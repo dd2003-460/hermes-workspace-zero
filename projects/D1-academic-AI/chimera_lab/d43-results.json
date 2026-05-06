@@ -1,0 +1,42 @@
+{
+  "timestamp": "2026-05-04T11:30:05.684001",
+  "theory": "D43: 历史周期率 — 正负反馈动力学",
+  "results": {
+    "D43-A": {
+      "description": "D43-A: 正反馈不稳定分化的相变阈值",
+      "validation": "D43-1",
+      "n_agents": 100,
+      "n_replications": 50,
+      "transition_alpha": 1.2,
+      "slope_before_transition": 0.03856243360732502,
+      "slope_after_transition": 1.044447599992895,
+      "phase_transition_confirmed": true,
+      "conclusion": "正反馈超过阈值触发不稳定性相变（D43-1）"
+    },
+    "D43-C": {
+      "description": "D43-C: 历史周期的极限环存在性",
+      "validation": "D43-3",
+      "t_span": [
+        0,
+        100
+      ],
+      "n_limit_cycles": 6,
+      "n_tested_configs": 6,
+      "limit_cycle_existence": true,
+      "period_delta_correlation": 0.336398316196296,
+      "conclusion": "修正范德波尔系统存在极限环，解释历史周期现象（D43-3）"
+    },
+    "D43-D": {
+      "description": "D43-D: 反馈平衡的临界衰减率",
+      "validation": "D43-4",
+      "n_configs": 20,
+      "critical_gamma": 0.01,
+      "equilibrium_range": [
+        1.4349999999999998,
+        100.0
+      ],
+      "stability_crosses_gamma": false,
+      "conclusion": "存在临界负反馈率，超过则平衡态失效（D43-4）"
+    }
+  }
+}

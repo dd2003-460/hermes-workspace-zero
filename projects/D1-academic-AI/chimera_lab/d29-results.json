@@ -1,0 +1,105 @@
+{
+  "timestamp": "2026-05-04T11:21:48.404131",
+  "theory": "D29: 方法论的矛盾",
+  "results": {
+    "D29-A": {
+      "description": "D29-A: 方法论的不完备性定理",
+      "validation": "D29-1",
+      "n_concepts": 1000,
+      "results_by_level": [
+        {
+          "inconsistency_level": 0.05,
+          "completeness_deficit": 0.05030000000000012,
+          "mean_cap_ratio": 0.9496999999999999,
+          "undecidable_count": 0,
+          "incompleteness_holds": true
+        },
+        {
+          "inconsistency_level": 0.1,
+          "completeness_deficit": 0.09686000000000006,
+          "mean_cap_ratio": 0.9031399999999999,
+          "undecidable_count": 0,
+          "incompleteness_holds": true
+        },
+        {
+          "inconsistency_level": 0.15,
+          "completeness_deficit": 0.15178000000000014,
+          "mean_cap_ratio": 0.8482199999999999,
+          "undecidable_count": 0,
+          "incompleteness_holds": true
+        },
+        {
+          "inconsistency_level": 0.2,
+          "completeness_deficit": 0.19834000000000007,
+          "mean_cap_ratio": 0.8016599999999999,
+          "undecidable_count": 0,
+          "incompleteness_holds": true
+        },
+        {
+          "inconsistency_level": 0.3,
+          "completeness_deficit": 0.3002600000000002,
+          "mean_cap_ratio": 0.6997399999999998,
+          "undecidable_count": 0,
+          "incompleteness_holds": true
+        }
+      ],
+      "incompleteness_always_true": true,
+      "deficit_increases_with_theta": true,
+      "conclusion": "任何方法论都存在不可判定命题（不完备性定理）"
+    },
+    "D29-B": {
+      "description": "D29-B: 方法论悖论的分类定理",
+      "validation": "D29-2",
+      "n_lexical": 3,
+      "n_inference": 0,
+      "n_validity": 0,
+      "total_categorized": 3,
+      "classification_rate": 3.0,
+      "mutual_exclusivity": 1.0,
+      "three_types_proven": true,
+      "conclusion": "方法论悖论可分为三类且互不相交（D29-2 分类定理）"
+    },
+    "D29-C": {
+      "description": "D29-C: 方法论矛盾的创造性势能",
+      "validation": "D29-3",
+      "contradiction_innovation_correlation": -0.01534322169736988,
+      "p_value": 0.10581416785998991,
+      "p_below_005": false,
+      "predicted_innovation_correlation": -0.006753008291828313,
+      "peak_innovation_mean_contradiction": 0.6889478526488821,
+      "creative_potential_valid": false,
+      "conclusion": "方法论矛盾强度与创新呈正相关（创造性势能定理）"
+    },
+    "D29-D": {
+      "description": "D29-D: 方法论层次间的不一致性传递",
+      "validation": "D29-5",
+      "n_levels": 8,
+      "inconsistency_per_level": [
+        0.1,
+        0.15765390214170436,
+        0.20573568755963798,
+        0.24354454144644583,
+        0.29472175362025493,
+        0.3545474882565327,
+        0.4111110969548182,
+        0.4694491703464118
+      ],
+      "increment_per_level": [
+        0.05765390214170435,
+        0.04808178541793362,
+        0.03780885388680785,
+        0.051177212173809106,
+        0.05982573463627777,
+        0.05656360869828547,
+        0.05833807339159364
+      ],
+      "min_increment_above_delta": true,
+      "mean_increment": 0.05277845290663026,
+      "monotonically_increasing": true,
+      "level_inconsistency_slope": 0.05179812834232077,
+      "r_squared": 0.9983240220675892,
+      "no_max_consistency": true,
+      "conclusion": "方法论反思的不一致性随层次递增（无最大自洽层次）"
+    }
+  }
+}

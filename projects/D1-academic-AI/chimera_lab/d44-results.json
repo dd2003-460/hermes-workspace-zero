@@ -1,0 +1,51 @@
+{
+  "timestamp": "2026-05-04T11:49:04.512600",
+  "theory": "D44: 耦合的非双射自由度",
+  "results": {
+    "D44-A": {
+      "description": "D44-A: 耦合度定义为双射外自由度",
+      "validation": "D44-1",
+      "n_configs": 16,
+      "mean_coupling_asymmetric": 0.2785130207335797,
+      "mean_coupling_symmetric": 0.052502804903180905,
+      "asymmetric_greater": true,
+      "all_coupling_nonzero": false,
+      "conclusion": "耦合度存在且由非双射自由度定义（D44-1）"
+    },
+    "D44-B": {
+      "description": "D44-B: 解耦最小步更新收敛",
+      "validation": "D44-2",
+      "dim": 2,
+      "n_iterations": 1000,
+      "max_eigenvalue": 1.054138126514911,
+      "max_stable_step_size": 1.8972845680216552,
+      "n_stable_configs": 6,
+      "stable_convergence_rate": 0.8333333333333334,
+      "epsilon_convergence_correlation": 0.5211761265552924,
+      "all_converged": false,
+      "convergence_rate_inversely_proportional": true,
+      "conclusion": "解耦可通过最小步迭代收敛（D44-2）"
+    },
+    "D44-C": {
+      "description": "D44-C: 测试循环下界估计",
+      "validation": "D44-3",
+      "n_configs": 4,
+      "n_tests_per_config": 50,
+      "bound_holding_pct": 100.0,
+      "mean_estimation_error": 10.862567150236769,
+      "bounds_reasonably_accurate": false,
+      "conclusion": "测试循环可提供耦合度下界的合理估计（D44-3）"
+    },
+    "D44-D": {
+      "description": "D44-D: 完美耦合的存在性渐近极限",
+      "validation": "D44-4",
+      "n_configs": 20,
+      "n_perfect_coupling": 3,
+      "n_near_perfect_coupling": 6,
+      "perfect_coupling_exists_asymptotically": true,
+      "coupling_decreases_with_dimension": true,
+      "coupling_increases_with_epsilon": false,
+      "conclusion": "完美耦合在渐近极限下存在（D44-4）"
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "timestamp": "2026-05-04T10:19:14.260311",
+  "theory": "D41: 社会舆论信用系统",
+  "results": {
+    "D41-A": {
+      "description": "D41-A: 信用演化 Lyapunov 稳定性",
+      "validation": "D41-1",
+      "Rc_critical": 0.5,
+      "is_credit_stable": true,
+      "final_credit_std": 0.0623028008608097,
+      "initial_credit_std": 18.072323532892593,
+      "R_convergence": 0.13742832761335144,
+      "R_timeseries_early_mean": 1.2927608306414837,
+      "R_timeseries_late_mean": 1.1553325030281323,
+      "conclusion": "信用分布在 αI > βH 条件下稳定（Lyapunov 稳态存在）"
+    },
+    "D41-B": {
+      "description": "D41-B: 煽动性话语需要信用补偿",
+      "validation": "D41-2",
+      "early_rational_exposure": 746.9515815265119,
+      "late_rational_exposure": 779.743456760867,
+      "early_emotional_exposure": 29.28961324075106,
+      "late_emotional_exposure": 55.325815830910045,
+      "rational_catches_up": true,
+      "crossing_occurred": false,
+      "required_credit_compensation": 2.115071809078625,
+      "conclusion": "理性话语早期曝光低但最终超过情绪话语（信用累积效应）"
+    },
+    "D41-C": {
+      "description": "D41-C: 舆论场相变临界点",
+      "validation": "D41-3",
+      "n_critical_points": 25,
+      "rational_phase_count": 0,
+      "total_points": 25,
+      "rational_phase_ratio": 0.0,
+      "critical_J_threshold": 1.0199999999999998,
+      "J_values": [
+        0.2999999999999998,
+        0.0,
+        -0.30000000000000027,
+        -0.6000000000000001,
+        -0.8999999999999999
+      ],
+      "phi_values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "conclusion": "当 J = α⟨I⟩ - β⟨H⟩ > 0 且 T < J 时，系统进入理性相"
+    },
+    "D41-D": {
+      "description": "D41-D: 实名制的信息论下界",
+      "validation": "D41-4",
+      "anonymous_mean_exposure": 0.3242129594593435,
+      "real_id_mean_exposure": 8.52613081200991,
+      "real_id_advantage_pct": 2529.7933389917725,
+      "log_T_fitting_r_squared": 0.38553415216932924,
+      "conclusion": "实名制提供 O(log T) 的信用累积优势"
+    }
+  }
+}

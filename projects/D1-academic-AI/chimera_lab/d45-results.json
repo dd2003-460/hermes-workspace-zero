@@ -1,0 +1,50 @@
+{
+  "timestamp": "2026-05-04T12:02:23.275629",
+  "theory": "D45: 自证预言的正反馈动力学",
+  "results": {
+    "D45-A": {
+      "description": "D45-A: 自证预言的正反馈增长曲线",
+      "validation": "D45-1",
+      "n_individuals": 100,
+      "n_days": 100,
+      "reinforcement_rate": 0.1,
+      "decay_rate": 0.02,
+      "initial_belief": 0.0,
+      "final_belief": 0.9755498560514553,
+      "growth_ratio": 9755498560.514553,
+      "inflection_day": 31,
+      "growth_confirmed": true,
+      "growth_type": "S形增长",
+      "conclusion": "自证预言在正反馈下呈 S 形增长（D45-1）"
+    },
+    "D45-B": {
+      "description": "D45-B: 信念临界点触发的相变",
+      "validation": "D45-2",
+      "n_configs": 35,
+      "mean_transition_high_sensitivity": 0.3535179098318597,
+      "mean_transition_low_sensitivity": 0.03747658396315036,
+      "high_sensitivity_stronger": true,
+      "strongest_transition_sensitivity": 100.0,
+      "strongest_transition_threshold": 0.2,
+      "conclusion": "信念超过临界点后发生行为对齐相变（D45-2）"
+    },
+    "D45-C": {
+      "description": "D45-C: 外部干预对自证预言的抑制",
+      "validation": "D45-3",
+      "n_individuals": 50,
+      "n_days": 100,
+      "intervention_suppression_correlation": 5.5794736029051215,
+      "p_value": 0.009193084981797217,
+      "strongest_intervention": 0.960748496320175,
+      "conclusion": "外部干预有效抑制自证预言（D45-3）"
+    },
+    "D45-D": {
+      "description": "D45-D: 自证预言的记忆持久性",
+      "validation": "D45-4",
+      "n_days": 365,
+      "half_life_retention_correlation": 0.001040687334564207,
+      "longest_half_life_1yr_retention": 0.7071067811865476,
+      "conclusion": "自证预言记忆受半衰期约束，强记忆持久留存（D45-4）"
+    }
+  }
+}

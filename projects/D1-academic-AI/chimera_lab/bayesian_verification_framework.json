@@ -1,0 +1,53 @@
+{
+  "framework": "D30-D53 实验结果 Bayesian 验证框架",
+  "date": "2026-05-05",
+  "iteration": 132,
+  "structure": {
+    "base_prior_theory": 0.3,
+    "evidence_model": "logit(BASE_PRIOR) + sum(N exp log(LR_exp)) + group_discount",
+    "likelihood_models": {
+      "R_squared_near_1": 2.5,
+      "correlation_magnitude_gt_0.9": 2.0,
+      "monotonicity_rate_gt_0.9": 2.0,
+      "p_value_significant": 2.0,
+      "improvement_significant": 1.8,
+      "null_correlation": 0.5,
+      "falsified": 0.3,
+      "convergence_achieved": 1.8,
+      "cross_theory_evidence": 2.0
+    }
+  },
+  "theory_posteriors": {
+    "d34": {"posterior": 0.51, "evidence_mean": 0.625, "n_exp": 4, "key_evidence": "convexity at optimum"},
+    "d35": {"posterior": 0.59, "evidence_mean": 0.675, "n_exp": 4, "key_evidence": "R²=1.0 log-law match, RK45 advantage 91%"},
+    "d36": {"posterior": 0.55, "evidence_mean": 0.65, "n_exp": 4, "key_evidence": "sensitivity_ratio=4.48, Lyapunov stability"},
+    "d37": {"posterior": 0.51, "evidence_mean": 0.40, "n_exp": 4, "key_evidence": "Nash non-convergence, asymmetric robustness weak"},
+    "d38": {"posterior": 0.51, "evidence_mean": 0.625, "n_exp": 4, "key_evidence": "R²=1.0 burst decay + corr=-0.986, but D falsified"},
+    "d39": {"posterior": 0.47, "evidence_mean": 0.60, "n_exp": 4, "key_evidence": "ΔI_fit>0 but ΔI_gen<0, C_crit≈4"},
+    "d40": {"posterior": 0.66, "evidence_mean": 0.725, "n_exp": 4, "key_evidence": "monotonic decreasing 100%, slope corr=-0.97, improvement 119.9%"},
+    "d41": {"posterior": 0.51, "evidence_mean": 0.625, "n_exp": 4, "key_evidence": "credit stable, Lyapunov, real_id advantage 2529.8%"},
+    "d42": {"posterior": 0.51, "evidence_mean": 0.625, "n_exp": 4, "key_evidence": "phase transition, Nash equilibrium tau*=1/λ"},
+    "d43": {"posterior": 0.50, "evidence_mean": 0.667, "n_exp": 3, "key_evidence": "phase transition α*=1.2, 6/6 limit cycle"},
+    "d44": {"posterior": 0.47, "evidence_mean": 0.60, "n_exp": 4, "key_evidence": "asymmetric 0.279 >> symmetric 0.053"},
+    "d45": {"posterior": 0.47, "evidence_mean": 0.60, "n_exp": 4, "key_evidence": "S-curve growth, feedback mechanism"},
+    "d46": {"posterior": 0.30, "evidence_mean": 0.50, "n_exp": 4, "key_evidence": "low certainty (early stage)"},
+    "d47": {"posterior": 0.39, "evidence_mean": 0.55, "n_exp": 4, "key_evidence": "adaptive scale transition"},
+    "d48": {"posterior": 0.30, "evidence_mean": 0.50, "n_exp": 4, "key_evidence": "discovery criticality (early stage)"},
+    "d49": {"posterior": 0.30, "evidence_mean": 0.50, "n_exp": 4, "key_evidence": "exploration-exploitation (early stage)"},
+    "d50": {"posterior": 0.43, "evidence_mean": 0.575, "n_exp": 4, "key_evidence": "ρ_c ≈ 0.152, memory damping"},
+    "d51": {"posterior": 0.38, "evidence_mean": 0.60, "n_exp": 2, "key_evidence": "info conservation SD=0.03, Nash entropy 0.810"},
+    "d52": {"posterior": 0.43, "evidence_mean": 0.575, "n_exp": 4, "key_evidence": "D53: λ_c/μ_c=1.11 duality, hysteresis 0.63"},
+    "d53": {"posterior": 0.35, "evidence_mean": 0.475, "n_exp": 4, "key_evidence": "duality confirmed, but A/C falsified (null)"}
+  },
+  "cross_theory_analysis": {
+    "high_confidence": ["d40"],
+    "medium_confidence": ["d35", "d36", "d34"],
+    "pending": ["d37", "d38", "d41", "d42", "d43", "d45"],
+    "uncertain": ["d39", "d44", "d46", "d47", "d48", "d49", "d50", "d51", "d52", "d53"]
+  },
+  "notes": {
+    "verification_concentration": "D30/D37/D44 验证失败集中在早期理论的复杂性递增→验证难度增加",
+    "calibration_needed": "prior scores need re-calibration from INDEX.md data for d39, d41-d53",
+    "d44_paradox": "asymmetric>symmetric shows D44-A strong but overall posterior only 0.47"
+  }
+}

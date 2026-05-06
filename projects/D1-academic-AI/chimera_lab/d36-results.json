@@ -1,0 +1,88 @@
+{
+  "A": {
+    "alpha_0.3": {
+      "convergence_rate_lambda": 3.5393870188048857,
+      "asymptotic_distance": 0.23426014382568983,
+      "fit_r_squared": 0.05384960452840759,
+      "final_distance": 0.40978447958014086,
+      "initial_distance": 0.8177015235724424
+    },
+    "alpha_0.5": {
+      "convergence_rate_lambda": 2.365635465700791,
+      "asymptotic_distance": 0.22630551058756318,
+      "fit_r_squared": 0.08027473214913872,
+      "final_distance": 0.4123084222334848,
+      "initial_distance": 0.8570456374948173
+    },
+    "alpha_0.7": {
+      "convergence_rate_lambda": 1.258165166540489,
+      "asymptotic_distance": 0.19717847913201908,
+      "fit_r_squared": 0.1765972924784105,
+      "final_distance": 0.3749126950056791,
+      "initial_distance": 0.8964268587015726
+    },
+    "alpha_0.9": {
+      "convergence_rate_lambda": 0.32396491894662655,
+      "asymptotic_distance": 0.11223105977721409,
+      "fit_r_squared": 0.7589124349830096,
+      "final_distance": 0.21144651792148633,
+      "initial_distance": 0.9358466096355523
+    }
+  },
+  "B": {
+    "alpha_0.3": {
+      "chi_c": 1.726626626626627,
+      "t_at_K0.5": 32.532532532532535,
+      "K_initial": 0.04030710172744722,
+      "K_final": 0.6815185196980795
+    },
+    "alpha_0.5": {
+      "chi_c": 2.417317317317318,
+      "t_at_K0.5": 46.34634634634635,
+      "K_initial": 0.029126213592233007,
+      "K_final": 0.6045086019379079
+    },
+    "alpha_0.7": {
+      "chi_c": 4.028928928928929,
+      "t_at_K0.5": 78.57857857857859,
+      "K_initial": 0.017681728880157174,
+      "K_final": 0.4783788013144855
+    },
+    "alpha_0.9": {
+      "chi_c": "N/A",
+      "t_at_K0.5": "N/A",
+      "K_initial": 0.00596421471172962,
+      "K_final": 0.23412728804472693
+    }
+  },
+  "C": {
+    "t_pre": 10,
+    "t_post": 40,
+    "psi_pre": 0.6065306597126334,
+    "psi_post": 0.1353352832366127,
+    "sensitivity_ratio": 4.4816890703380645,
+    "expected_ratio": 4.4816890703380645
+  },
+  "D": {
+    "low_alpha": {
+      "rho_0.2": 0.1281,
+      "rho_0.5": 0.297,
+      "rho_0.8": 0.4729
+    },
+    "high_alpha": {
+      "rho_0.2": 0.0736,
+      "rho_0.5": 0.1671,
+      "rho_0.8": 0.2644
+    }
+  },
+  "metadata": {
+    "date": "2026-05-04T08:38:52.556502",
+    "experiment": "D36-Intergenerational-Viewpoint-Convergence",
+    "propositions": [
+      "D36-1: Lyapunov Attractor",
+      "D36-2: Genetic Lower Bound",
+      "D36-3: Critical Period",
+      "D36-4: Environment Reversal"
+    ]
+  }
+}

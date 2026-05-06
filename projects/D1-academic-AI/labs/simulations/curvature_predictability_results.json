@@ -1,0 +1,20 @@
+{
+  "pride_and_prejudice": {
+    "surprisal_mean": 1.0029707155122358,
+    "surprisal_var": 2.096527861636022,
+    "entropy_rate": 8.216760373903464,
+    "n_tokens": 10000,
+    "n_vocab": 1591,
+    "entropy_per_token": 0.9998,
+    "vocab_ratio": 0.1591
+  },
+  "shakespeare_sonnets": {
+    "surprisal_mean": 0.8181645535718145,
+    "surprisal_var": 2.260266190255044,
+    "entropy_rate": 8.607037374959098,
+    "n_tokens": 10000,
+    "n_vocab": 2025,
+    "entropy_per_token": 0.9998,
+    "vocab_ratio": 0.2025
+  }
+}

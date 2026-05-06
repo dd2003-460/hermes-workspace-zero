@@ -1,0 +1,81 @@
+{
+  "timestamp": "2026-05-04T10:42:01.885168",
+  "theory": "D42: 流量经济",
+  "results": {
+    "D42-A": {
+      "description": "D42-A: 信息网络相变",
+      "validation": "D42-1",
+      "n_phases_tested": 6,
+      "n_rewire_values": 7,
+      "correlation_prewire_gini_ratio": 0.8424626996203138,
+      "mean_gini_ratio": 5.09614862236622,
+      "conclusion": "低α（长程信息）下信息分布更集中（幂律倾向）"
+    },
+    "D42-B": {
+      "description": "D42-B: 信息-经济不平等放大",
+      "validation": "D42-2",
+      "gini_phi": 0.834629582925931,
+      "gini_E": 0.8553920002979917,
+      "inequality_holds": true,
+      "amplification_factor": 1.0248762059203254,
+      "simple_amplification_holds": true,
+      "amplification_by_beta2": [
+        {
+          "beta2": 0.0,
+          "gini_E": 0.834629582925931,
+          "amplification": 1.0
+        },
+        {
+          "beta2": 0.1,
+          "gini_E": 0.8406021030019722,
+          "amplification": 1.007155893103026
+        },
+        {
+          "beta2": 0.3,
+          "gini_E": 0.8486926050908131,
+          "amplification": 1.0168494173374276
+        },
+        {
+          "beta2": 0.5,
+          "gini_E": 0.8514431406402642,
+          "amplification": 1.0201449338224873
+        },
+        {
+          "beta2": 1.0,
+          "gini_E": 0.853950200800458,
+          "amplification": 1.0231487336056257
+        },
+        {
+          "beta2": 2.0,
+          "gini_E": 0.8553920002979917,
+          "amplification": 1.0248762059203254
+        }
+      ],
+      "conclusion": "经济不平等程度大于信息不平等程度（资本正反馈放大）"
+    },
+    "D42-C": {
+      "description": "D42-C: 中介租金均衡",
+      "validation": "D42-3",
+      "theoretical_tau_star": 1.0,
+      "numerical_tau_star": 1.0000013641913852,
+      "tau_optimization_error": 1.364191385189173e-06,
+      "theoretical_max_revenue": 36.787944117144235,
+      "numerical_max_revenue": 36.78794411711,
+      "revenue_error": 3.423394900892163e-11,
+      "flow_at_optimal_tau": 36.787944117144235,
+      "conclusion": "最优税率 τ* = 1/λ = 1.000（数值优化误差 < 1e-6）"
+    },
+    "D42-D": {
+      "description": "D42-D: 市场有效性崩溃",
+      "validation": "D42-4",
+      "estimated_phase_transition_point": 1.0,
+      "min_market_effectiveness": 0.9692293833907115,
+      "before_transition_mean_eff": 0.9856583028530047,
+      "after_transition_mean_eff": 0.9692293833907115,
+      "transition_magnitude": 0.01642891946229319,
+      "market_eff_regression_r2": 5.197857629638095e-07,
+      "market_eff_regression_slope": 0.9856902053103248,
+      "conclusion": "市场有效性在信息集中临界点急剧下降（相变信号明确）"
+    }
+  }
+}

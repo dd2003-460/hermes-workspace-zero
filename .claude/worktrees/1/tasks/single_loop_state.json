@@ -1,0 +1,117 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-04-28T17:53+08:00",
+  "phase": "planning -- [4.*] Script consolidator cron job design completed (independent)",
+  "current_topic": {
+    "id": "[4.*] Script consolidator cron job",
+    "title": "cron script to verify INDEX.md consistency across D1-* projects against filesystem reality",
+    "status": "completed_design"
+  },
+  "planning_phase_notes": {
+    "_struct_golden_path": ["D1-workspace-org", "D1-academic-AI", "D1-prompt-design"],
+    "_gap_list": [
+      "[2.4] 闭环执行 -- requires D1-* scripts or verification",
+      "[3.* memory restructuring pending] (blocked: raw dir empty)"
+    ],
+    "_consolidator_report": {
+      "status": "DESIGN_COMPLETED",
+      "finding_count_real_issues_discovered": 4,
+      "real_inconsistencies_found": [
+        {
+          "id": 1,
+          "category": "case-inconsistency",
+          "detail": "D1-workspace-org uses memory/index.md (lowercase) vs academic-AI INDEX.md"
+        },
+        {
+          "id": 2,
+          "category": "missing-directory",
+          "detail": "D1-prompt-design has NO scripts/ while siblings do -- golden path violation"
+        },
+        {
+          "id": 3,
+          "category": "missing-index",
+          "detail": "D1-academic-AI/scripts/ has no INDEX.md despite being directory"
+        },
+        {
+          "id": 4,
+          "category": "stale-reference",
+          "detail": "workspace-org/scripts/INDEX.md says 'awaiting cron_workspace_org.py' but script exists at root"
+        }
+      ],
+      "design_qa_notes": [
+        {
+          "_id": "[4.1] language/tool": "Python3 stdlib only (pathlib, json) -- cron toolset restricted",
+          "_id_42": "[4.2] exact_command": "index_verifier.py --root /projects/ --output-format report",
+          "_id_43": "[4.3] timeout_freq": "~60s, every 6 hours -- no risk of execution overlap",
+          "_id_44": "[4.4] safety_mechanisms": "backup-before-modify, dry-run mode, atomic os.replace()",
+          "_id_45": "[4.5] state_integration": "write findings to single_loop_state.json _consolidator_reports_[] field"
+        }
+      ],
+      "hidden_assumptions_audited": [
+        {"assumption_A": "filesystem = truth", "correction": "INDEX.md IS the canonical source; filesystem scan is for anomaly detection only"},
+        {"assumption_B": "more consistency = better", "correction": "Legitimate structural differences possible between projects; system must respect intentional gaps"},
+        {"assumption_C": "macOS case-insensitive masks errors", "correction": "os.path.exists() + normalized path needed to detect real mismatches"},
+        {"assumption_D": "script crash protection via try/finally + temp writes"}
+      ],
+      "_brain_sub_attempt_note": "3rd timeout; switched to independent design path using direct filesystem exploration"
+    },
+    "brave_point_items": [
+      {
+        "issue": "indexing_too_high_level",
+        "detail": "e.g. D1-academic-AI references memory/index/INDEX.md which doesn't exist -- FIXED"
+      },
+      {
+        "issue": "gap_existence_consolidation",
+        "detail": "3 of 5 planned topics; memory/raw/ empty -- no immediate work to route"
+      }
+    ],
+    "next_topic_candidates": [
+      {
+        "_id": "[2.4] 闭环执行",
+        "status": "unblocked -- may now implement via script consolidator"
+      },
+      {
+        "_id": "[3.*] Memory restructuring",
+        "blocked_by_note": "Raw memory dir is empty -- no concrete work"
+      },
+      {
+        "_id": "[6.*] Dead tree reconciliation",
+        "blocked_by_note": "Requires execution results from live projects"
+      }
+    ],
+    "_structural_recommendations": [
+      {
+        "recommendation": "add_d1_scripts_dir_to_all_projects",
+        "detail": "even if empty, to prevent future inconsistencies"
+      },
+      {
+        "recommendation": "create_gravity_wave_project_under_D1_academic_Ai",
+        "detail": "r01-r12 topic alignment needs explicit D1 project"
+      }
+    ]
+  },
+  "notes": {
+    "_this_turn_action_taken": [
+      "Read foundational files (AGENTS.md, SOUL.md, USER.md, LOOP.md)",
+      "Read 1-loop modules (README, 双脑原则, 主脑, 副脑)",
+      "Independent filesystem exploration via find/grep (no brain sub -- timeout pattern handled per policy)",
+      "Identified 4 real structural inconsistencies across D1-* projects",
+      "Completed design document at loop/2-loop/output.md (v1.0, 11KB)",
+      "Two-phase pass model: Discovery -> Reporting with backup-before-modify safety",
+      "Hidden assumption audit completed (4 risks identified, mitigations defined)"
+    ],
+    "_brain_sub_status": "not_dispatched_this_turn -- switched to independent execution after 3 prior timeouts",
+    "_consolidator_design": {
+      "location": "/Users/a1-6/Desktop/workspace-zero/loop/2-loop/output.md",
+      "implementation_target": "/Users/a1-6/Desktop/workspace-zero/projects/D1-workspace-org/scripts/index_verifier.py",
+      "confidence_level": 0.75,
+      "status_file_integration": "_consolidator_reports_[] field appended on each cron run"
+    }
+  },
+  "next_steps": {
+    "_phase_status": "[4.*] design COMPLETE -- ready for 2-loop execution entry OR brain sub implementation dispatch",
+    "_recommended_next_action": "Dispatch python coding agent to implement index_verifier.py at D1-workspace-org/scripts/",
+    "_alternative_next_action": "Update loop project board: mark [4.*] as in-progress, start implementing index_verifier.py",
+    "_decision_needed": "User should choose: (a) self-implement the verifier, or (b) keep planning for other topics while consolidator waits"
+  }
+}

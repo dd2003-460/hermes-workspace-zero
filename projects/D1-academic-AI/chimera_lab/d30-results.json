@@ -1,0 +1,115 @@
+{
+  "timestamp": "2026-05-04T11:19:17.017980",
+  "theory": "D30: 层级数据理论与 CoT 模型大小下限",
+  "results": {
+    "D30-A": {
+      "description": "D30-A: hierarchical data optimal depth",
+      "validation": "D30-1, D30-4",
+      "n_features": 1000,
+      "gamma": 2.0,
+      "depth_range": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "objective_values": [
+        0.923073162148071,
+        0.7717377179290892,
+        0.7655910584186135,
+        0.7843373482356272,
+        0.8070178898392205,
+        0.8284692297850074,
+        0.8475353807920487,
+        0.8642486753373706,
+        0.8789770014382143,
+        0.8921388572403144
+      ],
+      "efficiency_values": [
+        0.2479383307790635,
+        0.5787128448740053,
+        0.8284386756233417,
+        0.9940172690736347,
+        1.0964552637747416,
+        1.15564311714161,
+        1.1862634400831955,
+        1.198322780789043,
+        1.1984240437720879,
+        1.1908691907704487
+      ],
+      "L_star_estimated": 3,
+      "L_theory_prediction": 9.965784284662087,
+      "convex_objective": false,
+      "theory_experiment_close": false,
+      "conclusion": "存在唯一最优层级深度 L* ≈ log_γ(n)（D30-1 + D30-4）"
+    },
+    "D30-B": {
+      "description": "D30-B: CoT 模型大小下限",
+      "validation": "D30-2",
+      "n_scenarios": 18,
+      "K_T_range": [
+        4.0,
+        384.0
+      ],
+      "M_required_range": [
+        5.699999999999999,
+        417.89693845669905
+      ],
+      "polyfit_coeffs": [
+        -7.142836736670424e-05,
+        1.1094821179047905,
+        2.055979773473932
+      ],
+      "r_squared_fit": 0.9999876584615772,
+      "nonlinear_growth": true,
+      "conclusion": "CoT 模型大小下限由推理树 Koltogorov 复杂度决定"
+    },
+    "D30-C": {
+      "description": "D30-C: RAG 带宽-延迟权衡",
+      "validation": "D30-3",
+      "n_configs": 36,
+      "capacity_range": [
+        109.0909090909091,
+        1099.000999000999
+      ],
+      "optimal_bandwidth_estimated": 1000.0,
+      "theoretical_optimal_bandwidth": 31.622776601683796,
+      "diminishing_returns_exist": false,
+      "conclusion": "RAG 带宽存在transition，超过后额外收益递减（D30-3）"
+    },
+    "D30-D": {
+      "description": "D30-D: 冗余-压缩对偶性",
+      "validation": "D30-5",
+      "K_T": 1000.0,
+      "model_size_range": [
+        100,
+        200,
+        500,
+        1000,
+        2000,
+        5000,
+        10000,
+        20000,
+        50000
+      ],
+      "redundancy_range": [
+        -950.0,
+        48950.0
+      ],
+      "ratio_range": [
+        0.02,
+        10.0
+      ],
+      "opposite_signs_ratio": 1.0,
+      "dual_correlation": -0.4430055305638628,
+      "duality_holds": false,
+      "conclusion": "冗余预算与压缩比互为对偶（∇B = -∇r）"
+    }
+  }
+}

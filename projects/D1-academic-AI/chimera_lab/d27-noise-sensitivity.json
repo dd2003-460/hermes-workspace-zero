@@ -1,0 +1,61 @@
+{
+  "config": {
+    "n_trials": 100,
+    "n_dim": 5,
+    "n_researchers": 13,
+    "step_size": 0.1
+  },
+  "results": [
+    {
+      "noise": 0.0,
+      "valid_trials": 100,
+      "r_squared": 1.0,
+      "slope": -2.1502205828820958e-15,
+      "intercept": 101.00000000000009,
+      "mean_T": 101.0,
+      "std_T": 0.0,
+      "epsilon_used": 1e-06
+    },
+    {
+      "noise": 0.01,
+      "valid_trials": 100,
+      "r_squared": 1.0,
+      "slope": -1.5492183820662753e-15,
+      "intercept": 101.00000000000006,
+      "mean_T": 101.0,
+      "std_T": 0.0,
+      "epsilon_used": 0.1
+    },
+    {
+      "noise": 0.05,
+      "valid_trials": 100,
+      "r_squared": 0.0011476504889680328,
+      "slope": 0.4679118746045541,
+      "intercept": 117.62629926631432,
+      "mean_T": 123.91,
+      "std_T": 18.882317124759876,
+      "epsilon_used": 0.1
+    },
+    {
+      "noise": 0.1,
+      "valid_trials": 100,
+      "r_squared": 0.00748920939338571,
+      "slope": -24.64718000180673,
+      "intercept": 936.6228887603637,
+      "mean_T": 605.63,
+      "std_T": 389.3545853075317,
+      "epsilon_used": 0.1
+    },
+    {
+      "noise": 0.2,
+      "valid_trials": 16,
+      "r_squared": 0.010828302415129887,
+      "slope": -50.824629832396994,
+      "intercept": 2548.527311801686,
+      "mean_T": 1867.9375,
+      "std_T": 689.9115404120662,
+      "epsilon_used": 0.1
+    }
+  ],
+  "timestamp": "2026-05-04T06:54:30.246469"
+}

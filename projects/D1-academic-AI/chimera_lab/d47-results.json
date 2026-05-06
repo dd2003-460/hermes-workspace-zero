@@ -1,0 +1,53 @@
+{
+  "experiment": "D47-Multi-Scale-Tool-Selection",
+  "date": "2026-05-04T12:56:32.584921",
+  "theoretical_framework": "\u81ea\u9002\u5e94\u8def\u7531\u52a8\u529b\u5b66 + \u591a\u5c3a\u5ea6\u5de5\u5177\u9009\u62e9",
+  "inspired_by": [
+    "S18-1",
+    "D46"
+  ],
+  "propositions": {
+    "D47-A": "\u591a\u5de5\u5177\u7a7a\u95f4\u5b58\u5728\u6700\u4f18\u9009\u62e9\u8fb9\u754c\uff08D47-1\uff09",
+    "D47-B": "\u8def\u7531\u7b56\u7565\u590d\u6742\u5ea6\u4e0e\u4efb\u52a1\u590d\u6742\u5ea6\u5339\u914d\uff08D47-2\uff09",
+    "D47-C": "\u56fa\u5b9a\u5de5\u5177\u96c6\u5bfc\u81f4\u80fd\u529b\u4e0b\u964d\uff08D47-3\uff09",
+    "D47-D": "\u8def\u7531\u8bb0\u5fc6\u4ea7\u751f\u51b3\u7b56\u6301\u7eed\uff08D47-4\uff09"
+  },
+  "results": {
+    "D47-A": {
+      "description": "D47-A\uff1a\u591a\u5de5\u5177\u7a7a\u95f4\u5b58\u5728\u6700\u4f18\u9009\u62e9\u8fb9\u754c",
+      "validation": "D47-1",
+      "pareto_optimal_tools": [
+        0.4555555555555556,
+        0.3666666666666667,
+        0.5444444444444445
+      ],
+      "n_pareto_tools": 3,
+      "conclusion": "\u5b58\u5728 Pareto \u6700\u4f18\u5de5\u5177\u5b50\u96c6\uff08D47-1\uff09"
+    },
+    "D47-B": {
+      "description": "D47-B\uff1a\u8def\u7531\u7b56\u7565\u590d\u6742\u5ea6\u4e0e\u4efb\u52a1\u590d\u6742\u5ea6\u5339\u914d",
+      "validation": "D47-2",
+      "correlation": 1.0,
+      "n_data_points": 10,
+      "conclusion": "\u8def\u7531\u7b56\u7565\u590d\u6742\u5ea6\u4e0e\u4efb\u52a1\u590d\u6742\u5ea6\u6b63\u76f8\u5173\uff08D47-2\uff09"
+    },
+    "D47-C": {
+      "description": "D47-C\uff1a\u56fa\u5b9a\u5de5\u5177\u96c6\u5bfc\u81f4\u80fd\u529b\u4e0b\u964d",
+      "validation": "D47-3",
+      "avg_penalty": 0.371480068002878,
+      "fixed_tool_complexity": 0.5444444444444445,
+      "conclusion": "\u56fa\u5b9a\u5de5\u5177\u5bfc\u81f4\u5e73\u5747\u80fd\u529b\u4e0b\u964d 0.3715\uff08D47-3\uff09"
+    },
+    "D47-D": {
+      "description": "D47-D\uff1a\u8def\u7531\u8bb0\u5fc6\u4ea7\u751f\u51b3\u7b56\u6301\u7eed",
+      "validation": "D47-4",
+      "retention_rates": {
+        "20": 0.0013810679318443568,
+        "50": 0.07179364717967925,
+        "100": 0.26794336560643545,
+        "200": 0.5176324618681144
+      },
+      "conclusion": "\u8def\u7531\u8bb0\u5fc6\u534a\u8870\u671f\u8d8a\u957f\uff0c\u51b3\u7b56\u6301\u7eed\u6027\u8d8a\u5f3a\uff08D47-4\uff09"
+    }
+  }
+}

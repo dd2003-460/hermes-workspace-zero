@@ -1,0 +1,100 @@
+{
+  "experiment": "D51-Multi-Agent-Information-Game",
+  "date": "2026-05-04T14:48:32.081919",
+  "theoretical_framework": "D4 \u591aAgent\u4fe1\u606f\u535a\u5f08\u731c\u60f3 + \u535a\u5f08\u8bba + \u4fe1\u606f\u74f6\u9888",
+  "inspired_by": [
+    "D4",
+    "D51",
+    "S1-1"
+  ],
+  "propositions": {
+    "D51-A": "\u7ade\u4e89\u73af\u5883\u5b58\u5728\u4fe1\u606f\u5b88\u6052\u5747\u8861\uff08D51-1\uff09",
+    "D51-B": "\u7ade\u4e89\u5f3a\u5ea6\u5f71\u54cd\u4fe1\u606f\u5206\u5e03\uff08D51-2\uff09",
+    "D51-C": "\u4fe1\u606f\u535a\u5f08\u7684\u7eb3\u4ec0\u5747\u8861\u8d8b\u5411\u6700\u5927\u71b5\uff08D51-3\uff09",
+    "D51-D": "\u7ade\u4e89\u73af\u5883\u4e0b\u6d8c\u73b0\u4fe1\u606f\u56e4\u79ef\u5747\u8861\uff08D51-4\uff09"
+  },
+  "results": {
+    "D51-A": {
+      "description": "D51-A\uff1a\u7ade\u4e89\u73af\u5883\u5b58\u5728\u4fe1\u606f\u5b88\u6052\u5747\u8861",
+      "validation": "D51-1",
+      "total_info_mean_last_100": 16.088948974915017,
+      "total_info_std_last_100": 0.030877133224439197,
+      "initial_mean": 16.0871389253095,
+      "conservation_verified": true,
+      "info_stability_ratio": 0.0019193675996462634,
+      "conclusion": "\u7ade\u4e89\u73af\u5883\u603b\u4fe1\u606f\u91cf\u8d8b\u4e8e\u7a33\u5b9a\uff08SD=0.0309\uff09\uff08D51-1\uff09"
+    },
+    "D51-B": {
+      "description": "D51-B\uff1a\u7ade\u4e89\u5f3a\u5ea6\u5f71\u54cd\u4fe1\u606f\u5206\u5e03",
+      "validation": "D51-2",
+      "distribution_metrics": {
+        "0.1": {
+          "avg_distribution_entropy": 2.3009177247247696,
+          "std_distribution_entropy": 0.0008212323525818823,
+          "gini_coefficient": 0.024966027595096956
+        },
+        "0.3": {
+          "avg_distribution_entropy": 2.2969757436599463,
+          "std_distribution_entropy": 0.0033687807909041924,
+          "gini_coefficient": 0.059194341321736614
+        },
+        "0.5": {
+          "avg_distribution_entropy": 2.288330205905431,
+          "std_distribution_entropy": 0.012299240840885205,
+          "gini_coefficient": 0.09118068338914814
+        },
+        "0.7": {
+          "avg_distribution_entropy": 2.284535043733062,
+          "std_distribution_entropy": 0.017545949112325848,
+          "gini_coefficient": 0.07545301055498363
+        },
+        "1.0": {
+          "avg_distribution_entropy": 2.2768931817254496,
+          "std_distribution_entropy": 0.019282514900265224,
+          "gini_coefficient": 0.08980406287487502
+        }
+      },
+      "conclusion": "\u7ade\u4e89\u8d8a\u5f3a\uff0c\u4fe1\u606f\u5206\u5e03\u8d8a\u4e0d\u5e73\u7b49\uff08D51-2\uff09"
+    },
+    "D51-C": {
+      "description": "D51-C\uff1a\u4fe1\u606f\u535a\u5f08\u7684\u7eb3\u4ec0\u5747\u8861\u8d8b\u5411\u6700\u5927\u71b5",
+      "validation": "D51-3",
+      "avg_equilibrium_entropy": 0.7371642754284651,
+      "max_entropy": 1.6094379124341003,
+      "entropy_ratio": 0.4580259168045703,
+      "entropy_variance": 0.15961998518973763,
+      "conclusion": "\u7eb3\u4ec0\u5747\u8861\u71b5\u7387\u8fbe\u5230\u6700\u5927\u503c\u7684 0.458\uff08D51-3\uff09"
+    },
+    "D51-D": {
+      "description": "D51-D\uff1a\u7ade\u4e89\u73af\u5883\u4e0b\u6d8c\u73b0\"\u4fe1\u606f\u56e4\u79ef\"\u5747\u8861",
+      "validation": "D51-4",
+      "max_allocation_trend": 0.00013165121316290707,
+      "gini_trend": 0.0010890355282082776,
+      "final_gini": 0.21762588312524872,
+      "final_max_allocation": 0.051086849550987024,
+      "type_breakdown": {
+        "aggressive": {
+          "mean_allocation": 0.04169985615413558,
+          "min_allocation": 0.03266785583952273,
+          "max_allocation": 0.051086849550987024
+        },
+        "conservative": {
+          "mean_allocation": 0.014585681063275898,
+          "min_allocation": 0.01387178642397237,
+          "max_allocation": 0.014876377924970876
+        },
+        "balanced": {
+          "mean_allocation": 0.024550890208062132,
+          "min_allocation": 0.02223087241526609,
+          "max_allocation": 0.029090003075032112
+        },
+        "opportunistic": {
+          "mean_allocation": 0.019623313515725892,
+          "min_allocation": 0.017906661609550407,
+          "max_allocation": 0.021172028516368988
+        }
+      },
+      "conclusion": "\u4fe1\u606f\u5206\u914d\u8d8b\u5411\u96c6\u4e2d\u5316\uff08Gini\u589e\u957f\u659c\u7387=0.0011\uff09\uff08D51-4\uff09"
+    }
+  }
+}

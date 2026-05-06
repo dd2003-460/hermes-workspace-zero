@@ -1,0 +1,24 @@
+{
+  "post": {
+    "title": "IC_K ≠ inf IC: When the Infimum Destroys the Answer",
+    "subtitle": "Why optimizing over distributions kills your lower bound",
+    "content_path": "../projects/写作/a3_blog_draft_v3.md",
+    "tags": [
+      "Information Theory",
+      "Communication Complexity",
+      "Kolmogorov Complexity",
+      "Mathematical Intuitions"
+    ],
+    "post_type": "post",
+    "author_display_name": "Cheng Lu",
+    "group_id": null,
+    "coauthors": []
+  },
+  "promotional": {
+    "twitter_thread": "1/ IC_K (Kolmogorov worst-case information complexity) and inf IC (Shannon distribution-free infimum) look like the same concept. They're not. One says Equality needs Θ(log n) communication. The other says 0. For EVERY Boolean function. Thread on why this matters:",
+    "linkedin_summary": "New blog post: IC_K ≠ inf IC. The infimum over distributions collapses Shannon information complexity to zero for all Boolean functions, while Kolmogorov-based IC_K gives meaningful worst-case bounds. The quantifier order and complexity measure determine what question you're actually asking."
+  },
+  "companion_paper": "Why Average-Case Analysis Isn't Enough: A Kolmogorov Perspective",
+  "generated_at": "2026-04-06T11:12:00+08:00",
+  "generated_by": "R88 brain sub (writing domain)"
+}

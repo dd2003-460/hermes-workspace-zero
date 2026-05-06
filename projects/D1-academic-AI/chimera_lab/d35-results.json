@@ -1,0 +1,114 @@
+{
+  "timestamp": "2026-05-04T11:02:22.595991",
+  "theory": "D35: 变步长精度 — 信息通信视角的梯度优化",
+  "results": {
+    "D35-A": {
+      "description": "D35-A: 最优比特分配的对数律",
+      "validation": "D35-2",
+      "n_scenarios": 10,
+      "mean_slope": 0.20000000000000004,
+      "expected_slope": 0.2,
+      "slope_match": true,
+      "mean_r_squared": 0.9999999999999998,
+      "r_squared_above_095": true,
+      "fits": [
+        {
+          "slope": 0.19999999999999987,
+          "r_squared": 1.0,
+          "intercept": 2.314326151539001,
+          "expected_slope": 0.2
+        },
+        {
+          "slope": 0.20000000000000007,
+          "r_squared": 1.0,
+          "intercept": 2.3060972828101276,
+          "expected_slope": 0.2
+        },
+        {
+          "slope": 0.2000000000000001,
+          "r_squared": 1.0,
+          "intercept": 2.295488557280154,
+          "expected_slope": 0.2
+        },
+        {
+          "slope": 0.19999999999999993,
+          "r_squared": 0.9999999999999987,
+          "intercept": 2.304471925516314,
+          "expected_slope": 0.2
+        },
+        {
+          "slope": 0.20000000000000012,
+          "r_squared": 1.0,
+          "intercept": 2.328731081282369,
+          "expected_slope": 0.2
+        },
+        {
+          "slope": 0.1999999999999999,
+          "r_squared": 0.9999999999999991,
+          "intercept": 2.277159910771641,
+          "expected_slope": 0.2
+        },
+        {
+          "slope": 0.2000000000000001,
+          "r_squared": 1.0,
+          "intercept": 2.3077176349296527,
+          "expected_slope": 0.2
+        },
+        {
+          "slope": 0.20000000000000012,
+          "r_squared": 1.0,
+          "intercept": 2.3027292629581586,
+          "expected_slope": 0.2
+        },
+        {
+          "slope": 0.2000000000000001,
+          "r_squared": 1.0,
+          "intercept": 2.311305242489814,
+          "expected_slope": 0.2
+        },
+        {
+          "slope": 0.20000000000000012,
+          "r_squared": 1.0,
+          "intercept": 2.2930191341823405,
+          "expected_slope": 0.2
+        }
+      ],
+      "conclusion": "最优比特分配服从对数律 b* = C0 + (1/(p+1))·log2(w)"
+    },
+    "D35-B": {
+      "description": "D35-B: 均匀场退化定理",
+      "validation": "D35-3",
+      "h_uniform": 0.1,
+      "h_adaptive": 0.0625,
+      "final_value_uniform": 1.9999545996589838,
+      "final_value_adaptive": 1.99995460000942,
+      "final_difference": 3.504361245632026e-10,
+      "trajectory_mean_difference": 3.504361245632026e-10,
+      "degeneration_holds": true,
+      "conclusion": "均匀场下自适应步长退化为定步长（差异 < 容差）"
+    },
+    "D35-C": {
+      "description": "D35-C: 非均匀场优势",
+      "validation": "D35-4",
+      "w_mean": 1.7991235514353952,
+      "w_std": 0.7024902292692433,
+      "field_uniformity": 0.3904624719679621,
+      "error_uniform_estimate": 0.008995617757176977,
+      "error_adaptive_estimate": 0.0007952610267455461,
+      "advantage_pct": 91.1594617711378,
+      "advantage_significant": true,
+      "conclusion": "非均匀场下变步长策略降低误差 > 5%"
+    },
+    "D35-D": {
+      "description": "D35-D: RK45 变步长验证",
+      "validation": "D35-1",
+      "error_rk4_fixed": 0.00013750000000000004,
+      "error_adaptive_rk45": 9.659866074876592e-06,
+      "n_evals_rk4_fixed": 800,
+      "n_evals_adaptive": 1264,
+      "efficiency_ratio": 0.6329113924050633,
+      "rk45_better_or_equal": true,
+      "conclusion": "RK45 变步长使用更少函数评估达到可比精度"
+    }
+  }
+}

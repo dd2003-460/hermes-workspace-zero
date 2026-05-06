@@ -1,0 +1,10 @@
+{
+  "step_true": {
+    "step_r2_mean": 0.996470447505946,
+    "sigmoid_r2_mean": 0.979222256391757
+  },
+  "sigmoid_true": {
+    "step_r2_mean": 13.0,
+    "sigmoid_r2_mean": 0.9951216128445387
+  }
+}

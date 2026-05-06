@@ -1,0 +1,50 @@
+{
+  "true_chimera": {
+    "phase": "gradient_locking",
+    "ci": 0.089398,
+    "sync": [
+      0.2455,
+      0.2918,
+      0.2835,
+      0.2368
+    ],
+    "desc": "\u975e\u5c40\u90e8\u9ad8\u65af\u8026\u5408 (Abrams-Strogatz)"
+  },
+  "freq_gradient": {
+    "phase": "gradient_locking",
+    "ci": 0.052771,
+    "sync": [
+      0.1069,
+      0.0968,
+      0.1122,
+      0.1068
+    ],
+    "desc": "\u9891\u7387\u68af\u5ea6\u9501\u76f8"
+  },
+  "global_uniform": {
+    "phase": "mixed",
+    "ci": 0.180745,
+    "sync": [
+      0.1338,
+      0.1009,
+      0.1182,
+      0.0812
+    ],
+    "desc": "\u7eaf\u5747\u5300\u8026\u5408"
+  },
+  "mixed_chimera": {
+    "phase": "gradient_locking",
+    "ci": 0.0906,
+    "sync": [
+      0.0535,
+      0.0669,
+      0.0622,
+      0.0679
+    ],
+    "desc": "\u6df7\u5408 chimera + \u9891\u7387\u68af\u5ea6"
+  },
+  "_summary": {
+    "gradient": 3,
+    "mixed": 1
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "A": {
+    "converged": false,
+    "iterations": 200,
+    "c_A": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "c_B": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "final_imbalance": 0.14142135623730948
+  },
+  "B": {
+    "asym_0.0": {
+      "converged": true,
+      "iterations": 1,
+      "final_imbalance": 0.0
+    },
+    "asym_0.3": {
+      "converged": false,
+      "iterations": 200,
+      "final_imbalance": 0.8545900034952868
+    },
+    "asym_0.6": {
+      "converged": false,
+      "iterations": 200,
+      "final_imbalance": 1.0230480042182337
+    },
+    "asym_0.9": {
+      "converged": false,
+      "iterations": 200,
+      "final_imbalance": 1.0294116977306542
+    }
+  },
+  "C": {
+    "eps_0.01": {
+      "epsilon_dead": 0.01,
+      "early_imbalance_avg": 0.7646354054267775,
+      "late_imbalance_avg": 0.905538513813742,
+      "imbalance_ratio": 0.8443985471213802
+    },
+    "eps_0.05": {
+      "epsilon_dead": 0.05,
+      "early_imbalance_avg": 0.7646354054267775,
+      "late_imbalance_avg": 0.905538513813742,
+      "imbalance_ratio": 0.8443985471213802
+    },
+    "eps_0.1": {
+      "epsilon_dead": 0.1,
+      "early_imbalance_avg": 0.7646354054267775,
+      "late_imbalance_avg": 0.905538513813742,
+      "imbalance_ratio": 0.8443985471213802
+    },
+    "eps_0.2": {
+      "epsilon_dead": 0.2,
+      "early_imbalance_avg": 0.7646354054267775,
+      "late_imbalance_avg": 0.905538513813742,
+      "imbalance_ratio": 0.8443985471213802
+    }
+  },
+  "D": {
+    "norm_A_expansion": 1.4142135623730951,
+    "norm_A_contraction": 1.4142135623730951,
+    "hysteresis_area_A": 0.0,
+    "norm_B_expansion": 1.3364178665743827,
+    "norm_B_contraction": 1.4142135623730951,
+    "hysteresis_area_B": 0.07779569579871248,
+    "total_hysteresis": 0.07779569579871248
+  },
+  "metadata": {
+    "date": "2026-05-04T08:48:23.379883",
+    "experiment": "D37-Relationship-Cost-Equilibrium",
+    "propositions": [
+      "D37-1: Nash Equilibrium Existence",
+      "D37-2: Asymmetry Robustness",
+      "D37-3: Dead Zone Threshold",
+      "D37-4: Hysteresis Path Dependence"
+    ]
+  }
+}

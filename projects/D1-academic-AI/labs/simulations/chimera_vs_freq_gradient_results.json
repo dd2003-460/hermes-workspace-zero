@@ -1,0 +1,114 @@
+{
+  "uniform_coupling": {
+    "name": "uniform_coupling",
+    "global_coherence": 0.0817782869247046,
+    "cluster_analysis": {
+      "k": 2,
+      "silhouette": 0.7991517669224697,
+      "cluster_stats": {
+        "0": {
+          "size": 37,
+          "size_fraction": 0.074,
+          "mean_phase": 5.023117809307704,
+          "coherence": 0.9950140714050709
+        },
+        "1": {
+          "size": 35,
+          "size_fraction": 0.07,
+          "mean_phase": 4.13890198574164,
+          "coherence": 0.9882507268210975
+        }
+      },
+      "size_variance": 1.0,
+      "high_coherence_ratio": 1.0,
+      "spatial_segregation": 0.3026052104208417
+    }
+  },
+  "freq_gradient_only": {
+    "name": "freq_gradient_only",
+    "global_coherence": 0.06954612860931687,
+    "cluster_analysis": {
+      "k": 3,
+      "silhouette": 0.7788952568580378,
+      "cluster_stats": {
+        "0": {
+          "size": 14,
+          "size_fraction": 0.028,
+          "mean_phase": 4.6838951601724,
+          "coherence": 0.9961378373872343
+        },
+        "1": {
+          "size": 34,
+          "size_fraction": 0.068,
+          "mean_phase": 0.17181707861961854,
+          "coherence": 0.9935303175058207
+        },
+        "2": {
+          "size": 36,
+          "size_fraction": 0.072,
+          "mean_phase": 1.181400038141551,
+          "coherence": 0.9858314230038234
+        }
+      },
+      "size_variance": 98.66666666666667,
+      "high_coherence_ratio": 1.0,
+      "spatial_segregation": 0.3306613226452906
+    }
+  },
+  "spatial_coupling_only": {
+    "name": "spatial_coupling_only",
+    "global_coherence": 0.08483570611676441,
+    "cluster_analysis": {
+      "k": 2,
+      "silhouette": 0.8041689237109734,
+      "cluster_stats": {
+        "0": {
+          "size": 35,
+          "size_fraction": 0.07,
+          "mean_phase": 5.260912293657454,
+          "coherence": 0.9951911735838087
+        },
+        "1": {
+          "size": 36,
+          "size_fraction": 0.072,
+          "mean_phase": 3.975678280875817,
+          "coherence": 0.9866686598439838
+        }
+      },
+      "size_variance": 0.25,
+      "high_coherence_ratio": 1.0,
+      "spatial_segregation": 0.31462925851703405
+    }
+  },
+  "both": {
+    "name": "both",
+    "global_coherence": 0.08916958749328574,
+    "cluster_analysis": {
+      "k": 3,
+      "silhouette": 0.7979196523976579,
+      "cluster_stats": {
+        "0": {
+          "size": 42,
+          "size_fraction": 0.084,
+          "mean_phase": 5.196537923164892,
+          "coherence": 0.9948086444956058
+        },
+        "1": {
+          "size": 41,
+          "size_fraction": 0.082,
+          "mean_phase": 4.809492834543342,
+          "coherence": 0.9939748307442366
+        },
+        "2": {
+          "size": 31,
+          "size_fraction": 0.062,
+          "mean_phase": 3.8908865682899574,
+          "coherence": 0.9884860085975857
+        }
+      },
+      "size_variance": 24.666666666666668,
+      "high_coherence_ratio": 1.0,
+      "spatial_segregation": 0.36072144288577157
+    }
+  }
+}

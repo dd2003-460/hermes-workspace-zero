@@ -1,0 +1,29 @@
+{
+  "domain": "writing",
+  "type": "终点",
+  "status": "active",
+  "description": "影响力导向的写作管线——blog、社交媒体、学术写作的持续产出",
+  "created_at": "2026-04-02T10:04:00+08:00",
+  "blocking_strategy": {
+    "principle": "阻塞不阻断。任务卡住时自动尝试替代方案，实在不行就跳过。",
+    "levels": {
+      "L1_autonomous": "阻塞 → 自动跳过，转做 idea 转换/内容生成等可推进工作",
+      "L2_semi_autonomous": "阻塞 → 尝试自动登录发布（需用户授权账号/token）",
+      "L3_full_autonomous": "待授权后，cron 自动尝试发布 → 失败 → 跳过"
+    },
+    "fallback": "跳过/搁置，主循环继续推进其他任务"
+  },
+  "sub_projects": {
+    "a2_distribution_free": {
+      "title": "A2: Why Average-Case Analysis Isn't Enough",
+      "file": "a2_lw_ready.md",
+      "status": "ready_to_publish",
+      "quality_grade": "A+",
+      "target": "Less Wrong",
+      "word_count": 123,
+      "last_updated": "2026-04-04T22:00:00+08:00",
+      "publish_decision": "approve_immediate",
+      "notes": "IC_K distribution-free information complexity. Verified by R13/R14 brain subs. Hook: 'For every Boolean function — distribution-free IC = exactly zero.'"
+    }
+  }
+}

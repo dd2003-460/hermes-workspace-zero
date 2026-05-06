@@ -1,0 +1,43 @@
+## next_brain_sub 派发指令
+
+**派发目标**: 启动 R80 副脑回合
+
+**Reasoning**:
+- R79 已验证 R74→R78 连续5轮建议0执行，行动转化率=0%
+- Hot state 空转（manual-1775396224909 持续 awaiting_verification 超过30分钟）
+- 已生成详细诊断和3条路径（A/B/C）
+- 需要 R80 验证哪个路径被实际执行
+
+**下一轮任务**:
+```
+Checklist:
+1. 验证 hot state 是否被清理
+   - manual-1775396224909 是否从 tasks[] 移除或状态改为 removed/cannot_automate
+2. 验证是否有新写作域任务注册
+   - 搜索 tasks[] 中 id 包含 "writing-" 的新条目
+3. 验证 outputs 目录
+   - 检查 projects/写作/outputs/a3_blog_v3_release_candidate.md 是否存在
+   - 检查 projects/写作/outputs/twitter_thread_release.md 是否存在
+4. 结论
+   - 如任何产出存在 → 标记"部分执行"，建议主脑继续派发 completion_sub
+   - 如全部未执行 → 标记"信道断裂"，建议方案C（硬重置）或人工介入
+```
+
+**阶段决策**:
+- R80 仍为 1-loop 副脑（planning/verification 阶段）
+- 不需生成新分析，只需做 **binary 验证**
+- 输出格式：Checklist → 结论 → next_brain_sub 指示
+
+**置信度要求**:
+- 每项验证需给出置信度（文件存在=1.0，文件不存在=1.0，推测=<0.6）
+- 最终判断置信度需 > 0.85 才发出明确指令
+
+**循环保证**:
+- R80 必须派发 next_brain_sub (R81) — Red Line 0
+- 如发现已执行，R81 应为 execution_sub 验证产出质量
+
+---
+
+**派发者**: R79 副脑
+**时间**: 2026-04-05 22:36
+**状态**: 待主 session 读取并启动 R80

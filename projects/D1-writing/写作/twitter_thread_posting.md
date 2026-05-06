@@ -1,0 +1,99 @@
+# IC_K Twitter/X Thread — Posting Ready
+
+Copy-paste each tweet in order. All verified <280 chars.
+
+---
+
+**Tweet 1/12** (198 chars):
+🧵 For every Boolean function in the universe, the 'distribution-free' information complexity is exactly zero. Not small. Zero. And that's not a bug — it's a proof you're asking the wrong question. 🧵
+
+---
+
+**Tweet 2/12** (236 chars):
+The setup: Alice has x, Bob has y, both n-bit strings. They want to compute f(x,y). How many bits must they exchange?
+
+Classical answer: D(f). But information complexity asks a sharper question: *how much info must the protocol reveal?*
+
+---
+
+**Tweet 3/12** (247 chars):
+The problem: Shannon IC(f,μ) depends on a distribution μ. D(f) doesn't care about distributions. The natural fix: take inf over all μ.
+
+But here's the killer: **For every Boolean function f, inf_μ IC(f,μ) = 0.**
+
+Just pick a point mass. Game over.
+
+---
+
+**Tweet 4/12** (212 chars):
+Why does point mass kill it? If all probability sits on one input (x₀,y₀), a protocol that just outputs f(x₀,y₀) without communicating is correct with prob 1. Zero information revealed. Measure tells you nothing.
+
+---
+
+**Tweet 5/12** (233 chars):
+The Kolmogorov approach is distribution-free — but it trivializes for Boolean outputs. The one-bit output constraint collapses the measure.
+
+So we're stuck: Shannon IC works but needs μ. Kolmogorov MI is distribution-free but breaks.
+
+---
+
+**Tweet 6/12** (265 chars):
+IC_K's solution: Kolmogorov complexity on the *transcript*, with supremum over inputs.
+
+IC_K(f) = min_π sup_{x,y} [K(M|y,π) + K(M|x,π)]
+
+Three design choices:
+• Kolmogorov → no distribution needed
+• Transcript → captures info reveal
+• Supremum → prevents degeneracy
+
+---
+
+**Tweet 7/12** (240 chars):
+Concrete result: IC_K(EQ) = Θ(log n).
+
+EQ: do x = y? Binary search protocol. Worst-case inputs (single-bit diff) force the protocol to reveal the mismatch *location* — log n bits of info.
+
+No distribution needed. The right answer falls out.
+
+---
+
+**Tweet 8/12** (252 chars):
+Key theorems:
+
+📌 IC_K(f) ≤ 2D(f) + O(log n) — bounded by deterministic complexity
+📌 IC_K(f^n) ≤ n·IC_K(f) + O(n log n) — clean Direct Sum
+📌 Prefix variant: O(1) overhead — even cleaner
+
+That O(1) is exactly what you want from an info-theoretic measure.
+
+---
+
+**Tweet 9/12** (242 chars):
+Why this matters practically: any lower bound on IC_K is a lower bound on D(f).
+
+If you can prove strong IC_K bounds — without carefully constructing adversarial distributions — that's a new proof technique. The EQ result is proof of concept.
+
+---
+
+**Tweet 10/12** (246 chars):
+The Direct Sum result is exciting for composition. Many open problems — log-rank conjecture, bounds for f∘g — are about how complexity scales under composition.
+
+IC_K composing additively (even O(1) for prefix) suggests it is the "right" measure.
+
+---
+
+**Tweet 11/12** (198 chars):
+Open problems:
+
+• IC_K for Disjointness: conjectured Θ(n), matching Shannon IC without distributions
+• Strong Direct Sum LB: IC_K(f^n) ≥ n·IC_K(f) − small terms. Prefix variant is the right setting.
+
+---
+
+**Tweet 12/12** (271 chars):
+Bottom line: IC_K = info-theoretic precision without committing to a distribution.
+
+Shannon IC was the grammar of impossibility results. IC_K is a grammar upgrade — say *why* problems are hard, no μ needed.
+
+The definitions were the hard part. Now the real work begins. 🚀

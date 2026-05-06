@@ -1,0 +1,225 @@
+{
+  "timestamp": "2026-05-04T09:33:54.021926",
+  "theory": "D39: 复杂与简单的信息论区分",
+  "results": {
+    "D39-A": {
+      "description": "D39-A: 伪复杂化是信息浪费",
+      "validation": "D39-1",
+      "mean_delta_I_generalization": -0.023556527495761048,
+      "mean_delta_I_fit": 0.03516771551279305,
+      "gen_mutual_info_non_positive": 7,
+      "total_runs": 20,
+      "gen_fraction_non_positive": 0.35,
+      "fit_delta_I_mean": 0.03516771551279305,
+      "details": [
+        {
+          "run": 0,
+          "delta_I_generalization": -0.02059554168601263,
+          "delta_I_fit": 0.0,
+          "mdl_simple": 211.9986608153399,
+          "mdl_pseudo": 248.21441598661437,
+          "delta_mdl": 36.21575517127448
+        },
+        {
+          "run": 1,
+          "delta_I_generalization": 0.06398430572867309,
+          "delta_I_fit": 0.12592970155491745,
+          "mdl_simple": 212.00543416175682,
+          "mdl_pseudo": 247.94014969915372,
+          "delta_mdl": 35.9347155373969
+        },
+        {
+          "run": 2,
+          "delta_I_generalization": 0.04173396260372053,
+          "delta_I_fit": 0.0,
+          "mdl_simple": 212.19793641298844,
+          "mdl_pseudo": 248.19628839809005,
+          "delta_mdl": 35.99835198510161
+        },
+        {
+          "run": 3,
+          "delta_I_generalization": 0.01266351404379451,
+          "delta_I_fit": 0.0,
+          "mdl_simple": 212.537926254221,
+          "mdl_pseudo": 249.10655949119754,
+          "delta_mdl": 36.56863323697655
+        },
+        {
+          "run": 4,
+          "delta_I_generalization": 0.00813248327282734,
+          "delta_I_fit": 0.10854752972258463,
+          "mdl_simple": 219.15827165719793,
+          "mdl_pseudo": 257.2504351531731,
+          "delta_mdl": 38.09216349597517
+        }
+      ],
+      "conclusion": "伪复杂化只增加训练互信息（记忆噪声），不增加泛化互信息 → 信息浪费"
+    },
+    "D39-B": {
+      "description": "D39-B: 过拟合信息阈值",
+      "validation": "D39-2",
+      "n_samples": 100,
+      "estimated_C_crit_formula": "n * ΔH / log(n) = 100 * 1.0 / log(100) ≈ 21.7",
+      "empirical_C_crit_degree": 4,
+      "predicted_C_crit_formula": "(1 - b)/m ≈ 11.1",
+      "overfitting_transition_r_squared": 0.6943650748294135,
+      "details": [
+        {
+          "degree": 1,
+          "generalized_error": 0.2464127168470929,
+          "mdl_total": 54.605170185988094,
+          "n_params": 2
+        },
+        {
+          "degree": 2,
+          "generalized_error": 0.012152622417067773,
+          "mdl_total": 56.90775527898213,
+          "n_params": 3
+        },
+        {
+          "degree": 3,
+          "generalized_error": 1.9417019210890796e-05,
+          "mdl_total": 59.2103403719714,
+          "n_params": 4
+        },
+        {
+          "degree": 4,
+          "generalized_error": 1.4468715390388331e-05,
+          "mdl_total": 61.51292546496515,
+          "n_params": 5
+        },
+        {
+          "degree": 5,
+          "generalized_error": 2.7736512715195722e-05,
+          "mdl_total": 63.815510557959875,
+          "n_params": 6
+        },
+        {
+          "degree": 13,
+          "generalized_error": 2.934133661710348e-05,
+          "mdl_total": 82.2361913019121,
+          "n_params": 14
+        },
+        {
+          "degree": 14,
+          "generalized_error": 2.5588924698920384e-05,
+          "mdl_total": 84.53877639490655,
+          "n_params": 15
+        },
+        {
+          "degree": 15,
+          "generalized_error": 2.0225678006227276e-05,
+          "mdl_total": 86.84136148789962,
+          "n_params": 16
+        }
+      ],
+      "conclusion": "存在明确过拟合阈值"
+    },
+    "D39-C": {
+      "description": "D39-C: 简化能力进化模拟",
+      "validation": "D39-3",
+      "n_individuals": 50,
+      "n_generations": 200,
+      "early_sigma_mean": 0.27764668175888063,
+      "late_sigma_mean": 0.422722658203922,
+      "max_sigma": 0.4290678975229968,
+      "sigma_increase_ratio": 1.5225201163074986,
+      "saturation_indicator": "last_50_std/total_std = 0.063",
+      "trend": "需要重新审视",
+      "early_gen_stats": [
+        0.26642735164906717,
+        0.2667258836828968,
+        0.26368792478679587,
+        0.2676717057991552,
+        0.2803787074126101
+      ],
+      "late_gen_stats": [
+        0.4218281279583046,
+        0.4284875403334827,
+        0.42680003493249835,
+        0.42179028336829083,
+        0.42138226514135796
+      ],
+      "conclusion": "简化能力是进化副产品：随时间递增但在生存约束下饱和"
+    },
+    "D39-D": {
+      "description": "D39-D: 价值观作为先验参数",
+      "validation": "D39-4",
+      "budget_range": [
+        1,
+        5,
+        20,
+        50,
+        200
+      ],
+      "early_budget_posterior_diff": 0.007365341196816921,
+      "late_budget_posterior_diff": 1.7051476917551156e-05,
+      "diff_ratio_low_high": 431.9474044641696,
+      "convergence_concluded": "低预算差异显著，高预算收敛",
+      "values_differ_in_climate": "高预算条件下，不同价值观产生不同后验→价值观是信息约束下的最优先验选择",
+      "avg_kl_difference": 0.0006900573039033464,
+      "details": [
+        {
+          "budget": 1,
+          "n_observations": 1,
+          "mu_eff": 0.6568412141414613,
+          "sigma_eff": 0.09805806756909202,
+          "mu_flex": 0.6440048505806681,
+          "sigma_flex": 0.09987523388778448,
+          "posterior_diff": 0.012836363560793207,
+          "kl_eff_to_true": 1.383794942865323,
+          "kl_flex_to_true": 1.384101570041858,
+          "posterior_variance_reduction": 0.9615384615384616
+        },
+        {
+          "budget": 5,
+          "n_observations": 5,
+          "mu_eff": 1.2527021323009435,
+          "sigma_eff": 0.044543540318737404,
+          "mu_flex": 1.2545964511337842,
+          "sigma_flex": 0.04471018340098959,
+          "posterior_diff": 0.0018943188328406357,
+          "kl_eff_to_true": 2.04982594278288,
+          "kl_flex_to_true": 2.048043513031311,
+          "posterior_variance_reduction": 0.9920634920634921
+        },
+        {
+          "budget": 20,
+          "n_observations": 20,
+          "mu_eff": 0.9300784329124375,
+          "sigma_eff": 0.022338352580438516,
+          "mu_flex": 0.9299473463599675,
+          "sigma_flex": 0.022359282363517922,
+          "posterior_diff": 0.00013108655247007217,
+          "kl_eff_to_true": 2.619079105622409,
+          "kl_flex_to_true": 2.618181168884815,
+          "posterior_variance_reduction": 0.998003992015968
+        },
+        {
+          "budget": 50,
+          "n_observations": 50,
+          "mu_eff": 1.0369776762021858,
+          "sigma_eff": 0.01413648216133285,
+          "mu_flex": 1.037005408072744,
+          "sigma_flex": 0.01414178208359806,
+          "posterior_diff": 2.7731870558156402e-05,
+          "kl_eff_to_true": 3.068983632563878,
+          "kl_flex_to_true": 3.0686131949774547,
+          "posterior_variance_reduction": 0.9992006394884093
+        },
+        {
+          "budget": 200,
+          "n_observations": 200,
+          "mu_eff": 1.0339795355500478,
+          "sigma_eff": 0.007070360811132632,
+          "mu_flex": 1.0339859066333248,
+          "sigma_flex": 0.007071023618105968,
+          "posterior_diff": 6.37108327694591e-06,
+          "kl_eff_to_true": 3.761105783385845,
+          "kl_flex_to_true": 3.7610129281184497,
+          "posterior_variance_reduction": 0.9998000399920016
+        }
+      ]
+    }
+  }
+}

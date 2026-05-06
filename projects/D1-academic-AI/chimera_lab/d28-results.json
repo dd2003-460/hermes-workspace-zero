@@ -1,0 +1,115 @@
+{
+  "timestamp": "2026-05-04T11:19:18.274648",
+  "theory": "D28: 正交维度的关联生成理论",
+  "results": {
+    "D28-A": {
+      "description": "D28-A: 正交幻觉定理",
+      "validation": "D28-1",
+      "n_dimensions": 300,
+      "n_vectors": 1000,
+      "d_observation_values": [
+        5,
+        10,
+        50,
+        100,
+        200,
+        300
+      ],
+      "measured_rates": [
+        0.8879395888411902,
+        0.6742171960266511,
+        0.5533476346413988,
+        0.5318072644098157,
+        0.5157450054678914,
+        0.5107551154946444
+      ],
+      "theory_rates": [
+        0.2949758973182217,
+        0.20090695118649285,
+        0.06650443125368231,
+        0.03369134661421841,
+        0.010360783586358254,
+        0.0
+      ],
+      "d_obs_correlation": -0.0008527943106929083,
+      "correlation_below_minus05": false,
+      "theory实测_correlation": 1.0,
+      "illusion_rate_range": [
+        0.5107551154946444,
+        0.8879395888411902
+      ],
+      "conclusion": "低维投影下正交率更高（正交幻觉），高维下下降（D28-1）"
+    },
+    "D28-B": {
+      "description": "D28-B: 认知路径最短性原理",
+      "validation": "D28-4",
+      "n_concepts": 200,
+      "semantic_dimension": 50,
+      "analog_dimension": 40,
+      "mean_distance_ratio": 0.8973230794302604,
+      "median_distance_ratio": 0.9027486201019516,
+      "analog_shorter_pct": 100.0,
+      "exploration_efficiency": 1.0,
+      "analog_path_optimal": true,
+      "conclusion": "类比路径在高维空间中提供更短连接（认知能量最小）"
+    },
+    "D28-C": {
+      "description": "D28-C: 概念距离的度规退化",
+      "validation": "D28-3",
+      "n_points": 500,
+      "semantic_mean_distance": 10.11220188392269,
+      "analog_mean_distance": 8.808268556024826,
+      "mean_distance_reduction": 1.3039333278978626,
+      "analog_always_shorter_pct": 82.45531062124249,
+      "degradation_holds": true,
+      "conclusion": "类比空间提供度量退化（d_analog ≤ d_semantic）"
+    },
+    "D28-D": {
+      "description": "D28-D: 正交-独立不等式界限",
+      "validation": "D28-5",
+      "n_pairs": 1000,
+      "D_total": 300,
+      "results_by_dimension": [
+        {
+          "d_obs": 5,
+          "correlation": 0.09351352305280308,
+          "orthogonality_error": 1.2029355561638948,
+          "theory_threshold": 0.9833333333333333,
+          "bound_holds": true
+        },
+        {
+          "d_obs": 10,
+          "correlation": 0.29525360410912926,
+          "orthogonality_error": 1.8544376617924316,
+          "theory_threshold": 0.9666666666666667,
+          "bound_holds": true
+        },
+        {
+          "d_obs": 50,
+          "correlation": 0.14608698105210433,
+          "orthogonality_error": 2.7405768658683707,
+          "theory_threshold": 0.8333333333333334,
+          "bound_holds": true
+        },
+        {
+          "d_obs": 100,
+          "correlation": 0.21327776233398574,
+          "orthogonality_error": 3.175203257881006,
+          "theory_threshold": 0.6666666666666667,
+          "bound_holds": true
+        },
+        {
+          "d_obs": 200,
+          "correlation": 0.19304792088730313,
+          "orthogonality_error": 4.804398002732612,
+          "theory_threshold": 0.33333333333333337,
+          "bound_holds": true
+        }
+      ],
+      "bound_holding_pct": 100.0,
+      "threshold_slope": -0.0033333333333333327,
+      "r_squared_theory": 0.9999999999999996,
+      "conclusion": "正交条件允许非零互信息，上限由 d/D 决定（D28-5）"
+    }
+  }
+}

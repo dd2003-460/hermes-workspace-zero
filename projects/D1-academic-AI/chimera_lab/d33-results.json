@@ -1,0 +1,40 @@
+{
+  "d33_4_verified": true,
+  "d33_4_ratio": 19.52720987654321,
+  "d33_2_verified": true,
+  "energy_costs": {
+    "new_agent_mean": 50.625,
+    "old_agent_mean": 988.565,
+    "new_reached_pct": 1.0,
+    "old_reached_pct": 0.485
+  },
+  "query_time_summary": [
+    {
+      "mu_D": 0.01,
+      "mean_time": 716.4766666666667,
+      "std_time": 28.366931256110327
+    },
+    {
+      "mu_D": 0.05,
+      "mean_time": 200.46,
+      "std_time": 5.601345076556761
+    },
+    {
+      "mu_D": 0.1,
+      "mean_time": 100.50666666666666,
+      "std_time": 1.8788175950729107
+    },
+    {
+      "mu_D": 0.2,
+      "mean_time": 50.49,
+      "std_time": 0.8225367266369731
+    },
+    {
+      "mu_D": 0.5,
+      "mean_time": 20.476666666666667,
+      "std_time": 0.49945525881259434
+    }
+  ],
+  "lin_r2": 0.382349224603614,
+  "nonlinear_r2": 0.994608685591393
+}

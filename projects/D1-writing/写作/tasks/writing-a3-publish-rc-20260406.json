@@ -1,0 +1,33 @@
+{
+  "id": "writing-a3-publish-rc-20260406",
+  "title": "A3: IC_K ≠ inf IC — RC 发布 (LessWrong)",
+  "description": " releasing the A3 blog post 'IC_K ≠ inf IC: When the Infimum Destroys the Answer' to LessWrong. Preconditions: RC content verified, payload ready, promotional materials prepared.",
+  "status": "pending",
+  "interaction_stage": "planning",
+  "source_type": "user_message",
+  "project_name": "writing",
+  "allowed_actions": [
+    "copy RC content to LessWrong new post form",
+    "replace [Author Name] with actual signature",
+    "add tags: complexity_theory, information_theory, kolmogorov_complexity, applied_rationality, mathematics",
+    "publish post",
+    "promote on Twitter/X and LinkedIn"
+  ],
+  "forbidden_actions": [
+    "modify RC content before publishing",
+    "publish without verifying KaTeX rendering"
+  ],
+  "evidence_required": [
+    "outputs/a3_blog_v3_release_candidate.md",
+    "projects/写作/notes/a3_publish_execution_report_20260406.md",
+    "LessWrong post URL after publishing"
+  ],
+  "testing": {
+    "execution_outcome": "pass"
+  },
+  "urls": [
+    "https://www.lesswrong.com/newPost"
+  ],
+  "created_at": "2026-04-06T00:00:00+08:00",
+  "updated_at": "2026-04-06T11:20:00+08:00"
+}

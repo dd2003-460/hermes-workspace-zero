@@ -1,0 +1,22 @@
+# Writing 发布配置
+# 复制为 publish_config.yaml 并填入真实值
+# ⚠️ publish_config.yaml 已在 .gitignore 中
+
+lesswrong:
+  # LessWrong GraphQL API
+  api_url: "https://www.lesswrong.com/graphql"
+  # API Key (从 LessWrong 账户设置获取)
+  api_key: "YOUR_LESSWRONG_API_KEY"
+
+twitter:
+  # Twitter/X API v2
+  # 从 https://developer.twitter.com 获取
+  api_key: "YOUR_API_KEY"
+  api_secret: "YOUR_API_SECRET"
+  access_token: "YOUR_ACCESS_TOKEN"
+  access_token_secret: "YOUR_ACCESS_TOKEN_SECRET"
+
+defaults:
+  # 默认发布设置
+  lesswrong_draft: true      # 先存为草稿，不直接发布
+  twitter_thread_delay: 5    # tweet 间间隔（秒）

@@ -1,0 +1,82 @@
+{
+  "configurations": {
+    "true_chimera": {
+      "description": "\u975e\u5c40\u90e8\u8026\u5408 chimera\uff08Abrams-Strogatz\uff09",
+      "k": 1.0,
+      "g": 0.3,
+      "omega_magnitude": 0.0,
+      "phase": "gradient_locking",
+      "mpi": 0.0,
+      "sci": 0.09779211390124765,
+      "tfd": 3.1372550754999824e-05,
+      "confidence": 0.5,
+      "segment_sync": [
+        0.0876,
+        0.1035,
+        0.1121,
+        0.0919
+      ],
+      "sync_variance": 9.3e-05
+    },
+    "freq_gradient": {
+      "description": "\u7eaf\u9891\u7387\u68af\u5ea6\u9501\u76f8\uff08global coupling\uff09",
+      "k": 1.0,
+      "g": 0.0,
+      "omega_magnitude": 0.5,
+      "phase": "gradient_locking",
+      "mpi": 0.0,
+      "sci": 0.12407182700108998,
+      "tfd": 0.005826790283773935,
+      "confidence": 0.5,
+      "segment_sync": [
+        0.1209,
+        0.1115,
+        0.1388,
+        0.0988
+      ],
+      "sync_variance": 0.000213
+    },
+    "global_uniform": {
+      "description": "\u7eaf\u5747\u5300\u8026\u5408\uff08\u5168\u5c40\u540c\u6b65\uff09",
+      "k": 1.0,
+      "g": 0.0,
+      "omega_magnitude": 0.0,
+      "phase": "gradient_locking",
+      "mpi": 0.0,
+      "sci": 0.18074465069497075,
+      "tfd": 1.1056354663051096e-15,
+      "confidence": 0.5,
+      "segment_sync": [
+        0.1338,
+        0.1009,
+        0.1182,
+        0.0812
+      ],
+      "sync_variance": 0.000385
+    },
+    "mixed_chimera": {
+      "description": "\u6df7\u5408 chimera + \u9891\u7387\u68af\u5ea6",
+      "k": 1.5,
+      "g": 0.3,
+      "omega_magnitude": 0.3,
+      "phase": "gradient_locking",
+      "mpi": 0.0,
+      "sci": 0.4956898807888098,
+      "tfd": 0.0036790860339414046,
+      "confidence": 0.5,
+      "segment_sync": [
+        0.0233,
+        0.1618,
+        0.1385,
+        0.1006
+      ],
+      "sync_variance": 0.00276
+    }
+  },
+  "summary": {
+    "theory_reference": "D4-S18-r23-chimera-diagnostic-formalization.md",
+    "protocol": "D4-S18-r23-P1: \u53cc\u9636\u6bb5 chimera \u8ba4\u8bc1",
+    "chimera_count": false,
+    "gradient_locking_count": 4
+  }
+}

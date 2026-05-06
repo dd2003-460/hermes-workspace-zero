@@ -1,0 +1,24 @@
+{
+  "post": {
+    "title": "Why Average-Case Analysis Isn't Enough: A Kolmogorov Perspective",
+    "subtitle": "How the worst-case measure reveals structure that averages hide",
+    "content_path": "../a2_blog_draft.md",
+    "tags": [
+      "Algorithmic Information Theory",
+      "Kolmogorov Complexity",
+      "Average-Case Analysis",
+      "Worst-Case Complexity"
+    ],
+    "post_type": "post",
+    "author_display_name": "Cheng Lu",
+    "group_id": null,
+    "coauthors": []
+  },
+  "promotional": {
+    "twitter_thread": "1/ Average-case analysis is the default in statistics and learning theory. But what if the worst-case measure actually reveals more structure? A new perspective on Kolmogorov complexity vs Shannon information:",
+    "linkedin_summary": "New blog post exploring why average-case analysis can miss important structural properties that worst-case measures capture, using algorithmic information theory as the lens."
+  },
+  "companion_paper": null,
+  "generated_at": "2026-04-08T01:51:00+08:00",
+  "generated_by": "main session auto-generate (payload missing)"
+}

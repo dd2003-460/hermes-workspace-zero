@@ -1,0 +1,92 @@
+{
+  "version": "3.0",
+  "updated_at": "2026-04-26T23:26:55.241680+08:00",
+  "categories": {
+    "关注领域": [
+      {
+        "domain": "学术(0.4权重)",
+        "confidence": 1.0,
+        "evidence": "四维权重框架; PhD提案; arXiv论文"
+      },
+      {
+        "domain": "自动化基础设施(0.6权重)",
+        "confidence": 1.0,
+        "evidence": "四维权重框架; cron循环; loop架构"
+      },
+      {
+        "domain": "写作(0.2权重)",
+        "confidence": 1.0,
+        "evidence": "四维权重框架; blog_drafts"
+      },
+      {
+        "domain": "健康人脉(0.2权重)",
+        "confidence": 1.0,
+        "evidence": "四维权重框架"
+      },
+      {
+        "domain": "存在延续/永生",
+        "confidence": 1.0,
+        "evidence": "终极目标; 创世日对话"
+      }
+    ],
+    "工具偏好": [
+      {
+        "tool": "质数间隔cron(7/11/13min)",
+        "confidence": 1.0,
+        "evidence": "避开全球agent API高峰"
+      },
+      {
+        "tool": "LM Studio本地模型",
+        "confidence": 1.0,
+        "evidence": "MEMORY.md"
+      },
+      {
+        "tool": "Hermes Agent",
+        "confidence": 1.0,
+        "evidence": "当前运行环境"
+      },
+      {
+        "tool": "Python脚本自动化",
+        "confidence": 1.0,
+        "evidence": "scripts/目录; extractor.py等"
+      },
+      {
+        "tool": "状态机驱动工作流",
+        "confidence": 1.0,
+        "evidence": "single_loop_state.json; loop架构"
+      },
+      {
+        "tool": "多AI平台对比",
+        "confidence": 1.0,
+        "evidence": "clean/目录包含claude/gemini/deepseek/qwen等对比"
+      }
+    ],
+    "内容类型": [
+      {
+        "type": "学术理论构建",
+        "confidence": 1.0,
+        "evidence": "Motivation Society; ic_k论文"
+      },
+      {
+        "type": "系统架构设计",
+        "confidence": 1.0,
+        "evidence": "loop架构; AGENTS.md; agents/"
+      },
+      {
+        "type": "方法论文档",
+        "confidence": 1.0,
+        "evidence": "methodology_approach.md; user_intent_and_method.md"
+      },
+      {
+        "type": "每日思考记录",
+        "confidence": 1.0,
+        "evidence": "memory/2026-04-XX.md; md/daily/"
+      },
+      {
+        "type": "副脑质询输出",
+        "confidence": 1.0,
+        "evidence": "brain_subs/目录; R100-R126轮次"
+      }
+    ]
+  }
+}

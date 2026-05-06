@@ -1,0 +1,20 @@
+{
+  "pure_chimera": {
+    "name": "pure_chimera",
+    "global_coherence": 0.09804660629085545,
+    "score_stability": 1.1102230246251565e-16,
+    "spatial_corr_std": 3.8472530312732063e-10,
+    "spatial_corr_mean": 0.9999999444621307,
+    "size_var_over_time": 0.4536862003780718,
+    "avg_region_variance": 0.004521739130434784
+  },
+  "gradient_locking": {
+    "name": "gradient_locking",
+    "global_coherence": 0.14151707366961683,
+    "score_stability": 0.0,
+    "spatial_corr_std": 8.42909918104941e-10,
+    "spatial_corr_mean": 0.9999637065306316,
+    "size_var_over_time": 26.37429111531191,
+    "avg_region_variance": 0.16173913043478264
+  }
+}

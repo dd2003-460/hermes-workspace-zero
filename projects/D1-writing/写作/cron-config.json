@@ -1,0 +1,16 @@
+{
+  "domain": "writing",
+  "version": 2,
+  "revised": "2026-04-08",
+  "description": "写作域 cron 配置。cron 只提醒主脑，副脑追问和互相质疑留给 loop；项目记忆写回本项目 notes/。分钟级质数间隔。",
+  "jobs": {
+    "main_loop": {
+      "name": "mb-write-11min",
+      "enabled": true,
+      "schedule": { "kind": "cron", "expr": "*/11 * * * *" },
+      "sessionTarget": "isolated",
+      "purpose": "写作域主脑巡检 — 每 11 分钟一轮，保持发布/草稿/推广链路推进",
+      "payload_summary": "先读 AGENTS.md / SOUL.md / USER.md / loop/prompt-template.md / loop/1-loop/relay-sub-prompt.md / loop/2-loop/SUB_STANDARD.md / projects/写作/project.json / projects/写作/notes/memory.md / projects/写作/notes/output.md / projects/写作/notes/questions.md；复述写作域真实瓶颈、下一步主脑会做什么、用户接下来会做什么、应该提前准备什么；保持副脑循环，不中断；写回 projects/写作/notes/memory.md，并更新 output/questions（如有新增）"
+    }
+  }
+}

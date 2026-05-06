@@ -1,0 +1,80 @@
+{
+  "version": "3.0",
+  "updated_at": "2026-04-26T23:26:55.241680+08:00",
+  "source_files_analyzed": 1487,
+  "categories": {
+    "表达风格": [
+      {
+        "trait": "简洁直接",
+        "confidence": 1.0,
+        "evidence": "AGENTS.md Red Line; USER.md; user_preferences_2026-03-26.md"
+      },
+      {
+        "trait": "避免机械复读",
+        "confidence": 1.0,
+        "evidence": "user_preferences_2026-03-26.md"
+      },
+      {
+        "trait": "少空话多证据",
+        "confidence": 1.0,
+        "evidence": "SOUL.md; AGENTS.md"
+      },
+      {
+        "trait": "不包装礼貌为拖延",
+        "confidence": 0.95,
+        "evidence": "SOUL.md"
+      }
+    ],
+    "信息密度": [
+      {
+        "trait": "高信息密度偏好",
+        "confidence": 1.0,
+        "evidence": "所有对话记录显示高密度学术讨论"
+      },
+      {
+        "trait": "压缩=理解",
+        "confidence": 0.85,
+        "evidence": "创世日思维流; book2 Hubble案例"
+      },
+      {
+        "trait": "正交分解",
+        "confidence": 1.0,
+        "evidence": "Plan五步方法; 文件放置正交规则"
+      }
+    ],
+    "语言习惯": [
+      {
+        "trait": "中英混用",
+        "confidence": 1.0,
+        "evidence": "所有文档混合使用中文和英文术语"
+      },
+      {
+        "trait": "结构化输出偏好",
+        "confidence": 1.0,
+        "evidence": "Markdown文档; JSON状态文件"
+      },
+      {
+        "trait": "置信度标注",
+        "confidence": 1.0,
+        "evidence": "user_intent_and_method.md 每个维度都有置信度"
+      }
+    ],
+    "输出格式": [
+      {
+        "trait": "Markdown + JSON 双格式",
+        "confidence": 1.0,
+        "evidence": "workspace文件结构"
+      },
+      {
+        "trait": "日期命名",
+        "confidence": 1.0,
+        "evidence": "memory/2026-04-XX.md 模式"
+      },
+      {
+        "trait": "README.md 同行文档",
+        "confidence": 1.0,
+        "evidence": "user_preferences_2026-03-26.md"
+      }
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "experiment": "D46-Adaptive-Scale-Transition",
+  "date": "2026-05-04T12:45:59.315645",
+  "theoretical_framework": "\u591a\u5c3a\u5ea6\u52a8\u529b\u5b66 + \u5c3a\u5ea6\u8f6c\u6362",
+  "propositions": {
+    "D46-A": "\u591a\u5c3a\u5ea6\u8868\u5f81\u662f\u5fc5\u8981\u6761\u4ef6\uff08D46-1\uff09",
+    "D46-B": "\u5c3a\u5ea6\u8f6c\u6362\u901f\u7387\u5339\u914d\u4efb\u52a1\u590d\u6742\u5ea6\uff08D46-2\uff09",
+    "D46-C": "\u5f3a\u5236\u5355\u4e00\u5c3a\u5ea6\u5bfc\u81f4\u6b21\u4f18\u89e3\uff08D46-3\uff09",
+    "D46-D": "\u5c3a\u5ea6\u8bb0\u5fc6\u4ea7\u751f\u6027\u80fd\u6301\u7eed\uff08D46-4\uff09"
+  },
+  "results": {
+    "D46-A": {
+      "description": "D46-A: \u591a\u5c3a\u5ea6\u8868\u5f81\u662f\u81ea\u9002\u5e94\u4efb\u52a1\u6c42\u89e3\u7684\u5fc5\u8981\u6761\u4ef6",
+      "validation": "D46-1",
+      "avg_single_scale_performance": 0.471539320722069,
+      "avg_multi_scale_performance": 0.482233633799416,
+      "advantage_ratio": 0.022679578574068424,
+      "n_tasks": 10,
+      "n_scales": 15,
+      "conclusion": "\u591a\u5c3a\u5ea6\u7b56\u7565\u59cb\u7ec8\u4f18\u4e8e\u5355\u5c3a\u5ea6\uff08D46-1\uff09"
+    },
+    "D46-B": {
+      "description": "D46-B\uff1a\u5c3a\u5ea6\u8f6c\u6362\u901f\u7387\u4e0e\u4efb\u52a1\u590d\u6742\u5ea6\u5339\u914d",
+      "validation": "D46-2",
+      "complexity_scale_correlation": -0.9870934276405386,
+      "optimal_switching_valid": true,
+      "n_complexity_levels": 5,
+      "conclusion": "\u590d\u6742\u5ea6\u8d8a\u9ad8\uff0c\u7cfb\u7edf\u8d8b\u5411\u7ec6\u7c92\u5ea6\u5c3a\u5ea6\uff08D46-2\uff09"
+    },
+    "D46-C": {
+      "description": "D46-C\uff1a\u5f3a\u5236\u5355\u4e00\u5c3a\u5ea6\u5bfc\u81f4\u6b21\u4f18\u89e3",
+      "validation": "D46-3",
+      "avg_penalty": -0.015687340880522836,
+      "max_penalty": 0.34697118671842864,
+      "penalty_vs_complexity_corr": -0.9935177878675299,
+      "n_mismatch_scenarios": 20,
+      "conclusion": "\u5f3a\u5236\u5355\u5c3a\u5ea6\u5e73\u5747\u60e9\u7f5a -0.0157\uff08D46-3\uff09"
+    },
+    "D46-D": {
+      "description": "D46-D\uff1a\u5c3a\u5ea6\u8bb0\u5fc6\u4ea7\u751f\u6027\u80fd\u6301\u7eed",
+      "validation": "D46-4",
+      "retention_rates": {
+        "10": 0.0019531249997384104,
+        "25": 0.08246924441399263,
+        "50": 0.2871745887187169,
+        "100": 0.5358867312128709
+      },
+      "n_half_life_levels": 4,
+      "time_horizon": 100,
+      "conclusion": "\u534a\u8870\u671f\u8d8a\u957f\uff0c\u8bb0\u5fc6\u6301\u7eed\u6548\u5e94\u8d8a\u5f3a\uff08D46-4\uff09"
+    }
+  }
+}

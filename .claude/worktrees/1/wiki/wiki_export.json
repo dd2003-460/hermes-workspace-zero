@@ -1,0 +1,98 @@
+[
+  {
+    "id": "SCHEMA",
+    "path": "SCHEMA.md",
+    "title": "SCHEMA.md - 知识体系定义",
+    "content": "# SCHEMA.md - 知识体系定义\n\n## 概念层级\n\n```\n范畴论 (Category Theory)\n├── 函子 (Functors)\n│   ├── Extended Functorial QFT\n│   └── AQFT (Algebraic QFT)\n├── 自然变换 (Natural Transformations)\n├── 拓扑斯理论 (Topos Theory)\n└── Cobordism\n    ├── Lorentzian Cobordism\n    └── Extended Cobordism\n\n引力波天文学 (Gravitational Wave Astronomy)\n├── PTA (Pulsar Timing Arrays)\n│   ├── NANOGrav\n│   ├── EPTA\n│   └── IPTA\n├── 引力波背景 (SGWB)\n└── 传播理论\n\n贝叶斯推断 (Bayesian Inference)\n├── 谱指数约束\n├── 最优统计量\n└── 模型比较\n```\n\n## 实体类型\n\n| 类型 | 示例 | 存储位置 |\n|------|------|----------|\n| 论文 | arXiv:0806.1079 | `raw/papers/` |\n| 概念 | Extended Functorial QFT | `concepts/` |\n| 人 | Schreiber, Brunetti | `entities/people/` |\n| 机构 | NANOGrav, SKAO | `entities/orgs/` |\n\n## 关系类型\n\n- `references`: A 引用 B\n- `extends`: A 扩展 B  \n- `contradicts`: A 与 B 矛盾\n- `applies`: A 应用于 B\n\n## 向量检索配置\n\n### 嵌入策略\n\n1. **本地模式**：用 `sentence-transformers` 生成 embedding，存储为 JSON\n2. **外部模式**：将文本导出为 Markdown，供任意向量数据库导入\n\n### 迁移格式\n\n```json\n{\n  \"id\": \"concept-extended-fqft\",\n  \"path\": \"concepts/extended_functorial_qft.md\",\n  \"text\": \"...全文内容...\",\n  \"embedding_ref\": \"embeddings/vectors/concept-extended-fqft.npy\",\n  \"tags\": [\"category-theory\", \"QFT\", \"functorial\"]\n}\n```\n"
+  },
+  {
+    "id": "concepts-aqft",
+    "path": "concepts/aqft.md",
+    "title": "AQFT (Algebraic Quantum Field Theory)",
+    "content": "# AQFT (Algebraic Quantum Field Theory)\n\n## 概述\n\n代数量子场论（AQFT）是 QFT 的一种公理化表述，用 C*-代数的语言描述局部可观测量。\n\n## 核心思想\n- 每个时空区域 O 关联一个 C*-代数 A(O)（该区域内的可观测量）\n- 因果性：类空分离的区域对应的代数对易\n- 协变性：时空微分同胚诱导代数间的同态\n\n## 与范畴论的联系\n- AQFT 可表述为从时空范畴到 C*-代数范畴的函子\n- 局部协变性 = 自然变换（Brunetti-Fredenhagen-Verch, arXiv:1105.6202）\n- Extended Functorial QFT 与 AQFT 的统一框架（Schreiber, arXiv:0806.1079）\n\n## 与引力波的关联\n- 局部协变框架为 GW 传播提供了严格表述\n- 引力波扰动可视为时空范畴中的态射处理\n- **可行性最高**：已有数学基础，扩展路径清晰\n\n## 关键参考文献\n1. Brunetti, Fredenhagen & Verch (2003) — \"The generally covariant locality principle\"\n2. Brunetti, Fredenhagen & Verch (1105.6202) — \"On the notion of 'the same physics in all spacetimes'\"\n3. Schreiber (0806.1079) — \"AQFT from n-functorial QFT\"\n\n## 状态\n- [x] 理解 AQFT 基本框架\n- [ ] 深入阅读 BFV 局部协变性论文\n- [ ] 评估扩展到 GW 传播计算的可行性\n\n## 相关概念\n- [[Extended Functorial QFT]]\n- [[局部协变性]]\n- [[Cobordism]]\n"
+  },
+  {
+    "id": "concepts-extended_functorial_qft",
+    "path": "concepts/extended_functorial_qft.md",
+    "title": "Extended Functorial QFT (EFQFT)",
+    "content": "# Extended Functorial QFT (EFQFT)\n\n## 概述\n\nExtended Functorial Quantum Field Theory 是将传统函子型 QFT 扩展到流形所有维度子结构的推广框架。\n\n## 核心数学结构\n\n### 基础框架（Atiyah-Segal）\n- **标准 functorial QFT**：从 n-维 cobordism 范畴 Cob_n 到向量空间范畴 Vect 的对称单值函子\n- Cob_n 的对象：(n-1)-维闭流形；态射：n-维 cobordism（带边流形）\n- 公理：函子性（cobordism 组合 → 算符复合）、对称性（流形直和 → 张量积）\n\n### Extended 推广（Baez-Dolan, Lurie）\n- **Extended QFT**：不仅对全维流形定义，还对任意维度子流形（包括点、曲线、曲面）定义数据\n- 数学表述：从 extended cobordism ∞-范畴到 ∞-范畴的 n-函子\n- 关键：在 k-维子流形上定义 k-向量空间（而非仅在 (n-1)-维闭流形上定义向量空间）\n\n### Schreiber 的统一（arXiv:0806.1079）\n- AQFT（代数 QFT）与 n-functorial QFT 的统一框架\n- 核心：从时空范畴（Lorentzian 流形 + 因果嵌入）到代数范畴的函子\n- **关键创新**：将局部协变性（local covariance）表述为自然变换\n\n## 与引力波检测的关联\n\n### PTA 建模\n- N 颗脉冲星 → N 条世界线（1-维子流形）\n- 每颗脉冲星的计时残差 → 在该世界线上的标量场数据\n- Hellings-Downs 相关性 → 不同世界线之间的关联函数\n- Extended Functorial QFT 框架：F(Σ_i) = 脉冲星 i 的希尔伯特空间，F(W_ij) = 从脉冲星 i 到 j 的传播子\n\n### 干涉仪建模\n- LIGO/Virgo/KAGRA 的臂 → 光线的零测地线（1-维子流形）\n- 引力波扰动 → 度规变化 δg_μν，影响光程差\n- Extended Functorial QFT 框架：F(arm) = 干涉仪的量子态空间，F(cobordism) = 引力波传播算符\n\n### 关键洞察\n- Extended Functorial QFT 提供了一个统一的框架，可以同时描述 PTA（长基线、低频）和干涉仪（短基线、高频）的引力波检测\n- 不同尺度的探测器对应于不同维度的子流形上的数据\n- **创新潜力**：用 Extended Functorial QFT 的函子性，可以严格推导不同探测器之间的关联关系\n\n## 三条可行路径对比\n\n| 路径 | 数学成熟度 | 与观测的联系 | 创新潜力 | 工作量 |\n|------|-----------|------------|---------|--------|\n| A: 引力子作为态 | 中（Euclidean 成熟，Lorentzian 发展中） | 高（直接计算传播振幅） | 高 | 大 |\n| B: 局部协变扩展 | 高（已有 AQFT 框架） | 中高（可推导 GW 传播方程） | 中 | 中 |\n| C: Extended + 自旋泡沫 | 低（高度理论化） | 低（远离观测） | 极高 | 极大 |\n\n## 核心挑战\n- Extended Functorial QFT 目前主要在 Euclidean 背景下发展\n- Lorentzian 时空的 extended functorial QFT 表述仍在发展中（Schreiber 2008 部分处理）\n- **具体挑战**：Lorentzian cobordism 的范畴结构比 Euclidean 更复杂（因果结构、时间定向）\n\n## 状态\n- [x] 理解基本定义和数学框架\n- [ ] 深入阅读 Schreiber (0806.1079) AQFT 统一框架\n- [ ] 研究 Brunetti-Fredenhagen-Verch (1105.6202) 局部协变扩展\n- [ ] 探索 Lorentzian cobordism 的最新进展\n\n## 相关概念\n- [[AQFT]]\n- [[Cobordism]]\n- [[Lorentzian Cobordism]]\n- [[局部协变性]]\n\n## 关键参考文献\n1. **Atiyah (1988)** — \"Topological quantum field theories\"\n2. **Baez & Dolan (1995)** — \"From finite sets to Feynman diagrams\"\n3. **Lurie (2009)** — \"On the classification of topological field theories\"\n4. **Schreiber (0806.1079)** — \"AQFT from n-functorial QFT\"\n5. **Brunetti, Fredenhagen & Verch (1105.6202)** — 局部协变性的范畴论表述\n"
+  },
+  {
+    "id": "concepts-higher_gauge_theory",
+    "path": "concepts/higher_gauge_theory.md",
+    "title": "高阶规范理论 (Higher Gauge Theory)",
+    "content": "# 高阶规范理论 (Higher Gauge Theory)\n\n## 概述\n\n广义相对论可表述为庞加莱 2-群（Poincaré 2-group）上的约束拓扑理论。\n\n## 核心思想\n- **联络提升**：从普通的 1-形式提升为 2-联络（2-connection）\n- **规范群提升**：从 Lie 群提升为 2-群（n-group）\n- **BFCG (2BF) 理论**：是 BF 理论的范畴论推广，可描述引力与标准模型的耦合\n\n## 与引力波的关联\n- 高阶规范理论预言了新的引力波偏振模式（超出广义相对论的两种张量模）\n- 这些模式可用 2-群表示论分类\n- Higher topos theory 自然包含 higher gauge fields，这些是引力理论中的基本对象\n\n## 关键论文\n- Baez & Schreiber (2011) — arXiv:1110.4694 \"Poincare 2-group and quantum gravity\"\n- Baez & Schreiber (2012) — arXiv:1204.4339 \"Teleparallel Gravity as a Higher Gauge Theory\"\n- 2024 (arXiv:2408.02889) — \"Categorical generalization of BF theory coupled to gravity\"\n\n## 状态\n- [x] 理解高阶规范理论基本概念\n- [ ] 研究新引力波偏振模式的预测\n\n## 相关概念\n- [[拓扑斯理论]]\n- [[Extended Functorial QFT]]\n"
+  },
+  {
+    "id": "concepts-local_covariance",
+    "path": "concepts/local_covariance.md",
+    "title": "局部协变性 (Local Covariance)",
+    "content": "# 局部协变性 (Local Covariance)\n\n## 概述\n\n局部协变性原理：物理定律在所有时空上形式一致，是广义相对论在 QFT 中的自然推广。\n\n## 范畴论表述\n- **时空范畴**：对象为全局双曲 Lorentzian 流形，态射为因果嵌入（causal embedding）\n- **代数范畴**：对象为 C*-代数，态射为 *-同态\n- **AQFT 函子**：F: Spacetime → C*-Alg，将每个时空映射到其可观测量代数\n- **局部协变性** = 自然变换：对任意因果嵌入 i: M → N，F(i): F(M) → F(N) 保持物理结构\n\n## 与引力波的关联\n- 引力波在不同背景时空中的传播可用局部协变框架严格描述\n- 范畴论提供了统一的表述，不依赖特定坐标选择\n- **扩展路径**：将引力波扰动作为时空范畴中的态射处理\n\n## 关键论文\n- Brunetti, Fredenhagen & Verch (1105.6202) — \"On the notion of 'the same physics in all spacetimes'\"\n- 2022 (arXiv:2201.09166) — \"Spacetimes categories and disjointness for algebraic quantum field theory\"\n\n## 状态\n- [x] 理解局部协变性的范畴论表述\n- [ ] 评估扩展到 GW 传播计算的可行性\n\n## 相关概念\n- [[AQFT]]\n- [[Extended Functorial QFT]]\n- [[Cobordism]]\n"
+  },
+  {
+    "id": "concepts-sheaf_pta",
+    "path": "concepts/sheaf_pta.md",
+    "title": "层论在 PTA 数据分析中的应用",
+    "content": "# 层论在 PTA 数据分析中的应用\n\n## 概述\n\n细胞层/余层（Cellular Sheaves/Cosheaves）在脉冲星计时阵列数据分析中的潜在应用。\n\n## 核心思想\n- **细胞层**：在胞腔复形上定义的层，每个胞腔关联一个向量空间，包含映射描述数据在胞腔间的传递\n- **层上同调**：量化了数据的全局一致性约束\n- Hellings-Downs 相关性可表述为层的相容性条件\n\n## PTA 建模\n- N 颗脉冲星 → N 个胞腔（顶点）\n- 每颗脉冲星的计时残差 → 该胞腔上的层数据\n- Hellings-Downs 相关性 → 不同脉冲星之间的映射（边的结构）\n- **创新点**：层上同调可检测 HD 相关性的全局一致性\n\n## 关键论文\n- Ghrist (2013) — arXiv:1303.3255 \"Sheaves, Cosheaves and Applications\"\n- 2025 (arXiv:2502.15476) — \"Sheaf theory: from deep geometry to deep learning\"\n- 2025 (arXiv:2504.08095) — \"Sheaf Topos Theory: A powerful setting for Lagrangian Field Theory\"\n\n## 研究空白\n- **最大空白**：层上同调检测 HD 相关性——这是一个全新的研究方向\n- 成熟度：★★☆☆☆（概念新颖）\n\n## 状态\n- [x] 理解层论基本概念\n- [ ] 设计 PTA 数据的层结构建模方案\n- [ ] 探索层上同调检测 HD 相关性的具体算法\n\n## 相关概念\n- [[拓扑斯理论]]\n- [[Extended Functorial QFT]]\n"
+  },
+  {
+    "id": "concepts-topos_theory",
+    "path": "concepts/topos_theory.md",
+    "title": "拓扑斯理论 (Topos Theory)",
+    "content": "# 拓扑斯理论 (Topos Theory)\n\n## 概述\n\n拓扑斯理论提供了一种全新的物理理论构建框架，每个 topos 是一个具有内部逻辑的\"数学宇宙\"。\n\n## 核心思想\n- **Isham-Döring 方案**：将量子理论重新表述为在某个 topos 中的经典理论\n- 物理量的取值从复数变为\"层\"（sheaves）\n- 命题的真值从 {T,F} 变为子对象分类器上的元素\n\n## 与引力波的关联\n- 量子引力的核心挑战之一是时空本身的量子化。Topos theory 提供了一种不预设经典时空结构的框架\n- 在 topos 框架下，引力波可以被视为从量子时空到经典时空的\"退相干\"过程中的涌现现象\n- **关键缺口**：Isham-Döring 方案主要关注量子力学基础，尚未扩展到引力波的具体计算\n\n## Higher Topos Theory (Schreiber, 2311.11026)\n- Higher topos theory（高阶拓扑斯理论）是 (∞,1)-topos 的理论，为现代数学物理提供了统一框架\n- Higher topos theory 自然包含 gauge fields、gerbes 和 higher gauge fields，这些是引力理论中的基本对象\n- n-群（n-groups）和 higher gauge theory 可以描述引力波的非阿贝尔传播效应\n- **关键缺口**：Higher topos theory 在物理中的应用仍处于概念阶段，尚未产生具体的引力波预测\n\n## 关键论文\n- Isham & Butterfield (1999) — arXiv:gr-qc/9910005\n- Doering & Isham (0803.0417) — \"`What is a Thing?`: Topos Theory in the Foundations of Physics\"\n- Schreiber (2311.11026) — \"Higher Topos Theory in Physics\"\n\n## 状态\n- [x] 理解 topos theory 基本概念\n- [ ] 研究 Higher topos theory 在物理中的应用\n\n## 相关概念\n- [[Extended Functorial QFT]]\n- [[AQFT]]\n- [[层论在 PTA 数据分析中的应用]]\n"
+  },
+  {
+    "id": "entities-orgs-nanograv",
+    "path": "entities/orgs/nanograv.md",
+    "title": "机构：NANOGrav",
+    "content": "# 机构：NANOGrav\n\n## 基本信息\n- **全称**：North American Nanohertz Observatory for Gravitational Waves\n- **类型**：PTA 合作组\n- **关键成果**：2023 年宣布发现引力波背景证据\n\n## 与本项目关联\n- PTA 数据是 Extended Functorial QFT 建模的主要对象\n- Hellings-Downs 相关性是层论建模的关键约束\n\n## 状态\n- [x] 记录基本信息\n- [ ] 跟踪 NANOGrav 最新成果\n"
+  },
+  {
+    "id": "entities-orgs-skao",
+    "path": "entities/orgs/skao.md",
+    "title": "机构：SKAO",
+    "content": "# 机构：SKAO\n\n## 基本信息\n- **全称**：Square Kilometre Array Observatory\n- **类型**：下一代射电望远镜阵列\n- **关键能力**：更高灵敏度的 PTA 观测\n\n## 与本项目关联\n- SKAO PTA 灵敏度预测是 r08 提出的备选方向\n- 如果范畴论方向进展缓慢，可转向 SKAO PTA 研究\n\n## 状态\n- [x] 记录基本信息\n- [ ] 跟踪 SKAO PTA 灵敏度预测方案\n"
+  },
+  {
+    "id": "entities-people-john_baez",
+    "path": "entities/people/john_baez.md",
+    "title": "人：John Baez",
+    "content": "# 人：John Baez\n\n## 基本信息\n- **领域**：数学物理、范畴论、量子引力\n- **关键贡献**：Cobordism hypothesis（与 Dolan）、Higher Gauge Theory\n\n## 关键论文\n- Baez & Dolan (1995) — \"From finite sets to Feynman diagrams\"\n- Baez & Schreiber (2011) — arXiv:1110.4694 \"Poincare 2-group and quantum gravity\"\n- Baez & Schreiber (2012) — arXiv:1204.4339 \"Teleparallel Gravity as a Higher Gauge Theory\"\n\n## 与本项目关联\n- Cobordism hypothesis 是 Extended Functorial QFT 的数学基础\n- Higher Gauge Theory 预言了新的引力波偏振模式\n\n## 状态\n- [x] 记录关键论文\n- [ ] 深入研究 cobordism hypothesis\n"
+  },
+  {
+    "id": "entities-people-urs_schreiber",
+    "path": "entities/people/urs_schreiber.md",
+    "title": "人：Urs Schreiber",
+    "content": "# 人：Urs Schreiber\n\n## 基本信息\n- **领域**：数学物理、范畴论、QFT\n- **关键贡献**：AQFT 与 n-functorial QFT 的统一框架、Higher Topos Theory in Physics\n\n## 关键论文\n- arXiv:0806.1079 — \"AQFT from n-functorial QFT\"\n- arXiv:2311.11026 — \"Higher Topos Theory in Physics\"\n- arXiv:13... — \"Differential cohomology in a cohesive infinity-topos\"\n\n## 与本项目关联\n- Schreiber 的统一框架是 Extended Functorial QFT 的核心基础\n- Higher topos theory 为量子引力中的引力波提供了概念框架\n\n## 状态\n- [x] 记录关键论文\n- [ ] 深入阅读 Schreiber AQFT 统一框架\n"
+  },
+  {
+    "id": "index",
+    "path": "index.md",
+    "title": "Wiki Index",
+    "content": "# Wiki Index\n\n## 目录结构\n\n```\nwiki/\n├── index.md              ← 本文件：知识总览与导航\n├── log.md                ← 变更日志（每次写入/更新都记录）\n├── SCHEMA.md             ← 知识体系定义（概念、实体、关系类型）\n├── embeddings/           ← 向量索引目录\n│   ├── index.json        ← 向量元数据（id, path, embedding_ref）\n│   └── vectors/          ← 向量数据（可选：本地存储或外部引用）\n├── raw/                  ← 原始素材（论文、文章、转录）\n│   ├── articles/         ← 一般文章\n│   ├── papers/           ← 学术论文（arxiv ID 命名）\n│   └── transcripts/      ← 对话/会议转录\n├── entities/             ← 实体笔记（人、机构、项目）\n│   ├── people/           ← 人物\n│   └── orgs/             ← 机构\n├── concepts/             ← 概念笔记（核心知识单元）\n├── comparisons/          ← 对比分析\n└── queries/              ← 查询模板与结果缓存\n\nscripts/\n├── wiki-search.py        ← 轻量搜索（无需外部依赖）\n└── wiki-embed.py         ← 向量嵌入（需 pip install sentence-transformers）\n```\n\n## 知识体系（按 SCHEMA.md）\n\n### 范畴论 × 引力波天文学\n\n- [[Extended Functorial QFT]] — PTA/干涉仪的统一数学框架\n- [[AQFT]] — 代数量子场论，局部协变性的基础\n- [[拓扑斯理论]] — 量子引力的背景无关表述\n- [[高阶规范理论]] — 新引力波偏振模式的分类\n- [[层论在 PTA 数据分析中的应用]] — 最大研究空白\n\n### 关键实体\n\n- **人**: [[Urs Schreiber]], [[John Baez]]\n- **机构**: [[NANOGrav]], [[SKAO]]\n\n### 关键论文\n\n- arXiv:0806.1079 — Schreiber, AQFT from n-functorial QFT\n- arXiv:1105.6202 — Brunetti, Fredenhagen & Verch, 局部协变性\n- arXiv:2311.11026 — Schreiber, Higher Topos Theory in Physics\n\n## 使用方式\n\n### 1. 关键词搜索（无需安装依赖）\n```bash\npython3 wiki/scripts/wiki-search.py search \"范畴论\"\npython3 wiki/scripts/wiki-search.py search \"引力波\"\n```\n\n### 2. 向量检索（需安装依赖）\n```bash\npip install sentence-transformers numpy\npython3 wiki/scripts/wiki-embed.py build\npython3 wiki/scripts/wiki-embed.py search \"范畴论\"\n```\n\n### 3. 导出迁移\n```bash\npython3 wiki/scripts/wiki-search.py export\n# 输出到 wiki/wiki_export.json（可导入任意平台）\n```\n\n## 与 memory/ 的关系\n\n| 目录 | 用途 | 性质 |\n|------|------|------|\n| `memory/` | 会话日志、进度追踪 | 临时性 |\n| `wiki/` | 结构化知识、可长期复用 | 持久性 |\n\n## 迁移指南\n\n整个 `wiki/` 目录可复制到任意平台：\n1. **Obsidian**: 直接导入 wiki 目录作为 vault\n2. **Notion**: 用 `wiki_export.json` 批量导入\n3. **任意向量数据库**: 用 `wiki-embed.py build` 生成 embedding\n"
+  },
+  {
+    "id": "log",
+    "path": "log.md",
+    "title": "Wiki Log",
+    "content": "# Wiki Log\n\n## 变更日志\n\n| 时间 | 操作 | 详情 |\n|------|------|------|\n| 2026-04-26T01:52+08:00 | 初始化 | 创建 wiki 目录结构、index.md、log.md、SCHEMA.md、embedding 基础设施 |\n"
+  },
+  {
+    "id": "raw-papers-arxiv_0806.1079",
+    "path": "raw/papers/arxiv_0806.1079.md",
+    "title": "arXiv:0806.1079 — AQFT from n-functorial QFT",
+    "content": "# arXiv:0806.1079 — AQFT from n-functorial QFT\n\n## 作者\nUrs Schreiber\n\n## 核心思想\n- AQFT（代数 QFT）与 n-functorial QFT 的统一框架\n- 从时空范畴（Lorentzian 流形 + 因果嵌入）到代数范畴的函子\n- 将局部协变性（local covariance）表述为自然变换\n\n## 与本项目关联\n- Extended Functorial QFT 的核心基础\n- 路径 B（局部协变扩展）的数学依据\n\n## 状态\n- [ ] 深入阅读\n- [ ] 提取关键定理和证明\n"
+  },
+  {
+    "id": "raw-papers-arxiv_1105.6202",
+    "path": "raw/papers/arxiv_1105.6202.md",
+    "title": "arXiv:1105.6202 — On the notion of 'the same physics in all spacetimes'",
+    "content": "# arXiv:1105.6202 — On the notion of 'the same physics in all spacetimes'\n\n## 作者\nBrunetti, Fredenhagen, Verch\n\n## 核心思想\n- 量子场论可表述为从时空范畴 (category of spacetimes) 到代数范畴 (category of C*-algebras) 的函子\n- 局部协变性 = 自然变换 (natural transformation)，确保物理定律在所有时空上一致\n- 为引力波在不同背景时空中的传播提供了严格描述框架\n\n## 与本项目关联\n- 路径 B（局部协变扩展）的核心文献\n- 已有数学基础，扩展路径清晰\n\n## 状态\n- [ ] 深入阅读\n- [ ] 评估扩展到 GW 传播计算的可行性\n"
+  },
+  {
+    "id": "raw-papers-arxiv_2311.11026",
+    "path": "raw/papers/arxiv_2311.11026.md",
+    "title": "arXiv:2311.11026 — Higher Topos Theory in Physics",
+    "content": "# arXiv:2311.11026 — Higher Topos Theory in Physics\n\n## 作者\nUrs Schreiber\n\n## 核心思想\n- Higher topos theory（高阶拓扑斯理论）是 (∞,1)-topos 的理论，为现代数学物理提供了统一框架\n- Higher topos theory 自然包含 gauge fields、gerbes 和 higher gauge fields，这些是引力理论中的基本对象\n- n-群（n-groups）和 higher gauge theory 可以描述引力波的非阿贝尔传播效应\n\n## 与本项目关联\n- Higher topos theory 最有希望为量子引力中的引力波提供新的概念框架\n\n## 状态\n- [ ] 深入阅读\n- [ ] 提取 higher gauge fields 的具体物理应用\n"
+  }
+]

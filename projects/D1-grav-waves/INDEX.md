@@ -29,6 +29,13 @@
 | 工具复用 | compile_paper.sh, arxiv_submission_checklist.sh |
 | 最终阻塞项 | arXiv 提交（需作者确认 gr-qc 分类 + 英文摘要） |
 
+## 交叉引用
+
+| 关联项目 | 关联类型 | 描述 |
+|----------|----------|------|
+| [AH.1] D1-anyon-hawking | 理论类比 | 同属形式化 QFT 框架研究 — D1-grav-waves 使用 Extended Functorial AQFT，D1-anyon-hawking 使用 Chern-Simons 拓扑场论 |
+| [DAI.1] D1-academic-AI | 方法论 | 范畴论在物理中的应用（D1-grav-waves 将 HD 相关性推导为自然变换） |
+
 ---
 
 *按 CLAUDE.md 红线 0 原则：探索记录保存至 memory/*

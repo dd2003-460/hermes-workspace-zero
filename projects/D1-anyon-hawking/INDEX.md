@@ -54,4 +54,12 @@
 
 ---
 
-*按 CLAUDE.md 红线 0 原则：所有探索记录保存在 notes/*
+## 交叉引用
+
+| 关联项目 | 关联类型 | 描述 |
+|----------|----------|------|
+| [GW.1] D1-grav-waves | 理论类比 | 同属形式化 QFT 研究 — D1-anyon-hawking 使用 Chern-Simons 拓扑场论，D1-grav-waves 使用 Extended Functorial AQFT |
+
+---
+
+*按 CLAUDE.md 红线 0 原则：所有探索记录保存至 notes/*

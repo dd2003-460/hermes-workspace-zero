@@ -57,7 +57,7 @@ pdflatex -interaction=nonstopmode GW-BacQFT-paper.tex 2>&1 | tail -20
 ## arXiv Tarball（已生成）
 
 ```
-/tmp/D1-grav-waves-arxiv.tar.gz (126.4 KB)
+/Users/a1-6/Desktop/workspace/projects/D1-grav-waves/papers/2026-GW-BacQFT/arxiv-submission-D1-grav-waves.tar.gz (126.8 KB)
 包含: GW-BacQFT-paper.tex + Fig1-Hellings-Downs-curve.png
 ```
 

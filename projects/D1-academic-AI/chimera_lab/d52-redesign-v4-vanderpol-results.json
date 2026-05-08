@@ -1,0 +1,303 @@
+{
+  "timestamp": "2026-05-08T04:59:31.030876",
+  "theory": "D52: 频率-动力学对偶性（Van der Pol 重构）",
+  "version": "v4",
+  "results": {
+    "D52-A": {
+      "description": "D52-A: Van der Pol mu 参数 vs 频率-振幅",
+      "validation": "D52-频率动力学对偶",
+      "mu_values": [
+        0.0,
+        0.1,
+        0.5,
+        1.0,
+        2.0,
+        5.0,
+        10.0
+      ],
+      "results": [
+        {
+          "mu": 0.0,
+          "overshoot": 1.9999996711337955,
+          "energy": 0.4999996856565136,
+          "period": 31.0,
+          "zero_crossings": 159,
+          "correlation_log_log": 0.06954944970750361,
+          "p_value": 0.7715201681161742
+        },
+        {
+          "mu": 0.1,
+          "overshoot": 3.0001037208016776,
+          "energy": 1.9451140730483147,
+          "period": 31.0,
+          "zero_crossings": 159
+        },
+        {
+          "mu": 0.5,
+          "overshoot": 3.002487913829281,
+          "energy": 2.004618760142987,
+          "period": 32.0,
+          "zero_crossings": 157
+        },
+        {
+          "mu": 1.0,
+          "overshoot": 3.0086198209149493,
+          "energy": 2.0537415368065166,
+          "period": 33.0,
+          "zero_crossings": 150
+        },
+        {
+          "mu": 2.0,
+          "overshoot": 3.019891273641053,
+          "energy": 2.1877436914480652,
+          "period": 38.0,
+          "zero_crossings": 131
+        },
+        {
+          "mu": 5.0,
+          "overshoot": 3.0215080441585465,
+          "energy": 2.4677486412067324,
+          "period": 58.0,
+          "zero_crossings": 86
+        },
+        {
+          "mu": 10.0,
+          "overshoot": 3.014285257049757,
+          "energy": 2.6496876071203426,
+          "period": 95.0,
+          "zero_crossings": 53
+        }
+      ],
+      "log_log_slope": 0.06954944970750361,
+      "log_log_p_value": 0.7715201681161742,
+      "conclusion": "mu 增大导致能量-频率关系非线性化"
+    },
+    "D52-B": {
+      "description": "D52-B: 预规划强度 alpha 扫描",
+      "validation": "D52-C 强化",
+      "mu": 1.0,
+      "alpha_values": [
+        0.0,
+        0.1,
+        0.3,
+        0.5,
+        0.7,
+        1.0,
+        1.5,
+        2.0
+      ],
+      "results": [
+        {
+          "alpha": 0.0,
+          "energy": 2.0537415368065166,
+          "overshoot": 3.0086198209149493,
+          "zero_crossings": 150
+        },
+        {
+          "alpha": 0.1,
+          "energy": 2.047981898076159,
+          "overshoot": 2.9461795412794696,
+          "zero_crossings": 150
+        },
+        {
+          "alpha": 0.3,
+          "energy": 1.9913766308877494,
+          "overshoot": 2.792172163664686,
+          "zero_crossings": 147
+        },
+        {
+          "alpha": 0.5,
+          "energy": 1.8664408611674494,
+          "overshoot": 2.5719873707605867,
+          "zero_crossings": 142
+        },
+        {
+          "alpha": 0.7,
+          "energy": 1.5871015846956729,
+          "overshoot": 2.1841252228488788,
+          "zero_crossings": 135
+        },
+        {
+          "alpha": 1.0,
+          "energy": 0.5,
+          "overshoot": 0.0,
+          "zero_crossings": 0
+        },
+        {
+          "alpha": 1.5,
+          "energy": 1.124463582964395,
+          "overshoot": 0.610035839926151,
+          "zero_crossings": 0
+        },
+        {
+          "alpha": 2.0,
+          "energy": 1.9958285585159479,
+          "overshoot": 1.0000000000458793,
+          "zero_crossings": 0
+        }
+      ],
+      "correlation": -0.29517483462776206,
+      "p_value": 1.870937643042905,
+      "conclusion": "alpha 对能量有显著影响"
+    },
+    "D52-C": {
+      "description": "D52-C: 迟滞效应 — Van der Pol",
+      "validation": "D52-迟滞",
+      "mean_hysteresis_area": 1.5688324089632573,
+      "max_hysteresis_area": 1.7390668647727736,
+      "n_scans": 50,
+      "conclusion": "非线性 Van der Pol 产生显著迟滞环"
+    },
+    "D52-D": {
+      "description": "D52-D: alpha-mu 交互效应",
+      "validation": "D52-交互",
+      "results": [
+        {
+          "mu": 0.0,
+          "alpha": 0.0,
+          "energy": 0.4999996856565136
+        },
+        {
+          "mu": 0.0,
+          "alpha": 0.3,
+          "energy": 0.28980601169651
+        },
+        {
+          "mu": 0.0,
+          "alpha": 0.5,
+          "energy": 0.249769140287116
+        },
+        {
+          "mu": 0.0,
+          "alpha": 0.7,
+          "energy": 0.28980610477155144
+        },
+        {
+          "mu": 0.0,
+          "alpha": 1.0,
+          "energy": 0.5
+        },
+        {
+          "mu": 0.5,
+          "alpha": 0.0,
+          "energy": 2.004618760142987
+        },
+        {
+          "mu": 0.5,
+          "alpha": 0.3,
+          "energy": 1.8937782628796855
+        },
+        {
+          "mu": 0.5,
+          "alpha": 0.5,
+          "energy": 1.683056912321408
+        },
+        {
+          "mu": 0.5,
+          "alpha": 0.7,
+          "energy": 1.3194577424921548
+        },
+        {
+          "mu": 0.5,
+          "alpha": 1.0,
+          "energy": 0.5
+        },
+        {
+          "mu": 1.0,
+          "alpha": 0.0,
+          "energy": 2.0537415368065166
+        },
+        {
+          "mu": 1.0,
+          "alpha": 0.3,
+          "energy": 1.9913766308877494
+        },
+        {
+          "mu": 1.0,
+          "alpha": 0.5,
+          "energy": 1.8664408611674494
+        },
+        {
+          "mu": 1.0,
+          "alpha": 0.7,
+          "energy": 1.5871015846956729
+        },
+        {
+          "mu": 1.0,
+          "alpha": 1.0,
+          "energy": 0.5
+        },
+        {
+          "mu": 2.0,
+          "alpha": 0.0,
+          "energy": 2.1877436914480652
+        },
+        {
+          "mu": 2.0,
+          "alpha": 0.3,
+          "energy": 2.1529568977121256
+        },
+        {
+          "mu": 2.0,
+          "alpha": 0.5,
+          "energy": 2.0753967631247527
+        },
+        {
+          "mu": 2.0,
+          "alpha": 0.7,
+          "energy": 1.947045830395419
+        },
+        {
+          "mu": 2.0,
+          "alpha": 1.0,
+          "energy": 0.5
+        },
+        {
+          "mu": 5.0,
+          "alpha": 0.0,
+          "energy": 2.4677486412067324
+        },
+        {
+          "mu": 5.0,
+          "alpha": 0.3,
+          "energy": 2.436290143492958
+        },
+        {
+          "mu": 5.0,
+          "alpha": 0.5,
+          "energy": 2.3539918334964516
+        },
+        {
+          "mu": 5.0,
+          "alpha": 0.7,
+          "energy": 2.2220782096024276
+        },
+        {
+          "mu": 5.0,
+          "alpha": 1.0,
+          "energy": 0.5
+        }
+      ],
+      "minimum_energy_config": {
+        "mu": 0.0,
+        "alpha": 0.5,
+        "energy": 0.249769140287116
+      },
+      "mu_energy_ranges": {
+        "mu=0.0": 0.250230859712884,
+        "mu=0.5": 1.504618760142987,
+        "mu=1.0": 1.5537415368065166,
+        "mu=2.0": 1.6877436914480652,
+        "mu=5.0": 1.9677486412067324
+      },
+      "alpha_energy_ranges": {
+        "alpha=0.0": 1.9677489555502188,
+        "alpha=0.3": 2.146484131796448,
+        "alpha=0.5": 2.1042226932093357,
+        "alpha=0.7": 1.9322721048308762,
+        "alpha=1.0": 0.0
+      },
+      "conclusion": "alpha 和 mu 存在交互效应，最低能量出现在特定组合"
+    }
+  }
+}

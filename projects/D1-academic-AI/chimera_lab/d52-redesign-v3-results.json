@@ -1,0 +1,241 @@
+{
+  "experiment": "D52-redesign-v3",
+  "n_steps": 5000,
+  "params": {
+    "zeta_base": 0.3,
+    "omega_0": 2.0
+  },
+  "D52-A": {
+    "no_memory": {
+      "mu_0": 0.0,
+      "decay_rate": 10.0,
+      "absolute_overshoot": 1.372318,
+      "convergence_time": 717.0,
+      "oscillation": {
+        "period": 1.65,
+        "num_zeros": 30,
+        "damped": true,
+        "decay_constant": 0.993735
+      }
+    },
+    "fast_decay_0.5": {
+      "mu_0": 0.1,
+      "decay_rate": 0.5,
+      "absolute_overshoot": 1.377103,
+      "convergence_time": 717.0,
+      "oscillation": {
+        "period": 1.65,
+        "num_zeros": 30,
+        "damped": true,
+        "decay_constant": 0.97583
+      }
+    },
+    "fast_decay_1.0": {
+      "mu_0": 0.2,
+      "decay_rate": 1.0,
+      "absolute_overshoot": 1.37828,
+      "convergence_time": 717.0,
+      "oscillation": {
+        "period": 1.65,
+        "num_zeros": 30,
+        "damped": true,
+        "decay_constant": 0.9618
+      }
+    },
+    "medium_decay_0.1": {
+      "mu_0": 0.2,
+      "decay_rate": 0.1,
+      "absolute_overshoot": 1.408895,
+      "convergence_time": 718.0,
+      "oscillation": {
+        "period": 1.65,
+        "num_zeros": 30,
+        "damped": true,
+        "decay_constant": 1.061635
+      }
+    },
+    "medium_decay_0.05": {
+      "mu_0": 0.3,
+      "decay_rate": 0.05,
+      "absolute_overshoot": 1.457322,
+      "convergence_time": 720.0,
+      "oscillation": {
+        "period": 1.65,
+        "num_zeros": 30,
+        "damped": true,
+        "decay_constant": 0.957327
+      }
+    },
+    "slow_decay_0.02": {
+      "mu_0": 0.4,
+      "decay_rate": 0.02,
+      "absolute_overshoot": 1.536372,
+      "convergence_time": 723.0,
+      "oscillation": {
+        "period": 1.65,
+        "num_zeros": 30,
+        "damped": true,
+        "decay_constant": 1.319724
+      }
+    }
+  },
+  "D52-B": {
+    "decay_scan": [
+      0.01,
+      0.1147,
+      0.2195,
+      0.3242,
+      0.4289,
+      0.5337,
+      0.6384,
+      0.7432,
+      0.8479,
+      0.9526,
+      1.0574,
+      1.1621,
+      1.2668,
+      1.3716,
+      1.4763,
+      1.5811,
+      1.6858,
+      1.7905,
+      1.8953,
+      2.0
+    ],
+    "overshoot_scan": [
+      1.451009,
+      1.405502,
+      1.391842,
+      1.386197,
+      1.383274,
+      1.381518,
+      1.380355,
+      1.379533,
+      1.378924,
+      1.378456,
+      1.378089,
+      1.377793,
+      1.377552,
+      1.377352,
+      1.377184,
+      1.377042,
+      1.376921,
+      1.376818,
+      1.376728,
+      1.376651
+    ],
+    "conv_scan": [
+      720.0,
+      718.0,
+      717.0,
+      717.0,
+      717.0,
+      717.0,
+      717.0,
+      717.0,
+      717.0,
+      717.0,
+      717.0,
+      717.0,
+      717.0,
+      717.0,
+      717.0,
+      717.0,
+      717.0,
+      717.0,
+      717.0,
+      717.0
+    ],
+    "corr_overshoot_decay": -0.6207,
+    "corr_conv_decay": -0.473
+  },
+  "D52-C": [
+    {
+      "alpha": 0.1,
+      "energy": 0.3745847,
+      "oscillation": {
+        "period": 1.57,
+        "num_zeros": 32,
+        "damped": true,
+        "decay_constant": 4.040524
+      }
+    },
+    {
+      "alpha": 0.3,
+      "energy": 0.12475791,
+      "oscillation": {
+        "period": 1.58,
+        "num_zeros": 32,
+        "damped": true,
+        "decay_constant": 6.212143
+      }
+    },
+    {
+      "alpha": 0.5,
+      "energy": 0.07406247,
+      "oscillation": {
+        "period": 1.59,
+        "num_zeros": 31,
+        "damped": true,
+        "decay_constant": 2.430958
+      }
+    },
+    {
+      "alpha": 0.7,
+      "energy": 0.05221028,
+      "oscillation": {
+        "period": 1.61,
+        "num_zeros": 31,
+        "damped": true,
+        "decay_constant": 1.427811
+      }
+    },
+    {
+      "alpha": 1.0,
+      "energy": 0.03583974,
+      "oscillation": {
+        "period": 1.65,
+        "num_zeros": 30,
+        "damped": true,
+        "decay_constant": 1.061635
+      }
+    }
+  ],
+  "D52-D": {
+    "hysteresis": 0.0,
+    "increase_phase": [
+      -0.36697046,
+      -0.20285696,
+      -0.11130355,
+      -0.05903275,
+      -0.02918023,
+      -0.01255399,
+      -0.00383641,
+      0.0001919,
+      0.0015422,
+      0.00149434,
+      0.00086786,
+      0.00018451,
+      -0.00023016,
+      -0.00018125,
+      0.00043876
+    ],
+    "decrease_phase": [
+      0.00043876,
+      -0.00018125,
+      -0.00023016,
+      0.00018451,
+      0.00086786,
+      0.00149434,
+      0.0015422,
+      0.0001919,
+      -0.00383641,
+      -0.01255399,
+      -0.02918023,
+      -0.05903275,
+      -0.11130355,
+      -0.20285696,
+      -0.36697046
+    ]
+  }
+}

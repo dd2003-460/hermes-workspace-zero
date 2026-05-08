@@ -1,7 +1,7 @@
 {
   "framework": "D30-D53 实验结果 Bayesian 验证框架",
   "date": "2026-05-05",
-  "iteration": 132,
+  "iteration": 141,
   "structure": {
     "base_prior_theory": 0.3,
     "evidence_model": "logit(BASE_PRIOR) + sum(N exp log(LR_exp)) + group_discount",
@@ -21,10 +21,10 @@
     "d34": {"posterior": 0.51, "evidence_mean": 0.625, "n_exp": 4, "key_evidence": "convexity at optimum"},
     "d35": {"posterior": 0.59, "evidence_mean": 0.675, "n_exp": 4, "key_evidence": "R²=1.0 log-law match, RK45 advantage 91%"},
     "d36": {"posterior": 0.55, "evidence_mean": 0.65, "n_exp": 4, "key_evidence": "sensitivity_ratio=4.48, Lyapunov stability"},
-    "d37": {"posterior": 0.51, "evidence_mean": 0.40, "n_exp": 4, "key_evidence": "Nash non-convergence, asymmetric robustness weak"},
-    "d38": {"posterior": 0.51, "evidence_mean": 0.625, "n_exp": 4, "key_evidence": "R²=1.0 burst decay + corr=-0.986, but D falsified"},
+    "d37": {"posterior": 0.30, "evidence_mean": 0.40, "n_exp": 4, "key_evidence": "4/4 falsified: A-Nash不收敛, B-asym>0全不收敛, C-dead zone无效果, D-hysteresis=0"},
+    "d38": {"posterior": 0.61, "evidence_mean": 0.775, "n_exp": 4, "key_evidence": "A: Nash overshoot, B: R²=0.9999, C: corr=-0.986, D: v6 confirms D38-4a (short-burst-high-amplitude strategy)"},
     "d39": {"posterior": 0.47, "evidence_mean": 0.60, "n_exp": 4, "key_evidence": "ΔI_fit>0 but ΔI_gen<0, C_crit≈4"},
-    "d40": {"posterior": 0.66, "evidence_mean": 0.725, "n_exp": 4, "key_evidence": "monotonic decreasing 100%, slope corr=-0.97, improvement 119.9%"},
+    "d40": {"posterior": 0.72, "evidence_mean": 0.725, "n_exp": 4, "key_evidence": "monotonic 100%, slope corr=-0.97, improvement 119.9%, literature 8/9, posterior>0.7"},
     "d41": {"posterior": 0.51, "evidence_mean": 0.625, "n_exp": 4, "key_evidence": "credit stable, Lyapunov, real_id advantage 2529.8%"},
     "d42": {"posterior": 0.51, "evidence_mean": 0.625, "n_exp": 4, "key_evidence": "phase transition, Nash equilibrium tau*=1/λ"},
     "d43": {"posterior": 0.50, "evidence_mean": 0.667, "n_exp": 3, "key_evidence": "phase transition α*=1.2, 6/6 limit cycle"},
@@ -36,18 +36,22 @@
     "d49": {"posterior": 0.30, "evidence_mean": 0.50, "n_exp": 4, "key_evidence": "exploration-exploitation (early stage)"},
     "d50": {"posterior": 0.43, "evidence_mean": 0.575, "n_exp": 4, "key_evidence": "ρ_c ≈ 0.152, memory damping"},
     "d51": {"posterior": 0.38, "evidence_mean": 0.60, "n_exp": 2, "key_evidence": "info conservation SD=0.03, Nash entropy 0.810"},
-    "d52": {"posterior": 0.43, "evidence_mean": 0.575, "n_exp": 4, "key_evidence": "D53: λ_c/μ_c=1.11 duality, hysteresis 0.63"},
+    "d52": {"posterior": 0.65, "evidence_mean": 0.80, "n_exp": 4, "key_evidence": "v6 Van der Pol: 4/4 pass (A: 频率-能量对偶slope=-0.86, B: alpha最优1.5, C: 迟滞318.6, F: 相图slope=-0.86)"},
     "d53": {"posterior": 0.35, "evidence_mean": 0.475, "n_exp": 4, "key_evidence": "duality confirmed, but A/C falsified (null)"}
   },
   "cross_theory_analysis": {
     "high_confidence": ["d40"],
-    "medium_confidence": ["d35", "d36", "d34"],
-    "pending": ["d37", "d38", "d41", "d42", "d43", "d45"],
-    "uncertain": ["d39", "d44", "d46", "d47", "d48", "d49", "d50", "d51", "d52", "d53"]
+    "medium_confidence": ["d35", "d36", "d34", "d38", "d52"],
+    "pending": ["d41", "d42", "d43", "d45"],
+    "uncertain": ["d37", "d39", "d44", "d46", "d47", "d48", "d49", "d50", "d51", "d53"]
   },
   "notes": {
     "verification_concentration": "D30/D37/D44 验证失败集中在早期理论的复杂性递增→验证难度增加",
     "calibration_needed": "prior scores need re-calibration from INDEX.md data for d39, d41-d53",
-    "d44_paradox": "asymmetric>symmetric shows D44-A strong but overall posterior only 0.47"
+    "d44_paradox": "asymmetric>symmetric shows D44-A strong but overall posterior only 0.47",
+    "d37_updated": "iteration 136: 4/4 falsified (Nash不收敛, asym>0发散, dead zone无效, hysteresis=0). posterior 0.51→0.30",
+    "d52_updated": "iteration 141: v6 Van der Pol重构完成。4/4命题全部通过：A频率~mu=-0.86(接近-1), B alpha最优=1.5, C迟滞318.6, F相图slope=-0.86。posterior 0.43→0.65，从uncertain升至medium_confidence。",
+    "d38_updated": "iteration 136: v6确认D38-4a (short-burst-high-amplitude). posterior 0.51→0.61",
+    "cross_theory_iteration_138": "跨理论综合分析: D30-D53 验证质量与模型复杂度负相关。D40是唯一同时满足: 非tautological数学框架 + 4/4命题通过 + 文献8/9支持 + posterior=0.72的理论。D40不受复杂度验证衰退模式影响，是最可靠的实证发现。"
   }
 }

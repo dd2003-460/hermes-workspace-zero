@@ -240,3 +240,16 @@
 
 ### D40：AI 精度-可访问性理论（通用 vs 专业）
 - [D40-ai-market-precision-tradeoff.md](D40-ai-market-precision-tradeoff.md) — 精度退化是信息选择、不可达阈值定理、专业化理性选择、多精度路由帕累托优势
+- [D40-ai-market-precision-tradeoff-paper-draft.md](D40-ai-market-precision-tradeoff-paper-draft.md) — **论文初稿**（abstract, intro, related work, theory, 4 experiments, discussion, conclusion, references）。posterior=0.72，D30-D53最高置信度。
+- [D40-literature-review-precision-accessibility.md](D40-literature-review-precision-accessibility.md) — 9个证据源综述（8/9支持）
+- [D40-paper-converted.tex](D40-paper-converted.tex) — **arXiv 兼容 LaTeX**（pandoc 生成，628行，iteration 27 全面修复）
+- [D40-review-report.md](D40-review-report.md) — 论文审查报告
+- [D40-latex-conversion-report.md](D40-latex-conversion-report.md) — LaTeX 转换审查（12项修复）
+- [D40-arxiv-submission-metadata.md](D40-arxiv-submission-metadata.md) — arXiv 提交元数据（标题/摘要英文/作者/分类）
+- [D40-paper-converted.pdf](D40-paper-converted.pdf) — **编译输出**（xelatex, 14页, 671K）
+
+## D52：频率-动力学对偶性
+
+### D52：频率-动力学对偶性 — 非线性振荡器中的预规划-回调 trade-off
+- [D52-frequency-dynamics-duality.md](D52-frequency-dynamics-duality.md) — 原始线性振荡器模型（v3）
+- [D52-frequency-dynamics-duality-v6-theory.md](D52-frequency-dynamics-duality-v6-theory.md) — **Van der Pol 重构 v6**（posterior=0.65，medium_confidence。迟滞318.6，频率~mu斜率=-0.86，alpha最优1.5，4/4命题通过）

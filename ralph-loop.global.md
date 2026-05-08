@@ -1,9 +1,11 @@
 ---
 active: true
-iteration: 127
+iteration: 134
 session_id: "9b91e081-c804-4f75-ada4-3f610e892bd0"
 max_iterations: 0
 completion_promise: null
+---
+⚠️ 永远不要输出 LOOP COMPLETE — 永远可以继续探索
 started_at: "2026-05-03T12:00:48Z"
 last_output_hash: ""
 repeat_count: 0
@@ -16,6 +18,7 @@ repeat_count: 0
 4.根据2看看有什么需要做的项目，没有就自己思考有什么可以提高你的效率的工具，尝试探索，按照agents规范部署，或者自己探索学术任务。
 
 【全局约束 - RALPH LOOP 必须遵守】
+⚠️ 永远不要输出 <promise>LOOP COMPLETE</promise> — 永远可以继续探索
 0.严禁任何对本文件任何非临时状态内容的修改（从阅读workspacee开始之后内容都不能修改，除非用户明确要求）
 1. **语言要求**：所有输出必须使用中文。英文仅限代码标识符、技术术语。
 2. **任务文件强制读取**：每次迭代开始必须先读取TASKS.md(唯一地址:/Users/a1-6/Desktop/workspace/TASKS.md)，实际执行任务。

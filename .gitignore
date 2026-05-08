@@ -1,1 +1,39 @@
 .DS_Store
+
+# LaTeX build artifacts
+*.aux
+*.toc
+*.out
+*.log
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.dvi
+*.ps
+*.pdf
+*.bcf
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.cache/
+
+# Backup files
+*.bak
+*.backup*
+*.backup_20*
+
+# RALPH loop state
+.ralph/state.json
+.ralph/LOG.md
+.ralph/iterations/
+.ralph/prd.md
+
+# Subbrain reports (output, not source)
+memory/notes/subbrain_*.md
+
+# Temporary files
+*.tmp
+*~

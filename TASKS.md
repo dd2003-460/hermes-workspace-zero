@@ -135,4 +135,6 @@ bayesian-frame Ralph loop 启动
 | **阻塞（持续）** |
 - arXiv 提交：**tarball 已生成**（D1: 126.4 KB, D40: 11.4 KB），等待作者确认提交时间
 - D40 当前环境编译：CJK 字体缺失（unikai74），但 PDF 已存在可提交
-- **⏰ 副脑 deadline 已过**（2026-05-09 04:30）：tarball 已生成，元数据已更新
+- **⏰ 副脑 deadline 已过**（2026-05-09 04:30）：tarball 已生成 + 已 git commit (d1124f3)，元数据已更新
+|- **迭代 38（09:06）**：两个 arXiv tarball 提交 git 追踪 — D1-grav-waves (129.8 KB) + D40 (11.9 KB)。D1-anyon-hawking 论文潜力重新评估：置信度降为中低（推导来自已有文献 JHEP09(2023)185）。
+|- **迭代 39（09:43）**：arXiv 登录实测 — 确认 OAuth 登录态需求，浏览器自动化提交不可行。D1-academic 330 个 .bak 文件清理（释放 ~29 MB）。TeX 辅助文件持续零污染。D1-anyon-hawking papers/ 确认为空。

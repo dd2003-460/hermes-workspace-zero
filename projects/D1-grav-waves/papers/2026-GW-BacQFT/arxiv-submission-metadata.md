@@ -14,7 +14,7 @@ We develop a formalism for gravitational-wave (GW) source discrimination in puls
 - hep-th (High Energy Physics - Theory)
 - astrophim.CO (Astrophysics - Cosmology and Extragalactic Astrophysics)
 
-**Comments**: 30 pages, no figures. Extended functorial QFT framework applied to PTA GW source discrimination.
+**Comments**: 10 pages, 1 figure. Extended functorial QFT framework applied to PTA GW source discrimination.
 
 ## 关键词
 
@@ -32,10 +32,11 @@ pulsar timing arrays; gravitational waves; algebraic QFT; functorial QFT; Hellin
 
 ## 参考文献验证
 
-所有 23 篇参考文献已验证存在：
+所有 24 篇参考文献已验证存在（24/24 cite 引用）：
 - 8 篇原始文献（Hellings 1983, Brunetti 2003, Baez 1995, 等）
 - 7 篇补充文献（Anholm 2009, Rogers 2016, Siemens 2016, 等）— iteration 14 新增
 - 8 篇相关文献（Agazie 2023, Magueijo 2007, 等）
+- 1 篇新增（Kehagias&Riotto 2024, HD 对称性解释）— iteration 35 新增
 
 ## 审查状态
 

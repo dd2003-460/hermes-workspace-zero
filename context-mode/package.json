@@ -1,0 +1,11 @@
+{
+  "name": "context-mode",
+  "version": "1.0.124",
+  "type": "module",
+  "description": "MCP plugin that saves 98% of your context window. Sandboxed code execution, FTS5 knowledge base, and intent-driven search.",
+  "main": "server.bundle.mjs",
+  "bin": "cli.bundle.mjs",
+  "scripts": {
+    "start": "node start.mjs"
+  }
+}

@@ -61,6 +61,13 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 TITLE=$(python3 "$SCRIPT_DIR/_extract_title.py" "$TEX_FILE" 2>/dev/null || echo 'UNKNOWN')
 echo "Title: $TITLE"
 
+# Verify all \bibitem entries have inline \cite{} references
+if python3 "$SCRIPT_DIR/verify_citations.py" "$TEX_FILE" 2>/dev/null; then
+    echo "Citation check: PASS"
+else
+    echo "WARNING: Citation check found uncited references"
+fi
+
 # Create staging directory
 STAGING=$(mktemp -d)
 SRC_DIR="$STAGING/source"

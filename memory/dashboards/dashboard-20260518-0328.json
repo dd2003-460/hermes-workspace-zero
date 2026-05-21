@@ -1,0 +1,161 @@
+{
+  "generated_at": "2026-05-18T03:28:40.817151",
+  "workspace_root": "/Users/a1-6/Desktop/workspace",
+  "project_count": 7,
+  "projects": {
+    "D1-academic": {
+      "name": "D1-academic",
+      "type": "理论物理",
+      "last_modified": "2026-05-18 03:18",
+      "files": {
+        "total": 604,
+        "md": 194,
+        "py": 128,
+        "tex": 30,
+        "json": 57,
+        "pdf": 49,
+        "png": 18
+      },
+      "memory_count": 0,
+      "tasks_count": 0,
+      "papers": [],
+      "blocks": [],
+      "status": "ok"
+    },
+    "D1-academic-AI": {
+      "name": "D1-academic-AI",
+      "type": "AI/机器学习",
+      "last_modified": "2026-05-17 21:45",
+      "files": {
+        "total": 482,
+        "md": 300,
+        "py": 71,
+        "tex": 10,
+        "json": 48,
+        "pdf": 15,
+        "png": 3
+      },
+      "memory_count": 225,
+      "tasks_count": 77,
+      "papers": [],
+      "blocks": [
+        "- [x] 审查报告更新 — 标记已完成/阻塞状态",
+        "### 阻塞项",
+        "- ~~编译验证阻塞~~ — ✅ 已解决 (迭代 194+)"
+      ],
+      "status": "ok"
+    },
+    "D1-anyon-hawking": {
+      "name": "D1-anyon-hawking",
+      "type": "任意子/黑洞物理",
+      "last_modified": "2026-05-17 16:29",
+      "files": {
+        "total": 22,
+        "md": 13,
+        "py": 0,
+        "tex": 1,
+        "json": 3,
+        "pdf": 1,
+        "png": 0
+      },
+      "memory_count": 1,
+      "tasks_count": 0,
+      "papers": [],
+      "blocks": [],
+      "status": "ok"
+    },
+    "D1-continuous-agent": {
+      "name": "D1-continuous-agent",
+      "type": "未知",
+      "last_modified": "2026-05-17 20:54",
+      "files": {
+        "total": 3,
+        "md": 3,
+        "py": 0,
+        "tex": 0,
+        "json": 0,
+        "pdf": 0,
+        "png": 0
+      },
+      "memory_count": 0,
+      "tasks_count": 0,
+      "papers": [],
+      "blocks": [],
+      "status": "ok"
+    },
+    "D1-grav-waves": {
+      "name": "D1-grav-waves",
+      "type": "引力波物理",
+      "last_modified": "2026-05-17 18:15",
+      "files": {
+        "total": 71,
+        "md": 43,
+        "py": 2,
+        "tex": 1,
+        "json": 0,
+        "pdf": 3,
+        "png": 3
+      },
+      "memory_count": 45,
+      "tasks_count": 56,
+      "papers": [],
+      "blocks": [
+        "- [x] 编译验证 — pdflatex 编译阻塞于 brew install texlive（下载中）",
+        "- [x] PDF 生成与渲染检查 — 阻塞于编译环境",
+        "## 解除阻塞"
+      ],
+      "status": "ok"
+    },
+    "D1-memory": {
+      "name": "D1-memory",
+      "type": "记忆系统",
+      "last_modified": "2026-05-17 20:54",
+      "files": {
+        "total": 25,
+        "md": 11,
+        "py": 0,
+        "tex": 0,
+        "json": 9,
+        "pdf": 0,
+        "png": 0
+      },
+      "memory_count": 31,
+      "tasks_count": 5,
+      "papers": [],
+      "blocks": [],
+      "status": "ok"
+    },
+    "D1-writing": {
+      "name": "D1-writing",
+      "type": "写作",
+      "last_modified": "2026-05-18 00:21",
+      "files": {
+        "total": 208,
+        "md": 98,
+        "py": 25,
+        "tex": 24,
+        "json": 13,
+        "pdf": 13,
+        "png": 0
+      },
+      "memory_count": 0,
+      "tasks_count": 0,
+      "papers": [],
+      "blocks": [],
+      "status": "ok"
+    }
+  },
+  "summary": {
+    "total_files": 1415,
+    "total_memory": 302,
+    "total_tasks_pending": 0,
+    "papers_ready": 0,
+    "total_blocks": 6,
+    "oldest_project": null,
+    "most_recent_update": "2026-05-18 03:18"
+  },
+  "workspace_stats": {
+    "total_workspace_files": 5019,
+    "git_status": "M CLAUDE.md\n M TASKS.md\n m projects/D1-academic\n M projects/D1-academic-AI/INDEX.md\n M projects/D1-academic-AI/chimera_lab/INDEX.md\n M projects/D1-academic-AI/papers/D40-paper-converted.tex\n M projects/D1-academic-AI/papers/INDEX.md\n M projects/D1-academic-AI/tasks/D1-academic-AI-tasks.md\n M projects/D1-academic-AI/tasks/single_loop_state.json\n M projects/D1-anyon-hawking/tasks/sub-ideas.json\n M projects/D1-grav-waves/INDEX.md\n M projects/D1-grav-waves/STATUS.md\n M projects/D1-grav-waves/papers/2026-GW-BacQFT/GW-BacQFT-paper.tex\n M projects/D1-grav-waves/papers/2026-GW-BacQFT/GW-BacQFT-review-report.md\n D projects/D1-grav-waves/papers/2026-GW-BacQFT/arxiv-submission-D1-grav-waves.tar.gz\n M projects/D1-grav-waves/papers/2026-GW-BacQFT/arxiv-submission-metadata.md\n M projects/D1-grav-waves/tasks/d1-grav-waves-tasks.md\n m \"projects/D1-writing/\\345\\206\\231\\344\\275\\234/motivation_society\"\n M projects/INDEX.md\n M ralph-loop.global.md\n D scripts/_extract_title.py.legacy\n M scripts/arxiv_tarball.sh\n?? .claude/worktrees/happy-poitras-31b348/\n?? .claude/worktrees/recursing-franklin-cd38c9/\n?? context-mode/\n?? memory/\n?? projects/ACADEMIC-STATUS.md\n?? projects/AI/\n?? projects/D1-academic-AI/D40-paper-arxiv.tar.gz\n?? projects/D1-academic-AI/D40-review.tar.gz\n?? projects/D1-academic-AI/DISTCAT-v5-review-notes.md\n?? projects/D1-academic-AI/arXiv-submission-confirmation.md\n?? projects/D1-academic-AI/memory/5.50-d16-d24-joint-start-iter50.md\n?? projects/D1-academic-AI/memory/5.51-joint-theorem-1-proof-iter51.md\n?? projects/D1-academic-AI/memory/5.52-joint-theorem-2-proof-iter52.md\n?? projects/D1-academic-AI/memory/5.53-detour-correction-iter53.md\n?? projects/D1-academic-AI/memory/5.54-semantic-resonance-iter54.md\n?? projects/D1-academic-AI/memory/5.55-methodology-comparison-iter55.md\n?? projects/D1-academic-AI/memory/5.56-distcat-framework-iter56.md\n?? projects/D1-academic-AI/memory/5.57-distcat-theorems-proven-iter57.md\n?? projects/D1-academic-AI/memory/5.58-bayesian-distcat-iter58.md\n?? projects/D1-academic-AI/memory/5.59-d26-resonance-distcat-iter59.md\n?? projects/D1-academic-AI/memory/5.61-distance-equivalence-verified-iter61.md\n?? projects/D1-academic-AI/memory/5.62-emri-d26-resonance-mapping.md\n?? projects/D1-academic-AI/memory/5.63-emri-d26-paper2-verification.md\n?? projects/D1-academic-AI/memory/5.64-d1-emri-structure-equivalence.md\n?? projects/D1-academic-AI/memory/5.65-omega_un-numerical-computation.md\n?? projects/D1-academic-AI/memory/5.66-kam-scaling-proof.md\n?? projects/D1-academic-AI/memory/5.71-distcat-emri-2category-proof.md\n?? projects/D1-academic-AI/memory/72-d1-emri-quantitative-comparison.md\n?? projects/D1-academic-AI/memory/73-optimal-distance-export.md\n?? projects/D1-academic-AI/memory/74-distcat-critical-review-round2.md\n?? projects/D1-academic-AI/memory/75-param-distance-gap-fix.md\n?? projects/D1-academic-AI/memory/76-subbrain-review-round4-fix.md\n?? projects/D1-academic-AI/memory/77-subbrain-review-round5-analysis.md\n?? projects/D1-academic-AI/memory/78-deep-categorical-discreteness.md\n?? projects/D1-academic-AI/memory/79-distcat-final-limitation-fix.md\n?? projects/D1-academic-AI/memory/80-round7-fix.md\n?? projects/D1-academic-AI/memory/81-round8-verify-fix.md\n?? projects/D1-academic-AI/memory/84-emri-rho_s0-limit-derivation-plan.md\n?? projects/D1-academic-AI/memory/85-bridge-paper-plan.md\n?? projects/D1-academic-AI/memory/final-submission-status.md\n?? projects/D1-academic-AI/papers/D16-D24-D1-comparison.md\n?? projects/D1-academic-AI/papers/D16-D24-joint-framework.md\n?? projects/D1-academic-AI/papers/DISTCAT-D26-resonance.md\n?? projects/D1-academic-AI/papers/DISTCAT-EMRI-2category-proof.md\n?? projects/D1-academic-AI/papers/DISTCAT-arxiv-submission-meta.json\n?? projects/D1-academic-AI/papers/DISTCAT-bayesian-integration.md\n?? projects/D1-academic-AI/papers/DISTCAT-distance-equivalence-report.md\n?? projects/D1-academic-AI/papers/DISTCAT-framework.md\n?? projects/D1-academic-AI/papers/DISTCAT-optimal-distance-export.md\n?? projects/D1-academic-AI/papers/DISTCAT-references.bib\n?? projects/D1-academic-AI/papers/DISTCAT-unified-framework.md\n?? projects/D1-academic-AI/papers/EMRI-AppendixA-Schwarzschild-limit.md\n?? projects/D1-academic-AI/papers/EMRI-D26-resonance-mapping.md\n?? projects/D1-academic-AI/papers/arxiv-ready/\n?? projects/D1-academic-AI/papers/distcat-consolidation-plan.md\n?? projects/D1-academic-AI/papers/distcat-v5/\n?? projects/D1-academic-AI/papers/distcat-v6/\n?? projects/D1-academic-AI/papers/emri-d26-arxiv-v0.tar.gz\n?? projects/D1-academic-AI/papers/emri-d26-resonance.tex\n?? projects/D1-academic-AI/papers/latex-pandoc-convert/\n?? projects/D1-academic-AI/raw/verify_citations.py\n?? projects/D1-anyon-hawking/notes/prediction1_dimension-statistics.md\n?? projects/D1-anyon-hawking/notes/prediction2_holographic-statistics.md\n?? projects/D1-anyon-hawking/notes/prediction2_horizon-bulk-statistical-duality.md\n?? projects/D1-anyon-hawking/notes/prediction2_strict_derivation.md\n?? projects/D1-anyon-hawking/notes/prediction3D_strict_formalization.md\n?? projects/D1-anyon-hawking/notes/prediction3_planck-scale-corrections.md\n?? projects/D1-anyon-hawking/papers/\n?? projects/D1-anyon-hawking/tasks/single_loop_state.json\n?? projects/D1-continuous-agent/\n?? projects/D1-grav-waves/2026-GW-BacQFT.submission-review.tar.gz\n?? projects/D1-grav-waves/D1-grav-waves-arxiv.tar.gz\n?? projects/D1-grav-waves/GW-BacQFT-review.tar.gz\n?? projects/D1-grav-waves/arXiv-submission-confirmation.md\n?? projects/D1-grav-waves/memory/5.32-dns-blocked-compile-iter36.md\n?? projects/D1-grav-waves/memory/5.33-arxiv-tarballs-ready-iter37.md\n?? projects/D1-grav-waves/memory/5.34-title-extract-fix-iter38.md\n?? projects/D1-grav-waves/memory/5.35-inline-citations-fix-iter39.md\n?? projects/D1-grav-waves/memory/5.36-citation-verification-iter40.md\n?? projects/D1-grav-waves/memory/5.37-brew-texlive-installing-iter41.md\n?? projects/D1-grav-waves/memory/5.38-texlive-installed-iter42.md\n?? projects/D1-grav-waves/memory/5.39-submission-confirmation-iter43.md\n?? projects/D1-grav-waves/memory/5.40-upload-helper-iter44.md\n?? projects/D1-grav-waves/memory/5.41-local-compile-status-iter45.md\n?? projects/D1-grav-waves/memory/5.42-both-papers-compile-iter46.md\n?? projects/D1-grav-waves/memory/5.43-review-tarball-iter47.md\n?? projects/D1-grav-waves/memory/5.44-author-review-tool-iter49.md\n?? projects/D1-grav-waves/memory/82-arxiv-tooling-strategy.md\n?? projects/D1-grav-waves/memory/83-final-cleanup-and-review.md\n?? projects/D1-grav-waves/memory/84-iteration84-summary.md\n?? projects/D1-grav-waves/memory/84-tools-and-readiness.md\n?? projects/D1-grav-waves/memory/85-30-day-plan.md\n?? projects/D1-grav-waves/notes/\n?? projects/D1-grav-waves/papers/2026-GW-BacQFT/Fig2-source-discrimination.png\n?? projects/D1-grav-waves/papers/2026-GW-BacQFT/GW-BacQFT.bib\n?? projects/D1-grav-waves/papers/2026-GW-BacQFT/arxiv-submission-D1-grav-waves-v3.tar.gz\n?? projects/D1-grav-waves/papers/2026-GW-BacQFT/arxiv-submission-D1-grav-waves-v4.tar.gz\n?? projects/D1-grav-waves/papers/2026-GW-BacQFT/fig-source-discrimination.py\n?? projects/D1-grav-waves/scripts/\n?? \"projects/D1-writing/\\345\\206\\231\\344\\275\\234/a1/INDEX.md\"\n?? \"projects/D1-writing/\\345\\206\\231\\344\\275\\234/notes/INDEX.md\"\n?? \"projects/D1-writing/\\345\\206\\231\\344\\275\\234/outputs/INDEX.md\"\n?? \"projects/D1-writing/\\345\\206\\231\\344\\275\\234/\\351\\253\\230\\350\\264\\250\\351\\207\\217\\346\\240\\267\\346\\234\\254/INDEX.md\"\n?? projects/DASHBOARD.md\n?? projects/continue/\n?? projects/tasks/\n?? scripts/_extract_title.py\n?? scripts/arxiv_author_review.sh\n?? scripts/arxiv_review_tarball.sh\n?? scripts/arxiv_submit.sh\n?? scripts/arxiv_upload_helper.sh\n?? scripts/d1_research_iteration.py\n?? scripts/papers_readiness.sh\n?? scripts/project_health_check.sh\n?? scripts/research_dashboard.py\n?? scripts/unified_iteration.py\n?? scripts/verify_citations.py\n?? tools/"
+  }
+}

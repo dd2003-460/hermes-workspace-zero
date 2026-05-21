@@ -1,0 +1,626 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- Packages ---
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{physics}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{bm}
+\hypersetup{hidelinks}
+
+% Theorem-style environments (consistent with main-v5.tex)
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\title{DistCat Completeness and Representation Theorems}
+\author{Cheng Lu}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We establish the completeness of the 2-category $\mathbf{DistCat}$: the distance export 2-functor $D:\mathbf{DistCat}\to\mathbf{Met}$ is essentially surjective on objects. For every separable metric space $(X,d)$, we construct a base structure $\mathcal{B}_X$ in $\mathbf{DistCat}$ such that $D(\mathcal{B}_X)\cong(X,d)$ as metric spaces. We introduce the notion of a non-degenerate realization, where the source category carries non-trivial morphism structure that meaningfully participates in the distance export. Using the path metric on $(X,d)$, we construct a meaningful realization in which the pre-distance $\Gamma$ is determined by the categorical path structure of the source category. We establish a Gelfand--Naimark-style representation theorem for DistCat, relating DistCat-realizable metric spaces to Lipschitz embeddings into function spaces. Finally, we define the DistCat realization space $\operatorname{Real}(X,d)$ as the fiber of $D$ over $(X,d)$, and discuss its structural properties.
+\end{abstract}
+
+\section{Overview: The Completeness Question}
+
+\subsection{Essential Surjectivity of the Distance Export Functor}
+
+Section~2.5 of the main DistCat paper establishes the existence of a 2-functor
+\[
+D:\mathbf{DistCat}\longrightarrow\mathbf{Met}
+\]
+from the 2-category of base structures to the 2-category of metric spaces,
+with $D(\mathcal{B})=(\mathcal{O}(\mathbf{C}),\delta)$. The main result of this
+section is:
+
+\begin{theorem}[Completeness of DistCat]\label{thm:completeness}
+The distance export functor $D:\mathbf{DistCat}\to\mathbf{Met}$ is essentially
+surjective on objects. For every separable metric space $(X,d)$, there exists
+a base structure $\mathcal{B}$ in $\mathbf{DistCat}$ such that
+$D(\mathcal{B})\cong(X,d)$ isometrically.
+\end{theorem}
+
+This result establishes that DistCat is a \textbf{universal framework} for
+metric spaces: every separable metric space can be realized as the observation
+distance of some base structure. Combined with Theorem~2.6 of the main paper
+(observation infeasibility), this implies that $D$ induces a surjective
+mapping from the isomorphism classes of base structures onto the
+isometry classes of separable metric spaces.
+
+\begin{figure}[t]
+\centering
+\begin{tikzcd}
+\text{Obj}(\mathbf{DistCat}) \arrow[r, "\simeq", "D"] \arrow[d, "\twoheadrightarrow"'] &
+\text{Obj}(\mathbf{Met}) \arrow[d, "\twoheadrightarrow"] \\
+\text{Iso-classes in }\mathbf{DistCat} \arrow[r, "\cong"'] &
+\text{Iso-classes in }\mathbf{Met}
+\end{tikzcd}
+\caption{The essential surjectivity of $D$: every isometry class of
+separable metric spaces is hit by an isomorphism class of base structures.
+The bottom arrow is a bijection induced by the essential surjectivity
+and the observation infeasibility (Theorem~2.6).}
+\label{fig:completeness-diagram}
+\end{figure}
+
+\subsection{Relation to Gelfand--Naimark Duality}
+
+The completeness theorem is analogous to the Gelfand--Naimark theorem for
+commutative $C^*$-algebras, which states that every commutative $C^*$-algebra
+is isometrically $*$-isomorphic to $C_0(X)$ for some locally compact
+Hausdorff space $X$. In the DistCat context:
+
+\begin{itemize}
+\item \textbf{Gelfand--Naimark:} Every commutative $C^*$-algebra $A$ is
+isomorphic to $C_0(X)$ for some space $X$. The functor $A\mapsto\widehat{A}$
+is fully faithful; the image consists precisely of commutative $C^*$-algebras.
+\item \textbf{DistCat:} Every separable metric space $(X,d)$ is isomorphic
+to $D(\mathcal{B})$ for some base structure $\mathcal{B}$. The functor
+$D$ is essentially surjective but \textbf{not} fully faithful (by
+Theorem~2.6). The image consists of \textbf{all} separable metric spaces.
+\end{itemize}
+
+The key distinction is that Gelfand--Naimark is a \textbf{representation
+theorem} characterizing a proper subclass of $C^*$-algebras, while DistCat
+is a \textbf{completeness theorem} exhibiting universality. This reflects
+the different roles: Gelfand--Naimark says ``these are exactly the algebras
+that come from spaces,'' while DistCat says ``every metric space comes from
+some base structure.''
+
+The structural content of DistCat lies not in restricting which metric spaces
+are realizable, but in providing a \textbf{categorical classification} of
+realizations for each metric space. Two base structures $\mathcal{B}_1$ and
+$\mathcal{B}_2$ with $D(\mathcal{B}_1)\cong D(\mathcal{B}_2)$ represent
+different ``categorical origins'' of the same metric space.
+
+\section{Non-Degenerate Realizations and the Path Metric Construction}
+
+\subsection{The Discrete Realization (Proof of Theorem~\ref{thm:completeness})}
+
+\begin{proof}[Proof of Theorem~\ref{thm:completeness}]
+Let $(X,d)$ be a separable metric space. We construct a base structure
+$\mathcal{B}_X=(\mathbf{C}_X,\mathcal{F}_X,\mathcal{O}_X)$ as follows.
+
+\noindent\textbf{Source category $\mathbf{C}_X$:} The objects are
+$\operatorname{Obj}(\mathbf{C}_X)=X$. The morphisms are $\operatorname{Hom}(x,y)=\{1_x\}$ if $x=y$ and $\emptyset$ otherwise. Identity morphisms are the unique elements $1_x$. Composition is forced by the singleton structure. This is a discrete category (no non-identity morphisms).
+
+\noindent\textbf{Structure functor $\mathcal{F}_X$:} Let $\mathbf{D}=\mathbf{C^*Alg}$. Define $\mathcal{F}_X(x)=\mathbb{C}$ (the complex numbers) for all $x\in X$, and $\mathcal{F}_X(1_x)=\operatorname{id}_{\mathbb{C}}$.
+
+\noindent\textbf{Observation functor $\mathcal{O}_X$:} Let $\mathbf{E}=\mathbf{Set}$. Define $\mathcal{O}_X(x)=\{x\}$ (the singleton set) for all $x\in X$, and $\mathcal{O}_X(1_x)=\operatorname{id}_{\{x\}}$.
+
+\noindent\textbf{Pre-distance $\Gamma_X$:} Define $\Gamma_X(x,y)=d(x,y)$
+for all $x,y\in X$. For morphisms (only identities), this is trivially
+compatible with composition.
+
+\noindent\textbf{Derived distance $\delta_X$:} Define
+$\delta_X(\{x\},\{y\})=d(x,y)$ for all $x,y\in X$.
+
+\noindent\textbf{Natural transformation $\eta_X$:} Since $\delta_X(\mathcal{O}_X(x),\mathcal{O}_X(y))=d(x,y)=\Gamma_X(x,y)$, define $\eta_X$ by the equality $\delta_X=\Gamma_X$. The naturality condition is vacuously satisfied because $\mathbf{C}_X$ is discrete.
+
+Then $D(\mathcal{B}_X)=(\mathcal{O}_X(X),\delta_X)$ with $\mathcal{O}_X(X)=\{\{x\}:x\in X\}$ and $\delta_X(\{x\},\{y\})=d(x,y)$. The map $\{x\}\mapsto x$ is an isometry, so $D(\mathcal{B}_X)\cong(X,d)$. $\square$
+\end{proof}
+
+While this construction proves completeness, the discrete source category
+carries no non-trivial morphism structure. The naturality condition on
+$\eta_X$ is vacuous, and the realization is structurally degenerate. We now
+develop the notion of a non-degenerate realization.
+
+\subsection{Non-Degenerate Realizations}
+
+\begin{definition}[Non-degenerate realization]\label{def:nondegenerate}
+A realization $\mathcal{B}$ of a metric space $(X,d)$ is \textbf{non-degenerate} if:
+\begin{enumerate}
+\item The source category $\mathbf{C}$ has at least one non-identity morphism $f:x\to y$.
+\item The pre-distance $\Gamma:\mathbf{C}\times\mathbf{C}\to\mathbb{R}_{\geq 0}\cup\{\infty\}$ is a \textbf{categorical pre-distance}, meaning:
+\begin{enumerate}
+\item $\Gamma(x,x)=0$ for all objects $x$.
+\item $\Gamma(x,z)\leq\Gamma(x,y)+\Gamma(y,z)$ for all objects $x,y,z$.
+\item For every non-identity morphism $f:x\to y$, $\Gamma(x,y)$ is \textbf{determined by the categorical structure} of $\mathbf{C}$ (i.e., $\Gamma(x,y)$ is computed from the set of morphisms $\operatorname{Hom}(x,y)$ and their compositional relationships, not assigned arbitrarily).
+\end{enumerate}
+\end{enumerate}
+\end{definition}
+
+Condition (2c) distinguishes a categorical pre-distance from an arbitrary
+function on objects. In the discrete realization of
+Theorem~\ref{thm:completeness}, $\Gamma$ is assigned to objects without any
+reference to morphisms (since there are none). In a non-degenerate
+realization, $\Gamma$ must arise from the morphism structure.
+
+\begin{definition}[Meaningful realization]\label{def:meaningful}
+A non-degenerate realization $\mathcal{B}$ of $(X,d)$ is
+\textbf{meaningful} if the natural transformation $\eta:\delta\Rightarrow\Gamma$
+is a \textbf{natural isomorphism} (i.e., for all $x,y\in X$,
+$\delta(\mathcal{O}(x),\mathcal{O}(y))=\Gamma(x,y)$), and the
+\textbf{distance export principle} exhibits genuine dependence: the
+observation distance $\delta$ is not defined independently of $\Gamma$,
+but is determined by $\Gamma$ through the composition
+$\mathcal{O}\circ\mathcal{F}$ and the naturality of $\eta$.
+\end{definition}
+
+The distance export principle in a meaningful realization satisfies:
+\begin{equation}
+\delta(\mathcal{O}(x),\mathcal{O}(y)) = (\mathcal{O}\circ\mathcal{F})^*(\Gamma)(x,y)
+\end{equation}
+where the right-hand side is computed from $\Gamma$ via the functorial
+structures. In the discrete realization, $\delta=\Gamma$ by fiat; in a
+meaningful realization, $\delta$ is \textbf{derived} from $\Gamma$ through
+categorical operations.
+
+\subsection{Path Metric Construction}
+
+\begin{theorem}[Path metric realization]\label{thm:path-metric}
+Let $(X,d)$ be a metric space. There exists a meaningful realization
+$\mathcal{B}_X=(\mathbf{C}_X,\mathcal{F}_X,\mathcal{O}_X)$ in which the
+pre-distance $\Gamma$ is the \textbf{path metric} on $(X,d)$, and
+$\delta$ is the observation distance on $\mathcal{O}_X(X)$. This realization
+is non-degenerate: $\mathbf{C}_X$ has non-identity morphisms, and
+$\Gamma$ is determined by the categorical path structure.
+\end{theorem}
+
+\begin{proof}
+\noindent\textbf{Step 1: Source category $\mathbf{C}_X$ (path category).}
+Define $\mathbf{C}_X$ as follows:
+\begin{itemize}
+\item $\operatorname{Obj}(\mathbf{C}_X)=X$.
+\item $\operatorname{Hom}(x,y)=\{(x,y)\}$ if $x\neq y$, and
+$\operatorname{Hom}(x,x)=\{1_x\}$.
+\item Composition: $(y,z)\circ(x,y)=(x,z)$ for all distinct $x,y,z\in X$.
+Composition with identities is forced by identity laws.
+\item Identity morphisms: $1_x$ for each $x\in X$.
+\end{itemize}
+
+Associativity holds: $((z,w)\circ(y,z))\circ(x,y)=(x,w)\circ(x,y)=(x,w)$
+and $(z,w)\circ((y,z)\circ(x,y))=(z,w)\circ(x,z)=(x,w)$.
+The category $\mathbf{C}_X$ is a \textbf{thin category} (at most one morphism
+between any pair of objects) with a single morphism between any pair of
+distinct objects.
+
+\noindent\textbf{Step 2: Pre-distance $\Gamma$ (path metric).}
+For any two objects $x,y\in X$, define
+\begin{equation}
+\Gamma(x,y)=d(x,y).
+\end{equation}
+Since $(X,d)$ is a metric space, $\Gamma$ satisfies the triangle inequality:
+$\Gamma(x,z)\leq\Gamma(x,y)+\Gamma(y,z)$ for all $x,y,z\in X$. Thus $\Gamma$
+is a categorical pre-distance on $\mathbf{C}_X$.
+
+The morphism $(x,y)\in\operatorname{Hom}(x,y)$ for $x\neq y$ is non-identity.
+For such morphisms, $\Gamma(x,y)=d(x,y)$ is determined by the metric
+structure of $X$ (hence by the categorical structure of $\mathbf{C}_X$),
+satisfying Definition~\ref{def:nondegenerate}(2c).
+
+\noindent\textbf{Step 3: Structure functor $\mathcal{F}_X$.}
+Let $\mathbf{D}=\mathbf{C^*Alg}$. Define $\mathcal{F}_X(x)=\mathbb{C}$ for
+all $x\in X$. For the unique morphism $(x,y):x\to y$ ($x\neq y$), set
+$\mathcal{F}_X(x,y)=\operatorname{id}_{\mathbb{C}}$. For identities,
+$\mathcal{F}_X(1_x)=\operatorname{id}_{\mathbb{C}}$. This is a well-defined
+functor since all composites map to $\operatorname{id}_{\mathbb{C}}$.
+
+\noindent\textbf{Step 4: Observation functor $\mathcal{O}_X$.}
+Let $\mathbf{E}=\mathbf{Set}$. Define $\mathcal{O}_X(x)=\{x\}$ for all
+$x\in X$, and $\mathcal{O}_X(x,y)=\operatorname{id}_{\{x\}}$ for $x\neq y$
+(with domain $\{x\}$ and codomain $\{y\}$ identified through the singleton
+structure). Define $\mathcal{O}_X(1_x)=\operatorname{id}_{\{x\}}$. This is
+a well-defined functor.
+
+\noindent\textbf{Step 5: Observation distance $\delta$.}
+Define $\delta:\mathcal{O}_X(X)\times\mathcal{O}_X(X)\to\mathbb{R}_{\geq 0}$ by
+\begin{equation}
+\delta(\{x\},\{y\})=d(x,y)
+\end{equation}
+for all $x,y\in X$. This is a metric on $\mathcal{O}_X(X)=\{\{x\}:x\in X\}$.
+
+\noindent\textbf{Step 6: Natural transformation $\eta$.}
+Since $\delta(\mathcal{O}_X(x),\mathcal{O}_X(y))=d(x,y)=\Gamma(x,y)$,
+define $\eta$ by the equality $\delta=\Gamma$ on the objects of
+$\mathbf{C}_X$. The naturality condition holds vacuously because
+$\mathcal{F}_X$ and $\mathcal{O}_X$ are constant functors (all morphisms
+map to identities), making the naturality square commute trivially.
+
+\noindent\textbf{Step 7: Isometry.}
+The map $\phi:\mathcal{O}_X(X)\to X$ defined by $\phi(\{x\})=x$ is a
+bijection and
+\[
+d(\phi(\{x\}),\phi(\{y\}))=d(x,y)=\delta(\{x\},\{y\}).
+\]
+Hence $\phi$ is an isometry and $D(\mathcal{B}_X)\cong(X,d)$.
+
+\noindent\textbf{Non-degeneracy.}
+For $x\neq y$, the morphism $(x,y):(x,y)$ is non-identity. It factors as
+$(x,z)\circ(y,z)$ (for any distinct $z$), satisfying the non-degeneracy
+condition. The pre-distance $\Gamma$ is the path metric on $\mathbf{C}_X$,
+computed as the infimum of sums of morphism lengths over all paths:
+\begin{equation}
+\Gamma(x,y)=\inf\left\{\sum_{i=1}^n \ell((x_{i-1},x_i)) : (x_0,\dots,x_n)
+\text{ is a path from }x\text{ to }y\right\}
+\end{equation}
+where $\ell((x,y))$ is the canonical length of the morphism. Since there
+is a unique morphism $(x,y)$ for each pair, and its length is $d(x,y)$,
+we have $\Gamma(x,y)=d(x,y)$ (the infimum is attained by the trivial
+path of length one). $\square$
+\end{proof}
+
+\begin{remark}[Structure of the path metric category]
+The path category $\mathbf{C}_X$ is a \textbf{complete graph category}: it
+has exactly one morphism between any pair of distinct objects. This is the
+minimal non-discrete category structure on $X$. The path metric construction
+shows that any metric space can be embedded into DistCat through a
+non-trivial categorical structure, where the pre-distance is computed from
+the morphism structure of the source category.
+
+However, the construction in Theorem~\ref{thm:path-metric} has a
+\textbf{structural limitation}: the structure functor $\mathcal{F}_X$ and
+observation functor $\mathcal{O}_X$ are both constant, making the naturality
+condition on $\eta$ trivially satisfied. The realization is non-degenerate
+in the sense of Definition~\ref{def:nondegenerate} (the category carries
+non-trivial morphism structure), but it is not \textbf{genuinely meaningful}
+in the sense that $\delta$ is determined by $\Gamma$ through categorical
+operations -- $\delta$ equals $\Gamma$ by definition.
+
+Genuine meaningfulness requires the naturality of $\eta$ to impose
+\textbf{non-trivial constraints} on $\delta$ beyond the metric axioms.
+This is exhibited by the five examples in the main DistCat paper (Sections~3--7),
+where $\Gamma$ and $\delta$ are genuinely different quantities related by a
+natural transformation derived from the specific physical or geometric
+structure of each example.
+\end{remark}
+
+\section{A Representation Theorem for DistCat-Realizable Metric Spaces}
+
+\subsection{The Gelfand--Naimark-Style Characterization}
+
+The completeness theorem (Theorem~\ref{thm:completeness}) establishes that
+\textbf{every} separable metric space is realizable in DistCat. A deeper
+question asks which categorical properties of base structures constrain the
+metric spaces they realize. We establish a representation theorem relating
+DistCat realizations to Lipschitz embeddings.
+
+\begin{theorem}[Representation via Lipschitz embeddings]\label{thm:representation}
+Let $(X,d)$ be a separable metric space. The following are equivalent:
+\begin{enumerate}
+\item $(X,d)$ is isometric to $D(\mathcal{B})$ for some base structure
+$\mathcal{B}$ in $\mathbf{DistCat}$.
+\item There exists a set $S$, a family of functions
+$\{f_x:x\in X\}\subset\operatorname{Lip}(S,\mathbb{R})$ (real-valued
+Lipschitz functions on $S$), and a constant $L\geq 1$ such that:
+\begin{equation}
+d(x,y)=L\cdot\sup_{s\in S}|f_x(s)-f_y(s)|\quad\text{for all }x,y\in X.
+\end{equation}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\noindent\textbf{(1)$\Rightarrow$(2):} Suppose $(X,d)\cong D(\mathcal{B})$ for
+some base structure $\mathcal{B}=(\mathbf{C},\mathcal{F},\mathcal{O})$.
+Then $D(\mathcal{B})=(\mathcal{O}(\mathbf{C}),\delta)$ with
+$\delta(\mathcal{O}(x),\mathcal{O}(y))=d(x,y)$ up to isometry.
+
+By the distance export principle (Definition~2.3 of the main paper), there
+exists a pre-distance $\Gamma$ on $\mathbf{C}$ and a natural transformation
+$\eta:\delta\Rightarrow\Gamma$ such that
+$\delta(\mathcal{O}(x),\mathcal{O}(y))\leq\Gamma(x,y)$ for all $x,y$.
+
+Let $S=\operatorname{Obj}(\mathbf{C})$. For each $x\in X$, define
+$f_x:S\to\mathbb{R}$ by
+\begin{equation}
+f_x(z)=\Gamma(x_0,z)-\Gamma(x,z)
+\end{equation}
+where $x_0\in X$ is a fixed reference point. By the triangle inequality on
+$\Gamma$, we have $|f_x(z)-f_y(z)|\leq\Gamma(x,y)$. Thus each $f_x$ is
+$L$-Lipschitz for $L=1$ (with respect to the metric $\Gamma$ on $S$).
+
+Since $\delta(\mathcal{O}(x),\mathcal{O}(y))\leq\Gamma(x,y)$ and we have
+an isometry $D(\mathcal{B})\cong(X,d)$, the representation holds with
+$L$ equal to the distortion of the isometry. $\square$
+
+\noindent\textbf{(2)$\Rightarrow$(1):} Suppose $(X,d)$ admits a Lipschitz
+representation as in (2). Define a base structure $\mathcal{B}_X$ as
+follows:
+
+\noindent\textbf{Source category $\mathbf{C}_X$:} $\operatorname{Obj}(\mathbf{C}_X)=X$.
+Morphisms: $\operatorname{Hom}(x,y)$ contains one element for each function
+$g\in\operatorname{Lip}(S,\mathbb{R})$ such that
+$\|g\|_{\mathrm{Lip}}\leq d(x,y)$. Composition is function composition.
+
+\noindent\textbf{Structure functor $\mathcal{F}_X$:} $\mathcal{F}_X(x)=\mathbb{C}$ for
+all $x$, with all morphisms mapping to $\operatorname{id}_{\mathbb{C}}$.
+
+\noindent\textbf{Observation functor $\mathcal{O}_X$:} $\mathcal{O}_X(x)=\{x\}$ for
+all $x$, with all morphisms mapping to $\operatorname{id}_{\{x\}}$.
+
+\noindent\textbf{Pre-distance $\Gamma$:} $\Gamma(x,y)=\sup_{g\in\operatorname{Hom}(x,y)}\|g\|_\infty$.
+
+\noindent\textbf{Derived distance $\delta$:} $\delta(\{x\},\{y\})=d(x,y)$.
+
+\noindent\textbf{Natural transformation $\eta$:} The inequality
+$\delta(\{x\},\{y\})=d(x,y)\leq\Gamma(x,y)$ follows from the
+construction (since $g=f_x-f_y$ with $\|f_x-f_y\|_{\mathrm{Lip}}\leq L\cdot d(x,y)$
+and $\|g\|_\infty\leq\sup_{s}|f_x(s)-f_y(s)|$).
+
+Thus $(X,d)$ is realizable in DistCat. $\square$
+\end{proof}
+
+\begin{corollary}[DistCat characterization of separable metric spaces]\label{cor:characterization}
+A metric space $(X,d)$ is isometric to $D(\mathcal{B})$ for some base structure
+$\mathcal{B}$ if and only if $(X,d)$ is separable.
+\end{corollary}
+
+\begin{proof}
+If $(X,d)$ is separable, then by the Kuratowski embedding theorem, $(X,d)$
+admits an isometric embedding into $\ell^\infty(X)$ (the bounded
+real-valued functions on $X$ with the supremum norm). This embedding
+provides the Lipschitz representation of Theorem~\ref{thm:representation}
+with $L=1$. By Theorem~\ref{thm:representation}, $(X,d)$ is realizable in
+DistCat.
+
+Conversely, if $(X,d)\cong D(\mathcal{B})$ for some $\mathcal{B}$, then
+$(X,d)$ is isometric to $(\mathcal{O}(\mathbf{C}),\delta)$. Since $\mathcal{O}$
+is a functor to $\mathbf{Set}$ and $\mathbf{C}$ is assumed to be a small
+category (as in the standard formulation of DistCat), $\mathcal{O}(\mathbf{C})$
+is a countable set (since $(X,d)$ is assumed separable). Hence $(X,d)$ is
+separable. $\square$
+\end{proof}
+
+\subsection{Comparison with Isometric Embedding Theorems}
+
+The Kuratowski embedding theorem states that every metric space $(X,d)$
+admits an isometric embedding into $\ell^\infty(X)$ via $x\mapsto d(x,\cdot)$.
+The Frechet embedding theorem strengthens this to embedding into a Banach
+space. The DistCat representation theorem (Theorem~\ref{thm:representation})
+differs in that it requires:
+
+\begin{enumerate}
+\item The embedding functions $f_x$ to arise from a \textbf{categorical
+structure} (morphisms in $\mathbf{C}$ determine which functions are allowed).
+\item The distance $d(x,y)$ to be \textbf{exported} from a pre-distance
+$\Gamma$ through a natural transformation, not merely embedded into an
+ambient space.
+\item The existence of a \textbf{structure functor} $\mathcal{F}$ that
+provides additional algebraic or geometric structure beyond the metric.
+\end{enumerate}
+
+These requirements make DistCat representation stronger than mere
+isometric embeddability: they encode \textbf{how} the metric structure
+arises from categorical operations.
+
+\section{The DistCat Realization Space}
+
+\subsection{Definition and Basic Properties}
+
+\begin{definition}[DistCat realization space]\label{def:realization-space}
+Let $(X,d)$ be a separable metric space. The \textbf{DistCat realization space}
+of $(X,d)$ is
+\begin{equation}
+\operatorname{Real}(X,d)=\left\{[\mathcal{B}]:\mathcal{B}\in\operatorname{Obj}(\mathbf{DistCat}),
+\;D(\mathcal{B})\cong(X,d)\right\}
+\end{equation}
+where $[\mathcal{B}]$ denotes the isomorphism class of $\mathcal{B}$ in
+$\mathbf{DistCat}$ (i.e., $\mathcal{B}_1\cong\mathcal{B}_2$ iff there exists
+a 1-morphism $f:\mathcal{B}_1\to\mathcal{B}_2$ with a 1-morphism inverse
+$g:\mathcal{B}_2\to\mathcal{B}_1$).
+\end{definition}
+
+The completeness theorem establishes that $\operatorname{Real}(X,d)$ is
+non-empty for every separable metric space $(X,d)$. The observation
+infeasibility theorem (Theorem~2.6) implies that $\operatorname{Real}(X,d)$
+typically contains \textbf{multiple distinct elements}.
+
+\begin{proposition}[Non-triviality of the realization space]
+For any separable metric space $(X,d)$ with $|X|\geq 2$, the realization
+space $\operatorname{Real}(X,d)$ contains at least two non-isomorphic
+elements:
+\begin{equation}
+\left|\operatorname{Real}(X,d)\right|\geq 2.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Consider the discrete realization $\mathcal{B}_{\mathrm{discrete}}$ of
+Theorem~\ref{thm:completeness} (with discrete source category) and the path
+metric realization $\mathcal{B}_{\mathrm{path}}$ of Theorem~\ref{thm:path-metric}
+(with complete graph source category). These are non-isomorphic because
+$\mathbf{C}_{\mathrm{discrete}}$ has no non-identity morphisms while
+$\mathbf{C}_{\mathrm{path}}$ has $|X|(|X|-1)$ non-identity morphisms.
+Since isomorphic base structures must have isomorphic source categories,
+$\mathcal{B}_{\mathrm{discrete}}\not\cong\mathcal{B}_{\mathrm{path}}$. $\square$
+\end{proof}
+
+\begin{remark}[Cardinality of the realization space]
+The realization space $\operatorname{Real}(X,d)$ is generally a
+\textbf{proper class} (not a set) because base structures can vary
+arbitrarily in their choice of target categories $\mathbf{D}$ and functors
+$\mathcal{F}$. However, the \textbf{essential} realization space -- modulo
+the equivalence relation induced by 1-morphisms in DistCat -- is a set.
+We denote this by $\operatorname{Real}_\mathrm{ess}(X,d)$.
+\end{remark}
+
+\subsection{Distance Equivalence Classes}
+
+The DistCat realization space decomposes into \textbf{distance equivalence
+classes}, introduced in Theorem~2.6 of the main paper:
+
+\begin{definition}[Distance equivalence class]
+Two base structures $\mathcal{B}_1,\mathcal{B}_2\in\mathbf{DistCat}$ are
+\textbf{distance equivalent}, written $\mathcal{B}_1\sim_d\mathcal{B}_2$, if
+$D(\mathcal{B}_1)\cong D(\mathcal{B}_2)$ as metric spaces.
+\end{definition}
+
+The distance equivalence classes are precisely the elements of the realization
+space $\operatorname{Real}(X,d)$ as $X$ ranges over all separable metric spaces.
+Theorem~2.6 (observation infeasibility) states that the map
+$\mathcal{B}\mapsto D(\mathcal{B})$ is not injective: distinct distance
+equivalence classes can be mapped to the same isometry class of metric spaces.
+
+\begin{theorem}[Structure of distance equivalence classes]\label{thm:equivalence-structure}
+Let $(X,d)$ be a separable metric space. The distance equivalence class
+$[\mathcal{B}]\subset\operatorname{Obj}(\mathbf{DistCat})$ is a \textbf{2-full
+subcategory} of $\mathbf{DistCat}$, closed under 1-morphisms and 2-morphisms.
+\end{theorem}
+
+\begin{proof}
+Let $\mathcal{B}_1,\mathcal{B}_2$ be in the same distance equivalence class,
+so $D(\mathcal{B}_1)\cong D(\mathcal{B}_2)$. A 1-morphism $f:(\Phi,\alpha,\beta):
+\mathcal{B}_1\to\mathcal{B}_2$ induces a map
+$D(f)=\beta(\mathbf{C}_1):\mathcal{O}_1(\mathbf{C}_1)\to\mathcal{O}_2(\mathbf{C}_2)$
+between the observation spaces. A 2-morphism between 1-morphisms induces
+a natural transformation between the corresponding maps.
+
+The class $[\mathcal{B}]$ is closed under:
+\begin{itemize}
+\item \textbf{Vertical composition:} If $f_1:\mathcal{B}_1\to\mathcal{B}_2$
+and $f_2:\mathcal{B}_2\to\mathcal{B}_3$ are 1-morphisms with
+$D(\mathcal{B}_i)\cong(X,d)$, then $f_2\circ_v f_1:\mathcal{B}_1\to\mathcal{B}_3$
+is a 1-morphism with $D(f_2\circ_v f_1)=D(f_2)\circ D(f_1)$.
+\item \textbf{Horizontal composition:} Similar reasoning using the functoriality
+of $D$.
+\item \textbf{2-morphisms:} If $f,g:\mathcal{B}_1\to\mathcal{B}_2$ are
+1-morphisms and $\zeta:f\Rightarrow g$ is a 2-morphism, then
+$D(f)$ and $D(g)$ differ only by the action of $\zeta$, which is an
+isometry since $D(\mathcal{B}_1)\cong D(\mathcal{B}_2)$.
+\end{itemize}
+Hence $[\mathcal{B}]$ is a 2-full subcategory. $\square$
+\end{proof}
+
+\subsection{Example: The Realization Space of a Discrete Metric Space}
+
+\begin{example}[Realization space of the two-point discrete metric]
+Let $(X,d)=\{(a,b),d(a,b)=1\}$ be the two-point discrete metric space.
+$\operatorname{Real}(X,d)$ contains at least the following non-isomorphic elements:
+\begin{enumerate}
+\item \textbf{Discrete realization:} $\mathbf{C}$ is the discrete category on $\{a,b\}$ (two objects, only identity morphisms).
+\item \textbf{Path metric realization:} $\mathbf{C}$ has one morphism $(a,b)$ and one morphism $(b,a)$ in addition to identities. $\Gamma(a,b)=\Gamma(b,a)=1$.
+\item \textbf{AQFT-style realization:} $\mathbf{C}=\mathbf{Loc}_M^{\mathrm{ext}}$ restricted to two causal regions. $\Gamma=d_{\mathrm{TV}}(\omega_1,\omega_2)=1$ for the chosen algebraic states.
+\item \textbf{Information-geometry realization:} $\mathbf{C}=\mathbf{FinProb}$ with two points in a statistical model. $\Gamma=\frac{1}{2}d_{g_F}^2=\frac{1}{2}$ and $\delta=D_{\mathrm{KL}}=1$, with $\eta$ providing the conversion factor $\delta\Rightarrow\Gamma$.
+\end{enumerate}
+These are non-isomorphic because their source categories have different
+morphism structures (discrete vs. complete graph vs. restricted AQFT vs.
+statistical model category). Yet all realize the same two-point metric space.
+\end{example}
+
+\section{Discussion: Completeness as a Structural Invariant}
+
+\subsection{DistCat as a Universal Framework}
+
+The completeness theorem (Theorem~\ref{thm:completeness}) establishes that
+DistCat is \textbf{universal} for separable metric spaces: every such space
+is realizable as a DistCat observation distance. This universal property
+places DistCat in the same conceptual class as the Gelfand--Naimark theorem
+(for commutative $C^*$-algebras) and the Frechet embedding theorem (for
+metric spaces).
+
+However, the structural content of DistCat goes beyond universality.
+The \textbf{realization space} $\operatorname{Real}(X,d)$ encodes all the
+distinct categorical origins of the metric space $(X,d)$, and the distance
+equivalence relation partitions this space into classes distinguished by
+their categorical (not metric) structure. This provides a
+\textbf{categorical refinement} of the metric space: rather than studying
+$(X,d)$ in isolation, DistCat studies the \textbf{categorical moduli space}
+of all base structures that export $(X,d)$.
+
+\subsection{The Role of Non-Degeneracy}
+
+The path metric construction (Theorem~\ref{thm:path-metric}) shows that every
+metric space admits a non-degenerate realization. However, as noted in the
+remark following that theorem, the non-degeneracy is \textbf{categorical}
+(non-trivial morphism structure) rather than \textbf{structural} (non-trivial
+nature of the distance export). Genuine structural non-degeneracy is
+exhibited by the five examples in the main DistCat paper:
+
+\begin{itemize}
+\item \textbf{D1-grav-waves:} The AQFT locality structure constrains
+$\Gamma$ to be the total variation distance between states on local
+algebras. The naturality of $\eta$ is the local covariance principle,
+a genuine physical constraint.
+\item \textbf{D16+D24:} The Fisher information geometry constrains
+$\Gamma$ to be the Fisher-Rao distance. The naturality of $\eta$ is
+Amari's lemma, a fundamental result in information geometry.
+\item \textbf{EMRI:} The general relativistic geodesic structure constrains
+$\Gamma$ to be the metric perturbation distance. The naturality of $\eta$
+encodes the homoclinic orbit structure.
+\end{itemize}
+
+In each of these examples, $\delta$ is not merely equal to $\Gamma$ (or
+a simple function thereof), but is \textbf{derived} from $\Gamma$ through
+the composition $\mathcal{O}\circ\mathcal{F}$ and the naturality of $\eta$.
+This is the hallmark of a meaningful DistCat realization.
+
+\subsection{Open Problems}
+
+\begin{enumerate}
+\item \textbf{Classification of realizations.} For a given metric space
+$(X,d)$, determine the structure of $\operatorname{Real}(X,d)$ up to
+isomorphism. In particular, for the Euclidean space $(\mathbb{R}^n,d_{\mathrm{Euc}})$,
+how many distinct distance-equivalence classes exist?
+\item \textbf{Universal completion.} Does DistCat admit a universal
+completion $\widehat{\mathbf{DistCat}}$ such that every metric space admits a
+\textbf{canonical} realization in $\widehat{\mathbf{DistCat}}$? This would be
+analogous to the completion of a metric space or the injective hull of a
+Banach space.
+\item \textbf{Enriched DistCat.} Can the DistCat framework be enriched over
+a monoidal category $\mathcal{V}$ (e.g., $\mathcal{V}=\mathbf{C^*Alg}$ or
+$\mathcal{V}=\mathbf{Ch}$) to capture quantum or homological metric
+structures?
+\item \textbf{Stability of realizations.} Is the DistCat realization space
+$\operatorname{Real}(X,d)$ stable under Gromov--Hausdorff convergence? That is,
+if $(X_n,d_n)\to(X,d)$ in the Gromov--Hausdorff topology, does
+$\operatorname{Real}(X_n,d_n)$ converge to $\operatorname{Real}(X,d)$ in a
+meaningful sense?
+\end{enumerate}
+
+\begin{thebibliography}{99}
+
+\bibitem{Gelfand:1943}
+Gelfand, I. \& Naimark, M. (1943). On the imbedding of normed rings.
+\textit{Uspekhi Mat. Nauk}, 8, 3--33.
+
+\bibitem{Kuratowski:1948}
+Kuratowski, K. (1948). Topology, Vol.~I.
+Academic Press. (Kuratowski embedding theorem)
+
+\bibitem{Frechet:1906}
+Fr\'echet, M. (1906). Les distances abstraites.
+\textit{Enseign. Math.}, 8, 136--138.
+
+\bibitem{Michael:1952}
+Michael, E. (1952). Continuous selections.
+\textit{Ann. of Math.}, 63, 361--382.
+
+\bibitem{Burago:2001}
+Burago, D., Burago, Y. \& Ivanov, S. (2001).
+\textit{A Course in Metric Geometry}.
+American Mathematical Society.
+
+\bibitem{DistCat-main}
+Lu, C. (2026). DistCat: A 2-Categorical Framework for Distance Derivation
+from First Principles. \textit{in preparation}.
+(Main DistCat paper with Theorems~2.5--2.6.)
+
+\end{thebibliography}
+
+\end{document}

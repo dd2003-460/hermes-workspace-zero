@@ -5,8 +5,20 @@
     "status": "completed",
     "progress_percent": 100
   },
-  "queue": [],
+  "queue": [
+    "arXiv 提交（等待作者确认 gr-qc/cs.AI 分类）"
+  ],
   "completed_topics": [
+    {
+      "topic": "TeX Live 安装成功 + arXiv tarball 脚本增强（iteration 42）",
+      "doc": "memory/5.38-texlive-installed-iter42.md",
+      "result": "brew texlive安装完成。D1编译通过(10页/291KB)。D40本地CJK编译失败，arXiv服务器应可处理。arxiv_tarball.sh集成引用验证。两个tarball就绪提交。"
+    },
+    {
+      "topic": "arXiv tarball 生成 + 检查清单通过（iteration 37）",
+      "doc": "memory/5.33-arxiv-tarballs-ready-iter37.md",
+      "result": "D1-grav-waves: 128K READY (9 pass/0 fail/2 warn), D40: 12K (7 pass/0 fail/4 warn)。brew texlive下载中。两个提交就绪。"
+    },
     {
       "topic": "D4-S18-r23 诊断协议正式化",
       "doc": "D4-S18-r23-chimera-diagnostic-formalization.md"
@@ -92,6 +104,6 @@
       "result": "两个论文添加 CC BY 4.0 许可证，重新编译通过。D1-grav-waves figure 路径因 pdflatex 工作目录解析限制未嵌入，arXiv 可单独上传图片。提交准备度: LICENSED + COMPILED + CHECKLIST_PASS"
     }
   ],
-  "_ralph_iteration": 35,
-  "_last_turn_action_taken": "迭代35: D1-grav-waves CrossRef 文献搜索完成(8篇,Kehagias2024 HD对称性等)。Kehagias:2024已加入D1论文参考文献。项目目录整洁。"
+  "_ralph_iteration": 47,
+  "_last_turn_action_taken": "迭代47: arxiv_review_tarball.sh审阅包工具创建。工具链完整6个工具。两篇论文全部就绪。阻塞于作者确认后提交arXiv。"
 }

@@ -1,56 +1,34 @@
 # Projects — 工作区项目索引
 
-**最后更新**: 2026-05-09（D1-grav-waves arXiv-ready + D1-anyon-hawking 交叉引用 + 中间文件归档）
+**最后更新**: 2026-05-19（persona-align T3 完成, DPA.1 状态更新）
 
 ---
 
 ## 项目分类（按领域学科）
 
 ### 理论物理
-|| 项目 | 索引号 | 描述 |
-||------|--------|------|
-|| `D1-grav-waves/` | [GW.1] | **arXiv 就绪**：Extended Functorial QFT 框架用于 PTA 引力波源判别（iteration 35+，tarball 已生成，两论文均等待作者确认提交） |
-|| `D1-academic-AI/` | [DAI.1] | Chimera动力学 + 认知拓扑 + 语言信息几何 + 代理自主性理论（D1-D52理论迭代） |
-|| `D1-anyon-hawking/` | [AH.1] | 视界上的任意子拓扑动力学 — **进行中**：有探索笔记和原始计算，论文尚未产出 |
 
-**D1-academic-AI 结构**：
-```
-D1-academic-AI/INDEX.md
-├── papers/          → 已完成学术论文（约50篇）
-├── theories/        → 理论迭代（chimera-dynamics/, cognitive-topology/, language-geometry/）
-├── chimera_lab/     → 实验脚本 + 结果数据
-├── raw/             → 原始ideas
-├── labs/simulations/→ 仿真实验
-├── memory/          → 探索记录（含 S9, S12, S18, D4, A1 等归档探索）
-├── modules/         → 可复用代码模块
-├── architecture/    → 系统设计文档
-└── tasks/           → 任务状态 + 队列索引
-```
-
-### 计算/信息论
 | 项目 | 索引号 | 描述 |
 |------|--------|------|
-| `D1-academic/` | [DA.0] | Bayesian 视觉推理计算框架 + 学术资料库 |
+| `D1-grav-waves/` | [GW.1] | **arXiv 就绪 v4**：Extended Functorial QFT 框架用于 PTA 引力波源判别（10页/303K，24 refs，Round 11 审查 15/15 修复完成） |
+| `D1-anyon-hawking/` | [AH.1] | 视界上的任意子拓扑动力学 — **原始研究**：任意子统计、纽结理论、黑洞视界（有探索笔记，无论文产出） |
+
+### AI / 计算科学
+
+| 项目 | 索引号 | 描述 |
+|------|--------|------|
+| `D1-persona-align/` | [DPA.1] | **T1-T5b 完成，T6 部署**：scorer + chenglu personality + 68 LoRA samples |
+| `D1-academic-AI/` | [DAI.1] | **arXiv 就绪**：DistCat 2-Cat 统一框架（2-范畴距离导出，13页/298K）、Chimera 动力学、D40 AI 精度-可访问性权衡 |
+| `D1-academic/bayesian-frame/` | [DA.0.1] | **arXiv 就绪 v2.0**：Bayesian 感知推理框架（|sin(4θ)| 为核心发现，11页/871K，JCR 论文） |
 | `cosmos-thesis-review/` | [CTR.1] | 宇宙学关联函数 180页博士论文评审（已完成） |
 
-**D1-academic 结构**：
-```
-D1-academic/INDEX.md
-├── bayesian-frame/      → 后验推理计算框架
-├── 学术/               → 论文PDF、笔记、翻译
-│   └── 资料库/文献资料/理论物理/
-│       └── (文献存储，cosmos-thesis-review 已独立)
-```
+### 写作 / 系统
 
-### 写作/输出
-|| 项目 | 索引号 | 描述 |
-||------|--------|------|
-|| `D1-writing/` | [DW.1] | 写作/输出相关工作 — **⚠️ 与 D1-academic/学术/写作/ 86% 重叠**（67 vs 60 条目，58 重复）。建议：保留 D1-writing 为 canonical（有 git 历史），D1-academic/写作/ 标记 DEPRECATED |
-
-### 系统/记忆
 | 项目 | 索引号 | 描述 |
 |------|--------|------|
+| `D1-writing/` | [DW.1] | 写作/输出相关工作 — **⚠️ 与 D1-academic/学术/写作/ 86% 重叠**，建议保留 D1-writing |
 | `D1-memory/` | [DM.1] | 记忆系统（用户配置、探索归档、系统状态） |
+| `D1-continuous-agent/` | [CA.1] | Agent 持续循环机制研究 — stop hook 分析、Hermes 兼容层探索 |
 
 ---
 
@@ -59,20 +37,12 @@ D1-academic/INDEX.md
 | 路径 | 描述 |
 |------|------|
 | `CLAUDE.md` / `AGENTS.md` / `SOUL.md` | 全局原则 + 红线约束 |
-| `loop/` | Ralph loop 框架（1-loop/ 2-loop/） #workspace |
-| `scripts/` | 自动化脚本 #workspace |
-| `tasks/` | 全局任务板 #workspace |
-| `wiki/` | 领域知识文档 #workspace |
+| `loop/` | Ralph loop 框架（1-loop/ 2-loop/） |
+| `scripts/` | 自动化脚本 |
+| `tasks/` | 全局任务板 |
+| `wiki/` | 领域知识文档 |
+| `tools/` | 工具脚本（search_web.py 等） |
 | `TASKS.md` / `MEMORY.md` / `README.md` / `USER.md` | 系统文件 |
-
----
-
-### 独立探索（未分类）
-> 不挂入学科分类，保持独立。
-
-| 项目 | 索引号 | 描述 |
-|------|--------|------|
-| `D1-anyon-hawking/` | [AH.1] | 视界上的任意子拓扑动力学 — 任意子统计、纽结理论、黑洞视界（原始论文 + Claude 14回合对话） |
 
 ---
 

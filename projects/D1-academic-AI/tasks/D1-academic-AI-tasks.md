@@ -82,9 +82,45 @@
 - [x] 两个论文均通过 arXiv 检查清单（READY for submission）
 - [x] 已有工具发现: `arxiv_cat.py`（arXiv API 搜索）、`wiki-search.py`、`wiki-embed.py`、`index_verifier.py`
 
+### 已完成（iteration 75-81：DistCat 数学修复 + arXiv 提交 + 两轮审查）
+- [x] Iteration 75: 参数距离修复（η → d_param，Prop 4.8 d_param ≡ Γ）
+- [x] Iteration 76: 修复 3 个 Round 4 问题（Sobolev → 参数空间光滑性，Prop 4.7 commutative inequality，Thm 5.2 fixed r_s）
+- [x] Iteration 77: Round 5 审查确认 fixes 正确，发现离散范畴问题
+- [x] Iteration 78: C_EMRI 离散性证明，三条出路评估，选择 Path 2
+- [x] Iteration 79: 两篇论文均添加 limitation section
+- [x] Iteration 80: Round 7 审查修复 3 Critical + 5 Should-fix
+  - Prop 4.8: 显式 ∂h_tt/∂r_s 梯度非零证明
+  - Thm 1.4: 增加 δ 由散度函数产生的假设
+  - "universal" → "structural universality"（abstract + Sec 1 + Sec 9.1 + Sec 9.5）
+  - α 作为 invariant 矛盾修复
+  - Fisher-Rao 非统计例子限定
+  - EMRI-D26 章节编号修复
+  - Def 4.5 η 非标准范畴说明 + 公式去重
+- [x] Iteration 81: Round 8 验证修复（Sec 9.1 标题、EMRI-D26 子节编号、Def 4.5 重复）
+- [x] arXiv 提交包 v2 就绪
+  - papers/arxiv-ready/ — 主 LaTeX + 4 篇 supplementary PDF + tarball 878K
+  - pandoc 自动转换：统一框架 13 页零错误，EMRI 证明 14 页零 warning
+- [x] D1-grav-waves: 编译验证通过（10 页 303KB），tarball v3 (127K)，清单 11/11 pass
+
 ### 阻塞项
-- ~~编译验证阻塞~~ — ✅ 已解决
-- arXiv 提交元数据审阅 — 待作者确认英文摘要
+- ~~编译验证阻塞~~ — ✅ 已解决 (迭代 194+)
+- arXiv 提交元数据审阅 — 待作者确认
 - ~~两个论文缺少许可证声明~~ — ✅ 已添加 CC BY 4.0
-- D1-grav-waves 需要添加 gr-qc arXiv 分类
-- D1-grav-waves figure 引用修复（pdflatex 工作目录解析限制）
+- ~~D1-grav-waves 需要添加 gr-qc arXiv 分类~~ — ✅ 已解决
+- ~~D1-grav-waves figure 引用修复~~ — ✅ 已解决
+
+### 已完成（迭代 200+：DistCat v5 figures + 编译）
+- [x] 添加 Figure 1: 2-category structure diagram (Fig1-2cat-structure.png)
+- [x] 添加 Figure 2: Critical exponent comparison across 5 examples (Fig2-critical-exponents.png)
+- [x] 编译验证: 16 页, 0 err, 0 warn, 846KB (含 figures)
+
+### 已完成（迭代 194+：DistCat v5 最终编译修复）
+- [x] 移除嵌入 pandoc 文档块 (853 行)
+- [x] 移除重复 Section 8 内容
+- [x] 定义 theorem/proposition/corollary/lemma/definition 环境
+- [x] Unicode 字符修复 (→, 。, ∞, α, θ, ≈)
+- [x] tikzcd → array 转换
+- [x] 数学模式定界符修复
+- [x] 孤立的 ref 引用清理
+- [x] **DistCat v5 编译通过: 0 错误, 0 警告, 15 页, 348KB**
+- [x] **arXiv 提交包就绪 (需要作者最终确认)**

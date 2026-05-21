@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "created": "2026-05-17T13:55:00+08:00",
+  "updated": "2026-05-17T13:55:00+08:00",
+  "projects": {
+    "D1-anyon-hawking": {
+      "status": "draft_complete",
+      "last_action": "paper_created_and_compiled",
+      "last_updated": "2026-05-17T13:55:00+08:00",
+      "papers": ["anyon-hawking-paper.tex (6pg, compiled OK)"],
+      "next_action": "peer_review_and_revision",
+      "priority": 2
+    },
+    "D1-grav-waves": {
+      "status": "v4_improved",
+      "last_action": "deep_quality_review",
+      "last_updated": "2026-05-17T13:55:00+08:00",
+      "papers": ["GW-BacQFT-paper.tex (11pg, compiled OK)"],
+      "last_improvements": [
+        "Fixed false claim 'cosmological N_src^-2' in conclusion",
+        "Replaced unproven cobordism claim with Kehagias citation",
+        "Added Section 2.4: Anisotropic backgrounds in functorial framework"
+      ],
+      "next_action": "expand_to_non-extreme_kerr",
+      "priority": 1
+    },
+    "D1-academic-AI": {
+      "status": "active_research",
+      "last_updated": "2026-05-16T15:14:00+08:00",
+      "next_action": "review_for_publication",
+      "priority": 3
+    }
+  },
+  "iterations": [],
+  "global_next_priority": "D1-grav-waves: expand_to_non_extreme_kerr"
+}

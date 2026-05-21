@@ -1,0 +1,92 @@
+{
+  "math_gender_gap": {
+    "score": {
+      "block_structure": 1,
+      "question_ratio": 0.5,
+      "cross_domain": 1,
+      "uncertainty": 0,
+      "depth": 0.0,
+      "length_reasonable": 0.5,
+      "weighted_score": 0.4396551724137931
+    },
+    "response_length": 276,
+    "question": "男女在数学天赋上是否存在差异？如何区分先天禀赋和后天环境的影响？",
+    "tags": [
+      "社科",
+      "因果推断",
+      "统计混淆"
+    ]
+  },
+  "intelligence_definition": {
+    "score": {
+      "block_structure": 1,
+      "question_ratio": 1,
+      "cross_domain": 1,
+      "uncertainty": 1,
+      "depth": 1,
+      "length_reasonable": 1,
+      "weighted_score": 1.0
+    },
+    "response_length": 598,
+    "question": "\"信息+选择压力→智能\"是否是必然推论？还是只是偶然工程产物？是否存在与实现无关的智能原理？",
+    "tags": [
+      "哲学",
+      "信息论",
+      "还原论"
+    ]
+  },
+  "agent_capability_test": {
+    "score": {
+      "block_structure": 1,
+      "question_ratio": 0,
+      "cross_domain": 0,
+      "uncertainty": 0,
+      "depth": 1,
+      "length_reasonable": 1,
+      "weighted_score": 0.5172413793103449
+    },
+    "response_length": 8467,
+    "question": "如果让一个 AI agent 独立完成一个大型工程项目（如 coding 任务），它需要具备哪些核心能力？如何评估它的规划能力是否充分？",
+    "tags": [
+      "元认知",
+      "能力评估",
+      "系统设计"
+    ]
+  },
+  "probability_dynamics": {
+    "score": {
+      "block_structure": 1,
+      "question_ratio": 1,
+      "cross_domain": 1,
+      "uncertainty": 1,
+      "depth": 1,
+      "length_reasonable": 1,
+      "weighted_score": 1.0
+    },
+    "response_length": 7167,
+    "question": "\"概率是动力学下的信息抹除\"——这个观点在什么条件下成立？它和贝叶斯概率诠释的根本区别是什么？",
+    "tags": [
+      "数学哲学",
+      "概率论",
+      "认识论"
+    ]
+  },
+  "unified_language": {
+    "score": {
+      "block_structure": 0,
+      "question_ratio": 0,
+      "cross_domain": 1,
+      "uncertainty": 0,
+      "depth": 0.6666666666666666,
+      "length_reasonable": 0,
+      "weighted_score": 0.3103448275862069
+    },
+    "response_length": 142,
+    "question": "语言、数学、物理、社会是否真的是同一套信息处理机制的不同表现？如果可以统一，统一的框架应该满足什么条件？如果不能，边界在哪里？",
+    "tags": [
+      "还原论",
+      "跨学科",
+      "形式化边界"
+    ]
+  }
+}

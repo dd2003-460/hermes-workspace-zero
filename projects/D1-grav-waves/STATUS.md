@@ -1,4 +1,5 @@
-# D1-grav-waves 项目状态
+<!-- DEPRECATED: 状态已迁移至 tasks/d1-grav-waves-tasks.md 和 INDEX.md -->
+# D1-grav-waves 项目状态（废弃 — 见 INDEX.md）
 
 ## 当前状态: arXiv 就绪待提交（iteration 35+）
 

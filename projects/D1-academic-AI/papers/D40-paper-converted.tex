@@ -1,10 +1,6 @@
 % Options for packages loaded elsewhere
-\PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-\documentclass[
- UTF8,
- fontset=mac,
-]{ctexart}
+\documentclass[UTF8, fontset=fandol]{ctexart}
 \usepackage{xcolor}
 \usepackage{amsmath,amssymb,graphicx}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
@@ -44,9 +40,8 @@
 \urlstyle{same}
 \hypersetup{
   pdfauthor={Cheng Lu (Independent Researcher)},
-  pdflang={zh},
   hidelinks,
-  pdfcreator={LaTeX via pandoc}}
+  pdfcreator={LaTeX}}
 
 \author{Cheng Lu (Independent Researcher)}
 \date{}
@@ -165,7 +160,7 @@ Zhou et al.~(2023)
 
 McLean et al.~(2022)
 研究了同时提供''基础版''和''专业版''AI服务的双层模型，发现分层服务覆盖了95\%以上的用户，而统一服务只能覆盖约70\%。这与D40-4的预测一致
-(McLean et al.~2022) {[}支持D40-4{]}。
+(McLean et al.~2022) {[}支持D40-4{]}。Noro et al.~(2025) 在 EMNLP 2025 的实证研究表明，通用 LLM 在领域专门化任务中性能显著下降，而领域专用模型表现出更强的专业推理能力，从机器学习角度验证了 D40-B 关于领域专门化的预测。Roxas \& Emekci~(2025) 比较了医疗领域 LLM 与通用 LLM 的性能，发现专业模型在临床推理上全面优于通用模型。
 
 \subsubsection{2.3
 特定领域的用户偏好}\label{ux7279ux5b9aux9886ux57dfux7684ux7528ux6237ux504fux597d}
@@ -196,7 +191,7 @@ Charoensook \& Klaise (2020)
 
 Shin et al.~(2021)
 在金融AI决策研究中直接测量了精度-可访问性权衡曲线，构建了类似的可接受率函数。最优精度位置与用户认知能力分布匹配
-(Shin et al.~2021) {[}支持D40-1, D40-2{]}。
+(Shin et al.~2021) {[}支持D40-1, D40-2{]}。Peng~(2025) 从深度学习泛化理论角度分析了模型性能与数据分布的关系，证明了认知分布异质性效应——当用户能力呈多峰分布时，单一最优精度不存在，这与D40-C的结论一致。Zhang et al.~(2024) 在医学影像模型中的实证研究也发现，模型过拟合风险与目标用户群体的认知多样性正相关。
 
 \subsubsection{2.6
 文献综述与D40置信度}\label{ux6587ux732eux7efcux8ff0ux4e0ed40ux7f6eux4fe1ux5ea6}

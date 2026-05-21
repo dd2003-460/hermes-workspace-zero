@@ -157,28 +157,41 @@
     "id": "idea-08",
     "name": "Pauli相斥是任意子统计特例 — 拓扑-自旋统一",
     "category": "核心原创",
-    "description": "Pauli不相容原理不是与任意子统计完全不同的机制，而是任意子统计在3+1维下的特例（θ=π）。3+1维旋转群SO(3)的π₁=Z₂只允许±1相位。2+1维SO(2)允许任意相位。拓扑结构决定统计类型。",
-    "source": "用户洞察：'Pauli相斥原理是任意子统计的一种特例，他们两个是一个东西'",
-    "status": "researched",
+    "description": "Pauli不相容原理不是与任意子统计完全不同的机制，而是任意子统计在3+1维下的特例（theta=pi）。3+1维旋转群SO(3)的pi_1=Z_2只允许plusminus1相位。2+1维SO(2)允许任意相位。拓扑结构决定统计类型。",
+    "source": "用户洞察",
+    "status": "reviewed_by_brain_sub_2026-05-13_2loop",
     "key_points": [
-      "3+1维旋转群SO(3)，π₁(SO(3))=Z₂，统计只有±1",
-      "2+1维旋转群SO(2)，π₁(SO(2))=Z，任意统计相",
-      "Pauli相斥=费米子交换θ=π特例",
-      "拓扑结构→统计类型→Pauli原理是推导而非假设",
-      "如果空间拓扑可从全同性推导，统计类型也是推导结果"
+      "3+1维旋转群SO(3)，pi_1=Z_2，统计只有plusminus1",
+      "2+1维旋转群SO(2)，pi_1=Z，任意统计相",
+      "Pauli相斥=费米子交换theta=pi特例",
+      "拓扑结构->统计类型->Pauli原理是推导而非假设"
+    ],
+    "research_result": "Brain Sub 2-loop 审查 (2026-05-13):\n预测1: 确认已知，无改进空间，关闭。\n预测2: Fujikawa严格推导正确(k=½sgn(m_f)N_f)，但(1)notes中θ公式有错误(θ=2π·sgn(m_f)/N_f而非原文)，(2)k=½sgn(m_f)N_f在black hole horizon context下的文献对标是原创性生死线，必须立即执行。\n预测3: fuzzy sphere π₁(S²_θ)=Z claim可能错误（非交换几何不是拓扑空间），ε量纲估计无具体模型，关闭。\n混沌审查: R23完成，切入点3最高价值但未启动。\n原创空间被压缩到单一任务: anomaly inflow → horizon statistics的文献对标。",
+    "literature_refs": [
+      "Leinaas 1977",
+      "Wilczek 1982",
+      "Shapiro 1987",
+      "Dwyer 2014",
+      "Holevo 1982",
+      "Barkeshli 2019",
+      "Girelli 2004",
+      "Fujikawa 1980 PRA21 2848 (odd-parity action)",
+      "Fujikawa 1984 PRC29 285 (anomaly inflow)",
+      "Ferreiro 1997 (CS level non-running)",
+      "Witten 1993 NuPhys B392 (CS topological phase transition)",
+      "Bao-Sun-Wang 2021 (higher-dimensional anyons)",
+      "Barkeshli-Bonderson-Cheng-Wang 2019 (Topological QC)"
     ],
     "needs": [
-      "查文献：拓扑推导自旋-统计定理",
-      "查文献：3+1 vs 2+1旋转群比较",
-      "查文献：拓扑起源的自旋-统计关系"
+      "[CRITICAL] 文献对标: anomaly inflow black hole horizon Chern-Simons Fujikawa",
+      "修正notes中prediction2的θ公式",
+      "混沌+D16/D24/D26交叉（下一阶段）"
     ],
-    "research_result": "Pauli=任意子特例是已知数学(Dwyer 2014, Shapiro 1987, Leinaas-Myrheim 1977)。原创点在于：从全同性公理→世界线拓扑→维度→统计的完整推导链，追问'为什么是Z2而不是Z'。",
-    "literature_refs": [
-      "Leinaas & Myrheim (1977) - 原始任意子论文",
-      "Wilczek (1982) - 任意统计推广",
-      "Shapiro (1987) - 拓扑自旋统计定理",
-      "Dwyer (2014) - 现代拓扑处理",
-      "Holevo (1982) - 量子统计公理化"
+    "next_steps": [
+      "1. 执行文献对标（最高优先级）",
+      "2. 如果无对标: prediction2新版本作为完整论文贡献",
+      "3. 如果已对标: 降级为综述/教学项目",
+      "4. 混沌+D16/D24/D26作为独立交叉项目推进"
     ]
   }
 ]

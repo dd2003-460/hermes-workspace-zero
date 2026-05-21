@@ -1,0 +1,19 @@
+{
+  "arxiv_submission": {
+    "title": "DistCat: A 2-Categorical Framework for Distance Derivation from First Principles",
+    "authors": ["Cheng Lu"],
+    "abstract": "We present DistCat, a 2-categorical framework for deriving distance functions from first principles. The central principle states that any distance function δ on an observation space is derived from a more fundamental distance Γ on a source category via a natural transformation η: δ ⇒ Γ. We define DistCat as a 2-category whose 0-objects are base structures B=(C,F,O), 1-morphisms are structure-preserving functors with natural transformations, and 2-morphisms are distance-exporting pairs (Γ,δ). We prove the existence of a 2-functor D: DistCat → Met mapping base structures to metric spaces, and prove observation infeasibility: distinct base structures may yield isometric observation spaces. We prove the distance export functor D is well-defined on all five examples, including a complete 2-category axiom verification for the EMRI case. We verify the framework with five independently-motivated examples: (1) D1-grav-waves, reconstructing the Hellings-Downs correlation as a natural transformation in Extended Functorial AQFT; (2) D16+D24, deriving semantic geodesics from Fisher information geometry; (3) Bayesian inference, as Fisher-Rao distance under marginalization; (4) D26, formalizing resonance amplification in control theory; (5) EMRI chaos, connecting dark matter halo perturbations to Lyapunov exponents. We prove three predictions for the EMRI example: unstable-orbital frequency scaling, GW amplitude proportionality to resonance coefficients, and a KAM-breakup square-root scaling law for the Lyapunov exponent. We establish distance equivalence between D1 and D16+D24 (asymptotic), between D26 and EMRI (structural), and between D1 and EMRI (through GW observational bridge). Furthermore, we prove that the Fisher-Rao distance is the unique optimal pre-distance maximizing mutual information I(Γ;δ) for exponential family observations, providing a universal optimality criterion. The critical exponents α∈{1.84,2.00,2.00,∞,0.50} belong to different universality classes but share the same categorical structure. The distance export principle δ=Φ(Γ) appears to be a categorical invariant, not a domain-specific accident.",
+    "subjects": ["math.CT", "math.DG", "quant-ph", "gr-qc"],
+    "categories": ["math.CT Category Theory", "math.DG Differential Geometry", "quant-ph Quantum Physics", "gr-qc General Relativity and Quantum Cosmology"],
+    "keywords": ["2-category theory", "distance derivation", "information geometry", "Fisher-Rao metric", "natural transformation", "quantum field theory", "gravitational waves", "KAM theory"],
+    "files": {
+      "main": "papers/DISTCAT-unified-framework.md",
+      "proof": "papers/DISTCAT-EMRI-2category-proof.md",
+      "optimality": "papers/DISTCAT-optimal-distance-export.md",
+      "mapping": "papers/EMRI-D26-resonance-mapping.md"
+    },
+    "references_included": 12,
+    "pages_estimate": 35,
+    "license": "CC BY 4.0"
+  }
+}

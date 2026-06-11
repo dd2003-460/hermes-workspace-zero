@@ -24,7 +24,7 @@
 | `AI-计算科学/D1-academic/` | [DA.1] | 广义学术工作（BayesFrame、方法论工具、学术协作） |
 | `AI-计算科学/D1-memory/` | [DM.1] | 记忆系统 |
 | `AI-计算科学/D1-continuous-agent/` | [CA.1] | Agent 持续循环机制 |
-| `AI-计算科学/d1-self-evolution/` | [DSE.1] | 自我进化实验 |
+| `AI-计算科学/D1-self-evolution/` | [DSE.1] | 自我进化实验 |
 | `AI-计算科学/D1-goal-investigation/` | [DGI.1] | 目标发现与探索 |
 
 ### 写作 / 社会系统

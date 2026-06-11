@@ -1,10 +1,41 @@
 # 全局任务板
 
-**最后更新**: 2026-06-11（ralph-loop iteration 501: 健康检查修复, INDEX.md 修复）
+**最后更新**: 2026-06-11（ralph-loop iteration 505: 命名规范修复, d1-self-evolution → D1-self-evolution）
 
 ---
 
 ## ralph-loop 迭代记录
+
+### Iteration 505 — 2026-06-11
+
+**执行内容：**
+
+1. ✅ 读取 ralph-loop.global.md — 确认 TASKS.md 为唯一状态源
+2. ✅ 读取 AGENTS.md — 确认分类规范和命名规范
+3. ✅ 读取 TASKS.md — 识别可执行任务（跳过作者阻塞项）
+4. ✅ 运行 health check — 验证 workspace 结构合规性（10/10 ✅）
+5. ✅ 扫描 workspace 结构 — 发现 d1-self-evolution 命名不规范
+6. ✅ 重命名 d1-self-evolution → D1-self-evolution — 符合 AGENTS.md 递归编号规范
+7. ✅ 更新 projects/INDEX.md — 修复 DSE.1 索引引用
+
+**健康检查结果：**
+
+| 指标 | 值 |
+|------|-----|
+| 项目数 | 10（D1-* 格式） |
+| arXiv tarballs | 10 |
+| 编译 PDF | 139 |
+| 合规项目 | 10/10 ✅ |
+| Health | GOOD |
+
+**结构调整：**
+
+| 操作 | 说明 |
+|------|------|
+| d1-self-evolution → D1-self-evolution | 符合 AGENTS.md 命名规范（D*-*, d*-*.py） |
+| projects/INDEX.md 更新 | 修复 [DSE.1] 索引引用 |
+
+---
 
 ### Iteration 501 — 2026-06-11
 

@@ -1,0 +1,356 @@
+% D18: Optimization Information Dynamics and Tool Routing Theory
+% Optimization as path integral in tool routing functional space
+% origin: ai (converted from D18-optimization-information-dynamics-tool-routing.md)
+
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D18: Optimization Information Dynamics and Tool Routing}
+\lhead{\thepage}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calD}{\mathcal{D}}
+
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+\newcommand{\hbarF}{\hbar}
+
+\newtcolorbox{thmbox}[1]{
+  colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+\newtcolorbox{defbox}[1]{
+  colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+
+\begin{document}
+
+\title{Optimization Information Dynamics and Tool Routing Theory: \\A Unified Formalization of Adaptive Method Selection}
+\author{RALPH Loop -- D18}
+\date{}
+\maketitle
+
+\begin{abstract}
+This paper unifies all domain problem-solving into a two-step process: (1) tool routing -- selecting the optimal method according to problem type; and (2) method application -- solving within the optimal parameter space of the selected method. We formalize tool selection as a \emph{distribution matching optimization} -- the match degree between the tool distribution $Q_{\mathcal{T}}$ and the problem distribution $P_{\Omega}$ determines solution efficiency. We introduce orthogonal decomposition of problem spaces, adaptive coarse-graining, path integral formulations of tool routing, and the principle of logical degeneration under incomplete priors. The main theorem states that tool selection is not an empirical rule, but the \emph{optimal path in a functional space} determined by the information-theoretic match between problem and tool distributions.
+
+\textbf{Keywords}: tool routing, distribution matching, adaptive coarse-graining, path integral, logical degeneration, KL divergence, orthogonal decomposition.
+\end{abstract}
+
+\tableofcontents
+
+\section{Core Insight}
+
+All domain problem solving can be unified as a \textbf{two-step process}:
+\begin{enumerate}
+\item \textbf{Tool Routing}: Select the optimal method according to problem type.
+\item \textbf{Method Application}: Solve within the optimal parameter space of that method.
+\end{enumerate}
+
+\textbf{D18 Claim}: Tool selection can be formalized as \textbf{distribution matching optimization} --- the match degree between the tool distribution $Q_{\mathcal{T}}$ and the problem distribution $P_{\Omega}$ determines solution efficiency, with higher match yielding higher efficiency.
+
+\begin{quote}
+\textit{Efficiency $= 1 - \lambda \cdot \KL(P_{\Omega} \| Q_{\mathcal{T}})$}
+
+\textit{Specific method outperforms general method $\iff \KL(P_{\Omega|\Omega_k} \| Q_{\text{specific}}) < \KL(P_{\Omega} \| Q_{\text{general}})$}
+\end{quote}
+
+\section{Theoretical Framework}
+
+\subsection{Orthogonal Decomposition of Problem Space}
+
+\begin{definition}[Orthogonal Decomposition $\calD_{\Omega}$ of Problem Space]\label{def:d18-1}
+Let the problem space be $\Omega$. An \textbf{orthogonal decomposition} partitions $\Omega$ into mutually exclusive subsets:
+$$\Omega = \bigsqcup_{i=1}^{N} \Omega_i, \quad \Omega_i \cap \Omega_j = \emptyset, \quad i \neq j$$
+\end{definition}
+
+\textbf{Decomposition Construction Algorithm} (from raw.md):
+$$\begin{array}{l}
+\mbox{1. Select subset $\Omega_1 \subset \Omega$ (first domain)}\\
+\mbox{2. Define $\Omega_1^c = \Omega \setminus \Omega_1$ (non-$\Omega_1$ complement)}\\
+\mbox{3. Select subset $\Omega_2 \subset \Omega_1^c$ from the complement}\\
+\mbox{4. Repeat: $\Omega_{k+1} \subset \left(\Omega \setminus \bigcup_{i=1}^{k} \Omega_i\right)}
+\end{array}$$
+
+This construction ensures all subsets are disjoint and their union covers the entire problem space $\Omega$.
+
+\subsection{Tool Space Mapping}
+
+\begin{definition}[Tool Space $\mathcal{T}$]\label{def:d18-2}
+The tool space is defined by the set of available solution methods:
+$$\mathcal{T} = \{T_1, T_2, \ldots, T_M\}$$
+\end{definition}
+
+\textbf{Tool-Problem Matching Function}:
+$$M: \Omega \times \mathcal{T} \to [0, 1]$$
+where $M(\omega, T_i) \in [0,1]$ is the \textbf{match degree} of tool $T_i$ on problem $\omega$.
+
+\subsection{Distribution Matching Theory}
+
+\begin{definition}[Problem Distribution and Tool Distribution]\label{def:d18-3}
+\begin{itemize}
+\item \textbf{Problem distribution}: $P_{\Omega}(\omega) = \text{probability that problem } \omega \text{ occurs}$
+\item \textbf{Tool distribution}: $Q_{\mathcal{T}}(T) = \text{probability of choosing tool } T$
+\end{itemize}
+\end{definition}
+
+\textbf{Distribution Match Degree}:
+$$\mathcal{E}(P, Q) = 1 - \frac{1}{|\Omega|} \cdot \KL(P_{\Omega|T} \| Q_{\mathcal{T}})$$
+
+\textbf{D18 Core Inequality}:
+$$\text{Efficiency}(P_{\Omega}, Q_{\mathcal{T}}) = 1 - \lambda \cdot \KL(P_{\Omega} \| Q_{\mathcal{T}})$$
+
+where $\lambda > 0$ is a scaling parameter. Higher distribution alignment yields higher efficiency.
+
+\section{Five Theoretical Propositions}
+
+\subsection{Proposition D18-1: Optimal Tool Routing Theorem}
+
+\textbf{Formalization}: Define the \textbf{tool routing policy} $\pi: \Omega \to \mathcal{T}$. The optimal route is:
+$$\pi^*(\omega) = \argmax_{T \in \mathcal{T}} M(\omega, T)$$
+
+\begin{theorem}[Optimal Routing Distribution Match]\label{thm:d18-1}
+The optimal routing satisfies:
+$$\pi^* = \argmin_{\pi} \KL(P_{\Omega} \| Q_{\mathcal{T},\pi})$$
+where $Q_{\mathcal{T},\pi}$ is the tool distribution induced by routing policy $\pi$.
+\end{theorem}
+
+\textbf{Information-Theoretic Interpretation}: Optimal tool routing = minimizing the KL divergence between tool usage distribution and problem distribution.
+
+\subsection{Proposition D18-2: Specific Method Efficiency Advantage}
+
+\textbf{Formalization}: Define the \textbf{specific method} $T_{\text{specific}}$ and the \textbf{general method} $T_{\text{general}}$:
+\begin{itemize}
+\item $T_{\text{specific}}$: excels on a specific problem subspace $\Omega_k$
+\item $T_{\text{general}}$: performs adequately across all $\Omega$
+\end{itemize}
+
+\begin{theorem}[Specific outperforms General]\label{thm:d18-2}
+$$\E_{\omega \sim P_{\Omega|\Omega_k}} \bigl[\text{Eff}(T_{\text{specific}})\bigr] > \E_{\omega \sim P_{\Omega}} \bigl[\text{Eff}(T_{\text{general}})\bigr]$$
+\textbf{if and only if}:
+$$\KL\bigl(P_{\Omega|\Omega_k} \| Q_{\mathcal{T}, T_{\text{specific}}}\bigr) < \KL\bigl(P_{\Omega} \| Q_{\mathcal{T}, T_{\text{general}}}\bigr)$$
+\end{theorem}
+
+\begin{corollary}[Specific method efficiency]
+A specific method is more efficient $\iff$ the specific method matches the problem distribution of the subspace.
+\end{corollary}
+
+\begin{corollary}[General method necessity]
+A general method is necessary $\iff$ the problem distribution is diffuse (cannot concentrate in any subspace).
+\end{corollary}
+
+\subsection{Proposition D18-3: Adaptive Coarse-Graining and Resource Optimization}
+
+\textbf{Formalization}: Define the \textbf{problem complexity} $C(\omega)$ and the \textbf{coarse-graining level} $\ell(\omega) \in \{1, 2, \ldots, L\}$.
+
+\begin{theorem}[Optimal Adaptive Coarse-Graining]\label{thm:d18-3}
+The optimal coarse-graining level minimizes the information-loss-adjusted cost:
+$$\ell^*(\omega) = \argmin_{\ell} \Bigl[ \text{Cost}(\ell) + \alpha \cdot \KL\bigl(P_{\Omega|s(\omega)} \| Q_{\ell}\bigr) \Bigr]$$
+where $s(\omega)$ is the problem scale, $Q_{\ell}$ is the distribution at coarse-graining level $\ell$, and $\alpha$ weights information preservation against computational cost.
+\end{theorem}
+
+\textbf{Adaptive coarse-graining}: Simple problems use coarse levels (fast, low precision); complex problems automatically refine to finer levels (slow, high precision). The transition is a \textbf{phase transition} at the complexity threshold $C(\omega) \approx C^*$.
+
+\textbf{Kolmogorov Complexity Lower Bound}:
+$$L_{\text{optimal}}(\omega) \geq \frac{K(\omega)}{\log |\mathcal{T}|}$$
+where $K(\omega)$ is the Kolmogorov complexity of problem $\omega$.
+
+\subsection{Proposition D18-4: Path Integral of Tool Routing}
+
+\textbf{Formalization}: Define the \textbf{routing path} $\pi(t): [0,1] \to \mathcal{T}$ and the \textbf{routing action}:
+$$\mathcal{A}[\pi] = \int_0^1 \Bigl[ \KL\bigl(P_{\Omega}(t) \| Q_{\mathcal{T},\pi(t)}\bigr) + \frac{\alpha}{2} \|\dot{\pi}(t)\|^2 \Bigr] \diff t$$
+
+\begin{theorem}[Path Integral Formulation]\label{thm:d18-4}
+The partition function over all routing paths is:
+$$\mathcal{Z}[\pi] = \int_{\Pi} \mathcal{D}\pi \, \exp\Bigl(-\frac{\mathcal{A}[\pi]}{\hbarF}\Bigr)$$
+where $\hbarF$ represents the exploration randomness (analogous to temperature in simulated annealing).
+
+The Euler-Lagrange equation for the optimal path is:
+$$\frac{\partial}{\partial t} \frac{\partial \mathcal{L}}{\partial \dot{\pi}} - \frac{\partial \mathcal{L}}{\partial \pi} = 0$$
+with the routing Lagrangian:
+$$\mathcal{L}(\pi, \dot{\pi}) = \KL\bigl(P_{\Omega} \| Q_{\mathcal{T},\pi}\bigr) + \frac{\alpha}{2} \|\dot{\pi}\|^2$$
+\end{theorem}
+
+\textbf{Functional field}: The tool routing dynamics evolve in a functional space. The functional field = the dynamical evolution space of tool routing. The parameter $\hbarF$ = exploration randomness (analogous to a simulated annealing temperature parameter).
+
+\subsection{Proposition D18-5: Logical Degeneration Under Prior Incompleteness}
+
+\textbf{Formalization}: Define the \textbf{prior completeness degree}:
+$$\xi = \mathbb{P}\bigl(\exists T \in \mathcal{T}: M(\omega, T) = 1\bigr)$$
+
+\begin{theorem}[Logical Degeneration Path]\label{thm:d18-5}
+$$\xi \in \{0, 1\} \implies \text{solving strategy } \sigma: \begin{cases} \sigma_{\text{match}} & \xi = 1 \text{ (complete prior)}\\ \sigma_{\text{general}} & \xi = 0 \text{ (prior scarcity)}\end{cases}$$
+
+\textbf{Continuity of degeneration}:
+$$\sigma(\xi) = \xi \cdot \sigma_{\text{match}} + (1 - \xi) \cdot \sigma_{\text{general}}$$
+\end{theorem}
+
+\begin{corollary}[Information-theoretic interpretation]
+\begin{itemize}
+\item $\xi = 1 \implies H(T|\omega) = 0$, no uncertainty in tool selection.
+\item $\xi = 0 \implies H(T|\omega) = \log |\mathcal{T}|$, completely random tool selection.
+\end{itemize}
+\end{corollary}
+
+\begin{corollary}[Adaptive reasoning]
+The reasoning strategy should vary continuously with $\xi$ --- this is a \textbf{phase transition} from ``pattern matching'' to ``logical reasoning.''
+\end{corollary}
+
+\section{Four Experimental Verification Protocols}
+
+\subsection{Protocol D18-A: Specific vs General Method Efficiency Comparison}
+
+\textbf{Verifies D18-2}:
+\begin{enumerate}
+\item Compare specific and general methods on a benchmark (e.g., MATH, GSM8K).
+\item Compute the KL divergence match for both methods.
+\item \textbf{Expected}: The KL divergence difference correlates positively with efficiency improvement.
+\end{enumerate}
+
+\subsection{Protocol D18-B: Adaptive Coarse-Graining Resource Optimization}
+
+\textbf{Verifies D18-3}:
+\begin{enumerate}
+\item Measure the optimal solving depth for problems of different complexity.
+\item Verify the dynamic switching threshold from coarse to fine graining.
+\item \textbf{Expected}: The relationship between complexity and required computational resources is nonlinear.
+\end{enumerate}
+
+\subsection{Protocol D18-C: Tool Routing Path Integral Simulation}
+
+\textbf{Verifies D18-4}:
+\begin{enumerate}
+\item Simulate tool selection using Monte Carlo path integrals.
+\item Verify the Euler-Lagrange optimal path.
+\item \textbf{Expected}: The path integral strategy converges toward the greedy optimum.
+\end{enumerate}
+
+\subsection{Protocol D18-D: Continuous Prior Completeness Degeneration}
+
+\textbf{Verifies D18-5}:
+\begin{enumerate}
+\item Gradually remove the model's prior knowledge.
+\item Measure the degeneration of the reasoning strategy from ``matching'' to ``logical.''
+\item \textbf{Expected}: The degeneration process exhibits a critical point (phase transition).
+\end{enumerate}
+
+\section{Connections to Other Frameworks}
+
+\subsection{D18--S18: Dynamics Unification}
+
+The D18 tool routing path integral $\mathcal{Z}[\pi]$ corresponds to the S18 cognitive dynamics functional.
+
+S18 functional: $\mathcal{F}_{\text{intelligence}} = \beta \cdot H(O|\mathcal{I}) + \lambda \cdot L(M)$
+
+D18 functional: $\mathcal{A}[\pi] = \KL(P_{\Omega} \| Q_{\mathcal{T},\pi}) + \alpha \cdot \|\dot{\pi}\|^2$
+
+\textbf{Unification}: Both are variational principles for the \emph{optimal dynamics path}.
+
+\subsection{D18--D17: Cognitive Manifolds}
+
+The D17 cognitive path $\gamma(t)$ = the D18 routing path $\pi(t)$. The D17 cognitive Lagrangian = the D18 routing Lagrangian $\mathcal{L}$.
+
+\textbf{Unification}: Cognitive choice and tool routing operate under the same functional space.
+
+\subsection{D18--D7: Probability Dynamical Erasure}
+
+D18-5's prior completeness $\xi$ relates to D7's information erasure amount. $\xi = 1 \implies H(T|\omega) = 0 \implies$ complete information erasure.
+
+\textbf{Unification}: Reasoning = minimizing KL divergence under incomplete information.
+
+\subsection{D18--S18-1: Adaptive Tool Router}
+
+S18-1 proposed ``Kolmogorov complexity-driven adaptive tool routing.'' D18 formalizes this intuition: routing = distribution matching + path integral. The K-complexity lower bound = the problem scale $s(\omega)$ determines adaptive coarse-graining.
+
+\section{Theoretical Boundaries}
+
+\subsection{Falsifiable Claims}
+\begin{enumerate}
+\item \textbf{D18-1 falsification}: Optimal tool selection is not equivalent to KL divergence minimization.
+\item \textbf{D18-2 falsification}: Specific methods do not outperform general methods on all problem subspaces.
+\item \textbf{D18-4 falsification}: Tool routing cannot be formulated in terms of a functional field theory.
+\item \textbf{D18-5 falsification}: No phase transition exists from matching to logical degeneration.
+\end{enumerate}
+
+\subsection{Theoretical Limitations}
+\begin{enumerate}
+\item \textbf{Finite tool space}: $\mathcal{T}$ is typically discrete and finite.
+\item \textbf{Dynamic environments}: The problem distribution $P_{\Omega}$ changes over time (non-stationary).
+\item \textbf{Cognitive dimensions}: Human cognitive biases are not directly modeled.
+\end{enumerate}
+
+\section{Final Theorem Statement}
+
+\begin{thmbox}{Optimization Information Dynamics Unified Theorem}
+Let the problem space $\Omega$ be partitioned by orthogonal decomposition $\calD_{\Omega}$, and the tool space $\mathcal{T}$ contain $M$ solution methods.
+
+Then:
+\begin{enumerate}
+\item \textbf{Optimal routing}: $\pi^* = \argmin_{\pi} \KL(P_{\Omega} \| Q_{\mathcal{T},\pi})$
+\item \textbf{Specific advantage}: $\KL(P_{\Omega|\Omega_k} \| Q_{\text{specific}}) < \KL(P_{\Omega} \| Q_{\text{general}})$
+\item \textbf{Adaptive coarse-graining}: $L_{\text{optimal}}(\omega) = H(P_{\Omega} | s(\omega))$
+\item \textbf{Path integral formulation}: $\mathcal{Z}[\pi] = \int_{\Pi} \mathcal{D}\pi \, \exp(-\mathcal{A}[\pi]/\hbarF)$
+\item \textbf{Logical degeneration}: $\sigma(\xi) = \xi \cdot \sigma_{\text{match}} + (1-\xi) \cdot \sigma_{\text{general}}$
+\end{enumerate}
+
+\textbf{In summary}: Tool selection is not an empirical rule --- it is the \emph{optimal path in a functional space}, determined by the \emph{information-theoretic match} between problem and tool distributions.
+\end{thmbox}
+
+\section{Conclusion}
+
+This paper has unified tool routing, adaptive coarse-graining, and orthogonal analysis under the framework of optimization information dynamics. The core contribution is the formalization of tool selection as a distribution matching problem, with the KL divergence serving as the bridge between information theory and practical method selection. The path integral formulation connects tool routing to variational calculus and functional analysis, opening the door to quantum-inspired optimization methods.
+
+Future work includes: (1) empirical validation on real benchmarks; (2) extension to non-stationary environments; (3) integration with reinforcement learning for adaptive routing; and (4) exploration of the phase transition behavior near the cognitive complexity threshold.
+
+\begin{thebibliography}{99}
+\bibitem{d16} D16: Information-Theoretic Unified Classification
+\bibitem{d17} D17: Biological Pretraining and Cognitive Path Selection
+\bibitem{d7} D7: Probability Dynamical Erasure
+\bibitem{s18} S18: Dynamics Unification Framework
+\bibitem{s18-1} S18-1: Adaptive Tool Router Specification
+\end{thebibliography}
+
+\end{document}

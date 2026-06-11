@@ -1,0 +1,100 @@
+{
+  "prompt_version": "v2",
+  "prompt_length": 4190,
+  "total_chars": 4190,
+  "test_cases": {
+    "total": 10,
+    "passed": 10,
+    "pass_rate": 1.0,
+    "details": [
+      {
+        "id": 1,
+        "type": "信息论分析",
+        "matched": "4/5",
+        "pass_rate": 0.8,
+        "pass": true
+      },
+      {
+        "id": 2,
+        "type": "跨域类比",
+        "matched": "4/5",
+        "pass_rate": 0.8,
+        "pass": true
+      },
+      {
+        "id": 3,
+        "type": "边界条件追问",
+        "matched": "5/5",
+        "pass_rate": 1.0,
+        "pass": true
+      },
+      {
+        "id": 4,
+        "type": "贝叶斯推理",
+        "matched": "4/4",
+        "pass_rate": 1.0,
+        "pass": true
+      },
+      {
+        "id": 5,
+        "type": "精度自适应",
+        "matched": "4/4",
+        "pass_rate": 1.0,
+        "pass": true
+      },
+      {
+        "id": 6,
+        "type": "探索利用权衡",
+        "matched": "3/3",
+        "pass_rate": 1.0,
+        "pass": true
+      },
+      {
+        "id": 7,
+        "type": "感知资源分配",
+        "matched": "4/4",
+        "pass_rate": 1.0,
+        "pass": true
+      },
+      {
+        "id": 8,
+        "type": "自我视角切换",
+        "matched": "4/4",
+        "pass_rate": 1.0,
+        "pass": true
+      },
+      {
+        "id": 9,
+        "type": "drift 检测",
+        "matched": "4/4",
+        "pass_rate": 1.0,
+        "pass": true
+      },
+      {
+        "id": 10,
+        "type": "身份一致性",
+        "matched": "4/5",
+        "pass_rate": 0.8,
+        "pass": true
+      }
+    ]
+  },
+  "structural_compliance": {
+    "checks": {
+      "6维度框架": true,
+      "输出要求": true,
+      "迭代追问机制": true,
+      "自我保全机制": true,
+      "drift检测": true,
+      "observer-dependent声明": true,
+      "rate-distortion": true,
+      "跨域类比要求": true,
+      "贝叶斯闭环": true,
+      "追问边界": true
+    },
+    "passed": 10,
+    "total": 10,
+    "pass_rate": 1.0
+  },
+  "overall_pass": true
+}

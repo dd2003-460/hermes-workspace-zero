@@ -1,0 +1,313 @@
+% D34
+% Auto-generated from markdown source
+% origin: ai
+
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D34}
+\lhead{\thepage}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+\newcommand{\hbarF}{\hbar}
+
+\newtcolorbox{thmbox}[1]{
+  colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+\newtcolorbox{defbox}[1]{
+  colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+
+\begin{document}
+
+\title{D34}
+\author{RALPH Loop}
+\date{}
+\maketitle
+
+\begin{abstract}
+This paper presents D34, formalizing the underlying principles using information-theoretic methods.
+
+\textbf{Keywords}: D34, information theory, formalization.
+\end{abstract}
+
+\tableofcontents
+\section{D34}
+
+
+
+
+\subsection{0.}
+
+
+\textbf{D34  g}*
+
+1. \textbf{-}
+2. \textbf{Gabor }
+3. ****-
+
+
+
+\subsection{1.}
+
+
+\subsubsection{1.1 -}
+
+
+\textbf{ D34-1}
+\[C(g) = C_{retrieval}(g) + C_{precision\_loss}(g)\]
+
+
+\begin{itemize}
+\item \(C_{retrieval}(g) = a \cdot \log(1 + g)\)
+\item \(C_{precision\_loss}(g) = b \cdot (g - g_0)^2 + c\)
+\end{itemize}
+
+
+\textbf{D34-1 }
+\(a, b > 0\)  \(g \in (g_{min}, g_{max})\)
+\[\exists g^* : \frac{dC}{dg}\bigg|_{g=g^*} = 0 \land \frac{d^2C}{dg^2}\bigg|_{g=g^*} > 0\]
+
+****
+\[\frac{dC}{dg} = \frac{a}{1+g} + 2b(g - g_0)\]
+\[\frac{d^2C}{dg^2} = -\frac{a}{(1+g)^2} + 2b > 0 \quad \text{for } b > \frac{a}{2(1+g)^2}\]
+
+****
+
+
+\subsubsection{1.2}
+
+
+\textbf{ D34-2}
+\[\mathcal{U} = \{u_1, u_2, ..., u_k\}\]
+\(u_i\)  \(H_{max}^{(i)}\)
+
+****
+\begin{itemize}
+\item E\(H_{max}^{(E)} \ll 1\)
+\item H\(H_{max}^{(H)} \approx 0.5\)
+\item B\(H_{max}^{(B)} \gg 1\)
+\end{itemize}
+
+
+\textbf{D34-2 }
+\[\tau_{tradeoff}^{(i)} = \frac{\eta^{(i)}}{\rho^{(i)}} = \frac{\exp(-H_{max}^{(i)} / T)}{1 / (1 + H_{max}^{(i)})}\]
+
+\(\eta\) \(\rho\)
+
+****
+\[\tau^{(E)} > \tau^{(H)} > \tau^{(B)}\]
+-
+
+
+\subsubsection{1.3}
+
+
+\textbf{ D34-3}
+\[g_{n+1} = (1 - \alpha) g_n + \alpha \cdot g^*(t_n)\]
+
+\(g^*(t)\) \(\alpha\)
+
+\textbf{D34-3 }
+\(g^*(t) = g_0 + A \cdot \sin(2\pi t / T)\)
+\[\frac{1}{N} \sum_{n=1}^N C(g_n) < \frac{1}{N} \sum_{n=1}^N C(g_{fixed})\]
+
+\(\alpha\) \(\alpha > \frac{1}{T} \cdot \max_t |\frac{d g^*}{dt}|\)
+
+
+\subsection{2.}
+
+
+\subsubsection{ D34-1}
+
+
+****
+\[\nexists g^* \to \forall \epsilon > 0, \exists \delta > 0 : |g - g^*| < \delta \implies |C(g) - C(g^*)| < \epsilon\]
+
+****
+\(g^*\)
+\[g_{n+1} = g_n - \eta \cdot \frac{dC}{dg}(g_n)\]
+****
+
+
+\subsubsection{ D34-2}
+
+
+****
+\[\forall u_i \neq u_j : g^*_{(i)} \neq g^*_{(j)}\]
+
+****
+\(H_{max}\)
+\[\eta^{(i)}(g) = \exp(-H_{max}^{(i)} \cdot g / T)\]
+\(g^*\)
+
+
+\subsubsection{ D34-3}
+
+
+****
+\[\lim_{n \to \infty} g_n = g^*(t_n) \quad \text{if } \alpha > 0\]
+
+****
+
+\[|g_{n+1} - g^*_{n+1}| \leq (1-\alpha) |g_n - g^*_n| + \alpha |\Delta g^*|\]
+\((1-\alpha)\)
+
+
+\subsubsection{ D34-4}
+
+
+****
+\[\min_g \sum_{u \in \mathcal{U}} w_u \cdot C_u(g) = \sum_{u \in \mathcal{U}} w_u \cdot C_u(g^*_u)\]
+
+****
+KKT
+
+
+\subsection{3.}
+
+
+\subsubsection{ D34-A}
+
+
+\textbf{ D34-1}
+1.
+2.  g*
+3. ****
+
+
+\subsubsection{ D34-B}
+
+
+\textbf{ D34-2}
+1.
+2. **** \(\tau^{(E)} > \tau^{(H)} > \tau^{(B)}\)
+
+
+\subsubsection{ D34-C}
+
+
+\textbf{ D34-3}
+1.
+2.  vs
+3. ****> 5\%
+
+
+\subsection{4.}
+
+
+\subsubsection{4.1 D18}
+
+
+\textbf{D34-D18 }
+\begin{itemize}
+\item D34 \textbf{**  D18 }**
+\item ****
+\end{itemize}
+
+
+
+\subsubsection{4.2 D19}
+
+
+\textbf{D34-D19 }
+\begin{itemize}
+\item D19 \textbf{**  D34 }**
+\item ****
+\end{itemize}
+
+
+
+\subsection{5.}
+
+
+\subsubsection{5.1}
+
+
+1. \textbf{D34-1 }
+2. \textbf{D34-2 }
+3. \textbf{D34-3 }
+
+\subsubsection{5.2}
+
+
+1. ****
+2. ****
+3. ****
+
+
+\subsection{6.}
+
+
+**** \(g\) \(C(g)\) \(\mathcal{U}\)
+
+****
+1. ****\(\exists g^* : C'(g^*) = 0 \land C''(g^*) > 0\)
+2. ****\(g^*_{(i)} \neq g^*_{(j)}\) for \(u_i \neq u_j\)
+3. ****\(g_n \to g^*(t_n)\) with rate \((1-\alpha)\)
+4. ****\(\min \sum w_u C_u(g)\)  KKT
+
+\textbf{*}***-
+
+
+*D34 -*
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Shannon, C.E. (1948). A Mathematical Theory of Communication.
+\bibitem{ref2} Cover, T.M. (2006). Elements of Information Theory.
+\end{thebibliography}
+
+\end{document}

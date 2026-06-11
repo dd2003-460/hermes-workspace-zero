@@ -1,0 +1,291 @@
+% D11: Abstract Condemn Cooperation Theorem
+% Abstract system criticism > specific person hatred for collective action
+% origin: ai (converted from D11-abstract-condemn-cooperation-theorem.md)
+
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D11: Abstract Condemn Cooperation Theorem}
+\lhead{\thepage}
+
+% Theorem environments
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+
+% Custom commands
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calJ}{\mathcal{J}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calT}{\mathcal{T}}
+
+\begin{document}
+
+\title{D11: Abstract Condemn Cooperation Theorem}
+\author{}
+\date{}
+\maketitle
+
+\begin{quote}
+\textbf{Original insight}: ``Hate systems rather than specific people is more likely to initiate change, unite friends, unless specific people resolutely defend abstract people.'' (raw.md \\29)
+\end{quote}
+
+\section{Core Insight}
+
+Traditional moral intuition (such as Tolstoy's ``love the specific person'') advocates \textbf{directing resentment toward individuals} rather than abstract structures.
+
+\textbf{D11 assertion}: Conversely — \textbf{directing criticism toward abstract systems (institutions) is a necessary condition for collective change}, because:
+\begin{enumerate}
+    \item \textbf{System hatred provides a common enemy} (a coordinable opponent)
+    \item \textbf{Individual hatred creates discord} (each victim's perpetrator is different)
+    \item \textbf{Abstract objects do not trigger defensive counterattacks} (systems don't ``hate back'')
+\end{enumerate}
+
+\begin{quote}
+\textbf{Abstract criticism = Coordination focal point for collective action}
+
+Hate abstract $\neq$ empty theoretical criticism — it is the \textbf{only feasible strategy for organizing change}
+\end{quote}
+
+\section{Theoretical Framework}
+
+\subsection{Typology of Hatred Targets}
+
+\textbf{Definition D11-1 (Topological Structure of Hatred)}:
+
+Let $\calV$ be the set of victims and $\calA$ be the set of perpetrators. Define the \textbf{hatred relation graph}:
+$$\calG_{\text{hatred}} = (\calV \cup \calA, E_{\text{hatred}})$$
+
+where $E_{\text{hatred}} \subseteq \calV \times (\calA \cup \{\calS\})$, $\calS$ being the \textbf{abstract system} (institutions, structures).
+
+\textbf{Two types of hatred}:
+\begin{itemize}
+    \item \textbf{Specific hatred} $h_c: \calV \to \calA$ — directed at specific individuals
+    \item \textbf{Abstract hatred} $h_a: \calV \to \calS$ — directed at abstract systems
+\end{itemize}
+
+\subsection{Change Possibility Measure}
+
+\textbf{Definition D11-2 (Coordination Index of Change)}:
+$$\calC[h] = \frac{1}{|\calV|^2} \sum_{i,j \in \calV} \cos(\theta_{i}^{h}, \theta_{j}^{h})$$
+
+where $\theta_i^{h}$ is the hatred vector angle of individual $i$.
+
+\textbf{Key distinction}:
+\begin{itemize}
+    \item Specific hatred: $\cos(\theta_i^{h_c}, \theta_j^{h_c})$ is low (different perpetrators for different victims $\to$ random hatred vector directions)
+    \item Abstract hatred: $\cos(\theta_i^{h_a}, \theta_j^{h_a})$ is high (same system $\to$ aligned hatred vector directions)
+\end{itemize}
+
+\section{Five Theoretical Propositions}
+
+\subsection{Proposition D11-1: Abstract Hatred Coordinates Cooperation (System Hatred Theorem)}
+
+\textbf{Formal statement}:
+
+Let $\calC_{\text{coalition}}$ be the probability of joint action. Then:
+$$\calC_{\text{coalition}}(h_a) > \calC_{\text{coalition}}(h_c) \iff \forall i, j: \calS_i = \calS_j$$
+
+\textbf{Proof sketch}:
+\begin{enumerate}
+    \item Specific hatred: each victim encounters different perpetrators $\to$ action goals cannot align
+    \item Abstract hatred: each victim encounters the same system $\to$ action goals align
+    \item Therefore: \textbf{collective change requires abstract hatred, not specific hatred}
+\end{enumerate}
+
+\textbf{Corollary D11-1a}: The degree of solidarity within oppressed groups is proportional to \textbf{system common cognition}.
+
+\subsection{Proposition D11-2: Conditional Response of Individuals Defending the Abstract}
+
+\textbf{Formal statement}:
+
+Define individual $a_i \in \calA$'s \textbf{defense intensity} $\gamma_i$ when system $S$ faces abstract hatred attack:
+$$\frac{d}{dt} \text{[Defend]} = \lambda \cdot h_a \cdot \mathbb{I}(\gamma_i > \gamma_{\text{threshold}})$$
+
+\textbf{D11-2 Theorem} (Concretizing the group):
+
+\textbf{Abstract hatred forces system defenders to explicitly take sides}, transforming \textbf{system criticism} into \textbf{interpersonal conflict}.
+
+\textbf{Social implications}:
+\begin{itemize}
+    \item Critique ``capitalism'' $\to$ capitalist agents no longer hide
+    \item Critique ``patriarchy'' $\to$ patriarchy defenders no longer remain invisible
+    \item \textbf{This is the advancing force of change} — abstract hatred creates a ``development effect'' producing concrete negotiation partners
+\end{itemize}
+
+\subsection{Proposition D11-3: Phase Transition of Hatred Cohesion}
+
+\textbf{Formal statement}:
+
+Define group cohesion $\phi$:
+$$\frac{d\phi}{dt} = h \cdot (1 - \phi) - \delta \cdot \phi \cdot (1 - \phi)^2$$
+
+where $h = \begin{cases} h_a & \text{abstract hatred} \\ h_c & \text{specific hatred} \end{cases}$
+
+\textbf{D11-3 Theorem} (Critical value of cohesive phase transition):
+$$\phi \to 1 \iff h > \frac{\delta}{4}$$
+
+But \textbf{abstract hatred has a lower effective threshold}:
+$$h_{a, c} < h_{c, c} \implies \text{abstract hatred produces group cohesion more easily}$$
+
+\subsection{Proposition D11-4: Topological Equivalence of Justice}
+
+\textbf{Formal statement}:
+
+Define the \textbf{justice request function} $J: \calV \to \mathbb{R}$, for victim $v$:
+$$J(v) = \sum_{a \in \calA_v} w_a \cdot (a_v - a^*) + \kappa \cdot (S_v - S^*)$$
+
+where $a_v$ is the specific injustice inflicted on $v$, and $S_v$ is the systemic injustice perceived by $v$.
+
+\textbf{D11-4 Theorem} (Topological equivalence of justice requests):
+
+Under the premise of \textbf{system sufficiently bad}, all victims' $J(v)$ are topologically equivalent:
+$$\|J(v_1) - J(v_2)\| < \epsilon \quad \text{when } S_{v_1} \approx S_{v_2} \approx S_{\text{bad}}$$
+
+\textbf{Corollary}: Common fate perception among victims > differential perception $\to$ \textbf{potential for solidarity}.
+
+\subsection{Proposition D11-5: Critical Point of Hatred Transformation}
+
+\textbf{Formal statement}:
+
+When individuals defend systems (D11-2), specific hatred transforms from $h_a \to h_c'$:
+$$h_c' = \rho \cdot h_a \cdot \mathbb{I}(\gamma_i > \gamma_{\text{threshold}})$$
+
+where $\rho$ is the \textbf{relationship transformation coefficient}.
+
+\textbf{D11-5 Theorem} (Resentment directional selection):
+$$\text{Resistance}(h_c \text{ against } a_i) > \text{Resistance}(h_a \text{ against } S)$$
+
+\textbf{Core insight}:
+\begin{itemize}
+    \item When confronting \textbf{specific individuals}, opponents resist/retaliate $\to$ action efficiency decreases
+    \item When confronting \textbf{abstract systems}, no one directly opposes $\to$ change through institutional channels
+    \item \textbf{Therefore ``criticize systems'' rather than ``hate that person'' is strategically optimal}
+\end{itemize}
+
+\section{Four Experimental Verification Protocols}
+
+\subsection{Protocol D11-A: Group Cohesion Measurement}
+
+\textbf{Verifying D11-3}:
+\begin{enumerate}
+    \item Recruit two groups of participants: one group experiencing the same systemic injustice (e.g., workplace gender discrimination), one group experiencing different individual injustice
+    \item Measure group cohesion (willingness to cooperate, solidarity scores)
+    \item \textbf{Expected}: Systemically victimized group shows significantly higher cohesion
+\end{enumerate}
+
+\subsection{Protocol D11-B: Development Effect Tracking}
+
+\textbf{Verifying D11-2}:
+\begin{enumerate}
+    \item Build a proxy model: system $S$ has $N$ defenders, each with defense intensity $\gamma_i$
+    \item When $S$ faces $h_a$ attack, track which defenders become ``visible''
+    \item \textbf{Expected}: Abstract criticism reveals hidden power structures
+\end{enumerate}
+
+\subsection{Protocol D11-C: Justice Request Homogeneity}
+
+\textbf{Verifying D11-4}:
+\begin{enumerate}
+    \item Conduct in-depth interviews with victims of the same system under different circumstances
+    \item Code justice requests and compute similarity
+    \item \textbf{Expected}: Victims of the same system have highly homogeneous justice requests
+\end{enumerate}
+
+\subsection{Protocol D11-D: Hatred Transformation Critical Measurement}
+
+\textbf{Verifying D11-5}:
+\begin{enumerate}
+    \item Conduct longitudinal tracking of participants in rights defense movements
+    \item Record the transition point from ``system criticism'' to ``conflict with specific persons''
+    \item \textbf{Expected}: When individual system defense reaches a threshold, abstract conflict becomes concrete
+\end{enumerate}
+
+\section{Connections with Other Frameworks}
+
+\subsection{D8 Social Dynamics Connection}
+
+\textbf{D11-D8 bridge}:
+\begin{itemize}
+    \item Abstract hatred corresponds to \textbf{collective negative feedback} (adjusting systems rather than punishing individuals)
+    \item Specific hatred corresponds to \textbf{local perturbations} (no systemic effect)
+    \item \textbf{Unification}: In D8's $\rho < \rho_c$ condition, $\rho = G_+/G_-$ is easier to reduce when using \textbf{abstract hatred}
+\end{itemize}
+
+\subsection{S18 Dynamics Unification}
+
+\textbf{S18-Justice Functional}:
+$$\calF_{\text{justice}}[S] = \sum_{v \in \calV} J_v(S) + \lambda \cdot \text{Stability}(S)$$
+
+\textbf{Change equilibrium}: $\frac{\delta \calF_{\text{justice}}}{\delta S} = 0$ — balance between system stability and justice requests
+
+\subsection{D10 Meme Dynamics Connection}
+
+\textbf{D11-D10 bridge}:
+\begin{itemize}
+    \item ``System criticism'' is a \textbf{cross-individual meme} (shared meme)
+    \item Abstract hatred is the social application scenario of \textbf{meme resonance (D10-2)}
+    \item \textbf{Unification}: Collective change requires a \textbf{common meme framework} to organize action
+\end{itemize}
+
+\section{Theoretical Boundaries}
+
+\subsection{Main Falsifiable Claims}
+
+\begin{enumerate}
+    \item \textbf{D11-1 falsification}: Specific hatred groups show higher cohesion than abstract hatred groups
+    \item \textbf{D11-2 falsification}: System criticism does not force agents to explicitly take sides
+    \item \textbf{D11-5 falsification}: No efficiency difference between confronting specific persons versus confronting systems
+\end{enumerate}
+
+\subsection{Theoretical Limitations}
+
+\begin{enumerate}
+    \item Ignores the \textbf{emotional authenticity potentially contained in specific hatred}
+    \item Does not consider \textbf{special scenarios where systemic violence is directly inflicted by specific individuals}
+    \item \textbf{Historically contingent}: In certain revolutionary moments, concretizing enemies is necessary
+\end{enumerate}
+
+\section{Final Theorem Statement}
+
+\textbf{Abstract Condemn Cooperation Promotion Theorem}
+
+\textbf{Given} victim set $\calV$ suffering injustice, where injustice sources can be specific individuals $\calA$ or abstract systems $\calS$.
+
+\textbf{Then} the probability of joint action satisfies:
+$$\boxed{\calC_{\text{coalition}}(h_a) > \calC_{\text{coalition}}(h_c) \iff \calS \text{ is the common perpetrator}}$$
+
+\textbf{And}:
+$$\frac{d\phi}{dt} = h_a \cdot (1-\phi) - \delta \cdot \phi \cdot (1-\phi)^2 \implies \phi \to 1 \text{ faster for } h_a$$
+
+\textbf{That is}: Criticizing abstract systems rather than hating specific persons is the \textbf{necessary coordination mechanism} for organizing collective change — because it provides a common enemy, generates group cohesion, and reveals hidden power structures through the development effect.
+
+\end{document}

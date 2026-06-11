@@ -1,0 +1,379 @@
+% D19
+% Auto-generated from markdown source
+% origin: ai
+
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D19}
+\lhead{\thepage}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+\newcommand{\hbarF}{\hbar}
+
+\newtcolorbox{thmbox}[1]{
+  colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+\newtcolorbox{defbox}[1]{
+  colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+
+\begin{document}
+
+\title{D19}
+\author{RALPH Loop}
+\date{}
+\maketitle
+
+\begin{abstract}
+This paper presents D19, formalizing the underlying principles using information-theoretic methods.
+
+\textbf{Keywords}: D19, information theory, formalization.
+\end{abstract}
+
+\tableofcontents
+\section{D19}
+
+
+
+
+\subsection{0.}
+
+
+****
+\begin{itemize}
+\item ****
+\item ****
+\item \textbf{**/}**
+\end{itemize}
+
+
+\textbf{D19 }\textbf{-}****
+
+
+
+\subsection{1.}
+
+
+\subsubsection{1.1}
+
+
+\textbf{ D19-1 \(\mathcal{L}_{\epsilon}\)}
+/**** \(\epsilon\)
+\begin{itemize}
+\item \textbf{\(\epsilon_{\text{}} \ll 1\)}
+\item \textbf{\(\epsilon_{\text{}} \approx \epsilon_0\)}
+\item \textbf{\(\epsilon_{\text{}} \gg \epsilon_0\)}
+\end{itemize}
+
+
+****
+\[d_{\mathcal{L}}(l_1, l_2) = \frac{1}{\epsilon(l_1)} + \frac{1}{\epsilon(l_2)} - 2 \cdot \min\left(\frac{1}{\epsilon(l_1)}, \frac{1}{\epsilon(l_2)}\right)\]
+
+
+\subsubsection{1.2}
+
+
+\textbf{ D19-2 \(\mathcal{C}_{l_1 \to l_2}\)}
+\(l_1\)  \(l_2\) ****
+\[\mathcal{C}_{l_1 \to l_2}: \mathcal{L}_{\text{}} \times \mathcal{K}_{\text{}} \to \mathcal{L}_{\text{}} \times \mathcal{K}_{\text{}}\]
+
+****
+\[C(\mathcal{C}_{l_1 \to l_2}) = \max_{P_{\text{}}} I(\mathcal{K}_{\text{}}; \mathcal{K}'_{\text{}})\]
+
+\(\mathcal{K}'_{\text{}}\)
+
+****
+\[\mathcal{L}_{\text{precision}}(l_1, l_2) = \frac{H(\mathcal{K}_{\text{}} | \mathcal{K}'_{\text{}})}{H(\mathcal{K}_{\text{}})}\]
+
+
+\subsection{2.}
+
+
+\subsubsection{ D19-1}
+
+
+****
+\((l_H, l_M, l_L)\)
+
+\textbf{D19-1 }
+\[C(l_H \to l_L) \leq C(l_H \to l_M) + C(l_M \to l_L) - \Delta_{\text{bridge}}\]
+
+\(\Delta_{\text{bridge}} \geq 0\) ****
+
+\textbf{ D19-1a}
+\begin{itemize}
+\item ****\(C(l_H \to l_M) + C(l_M \to l_L) \geq C(l_H \to l_L)\)
+\item ****\(\Delta_{\text{bridge}} > 0 \iff\)
+\end{itemize}
+
+
+
+\subsubsection{ D19-2-}
+
+
+****
+\textbf{** \(\eta\) }** \(\alpha\)
+\[\eta = \frac{R}{C_{\text{max}}}, \quad \alpha = 1 - \frac{H(\mathcal{K}| \mathcal{K}')}{H(\mathcal{K})}\]
+
+\textbf{D19-2 }
+\[\eta \cdot \alpha \leq \frac{1}{2} \log_2\left(1 + \frac{\epsilon_{\text{channel}}}{\sigma^2_{\text{noise}}}\right)\]
+
+\textbf{- Pareto }
+\[\mathcal{P}^* = \left\{(\eta, \alpha) \mid \exists p: \eta \cdot \alpha = \max\right\}\]
+
+****
+\begin{itemize}
+\item \textbf{** }**
+\item \textbf{** }**
+\item ****\(\frac{\partial(\eta \cdot \alpha)}{\partial p} = 0\)
+\end{itemize}
+
+
+
+\subsubsection{ D19-3}
+
+
+****
+\textbf{** \(f: \mathcal{K}_{\text{}} \to \mathcal{K}_{\text{}}\)}**
+\[\mathcal{Q}(f) = \frac{I(f(\mathcal{K}_{\text{}}); \mathcal{K}_{\text{}})}{H(\mathcal{K}_{\text{}})}\]
+
+\textbf{D19-3 }
+\[f^* = \arg\max_{f} \left[\mathcal{Q}(f) - \lambda \cdot \mathcal{D}_{\text{complexity}}(f)\right]\]
+
+
+\begin{itemize}
+\item \(\mathcal{Q}(f)\)
+\item \(\mathcal{D}_{\text{complexity}}(f)\)
+\item \(\lambda\)
+\end{itemize}
+
+
+****
+\[\frac{\delta \mathcal{Q}}{\delta f} = \lambda \cdot \frac{\delta \mathcal{D}_{\text{complexity}}}{\delta f}\]
+
+\textbf{*}***
+
+
+\subsubsection{ D19-4}
+
+
+****
+**** \(\epsilon_k\) \(\epsilon_{\text{in}}\)
+
+\textbf{D19-4 }
+\[\epsilon_{k+1} = \epsilon_k + \Delta \epsilon_k + \eta_k \cdot \epsilon_{\text{in}}\]
+
+
+\begin{itemize}
+\item \(\Delta \epsilon_k\) \(k\) ****
+\item \(\eta_k\) \(k\) ****
+\end{itemize}
+
+
+****
+\[\epsilon_N = \epsilon_0 \cdot \prod_{k=0}^{N-1} (1 + \eta_k) + \sum_{k=0}^{N-1} \Delta \epsilon_k \cdot \prod_{j=k+1}^{N-1} (1 + \eta_j)\]
+
+\textbf{ D19-4a}
+\begin{itemize}
+\item ****\(\Delta \epsilon_k \approx \text{machine epsilon}\)
+\item \textbf{/ML }\(\Delta \epsilon_k\)
+\end{itemize}
+
+
+**** =
+
+
+\subsubsection{ D19-5}
+
+
+****
+\textbf{*}***
+\[\mathcal{I}_{\text{conserved}}(\mathcal{K}_{l_1 \to l_2}) = \frac{I(\mathcal{K}_{l_1}; f(\mathcal{K}_{l_2})))}{H(\mathcal{K}_{l_1})}\]
+
+\textbf{D19-5 }
+\[\mathcal{I}_{\text{conserved}}(l_H \to l_L) \geq \mathcal{I}_{\text{conserved}}(l_H \to l_M) \cdot \mathcal{I}_{\text{conserved}}(l_M \to l_L)\]
+
+\textbf{ D19-5a}
+\[\mathcal{I}_{\text{conserved}}(l_H \to l_L) \leq \mathcal{I}_{\text{conserved}}(l_H \to l_M) \cdot \mathcal{I}_{\text{conserved}}(l_M \to l_L)\]
+
+\textbf{*}\textbf{*   \(f_{HM}\)  \(f_{ML}\) }**
+
+
+\subsection{3.}
+
+
+\subsubsection{ D19-A}
+
+
+\textbf{ D19-5}
+1.
+2.  vs  vs
+3.
+4. **** >
+
+
+\subsubsection{ D19-B- Pareto}
+
+
+\textbf{ D19-2}
+1.
+2.
+3.  Pareto
+4. ****
+
+
+\subsubsection{ D19-C}
+
+
+\textbf{ D19-4}
+1. FP32FP16INT8
+2.  \(\epsilon_k\)
+3. ****
+
+
+\subsubsection{ D19-D}
+
+
+\textbf{ D19-3}
+1.
+2.  \(\lambda\)
+3. -
+4. **** \(\lambda^*\)
+
+
+\subsection{4.}
+
+
+\subsubsection{4.1 D16}
+
+
+\textbf{D19-D16 }
+\begin{itemize}
+\item D19  \(\epsilon\)  D16 ****
+\item D19-2 - = D16-4 ****
+\item \textbf{** = }**
+\end{itemize}
+
+
+
+\subsubsection{4.2 D7}
+
+
+\textbf{D19-D7 }
+\begin{itemize}
+\item D19  \(\Delta \epsilon_k\) = D7 ****
+\item = ****
+\item \textbf{** = }**
+\end{itemize}
+
+
+
+\subsubsection{4.3 D13}
+
+
+\textbf{D19-D13 }
+\begin{itemize}
+\item D19  \(\mathcal{C}_{l_1 \to l_2}\)  D13 ****
+\item = D13 ****
+\item \textbf{** = }**
+\end{itemize}
+
+
+
+\subsection{5.}
+
+
+\subsubsection{5.1}
+
+
+1. \textbf{D19-1 }
+2. \textbf{D19-2 }
+3. \textbf{D19-4 }
+4. \textbf{D19-5 }
+
+\subsubsection{5.2}
+
+
+1. \textbf{/}
+2. ****
+3. ****
+
+
+\subsection{6.}
+
+
+###
+
+**** \(\mathcal{L}_{\text{}}\) \(\mathcal{L}_{\text{}}\) \(\mathcal{L}_{\text{}}\) \(\epsilon_H \ll \epsilon_M \ll \epsilon_L\)
+
+****
+1. ****\(C(l_H \to l_L) \leq C(l_H \to l_M) + C(l_M \to l_L)\)
+2. ****\(f^* = \arg\max_f [\mathcal{Q}(f) - \lambda \cdot \mathcal{D}(f)]\)
+3. ****\(\epsilon_N = \epsilon_0 \prod(1 + \eta_k) + \sum \Delta \epsilon_k \prod(1 + \eta_j)\)
+4. ****\(\mathcal{I}_{\text{conserved}}(l_H \to l_L) = \mathcal{I}_{\text{conserved}}(l_H \to l_M) \cdot \mathcal{I}_{\text{conserved}}(l_M \to l_L)\)
+
+\textbf{**  }\textbf{**Pareto }
+
+
+*D19 -*
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Shannon, C.E. (1948). A Mathematical Theory of Communication.
+\bibitem{ref2} Cover, T.M. (2006). Elements of Information Theory.
+\end{thebibliography}
+
+\end{document}

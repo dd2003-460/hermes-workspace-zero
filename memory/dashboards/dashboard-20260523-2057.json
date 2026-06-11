@@ -1,0 +1,205 @@
+{
+  "generated_at": "2026-05-23T20:57:51.942307",
+  "workspace_root": "/Users/a1-6/Desktop/workspace",
+  "project_count": 9,
+  "projects": {
+    "D1-academic": {
+      "name": "D1-academic",
+      "type": "理论物理",
+      "last_modified": "2026-05-23 15:03",
+      "files": {
+        "total": 606,
+        "md": 196,
+        "py": 128,
+        "tex": 30,
+        "json": 57,
+        "pdf": 49,
+        "png": 18
+      },
+      "memory_count": 1,
+      "tasks_count": 2,
+      "papers": [],
+      "blocks": [
+        "| 任务 | 状态 | 阻塞 |"
+      ],
+      "status": "ok"
+    },
+    "D1-academic-AI": {
+      "name": "D1-academic-AI",
+      "type": "AI/机器学习",
+      "last_modified": "2026-05-18 18:09",
+      "files": {
+        "total": 480,
+        "md": 300,
+        "py": 71,
+        "tex": 10,
+        "json": 48,
+        "pdf": 15,
+        "png": 5
+      },
+      "memory_count": 225,
+      "tasks_count": 77,
+      "papers": [],
+      "blocks": [
+        "- [x] 审查报告更新 — 标记已完成/阻塞状态",
+        "### 阻塞项",
+        "- ~~编译验证阻塞~~ — ✅ 已解决 (迭代 194+)"
+      ],
+      "status": "ok"
+    },
+    "D1-aging-economics": {
+      "name": "D1-aging-economics",
+      "type": "未知",
+      "last_modified": "2026-05-23 13:40",
+      "files": {
+        "total": 2,
+        "md": 2,
+        "py": 0,
+        "tex": 0,
+        "json": 0,
+        "pdf": 0,
+        "png": 0
+      },
+      "memory_count": 0,
+      "tasks_count": 0,
+      "papers": [],
+      "blocks": [],
+      "status": "ok"
+    },
+    "D1-anyon-hawking": {
+      "name": "D1-anyon-hawking",
+      "type": "任意子/黑洞物理",
+      "last_modified": "2026-05-23 20:38",
+      "files": {
+        "total": 24,
+        "md": 14,
+        "py": 0,
+        "tex": 1,
+        "json": 3,
+        "pdf": 1,
+        "png": 0
+      },
+      "memory_count": 2,
+      "tasks_count": 0,
+      "papers": [],
+      "blocks": [],
+      "status": "ok"
+    },
+    "D1-continuous-agent": {
+      "name": "D1-continuous-agent",
+      "type": "未知",
+      "last_modified": "2026-05-18 14:12",
+      "files": {
+        "total": 5,
+        "md": 5,
+        "py": 0,
+        "tex": 0,
+        "json": 0,
+        "pdf": 0,
+        "png": 0
+      },
+      "memory_count": 1,
+      "tasks_count": 0,
+      "papers": [],
+      "blocks": [],
+      "status": "ok"
+    },
+    "D1-grav-waves": {
+      "name": "D1-grav-waves",
+      "type": "引力波物理",
+      "last_modified": "2026-05-22 03:30",
+      "files": {
+        "total": 73,
+        "md": 45,
+        "py": 2,
+        "tex": 1,
+        "json": 0,
+        "pdf": 3,
+        "png": 3
+      },
+      "memory_count": 46,
+      "tasks_count": 56,
+      "papers": [],
+      "blocks": [
+        "- [x] 编译验证 — pdflatex 编译阻塞于 brew install texlive（下载中）",
+        "- [x] PDF 生成与渲染检查 — 阻塞于编译环境",
+        "## 解除阻塞"
+      ],
+      "status": "ok"
+    },
+    "D1-memory": {
+      "name": "D1-memory",
+      "type": "记忆系统",
+      "last_modified": "2026-05-22 15:35",
+      "files": {
+        "total": 25,
+        "md": 11,
+        "py": 0,
+        "tex": 0,
+        "json": 9,
+        "pdf": 0,
+        "png": 0
+      },
+      "memory_count": 31,
+      "tasks_count": 5,
+      "papers": [],
+      "blocks": [],
+      "status": "ok"
+    },
+    "D1-persona-align": {
+      "name": "D1-persona-align",
+      "type": "未知",
+      "last_modified": "2026-05-23 20:30",
+      "files": {
+        "total": 124,
+        "md": 38,
+        "py": 32,
+        "tex": 0,
+        "json": 31,
+        "pdf": 0,
+        "png": 0
+      },
+      "memory_count": 22,
+      "tasks_count": 3,
+      "papers": [],
+      "blocks": [
+        "## 4. 阻塞项",
+        "### 主要阻塞: 数据不足",
+        "### 次要阻塞: 训练基础设施"
+      ],
+      "status": "ok"
+    },
+    "D1-writing": {
+      "name": "D1-writing",
+      "type": "写作",
+      "last_modified": "2026-05-23 15:03",
+      "files": {
+        "total": 210,
+        "md": 100,
+        "py": 25,
+        "tex": 24,
+        "json": 13,
+        "pdf": 13,
+        "png": 0
+      },
+      "memory_count": 1,
+      "tasks_count": 0,
+      "papers": [],
+      "blocks": [],
+      "status": "ok"
+    }
+  },
+  "summary": {
+    "total_files": 1549,
+    "total_memory": 329,
+    "total_tasks_pending": 0,
+    "papers_ready": 0,
+    "total_blocks": 10,
+    "oldest_project": null,
+    "most_recent_update": "2026-05-23 20:38"
+  },
+  "workspace_stats": {
+    "total_workspace_files": 5513,
+    "git_status": "? .claude/worktrees/recursing-franklin-cd38c9\n M TASKS.md\n m projects/D1-academic\n M projects/D1-anyon-hawking/papers/anyon-hawking-paper.tex\n M projects/D1-anyon-hawking/tasks/single_loop_state.json\n M projects/D1-memory/memory/profile/unified_profile.json\n M projects/D1-persona-align/INDEX.md\n M projects/D1-persona-align/raw/lora_data/lora_trainset.jsonl\n M projects/D1-persona-align/tasks/TASKS.md\n m \"projects/D1-writing/\\345\\206\\231\\344\\275\\234/motivation_society\"\n M projects/INDEX.md\n M scripts/unified_iteration.py\n?? loop/iteration-1.md\n?? loop/iteration-11.md\n?? loop/iteration-13.md\n?? loop/iteration-14.md\n?? loop/iteration-7.md\n?? loop/iteration-9.md\n?? memory/dashboards/dashboard-20260521-2105.json\n?? memory/dashboards/dashboard-20260522-0110.json\n?? memory/dashboards/dashboard-20260522-0529.json\n?? memory/dashboards/dashboard-20260522-0955.json\n?? memory/dashboards/dashboard-20260522-1438.json\n?? memory/dashboards/dashboard-20260522-1936.json\n?? memory/dashboards/dashboard-20260522-2355.json\n?? memory/dashboards/dashboard-20260523-0512.json\n?? memory/dashboards/dashboard-20260523-0952.json\n?? memory/dashboards/dashboard-20260523-1503.json\n?? persona-evolve/\n?? projects/D1-aging-economics/\n?? projects/D1-anyon-hawking/memory/literature-benchmark-20260523.md\n?? projects/D1-grav-waves/memory/86-emri-autonomous-progress.md\n?? projects/D1-grav-waves/papers/EMRI-Paper-I/\n?? projects/D1-persona-align/eval_results/eval_thinking_chenglu_persona.json\n?? projects/D1-persona-align/eval_results/eval_thinking_method_only.json\n?? projects/D1-persona-align/eval_results/eval_thinking_summary.json\n?? projects/D1-persona-align/eval_results/eval_thinking_thinking_engine_v1.json\n?? projects/D1-persona-align/eval_thinking_engine.py\n?? projects/D1-persona-align/eval_thinking_v2.py\n?? projects/D1-persona-align/memory/iteration-1-eval-analysis.md\n?? projects/D1-persona-align/memory/iteration-15.md\n?? projects/D1-persona-align/memory/iteration-16.md\n?? projects/D1-persona-align/memory/iteration-17-18.md\n?? projects/D1-persona-align/memory/iteration-2-eval-results.md\n?? projects/D1-persona-align/memory/iteration-20.md\n?? projects/D1-persona-align/memory/iteration-21.md\n?? projects/D1-persona-align/memory/iteration-22.md\n?? projects/D1-persona-align/memory/iteration-23.md\n?? projects/D1-persona-align/memory/iteration-24.md\n?? projects/D1-persona-align/memory/iteration-26.md\n?? projects/D1-persona-align/memory/iteration-27.md\n?? projects/D1-persona-align/memory/iteration-30.md\n?? projects/D1-persona-align/memory/iteration-31.md\n?? projects/D1-persona-align/memory/iteration-32.md\n?? projects/D1-persona-align/memory/iteration-4-5-decision.md\n?? projects/D1-persona-align/memory/iteration-eval-comparison.md\n?? projects/D1-persona-align/memory/persona-evolution-report.md\n?? projects/D1-persona-align/memory/quick-test-results.md\n?? projects/D1-persona-align/memory/test_write\n?? projects/D1-persona-align/memory/v2-validation.md\n?? projects/D1-persona-align/persona-evolve/\n?? projects/D1-persona-align/persona-manifest.md\n?? projects/D1-persona-align/raw/eval_methodology_v2.md\n?? projects/D1-persona-align/raw/eval_reasoning_vs_recitation.md\n?? projects/D1-persona-align/researches/\n?? projects/D1-persona-align/test_quick.py\n?? projects/D1-persona-align/tools/\n?? projects/D1-persona-align/verify_write\n?? projects/verify_write\n?? tools/analysis_framework.md\n?? tools/persona_profile_prompt.md\n?? tools/test_write"
+  }
+}

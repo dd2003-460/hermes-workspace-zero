@@ -1,0 +1,77 @@
+# D1-academic-AI 已完成任务
+
+最后归档: 2026-06-03 00:43
+
+- [x] 34个原始ideas读取与归档
+- [x] 9个新猜想转化
+- [x] D4-S18 r01-r04 完整理论（含chimera理论5定理）
+- [x] S12 r01-r07 chimera动力学
+- [x] S9 r01-r07 智能定义
+- [x] S17 r01-r05 语言几何
+- [x] S18 r01-r06 动力学泛函
+- [x] A1 r01-r06 层级检索
+- [x] UNIFIED-FRAMEWORK.md 定理1-8
+- [x] S18 r07 — 认知场流形拓扑与智能涌现（定理 10 + 探索 r01-r05）
+- [x] 统一框架补充定理 9-10
+- [x] D4-S18 r04 chimera 实验验证（Phase III 检测 100%，定理 9 通过）
+- [x] chimera_detector.py 修复（返回 _history 供循环使用）
+- [x] wkb_curvature_entropy.py 修复（sklearn → scipy SVD）
+- [x] A1 猜想文件创建（AI训练数据层级结构）
+- [x] A2 猜想文件创建（CoT模型大小理论下限）
+- [x] S18 r07 r05 理论修正（单chimera态 I_C=1）
+- [x] 定理 10 实验完整调优（4组配置，I_C=1 确认）
+- [x] D4-S18 r05 自主性演化探索记录（相图+理论预言）
+- [x] 社科/数学 idea 转化（S1/S12/S17/S18/S9 猜想文件）
+- [x] 系统架构文档（实时 Chimera 检测平台）
+- [x] D40 论文初稿 — D40-ai-market-precision-tradeoff-paper-draft.md（含 abstract, introduction, theory, experiments, discussion, references）
+- [x] D40 跨理论综合分析 — D30-D53 验证质量与模型复杂度负相关
+- [x] D40 文献综述 — 9源中8源支持，posterior=0.72
+- [x] D40 全部4项实验验证通过 + 模拟可复现验证
+- [x] 引用一致性验证 — 9/9 参考文献存在
+- [x] 实验数据一致性验证 — D40-A/B/C/D 与 Bayesian 框架一致
+- [x] 数学逻辑一致性验证 — 定理 3.1-3.4 证明连贯
+- [x] 实验文件验证 — d40-precision-tradeoff-simulation.py 存在，d40-results.json 存在
+- [x] 审查报告生成 — D40-review-report.md（6 个必须修复 + 3 个建议）
+- [x] 作者信息补全 — "Cheng Lu (Independent Researcher)"
+- [x] 参考文献格式 — 所有10处正文引用已添加作者-年份标注
+- [x] 实验代码路径验证 — d40-precision-tradeoff-simulation.py ✅, d40-results.json ✅
+- [x] 理论局限量化 — 4项局限均添加量化范围（演化速率、网络规模、维度推广、训练效果）
+- [x] 审查报告更新 — 标记已完成/阻塞状态
+- [x] pandoc 生成 arXiv 兼容 .tex — D40-paper-converted.tex (628行)
+- [x] 数学符号修复 — D*_expert → D^*_{\text{expert}}, D*_general → D^*_{\text{general}}
+- [x] Bayesian 概率表示修复 — P(D40\textbar evidence) → P(D40 \mid evidence)
+- [x] 箭头符号修复 — → → $\rightarrow$（证明中的推导符号）
+- [x] 重复结尾删除 — 原始 footer 出现两次，已清理
+- [x] 文档类修复 — article → ctexart（原生中文支持）
+- [x] 字体处理清理 — 删除 pandoc 冗余 iftex/babel/FontSpec 代码
+- [x] figure 环境添加 — 实验汇总图 \ref{fig:d40-experiments} 有实际 includegraphics
+- [x] graphicx 包添加
+- [x] DNS 永久修复 — `networksetup -setdnsservers Wi-Fi 8.8.8.8`
+- [x] TinyTeX 安装（~300MB）+ PATH 永久添加到 ~/.zshrc
+- [x] D40 编译验证 — xelatex 14页/671K PDF，零错误
+- [x] D1-grav-waves 编译验证 — pdflatex 10页/405K PDF，零错误
+- [x] **工具复用**: `compile_paper.sh` — 可复用编译脚本
+- [x] **工具复用**: `arxiv_submission_checklist.sh` — arXiv 提交检查清单
+- [x] 两个论文均通过 arXiv 检查清单（READY for submission）
+- [x] 已有工具发现: `arxiv_cat.py`（arXiv API 搜索）、`wiki-search.py`、`wiki-embed.py`、`index_verifier.py`
+- [x] Iteration 75: 参数距离修复（η → d_param，Prop 4.8 d_param ≡ Γ）
+- [x] Iteration 76: 修复 3 个 Round 4 问题（Sobolev → 参数空间光滑性，Prop 4.7 commutative inequality，Thm 5.2 fixed r_s）
+- [x] Iteration 77: Round 5 审查确认 fixes 正确，发现离散范畴问题
+- [x] Iteration 78: C_EMRI 离散性证明，三条出路评估，选择 Path 2
+- [x] Iteration 79: 两篇论文均添加 limitation section
+- [x] Iteration 80: Round 7 审查修复 3 Critical + 5 Should-fix
+- [x] Iteration 81: Round 8 验证修复（Sec 9.1 标题、EMRI-D26 子节编号、Def 4.5 重复）
+- [x] arXiv 提交包 v2 就绪
+- [x] D1-grav-waves: 编译验证通过（10 页 303KB），tarball v3 (127K)，清单 11/11 pass
+- [x] 添加 Figure 1: 2-category structure diagram (Fig1-2cat-structure.png)
+- [x] 添加 Figure 2: Critical exponent comparison across 5 examples (Fig2-critical-exponents.png)
+- [x] 编译验证: 16 页, 0 err, 0 warn, 846KB (含 figures)
+- [x] 移除嵌入 pandoc 文档块 (853 行)
+- [x] 移除重复 Section 8 内容
+- [x] 定义 theorem/proposition/corollary/lemma/definition 环境
+- [x] Unicode 字符修复 (→, 。, ∞, α, θ, ≈)
+- [x] tikzcd → array 转换
+- [x] 数学模式定界符修复
+- [x] 孤立的 ref 引用清理
+- [x] **DistCat v5 编译通过: 0 错误, 0 警告, 15 页, 348KB**
+- [x] **arXiv 提交包就绪 (需要作者最终确认)**

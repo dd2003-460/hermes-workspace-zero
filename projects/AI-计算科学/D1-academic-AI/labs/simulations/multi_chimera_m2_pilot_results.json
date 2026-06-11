@@ -1,0 +1,2549 @@
+{
+  "experiment": "M2_pilot_phase_diagram",
+  "mode": "pilot",
+  "parameters": {
+    "N_total": 1500,
+    "N_per_domain": 750,
+    "T_transient": 50000,
+    "T_measure": 50000,
+    "dt": 0.02,
+    "N_runs": 3,
+    "K_transition": 0.3,
+    "delta": 0.15,
+    "domain_boundaries": [
+      0.4,
+      0.5,
+      0.9
+    ],
+    "eps_A_grid": [
+      0.3,
+      0.5,
+      0.6,
+      0.7,
+      0.9
+    ],
+    "eps_B_grid": [
+      0.3,
+      0.5,
+      0.6,
+      0.7,
+      0.9
+    ],
+    "K0_grid": [
+      0.8,
+      1.0,
+      1.2,
+      1.4
+    ]
+  },
+  "results": {
+    "grid_0000_epsA=0.3_epsB=0.3_K0=0.8": {
+      "params": {
+        "eps_A": 0.3,
+        "eps_B": 0.3,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        0,
+        0,
+        0
+      ],
+      "grid_position_flat": 0,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.3333333333333333,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.969315234417626,
+        "mean_r_B": 0.940150925815393,
+        "phase": "DC"
+      }
+    },
+    "grid_0001_epsA=0.3_epsB=0.3_K0=1.0": {
+      "params": {
+        "eps_A": 0.3,
+        "eps_B": 0.3,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        0,
+        0,
+        1
+      ],
+      "grid_position_flat": 1,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.3333333333333333,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9659421762679967,
+        "mean_r_B": 0.9569601852202213,
+        "phase": "DC"
+      }
+    },
+    "grid_0002_epsA=0.3_epsB=0.3_K0=1.2": {
+      "params": {
+        "eps_A": 0.3,
+        "eps_B": 0.3,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        0,
+        0,
+        2
+      ],
+      "grid_position_flat": 2,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.963224823806757,
+        "mean_r_B": 0.9606884858888353,
+        "phase": "DC"
+      }
+    },
+    "grid_0003_epsA=0.3_epsB=0.3_K0=1.4": {
+      "params": {
+        "eps_A": 0.3,
+        "eps_B": 0.3,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        0,
+        0,
+        3
+      ],
+      "grid_position_flat": 3,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9482188138121143,
+        "mean_r_B": 0.9600361605732669,
+        "phase": "DC"
+      }
+    },
+    "grid_0004_epsA=0.3_epsB=0.5_K0=0.8": {
+      "params": {
+        "eps_A": 0.3,
+        "eps_B": 0.5,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        0,
+        1,
+        0
+      ],
+      "grid_position_flat": 4,
+      "summary": {
+        "dc_fraction": 1.0,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.969315234417626,
+        "mean_r_B": 0.9135591992835591,
+        "phase": "DC"
+      }
+    },
+    "grid_0005_epsA=0.3_epsB=0.5_K0=1.0": {
+      "params": {
+        "eps_A": 0.3,
+        "eps_B": 0.5,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        0,
+        1,
+        1
+      ],
+      "grid_position_flat": 5,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.3333333333333333,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9659421764758708,
+        "mean_r_B": 0.9456612932420786,
+        "phase": "DC"
+      }
+    },
+    "grid_0006_epsA=0.3_epsB=0.5_K0=1.2": {
+      "params": {
+        "eps_A": 0.3,
+        "eps_B": 0.5,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        0,
+        1,
+        2
+      ],
+      "grid_position_flat": 6,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9632248247050783,
+        "mean_r_B": 0.9531171430246972,
+        "phase": "DC"
+      }
+    },
+    "grid_0007_epsA=0.3_epsB=0.5_K0=1.4": {
+      "params": {
+        "eps_A": 0.3,
+        "eps_B": 0.5,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        0,
+        1,
+        3
+      ],
+      "grid_position_flat": 7,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9482188153380724,
+        "mean_r_B": 0.9551273762759488,
+        "phase": "DC"
+      }
+    },
+    "grid_0008_epsA=0.3_epsB=0.6_K0=0.8": {
+      "params": {
+        "eps_A": 0.3,
+        "eps_B": 0.6,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        0,
+        2,
+        0
+      ],
+      "grid_position_flat": 8,
+      "summary": {
+        "dc_fraction": 1.0,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9693152344176258,
+        "mean_r_B": 0.8953401635104714,
+        "phase": "DC"
+      }
+    },
+    "grid_0009_epsA=0.3_epsB=0.6_K0=1.0": {
+      "params": {
+        "eps_A": 0.3,
+        "eps_B": 0.6,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        0,
+        2,
+        1
+      ],
+      "grid_position_flat": 9,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.3333333333333333,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.965942176589925,
+        "mean_r_B": 0.9378219173106239,
+        "phase": "DC"
+      }
+    },
+    "grid_0010_epsA=0.3_epsB=0.6_K0=1.2": {
+      "params": {
+        "eps_A": 0.3,
+        "eps_B": 0.6,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        0,
+        2,
+        2
+      ],
+      "grid_position_flat": 10,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9632248251579147,
+        "mean_r_B": 0.9510094679174242,
+        "phase": "DC"
+      }
+    },
+    "grid_0011_epsA=0.3_epsB=0.6_K0=1.4": {
+      "params": {
+        "eps_A": 0.3,
+        "eps_B": 0.6,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        0,
+        2,
+        3
+      ],
+      "grid_position_flat": 11,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.948218816108513,
+        "mean_r_B": 0.9511348775420011,
+        "phase": "DC"
+      }
+    },
+    "grid_0012_epsA=0.3_epsB=0.7_K0=0.8": {
+      "params": {
+        "eps_A": 0.3,
+        "eps_B": 0.7,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        0,
+        3,
+        0
+      ],
+      "grid_position_flat": 12,
+      "summary": {
+        "dc_fraction": 1.0,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.969315234417626,
+        "mean_r_B": 0.8745386262643402,
+        "phase": "DC"
+      }
+    },
+    "grid_0013_epsA=0.3_epsB=0.7_K0=1.0": {
+      "params": {
+        "eps_A": 0.3,
+        "eps_B": 0.7,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        0,
+        3,
+        1
+      ],
+      "grid_position_flat": 13,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.3333333333333333,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9659421767146066,
+        "mean_r_B": 0.9257580660049878,
+        "phase": "DC"
+      }
+    },
+    "grid_0014_epsA=0.3_epsB=0.7_K0=1.2": {
+      "params": {
+        "eps_A": 0.3,
+        "eps_B": 0.7,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        0,
+        3,
+        2
+      ],
+      "grid_position_flat": 14,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9632248256132558,
+        "mean_r_B": 0.9466592595805267,
+        "phase": "DC"
+      }
+    },
+    "grid_0015_epsA=0.3_epsB=0.7_K0=1.4": {
+      "params": {
+        "eps_A": 0.3,
+        "eps_B": 0.7,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        0,
+        3,
+        3
+      ],
+      "grid_position_flat": 15,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9482188168840772,
+        "mean_r_B": 0.9510355819144122,
+        "phase": "DC"
+      }
+    },
+    "grid_0016_epsA=0.3_epsB=0.9_K0=0.8": {
+      "params": {
+        "eps_A": 0.3,
+        "eps_B": 0.9,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        0,
+        4,
+        0
+      ],
+      "grid_position_flat": 16,
+      "summary": {
+        "dc_fraction": 1.0,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.969315234417626,
+        "mean_r_B": 0.8232245254544909,
+        "phase": "DC"
+      }
+    },
+    "grid_0017_epsA=0.3_epsB=0.9_K0=1.0": {
+      "params": {
+        "eps_A": 0.3,
+        "eps_B": 0.9,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        0,
+        4,
+        1
+      ],
+      "grid_position_flat": 17,
+      "summary": {
+        "dc_fraction": 1.0,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9659421770219282,
+        "mean_r_B": 0.8658519048314647,
+        "phase": "DC"
+      }
+    },
+    "grid_0018_epsA=0.3_epsB=0.9_K0=1.2": {
+      "params": {
+        "eps_A": 0.3,
+        "eps_B": 0.9,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        0,
+        4,
+        2
+      ],
+      "grid_position_flat": 18,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.3333333333333333,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9632248265316208,
+        "mean_r_B": 0.8948340679095655,
+        "phase": "DC"
+      }
+    },
+    "grid_0019_epsA=0.3_epsB=0.9_K0=1.4": {
+      "params": {
+        "eps_A": 0.3,
+        "eps_B": 0.9,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        0,
+        4,
+        3
+      ],
+      "grid_position_flat": 19,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.3333333333333333,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9482188184510479,
+        "mean_r_B": 0.934811526812156,
+        "phase": "DC"
+      }
+    },
+    "grid_0020_epsA=0.5_epsB=0.3_K0=0.8": {
+      "params": {
+        "eps_A": 0.5,
+        "eps_B": 0.3,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        1,
+        0,
+        0
+      ],
+      "grid_position_flat": 20,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.3333333333333333,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9629659497619935,
+        "mean_r_B": 0.9401509258073015,
+        "phase": "DC"
+      }
+    },
+    "grid_0021_epsA=0.5_epsB=0.3_K0=1.0": {
+      "params": {
+        "eps_A": 0.5,
+        "eps_B": 0.3,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        1,
+        0,
+        1
+      ],
+      "grid_position_flat": 21,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9745829724572102,
+        "mean_r_B": 0.9569601852143089,
+        "phase": "DC"
+      }
+    },
+    "grid_0022_epsA=0.5_epsB=0.3_K0=1.2": {
+      "params": {
+        "eps_A": 0.5,
+        "eps_B": 0.3,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        1,
+        0,
+        2
+      ],
+      "grid_position_flat": 22,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9571092858666711,
+        "mean_r_B": 0.9606884859086335,
+        "phase": "DC"
+      }
+    },
+    "grid_0023_epsA=0.5_epsB=0.3_K0=1.4": {
+      "params": {
+        "eps_A": 0.5,
+        "eps_B": 0.3,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        1,
+        0,
+        3
+      ],
+      "grid_position_flat": 23,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9511781764067901,
+        "mean_r_B": 0.9600361606572272,
+        "phase": "DC"
+      }
+    },
+    "grid_0024_epsA=0.5_epsB=0.5_K0=0.8": {
+      "params": {
+        "eps_A": 0.5,
+        "eps_B": 0.5,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        1,
+        1,
+        0
+      ],
+      "grid_position_flat": 24,
+      "summary": {
+        "dc_fraction": 1.0,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9629659497619935,
+        "mean_r_B": 0.9135591992716735,
+        "phase": "DC"
+      }
+    },
+    "grid_0025_epsA=0.5_epsB=0.5_K0=1.0": {
+      "params": {
+        "eps_A": 0.5,
+        "eps_B": 0.5,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        1,
+        1,
+        1
+      ],
+      "grid_position_flat": 25,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9745829724572102,
+        "mean_r_B": 0.9456612932227356,
+        "phase": "DC"
+      }
+    },
+    "grid_0026_epsA=0.5_epsB=0.5_K0=1.2": {
+      "params": {
+        "eps_A": 0.5,
+        "eps_B": 0.5,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        1,
+        1,
+        2
+      ],
+      "grid_position_flat": 26,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9571092872379268,
+        "mean_r_B": 0.953117143012746,
+        "phase": "DC"
+      }
+    },
+    "grid_0027_epsA=0.5_epsB=0.5_K0=1.4": {
+      "params": {
+        "eps_A": 0.5,
+        "eps_B": 0.5,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        1,
+        1,
+        3
+      ],
+      "grid_position_flat": 27,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9511781784611782,
+        "mean_r_B": 0.9551273763009398,
+        "phase": "DC"
+      }
+    },
+    "grid_0028_epsA=0.5_epsB=0.6_K0=0.8": {
+      "params": {
+        "eps_A": 0.5,
+        "eps_B": 0.6,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        1,
+        2,
+        0
+      ],
+      "grid_position_flat": 28,
+      "summary": {
+        "dc_fraction": 1.0,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9629659497619935,
+        "mean_r_B": 0.8953401634980764,
+        "phase": "DC"
+      }
+    },
+    "grid_0029_epsA=0.5_epsB=0.6_K0=1.0": {
+      "params": {
+        "eps_A": 0.5,
+        "eps_B": 0.6,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        1,
+        2,
+        1
+      ],
+      "grid_position_flat": 29,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9745829724572103,
+        "mean_r_B": 0.9378219172873331,
+        "phase": "DC"
+      }
+    },
+    "grid_0030_epsA=0.5_epsB=0.6_K0=1.2": {
+      "params": {
+        "eps_A": 0.5,
+        "eps_B": 0.6,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        1,
+        2,
+        2
+      ],
+      "grid_position_flat": 30,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.957109287929815,
+        "mean_r_B": 0.9510094678940327,
+        "phase": "DC"
+      }
+    },
+    "grid_0031_epsA=0.5_epsB=0.6_K0=1.4": {
+      "params": {
+        "eps_A": 0.5,
+        "eps_B": 0.6,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        1,
+        2,
+        3
+      ],
+      "grid_position_flat": 31,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9511781794996957,
+        "mean_r_B": 0.9511348775437632,
+        "phase": "DC"
+      }
+    },
+    "grid_0032_epsA=0.5_epsB=0.7_K0=0.8": {
+      "params": {
+        "eps_A": 0.5,
+        "eps_B": 0.7,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        1,
+        3,
+        0
+      ],
+      "grid_position_flat": 32,
+      "summary": {
+        "dc_fraction": 1.0,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9629659497619935,
+        "mean_r_B": 0.8745386662977356,
+        "phase": "DC"
+      }
+    },
+    "grid_0033_epsA=0.5_epsB=0.7_K0=1.0": {
+      "params": {
+        "eps_A": 0.5,
+        "eps_B": 0.7,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        1,
+        3,
+        1
+      ],
+      "grid_position_flat": 33,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9745829724572102,
+        "mean_r_B": 0.9257580659782524,
+        "phase": "DC"
+      }
+    },
+    "grid_0034_epsA=0.5_epsB=0.7_K0=1.2": {
+      "params": {
+        "eps_A": 0.5,
+        "eps_B": 0.7,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        1,
+        3,
+        2
+      ],
+      "grid_position_flat": 34,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9571092886260302,
+        "mean_r_B": 0.946659259546273,
+        "phase": "DC"
+      }
+    },
+    "grid_0035_epsA=0.5_epsB=0.7_K0=1.4": {
+      "params": {
+        "eps_A": 0.5,
+        "eps_B": 0.7,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        1,
+        3,
+        3
+      ],
+      "grid_position_flat": 35,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9511781805461257,
+        "mean_r_B": 0.9510355818934046,
+        "phase": "DC"
+      }
+    },
+    "grid_0036_epsA=0.5_epsB=0.9_K0=0.8": {
+      "params": {
+        "eps_A": 0.5,
+        "eps_B": 0.9,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        1,
+        4,
+        0
+      ],
+      "grid_position_flat": 36,
+      "summary": {
+        "dc_fraction": 1.0,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9629659497619935,
+        "mean_r_B": 0.8232245678675415,
+        "phase": "DC"
+      }
+    },
+    "grid_0037_epsA=0.5_epsB=0.9_K0=1.0": {
+      "params": {
+        "eps_A": 0.5,
+        "eps_B": 0.9,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        1,
+        4,
+        1
+      ],
+      "grid_position_flat": 37,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.3333333333333333,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9745829724572102,
+        "mean_r_B": 0.8658519503496316,
+        "phase": "DC"
+      }
+    },
+    "grid_0038_epsA=0.5_epsB=0.9_K0=1.2": {
+      "params": {
+        "eps_A": 0.5,
+        "eps_B": 0.9,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        1,
+        4,
+        2
+      ],
+      "grid_position_flat": 38,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.3333333333333333,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.957109290031975,
+        "mean_r_B": 0.8948340678558447,
+        "phase": "DC"
+      }
+    },
+    "grid_0039_epsA=0.5_epsB=0.9_K0=1.4": {
+      "params": {
+        "eps_A": 0.5,
+        "eps_B": 0.9,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        1,
+        4,
+        3
+      ],
+      "grid_position_flat": 39,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.3333333333333333,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9511781826639861,
+        "mean_r_B": 0.9348115267466043,
+        "phase": "DC"
+      }
+    },
+    "grid_0040_epsA=0.6_epsB=0.3_K0=0.8": {
+      "params": {
+        "eps_A": 0.6,
+        "eps_B": 0.3,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        2,
+        0,
+        0
+      ],
+      "grid_position_flat": 40,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.3333333333333333,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.959652627257786,
+        "mean_r_B": 0.9401509258034185,
+        "phase": "DC"
+      }
+    },
+    "grid_0041_epsA=0.6_epsB=0.3_K0=1.0": {
+      "params": {
+        "eps_A": 0.6,
+        "eps_B": 0.3,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        2,
+        0,
+        1
+      ],
+      "grid_position_flat": 41,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9720471296694839,
+        "mean_r_B": 0.9569601852114928,
+        "phase": "DC"
+      }
+    },
+    "grid_0042_epsA=0.6_epsB=0.3_K0=1.2": {
+      "params": {
+        "eps_A": 0.6,
+        "eps_B": 0.3,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        2,
+        0,
+        2
+      ],
+      "grid_position_flat": 42,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9587424984617883,
+        "mean_r_B": 0.9606884859179888,
+        "phase": "DC"
+      }
+    },
+    "grid_0043_epsA=0.6_epsB=0.3_K0=1.4": {
+      "params": {
+        "eps_A": 0.6,
+        "eps_B": 0.3,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        2,
+        0,
+        3
+      ],
+      "grid_position_flat": 43,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9532754223780739,
+        "mean_r_B": 0.9600361606966202,
+        "phase": "DC"
+      }
+    },
+    "grid_0044_epsA=0.6_epsB=0.5_K0=0.8": {
+      "params": {
+        "eps_A": 0.6,
+        "eps_B": 0.5,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        2,
+        1,
+        0
+      ],
+      "grid_position_flat": 44,
+      "summary": {
+        "dc_fraction": 1.0,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.959652627257786,
+        "mean_r_B": 0.913559199266046,
+        "phase": "DC"
+      }
+    },
+    "grid_0045_epsA=0.6_epsB=0.5_K0=1.0": {
+      "params": {
+        "eps_A": 0.6,
+        "eps_B": 0.5,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        2,
+        1,
+        1
+      ],
+      "grid_position_flat": 45,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9720471296694839,
+        "mean_r_B": 0.9456612932135707,
+        "phase": "DC"
+      }
+    },
+    "grid_0046_epsA=0.6_epsB=0.5_K0=1.2": {
+      "params": {
+        "eps_A": 0.6,
+        "eps_B": 0.5,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        2,
+        1,
+        2
+      ],
+      "grid_position_flat": 46,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9587424984680953,
+        "mean_r_B": 0.953117143007049,
+        "phase": "DC"
+      }
+    },
+    "grid_0047_epsA=0.6_epsB=0.5_K0=1.4": {
+      "params": {
+        "eps_A": 0.6,
+        "eps_B": 0.5,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        2,
+        1,
+        3
+      ],
+      "grid_position_flat": 47,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9532754246496274,
+        "mean_r_B": 0.9551273763124799,
+        "phase": "DC"
+      }
+    },
+    "grid_0048_epsA=0.6_epsB=0.6_K0=0.8": {
+      "params": {
+        "eps_A": 0.6,
+        "eps_B": 0.6,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        2,
+        2,
+        0
+      ],
+      "grid_position_flat": 48,
+      "summary": {
+        "dc_fraction": 1.0,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.959652627257786,
+        "mean_r_B": 0.8953401634922038,
+        "phase": "DC"
+      }
+    },
+    "grid_0049_epsA=0.6_epsB=0.6_K0=1.0": {
+      "params": {
+        "eps_A": 0.6,
+        "eps_B": 0.6,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        2,
+        2,
+        1
+      ],
+      "grid_position_flat": 49,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9720471296694839,
+        "mean_r_B": 0.9378219172762875,
+        "phase": "DC"
+      }
+    },
+    "grid_0050_epsA=0.6_epsB=0.6_K0=1.2": {
+      "params": {
+        "eps_A": 0.6,
+        "eps_B": 0.6,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        2,
+        2,
+        2
+      ],
+      "grid_position_flat": 50,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9587424984715751,
+        "mean_r_B": 0.9510094678829296,
+        "phase": "DC"
+      }
+    },
+    "grid_0051_epsA=0.6_epsB=0.6_K0=1.4": {
+      "params": {
+        "eps_A": 0.6,
+        "eps_B": 0.6,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        2,
+        2,
+        3
+      ],
+      "grid_position_flat": 51,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9532754257973285,
+        "mean_r_B": 0.9511348775444084,
+        "phase": "DC"
+      }
+    },
+    "grid_0052_epsA=0.6_epsB=0.7_K0=0.8": {
+      "params": {
+        "eps_A": 0.6,
+        "eps_B": 0.7,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        2,
+        3,
+        0
+      ],
+      "grid_position_flat": 52,
+      "summary": {
+        "dc_fraction": 1.0,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.959652627257786,
+        "mean_r_B": 0.8745386854312224,
+        "phase": "DC"
+      }
+    },
+    "grid_0053_epsA=0.6_epsB=0.7_K0=1.0": {
+      "params": {
+        "eps_A": 0.6,
+        "eps_B": 0.7,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        2,
+        3,
+        1
+      ],
+      "grid_position_flat": 53,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9720471296694839,
+        "mean_r_B": 0.9257580659655659,
+        "phase": "DC"
+      }
+    },
+    "grid_0054_epsA=0.6_epsB=0.7_K0=1.2": {
+      "params": {
+        "eps_A": 0.6,
+        "eps_B": 0.7,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        2,
+        3,
+        2
+      ],
+      "grid_position_flat": 54,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9587424984753089,
+        "mean_r_B": 0.9466592595300374,
+        "phase": "DC"
+      }
+    },
+    "grid_0055_epsA=0.6_epsB=0.7_K0=1.4": {
+      "params": {
+        "eps_A": 0.6,
+        "eps_B": 0.7,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        2,
+        3,
+        3
+      ],
+      "grid_position_flat": 55,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.953275426953296,
+        "mean_r_B": 0.9510355818833665,
+        "phase": "DC"
+      }
+    },
+    "grid_0056_epsA=0.6_epsB=0.9_K0=0.8": {
+      "params": {
+        "eps_A": 0.6,
+        "eps_B": 0.9,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        2,
+        4,
+        0
+      ],
+      "grid_position_flat": 56,
+      "summary": {
+        "dc_fraction": 1.0,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.959652627257786,
+        "mean_r_B": 0.8232245881387733,
+        "phase": "DC"
+      }
+    },
+    "grid_0057_epsA=0.6_epsB=0.9_K0=1.0": {
+      "params": {
+        "eps_A": 0.6,
+        "eps_B": 0.9,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        2,
+        4,
+        1
+      ],
+      "grid_position_flat": 57,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.3333333333333333,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9720471296694839,
+        "mean_r_B": 0.8658519718551155,
+        "phase": "DC"
+      }
+    },
+    "grid_0058_epsA=0.6_epsB=0.9_K0=1.2": {
+      "params": {
+        "eps_A": 0.6,
+        "eps_B": 0.9,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        2,
+        4,
+        2
+      ],
+      "grid_position_flat": 58,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.3333333333333333,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9587424984836894,
+        "mean_r_B": 0.8948340678304051,
+        "phase": "DC"
+      }
+    },
+    "grid_0059_epsA=0.6_epsB=0.9_K0=1.4": {
+      "params": {
+        "eps_A": 0.6,
+        "eps_B": 0.9,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        2,
+        4,
+        3
+      ],
+      "grid_position_flat": 59,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.3333333333333333,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9532754292911158,
+        "mean_r_B": 0.9348115267156486,
+        "phase": "DC"
+      }
+    },
+    "grid_0060_epsA=0.7_epsB=0.3_K0=0.8": {
+      "params": {
+        "eps_A": 0.7,
+        "eps_B": 0.3,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        3,
+        0,
+        0
+      ],
+      "grid_position_flat": 60,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.3333333333333333,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9567504410747567,
+        "mean_r_B": 0.9401509257996374,
+        "phase": "DC"
+      }
+    },
+    "grid_0061_epsA=0.7_epsB=0.3_K0=1.0": {
+      "params": {
+        "eps_A": 0.7,
+        "eps_B": 0.3,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        3,
+        0,
+        1
+      ],
+      "grid_position_flat": 61,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9694031423353993,
+        "mean_r_B": 0.9569601852087647,
+        "phase": "DC"
+      }
+    },
+    "grid_0062_epsA=0.7_epsB=0.3_K0=1.2": {
+      "params": {
+        "eps_A": 0.7,
+        "eps_B": 0.3,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        3,
+        0,
+        2
+      ],
+      "grid_position_flat": 62,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9606711163992362,
+        "mean_r_B": 0.9606884859270094,
+        "phase": "DC"
+      }
+    },
+    "grid_0063_epsA=0.7_epsB=0.3_K0=1.4": {
+      "params": {
+        "eps_A": 0.7,
+        "eps_B": 0.3,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        3,
+        0,
+        3
+      ],
+      "grid_position_flat": 63,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9554222635145599,
+        "mean_r_B": 0.9600361607344386,
+        "phase": "DC"
+      }
+    },
+    "grid_0064_epsA=0.7_epsB=0.5_K0=0.8": {
+      "params": {
+        "eps_A": 0.7,
+        "eps_B": 0.5,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        3,
+        1,
+        0
+      ],
+      "grid_position_flat": 64,
+      "summary": {
+        "dc_fraction": 1.0,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9567504427264549,
+        "mean_r_B": 0.9135591992605997,
+        "phase": "DC"
+      }
+    },
+    "grid_0065_epsA=0.7_epsB=0.5_K0=1.0": {
+      "params": {
+        "eps_A": 0.7,
+        "eps_B": 0.5,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        3,
+        1,
+        1
+      ],
+      "grid_position_flat": 65,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9694031423353993,
+        "mean_r_B": 0.9456612932046982,
+        "phase": "DC"
+      }
+    },
+    "grid_0066_epsA=0.7_epsB=0.5_K0=1.2": {
+      "params": {
+        "eps_A": 0.7,
+        "eps_B": 0.5,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        3,
+        1,
+        2
+      ],
+      "grid_position_flat": 66,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9606711164023268,
+        "mean_r_B": 0.9531171430014997,
+        "phase": "DC"
+      }
+    },
+    "grid_0067_epsA=0.7_epsB=0.5_K0=1.4": {
+      "params": {
+        "eps_A": 0.7,
+        "eps_B": 0.5,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        3,
+        1,
+        3
+      ],
+      "grid_position_flat": 67,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9554222659924371,
+        "mean_r_B": 0.955127376323421,
+        "phase": "DC"
+      }
+    },
+    "grid_0068_epsA=0.7_epsB=0.6_K0=0.8": {
+      "params": {
+        "eps_A": 0.7,
+        "eps_B": 0.6,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        3,
+        2,
+        0
+      ],
+      "grid_position_flat": 68,
+      "summary": {
+        "dc_fraction": 1.0,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9567504435532669,
+        "mean_r_B": 0.8953401634865171,
+        "phase": "DC"
+      }
+    },
+    "grid_0069_epsA=0.7_epsB=0.6_K0=1.0": {
+      "params": {
+        "eps_A": 0.7,
+        "eps_B": 0.6,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        3,
+        2,
+        1
+      ],
+      "grid_position_flat": 69,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9694031423353993,
+        "mean_r_B": 0.9378219172655923,
+        "phase": "DC"
+      }
+    },
+    "grid_0070_epsA=0.7_epsB=0.6_K0=1.2": {
+      "params": {
+        "eps_A": 0.7,
+        "eps_B": 0.6,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        3,
+        2,
+        2
+      ],
+      "grid_position_flat": 70,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9606711164040301,
+        "mean_r_B": 0.9510094678721694,
+        "phase": "DC"
+      }
+    },
+    "grid_0071_epsA=0.7_epsB=0.6_K0=1.4": {
+      "params": {
+        "eps_A": 0.7,
+        "eps_B": 0.6,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        3,
+        2,
+        3
+      ],
+      "grid_position_flat": 71,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9554222672440109,
+        "mean_r_B": 0.9511348775448935,
+        "phase": "DC"
+      }
+    },
+    "grid_0072_epsA=0.7_epsB=0.7_K0=0.8": {
+      "params": {
+        "eps_A": 0.7,
+        "eps_B": 0.7,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        3,
+        3,
+        0
+      ],
+      "grid_position_flat": 72,
+      "summary": {
+        "dc_fraction": 1.0,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9567504443806447,
+        "mean_r_B": 0.8745387039940411,
+        "phase": "DC"
+      }
+    },
+    "grid_0073_epsA=0.7_epsB=0.7_K0=1.0": {
+      "params": {
+        "eps_A": 0.7,
+        "eps_B": 0.7,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        3,
+        3,
+        1
+      ],
+      "grid_position_flat": 73,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9694031423353993,
+        "mean_r_B": 0.9257580659532806,
+        "phase": "DC"
+      }
+    },
+    "grid_0074_epsA=0.7_epsB=0.7_K0=1.2": {
+      "params": {
+        "eps_A": 0.7,
+        "eps_B": 0.7,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        3,
+        3,
+        2
+      ],
+      "grid_position_flat": 74,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9606711164058589,
+        "mean_r_B": 0.9466592595143295,
+        "phase": "DC"
+      }
+    },
+    "grid_0075_epsA=0.7_epsB=0.7_K0=1.4": {
+      "params": {
+        "eps_A": 0.7,
+        "eps_B": 0.7,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        3,
+        3,
+        3
+      ],
+      "grid_position_flat": 75,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9554222685043054,
+        "mean_r_B": 0.9510355818735953,
+        "phase": "DC"
+      }
+    },
+    "grid_0076_epsA=0.7_epsB=0.9_K0=0.8": {
+      "params": {
+        "eps_A": 0.7,
+        "eps_B": 0.9,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        3,
+        4,
+        0
+      ],
+      "grid_position_flat": 76,
+      "summary": {
+        "dc_fraction": 1.0,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.956750446036874,
+        "mean_r_B": 0.8232246078056531,
+        "phase": "DC"
+      }
+    },
+    "grid_0077_epsA=0.7_epsB=0.9_K0=1.0": {
+      "params": {
+        "eps_A": 0.7,
+        "eps_B": 0.9,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        3,
+        4,
+        1
+      ],
+      "grid_position_flat": 77,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.3333333333333333,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9694031423353991,
+        "mean_r_B": 0.8658519925769607,
+        "phase": "DC"
+      }
+    },
+    "grid_0078_epsA=0.7_epsB=0.9_K0=1.2": {
+      "params": {
+        "eps_A": 0.7,
+        "eps_B": 0.9,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        3,
+        4,
+        2
+      ],
+      "grid_position_flat": 78,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.3333333333333333,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9606711164099621,
+        "mean_r_B": 0.8948340678058205,
+        "phase": "DC"
+      }
+    },
+    "grid_0079_epsA=0.7_epsB=0.9_K0=1.4": {
+      "params": {
+        "eps_A": 0.7,
+        "eps_B": 0.9,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        3,
+        4,
+        3
+      ],
+      "grid_position_flat": 79,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.3333333333333333,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9554222710520307,
+        "mean_r_B": 0.934811526685789,
+        "phase": "DC"
+      }
+    },
+    "grid_0080_epsA=0.9_epsB=0.3_K0=0.8": {
+      "params": {
+        "eps_A": 0.9,
+        "eps_B": 0.3,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        4,
+        0,
+        0
+      ],
+      "grid_position_flat": 80,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.3333333333333333,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9635766355901234,
+        "mean_r_B": 0.9401509257923623,
+        "phase": "DC"
+      }
+    },
+    "grid_0081_epsA=0.9_epsB=0.3_K0=1.0": {
+      "params": {
+        "eps_A": 0.9,
+        "eps_B": 0.3,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        4,
+        0,
+        1
+      ],
+      "grid_position_flat": 81,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9683280897741436,
+        "mean_r_B": 0.9569601852035555,
+        "phase": "DC"
+      }
+    },
+    "grid_0082_epsA=0.9_epsB=0.3_K0=1.2": {
+      "params": {
+        "eps_A": 0.9,
+        "eps_B": 0.3,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        4,
+        0,
+        2
+      ],
+      "grid_position_flat": 82,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9644796615304676,
+        "mean_r_B": 0.9606884859441299,
+        "phase": "DC"
+      }
+    },
+    "grid_0083_epsA=0.9_epsB=0.3_K0=1.4": {
+      "params": {
+        "eps_A": 0.9,
+        "eps_B": 0.3,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        4,
+        0,
+        3
+      ],
+      "grid_position_flat": 83,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9595292195539868,
+        "mean_r_B": 0.9600361608057822,
+        "phase": "DC"
+      }
+    },
+    "grid_0084_epsA=0.9_epsB=0.5_K0=0.8": {
+      "params": {
+        "eps_A": 0.9,
+        "eps_B": 0.5,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        4,
+        1,
+        0
+      ],
+      "grid_position_flat": 84,
+      "summary": {
+        "dc_fraction": 1.0,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9635766370802951,
+        "mean_r_B": 0.9135591992501807,
+        "phase": "DC"
+      }
+    },
+    "grid_0085_epsA=0.9_epsB=0.5_K0=1.0": {
+      "params": {
+        "eps_A": 0.9,
+        "eps_B": 0.5,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        4,
+        1,
+        1
+      ],
+      "grid_position_flat": 85,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9683280897742592,
+        "mean_r_B": 0.9456612931877331,
+        "phase": "DC"
+      }
+    },
+    "grid_0086_epsA=0.9_epsB=0.5_K0=1.2": {
+      "params": {
+        "eps_A": 0.9,
+        "eps_B": 0.5,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        4,
+        1,
+        2
+      ],
+      "grid_position_flat": 86,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9644796615308553,
+        "mean_r_B": 0.953117142990774,
+        "phase": "DC"
+      }
+    },
+    "grid_0087_epsA=0.9_epsB=0.5_K0=1.4": {
+      "params": {
+        "eps_A": 0.9,
+        "eps_B": 0.5,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        4,
+        1,
+        3
+      ],
+      "grid_position_flat": 87,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9595292224159339,
+        "mean_r_B": 0.9551273763436363,
+        "phase": "DC"
+      }
+    },
+    "grid_0088_epsA=0.9_epsB=0.6_K0=0.8": {
+      "params": {
+        "eps_A": 0.9,
+        "eps_B": 0.6,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        4,
+        2,
+        0
+      ],
+      "grid_position_flat": 88,
+      "summary": {
+        "dc_fraction": 1.0,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9635766378262463,
+        "mean_r_B": 0.8953401634756334,
+        "phase": "DC"
+      }
+    },
+    "grid_0089_epsA=0.9_epsB=0.6_K0=1.0": {
+      "params": {
+        "eps_A": 0.9,
+        "eps_B": 0.6,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        4,
+        2,
+        1
+      ],
+      "grid_position_flat": 89,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9683280897743223,
+        "mean_r_B": 0.9378219172451483,
+        "phase": "DC"
+      }
+    },
+    "grid_0090_epsA=0.9_epsB=0.6_K0=1.2": {
+      "params": {
+        "eps_A": 0.9,
+        "eps_B": 0.6,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        4,
+        2,
+        2
+      ],
+      "grid_position_flat": 90,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9644796615310689,
+        "mean_r_B": 0.951009467851568,
+        "phase": "DC"
+      }
+    },
+    "grid_0091_epsA=0.9_epsB=0.6_K0=1.4": {
+      "params": {
+        "eps_A": 0.9,
+        "eps_B": 0.6,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        4,
+        2,
+        3
+      ],
+      "grid_position_flat": 91,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9595292238611979,
+        "mean_r_B": 0.9511348775454013,
+        "phase": "DC"
+      }
+    },
+    "grid_0092_epsA=0.9_epsB=0.7_K0=0.8": {
+      "params": {
+        "eps_A": 0.9,
+        "eps_B": 0.7,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        4,
+        3,
+        0
+      ],
+      "grid_position_flat": 92,
+      "summary": {
+        "dc_fraction": 1.0,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9635766385727084,
+        "mean_r_B": 0.8745387394776406,
+        "phase": "DC"
+      }
+    },
+    "grid_0093_epsA=0.9_epsB=0.7_K0=1.0": {
+      "params": {
+        "eps_A": 0.9,
+        "eps_B": 0.7,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        4,
+        3,
+        1
+      ],
+      "grid_position_flat": 93,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9683280897743897,
+        "mean_r_B": 0.9257580659297987,
+        "phase": "DC"
+      }
+    },
+    "grid_0094_epsA=0.9_epsB=0.7_K0=1.2": {
+      "params": {
+        "eps_A": 0.9,
+        "eps_B": 0.7,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        4,
+        3,
+        2
+      ],
+      "grid_position_flat": 94,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9644796615312976,
+        "mean_r_B": 0.9466592594843445,
+        "phase": "DC"
+      }
+    },
+    "grid_0095_epsA=0.9_epsB=0.7_K0=1.4": {
+      "params": {
+        "eps_A": 0.9,
+        "eps_B": 0.7,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        4,
+        3,
+        3
+      ],
+      "grid_position_flat": 95,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.3333333333333333,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9595292253162877,
+        "mean_r_B": 0.9510355818547692,
+        "phase": "DC"
+      }
+    },
+    "grid_0096_epsA=0.9_epsB=0.9_K0=0.8": {
+      "params": {
+        "eps_A": 0.9,
+        "eps_B": 0.9,
+        "K0": 0.8,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        4,
+        4,
+        0
+      ],
+      "grid_position_flat": 96,
+      "summary": {
+        "dc_fraction": 1.0,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.0,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9635766400669503,
+        "mean_r_B": 0.8232246454003805,
+        "phase": "DC"
+      }
+    },
+    "grid_0097_epsA=0.9_epsB=0.9_K0=1.0": {
+      "params": {
+        "eps_A": 0.9,
+        "eps_B": 0.9,
+        "K0": 1.0,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        4,
+        4,
+        1
+      ],
+      "grid_position_flat": 97,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.3333333333333333,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9683280897745409,
+        "mean_r_B": 0.8658520318262108,
+        "phase": "DC"
+      }
+    },
+    "grid_0098_epsA=0.9_epsB=0.9_K0=1.2": {
+      "params": {
+        "eps_A": 0.9,
+        "eps_B": 0.9,
+        "K0": 1.2,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        4,
+        4,
+        2
+      ],
+      "grid_position_flat": 98,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.3333333333333333,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9644796615318114,
+        "mean_r_B": 0.894834067758997,
+        "phase": "DC"
+      }
+    },
+    "grid_0099_epsA=0.9_epsB=0.9_K0=1.4": {
+      "params": {
+        "eps_A": 0.9,
+        "eps_B": 0.9,
+        "K0": 1.4,
+        "K_transition": 0.3,
+        "delta": 0.15
+      },
+      "grid_position": [
+        4,
+        4,
+        3
+      ],
+      "grid_position_flat": 99,
+      "summary": {
+        "dc_fraction": 0.6666666666666666,
+        "sc_a_fraction": 0.0,
+        "sc_b_fraction": 0.3333333333333333,
+        "ds_fraction": 0.0,
+        "intermittent_fraction": 0.0,
+        "mean_r_A": 0.9595292282568929,
+        "mean_r_B": 0.9348115266290628,
+        "phase": "DC"
+      }
+    }
+  },
+  "global_phase_counts": {
+    "DC": 221,
+    "SC_A": 9,
+    "SC_B": 14,
+    "DS": 56
+  },
+  "global_dc_fraction": 0.7366666666666667,
+  "dc_grid_points_count": 100
+}

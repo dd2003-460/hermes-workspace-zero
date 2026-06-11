@@ -1,0 +1,600 @@
+{
+  "summary": {
+    "h0_curvature": "SUPPORTED (curvature ≠ 0)",
+    "mean_curvature": 0.8624733333333333,
+    "std_curvature": 0.3383903928239623,
+    "h2_detour_result": "SUPPORTED",
+    "mean_detour_ratio": -72272651.63378476
+  },
+  "curvatures": [
+    {
+      "concept": "bird",
+      "curvature_strength": 1.0,
+      "eigenvalues": [
+        1e-06,
+        1e-06,
+        0.108519
+      ]
+    },
+    {
+      "concept": "vehicle",
+      "curvature_strength": 1.0,
+      "eigenvalues": [
+        1e-06,
+        1e-06,
+        0.052393
+      ]
+    },
+    {
+      "concept": "land_vehicle",
+      "curvature_strength": 1.0,
+      "eigenvalues": [
+        1e-06,
+        1e-06,
+        0.052944
+      ]
+    },
+    {
+      "concept": "car",
+      "curvature_strength": 1.0,
+      "eigenvalues": [
+        1e-06,
+        1e-06,
+        0.055214
+      ]
+    },
+    {
+      "concept": "train",
+      "curvature_strength": 1.0,
+      "eigenvalues": [
+        1e-06,
+        1e-06,
+        0.070992
+      ]
+    },
+    {
+      "concept": "aircraft",
+      "curvature_strength": 1.0,
+      "eigenvalues": [
+        1e-06,
+        1e-06,
+        0.090487
+      ]
+    },
+    {
+      "concept": "fruit",
+      "curvature_strength": 1.0,
+      "eigenvalues": [
+        1e-06,
+        1e-06,
+        0.070864
+      ]
+    },
+    {
+      "concept": "vegetable",
+      "curvature_strength": 1.0,
+      "eigenvalues": [
+        1e-06,
+        1e-06,
+        0.070864
+      ]
+    },
+    {
+      "concept": "apple",
+      "curvature_strength": 0.9999,
+      "eigenvalues": [
+        1e-06,
+        1e-06,
+        0.017107
+      ]
+    },
+    {
+      "concept": "banana",
+      "curvature_strength": 0.9999,
+      "eigenvalues": [
+        1e-06,
+        1e-06,
+        0.017107
+      ]
+    },
+    {
+      "concept": "dog",
+      "curvature_strength": 0.9819,
+      "eigenvalues": [
+        1e-06,
+        1e-06,
+        0.000109
+      ]
+    },
+    {
+      "concept": "cat",
+      "curvature_strength": 0.9788,
+      "eigenvalues": [
+        1e-06,
+        1e-06,
+        9.4e-05
+      ]
+    },
+    {
+      "concept": "mammal",
+      "curvature_strength": 0.9766,
+      "eigenvalues": [
+        1e-06,
+        1e-06,
+        8.5e-05
+      ]
+    },
+    {
+      "concept": "animal",
+      "curvature_strength": 0.0,
+      "eigenvalues": [
+        1e-06,
+        1e-06,
+        1e-06
+      ]
+    },
+    {
+      "concept": "labrador",
+      "curvature_strength": 0.0,
+      "eigenvalues": [
+        1e-06,
+        1e-06,
+        1e-06
+      ]
+    }
+  ],
+  "path_comparison": [
+    {
+      "concept_pair": [
+        "dog",
+        "labrador"
+      ],
+      "euclidean_distance": 1.0,
+      "geodesic_distance": 2.0,
+      "geodesic_euclidean_ratio": 1.9999999998,
+      "path_length": 3,
+      "information_loss_short": 0.0,
+      "information_loss_sampled": 0.0
+    },
+    {
+      "concept_pair": [
+        "dog",
+        "cat"
+      ],
+      "euclidean_distance": 0.8954651224414818,
+      "geodesic_distance": 0.8954651224414818,
+      "geodesic_euclidean_ratio": 0.9999999998883262,
+      "path_length": 2,
+      "information_loss_short": -1.1102230246251565e-16,
+      "information_loss_sampled": -1.1102230246251565e-16
+    },
+    {
+      "concept_pair": [
+        "dog",
+        "bird"
+      ],
+      "euclidean_distance": 1.0,
+      "geodesic_distance": 2.0,
+      "geodesic_euclidean_ratio": 1.9999999998,
+      "path_length": 3,
+      "information_loss_short": 0.0,
+      "information_loss_sampled": 0.0
+    },
+    {
+      "concept_pair": [
+        "dog",
+        "car"
+      ],
+      "euclidean_distance": 0.886752843915683,
+      "geodesic_distance": 0.8867528439156829,
+      "geodesic_euclidean_ratio": 0.9999999998872289,
+      "path_length": 2,
+      "information_loss_short": 0.0,
+      "information_loss_sampled": 0.0
+    },
+    {
+      "concept_pair": [
+        "dog",
+        "apple"
+      ],
+      "euclidean_distance": 1.0,
+      "geodesic_distance": 2.0,
+      "geodesic_euclidean_ratio": 1.9999999998,
+      "path_length": 3,
+      "information_loss_short": -1.1102230246251565e-16,
+      "information_loss_sampled": -1.1102230246251565e-16
+    },
+    {
+      "concept_pair": [
+        "mathematics",
+        "geometry"
+      ],
+      "euclidean_distance": 1.0,
+      "geodesic_distance": 2.0,
+      "geodesic_euclidean_ratio": 1.9999999998,
+      "path_length": 3,
+      "information_loss_short": 1.1102230246251565e-16,
+      "information_loss_sampled": 1.1102230246251565e-16
+    },
+    {
+      "concept_pair": [
+        "mathematics",
+        "analysis"
+      ],
+      "euclidean_distance": 1.0,
+      "geodesic_distance": 2.0,
+      "geodesic_euclidean_ratio": 1.9999999998,
+      "path_length": 3,
+      "information_loss_short": 0.0,
+      "information_loss_sampled": 0.0
+    },
+    {
+      "concept_pair": [
+        "mathematics",
+        "happiness"
+      ],
+      "euclidean_distance": 1.0,
+      "geodesic_distance": 2.0,
+      "geodesic_euclidean_ratio": 1.9999999998,
+      "path_length": 3,
+      "information_loss_short": 1.1102230246251565e-16,
+      "information_loss_sampled": 1.1102230246251565e-16
+    },
+    {
+      "concept_pair": [
+        "red",
+        "blue"
+      ],
+      "euclidean_distance": 1.0,
+      "geodesic_distance": 1.0,
+      "geodesic_euclidean_ratio": 0.9999999999,
+      "path_length": 2,
+      "information_loss_short": 0.0,
+      "information_loss_sampled": 0.0
+    },
+    {
+      "concept_pair": [
+        "red",
+        "happiness"
+      ],
+      "euclidean_distance": 1.0,
+      "geodesic_distance": 1.0,
+      "geodesic_euclidean_ratio": 0.9999999999,
+      "path_length": 2,
+      "information_loss_short": 1.1102230246251565e-16,
+      "information_loss_sampled": 1.1102230246251565e-16
+    }
+  ],
+  "detour_results": [
+    {
+      "sim": 0,
+      "start": "vehicle",
+      "end": "emotion",
+      "path_length_short": 3,
+      "path_length_detour": 7,
+      "dijkstra_distance": 2.0,
+      "info_loss_short": 1.1102230246251565e-16,
+      "info_loss_detour": -0.049025673939861125,
+      "info_loss_ratio": -490256195.1048955
+    },
+    {
+      "sim": 1,
+      "start": "analysis",
+      "end": "blue",
+      "path_length_short": 2,
+      "path_length_detour": 5,
+      "dijkstra_distance": 1.0,
+      "info_loss_short": 0.0,
+      "info_loss_detour": 0.0,
+      "info_loss_ratio": 0.0
+    },
+    {
+      "sim": 2,
+      "start": "happiness",
+      "end": "labrador",
+      "path_length_short": 3,
+      "path_length_detour": 7,
+      "dijkstra_distance": 2.0,
+      "info_loss_short": 0.0,
+      "info_loss_detour": 1.1102230246251565e-16,
+      "info_loss_ratio": 1.1102230246251565e-06
+    },
+    {
+      "sim": 3,
+      "start": "algebra",
+      "end": "food",
+      "path_length_short": 3,
+      "path_length_detour": 7,
+      "dijkstra_distance": 2.0,
+      "info_loss_short": 1.1102230246251565e-16,
+      "info_loss_detour": -0.017951006922909962,
+      "info_loss_ratio": -179509869.93310887
+    },
+    {
+      "sim": 4,
+      "start": "analysis",
+      "end": "sadness",
+      "path_length_short": 2,
+      "path_length_detour": 5,
+      "dijkstra_distance": 1.0,
+      "info_loss_short": 1.1102230246251565e-16,
+      "info_loss_detour": 1.1102230246251565e-16,
+      "info_loss_ratio": 1.1102217920313606e-06
+    },
+    {
+      "sim": 5,
+      "start": "color",
+      "end": "train",
+      "path_length_short": 3,
+      "path_length_detour": 7,
+      "dijkstra_distance": 2.0,
+      "info_loss_short": 0.0,
+      "info_loss_detour": 0.0,
+      "info_loss_ratio": 0.0
+    },
+    {
+      "sim": 6,
+      "start": "cat",
+      "end": "blue",
+      "path_length_short": 2,
+      "path_length_detour": 5,
+      "dijkstra_distance": 1.0,
+      "info_loss_short": 0.0,
+      "info_loss_detour": 0.0,
+      "info_loss_ratio": 0.0
+    },
+    {
+      "sim": 7,
+      "start": "vehicle",
+      "end": "red",
+      "path_length_short": 3,
+      "path_length_detour": 7,
+      "dijkstra_distance": 2.0,
+      "info_loss_short": 0.0,
+      "info_loss_detour": -0.049025673939861125,
+      "info_loss_ratio": -490256739.39861125
+    },
+    {
+      "sim": 8,
+      "start": "analysis",
+      "end": "car",
+      "path_length_short": 4,
+      "path_length_detour": 9,
+      "dijkstra_distance": 2.584829717101001,
+      "info_loss_short": 0.10379257072474979,
+      "info_loss_detour": 0.0,
+      "info_loss_ratio": 0.0
+    },
+    {
+      "sim": 9,
+      "start": "vehicle",
+      "end": "food",
+      "path_length_short": 3,
+      "path_length_detour": 7,
+      "dijkstra_distance": 2.0,
+      "info_loss_short": 1.1102230246251565e-16,
+      "info_loss_detour": -0.030409347683847066,
+      "info_loss_ratio": -304093139.22726583
+    },
+    {
+      "sim": 10,
+      "start": "red",
+      "end": "land_vehicle",
+      "path_length_short": 3,
+      "path_length_detour": 7,
+      "dijkstra_distance": 2.0,
+      "info_loss_short": 1.1102230246251565e-16,
+      "info_loss_detour": 0.07792636667015684,
+      "info_loss_ratio": 779262801.5460639
+    },
+    {
+      "sim": 11,
+      "start": "labrador",
+      "end": "sadness",
+      "path_length_short": 2,
+      "path_length_detour": 5,
+      "dijkstra_distance": 1.0,
+      "info_loss_short": 0.0,
+      "info_loss_detour": 1.1102230246251565e-16,
+      "info_loss_ratio": 1.1102230246251565e-06
+    },
+    {
+      "sim": 12,
+      "start": "food",
+      "end": "mammal",
+      "path_length_short": 3,
+      "path_length_detour": 7,
+      "dijkstra_distance": 1.8821085513711129,
+      "info_loss_short": 0.03929714954296237,
+      "info_loss_detour": 1.1102230246251565e-16,
+      "info_loss_ratio": 2.8251998801749826e-15
+    },
+    {
+      "sim": 13,
+      "start": "happiness",
+      "end": "vegetable",
+      "path_length_short": 3,
+      "path_length_detour": 7,
+      "dijkstra_distance": 2.0,
+      "info_loss_short": -1.1102230246251565e-16,
+      "info_loss_detour": 0.0,
+      "info_loss_ratio": 0.0
+    },
+    {
+      "sim": 14,
+      "start": "car",
+      "end": "banana",
+      "path_length_short": 4,
+      "path_length_detour": 9,
+      "dijkstra_distance": 2.584829717101001,
+      "info_loss_short": -0.10379257072474979,
+      "info_loss_detour": -0.012583017342701841,
+      "info_loss_ratio": -0.12123235066551957
+    },
+    {
+      "sim": 15,
+      "start": "food",
+      "end": "land_vehicle",
+      "path_length_short": 3,
+      "path_length_detour": 7,
+      "dijkstra_distance": 2.0,
+      "info_loss_short": 0.0,
+      "info_loss_detour": 1.1102230246251565e-16,
+      "info_loss_ratio": 1.1102230246251565e-06
+    },
+    {
+      "sim": 16,
+      "start": "dog",
+      "end": "animal",
+      "path_length_short": 3,
+      "path_length_detour": 7,
+      "dijkstra_distance": 1.8937899378662424,
+      "info_loss_short": -0.03540335404458583,
+      "info_loss_detour": -0.015172866019108278,
+      "info_loss_ratio": -0.42857142736089127
+    },
+    {
+      "sim": 17,
+      "start": "car",
+      "end": "vehicle",
+      "path_length_short": 2,
+      "path_length_detour": 5,
+      "dijkstra_distance": 0.8916813055720019,
+      "info_loss_short": -1.1102230246251565e-16,
+      "info_loss_detour": -0.0569711998213801,
+      "info_loss_ratio": -569711365.7071254
+    },
+    {
+      "sim": 18,
+      "start": "vegetable",
+      "end": "mathematics",
+      "path_length_short": 3,
+      "path_length_detour": 7,
+      "dijkstra_distance": 2.0,
+      "info_loss_short": 0.0,
+      "info_loss_detour": 0.017951006922910073,
+      "info_loss_ratio": 179510069.22910073
+    },
+    {
+      "sim": 19,
+      "start": "dog",
+      "end": "animal",
+      "path_length_short": 3,
+      "path_length_detour": 7,
+      "dijkstra_distance": 1.8937899378662424,
+      "info_loss_short": -0.03540335404458583,
+      "info_loss_detour": -0.015172866019108278,
+      "info_loss_ratio": -0.42857142736089127
+    },
+    {
+      "sim": 20,
+      "start": "animal",
+      "end": "cat",
+      "path_length_short": 3,
+      "path_length_detour": 7,
+      "dijkstra_distance": 2.0,
+      "info_loss_short": -1.1102230246251565e-16,
+      "info_loss_detour": 0.0,
+      "info_loss_ratio": 0.0
+    },
+    {
+      "sim": 21,
+      "start": "train",
+      "end": "fruit",
+      "path_length_short": 3,
+      "path_length_detour": 7,
+      "dijkstra_distance": 2.0,
+      "info_loss_short": 0.0,
+      "info_loss_detour": 0.0021852134068877094,
+      "info_loss_ratio": 21852134.068877093
+    },
+    {
+      "sim": 22,
+      "start": "labrador",
+      "end": "cat",
+      "path_length_short": 3,
+      "path_length_detour": 7,
+      "dijkstra_distance": 2.0,
+      "info_loss_short": -1.1102230246251565e-16,
+      "info_loss_detour": -1.1102230246251565e-16,
+      "info_loss_ratio": -1.1102217920313606e-06
+    },
+    {
+      "sim": 23,
+      "start": "vehicle",
+      "end": "blue",
+      "path_length_short": 2,
+      "path_length_detour": 5,
+      "dijkstra_distance": 1.0,
+      "info_loss_short": 1.1102230246251565e-16,
+      "info_loss_detour": -0.046972204630205905,
+      "info_loss_ratio": -469721524.80640703
+    },
+    {
+      "sim": 24,
+      "start": "happiness",
+      "end": "bird",
+      "path_length_short": 3,
+      "path_length_detour": 7,
+      "dijkstra_distance": 2.0,
+      "info_loss_short": 0.0,
+      "info_loss_detour": 1.1102230246251565e-16,
+      "info_loss_ratio": 1.1102230246251565e-06
+    },
+    {
+      "sim": 25,
+      "start": "aircraft",
+      "end": "analysis",
+      "path_length_short": 3,
+      "path_length_detour": 7,
+      "dijkstra_distance": 1.8781295226529575,
+      "info_loss_short": -0.04062349244901431,
+      "info_loss_detour": 0.0,
+      "info_loss_ratio": 0.0
+    },
+    {
+      "sim": 26,
+      "start": "geometry",
+      "end": "emotion",
+      "path_length_short": 2,
+      "path_length_detour": 5,
+      "dijkstra_distance": 1.0,
+      "info_loss_short": 0.0,
+      "info_loss_detour": -1.1102230246251565e-16,
+      "info_loss_ratio": -1.1102230246251565e-06
+    },
+    {
+      "sim": 27,
+      "start": "vehicle",
+      "end": "bird",
+      "path_length_short": 3,
+      "path_length_detour": 7,
+      "dijkstra_distance": 2.0,
+      "info_loss_short": 1.1102230246251565e-16,
+      "info_loss_detour": -0.014935248479847285,
+      "info_loss_ratio": -149352318.98408952
+    },
+    {
+      "sim": 28,
+      "start": "train",
+      "end": "food",
+      "path_length_short": 3,
+      "path_length_detour": 7,
+      "dijkstra_distance": 2.0,
+      "info_loss_short": 1.1102230246251565e-16,
+      "info_loss_detour": -0.049590395028108136,
+      "info_loss_ratio": -495903399.717709
+    },
+    {
+      "sim": 29,
+      "start": "emotion",
+      "end": "color",
+      "path_length_short": 2,
+      "path_length_detour": 5,
+      "dijkstra_distance": 1.0,
+      "info_loss_short": 0.0,
+      "info_loss_detour": 0.0,
+      "info_loss_ratio": 0.0
+    }
+  ]
+}

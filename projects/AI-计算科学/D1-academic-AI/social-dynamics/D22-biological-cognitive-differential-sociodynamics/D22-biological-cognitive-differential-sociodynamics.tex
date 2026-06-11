@@ -1,0 +1,389 @@
+% D22
+% Auto-generated from markdown source
+% origin: ai
+
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D22}
+\lhead{\thepage}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+\newcommand{\hbarF}{\hbar}
+
+\newtcolorbox{thmbox}[1]{
+  colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+\newtcolorbox{defbox}[1]{
+  colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+
+\begin{document}
+
+\title{D22}
+\author{RALPH Loop}
+\date{}
+\maketitle
+
+\begin{abstract}
+This paper presents D22, formalizing the underlying principles using information-theoretic methods.
+
+\textbf{Keywords}: D22, information theory, formalization.
+\end{abstract}
+
+\tableofcontents
+\section{D22}
+
+
+
+
+\subsection{0.}
+
+
+AI \textbf{/}****
+1. ****
+2. ****
+
+\textbf{D22 }\textbf{** \(\mathcal{M}_{bio}\) }\textbf{ \(\Phi_{pref}\) }\textbf{*}*
+
+
+
+\subsection{1.}
+
+
+\subsubsection{1.1}
+
+
+\textbf{ D22-1 \(\mathcal{M}_{bio}\)}
+\(i\)\textbf{** \(\mathcal{A}_i\) }** \(\mathcal{H}_i\)
+\[\mathcal{M}_{bio}^{(i)} = \text{convex\_hull}(\{\text{constraints}(\mathcal{A}_i, \mathcal{H}_i)\})\]
+
+****
+\(\Omega\) \(i\)
+\[P_i(\omega \mid \text{trajectory}) = \frac{\exp(-\mathcal{L}_i(\text{trajectory}) / \tau)}{Z_i}\]
+
+
+\begin{itemize}
+\item \(\mathcal{L}_i\) \textbf{/}
+\item \(\tau\) ****-
+\item \(Z_i\) ****
+\end{itemize}
+
+
+
+\subsubsection{1.2}
+
+
+\textbf{ D22-2 \(\Phi_{pref}^{(i)}\)}
+\(\mathcal{F}\)
+\[\Phi_{pref}^{(i)}(F) = \mathbb{E}_{x \sim \mathcal{D}_i}\left[\frac{\partial \log P_i(\text{understand } F \mid x)}{\partial \text{complexity}(F)}\right]\]
+
+\textbf{*}\textbf{*  }\textbf{*}*
+
+
+\subsubsection{1.3}
+
+
+\textbf{ D22-3 \(\mathcal{S}_{society}\)}
+**** \(\{\Phi_{pref}^{(1)}, \ldots, \Phi_{pref}^{(N)}\}\)
+\[\mathcal{S}_{society} = \left\langle \Phi_{pref}^{(i)} \right\rangle_{i=1}^{N}\]
+
+****
+\[C_{soc}(\Phi_A, \Phi_B) = \exp\left(-\frac{\|\Phi_A - \Phi_B\|_2^2}{2\sigma_{soc}^2}\right)\]
+
+
+\subsection{2.}
+
+
+\subsubsection{ D22-1}
+
+
+****
+\textbf{*}***
+\[I_{cross}(\mathcal{M}_A, \mathcal{M}_B) = H(P_A) + H(P_B) - H(P_A, P_B)\]
+
+\textbf{D22-1 }
+\[\|\mathcal{M}_{bio}^{(A)} - \mathcal{M}_{bio}^{(B)}\| > \epsilon_0 \implies \exists \omega \in \Omega: I_{cross}(\omega, \mathcal{M}_A) \neq I_{cross}(\omega, \mathcal{M}_B)\]
+
+\textbf{ D22-1a}
+\begin{itemize}
+\item \textbf{ > }  ****
+\item \textbf{*}***
+\end{itemize}
+
+
+
+\subsubsection{ D22-2}
+
+
+****
+**** magnetization
+\[m_{soc}(t) = \left\|\frac{1}{N(t)} \sum_{i \in \text{active}(t)} \Phi_{pref}^{(i)}(t)\right\|_2\]
+
+\textbf{D22-2 }
+\[\exists T_c: \lim_{t \to \infty} m_{soc}(t) = \begin{cases} 0 & t < T_c \text{}\\ \neq 0 & t > T_c \text{}\end{cases}\]
+
+****
+\[T_c = \frac{2\sigma_{soc}^2}{\langle \|\Phi_{pref}^{(i)}\|_2^2 \rangle_i} \cdot \log\left(\frac{N_{critical}}{N_0}\right)\]
+
+\textbf{ D22-2a}
+\begin{itemize}
+\item \textbf{T < Tc}
+\item \textbf{T > Tc}****
+\end{itemize}
+
+
+
+\subsubsection{ D22-3-}
+
+
+****
+\textbf{*}***
+\[\mathcal{I}(S) = P(\exists \omega \notin \bigcup_{i \in S} \text{Reachable}(\Phi_{pref}^{(i)}))\]
+
+\textbf{D22-3 }-U
+\[\mathcal{I}(S) = \alpha \cdot \sigma_{soc}^{-1} \cdot \exp\left(-\frac{(\|m_{soc}\|^2 - \mu_{opt})^2}{2\sigma_{opt}^2}\right) + \beta\]
+
+\(\mu_{opt}\) ****
+
+\textbf{ D22-3a}
+\begin{itemize}
+\item \textbf{homophilous }\(\sigma_{soc}\)
+\item \textbf{hyperconnected }\(\sigma_{soc}\)
+\item ****\(\sigma_{soc} \approx \sigma_{opt}\)
+\end{itemize}
+
+
+
+\subsubsection{ D22-4}
+
+
+****
+\textbf{*}***TAC
+\[\theta_{ij}(t+1) = \theta_{ij}(t) + \eta \cdot \mathbb{I}(|\Phi_{pref}^{(i)} - \Phi_{pref}^{(j)}| < \theta_{ij}(t)) \cdot \Delta\Phi_{ij}\]
+
+\textbf{D22-4 }
+\[\eta > \eta_{critical} = \frac{1}{|\mathcal{N}(j)|} \cdot \frac{\sigma_{soc}}{\max_i \|\Phi_{pref}^{(i)}\|} \implies \exists \text{}\]
+
+****
+****SOC
+\[P(\text{cascadE\_size} = s) \sim s^{-\tau}\]
+
+
+\subsubsection{ D22-5idea}
+
+
+****
+\textbf{ idea }
+\begin{itemize}
+\item Aidea  {release, protect}
+\item B {adopt, ignore}
+\end{itemize}
+
+
+\textbf{payoff }
+\[\begin{array}{c|cc}
+& \text{B: adopt} & \text{B: ignore} \\ \hline
+\text{A: release} & (v_A - c_{leak}, v_B) & (0, 0) \\
+\text{A: protect} & (v_A \cdot \alpha, 0) & (0, 0)
+\end{array}\]
+
+
+\begin{itemize}
+\item \(v_A\)idea
+\item \(c_{leak}\)idea
+\item \(\alpha\)\(\alpha \leq 1\)
+\end{itemize}
+
+
+\textbf{D22-5 }
+****
+\[v_A - c_{leak} < v_A \cdot \alpha \land v_B > 0\]
+
+****
+\[p_A^* = \frac{v_B}{v_B + v_B \cdot \alpha}, \quad p_B^* = \frac{v_A - c_{leak}}{v_A \cdot \alpha}\]
+
+\textbf{ D22-5a}
+\begin{itemize}
+\item ****\(v_B \gg c_{leak}\)  release
+\item ****\(c_{leak} \gg v_A(1-\alpha)\)  protect
+\item ****
+\end{itemize}
+
+
+
+\subsection{3.}
+
+
+\subsubsection{ D22-A}
+
+
+\textbf{ D22-2  D22-4}
+1.  N  Agent \(\Phi_{pref}\)
+2.  \(m_{soc}(t)\)
+3. **** \(T_c\)
+
+
+\subsubsection{ D22-B-}
+
+
+\textbf{ D22-3}
+1. LSTM vs Transformer vs GNN
+2.
+3. ****-U
+
+
+\subsubsection{ D22-Cidea}
+
+
+\textbf{ D22-5}
+1.  idea /
+2.  vs
+3. ****
+
+
+\subsubsection{ D22-D}
+
+
+\textbf{ D22-1}
+1.  AI
+2.  \(I_{cross}\)  \(\|\mathcal{M}_{bio}^{(human)} - \mathcal{M}_{bio}^{(AI)}\|\)
+3. ****
+
+
+\subsection{4.}
+
+
+\subsubsection{4.1 D8}
+
+
+\textbf{D22-D8 }
+\begin{itemize}
+\item D22   D8 ****
+\item D22-4  = D8-2 ****
+\item \textbf{** = }**
+\end{itemize}
+
+
+
+\subsubsection{4.2 D14}
+
+
+\textbf{D22-D14 }
+\begin{itemize}
+\item D22  \(\Phi_{pref}^{(i)}\)  D14 ****
+\item D22-1  = D14-1 ****
+\item \textbf{** = }**
+\end{itemize}
+
+
+
+\subsubsection{4.3 D17}
+
+
+\textbf{D22-D17 }
+\begin{itemize}
+\item D22  \(\mathcal{M}_{bio}\) = D17 ****
+\item D22-3 -U  = D17-2 ****
+\item \textbf{** = }**
+\end{itemize}
+
+
+
+\subsection{5.}
+
+
+\subsubsection{5.1}
+
+
+1. \textbf{D22-1 }
+2. \textbf{D22-2 }
+3. \textbf{D22-3 }
+4. \textbf{D22-5 }idea
+
+\subsubsection{5.2}
+
+
+1. ****\(\Phi_{pref}\)
+2. ****
+3. ****
+
+
+\subsection{6.}
+
+
+\#\#\#
+
+**** \(N\)  \(i\)  \(\mathcal{M}_{bio}^{(i)}\)  \(\Phi_{pref}^{(i)}\)
+
+****
+1. ****\(\|\mathcal{M}_{bio}^{(A)} - \mathcal{M}_{bio}^{(B)}\| > \epsilon_0 \implies \exists \omega: I_{cross}(\omega, \mathcal{M}_A) \neq I_{cross}(\omega, \mathcal{M}_B)\)
+2. ****\(T > T_c \implies m_{soc}(t) \to \text{non-zero}\)
+3. \textbf{-U }\(\mathcal{I}(S) = \mathcal{U}(\sigma_{soc})\)
+4. ****\(\eta > \eta_{crit} \implies\)  + SOC
+5. ****\(v_A(1-\alpha) \approx c_{leak} \implies\)
+
+\textbf{**  }\textbf{ " idea " } vs **
+
+
+*D22  idea *
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Shannon, C.E. (1948). A Mathematical Theory of Communication.
+\bibitem{ref2} Cover, T.M. (2006). Elements of Information Theory.
+\end{thebibliography}
+
+\end{document}

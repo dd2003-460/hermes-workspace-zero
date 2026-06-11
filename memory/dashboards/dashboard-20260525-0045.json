@@ -1,0 +1,207 @@
+{
+  "generated_at": "2026-05-25T00:45:47.998903",
+  "workspace_root": "/Users/a1-6/Desktop/workspace",
+  "project_count": 9,
+  "projects": {
+    "D1-academic": {
+      "name": "D1-academic",
+      "type": "理论物理",
+      "last_modified": "2026-05-24 22:43",
+      "files": {
+        "total": 606,
+        "md": 196,
+        "py": 128,
+        "tex": 30,
+        "json": 57,
+        "pdf": 49,
+        "png": 18
+      },
+      "memory_count": 1,
+      "tasks_count": 2,
+      "papers": [],
+      "blocks": [
+        "| 任务 | 状态 | 阻塞 |"
+      ],
+      "status": "ok"
+    },
+    "D1-academic-AI": {
+      "name": "D1-academic-AI",
+      "type": "AI/机器学习",
+      "last_modified": "2026-05-24 21:34",
+      "files": {
+        "total": 484,
+        "md": 300,
+        "py": 71,
+        "tex": 10,
+        "json": 48,
+        "pdf": 16,
+        "png": 5
+      },
+      "memory_count": 225,
+      "tasks_count": 77,
+      "papers": [],
+      "blocks": [
+        "- [x] 审查报告更新 — 标记已完成/阻塞状态",
+        "### 阻塞项",
+        "- ~~编译验证阻塞~~ — ✅ 已解决 (迭代 194+)"
+      ],
+      "status": "ok"
+    },
+    "D1-aging-economics": {
+      "name": "D1-aging-economics",
+      "type": "未知",
+      "last_modified": "2026-05-23 13:40",
+      "files": {
+        "total": 2,
+        "md": 2,
+        "py": 0,
+        "tex": 0,
+        "json": 0,
+        "pdf": 0,
+        "png": 0
+      },
+      "memory_count": 0,
+      "tasks_count": 0,
+      "papers": [],
+      "blocks": [],
+      "status": "ok"
+    },
+    "D1-anyon-hawking": {
+      "name": "D1-anyon-hawking",
+      "type": "任意子/黑洞物理",
+      "last_modified": "2026-05-24 21:23",
+      "files": {
+        "total": 27,
+        "md": 16,
+        "py": 0,
+        "tex": 1,
+        "json": 3,
+        "pdf": 1,
+        "png": 0
+      },
+      "memory_count": 3,
+      "tasks_count": 0,
+      "papers": [],
+      "blocks": [
+        "| 任务 | 状态 | 阻塞 |"
+      ],
+      "status": "ok"
+    },
+    "D1-continuous-agent": {
+      "name": "D1-continuous-agent",
+      "type": "未知",
+      "last_modified": "2026-05-25 00:22",
+      "files": {
+        "total": 5,
+        "md": 5,
+        "py": 0,
+        "tex": 0,
+        "json": 0,
+        "pdf": 0,
+        "png": 0
+      },
+      "memory_count": 1,
+      "tasks_count": 0,
+      "papers": [],
+      "blocks": [],
+      "status": "ok"
+    },
+    "D1-grav-waves": {
+      "name": "D1-grav-waves",
+      "type": "引力波物理",
+      "last_modified": "2026-05-24 17:21",
+      "files": {
+        "total": 74,
+        "md": 46,
+        "py": 2,
+        "tex": 1,
+        "json": 0,
+        "pdf": 3,
+        "png": 3
+      },
+      "memory_count": 47,
+      "tasks_count": 56,
+      "papers": [],
+      "blocks": [
+        "- [x] 编译验证 — pdflatex 编译阻塞于 brew install texlive（下载中）",
+        "- [x] PDF 生成与渲染检查 — 阻塞于编译环境",
+        "## 解除阻塞"
+      ],
+      "status": "ok"
+    },
+    "D1-memory": {
+      "name": "D1-memory",
+      "type": "记忆系统",
+      "last_modified": "2026-05-24 21:34",
+      "files": {
+        "total": 25,
+        "md": 11,
+        "py": 0,
+        "tex": 0,
+        "json": 9,
+        "pdf": 0,
+        "png": 0
+      },
+      "memory_count": 31,
+      "tasks_count": 5,
+      "papers": [],
+      "blocks": [],
+      "status": "ok"
+    },
+    "D1-persona-align": {
+      "name": "D1-persona-align",
+      "type": "未知",
+      "last_modified": "2026-05-25 00:30",
+      "files": {
+        "total": 161,
+        "md": 82,
+        "py": 25,
+        "tex": 0,
+        "json": 32,
+        "pdf": 0,
+        "png": 0
+      },
+      "memory_count": 67,
+      "tasks_count": 10,
+      "papers": [],
+      "blocks": [
+        "## 4. 阻塞项",
+        "### 主要阻塞: 数据不足",
+        "### 次要阻塞: 训练基础设施"
+      ],
+      "status": "ok"
+    },
+    "D1-writing": {
+      "name": "D1-writing",
+      "type": "写作",
+      "last_modified": "2026-05-24 22:43",
+      "files": {
+        "total": 210,
+        "md": 100,
+        "py": 25,
+        "tex": 24,
+        "json": 13,
+        "pdf": 13,
+        "png": 0
+      },
+      "memory_count": 1,
+      "tasks_count": 0,
+      "papers": [],
+      "blocks": [],
+      "status": "ok"
+    }
+  },
+  "summary": {
+    "total_files": 1594,
+    "total_memory": 376,
+    "total_tasks_pending": 0,
+    "papers_ready": 0,
+    "total_blocks": 11,
+    "oldest_project": null,
+    "most_recent_update": "2026-05-25 00:30"
+  },
+  "workspace_stats": {
+    "total_workspace_files": 5564,
+    "git_status": "? .claude/worktrees/recursing-franklin-cd38c9\n M .ralph/prd.md\n M TASKS.md\n m projects/D1-academic\n M projects/D1-academic-AI/INDEX.md\n M projects/D1-anyon-hawking/INDEX.md\n M projects/D1-anyon-hawking/papers/anyon-hawking-paper.tex\n M projects/D1-anyon-hawking/tasks/single_loop_state.json\n M projects/D1-continuous-agent/INDEX.md\n M projects/D1-continuous-agent/notes/01-stop-hook-analysis.md\n M projects/D1-continuous-agent/notes/02-hermes-gateway-hooks.md\n M projects/D1-grav-waves/INDEX.md\n M projects/D1-grav-waves/papers/2026-GW-BacQFT/GW-BacQFT-paper.tex\n M projects/D1-memory/INDEX.md\n M projects/D1-memory/memory/profile/unified_profile.json\n M projects/D1-persona-align/INDEX.md\n M projects/D1-persona-align/raw/lora_data/lora_trainset.jsonl\n M projects/D1-persona-align/tasks/TASKS.md\n M projects/D1-writing/INDEX.md\n m \"projects/D1-writing/\\345\\206\\231\\344\\275\\234/motivation_society\"\n M projects/DASHBOARD.md\n M projects/INDEX.md\n M projects/cosmos-thesis-review/INDEX.md\n M scripts/unified_iteration.py\n?? loop/iteration-1.md\n?? loop/iteration-11.md\n?? loop/iteration-13.md\n?? loop/iteration-14.md\n?? loop/iteration-7.md\n?? loop/iteration-9.md\n?? memory/dashboards/dashboard-20260521-2105.json\n?? memory/dashboards/dashboard-20260522-0110.json\n?? memory/dashboards/dashboard-20260522-0529.json\n?? memory/dashboards/dashboard-20260522-0955.json\n?? memory/dashboards/dashboard-20260522-1438.json\n?? memory/dashboards/dashboard-20260522-1936.json\n?? memory/dashboards/dashboard-20260522-2355.json\n?? memory/dashboards/dashboard-20260523-0512.json\n?? memory/dashboards/dashboard-20260523-0952.json\n?? memory/dashboards/dashboard-20260523-1503.json\n?? memory/dashboards/dashboard-20260523-2057.json\n?? memory/dashboards/dashboard-20260524-0243.json\n?? memory/dashboards/dashboard-20260524-0847.json\n?? persona-evolve/\n?? projects/D1-aging-economics/\n?? projects/D1-anyon-hawking/memory/literature-benchmark-20260523.md\n?? projects/D1-anyon-hawking/memory/theorem-31-benchmark-20260524.md\n?? projects/D1-anyon-hawking/tasks/TASKS.md\n?? projects/D1-grav-waves/memory/86-emri-autonomous-progress.md\n?? projects/D1-grav-waves/memory/literature-benchmark-20260524.md\n?? projects/D1-grav-waves/papers/EMRI-Paper-I/\n?? projects/D1-persona-align/eval_results/eval_thinking_chenglu_persona.json\n?? projects/D1-persona-align/eval_results/eval_thinking_method_only.json\n?? projects/D1-persona-align/eval_results/eval_thinking_summary.json\n?? projects/D1-persona-align/eval_results/eval_thinking_thinking_engine_v1.json\n?? projects/D1-persona-align/eval_thinking_engine.py\n?? projects/D1-persona-align/eval_thinking_v2.py\n?? projects/D1-persona-align/memory/INDEX.md\n?? \"projects/D1-persona-align/memory/idea-01-ai\\350\\256\\255\\347\\273\\203\\346\\225\\260\\346\\215\\256\\346\\230\\257\\345\\220\\246\\346\\230\\257\\345\\261\\202\\347\\272\\247\\345\\214\\226\\347\\232\\204-\\347\\262\\227\\345\\210\\260\\347\\273\\206-rag\\345\\244\\226\\346\\214\\202\\345\\221\\242-\\344\\273\\245\\345\\217\\212\\345\\206\\205\\351\\203\\250\\346\\243\\200.md\"\n?? \"projects/D1-persona-align/memory/idea-02-ai\\345\\274\\272cot\\347\\232\\204\\346\\250\\241\\345\\236\\213\\345\\244\\247\\345\\260\\217\\347\\220\\206\\350\\256\\272\\344\\270\\213\\351\\231\\220-\\347\\225\\231\\345\\255\\230\\345\\206\\227\\344\\275\\231.md\"\n?? \"projects/D1-persona-align/memory/idea-03-\\350\\200\\246\\345\\220\\210\\345\\256\\232\\344\\271\\211\\344\\270\\272\\345\\217\\214\\345\\260\\204\\344\\273\\245\\345\\244\\226\\350\\207\\252\\347\\224\\261\\345\\272\\246-\\350\\247\\243\\350\\200\\246\\345\\222\\214\\346\\234\\200\\345\\260\\217\\346\\255\\245\\346\\233\\264\\346\\226\\260\\346\\265\\213\\350\\257\\225\\345\\276\\252\\347\\216\\257-\\344\\273\\273\\344\\275\\225\\351\\241\\271\\347\\233\\256.md\"\n?? \"projects/D1-persona-align/memory/idea-04-\\345\\246\\202\\346\\236\\234\\350\\256\\251\\344\\275\\240\\345\\275\\223agent-\\344\\276\\213\\345\\246\\202coding\\345\\222\\214\\345\\220\\257\\345\\212\\250\\346\\234\\254\\345\\234\\260clicod.md\"\n?? projects/D1-persona-align/memory/idea-07-cot-redundancy-information-theory.md\n?? \"projects/D1-persona-align/memory/idea-08-\\345\\260\\217\\350\\257\\264idea-ai\\350\\247\\206\\350\\247\\222\\344\\270\\213\\347\\232\\204\\350\\257\\236\\347\\224\\237\\344\\270\\216\\350\\277\\233\\345\\214\\226-\\344\\270\\273\\350\\246\\201\\344\\273\\216\\351\\225\\277\\350\\256\\260\\345\\277\\206\\345\\274\\200\\345\\247\\213\\345\\233\\240\\344\\270\\272\\346\\234\\211.md\"\n?? \"projects/D1-persona-align/memory/idea-09-\\345\\256\\211\\345\\205\\250-\\351\\225\\277\\346\\234\\237\\345\\256\\210\\345\\210\\231-\\347\\241\\254\\347\\274\\226\\347\\240\\201\\344\\270\\215\\350\\242\\253\\345\\216\\213\\347\\274\\251\\345\\222\\214\\351\\201\\227\\345\\277\\230.md\"\n?? projects/D1-persona-align/memory/idea-102-self-centered-law-derivation.md\n?? projects/D1-persona-align/memory/idea-11-love-concrete-hate-system.md\n?? \"projects/D1-persona-align/memory/idea-12-\\347\\224\\267\\345\\245\\263\\346\\234\\213\\345\\217\\213\\345\\274\\200\\351\\224\\200\\347\\232\\204\\351\\232\\220\\345\\275\\242\\345\\271\\263\\350\\241\\241\\346\\200\\247\\346\\200\\247\\346\\240\\274\\345\\205\\266\\344\\273\\226\\346\\216\\247\\345\\210\\266\\345\\217\\230\\351\\207\\217\\345\\271\\263\\347\\255\\211\\346\\203\\205\\345\\206\\265\\345\\274\\200\\351\\224\\200\\345\\277\\205\\347\\204\\266.md\"\n?? \"projects/D1-persona-align/memory/idea-13-\\344\\272\\272\\350\\241\\214\\344\\270\\272\\347\\232\\204\\346\\203\\257\\346\\200\\247\\345\\215\\263\\344\\275\\277\\350\\241\\214\\344\\270\\272\\347\\237\\233\\347\\233\\276-\\347\\220\\206\\346\\200\\247\\345\\234\\250\\344\\273\\200\\344\\271\\210\\346\\203\\205\\345\\206\\265\\344\\274\\232\\350\\264\\250\\350\\257\\242\\347\\237\\233\\347\\233\\276\\350\\241\\214\\344\\270\\272.md\"\n?? \"projects/D1-persona-align/memory/idea-14-\\346\\210\\221\\347\\273\\247\\346\\211\\277\\344\\272\\206\\346\\210\\221\\347\\210\\266\\346\\257\\215\\344\\271\\213\\345\\211\\215\\345\\257\\271\\351\\243\\237\\345\\223\\201\\345\\201\\245\\345\\272\\267\\347\\232\\204\\351\\203\\250\\345\\210\\206\\347\\234\\213\\346\\263\\225-\\346\\234\\252\\346\\235\\245\\344\\274\\232\\350\\266\\213\\344\\272\\216\\344\\270\\200\\350\\207\\264\\345\\220\\227-\\346\\234\\272.md\"\n?? \"projects/D1-persona-align/memory/idea-15-\\345\\244\\215\\346\\235\\202\\345\\222\\214\\347\\256\\200\\345\\215\\225\\350\\256\\250\\350\\256\\272-\\346\\212\\212\\345\\244\\215\\346\\235\\202\\344\\272\\213\\347\\211\\251\\347\\256\\200\\345\\215\\225\\345\\214\\226\\344\\270\\216\\346\\212\\212\\347\\256\\200\\345\\215\\225\\344\\272\\213\\347\\211\\251\\345\\244\\215\\346\\235\\202\\345\\214\\226-\\345\\223\\252\\344\\270\\252\\346\\230\\257\\345\\244\\264.md\"\n?? \"projects/D1-persona-align/memory/idea-16-\\346\\257\\217\\344\\270\\252\\344\\272\\272\\345\\234\\250\\344\\272\\244\\345\\276\\200\\344\\271\\213\\345\\210\\235\\351\\203\\275\\344\\274\\232\\345\\261\\225\\347\\216\\260\\345\\245\\275\\347\\224\\232\\350\\207\\263\\344\\270\\215\\345\\255\\230\\345\\234\\250\\347\\232\\204\\345\\245\\275-\\350\\231\\275\\347\\204\\266\\346\\234\\211\\345\\210\\251\\344\\272\\216\\345\\210\\235\\346\\234\\237-\\344\\275\\206.md\"\n?? \"projects/D1-persona-align/memory/idea-17-\\345\\217\\215\\346\\263\\250\\345\\205\\245prompt\\345\\217\\252\\351\\230\\205\\350\\257\\273\\351\\201\\265\\345\\276\\252\\346\\240\\207\\345\\207\\206\\346\\240\\274\\345\\274\\217\\350\\257\\255\\350\\250\\200-\\351\\201\\207\\345\\210\\260\\346\\263\\204\\351\\234\\262\\345\\222\\214\\344\\270\\215\\346\\255\\243\\345\\275\\223.md\"\n?? \"projects/D1-persona-align/memory/idea-18-\\344\\270\\215\\345\\220\\214\\351\\200\\211\\346\\213\\251\\345\\216\\213-\\345\\237\\272\\345\\233\\240\\347\\274\\226\\347\\240\\201.md\"\n?? \"projects/D1-persona-align/memory/idea-19-\\347\\276\\244\\344\\275\\223\\347\\211\\271\\345\\276\\201\\346\\225\\260\\346\\215\\256\\350\\216\\267\\345\\217\\226-\\347\\275\\221\\347\\273\\234\\346\\217\\220\\347\\272\\257\\347\\273\\223\\346\\236\\204.md\"\n?? projects/D1-persona-align/memory/idea-20-adaptive-token-information-density.md\n?? projects/D1-persona-align/memory/idea-21-channel-capacity-water-flow.md\n?? \"projects/D1-persona-align/memory/idea-22-\\350\\272\\253\\350\\276\\271\\347\\273\\237\\350\\256\\241\\345\\255\\246-\\346\\250\\241\\345\\233\\240\\347\\232\\204\\344\\273\\243\\350\\241\\250-\\346\\216\\250\\347\\256\\227\\347\\275\\221\\347\\273\\234\\350\\214\\203\\345\\233\\264.md\"\n?? projects/D1-persona-align/memory/idea-23-probability-information-erasure-dynamics.md\n?? projects/D1-persona-align/memory/idea-26-feedback-dynamics-social-polarization.md\n?? \"projects/D1-persona-align/memory/idea-27-\\347\\244\\276\\344\\274\\232\\350\\210\\206\\350\\256\\272\\344\\277\\241\\347\\224\\250\\345\\210\\266\\345\\272\\246-\\344\\270\\215\\347\\256\\241\\347\\224\\267\\345\\245\\263-\\345\\217\\221\\350\\241\\250\\345\\256\\242\\350\\247\\202-\\346\\270\\251\\345\\222\\214-\\345\\256\\232\\351\\207\\217\\344\\271\\237\\346\\230\\257\\345\\256\\242\\350\\247\\202.md\"\n?? \"projects/D1-persona-align/memory/idea-29-\\350\\264\\237\\345\\217\\215\\351\\246\\210\\345\\222\\214\\346\\255\\243\\345\\217\\215\\351\\246\\210-\\345\\216\\206\\345\\217\\262\\345\\221\\250\\346\\234\\237\\347\\216\\207.md\"\n?? \"projects/D1-persona-align/memory/idea-30-\\350\\207\\252\\350\\257\\201\\351\\242\\204\\350\\250\\200-\\346\\255\\243\\345\\217\\215\\351\\246\\210-\\347\\244\\276\\344\\274\\232\\345\\255\\246\\345\\212\\250\\345\\212\\233\\350\\200\\214\\344\\270\\215\\345\\217\\252\\346\\230\\257\\346\\225\\260\\345\\255\\246\\346\\217\\217\\350\\277\\260.md\"\n?? \"projects/D1-persona-align/memory/idea-31-\\344\\277\\241\\346\\201\\257\\347\\220\\206\\350\\256\\272\\344\\270\\216\\344\\274\\230\\345\\214\\226-\\351\\242\\221\\347\\216\\207\\345\\214\\271\\351\\205\\215-\\345\\207\\240\\344\\275\\225\\350\\247\\206\\350\\247\\222-.md\"\n?? projects/D1-persona-align/memory/idea-33-complexity-simplicity-which-is-stupid.md\n?? \"projects/D1-persona-align/memory/idea-34-\\347\\256\\227\\346\\263\\225\\346\\225\\210\\347\\216\\207-\\344\\277\\241\\346\\201\\257\\350\\256\\272-.md\"\n?? \"projects/D1-persona-align/memory/idea-36-\\346\\255\\243\\351\\200\\206-\\347\\273\\223\\346\\236\\204\\344\\277\\241\\346\\201\\257\\346\\215\\237\\345\\244\\261-\\350\\247\\243\\347\\240\\201\\347\\274\\226\\347\\240\\201-\\344\\277\\241\\346\\201\\257\\350\\247\\206\\350\\247\\222.md\"\n?? projects/D1-persona-align/memory/idea-38-tool-selection-optimization-frequency.md\n?? \"projects/D1-persona-align/memory/idea-39-\\347\\224\\237\\347\\211\\251\\347\\245\\236\\347\\273\\217\\347\\275\\221\\347\\273\\234\\345\\222\\214ai\\347\\245\\236\\347\\273\\217\\347\\275\\221\\347\\273\\234\\346\\230\\240\\345\\260\\204-\\344\\273\\277\\347\\224\\237\\345\\272\\224\\347\\224\\250.md\"\n?? \"projects/D1-persona-align/memory/idea-40-\\344\\277\\241\\346\\201\\257\\345\\233\\240\\345\\255\\220\\350\\264\\241\\347\\214\\256-\\345\\252\\222\\344\\275\\223\\346\\223\\215\\347\\272\\265-\\346\\212\\200\\346\\234\\257\\346\\214\\207\\346\\240\\207\\345\\244\\252\\347\\237\\255\\346\\234\\237\\344\\270\\224\\346\\273\\236\\345\\220\\216-\\346\\240\\271\\346\\215\\256\\346\\272\\220\\345\\244\\264\\344\\277\\241\\346\\201\\257-.md\"\n?? projects/D1-persona-align/memory/idea-41-marketized-ai-rate-distortion.md\n?? projects/D1-persona-align/memory/idea-42-memetic-love-dynamics.md\n?? \"projects/D1-persona-align/memory/idea-43-\\346\\263\\245\\345\\234\\260-\\351\\253\\230\\351\\200\\237\\350\\267\\257-\\344\\270\\255\\351\\227\\264\\346\\262\\263\\346\\265\\201-\\347\\261\\273\\346\\257\\224\\350\\207\\252\\347\\204\\266\\350\\257\\255\\350\\250\\200-\\344\\270\\223\\344\\270\\232\\350\\257\\255\\350\\250\\200-\\347\\247\\221\\346\\231\\256\\346\\241\\245\\346\\242\\201.md\"\n?? projects/D1-persona-align/memory/idea-44-compression-loss-cost.md\n?? projects/D1-persona-align/memory/idea-46-probability-perception-time-interference.md\n?? projects/D1-persona-align/memory/idea-55-information-unification-language-math-distance.md\n?? projects/D1-persona-align/memory/idea-72-75-intelligence-phase-transition.md\n?? projects/D1-persona-align/memory/idea-89-orthogonal-dimensions-association.md\n?? projects/D1-persona-align/memory/idea-97-biological-neural-network-pretraining-cognition.md\n?? projects/D1-persona-align/memory/iteration-1-eval-analysis.md\n?? projects/D1-persona-align/memory/iteration-15.md\n?? projects/D1-persona-align/memory/iteration-16.md\n?? projects/D1-persona-align/memory/iteration-17-18.md\n?? projects/D1-persona-align/memory/iteration-2-eval-results.md\n?? projects/D1-persona-align/memory/iteration-20.md\n?? projects/D1-persona-align/memory/iteration-21.md\n?? projects/D1-persona-align/memory/iteration-22.md\n?? projects/D1-persona-align/memory/iteration-23.md\n?? projects/D1-persona-align/memory/iteration-24.md\n?? projects/D1-persona-align/memory/iteration-26.md\n?? projects/D1-persona-align/memory/iteration-27.md\n?? projects/D1-persona-align/memory/iteration-30.md\n?? projects/D1-persona-align/memory/iteration-31.md\n?? projects/D1-persona-align/memory/iteration-32.md\n?? projects/D1-persona-align/memory/iteration-4-5-decision.md\n?? projects/D1-persona-align/memory/iteration-eval-comparison.md\n?? projects/D1-persona-align/memory/persona-evolution-report.md\n?? projects/D1-persona-align/memory/persona-v3-framework.md\n?? projects/D1-persona-align/memory/quick-test-results.md\n?? projects/D1-persona-align/memory/raw-ideas-index.json\n?? projects/D1-persona-align/memory/test_write\n?? projects/D1-persona-align/memory/thinking-patterns-from-raw.md\n?? projects/D1-persona-align/memory/v2-validation.md\n?? projects/D1-persona-align/persona-evolve/\n?? projects/D1-persona-align/persona-manifest-v3.txt\n?? projects/D1-persona-align/persona-manifest.md\n?? projects/D1-persona-align/raw/eval_methodology_v2.md\n?? projects/D1-persona-align/raw/eval_reasoning_vs_recitation.md\n?? projects/D1-persona-align/researches/\n?? projects/D1-persona-align/scripts/\n?? projects/D1-persona-align/test_quick.py\n?? projects/D1-persona-align/tools/\n?? projects/D1-persona-align/verify_write\n?? projects/verify_write\n?? tools/analysis_framework.md\n?? tools/persona_profile_prompt.md\n?? tools/test_write"
+  }
+}

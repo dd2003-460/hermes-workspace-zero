@@ -1,0 +1,400 @@
+% D32
+% Auto-generated from markdown source
+% origin: ai
+
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D32}
+\lhead{\thepage}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+\newcommand{\hbarF}{\hbar}
+
+\newtcolorbox{thmbox}[1]{
+  colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+\newtcolorbox{defbox}[1]{
+  colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+
+\begin{document}
+
+\title{D32}
+\author{RALPH Loop}
+\date{}
+\maketitle
+
+\begin{abstract}
+This paper presents D32, formalizing the underlying principles using information-theoretic methods.
+
+\textbf{Keywords}: D32, information theory, formalization.
+\end{abstract}
+
+\tableofcontents
+\section{D32}
+
+
+
+
+\subsection{0.}
+
+
+\textbf{D32  \(\hat{Y}\)  \(\epsilon_{obs}\)}  ****
+
+1. \(H(Y| \hat{Y}) \geq H(Y | \text{Observations}) - \mathcal{I}_{model}\)
+2.   /
+3. """"****
+
+
+
+\subsection{1.}
+
+
+\subsubsection{1.1}
+
+
+\textbf{ D32-1}
+****\(\tilde{X} = X + \epsilon\) \(\epsilon \sim \mathcal{N}(0, \sigma_{obs}^2 I)\)
+****\(\eta = 1 - D_{KL}(p_{\tilde{X}|X} || \delta_{X})\)
+
+\textbf{D32-1 }
+\[H(Y | M(\tilde{X})) \geq H(Y | X) - I(X; Y) + D_{KL}(p_{\tilde{X}} || p_X)\]
+
+****
+
+\[H(Y | M(\tilde{X})) = H(Y | \hat{Y}) \geq H(Y | \tilde{X})\]
+
+\[= H(Y | X) + H(\tilde{X} | X) - H(\tilde{X} | Y)\]
+
+Jensen-Shannon \(D_{KL}(p_{\tilde{X}} || p_X) \leq H(\tilde{X}|X)\)
+
+\[\implies H(Y | M(\tilde{X})) \geq H(Y | X) - I(X; Y) + D_{KL}(p_{\tilde{X}} || p_X)\]
+
+\textbf{ D32-1a}
+\begin{itemize}
+\item \(\sigma_{obs}\)
+\item \(I(X; Y)\)
+\item ****
+\end{itemize}
+
+
+
+\subsubsection{1.2}
+
+
+\textbf{ D32-2}
+**** \(p_\epsilon\) \(p_\epsilon\)  \(p_\epsilon\)
+
+\textbf{D32-2 }
+\[\min_{M} H(\epsilon | M(\tilde{X})) \geq H(\epsilon) - \log \frac{1}{\epsilon_{estimation}}\]
+
+****
+\(\hat{p}_\epsilon\)  \(N\)
+\[H(\epsilon | \hat{p}_\epsilon) \geq H(\epsilon) - \frac{\log N}{2} + O(1)\]
+
+****
+
+\textbf{ D32-2a}
+-
+\begin{itemize}
+\item denoising \(N \geq 2^{H(\epsilon) + c}\)
+\end{itemize}
+
+
+
+\subsection{2.}
+
+
+\subsubsection{ D32-1}
+
+
+****
+****
+\[\mathcal{P}(M) = H(Y) - H(Y | M(\tilde{X}))\]
+
+\textbf{D32-1 }
+\[\mathcal{P}(M) \leq H(Y) - H(Y | X) + I(X; \tilde{X}) - D_{KL}(p_{\tilde{X}} || p_X)\]
+
+****
+D32-1
+\[\mathcal{P}(M) = I(\tilde{X}; Y | M) \leq I(\tilde{X}; Y) = I(X; Y) - I(X; \tilde{X}|Y) + I(X; \tilde{X})\]
+
+\[\leq H(Y) - H(Y|X) + I(X; \tilde{X}) - D_{KL}(p_{\tilde{X}} || p_X)\]
+
+\textbf{ D32-1a}
+\[\mathcal{P}(M) \leq H(Y) - H(Y | X) - \epsilon_{obs}\]
+****
+
+
+\subsubsection{ D32-2-}
+
+
+****
+\textbf{-}
+\[\mathcal{J}(\eta, |M|) = \alpha \cdot H(Y|M(\tilde{X})) + \beta \cdot |M| + \gamma \cdot C_{obs}(\eta)\]
+
+\textbf{D32-2 -}
+\[\frac{\partial \mathcal{P}}{\partial \eta} \cdot \frac{\partial \eta}{\partial |M|} + \frac{\partial \mathcal{P}}{\partial |M|} \cdot \frac{\partial |M|}{\partial \eta} \geq 0\]
+
+****
+
+1.  \(C_{obs}(\eta)\)
+2. ""
+
+\(I(X; \tilde{X})\)
+\[\frac{\partial I(X; \tilde{X})}{\partial |M|} \approx \frac{\partial I(X; \tilde{X})}{\partial \eta}\]
+
+
+\subsubsection{ D32-3}
+
+
+****
+\textbf{""}
+\[R(|M|, \eta) = \frac{d\mathcal{P}}{d|M|} = \frac{\partial \mathcal{P}}{\partial \eta} \cdot \frac{\partial \eta}{\partial |M|}\]
+
+\textbf{D32-3 }
+\[\lim_{|M| \to \infty} \mathcal{P}(M, \eta) = H(Y) - H(Y|X) - D_{KL}(p_{\tilde{X}} || p_X)\]
+
+****
+
+\[\lim_{|M| \to \infty} I(\tilde{X}; Y | M) = I(\tilde{X}; Y) = I(X; Y) - I(X; Y | \tilde{X})\]
+
+\(I(X; Y | \tilde{X})\)  \(\tilde{X}\)
+
+\textbf{ D32-3a}
+\begin{itemize}
+\item \textbf{ +   }
+\item ****\(\mathcal{P}_{max} = I(X; Y) - D_{obs}\)
+\end{itemize}
+
+
+
+\subsubsection{ D32-4-}
+
+
+****
+\textbf{-}
+\(\tilde{X}_t\)   \(\hat{Y}_t\)   \(Y_t\)   \(M_{t+1}\)
+
+\textbf{D32-4 }
+\[\lim_{t \to \infty} \mathbb{E}[H(Y_t | \hat{Y}_t)] = H(Y) - I(X; Y) + \delta(\eta, M_0)\]
+
+****
+\textbf{*}***
+\[H(Y_t | \hat{Y}_t) = H(Y_t | Y_{t-1}, \ldots, Y_0, \hat{Y}_{t-1})\]
+
+****
+\[\lim_{t \to \infty} H(Y_t | \text{past}) = H(Y_t | X_t) + D_{KL}(p_{\tilde{X}} || p_X)\]
+
+
+\subsubsection{ D32-5}
+
+
+****
+****""""
+
+\textbf{D32-5 }
+\[\exists \epsilon^{(k)} > 0 : H(\epsilon^{(k)} | M(\tilde{\epsilon}^{(k)})) \geq H(\epsilon^{(k-1)}) - \log(N_{k-1})\]
+
+****
+""
+\[\tilde{X} = X + \epsilon^{(1)}\]
+\[\tilde{\epsilon}^{(k)} = \epsilon^{(k-1)} + \epsilon^{(k)}\]
+
+****
+\[H(\epsilon^{(k)} | M(\tilde{\epsilon}^{(k)})) \geq H(\epsilon^{(k-1)}) - \log(N_{k-1})\]
+D32-2
+
+\textbf{ D32-5a}
+\begin{itemize}
+\item ****
+\end{itemize}
+
+-
+\begin{itemize}
+\item \textbf{"" \(k_{opt}\)}
+\end{itemize}
+
+
+
+\subsection{3.}
+
+
+\subsubsection{ D32-A}
+
+
+\textbf{ D32-1}
+1. - \(\rho = \sigma_{signal} / \sigma_{noise}\)  0.1  100
+2.
+3.  vs
+4. **** \(\rho\)
+
+
+\subsubsection{ D32-B-}
+
+
+\textbf{ D32-2}
+1.  \(\eta\) \(|M|\)
+2.  \(\frac{d\mathcal{P}}{d|M|}\)
+3.  \(\eta\)
+4. ****
+
+
+\subsubsection{ D32-C}
+
+
+\textbf{ D32-3}
+1.
+2.
+3.  \(H(Y) - H(Y|X) - D_{obs}\)
+4. ****
+
+
+\subsubsection{ D32-D}
+
+
+\textbf{ D32-5}
+1. 2-5
+2.
+3.  \(H(\epsilon^{(k)}) \sim H(\epsilon^{(k-1)}) - c \log N\)
+4. ****
+
+
+\subsection{4.}
+
+
+\subsubsection{4.1 D30}
+
+
+\textbf{D32-D30 }
+\begin{itemize}
+\item D30-3 \textbf{RAG }  D32-2 ****
+\item D30-1 \textbf{** = D32-4 }**
+\item ****RAG
+\end{itemize}
+
+
+
+\subsubsection{4.2 D31}
+
+
+\textbf{D32-D31 }
+\begin{itemize}
+\item D31-3 \textbf{**  D32-1 }**
+\item D31-2 \textbf{** = D32-2 }**
+\item ****"" =
+\end{itemize}
+
+
+
+\subsubsection{4.3 D25}
+
+
+\textbf{D32-D25 }
+\begin{itemize}
+\item D25-2 \textbf{**  D32-4 }**
+\item D25-3 \textbf{** = D32-5 }**
+\item \textbf{** = }**
+\end{itemize}
+
+
+
+\subsection{5.}
+
+
+\subsubsection{5.1}
+
+
+1. \textbf{D32-1 }
+2. \textbf{D32-3 }
+3. \textbf{D32-5 }
+
+\subsubsection{5.2}
+
+
+1. ****
+2. ****
+3. ****
+
+
+\subsection{6.}
+
+
+\#\#\#
+
+**** \(Y = f(X) + \epsilon\) \(\tilde{X} = X + \eta\) \(|M|\)
+
+****
+1. ****\(\mathcal{P}(M) \leq H(Y) - H(Y | X) - D_{KL}(p_{\tilde{X}} || p_X)\)
+2. ****\(\frac{\partial \mathcal{P}}{\partial \eta} + \frac{\partial \mathcal{P}}{\partial |M|} \geq 0\)
+3. ****\(\lim_{|M| \to \infty} \mathcal{P} = I(X; Y) - D_{obs}\)
+4. ****\(\lim_{t \to \infty} \mathbb{E}[H(Y_t | \hat{Y}_t)] = H(Y) - I(X; Y) + \delta\)
+5. ****\(\exists k_{opt}\)
+
+\textbf{*}***
+
+\textbf{**""}\textbf{  }**
+
+
+*D32 *
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Shannon, C.E. (1948). A Mathematical Theory of Communication.
+\bibitem{ref2} Cover, T.M. (2006). Elements of Information Theory.
+\end{thebibliography}
+
+\end{document}

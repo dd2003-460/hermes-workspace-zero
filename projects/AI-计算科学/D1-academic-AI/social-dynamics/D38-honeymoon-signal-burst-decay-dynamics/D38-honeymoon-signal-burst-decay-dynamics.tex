@@ -1,0 +1,437 @@
+% D38   +
+% Auto-generated from markdown source
+% origin: ai
+
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D38   +}
+\lhead{\thepage}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+\newcommand{\hbarF}{\hbar}
+
+\newtcolorbox{thmbox}[1]{
+  colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+\newtcolorbox{defbox}[1]{
+  colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+
+\begin{document}
+
+\title{D38   +}
+\author{RALPH Loop}
+\date{}
+\maketitle
+
+\begin{abstract}
+This paper presents D38   +, formalizing the underlying principles using information-theoretic methods.
+
+\textbf{Keywords}: D38   +, information theory, formalization.
+\end{abstract}
+
+\tableofcontents
+\section{D38   +}
+
+
+
+
+\subsection{0.}
+
+
+\textbf{D38 signal overshoot}
+
+1. ****t  [0, T\_honeymoon] \(s(t) > s_{true}\)
+2. ****\(s(t) \to s_{true} + \delta\)
+3. \textbf{*}\textbf{*}**
+
+
+
+\subsection{1.}
+
+
+\subsubsection{1.1}
+
+
+\textbf{ D38-1}
+\begin{itemize}
+\item \(\theta \in \Theta\)/
+\item \(s \in S\)
+\item \(a \in A\)//
+\item \(U_i(s, \theta, a)\)\(i \in \{sender, receiver\}\)
+\end{itemize}
+
+
+\textbf{ D38-2}
+\[\mathcal{G}_{time} = (\text{Phase I: Attraction}, \text{Phase II: Maintenance})\]
+
+\textbf{Phase It  [0, T\_h]}
+\[s_{sender}^* = \arg\max_s P(\text{accept} | s) \cdot R_{attraction} - C_I(s)\]
+
+\textbf{Phase IIt > T\_h}
+\[s_{sender}^* = \arg\max_s P(\text{stay} | s) \cdot R_{maintenance} - C_{II}(s)\]
+
+
+\subsubsection{1.2}
+
+
+\textbf{ D38-3}
+\[\epsilon(t) = \frac{s(t) - \theta}{\theta}\]
+
+\textbf{D38-1 }
+
+\[\epsilon^*(t) = \epsilon_{max} > 0\]
+
+****
+Attraction
+\[U_I(s) = \alpha \cdot P_a(s) \cdot V_{future} - C(s)\]
+\(P_a(s) = \frac{1}{1 + e^{-\eta(s - \theta_0)}}\) sigmoid\(V_{future}\)
+
+
+\[\frac{dU_I}{ds} = \alpha \cdot P_a'(s) \cdot V_{future} - C'(s) = 0\]
+
+\(V_{future}\)
+\[C'(s^*) < \alpha \cdot P_a'(s_{true}) \cdot V_{future} \implies s^* > \theta_{true}\]
+
+\textbf{ rational }
+
+
+\subsubsection{1.3}
+
+
+\textbf{ D38-4}
+\[E(t) = E_0 - \int_0^t C(s(\tau)) d\tau\]
+
+\textbf{D38-2 }
+
+\[\frac{ds}{dt} = -\gamma \cdot (s(t) - \theta) - \lambda \cdot \frac{dE}{dt}\]
+
+****
+\begin{itemize}
+\item \(\theta\)
+\end{itemize}
+
+-
+
+****
+\[s(t) = \theta + (s_0 - \theta) \cdot e^{-(\gamma + \lambda C')t}\]
+
+****
+
+
+\subsubsection{1.4}
+
+
+\textbf{ D38-5}
+\[\mathbf{g} = (g_{decay}, g_{signal\_cost}, g_{tolerance})\]
+
+\begin{itemize}
+\item \(g_{decay}\)
+\item \(g_{signal\_cost}\)
+\item \(g_{tolerance}\)
+\end{itemize}
+
+
+\textbf{D38-3 }
+95\%
+\[t_{95\%}(\mathbf{g}) = \frac{3}{\gamma(\mathbf{g}) + \lambda(\mathbf{g}) \cdot C'(s)}\]
+
+\textbf{ D38-3a}
+\(\mathbf{g}\) ****
+\[\mathbf{g}_A \approx \mathbf{g}_B \implies t_{95\%}^A \approx t_{95\%}^B\]
+
+\textbf{ D36 }
+
+
+\subsection{2.}
+
+
+\subsubsection{ D38-1}
+
+
+****
+\[\exists (s_A^*, s_B^*, \theta_A^*, \theta_B^*) : U_i \text{ }\]
+
+****
+
+\[s_A^*(s_B) = \arg\max_{s_A} U_A(s_A, \theta_A, \text{accept}(s_A, s_B))\]
+
+
+\begin{itemize}
+\item Brouwer
+\end{itemize}
+
+****
+
+
+\subsubsection{ D38-2}
+
+
+****
+\[\frac{d}{dt}(E(t) + W(t)) = 0\]
+\(W(t) = \int_0^t C(s(\tau)) d\tau\)
+
+****
+\(E(t) = E_0 - W(t)\)
+\[\dot{E}(t) = -\dot{W}(t) = -C(s(t))\]
+****
+
+
+\subsubsection{ D38-3}
+
+
+****
+\[\frac{\partial t_{95\%}}{\partial g_{decay}} < 0, \quad \frac{\partial t_{95\%}}{\partial g_{signal\_cost}} > 0\]
+
+****
+\(t_{95\%} = \frac{3}{\gamma(\mathbf{g}) + \lambda(\mathbf{g}) \cdot C'}\)
+\begin{itemize}
+\item \(g_{decay} \uparrow \implies \gamma \uparrow \implies t_{95\%} \downarrow\) =
+\item \(g_{signal\_cost} \uparrow \implies C' \uparrow \implies t_{95\%} \downarrow\) =
+\end{itemize}
+
+
+\textbf{honeymoon duration}
+
+
+\subsubsection{ D38-4}
+
+
+****
+\[T_{stop} = \arg\max_t U_{total}(s(t); t)\]
+
+****
+
+\[U_{total}(t) = \int_0^{T_h} P_a(s(\tau)) d\tau + e^{-r T_h} \cdot V_{maintenance}\]
+
+
+\[P_a(s(T_h)) = r \cdot e^{-r T_h} \cdot V_{maintenance}\]
+
+\textbf{ = }
+
+\textbf{r02}
+
+
+| V\_future | T* |
+|----------|----------|
+| 1.0 | 173 |
+| 2.0 | 112 |
+| 5.0 | 36 |
+| 10.0 | 1 |
+
+\textbf{ D38-4a} V\_future  ****
+-
+\begin{itemize}
+\item ****
+\end{itemize}
+
+
+
+\subsection{3.}
+
+
+\subsubsection{ D38-A}
+
+
+\textbf{ D38-1}
+1.  \(S = \{s_{appearance}, s_{humor}, s_{status}\}\)
+2.
+3.
+4. **** \(s^* > \theta^*\) \(V_{future}\)
+
+
+\subsubsection{ D38-B}
+
+
+\textbf{ D38-2}
+1.  \(s(0) = \theta_0 + \Delta_{inflated}\)
+2.  \(ds/dt = -\gamma(s-\theta) - \lambda \dot{E}\)
+3.
+4. **** \(R^2 > 0.95\)
+
+
+\subsubsection{ D38-C}
+
+
+\textbf{ D38-3}
+1.  \(\mathbf{g}\)
+2.  \(t_{95\%}\)
+3.
+4. **** \(g_{decay}\)  honeymoon period
+
+
+\subsubsection{ D38-D}
+
+
+\textbf{ D38-4}
+1.
+2.  T\_h
+3.
+4. \textbf{v6 2026-05-08}
+\begin{itemize}
+\item V\_future  T*
+\item \(A_0(V) = A_{base} \cdot (1 + \alpha \cdot \frac{V}{1+V})\) V\_future
+\item ****T*  V\_future  D38-4a
+\end{itemize}
+
+
+\textbf{v6 }
+| V\_future | T*() | A\_0 () | U* () |
+|----------|--------|----------------|-------------|
+| 1.0 | 11 | 0.375 | 97.97 |
+| 2.0 | 9 | 0.450 | 130.87 |
+| 5.0 | 7 | 0.525 | 164.15 |
+| 10.0 | 7 | 0.559 | 179.00 |
+| 20.0 | 7 | 0.579 | 187.48 |
+| 50.0 | 7 | 0.591 | 192.97 |
+| 100.0 | 7 | 0.596 | 194.88 |
+
+****
+\begin{itemize}
+\item V\_future  V\_future
+\item >>
+\end{itemize}
+
+-
+\begin{itemize}
+\item ****
+\end{itemize}
+
+
+\textbf{D38-4a }
+
+
+\subsection{4.}
+
+
+\subsubsection{4.1 D36}
+
+
+\textbf{D38-D36 }
+\begin{itemize}
+\item D38  \textbf{ \(\mathbf{g}\)}  D36  \textbf{ \(\alpha\)}
+\item **** +
+\end{itemize}
+
+
+
+\subsubsection{4.2 D37}
+
+
+\textbf{D38-D37 }
+\begin{itemize}
+\item D38  \textbf{**  D37  }**
+\item ****/
+\end{itemize}
+
+
+
+\subsubsection{4.3 D8}
+
+
+\textbf{D38-D8 }
+\begin{itemize}
+\item D8  \textbf{**  D38  }/**
+\item ****
+\end{itemize}
+
+
+
+\subsection{5.}
+
+
+\subsubsection{5.1}
+
+
+1. \textbf{D38-1 }
+2. \textbf{D38-2 }
+3. \textbf{D38-3 }
+4. \textbf{D38-4 }
+
+\subsubsection{5.2}
+
+
+1. ****
+2. ****
+3. ****
+4. ****
+
+
+\subsection{6.}
+
+
+**** \(\theta\) \(s(t)\) \(E(t)\)
+
+****
+1. ****\(s^*(0) > \theta\)  \(V_{future}\)
+2. ****\(s(t) = \theta + \Delta_0 e^{-(\gamma + \lambda C')t}\)
+3. ****\(t_{95\%}(\mathbf{g}) = \frac{3}{\gamma(\mathbf{g}) + \lambda(\mathbf{g}) \cdot C'}\)
+4. ****\(P_a(s(T_{stop})) = r \cdot e^{-r T_{stop}} \cdot V_{maintenance}\)
+
+\textbf{D38-4a} \(T^*\)  \(V_{future}\) \textbf{   + }****
+
+\textbf{*}* D36 **
+
+
+*D38 r02  +  D38-4  V\_future   T* +  **
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Shannon, C.E. (1948). A Mathematical Theory of Communication.
+\bibitem{ref2} Cover, T.M. (2006). Elements of Information Theory.
+\end{thebibliography}
+
+\end{document}

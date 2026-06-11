@@ -1,0 +1,399 @@
+% D26  -
+% Auto-generated from markdown source
+% origin: ai
+
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D26  -}
+\lhead{\thepage}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+\newcommand{\hbarF}{\hbar}
+
+\newtcolorbox{thmbox}[1]{
+  colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+\newtcolorbox{defbox}[1]{
+  colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+
+\begin{document}
+
+\title{D26  -}
+\author{RALPH Loop}
+\date{}
+\maketitle
+
+\begin{abstract}
+This paper presents D26  -, formalizing the underlying principles using information-theoretic methods.
+
+\textbf{Keywords}: D26  -, information theory, formalization.
+\end{abstract}
+
+\tableofcontents
+\section{D26  -}
+
+
+
+
+\subsection{0.}
+
+
+****
+\begin{itemize}
+\item ****unstable
+\item ****stable
+\item ****critical
+\end{itemize}
+
+
+\textbf{D26 }\textbf{*}\textbf{*}**
+
+
+
+\subsection{1.}
+
+
+\subsubsection{1.1}
+
+
+\textbf{ D26-1}
+LTI
+\[\dot{x} = Ax + Bu, \quad y = Cx + Du\]
+
+****
+\[\dot{x} = (A + \delta A)x + (B + \delta B)u + \eta\]
+
+
+\begin{itemize}
+\item \(\delta A, \delta B\)
+\item \(\eta\)
+\end{itemize}
+
+
+
+\subsubsection{1.2}
+
+
+\textbf{ D26-2 \(G_{AMP}\)}
+\(\omega\)
+\[G_{AMP}(\omega) = \frac{\|y(t; \delta)\|_2}{\|\delta\|_2}\]
+
+****
+\[G(s) = C(sI - A)^{-1}B + D\]
+
+\textbf{ = }
+\[G_{AMP}(\omega) = \|G(j\omega)\|_2 = \sigma_{\max}(G(j\omega))\]
+
+
+\subsubsection{1.3}
+
+
+\textbf{ D26-3}
+****
+\[\exists \lambda_i \in \text{spec}(A): \text{Re}(\lambda_i) = 0\]
+
+****
+\[\kappa_c = \min_{\lambda_i} |\text{Re}(\lambda_i)|\]
+
+
+\subsection{2.}
+
+
+\subsubsection{ D26-1}
+
+
+****
+\textbf{*}***
+\[S_{\lambda_i}(A) = \frac{\partial \lambda_i}{\partial A} = v_i w_i^\top\]
+
+\(v_i, w_i\) /
+
+\textbf{D26-1 }
+\[\lim_{t \to \infty} \|x(t)\| = \infty \iff \exists i: \text{Re}(\lambda_i + \delta \lambda_i) > 0\]
+
+****
+\[\delta \lambda_i = w_i^\top \delta A v_i + O(\|\delta A\|^2)\]
+
+\textbf{ D26-1a}
+\begin{itemize}
+\item ****\(\min_i \text{Re}(\lambda_i) > 0\)
+\item \textbf{** \(\delta \lambda_i\)   }**
+\item \textbf{**\(w_i\) }**
+\end{itemize}
+
+
+
+\subsubsection{ D26-2}
+
+
+****
+\textbf{** \(\omega\) }**
+\[H(\omega) = \|G(j\omega)\|_2 = \frac{1}{\min_i |j\omega - \lambda_i|}\]
+
+\textbf{D26-2 }
+\[\omega_{res} = \arg\max_\omega H(\omega) = \arg\max_\omega \min_i |\omega - \text{Im}(\lambda_i)|\]
+
+\textbf{-}G-B product
+\[\text{GBW} = \omega_{bw} \cdot H(\omega_{bw}) \leq \frac{\sigma_{\max}(C) \cdot \sigma_{\max}(B)}{\min_i |\text{Re}(\lambda_i)|}\]
+
+****
+\begin{itemize}
+\item ****
+\item \textbf{GBW } I/O
+\item ****\(\min_i |\text{Re}(\lambda_i)| \to 0\)  GBW  \(\infty\)
+\end{itemize}
+
+
+
+\subsubsection{ D26-3}
+
+
+****
+\textbf{*}***
+\[\epsilon = \inf_{i: \text{Re}(\lambda_i) > 0} \text{Re}(\lambda_i)\]
+
+\textbf{D26-3 }
+\[G_{AMP} \sim \epsilon^{-\gamma}, \quad \gamma = \arg\max_i \frac{\|\delta \lambda_i\|}{\text{Re}(\lambda_i)}\]
+
+****
+\[\tau_{relax} \sim \epsilon^{-\nu}, \quad \nu = 1 \text{}\]
+
+\textbf{ D26-3a}
+\begin{itemize}
+\item \textbf{**\(\epsilon \to 0\) }**
+\item \textbf{ \(\tau_{relax}\) }
+\item **** +
+\end{itemize}
+
+
+
+\subsubsection{ D26-4-}
+
+
+****
+\textbf{-}
+\[I_{causal} = \sup_{t} \mathbb{E}[y(t) | \text{do}(\delta)] - \mathbb{E}[y(t) | \delta = 0]\]
+
+\textbf{D26-4 }
+\[I_{causal} = \int_{0}^{\infty} \|h(\tau)\| \cdot \|\delta\| d\tau\]
+
+\textbf{** \(h(\tau) = Ce^{A\tau}B\) }**
+
+****
+\[\text{Gr}_{causal} = \{(u_i \to y_j): \|CB_{ij}\| > \epsilon_{thresh}\}\]
+
+\textbf{ D26-4a}
+\begin{itemize}
+\item \textbf{** } \(CB\) **
+\item \textbf{** = }**
+\item \textbf{*}***
+\end{itemize}
+
+
+
+\subsubsection{ D26-5}
+
+
+****
+****
+\[\mathcal{R}(\mathcal{S}) = \sup\{\|\delta\| : \text{spec}(A+\delta A) \subseteq \text{stable region}\}\]
+
+\textbf{D26-5 }H
+\[\mathcal{R}(\mathcal{S}) = \frac{1}{\|T_{zw}(s)\|_\infty}\]
+
+\(T_{zw}(s)\) \textbf{ \(w\)  \(z\) }
+
+****
+\[\mathcal{D}_{stable} = \{\delta : \exists \gamma > 0: \|T_{zw}(s)\|_\infty < \gamma\}\]
+
+\textbf{ D26-5a}
+\begin{itemize}
+\item \textbf{ =  H }
+\item \textbf{*}***
+\item ****
+\end{itemize}
+
+
+
+\subsection{3.}
+
+
+\subsubsection{ D26-A-}
+
+
+\textbf{ D26-1  D26-3}
+1. \(\ddot{x} + 2\zeta\omega_n \dot{x} + \omega_n^2 x = u\)
+2.  \(\zeta\)  0.01  0.99
+3.
+4. ****\(\zeta \to 0\)  \(G_{AMP} \to \infty\)
+
+
+\subsubsection{ D26-B}
+
+
+\textbf{ D26-5}
+1.  PID  \(C(s) = K_p + K_i/s + K_d s\)
+2.  \(\delta K, \delta \phi\)
+3. \textbf{-}
+4. **** \(\mathcal{R} = 1/\|T_{zw}\|_\infty\)
+
+
+\subsubsection{ D26-C}
+
+
+\textbf{ D26-4}
+1.
+2.
+3. ****
+4. ****\(I_{causal}\)
+
+
+\subsubsection{ D26-D}
+
+
+\textbf{ D26-3}
+1.
+2.  \(\tau_{relax}\)
+3.  \(\tau_{relax} \sim \epsilon^{-\nu}\)
+4. ****\(\nu \approx 1\)
+
+
+\subsection{4.}
+
+
+\subsubsection{4.1 D8}
+
+
+\textbf{D26-D8 }
+\begin{itemize}
+\item D26 \textbf{**  D8-1 }**
+\item D26-3 \textbf{**  D8-2 }**
+\item \textbf{** = }**
+\end{itemize}
+
+
+
+\subsubsection{4.2 D15}
+
+
+\textbf{D26-D15 }
+\begin{itemize}
+\item D26 \textbf{** \(\mathcal{R}\)  D15-2 }**
+\item D26-5 \textbf{**  D15-1 }**
+\item \textbf{** = }**
+\end{itemize}
+
+
+
+\subsubsection{4.3 D1-S12}
+
+
+\textbf{D26-D1-S12 }
+\begin{itemize}
+\item D26-3 \textbf{** = D1-S12  }\(T_c\) **
+\item D26-3 \textbf{** = D1-S12  }\(d\rho/dt \to 0\)**
+\item \textbf{** = }**
+\end{itemize}
+
+
+
+\subsection{5.}
+
+
+\subsubsection{5.1}
+
+
+1. \textbf{D26-3 }
+2. \textbf{D26-5 } H
+3. \textbf{D26-1 }
+
+\subsubsection{5.2}
+
+
+1. **** Lyapunov
+2. ****
+3. ****
+
+
+\subsection{6.}
+
+
+\#\#\#
+
+**** \(\dot{x} = Ax + Bu\)  \(\delta A, \delta B, \eta\)
+
+****
+1. ****\(\delta \lambda_i = w_i^\top \delta A v_i\)
+2. ****\(\omega_{res} = \arg\max_\omega \min_i |\omega - \text{Im}(\lambda_i)|\)
+3. ****\(G_{AMP} \sim \epsilon^{-\gamma}\)\(\tau_{relax} \sim \epsilon^{-\nu}\)
+4. ****\(I_{causal} = \int \|h(\tau)\| \|\delta\| d\tau\)
+5. ****\(\mathcal{R} = 1/\|T_{zw}\|_\infty\)
+
+\textbf{**  }\textbf{** +  + }
+
+\textbf{*}*** \(\lambda_i\)
+
+
+*D26 -\textbf{*}
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Shannon, C.E. (1948). A Mathematical Theory of Communication.
+\bibitem{ref2} Cover, T.M. (2006). Elements of Information Theory.
+\end{thebibliography}
+
+\end{document}

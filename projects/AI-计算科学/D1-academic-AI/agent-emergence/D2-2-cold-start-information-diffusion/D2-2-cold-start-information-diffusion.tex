@@ -1,0 +1,234 @@
+% D2-2
+% Auto-generated from markdown source
+% origin: ai
+
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D2-2}
+\lhead{\thepage}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+\newcommand{\hbarF}{\hbar}
+
+\newtcolorbox{thmbox}[1]{
+  colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+\newtcolorbox{defbox}[1]{
+  colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+
+\begin{document}
+
+\title{D2-2}
+\author{RALPH Loop}
+\date{}
+\maketitle
+
+\begin{abstract}
+This paper presents D2-2, formalizing the underlying principles using information-theoretic methods.
+
+\textbf{Keywords}: D2-2, information theory, formalization.
+\end{abstract}
+
+\tableofcontents
+\section{D2-2}
+
+
+
+
+\#\#
+
+
+
+\#\#
+
+**** Agent  \(K_0\) \(\Delta K_t\)""
+
+\[T_{emerge} = \inf\{t : I(K_t; y_{target}) > I(K_0; y_{target}) + \gamma\}\]
+
+\textbf{*}*** \(t_c\) \(\sum_{i=0}^{t_c} \Delta K_i\) Agent """"
+
+
+\#\#
+
+\subsubsection{ 1}
+
+
+****
+\[\frac{dK_t}{dt} = -\lambda K_t + \alpha \cdot \nabla_K I(K; y_{target}) + \eta(t)\]
+
+
+\begin{itemize}
+\item \(-\lambda K_t\)****
+\item \(\alpha \cdot \nabla_K I(K; y_{target})\)****
+\item \(\eta(t)\)****
+\end{itemize}
+
+
+****\(\frac{dK_t}{dt} = 0 \implies \lambda K^* = \alpha \cdot \nabla_K I(K^*; y_{target})\)
+
+
+\subsubsection{ 2}
+
+
+****Cahn-Hilliard
+\[\det\left(\frac{\partial^2 V_{eff}}{\partial K^2}\right) = 0\]
+
+\(V_{eff}(K)\)
+\[V_{eff}(K) = \frac{\lambda}{2} K^2 - \alpha I(K; y_{target}) + \frac{\sigma^2}{2} \log |\det(\nabla^2 K)|\]
+
+****
+\[t_c = \frac{1}{\lambda} \log\left(\frac{K^* - K_0}{K^* - K_c}\right)\]
+
+\(K_t > K_c\) \textbf{*}***
+
+
+\subsubsection{ 3D2-1/D2-2}
+
+
+\textbf{D2-1  + D2-2  = }
+
+\[\text{} \equiv |A| > |A|_c \land t > t_c\]
+
+****
+\begin{itemize}
+\item D2-1Agent **** \(|A| = |A|_c\)
+\item D2-2Agent **** \(t = t_c\)
+\end{itemize}
+
+
+****
+\[P_{\text{emergence}}(|A|, t) = \Phi\left(\frac{|A| - |A|_c}{|A|_c}\right) \cdot \Phi\left(\frac{t - t_c}{t_c}\right)\]
+
+\(\Phi\)
+
+
+\subsubsection{ 4 D9-III}
+
+
+\textbf{D9-III }
+\begin{itemize}
+\item D9-III  \(T_{train}\)
+\item D2-2 \(T_{train} > t_c\) ****
+\end{itemize}
+
+
+\textbf{D9-III + D2-2 }
+\[\text{} \equiv \mathbb{I}[|A| > |A|_c] \land \mathbb{I}[t > t_c] \land \mathbb{I}[I_{gen} > I_{cov}]\]
+
+\textbf{** Agent }**
+
+
+\#\#
+
+\subsubsection{ 1Agent}
+
+```python
+\section{1.  Agent}
+
+\section{2.  I(K_t; y_target)}
+
+\section{3.  t_c}
+
+```
+
+\subsubsection{ 2RAG vs  RAG}
+
+```python
+\section{1.  RAGvs  RAG}
+
+\section{2. RAG  t_c |A|_c}
+
+```
+
+\subsubsection{ 3}
+
+```python
+\section{1.}
+
+\section{2.  t_c vs L}
+
+```
+
+
+\#\#
+
+1. ****
+2. \textbf{ D2-1 }
+3. \textbf{ D9-III  \(T_{train}\) }
+
+
+\#\#
+
+\begin{itemize}
+\item [x]  1-4
+\item [ ]  1Agent
+\item [ ]  2RAG vs  RAG
+\item [ ]  3
+\end{itemize}
+
+
+
+* D2-2  D2-1 *
+*2026-05-04 | r01 | *
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Shannon, C.E. (1948). A Mathematical Theory of Communication.
+\bibitem{ref2} Cover, T.M. (2006). Elements of Information Theory.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,142 @@
+{
+  "information_geometry": {
+    "n_papers": 300,
+    "n_clusters": 151,
+    "mean_inter_arrival": 32.69565217391305,
+    "median_inter_arrival": 15.0,
+    "cv": 1.7151984935839522,
+    "lag1_autocorrelation": 0.2813787673083544,
+    "ks_stat_exponential": 0.1671734900808438,
+    "ks_p_exponential": 8.992585274509068e-08,
+    "cluster_sizes_mean": 1.9867549668874172,
+    "cluster_sizes_max": 11.0,
+    "cluster_sizes_90pct": 4.0,
+    "alpha_powerlaw": null,
+    "pl_ks_p": null,
+    "months_span": 161,
+    "peak_monthly_rate": 5.0,
+    "mean_monthly_rate": 1.8633540372670807,
+    "largest_cluster_dates": [
+      "2025-09-19",
+      "2026-02-03",
+      "2024-01-04"
+    ],
+    "largest_cluster_sizes": [
+      11,
+      10,
+      9
+    ]
+  },
+  "phase_transition_ml": {
+    "n_papers": 300,
+    "n_clusters": 155,
+    "mean_inter_arrival": 35.15384615384615,
+    "median_inter_arrival": 15.0,
+    "cv": 1.5073282461870474,
+    "lag1_autocorrelation": 0.247538321744663,
+    "ks_stat_exponential": 0.1581053701044164,
+    "ks_p_exponential": 5.38578628805969e-07,
+    "cluster_sizes_mean": 1.935483870967742,
+    "cluster_sizes_max": 12.0,
+    "cluster_sizes_90pct": 4.0,
+    "alpha_powerlaw": null,
+    "pl_ks_p": null,
+    "months_span": 170,
+    "peak_monthly_rate": 6.0,
+    "mean_monthly_rate": 1.7647058823529411,
+    "largest_cluster_dates": [
+      "2021-02-02",
+      "2024-01-30",
+      "2024-05-23"
+    ],
+    "largest_cluster_sizes": [
+      12,
+      10,
+      9
+    ]
+  },
+  "coT": {
+    "n_papers": 500,
+    "n_clusters": 20,
+    "mean_inter_arrival": 18.37675350701403,
+    "median_inter_arrival": 1.0,
+    "cv": 8.868284727357766,
+    "lag1_autocorrelation": 0.3666572971877182,
+    "ks_stat_exponential": 0.6440731792769464,
+    "ks_p_exponential": 3.362618173476859e-202,
+    "cluster_sizes_mean": 25.0,
+    "cluster_sizes_max": 358.0,
+    "cluster_sizes_90pct": 34.10000000000003,
+    "alpha_powerlaw": null,
+    "pl_ks_p": null,
+    "months_span": 56,
+    "peak_monthly_rate": 37.0,
+    "mean_monthly_rate": 8.928571428571429,
+    "largest_cluster_dates": [
+      "2024-08-16",
+      "2024-01-11",
+      "2023-04-03"
+    ],
+    "largest_cluster_sizes": [
+      358,
+      53,
+      32
+    ]
+  },
+  "emergent_ability": {
+    "n_papers": 300,
+    "n_clusters": 108,
+    "mean_inter_arrival": 34.64548494983278,
+    "median_inter_arrival": 8.0,
+    "cv": 2.6802081181073487,
+    "lag1_autocorrelation": 0.2996782717542943,
+    "ks_stat_exponential": 0.319720762006038,
+    "ks_p_exponential": 1.0971402934659036e-27,
+    "cluster_sizes_mean": 2.7777777777777777,
+    "cluster_sizes_max": 21.0,
+    "cluster_sizes_90pct": 8.0,
+    "alpha_powerlaw": null,
+    "pl_ks_p": null,
+    "months_span": 125,
+    "peak_monthly_rate": 11.0,
+    "mean_monthly_rate": 2.4,
+    "largest_cluster_dates": [
+      "2025-05-01",
+      "2024-01-10",
+      "2025-08-06"
+    ],
+    "largest_cluster_sizes": [
+      21,
+      13,
+      13
+    ]
+  },
+  "free_energy": {
+    "n_papers": 300,
+    "n_clusters": 169,
+    "mean_inter_arrival": 39.28428093645485,
+    "median_inter_arrival": 17.0,
+    "cv": 2.3109751716145066,
+    "lag1_autocorrelation": 0.26677594251904463,
+    "ks_stat_exponential": 0.16358803988912207,
+    "ks_p_exponential": 1.8472969052144873e-07,
+    "cluster_sizes_mean": 1.7751479289940828,
+    "cluster_sizes_max": 9.0,
+    "cluster_sizes_90pct": 4.0,
+    "alpha_powerlaw": null,
+    "pl_ks_p": null,
+    "months_span": 173,
+    "peak_monthly_rate": 5.0,
+    "mean_monthly_rate": 1.7341040462427746,
+    "largest_cluster_dates": [
+      "2026-01-29",
+      "2025-01-31",
+      "2025-05-14"
+    ],
+    "largest_cluster_sizes": [
+      9,
+      8,
+      8
+    ]
+  }
+}

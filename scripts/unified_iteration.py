@@ -198,7 +198,7 @@ def run_infra_iteration(state: dict) -> dict:
         if cron_path.exists():
             cron_data = json.loads(cron_path.read_text())
             active = [j for j in cron_data.get("jobs", []) if j.get("enabled", True)]
-            result["checks"].append({"check": "active_cron_jobs", "value": len(active), "status": "ok" if active > 0 else "warning"})
+            result["checks"].append({"check": "active_cron_jobs", "value": len(active), "status": "ok" if len(active) > 0 else "warning"})
             cron_names = [j["name"] for j in active]
             result["findings"].append(f"Active cron jobs: {', '.join(cron_names[:5])}")
         else:

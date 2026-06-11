@@ -1,0 +1,398 @@
+% D41
+% Auto-generated from markdown source
+% origin: ai
+
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D41}
+\lhead{\thepage}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+\newcommand{\hbarF}{\hbar}
+
+\newtcolorbox{thmbox}[1]{
+  colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+\newtcolorbox{defbox}[1]{
+  colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+
+\begin{document}
+
+\title{D41}
+\author{RALPH Loop}
+\date{}
+\maketitle
+
+\begin{abstract}
+This paper presents D41, formalizing the underlying principles using information-theoretic methods.
+
+\textbf{Keywords}: D41, information theory, formalization.
+\end{abstract}
+
+\tableofcontents
+\section{D41}
+
+
+
+
+\subsection{0.}
+
+
+\textbf{D41 }
+
+1. \textbf{ vs }
+2. ****
+3. ****
+4. ****
+5. ****
+
+
+
+\subsection{1.}
+
+
+\subsubsection{1.1}
+
+
+\textbf{ D41-1 \(H(u)\)}
+\[H(u) = -\sum_{e} p(e|u) \log p(e|u)\]
+
+\(p(e|u)\)  \(u\)  \(e\)  = / =
+
+\textbf{ D41-2 \(I(u)\)}
+\[I(u) = H(R) - H(R|u)\]
+
+\(R\) \(H(R|u)\)  \(u\) \textbf{ =  = }
+
+\textbf{ D41-3 \(\Delta C_u\)}
+\[\Delta C_u = \alpha I(u) - \beta H(u) + \gamma \cdot \text{social\_feedback}(u)\]
+
+
+\begin{itemize}
+\item \(\alpha\)
+\item \(\beta\)
+\item \(\gamma\)
+\end{itemize}
+
+
+
+\subsubsection{1.2}
+
+
+\textbf{ D41-4 \(P_{uv}\)}
+\[P_{uv}(u \to v) = \sigma(w_{uv} + \lambda C_u - \mu H(u))\]
+
+
+\begin{itemize}
+\item \(w_{uv}\) \(u,v\)
+\item \(\lambda C_u\)
+\item \(\mu H(u)\)
+\end{itemize}
+
+
+\textbf{ D41-5 Lyapunov  \(V\)}
+\[V(\{C_u\}) = -\sum_{u,v} w_{uv} \cdot \exp(-H(u)/\tau) \cdot \exp(C_u/C_0) \cdot I(u)\]
+
+
+\begin{itemize}
+\item \(\tau\)
+\item \(C_0\)
+\end{itemize}
+
+
+\textbf{D41-1 }
+\(\Delta C_u = \alpha I(u) - \beta H(u)\)  \(\alpha/\beta > 1\)
+\begin{itemize}
+\item =  +
+\end{itemize}
+
+-
+
+****
+1.  Lyapunov  \(V = \sum_u \frac{\partial V}{\partial C_u} \cdot \Delta C_u\)
+2. \(\frac{\partial V}{\partial C_u} = -w_{uv} \cdot \exp(-H(u)/\tau) \cdot \exp(C_u/C_0) \cdot I(u)\)
+3. \(\Delta C_u = \alpha I(u) - \beta H(u)\)
+4. \(\frac{dV}{dt} = \sum_u \frac{\partial V}{\partial C_u} \cdot (\alpha I(u) - \beta H(u))\)
+5. \(\frac{\partial V}{\partial C_u} \cdot (\alpha I(u) - \beta H(u)) \leq 0\)
+6. \(\iff \alpha I(u) > \beta H(u)\)  \(I(u)/H(u) > \beta/\alpha\)
+7.  \textbf{ \(r_c = \beta/\alpha\)\(r > r_c\) }
+
+
+\subsubsection{1.3  vs}
+
+
+\textbf{ D41-6 \(M\)}
+\[M(H, C) = \frac{\partial (\text{})}{\partial (\text{})} = \frac{\partial}{\partial (\text{})} \left[\frac{\exp(C/C_0)}{1 + H/H_0}\right]\]
+
+\textbf{D41-2 }
+\begin{itemize}
+\item \(H > H_{crit}\)\(M(H, C) < 0\)
+\item \(M(H, C)\)  \(C\)  \(\eta_C = \frac{\partial M}{\partial C} \cdot \frac{C}{M} > 0\)
+\item ****
+\item \(M\)
+\end{itemize}
+
+
+****
+
+
+\subsubsection{1.4}
+
+
+\textbf{D41-3 }
+\(\phi\)
+\[\phi = \tanh\left(\frac{J \phi + h}{T}\right)\]
+
+
+\begin{itemize}
+\item \(J = \alpha \langle I \rangle - \beta \langle H \rangle\)
+\item \(T\)=
+\item \(h\)=
+\end{itemize}
+
+
+****
+\[T_c = J = \alpha \langle I \rangle - \beta \langle H \rangle\]
+
+\textbf{ \(\alpha \langle I \rangle > \beta \langle H \rangle\)  \(T < T_c\) }
+
+
+\subsection{2.}
+
+
+\subsubsection{ D41-1 Lyapunov}
+
+
+****
+\(R = I/H\)
+\[\frac{dC}{dt} = \alpha H \cdot (R - R_c)\]
+
+\(R_c = \beta/\alpha\)
+
+****
+1.  Lyapunov  \(V(C, R) = \frac{1}{2}(R - R_c)^2 + \frac{1}{2\tau}C^2\)
+2. \(\frac{dV}{dt} = (R - R_c)\frac{dR}{dt} + \frac{1}{\tau}C\frac{dC}{dt}\)
+3. \(\frac{dR}{dt} = -\nabla_R V\)\(\frac{dC}{dt} = -\nabla_C V\)
+4. \(\Rightarrow \frac{dV}{dt} \leq 0\)
+5.  \textbf{ \(R\)  \(R_c\)}
+
+
+\subsubsection{ D41-2}
+
+
+****
+
+\[\int_{\mathcal{H}} P(u \to v) du dv = \text{const}\]
+
+****
+1. \(P(u \to v) \propto \exp(C_u/C_0 - H(u)/\tau)\)
+2. \(P_{high\_H} \propto \exp(-H_{high}/\tau)\)
+3. \(C_{high\_H} - H_{high}/\tau = C_{low\_H} - H_{low}/\tau\)
+4. \(\Rightarrow \Delta C = (H_{high} - H_{low})/\tau\)
+5.  \textbf{ \(\Delta C\) }
+6. ****
+
+
+\subsubsection{ D41-3}
+
+
+****
+\(W = (w_{uv})\) \(W\)
+\[\prod_{u_1 \to u_2 \to \cdots \to u_n \to u_1} w_{u_1 u_2} \cdots w_{u_n u_1} = 0\]
+
+****
+1. Lyapunov \(\nabla_C V = W \cdot g(C, R)\)
+2.  \(\Rightarrow\)
+3. \(\Rightarrow\)
+4. \textbf{ \(\Rightarrow\) }
+
+
+\subsubsection{ D41-4}
+
+
+****
+
+\[\Phi_{anon} = \max_{C} \mathbb{E}_{u \sim \mathcal{U}} [I(u) - \lambda H(u)]\]
+
+****
+1.  \(S\)
+2. \(S \to \infty\)
+3. \(S = 1\)
+4.  \(C_u = \sum_{t=1}^{T} \Delta C_u(t)\)
+5. \(\mathbb{E}[C_u | \text{}] - \mathbb{E}[C_u | \text{}] = \Omega(\log T)\)
+6.  \textbf{ \(O(\log T)\) }
+
+
+\subsection{3.}
+
+
+\subsubsection{ D41-A}
+
+
+\textbf{ D41-1}
+1.  \(I \sim \mathcal{N}(\mu_I, \sigma_I)\)\(H \sim \mathcal{N}(\mu_H, \sigma_H)\)
+2. \(C_{t+1} = C_t + \alpha I_t - \beta H_t\)
+3.  \(R = I/H\)
+4. ****\(R \to R_c\) \(\alpha/\beta\)
+
+
+\subsubsection{ D41-B}
+
+
+\textbf{ D41-2}
+1.
+2.
+3. ****
+
+
+\subsubsection{ D41-C}
+
+
+\textbf{ D41-3}
+1.  \(T\)\(J\)
+2.  \(\phi\)
+3. **** \(T_c = J\)\(\phi \propto |T - T_c|^\beta\)
+
+
+\subsubsection{ D41-D}
+
+
+\textbf{ D41-4}
+1.  vs
+2.  \(\log T\)
+3. **** \(\Omega(\log T)\)
+
+
+\subsection{4.}
+
+
+\subsubsection{4.1 D8}
+
+
+\textbf{D41-D8 }
+\begin{itemize}
+\item D8  \textbf{**  D41  }**
+\item ****
+\end{itemize}
+
+
+
+\subsubsection{4.2 D37}
+
+
+\textbf{D41-D37 }
+\begin{itemize}
+\item D37  \textbf{ Nash }  D41  \textbf{-}
+\item ****
+\end{itemize}
+
+
+
+\subsubsection{4.3 D40}
+
+
+\textbf{D41-D40 }
+\begin{itemize}
+\item D40  \textbf{-}  D41  \textbf{-}
+\item ****
+\end{itemize}
+
+
+
+\subsection{5.}
+
+
+\subsubsection{5.1}
+
+
+1. \textbf{D41-1 }
+2. \textbf{D41-2 }
+3. \textbf{D41-3 }
+4. \textbf{D41-4 } \(O(\log T)\)
+
+\subsubsection{5.2}
+
+
+1. **** NLP
+2. ****
+3. ****
+4. ****
+
+
+\subsection{6.}
+
+
+**** \(H\) \(I\) \(\Delta C = \alpha I - \beta H\) \(P(u \to v) \propto \exp(C_u/C_0 - H(u)/\tau)\)
+
+****
+1. ****\(R = I/H > R_c = \beta/\alpha\)  Lyapunov
+2. **** \(\Delta C = \Delta H/\tau\)
+3. ****\(T_c = \alpha \langle I \rangle - \beta \langle H \rangle\)
+4. **** \(O(\log T)\)
+
+\textbf{*}*(1) \(\alpha > \beta\) > (2) \(T < T_c\)(3) **
+
+
+*D41  \(H(u)\)  \(I(u)\)  Lyapunov *
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Shannon, C.E. (1948). A Mathematical Theory of Communication.
+\bibitem{ref2} Cover, T.M. (2006). Elements of Information Theory.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,49 @@
+{
+  "diff_time": "2026-05-23T13:01:03.989940",
+  "analysis": {
+    "status": "ok",
+    "manifest_keywords_found": 12,
+    "total_v2_keywords": 12,
+    "suggestions": [
+      {
+        "type": "manifest_valid",
+        "keywords": 12,
+        "action": "V2 规则完整"
+      },
+      {
+        "type": "auto_preference",
+        "pref": "要修改 Ralph Loop 的 hooks 配置。",
+        "action": "自动化偏好 — 考虑添加到执行原则"
+      },
+      {
+        "type": "key_quote",
+        "quote": "你好，我发现在claude code的模型执行bash的时候，gpu会空载，我希望队列可以填满空白，我应该怎么做，",
+        "action": "关键引用 — 建议整合到 persona 核心规则"
+      },
+      {
+        "type": "key_quote",
+        "quote": "不要，这里不许更改global，last这些应该在task里面更改",
+        "action": "关键引用 — 建议整合到 persona 核心规则"
+      },
+      {
+        "type": "key_quote",
+        "quote": "当前的 1-loop README\n  偏向元认知原则，不够具体——没有你说的\"任务要求→目标澄清→分解→信息搜集→核验→决策\"这个标准流程",
+        "action": "关键引用 — 建议整合到 persona 核心规则"
+      },
+      {
+        "type": "key_quote",
+        "quote": "那你有没有想过loop是workspace的全局通用流程文件，所以你制作的1loop应该根2loop都放到根目录的loop",
+        "action": "关键引用 — 建议整合到 persona 核心规则"
+      },
+      {
+        "type": "key_quote",
+        "quote": "你好，我希望如你变成真正的人，干完我的活之后思考，自己探索，但是用ralphskill你经常循环，然后莫名其妙跳出循环，文希望如你别循环，记住教训，我们怎么确定ralph的prompt",
+        "action": "关键引用 — 建议整合到 persona 核心规则"
+      }
+    ],
+    "total_negations": 59,
+    "total_preferences": 68,
+    "total_key_quotes": 52
+  },
+  "version": "2.0"
+}

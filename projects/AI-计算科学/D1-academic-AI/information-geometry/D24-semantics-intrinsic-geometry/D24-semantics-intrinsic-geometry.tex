@@ -1,0 +1,382 @@
+% D24
+% Auto-generated from markdown source
+% origin: ai
+
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D24}
+\lhead{\thepage}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+\newcommand{\hbarF}{\hbar}
+
+\newtcolorbox{thmbox}[1]{
+  colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+\newtcolorbox{defbox}[1]{
+  colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+
+\begin{document}
+
+\title{D24}
+\author{RALPH Loop}
+\date{}
+\maketitle
+
+\begin{abstract}
+This paper presents D24, formalizing the underlying principles using information-theoretic methods.
+
+\textbf{Keywords}: D24, information theory, formalization.
+\end{abstract}
+
+\tableofcontents
+\section{D24}
+
+
+
+
+\subsection{0.}
+
+
+****
+\begin{itemize}
+\item \textbf{**  }**
+\item \textbf{*}***
+\end{itemize}
+
+
+\textbf{D24 }\textbf{*}\textbf{*}**
+
+
+
+\subsection{1.}
+
+
+\subsubsection{1.1}
+
+
+\textbf{ D24-1 \(\mathcal{S}\)}
+\(d\)  \((\mathcal{S}, g)\)
+\begin{itemize}
+\item **** \(p \in \mathcal{S}\)
+\item \textbf{** \(g_{\mu\nu}(p)\)}**
+\end{itemize}
+
+
+****
+\[g_{\mu\nu}(p) = \mathbb{E}_{X \sim \mathcal{D}_{nearby}}\left[\frac{\partial \log p(x|p)}{\partial \theta^\mu} \cdot \frac{\partial \log p(x|p)}{\partial \theta^\nu}\right]\]
+
+\textbf{** }Fisher **
+
+
+\subsubsection{1.2}
+
+
+\textbf{ D24-2}
+\(A\)  \(B\) ****
+\[d_{sem}(A, B) = \inf_{\gamma: \gamma(0)=A, \gamma(1)=B} \int_0^1 \sqrt{g_{\mu\nu}(\gamma(t)) \dot{\gamma}^\mu(t) \dot{\gamma}^\nu(t)} \, dt\]
+
+****
+\[\underbrace{\|A - B\|_2}_{\text{}} \neq \underbrace{d_{sem}(A, B)}_{\text{}}\]
+
+
+\subsubsection{1.3}
+
+
+\textbf{ D24-3}
+\(A, B\)  \(C\)****
+\[\Delta_{detour}(A, B; C) = d_{sem}(A, C) + d_{sem}(C, B) - d_{sem}(A, B)\]
+
+****
+\[\exists (A, B, C) : \Delta_{detour}(A, B; C) < 0 \quad \text{}\]
+
+
+\subsection{2.}
+
+
+\subsubsection{ D24-1}
+
+
+****
+**** \(f: \mathcal{C} \to \mathbb{R}^d\) \(\mathcal{C}\)
+
+\textbf{D24-1 }
+\(S(c_i, c_j) = \cos(\langle f(c_i), f(c_j) \rangle)\) ****triangular congruence for embeddings \(g_{int}\)
+\[d_{sem}(c_i, c_j) = \|f(c_i) - f(c_j)\|_g = \sqrt{(f(c_i) - f(c_j))^\top G (f(c_i) - f(c_j))}\]
+
+\(G\) \textbf{Gram }
+
+\textbf{ D24-1a}
+\begin{itemize}
+\item ****
+\item \(d \geq 3\) \(\mathbb{R}^3\)
+\item \textbf{Fisher } \(g_{Fisher}\) ****
+\end{itemize}
+
+
+
+\subsubsection{ D24-2}
+
+
+****
+****
+\[\Delta I(A \xrightarrow{C} B) = I(A; B) - [I(A; C) + I(C; B) - 2I(A; B|C)]\]
+
+\(I(X; Y)\)  \textbf{Shannon }
+
+\textbf{D24-2 }
+\[d_{sem}(A, B) \leq d_{sem}(A, C) + d_{sem}(C, B) - \frac{1}{\beta} \cdot \Delta I(A \xrightarrow{C} B)\]
+
+\(\beta\) \textbf{-}Hessian
+
+****
+\[\Delta_{detour} < 0 \iff \Delta I(A \xrightarrow{C} B) > \beta \cdot [d_{sem}(A, C) + d_{sem}(C, B) - d_{sem}(A, B)]\]
+
+\textbf{** }Spacetime **
+
+
+\subsubsection{ D24-3}
+
+
+****
+\textbf{*}***
+\[R(A, B; C, D) = d_{sem}(A, C) + d_{sem}(B, D) - d_{sem}(A, D) - d_{sem}(B, C)\]
+
+\textbf{D24-3 }
+\[R(A, B; C, D) = \int_{\gamma} \langle \nabla_\gamma \partial_\gamma \gamma, R(\partial_\gamma \gamma, \cdot) \partial_\gamma \gamma \rangle d\tau\]
+
+\(R\) ****
+
+****
+\begin{itemize}
+\item \textbf{ = }
+\item \textbf{\(R = 0\)}****
+\item \textbf{\(R \neq 0\)}****
+\end{itemize}
+
+
+
+\subsubsection{ D24-4}
+
+
+****
+**** \(\phi: \mathcal{C} \to \mathcal{K}\) \(\mathcal{K}\)
+
+\textbf{D24-4 }
+\(\phi\)
+\[\|\nabla \phi^\mu\|^2 = \frac{\partial \phi^\mu}{\partial \theta^i} \frac{\partial \phi^\mu}{\partial \theta^j} g^{ij} = 1 \quad \forall \mu\]
+
+\textbf{ D24-4a}
+\begin{itemize}
+\item \textbf{ = }
+\item \textbf{** = }**
+\item ****\(\forall k_1, k_2\): \(d_{sem}^{\phi_{k_1}} = d_{sem}^{\phi_{k_2}} \iff \phi_{k_1}, \phi_{k_2}\)
+\end{itemize}
+
+
+
+\subsubsection{ D24-5}
+
+
+****
+****
+\[\delta d_{sem}(A, B) = \delta \int_A^B \sqrt{g_{\mu\nu} \dot{\gamma}^\mu \dot{\gamma}^\nu} dt\]
+
+\textbf{Euler-Lagrange }
+\[\frac{d^2 x^\mu}{dt^2} + \Gamma^\mu_{\nu\rho} \frac{dx^\nu}{dt} \frac{dx^\rho}{dt} = 0\]
+
+\textbf{D24-5 }Jacobi -
+\(x(t)\)  \(y(t) = x(t) + \epsilon J(t)\)
+\[\frac{D^2}{dt^2} J^\mu + R^\mu_{\nu\rho\sigma} \frac{dx^\nu}{dt} J^\rho \frac{dx^\sigma}{dt} = 0\]
+
+****
+\[\frac{d}{dt} \|J(t)\|^2 = 2 \langle J, \frac{D}{dt} J \rangle + O(\|J\|^2)\]
+
+\textbf{ D24-5a}
+\begin{itemize}
+\item \textbf{**  }**
+\item \textbf{**  }**
+\item \textbf{** \(\Rightarrow\) }**
+\end{itemize}
+
+
+
+\subsection{3.}
+
+
+\subsubsection{ D24-A}
+
+
+\textbf{ D24-2 }
+1.  BERT
+2.  \(d_{sem}(A, B)\) vs \(d_{sem}(A, C) + d_{sem}(C, B)\)
+3.  \(\Delta_{detour} < 0\)
+4. ****
+
+
+\subsubsection{ D24-B}
+
+
+\textbf{ D24-3  D24-5}
+1. NounVerbAdjective
+2.  \(R(A,B;C,D)\)
+3. ****
+
+
+\subsubsection{ D24-C}
+
+
+\textbf{ D24-4}
+1.
+2.
+3. ****
+
+
+\subsubsection{ D24-D}
+
+
+\textbf{ D24-5}
+1.
+2.
+3. ****
+
+
+\subsection{4.}
+
+
+\subsubsection{4.1 D3}
+
+
+\textbf{D24-D3 }
+\begin{itemize}
+\item D24-2 \textbf{** = D3 }**
+\item D24-4 \textbf{** = D3 }**
+\item \textbf{** = }**
+\end{itemize}
+
+
+
+\subsubsection{4.2 D16}
+
+
+\textbf{D24-D16 }
+\begin{itemize}
+\item D24-4 \textbf{** = D16-4 }**
+\item D24-5 \textbf{** = D16-2 }**
+\item \textbf{** = }**
+\end{itemize}
+
+
+
+\subsubsection{4.3 D21}
+
+
+\textbf{D24-D21 }
+\begin{itemize}
+\item D24 \textbf{**  D21  }Betti **
+\item \textbf{*}***
+\item \textbf{** = } + **
+\end{itemize}
+
+
+
+\subsection{5.}
+
+
+\subsubsection{5.1}
+
+
+1. \textbf{D24-1 } =
+2. \textbf{D24-2 }\(\Delta_{detour} \geq 0\)
+3. \textbf{D24-5 }
+
+\subsubsection{5.2}
+
+
+1. **** (4096+)
+2. ****
+3. ****
+
+
+\subsection{6.}
+
+
+\#\#\#
+
+**** \((\mathcal{S}, g)\) \(g\)  Fisher  \(d_{sem}(A,B)\)
+
+****
+1. ****\(\exists G: d_{sem}(A,B) = \|(A-B)\|_G\)
+2. ****\(\Delta_{detour} < 0 \iff \Delta I(A \xrightarrow{C} B) > 0\)
+3. ****\(R(A,B;C,D)\)
+4. **** \(\|\nabla \phi^\mu\|^2 = 1\)
+5. ****\(\|J(t)\| \sim e^{\lambda t}\)\(\lambda = \sup|R_{\mu\nu\rho\sigma}|\)
+
+\textbf{** }\textbf{*}*
+
+\textbf{**  }\textbf{*}*
+
+
+*D24   \textbf{*}
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Shannon, C.E. (1948). A Mathematical Theory of Communication.
+\bibitem{ref2} Cover, T.M. (2006). Elements of Information Theory.
+\end{thebibliography}
+
+\end{document}

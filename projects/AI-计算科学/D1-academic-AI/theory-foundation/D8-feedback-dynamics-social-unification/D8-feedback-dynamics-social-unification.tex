@@ -1,0 +1,327 @@
+% D8-
+% Auto-generated from markdown source
+% origin: ai
+
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D8-}
+\lhead{\thepage}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+\newcommand{\hbarF}{\hbar}
+
+\newtcolorbox{thmbox}[1]{
+  colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+\newtcolorbox{defbox}[1]{
+  colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+
+\begin{document}
+
+\title{D8-}
+\author{RALPH Loop}
+\date{}
+\maketitle
+
+\begin{abstract}
+This paper presents D8-, formalizing the underlying principles using information-theoretic methods.
+
+\textbf{Keywords}: D8-, information theory, formalization.
+\end{abstract}
+
+\tableofcontents
+\section{D8-}
+
+
+
+
+\subsection{0.}
+
+
+\textbf{//}\textbf{//}/
+
+\textbf{D8 }-\textbf{ \(G\)  \(G_c = 1\) }
+
+
+\subsection{1.}
+
+
+\subsubsection{1.1}
+
+
+\textbf{ D8-1} \(x \in \mathbb{R}^n\)
+\[\dot{x} = Ax + f_{\text{feedback}}(x) + \xi(t)\]
+
+\(f_{\text{feedback}}(x) = \begin{cases} +G \cdot h(x) & \text{positive feedback} \\ -G \cdot h(x) & \text{negative feedback} \end{cases}\)
+
+\textbf{ D8-2}
+\begin{itemize}
+\item \textbf{**\(G > 0\)  }\textbf{  }**
+\item \textbf{**\(G < 0\)  }\textbf{  }**
+\end{itemize}
+
+
+
+\subsubsection{1.2}
+
+
+\textbf{SocUni-T1}
+****
+\[\mathcal{D}[t] = \frac{1}{N} \sum_{i,j} \text{Var}(\theta_i - \theta_j | t)\]
+
+
+\[\frac{d\mathcal{D}}{dt} = (G_+ - G_-) \cdot \mathcal{D} - \gamma \cdot \mathcal{D} + \sigma^2\]
+
+
+\begin{itemize}
+\item \(G_+\)//
+\item \(G_-\)//
+\item \(\gamma\)
+\item \(\sigma^2\)
+\end{itemize}
+
+
+
+\subsection{2.}
+
+
+\subsubsection{ D8-1}
+
+
+****
+\(\rho_c = G_c^+/G_c^-\)
+\[\rho = \frac{G_+}{G_-} \begin{cases} > \rho_c & \implies \mathcal{D}[t] \to \infty \quad \text{} \\ < \rho_c & \implies \mathcal{D}[t] \to \mathcal{D}^* < \infty \quad \text{} \end{cases}\]
+
+****
+\[\rho_c = 1 + \frac{\gamma}{\lambda_{\max}(A_{\text{diff}})}\]
+
+\(A_{\text{diff}}\)
+
+
+\subsubsection{ D8-2}
+
+
+****
+**** \(m = 1 - \mathcal{D}/\mathcal{D}_{\max}\) \(\rho \to \rho_c\)
+\[m \sim |\rho - \rho_c|^{\beta}, \quad \chi_{\mathcal{D}} \sim |\rho - \rho_c|^{-\gamma_{\text{soc}}}\]
+
+****
+\begin{itemize}
+\item \(\beta = \frac{1}{2}\)
+\item \(\gamma_{\text{soc}} = 1\)
+\end{itemize}
+
+
+
+\subsubsection{ D8-3}
+
+
+****
+\(\rho < \rho_c\)
+\[-\frac{d\mathcal{D}}{dt} \geq (\rho_c - \rho) \cdot \mathcal{D} - \sigma^2\]
+
+\textbf{ D8-3a}****
+\[\sigma^2_{\min} = (\rho_c - \rho) \cdot \mathcal{D}_{\max}\]
+
+\(\mathcal{D} = 0\)
+
+
+\subsubsection{ D8-4 slowing down}
+
+
+****
+\(\rho_c^-\)
+\[\tau_{\text{relax}} = \frac{1}{\rho_c - \rho} \to \infty \quad \text{as } \rho \to \rho_c^-\]
+
+\textbf{*}***
+
+
+\subsubsection{ D8-5}
+
+
+****
+\(\tau_h\) hysteresis loop
+\[\Delta \rho_{\text{hysteresis}} = \rho_{\text{divergence onset}} - \rho_{\text{convergence recovery}} > 0\]
+
+\textbf{**\(G_+^{\text{onset}} < G_-^{\text{recovery}}\)}**
+
+
+\subsection{3.}
+
+
+\subsubsection{ D8-A}
+
+
+\textbf{ D8-1  D8-2}
+1.  Agent-Based ModelAgent  \(\theta_i \in [-1, 1]\)
+2. \(\theta_i \leftarrow \theta_i + G_+ \cdot (\theta_j - \theta_i) \cdot \mathbb{I}(|\theta_i - \theta_j| < \delta)\)
+3. \(\theta_i \leftarrow \theta_i - G_- \cdot (\theta_j - \theta_i) \cdot \mathbb{I}(|\theta_i - \theta_j| > \Delta)\)
+4.  \((G_+, G_-)\)
+
+**** \(\rho = \rho_c\)
+
+
+\subsubsection{ D8-B}
+
+
+\textbf{ D8-4}
+1.  \(\theta_i(t_0) \leftarrow \theta_i(t_0) + \epsilon\)
+2.  \(\tau\)  \(\rho_c - \rho\)
+3. \(\tau \propto (\rho_c - \rho)^{-1}\)
+
+
+\subsubsection{ D8-C}
+
+
+\textbf{ D8-5}
+1.  \(\rho\)**** \(\rho\)  \(\rho_c\)
+2.  onset \(\rho_{\uparrow}\)
+3. **** \(\rho\)  \(\rho_c\)
+4.  \(\rho_{\downarrow}\)
+5. \(\rho_{\uparrow} > \rho_{\downarrow}\)
+
+
+\subsubsection{ D8-D}
+
+
+\textbf{ D8-3a}
+1.  \(\rho < \rho_c\) \(\sigma^2\)
+2.  \(\mathcal{D}^*\)
+3.  \(\sigma^2_{\min}\)  \(\mathcal{D}^* \to 0\)
+
+
+\subsection{4.}
+
+
+\subsubsection{4.1 D9}
+
+
+\textbf{D9-V } \(\Phi_{\text{soc}}\)
+\[\Phi_{\text{soc}} = 1 - \frac{\mathcal{D}[\infty]}{\mathcal{D}_{\max}}\]
+
+\textbf{D9 } \(\mathcal{C}_{\text{feedback}}\)
+\[\mathcal{C}_{\text{feedback}} \equiv \frac{G_-}{G_+ + G_-} > \rho_c^{-1}\]
+
+
+\subsubsection{4.2 S18}
+
+
+\textbf{ S18-}
+\[\mathcal{F}_{\text{soc}}[\theta] = \underbrace{\sum_{i,j} K_{ij} |\theta_i - \theta_j|^2}_{\text{}} - \underbrace{G_+ \sum_{i,j} J_{ij} (\theta_i - \theta_j)^2 \mathbb{I}(|\theta_i - \theta_j| < \delta)}_{\text{}}\]
+
+****\(\frac{\delta \mathcal{F}_{\text{soc}}}{\delta \theta_i} = 0 \iff \text{}\)
+
+
+\subsubsection{4.3}
+
+
+\textbf{D8-}
+-
+-
+\begin{itemize}
+\item \(\rho \to \rho_c^+\)  ****
+\end{itemize}
+
+-
+\begin{itemize}
+\item \(T_{\text{dynasty}} \approx \frac{1}{\lambda} \log\left(\frac{\rho_c - \rho_0}{\rho - \rho_c}\right)\)
+\end{itemize}
+
+
+
+\subsection{5.}
+
+
+\subsubsection{5.1}
+
+
+1. \textbf{D8-1 } \(\rho_c\)
+2. \textbf{D8-4 } \(\rho \to \rho_c^-\)
+3. \textbf{D8-5 }-
+
+\subsubsection{5.2}
+
+
+1. ****
+2. ****
+3.  \(+/-\) ****
+
+
+\subsection{6.}
+
+
+\subsubsection{-}
+
+
+**** Agent /
+\[\dot{\theta}_i = -G_- \sum_j w_{ij}(\theta_i - \theta_j) + G_+ \sum_k v_{ik}(\theta_i - \theta_k) \mathbb{I}(|\theta_i - \theta_k| < \delta) + \xi_i(t)\]
+
+****
+\[\boxed{\frac{d\mathcal{D}}{dt} = (G_+ - G_-)\mathcal{D} - \gamma \mathcal{D} + \sigma^2 = 0 \iff \rho = \frac{G_+}{G_-} = \rho_c}\]
+
+****- \(G_c = 1\)
+
+
+*D8 *
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Shannon, C.E. (1948). A Mathematical Theory of Communication.
+\bibitem{ref2} Cover, T.M. (2006). Elements of Information Theory.
+\end{thebibliography}
+
+\end{document}

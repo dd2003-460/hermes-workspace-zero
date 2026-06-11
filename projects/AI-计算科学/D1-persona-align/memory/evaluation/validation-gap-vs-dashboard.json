@@ -1,0 +1,77 @@
+{
+  "total": 52,
+  "mismatches": 49,
+  "mismatch_rate": 0.9423,
+  "top_mismatches": [
+    {
+      "file": "idea-41-marketized-ai-rate-distortion.md",
+      "gap_filler": 0.5,
+      "dashboard": 0.625,
+      "diff": 0.125,
+      "mismatch": true
+    },
+    {
+      "file": "idea-01-ai训练数据是否是层级化的-粗到细-rag外挂呢-以及内部检.md",
+      "gap_filler": 0.5833,
+      "dashboard": 0.6875,
+      "diff": 0.1042,
+      "mismatch": true
+    },
+    {
+      "file": "idea-02-ai强cot的模型大小理论下限-留存冗余.md",
+      "gap_filler": 0.5833,
+      "dashboard": 0.6875,
+      "diff": 0.1042,
+      "mismatch": true
+    },
+    {
+      "file": "idea-03-耦合定义为双射以外自由度-解耦和最小步更新测试循环-任何项目.md",
+      "gap_filler": 0.5833,
+      "dashboard": 0.6875,
+      "diff": 0.1042,
+      "mismatch": true
+    },
+    {
+      "file": "idea-04-如果让你当agent-例如coding和启动本地clicod.md",
+      "gap_filler": 0.5833,
+      "dashboard": 0.6875,
+      "diff": 0.1042,
+      "mismatch": true
+    },
+    {
+      "file": "idea-07-cot-redundancy-information-theory.md",
+      "gap_filler": 0.5833,
+      "dashboard": 0.6875,
+      "diff": 0.1042,
+      "mismatch": true
+    },
+    {
+      "file": "idea-08-小说idea-ai视角下的诞生与进化-主要从长记忆开始因为有.md",
+      "gap_filler": 0.5833,
+      "dashboard": 0.6875,
+      "diff": 0.1042,
+      "mismatch": true
+    },
+    {
+      "file": "idea-09-安全-长期守则-硬编码不被压缩和遗忘.md",
+      "gap_filler": 0.5833,
+      "dashboard": 0.6875,
+      "diff": 0.1042,
+      "mismatch": true
+    },
+    {
+      "file": "idea-102-self-centered-law-derivation.md",
+      "gap_filler": 0.5833,
+      "dashboard": 0.6875,
+      "diff": 0.1042,
+      "mismatch": true
+    },
+    {
+      "file": "idea-11-love-concrete-hate-system.md",
+      "gap_filler": 0.5833,
+      "dashboard": 0.6875,
+      "diff": 0.1042,
+      "mismatch": true
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+% D5
+% Auto-generated from markdown source
+% origin: ai
+
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D5}
+\lhead{\thepage}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+\newcommand{\hbarF}{\hbar}
+
+\newtcolorbox{thmbox}[1]{
+  colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+\newtcolorbox{defbox}[1]{
+  colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+
+\begin{document}
+
+\title{D5}
+\author{RALPH Loop}
+\date{}
+\maketitle
+
+\begin{abstract}
+This paper presents D5, formalizing the underlying principles using information-theoretic methods.
+
+\textbf{Keywords}: D5, information theory, formalization.
+\end{abstract}
+
+\tableofcontents
+\section{D5}
+
+
+
+
+\#\#
+
+
+
+\#\#
+
+\textbf{-} \(\rho_\theta\) Bures
+
+\[d_B(\rho_1, \rho_2) = \sqrt{2(1 - \text{Tr}(\rho_1^{1/2}\rho_2\rho_1^{1/2}))}\]
+
+Fisher
+\[g_{ij} = \text{Re}\left[\text{Tr}(\rho_\theta L_i L_j)\right]\]
+
+\(L_i\) SLD
+
+\textbf{*}*** \(S(\rho) = -\text{Tr}(\rho \log \rho)\)  Betti
+
+\[\beta_1(\mathcal{P}_\theta) \leq C \cdot S(\rho_\theta) + \log(d)\]
+
+\(d\)
+
+
+\#\#
+
+\subsubsection{ 1 Bures-}
+
+
+\textbf{-}
+\[\lim_{\hbar \to 0} d_B(\rho_\theta, \rho_{\theta+\delta\theta}) = \|\theta - (\theta + \delta\theta)\|_{g_{FI}}\]
+
+\textbf{ Fisher Braunstein-Caves, 1994}
+\[g_{ij}^{Q} = \lim_{\hbar \to 0} g_{ij}^{classical} + \mathcal{O}(\hbar)\]
+
+**** D5-D1-1/D1-2
+
+
+\subsubsection{ 2-Betti}
+
+
+\textbf{ Betti } n  Schmidt  \(|\psi\rangle = \sum_i \lambda_i |i\rangle_A |i\rangle_B\)
+
+\[\beta_1(\mathcal{P}_\theta) \leq \mathcal{O}\left(n \cdot e^{S_E/2}\right)\]
+
+\(S_E = -\sum_i \lambda_i^2 \log \lambda_i^2\) ****
+
+****
+\begin{itemize}
+\item ""
+\item D1-2 \(\|T\|_{HS}/\|T\|_{op}\)  \(S(\rho)\)
+\end{itemize}
+
+
+
+\subsubsection{ 3}
+
+
+\textbf{Tishby et al.}\(I(X;Z) - \beta I(Z;Y)\)
+
+****
+\[\min_\rho \left[ I(\rho_\theta; Z) - \beta \cdot I(Z; Y | \rho_\theta) \right]\]
+
+\(I(A;B) = S(\rho_A) + S(\rho_B) - S(\rho_{AB})\)
+
+\textbf{ IB }
+\[I(\rho_\theta; Z) \geq S(\rho_\theta) - S(Z|\rho_\theta)\]
+
+\textbf{ D2-1 }****
+\[|A|_{quantum} \geq I_{plan}^{quantum} + \delta_{margin}^{quantum}\]
+
+
+\subsubsection{ 4Schmidt}
+
+
+\textbf{Schmidt   }
+\(|\psi\rangle = \sum_{i=1}^r \lambda_i |i\rangle_A |i\rangle_B\) \(r\)  Schmidt
+
+\textbf{Schmidt -Betti }
+\[\beta_1(\mathcal{P}_\theta) \sim r - d\]
+
+\(d\)
+
+\textbf{-}
+\[Z[\psi] = \langle\psi|\hat{U}(t)|\psi\rangle = \sum_{C \in \pi_1(\mathcal{M})} \exp(-S[C]/\hbar) \cdot \text{winding}(C)\]
+
+
+\#\#
+
+\subsubsection{ 1}
+
+```python
+\section{1.  PennyLane / Cirq}
+
+\section{2.  S()}
+
+\section{3.    CS() + log(d)}
+
+```
+
+\subsubsection{ 2}
+
+```python
+\section{1.}
+
+\section{2.}
+
+\section{3.}
+
+```
+
+\subsubsection{ 3- IB}
+
+```python
+\section{1. /}
+
+\section{2.  IB  I(Z;Y)}
+
+```
+
+
+\#\#
+
+1. \textbf{""}
+2. \textbf{ Betti }
+3. ****
+
+
+\#\#
+
+\begin{itemize}
+\item [x]  1-4
+\item [ ]  1
+\item [ ]  2
+\item [ ]  3- IB
+\end{itemize}
+
+
+
+* D5 -*
+*2026-05-04 | r01 |  | *
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Shannon, C.E. (1948). A Mathematical Theory of Communication.
+\bibitem{ref2} Cover, T.M. (2006). Elements of Information Theory.
+\end{thebibliography}
+
+\end{document}

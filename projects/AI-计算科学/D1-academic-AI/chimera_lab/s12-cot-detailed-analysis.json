@@ -1,0 +1,280 @@
+{
+  "total_papers": 500,
+  "time_span": "2000-09-21 to 2026-06-07",
+  "n_clusters": 20,
+  "top_clusters": [
+    {
+      "size": 358,
+      "span_days": 659,
+      "sample_titles": [
+        [
+          "2024-08-16T10:34:50Z",
+          "Chain of Thought Still Thinks Fast: APriCoT Helps with Thinking Slow"
+        ],
+        [
+          "2024-08-21T21:40:30Z",
+          "CaRDiff: Video Salient Object Ranking Chain of Thought Reasoning for Saliency Prediction with Diffusion"
+        ],
+        [
+          "2024-08-22T06:55:29Z",
+          "Implicit Sentiment Analysis Based on Chain of Thought Prompting"
+        ],
+        [
+          "2024-08-25T04:07:18Z",
+          "Unveiling the Statistical Foundations of Chain-of-Thought Prompting Methods"
+        ],
+        [
+          "2024-08-26T07:19:07Z",
+          "Enhancing Depression Diagnosis with Chain-of-Thought Prompting"
+        ]
+      ]
+    },
+    {
+      "size": 53,
+      "span_days": 193,
+      "sample_titles": [
+        [
+          "2024-01-11T01:52:25Z",
+          "The Benefits of a Concise Chain of Thought on Problem-Solving in Large Language Models"
+        ],
+        [
+          "2024-01-18T18:58:44Z",
+          "Edit One for All: Interactive Batch Image Editing"
+        ],
+        [
+          "2024-01-23T15:56:11Z",
+          "KAM-CoT: Knowledge Augmented Multimodal Chain-of-Thoughts Reasoning"
+        ],
+        [
+          "2024-01-25T16:34:00Z",
+          "Demystifying Chains, Trees, and Graphs of Thoughts"
+        ],
+        [
+          "2024-02-01T12:46:45Z",
+          "A Chain-of-Thought Is as Strong as Its Weakest Link: A Benchmark for Verifiers of Reasoning Chains"
+        ]
+      ]
+    },
+    {
+      "size": 32,
+      "span_days": 104,
+      "sample_titles": [
+        [
+          "2023-04-03T07:59:13Z",
+          "Chain-of-Thought Predictive Control"
+        ],
+        [
+          "2023-04-06T14:12:02Z",
+          "Investigating Chain-of-thought with ChatGPT for Stance Detection on Social Media"
+        ],
+        [
+          "2023-04-16T23:59:25Z",
+          "Chain of Thought Prompt Tuning in Vision Language Models"
+        ],
+        [
+          "2023-04-23T06:52:35Z",
+          "Divide and Prompt: Chain of Thought Prompting for Text-to-SQL"
+        ],
+        [
+          "2023-04-23T13:54:39Z",
+          "Enhancing Chain-of-Thoughts Prompting with Iterative Bootstrapping in Large Language Models"
+        ]
+      ]
+    },
+    {
+      "size": 30,
+      "span_days": 106,
+      "sample_titles": [
+        [
+          "2023-09-10T17:47:21Z",
+          "Exploring Social Choice Mechanisms for Recommendation Fairness in SCRUF"
+        ],
+        [
+          "2023-09-15T17:44:17Z",
+          "Chain-of-Thought Reasoning is a Policy Improvement Operator"
+        ],
+        [
+          "2023-09-20T04:17:28Z",
+          "Design of Chain-of-Thought in Math Problem Solving"
+        ],
+        [
+          "2023-09-27T04:53:10Z",
+          "Navigate through Enigmatic Labyrinth A Survey of Chain of Thought Reasoning: Advances, Frontiers and Future"
+        ],
+        [
+          "2023-09-28T17:21:33Z",
+          "Stress Testing Chain-of-Thought Prompting for Large Language Models"
+        ]
+      ]
+    },
+    {
+      "size": 6,
+      "span_days": 21,
+      "sample_titles": [
+        [
+          "2022-09-16T02:54:00Z",
+          "Text and Patterns: For Effective Chain of Thought, It Takes Two to Tango"
+        ],
+        [
+          "2022-09-16T19:23:13Z",
+          "Psychologically-informed chain-of-thought prompts for metaphor understanding in large language models"
+        ],
+        [
+          "2022-09-20T07:04:24Z",
+          "Learn to Explain: Multimodal Reasoning via Thought Chains for Science Question Answering"
+        ],
+        [
+          "2022-10-03T21:34:32Z",
+          "Language Models Are Greedy Reasoners: A Systematic Formal Analysis of Chain-of-Thought"
+        ],
+        [
+          "2022-10-06T17:03:34Z",
+          "Language Models are Multilingual Chain-of-Thought Reasoners"
+        ]
+      ]
+    },
+    {
+      "size": 4,
+      "span_days": 2,
+      "sample_titles": [
+        [
+          "2023-01-30T17:37:32Z",
+          "Thought Bubbles: A Proxy into Players' Mental Model Development"
+        ],
+        [
+          "2023-01-31T03:04:26Z",
+          "Faithful Chain-of-Thought Reasoning"
+        ],
+        [
+          "2023-02-01T17:33:12Z",
+          "Synthetic Prompting: Generating Chain-of-Thought Demonstrations for Large Language Models"
+        ],
+        [
+          "2023-02-02T07:51:19Z",
+          "Multimodal Chain-of-Thought Reasoning in Language Models"
+        ]
+      ]
+    },
+    {
+      "size": 3,
+      "span_days": 10,
+      "sample_titles": [
+        [
+          "2023-02-24T18:58:06Z",
+          "Automatic Prompt Augmentation and Selection with Chain-of-Thought from Labeled Data"
+        ],
+        [
+          "2023-03-02T05:06:17Z",
+          "Dynamic fairness-aware recommendation through multi-agent social choice"
+        ],
+        [
+          "2023-03-07T03:23:14Z",
+          "CoTEVer: Chain of Thought Prompting Annotation Toolkit for Explanation Verification"
+        ]
+      ]
+    },
+    {
+      "size": 2,
+      "span_days": 5,
+      "sample_titles": [
+        [
+          "2022-03-16T04:12:20Z",
+          "Iteratively Prompt Pre-trained Language Models for Chain of Thought"
+        ],
+        [
+          "2022-03-21T17:48:52Z",
+          "Self-Consistency Improves Chain of Thought Reasoning in Language Models"
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "span_days": 0,
+      "sample_titles": [
+        [
+          "2000-09-21T20:51:43Z",
+          "Preserving entanglement under decoherence and sandwiching all separable states"
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "span_days": 0,
+      "sample_titles": [
+        [
+          "2001-05-04T11:18:48Z",
+          "Standard and Hyperfinite Unifications for All Physical Theories"
+        ]
+      ]
+    }
+  ],
+  "rates_by_quarter": [
+    [
+      "Q1",
+      2,
+      0.025564550489987216
+    ],
+    [
+      "Q2",
+      2,
+      0.025564550489987216
+    ],
+    [
+      "Q3",
+      4,
+      0.05112910097997443
+    ],
+    [
+      "Q4",
+      491,
+      6.276097145291862
+    ]
+  ],
+  "trend_test": {
+    "slope": 146.9,
+    "r_squared": 0.6032719287578329,
+    "p_value": 0.22329418132871381
+  },
+  "cross_topic_comparison": [
+    {
+      "topic": "coT",
+      "n_papers": 500,
+      "n_clusters": 8,
+      "cv": 8.868284727357766,
+      "max_cluster": 358,
+      "mass_fraction": 0.976
+    },
+    {
+      "topic": "emergent_ability",
+      "n_papers": 300,
+      "n_clusters": 40,
+      "cv": 2.6802081181073487,
+      "max_cluster": 21,
+      "mass_fraction": 0.7733333333333333
+    },
+    {
+      "topic": "free_energy",
+      "n_papers": 300,
+      "n_clusters": 51,
+      "cv": 2.3109751716145066,
+      "max_cluster": 9,
+      "mass_fraction": 0.6066666666666667
+    },
+    {
+      "topic": "information_geometry",
+      "n_papers": 300,
+      "n_clusters": 61,
+      "cv": 1.7151984935839522,
+      "max_cluster": 11,
+      "mass_fraction": 0.7
+    },
+    {
+      "topic": "phase_transition_ml",
+      "n_papers": 300,
+      "n_clusters": 54,
+      "cv": 1.5073282461870474,
+      "max_cluster": 12,
+      "mass_fraction": 0.6633333333333333
+    }
+  ]
+}

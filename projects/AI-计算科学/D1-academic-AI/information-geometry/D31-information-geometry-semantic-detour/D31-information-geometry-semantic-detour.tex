@@ -1,0 +1,426 @@
+% D31   vs
+% Auto-generated from markdown source
+% origin: ai
+
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D31   vs}
+\lhead{\thepage}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+\newcommand{\hbarF}{\hbar}
+
+\newtcolorbox{thmbox}[1]{
+  colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+\newtcolorbox{defbox}[1]{
+  colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+
+\begin{document}
+
+\title{D31   vs}
+\author{RALPH Loop}
+\date{}
+\maketitle
+
+\begin{abstract}
+This paper presents D31   vs, formalizing the underlying principles using information-theoretic methods.
+
+\textbf{Keywords}: D31   vs, information theory, formalization.
+\end{abstract}
+
+\tableofcontents
+\section{D31   vs}
+
+
+
+
+\subsection{0.}
+
+
+\textbf{""}
+
+\textbf{D31 }
+1.
+2. "" =
+3.  =
+
+
+
+\subsection{1.}
+
+
+\subsubsection{1.1 -}
+
+
+\textbf{ D31-1}
+\(\mathcal{W} \subset \mathbb{R}^d\)
+
+****D24
+\[g_{ij}^{geo} = \frac{\partial^2}{\partial w^i \partial w^j} \log Z(w)\]
+\(Z(w) = \sum_k \exp(-\|w - w_k\|^2 / 2\sigma^2)\)
+
+****D31
+\[g_{ij}^{info} = \mathbb{E}\left[\frac{\partial \log P(X|Y)}{\partial w^i} \cdot \frac{\partial \log P(X|Y)}{\partial w^j}\right]\]
+\(X, Y\) \(P(X|Y)\)
+
+****\(g_{ij}^{geo} \stackrel{?}{=} g_{ij}^{info}\)
+
+
+\subsubsection{1.2}
+
+
+\textbf{ D31-2}
+**** \(\pi = (w_0, w_1, \ldots, w_n)\)  \(w_0\)  \(w_n\)
+
+****
+\[L_{geo}(\pi) = \sum_{i=0}^{n-1} \sqrt{g^{geo}(w_i, w_i) \cdot \Delta w_i^2}\]
+
+****
+\[C_{info}(\pi) = \sum_{i=0}^{n-1} H(X_{i+1} | X_i) - H(X_{i+1} | X_i, w_i \to w_{i+1})\]
+
+\textbf{D31-1 -}
+\[\inf_{\pi_{geo}} L_{geo}(\pi) \neq \inf_{\pi_{info}} C_{info}(\pi)\]
+**** \(\phi: \mathcal{M}_{geo} \to \mathcal{M}_{info}\)
+\[L_{geo}(\pi) = L_{geo}(\phi(\pi)) \implies C_{info}(\pi) = C_{info}(\phi(\pi))\]
+
+****
+****
+
+
+\subsubsection{1.3 ""}
+
+
+\textbf{ D31-3}
+**** \(\pi_2\)  \(\pi_1\)
+
+****
+\begin{itemize}
+\item \(\pi_1 = (w_A, w_B)\)
+\item \(\pi_2 = (w_A, w_{c1}, w_{c2}, \ldots, w_B)\)
+\end{itemize}
+
+
+\textbf{D31-2 }
+\[L_{geo}(\pi_1) \leq L_{geo}(\pi_2) \text{  } C_{info}(\pi_1) = C_{info}(\pi_2)\]
+****
+\[I(w_A; w_B) = I(w_A; w_{c1}) + I(w_{c1}; w_{c2}) + \cdots + I(w_{kn}; w_B) - H(\text{redundancy})\]
+
+\textbf{*}***
+
+****
+\[\Delta C_{info} = \underbrace{\sum I(w_i; w_{i+1})}_{\text{}} - \underbrace{I(w_A; w_B)}_{\text{}} = H_{redundancy} \geq 0\]
+
+
+\subsection{2.}
+
+
+\subsubsection{ D31-1}
+
+
+****
+****
+\[\rho_{geo}(w_i, w_j) = \exp(-L_{geo}(w_i, w_j)^2 / 2\sigma^2)\]
+\[\rho_{info}(w_i, w_j) = \frac{I(w_i; w_j)}{H(w_i)}\]
+
+\textbf{D31-1 }
+\[\exists \phi: \mathcal{W} \times \mathcal{W} \to \mathbb{R}_+ : \rho_{geo} = \phi(\rho_{info})\]
+\textbf{ \(\phi\) }
+
+****
+
+\[\min_{w} \sum_{i,j} p(w_i, w_j) \log \frac{p(w_i, w_j)}{p(w_i)p(w_j)}\]
+KL KL  Lipschitz
+
+\textbf{ D31-1a}
+\begin{itemize}
+\item \textbf{*}***
+\item ****
+\end{itemize}
+
+
+
+\subsubsection{ D31-2}
+
+
+****
+****
+\[\mathcal{R}(\pi_{indirect}) = \sum_{i=0}^{n-1} I(w_i; w_{i+1} | w_{i-1}) - I(w_0; w_n)\]
+
+\textbf{D31-2 }
+\[\mathcal{R}(\pi_{indirect}) = \Delta H_{context} - \Delta H_{information}\]
+\textbf{*}\textbf{*}**
+
+****
+
+\[H(w_0, w_1, \ldots, w_n) = \sum_{i=0}^n H(w_i | w_0, \ldots, w_{i-1})\]
+
+\[H(\pi_{direct}) = H(w_A) + H(w_B | w_A)\]
+\[H(\pi_{indirect}) = H(w_A) + H(w_{c1}|w_A) + \cdots + H(w_B|w_{cn})\]
+
+\textbf{Markov }
+\[I(w_A; w_B) \geq I(w_A; w_{c1}) \geq \cdots \geq I(w_{cn}; w_B)\]
+
+\textbf{ D31-2a}
+\begin{itemize}
+\item ****
+\item ""\textbf{*}***
+\end{itemize}
+
+
+
+\subsubsection{ D31-3}
+
+
+****
+****
+\[C_{semantic} = \max_{p(x)} I(X; Y)\]
+\(X\) \(Y\)
+
+\textbf{D31-3 }
+\[C_{semantic} \leq \min(H(X), H(Y)) - D_{KL}(p_{true} || p_{model})\]
+
+****
+=
+\[I(X; Y) = H(Y) - H(Y|X)\]
+\(H(Y|X)\)
+KL  \(p_{true}\)  \(p_{model}\)
+
+\textbf{ D31-3a}
+\begin{itemize}
+\item ****
+\item \textbf{   \(\min(H(X), H(Y))\)}
+\item \textbf{ = KL }
+\end{itemize}
+
+
+
+\subsubsection{ D31-4-}
+
+
+****
+****
+\[D_l(w_i, w_j) = \text{distance at level } l \text{ of hierarchical decomposition}\]
+
+\textbf{D31-4 }
+\[\arg\min_l \left[\alpha \cdot L_{geo}^{(l)} + (1-\alpha) \cdot C_{info}^{(l)}\right]\]
+****
+
+****
+****
+****
+\(\iff\)
+
+\textbf{ D31-4a}
+-
+-
+\begin{itemize}
+\item \textbf{ = }
+\end{itemize}
+
+
+
+\subsubsection{ D31-5}
+
+
+****
+****
+\[\mathcal{L}[\pi] = \int_{\pi} \left[\alpha \sqrt{g^{geo}(\dot{\pi}, \dot{\pi})} + (1-\alpha) c_{info}(\pi)\right] dt\]
+
+\textbf{D31-5 }
+\[\exists \pi^* : \delta \mathcal{L}[\pi^*] = 0 \land \mathcal{L}[\pi^*] \leq \mathcal{L}[\forall \pi]\]
+
+****
+\(\mathcal{M}\)  \(\mathcal{L}\)  \(H^1\)
+****Dirichlet
+\begin{itemize}
+\item \(\mathcal{L}\)
+\item \(\mathcal{L}\)
+\end{itemize}
+
+-
+
+\(\pi^*\)
+
+
+\subsection{3.}
+
+
+\subsubsection{ D31-A-}
+
+
+\textbf{ D31-1}
+1.  word2vec/GloVe
+2.  \(\|\vec{w_i} - \vec{w_j}\|\)
+3.  \(I(w_i; w_j)\)
+4. ****Spearman \(\rho > 0.8\)
+
+
+\subsubsection{ D31-B}
+
+
+\textbf{ D31-2}
+1. -
+2.  vs
+3.  \(\mathcal{R}(\pi) \approx \Delta H_{context}\)
+4. ****
+
+
+\subsubsection{ D31-C}
+
+
+\textbf{ D31-3}
+1.  \(X\)100
+2.  \(Y\) embedding
+3.  \(C_{semantic} = \max I(X; Y)\)
+4. **** >  KL
+
+
+\subsubsection{ D31-D}
+
+
+\textbf{ D31-4}
+1.
+2.
+3. ****
+
+
+\subsection{4.}
+
+
+\subsubsection{4.1 D24}
+
+
+\textbf{D31-D24 }
+\begin{itemize}
+\item D24 \textbf{**  D31 }**
+\item D24 \textbf{** = D31-2 }**
+\item ****
+\end{itemize}
+
+
+
+\subsubsection{4.2 D1-S17}
+
+
+\textbf{D31-D1-S17 }
+\begin{itemize}
+\item D1-S17 \textbf{**  D31 }**
+\item D1-S17 \textbf{=} = D31-4 ****
+\item ****D1-S17D31-4
+\end{itemize}
+
+
+
+\subsubsection{4.3 D18}
+
+
+\textbf{D31-D18 }
+\begin{itemize}
+\item D31-5 \textbf{**  D18 }**
+\item D31-3 \textbf{** = D18 }**
+\item **** =
+\end{itemize}
+
+
+
+\subsection{5.}
+
+
+\subsubsection{5.1}
+
+
+1. \textbf{D31-1 }
+2. \textbf{D31-2 }
+3. \textbf{D31-3 }
+
+\subsubsection{5.2}
+
+
+1. ****
+2. ****
+3. ****
+
+
+\subsection{6.}
+
+
+\#\#\#
+
+**** \(\mathcal{W}\)  \(g^{geo}\)  \(g^{info}\)
+
+****
+1. ****\(\rho_{geo} = \phi(\rho_{info})\)
+2. ****\(\mathcal{R}(\pi_{indirect}) = \Delta H_{context} - \Delta H_{information}\)
+3. ****\(C_{semantic} \leq \min(H(X), H(Y)) - D_{KL}\)
+4. ****
+5. ****\(\exists \pi^*\)
+
+\textbf{*}\textbf{*""}**
+
+\textbf{**""}\textbf{*}*
+
+
+*D31  D24 -"" = *
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Shannon, C.E. (1948). A Mathematical Theory of Communication.
+\bibitem{ref2} Cover, T.M. (2006). Elements of Information Theory.
+\end{thebibliography}
+
+\end{document}

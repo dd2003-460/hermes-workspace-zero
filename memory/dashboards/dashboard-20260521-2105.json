@@ -1,0 +1,186 @@
+{
+  "generated_at": "2026-05-21T21:05:57.259888",
+  "workspace_root": "/Users/a1-6/Desktop/workspace",
+  "project_count": 8,
+  "projects": {
+    "D1-academic": {
+      "name": "D1-academic",
+      "type": "理论物理",
+      "last_modified": "2026-05-21 20:09",
+      "files": {
+        "total": 606,
+        "md": 196,
+        "py": 128,
+        "tex": 30,
+        "json": 57,
+        "pdf": 49,
+        "png": 18
+      },
+      "memory_count": 1,
+      "tasks_count": 2,
+      "papers": [],
+      "blocks": [
+        "| 任务 | 状态 | 阻塞 |"
+      ],
+      "status": "ok"
+    },
+    "D1-academic-AI": {
+      "name": "D1-academic-AI",
+      "type": "AI/机器学习",
+      "last_modified": "2026-05-18 18:09",
+      "files": {
+        "total": 480,
+        "md": 300,
+        "py": 71,
+        "tex": 10,
+        "json": 48,
+        "pdf": 15,
+        "png": 5
+      },
+      "memory_count": 225,
+      "tasks_count": 77,
+      "papers": [],
+      "blocks": [
+        "- [x] 审查报告更新 — 标记已完成/阻塞状态",
+        "### 阻塞项",
+        "- ~~编译验证阻塞~~ — ✅ 已解决 (迭代 194+)"
+      ],
+      "status": "ok"
+    },
+    "D1-anyon-hawking": {
+      "name": "D1-anyon-hawking",
+      "type": "任意子/黑洞物理",
+      "last_modified": "2026-05-18 23:32",
+      "files": {
+        "total": 23,
+        "md": 13,
+        "py": 0,
+        "tex": 1,
+        "json": 3,
+        "pdf": 1,
+        "png": 0
+      },
+      "memory_count": 1,
+      "tasks_count": 0,
+      "papers": [],
+      "blocks": [],
+      "status": "ok"
+    },
+    "D1-continuous-agent": {
+      "name": "D1-continuous-agent",
+      "type": "未知",
+      "last_modified": "2026-05-18 14:12",
+      "files": {
+        "total": 5,
+        "md": 5,
+        "py": 0,
+        "tex": 0,
+        "json": 0,
+        "pdf": 0,
+        "png": 0
+      },
+      "memory_count": 1,
+      "tasks_count": 0,
+      "papers": [],
+      "blocks": [],
+      "status": "ok"
+    },
+    "D1-grav-waves": {
+      "name": "D1-grav-waves",
+      "type": "引力波物理",
+      "last_modified": "2026-05-18 05:16",
+      "files": {
+        "total": 71,
+        "md": 43,
+        "py": 2,
+        "tex": 1,
+        "json": 0,
+        "pdf": 3,
+        "png": 3
+      },
+      "memory_count": 45,
+      "tasks_count": 56,
+      "papers": [],
+      "blocks": [
+        "- [x] 编译验证 — pdflatex 编译阻塞于 brew install texlive（下载中）",
+        "- [x] PDF 生成与渲染检查 — 阻塞于编译环境",
+        "## 解除阻塞"
+      ],
+      "status": "ok"
+    },
+    "D1-memory": {
+      "name": "D1-memory",
+      "type": "记忆系统",
+      "last_modified": "2026-05-17 20:54",
+      "files": {
+        "total": 25,
+        "md": 11,
+        "py": 0,
+        "tex": 0,
+        "json": 9,
+        "pdf": 0,
+        "png": 0
+      },
+      "memory_count": 31,
+      "tasks_count": 5,
+      "papers": [],
+      "blocks": [],
+      "status": "ok"
+    },
+    "D1-persona-align": {
+      "name": "D1-persona-align",
+      "type": "未知",
+      "last_modified": "2026-05-21 20:40",
+      "files": {
+        "total": 51,
+        "md": 10,
+        "py": 18,
+        "tex": 0,
+        "json": 8,
+        "pdf": 0,
+        "png": 0
+      },
+      "memory_count": 1,
+      "tasks_count": 3,
+      "papers": [],
+      "blocks": [
+        "## 4. 阻塞项",
+        "### 主要阻塞: 数据不足",
+        "### 次要阻塞: 训练基础设施"
+      ],
+      "status": "ok"
+    },
+    "D1-writing": {
+      "name": "D1-writing",
+      "type": "写作",
+      "last_modified": "2026-05-21 20:09",
+      "files": {
+        "total": 210,
+        "md": 100,
+        "py": 25,
+        "tex": 24,
+        "json": 13,
+        "pdf": 13,
+        "png": 0
+      },
+      "memory_count": 1,
+      "tasks_count": 0,
+      "papers": [],
+      "blocks": [],
+      "status": "ok"
+    }
+  },
+  "summary": {
+    "total_files": 1471,
+    "total_memory": 306,
+    "total_tasks_pending": 0,
+    "papers_ready": 0,
+    "total_blocks": 10,
+    "oldest_project": null,
+    "most_recent_update": "2026-05-21 20:40"
+  },
+  "workspace_stats": {
+    "total_workspace_files": 5363,
+    "git_status": "? .claude/worktrees/recursing-franklin-cd38c9\n m projects/D1-academic\n m \"projects/D1-writing/\\345\\206\\231\\344\\275\\234/motivation_society\"\n?? projects/D1-persona-align/raw/eval_methodology_v2.md"
+  }
+}

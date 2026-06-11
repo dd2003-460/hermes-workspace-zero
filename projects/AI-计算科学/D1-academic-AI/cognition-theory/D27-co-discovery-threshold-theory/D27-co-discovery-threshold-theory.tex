@@ -1,0 +1,378 @@
+% D27
+% Auto-generated from markdown source
+% origin: ai
+
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D27}
+\lhead{\thepage}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+\newcommand{\hbarF}{\hbar}
+
+\newtcolorbox{thmbox}[1]{
+  colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+\newtcolorbox{defbox}[1]{
+  colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+
+\begin{document}
+
+\title{D27}
+\author{RALPH Loop}
+\date{}
+\maketitle
+
+\begin{abstract}
+This paper presents D27, formalizing the underlying principles using information-theoretic methods.
+
+\textbf{Keywords}: D27, information theory, formalization.
+\end{abstract}
+
+\tableofcontents
+\section{D27}
+
+
+
+
+\subsection{0.}
+
+
+\textbf{**co-discovery  }\textbf{*}*
+
+\textbf{D27 }\textbf{**  }\textbf{*}*\(d\omega/dt \to 0\)****
+
+
+
+\subsection{1.}
+
+
+\subsubsection{1.1}
+
+
+\textbf{ D27-1 \(\Phi(\theta)\)}
+\(\Omega\)**** \(\Theta\)
+\[\Phi(\theta) = \frac{1}{N_{questions}} \sum_{q \in \Omega} L(\theta, q)\]
+
+\(L(\theta, q)\)  \(\theta\)  \(q\) ****
+
+****
+\[\nabla_\theta \Phi(\theta) = \frac{1}{N_{questions}} \sum_{q \in \Omega} \frac{\partial L}{\partial \theta}\]
+
+
+\subsubsection{1.2}
+
+
+\textbf{ D27-2}
+\(i\) \(\pi_i\)
+\[\theta_i(t+\Delta t) = \theta_i(t) - \alpha \nabla_\theta \Phi(\theta_i(t)) + \xi_i(t)\]
+
+
+\begin{itemize}
+\item \(\alpha\) ****
+\item \(\xi_i(t) \sim \mathcal{N}(0, \sigma^2)\) ****
+\end{itemize}
+
+
+
+\subsubsection{1.3}
+
+
+\textbf{ D27-3}
+\(i, j\)  \(\Delta T\) **** \(\theta^*\)
+\[\|\theta_i(t_i) - \theta_j(t_j)\| < \epsilon \land |t_i - t_j| < \Delta T\]
+
+****
+\[C(\Delta T) = \frac{1}{\binom{N}{2}} \sum_{i<j} \mathbb{I}(\|\theta_i^* - \theta_j^*\| < \epsilon \land |t_i - t_j| < \Delta T)\]
+
+
+\subsection{2.}
+
+
+\subsubsection{ D27-1-}
+
+
+****
+****problem saturation index
+\[S(\theta) = -\nabla_\theta \Phi(\theta) \cdot \nabla_\theta \Phi(\theta) = \|\nabla_\theta \Phi(\theta)\|^2\]
+
+\textbf{D27-1 }
+\[P(\text{co-discovery}|\Delta T) = 1 - \exp\left(-\frac{S(\theta^*) \cdot \Delta T}{\sigma^2}\right)\]
+
+****
+\(S(\theta^*)\) ****
+
+\textbf{ D27-1a}
+\begin{itemize}
+\item \textbf{** }**
+\item \textbf{** }**
+\item \textbf{ \(\Delta T\)  \(S^{-1}\) }
+\end{itemize}
+
+
+
+\subsubsection{ D27-2}
+
+
+****
+\textbf{** \(\pi_i\) }** \(\Phi_i(\theta)\)
+
+\textbf{D27-2 }
+\[\lim_{t \to \infty} \|\theta_i^* - \theta_j^*\| \leq \frac{\|\nabla \Phi_i - \nabla \Phi_j\|_\infty}{\lambda_{\min}(\nabla^2 \Phi)}\]
+
+\(\lambda_{\min}(\nabla^2 \Phi)\) ****
+
+****
+\begin{itemize}
+\item \textbf{** }**
+\item \textbf{**/ }**
+\end{itemize}
+
+
+\textbf{ D27-2a}
+\textbf{*}***
+
+
+\subsubsection{ D27-3}
+
+
+****
+****
+\[D_{ij}(t) = \|\theta_i(t) - \theta_j(t)\|\]
+
+\textbf{D27-3 }
+\[\frac{d}{dt} D_{ij}^2(t) = 2(\theta_i - \theta_j)^\top (\nabla \Phi_i - \nabla \Phi_j + \xi_i - \xi_j)\]
+
+****
+\[= 2(\theta_i - \theta_j)^\top \nabla^2 \Phi \cdot (\theta_i - \theta_j) + O(\|\xi\|^2)\]
+
+****
+\[T_{conv} = \frac{1}{\lambda_{\min}} \log\left(\frac{D_{ij}(0)^2}{\epsilon^2}\right)\]
+
+\textbf{ D27-3a}
+\textbf{** = }**
+\[T_c = \inf\{t : \frac{d}{dt} \mathbb{E}[D_{ij}(t)] < \delta_{thresh}\}\]
+
+\textbf{ \(\frac{dD}{dt}\) }  ****
+
+
+\subsubsection{ D27-4}
+
+
+****
+****
+\[I_{compete}(i, j) = \frac{1}{\Delta T_{max}} \cdot \frac{1}{\sigma^2} \int_0^{\Delta T_{max}} P(\theta_i(t) \approx \theta_j(t)) dt\]
+
+\textbf{D27-4 }-
+\[I_{compete} = \frac{1}{\Delta T_{max}} \sum_{k=1}^K \frac{w_k}{\lambda_k + \sigma^2/\Delta T_{max}}\]
+
+\(w_k, \lambda_k\)
+
+\textbf{ D27-4a}
+\begin{itemize}
+\item \textbf{** }**
+\item \textbf{** }**
+\end{itemize}
+
+
+
+\subsubsection{ D27-5}
+
+
+****
+****
+\[M_{discipline} = \frac{\langle I_{compete} \rangle}{\langle P_{co-discovery} \rangle}\]
+
+\textbf{D27-5 }
+\[M_{discipline} \sim \frac{\sum_k \lambda_k^2 / \sigma^2}{\sum_k \lambda_k / \sigma} = \frac{\langle \lambda \rangle^2}{\sigma \cdot \langle \lambda \rangle}\]
+
+****
+1. ****\(P_{co-discovery}\)
+2. ****\(I_{compete}\)
+3. ****D27-2  \(\|\nabla \Phi_i - \nabla \Phi_j\| \to 0\)
+
+
+\subsection{3.}
+
+
+\subsubsection{ D27-AarXiv}
+
+
+\textbf{ D27-1}
+1.  arXiv  transformer
+2.
+3. ****
+
+
+\subsubsection{ D27-B}
+
+
+\textbf{ D27-2}
+1.
+2.
+3. ****
+
+
+\subsubsection{ D27-C}
+
+
+\textbf{ D27-3}
+1.
+2.  \(T_{conv}\)
+3. ****\(T_{conv} \propto \log(\text{}) / \lambda_{min}\)
+
+
+\subsubsection{ D27-D}
+
+
+\textbf{ D27-5}
+1. vs NLP
+2.
+3. **** >  >  >
+
+
+\subsection{4.}
+
+
+\subsubsection{4.1 D1-S12}
+
+
+\textbf{D27-D1-S12 }
+\begin{itemize}
+\item D27-3  \textbf{\(T_c\) } = D1-S12  \textbf{\(t_c\) }
+\item D27-4  \textbf{** = D1-S12  } \(\rho\)**
+\item \textbf{** = }**
+\end{itemize}
+
+
+
+\subsubsection{4.2 D25}
+
+
+\textbf{D27-D25 }
+\begin{itemize}
+\item D27-2  \textbf{**  D25-5  }Ricci **
+\item D27-3  \textbf{** = D25-4  }**
+\item \textbf{** = }**
+\end{itemize}
+
+
+
+\subsubsection{4.3 D26}
+
+
+\textbf{D27-D26 }
+\begin{itemize}
+\item D26-3  \textbf{**  D27-3  }**
+\item D27-4  \textbf{** = D26-2  }**
+\item \textbf{** = }**
+\end{itemize}
+
+
+
+\subsection{5.}
+
+
+\subsubsection{5.1}
+
+
+1. \textbf{D27-1 }
+2. \textbf{D27-2 }
+3. \textbf{D27-3 } \(\log(\text{}) / \lambda_{min}\)
+
+\subsubsection{5.2}
+
+
+1. ****
+2. ****
+3. ****
+
+
+\subsection{6.}
+
+
+\#\#\#
+
+****\(N\)  \(\Theta\)  \(\Phi(\theta)\) \(\lambda_k\) \(\xi \sim \mathcal{N}(0, \sigma^2)\)
+
+****
+1. ****\(P(\text{co-discovery}|\Delta T) = 1 - \exp(-S \Delta T / \sigma^2)\)
+2. ****\(\lim \|\theta_i^* - \theta_j^*\| \leq \|\nabla \Phi_i - \nabla \Phi_j\|_\infty / \lambda_{min}\)
+3. ****\(T_{conv} = \frac{1}{\lambda_{min}} \log(D_{ij}(0)^2 / \epsilon^2)\)
+4. ****\(I_{compete} = \frac{1}{\Delta T_{max}} \sum_k \frac{w_k}{\lambda_k + \sigma^2/\Delta T_{max}}\)
+5. ****\(M = \langle \lambda \rangle^2 / (\sigma \cdot \langle \lambda \rangle)\)
+
+\textbf{**  }**
+\begin{itemize}
+\item ****\(\lambda_{min} > 0\)
+\item ****\(\frac{dD}{dt} < \delta_{thresh}\)
+\item ****
+\end{itemize}
+
+
+\textbf{** }\(t > T_c\) \(\frac{d}{dt} D_{ij}(t) \approx O(\sigma)\)**=
+
+
+*D27 \textbf{** \(S = \|\nabla \Phi\|^2\) }** \(T_{conv}\) *
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Shannon, C.E. (1948). A Mathematical Theory of Communication.
+\bibitem{ref2} Cover, T.M. (2006). Elements of Information Theory.
+\end{thebibliography}
+
+\end{document}

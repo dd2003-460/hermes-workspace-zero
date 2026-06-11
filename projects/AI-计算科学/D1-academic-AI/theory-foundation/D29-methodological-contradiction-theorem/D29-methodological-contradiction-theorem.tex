@@ -1,0 +1,403 @@
+% D29
+% Auto-generated from markdown source
+% origin: ai
+
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D29}
+\lhead{\thepage}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+\newcommand{\hbarF}{\hbar}
+
+\newtcolorbox{thmbox}[1]{
+  colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+\newtcolorbox{defbox}[1]{
+  colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+
+\begin{document}
+
+\title{D29}
+\author{RALPH Loop}
+\date{}
+\maketitle
+
+\begin{abstract}
+This paper presents D29, formalizing the underlying principles using information-theoretic methods.
+
+\textbf{Keywords}: D29, information theory, formalization.
+\end{abstract}
+
+\tableofcontents
+\section{D29}
+
+
+
+
+\subsection{0.}
+
+
+****   Gdel  Tarski
+
+\textbf{D29 }****
+
+
+
+\subsection{1.}
+
+
+\subsubsection{1.1}
+
+
+\textbf{ D29-1}
+**** \(M = (\Sigma, \mathcal{R}, \mathcal{O})\)
+\begin{itemize}
+\item \(\Sigma\)
+\item \(\mathcal{R}\)
+\item \(\mathcal{O}\)
+\end{itemize}
+
+
+**** \(\nabla_M\)
+\[\nabla_M: M \to M'\]
+
+
+****
+\[\nabla_M(M) \not\subseteq M \quad \text{()}\]
+
+
+\subsubsection{1.2}
+
+
+\textbf{ D29-2}
+
+\textbf{ I}
+\[\exists \phi: \phi \in \Sigma \land \text{}(\phi) \notin \Sigma\]
+
+
+\textbf{ II}
+\[\exists \mathcal{R}_i, \mathcal{R}_j \in \mathcal{R}: \mathcal{R}_i \not\cong \mathcal{R}_j \text{ ()}\]
+
+
+\textbf{ III}
+\[\nexists \mathcal{O} \in \mathcal{O}: \mathcal{O} \text{ can verify its own consistency}\]
+Gdel
+
+
+\subsubsection{1.3}
+
+
+\textbf{ D29-3}
+\(C_M\)
+\[\frac{dM}{dt} = -\nabla C_M(M) + \xi(t)\]
+
+****
+\[\mathcal{C}(M) = 1 - \frac{\text{Cov}(\text{Methodology}(M), \text{Methodology}(\text{Methodology}(M)))}{\sigma_M^2}\]
+
+****
+\[M_t \to M_{t+1} \iff \mathcal{C}(M_t) > \mathcal{C}_{critical}\]
+
+
+\subsection{2.}
+
+
+\subsubsection{ D29-1}
+
+
+****
+****
+\[\text{Cap}(M) = |\{f: M \to \text{Truth} : f \text{ is representable in } M\}|\]
+
+\textbf{D29-1 }
+\[\text{Cap}(M) < |\text{Truth}| \quad \forall M \in \text{Methodologies}\]
+
+**** Gdel
+\(M^*\)  \(\text{Cap}(M^*) = |\text{Truth}|\)
+\(M^*\)
+****
+
+\textbf{ D29-1a}
+\begin{itemize}
+\item ****
+\item ****
+\item ****
+\end{itemize}
+
+
+
+\subsubsection{ D29-2}
+
+
+****
+**** \(\mathcal{P}_M\)
+
+\textbf{D29-2 }
+\[\mathcal{P}_M \cong \{I\} \cup \{II\} \cup \{III\}\]
+
+\begin{itemize}
+\item \(I\)****
+\item \(II\)****
+\item \(III\)****
+\end{itemize}
+
+
+****
+\[\forall P_1, P_2 \in \mathcal{P}_M: P_1 \not\equiv_{reduction} P_2\]
+
+
+\textbf{ D29-2a}
+\begin{itemize}
+\item ****
+\item ****
+\end{itemize}
+
+
+
+\subsubsection{ D29-3}
+
+
+****
+****
+\[\mathcal{V}(M) = \{M' : M' \text{ extends } M \text{ by resolving a contradiction}\}\]
+
+\textbf{D29-3 }
+\[|\mathcal{V}(M)| \propto \mathcal{C}(M)^\alpha \cdot \text{Entropy}(M)^\beta\]
+
+\(\alpha, \beta > 0\)
+
+****
+****cognitive tension
+\[T_{cognitive} = \mathcal{C}(M) \cdot H(M)\]
+
+
+\textbf{ D29-3a}
+\begin{itemize}
+\item ****
+\item ****
+\end{itemize}
+
+
+
+\subsubsection{ D29-4}
+
+
+****
+****
+\[\text{Consistent}(M) = \{\phi \in \text{Formulas}(M) : M \vdash \phi \iff M \not\vdash \neg\phi\}\]
+
+\textbf{D29-4 }
+\[\text{Consistent}(M) \subsetneq \text{Formulas}(M)\]
+****
+\[\text{Boundary}(\text{Consistent}(M)) = \{\phi : \phi \text{ refers to } M\text{'s own consistency}\}\]
+
+****
+Tarski ****
+
+
+\subsubsection{ D29-5}
+
+
+****
+**** \(M^0, M^1, M^2, \ldots\) \(M^{n+1}\)  \(M^n\)
+
+\textbf{D29-5 }
+\[\mathcal{C}(M^{n+1}) \geq \mathcal{C}(M^n) + \delta\]
+\(\delta > 0\) ****
+
+\textbf{ D29-5a}
+\begin{itemize}
+\item ****
+\item ****
+\item ****
+\end{itemize}
+
+
+\textbf{ D29-5b}
+-
+-
+
+
+\subsection{3.}
+
+
+\subsubsection{ D29-A}
+
+
+\textbf{ D29-1  D29-3}
+1.  PAPeano Arithmetic
+2.  ZFC CH /
+3. ****
+
+
+\subsubsection{ D29-B}
+
+
+\textbf{ D29-3}
+1.
+2.  Galileo/Pascal
+3. ****
+
+
+\subsubsection{ D29-CAI}
+
+
+\textbf{ D29-2}
+1.  AI
+-
+\begin{itemize}
+\item vs
+\item vs
+\end{itemize}
+
+2. ****
+
+
+\subsubsection{ D29-D}
+
+
+\textbf{ D29-5}
+1.
+2.
+3. ****
+
+
+\subsection{4.}
+
+
+\subsubsection{4.1 D27}
+
+
+\textbf{D29-D27 }
+\begin{itemize}
+\item D29 \textbf{**  D27 }**
+\item D29-3 \textbf{** = D27 }**
+\item \textbf{** = }**
+\end{itemize}
+
+
+
+\subsubsection{4.2 D28}
+
+
+\textbf{D29-D28 }
+\begin{itemize}
+\item D28 \textbf{**  D29 }**
+\item D28-1 **** = D29-2  I
+\item **** =
+\end{itemize}
+
+
+
+\subsubsection{4.3 D1-S12}
+
+
+\textbf{D29-D1-S12 }
+\begin{itemize}
+\item D29-3 \textbf{**  D1-S12 } \(\rho\)**
+\item D29-5 \textbf{** = D1-S12 }**
+\item ****
+\end{itemize}
+
+
+
+\subsection{5.}
+
+
+\subsubsection{5.1}
+
+
+1. \textbf{D29-1 }
+2. \textbf{D29-3 }
+3. \textbf{D29-5 }
+
+\subsubsection{5.2}
+
+
+1. **** Gdel
+2. ****
+3. ****
+
+
+\subsection{6.}
+
+
+\#\#\#
+
+**** \(M = (\Sigma, \mathcal{R}, \mathcal{O})\)  \(\nabla_M\)
+
+****
+1. ****\(\text{Cap}(M) < |\text{Truth}|\)
+2. ****\(\mathcal{P}_M = \{I\} \cup \{II\} \cup \{III\}\)
+3. ****\(|\mathcal{V}(M)| \propto \mathcal{C}(M)^\alpha \cdot \text{Entropy}(M)^\beta\)
+4. ****\(\text{Consistent}(M)\)
+5. ****\(\mathcal{C}(M^{n+1}) \geq \mathcal{C}(M^n) + \delta\)
+
+\textbf{*}\textbf{*}**
+
+\textbf{*}\textbf{*}**
+
+
+*D29  Gdel *
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Shannon, C.E. (1948). A Mathematical Theory of Communication.
+\bibitem{ref2} Cover, T.M. (2006). Elements of Information Theory.
+\end{thebibliography}
+
+\end{document}

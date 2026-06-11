@@ -1,0 +1,381 @@
+% D39
+% Auto-generated from markdown source
+% origin: ai
+
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D39}
+\lhead{\thepage}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+\newcommand{\hbarF}{\hbar}
+
+\newtcolorbox{thmbox}[1]{
+  colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+\newtcolorbox{defbox}[1]{
+  colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+
+\begin{document}
+
+\title{D39}
+\author{RALPH Loop}
+\date{}
+\maketitle
+
+\begin{abstract}
+This paper presents D39, formalizing the underlying principles using information-theoretic methods.
+
+\textbf{Keywords}: D39, information theory, formalization.
+\end{abstract}
+
+\tableofcontents
+\section{D39}
+
+
+
+
+\subsection{0.}
+
+
+\textbf{D39 }
+
+1. ****\(I(S; C|O) \approx I(O; C)\)  \(|S| \ll |C|\)
+2. ****\(|S| \gg |C|\)  \(I(S; O|C)\)
+3. **** \(I(O_{true}; S) > I(O_{simple}; S)\)
+
+
+
+\subsection{1.}
+
+
+\subsubsection{1.1}
+
+
+\textbf{ D39-1}
+\begin{itemize}
+\item / \(M\) \(O\)
+\item \(M'\)
+\item \(|M'| < |M|\)
+\item \(H(O|M') \leq H(O|M) + \delta\)
+\end{itemize}
+
+
+\textbf{ D39-2}
+\begin{itemize}
+\item / \(M\) \(O\)
+\item \(M'\)
+\item \(|M'| > |M|\)
+\item \(H(O|M') < H(O|M)\)
+\end{itemize}
+
+
+\textbf{ D39-3/}
+\begin{itemize}
+\item ****\(|M'| > |M|\)  \(H(O|M') \geq H(O|M)\)
+\item ****\(|M'| < |M|\)  \(H(O|M') \gg H(O|M)\)
+\end{itemize}
+
+
+
+\subsubsection{1.2}
+
+
+\textbf{ D39-4MDL }
+\(M^*\)
+\[M^* = \arg\min_M \left[ L(M) + L(O|M) \right]\]
+\(L(M)\) \(L(O|M)\)  \(M\)  \(O\)
+
+\textbf{D39-1 }
+\(P_{true}\) \(O^n = (o_1, \ldots, o_n)\)
+\[\lim_{n \to \infty} \frac{1}{n} L_{MDL}(O^n) = H(P_{true})\]
+
+****
+1.  \(C\)  \(l(o) \geq -\log P(o)\)
+2. MDL
+3.  Kraft MDL
+
+****
+
+
+\subsubsection{1.3  vs}
+
+
+\textbf{ D39-5}
+\begin{itemize}
+\item \(K(x)\) \(x\)
+\item ****\(K(x)\)
+\item ****\(K_{est}(x) \approx \log \hat{P}_{MLE}(x) + \log \hat{C}\)
+\end{itemize}
+
+
+\textbf{ D39-6}
+-
+-
+
+\textbf{D39-2 }
+\begin{itemize}
+\item \textbf{  } Collatz
+\item \textbf{  }
+\item ****meta-reasoning
+\end{itemize}
+
+
+
+\subsubsection{1.4}
+
+
+\textbf{ D39-7}
+\(I\)
+\[\sigma(I) = \sup_{M, \delta} \{ |M| - |M'_I| : H(O|M'_I) \leq H(O|M) + \delta \}\]
+
+\textbf{ D39-8}
+\(I\)
+\[\kappa(I) = \mathbb{I}[H(O|M_{comp}) < H(O|M_{simp}) - \epsilon]\]
+
+\textbf{D39-3 }
+
+\[\frac{\partial}{\partial T} \sigma(I, T) > 0, \quad \frac{\partial}{\partial T} \kappa(I, T) < \infty\]
+\textbf{ =  overfitting}
+
+
+\subsection{2.}
+
+
+\subsubsection{ D39-1}
+
+
+****
+\(M \to M'\)
+\[I(O; M') - I(O; M) \leq 0 < |M'| - |M|\]
+
+****
+\(H(O|M') \geq H(O|M)\)
+
+\[I(O; M') = H(O) - H(O|M') \leq H(O) - H(O|M) = I(O; M)\]
+****
+
+
+\subsubsection{ D39-2}
+
+
+****
+\(C_{crit}\)
+\[|M| > C_{crit} \implies H(O|M_{min}) \text{ }\]
+
+****
+1.  \(p\)
+2. MDL \(\frac{p}{2} \log n + O(1)\)
+3.  \(p > C_{crit} \approx \frac{n \cdot \Delta H}{\log n}\)
+\begin{itemize}
+\item \(H(O|M)\)  <
+\end{itemize}
+
+****
+
+
+\subsubsection{ D39-3}
+
+
+****
+\(I_t\)
+\[\mathbb{E}[\sigma(I_T)] = \int_0^T \lambda(\sigma, t) \cdot P_{survival}(t|\sigma) dt\]
+
+****
+1.
+2.  \(H(O|M) \geq H_{noise}\)
+3.
+\[\sigma^* = \arg\max_\sigma \{ \text{}(\sigma) - \text{}(\sigma) \}\]
+\textbf{-}
+
+
+\subsubsection{ D39-4}
+
+
+****
+\(V\)  \(O\)  \(P_V(O)\) KL
+\[D_{KL}(P_{V_1} \| P_{V_2}) = \sum_o P_{V_1}(o) \log \frac{P_{V_1}(o)}{P_{V_2}(o)}\]
+
+****
+1.
+2.
+3.  Bayes
+4.
+\[P^*_{V} = \arg\min_V D_{KL}(P_V \| P_{target}) + \lambda \cdot \text{Cost}(V)\]
+\textbf{ = }
+
+
+\subsection{3.}
+
+
+\subsubsection{ D39-A}
+
+
+\textbf{ D39-1}
+1.  \(O^n\)
+2.  vs
+3.
+4. **** \(I(O; M') - I(O; M) \leq 0\)
+
+
+\subsubsection{ D39-B}
+
+
+\textbf{ D39-2}
+1.  \(n\) \(p\)
+2.  MDL  vs
+3. **** \(p = C_{crit}\)
+
+
+\subsubsection{ D39-C}
+
+
+\textbf{ D39-3}
+1.
+2.
+3.  \(T\)
+4. ****\(\sigma(I_T)\)
+
+
+\subsubsection{ D39-D}
+
+
+\textbf{ D39-4}
+1.  vs
+2.
+3. ****
+
+
+\subsection{4.}
+
+
+\subsubsection{4.1 D34}
+
+
+\textbf{D39-D34 }
+\begin{itemize}
+\item D39  \textbf{ \(\sigma(I)\)}  D34  \textbf{ \(g^*\)}
+\item ****
+\end{itemize}
+
+
+
+\subsubsection{4.2 D35}
+
+
+\textbf{D39-D35 }
+\begin{itemize}
+\item D39  \textbf{**  D35  }**
+\item ****
+\end{itemize}
+
+
+
+\subsubsection{4.3 D9-III}
+
+
+\textbf{D39-D9-III }
+\begin{itemize}
+\item D39  \textbf{**  D9-III  }**
+\item ****
+\end{itemize}
+
+
+
+\subsection{5.}
+
+
+\subsubsection{5.1}
+
+
+1. \textbf{D39-1 }
+2. \textbf{D39-2 }
+3. \textbf{D39-3 }/
+4. \textbf{D39-4 }
+
+\subsubsection{5.2}
+
+
+1. ****
+2. **** Shannon
+3. ****
+4. ****
+
+
+\subsection{6.}
+
+
+**** \(O^n\) \(L(M)\) \(L(O^n|M)\)
+
+****
+1. ****\(I(O; M') - I(O; M) \leq 0 < |M'| - |M|\)
+2. ****\(C_{crit} \approx \frac{n \cdot \Delta H}{\log n}\)
+3. ****\(\frac{\partial}{\partial T} \sigma(I, T) > 0\)
+4. ****\(P^*_V = \arg\min_V D_{KL}(P_V \| P_{target}) + \lambda \cdot \text{Cost}(V)\)
+
+\textbf{*}* = **
+
+
+*D39 MDL *
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Shannon, C.E. (1948). A Mathematical Theory of Communication.
+\bibitem{ref2} Cover, T.M. (2006). Elements of Information Theory.
+\end{thebibliography}
+
+\end{document}

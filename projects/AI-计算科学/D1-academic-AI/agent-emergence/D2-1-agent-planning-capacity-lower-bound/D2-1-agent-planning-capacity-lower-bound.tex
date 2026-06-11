@@ -1,0 +1,236 @@
+% D2-1Agent
+% Auto-generated from markdown source
+% origin: ai
+
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D2-1Agent}
+\lhead{\thepage}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+\newcommand{\hbarF}{\hbar}
+
+\newtcolorbox{thmbox}[1]{
+  colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+\newtcolorbox{defbox}[1]{
+  colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+
+\begin{document}
+
+\title{D2-1Agent}
+\author{RALPH Loop}
+\date{}
+\maketitle
+
+\begin{abstract}
+This paper presents D2-1Agent, formalizing the underlying principles using information-theoretic methods.
+
+\textbf{Keywords}: D2-1Agent, information theory, formalization.
+\end{abstract}
+
+\tableofcontents
+\section{D2-1Agent}
+
+
+
+
+\#\#
+
+
+
+\#\#
+
+\textbf{Agent } \(A\)  Agent \(\mathcal{T}\) \(L\)****
+
+\[I_{plan} = I(\text{plan}; \mathcal{T}, y_{target})\]
+
+**** \(|A| < I_{plan}^* + \delta_{margin}\) \(\delta_{margin} \approx 10\%\) Agent  \((L, |\mathcal{T}|)\)
+
+
+\#\#
+
+\subsubsection{ 1}
+
+
+\textbf{ vs }
+\begin{itemize}
+\item IB\(X \to Z \to Y\)
+\item \textbf{ IB}\(\mathcal{T} \to \text{plan} \to \text{action\_sequence}\)
+\end{itemize}
+
+
+\textbf{ \(I_{plan}\) }
+1. ****
+2. ****" A  B "
+3. ****
+
+****
+\[I_{plan} \geq I(\mathcal{T}; y_{target}) - I_{irrelevant}(\mathcal{T}; y_{target})\]
+
+
+\subsubsection{ 2}
+
+
+****
+\[|A|_{crit} = I_{plan}^* + \delta_{margin}\]
+
+\(\delta_{margin}\)  \(d\)
+\[\delta_{margin} \geq d \cdot \log |\mathcal{T}|\]
+
+****
+\[\text{}(A) = \mathbb{I}\left[|A| > I_{plan}^* + \delta_{margin}\right]\]
+
+
+\subsubsection{ 3}
+
+
+\textbf{ \(|A|_c\)}\textbf{** \(|A|\) }**""""
+
+****
+\[\lim_{|A| \to |A|_c} \frac{d}{d|A|} P_{\text{planning}}(|A|) = \infty\]
+
+\textbf{ grokking }
+\begin{itemize}
+\item Grokking
+\end{itemize}
+
+-
+\begin{itemize}
+\item ****\(\Psi(x) = \tanh(k(x - x_c))\)
+\end{itemize}
+
+
+
+\subsubsection{ 4 D9-III}
+
+
+\textbf{D9-III  + }
+\begin{itemize}
+\item D9-III  Agent ****
+\item D2-1  Agent ****
+\end{itemize}
+
+
+****
+\[\text{} = \mathbb{I}[|A| > |A|_c] \land \mathbb{I}[I_{plan} > \mathbb{I}_{\text{cov}}(\mathcal{T})]\]
+
+****D2-1 D9-III
+
+
+\#\#
+
+\subsubsection{ 1}
+
+```python
+\section{1.}
+
+\section{2.  P\_planning vs |A|}
+
+\section{3.  |A|\_c}
+
+```
+
+\subsubsection{ 2}
+
+```python
+\section{1.  L}
+
+\section{2.}
+
+\section{3.  L  |A|\_c}
+
+```
+
+\subsubsection{ 3}
+
+```python
+\section{1.  I\_plan}
+
+\section{2.  I\_plan}
+
+```
+
+
+\#\#
+
+1. ****
+2. \textbf{""""}
+3. \textbf{ grokking }
+
+
+\#\#
+
+\begin{itemize}
+\item [x]  1-4
+\item [ ]  1
+\item [ ]  2
+\item [ ]  3
+\end{itemize}
+
+
+
+* D2-1  D9-I *
+*2026-05-04 | r01 | *
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Shannon, C.E. (1948). A Mathematical Theory of Communication.
+\bibitem{ref2} Cover, T.M. (2006). Elements of Information Theory.
+\end{thebibliography}
+
+\end{document}

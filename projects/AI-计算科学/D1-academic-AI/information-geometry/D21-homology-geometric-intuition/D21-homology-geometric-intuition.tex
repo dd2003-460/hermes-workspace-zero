@@ -1,0 +1,381 @@
+% D21
+% Auto-generated from markdown source
+% origin: ai
+
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D21}
+\lhead{\thepage}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+\newcommand{\hbarF}{\hbar}
+
+\newtcolorbox{thmbox}[1]{
+  colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+\newtcolorbox{defbox}[1]{
+  colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+
+\begin{document}
+
+\title{D21}
+\author{RALPH Loop}
+\date{}
+\maketitle
+
+\begin{abstract}
+This paper presents D21, formalizing the underlying principles using information-theoretic methods.
+
+\textbf{Keywords}: D21, information theory, formalization.
+\end{abstract}
+
+\tableofcontents
+\section{D21}
+
+
+
+
+\subsection{0.}
+
+
+homology groups Betti holes\textbf{*}***
+
+\textbf{D21 }**** Betti
+\begin{itemize}
+\item ****
+\item ****
+\item ****
+\end{itemize}
+
+
+
+
+\subsection{1.}
+
+
+\subsubsection{1.1}
+
+
+\textbf{ D21-1 \(\mathcal{M}\)}
+\(\mathcal{S}\)****
+\[\mathcal{M} = \bigcup_{x \in \mathcal{S}} B_\epsilon(x)\]
+
+\(B_\epsilon(x)\)  \(\epsilon\)
+
+
+\subsubsection{1.2 Simplicial Complex  Simplicial Homology}
+
+
+\textbf{ D21-2 \(K\)}
+\(\mathcal{M}\) \textbf{\(\epsilon\)-}
+\[K_\epsilon = \{[v_0, \ldots, v_k] \mid d(v_i, v_j) \leq \epsilon, \forall i, j\}\]
+
+\([v_0, \ldots, v_k]\)  \(k\)- \(k\)-
+
+****
+\[H_k(K) = \ker(\partial_k) / \text{im}(\partial_{k+1})\]
+
+\(\partial_k\)
+
+
+\subsubsection{1.3 Betti}
+
+
+\textbf{ D21-3Betti  \(\beta_k\)}
+\[\beta_k = \text{rank}(H_k(K)) = \dim(\ker(\partial_k) / \text{im}(\partial_{k+1}))\]
+
+****raw.md \#55
+| Betti  |  |  |
+|----------|----------|----------|
+| \(\beta_0\) |  |  |
+| \(\beta_1\) |  |  |
+| \(\beta_2\) |  |  |
+| \(\beta_k\) | \(k\)- | \(k\)- |
+
+****
+\[\beta_k = b_k - a_{k+1}\]
+\(b_k = \dim(\ker \partial_k)\) \(a_{k+1} = \dim(\text{im } \partial_{k+1})\)
+
+
+\subsection{2.}
+
+
+\subsubsection{ D21-1 Betti}
+
+
+****
+**** \(\mathcal{M}\)  \(\epsilon\)- \(K_\epsilon\)
+
+\textbf{D21-1 }
+\[\beta_0(K_\epsilon) = 1 \iff \mathcal{M} \text{ }\]
+
+\textbf{ D21-1a}
+\begin{itemize}
+\item \textbf{\(\beta_0 = 1\)}
+\item \textbf{\(\beta_0 > 1\)}****
+\end{itemize}
+
+
+\textbf{D1-S12 }
+\[\beta_0 = M \iff \text{chimera  } M \text{ }\]
+
+
+\subsubsection{ D21-2 =}
+
+
+****
+\textbf{*}*** 1-
+\[\gamma = \sum_{i=1}^{n} [v_i, v_{i+1}], \quad \gamma \in Z_1 \setminus B_1\]
+
+\textbf{D21-2 }
+\[\beta_1(K_\epsilon) > 0 \implies \exists \gamma: \gamma \neq \partial \sigma, \quad \forall \sigma \in C_2\]
+
+\textbf{ D21-2a} D1-S12
+\[\beta_1 > 0 \iff \text{}\]
+
+****
+\begin{itemize}
+\item \textbf{ = 0}
+\item \textbf{ > 0}****
+\end{itemize}
+
+
+
+\subsubsection{ D21-3}
+
+
+****
+**** 2- 2-
+\[\sigma \in C_2, \quad \partial_2(\sigma) = 0, \quad \nexists \tau \in C_3: \partial_3(\tau) = \sigma\]
+
+\textbf{D21-3 }
+\[\beta_2(K_\epsilon) > 0 \implies \exists \text{ } \Omega_{\text{blind}}: \partial \Omega_{\text{blind}} \in \mathcal{M}, \quad \Omega_{\text{blind}} \cap \mathcal{M} = \emptyset\]
+
+\textbf{ D21-3a}
+\begin{itemize}
+\item \textbf{ = 0} 2-
+\item \textbf{ > 0}****
+\end{itemize}
+
+
+\textbf{**  }**
+
+
+\subsubsection{ D21-4}
+
+
+****
+\textbf{*}*** \(K_\epsilon(t)\)
+
+\textbf{D21-4 }
+\[\frac{d\beta_k}{dt} = \begin{cases} \geq 0 & \text{}\\ \leq 0 & \text{} \end{cases}\]
+
+****
+\[t_c = \inf\{t \mid \beta_k(t) \neq \beta_k(t - \delta t)\}\]
+
+\textbf{ D21-4a} D1-S12
+\textbf{\(t_c\) }S12-1 ****
+
+
+\subsubsection{ D21-5Betti}
+
+
+****
+\textbf{** \(\epsilon \in [0, \infty)\) }Vietoris-Rips **
+\[K_\epsilon \subseteq K_{\epsilon'} \quad \forall \epsilon < \epsilon'\]
+
+****
+\[H_k^{persistence} = \{(t_{\text{birth}}, t_{\text{death}}) \mid \beta_k(t_{\text{birth}}) > \beta_k(t_{\text{death}})\}\]
+
+\textbf{D21-5 }
+\[\exists \Delta > 0: \forall \epsilon: \beta_k(K_\epsilon) = \beta_k(K_{\epsilon+\Delta}) \iff \mathcal{M} \text{  } k\text{-}\]
+
+\textbf{persistence diagram}
+\[PD_k = \{(t_i^{b}, t_i^{d})\}_{i=1}^{n} \subset [0, \infty)^2\]
+
+\textbf{ D21-5a}
+\begin{itemize}
+\item ****\(t_d - t_b\) =
+\item **** =
+\end{itemize}
+
+
+
+\subsection{3.}
+
+
+\subsubsection{ D21-A}
+
+
+\textbf{ D21-1  D21-2}
+1.  LLM cosine similarity
+2.  Vietoris-Rips \(\epsilon\)-
+3.  Betti  \(\beta_0, \beta_1, \beta_2\)
+4. **** \(\beta_1 > 0\)
+
+
+\subsubsection{ D21-BBetti}
+
+
+\textbf{ D21-4}
+1.
+2.  Betti
+3. ****
+
+
+\subsubsection{ D21-C}
+
+
+\textbf{ D21-5}
+1.
+2.  Betti
+3. ****
+
+
+\subsubsection{ D21-D-}
+
+
+\textbf{ D21-3}
+1.
+2.   > 0
+3. ****   0
+
+
+\subsection{4.}
+
+
+\subsubsection{4.1 D1-S12}
+
+
+\textbf{D21-D1-S12 }
+\begin{itemize}
+\item D1-S12  chimera M=2  D21  \textbf{  1}
+\item D1-S12  N   D21  ****
+\item \textbf{** = } > 0**
+\end{itemize}
+
+
+
+\subsubsection{4.2 D9-IV}
+
+
+\textbf{D21-D9-IV }
+\begin{itemize}
+\item D9-IV \textbf{ T}  D21  \textbf{ }
+\item D9-IV \textbf{**  D21  } **
+\item \textbf{** = }**
+\end{itemize}
+
+
+
+\subsubsection{4.3 D16}
+
+
+\textbf{D21-D16 }
+\begin{itemize}
+\item D16 \textbf{**  D21  }Vietoris-Rips  **
+\item D16 \textbf{**  D21  }**
+\item \textbf{** = }**
+\end{itemize}
+
+
+
+\subsection{5.}
+
+
+\subsubsection{5.1}
+
+
+1. \textbf{D21-1 }  > 1
+2. \textbf{D21-2 } > 0
+3. \textbf{D21-3 }
+4. \textbf{D21-5 }
+
+\subsubsection{5.2}
+
+
+1. **** N > 10^4
+2. ****Betti
+3. ****
+
+
+\subsection{6.}
+
+
+\#\#\#
+
+**** \(\mathcal{M}\)  \(\epsilon\)-Vietoris-Rips  \(K_\epsilon\) \(H_k(K_\epsilon)\)
+
+****
+1. ****\(\beta_0 = \text{rank}(H_0) = \#(\text{})\)
+2. ****\(\beta_1 = \text{rank}(H_1) \geq 1 \implies \text{}\)
+3. ****\(\beta_2 = \text{rank}(H_2) > 0 \implies \text{}\)
+4. ****\(t_c = \inf\{t \mid \beta_k(t) \neq \beta_k(t-\delta t)\}\)
+5. ****\(\beta_k(K_\epsilon) = \beta_k(K_{\epsilon+\Delta}) \iff \text{}\)
+
+\textbf{*}\textbf{*}\textbf{Betti }**
+
+
+*D21  Betti *
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Shannon, C.E. (1948). A Mathematical Theory of Communication.
+\bibitem{ref2} Cover, T.M. (2006). Elements of Information Theory.
+\end{thebibliography}
+
+\end{document}

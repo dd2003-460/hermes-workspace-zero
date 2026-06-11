@@ -1,0 +1,367 @@
+% D36   Lyapunov
+% Auto-generated from markdown source
+% origin: ai
+
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D36   Lyapunov}
+\lhead{\thepage}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+\newcommand{\hbarF}{\hbar}
+
+\newtcolorbox{thmbox}[1]{
+  colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+\newtcolorbox{defbox}[1]{
+  colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+
+\begin{document}
+
+\title{D36   Lyapunov}
+\author{RALPH Loop}
+\date{}
+\maketitle
+
+\begin{abstract}
+This paper presents D36   Lyapunov, formalizing the underlying principles using information-theoretic methods.
+
+\textbf{Keywords}: D36   Lyapunov, information theory, formalization.
+\end{abstract}
+
+\tableofcontents
+\section{D36   Lyapunov}
+
+
+
+
+\subsection{0.}
+
+
+\textbf{D36  Lyapunov }
+
+1. \textbf{ }
+2. \textbf{ (t)} cohabitation
+3. \textbf{ }
+
+
+
+\subsection{1.}
+
+
+\subsubsection{1.1}
+
+
+\textbf{ D36-1}
+\[\phi \in \mathcal{M} \subset \mathbb{R}^d\]
+
+
+\textbf{ D36-2}
+\[\alpha = \frac{\|\mu_{neural}^{child} - \mu_{neural}^{parent}\|^2}{\|\mu_{neural}^{child}\|^2 + \|\mu_{neural}^{parent}\|^2}\]
+\(\alpha \in [0, 1]\)
+
+\textbf{ D36-3}
+\[\chi(t) = \int_0^t \gamma(\tau) \cdot I_{shared}(\tau) d\tau\]
+
+\begin{itemize}
+\item \(I_{shared}(t)\)
+\item \(\gamma(t)\)
+\end{itemize}
+
+
+****
+\[\gamma(t) = \gamma_0 \cdot e^{-t/\tau_{plastic}} \quad \text{()}\]
+
+
+\subsubsection{1.2  Lyapunov}
+
+
+\textbf{ D36-4}
+\[V(\phi_c, \phi_p; \alpha, \chi) = (1-\alpha) \cdot \|\phi_c - \phi_p\|^2 + \beta \cdot (\chi - \chi_0)^2\]
+
+****
+\begin{itemize}
+\item \((1-\alpha)\|\phi_c - \phi_p\|^2\)\(\alpha \to 1\)
+\item \(\beta(\chi - \chi_0)^2\)
+\end{itemize}
+
+
+\textbf{D36-1  Lyapunov }
+
+\[\frac{d}{dt}\|\phi_c - \phi_p\|^2 = -2(1-\alpha) \cdot \|\phi_c - \phi_p\|^2 - 2\beta \cdot (\chi - \chi_0) \cdot \dot{\chi}\]
+
+****
+\(\dot{\phi}_c = -\nabla_{\phi_c} V = 2(1-\alpha)(\phi_c - \phi_p)\)
+\[\frac{d}{dt}\|\phi_c - \phi_p\|^2 = 2(\phi_c - \phi_p)^T(\dot{\phi}_c - \dot{\phi}_p)\]
+\(\dot{\phi}_p = 0\)
+\[= 2(\phi_c - \phi_p)^T \cdot 2(1-\alpha)(\phi_c - \phi_p) = 4(1-\alpha)\|\phi_c - \phi_p\|^2\]
+\textbf{ \(\alpha < 1\) }
+
+
+\subsubsection{1.3}
+
+
+\textbf{ D36-5}
++
+\[P(\phi_c | \mathcal{D}) \propto P(\phi_c | \alpha) \cdot P(\mathcal{D} | \phi_c, \chi(t))\]
+
+****
+\[P(\phi_c | \alpha) = \mathcal{N}(\phi_c; \phi_p, \Sigma_\alpha)\]
+\(\Sigma_\alpha = (1-\alpha) \cdot \Sigma_0\)
+
+\textbf{D36-2 -}
+
+\[\hat{\phi}_c(t) = K(t) \cdot \mathcal{D}_{env}(t) + (1-K(t)) \cdot \phi_{genetic}\]
+Kalman
+\[K(t) = \frac{\Sigma_\alpha}{\Sigma_\alpha + \Sigma_{env}/\chi(t)}\]
+
+****
+\begin{itemize}
+\item (\(\chi \ll 1\))\(K \to 0\)
+\item (\(\chi \gg 1\))\(K \to 1\)
+\item ****\(\chi_c = \Sigma_{env}/\Sigma_\alpha\)
+\end{itemize}
+
+
+
+\subsubsection{1.4}
+
+
+\textbf{D36-3 }
+
+\[\Psi(t) = \Psi_0 \cdot e^{-t/\tau_{plastic}}\]
+
+\textbf{ D36-3a}
+\(t^*\)
+\[t > t^* \implies |\frac{\partial \phi_c}{\partial \chi}| < \epsilon\]
+\textbf{ \(\epsilon\)}
+
+
+\subsection{2.}
+
+
+\subsubsection{ D36-1 Lyapunov}
+
+
+****
+Lyapunov  \(L(\phi_c, \phi_p) = \|\phi_c - \phi_p\|^2\)
+\[\dot{L} < 0 \quad \forall \alpha < 1\]
+
+****
+D36-1 \(\dot{L} = -2(1-\alpha) \cdot L - 2\beta(\chi-\chi_0)\dot{\chi}\)
+\(\chi(t)\)  \(|\dot{\chi}|\)  \(-2(1-\alpha) \cdot L < 0\)
+\textbf{Lyapunov }
+
+
+\subsubsection{ D36-2}
+
+
+****
+\[\lim_{t \to \infty} \|\phi_c(t) - \phi_p(t)\|^2 = \delta^2_{genetic} > 0\]
+\(\delta^2_{genetic} = \frac{\beta \cdot \dot{\chi}^2}{2(1-\alpha)}\)
+
+****
+\(\dot{L} = 0\)
+\[-2(1-\alpha) \cdot \delta^2_{genetic} - 2\beta(\chi - \chi_0)\dot{\chi} = 0\]
+\(\dot{\chi} \to 0\) \(\delta^2_{genetic} \to 0\) \(\dot{\chi}\)
+\textbf{ \(\alpha = 1\)}
+
+
+\subsubsection{ D36-3}
+
+
+****
+\[\frac{d}{dt}\left(\frac{\partial \phi_c}{\partial \chi}\right) = -\frac{1}{\tau_{plastic}} \cdot \frac{\partial \phi_c}{\partial \chi}\]
+
+****
+
+\[\frac{\partial \phi_c(t)}{\partial \chi} = \frac{\partial \phi_c(0)}{\partial \chi} \cdot e^{-t/\tau_{plastic}}\]
+\textbf{ \(t^*\) }
+
+
+\subsubsection{ D36-4}
+
+
+****
+\(\alpha\)  \(\rho_{env}\)
+\[\alpha < \alpha_c \implies \|\phi_c - \phi_p\| \sim f(\rho_{env})\]
+
+****
+
+\[\|\phi_c - \phi_p\|^2 = (1-\alpha) \cdot \|\phi_c - \phi_p\|_{genetic}^2 + \alpha \cdot \|\phi_c - \phi_p\|_{env}^2\]
+\(\alpha\)  \(\alpha\)
+\textbf{ \(\alpha_c = \frac{\|\phi_c-\phi_p\|_{env}^2}{\|\phi_c-\phi_p\|_{genetic}^2 + \|\phi_c-\phi_p\|_{env}^2}\)}
+
+
+\subsection{3.}
+
+
+\subsubsection{ D36-A}
+
+
+\textbf{ D36-1}
+1.  \(d\)- parent \(\phi_p\)  child \(\phi_c\)
+2.  \(\alpha \in [0.3, 0.9]\) \(\chi(t) = \chi_0 + vt\)
+3.  Lyapunov  \(\|\phi_c(t) - \phi_p(t)\|\)
+4. **** \((1-\alpha)\)
+
+
+\subsubsection{ D36-B-}
+
+
+\textbf{ D36-2}
+1.  \(\alpha\)  \(\chi\)
+2.  \(K(t) = \frac{\Sigma_\alpha}{\Sigma_\alpha + \Sigma_{env}/\chi(t)}\)
+3. **** \(\chi_c\)  \(K(\chi_c) = 0.5\)/
+
+
+\subsubsection{ D36-C}
+
+
+\textbf{ D36-3}
+1.  \(t_1 < t^*\)  \(t_2 > t^*\)  \(\Delta \chi\)
+2.  \(|\Delta \phi_c|\)
+3. ****\(\frac{|\Delta \phi_c(t_1)|}{|\Delta \phi_c(t_2)|} > 5\)
+
+
+\subsubsection{ D36-D}
+
+
+\textbf{ D36-4}
+1.  \(\alpha\)  vs
+2.  \(\alpha\)
+3. **** \(\alpha\)
+
+
+\subsection{4.}
+
+
+\subsubsection{4.1 D33}
+
+
+\textbf{D36-D33 }
+\begin{itemize}
+\item D33 \textbf{**  D36 }**
+\item ****/ Lyapunov /
+\end{itemize}
+
+
+
+\subsubsection{4.2 D12}
+
+
+\textbf{D36-D12 }
+\begin{itemize}
+\item D12 \textbf{**  D36 }**
+\item ****
+\end{itemize}
+
+
+
+\subsubsection{4.3 D8}
+
+
+\textbf{D36-D8 }
+\begin{itemize}
+\item D8 \textbf{**  D36 } \(\alpha_c\)**
+\item ****/
+\end{itemize}
+
+
+
+\subsection{5.}
+
+
+\subsubsection{5.1}
+
+
+1. \textbf{D36-1 }
+2. \textbf{D36-2 }\(\alpha < 1\)
+3. \textbf{D36-3 }
+
+\subsubsection{5.2}
+
+
+1. ****Lyapunov
+2. ****+/
+3. ****\(\alpha\)
+4. ****\(\dot{\phi}_p = 0\)
+
+
+\subsection{6.}
+
+
+**** \(\phi_c, \phi_p\) \(\alpha\) \(\chi(t)\)
+
+****
+1. \textbf{Lyapunov }\(\dot{\phi}_c = -\nabla_{\phi_c} V \implies \|\phi_c - \phi_p\| \to \delta_{genetic}\)
+2. \textbf{-}\(K(\chi) = 0.5\) / \(\chi_c = \Sigma_{env}/\Sigma_\alpha\)
+3. **** \(\Psi(t) \propto e^{-t/\tau_{plastic}}\) \(t^*\)
+4. ****\(\alpha < \alpha_c\)
+
+\textbf{*}* \(\alpha\)  \(\chi(t)\)  \(\tau_{plastic}\) **
+
+
+*D36  Lyapunov  +  Lyapunov *
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Shannon, C.E. (1948). A Mathematical Theory of Communication.
+\bibitem{ref2} Cover, T.M. (2006). Elements of Information Theory.
+\end{thebibliography}
+
+\end{document}

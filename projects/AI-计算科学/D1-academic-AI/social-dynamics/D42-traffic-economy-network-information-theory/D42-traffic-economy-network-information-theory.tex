@@ -1,0 +1,367 @@
+% D42
+% Auto-generated from markdown source
+% origin: ai
+
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D42}
+\lhead{\thepage}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+\newcommand{\hbarF}{\hbar}
+
+\newtcolorbox{thmbox}[1]{
+  colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+\newtcolorbox{defbox}[1]{
+  colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+
+\begin{document}
+
+\title{D42}
+\author{RALPH Loop}
+\date{}
+\maketitle
+
+\begin{abstract}
+This paper presents D42, formalizing the underlying principles using information-theoretic methods.
+
+\textbf{Keywords}: D42, information theory, formalization.
+\end{abstract}
+
+\tableofcontents
+\section{D42}
+
+
+
+
+\subsection{0.}
+
+
+\textbf{D42 }
+
+1. ****small-worldscale-free
+2. ****KOL
+3. \textbf{ = }betweennesscloseness
+4. \textbf{ = } =  =
+
+
+
+\subsection{1.}
+
+
+\subsubsection{1.1}
+
+
+\textbf{ D42-1 \(G_I\)}
+\(V = \{v_1, v_2, \ldots, v_n\}\) \(E_I\)
+\[P(v_i \to v_j) = \frac{w_{ij}}{\sum_k w_{ik}}\]
+
+\(w_{ij}\)  \(v_i\)  \(v_j\)
+
+\textbf{ D42-2 \(\Phi_u\)}
+\[\Phi_u = \sum_{v \in \text{ancestors}(u)} \frac{S_v}{d(u, v)^\alpha}\]
+
+
+\begin{itemize}
+\item \(S_v\) \(v\)
+\item \(d(u, v)\) \(u\)  \(v\)
+\item \(\alpha\) \(\alpha \in [0.5, 2.0]\)
+\end{itemize}
+
+
+\textbf{ D42-3 \(H_\Phi\)}
+\[H_\Phi = -\sum_u \frac{\Phi_u}{\sum_v \Phi_v} \log \frac{\Phi_u}{\sum_v \Phi_v}\]
+
+
+
+
+\subsubsection{1.2}
+
+
+\textbf{ D42-4 \(E(u)\)}
+\[E(u) = \beta_0 + \beta_1 \Phi_u + \beta_2 \Phi_u \cdot A_u + \epsilon_u\]
+
+\(A_u\)  \(u\) /\(\beta_2 > 0\) ****/
+
+\textbf{ D42-5 \(T_u\)}
+\[T_u = \frac{E(u)}{\Phi_u} = \frac{\beta_0}{\Phi_u} + \beta_1 + \beta_2 A_u\]
+
+
+
+\textbf{ D42-6 \(\mathcal{M}\)}
+\[\mathcal{M} = 1 - \frac{\text{Gini}(E)}{H_\Phi}\]
+
+\(\text{Gini}(E)\) \textbf{\(\mathcal{M}\) }
+
+
+\subsubsection{1.3}
+
+
+\textbf{D42-1 }
+\(\alpha_c\) \(\alpha < \alpha_c\)
+
+****
+\[\alpha_c = \frac{d \ln \langle \Phi \rangle}{d \ln n}\]
+
+\(n\) \(\langle \Phi \rangle\)
+
+****
+\begin{itemize}
+\item \(\alpha < \alpha_c\)scale-free
+\item \(\alpha > \alpha_c\)/
+\end{itemize}
+
+
+
+\subsubsection{1.4}
+
+
+\textbf{ D42-7 \(R_{between}\)}
+\[R_{between}(u) = \gamma \cdot B(u) \cdot \max_v \Phi_v\]
+
+\(B(u)\)  \(u\) betweenness centrality\(\gamma\)
+
+\textbf{D42-2 }
+****
+
+****
+1.  \(x\)  \(s\)  \(t\)
+2. \(s \to t\)  \(x\)
+3. \(x\)
+4. \(R_{between}(x) = \text{flow}(s \to t) \cdot \text{tax}(x)\)
+5.  ****
+
+
+\subsection{2.}
+
+
+\subsubsection{ D42-1 -}
+
+
+****
+\[\text{Gini}(E) \geq \text{Gini}(\Phi) \cdot (1 + \beta_2 \cdot \bar{A})\]
+
+\(\bar{A}\)
+
+****
+
+
+\subsubsection{ D42-2}
+
+
+****
+\[\frac{\partial T_u}{\partial \Phi_u} = -\frac{\beta_0}{\Phi_u^2} + \frac{\partial \beta_2 A_u}{\partial \Phi_u}\]
+
+****
+-
+-
+\begin{itemize}
+\item \textbf{ \(\Phi_u^* = \sqrt{\beta_0 / (\partial \beta_2 A_u / \partial \Phi_u)}\)}
+\end{itemize}
+
+
+
+\subsubsection{ D42-3}
+
+
+****
+\(m\)  \(\tau_m\)
+\[\max_{\tau_m} \int_0^\infty e^{-rt} \cdot \text{flow}(t) \cdot \tau_m \, dt\]
+
+\(\text{flow}(t) = F_0 \cdot e^{-\lambda \tau_m}\)
+
+****
+\[\tau_m^* = \frac{1}{\lambda}, \quad \text{flow}^* = F_0 \cdot e^{-1/\lambda}\]
+
+****
+
+
+\subsubsection{ D42-4}
+
+
+****
+\(\alpha \to \alpha_c^-\)
+\[\lim_{\alpha \to \alpha_c^-} \mathcal{M}(\alpha) = 0\]
+
+****
+
+****
+
+
+\subsection{3.}
+
+
+\subsubsection{ D42-A}
+
+
+\textbf{ D42-1}
+1.  Newman-Watts small-world  \(p\)
+2.  \(S_v = 1 \forall v\)
+3.  \(p\)  \(\Phi_u\)  \(\alpha\)
+4. ****\(p\)  scale-free
+
+
+\subsubsection{ D42-B-}
+
+
+\textbf{ D42-2-}
+1.  \(\Phi_u \sim \text{Pareto}(\alpha_\Phi)\)
+2.  \(A_u \sim \text{LogNormal}(\mu_A, \sigma_A)\)
+3.  \(E(u) = \beta_1 \Phi_u + \beta_2 \Phi_u A_u\)
+4.  \(\text{Gini}(E)\)  \(\text{Gini}(\Phi)\)
+5. ****\(\text{Gini}(E) > \text{Gini}(\Phi)\) \(\beta_2\)
+
+
+\subsubsection{ D42-C}
+
+
+\textbf{ D42-3}
+1.  \(m\)
+2.  \(\text{flow}(\tau) = F_0 e^{-\lambda \tau}\)
+3.  \(\max_\tau \text{flow}(\tau) \cdot \tau\)
+4. ****\(\tau^* = 1/\lambda\)
+
+
+\subsubsection{ D42-D}
+
+
+\textbf{ D42-4}
+1.  \(\alpha\)
+2.  \(\mathcal{M}\)  \(\text{Gini}(\Phi)\)
+3. ****\(\mathcal{M}\)  \(\alpha \approx \alpha_c\)
+
+
+\subsection{4.}
+
+
+\subsubsection{4.1 D8}
+
+
+\textbf{D42-D8 }
+\begin{itemize}
+\item D8  \textbf{**  D42  }**
+\item ****-
+\end{itemize}
+
+
+
+\subsubsection{4.2 D37}
+
+
+\textbf{D42-D37 }
+\begin{itemize}
+\item D37  \textbf{ Nash }  D42  ****
+\item ****
+\end{itemize}
+
+
+
+\subsubsection{4.3 D40}
+
+
+\textbf{D42-D40 }
+\begin{itemize}
+\item D40  \textbf{-}  D42  \textbf{-}
+\item ****
+\end{itemize}
+
+
+
+\subsection{5.}
+
+
+\subsubsection{5.1}
+
+
+1. \textbf{D42-1 }
+2. \textbf{D42-2 }
+3. \textbf{D42-3 }
+4. \textbf{D42-4 }
+
+\subsubsection{5.2}
+
+
+1. ****
+2. ****
+3. ****
+4. ****
+
+
+\subsection{6.}
+
+
+**** \(G = (V, E)\) \(S: V \to \mathbb{R}^+\) \(\Phi_u = \sum_{v} S_v / d(u,v)^\alpha\) \(E(u) = \beta_1 \Phi_u + \beta_2 \Phi_u A_u\)
+
+****
+1. ****\(\alpha < \alpha_c\)
+2. \textbf{-}\(\text{Gini}(E) \geq \text{Gini}(\Phi) \cdot (1 + \beta_2 \bar{A})\)
+3. **** \(\tau^* = 1/\lambda\)
+4. ****\(\mathcal{M}(\alpha) \to 0\)  \(\alpha \to \alpha_c^-\)
+
+\textbf{*}***
+
+
+*D42 *
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Shannon, C.E. (1948). A Mathematical Theory of Communication.
+\bibitem{ref2} Cover, T.M. (2006). Elements of Information Theory.
+\end{thebibliography}
+
+\end{document}

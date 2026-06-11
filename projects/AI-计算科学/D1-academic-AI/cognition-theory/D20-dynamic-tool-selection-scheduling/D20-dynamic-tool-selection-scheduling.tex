@@ -1,0 +1,388 @@
+% D20
+% Auto-generated from markdown source
+% origin: ai
+
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{D20}
+\lhead{\thepage}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+
+\newcommand{\Tr}{\text{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+\newcommand{\hbarF}{\hbar}
+
+\newtcolorbox{thmbox}[1]{
+  colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+\newtcolorbox{defbox}[1]{
+  colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries,
+  title={#1}, breakable
+}
+
+\begin{document}
+
+\title{D20}
+\author{RALPH Loop}
+\date{}
+\maketitle
+
+\begin{abstract}
+This paper presents D20, formalizing the underlying principles using information-theoretic methods.
+
+\textbf{Keywords}: D20, information theory, formalization.
+\end{abstract}
+
+\tableofcontents
+\section{D20}
+
+
+
+
+\subsection{0.}
+
+
+****
+1. ****
+2. ****
+3. ****
+
+\textbf{D20 }\textbf{MDP}\textbf{-}
+
+
+
+\subsection{1.}
+
+
+\subsubsection{1.1}
+
+
+\textbf{ D20-1}
+\(\mathcal{A}\)...
+
+|  |  |  |  |
+|----|------|------|------|
+| L1 |  | \(c_{\text{search}}\) | \(v_{\text{tool}}\)|
+| L2 | / | \(c_{\text{prep}}\) | \(\Delta u\)|
+| L3 |  |  |  |
+
+****
+\[\mathcal{C}_{\text{total}} = \sum_{i=1}^{N} \left(c_{\text{search}} \cdot \mathbb{I}_{\text{search}, i} + c_{\text{prep}, i} + c_{\text{app}, i}\right)\]
+
+
+\subsubsection{1.2}
+
+
+\textbf{ D20-2 MDP}
+\[\mathcal{M} = (\mathcal{S}, \mathcal{A}, \mathcal{P}, r, \gamma)\]
+
+****
+\[\mathcal{S} = \mathcal{T}_{\text{current}} \times \mathcal{K}_{\text{tool}} \times \mathcal{R}_{\text{task}}\]
+
+\begin{itemize}
+\item \(\mathcal{T}_{\text{current}}\)
+\item \(\mathcal{K}_{\text{tool}}\)
+\item \(\mathcal{R}_{\text{task}}\)
+\end{itemize}
+
+
+****
+\[\mathcal{A} = \{\text{search}, \text{prepare}, \text{execute}, \text{switch}\}\]
+
+****L1-L3
+\[\begin{array}{l}
+\mathcal{P}(s' | s, \text{search}) = \text{Distribution}(v_{\text{new}}) \\
+\mathcal{P}(s' | s, \text{prepare}) = \mathbb{I}(K_{\text{new}} = K_{\text{old}} + \Delta K) \\
+\mathcal{P}(s' | s, \text{execute}) = \mathbb{I}(R_{\text{new}} = R_{\text{old}} - \Delta R) \\
+\mathcal{P}(s' | s, \text{switch}) = \delta(T' = T_{\text{current}})
+\end{array}\]
+
+****
+\[r(s, a) = -c_a + \mathbb{I}_{\text{execute}} \cdot v_{\text{task}} \cdot u(\mathcal{K}_{\text{current}})\]
+
+
+\subsection{2.}
+
+
+\subsubsection{ D20-1}
+
+
+****
+****
+\[V_{\text{search}}(t) = \sup_{\tau \geq t} \mathbb{E}\left[\sum_{k=t}^{t+\tau} e^{-\gamma k} \cdot \max_T u(T, \text{task}_k)\right]\]
+
+\textbf{D20-1 }
+\[\tau^* = \inf\left\{t : \mathbb{E}[\Delta V_{\text{tool}}] < c_{\text{search}}\right\}\]
+
+****
+\[\text{Search}(t) = \mathbb{I}\left(\mathbb{E}[\text{better tool}] > \frac{c_{\text{search}}}{\Delta t_{\text{task}}}\right)\]
+
+\textbf{ D20-1a}
+\begin{itemize}
+\item ****\(v_{\text{task}} \gg c_{\text{search}}\)
+\item ****\(c_{\text{search}} \gg v_{\text{task}} \cdot \Delta u\)
+\end{itemize}
+
+
+
+\subsubsection{ D20-2}
+
+
+****
+****
+\[\frac{\partial V_{\text{execute}}}{\partial K} = \frac{\partial}{\partial K} \left[\frac{v_{\text{task}} \cdot K}{c_{\text{prep}} + c_{\text{app}}(K)}\right]\]
+
+\textbf{D20-2 }
+\[K^* = \arg\max_K \left[\frac{v_{\text{task}} \cdot K}{c_{\text{prep}} + c_{\text{app}}(K)} - c_{\text{prep}} \cdot K\right]\]
+
+****
+\[\frac{d}{dK} \left[\frac{K}{c_{\text{app}}(K)}\right] = \frac{c_{\text{prep}}}{v_{\text{task}}}\]
+
+\textbf{ D20-2a}
+\begin{itemize}
+\item ****  \(K^* \to \min\)
+\item ****  \(K^* \to \max\)
+\end{itemize}
+
+
+
+\subsubsection{ D20-3}
+
+
+****
+\textbf{** \(\lambda(T) = \mathbb{P}(T \text{ is selected})\) }** \(p(T)\)
+
+\textbf{D20-3 }
+\[\lambda^*(T) = \arg\max_{\lambda} \left[\sum_{T \in \mathcal{T}} \lambda(T) \cdot p(T) \cdot v(T) - c_{\text{switch}} \cdot \sum_{T \neq T'} \lambda(T) \cdot \lambda(T') \cdot d(T, T')\right]\]
+
+\(d(T, T')\) ****
+
+\textbf{- Pareto }
+\[\lambda^* \cdot p(\lambda^*) = \max \iff \frac{\partial p}{\partial \lambda} = \frac{p}{\lambda} \cdot \frac{c_{\text{switch}} \cdot d}{v}\]
+
+****
+\begin{itemize}
+\item ****
+\item ****
+\item ****
+\end{itemize}
+
+
+
+\subsubsection{ D20-4}
+
+
+****
+**** \(\pi^* = (\pi_{\text{search}}^*, \pi_{\text{prep}}^*, \pi_{\text{exec}}^*)\)
+
+\textbf{D20-4 }
+\[\pi^* = \arg\max_{\pi} \mathbb{E}\left[\sum_{t=0}^{T} \gamma^t \cdot r_t \mid s_0, \pi\right]\]
+
+\textbf{Bellman }
+\[V^*(s) = \max_{a \in \mathcal{A}} \left\{r(s, a) + \gamma \sum_{s'} \mathcal{P}(s'|s, a) V^*(s')\right\}\]
+
+****
+\[\pi^*_{\text{joint}} = \pi^*_{\text{search}} \times \pi^*_{\text{prep}} \times \pi^*_{\text{exec}} \quad \text{} \quad c_{\text{cross}} = 0\]
+
+\textbf{ D20-4a}
+\textbf{**\(c_{\text{cross}} \neq 0\)}**
+
+
+\subsubsection{ D20-5}
+
+
+****
+\textbf{** \(\mathcal{F} = \{f_\theta : \theta \in \Theta\}\)  \(\Omega\) }**
+\[\mathcal{E}(\theta) = \mathbb{E}_{\omega \sim \Omega}[L(f_\theta(\omega), \omega)]\]
+
+\textbf{D20-5 }
+\[\mathcal{E}^* \geq \frac{H(\Omega) - I(\mathcal{F}; \Omega)}{|\Omega|} + \frac{\lambda_{\text{complexity}} \cdot \text{KL}(\theta \| \theta_{\text{prior}})}{T}\]
+
+
+\begin{itemize}
+\item \textbf{*}***
+\item ****Ockham
+\end{itemize}
+
+
+\textbf{ D20-5a}
+****
+\[V_{\text{search}} \geq \max_{\theta \in \Theta} \mathcal{E}(\theta_{\text{prior}}) - \min_{\theta \in \Theta} \mathcal{E}(\theta)\]
+
+**** =  \(I(\mathcal{F}; \Omega)\)-
+
+
+\subsection{3.}
+
+
+\subsubsection{ D20-A}
+
+
+\textbf{ D20-1}
+1.
+2.  \(c_{\text{search}}\)
+3. **** \(V_{\text{search}} < c_{\text{search}}\)
+
+
+\subsubsection{ D20-B-}
+
+
+\textbf{ D20-2}
+1.
+2.  \(K^* \propto v_{\text{task}} / c_{\text{prep}}\)
+3. ****
+
+
+\subsubsection{ D20-C}
+
+
+\textbf{ D20-3}
+1. / vs
+2.
+3. ****
+
+
+\subsubsection{ D20-D}
+
+
+\textbf{ D20-4}
+1.  Agent --
+2.  vs
+3. ****
+
+
+\subsection{4.}
+
+
+\subsubsection{4.1 D18}
+
+
+\textbf{D20-D18 }
+\begin{itemize}
+\item D20  = D18 ****
+\item D20  = D18 ****
+\item D20  MDP = D18 ****
+\item \textbf{*}* MDP **
+\end{itemize}
+
+
+
+\subsubsection{4.2 D2-1}
+
+
+\textbf{D20-D2-1 }
+\begin{itemize}
+\item D2-1 **** \(I_{\text{plan}} \leq C_{\text{model}}\)
+\item D20 \textbf{--} ****
+\item \textbf{** }** \(I(\mathcal{F}; \Omega)\)
+\end{itemize}
+
+
+
+\subsubsection{4.3 D7}
+
+
+\textbf{D20-D7 }
+\begin{itemize}
+\item D20  \textbf{Bellman } = ****
+\item = D7 ****
+\item **** \(K\)  =
+\end{itemize}
+
+
+
+\subsection{5.}
+
+
+\subsubsection{5.1}
+
+
+1. \textbf{D20-1 }
+2. \textbf{D20-2 }
+3. \textbf{D20-3 }
+4. \textbf{D20-4 }
+
+\subsubsection{5.2}
+
+
+1. ****
+2. ****
+3. ****
+
+
+\subsection{6.}
+
+
+\#\#\#
+
+**** \(c_{\text{search}}\), \(c_{\text{prep}}\), \(c_{\text{app}}(K)\) \(v_{\text{task}} \cdot K\)
+
+****
+1. ****\(\tau^* = \inf\{t : \mathbb{E}[\Delta V_{\text{tool}}] < c_{\text{search}}\}\)
+2. ****\(K^* = \arg\max_K \frac{v_{\text{task}} \cdot K}{c_{\text{prep}} + c_{\text{app}}(K)}\)
+3. ****\(\lambda^*(T) \propto \frac{p(T) \cdot v(T)}{1 + c_{\text{switch}} \cdot d(T, T')}\)
+4. ****\(\pi^*_{\text{joint}} = \text{argmax}_{\pi} \mathbb{E}[\sum \gamma^t r_t]\)
+5. ****\(\mathcal{E}^* \geq \frac{H(\Omega) - I(\mathcal{F}; \Omega)}{|\Omega|}\)
+
+\textbf{**  }\textbf{*}\textbf{*}
+
+
+*D20  MDP *
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Shannon, C.E. (1948). A Mathematical Theory of Communication.
+\bibitem{ref2} Cover, T.M. (2006). Elements of Information Theory.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,35 @@
+{
+  "control_topics": {},
+  "original_ai_topics": {
+    "CoT (AI)": {
+      "cv": 8.87,
+      "max_cluster": 358,
+      "f_c": 0.976,
+      "n": 500
+    },
+    "Info Geometry": {
+      "cv": 1.72,
+      "max_cluster": 11,
+      "f_c": 0.7,
+      "n": 300
+    },
+    "Phase Transition ML": {
+      "cv": 1.51,
+      "max_cluster": 12,
+      "f_c": 0.663,
+      "n": 300
+    },
+    "Emergent Ability": {
+      "cv": 2.68,
+      "max_cluster": 21,
+      "f_c": 0.773,
+      "n": 300
+    },
+    "Free Energy": {
+      "cv": 2.31,
+      "max_cluster": 9,
+      "f_c": 0.607,
+      "n": 300
+    }
+  }
+}

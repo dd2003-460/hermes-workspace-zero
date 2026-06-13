@@ -1,0 +1,248 @@
+{
+  "experiment_1_easy": {
+    "boltzmann": {
+      "mean_reward": 0.4419033135973262,
+      "mean_complexity": 3.581,
+      "mean_accuracy": 0.6533300000000001
+    },
+    "ucb1_c0.5": {
+      "mean_reward": 0.37936537653899105,
+      "mean_complexity": 1.0,
+      "mean_accuracy": 0.5
+    },
+    "ucb1_c1.0": {
+      "mean_reward": 0.37936537653899105,
+      "mean_complexity": 1.0,
+      "mean_accuracy": 0.5
+    },
+    "ucb1_c2.0": {
+      "mean_reward": 0.37936537653899105,
+      "mean_complexity": 1.0,
+      "mean_accuracy": 0.5
+    },
+    "thompson": {
+      "mean_reward": 0.39974101083932717,
+      "mean_complexity": 5.3305,
+      "mean_accuracy": 0.7260650000000001
+    },
+    "random": {
+      "mean_reward": 0.3086754399784971,
+      "mean_complexity": 6.4705,
+      "mean_accuracy": 0.7478400000000002
+    },
+    "best_response": {
+      "mean_reward": 0.6100000000000001,
+      "mean_complexity": 3.0,
+      "mean_accuracy": 0.6999999999999998
+    }
+  },
+  "experiment_2_medium": {
+    "boltzmann": {
+      "mean_reward": 0.37404074396093623,
+      "mean_complexity": 4.2425,
+      "mean_accuracy": 0.6746400000000001
+    },
+    "ucb1_c0.5": {
+      "mean_reward": 0.24440581804701322,
+      "mean_complexity": 1.0,
+      "mean_accuracy": 0.5
+    },
+    "ucb1_c1.0": {
+      "mean_reward": 0.24440581804701322,
+      "mean_complexity": 1.0,
+      "mean_accuracy": 0.5
+    },
+    "ucb1_c2.0": {
+      "mean_reward": 0.24440581804701322,
+      "mean_complexity": 1.0,
+      "mean_accuracy": 0.5
+    },
+    "thompson": {
+      "mean_reward": 0.45614000538165944,
+      "mean_complexity": 7.6045,
+      "mean_accuracy": 0.7997400000000001
+    },
+    "random": {
+      "mean_reward": 0.37567545876920067,
+      "mean_complexity": 6.533,
+      "mean_accuracy": 0.7517250000000001
+    },
+    "best_response": {
+      "mean_reward": 0.59,
+      "mean_complexity": 7.0,
+      "mean_accuracy": 0.8000000000000002
+    }
+  },
+  "experiment_3_hard": {
+    "boltzmann": {
+      "mean_reward": 0.2654538421550132,
+      "mean_complexity": 4.849,
+      "mean_accuracy": 0.6966800000000001
+    },
+    "ucb1_c0.5": {
+      "mean_reward": 0.15393972058572117,
+      "mean_complexity": 1.0,
+      "mean_accuracy": 0.5
+    },
+    "ucb1_c1.0": {
+      "mean_reward": 0.15393972058572117,
+      "mean_complexity": 1.0,
+      "mean_accuracy": 0.5
+    },
+    "ucb1_c2.0": {
+      "mean_reward": 0.15393972058572117,
+      "mean_complexity": 1.0,
+      "mean_accuracy": 0.5
+    },
+    "thompson": {
+      "mean_reward": 0.47769482450341055,
+      "mean_complexity": 10.3245,
+      "mean_accuracy": 0.8639900000000001
+    },
+    "random": {
+      "mean_reward": 0.3226260025892724,
+      "mean_complexity": 6.4875,
+      "mean_accuracy": 0.75024
+    },
+    "best_response": {
+      "mean_reward": 0.5499999999999999,
+      "mean_complexity": 11.0,
+      "mean_accuracy": 0.8800000000000002
+    }
+  },
+  "experiment_4_learning": {
+    "boltzmann": {
+      "final_cumulative_reward": 189.31921083290518,
+      "final_avg_reward": 0.37863842166581035,
+      "reward_at_50": 19.99735229064133,
+      "reward_at_100": 39.90624986838798,
+      "reward_at_200": 76.14389620843912,
+      "reward_at_500": 189.31921083290518,
+      "learning_rate": 0.3743102927853186
+    },
+    "ucb1_c1.0": {
+      "final_cumulative_reward": 224.32366422169488,
+      "final_avg_reward": 0.4486473284433898,
+      "reward_at_50": 20.292010379531483,
+      "reward_at_100": 41.47260857452279,
+      "reward_at_200": 85.23516865206726,
+      "reward_at_500": 224.32366422169488,
+      "learning_rate": 0.4329543884835719
+    },
+    "thompson": {
+      "final_cumulative_reward": 262.13794893304225,
+      "final_avg_reward": 0.5242758978660845,
+      "reward_at_50": 25.728963821076587,
+      "reward_at_100": 51.62715311807373,
+      "reward_at_200": 104.41134796187589,
+      "reward_at_500": 262.13794893304225,
+      "learning_rate": 0.5245492276053286
+    },
+    "random": {
+      "final_cumulative_reward": 191.99307513425742,
+      "final_avg_reward": 0.38398615026851485,
+      "reward_at_50": 20.33449509238544,
+      "reward_at_100": 40.223286164575356,
+      "reward_at_200": 76.60157215839232,
+      "reward_at_500": 191.99307513425742,
+      "learning_rate": 0.37511384710671253
+    }
+  },
+  "experiment_5_sweep": {
+    "ucb_sweep": {
+      "c=0.1": 0.581411276998794,
+      "c=0.5": 0.49950948669640355,
+      "c=1.0": 0.434755939438913,
+      "c=2.0": 0.40397720814600707,
+      "c=5.0": 0.3869141455821036
+    },
+    "boltzmann_sweep": {
+      "beta=0.1": 0.40214840888146425,
+      "beta=0.3": 0.38925475722468983,
+      "beta=0.5": 0.3455725787295121,
+      "beta=1.0": 0.28709350528531874,
+      "beta=2.0": 0.25562011962349773
+    },
+    "comparison": {
+      "best_ucb": {
+        "c=0.1": 0.581411276998794
+      },
+      "best_boltzmann": {
+        "beta=0.1": 0.40214840888146425
+      }
+    }
+  },
+  "summary": {
+    "easy_task": {
+      "boltzmann": 0.4419033135973262,
+      "ucb1_c0.5": 0.37936537653899105,
+      "ucb1_c1.0": 0.37936537653899105,
+      "ucb1_c2.0": 0.37936537653899105,
+      "thompson": 0.39974101083932717,
+      "random": 0.3086754399784971,
+      "best_response": 0.6100000000000001
+    },
+    "medium_task": {
+      "boltzmann": 0.37404074396093623,
+      "ucb1_c0.5": 0.24440581804701322,
+      "ucb1_c1.0": 0.24440581804701322,
+      "ucb1_c2.0": 0.24440581804701322,
+      "thompson": 0.45614000538165944,
+      "random": 0.37567545876920067,
+      "best_response": 0.59
+    },
+    "hard_task": {
+      "boltzmann": 0.2654538421550132,
+      "ucb1_c0.5": 0.15393972058572117,
+      "ucb1_c1.0": 0.15393972058572117,
+      "ucb1_c2.0": 0.15393972058572117,
+      "thompson": 0.47769482450341055,
+      "random": 0.3226260025892724,
+      "best_response": 0.5499999999999999
+    },
+    "rankings": {
+      "easy": [
+        [
+          "best_response",
+          0.6100000000000001
+        ],
+        [
+          "boltzmann",
+          0.4419033135973262
+        ],
+        [
+          "thompson",
+          0.39974101083932717
+        ]
+      ],
+      "medium": [
+        [
+          "best_response",
+          0.59
+        ],
+        [
+          "thompson",
+          0.45614000538165944
+        ],
+        [
+          "random",
+          0.37567545876920067
+        ]
+      ],
+      "hard": [
+        [
+          "best_response",
+          0.5499999999999999
+        ],
+        [
+          "thompson",
+          0.47769482450341055
+        ],
+        [
+          "random",
+          0.3226260025892724
+        ]
+      ]
+    }
+  }
+}

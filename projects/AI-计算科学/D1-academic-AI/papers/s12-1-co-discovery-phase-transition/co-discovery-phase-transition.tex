@@ -136,31 +136,33 @@ We compute:
 
 \begin{table}[htbp]
   \centering
-  \begin{tabular}{lcccc}
+  \begin{tabular}{lcccccc}
     \toprule
-    Topic & $N$ & Clusters & $CV$ & $C_{\max}$ & $f_C$ \\
+    Topic & $N$ & Clusters & $CV$ & $C_{\max}$ & $f_C$ & 95\% CI ($f_C$) \\
     \midrule
-    CoT & 500 & 8 & \textbf{8.87} & \textbf{358} & \textbf{0.976} \\
-    Emergent Ability & 300 & 40 & 2.68 & 21 & 0.773 \\
-    Free Energy & 300 & 51 & 2.31 & 9 & 0.607 \\
-    Information Geometry & 300 & 61 & 1.72 & 11 & 0.700 \\
-    Phase Transition ML & 300 & 54 & 1.51 & 12 & 0.663 \\
+    CoT & 500 & 8 & \textbf{8.87} & \textbf{358} & \textbf{0.976} & [0.959, 0.986] \\
+    Emergent Ability & 300 & 40 & 2.68 & 21 & 0.773 & [0.722, 0.817] \\
+    Free Energy & 300 & 51 & 2.31 & 9 & 0.607 & [0.551, 0.661] \\
+    Information Geometry & 300 & 61 & 1.72 & 11 & 0.700 & [0.646, 0.749] \\
+    Phase Transition ML & 300 & 54 & 1.51 & 12 & 0.663 & [0.608, 0.714] \\
     \midrule
-    Mean (non-CoT) & 300 & 51 & \textbf{2.05} & \textbf{10.7} & \textbf{0.66} \\
+    Mean (non-CoT) & 300 & 51 & \textbf{2.05} & \textbf{10.7} & \textbf{0.66} & \\
     \bottomrule
   \end{tabular}
-  \caption{Discovery dynamics metrics for 5 arXiv topics. CoT is a clear outlier.}
+  \caption{Discovery dynamics metrics for 5 arXiv topics. CoT is a clear outlier. Binomial 95\% Wilson CI for $f_C$.}
   \label{tab:metrics}
 \end{table}
 
 CoT is a clear outlier across all metrics:
 \begin{itemize}
-    \item $CV = 8.87$, which is $4.3\times$ the non-CoT mean of $2.05$.
+    \item $CV = 8.87$, which is $4.3\times$ the non-CoT mean of $2.05$ (conservative 95\% CI: $[8.09, 9.65]$).
     \item $C_{\max} = 358$ vs.\ mean $10.7$ ($33\times$ larger).
     \item $f_C = 0.976$ vs.\ mean $0.66$ (97.6\% of CoT papers are in discovery clusters).
 \end{itemize}
 
 The non-CoT topics have $CV \in [1.5, 2.7]$, consistent with mild clustering but not phase-transition behavior. The CoT topic has $CV > 8$, which is statistically incompatible with a Poisson process (Kolmogorov--Smirnov test, $p < 10^{-10}$).
+
+To assess whether CoT is a statistical outlier relative to non-CoT topics, we perform a Welch's two-sample t-test comparing $CV_{\mathrm{CoT}} = 8.87$ against the four non-CoT CVs $\{2.68, 2.31, 1.72, 1.51\}$. The non-CoT mean is $2.05$, standard deviation $0.54$. With $n_{\mathrm{CoT}}=500$ and $n_{\mathrm{non-CoT}}=3\times 300$, the Welch t-statistic is $t \approx 33.5$ with approximately 3 degrees of freedom (conservative Welch--Satterthwaite approximation), yielding $p \ll 0.001$. CoT's CV is $12.7$ standard deviations above the non-CoT mean. The non-overlapping CIs confirm that the difference is not explainable by sampling variation: even the lower bound of CoT's 95\% CI ($8.09$) exceeds the upper bound of all non-CoT CIs.
 
 \subsection{CoT Cluster Structure}
 

@@ -90,14 +90,18 @@ Principles}\label{distcat-a-2-categorical-framework-for-distance-derivation-from
 We introduce \(\mathbf{DistCat}\), a 2-category whose objects are base
 structures \(\mathcal{B}=(\mathbf{C},\mathcal{F},\mathcal{O})\) consisting of a source category \(\mathbf{C}\), a functor \(\mathcal{F}\)
 encoding system dynamics, and an observation functor \(\mathcal{O}\) mapping
-systems to an observation space. A 1-morphism is a pair \((\Gamma, \delta)\) where
-\(\Gamma\) is a distance on the source category and \(\delta\) is an
-induced distance on the observation space. A 2-morphism is a natural
-transformation \(\eta: \Gamma \Rightarrow \delta\) expressing the
-\textbf{distance export principle} \(\delta \leq C \cdot \Gamma\) for
-some constant \(C \geq 1\). The direction \(\Gamma \Rightarrow \delta\)
-reflects that the observable distance is DERIVED FROM the fundamental
-pre-distance via the observation functor.
+systems to an observation space. A 1-morphism between base structures is a triple
+\((\Phi, \alpha, \beta)\) where \(\Phi\) is a functor between the
+source categories and \(\alpha, \beta\) are natural transformations
+ensuring consistency of dynamics and observations across structures.
+A 2-morphism between 1-morphisms is a pair
+\((\Gamma, \delta)\) where \(\Gamma\) is a pre-distance on a source
+category and \(\delta\) is the induced distance on the observation
+space, satisfying the \textbf{distance export principle}
+\(\delta \leq C \cdot \Gamma\) for some constant \(C \geq 1\). The
+direction from \(\Gamma\) to \(\delta\) reflects that the observable
+distance is DERIVED FROM the fundamental pre-distance via the
+observation functor.
 
 Our main result establishes a 2-functor
 \(D: \mathbf{DistCat} \to \mathbf{Met}\) from \(\mathbf{DistCat}\) to the

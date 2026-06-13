@@ -306,7 +306,7 @@ We evaluate two well-established multi-armed bandit algorithms against our Boltz
     UCB1 $c=1.0$ & 0.379 & 0.244 & 0.154 \\
     \bottomrule
   \end{tabular}
-  \caption{Mean reward across three task complexity levels (averaged over 10 seeds). Best-Response is the theoretical upper bound. Thompson Sampling is the best adaptive baseline. UCB1 is highly sensitive to $c$: low $c$ approaches Best-Response but is unstable, high $c$ fails catastrophically.}
+  \caption{Mean reward across three task complexity levels (averaged over 10 seeds). Best-Response is the theoretical upper bound. Thompson Sampling is the best adaptive baseline. UCB1 is highly sensitive to $c$: low $c$ approaches Best-Response but is unstable, high $c$ degrades sharply.}
   \label{tab:ucb-thompson}
 \end{table}
 
@@ -321,9 +321,9 @@ Key findings:
 \begin{figure}[htb]
   \centering
   \fbox{\parbox{0.85\textwidth}{\centering\large
-    Learning curves: Thompson Sampling > UCB1 > Boltzmann > Random\strut\\
-    \small (figure pending: cumulative reward over 500 rounds)}}
-  \caption{Learning curves: cumulative reward over 500 rounds. Thompson Sampling learns fastest (steepest initial slope), followed by UCB1 (after initial exploration), then Boltzmann (no learning), then Random.}
+    Learning curves: Thompson Sampling and UCB1 ($c=0.1$) lead in final reward\strut\\
+    \small (figure pending: cumulative reward over 500 rounds, see Table~\ref{tab:ucb-thompson} for final averages)}}
+  \caption{Learning curves (placeholder): cumulative reward over 500 rounds. Thompson Sampling converges fastest due to its adaptive exploration rate. UCB1 ($c=0.1$) also shows strong performance but is sensitive to $c$. Boltzmann ($\beta=0.1$) reaches a plateau quickly. Random serves as baseline. See Table~\ref{tab:ucb-thompson} for final average rewards.}
   \label{fig:learning-curves}
 \end{figure}
 

@@ -459,11 +459,11 @@ The gravitational EMRI base structure $\mathcal{B}_{\rm EMRI} = (\mathbf{C}_{\rm
 
 \item \textbf{Geodesic functor:} $\mathcal{F}_{\rm geo}: \mathbf{C}_{\rm EMRI} \to \mathbf{Path}$ assigns to each $(M, g)$ the path space $\mathcal{F}(M, g) = \{r(\phi; E, L) \mid \text{solutions to } \ddot{x}^\mu + \Gamma^\mu_{\alpha\beta}\dot{x}^\alpha\dot{x}^\beta = 0\}$, where $E$ and $L$ are conserved energy and angular momentum.
 
-\item \textbf{Observation functor:} For a geodesic trajectory $\gamma \in \mathcal{F}(M, g)$, the observation functor extracts invariant chaos diagnostics:
+\item \textbf{Observation functor:} $\mathcal{O}_{\rm obs}$ maps each spacetime object $(M, g)$ to its chaos diagnostic profile in the observation space:
 \begin{equation}
-\mathcal{O}_{\rm obs}(M, g, \gamma) = (\lambda_T, \kappa, \{r_{\rm circ}\}) \in \mathbb{R}_{\geq 0} \times \mathbb{R}_{>0} \times \mathbb{R}_{>0}
+\mathcal{O}_{\rm obs}(M, g) = (\lambda_T, \kappa, \{r_{\rm circ}\}) \in \mathbb{R}_{\geq 0} \times \mathbb{R}_{>0} \times \mathbb{R}_{>0}
 \end{equation}
-where $\lambda_T$ is the total Lyapunov exponent (phase-space divergence rate), $\kappa$ is the effective surface gravity, and $\{r_{\rm circ}\}$ is the set of circular orbit radii (fixed points of the radial flow).
+where $\lambda_T$ is the maximal Lyapunov exponent of the geodesic flow, $\kappa$ is the effective surface gravity, and $\{r_{\rm circ}\}$ is the set of circular orbit radii (fixed points of the radial flow). The specific observables for a trajectory $\gamma \in \mathcal{F}(M, g)$ are obtained by composing $\mathcal{O}_{\rm obs} \circ \mathcal{F}_{\rm geo}$, extracting the chaos diagnostics along that geodesic.
 \end{enumerate}
 \end{definition}
 
@@ -501,7 +501,7 @@ under the D26 $\leftrightarrow$ EMRI correspondence. Specifically:
 \begin{enumerate}
 \item The resonance frequency $\omega_{\rm res}$ in D26 corresponds to the unstable circular orbit frequency:
 \begin{equation}\label{eq:omega_un}
-\Omega_{\rm un}^2 = \frac{1}{r_{\rm un}^3}\,\frac{dV_{\rm eff}}{dr}\bigg|_{r=r_{\rm un}} = \frac{M}{r_{\rm un}^3} + \mathcal{O}(\rho_s)
+\Omega_{\rm un}^2 = \frac{1}{r_{\rm un}}\,\frac{d^2 V_{\rm eff}}{dr^2}\bigg|_{r=r_{\rm un}} = \frac{M}{r_{\rm un}^3} + \mathcal{O}(\rho_s)
 \end{equation}
 \item The critical distance $\varepsilon \to 0$ in D26 corresponds to the distance from the homoclinic orbit to the unstable fixed point: $\varepsilon = r - r_{\rm un}$.
 \item The critical power law $G_{\rm Amp} \sim \varepsilon^{-\gamma}$ in D26 corresponds to $\lambda_T \sim (\rho_s - \rho_{s,\text{crit}})^\alpha$ in EMRI.

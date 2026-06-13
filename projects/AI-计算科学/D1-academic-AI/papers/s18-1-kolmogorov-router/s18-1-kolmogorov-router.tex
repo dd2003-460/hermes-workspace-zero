@@ -188,7 +188,7 @@ We construct a market of 13 tools at three complexity levels:
   \item \textbf{Random Agent}: uniform random tool selection
   \item \textbf{Best-Response Agent}: deterministic selection maximizing $a(t) - \beta' K(t)$
   \item \textbf{UCB1 Agent}: Upper Confidence Bound (Auer et al.\ 2002) with exploration parameter $c \in \{0.1, 0.5, 1.0, 2.0, 5.0\}$
-  \item \textbf{Thompson Sampling Agent}: Bayesian posterior sampling with Beta$(\alpha, \beta)$ parameterization~\cite{r92-thompson1933}
+  \item \textbf{Thompson Sampling Agent}: Bayesian posterior sampling with Beta$(\alpha_{\mathrm{TS}}, \beta_{\mathrm{TS}})$ parameterization~\cite{r92-thompson1933} (distinct from routing penalty $\beta$)
 \end{enumerate}
 
 \subsection{Parameters}

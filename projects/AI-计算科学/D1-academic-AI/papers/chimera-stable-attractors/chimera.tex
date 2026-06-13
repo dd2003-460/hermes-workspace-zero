@@ -96,7 +96,7 @@ The coupling parameters are:
 \item $K_0 = 1.0$ (base coupling strength)
 \item $\epsA$ (Domain A modulation amplitude)
 \item $\epsB$ (Domain B modulation amplitude)
-\item $K_{\textrm{transition}} \approx 0.3$ (effective coupling in transition/outside regions, $K_0 \cdot w(x)$ at $x \in [0.4,0.5) \cup [0.9,1.0)$ where $w(x) \approx 0.3$ for $\eps \approx -0.7$)
+\item $K_{\textrm{transition}}$ (position-dependent coupling in boundary regions): $w(x) = 1 + \eps \cos(2\pi x)$ with $\eps \approx -0.7$ yields $w \in [1.57, 1.70]$ for $x \in [0.4, 0.5)$ (transition region, elevated coupling) and $w \in [0.33, 0.43]$ for $x \in [0.9, 1.0)$ (outside regions, reduced coupling). The minimum $K \approx 0.33$ near $x = 0.9$ creates the incoherent sector.
 \end{itemize}
 
 \subsection{Integration Scheme}

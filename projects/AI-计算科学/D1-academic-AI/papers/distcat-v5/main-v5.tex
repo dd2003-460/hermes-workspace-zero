@@ -152,8 +152,9 @@ This paper proposes that \textbf{all distance functions are exported
 from a more fundamental structure via categorical natural
 transformations}. Specifically, given a source category \(\mathbf{C}\)
 with a pre-distance \(\Gamma\), an observation functor
-\(\mathcal{O}: \mathbf{C} \to \mathbf{E}\), and a natural transformation
-\(\eta: \Gamma \Rightarrow \delta\), the observable distance \(\delta\)
+\(\mathcal{O}: \mathbf{C} \to \mathbf{E}\), and a derived distance
+\(\delta\) satisfying the distance export inequality \(\delta \leq C \cdot \Gamma\),
+the observable distance \(\delta\)
 is completely determined by \(\Gamma\) and \(\mathcal{O}\).
 
 The framework \(\mathbf{DistCat}\) formalizes this idea as a
@@ -350,7 +351,7 @@ a 2-category defined by:
   \((\Phi, \alpha, \beta)\)
 \item
   \textbf{2-morphisms}: Distance-exporting pairs \((\Gamma, \delta)\)
-  with natural transformation \(\eta\)
+  satisfying the inequality \(\delta \leq C \cdot \Gamma\)
 \end{itemize}
 
 \textbf{Composition rules}: - Vertical:
@@ -362,7 +363,7 @@ functor-composition pushout
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{Fig1-2cat-structure.png}
-\caption{The 2-category structure of \(\mathbf{DistCat}\). 0-objects are base structures \(\mathcal{B}=(\mathbf{C},\mathcal{F},\mathcal{O})\). 1-morphisms are structure-preserving triples \((\Phi,\alpha,\beta)\). 2-morphisms are natural transformations \(\eta:\Gamma\Rightarrow\delta\) encoding the distance export principle \(\delta \leq C \cdot \Gamma\). The 2-functor \(D:\mathbf{DistCat}\to\mathbf{Met}\) exports each base structure to its observation metric.}
+\caption{The 2-category structure of \(\mathbf{DistCat}\). 0-objects are base structures \(\mathcal{B}=(\mathbf{C},\mathcal{F},\mathcal{O})\). 1-morphisms are structure-preserving triples \((\Phi,\alpha,\beta)\). 2-morphisms are pairs \((\Gamma,\delta)\) satisfying the distance export inequality \(\delta \leq C \cdot \Gamma\). The 2-functor \(D:\mathbf{DistCat}\to\mathbf{Met}\) exports each base structure to its observation metric.}
 \label{fig:2cat-structure}
 \end{figure}
 
@@ -457,7 +458,7 @@ is the dominant component of the DM-induced metric correction (Dehnen $(1, 4, 5/
 \delta\bigl(\mathcal{O}_1, \mathcal{O}_2\bigr) = |\lambda_{T1} - \lambda_{T2}| + |\kappa_1 - \kappa_2| + \sum_i |r_{{\rm circ}, i, 1} - r_{{\rm circ}, i, 2}|
 \end{equation}
 
-The natural transformation $\eta: \Gamma \Rightarrow \delta$ encodes the distance export principle (Definition~2.3) for this example. Its Lipschitz continuity $\delta \leq C \cdot \Gamma$ follows from the smooth dependence of geodesics on the metric (standard ODE theory applied to the geodesic equation).
+The distance export inequality (Definition~2.3) relates the pre-distance $\Gamma$ to the observable distance $\delta$ for this example. Its Lipschitz continuity $\delta \leq C \cdot \Gamma$ follows from the smooth dependence of geodesics on the metric (standard ODE theory applied to the geodesic equation).
 
 \textbf{Effective potential formulation.} The radial motion of a test particle in the Schwarzschild+DM spacetime is governed by the effective potential:
 \begin{equation}\label{eq:veff}
@@ -638,7 +639,7 @@ Structure functor $\mathcal{F}$ & Geodesic functor $\mapsto \{r(\phi; E,L)\}$ \\
 Observation functor $\mathcal{O}$ & $(\lambda_T, \kappa, \{r_{\rm circ}\})$ \\
 Source pre-distance $\Gamma$ & $\|h_{\mu\nu}\|_{L^2}$ (DM halo metric perturbation) \\
 Observation distance $\delta$ & Chaos distance in $(\lambda_T, \kappa, r_{\rm circ})$ space \\
-Natural transformation $\eta$ & $\delta \leq C \cdot \Gamma$ (geodesic continuity) \\
+Distance export inequality & $\delta \leq C \cdot \Gamma$ (geodesic continuity) \\
 Exported metric $D(\mathcal{B})$ & Chaos metric space $(\{\lambda_T, \kappa, r_{\rm circ}\}, d_{\rm chaos})$ \\
 Distance-equivalence class & $\cong_{\rm struct} D(\mathcal{B}_{\rm D26})$ (Prop.~\ref{prop:emri-d26-dist-eq}) \\
 Robustness certificate & MSS bound $\lambda_T^2 < \kappa^2$ (Prop.~\ref{prop:mss-robustness}) \\
@@ -663,8 +664,8 @@ The EMRI example, together with the four preceding examples in this paper, demon
 The five examples demonstrate that distance export is not an isolated
 phenomenon but a \textbf{universal structural pattern} appearing in
 AQFT, information geometry, Bayesian statistics, control theory, and
-general relativity. The common feature is a natural transformation
-\(\eta: \Gamma \Rightarrow \delta\) connecting a more fundamental distance
+general relativity. The common feature is a distance export inequality
+\(\delta \leq C \cdot \Gamma\) connecting a more fundamental distance
 to its observable export.
 
 \subsubsection{9.2 Critical Exponents as Categorical

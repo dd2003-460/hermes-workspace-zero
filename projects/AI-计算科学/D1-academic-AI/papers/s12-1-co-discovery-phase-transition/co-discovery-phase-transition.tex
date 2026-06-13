@@ -24,7 +24,7 @@ Empirical Evidence for a Critical Information Density}
 \maketitle
 
 \begin{abstract}
-We present empirical evidence for accelerated co-discovery dynamics in scientific research driven by information density. Analyzing 1,700 papers across five arXiv topics, we find that the Chain-of-Thought (CoT) literature exhibits critical clustering behavior: coefficient of variation (CV) in inter-publication time is 8.87 (4.3$\times$ higher than other topics), 97.6\% of papers belong to discovery clusters (vs.\ 61--77\% for other topics), and the maximum cluster contains 358 papers spanning 659 days. A quarterly rate analysis reveals a $16\times$ acceleration in normalized daily publication rate, peaking in 2024 Q3--Q4. We formalize the discovery dynamics using a threshold model where the information density $\rho$ triggers a transition from Poisson-like independent discovery to cascade-like co-discovery at a critical density $\rho_c$. A phase-transition power law fits the quarterly rates better than exponential growth (delta AIC=7.45), though the logistic model (delta AIC=3.85) provides a competitive alternative. The results share formal analogies with critical phenomena in statistical physics.
+We present empirical evidence for accelerated co-discovery dynamics in scientific research driven by information density. Analyzing 1,700 papers across five arXiv topics, we find that the Chain-of-Thought (CoT) literature exhibits critical clustering behavior: coefficient of variation (CV) in inter-publication time is 8.87 (4.3$\times$ higher than other topics), 97.6\% of papers belong to discovery clusters (vs.\ 61--77\% for other topics), and the maximum cluster contains 358 papers spanning 659 days. A quarterly rate analysis reveals a $16\times$ acceleration in normalized daily publication rate, peaking in 2024 Q3--Q4. We formalize the discovery dynamics using a threshold model where the information density $\rho$ triggers a transition from Poisson-like independent discovery to cascade-like co-discovery at a critical density $\rho_c$. A threshold-crossing power law fits the quarterly rates better than exponential growth (delta AIC=7.45), though the logistic model (delta AIC=3.85) provides a competitive alternative. The results share formal analogies with critical phenomena in statistical physics.
 
 \textbf{Keywords}: scientific discovery, threshold dynamics, information density, co-discovery, Chain-of-Thought, empirical science of science, critical phenomena
 \end{abstract}
@@ -187,7 +187,7 @@ We further computed non-parametric bootstrap confidence intervals by resampling 
     \textbf{Non-AI mean} & \textbf{429} & \textbf{1.85} & \textbf{0.776} & \textbf{13} \\
     \bottomrule
   \end{tabular}
-  \caption{Bootstrap CV/f_C/C_max from independent arXiv sample (500 papers per topic except Free Energy: 145, due to limited recent publications; 10,000 resamples). Five non-AI controls exclude Emergent Ability (CV=4.95) and Free Energy (CV=4.06), which are AI-adjacent. CoT's CI [1.58, 3.91] is above all non-AI point estimates. Full bootstrap CIs: S12-1-bootstrap-ci-results.json.}
+  \caption{Bootstrap CV/f\_C/C\_max from independent arXiv sample (500 papers per topic except Free Energy: 145, due to limited recent publications; 10,000 resamples). Five non-AI controls exclude Emergent Ability (CV=4.95) and Free Energy (CV=4.06), which are AI-adjacent. CoT's CI [1.58, 3.91] is above all non-AI point estimates. Full bootstrap CIs: S12-1-bootstrap-ci-results.json.}
   \label{tab:bootstrap-ci}
 \end{table}
 
@@ -256,7 +256,7 @@ From the quarterly data, the peak daily rate is 0.694 papers/day (2024 Q3--Q4), 
 
 With $\rho_c = 0.20$ (a low, conservative threshold), three quarters are supercritical. A log-log regression yields $\beta = 0.55 \pm 0.04$ ($R^2 = 0.99$). With $\rho_c = 0.30$, $\beta = 0.26 \pm 0.06$ ($R^2 = 0.96$). For $\rho_c > 0.40$, fewer than three supercritical periods remain, making the power-law fit unreliable.
 
-The exponent estimate is highly sensitive to $\rho_c$, reflecting the limited number of supercritical data points. We also performed a formal model comparison testing three candidate growth models against the quarterly daily rates: (i) exponential growth $\lambda(t)=\lambda_0\exp(\alpha t)$, (ii) logistic growth $\lambda(t)=\lambda_{\max}/(1+\exp(-\alpha(t-t_0)))$, and (iii) the phase-transition power law $\lambda=\lambda_0(\rho/\rho_c-1)^\beta$. Results:
+The exponent estimate is highly sensitive to $\rho_c$, reflecting the limited number of supercritical data points. We also performed a formal model comparison testing three candidate growth models against the quarterly daily rates: (i) exponential growth $\lambda(t)=\lambda_0\exp(\alpha t)$, (ii) logistic growth $\lambda(t)=\lambda_{\max}/(1+\exp(-\alpha(t-t_0)))$, and (iii) the threshold-crossing power law $\lambda=\lambda_0(\rho/\rho_c-1)^\beta$. Results:
 
 \begin{table}[htbp]
   \centering
@@ -264,12 +264,12 @@ The exponent estimate is highly sensitive to $\rho_c$, reflecting the limited nu
     \toprule
     Model & $R^2$ & AIC \\
     \midrule
-    Phase Transition ($\rho_c=0.10$) & \textbf{0.981} & \textbf{--8.99} \\
+    Threshold Crossing ($\rho_c=0.10$) & \textbf{0.981} & \textbf{--8.99} \\
     Logistic Growth & 0.889 & --5.13 \\
     Exponential Growth & 0.661 & --1.54 \\
     \bottomrule
   \end{tabular}
-  \caption{Model comparison for quarterly daily publication rates. The phase-transition model has the best fit, but the logistic model (delta AIC=3.85) provides a competitive alternative. Exponential growth is ruled out (delta AIC=7.45).}
+  \caption{Model comparison for quarterly daily publication rates. The threshold-crossing model has the best fit, but the logistic model (delta AIC=3.85) provides a competitive alternative. Exponential growth is ruled out (delta AIC=7.45).}
   \label{tab:model-comparison}
 \end{table}
 
@@ -290,7 +290,7 @@ Disentangling these factors is an important direction for future work. Notably, 
 
 \subsection{Generalizability and Selection Bias}
 
-All five topics in this study are AI/ML-adjacent. The CoT topic alone is the most active subfield in modern AI. It is therefore possible that the observed ``phase transition'' is an artifact of studying the fastest-moving field in academia, rather than a universal feature of scientific discovery.
+All five topics in this study are AI/ML-adjacent. The CoT topic alone is the most active subfield in modern AI. It is therefore possible that the observed ``threshold crossing'' is an artifact of studying the fastest-moving field in academia, rather than a universal feature of scientific discovery.
 
 Traditional fields (physics, biology, medicine) typically have slower publication cycles, more established subfields with mature publication rates, and less social media amplification. We do not claim that the same dynamics necessarily apply to these fields.
 
@@ -353,7 +353,7 @@ and assessing parameter sensitivity.
 
 \section{Conclusion}
 
-We have presented empirical evidence for accelerated co-discovery dynamics in the CoT literature. The CoT topic exhibits unusual clustering behavior ($CV = 8.87$, $f_C = 0.976$, $C_{\max} = 358$) that is statistically incompatible with a Poisson process and formally analogous to a threshold model at critical information density. A formal model comparison shows that a phase-transition power law fits the quarterly rates better than both exponential growth (delta AIC=7.45, ruled out) and logistic growth (delta AIC=3.85, competitive), though the phase-transition evidence is not conclusive due to limited data points and parameter selection. Our analysis also shows that the power-law exponent is sensitive to the choice of critical threshold. Crucially, a non-AI control group analysis with 5 categories (math.AG, math.GT, physics.flu-dyn, math.CO, math.DS) demonstrates that CoT's CV is 19--74x higher than all controls (Table~\ref{tab:non-ai-controls}), establishing that the bursty discovery dynamics are AI-specific rather than a universal feature of science.
+We have presented empirical evidence for accelerated co-discovery dynamics in the CoT literature. The CoT topic exhibits unusual clustering behavior ($CV = 8.87$, $f_C = 0.976$, $C_{\max} = 358$) that is statistically incompatible with a Poisson process and formally analogous to a threshold model at critical information density. A formal model comparison shows that a threshold-crossing power law fits the quarterly rates better than both exponential growth (delta AIC=7.45, ruled out) and logistic growth (delta AIC=3.85, competitive), though the threshold-crossing evidence is not conclusive due to limited data points and parameter selection. Our analysis also shows that the power-law exponent is sensitive to the choice of critical threshold. Crucially, a non-AI control group analysis with 5 categories (math.AG, math.GT, physics.flu-dyn, math.CO, math.DS) demonstrates that CoT's CV is 19--74x higher than all controls (Table~\ref{tab:non-ai-controls}), establishing that the bursty discovery dynamics are AI-specific rather than a universal feature of science.
 
 Future work should:
 \begin{enumerate}

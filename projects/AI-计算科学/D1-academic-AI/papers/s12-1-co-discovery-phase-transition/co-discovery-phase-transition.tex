@@ -184,7 +184,7 @@ We further computed non-parametric bootstrap confidence intervals by resampling 
     math.AG (non-AI) & 500 & 1.21 & 0.736 & 8 \\
     math.GT (non-AI) & 500 & 1.18 & 0.744 & 10 \\
     \midrule
-    \textbf{Non-AI mean} & \textbf{500} & \textbf{1.85} & \textbf{0.776} & \textbf{13} \\
+    \textbf{Non-AI mean} & \textbf{429} & \textbf{1.85} & \textbf{0.776} & \textbf{13} \\
     \bottomrule
   \end{tabular}
   \caption{Bootstrap CV/f_C/C_max from independent arXiv sample (500 papers per topic except Free Energy: 145, due to limited recent publications; 10,000 resamples). Five non-AI controls exclude Emergent Ability (CV=4.95) and Free Energy (CV=4.06), which are AI-adjacent. CoT's CI [1.58, 3.91] is above all non-AI point estimates. Full bootstrap CIs: S12-1-bootstrap-ci-results.json.}
@@ -311,11 +311,11 @@ math.DS (Dynamical Systems) & 0.46 & 99.5\% & 1.93x \\
 \textbf{CoT (this study)} & \textbf{8.87} & \textbf{97.6\%} & \textbf{16x} \\
 \bottomrule
 \end{tabular}
-\caption{Non-AI control group results. All 5 control categories show CV $\ll$ 1 (uniform publication rates) and acceleration $\approx$ 1--2x (modest growth). CoT's CV is 19--74x higher than all controls. Cluster quality ($f_C$) is comparable across categories, indicating the tau=14-day threshold detects clustering consistently. The difference lies in the burstiness of cluster timings (CV), not in whether clustering occurs. Acceleration is measured as papers/year ratio (2020--2024 vs 2015--2019); CoT's daily rate is 16x.}
+\caption{Non-AI control group results. All 5 control categories show CV $< 0.5$ (uniform publication rates) and acceleration $\approx$ 1--2x (modest growth). CoT's CV is 19--74x higher than the 5 math/physics non-AI controls (range 0.12--0.46), with a minimum of $8.87/0.46 \approx 19\times$ (physics.flu-dyn). Cluster quality ($f_C$) is comparable across categories, indicating the tau=14-day threshold detects clustering consistently. The difference lies in the burstiness of cluster timings (CV), not in whether clustering occurs. Acceleration is measured as papers/year ratio (2020--2024 vs 2015--2019); CoT's daily rate is 16x.}
 \label{tab:non-ai-controls}
 \end{table}
 
-These results demonstrate that the extreme burstiness of discovery in CoT ($CV = 8.87$) is not a universal feature of scientific research but is specific to AI-accelerated fields. All 5 non-AI control categories have CV $< 0.5$, at least 19x lower than CoT. Similarly, the acceleration rate in non-AI fields is modest (1.2--1.9x), compared to CoT's 16x.
+These results demonstrate that the extreme burstiness of discovery in CoT ($CV = 8.87$) is not a universal feature of scientific research but is specific to AI-accelerated fields. All 5 math/physics non-AI control categories have CV $< 0.5$, at least $8.87/0.46 \approx 19\times$ lower than CoT. (By contrast, the 4 non-CoT AI/ML arXiv topics in Table~\ref{tab:metrics} have CVs of 1.51--2.68, i.e.\ $3.3\times$--$5.9\times$ lower.) Similarly, the acceleration rate in non-AI fields is modest (1.2--1.9x), compared to CoT's 16x.
 
 Within the scope of AI/ML research, the finding that one subfield (CoT) exhibits dramatically different clustering dynamics from its peers is still noteworthy: it suggests that the structure of discovery varies across subfields, potentially reflecting differences in problem-space topology, community size, or the degree of tool-dependent research.
 

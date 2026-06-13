@@ -124,7 +124,12 @@ observation functors, and prove that equivalence classes of
 \(\mathbf{DistCat}\) objects are characterized by the asymptotic behavior
 of their exported distances near critical points.
 
-The framework is instantiated in five independently-motivated contexts:
+The framework is instantiated in five independently-motivated contexts.
+Example~1 (D1-grav-waves, AQFT-based GW source discrimination) is developed in Section~\ref{sec:example1-grav-waves}.
+Examples~2 (KL divergence/Fisher-Rao geometry), 3 (Bayesian marginalization),
+and 4 (D26 resonance amplification) are described structurally here and will be
+developed in companion papers (see discussion in Section~\ref{discussion}).
+Example~5 (EMRI chaos) is developed in full in Section~\ref{sec:example5-emri}.
 (1) Extended Functorial AQFT, reconstructing the Hellings-Downs
 correlation as a natural transformation; (2) statistical model
 comparison via Fisher information geometry; (3) Bayesian marginalization
@@ -164,7 +169,9 @@ structure-preserving triples \((\Phi, \alpha, \beta)\) - 2-morphisms:
 distance-exporting pairs \((\Gamma, \delta)\)
 
 We verify this framework with five examples spanning physics,
-statistics, and control theory:
+statistics, and control theory. Examples~1 and 5 are developed in full
+in this paper; Examples~2--4 are described structurally here and will be
+developed in companion papers.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -173,23 +180,26 @@ statistics, and control theory:
   \textbf{D1-grav-waves}: The Hellings-Downs correlation
   \(\zeta(\theta)\) between pulsar pairs is derived from the total
   variation distance between algebraic states in Extended Functorial
-  AQFT.
+  AQFT. (Developed in full in Section~\ref{sec:example1-grav-waves}.)
 \item
   \textbf{D16+D24}: The KL divergence between categorical distributions
   is derived from the Fisher-Rao distance on the semantic manifold,
-  recovering Amari's local equivalence.
+  recovering Amari's local equivalence. (Described structurally; full
+  development in companion paper.)
 \item
   \textbf{Bayesian inference}: The Fisher-Rao distance under
   marginalization corresponds to Bayesian posterior contraction.
+  (Described structurally; full development in companion paper.)
 \item
   \textbf{D26 resonance}: The resonance amplification coefficient
   \(G_{\text{amp}}\) in control theory is the distance export from a
-  pole-perturbation distance.
+  pole-perturbation distance. (Described structurally; full
+  development in companion paper.)
 \item
   \textbf{EMRI chaos}: The Lyapunov exponent \(\lambda_T\)
   characterizing chaotic dynamics near a Schwarzschild black hole
   immersed in a dark matter halo is the distance export from a
-  metric-perturbation distance.
+  metric-perturbation distance. (Developed in full in Section~\ref{sec:example5-emri}.)
 \end{enumerate}
 
 The five examples have critical exponents
@@ -703,7 +713,7 @@ Unification}\label{implications-for-theory-unification}
 
 If distinct physical theories share the same distance-export structure,
 they may be unified as different 0-objects within the same 2-category.
-Theorem 2.6 (observation infeasibility) implies that observational data
+Conjecture 2.6 (observation infeasibility) implies that observational data
 alone cannot distinguish between theories in the same distance
 equivalence class. Theory choice requires additional criteria:
 simplicity of the base category \(\mathbf{C}\), naturalness of the

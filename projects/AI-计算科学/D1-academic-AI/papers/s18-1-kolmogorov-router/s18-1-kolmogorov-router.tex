@@ -39,7 +39,7 @@
 \maketitle
 
 \begin{abstract}
-We study the dynamics of tool selection by agents operating under a complexity-penalized routing policy. We formalize the \emph{adaptive routing hypothesis}: agents should select tools whose computational complexity matches task complexity, penalized by a complexity cost parameter $\beta$. We show that this routing dynamics exhibits a sharp crossover at critical $\beta_c$, where the mean selected complexity jumps from intermediate ($\langle K \rangle \approx 5.4$) to coarse ($\langle K \rangle \approx 1.2$) on a unit-complexity tool scale. Empirical validation on a synthetic tool-market confirms the sharp transition (jump size 4.2, max derivative 10.88, $\beta_c \approx 0.06$) and demonstrates that adaptive routing outperforms random selection for low-to-medium complexity tasks (mean advantage 0.036, $p=0.013$), but degrades on high-complexity tasks where over-penalization selects under-powered tools. A comparison with standard bandit baselines shows that Thompson Sampling (an adaptive baseline with learning) outperforms fixed-$\beta$ Boltzmann routing, while UCB1 fails catastrophically in the structured tool setting due to its inability to exploit complexity ordering. Our results establish computational complexity as a fundamental variable in agent tool-selection dynamics, with implications for understanding the \emph{complexity matching principle} in both artificial and biological agents.
+We study the dynamics of tool selection by agents operating under a complexity-penalized routing policy. We formalize the \emph{adaptive routing hypothesis}: agents should select tools whose computational complexity matches task complexity, penalized by a complexity cost parameter $\beta$. We show that this routing dynamics exhibits a sharp crossover at critical $\beta_c$, where the mean selected complexity decreases sharply from intermediate ($\langle K \rangle \approx 5.4$) to coarse ($\langle K \rangle \approx 1.2$) on a unit-complexity tool scale. Empirical validation on a synthetic tool-market confirms the sharp transition (jump size 4.2, max derivative 10.88, $\beta_c \approx 0.06$) and demonstrates that adaptive routing outperforms random selection for low-to-medium complexity tasks (mean advantage 0.036, $p=0.013$), but degrades on high-complexity tasks where over-penalization selects under-powered tools. A comparison with standard bandit baselines shows that Thompson Sampling (an adaptive baseline with learning) outperforms fixed-$\beta$ Boltzmann routing, while UCB1 fails catastrophically in the structured tool setting due to its inability to exploit complexity ordering. Our results establish computational complexity as a fundamental variable in agent tool-selection dynamics, with implications for understanding the \emph{complexity matching principle} in both artificial and biological agents.
 \end{abstract}
 
 \section{Introduction}
@@ -100,32 +100,26 @@ Let $\mathcal{P} = \{p_1, \ldots, p_N\}$ be a set of tasks. Each task has:
 
 \subsection{Complexity-Penalized Routing Policy}
 
-The agent's routing policy is a Boltzmann distribution over tools:
+The agent's routing policy mixes a Boltzmann distribution with uniform exploration:
 
 \begin{equation}
-P(t \mid p, \beta) = \frac{\exp\big(-\beta \cdot K(t)\big) \cdot a(t) \cdot \exp\big(-\alpha \cdot |K(t) - C_{\mathrm{task}}(p)|\big)}{Z(p, \beta)}
+P_\epsilon(t \mid p, \beta) = (1 - \epsilon) \cdot \frac{\exp\big(-\beta \cdot K(t)\big) \cdot a(t) \cdot \exp\big(-\alpha \cdot |K(t) - C_{\mathrm{task}}(p)|\big)}{Z(p, \beta)} + \frac{\epsilon}{M}
 \label{eq:routing-policy}
 \end{equation}
 
-where:
-\begin{itemize}
-  \item $\beta \geq 0$ is the \emph{complexity-penalization parameter}
-  \item $\alpha \geq 0$ is the \emph{complexity-match penalty} (how badly mismatches hurt)
-  \item $\epsilon \in [0,1]$ is the \emph{exploration mixing} parameter (uniform exploration: $P_\epsilon = (1-\epsilon)P_\mathrm{Boltzmann} + \epsilon\,U$)
-  \item $Z(p, \beta) = \sum_{t \in \mathcal{T}} \exp(-\beta K(t)) \cdot a(t) \cdot \exp(-\alpha |K(t) - C_{\mathrm{task}}(p)|)$ is the partition function
-\end{itemize}
+where $Z(p, \beta) = \sum_{t \in \mathcal{T}} \exp(-\beta K(t)) \cdot a(t) \cdot \exp(-\alpha |K(t) - C_{\mathrm{task}}(p)|)$ is the Boltzmann partition function, $\epsilon \in [0,1]$ is the \emph{exploration mixing} parameter, and $M = |\mathcal{T}|$ is the number of tools.
 
 The expected tool complexity under this policy is:
 
 \begin{equation}
-\langle K \rangle(p, \beta) = \sum_{t \in \mathcal{T}} K(t) \cdot P(t \mid p, \beta)
+\langle K \rangle(p, \beta, \epsilon) = \sum_{t \in \mathcal{T}} K(t) \cdot P_\epsilon(t \mid p, \beta)
 \label{eq:expected-complexity}
 \end{equation}
 
 The \emph{order parameter} (route complexity) is:
 
 \begin{equation}
-m(\beta) = \frac{1}{N} \sum_{p \in \mathcal{P}} \langle K \rangle(p, \beta)
+m(\beta, \epsilon) = \frac{1}{N} \sum_{p \in \mathcal{P}} \langle K \rangle(p, \beta, \epsilon)
 \end{equation}
 
 \subsection{Routing Performance}
@@ -133,7 +127,7 @@ m(\beta) = \frac{1}{N} \sum_{p \in \mathcal{P}} \langle K \rangle(p, \beta)
 The performance of a routing strategy on task $p$ is:
 
 \begin{equation}
-\mathcal{R}(p, \beta) = \mathbb{E}_{t \sim P(\cdot \mid p, \beta)}\!\big[a(t)\big] \, - \, \lambda \cdot \mathbb{E}_{t \sim P(\cdot \mid p, \beta)}\!\big[K(t)\big]
+\mathcal{R}(p, \beta, \epsilon) = \mathbb{E}_{t \sim P_\epsilon(\cdot \mid p, \beta)}\!\big[a(t)\big] \, - \, \lambda \cdot \mathbb{E}_{t \sim P_\epsilon(\cdot \mid p, \beta)}\!\big[K(t)\big]
 \label{eq:performance}
 \end{equation}
 
@@ -159,15 +153,15 @@ Part (3): $dm/d\beta = -\mathrm{Var}_P(K) < 0$ for all finite $\beta$, so $m(\be
 \end{proof}
 
 \begin{proposition}[Complexity Matching Condition]\label{prop:matching}
-The expected complexity gap $\Delta(\beta) = \langle K \rangle - C_{\mathrm{task}}$ is monotonically decreasing in $\beta$. There exists a unique $\beta^*(p)$ such that $\Delta(\beta^*) = 0$, i.e., the selected complexity matches the task complexity.
+For fixed $\epsilon \in [0, 1)$, the expected complexity gap $\Delta(\beta, \epsilon) = \langle K \rangle(p, \beta, \epsilon) - C_{\mathrm{task}}$ is monotonically decreasing in $\beta$. There exists a unique $\beta^*(p, \epsilon)$ such that $\Delta(\beta^*, \epsilon) = 0$, i.e., the selected complexity matches the task complexity.
 \end{proposition}
 
 \begin{proof}
-$\partial \langle K \rangle / \partial \beta = -\mathrm{Var}_{P}(K) < 0$ for any finite $\beta$. Thus $\Delta(\beta)$ is strictly decreasing. By the intermediate value theorem and the limits from Theorem~\ref{thm:crossover}, a unique root exists.
+$\partial \langle K \rangle / \partial \beta = -(1-\epsilon) \cdot \mathrm{Var}_{P_{\mathrm{Boltzmann}}}(K) < 0$ for any finite $\beta$ and $\epsilon < 1$. Thus $\Delta(\beta, \epsilon)$ is strictly decreasing. By the intermediate value theorem and the limits from Theorem~\ref{thm:crossover}, a unique root exists.
 \end{proof}
 
 \begin{corollary}[Over-Penalization Regime]\label{cor:over-penalization}
-For tasks with $C_{\mathrm{task}} > \langle K \rangle_{\beta=0}$, there exists $\beta_{\mathrm{crit}}$ such that for $\beta > \beta_{\mathrm{crit}}$, the selected tool complexity is \emph{strictly less} than task complexity: $\langle K \rangle(p, \beta) < C_{\mathrm{task}}(p)$.
+For tasks with $C_{\mathrm{task}} > \langle K \rangle_{\beta=0}$, there exists $\beta_{\mathrm{crit}}(\epsilon)$ such that for $\beta > \beta_{\mathrm{crit}}$, the selected tool complexity is \emph{strictly less} than task complexity: $\langle K \rangle(p, \beta, \epsilon) < C_{\mathrm{task}}(p)$.
 \end{corollary}
 
 This formalizes the \emph{over-penalization} phenomenon observed in our experiments: at high $\beta$, even high-complexity tasks receive low-complexity tools.
@@ -199,7 +193,7 @@ We construct a market of 13 tools at three complexity levels:
 
 \subsection{Parameters}
 
-$\beta \in [0.01, 2.0]$ (40 values), $\alpha = 0.1$, $\lambda = 0.03$, $n_{\mathrm{samples}} = 200$ per configuration.
+$\beta \in [0.01, 2.0]$ (40 values), $\alpha = 0.1$, $\lambda = 0.03$, $\epsilon = 0$ (pure Boltzmann), $n_{\mathrm{samples}} = 200$ per configuration.
 
 \section{Results}
 

@@ -7,7 +7,7 @@
 
 ## Abstract
 
-Given a DistCat base structure $\mathcal{B} = (\mathbf{C}, \mathcal{F}, \mathcal{O})$ with pre-distance $\Gamma$ on $\mathbf{C}$ and derived distance $\delta$ on $\mathcal{O}(\mathbf{C})$, we define **optimal distance export** as the problem of finding $\Gamma$ that maximizes the mutual information $I(\Gamma; \delta)$ subject to the natural transformation constraint $\eta: \delta \Rightarrow \Gamma$. We prove that for observation functors from exponential families, the Fisher-Rao distance $d_{\text{FR}}$ is the **unique optimal pre-distance**. The proof combines the Fisher-Neyman factorization theorem with Amari's information geometry: the Fisher information matrix is the unique metric making the data processing inequality tight, which is precisely the condition $I(\Gamma; \delta) = H(\delta)$ (sufficient pre-distance). We show that all five DistCat examples (D1-grav-waves, D16+D24, Bayesian inference, D26 resonance, EMRI chaos) are special cases of this optimality principle.
+Given a DistCat base structure $\mathcal{B} = (\mathbf{C}, \mathcal{F}, \mathcal{O})$ with pre-distance $\Gamma$ on $\mathbf{C}$ and derived distance $\delta$ on $\mathcal{O}(\mathbf{C})$, we define **optimal distance export** as the problem of finding $\Gamma$ that maximizes the mutual information $I(\Gamma; \delta)$ subject to the natural transformation constraint $\eta: \Gamma \Rightarrow \delta$. We prove that for observation functors from exponential families, the Fisher-Rao distance $d_{\text{FR}}$ is the **unique optimal pre-distance**. The proof combines the Fisher-Neyman factorization theorem with Amari's information geometry: the Fisher information matrix is the unique metric making the data processing inequality tight, which is precisely the condition $I(\Gamma; \delta) = H(\delta)$ (sufficient pre-distance). We show that all five DistCat examples (D1-grav-waves, D16+D24, Bayesian inference, D26 resonance, EMRI chaos) are special cases of this optimality principle.
 
 **Keywords**: optimal transport, information geometry, Fisher-Rao metric, sufficient statistics, DistCat framework
 
@@ -17,7 +17,7 @@ Given a DistCat base structure $\mathcal{B} = (\mathbf{C}, \mathcal{F}, \mathcal
 
 ### 1.1 Formal Definition
 
-**Definition 1.1** (Optimal Distance Export): Let $\mathcal{B} = (\mathbf{C}, \mathcal{F}, \mathcal{O})$ be a DistCat base structure where $\mathbf{C}$ has a parameterization $\theta \in \Theta \subset \mathbb{R}^n$. Let $\mathcal{G}_{\mathcal{B}}$ be the set of all pre-distances $\Gamma$ on $\mathbf{C}$ such that there exists a natural transformation $\eta: \delta \Rightarrow \Gamma$. The optimal distance export problem is:
+**Definition 1.1** (Optimal Distance Export): Let $\mathcal{B} = (\mathbf{C}, \mathcal{F}, \mathcal{O})$ be a DistCat base structure where $\mathbf{C}$ has a parameterization $\theta \in \Theta \subset \mathbb{R}^n$. Let $\mathcal{G}_{\mathcal{B}}$ be the set of all pre-distances $\Gamma$ on $\mathbf{C}$ such that there exists a natural transformation $\eta: \Gamma \Rightarrow \delta$. The optimal distance export problem is:
 
 $$\Gamma^* = \arg\max_{\Gamma \in \mathcal{G}_{\mathcal{B}}} I(\Gamma(X, Y); \delta(\mathcal{O}(X), \mathcal{O}(Y)))$$
 
@@ -141,7 +141,7 @@ Given empirical data $\{x_k\}_{k=1}^N$ from an observation functor $\mathcal{O}$
 
 The Fisher-Rao distance emerges as the **canonical distance** on any statistical manifold. Its optimality as the unique information-preserving pre-distance elevates it from a mathematical curiosity to a **physical principle** for statistical models: the universe "chooses" the Fisher-Rao distance because it maximizes information retention in observations.
 
-For **non-statistical** DistCat examples (EMRI chaos, D1-grav-waves), the canonical pre-distance is the **induced Riemannian metric** from the ambient space of $\mathcal{O}(\mathbf{C})$ — not Fisher-Rao, but still geometrically natural. The unified principle is: **the canonical pre-distance is the unique metric that makes the natural transformation $\eta: \delta \Rightarrow \Gamma$ a local isometry**. For statistical models, this is Fisher-Rao (Amari/Cencov). For non-statistical models, it is the induced metric from the observation space.
+For **non-statistical** DistCat examples (EMRI chaos, D1-grav-waves), the canonical pre-distance is the **induced Riemannian metric** from the ambient space of $\mathcal{O}(\mathbf{C})$ — not Fisher-Rao, but still geometrically natural. The unified principle is: **the canonical pre-distance is the unique metric that makes the natural transformation $\eta: \Gamma \Rightarrow \delta$ a local isometry**. For statistical models, this is Fisher-Rao (Amari/Cencov). For non-statistical models, it is the induced metric from the observation space.
 
 This connects to the **principle of minimum information loss** in physics: physical systems evolve to preserve information about their initial conditions as much as possible (Liouville's theorem, unitarity). In the DistCat framework, this manifests as the requirement that $\Gamma$ be sufficient for $\delta$.
 

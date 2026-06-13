@@ -78,7 +78,7 @@ We present \(\mathbf{DistCat}\), a 2-categorical framework for deriving
 distance functions from first principles. The central principle states
 that any distance function \(\delta\) on an observation space is derived
 from a more fundamental distance \(\Gamma\) on a source category via a
-natural transformation \(\eta: \delta \Rightarrow \Gamma\). We define
+natural transformation \(\eta: \Gamma \Rightarrow \delta\). We define
 \(\mathbf{DistCat}\) as a 2-category whose 0-objects are base structures
 \(\mathcal{B}=(\mathbf{C},\mathcal{F},\mathcal{O})\), 1-morphisms are
 structure-preserving functors with natural transformations, and
@@ -127,7 +127,7 @@ from a more fundamental structure via categorical natural
 transformations}. Specifically, given a source category \(\mathbf{C}\)
 with a pre-distance \(\Gamma\), an observation functor
 \(\mathcal{O}: \mathbf{C} \to \mathbf{E}\), and a natural transformation
-\(\eta: \delta \Rightarrow \Gamma\), the observable distance \(\delta\)
+\(\eta: \Gamma \Rightarrow \delta\), the observable distance \(\delta\)
 is completely determined by \(\Gamma\) and \(\mathcal{O}\).
 
 The framework \(\mathbf{DistCat}\) formalizes this idea as a
@@ -288,8 +288,8 @@ structure. A distance-exporting 2-morphism is a pair
   is a \textbf{derived distance} on the observation space
 \item
   There exists a natural transformation
-  \(\eta: \delta(\mathcal{O}(X), \mathcal{O}(Y)) \to \Gamma(X, Y)\) for
-  all \(X, Y \in \mathbf{C}\)
+  \(\eta: \Gamma(X, Y) \to \delta(\mathcal{O}(X), \mathcal{O}(Y))\) for
+  all \(X, Y \in \mathbf{C}\), satisfying \(\delta(\mathcal{O}(X), \mathcal{O}(Y)) \leq C \cdot \Gamma(X, Y)\)
 \end{itemize}
 
 \textbf{Distance export principle}: If \(\eta\) is a natural
@@ -551,7 +551,7 @@ Structure}\label{control-theory-base-structure}
 \item
   \(\delta((\omega_{r1}, G_1), (\omega_{r2}, G_2)) = |\omega_{r1} - \omega_{r2}| + |1/G_1 - 1/G_2|\)
 \item
-  \(\eta: \delta \Rightarrow \Gamma\) (resonance-observation distance
+  \(\eta: \Gamma \Rightarrow \delta\) (resonance-observation distance
   bounded by pole-perturbation distance)
 \end{itemize}
 
@@ -879,7 +879,7 @@ The five examples demonstrate that distance export is not an isolated
 phenomenon but a \textbf{universal structural pattern} appearing in
 AQFT, information geometry, Bayesian statistics, control theory, and
 general relativity. The common feature is a natural transformation
-\(\eta: \delta \Rightarrow \Gamma\) connecting an observable distance to
+\(\eta: \Gamma \Rightarrow \delta\) connecting an observable distance to
 a more fundamental distance.
 
 \subsubsection{9.2 Critical Exponents as Categorical

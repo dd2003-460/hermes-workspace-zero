@@ -94,8 +94,11 @@ encoding system dynamics, and an observation functor \(\mathcal{O}\) mapping
 systems to an observation space. A 1-morphism is a pair \((\Gamma, \delta)\) where
 \(\Gamma\) is a distance on the source category and \(\delta\) is an
 induced distance on the observation space. A 2-morphism is a natural
-transformation \(\eta: \delta \Rightarrow \Phi(\Gamma)\) expressing the
-\textbf{distance export principle} \(\delta \leq \Phi(\Gamma)\).
+transformation \(\eta: \Gamma \Rightarrow \delta\) expressing the
+\textbf{distance export principle} \(\delta \leq C \cdot \Gamma\) for
+some constant \(C \geq 1\). The direction \(\Gamma \Rightarrow \delta\)
+reflects that the observable distance is DERIVED FROM the fundamental
+pre-distance via the observation functor.
 
 Our main result establishes a 2-functor
 \(D: \mathbf{DistCat} \to \mathbf{Met}\) from \(\mathbf{DistCat}\) to the
@@ -147,7 +150,7 @@ from a more fundamental structure via categorical natural
 transformations}. Specifically, given a source category \(\mathbf{C}\)
 with a pre-distance \(\Gamma\), an observation functor
 \(\mathcal{O}: \mathbf{C} \to \mathbf{E}\), and a natural transformation
-\(\eta: \delta \Rightarrow \Gamma\), the observable distance \(\delta\)
+\(\eta: \Gamma \Rightarrow \delta\), the observable distance \(\delta\)
 is completely determined by \(\Gamma\) and \(\mathcal{O}\).
 
 The framework \(\mathbf{DistCat}\) formalizes this idea as a
@@ -308,8 +311,10 @@ structure. A distance-exporting 2-morphism is a pair
   is a \textbf{derived distance} on the observation space
 \item
   There exists a natural transformation
-  \(\eta: \delta(\mathcal{O}(X), \mathcal{O}(Y)) \to \Gamma(X, Y)\) for
-  all \(X, Y \in \mathbf{C}\)
+  \(\eta: \Gamma(X, Y) \to \delta(\mathcal{O}(X), \mathcal{O}(Y))\) for
+  all \(X, Y \in \mathbf{C}\), satisfying \(\delta(\mathcal{O}(X),
+  \mathcal{O}(Y)) \leq C \cdot \Gamma(X, Y)\) for some constant
+  \(C \geq 1\).
 \end{itemize}
 
 \textbf{Distance export principle}: If \(\eta\) is a natural
@@ -344,7 +349,7 @@ functor-composition pushout
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{Fig1-2cat-structure.png}
-\caption{The 2-category structure of \(\mathbf{DistCat}\). 0-objects are base structures \(\mathcal{B}=(\mathbf{C},\mathcal{F},\mathcal{O})\). 1-morphisms are structure-preserving triples \((\Phi,\alpha,\beta)\). 2-morphisms are natural transformations \(\eta:\delta\Rightarrow\Phi(\Gamma)\) encoding the distance export principle. The 2-functor \(D:\mathbf{DistCat}\to\mathbf{Met}\) exports each base structure to its observation metric.}
+\caption{The 2-category structure of \(\mathbf{DistCat}\). 0-objects are base structures \(\mathcal{B}=(\mathbf{C},\mathcal{F},\mathcal{O})\). 1-morphisms are structure-preserving triples \((\Phi,\alpha,\beta)\). 2-morphisms are natural transformations \(\eta:\Gamma\Rightarrow\delta\) encoding the distance export principle \(\delta \leq C \cdot \Gamma\). The 2-functor \(D:\mathbf{DistCat}\to\mathbf{Met}\) exports each base structure to its observation metric.}
 \label{fig:2cat-structure}
 \end{figure}
 
@@ -439,7 +444,7 @@ is the dominant component of the DM-induced metric correction (Dehnen $(1, 4, 5/
 \delta\bigl(\mathcal{O}_1, \mathcal{O}_2\bigr) = |\lambda_{T1} - \lambda_{T2}| + |\kappa_1 - \kappa_2| + \sum_i |r_{{\rm circ}, i, 1} - r_{{\rm circ}, i, 2}|
 \end{equation}
 
-The natural transformation $\eta: \delta \Rightarrow \Phi(\Gamma)$ encodes the distance export principle (Definition~2.3) for this example. Its Lipschitz continuity $\delta \leq C \cdot \Gamma$ follows from the smooth dependence of geodesics on the metric (standard ODE theory applied to the geodesic equation).
+The natural transformation $\eta: \Gamma \Rightarrow \delta$ encodes the distance export principle (Definition~2.3) for this example. Its Lipschitz continuity $\delta \leq C \cdot \Gamma$ follows from the smooth dependence of geodesics on the metric (standard ODE theory applied to the geodesic equation).
 
 \textbf{Effective potential formulation.} The radial motion of a test particle in the Schwarzschild+DM spacetime is governed by the effective potential:
 \begin{equation}\label{eq:veff}
@@ -646,8 +651,8 @@ The five examples demonstrate that distance export is not an isolated
 phenomenon but a \textbf{universal structural pattern} appearing in
 AQFT, information geometry, Bayesian statistics, control theory, and
 general relativity. The common feature is a natural transformation
-\(\eta: \delta \Rightarrow \Gamma\) connecting an observable distance to
-a more fundamental distance.
+\(\eta: \Gamma \Rightarrow \delta\) connecting a more fundamental distance
+to its observable export.
 
 \subsubsection{9.2 Critical Exponents as Categorical
 Invariants}\label{critical-exponents-as-categorical-invariants}

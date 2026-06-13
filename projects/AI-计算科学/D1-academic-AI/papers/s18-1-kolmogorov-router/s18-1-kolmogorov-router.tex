@@ -313,7 +313,7 @@ We evaluate two well-established multi-armed bandit algorithms against our Boltz
 Key findings:
 
 \begin{itemize}
-  \item \textbf{Thompson Sampling dominates Boltzmann routing} across all task complexities. Thompson achieves $+0.058$ (easy), $+0.081$ (medium), and $+0.211$ (hard) over the best Boltzmann configuration ($\beta=0.1$). This is because Thompson Sampling learns the task-tool match from experience, while Boltzmann imposes a fixed complexity penalty.
+  \item \textbf{Thompson Sampling outperforms Boltzmann routing} on medium and hard tasks. Relative to $\beta=0.3$ (the more competitive Boltzmann setting), Thompson achieves $+0.038$ (easy), $+0.082$ (medium), and $+0.212$ (hard). The advantage grows with task complexity, consistent with Thompson's ability to learn task-tool matches from experience while Boltzmann imposes a fixed complexity penalty.
   \item \textbf{UCB1 fails in the structured tool setting}. For $c \geq 0.5$, UCB1 converges to the simplest tool ($K=1$) and never explores beyond. The UCB exploration bonus does not account for the structured complexity ordering of tools: all tools look equally uncertain, so UCB greedily selects the one with highest initial estimate (the simplest tool). Only with very low $c=0.1$ does UCB1 approach Best-Response performance, but this is fragile to $c$ choice.
   \item \textbf{Boltzmann routing is robust but suboptimal}: The Boltzmann policy does not learn from experience (it uses a fixed $\beta$), making it less adaptive than Thompson Sampling. However, it is more stable than UCB1 across hyperparameter choices.
 \end{itemize}

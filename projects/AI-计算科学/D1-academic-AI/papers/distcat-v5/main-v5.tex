@@ -398,20 +398,32 @@ observation spaces (naturality of \(\beta\)). 3. Identity:
 \subsubsection{2.6 Observation
 Infeasibility}\label{observation-infeasibility}
 
-\textbf{Theorem 2.6 (Observation infeasibility)}: There exist
+\textbf{Conjecture 2.6 (Observation infeasibility)}: There exist
 \(\mathcal{B}_1 \neq \mathcal{B}_2\) such that
 \(D(\mathcal{B}_1) \cong D(\mathcal{B}_2)\) (isometric observation
 spaces).
 
-\textbf{Proof}: Consider \(\mathcal{B}_1\) with
+\textbf{Evidence}: Consider \(\mathcal{B}_1\) with
 \(\mathbf{C}_1 = \mathbf{FinProb}\) (D16+D24) and \(\mathcal{B}_2\) with
 \(\mathbf{C}_2 = \mathbf{Loc}_M^{\text{ext}}\) (D1-grav-waves). As
 \(\delta_1, \delta_2 \to 0\) near critical points, both approach
-quadratic forms: \(\delta_1 \approx \frac{1}{2} g_F\) and
-\(\delta_2 \approx \frac{1}{2} g_{HD}\). When \(g_F\) and \(g_{HD}\)
-share the same curvature structure, \(\delta_1 \cong \delta_2\). Hence
+quadratic forms: \(\delta_1 \approx \frac{1}{2} g_F\) (Fisher information
+metric on statistical manifold) and
+\(\delta_2 \approx \frac{1}{2} g_{HD}\) (Hellings--Downs correlation
+function as effective distance on pulsar-pair space). Both metrics arise
+from coarse-graining over unobservable degrees of freedom in their
+respective theories, suggesting a common origin in information geometry.
+When \(g_F\) and \(g_{HD}\) share the same curvature structure
+(i.e., when the statistical manifold of D16+D24 parameters is locally
+isometric to the angular correlation geometry of D1-grav-waves),
+\(\delta_1 \cong \delta_2\). Hence
 \(D(\mathcal{B}_1) \cong D(\mathcal{B}_2)\) but
 \(\mathcal{B}_1 \neq \mathcal{B}_2\).
+
+\textbf{Rigorous proof} requires establishing the local isometry between
+the Fisher information metric on \(\mathbf{FinProb}\)-parametrized families
+and the angular correlation geometry induced by \(g_{HD}\) on
+\(\mathbf{Loc}_M^{\text{ext}}\)---a calculation left for future work.
 
 \textbf{Corollary 2.7}: Distance export is not invertible --- the base
 structure cannot be uniquely recovered from the observation distance.

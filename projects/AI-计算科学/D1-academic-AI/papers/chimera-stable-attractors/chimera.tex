@@ -96,7 +96,6 @@ The coupling parameters are:
 \item $K_0 = 1.0$ (base coupling strength)
 \item $\epsA$ (Domain A modulation amplitude)
 \item $\epsB$ (Domain B modulation amplitude)
-\item $\delta = 0.15$ (coupling strength difference)
 \item $K_{\textrm{transition}} \approx 0.3$ (effective coupling in transition/outside regions, $K_0 \cdot w(x)$ at $x \in [0.4,0.5) \cup [0.9,1.0)$ where $w(x) \approx 0.3$ for $\eps \approx -0.7$)
 \end{itemize}
 
@@ -108,9 +107,10 @@ We integrate Eq.~\eqref{eq:kuramoto} using a fourth-order Runge--Kutta (RK4) met
 
 A chimera state is detected when both of the following conditions are met \textbf{per domain}:
 \begin{enumerate}
-\item \textbf{Sector-level}: Maximum sector coherence $r_{\textrm{max}} > 0.8$ AND minimum sector coherence $r_{\textrm{min}} < 0.3$
-\item \textbf{Multi-sector}: At least one sector has $r > 0.8$ AND at least one sector has $r < 0.3$
+\item \textbf{Sector-level}: Maximum sector coherence $r_{\textrm{max}} > \theta_{\textrm{det}}$ AND minimum sector coherence $r_{\textrm{min}} < \theta_{\textrm{det}}'$
+\item \textbf{Multi-sector}: At least one sector has $r > \theta_{\textrm{det}}$ AND at least one sector has $r < \theta_{\textrm{det}}'$
 \end{enumerate}
+where $\theta_{\textrm{det}} = 0.8$, $\theta_{\textrm{det}}' = 0.3$ for detection (stricter than the classification thresholds $\theta_1 = 0.7$, $\theta_2 = 0.3$ defined in Sec.~\ref{sec:results}, Subsec.~\ref{subsec:h1} to minimize false positives).
 
 Each domain is divided into $N_{\textrm{sectors}} = 8$ equal-width sectors. The sector coherence is computed as:
 \begin{equation}
@@ -184,11 +184,11 @@ For all three seeds, the domain-level order parameters are:
 \item $r_B \approx 0.95$--$0.97$
 \item Global $r \approx 0.90$--$0.95$
 \end{itemize}
-These values would be classified as ``highly synchronized'' by standard detection criteria. However, sector-level analysis reveals clear chimera patterns with sector coherences ranging from $r_{\textrm{min}} < 0.3$ to $r_{\textrm{max}} > 0.8$.
+These values would be classified as ``highly synchronized'' by standard detection criteria. However, sector-level analysis reveals clear chimera patterns with sector coherences ranging from $r_{\textrm{min}} < \theta_{\textrm{det}}' = 0.3$ to $r_{\textrm{max}} > \theta_{\textrm{det}} = 0.8$.
 
 \textbf{Key finding}: Domain-level order parameter is insufficient to detect chimera states in our system. The chimera state has high domain coherence because the coherent sector dominates the domain average. Sector-level resolution is essential.
 
-\subsection{H1 Metastability Classification Algorithm}
+\subsection{H1 Metastability Classification Algorithm}\label{subsec:h1}
 
 We formalize the metastability classification algorithm used throughout this paper. Given a trajectory of an oscillator system at time $t$, let $C(t)$ be the chimera indicator:
 

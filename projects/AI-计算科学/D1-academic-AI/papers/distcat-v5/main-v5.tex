@@ -731,9 +731,12 @@ The LTI control base structure $\mathcal{B}_{\rm D26} = (\mathbf{C}_{\rm D26}, \
 \end{enumerate}
 \end{definition}
 
-The source pre-distance is the LTI parameter perturbation $\Gamma = \|\delta A\|_2$ (H-infinity norm of system matrix perturbation). The observation distance is the resonance amplification of the output: $\delta = \|H\|_\infty$. The distance export inequality follows from the small-gain theorem: $\delta \leq C\, \Gamma$ where $C$ depends on the system's damping ratio. The critical exponent is $\alpha = -\gamma$ where $\gamma$ is the resonance sharpness exponent (typically $\gamma \in [0.5, 1.0]$ for underdamped systems). Near the resonance, $\|H(j\omega)\|_\infty \sim \varepsilon^{-\gamma}$ where $\varepsilon$ measures the distance from the undamped case.
+The source pre-distance is the LTI parameter perturbation $\Gamma = \|\delta A\|_2$ (spectral norm of system matrix perturbation). The observation distance measures the \textit{amplification relative to the unperturbed system}: $\delta = |\|H\|_\infty - \|H_0\|_\infty|$ where $H_0$ is the response of the unperturbed system. This modified distance vanishes at $\Gamma = 0$, satisfying the distance export inequality $\delta \leq C\, \Gamma$ by standard resolvent perturbation bounds:
+$|\|H\|_\infty - \|H_0\|_\infty| \leq \|(j\omega I - A)^{-1}\| \cdot \|\delta A\| \cdot \|(j\omega I - A)^{-1}\| \cdot \|B\| \cdot \|C\|$, giving $\delta \sim \Gamma$ for small perturbations (linear, $\alpha = 1$).
 
-\textbf{Cross-reference:} This universality class is distinguished from Examples 2--3 by the \textbf{inverse} critical exponent: the observation distance \textit{diverges} at the critical point (resonance blow-up) rather than vanishing. This reflects a different singularity type: Examples 2--3 are contraction phenomena (posterior convergence), while Example~4 is an amplification phenomenon (resonance). The exponent $\alpha < 0$ places it in a DistCat universality class characterized by divergent transport near critical points.
+However, near the resonance (as damping $\zeta \to 0$), the peak gain diverges: $\|H(j\omega)\|_\infty \sim \zeta^{-1}$. The parameter $\varepsilon = \zeta$ is not the same as $\Gamma = \|\delta A\|_2$; rather, $\zeta$ controls the unperturbed system's sharpness. The critical exponent in the resonance limit is $\alpha = -1$ (inverse relationship) because $\delta$ diverges as the system approaches the critical point from below.
+
+\textbf{Cross-reference:} This universality class is distinguished from Examples 2--3 by the \textbf{inverse} critical exponent: the observation distance \textit{diverges} at the critical point (resonance blow-up) rather than vanishing. This reflects a different singularity type: Examples 2--3 are contraction phenomena (posterior convergence), while Example~4 is an amplification phenomenon (resonance).
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -759,7 +762,7 @@ The critical exponent \(\alpha\) in \(\delta \sim \Gamma^\alpha\) is a
 contradict equivalence --- they reflect different members of the same
 distance equivalence class \([\mathcal{B}]\).
 
-The five examples yield critical exponents \(\alpha \in \{1.84, 0.50, 0.50, -\gamma, 0.50\}\), yet all follow the universal scaling law \(\delta \sim \Gamma^\alpha\) near critical points. Examples 2, 3, and 5 share the universality class \(\alpha = 0.5\) (contraction at critical point), while D1 (AQFT, \(\alpha \approx 1.84\)) and D26 (resonance, \(\alpha = -\gamma\)) belong to distinct classes. This universal power-law behavior is illustrated in Figure~\ref{fig:critical-exponents}.
+The five examples yield critical exponents \(\alpha \in \{1.84, 0.50, 0.50, 1, 0.50\}\), yet all follow the universal scaling law \(\delta \sim \Gamma^\alpha\) near critical points. Examples 2, 3, and 5 share the universality class \(\alpha = 0.5\) (contraction at critical point), D26 (resonance) exhibits \(\alpha = 1\) for small perturbations (linear response) with a singular divergent regime \(\alpha \to -1\) as damping vanishes, and D1 (AQFT, \(\alpha \approx 1.84\)) represents a geometric singularity class. This universal power-law behavior is illustrated in Figure~\ref{fig:critical-exponents}.
 
 \begin{figure}[h]
 \centering

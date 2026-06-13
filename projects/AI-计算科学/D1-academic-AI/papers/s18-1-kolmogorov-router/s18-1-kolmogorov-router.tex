@@ -46,7 +46,7 @@ We study the dynamics of tool selection by agents operating under a complexity-p
 
 Modern AI agents---from large language models with tool-use capabilities to autonomous robotics systems---must select from a repertoire of available tools, each with different computational cost, accuracy, and complexity. The question of \emph{how an agent should choose tools} is fundamental: a coarse tool applied to a complex task yields inaccurate results; a fine tool applied to a simple task wastes resources.
 
-This selection problem admits a natural formalization through \emph{computational complexity}: each tool $t \in \mathcal{T}$ has an intrinsic description length $C(t)$, which we approximate via circuit depth or program size. While true Kolmogorov complexity is uncomputable~\cite{r96-chaitin1975-randomness}, circuit depth provides a robust, monotonically increasing proxy that captures the same structural property---the minimum number of bits required to specify the tool. This is the \emph{Minimum Description Length} (MDL) principle applied to tool selection~\cite{r89-grunwald2007-mdl, r90-pedersen2015-mdl}.
+This selection problem admits a natural formalization through \emph{computational complexity}: each tool $t \in \mathcal{T}$ has an intrinsic description length $C(t)$, which we approximate via circuit size (gate count) or program length. While true Kolmogorov complexity $K(t)$ is uncomputable, circuit size provides an efficiently computable upper bound $K(t) \leq C_{\mathrm{size}}(t) + O(\log C_{\mathrm{size}}(t))$ (Bennett 1973). We use description length (equivalently, a compressed circuit size) as our complexity proxy, consistent with the \emph{Minimum Description Length} (MDL) principle~\cite{r89-grunwald2007-mdl, r90-pedersen2015-mdl}.
 
 However, the \emph{dynamics} of this optimization---how the routing strategy evolves as the complexity-penalization parameter $\beta$ varies---remain poorly understood. We ask:
 
@@ -83,7 +83,7 @@ We answer affirmatively. Our contributions:
 
 Let $\mathcal{T} = \{t_1, \ldots, t_M\}$ be a finite set of tools. Each tool has:
 \begin{itemize}
-  \item \textbf{computational complexity} $K(t) = C(t)$ (approximated by circuit depth or description length)
+  \item \textbf{computational complexity} $K(t) = C(t)$ (approximated by circuit size or description length)
   \item \textbf{Accuracy} $a(t) \in [0,1]$ (maximum achievable accuracy)
   \item \textbf{Cost} $c(t) \geq 0$ (computation cost)
 \end{itemize}

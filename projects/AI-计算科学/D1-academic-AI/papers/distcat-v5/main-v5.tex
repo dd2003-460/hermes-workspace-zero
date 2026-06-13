@@ -309,21 +309,20 @@ structure. A distance-exporting 2-morphism is a pair
   \(\delta: \mathcal{O}(\mathbf{C}) \times \mathcal{O}(\mathbf{C}) \to \mathbb{R}_{\geq 0}\)
   is a \textbf{derived distance} on the observation space
 \item
-  There exists a natural transformation
-  \(\eta: \Gamma(X, Y) \to \delta(\mathcal{O}(X), \mathcal{O}(Y))\) for
-  all \(X, Y \in \mathbf{C}\), satisfying \(\delta(\mathcal{O}(X),
-  \mathcal{O}(Y)) \leq C \cdot \Gamma(X, Y)\) for some constant
-  \(C \geq 1\).
+  The pair \((\Gamma, \delta)\) satisfies the \textbf{distance export
+  inequality}: for all \(X, Y \in \mathbf{C}\),
+  \(\delta(\mathcal{O}(X), \mathcal{O}(Y)) \leq C \cdot \Gamma(X, Y)\)
+  for some constant \(C \geq 1\).
 \end{itemize}
 
-\textbf{Distance export principle}: If \(\eta\) is a natural
-isomorphism, then \(\delta\) is completely determined by \(\Gamma\)
-through \(\mathcal{O}\).
+\textbf{Distance export principle}: If equality holds
+\(\delta(\mathcal{O}(X), \mathcal{O}(Y)) = C \cdot \Gamma(X, Y)\), then
+\(\delta\) is completely determined by \(\Gamma\) through \(\mathcal{O}\).
 
 \textbf{Structural vs. functional form}: Definition~2.3's inequality
 \(\delta \leq C \cdot \Gamma\) is the structural constraint ensuring
 Lipschitz continuity of the distance export. In specific physical
-realizations, \(\eta\) typically establishes an exact functional
+realizations, the inequality typically tightens to an exact functional
 relationship \(\delta = \Phi(\Gamma)\) (e.g., \(\delta = \Gamma\)
 itself, or \(\delta = \mathrm{KL}(\Gamma)\) or \(\delta = \mathrm{TV}(\Gamma)\)).
 In all such cases \(C = 1\) suffices and the inequality is saturated.
@@ -420,9 +419,9 @@ exist.
 
 \section{Example 5: EMRI Chaos as D26 Resonance Amplification}\label{sec:example5-emri}
 
-This section instantiates the DistCat framework for extreme mass-ratio inspirals (EMRIs) in dark matter (DM) halos, establishing that EMRI chaos is a gravitational realization of the D26 resonance amplification principle. We define the EMRI base structure $\mathcal{B}_{\rm EMRI} = (\mathbf{C}_{\rm EMRI}, \mathcal{F}_{\rm geo}, \mathcal{O}_{\rm obs})$, prove that the Lyapunov exponent $\lambda_T$ is the gravitational counterpart of the D26 amplification coefficient $G_{\rm Amp}$ (Proposition~\ref{prop:emri-chaos-resonance}), derive the KAM-breaking scaling law $\lambda_T \sim (\rho_s - \rho_c)^\beta$ with $\beta = 0.5$ (Proposition~\ref{prop:kam-scaling}), and show that the EMRI distance structure is categorically equivalent to D26's (Proposition~\ref{prop:emri-d26-dist-eq}). The MSS chaos bound $\lambda_T^2 < \kappa^2$ is interpreted as the D26 H-infinity robustness condition, yielding a provable stability boundary for EMRIs in DM halos.
+This section instantiates the DistCat framework for extreme mass-ratio inspirals (EMRIs) in dark matter (DM) halos, establishing that EMRI chaos is a gravitational realization of the D26 resonance amplification principle. We define the EMRI base structure $\mathcal{B}_{\rm EMRI} = (\mathbf{C}_{\rm EMRI}, \mathcal{F}_{\rm geo}, \mathcal{O}_{\rm obs})$, prove that the Lyapunov exponent $\lambda_T$ is the gravitational counterpart of the D26 amplification coefficient $G_{\rm Amp}$ (Proposition~\ref{prop:emri-chaos-resonance}), derive the KAM-breaking scaling law $\lambda_T \sim (\rho_s - \rho_c)^\alpha$ with $\alpha = 0.5$ (Proposition~\ref{prop:kam-scaling}), and show that the EMRI distance structure is categorically equivalent to D26's (Proposition~\ref{prop:emri-d26-dist-eq}). The MSS chaos bound $\lambda_T^2 < \kappa^2$ is interpreted as the D26 H-infinity robustness condition, yielding a provable stability boundary for EMRIs in DM halos.
 
-\textbf{Cross-reference}: This example corresponds to row 5 of the classification table in Section~2. The distance export principle $\delta \leq \Phi(\Gamma)$ from Definition~2.3 is realized through the effective potential $V_{\rm eff}(r; \rho_s, r_s)$, and the exported metric $D(\mathcal{B}_{\rm EMRI})$ coincides with the chaos distance space characterized by $\lambda_T$.
+\textbf{Cross-reference}: This example corresponds to row 5 of the classification table in Section~2. The distance export principle $\delta \leq C \cdot \Gamma$ from Definition~2.3 is realized through the effective potential $V_{\rm eff}(r; \rho_s, r_s)$, and the exported metric $D(\mathcal{B}_{\rm EMRI})$ coincides with the chaos distance space characterized by $\lambda_T$.
 
 \subsubsection{The EMRI Base Structure}\label{subsec:emri-base}
 
@@ -529,7 +528,7 @@ where $\mathcal{O}_{\rm critical}$ is the observation at the KAM-breaking thresh
 \begin{proposition}[KAM-breaking scaling law]\label{prop:kam-scaling}
 Near the KAM torus breaking threshold $\varepsilon_c = \rho_{s,\text{crit}}$, the Lyapunov exponent satisfies the universal scaling law:
 \begin{equation}\label{eq:kam-scaling}
-\lambda_T \sim |\varepsilon - \varepsilon_c|^\beta, \qquad \beta = \frac{1}{2}
+\lambda_T \sim |\varepsilon - \varepsilon_c|^\alpha, \qquad \alpha = \frac{1}{2}
 \end{equation}
 as $\varepsilon = \rho_s \to \varepsilon_c$.
 \end{proposition}
@@ -564,7 +563,7 @@ The proof proceeds through the Melnikov analysis:
 \item Therefore: $\lambda_T \sim \Delta E^{1/2} \sim |\varepsilon - \varepsilon_c|^{1/2}$. $\hfill\blacksquare$
 \end{enumerate}
 
-\textbf{Application to EMRI:} The control parameter is $\varepsilon = \rho_s$. The critical point $\varepsilon_c$ is the KAM-breaking threshold (numerically $\varepsilon_c \approx 0.04$ for Case-III). The DM perturbation $\delta V = -32\pi\rho_s r_s^2/(1+r_s/r) \cdot (\cdots)$ enters $V_{\rm eff}$ linearly in $\rho_s$, satisfying the linear-response condition. Numerical data from Paper~I (Table~3) show $\lambda_T^2/\varepsilon \approx \text{const}$ in the chaotic region, supporting $\beta = 0.5$.
+\textbf{Application to EMRI:} The control parameter is $\varepsilon = \rho_s$. The critical point $\varepsilon_c$ is the KAM-breaking threshold (numerically $\varepsilon_c \approx 0.04$ for Case-III). The DM perturbation $\delta V = -32\pi\rho_s r_s^2/(1+r_s/r) \cdot (\cdots)$ enters $V_{\rm eff}$ linearly in $\rho_s$, satisfying the linear-response condition. Numerical data from Paper~I (Table~3) show $\lambda_T^2/\varepsilon \approx \text{const}$ in the chaotic region, supporting $\alpha = 0.5$.
 
 \textbf{DistCat interpretation:} The scaling law~\eqref{eq:kam-scaling} gives the functional form of $\Phi$ in the distance export principle $\delta = \Phi(\Gamma)$ near the critical point. With $\Gamma \sim \varepsilon - \varepsilon_c$ (DM halo intensity) and $\delta = \lambda_T$ (exported chaos distance), we have $\Phi(\Gamma) \sim \Gamma^{1/2}$ -- a sub-linear critical exponent characteristic of Hamiltonian KAM breaking. This places the EMRI distance structure in the same universality class as other Hamiltonian resonance systems within the DistCat framework.
 \end{proof}
@@ -639,7 +638,7 @@ Natural transformation $\eta$ & $\delta \leq C \cdot \Gamma$ (geodesic continuit
 Exported metric $D(\mathcal{B})$ & Chaos metric space $(\{\lambda_T, \kappa, r_{\rm circ}\}, d_{\rm chaos})$ \\
 Distance-equivalence class & $\cong_{\rm struct} D(\mathcal{B}_{\rm D26})$ (Prop.~\ref{prop:emri-d26-dist-eq}) \\
 Robustness certificate & MSS bound $\lambda_T^2 < \kappa^2$ (Prop.~\ref{prop:mss-robustness}) \\
-Critical exponent & $\beta = 0.5$ (KAM-breaking, Prop.~\ref{prop:kam-scaling}) \\
+Critical exponent & $\alpha = 0.5$ (KAM-breaking, Prop.~\ref{prop:kam-scaling}) \\
 GW proxy observables & $A$, $\Delta f$, $RR$, $h_c(f)$ \\
 \bottomrule
 \end{tabular}

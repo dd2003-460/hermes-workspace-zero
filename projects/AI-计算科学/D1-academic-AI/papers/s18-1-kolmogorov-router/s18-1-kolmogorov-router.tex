@@ -135,12 +135,12 @@ where $\lambda$ is the per-unit complexity cost, calibrated to compute budgets i
 
 \section{Theoretical Results}
 
-\begin{theorem}[Sharp Crossover in Tool Selection]\label{thm:crossover}
+\begin{theorem}[Smooth Transition in Tool Selection]\label{thm:crossover}
 Consider a tool market with $M$ tools having complexities $K_1 < K_2 < \cdots < K_M$ and accuracies $a_1 \leq a_2 \leq \cdots \leq a_M$. Let $m(\beta)$ be the order parameter. Then:
 \begin{enumerate}
   \item $\lim_{\beta \to 0} m(\beta) = \frac{1}{M}\sum_{i=1}^M K_i$ (uniform over tools, weighted by accuracy)
   \item $\lim_{\beta \to \infty} m(\beta) = K_1$ (always select simplest tool)
-  \item If $a_M$ sufficiently exceeds $a_1$ relative to the complexity spread $\{K_i\}$, then $m(\beta)$ exhibits a sharp crossover at some $\beta_c \in (0, \infty)$, defined by the inflection point $d^2m/d\beta^2 = 0$. For finite $M$, $m(\beta)$ is smooth and strictly decreasing; the crossover reflects acceleration rather than discontinuity.
+  \item If $a_M$ sufficiently exceeds $a_1$ relative to the complexity spread $\{K_i\}$, then $m(\beta)$ exhibits a rapid transition at some $\beta_c \in (0, \infty)$, defined by the inflection point $d^2m/d\beta^2 = 0$. For finite $M$, $m(\beta)$ is smooth and strictly decreasing; the crossover reflects acceleration rather than discontinuity.
 \end{enumerate}
 \end{theorem}
 
@@ -149,7 +149,7 @@ Part (1): As $\beta \to 0$, the complexity penalty vanishes and $P(t) \propto a(
 
 Part (2): As $\beta \to \infty$, the term $\exp(-\beta K_1)$ dominates all others since $K_1$ is minimal. Thus $P(t_1) \to 1$.
 
-Part (3): With the $\epsilon$-mixing $P_\epsilon = (1-\epsilon)P_{\mathrm{B}} + \epsilon U$, $dm/d\beta = -(1-\epsilon)\mathrm{Var}_{P_{\mathrm{B}}}(K) < 0$ for all finite $\beta$ and $\epsilon < 1$, so $m(\beta)$ is monotonically decreasing. The second derivative is $d^2m/d\beta^2 = (1-\epsilon)\mathbb{E}_{P_{\mathrm{B}}}[(K-\langle K \rangle)^3]$, i.e., $(1-\epsilon)$ times the third central moment of $P_{\mathrm{B}}$. This changes sign depending on the skewness of the complexity distribution. The inflection point $d^2m/d\beta^2 = 0$ defines $\beta_c$. For finite $M$, $m(\beta)$ is smooth and strictly decreasing; the "crossover" reflects an acceleration region rather than a true discontinuity.
+Part (3): With the $\epsilon$-mixing $P_\epsilon = (1-\epsilon)P_{\mathrm{B}} + \epsilon U$, $dm/d\beta = -(1-\epsilon)\mathrm{Var}_{P_{\mathrm{B}}}(K) < 0$ for all finite $\beta$ and $\epsilon < 1$, so $m(\beta)$ is monotonically decreasing. The second derivative is $d^2m/d\beta^2 = -(1-\epsilon)\,\mathrm{Cov}_{P_{\mathrm{B}}}(K^2, K) + (1-\epsilon)\,\mathrm{Var}_{P_{\mathrm{B}}}(K)\,\mathbb{E}_{P_{\mathrm{B}}}[K]$, a fourth-moment expression. For symmetric complexity distributions, the covariances vanish and $d^2m/d\beta^2 = 0$ identically, yielding no inflection point. The inflection point $\beta_c$ (if any) is defined by the zero of this expression. For finite $M$, $m(\beta)$ is smooth and strictly decreasing; the "crossover" reflects an acceleration region rather than a true discontinuity.
 \end{proof}
 
 \begin{proposition}[Complexity Matching Condition]\label{prop:matching}
@@ -157,7 +157,7 @@ For fixed $\epsilon \in [0, 1)$, the expected complexity gap $\Delta(\beta, \eps
 \end{proposition}
 
 \begin{proof}
-$\partial \langle K \rangle / \partial \beta = -(1-\epsilon) \cdot \mathrm{Var}_{P_{\mathrm{Boltzmann}}}(K) < 0$ for any finite $\beta$ and $\epsilon < 1$. Thus $\Delta(\beta, \epsilon)$ is strictly decreasing. By the intermediate value theorem and the limits from Theorem~\ref{thm:crossover}, a unique root exists.
+$\partial \langle K \rangle / \partial \beta = -(1-\epsilon) \cdot \mathrm{Var}_{P_{\mathrm{Boltzmann}}}(K) < 0$ for any finite $\beta$ and $\epsilon < 1$. Thus $\Delta(\beta, \epsilon)$ is strictly decreasing. Strict monotonicity guarantees at most one root. The limits from Theorem~\ref{thm:crossover} (spanning all possible complexities) guarantee at least one root. Hence exactly one root exists.
 \end{proof}
 
 \begin{corollary}[Over-Penalization Regime]\label{cor:over-penalization}

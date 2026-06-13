@@ -678,6 +678,66 @@ The EMRI example, together with the four preceding examples in this paper, demon
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 
+\subsection{Example 2: KL Divergence and Fisher--Rao Geometry}\label{sec:example2-fisher-rao}
+
+This section sketches the instantiation of DistCat for statistical manifolds. Full development is in companion work.
+
+\begin{definition}[Statistical manifold base structure]\label{def:stat-manifold}
+The statistical manifold base structure $\mathcal{B}_{\rm FM} = (\mathbf{C}_{\rm FM}, \mathcal{F}_{\rm FM}, \mathcal{O}_{\rm FM})$ is defined by:
+\begin{enumerate}
+\item \textbf{Statistical models category:} $\mathbf{C}_{\rm FM}$ has objects $(M, g_{ij})$ where $M$ is a statistical manifold (family of probability distributions) and $g_{ij}$ is the Fisher information metric. Morphisms are smooth maps preserving the statistical structure.
+\item \textbf{Geodesic functor:} $\mathcal{F}_{\rm FM}$ assigns to each $(M, g)$ the geodesic path space with respect to the Fisher metric.
+\item \textbf{Observation functor:} $\mathcal{O}_{\rm FM}$ maps a statistical model to its Kullback--Leibler divergence structure: $\mathcal{O}_{\rm FM}(M, g) = D_{\rm KL}(\cdot \| \cdot)$ on $M$.
+\end{enumerate}
+\end{definition}
+
+The source pre-distance is the KL divergence $\Gamma = D_{\rm KL}(P \| Q)$. The observation distance is the Fisher metric distance $\delta(P, Q) = \inf_{\gamma} \int_0^1 \sqrt{g_{ij}(\gamma(t))\, \dot{\gamma}^i \dot{\gamma}^j}\, dt$. By the Cram\'er--Rao bound, $\delta^2(P, Q) \leq 4\, D_{\rm KL}(P \| Q)$, establishing the distance export inequality with $C = 4$. The critical exponent is $\alpha = 2.00$: near the MLE (which minimizes $D_{\rm KL}$), the local behavior is $\delta^2 \sim D_{\rm KL}$, so $\delta \sim \sqrt{D_{\rm KL}} \sim \Gamma^{1/2}$ and $\alpha = 2$ in the convention $\delta \sim \Gamma^\alpha$.
+
+\textbf{Cross-reference:} The critical exponent $\alpha = 2.00$ is shown in Figure~\ref{fig:critical-exponents} (left panel). This universality class is shared with Example~3 (Bayesian inference, below).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+
+\subsection{Example 3: Bayesian Inference and Fisher--Rao Distance}\label{sec:example3-bayesian}
+
+This section establishes that Bayesian model averaging is a DistCat distance export. Full development is in companion work.
+
+\begin{definition}[Bayesian base structure]\label{def:base-bayesian}
+The Bayesian base structure $\mathcal{B}_{\rm Bayes} = (\mathbf{C}_{\rm Bayes}, \mathcal{F}_{\rm Bayes}, \mathcal{O}_{\rm Bayes})$ is defined by:
+\begin{enumerate}
+\item \textbf{Statistical models category:} Objects are pairs $(M, \pi)$ where $M$ is a statistical manifold and $\pi$ is a prior distribution on $M$. Morphisms preserve the Bayesian structure.
+\item \textbf{Posterior functor:} $\mathcal{F}_{\rm Bayes}$ maps $(M, \pi)$ to the posterior family $\{\pi(\cdot | x_t)\}_t$ given data $x_t$.
+\item \textbf{Observation functor:} $\mathcal{O}_{\rm Bayes}$ extracts the Fisher--Rao posterior contraction distance: $\mathcal{O}_{\rm Bayes}(M, \pi, \{x_t\}) = \delta_{\rm FR}(\pi_0, \pi_\infty)$, the Fisher metric distance between prior and posterior.
+\end{enumerate}
+\end{definition}
+
+The source pre-distance is the $L^2$ distance between priors $\Gamma = \|\pi_0 - \pi_\infty\|_{L^2}$. The observation distance is the Fisher--Rao distance between prior and posterior $\delta = \delta_{\rm FR}(\pi_0, \pi_\infty)$. By the van Trees inequality (Bayesian Cram\'er--Rao), $\delta^2 \leq \mathbb{E}[I(\theta)]\, \Gamma^2$, where $I(\theta)$ is the Fisher information matrix. Thus $\delta \leq C\, \Gamma$ with $C = \sqrt{\lambda_{\max}(I)}$. The critical exponent is $\alpha = 2.00$: as data accumulate ($n \to \infty$), the posterior contracts as $\delta_{\rm FR} \sim n^{-1/2}$ while the pre-distance scales as $\Gamma \sim n^{-1}$, giving $\delta \sim \Gamma^{1/2}$ and $\alpha = 2$.
+
+\textbf{Cross-reference:} This shares the universality class with Example~2 (statistical manifolds). The Fisher--Rao metric is the unique natural metric on statistical manifolds (Cencov's theorem), making the distance export structurally canonical.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+
+\subsection{Example 4: D26 Resonance Amplification}\label{sec:example4-d26}
+
+This section instantiates DistCat for LTI control systems with resonance amplification. Full development is in companion work.
+
+\begin{definition}[LTI control base structure]\label{def:base-d26}
+The LTI control base structure $\mathcal{B}_{\rm D26} = (\mathbf{C}_{\rm D26}, \mathcal{F}_{\rm D26}, \mathcal{O}_{\rm D26})$ is defined by:
+\begin{enumerate}
+\item \textbf{System category:} $\mathbf{C}_{\rm D26}$ has objects $(A, B, C, D)$ where $A, B, C, D$ are LTI system matrices. Morphisms are similarity transformations $\phi: (A, B, C, D) \to (SAS^{-1}, SB, CS^{-1}, D)$ preserving the input--output map.
+\item \textbf{Trajectory functor:} $\mathcal{F}_{\rm D26}$ assigns to each system $(A, B, C, D)$ the solution space $\{x(t) \mid \dot{x} = Ax + Bu\}$ for admissible inputs $u(t)$.
+\item \textbf{Observation functor:} $\mathcal{O}_{\rm D26}$ extracts the frequency-response function $H(j\omega) = C(j\omega I - A)^{-1}B + D$ and its peak gain $\|H\|_\infty$.
+\end{enumerate}
+\end{definition}
+
+The source pre-distance is the LTI parameter perturbation $\Gamma = \|\delta A\|_2$ (H-infinity norm of system matrix perturbation). The observation distance is the resonance amplification of the output: $\delta = \|H\|_\infty$. The distance export inequality follows from the small-gain theorem: $\delta \leq C\, \Gamma$ where $C$ depends on the system's damping ratio. The critical exponent is $\alpha = -\gamma$ where $\gamma$ is the resonance sharpness exponent (typically $\gamma \in [0.5, 1.0]$ for underdamped systems). Near the resonance, $\|H(j\omega)\|_\infty \sim \varepsilon^{-\gamma}$ where $\varepsilon$ measures the distance from the undamped case.
+
+\textbf{Cross-reference:} This universality class is distinguished from Examples 2--3 by the \textbf{inverse} critical exponent: the observation distance \textit{diverges} at the critical point (resonance blow-up) rather than vanishing. This reflects a different singularity type: Examples 2--3 are contraction phenomena (posterior convergence), while Example~4 is an amplification phenomenon (resonance). The exponent $\alpha < 0$ places it in a DistCat universality class characterized by divergent transport near critical points.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+
 \subsection{9. Discussion}\label{discussion}
 
 \subsubsection{\texorpdfstring{9.1 Universal Nature of

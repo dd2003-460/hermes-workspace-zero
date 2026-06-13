@@ -89,14 +89,14 @@ We define two domains:
 \item \textbf{Domain A}: $x \in [0, 0.4)$ --- 600 oscillators
 \item \textbf{Domain B}: $x \in [0.5, 0.9)$ --- 600 oscillators
 \end{itemize}
-The transition region between domains ($x \in [0.4, 0.5)$) and outside both domains ($x \in [0.9, 1.0)$) have reduced coupling.
+The transition region between domains ($x \in [0.4, 0.5)$) and outside both domains ($x \in [0.9, 1.0)$) have reduced coupling. The full coupling function is $w(x) = K_0 + \epsA\cos(2\pi x)$ in Domain A and $w(x) = K_0 + \epsB\cos(2\pi x)$ in Domain B. In the transition and outside regions, the coupling follows a linear interpolation between the nearest domain boundary value and the midpoint value $K_0 = 1.0$, ensuring no discontinuities in the coupling profile. The coupling at $x = 0.4$ matches Domain A's value, at $x = 0.5$ matches Domain B's value, and the interpolation is linear in between.
 
 The coupling parameters are:
 \begin{itemize}
 \item $K_0 = 1.0$ (base coupling strength)
 \item $\epsA$ (Domain A modulation amplitude)
 \item $\epsB$ (Domain B modulation amplitude)
-\item $K_{\textrm{transition}}$ (position-dependent coupling in boundary regions): $w(x) = 1 + \eps \cos(2\pi x)$ with $\eps \approx -0.7$ yields $w \in [1.57, 1.70]$ for $x \in [0.4, 0.5)$ (transition region, elevated coupling) and $w \in [0.33, 0.43]$ for $x \in [0.9, 1.0)$ (outside regions, reduced coupling). The minimum $K \approx 0.33$ near $x = 0.9$ creates the incoherent sector.
+\item $K_{\textrm{transition}}$ (position-dependent coupling in boundary regions): linear interpolation between domain boundary values and $K_0=1.0$ ensures no discontinuities. The minimum effective coupling in the outside region $x \in [0.9, 1.0)$ arises from the Domain B modulation and creates the incoherent sector.
 \end{itemize}
 
 \subsection{Integration Scheme}
@@ -236,7 +236,7 @@ The empirical evidence is:
 \item Survival function $S(T) = 1.0$ for all $T \in [5000, 500000]$
 \end{enumerate}
 
-By Clopper--Pearson exact two-sided binomial confidence intervals, with $N=3$ seeds and zero observed collapses, the 95\% confidence interval for the true collapse rate is $[0, 0.71]$ and for the survival fraction is $[0.29, 1.0]$. Thus we can state $S_\infty \geq 0.29$ at 95\% CL. The actual lower bound is much tighter in practice: all $N=3$ seeds are long-lived metastable states, and the lower bound increases quadratically with $N$ (for $N$ independent trials, the 95\% upper bound on failure rate is $1-0.05^{1/N} \approx \ln(20)/N$ for large $N$).
+By Clopper--Pearson exact two-sided binomial confidence intervals, with $N=3$ seeds and zero observed collapses, the 95\% confidence interval for the true collapse rate is $[0, 1-0.05^{1/3}] \approx [0, 0.632]$ and for the survival fraction is $[0.05^{1/3}, 1.0] \approx [0.368, 1.0]$. Thus we can state $S_\infty \geq 0.368$ at 95\% CL. The lower bound increases with $N$ as $0.05^{1/N}$ (for $N$ independent trials, the 95\% upper bound on failure rate is $1-0.05^{1/N}$).
 
 \subsection{Implications}
 

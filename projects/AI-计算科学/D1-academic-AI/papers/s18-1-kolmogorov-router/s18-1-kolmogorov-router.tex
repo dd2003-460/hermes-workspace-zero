@@ -193,7 +193,7 @@ We construct a market of 13 tools at three complexity levels:
 
 \subsection{Parameters}
 
-$\beta \in [0.01, 2.0]$ (40 values), $\alpha = 0.1$, $\lambda = 0.03$, $\epsilon = 0$ (pure Boltzmann), $n_{\mathrm{samples}} = 200$ per configuration.
+$\beta \in [0.01, 2.0]$ (40 values), $\alpha = 0.1$, $\lambda = 0.03$, $\epsilon \in \{0, 0.1\}$ (0 for Experiments 1--3, 0.1 for the Boltzmann-vs-best-response comparison to test noise effects), $n_{\mathrm{samples}} = 200$ per configuration.
 
 \section{Results}
 
@@ -313,7 +313,7 @@ We evaluate two well-established multi-armed bandit algorithms against our Boltz
 Key findings:
 
 \begin{itemize}
-  \item \textbf{Thompson Sampling outperforms Boltzmann routing} on medium and hard tasks. Relative to $\beta=0.3$ (the more competitive Boltzmann setting), Thompson achieves $+0.038$ (easy), $+0.082$ (medium), and $+0.212$ (hard). The advantage grows with task complexity, consistent with Thompson's ability to learn task-tool matches from experience while Boltzmann imposes a fixed complexity penalty.
+  \item \textbf{Thompson Sampling outperforms Boltzmann routing} on medium and hard tasks. Relative to $\beta=0.3$ (the more competitive Boltzmann setting), Thompson achieves $-0.042$ (easy), $+0.082$ (medium), and $+0.212$ (hard). The advantage grows with task complexity, consistent with Thompson's ability to learn task-tool matches from experience while Boltzmann imposes a fixed complexity penalty (on easy tasks, Thompson's exploration sometimes overshoots).
   \item \textbf{UCB1 fails in the structured tool setting}. For $c \geq 0.5$, UCB1 converges to the simplest tool ($K=1$) and never explores beyond. The UCB exploration bonus does not account for the structured complexity ordering of tools: all tools look equally uncertain, so UCB greedily selects the one with highest initial estimate (the simplest tool). Only with very low $c=0.1$ does UCB1 approach Best-Response performance, but this is fragile to $c$ choice.
   \item \textbf{Boltzmann routing is robust but suboptimal}: The Boltzmann policy does not learn from experience (it uses a fixed $\beta$), making it less adaptive than Thompson Sampling. However, it is more stable than UCB1 across hyperparameter choices.
 \end{itemize}
@@ -339,7 +339,7 @@ Key findings:
     Random & 0.384 & 192.0 & 0.375 & --- \\
     \bottomrule
   \end{tabular}
-  \caption{Learning curve metrics (medium task, 500 rounds). Thompson Sampling has the highest final average reward and steepest learning rate. Boltzmann has no learning (fixed policy). The ``UCB Best'' column shows the best hyperparameter from the sweep (Table~\ref{tab:ucb-thompson}).}
+  \caption{Learning curve metrics (medium task, 500 rounds). Thompson Sampling has the highest final average reward and highest cumulative reward. The ``Learn Rate'' column reports average reward per round (identical to Final Avg), confirming that Boltzmann's per-round reward is no different from Random's (0.374 vs 0.375), consistent with no learning. The ``UCB Best'' column shows the best hyperparameter from the sweep (Table~\ref{tab:ucb-thompson}).}
   \label{tab:learning-curves}
 \end{table}
 

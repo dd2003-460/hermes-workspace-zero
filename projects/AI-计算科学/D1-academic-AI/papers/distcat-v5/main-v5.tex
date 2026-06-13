@@ -203,7 +203,7 @@ developed in companion papers.
 \end{enumerate}
 
 The five examples have critical exponents
-\(\alpha \in \{1.84, 2.00, 2.00, -\gamma, 0.50\}\), yet all share the
+\(\alpha \in \{1.84, 0.50, 0.50, -\gamma, 0.50\}\), yet all share the
 universal pattern \(\delta \sim \Gamma^\alpha\) near critical points.
 This suggests that the distance export principle is a
 \textbf{categorical invariant}, not a domain-specific accident.
@@ -691,9 +691,9 @@ The statistical manifold base structure $\mathcal{B}_{\rm FM} = (\mathbf{C}_{\rm
 \end{enumerate}
 \end{definition}
 
-The source pre-distance is the KL divergence $\Gamma = D_{\rm KL}(P \| Q)$. The observation distance is the Fisher metric distance $\delta(P, Q) = \inf_{\gamma} \int_0^1 \sqrt{g_{ij}(\gamma(t))\, \dot{\gamma}^i \dot{\gamma}^j}\, dt$. By the Cram\'er--Rao bound, $\delta^2(P, Q) \leq 4\, D_{\rm KL}(P \| Q)$, establishing the distance export inequality with $C = 4$. The critical exponent is $\alpha = 2.00$: near the MLE (which minimizes $D_{\rm KL}$), the local behavior is $\delta^2 \sim D_{\rm KL}$, so $\delta \sim \sqrt{D_{\rm KL}} \sim \Gamma^{1/2}$ and $\alpha = 2$ in the convention $\delta \sim \Gamma^\alpha$.
+The source pre-distance is the KL divergence $\Gamma = D_{\rm KL}(P \| Q)$. The observation distance is the Fisher metric distance $\delta(P, Q) = \inf_{\gamma} \int_0^1 \sqrt{g_{ij}(\gamma(t))\, \dot{\gamma}^i \dot{\gamma}^j}\, dt$. By the Cram\'er--Rao bound (local approximation), $\delta^2(P, Q) \approx 2\, D_{\rm KL}(P \| Q)$, establishing the distance export inequality with $C = 2$. The critical exponent is $\alpha = 0.50$: near the MLE (which minimizes $D_{\rm KL}$), the local behavior is $\delta^2 \sim D_{\rm KL}$, so $\delta \sim \sqrt{D_{\rm KL}} \sim \Gamma^{1/2}$ and $\alpha = 1/2$ in the convention $\delta \sim \Gamma^\alpha$.
 
-\textbf{Cross-reference:} The critical exponent $\alpha = 2.00$ is shown in Figure~\ref{fig:critical-exponents} (left panel). This universality class is shared with Example~3 (Bayesian inference, below).
+\textbf{Cross-reference:} The critical exponent $\alpha = 0.50$ is shown in Figure~\ref{fig:critical-exponents} (left panel). This universality class is shared with Example~3 (Bayesian inference, below).
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -711,7 +711,7 @@ The Bayesian base structure $\mathcal{B}_{\rm Bayes} = (\mathbf{C}_{\rm Bayes}, 
 \end{enumerate}
 \end{definition}
 
-The source pre-distance is the $L^2$ distance between priors $\Gamma = \|\pi_0 - \pi_\infty\|_{L^2}$. The observation distance is the Fisher--Rao distance between prior and posterior $\delta = \delta_{\rm FR}(\pi_0, \pi_\infty)$. By the van Trees inequality (Bayesian Cram\'er--Rao), $\delta^2 \leq \mathbb{E}[I(\theta)]\, \Gamma^2$, where $I(\theta)$ is the Fisher information matrix. Thus $\delta \leq C\, \Gamma$ with $C = \sqrt{\lambda_{\max}(I)}$. The critical exponent is $\alpha = 2.00$: as data accumulate ($n \to \infty$), the posterior contracts as $\delta_{\rm FR} \sim n^{-1/2}$ while the pre-distance scales as $\Gamma \sim n^{-1}$, giving $\delta \sim \Gamma^{1/2}$ and $\alpha = 2$.
+The source pre-distance is the $L^2$ distance between priors $\Gamma = \|\pi_0 - \pi_\infty\|_{L^2}$. The observation distance is the Fisher--Rao distance between prior and posterior $\delta = \delta_{\rm FR}(\pi_0, \pi_\infty)$. Under regularity conditions, the posterior contracts toward the true parameter at rate $\delta_{\rm FR} \sim n^{-1/2}$ (Bernstein--von Mises theorem), while the pre-distance between prior and posterior contracts as $\Gamma \sim n^{-1}$ (Bayesian learning). The distance export inequality $\delta \leq C\Gamma$ holds locally near the true parameter with $C$ related to the spectral gap of the Fisher information matrix. The critical exponent is $\alpha = 0.50$: as data accumulate ($n \to \infty$), the posterior contracts as $\delta_{\rm FR} \sim n^{-1/2}$ while the pre-distance scales as $\Gamma \sim n^{-1}$, giving $\delta \sim \Gamma^{1/2}$ and $\alpha = 1/2$.
 
 \textbf{Cross-reference:} This shares the universality class with Example~2 (statistical manifolds). The Fisher--Rao metric is the unique natural metric on statistical manifolds (Cencov's theorem), making the distance export structurally canonical.
 
@@ -759,7 +759,7 @@ The critical exponent \(\alpha\) in \(\delta \sim \Gamma^\alpha\) is a
 contradict equivalence --- they reflect different members of the same
 distance equivalence class \([\mathcal{B}]\).
 
-The five examples yield distinct critical exponents \(\alpha \in \{1.84, 2.00, 2.00, -\gamma, 0.50\}\), yet all follow the universal scaling law \(\delta \sim \Gamma^\alpha\) near critical points. This universal power-law behavior is illustrated in Figure~\ref{fig:critical-exponents}.
+The five examples yield critical exponents \(\alpha \in \{1.84, 0.50, 0.50, -\gamma, 0.50\}\), yet all follow the universal scaling law \(\delta \sim \Gamma^\alpha\) near critical points. Examples 2, 3, and 5 share the universality class \(\alpha = 0.5\) (contraction at critical point), while D1 (AQFT, \(\alpha \approx 1.84\)) and D26 (resonance, \(\alpha = -\gamma\)) belong to distinct classes. This universal power-law behavior is illustrated in Figure~\ref{fig:critical-exponents}.
 
 \begin{figure}[h]
 \centering

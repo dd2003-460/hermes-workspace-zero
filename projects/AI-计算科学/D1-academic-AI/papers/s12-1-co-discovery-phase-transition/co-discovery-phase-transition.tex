@@ -160,7 +160,7 @@ CoT is a clear outlier across all metrics:
     \item $f_C = 0.976$ vs.\ mean $0.686$ (97.6\% of CoT papers are in discovery clusters).
 \end{itemize}
 
-The non-CoT topics have $CV \in [1.5, 2.7]$, consistent with mild clustering but not phase-transition behavior. The CoT topic has $CV > 8$, which is statistically incompatible with a Poisson process (Kolmogorov--Smirnov test, $p < 10^{-10}$).
+The non-CoT topics have $CV \in [1.5, 2.7]$, consistent with mild clustering but not threshold-crossing behavior. The CoT topic has $CV > 8$, which is statistically incompatible with a Poisson process (Kolmogorov--Smirnov test, $p < 10^{-10}$).
 
 To assess whether CoT is a statistical outlier relative to non-CoT topics, we compare $CV_{\mathrm{CoT}} = 8.87$ against the four non-CoT topic-level CVs $\{2.68, 2.31, 1.72, 1.51\}$ with mean $2.05$ and standard deviation $0.54$. The distance from the non-CoT mean is $(8.87 - 2.05)/0.54 \approx 12.7$ non-CoT standard deviations. Treating the four non-CoT topics as the sample, the one-sample t-statistic is $t \approx 2.35$ with 3 degrees of freedom ($p \approx 0.11$, two-tailed), consistent with the small number of topics but limiting statistical power. The non-overlapping CIs provide a stronger argument: even the lower bound of CoT's 95\% CI ($8.09$) exceeds the upper bound of all non-CoT CIs.
 
@@ -212,7 +212,7 @@ The largest CoT cluster contains 358 papers spanning 659 days (2024-08-16 to 202
   \label{tab:clusters}
 \end{table}
 
-Cluster 1 contains 358 papers (71.6\% of all CoT papers) and began on 2024-08-16, shortly after the publication of ``Chain-of-Thought Prompting Elicits Reasoning in Large Language Models'' (Wei et al., 2022) and its subsequent rapid adoption. This suggests that $\rho$ crossed $\rho_c$ around August 2024, triggering the phase transition.
+Cluster 1 contains 358 papers (71.6\% of all CoT papers) and began on 2024-08-16, shortly after the publication of ``Chain-of-Thought Prompting Elicits Reasoning in Large Language Models'' (Wei et al., 2022) and its subsequent rapid adoption. This suggests that $\rho$ crossed $\rho_c$ around August 2024, corresponding to a threshold crossing in discovery dynamics.
 
 \subsection{Quarterly Rate Analysis}
 
@@ -239,9 +239,9 @@ The publication rate increases from a daily rate of 0.044 papers/day (2022 Q1--Q
 
 \section{Discussion}
 
-\subsection{Phase Transition Interpretation}
+\subsection{Threshold Interpretation}
 
-The CoT data shows several signatures consistent with a phase transition:
+The CoT data shows several signatures consistent with a threshold crossing:
 \begin{enumerate}
     \item \textbf{Order parameter jump}: $f_C$ jumps from $\approx 0.66$ (non-CoT baseline) to $0.976$ (CoT supercritical).
     \item \textbf{Dominant cluster}: $C_{\max} = 358$ papers in one cluster (71.6\% of all CoT papers), much larger than any non-CoT topic.

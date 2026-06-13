@@ -29,7 +29,7 @@
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{remark}[theorem]{Remark}
 
-\title{Computational Complexity Adaptive Routing:\\Phase Transitions in Tool Selection Dynamics}
+\title{Computational Complexity Adaptive Routing:\\Sharp Crossover in Tool Selection Dynamics}
 
 \author{Cheng Lu\thanks{Independent research. Contact: self-referential.}}
 \date{June 2026}
@@ -39,7 +39,7 @@
 \maketitle
 
 \begin{abstract}
-We study the dynamics of tool selection by agents operating under a complexity-penalized routing policy. We formalize the \emph{adaptive routing hypothesis}: agents should select tools whose computational complexity matches task complexity, penalized by a complexity cost parameter $\beta$. We show that this routing dynamics exhibits a sharp crossover at critical $\beta_c$ (approaching a phase transition in the thermodynamic limit $M\to\infty$), where the mean selected complexity jumps from intermediate ($\langle K \rangle \approx 5.4$) to coarse ($\langle K \rangle \approx 1.2$) on a unit-complexity tool scale. Empirical validation on a synthetic tool-market confirms the sharp transition (jump size 4.2, max derivative 10.88, $\beta_c \approx 0.06$) and demonstrates that adaptive routing outperforms random selection for low-to-medium complexity tasks (mean advantage 0.036, $p=0.013$), but degrades on high-complexity tasks where over-penalization selects under-powered tools. A comparison with standard bandit baselines shows that Thompson Sampling (an adaptive baseline with learning) outperforms fixed-$\beta$ Boltzmann routing, while UCB1 fails catastrophically in the structured tool setting due to its inability to exploit complexity ordering. Our results establish computational complexity as a fundamental variable in agent tool-selection dynamics, with implications for understanding the \emph{complexity matching principle} in both artificial and biological agents.
+We study the dynamics of tool selection by agents operating under a complexity-penalized routing policy. We formalize the \emph{adaptive routing hypothesis}: agents should select tools whose computational complexity matches task complexity, penalized by a complexity cost parameter $\beta$. We show that this routing dynamics exhibits a sharp crossover at critical $\beta_c$, where the mean selected complexity jumps from intermediate ($\langle K \rangle \approx 5.4$) to coarse ($\langle K \rangle \approx 1.2$) on a unit-complexity tool scale. Empirical validation on a synthetic tool-market confirms the sharp transition (jump size 4.2, max derivative 10.88, $\beta_c \approx 0.06$) and demonstrates that adaptive routing outperforms random selection for low-to-medium complexity tasks (mean advantage 0.036, $p=0.013$), but degrades on high-complexity tasks where over-penalization selects under-powered tools. A comparison with standard bandit baselines shows that Thompson Sampling (an adaptive baseline with learning) outperforms fixed-$\beta$ Boltzmann routing, while UCB1 fails catastrophically in the structured tool setting due to its inability to exploit complexity ordering. Our results establish computational complexity as a fundamental variable in agent tool-selection dynamics, with implications for understanding the \emph{complexity matching principle} in both artificial and biological agents.
 \end{abstract}
 
 \section{Introduction}
@@ -57,8 +57,8 @@ However, the \emph{dynamics} of this optimization---how the routing strategy evo
 We answer affirmatively. Our contributions:
 
 \begin{enumerate}
-  \item \textbf{Theoretical}: We prove that the complexity-penalized routing policy defines a statistical mechanical system with a phase transition at critical $\beta_c$ (Theorem~\ref{thm:phase-transition}).
-  \item \textbf{Empirical}: We validate the phase transition on a synthetic tool-market with 13 tools across 3 complexity levels, observing a jump of 4.2 units in mean selected complexity.
+  \item \textbf{Theoretical}: We prove that the complexity-penalized routing policy defines a statistical mechanical system with a sharp crossover at critical $\beta_c$ (Theorem~\ref{thm:crossover}).
+  \item \textbf{Empirical}: We validate the sharp crossover on a synthetic tool-market with 13 tools across 3 complexity levels, observing a jump of 4.2 units in mean selected complexity.
   \item \textbf{Performance}: We demonstrate that adaptive routing outperforms random selection for low-to-medium complexity tasks (mean advantage 0.036, $p=0.013$) but degrades for high-complexity tasks due to over-penalization.
   \item \textbf{Complexity Matching}: We formalize the \emph{complexity matching principle} and show its limits: optimal routing requires $\beta$ to scale inversely with task complexity.
 \end{enumerate}
@@ -73,7 +73,7 @@ We answer affirmatively. Our contributions:
 
 \paragraph{Complexity in computation.} The relationship between computational complexity and intelligence has been studied in~\cite{r95-hofstadter1979-godel, r96-chaitin1975-randomness}, but these works focus on \emph{problem} complexity, not \emph{tool} complexity as a routing variable.
 
-\paragraph{Online learning and bandits.} Agent tool selection is closely related to the multi-armed bandit problem~\cite{r98-auer2002-bandit, r99-garivier2011-ucb}. Our framework extends this by introducing complexity as a structural property of the action space, yielding phase transitions in selection dynamics that standard bandit theory does not capture. The connection between regret-minimizing exploration and Boltzmann exploration~\cite{r100-hutter2005-boltzmann} further motivates our modeling choice.
+\paragraph{Online learning and bandits.} Agent tool selection is closely related to the multi-armed bandit problem~\cite{r98-auer2002-bandit, r99-garivier2011-ucb}. Our framework extends this by introducing complexity as a structural property of the action space, yielding a sharp crossover in selection dynamics that standard bandit theory does not capture. The connection between regret-minimizing exploration and Boltzmann exploration~\cite{r100-hutter2005-boltzmann} further motivates our modeling choice.
 
 \paragraph{Intra-project connections.} The coexisting attractor classification (H1) and basin geometry analysis in chimera state research~\cite{chimera-stable-attractors-2026} share the same topological framework: both identify stable coexistence states with large basins of attraction. The cluster detection methodology used in co-discovery dynamics~\cite{S12-1-2026} was independently developed for both tool selection (cluster detection of similar-complexity tools) and scientific discovery (cluster detection of simultaneous publications).
 
@@ -141,12 +141,12 @@ where $\lambda$ is the per-unit complexity cost, calibrated to compute budgets i
 
 \section{Theoretical Results}
 
-\begin{theorem}[Existence of Phase Transition]\label{thm:phase-transition}
+\begin{theorem}[Sharp Crossover in Tool Selection]\label{thm:crossover}
 Consider a tool market with $M$ tools having complexities $K_1 < K_2 < \cdots < K_M$ and accuracies $a_1 \leq a_2 \leq \cdots \leq a_M$. Let $m(\beta)$ be the order parameter. Then:
 \begin{enumerate}
   \item $\lim_{\beta \to 0} m(\beta) = \frac{1}{M}\sum_{i=1}^M K_i$ (uniform over tools, weighted by accuracy)
   \item $\lim_{\beta \to \infty} m(\beta) = K_1$ (always select simplest tool)
-  \item If $a_M$ sufficiently exceeds $a_1$ relative to the complexity spread $\{K_i\}$, then $m(\beta)$ exhibits a rapid crossover at some $\beta_c \in (0, \infty)$, where the inflection point $\beta_c$ satisfies $d^2m/d\beta^2 = 0$.
+  \item If $a_M$ sufficiently exceeds $a_1$ relative to the complexity spread $\{K_i\}$, then $m(\beta)$ exhibits a sharp crossover at some $\beta_c \in (0, \infty)$, defined by the inflection point $d^2m/d\beta^2 = 0$. For finite $M$, $m(\beta)$ is smooth and strictly decreasing; the crossover reflects acceleration rather than discontinuity.
 \end{enumerate}
 \end{theorem}
 
@@ -155,7 +155,7 @@ Part (1): As $\beta \to 0$, the complexity penalty vanishes and $P(t) \propto a(
 
 Part (2): As $\beta \to \infty$, the term $\exp(-\beta K_1)$ dominates all others since $K_1$ is minimal. Thus $P(t_1) \to 1$.
 
-Part (3): $dm/d\beta = -\mathrm{Var}_P(K) < 0$ for all finite $\beta$, so $m(\beta)$ is monotonically decreasing. The second derivative is $d^2m/d\beta^2 = -\mathrm{Cov}_P(K, K^2) + \langle K \rangle\mathrm{Var}_P(K) = -\mathbb{E}[(K-\langle K \rangle)^3]$, i.e., the negative of the third central moment of $P$. This changes sign depending on the skewness of the complexity distribution under $P$. The inflection point $d^2m/d\beta^2 = 0$ defines $\beta_c$. In the thermodynamic limit ($M \to \infty$), the crossover becomes a discontinuity (first-order phase transition), as established in standard statistical mechanics~\cite{reichl2016}.
+Part (3): $dm/d\beta = -\mathrm{Var}_P(K) < 0$ for all finite $\beta$, so $m(\beta)$ is monotonically decreasing. The second derivative is $d^2m/d\beta^2 = -\mathrm{Cov}_P(K, K^2) + \langle K \rangle\mathrm{Var}_P(K) = -\mathbb{E}[(K-\langle K \rangle)^3]$, i.e., the negative of the third central moment of $P$. This changes sign depending on the skewness of the complexity distribution under $P$. The inflection point $d^2m/d\beta^2 = 0$ defines $\beta_c$. For finite $M$, $m(\beta)$ is smooth and strictly decreasing; the "crossover" reflects an acceleration region rather than a true discontinuity.
 \end{proof}
 
 \begin{proposition}[Complexity Matching Condition]\label{prop:matching}
@@ -163,7 +163,7 @@ The expected complexity gap $\Delta(\beta) = \langle K \rangle - C_{\mathrm{task
 \end{proposition}
 
 \begin{proof}
-$\partial \langle K \rangle / \partial \beta = -\mathrm{Var}_{P}(K) < 0$ for any finite $\beta$. Thus $\Delta(\beta)$ is strictly decreasing. By the intermediate value theorem and the limits from Theorem~\ref{thm:phase-transition}, a unique root exists.
+$\partial \langle K \rangle / \partial \beta = -\mathrm{Var}_{P}(K) < 0$ for any finite $\beta$. Thus $\Delta(\beta)$ is strictly decreasing. By the intermediate value theorem and the limits from Theorem~\ref{thm:crossover}, a unique root exists.
 \end{proof}
 
 \begin{corollary}[Over-Penalization Regime]\label{cor:over-penalization}
@@ -203,9 +203,9 @@ $\beta \in [0.01, 2.0]$ (40 values), $\alpha = 0.1$, $\lambda = 0.03$, $n_{\math
 
 \section{Results}
 
-\subsection{Phase Transition (Experiment 1)}
+\subsection{Sharp Crossover (Experiment 1)}
 
-Figure~\ref{fig:phase-transition} shows the order parameter $m(\beta) = \langle K \rangle$ as a function of $\beta$. We observe:
+Figure~\ref{fig:crossover} shows the order parameter $m(\beta) = \langle K \rangle$ as a function of $\beta$. We observe:
 
 \begin{itemize}
   \item At low $\beta$ ($< 0.1$): agents select tools with average complexity $\langle K \rangle \approx 5.4$, spanning coarse-to-medium range
@@ -217,11 +217,11 @@ Figure~\ref{fig:phase-transition} shows the order parameter $m(\beta) = \langle 
 \begin{figure}[htb]
   \centering
   \includegraphics[width=0.85\textwidth]{Fig01-phase-transition.png}
-  \caption{Phase transition in tool complexity. Mean selected complexity $\langle K \rangle$ jumps from 5.4 to 1.2 as $\beta$ increases through $\beta_c \approx 0.06$. The max derivative $d\langle K \rangle/d\beta = 10.88$ indicates a sharp (near-first-order) transition. Error bars show standard deviation across 200 samples.}
-  \label{fig:phase-transition}
+  \caption{Sharp crossover in tool complexity. Mean selected complexity $\langle K \rangle$ jumps from 5.4 to 1.2 as $\beta$ increases through $\beta_c \approx 0.06$. The max derivative $d\langle K \rangle/d\beta = 10.88$ indicates a sharp but smooth transition for finite $M=13$. Error bars show standard deviation across 200 samples.}
+  \label{fig:crossover}
 \end{figure}
 
-The large jump (4.2 units) and high derivative (10.88) are consistent with a \emph{first-order} phase transition in the thermodynamic limit ($M \to \infty$ tools).
+The large jump (4.2 units) and high derivative (10.88) indicate a sharp crossover for the finite system. While extrapolation to $M \to \infty$ would suggest a discontinuity, we establish only the crossover behavior for finite $M$.
 
 \subsection{Complexity Matching (Experiment 2)}
 
@@ -358,7 +358,7 @@ The learning curve analysis confirms that Thompson Sampling is the strongest ada
 Our results establish three key facts about computational complexity adaptive routing:
 
 \begin{enumerate}
-  \item \textbf{Phase transitions are inevitable}: Any agent following a complexity-penalized routing policy will exhibit a sharp transition in tool complexity as the penalty varies. This is a mathematical consequence (Theorem~\ref{thm:phase-transition}) confirmed empirically.
+  \item \textbf{Sharp crossovers are inevitable}: Any agent following a complexity-penalized routing policy will exhibit a sharp transition in tool complexity as the penalty varies. This is a mathematical consequence (Theorem~\ref{thm:crossover}) confirmed empirically.
 
   \item \textbf{Optimal $\beta$ is task-dependent}: The complexity matching analysis (Proposition~\ref{prop:matching}) shows that $\beta^*$ must scale inversely with task complexity. A \emph{fixed} $\beta$ is suboptimal: it works for easy-medium tasks but fails for hard ones.
 
@@ -367,13 +367,13 @@ Our results establish three key facts about computational complexity adaptive ro
 
 \subsection{Limits and Open Questions}
 
-\paragraph{Synthetic tool market.} Our experiments use a synthetic tool market with parameterized accuracy-complexity relationships. Real tool markets (e.g., LLM tool-use, computational solvers) may have different structures. However, the phase transition is a \emph{structural} property of any Boltzmann-style routing, not specific to our parameterization.
+\paragraph{Synthetic tool market.} Our experiments use a synthetic tool market with parameterized accuracy-complexity relationships. Real tool markets (e.g., LLM tool-use, computational solvers) may have different structures. However, the sharp crossover is a \emph{structural} property of any Boltzmann-style routing, not specific to our parameterization.
 
 \paragraph{Unknown task complexity.} In practice, agents do not know $C_{\mathrm{task}}(p)$ exactly. Learning task complexity from experience is an important open direction.
 
 \paragraph{Multi-tool composition.} We study single-tool selection. In practice, agents compose multiple tools (e.g., coarse \emph{then} fine). The dynamics of composed routing under complexity penalties remains open.
 
-\paragraph{Thermodynamic limit.} Our phase transition is for $M = 13$ tools. In the limit $M \to \infty$, the transition would become strictly discontinuous (first-order). Our observation of a jump of 4.2 on a 11-unit scale (38\%) is consistent with this extrapolation.
+\paragraph{Finite vs. thermodynamic limit.} Our crossover is for $M = 13$ tools. In the limit $M \to \infty$, a discontinuity would require specific scaling conditions on $\{K_i, a_i\}$ that are not established here. Our observation of a jump of 4.2 on an 11-unit scale (38\%) is consistent with a steep but smooth transition, and suggests that the crossover region narrows with $M$. A rigorous treatment of the thermodynamic limit is an open direction.
 
 \subsection{Relation to MDL and Model Selection}
 
@@ -386,13 +386,13 @@ This connection suggests that AI agents operating under MDL-like principles may 
 We have formalized and validated the computational complexity adaptive routing hypothesis. Our main results:
 
 \begin{itemize}
-  \item Theorem: routing dynamics exhibits a phase transition at critical $\beta_c$
+  \item Theorem: routing dynamics exhibits a sharp crossover at critical $\beta_c$
   \item Empirical: confirmed with jump size 4.2, max derivative 10.88
   \item Practical: adaptive routing beats random for easy-medium tasks ($p=0.013$) but fails for hard tasks due to over-penalization
   \item Design principle: $\beta$ must scale inversely with task complexity; fixed $\beta$ is suboptimal
 \end{itemize}
 
-These results position computational complexity as a fundamental variable in agent tool-selection dynamics, with formal phase transition guarantees and practical implications for the design of adaptive AI systems. Future work should explore \emph{learned} complexity penalties $\beta(t)$ that adapt over time---as Thompson Sampling learns task-tool matches---rather than fixed $\beta$ policies.
+These results position computational complexity as a fundamental variable in agent tool-selection dynamics, with a formal crossover characterization and practical implications for the design of adaptive AI systems. Future work should explore \emph{learned} complexity penalties $\beta(t)$ that adapt over time---as Thompson Sampling learns task-tool matches---rather than fixed $\beta$ policies.
 
 \begin{thebibliography}{99}
 
@@ -465,7 +465,7 @@ Hutter, M. (2005).
 \bibitem{chimera-stable-attractors-2026}
 Cheng, L. Chimera states as true stable attractors: lifetime, basin geometry, and mode selection.
 \textit{arXiv preprint} (2026). [D1-academic-AI/Chimera]
-\newblock Stable coexistence classification (H1) and basin geometry analysis share formal framework with phase transitions in selection dynamics.
+\newblock Stable coexistence classification (H1) and basin geometry analysis share formal framework with sharp crossovers in selection dynamics.
 
 \bibitem{S12-1-2026}
 Cheng, L. Co-discovery phase transitions in high-velocity scientific fields.

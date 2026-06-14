@@ -1,0 +1,77 @@
+{
+  "example1_fermi_electroweak": {
+    "example": "Fermi vs Electroweak",
+    "chi2_fermi": 370.80123200608614,
+    "chi2_electroweak": 0.00047593660351452643,
+    "k_fermi": 1,
+    "k_electroweak": 3,
+    "n_data": 13,
+    "aic_fermi": 372.80123200608614,
+    "aic_electroweak": 6.0004759366035145,
+    "bic_fermi": 373.3661813635477,
+    "bic_electroweak": 7.695324008988125,
+    "akaike_weights": [
+      2.23989592958809e-80,
+      1.0
+    ],
+    "bayesian_weights": [
+      3.940780350667391e-80,
+      1.0
+    ],
+    "max_residual_energy_gev": 1000.0,
+    "residual_fraction": -152.96117191628844
+  },
+  "example2_post_newtonian": {
+    "example": "Post-Newtonian vs EOB",
+    "chi2": {
+      "1PN": 18693.768808613753,
+      "2PN": 2243.8120885580947,
+      "3PN": 76.99524708311561,
+      "EOB": 192.07782022192606
+    },
+    "aic": {
+      "1PN": 18695.768808613753,
+      "2PN": 2247.8120885580947,
+      "3PN": 82.99524708311561,
+      "EOB": 202.07782022192606
+    },
+    "bic": {
+      "1PN": 18698.37397879974,
+      "2PN": 2253.022428930071,
+      "3PN": 90.81075764107989,
+      "EOB": 215.10367115186654
+    },
+    "best_aic": "3PN",
+    "best_bic": "3PN",
+    "residual_rms": {
+      "1PN": 0.019076590205253586,
+      "2PN": 0.006731449523143734,
+      "3PN": 0.0009967455671365847,
+      "EOB": 0.0018089587291570132
+    }
+  },
+  "example3_schwarzschild_kerr": {
+    "example": "Schwarzschild vs Kerr",
+    "chi2": {
+      "Schwarzschild": 750.5819356818092,
+      "Kerr": 2.6370363252230127
+    },
+    "aic": {
+      "Schwarzschild": 750.5819356818092,
+      "Kerr": 4.637036325223013
+    },
+    "bic": {
+      "Schwarzschild": 750.5819356818092,
+      "Kerr": 4.582946474278326
+    },
+    "best_by_aic": "Kerr",
+    "akaike_weights": [
+      1.0474256447288398e-162,
+      1.0
+    ],
+    "bayesian_weights": [
+      1.0194777244105495e-162,
+      1.0
+    ]
+  }
+}

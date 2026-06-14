@@ -14,7 +14,6 @@
 | `D1-goal-investigation/` | 目标发现与探索 |
 | `D1-memory/` | 记忆系统理论 |
 | `D1-persona-align/` | Persona 对齐机制（8 原则 + 6 维度 + 3 行为约束） |
-| `d1-self-evolution/` | 自我进化实验 |
 
 ---
 

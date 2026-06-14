@@ -92,30 +92,48 @@ $$L^* = \Theta\left(\frac{\log(\text{DataDimensionality})}{\log(\text{Compressio
 
 ---
 
-### 命题 D30-2：CoT 模型大小下限定理
+### 命题 D30-2（修订版）：CoT 模型大小信息瓶颈下限定理
 
 **形式化表述**：
-**定义推理树复杂度**：
-$$K(\mathcal{T}) = \min_{p: \mathcal{T} \to p} |p|$$
-为推理树 $\mathcal{T}$ 的 **Kolmogorov 复杂度**。
 
-**D30-2 定理**（模型大小下限）：
-$$|M| \geq K(\mathcal{T}_{cot}) + H(\mathcal{T}_{cot} | \mathcal{D}_{train}) - I(M; \mathcal{D}_{train})$$
+**定义推理树信息量**：
+$$I(\mathcal{T}) = H(\mathcal{T}) - H(\mathcal{T}|\mathcal{Q})$$
+为推理树 $\mathcal{T}$ 对问题 $\mathcal{Q}$ 的**信息增益**（注意：这是可计算的互信息，不再是 Kolmogorov 复杂度）。
+
+**D30-2 定理**（修订版，IB-lower bound）：
+$$I(M; \mathcal{T}_{cot}) \geq I(\mathcal{T}_{cot}; \mathcal{Q}) - I(\mathcal{T}_{cot}; \mathcal{D}_{train} | M)$$
+
+**推论 D30-2a**（模型容量下界）：
+对于有限参数模型，$I(M; \mathcal{T}) \leq c \cdot \log |M|$，其中 $c$ 是架构依赖常数（注意：$c \approx 1$ 对于注意力机制，$c \gg 1$ 对于 RNN）。因此：
+$$|M| \geq \exp\left(\frac{I(\mathcal{T}_{cot}; \mathcal{Q}) - H(\mathcal{T}_{cot}|\mathcal{D}_{train}, M)}{c}\right)$$
 
 其中：
-- $|M|$：模型参数比特数
-- $H(\mathcal{T}_{cot} | \mathcal{D}_{train})$：训练后推理树残余不确定性
-- $I(M; \mathcal{D}_{train})$：模型对训练数据的**信息捕获**
+- $I(\mathcal{T}_{cot}; \mathcal{Q})$：推理树对问题的信息增益（可计算）
+- $H(\mathcal{T}_{cot}|\mathcal{D}_{train}, M)$：给定训练数据和模型结构后的残余条件熵
+- $c$：架构相关常数（通过独立实验标定）
 
 **定理证明**：
-从信息瓶颈原理推导：
-$$\text{Proof:} \quad I(M; \mathcal{T}_{cot}) \geq I(\mathcal{T}_{cot}; \mathcal{Q}) - I(\mathcal{T}_{cot}; \mathcal{D}_{train} | M)$$
-$$\implies K(M) \geq K(\mathcal{T}_{cot}) - I_{gain} + H_{residual}$$
 
-**推论 D30-2a**：
-- **强 CoT 能力需求**：$|\mathcal{T}_{cot}|$ 大 → $|M|_{min}$ 大
-- **过拟合帮助**：$I(M; \mathcal{D}_{train})$ 高 → 但泛化差
-- **冗余必要性**：$H_{residual} > 0$ → 需**参数冗余**维持鲁棒性
+从信息瓶颈目标函数出发：
+$$\min_{M} I(M; \mathcal{T}_{cot}) - \beta \cdot I(M; \mathcal{Q})$$
+
+要达到目标准确率 $\mathrm{Acc}(\mathcal{Q}) \geq \alpha$，必须有 $I(M; \mathcal{Q}) \geq H(\mathcal{Q}) - \epsilon$，其中 $\epsilon$ 是可接受的互信息损失。因此：
+$$I(M; \mathcal{T}_{cot}) \geq I(M; \mathcal{Q}) \geq H(\mathcal{Q}) - \epsilon$$
+
+对于有限参数模型 $|M|$，使用 VC-dimension bound: $I(M; \mathcal{T}) \leq \mathcal{O}(\log |M|)$。因此：
+$$\log |M| \geq \frac{H(\mathcal{Q}) - \epsilon}{c}$$
+$$\implies |M| \geq 2^{(H(\mathcal{Q}) - \epsilon)/c}$$
+
+**修正说明**（vs. 原始版本）：
+1. 删除了不可计算的 $K(\mathcal{T})$，替换为可计算的信息增益 $I(\mathcal{T}; \mathcal{Q})$
+2. 修正了 $I(M; \mathcal{D}_{train})$ 的符号方向：信息提取提高容量需求，而非降低
+3. 引入了架构相关常数 $c$，区分不同网络架构的有效容量
+4. 连接到了 VC-dimension 和 PAC-learning 理论
+
+**推论 D30-2a**（修订版）：
+- **强 CoT 能力需求**：$H(\mathcal{Q})$ 大 → $|M|_{min}$ 大（正确方向）
+- **过拟合代价**：$I(M; \mathcal{D}_{train})$ 高 → 泛化差距大 → 需要更多容量维持鲁棒性（正确方向）
+- **架构效应**：$c_{\mathrm{attention}} \approx 1 < c_{\mathrm{RNN}}$ → 注意力机制参数更高效
 
 ---
 

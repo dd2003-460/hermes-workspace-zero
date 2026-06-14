@@ -134,7 +134,8 @@ The framework \(\mathbf{DistCat}\) formalizes this idea as a
 \textbf{2-category} with: - 0-objects: base structures
 \(\mathcal{B} = (\mathbf{C}, \mathcal{F}, \mathcal{O})\) - 1-morphisms:
 structure-preserving triples \((\Phi, \alpha, \beta)\) - 2-morphisms:
-distance-exporting pairs \((\Gamma, \delta)\)
+distance-exporting pairs \((\Gamma, \delta)\) (see
+Refs.~[17, 18] for 2-category foundations.)
 
 We verify this framework with five examples spanning physics,
 statistics, and control theory. Examples~1 and 5 are developed in full
@@ -416,7 +417,7 @@ exist.
 
 \subsection{Example 5: EMRI Chaos as D26 Resonance Amplification}\label{sec:example5-emri}
 
-This section instantiates the DistCat framework for extreme mass-ratio inspirals (EMRIs) in dark matter (DM) halos, establishing that EMRI chaos is a gravitational realization of the D26 resonance amplification principle. We define the EMRI base structure $\mathcal{B}_{\rm EMRI} = (\mathbf{C}_{\rm EMRI}, \mathcal{F}_{\rm geo}, \mathcal{O}_{\rm obs})$, prove that the Lyapunov exponent $\lambda_T$ is the gravitational counterpart of the D26 amplification coefficient $G_{\rm Amp}$ (Proposition~\ref{prop:emri-chaos-resonance}), derive the KAM-breaking scaling law $\lambda_T \sim (\rho_s - \rho_c)^\alpha$ with $\alpha = 0.5$ (Proposition~\ref{prop:kam-scaling}), and show that the EMRI distance structure is categorically equivalent to D26's (Proposition~\ref{prop:emri-d26-dist-eq}). The MSS chaos bound $\lambda_T^2 < \kappa^2$ is interpreted as the D26 H-infinity robustness condition, yielding a provable stability boundary for EMRIs in DM halos.
+This section instantiates the DistCat framework for extreme mass-ratio inspirals (EMRIs) in dark matter (DM) halos, establishing that EMRI chaos is a gravitational realization of the D26 resonance amplification principle. We define the EMRI base structure $\mathcal{B}_{\rm EMRI} = (\mathbf{C}_{\rm EMRI}, \mathcal{F}_{\rm geo}, \mathcal{O}_{\rm obs})$, prove that the Lyapunov exponent $\lambda_T$ is the gravitational counterpart of the D26 amplification coefficient $G_{\rm Amp}$ (Proposition~\ref{prop:emri-chaos-resonance}), derive the KAM-breaking scaling law $\lambda_T \sim (\rho_s - \rho_c)^\alpha$ with $\alpha = 0.5$ (Proposition~\ref{prop:kam-scaling}), and show that the EMRI distance structure is categorically equivalent to D26's (Proposition~\ref{prop:emri-d26-dist-eq}). The Maldacena--Shenker--Stanford (MSS) chaos bound~[11] $\lambda_T^2 < \kappa^2$ is interpreted as the D26 H-infinity robustness condition, yielding a provable stability boundary for EMRIs in DM halos.
 
 \textbf{Cross-reference}: This example corresponds to row 5 of the classification table in Section~2. The distance export principle $\delta \leq C \cdot \Gamma$ from Definition~2.3 is realized through the effective potential $V_{\rm eff}(r; \rho_s, r_s)$, and the exported metric $D(\mathcal{B}_{\rm EMRI})$ coincides with the chaos distance space characterized by $\lambda_T$.
 
@@ -499,7 +500,7 @@ A counterintuitive result from Paper~I: in the chaotic parameter regime, Schwarz
 \subsubsection{MSS Chaos Bound as Robustness Condition}\label{subsec:mss-robustness}
 
 \begin{proposition}[MSS chaos bound = D26 H-infinity robustness]\label{prop:mss-robustness}
-The MSS chaos bound $\lambda_T^2 < \kappa^2$ for EMRIs in Dehnen halos is equivalent to the D26 H-infinity robustness condition $\mathcal{R} > 0$:
+The MSS chaos bound~[11] $\lambda_T^2 < \kappa^2$ for EMRIs in Dehnen halos is equivalent to the D26 H-infinity robustness condition $\mathcal{R} > 0$:
 \begin{equation}
 \mathcal{R}_{\rm EMRI}^2 = \frac{1}{\kappa^2 - \lambda_T^2} \quad \Longleftrightarrow \quad \mathcal{R}_{\rm D26} = \frac{1}{\|T_{zw}\|_\infty} > 0
 \end{equation}
@@ -517,7 +518,7 @@ By the distance export principle (Definition~2.3) and Proposition~\ref{prop:emri
 \begin{equation}
 \mathcal{R}_{\rm EMRI} = \frac{1}{\delta(\mathcal{O}_{\rm EMRI}, \mathcal{O}_{\rm critical})} = \frac{1}{\lambda_T}
 \end{equation}
-where $\mathcal{O}_{\rm critical}$ is the observation at the KAM-breaking threshold. The robustness condition $\mathcal{R}_{\rm EMRI} > 0$ is equivalent to $\lambda_T < \infty$, which is sharpened by the MSS bound $\lambda_T^2 < \kappa^2$. The expanded form of $\kappa_{\rm BHDM}$ shows that the DM halo increases the surface gravity (stiffening the stability boundary) while the Lyapunov exponent is suppressed -- a consistency check on the robustness picture. $\square$
+where $\mathcal{O}_{\rm critical}$ is the observation at the KAM-breaking threshold. The robustness condition $\mathcal{R}_{\rm EMRI} > 0$ is equivalent to $\lambda_T < \infty$, which is sharpened by the MSS bound~[11] $\lambda_T^2 < \kappa^2$. The expanded form of $\kappa_{\rm BHDM}$ shows that the DM halo increases the surface gravity (stiffening the stability boundary) while the Lyapunov exponent is suppressed -- a consistency check on the robustness picture. $\square$
 \end{proof}
 
 \subsubsection{KAM-Breaking Scaling Law}\label{subsec:kam-scaling}
@@ -581,7 +582,7 @@ The 2-functor $D: \mathbf{DistCat} \to \mathbf{Met}$ (Theorem~2.5) maps each bas
 \item \textbf{Amplification/distance:} $\lambda_T \leftrightarrow G_{\rm Amp}$ are both response coefficients that diverge at the critical point. In EMRI, $\lambda_T \sim (\rho_s - \rho_{s,\text{crit}})^{1/2}$ as the KAM threshold is approached. In D26, $\|H\|_\infty \sim \zeta^{-1}$ as damping vanishes. Both are inverse-power divergences at a critical point, exported through the distance inequality $\delta \leq C\,\Gamma$.
 \item \textbf{Frequency structure:} $\Omega_{\rm un} \leftrightarrow \omega_{\rm res}$ are both characteristic frequencies determined by fixed-point analysis ($V_{\rm eff}'' = 0$ in EMRI, eigenvalue analysis in D26).
 \item \textbf{Control parameters:} $(\rho_s, r_s) \leftrightarrow \varepsilon\delta A$ are both small perturbations that tune the system through the critical point.
-\item \textbf{Stability boundary:} The MSS bound $\lambda_T^2 < \kappa^2$ and the H-infinity condition $\mathcal{R} > 0$ are mathematically equivalent as robustness certificates ($\lambda_T^2 < \kappa^2 \iff \mathcal{R}_{\rm EMRI}^2 = (\kappa^2 - \lambda_T^2)^{-1} > 0$).
+\item \textbf{Stability boundary:} The MSS bound~[11] $\lambda_T^2 < \kappa^2$ and the H-infinity condition $\mathcal{R} > 0$ are mathematically equivalent as robustness certificates ($\lambda_T^2 < \kappa^2 \iff \mathcal{R}_{\rm EMRI}^2 = (\kappa^2 - \lambda_T^2)^{-1} > 0$).
 \item \textbf{Critical scaling:} Both frameworks exhibit $\delta \sim \Gamma^\alpha$ near the critical point. The EMRI exponent $\alpha = 0.5$ (KAM-breaking) and the D26 exponent $\alpha = 1$ (linear perturbation sensitivity) are quantitatively distinct but structurally identical: both arise from the same distance-export mechanism (resolvent bound in D26, Melnikov function in EMRI).
 \end{enumerate}
 
@@ -634,7 +635,7 @@ Observation distance $\delta$ & Chaos distance in $(\lambda_T, \kappa, r_{\rm ci
 Distance export inequality & $\delta \leq C \cdot \Gamma$ (geodesic continuity) \\
 Exported metric $D(\mathcal{B})$ & Chaos metric space $(\{\lambda_T, \kappa, r_{\rm circ}\}, d_{\rm chaos})$ \\
 Distance-equivalence class & $\cong_{\rm struct} D(\mathcal{B}_{\rm D26})$ (Prop.~\ref{prop:emri-d26-dist-eq}) \\
-Robustness certificate & MSS bound $\lambda_T^2 < \kappa^2$ (Prop.~\ref{prop:mss-robustness}) \\
+Robustness certificate & MSS bound~[11] $\lambda_T^2 < \kappa^2$ (Prop.~\ref{prop:mss-robustness}) \\
 Critical exponent & $\alpha = 0.5$ (KAM-breaking, Prop.~\ref{prop:kam-scaling}) \\
 GW proxy observables & $A$, $\Delta f$, $RR$, $h_c(f)$ \\
 \bottomrule
@@ -683,7 +684,7 @@ The Bayesian base structure $\mathcal{B}_{\rm Bayes} = (\mathbf{C}_{\rm Bayes}, 
 
 The source pre-distance is the $L^2$ distance between priors $\Gamma = \|\pi_0 - \pi_\infty\|_{L^2}$. The observation distance is the Fisher--Rao distance between prior and posterior $\delta = \delta_{\rm FR}(\pi_0, \pi_\infty)$. Under regularity conditions, the posterior contracts toward the true parameter at rate $\delta_{\rm FR} \sim n^{-1/2}$ (Bernstein--von Mises theorem), while the pre-distance between prior and posterior contracts as $\Gamma \sim n^{-1}$ (Bayesian learning). The distance export inequality $\delta \leq C\Gamma$ holds locally near the true parameter with $C$ related to the spectral gap of the Fisher information matrix. The critical exponent is $\alpha = 0.50$: as data accumulate ($n \to \infty$), the posterior contracts as $\delta_{\rm FR} \sim n^{-1/2}$ while the pre-distance scales as $\Gamma \sim n^{-1}$, giving $\delta \sim \Gamma^{1/2}$ and $\alpha = 1/2$.
 
-\textbf{Cross-reference:} This shares the universality class with Example~2 (statistical manifolds). The Fisher--Rao metric is the unique natural metric on statistical manifolds (Cencov's theorem), making the distance export structurally canonical.
+\textbf{Cross-reference:} This shares the universality class with Example~2 (statistical manifolds). The Fisher--Rao metric is the unique natural metric on statistical manifolds (Cencov's theorem~[3]), making the distance export structurally canonical.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -811,7 +812,7 @@ which would make the GR example genuinely non-discrete.
 \item
   \textbf{Optimal distance export}: Fisher-Rao distance is the unique
   optimal pre-distance among statistical manifolds
-  (Amari/Cencov/Chentsov uniqueness theorem). Examples 2 (KL divergence)
+  (Amari/Cencov/Chentsov uniqueness theorem~[3, 4]). Examples 2 (KL divergence)
   and 3 (Bayesian inference) are statistical manifolds where Fisher-Rao
   optimality applies directly. The other examples use different pre-distances
   (total variation, Lyapunov, geodesic) but follow the same structural
@@ -833,11 +834,11 @@ which would make the GR example genuinely non-discrete.
 \item
   Amari, S. (1985). Differential-geometrical methods in statistics.
   \emph{Springer}.
-\item
+\item\label{cencov}
   Cencov, N. N. (1982). \emph{Statistical Decision Rules and Optimal Inference}.
   \emph{AMS Translations of Mathematical Monographs}, 53. (Original: 1972, Russian.)
   -- Cencov's theorem: Fisher information metric is the unique invariant metric on statistical manifolds.
-\item
+\item\label{chentsov}
   Chentsov, N. N. (1972). \emph{Statistical Invariant Spaces}.
   \emph{Annals of the Institute of Statistical Mathematics}, 24(1), 57-65.
   -- Chentsov's theorem: Fisher metric characterizes sufficient statistics.
@@ -861,7 +862,7 @@ which would make the GR example genuinely non-discrete.
 \item
   Kehagias, A. \& Riotto, A. (2024). On the symmetry interpretation of
   the Hellings-Downs curve.
-\item
+\item\label{mss}
   Maldacena, J., Shenker, S. \& Stanford, D. (2016). A bound on chaos.
   \emph{JHEP}, 08, 106.
 \item
@@ -879,10 +880,10 @@ which would make the GR example genuinely non-discrete.
 \item
   Lu, C. EMRI-D26 resonance mapping: chaos-to-observable
   correspondence. \emph{in preparation} (D26).
-\item
+\item\label{baez-lauda}
   Baez, J. C. \& Lauda, A. D. (2004). Higher-Dimensional Algebra V:
   2-Groups. \emph{Theory Appl. Categ.}, 12, 423, arXiv:math/0307200.
-\item
+\item\label{mac-lane}
   Mac Lane, S. (1998). \emph{Categories for the Working Mathematician},
   2nd edn. \emph{Springer}. (Original: 1971.)
 \item

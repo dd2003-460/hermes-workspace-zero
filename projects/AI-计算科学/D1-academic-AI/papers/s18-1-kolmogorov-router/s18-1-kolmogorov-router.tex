@@ -5,6 +5,7 @@
 \usepackage{geometry}
 \usepackage{booktabs}
 \usepackage{hyperref}
+\usepackage{bookmark}
 \usepackage{url}
 \usepackage{float}
 
@@ -18,7 +19,8 @@
   colorlinks=true,
   linkcolor=black,
   citecolor=black,
-  urlcolor=black
+  urlcolor=black,
+  pdfstringdefDisableCommands=\def
 }
 
 \newtheorem{theorem}{Theorem}[section]
@@ -320,10 +322,8 @@ Key findings:
 
 \begin{figure}[htb]
   \centering
-  \fbox{\parbox{0.85\textwidth}{\centering\large
-    Learning curves: Thompson Sampling and UCB1 ($c=0.1$) lead in final reward\strut\\
-    \small (figure pending: cumulative reward over 500 rounds, see Table~\ref{tab:ucb-thompson} for final averages)}}
-  \caption{Learning curves (placeholder): cumulative reward over 500 rounds. Thompson Sampling converges fastest due to its adaptive exploration rate. UCB1 ($c=0.1$) also shows strong performance but is sensitive to $c$. Boltzmann ($\beta=0.1$) reaches a plateau quickly. Random serves as baseline. See Table~\ref{tab:ucb-thompson} for final average rewards.}
+  \includegraphics[width=0.85\textwidth]{Fig05-learning-curves.png}
+  \caption{Learning curves (medium task, 500 rounds). Thompson Sampling converges fastest and achieves highest cumulative reward (262.1). UCB1 ($c=0.1$) is most successful on average but fragile to $c$ choice. Boltzmann ($\beta=0.3$) and Random perform similarly, consistent with Table~\ref{tab:learning-curves} (0.374 vs 0.375 average reward).}
   \label{fig:learning-curves}
 \end{figure}
 
@@ -386,7 +386,7 @@ We have formalized and validated the computational complexity adaptive routing h
   \item Design principle: $\beta$ must scale inversely with task complexity; fixed $\beta$ is suboptimal
 \end{itemize}
 
-These results position computational complexity as a fundamental variable in agent tool-selection dynamics, with a formal crossover characterization and practical implications for the design of adaptive AI systems. Future work should explore \emph{learned} complexity penalties $\beta(t)$ that adapt over time---as Thompson Sampling learns task-tool matches---rather than fixed $\beta$ policies.
+These results position computational complexity as a fundamental variable in agent tool-selection dynamics, with a formal crossover characterization and practical implications for the design of adaptive AI systems. The complexity metric $K(t)$ used here---based on description length and MDL---admits a more general treatment via the 2-categorical distance framework of~\cite{lu2026-distcat}, which could unify complexity and information-theoretic distances across domains. Future work should explore \emph{learned} complexity penalties $\beta(t)$ that adapt over time---as Thompson Sampling learns task-tool matches---rather than fixed $\beta$ policies.
 
 \begin{thebibliography}{99}
 
@@ -465,6 +465,11 @@ Cheng, L. Chimera states as true stable attractors: lifetime, basin geometry, an
 Cheng, L. Co-discovery phase transitions in high-velocity scientific fields.
 \textit{arXiv preprint} (2026). [D1-academic-AI/S12-1]
 \newblock Cluster detection methodology (chain clustering with temporal threshold) shared with tool complexity clustering framework.
+
+\bibitem{lu2026-distcat}
+Lu, C. Distance derivation via 2-categorical framework.
+\textit{arXiv preprint} (2026). [D1-academic-AI/DistCat]
+\newblock Unified framework for distance metrics via 2-category theory provides formal underpinning for the complexity metric $K(t)$ used here.
 
 \end{thebibliography}
 

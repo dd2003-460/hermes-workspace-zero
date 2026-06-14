@@ -126,54 +126,51 @@ def fig2_dc_heatmap():
 
 # ---- Figure 3: Sector PSD (synthetic frozen pattern) ----
 def fig3_sector_psd():
-    """Synthetic PSD based on Protocol A frozen chimera pattern.
+    """Real PSD from Protocol A sector-level time series.
 
-    In the real system, r_s(t) is constant for chimera sectors,
-    and fluctuates for incoherent sectors (white noise).
-    PSD should show flat spectrum (white noise) for incoherent sectors,
-    and delta-like at DC for coherent sectors.
+    Data from protocol_a_lifetime_results.json: sector_psd[sector][run_id]
+    = [frequencies, psd_values]. Average across 3 chimera seeds.
     """
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    Nt = 500  # time points
-    dt = 0.02
-    f_Nyquist = 0.5 / dt  # but we normalize
-    t = np.arange(Nt) * dt
+    # Load real sector PSD data
+    protocol_path = os.path.join(DATA_DIR, "protocol_a_lifetime_results.json")
+    proto_data = json.load(open(protocol_path))
+    real_psd = proto_data["analysis"]["sector_psd"]
 
-    # Sector A_S0 (coherent in chimera): nearly constant high r
-    r_A0 = 0.95 + 0.01 * np.random.randn(Nt)
-    # Sector A_S3 (incoherent in chimera): nearly constant low r
-    r_A3 = 0.15 + 0.05 * np.random.randn(Nt)
-    # Sector B_S0 (coherent in chimera)
-    r_B0 = 0.90 + 0.01 * np.random.randn(Nt)
-    # Sector B_S3 (incoherent in chimera)
-    r_B3 = 0.20 + 0.06 * np.random.randn(Nt)
-
-    # Compute PSD (mean-subtracted)
-    def psd(signal):
-        fft = np.abs(np.fft.rfft(signal - np.mean(signal))) ** 2
-        return fft / np.max(fft)  # normalized
-
-    freqs = np.fft.rfftfreq(Nt, d=dt)
-    f_norm = freqs / freqs[-1]  # normalized to Nyquist
+    # Select sectors: A_S0 (coherent), A_S3 (incoherent), B_S0 (coherent), B_S3 (incoherent)
+    sector_names = [("A_S0", "A_S0 (coherent)", "C0"),
+                    ("A_S3", "A_S3 (incoherent)", "C1"),
+                    ("B_S0", "B_S0 (coherent)", "C2"),
+                    ("B_S3", "B_S3 (incoherent)", "C3")]
 
     fig, ax = plt.subplots(figsize=(6.5, 4))
 
-    for r_s, label, color in [
-        (r_A0, "A_S0 (coherent)", "C0"),
-        (r_A3, "A_S3 (incoherent)", "C1"),
-        (r_B0, "B_S0 (coherent)", "C2"),
-        (r_B3, "B_S3 (incoherent)", "C3"),
-    ]:
-        p = psd(r_s)
-        ax.plot(f_norm, p, label=label, color=color, linewidth=1.5)
+    for sector_key, label, color in sector_names:
+        run_data = real_psd[sector_key]
+        # Average PSD across all 3 chimera seeds
+        psd_sum = None
+        freqs = None
+        for run_id in run_data:
+            f, p = run_data[run_id]
+            f = np.array(f)
+            p = np.array(p)
+            if freqs is None:
+                freqs = f
+                psd_sum = p
+            else:
+                # Align by frequency (should already match)
+                psd_sum += p
+        psd_avg = psd_sum / len(run_data)
+        # Normalize
+        psd_avg = psd_avg / np.max(psd_avg)
+        ax.plot(freqs, psd_avg, label=label, color=color, linewidth=1.5)
 
-    ax.set_xlabel("Normalized Frequency (f / f_Nyquist)", fontsize=12)
+    ax.set_xlabel("Frequency", fontsize=12)
     ax.set_ylabel(r"Normalized PSD", fontsize=12)
-    ax.set_title(r"Sector PSD: Frozen Spatial Mode", fontsize=13, fontweight="bold")
-    ax.set_xlim(0, 1)
+    ax.set_title(r"Sector PSD: Frozen Spatial Mode (Protocol A, Real Data)", fontsize=13, fontweight="bold")
     ax.legend(fontsize=9, loc="upper right")
     ax.grid(True, alpha=0.3)
     ax.tick_params(labelsize=10)

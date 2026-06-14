@@ -1,8 +1,9 @@
-# D1 Goal Investigation — INDEX
+# D1 Goal Investigation — Agent 目标发现与探索
 
 ## 项目目标
 
-调查 Claude Code 的 goal 机制，理解其与 Ralph Loop 的区别、交互和整合方式。
+研究 AI Agent 的 goal/task 执行机制，理解 Claude Code、Codex、Hermes 三者的异同，
+分析"非完成即停止"的根因，并探索如何用 prompt 稳定激发 AI 的提问风格。
 
 ## 背景
 
@@ -12,14 +13,11 @@
 
 | 目录 | 内容 |
 |------|------|
-| researches/ | 调研文档 |
-| memory/ | 探索记录 |
+| researches/ | 研究文档 |
+| notes/ | 过程笔记（调研过程记录） |
 | tasks/ | 任务板 |
 | raw/ | 原始资料 |
 
 ## 任务
 
-1. **goal机制技术调查** — /goal命令的工作原理、持久化、执行
-2. **Ralph Loop vs /goal 对比** — 两者区别、互补、冲突
-3. **提取对话记录中的用户消息** — 从JSONL日志中提取551条用户消息
-4. **goal架构设计** — 设计一个更robust的goal管理系统
+详见 [tasks/TASKS.md](tasks/TASKS.md)

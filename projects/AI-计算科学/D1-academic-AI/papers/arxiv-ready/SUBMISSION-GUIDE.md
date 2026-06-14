@@ -5,8 +5,8 @@
 | Paper | Title | Target | Package | Status |
 |-------|-------|--------|---------|--------|
 | DistCat v5 | Distance Derivation via 2-Categorical Framework | arXiv (math.CT) | DISTCAT-arxiv-submission-v5.tar.gz | READY |
-| Chimera | Chimera States as True Stable Attractors | Chaos / PR-E | chimera-arxiv-v1.tar.gz | READY |
-| S18-1 | Kolmogorov Complexity Router for Dynamic Tool Selection | arXiv (cs.AI) | s18-1-arxiv-v1.tar.gz | READY |
+| Chimera | Chimera States as True Stable Attractors | Chaos / PR-E | chimera-stable-attractors-arxiv.tar.gz | READY |
+| S18-1 | Kolmogorov Complexity Router for Dynamic Tool Selection | arXiv (cs.AI) | S18-1-kolmogorov-router-arxiv.tar.gz | READY |
 | S17-1 | Semantic Space Geometry: Negative Curvature from Word Vector Embeddings | arXiv (cs.CL) | s17-1-arxiv-v1.tar.gz | READY |
 | D30-2 | Tighter CoT Model Size Lower Bound via IB | arXiv (cs.LG) | d30-2-ib-bound-arxiv-v1.tar.gz | READY |
 
@@ -43,10 +43,11 @@ All packages are at:
 
 ## Notes
 
-- DistCat v5: Already submitted as v5 in previous iteration. Double-check if already submitted.
-- Chimera: Compiled clean on 2nd pass (citation resolved). 10 pages.
+- DistCat v5: 20 pages, LaTeX source + 2 figures. Most important paper — submit first.
+- Chimera: 10 pages, compiled clean on 2nd pass (citation resolved).
 - S18-1: 13 pages, 5 figures, cosmetic hyperref warning only.
 - S17-1: 8 pages, 3 figures, font warnings (cosmetic).
+- D30-2: 8 pages, 0 figures, 4-step proof. Theoretical paper on CoT model size.
 
 ## Post-Submission
 

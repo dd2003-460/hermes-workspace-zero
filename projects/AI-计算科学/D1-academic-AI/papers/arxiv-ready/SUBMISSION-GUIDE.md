@@ -8,6 +8,7 @@
 | Chimera | Chimera States as True Stable Attractors | Chaos / PR-E | chimera-arxiv-v1.tar.gz | READY |
 | S18-1 | Kolmogorov Complexity Router for Dynamic Tool Selection | arXiv (cs.AI) | s18-1-arxiv-v1.tar.gz | READY |
 | S17-1 | Semantic Space Geometry: Negative Curvature from Word Vector Embeddings | arXiv (cs.CL) | s17-1-arxiv-v1.tar.gz | READY |
+| D30-2 | Tighter CoT Model Size Lower Bound via IB | arXiv (cs.LG) | d30-2-ib-bound-arxiv-v1.tar.gz | READY |
 
 ## How to Submit
 
@@ -24,6 +25,7 @@
 - **Chimera**: chao-dyn (chaos/nlin.CD) or phys.rev.e
 - **S18-1**: cs.AI (Artificial Intelligence)
 - **S17-1**: cs.CL (Computation and Language) or stat.ML
+- **D30-2**: cs.LG (Machine Learning) or stat.ML
 
 ## Common arXiv Requirements
 

@@ -10,7 +10,7 @@ fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
 
 # Example data
 examples = ['AQFT\n(HD)', 'Fisher\nInfo Geo.', 'Bayesian\nF-R', 'Control\nResonance', 'EMRI\nChaos']
-alphas = [1.84, 2.00, 2.00, np.inf, 0.50]
+alphas = [1.84, 0.50, 0.50, 1, 0.50]
 colors = ['#2E86AB', '#A23B72', '#F18F01', '#C73E1D', '#60A33F']
 physical_interps = ['Total var.\ndistance', 'Statistical\ndistance', 'Bayesian\ncontraction', 'Pole distance\n(amplified)', 'Metric-perturb.\ndistance']
 
@@ -43,10 +43,10 @@ ax1.legend(legend_handles, physical_interps, fontsize=8.5, loc='upper left',
 Gamma_vals = np.logspace(-3, 0, 500)  # Gamma from 0.001 to 1
 
 # Plot different power laws
-alpha_vals = [0.50, 1.84, 2.00, 3.0]  # inf case handled separately
-alpha_labels = [r'$\alpha=0.50$ (EMRI)', r'$\alpha=1.84$ (AQFT)', r'$\alpha=2.00$ (Fisher/Bayesian)',
+alpha_vals = [0.50, 1.84, 0.50, 3.0]  # EMRI, AQFT, Fisher-Bayesian, reference
+alpha_labels = [r'$\alpha=0.50$ (EMRI)', r'$\alpha=1.84$ (AQFT)', r'$\alpha=0.50$ (Fisher-Bayesian)',
                 r'$\alpha=3.00$ (reference)']
-display_alphas = [(0.50, 0), (1.84, 1), (2.00, 2), (3.0, -1)]
+display_alphas = [(0.50, 0), (1.84, 1), (0.50, 2), (3.0, -1)]
 
 for a, idx in display_alphas:
     delta_vals = Gamma_vals ** a

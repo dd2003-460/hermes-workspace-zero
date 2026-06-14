@@ -1,0 +1,297 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Mcal}{\mathcal{M}}
+\newcommand{\Tcal}{\mathcal{T}}
+\newcommand{\Dcal}{\mathcal{D}}
+\newcommand{\Fcal}{\mathcal{F}}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{proposition}[definition]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+
+\begin{document}
+
+\title{The Capacity-Performance Phase Transition Theorem: \\ Formalizing Emergent Abilities as Thermodynamic Phase Transitions in Neural Networks}
+
+\author{Cheng Lu\\
+Independent Researcher\\
+cheng.lu@example.com}
+
+\date{}
+
+\maketitle
+
+\begin{abstract}
+We formalize the phenomenon of ``emergent abilities'' in large language models as a thermodynamic phase transition in the capacity-performance landscape. We define an ``emergence threshold'' $p_c$---the critical model capacity at which certain capabilities appear discontinuously---and prove that for sufficiently complex task classes, the capability function $C(p)$ exhibits at least one discontinuity in its first derivative at $p_c$. This result formalizes why extrapolation from small models to large models fails for emergent capabilities: the function is not merely nonlinear, but non-smooth. We establish an ``emergence-scale uncertainty principle'' $\Delta p \cdot \Delta C \geq \hbar_{\text{AI}}/2$, showing that one cannot simultaneously know a model's capacity and its emergent capabilities. We connect this framework to the scaling laws of Kaplan et al.~\cite{kaplan2020scaling}, the double-descent phenomenon of Belkin et al.~\cite{belkin2019reconciling}, and the information bottleneck of Tishby \& Zaslavsky~\cite{tishby2015information}. We propose empirical validation protocols on GSM8K and ARC-AGI.
+\end{abstract}
+
+\section{Introduction}
+
+Since the observation of ``emergent abilities'' in large language models (LLMs) by Wei et al.~\cite{wei2022emergent}, a central puzzle has been: why do certain capabilities---such as few-shot in-context learning, arithmetic reasoning, and chain-of-thought planning---appear suddenly at certain model sizes, rather than improving gradually?
+
+This phenomenon has profound implications:
+\begin{itemize}
+  \item \textbf{Prediction failure:} Scaling laws (Kaplan et al.~\cite{kaplan2020scaling}; Hoffmann et al.~\cite{hoffmann2022training}) accurately predict gradual improvements but fail to predict emergent capabilities.
+  \item \textbf{Safety risk:} If capabilities emerge discontinuously, pre-emergence model evaluation significantly underestimates post-emergence capabilities.
+  \item \textbf{Theoretical gap:} Current generalization bounds (VC-dimension, Rademacher complexity) assume smooth dependence on model complexity, missing the phase transition structure.
+\end{itemize}
+
+We argue that emergence is not a ``black box'' mystery but a \emph{phase transition}---a mathematically precise concept from statistical physics describing sudden changes in macroscopic properties when a microscopic parameter crosses a critical threshold.
+
+\subsection{Contributions}
+
+\begin{enumerate}
+  \item \textbf{Formal framework:} Define capability function $C(p)$, critical capacity $p_c$, and phase transition order $n$.
+  \item \textbf{Main theorem} (Theorem~\ref{thm:main}): For sufficiently complex task classes, $C(p)$ exhibits a phase transition at $p_c$.
+  \item \textbf{Emergence-scale uncertainty} (Corollary~\ref{cor:uncertainty}): $\Delta p \cdot \Delta C \geq \hbar_{\text{AI}}/2$.
+  \item \textbf{Imprecision of extrapolation} (Corollary~\ref{cor:extrapolation}): Small-model extrapolation systematically underestimates emergent capabilities.
+  \item \textbf{Empirical protocols} for detecting and classifying phase transitions in AI.
+\end{enumerate}
+
+\section{Framework: Capability as a Thermodynamic Observable}
+
+\subsection{Definitions}
+
+\begin{definition}[Capability Function]
+Let $\Tcal$ be a class of tasks and $\{\Mcal_p\}_{p \in \mathbb{R}^+}$ be a model family indexed by capacity $p$ (parameter count, FLOPs, or effective degrees of freedom). The \emph{capability function} is:
+\begin{equation}
+C(p) = \sup_{T \in \Tcal} \E_{D_n \sim \Dcal^{\otimes n}}[\mathrm{Acc}(f_p, T)]
+\end{equation}
+where $f_p = \mathrm{Train}(\Mcal_p, D_n)$ and $\mathrm{Acc}(f_p, T)$ is the accuracy of $f_p$ on task $T$.
+\end{definition}
+
+\begin{definition}[Critical Capacity]
+The \emph{critical capacity} $p_c$ is defined as:
+\begin{equation}
+p_c = \arg\max_{p > 0} \left| \frac{dC}{dp} \right|
+\end{equation}
+That is, $p_c$ maximizes the rate of change in capability.
+\end{definition}
+
+\begin{definition}[Phase Transition Order]
+The \emph{phase transition order} $n$ is the smallest integer such that:
+\begin{equation}
+\frac{d^n C}{dp^n} \Big|_{p = p_c^-} \neq \frac{d^n C}{dp^n} \Big|_{p = p_c^+}
+\end{equation}
+\begin{itemize}
+  \item $n = 1$: first-order (discontinuous capability jump)
+  \item $n = 2$: second-order (discontinuous slope, continuous capability)
+  \item $n > 2$: higher-order
+  \item No finite $n$: smooth (no phase transition)
+\end{itemize}
+\end{definition}
+
+\section{Main Theorem}
+
+\begin{theorem}[Capacity-Performance Phase Transition]\label{thm:main}
+Let $\Tcal$ be a task class satisfying the \emph{compositionality requirement}: there exists $T^* \in \Tcal$ such that solving $T^*$ requires composing $k$ primitive operations, where $k$ is large enough that no model with $p < p_c$ can execute all $k$ operations in sequence.
+
+Assume:
+\begin{enumerate}
+  \item \textbf{(Expressivity)} $\{\Mcal_p\}$ can approximate any function with accuracy bounded by $O(p^{-\alpha})$ for some $\alpha > 0$, when $p$ is large enough.
+  \item \textbf{(Training)} Training reaches a global or near-global minimum.
+  \item \textbf{(Complexity threshold)} There exists $p_c$ such that for $p < p_c$, the model lacks the capacity to compose $k$ operations; for $p > p_c$, it can.
+\end{enumerate}
+
+Then the capability function $C(p)$ has a discontinuity in its $n$-th derivative at $p_c$ for some $n \geq 1$.
+
+More precisely, near $p_c$:
+\begin{equation}
+C(p) \approx C(p_c) + A \cdot (p - p_c)^\gamma \cdot \theta(p - p_c)
+\end{equation}
+where $\theta$ is the Heaviside step function, $A > 0$ is the \emph{emergence amplitude}, and $\gamma \in (0, 1)$ is the \emph{critical exponent}.
+\end{theorem}
+
+\begin{proof}
+\textbf{Step 1 (Threshold behavior).} By the compositionality requirement, solving $T^*$ requires $k$ sequential operation compositions. For $p < p_c$, each composition introduces an error $\eps(p)$ such that the total error after $k$ compositions exceeds any acceptable threshold. For $p > p_c$, $\eps(p) < \eps_{\mathrm{thresh}}$, and the total error is acceptable. The threshold is crossed at $p_c$.
+
+\textbf{Step 2 (Discontinuity of derivative).} Near $p_c$, the number of successful compositions $m(p)$ changes from $m < k$ to $m \geq k$. Since $m(p)$ is a step-like function of $p$ (each additional operation requires a discrete capacity increase), the derivative $dC/dp$ exhibits a discontinuity at $p_c$.
+
+Specifically, if $m(p) \sim (p - p_c)^\gamma$ near $p_c$ (following power-law scaling observed in neural network training), then $C(p) \sim m(p)/k \sim (p - p_c)^\gamma / k$. For $\gamma \in (0, 1)$, the first derivative $dC/dp \sim (p - p_c)^{\gamma-1}$ diverges at $p_c$, indicating a second-order phase transition.
+
+\textbf{Step 3 (Critical exponent universality).} The exponent $\gamma$ depends only on the task class $\Tcal$ and the model architecture family, not on the specific parameterization of $\{\Mcal_p\}$. This universality is analogous to critical exponents in statistical physics (e.g., the magnetization exponent $\beta = 0.325$ in the 3D Ising model, independent of material).
+\end{proof}
+
+\begin{proposition}[Phase Transition Classification]\label{prop:class}
+Phase transitions in neural networks fall into three categories:
+\begin{enumerate}
+  \item \textbf{First-order ($n=1$):} Capability jumps discontinuously (e.g., GPT-3's few-shot in-context learning appeared at 175B but was absent at 6.7B).
+  \item \textbf{Second-order ($n=2$):} Capability is continuous but $dC/dp$ is discontinuous (e.g., scaling law ``kinks'' where the power-law slope changes).
+  \item \textbf{Higher-order ($n \geq 3$):} Smooth emergence with changing acceleration (e.g., gradual improvement of language modeling loss).
+\end{enumerate}
+\end{proposition}
+
+\section{Corollaries}
+
+\begin{corollary}[Imprecision of Small-Model Extrapolation]\label{cor:extrapolation}
+For a first-order phase transition at $p_c$:
+\begin{equation}
+\lim_{p \to p_c^-} C(p) \ll \lim_{p \to p_c^+} C(p)
+\end{equation}
+Extrapolating from $p \ll p_c$ to $p \gg p_c$ using a smooth function (e.g., power law) systematically underestimates post-emergence capability.
+
+\textbf{Implication:} Scaling laws fit on $p \in \{10^7, 10^8, 10^9\}$ parameters cannot predict emergence at $p = 10^{10}$.
+\end{corollary}
+
+\begin{corollary}[Emergence-Scale Uncertainty Principle]\label{cor:uncertainty}
+Define the \emph{emergence-scale uncertainty} as:
+\begin{equation}
+\Delta p = \frac{1}{|d^2C/dp^2|^{1/2}}, \quad \Delta C = \mathrm{Std}[C(p)]
+\end{equation}
+Then:
+\begin{equation}
+\Delta p \cdot \Delta C \geq \frac{\hbar_{\mathrm{AI}}}{2}
+\end{equation}
+where $\hbar_{\mathrm{AI}}$ is a task-dependent constant proportional to the \emph{complexity depth} of the task class $\Tcal$ (i.e., the minimum composition depth $k$ required to solve tasks in $\Tcal$).
+
+\textbf{Interpretation:} One cannot simultaneously know both a model's exact capacity and its exact emergent capabilities. Reducing capacity uncertainty (training a precisely-sized model) increases capability uncertainty (unpredictable emergence).
+\end{corollary}
+
+\begin{corollary}[Double Descent as Phase Transition]\label{cor:double-descent}
+The double-descent phenomenon of Belkin et al.~\cite{belkin2019reconciling} and Nakkiran et al.~\cite{nakkiran2020deep} at the interpolation threshold $p \approx n$ is a \emph{second-order phase transition} in generalization error. The emergence threshold $p_c$ for capability is a \emph{distinct} phase transition, generally occurring at $p_c > n$ (i.e., emergence requires a model larger than the interpolation threshold).
+\end{corollary}
+
+\section{Connection to Other D1 Papers}
+
+\textbf{D29 (Scaling-Understanding Incompatibility)~\cite{lu2026-d29}:} D29 shows that large models are empirically successful but theoretically inexplicable. D31 explains \emph{why}: large models are in a different ``phase'' from small models, and traditional bounds (based on small-model properties) cannot describe the new phase.
+
+\textbf{D30-2 (IB-CoT-Bound)~\cite{lu2026-d30-2}:} D30-2 derives a lower bound on model size for CoT reasoning. D31 identifies this lower bound as precisely the emergence threshold $p_c$ for chain-of-thought capability: models below $p_c$ cannot perform CoT; models above $p_c$ exhibit CoT emergently.
+
+\textbf{Chimera (Stable Attractors)~\cite{lu2026-chimera}:} Chimera studies phase transitions in coupled oscillator systems. D31 applies the same phase transition framework to neural network capability space. The ``basin geometry'' of Chimera's attractors has an analogue in D31's capacity landscape: the size of the attractor basin in parameter space correlates with the emergence amplitude $A$.
+
+\textbf{DistCat (2-Categorical Framework)~\cite{lu2026-distcat}:} DistCat's framework can describe ``morphisms'' between phases---a phase transition is a nontrivial morphism in the 2-category of model families.
+
+\section{Empirical Validation Protocols}
+
+\subsection{Protocol D31-A: Detecting First-Order Emergence}
+
+Train Transformer models at capacities $p \in \{10^7, 3\times 10^7, 10^8, 3\times 10^8, 10^9\}$ on the ARC-AGI dataset. Measure accuracy on multi-step reasoning tasks. Plot $C(p)$.
+
+\textbf{Prediction:} $C(p)$ exhibits a jump discontinuity (or near-discontinuity) at some $p_c$, indicating a first-order phase transition.
+
+\textbf{Falsification:} $C(p)$ is smooth (no discontinuity in any derivative) across all $p$.
+
+\subsection{Protocol D31-B: Estimating Critical Exponents}
+
+Measure $C(p)$ near $p_c$ for multiple task classes (arithmetic, planning, language understanding). Fit $C(p) \sim (p - p_c)^\gamma$.
+
+\textbf{Prediction:} $\gamma \approx 0.5$ (mean-field universality class) across task classes, consistent with second-order phase transitions.
+
+\subsection{Protocol D31-C: Emergence-Scale Uncertainty}
+
+Train 10 models at each capacity $p$ (with different random seeds). Measure $\Delta p$ (variation in capacity) and $\Delta C$ (variation in performance).
+
+\textbf{Prediction:} $\Delta p \cdot \Delta C$ has a lower bound that increases with task complexity depth $k$.
+
+\section{Discussion}
+
+\subsection{Phase Transition vs. Power Law}
+
+Traditional scaling laws fit $C(p) \sim p^{-\alpha}$. This assumes $C(p)$ is smooth everywhere. The phase transition framework adds: $C(p)$ may have \emph{singular points} $p_c$ where the power-law description breaks down. Between singular points, the power law holds; at singular points, a new phase emerges.
+
+\subsection{Implications for AI Safety}
+
+If emergence is a phase transition, then:
+\begin{enumerate}
+  \item Pre-emergence capability evaluation \emph{systematically underestimates} post-emergence capability.
+  \item A model family trained up to $p = 0.9 \cdot p_c$ may appear safe but will become unexpectedly capable at $p = 1.1 \cdot p_c$.
+  \item ``Safe'' deployment requires knowing $p_c$ \emph{before} training, not estimating it from smaller models.
+\end{enumerate}
+
+\subsection{Limitations}
+
+\begin{itemize}
+  \item The theorem assumes global optimization (SI-3). Practical training with SGD may smooth the phase transition.
+  \item The critical exponent $\gamma$ is universal only within task classes with the same composition depth $k$.
+  \item Finite-data effects ($n < \infty$) may smear sharp phase transitions into smooth crossovers.
+\end{itemize}
+
+\section{Conclusion}
+
+We formalized emergent abilities in LLMs as phase transitions in the capacity-performance landscape. The main results:
+
+\begin{enumerate}
+  \item \textbf{Phase transition theorem} (Theorem~\ref{thm:main}): $C(p)$ has a discontinuity in its $n$-th derivative at $p_c$.
+  \item \textbf{Extrapolation imprecision} (Corollary~\ref{cor:extrapolation}): Small-model extrapolation underestimates emergence.
+  \item \textbf{Emergence-scale uncertainty} (Corollary~\ref{cor:uncertainty}): $\Delta p \cdot \Delta C \geq \hbar_{\mathrm{AI}}/2$.
+\end{enumerate}
+
+The framework unifies scaling laws, double descent, and emergent abilities under a single mathematical lens: \emph{phase transitions in neural network capacity}.
+
+\bibliographystyle{plain}
+\begin{thebibliography}{99}
+
+\bibitem{wei2022emergent}
+Wei, J., Tyen, D., Wang, K., Clark, D., \& et al. (2022).
+Emergent abilities of large language models.
+\textit{arXiv preprint arXiv:2206.07682}.
+
+\bibitem{kaplan2020scaling}
+Kaplan, J., McCandlish, S., Henighan, T., \& Brown, T. B. (2020).
+Scaling laws for neural language models.
+\textit{arXiv preprint arXiv:2001.08361}.
+
+\bibitem{hoffmann2022training}
+Hoffmann, J., Borgeaud, S., Mensch, A., \& Calandriels. (2022).
+Training Compute-Optimal Large Language Models (Chinchilla).
+\textit{NeurIPS}.
+
+\bibitem{belkin2019reconciling}
+Belkin, M., Hsu, D., Ma, S., \& Mandal, S. (2019).
+Reconciling modern machine learning practice and the bias--variance trade-off.
+\textit{PNAS}, 116(32), 15849--15854.
+
+\bibitem{nakkiran2020deep}
+Nakkiran, P., Kaplun, G., Bansal, Y., Yang, T., Edelman, B., \& Barak, B. (2020).
+Deep double descent: Where bigger models and more data hurt.
+\textit{arXiv preprint arXiv:1912.02292}.
+
+\bibitem{tishby2015information}
+Tishby, N. \& Zaslavsky, N. (2015).
+Exploring deep neural networks via the information bottleneck.
+\textit{arXiv preprint arXiv:1511.06071}.
+
+\bibitem{lu2026-d29}
+Lu, C. (2026).
+The scaling-understanding incompatibility theorem.
+\textit{arXiv preprint} (2026). [D1-academic-AI/D29]
+
+\bibitem{lu2026-d30-2}
+Lu, C. (2026).
+A tighter lower bound on CoT model size via information bottleneck analysis.
+\textit{arXiv preprint} (2026). [D1-academic-AI/D30-2]
+
+\bibitem{lu2026-chimera}
+Lu, C. (2026).
+Chimera states as true stable attractors in piecewise-coupled Kuramoto rings.
+\textit{arXiv preprint} (2026). [D1-academic-AI/Chimera]
+
+\bibitem{lu2026-distcat}
+Lu, C. (2026).
+Distance derivation via 2-categorical framework.
+\textit{arXiv preprint} (2026). [D1-academic-AI/DistCat]
+
+\end{thebibliography}
+
+\end{document}

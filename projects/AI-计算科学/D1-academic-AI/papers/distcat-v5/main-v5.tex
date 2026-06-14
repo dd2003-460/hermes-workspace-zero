@@ -203,7 +203,7 @@ developed in companion papers.
 \end{enumerate}
 
 The five examples have critical exponents
-\(\alpha \in \{1.84, 0.50, 0.50, -\gamma, 0.50\}\), yet all share the
+\(\alpha \in \{1.84, 0.50, 0.50, 1, 0.50\}\), yet all share the
 universal pattern \(\delta \sim \Gamma^\alpha\) near critical points.
 This suggests that the distance export principle is a
 \textbf{categorical invariant}, not a domain-specific accident.
@@ -504,7 +504,7 @@ under the D26 $\leftrightarrow$ EMRI correspondence. Specifically:
 \Omega_{\rm un}^2 = \frac{1}{r_{\rm un}}\,\frac{d^2 V_{\rm eff}}{dr^2}\bigg|_{r=r_{\rm un}} = \frac{M}{r_{\rm un}^3} + \mathcal{O}(\rho_s)
 \end{equation}
 \item The critical distance $\varepsilon \to 0$ in D26 corresponds to the distance from the homoclinic orbit to the unstable fixed point: $\varepsilon = r - r_{\rm un}$.
-\item The critical power law $G_{\rm Amp} \sim \varepsilon^{-\gamma}$ in D26 corresponds to $\lambda_T \sim (\rho_s - \rho_{s,\text{crit}})^\alpha$ in EMRI.
+\item The response amplification in D26 ($\|H\|_\infty$ diverges as damping $\zeta \to 0$, with perturbation sensitivity $\delta \sim \Gamma^1$) corresponds to the Lyapunov exponent growth in EMRI ($\lambda_T \sim (\rho_s - \rho_{s,\text{crit}})^{1/2}$ near KAM-breaking). Both represent exponential instability---resonant in D26, chaotic in EMRI.
 \end{enumerate}
 \end{proposition}
 
@@ -608,11 +608,11 @@ where $\cong_{\rm struct}$ denotes structural equivalence (isomorphism in the me
 \begin{proof}
 The 2-functor $D: \mathbf{DistCat} \to \mathbf{Met}$ (Theorem~2.5) maps each base structure to its exported observation metric space. Structural equivalence $D(\mathcal{B}_{\rm EMRI}) \cong D(\mathcal{B}_{\rm D26})$ requires isomorphic metric spaces under the identified correspondences:
 \begin{enumerate}
-\item \textbf{Amplification/distance:} $\lambda_T \leftrightarrow G_{\rm Amp}$ are both divergence coefficients that diverge at the critical point. Both satisfy the same scaling form $\lambda_T \sim \varepsilon^\beta$, $G_{\rm Amp} \sim \varepsilon^{-\gamma}$.
+\item \textbf{Amplification/distance:} $\lambda_T \leftrightarrow G_{\rm Amp}$ are both response coefficients that diverge at the critical point. In EMRI, $\lambda_T \sim (\rho_s - \rho_{s,\text{crit}})^{1/2}$ as the KAM threshold is approached. In D26, $\|H\|_\infty \sim \zeta^{-1}$ as damping vanishes. Both are inverse-power divergences at a critical point, exported through the distance inequality $\delta \leq C\,\Gamma$.
 \item \textbf{Frequency structure:} $\Omega_{\rm un} \leftrightarrow \omega_{\rm res}$ are both characteristic frequencies determined by fixed-point analysis ($V_{\rm eff}'' = 0$ in EMRI, eigenvalue analysis in D26).
 \item \textbf{Control parameters:} $(\rho_s, r_s) \leftrightarrow \varepsilon\delta A$ are both small perturbations that tune the system through the critical point.
 \item \textbf{Stability boundary:} The MSS bound $\lambda_T^2 < \kappa^2$ and the H-infinity condition $\mathcal{R} > 0$ are mathematically equivalent as robustness certificates ($\lambda_T^2 < \kappa^2 \iff \mathcal{R}_{\rm EMRI}^2 = (\kappa^2 - \lambda_T^2)^{-1} > 0$).
-\item \textbf{Critical scaling:} Both frameworks exhibit $\delta \sim \Gamma^\alpha$ near the critical point, with $\alpha \in (0, 1)$ (sub-linear). The EMRI exponent $\alpha = 0.5$ and the D26 exponent $\gamma$ share the same qualitative behavior (critical slowing of the response).
+\item \textbf{Critical scaling:} Both frameworks exhibit $\delta \sim \Gamma^\alpha$ near the critical point. The EMRI exponent $\alpha = 0.5$ (KAM-breaking) and the D26 exponent $\alpha = 1$ (linear perturbation sensitivity) are quantitatively distinct but structurally identical: both arise from the same distance-export mechanism (resolvent bound in D26, Melnikov function in EMRI).
 \end{enumerate}
 
 The observation spaces are isomorphic: $\mathcal{O}_{\rm EMRI} \subset \mathbb{R}_{\geq 0} \times \mathbb{R}_{>0} \times \mathbb{R}_{>0}$ (Lyapunov exponent, surface gravity, circular orbit radii) maps to $\mathcal{O}_{\rm D26} \subset \mathbb{R}_{\geq 0} \times \mathbb{R}_{>0} \times \mathbb{R}_{>0}$ (amplification coefficient, resonance frequency, system pole positions) under the identification $\lambda_T \leftrightarrow G_{\rm Amp}$, $\Omega_{\rm un} \leftrightarrow \omega_{\rm res}$, and $\{r_{\rm circ}\} \leftrightarrow \{\lambda_i(A)\}$.
@@ -625,7 +625,7 @@ Combined with the distance equivalence results for the other examples (D1-grav-w
 \begin{equation}
 \begin{array}{l@{\quad}l}
 \text{D1-grav-waves:} & \alpha \approx 1.84 \quad (\text{log-corrected quadratic}) \\
-\text{D26:} & \alpha = -\gamma \quad (\text{divergent power law}) \\
+\text{D26:} & \alpha = 1 \quad (\text{linear perturbation sensitivity}) \\
 \text{EMRI:} & \alpha = 0.5 \quad (\text{KAM-breaking square root})
 \end{array}
 \end{equation}
@@ -734,9 +734,9 @@ The LTI control base structure $\mathcal{B}_{\rm D26} = (\mathbf{C}_{\rm D26}, \
 The source pre-distance is the LTI parameter perturbation $\Gamma = \|\delta A\|_2$ (spectral norm of system matrix perturbation). The observation distance measures the \textit{amplification relative to the unperturbed system}: $\delta = |\|H\|_\infty - \|H_0\|_\infty|$ where $H_0$ is the response of the unperturbed system. This modified distance vanishes at $\Gamma = 0$, satisfying the distance export inequality $\delta \leq C\, \Gamma$ by standard resolvent perturbation bounds:
 $|\|H\|_\infty - \|H_0\|_\infty| \leq \|(j\omega I - A)^{-1}\| \cdot \|\delta A\| \cdot \|(j\omega I - A)^{-1}\| \cdot \|B\| \cdot \|C\|$, giving $\delta \sim \Gamma$ for small perturbations (linear, $\alpha = 1$).
 
-However, near the resonance (as damping $\zeta \to 0$), the peak gain diverges: $\|H(j\omega)\|_\infty \sim \zeta^{-1}$. The parameter $\varepsilon = \zeta$ is not the same as $\Gamma = \|\delta A\|_2$; rather, $\zeta$ controls the unperturbed system's sharpness. The critical exponent in the resonance limit is $\alpha = -1$ (inverse relationship) because $\delta$ diverges as the system approaches the critical point from below.
+However, near the resonance (as damping $\zeta \to 0$), the peak gain diverges: $\|H(j\omega)\|_\infty \sim \zeta^{-1}$. The parameter $\zeta$ is not the same as $\Gamma = \|\delta A\|_2$; rather, $\zeta$ controls the unperturbed system's sharpness. The divergence $\|H\|_\infty \sim \zeta^{-1}$ is an exponent $-1$ in the \emph{damping} parameter, distinct from the perturbation exponent $\alpha = 1$ in $\delta \sim \Gamma^1$. The full critical behavior combines both: for small damping, $\delta \sim \zeta^{-2}\,\Gamma$ (enhanced sensitivity), while $\|H\|_\infty \sim \zeta^{-1}$ (resonance blow-up as $\zeta \to 0$).
 
-\textbf{Cross-reference:} This universality class is distinguished from Examples 2--3 by the \textbf{inverse} critical exponent: the observation distance \textit{diverges} at the critical point (resonance blow-up) rather than vanishing. This reflects a different singularity type: Examples 2--3 are contraction phenomena (posterior convergence), while Example~4 is an amplification phenomenon (resonance).
+\textbf{Cross-reference:} This universality class is distinguished from Examples 2--3 by the \textbf{dual critical structure}: while Examples 2--3 are contraction phenomena (posterior convergence, observation distance vanishes as $\Gamma \to 0$), Example~4 is an amplification phenomenon. The D26 system has two critical limits: (i) perturbation vanishing $\Gamma \to 0$ with $\delta \sim \Gamma^1$ (vanishing), and (ii) damping vanishing $\zeta \to 0$ with resonance blow-up $\|H\|_\infty \sim \zeta^{-1}$ (divergent). The interplay between these two limits is what distinguishes resonance amplification from posterior contraction.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 

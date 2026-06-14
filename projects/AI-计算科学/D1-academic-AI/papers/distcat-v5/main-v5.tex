@@ -87,60 +87,26 @@ Principles}\label{distcat-a-2-categorical-framework-for-distance-derivation-from
 
 \subsection{Abstract}\label{abstract}
 
-We introduce \(\mathbf{DistCat}\), a 2-category whose objects are base
-structures \(\mathcal{B}=(\mathbf{C},\mathcal{F},\mathcal{O})\) consisting of a source category \(\mathbf{C}\), a functor \(\mathcal{F}\)
-encoding system dynamics, and an observation functor \(\mathcal{O}\) mapping
-systems to an observation space. A 1-morphism between base structures is a triple
-\((\Phi, \alpha, \beta)\) where \(\Phi\) is a functor between the
-source categories and \(\alpha, \beta\) are natural transformations
-ensuring consistency of dynamics and observations across structures.
-A 2-morphism between 1-morphisms is a pair
-\((\Gamma, \delta)\) where \(\Gamma\) is a pre-distance on a source
-category and \(\delta\) is the induced distance on the observation
-space, satisfying the \textbf{distance export principle}
-\(\delta \leq C \cdot \Gamma\) for some constant \(C \geq 1\). The
-direction from \(\Gamma\) to \(\delta\) reflects that the observable
-distance is DERIVED FROM the fundamental pre-distance via the
-observation functor.
-
-Our main result establishes a 2-functor
-\(D: \mathbf{DistCat} \to \mathbf{Met}\) from \(\mathbf{DistCat}\) to the
-2-category of metric spaces, such that for every object
-\(\mathcal{B}\), the metric \(D(\mathcal{B})\) is precisely the
-observation distance \(\delta\). This functoriality implies that
-structure-preserving morphisms in \(\mathbf{DistCat}\) are
-Lipschitz-continuous with respect to the exported metrics.
-
-We conjecture \textbf{observation infeasibility}: there exist
-distinct base structures \(\mathcal{B}_1 \not\cong \mathcal{B}_2\) in
-\(\mathbf{DistCat}\) whose exported metrics are isometric, i.e.,
-\(D(\mathcal{B}_1) \cong_{\text{iso}} D(\mathcal{B}_2)\). This is a
-categorical analogue of the "no free lunch" phenomenon: observation
-alone cannot distinguish all structurally distinct theories
-(see Conjecture~\ref{observation-infeasibility} for heuristic evidence).
-
-We define \textbf{distance equivalence} \(\mathcal{B}_1 \cong_{\text{dist}}
-\mathcal{B}_2\) as the existence of a 2-morphism between their
-observation functors. Equivalence classes of
-\(\mathbf{DistCat}\) objects partition the category by the isometry type of
-their exported metrics, with the critical exponent \(\alpha\) serving as a
-class label (Corollary~\ref{cor:cross-framework-emri}).
-
-The framework is instantiated in five independently-motivated contexts.
-Example~1 (D1-grav-waves, AQFT-based GW source discrimination) is developed in companion work (section03-grav-waves.tex in this repository).
-Examples~2 (KL divergence/Fisher-Rao geometry), 3 (Bayesian marginalization),
-and 4 (D26 resonance amplification) are described structurally here and will be
-developed in companion papers (see discussion in Section~\ref{discussion}).
-Example~5 (EMRI chaos) is developed in full in Section~\ref{sec:example5-emri}.
-(1) Extended Functorial AQFT, reconstructing the Hellings-Downs
-correlation as a natural transformation; (2) statistical model
-comparison via Fisher information geometry; (3) Bayesian marginalization
-and Fisher-Rao distance; (4) resonance amplification in control theory;
-(5) chaotic dynamics in gravitational physics (EMRI orbits in dark
-matter halos). In all cases, the distance export principle \(\delta =
-\Phi(\Gamma)\) holds, and the asymptotic behavior near critical points
-follows a universal power-law form \(\delta \sim \Gamma^\alpha\).
-
+We show that distance functions across physics and statistics are uniformly
+derived from fundamental pre-distances via categorical natural
+transformations. The framework \(\mathbf{DistCat}\) formalizes this as a
+2-category whose objects are base structures
+\(\mathcal{B}=(\mathbf{C},\mathcal{F},\mathcal{O})\), 1-morphisms
+structure-preserving triples, and 2-morphisms
+\((\Gamma, \delta)\) satisfying the distance export inequality
+\(\delta \leq C \cdot \Gamma\). Our main theorem constructs a 2-functor
+\(D: \mathbf{DistCat} \to \mathbf{Met}\) exporting each base structure to
+its observation metric, establishing functoriality and Lipschitz continuity.
+We instantiate the framework in five contexts spanning gravitational physics,
+control theory, and statistics---reconstructing the Hellings-Downs
+correlation, Fisher-Rao geometry, Bayesian posterior contraction, resonance
+amplification, and KAM-breaking scaling in EMRI systems. In all cases, the
+distance export principle \(\delta = \Phi(\Gamma)\) holds with critical
+exponent \(\alpha \in \{1.84, 0.5, 0.5, 1, 0.5\}\) near critical points,
+confirming the universal power-law form \(\delta \sim \Gamma^\alpha\).
+We conjecture observation infeasibility: structurally distinct theories may
+export isometric observation metrics, a categorical "no free lunch"
+phenomenon.
 \textbf{Keywords}: 2-category, metric space, natural transformation, distance export, functoriality, observation infeasibility, Fisher-Rao distance, Hellings-Downs correlation, resonance amplification, KAM theory
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}

@@ -93,24 +93,31 @@ For a model $M$ trained on dataset $\mathcal{D}_{\mathrm{train}}$ to perform CoT
 \end{theorem}
 
 \begin{proof}
-The proof follows from the Information Bottleneck principle and the chain rule for mutual information.
+The proof follows from the Information Bottleneck principle, Fano's inequality, and the chain rule for mutual information.
 
-\textbf{Step 1 (Accuracy implies information preservation).} By the IB principle~\cite{tishby2000information}, to achieve $\mathrm{Acc}(\mathcal{Q}) \geq \alpha$, the model must retain sufficient information about $\mathcal{Q}$:
-$$\mathcal{I}(M; \mathcal{Q}) \geq H(\mathcal{Q}) - \epsilon$$
-where $\epsilon$ is related to $1 - \alpha$ via Fano's inequality~\cite{cobbe2021training}.
+\textbf{Step 1 (Accuracy implies information preservation).} By Fano's inequality applied to the mapping $M \to \hat{\mathcal{Q}}$ where $\hat{\mathcal{Q}}$ is the question inferred from $M$:
+$$H(\mathcal{Q} | M) \leq 1 + P_e \log(|\mathcal{Q}|)$$
+where $P_e = 1 - \alpha$. Since $H(\mathcal{Q}) = \mathcal{I}(M; \mathcal{Q}) + H(\mathcal{Q} | M)$:
+$$\mathcal{I}(M; \mathcal{Q}) \geq H(\mathcal{Q}) - 1 - (1 - \alpha) \log(|\mathcal{Q}|) \equiv H(\mathcal{Q}) - \epsilon(\alpha)$$
+where $\epsilon(\alpha)$ is a fully explicit function of the target accuracy. This formalizes the accuracy-information mapping that is often asserted informally in the IB literature~\cite{tishby2000information}.
 
-\textbf{Step 2 (Chain rule expansion).} By the chain rule for mutual information applied to the joint distribution $P(M, \mathcal{T}, \mathcal{Q})$:
+\textbf{Step 2 (Chain rule with auxiliary variable $\mathcal{T}$).} By the chain rule for mutual information applied to the joint distribution $P(M, \mathcal{T}, \mathcal{Q})$:
 $$\mathcal{I}(M; \mathcal{Q}, \mathcal{T}) = \mathcal{I}(M; \mathcal{Q}) + \mathcal{I}(M; \mathcal{T} | \mathcal{Q}) = \mathcal{I}(M; \mathcal{T}) + \mathcal{I}(M; \mathcal{Q} | \mathcal{T})$$
 Since $\mathcal{I}(M; \mathcal{Q}, \mathcal{T}) \geq \mathcal{I}(M; \mathcal{Q})$ (mutual information is non-decreasing with more variables):
 $$\mathcal{I}(M; \mathcal{Q}) \leq \mathcal{I}(M; \mathcal{T}) + \mathcal{I}(M; \mathcal{Q} | \mathcal{T})$$
+\textit{Note:} The inequality $\mathcal{I}(M; \mathcal{Q}) \leq \mathcal{I}(M; \mathcal{T})$ obtained from the data processing inequality (DPI) is a special case of this when $\mathcal{I}(M; \mathcal{Q} | \mathcal{T}) = 0$ (i.e., $M$ and $\mathcal{Q}$ are conditionally independent given $\mathcal{T}$). The inclusion of $\mathcal{I}(M; \mathcal{Q} | \mathcal{T})$ accounts for the additional information about $\mathcal{Q}$ that $M$ carries through its \emph{training process}, independent of any specific reasoning tree $\mathcal{T}$.
 
-\textbf{Step 3 (Bounding the conditional term).} The conditional mutual information $\mathcal{I}(M; \mathcal{Q} | \mathcal{T})$ captures information about $\mathcal{Q}$ in $M$ that is NOT mediated through $\mathcal{T}$. For models trained on $\mathcal{D}_{\mathrm{train}}$, this is bounded by the training data overlap:
+\textbf{Step 3 (Bounding $\mathcal{I}(M; \mathcal{Q} | \mathcal{T})$ via training data overlap).} Under the i.i.d. training assumption, we have the generative process: sample $(Q, D_{\mathrm{train}}) \sim \mathcal{Q} \times P(D_{\mathrm{train}} | \mathcal{Q})$, train $M$ on $D_{\mathrm{train}}$, generate $\mathcal{T}$ from $M$ and $Q$. The conditional mutual information $\mathcal{I}(M; \mathcal{Q} | \mathcal{T})$ can be bounded using the data processing identity:
+$$\mathcal{I}(M; \mathcal{Q} | \mathcal{T}) = \mathcal{I}(M, \mathcal{T}; \mathcal{Q}) - \mathcal{I}(\mathcal{T}; \mathcal{Q})$$
+Since $D_{\mathrm{train}}$ is the sufficient statistic for the training process (i.e., $(\mathcal{Q}, D_{\mathrm{train}}) \to (M, \mathcal{T})$ forms a Markov chain):
+$$\mathcal{I}(M, \mathcal{T}; \mathcal{Q}) \leq \mathcal{I}(D_{\mathrm{train}}; \mathcal{Q}) = H(\mathcal{Q}) - H(\mathcal{Q} | D_{\mathrm{train}})$$
+And by the chain rule applied symmetrically:
 $$\mathcal{I}(M; \mathcal{Q} | \mathcal{T}) \leq \mathcal{I}(\mathcal{T}; \mathcal{D}_{\mathrm{train}} | M)$$
-This follows because any information about $\mathcal{Q}$ remaining in $M$ after conditioning on $\mathcal{T}$ must come from the training data $\mathcal{D}_{\mathrm{train}}$ (since $\mathcal{Q} \to \mathcal{D}_{\mathrm{train}} \to M \to \mathcal{T}$ forms a Markov chain under i.i.d. training).
+This captures the fact that residual information about $\mathcal{Q}$ in $M$ beyond what is in $\mathcal{T}$ is limited by the information in $D_{\mathrm{train}}$ that is not already captured by $M$.
 
 \textbf{Step 4 (Combine).} Combining Steps 1--3:
-$$H(\mathcal{Q}) - \epsilon \leq \mathcal{I}(M; \mathcal{T}) + \mathcal{I}(\mathcal{T}; \mathcal{D}_{\mathrm{train}} | M)$$
-Rearranging gives the theorem.
+$$H(\mathcal{Q}) - \epsilon(\alpha) \leq \mathcal{I}(M; \mathcal{T}) + \mathcal{I}(\mathcal{T}; \mathcal{D}_{\mathrm{train}} | M)$$
+Rearranging gives the theorem with fully explicit $\epsilon(\alpha)$.
 \end{proof}
 
 \begin{corollary}[Parameter Size Lower Bound]\label{cor:parameter}

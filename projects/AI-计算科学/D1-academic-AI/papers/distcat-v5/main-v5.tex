@@ -272,9 +272,11 @@ observation map \(\mathcal{O}\).
 
 \textbf{Vertical composition}:
 \((\Phi_2, \alpha_2, \beta_2) \circ_v (\Phi_1, \alpha_1, \beta_1) = (\Phi_2 \circ \Phi_1, \alpha_1 \cdot \alpha_2, \beta_1 \cdot \beta_2)\)
+where \(\cdot\) denotes vertical composition of 2-morphisms (2-morphisms in the same category compose vertically).
 
 \textbf{Horizontal composition}:
 \((\Phi_2, \alpha_2, \beta_2) \circ_h (\Phi_1, \alpha_1, \beta_1) = (\Phi_2 \circ \Phi_1, \alpha_1 \circ \Phi_2 \cdot \alpha_2, \beta_2 \circ \Phi_1 \cdot \beta_1)\)
+where \(\circ\) denotes whiskering (horizontal composition of a 2-morphism with a 1-morphism), and \(\cdot\) as above.
 
 \subsubsection{2.3 Distance-Deriving
 2-Morphisms}\label{distance-deriving-2-morphisms}
@@ -427,7 +429,7 @@ The gravitational EMRI base structure $\mathcal{B}_{\rm EMRI} = (\mathbf{C}_{\rm
 
 \item \textbf{Geodesic functor:} $\mathcal{F}_{\rm geo}: \mathbf{C}_{\rm EMRI} \to \mathbf{Path}$ assigns to each $(M, g)$ the path space $\mathcal{F}(M, g) = \{r(\phi; E, L) \mid \text{solutions to } \ddot{x}^\mu + \Gamma^\mu_{\alpha\beta}\dot{x}^\alpha\dot{x}^\beta = 0\}$, where $E$ and $L$ are conserved energy and angular momentum.
 
-\item \textbf{Observation functor:} $\mathcal{O}_{\rm obs}$ maps each spacetime object $(M, g)$ to its chaos diagnostic profile in the observation space:
+\item \textbf{Observation functor:} $\mathcal{O}_{\rm obs}$ maps each spacetime object $(M, g)$ to its chaos diagnostic triple in the observation space:
 \begin{equation}
 \mathcal{O}_{\rm obs}(M, g) = (\lambda_T, \kappa, \{r_{\rm circ}\}) \in \mathbb{R}_{\geq 0} \times \mathbb{R}_{>0} \times \mathbb{R}_{>0}
 \end{equation}

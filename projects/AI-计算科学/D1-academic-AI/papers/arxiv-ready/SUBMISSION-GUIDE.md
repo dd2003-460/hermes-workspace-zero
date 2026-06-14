@@ -12,6 +12,7 @@
 | D30 | Hierarchical Training Data and CoT Bounds (companion paper, references D30-2) | arXiv (cs.LG) | d30-hierarchical-data-arxiv-v1.tar.gz | READY |
 | D29 | Scaling-Understanding Incompatibility Theorem (8 pages) | arXiv (cs.LG) | d29-scaling-understanding-arxiv-v1.tar.gz | READY |
 | D31 | Capacity-Performance Phase Transition Theorem (7 pages) | arXiv (cs.LG) | d31-capacity-performance-arxiv-v1.tar.gz | READY |
+| D32 | Information-Theoretic Phase Transition (6 pages) | arXiv (cs.LG) | d32-info-theoretic-arxiv-v1.tar.gz | READY |
 
 ## How to Submit
 
@@ -32,6 +33,7 @@
 - **D30**: cs.LG (Machine Learning) or cs.AI
 - **D29**: cs.LG (Machine Learning) or stat.ML
 - **D31**: cs.LG (Machine Learning) or cond-mat.dis-nn (disordered systems)
+- **D32**: cs.LG (Machine Learning)
 
 ## Common arXiv Requirements
 
@@ -56,6 +58,7 @@ All packages are at:
 - D30-2: 8 pages, 0 figures, rigorous 4-step proof (Fano inequality + chain rule). Theoretical paper on CoT model size.
 - D29: 8 pages, 0 figures. Theoretical paper on scaling-understanding incompatibility.
 - D31: 7 pages, 0 figures. Theoretical paper on phase transitions in capability emergence.
+- D32: 6 pages, 0 figures. Theoretical paper on information bottleneck as order parameter for emergence.
 
 ## Post-Submission
 

@@ -1,0 +1,228 @@
+P1-v3 Kerr QNM 高自旋边界扫描
+耗时: 24.8s
+PASS: 26, WARN: 2, FAIL: 0
+======================================================================
+a=0.75, l=2, m=0, n=0:
+  measured: ω_R = 0.388240
+  literature: ω_R = 0.374930, ω_I = 0.093025
+  error_R = 3.55%
+  V_peak = 0.151287
+  exact_data: False
+  status: PASS_extrap
+
+a=0.75, l=2, m=1, n=0:
+  measured: ω_R = 0.364710
+  literature: ω_R = 0.375755, ω_I = 0.099885
+  error_R = 2.94%
+  V_peak = 0.096633
+  exact_data: False
+  status: PASS_extrap
+
+a=0.75, l=2, m=2, n=0:
+  measured: ω_R = 0.364710
+  literature: ω_R = 0.374870, ω_I = 0.099085
+  error_R = 2.71%
+  V_peak = 0.056201
+  exact_data: False
+  status: PASS_extrap
+
+a=0.75, l=3, m=0, n=0:
+  measured: ω_R = 0.575301
+  literature: ω_R = 0.594755, ω_I = 0.066730
+  error_R = 3.27%
+  V_peak = 0.371625
+  exact_data: False
+  status: PASS_extrap
+
+a=0.75, l=3, m=1, n=0:
+  measured: ω_R = 0.575301
+  literature: ω_R = 0.594105, ω_I = 0.066515
+  error_R = 3.17%
+  V_peak = 0.249896
+  exact_data: False
+  status: PASS_extrap
+
+a=0.75, l=3, m=2, n=0:
+  measured: ω_R = 0.598830
+  literature: ω_R = 0.593440, ω_I = 0.066320
+  error_R = 0.91%
+  V_peak = 0.131294
+  exact_data: False
+  status: PASS_extrap
+
+a=0.75, l=3, m=3, n=0:
+  measured: ω_R = 0.575301
+  literature: ω_R = 0.592475, ω_I = 0.066145
+  error_R = 2.90%
+  V_peak = 0.076284
+  exact_data: False
+  status: PASS_extrap
+
+a=0.80, l=2, m=0, n=0:
+  measured: ω_R = 0.362342
+  literature: ω_R = 0.375070, ω_I = 0.093510
+  error_R = 3.39%
+  V_peak = 0.151287
+  exact_data: False
+  status: PASS_extrap
+
+a=0.80, l=2, m=1, n=0:
+  measured: ω_R = 0.385870
+  literature: ω_R = 0.375960, ω_I = 0.101100
+  error_R = 2.64%
+  V_peak = 0.091668
+  exact_data: False
+  status: PASS_extrap
+
+a=0.80, l=2, m=2, n=0:
+  measured: ω_R = 0.384694
+  literature: ω_R = 0.375030, ω_I = 0.100330
+  error_R = 2.58%
+  V_peak = 0.049063
+  exact_data: False
+  status: PASS_extrap
+
+a=0.80, l=3, m=0, n=0:
+  measured: ω_R = 0.594099
+  literature: ω_R = 0.595040, ω_I = 0.067530
+  error_R = 0.16%
+  V_peak = 0.371625
+  exact_data: False
+  status: PASS_extrap
+
+a=0.80, l=3, m=1, n=0:
+  measured: ω_R = 0.594099
+  literature: ω_R = 0.594370, ω_I = 0.067310
+  error_R = 0.05%
+  V_peak = 0.235273
+  exact_data: False
+  status: PASS_extrap
+
+a=0.80, l=3, m=2, n=0:
+  measured: ω_R = 0.571747
+  literature: ω_R = 0.593690, ω_I = 0.067110
+  error_R = 3.70%
+  V_peak = 0.106503
+  exact_data: False
+  status: PASS_extrap
+
+a=0.80, l=3, m=3, n=0:
+  measured: ω_R = 0.594099
+  literature: ω_R = 0.592660, ω_I = 0.066930
+  error_R = 0.24%
+  V_peak = 0.054225
+  exact_data: False
+  status: PASS_extrap
+
+a=0.85, l=2, m=0, n=0:
+  measured: ω_R = 0.381173
+  literature: ω_R = 0.375210, ω_I = 0.093995
+  error_R = 1.59%
+  V_peak = 0.151287
+  exact_data: False
+  status: PASS_extrap
+
+a=0.85, l=2, m=1, n=0:
+  measured: ω_R = 0.358820
+  literature: ω_R = 0.376165, ω_I = 0.102315
+  error_R = 4.61%
+  V_peak = 0.086413
+  exact_data: False
+  status: PASS_extrap
+
+a=0.85, l=2, m=2, n=0:
+  measured: ω_R = 0.381173
+  literature: ω_R = 0.375190, ω_I = 0.101575
+  error_R = 1.59%
+  V_peak = 0.041911
+  exact_data: False
+  status: PASS_extrap
+
+a=0.85, l=3, m=0, n=0:
+  measured: ω_R = 0.611760
+  literature: ω_R = 0.595325, ω_I = 0.068330
+  error_R = 2.76%
+  V_peak = 0.371625
+  exact_data: False
+  status: PASS_extrap
+
+a=0.85, l=3, m=1, n=0:
+  measured: ω_R = 0.588230
+  literature: ω_R = 0.594635, ω_I = 0.068105
+  error_R = 1.08%
+  V_peak = 0.219416
+  exact_data: False
+  status: PASS_extrap
+
+a=0.85, l=3, m=2, n=0:
+  measured: ω_R = 0.611760
+  literature: ω_R = 0.593940, ω_I = 0.067900
+  error_R = 3.00%
+  V_peak = 0.082205
+  exact_data: False
+  status: PASS_extrap
+
+a=0.85, l=3, m=3, n=0:
+  measured: ω_R = 0.588230
+  literature: ω_R = 0.592845, ω_I = 0.067715
+  error_R = 0.78%
+  V_peak = 0.034810
+  exact_data: False
+  status: PASS_extrap
+
+a=0.90, l=2, m=0, n=0:
+  measured: ω_R = 0.375307
+  literature: ω_R = 0.375350, ω_I = 0.094480
+  error_R = 0.01%
+  V_peak = 0.151287
+  exact_data: False
+  status: PASS_extrap
+
+a=0.90, l=2, m=1, n=0:
+  measured: ω_R = 0.397661
+  literature: ω_R = 0.376370, ω_I = 0.103530
+  error_R = 5.66%
+  V_peak = 0.080870
+  exact_data: False
+  status: WARN_extrap
+
+a=0.90, l=2, m=2, n=0:
+  measured: ω_R = 0.375307
+  literature: ω_R = 0.375350, ω_I = 0.102820
+  error_R = 0.01%
+  V_peak = 0.034861
+  exact_data: False
+  status: PASS_extrap
+
+a=0.90, l=3, m=0, n=0:
+  measured: ω_R = 0.601198
+  literature: ω_R = 0.595610, ω_I = 0.069130
+  error_R = 0.94%
+  V_peak = 0.371625
+  exact_data: False
+  status: PASS_extrap
+
+a=0.90, l=3, m=1, n=0:
+  measured: ω_R = 0.578844
+  literature: ω_R = 0.594900, ω_I = 0.068900
+  error_R = 2.70%
+  V_peak = 0.202386
+  exact_data: False
+  status: PASS_extrap
+
+a=0.90, l=3, m=2, n=0:
+  measured: ω_R = 0.601198
+  literature: ω_R = 0.594190, ω_I = 0.068690
+  error_R = 1.18%
+  V_peak = 0.059408
+  exact_data: False
+  status: PASS_extrap
+
+a=0.90, l=3, m=3, n=0:
+  measured: ω_R = 0.307070
+  literature: ω_R = 0.593030, ω_I = 0.068500
+  error_R = 48.22%
+  V_peak = 0.019153
+  exact_data: False
+  status: WARN_extrap
+

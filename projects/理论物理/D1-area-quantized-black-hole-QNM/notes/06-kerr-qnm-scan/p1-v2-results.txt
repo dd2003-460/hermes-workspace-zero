@@ -1,0 +1,200 @@
+P1-v2 Kerr QNM 高自旋扩展扫描
+耗时: 27.1s
+PASS: 27, WARN: 1, FAIL: 0
+======================================================================
+a=0.55, l=2, m=0, n=0:
+  measured: ω_R = 0.394120
+  literature: ω_R = 0.374395, ω_I = 0.091180
+  error_R = 5.27%
+  V_peak = 0.151287
+  status: WARN
+
+a=0.55, l=2, m=1, n=0:
+  measured: ω_R = 0.369414
+  literature: ω_R = 0.374960, ω_I = 0.095220
+  error_R = 1.48%
+  V_peak = 0.113835
+  status: PASS
+
+a=0.55, l=2, m=2, n=0:
+  measured: ω_R = 0.369414
+  literature: ω_R = 0.374265, ω_I = 0.094335
+  error_R = 1.30%
+  V_peak = 0.083286
+  status: PASS
+
+a=0.55, l=3, m=0, n=0:
+  measured: ω_R = 0.583533
+  literature: ω_R = 0.593665, ω_I = 0.063650
+  error_R = 1.71%
+  V_peak = 0.371625
+  status: PASS
+
+a=0.55, l=3, m=1, n=0:
+  measured: ω_R = 0.583533
+  literature: ω_R = 0.593095, ω_I = 0.063455
+  error_R = 1.61%
+  V_peak = 0.296448
+  status: PASS
+
+a=0.55, l=3, m=2, n=0:
+  measured: ω_R = 0.583533
+  literature: ω_R = 0.592495, ω_I = 0.063280
+  error_R = 1.51%
+  V_peak = 0.221557
+  status: PASS
+
+a=0.55, l=3, m=3, n=0:
+  measured: ω_R = 0.607063
+  literature: ω_R = 0.591775, ω_I = 0.063120
+  error_R = 2.58%
+  V_peak = 0.170881
+  status: PASS
+
+a=0.60, l=2, m=0, n=0:
+  measured: ω_R = 0.392944
+  literature: ω_R = 0.374510, ω_I = 0.091570
+  error_R = 4.92%
+  V_peak = 0.151287
+  status: PASS
+
+a=0.60, l=2, m=1, n=0:
+  measured: ω_R = 0.369415
+  literature: ω_R = 0.375140, ω_I = 0.096240
+  error_R = 1.53%
+  V_peak = 0.109893
+  status: PASS
+
+a=0.60, l=2, m=2, n=0:
+  measured: ω_R = 0.369415
+  literature: ω_R = 0.374390, ω_I = 0.095350
+  error_R = 1.33%
+  V_peak = 0.076805
+  status: PASS
+
+a=0.60, l=3, m=0, n=0:
+  measured: ω_R = 0.582358
+  literature: ω_R = 0.593900, ω_I = 0.064330
+  error_R = 1.94%
+  V_peak = 0.371625
+  status: PASS
+
+a=0.60, l=3, m=1, n=0:
+  measured: ω_R = 0.605887
+  literature: ω_R = 0.593310, ω_I = 0.064130
+  error_R = 2.12%
+  V_peak = 0.286471
+  status: PASS
+
+a=0.60, l=3, m=2, n=0:
+  measured: ω_R = 0.605887
+  literature: ω_R = 0.592690, ω_I = 0.063950
+  error_R = 2.23%
+  V_peak = 0.201207
+  status: PASS
+
+a=0.60, l=3, m=3, n=0:
+  measured: ω_R = 0.605887
+  literature: ω_R = 0.591920, ω_I = 0.063790
+  error_R = 2.36%
+  V_peak = 0.147835
+  status: PASS
+
+a=0.65, l=2, m=0, n=0:
+  measured: ω_R = 0.368237
+  literature: ω_R = 0.374650, ω_I = 0.092055
+  error_R = 1.71%
+  V_peak = 0.151287
+  status: PASS
+
+a=0.65, l=2, m=1, n=0:
+  measured: ω_R = 0.368237
+  literature: ω_R = 0.375345, ω_I = 0.097455
+  error_R = 1.89%
+  V_peak = 0.105727
+  status: PASS
+
+a=0.65, l=2, m=2, n=0:
+  measured: ω_R = 0.391766
+  literature: ω_R = 0.374550, ω_I = 0.096595
+  error_R = 4.60%
+  V_peak = 0.070118
+  status: PASS
+
+a=0.65, l=3, m=0, n=0:
+  measured: ω_R = 0.603532
+  literature: ω_R = 0.594185, ω_I = 0.065130
+  error_R = 1.57%
+  V_peak = 0.371625
+  status: PASS
+
+a=0.65, l=3, m=1, n=0:
+  measured: ω_R = 0.603532
+  literature: ω_R = 0.593575, ω_I = 0.064925
+  error_R = 1.68%
+  V_peak = 0.275443
+  status: PASS
+
+a=0.65, l=3, m=2, n=0:
+  measured: ω_R = 0.580002
+  literature: ω_R = 0.592940, ω_I = 0.064740
+  error_R = 2.18%
+  V_peak = 0.179182
+  status: PASS
+
+a=0.65, l=3, m=3, n=0:
+  measured: ω_R = 0.580002
+  literature: ω_R = 0.592105, ω_I = 0.064575
+  error_R = 2.04%
+  V_peak = 0.123976
+  status: PASS
+
+a=0.70, l=2, m=0, n=0:
+  measured: ω_R = 0.367050
+  literature: ω_R = 0.374790, ω_I = 0.092540
+  error_R = 2.07%
+  V_peak = 0.151287
+  status: PASS
+
+a=0.70, l=2, m=1, n=0:
+  measured: ω_R = 0.390579
+  literature: ω_R = 0.375550, ω_I = 0.098670
+  error_R = 4.00%
+  V_peak = 0.101315
+  status: PASS
+
+a=0.70, l=2, m=2, n=0:
+  measured: ω_R = 0.389402
+  literature: ω_R = 0.374710, ω_I = 0.097840
+  error_R = 3.92%
+  V_peak = 0.063239
+  status: PASS
+
+a=0.70, l=3, m=0, n=0:
+  measured: ω_R = 0.601162
+  literature: ω_R = 0.594470, ω_I = 0.065930
+  error_R = 1.13%
+  V_peak = 0.371625
+  status: PASS
+
+a=0.70, l=3, m=1, n=0:
+  measured: ω_R = 0.577633
+  literature: ω_R = 0.593840, ω_I = 0.065720
+  error_R = 2.73%
+  V_peak = 0.263274
+  status: PASS
+
+a=0.70, l=3, m=2, n=0:
+  measured: ω_R = 0.577633
+  literature: ω_R = 0.593190, ω_I = 0.065530
+  error_R = 2.62%
+  V_peak = 0.155733
+  status: PASS
+
+a=0.70, l=3, m=3, n=0:
+  measured: ω_R = 0.601162
+  literature: ω_R = 0.592290, ω_I = 0.065360
+  error_R = 1.50%
+  V_peak = 0.099864
+  status: PASS
+

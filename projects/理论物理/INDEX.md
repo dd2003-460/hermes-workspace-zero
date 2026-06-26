@@ -2,6 +2,9 @@
 
 **领域索引**：量子场论、规范理论、任意子/拓扑序、引力波、宇宙学。
 
+> **活跃项目入口**: [../ACTIVE.md](../ACTIVE.md) — 自动聚合的 loop 状态面板
+> 各项目 loop 状态: `projects/<domain>/<project-id>/loop-state.json`
+
 ---
 
 ## 项目索引

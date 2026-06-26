@@ -55,3 +55,26 @@
 
 *状态唯一来源: TASKS.md*
 *origin: ai — 任务状态文档*
+
+---
+
+## 新任务（2026-06-22）
+
+### Thompson Sampling 实证研究 — ✅ 已完成
+- [x] 实现 Thompson sampling 多臂老虎机模拟器
+- [x] 运行 500 次独立实验，收敛性分析
+- [x] 多策略比较：TS vs UCB vs ε-greedy
+- [x] 产出实验结果与研究备忘录
+- [x] 映射到 AI Agent 置信度驱动决策框架
+
+### 核心发现
+1. Thompson sampling regret = 13.67 (远低于 UCB 73.14, ε-greedy 85.85)
+2. 最优臂选择率 98%，收敛时间 ~200 轮
+3. Beta 分布天然编码置信度，对应 Ralph Loop "置信度驱动自主"
+4. 此框架可直接应用到 AI Agent 工具/方法选择问题
+
+## 产出文件
+- `researches/04-thompson-sampling-bandit.py` — Thompson sampling 模拟器
+- `researches/05-thompson-sampling-results.md` — 实验结果分析
+- `researches/06-strategy-comparison.py` — 多策略比较代码
+- `researches/07-strategy-comparison-results.md` — 策略比较分析

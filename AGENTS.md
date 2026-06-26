@@ -127,7 +127,9 @@
 - **对齐 > 规划 > 执行**：先理解意图，再动手
 - 任务必须归入 projects/ 对应目录，遵循 project.json 规范
 - **完成 ≠ 质量达标**：完成是最低门槛，世界顶尖可扩散水平才是标准
-- 所有变更必须记录到 tasks/single_loop_state.json
+- 所有变更必须记录到项目内 loop-state.json（路径: `<project>/loop-state.json`）
+- 聚合脚本: `scripts/aggregate-active.sh`（更新 projects/ACTIVE.md）
+- RALPH 同步: `scripts/ralph-sync.sh`（每次迭代结束时自动调用，同步全局状态→项目状态）
 - 记忆入库前必须向量化并分类（decision/approach/result/reflection）
 
 ## 关于成璐
@@ -150,17 +152,21 @@
 ## 会话最小阅读链路
 
 无论来源是 cron、Telegram、Discord、ClawX 还是 TUI，都只按这一顺序读：
-1. **ralph-loop.global.md** — 全局指令和循环状态（如果有）
+1. **projects/ACTIVE.md** — 活跃项目面板（自动聚合，从各项目 loop-state.json 生成）
 2. `AGENTS.md`（本文件）
-3. 当前任务阶段 → 按 loop 对应文档
-4. `memory/` 中的关键记忆文件
+3. 当前焦点项目 → `loop-state.json`（项目内固定路径）
+4. 当前任务阶段 → 按 loop 对应文档
+5. `memory/` 中的关键记忆文件
+
+**导航路径**：AGENTS.md → projects/INDEX.md（含 ACTIVE 链接）→ projects/ACTIVE.md → `<project>/loop-state.json`
 
 ## 读取顺序
 
-1. **ralph-loop.global.md**（如果存在）— 这是最高优先级的全局指令
+1. **projects/ACTIVE.md**（如果存在）— 当前活跃项目+loop阶段+迭代号
 2. **AGENTS.md** — 全局原则、红线、方法论
-3. **当前任务阶段** — 1-loop/2-loop 对应文件
-4. **记忆中/相关记忆** — 从 projects/D1-*/memory/ 读取
+3. **焦点项目 loop-state.json** — 项目内 loop 状态（迭代号、阶段、当前任务、阻塞项）
+4. **当前任务阶段** — 1-loop/2-loop 对应文件
+5. **记忆中/相关记忆** — 从 projects/D1-*/memory/ 读取
 
 ## 行为原则
 

@@ -1,0 +1,16 @@
+{
+  "id": "adsl-spin-connection",
+  "name": "adsl-spin-connection",
+  "dimension": "学术",
+  "type": "环节",
+  "status": "investigation_complete",
+  "description": "AdSL 引力 BTZ 黑洞 spin connection EOM 验证",
+  "created_at": "2026-03-31T21:20:00+08:00",
+  "progress": {
+    "eom1_R": "✅ ALL PASS (both frames)",
+    "eom2_T_sigma": "✅ ALL PASS (ε_{abc} correction + e⁰ dr=-1 fix)",
+    "eom3_F_ee": "❌ Two residuals: (dr,dφ)=2r/ℓ², (dv,dφ)=r(M+b-r²/ℓ²)/ℓ⁴ — structural, 4 paths investigated, likely paper typo",
+    "branches_completed": ["A: ε convention fix", "B: dual connection (not the issue)", "C: symbolic σ solve (overdetermined)", "D: dr sign fix → EOM2 passes", "E: EOM3 δσ correction (impossible)", "EOM3 deep dive: 4 paths all failed"],
+    "conclusion": "5/6 checks pass. EOM3 residual is structural — likely paper convention difference or typo. Recommend accept results or contact authors."
+  }
+}

@@ -1,0 +1,186 @@
+(* ============================================================ *)
+(* AdSL Gravity: BTZ Spin Connection Verification               *)
+(* Using xAct/xTerior + xCoba                                    *)
+(* Reference: JHEP 09 (2023) 185                                 *)
+(* ============================================================ *)
+
+(* --- Load xAct packages --- *)
+<< xAct`xTerior`
+<< xAct`xCore`
+<< xAct`xTensor`
+<< xAct`xCoba`
+
+(* ============================================================ *)
+(* Part 1: Setup — 3D manifold, non-diagonal Minkowski metric    *)
+(* ============================================================ *)
+
+(* Define 3D manifold *)
+DefManifold[M3, 3, {a, b, c, d, e, f}]
+
+(* Non-diagonal Minkowski metric (ingoing/outgoing EF convention) *)
+DefMetric[-1, \[Eta][-a, -b], CD, 
+  SymbolOfCovariantD -> {";", "\[Del]"}, 
+  PrintAs -> "\[Eta]"]
+
+(* Levi-Civita tensor *)
+DefTensor[\[Epsilon][a, b, c], M3, Antisymmetric[{a, b, c}]]
+
+(* ============================================================ *)
+(* Part 2: Define coordinate chart (outgoing EF)                 *)
+(* ============================================================ *)
+
+(* Coordinates: u, r, \[Phi] (outgoing EF for BTZ) *)
+DefChart[efout, M3, {0, 1, 2}, {u[], r[], \[Phi][]}, 
+  ChartColor -> Blue]
+
+(* ============================================================ *)
+(* Part 3: Define the tetrad (coframe) fields                     *)
+(* ============================================================ *)
+
+(* Parameters *)
+DefConstantSymbol[M, PrintAs -> "M"]
+DefConstantSymbol[J, PrintAs -> "J"]
+DefConstantSymbol[\[ScriptL], PrintAs -> "\[ScriptL]"]
+DefConstantSymbol[b, PrintAs -> "b"]
+
+(* f(r) = r^2/\[ScriptL]^2 - M + J^2/(4r^2) *)
+f[r_] := r[]^2/\[ScriptL]^2 - M + J^2/(4 r[]^2)
+
+(* Outgoing EF coframe (from paper eq. 1.35) *)
+(* e0bar = (1/(2\[ScriptL]^2))(\[ScriptL]^2 M - r^2) du - dr - (J/2) d\[Phi] *)
+(* e1bar = du *)
+(* e2bar = r d\[Phi] *)
+
+e0bar = (1/(2\[ScriptL]^2))(\[ScriptL]^2 M - r[]^2) du[] - dr[] - (J/2) d\[Phi][];
+e1bar = du[];
+e2bar = r[] d\[Phi][];
+
+(* ============================================================ *)
+(* Part 4: Define the spin connection (eq. 1.39)                 *)
+(* ============================================================ *)
+
+(* Outgoing EF spin connection from paper: *)
+(* \[Omega]0bar = -b/2 d\[Phi] *)
+(* \[Omega]1bar = d\[Phi] *)
+(* \[Omega]2bar = 0 *)
+
+\[Omega]0bar = -(b/2) d\[Phi][];
+\[Omega]1bar = d\[Phi][];
+\[Omega]2bar = 0;
+
+Print["=== Outgoing EF Spin Connection (eq. 1.39) ==="];
+Print["\[Omega]0bar = ", \[Omega]0bar];
+Print["\[Omega]1bar = ", \[Omega]1bar];
+Print["\[Omega]2bar = ", \[Omega]2bar];
+
+(* ============================================================ *)
+(* Part 5: Lower indices using non-diagonal \[Eta]               *)
+(* ============================================================ *)
+
+(* \[Eta] = {{0,1,0},{1,0,0},{0,0,1}} *)
+(* \[Eta]_01bar = \[Eta]_10bar = 1, \[Eta]_22bar = 1, rest = 0 *)
+(* Lowering: e_0bar = \[Eta]_01bar e^1bar = e^1bar = du *)
+(*           e_1bar = \[Eta]_10bar e^0bar = e^0bar *)
+(*           e_2bar = \[Eta]_22bar e^2bar = e^2bar *)
+
+e0barLower = e1bar;  (* e_0bar = du *)
+e1barLower = e0bar;  (* e_1bar = e^0bar *)
+e2barLower = e2bar;  (* e_2bar = e^2bar *)
+
+\[Omega]0barLower = \[Omega]1bar;   (* \[Omega]_0bar = d\[Phi] *)
+\[Omega]1barLower = \[Omega]0bar;   (* \[Omega]_1bar = -b/2 d\[Phi] *)
+\[Omega]2barLower = \[Omega]2bar;   (* \[Omega]_2bar = 0 *)
+
+Print["=== Lowered indices ==="];
+Print["e_0bar = ", e0barLower];
+Print["e_1bar = ", e1barLower];
+Print["e_2bar = ", e2barLower];
+
+(* ============================================================ *)
+(* Part 6: Compute curvature 2-forms R^a = d\[Omega]^a - 1/2 \[Epsilon]^abc \[Omega]_b \[Wedge] \[Omega]_c *)
+(* ============================================================ *)
+
+(* R^0bar *)
+R0bar = ExtDerivative[\[Omega]0bar] - 
+  (1/2)(\[Epsilon][0, 1, 2] \[Omega]1barLower \[Wedge] \[Omega]2barLower +
+        \[Epsilon][0, 2, 1] \[Omega]2barLower \[Wedge] \[Omega]1barLower +
+        \[Epsilon][1, 0, 2] \[Omega]0barLower \[Wedge] \[Omega]2barLower +
+        \[Epsilon][1, 2, 0] \[Omega]2barLower \[Wedge] \[Omega]0barLower +
+        \[Epsilon][2, 0, 1] \[Omega]0barLower \[Wedge] \[Omega]1barLower +
+        \[Epsilon][2, 1, 0] \[Omega]1barLower \[Wedge] \[Omega]0barLower);
+
+Print["=== Curvature 2-forms R^a ==="];
+Print["R^0bar = ", Simplify[R0bar]];
+
+(* R^1bar *)
+R1bar = ExtDerivative[\[Omega]1bar] - 
+  (1/2)(\[Epsilon][1, 0, 2] \[Omega]0barLower \[Wedge] \[Omega]2barLower +
+        \[Epsilon][1, 2, 0] \[Omega]2barLower \[Wedge] \[Omega]0barLower +
+        \[Epsilon][0, 1, 2] \[Omega]1barLower \[Wedge] \[Omega]2barLower +
+        \[Epsilon][0, 2, 1] \[Omega]2barLower \[Wedge] \[Omega]1barLower +
+        \[Epsilon][2, 1, 0] \[Omega]1barLower \[Wedge] \[Omega]0barLower +
+        \[Epsilon][2, 0, 1] \[Omega]0barLower \[Wedge] \[Omega]1barLower);
+
+Print["R^1bar = ", Simplify[R1bar]];
+
+(* R^2bar *)
+R2bar = ExtDerivative[\[Omega]2bar] - 
+  (1/2)(\[Epsilon][2, 0, 1] \[Omega]0barLower \[Wedge] \[Omega]1barLower +
+        \[Epsilon][2, 1, 0] \[Omega]1barLower \[Wedge] \[Omega]0barLower +
+        \[Epsilon][0, 2, 1] \[Omega]2barLower \[Wedge] \[Omega]1barLower +
+        \[Epsilon][0, 1, 2] \[Omega]1barLower \[Wedge] \[Omega]2barLower +
+        \[Epsilon][1, 2, 0] \[Omega]2barLower \[Wedge] \[Omega]0barLower +
+        \[Epsilon][1, 0, 2] \[Omega]0barLower \[Wedge] \[Omega]2barLower);
+
+Print["R^2bar = ", Simplify[R2bar]];
+
+(* ============================================================ *)
+(* Part 7: Compute torsion 2-forms T^a = D_\[Omega] e^a          *)
+(* ============================================================ *)
+
+(* T^a = de^a - \[Epsilon]^abc \[Omega]_b \[Wedge] e_c *)
+
+T0bar = ExtDerivative[e0bar] - 
+  (\[Epsilon][0,1,2] \[Omega]1barLower \[Wedge] e2barLower +
+   \[Epsilon][0,2,1] \[Omega]2barLower \[Wedge] e1barLower +
+   \[Epsilon][1,0,2] \[Omega]0barLower \[Wedge] e2barLower +
+   \[Epsilon][1,2,0] \[Omega]2barLower \[Wedge] e0barLower +
+   \[Epsilon][2,0,1] \[Omega]0barLower \[Wedge] e1barLower +
+   \[Epsilon][2,1,0] \[Omega]1barLower \[Wedge] e0barLower);
+
+Print["=== Torsion 2-forms T^a ==="];
+Print["T^0bar = ", Simplify[T0bar]];
+
+T1bar = ExtDerivative[e1bar] - 
+  (\[Epsilon][1,0,2] \[Omega]0barLower \[Wedge] e2barLower +
+   \[Epsilon][1,2,0] \[Omega]2barLower \[Wedge] e0barLower +
+   \[Epsilon][0,1,2] \[Omega]1barLower \[Wedge] e2barLower +
+   \[Epsilon][0,2,1] \[Omega]2barLower \[Wedge] e1barLower +
+   \[Epsilon][2,1,0] \[Omega]1barLower \[Wedge] e0barLower +
+   \[Epsilon][2,0,1] \[Omega]0barLower \[Wedge] e1barLower);
+
+Print["T^1bar = ", Simplify[T1bar]];
+
+T2bar = ExtDerivative[e2bar] - 
+  (\[Epsilon][2,0,1] \[Omega]0barLower \[Wedge] e1barLower +
+   \[Epsilon][2,1,0] \[Omega]1barLower \[Wedge] e0barLower +
+   \[Epsilon][0,2,1] \[Omega]2barLower \[Wedge] e1barLower +
+   \[Epsilon][0,1,2] \[Omega]1barLower \[Wedge] e2barLower +
+   \[Epsilon][1,2,0] \[Omega]2barLower \[Wedge] e0barLower +
+   \[Epsilon][1,0,2] \[Omega]0barLower \[Wedge] e2barLower);
+
+Print["T^2bar = ", Simplify[T2bar]];
+
+(* ============================================================ *)
+(* Part 8: Verify EOM — check R_a = 0, T_a + \[Epsilon]σe = 0, F_a + ... = 0 *)
+(* ============================================================ *)
+
+Print["=== EOM Verification (Outgoing EF) ==="];
+Print["R_a = 0: ", Simplify[R0bar] === 0 && Simplify[R1bar] === 0 && Simplify[R2bar] === 0];
+
+(* Contortion: \[Kappa]^a = \[Omega]^a - \[Omega]_LC^a *)
+(* For flat spacetime, \[Omega]_LC = 0 in Minkowski, so \[Kappa] = \[Omega] *)
+(* But in curved BTZ, we need to compute the full torsion-free \[Omega]_LC first *)
+
+Print["=== Note: Full verification requires xCoba connection computation ==="];
+Print["=== See analytical_verification.md for complete hand calculation ==="];

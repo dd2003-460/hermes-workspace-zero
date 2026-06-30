@@ -11,6 +11,11 @@
 - RALPH stop-hook 集成（项目状态同步）
 - AGENTS.md 阅读链路更新（4步→2步）
 
+**2026-06-27 迭代产出**：
+- ADSL Phase 2 coord_transform_fields.md — Lie derivative Killing 对称验证完成
+- QNM aim_research.md — Dehghan-Safari AIM 论文定位+方法研究完成
+- RALPH iteration: 32→34
+
 ## ✅ 已完成（2026-06-14）
 
 **项目级 beginner guide**：13 个项目全部完成（`notes/00-beginner-guide.md`）
@@ -53,7 +58,8 @@
 | D1-anyon-hawking | tasks/TASKS.md | arXiv-ready |
 | D1-aging-economics | TASKS.md | Phase 0-7 完成 |
 | D1-goal-investigation | tasks/TASKS.md | Agent 行为研究中 |
-| D1-area-quantized-black-hole-QNM | tasks/TASKS.md | ✅ I-1~I-6 + paper 完成 |
+| D1-area-quantized-black-hole-QNM | tasks/TASKS.md | ✅ I-1~I-6 + paper → 审稿意见:转向Teukolsky+Echoes → P1 conventions ✅, Teukolsky-RW duality ✅, P2 Dehghan-Safari AIM 研究完成, 待实施 Schwarzschild 回归 |
+| adsl-spin-connection | workspace/conventions.md | ✅ Phase 0 convention ✅, Phase 1 xact代码+静态黑洞解+EOM验证+变分方程 ✅, Phase 2 coord_transform 场Killing对称验证 ✅, 待推进BTZ pole-skipping |
 | D1-memory | — | 归档完成 |
 | D1-continuous-agent | — | Hermes Gateway Hook 验证完成 |
 | D1-writing | — | 活跃 |

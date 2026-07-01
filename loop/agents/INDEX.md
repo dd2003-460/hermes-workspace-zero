@@ -9,20 +9,22 @@
 
 ## Agent 映射表
 
-| Agent 编号 | Loop 阶段 | 全局规格文件 | 输入 | 本地输出 | 外部信息权限 |
-|------------|-----------|-------------|------|----------|-------------|
-| 01 | 1-loop 01-任务澄清 | `loop/1-loop/01-任务澄清.md` | project 下的 task-spec.md | 本项目 `loop/1-loop/01-任务澄清.md` | 无 |
-| 02 | 1-loop 02-目标澄清 | `loop/1-loop/02-目标澄清.md` | 1-loop/01 产出 | 本项目 `loop/1-loop/02-目标澄清.md` | 无 |
-| 03 | 1-loop 03-任务分解 | `loop/1-loop/03-任务分解.md` | 1-loop/02 产出 | 本项目 `loop/1-loop/03-任务分解.md` | 无 |
-| 04 | 1-loop 04-信息搜集 | `loop/1-loop/04-信息搜集.md` | 1-loop/03 产出 | 本项目 `loop/1-loop/04-信息搜集.md` | arXiv WebSearch WebFetch |
-| 05 | 1-loop 05-完备核验 | `loop/1-loop/05-完备核验.md` | 1-loop/03 + 1-loop/04 | 本项目 `loop/1-loop/05-完备核验.md` | arXiv 论文查询 |
-| 06 | 1-loop 06-决策 | `loop/1-loop/06-决策.md` | 1-loop/05 产出 | 本项目 `loop/1-loop/06-决策.md` | 无 |
-| 07 | 2-loop 01-pre-check | `loop/2-loop/01-pre-check.md` | 1-loop/06 产出 | 本项目 `loop/2-loop/01-pre-check.md` | 无 |
-| 08 | 2-loop 02-backup | `loop/2-loop/02-backup.md` | 2-loop/01 产出 | 本项目 `loop/2-loop/02-backup.md` | Bash (cp/diff) |
-| 09 | 2-loop 03-execute | `loop/2-loop/03-execute.md` | 2-loop/02 产出 | 修改后的文件 | Bash (运行脚本/测试) |
-| 10 | 2-loop 04-verify | `loop/2-loop/04-verify.md` | 2-loop/03 产出 | 本项目 `loop/2-loop/04-verify.md` | Bash (运行测试) |
-| 11 | 2-loop 05-confidence | `loop/2-loop/05-confidence.md` | 2-loop/04 产出 | 本项目 `loop/2-loop/05-confidence.md` | 无 |
-| 12 | 2-loop 06-decision | `loop/2-loop/06-decision.md` | 2-loop/05 产出 | 本项目 `loop/2-loop/06-decision.md` | 无 |
+| Agent | 编号 | 代号 | Loop 阶段 | 角色 |
+|------|------|------|-----------|------|
+| Leader | - | - | 团队指挥官 | 调度、分配任务、验证门禁 |
+| Brain-Sub | - | brain-sub | 副脑（永续） | 质疑主脑决策、找盲区 |
+| Agent | 01 | clarifier | 1-loop/01-任务澄清 | 将模糊需求转化为结构化任务定义 |
+| Agent | 02 | visionary | 1-loop/02-目标澄清 | 定义目标与边界，产出目标说明书 |
+| Agent | 03 | decomposer | 1-loop/03-任务分解 | 将目标拆解为可执行子任务 |
+| Agent | 04 | researcher | 1-loop/04-信息搜集 | 搜索 arXiv/Web 搜集技术信息 |
+| Agent | 05 | auditor | 1-loop/05-完备核验 | 检查任务分解的完备性，找遗漏 |
+| Agent | 06 | decision-maker | 1-loop/06-决策 | 综合前后阶段信息，决定 1→2 |
+| Agent | 07 | pre-checker | 2-loop/01-pre-check | 检查 2-loop 执行前提条件 |
+| Agent | 08 | backup-ops | 2-loop/02-backup | 执行前备份，生成变更清单 |
+| Agent | 09 | executor | 2-loop/03-execute | 执行修改、编写代码/脚本 |
+| Agent | 10 | verifier | 2-loop/04-verify | 验证产出是否符合预期 |
+| Agent | 11 | confider | 2-loop/05-confidence | 计算置信度，识别不确定项 |
+| Agent | 12 | final-decider | 2-loop/06-decision | 综合验证结果，决定是否结束 |
 
 ## 启动规则
 

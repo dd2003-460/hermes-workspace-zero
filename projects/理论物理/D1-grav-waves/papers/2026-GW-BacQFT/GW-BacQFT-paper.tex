@@ -9,6 +9,7 @@
 \usepackage{color}
 \usepackage{bm}
 
+
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{definition}{Definition}[section]
 \newtheorem{proposition}{Proposition}[section]
@@ -20,7 +21,7 @@
 \author{Cheng Lu\\
 \textit{Independent Researcher}\\
 \vspace{0.5em}
-\texttt{chenglu@research.local}
+\texttt{chenglu@protonmail.com}
 }
 \date{\today}
 
@@ -29,15 +30,17 @@
 \maketitle
 
 \begin{abstract}
-\textbf{We present a formalism for gravitational-wave (GW) source discrimination in pulsar timing arrays (PTAs) using the framework of extended algebraic quantum field theory. Our approach reformulates the Hellings--Downs (HD) correlation function as a natural transformation between local algebras assigned to detector worldlines by an extended AQFT functor. We show that distinct GW source classes---supermassive black hole binaries (SMBHBs) versus cosmological backgrounds---produce anisotropies of vastly different amplitudes and origins: SMBHB sources generate $\mathcal{O}(1\text{--}10\%)$ anisotropy that directly traces the local galaxy distribution (Poisson shot noise of discrete sources), while cosmological backgrounds exhibit $\mathcal{O}(10^{-5})$ anisotropy set by the primordial density field. We identify a source-discrimination invariant based on the total variation distance between the algebraic states associated with each source class and provide precise predictions for the discrimination power as a function of pulsar count and source population. We demonstrate the applicability of our framework to NANOGrav 15-year data and future IPTA/SKAO observations.}
+We present a formalism for gravitational-wave (GW) source discrimination in pulsar timing arrays (PTAs) using the framework of extended algebraic quantum field theory. Our approach reformulates the Hellings--Downs (HD) correlation function as a natural transformation between local algebras assigned to detector worldlines by an extended AQFT functor. We show that distinct GW source classes---supermassive black hole binaries (SMBHBs) versus cosmological backgrounds---produce anisotropies of vastly different amplitudes and origins: SMBHB sources generate $\mathcal{O}(1\text{--}10\%)$ anisotropy that directly traces the local galaxy distribution (Poisson shot noise of discrete sources), while cosmological backgrounds exhibit $\mathcal{O}(10^{-5})$ anisotropy set by the primordial density field. We identify a source-discrimination invariant based on the total variation distance between the algebraic states associated with each source class and provide precise predictions for the discrimination power as a function of pulsar count and source population. We demonstrate the applicability of our framework to NANOGrav 15-year data and future IPTA/SKAO observations.
 
-\textbf{Information-theoretic perspective:} The HD anisotropy measurement is fundamentally a signal extraction problem---we attempt to recover the angular distribution of GW sources from timing residual correlations obscured by detector noise and solar system ephemeris errors. The $\mathcal{O}(1\text{--}10\%)$ SMBHB anisotropy is a signal that survives compression (it carries mutual information with the galaxy distribution), while the $\mathcal{O}(10^{-5})$ cosmological anisotropy represents a different information channel---encoded in the primordial field rather than in discrete source locations. This cross-domain mapping (GW detection $\leftrightarrow$ information theory $\leftrightarrow$ category theory) reveals that the discrimination problem shares the same structure as any channel separation task: the source classes produce algebraic states with different entropy production rates, and the total variation distance between these states quantifies the distinguishability, which is equivalent to the channel capacity of the PTA detector network.
+Information-theoretic perspective: The HD anisotropy measurement is fundamentally a signal extraction problem---we attempt to recover the angular distribution of GW sources from timing residual correlations obscured by detector noise and solar system ephemeris errors. The $\mathcal{O}(1\text{--}10\%)$ SMBHB anisotropy is a signal that survives compression (it carries mutual information with the galaxy distribution), while the $\mathcal{O}(10^{-5})$ cosmological anisotropy represents a different information channel---encoded in the primordial field rather than in discrete source locations. This cross-domain mapping (GW detection $\leftrightarrow$ information theory $\leftrightarrow$ category theory) reveals that the discrimination problem shares the same structure as any channel separation task: the source classes produce algebraic states with different entropy production rates, and the total variation distance between these states quantifies the distinguishability, which is equivalent to the channel capacity of the PTA detector network.
 
 \vspace{0.5em}
 \noindent\textbf{License}: This work is licensed under Creative Commons Attribution 4.0 International (CC BY 4.0).
 
 \vspace{0.5em}
 \noindent\textbf{Keywords}: pulsar timing arrays; gravitational waves; algebraic QFT; functorial QFT; Hellings-Downs correlation; source discrimination; SMBHB; anisotropy
+
+\end{abstract}
 
 \tableofcontents
 
@@ -66,11 +69,11 @@ In this work, we reformulate GW detection in PTAs using \textbf{extended algebra
 Algebraic QFT assigns to each open region $O \subseteq M$ of a spacetime manifold $M$ a $C^*$-algebra $\mathcal{A}(O)$ of observables localized in $O$, satisfying the Einstein causality axiom: if $O_1$ and $O_2$ are spacelike separated, then $\mathcal{A}(O_1)$ and $\mathcal{A}(O_2)$ commute. The assignment $O \mapsto \mathcal{A}(O)$ is a functor from the category $\mathbf{Loc}_M$ (Lorentzian manifolds with causal embeddings) to the category $\mathbf{C^*Alg}$ of $C^*$-algebras \cite{Brunetti:2003,Moretti:2017}.
 
 \begin{definition}[Extended AQFT]
-An extended AQFT functor is a symmetric monoidal
+We call an AQFT framework \textbf{extended} when the functorial assignment of local algebras is defined not only on open regions of spacetime but also on submanifolds of lower dimension (in the sense of the cobordism-based formulation of extended TQFT \cite{Baez:1995,Lurie:2009}). Concretely, the extended AQFT functor is
 \begin{equation}
-F: \mathbf{Loc}_{M}^{\mathrm{ext}} \to \mathbf{C^*Alg}^{(\infty, n)}
+F: \mathbf{Loc}_{M}^{\mathrm{ext}} \to \mathbf{C^*Alg}
 \end{equation}
-where $\mathbf{Loc}_{M}^{\mathrm{ext}}$ is the extended category of causal regions including submanifolds of all codimensions, and $\mathbf{C^*Alg}^{(\infty, n)}$ is the $\infty$-category of $C^*$-algebras with additional higher-categorical structure encoding boundary conditions.
+where $\mathbf{Loc}_{M}^{\mathrm{ext}}$ is a category whose objects include causal regions (open submanifolds) as well as submanifolds of various codimensions, with morphisms given by causal embeddings and cobordisms of appropriate dimension. The target $\mathbf{C^*Alg}$ is the category of $C^*$-algebras; the ``extended'' structure is encoded in the source category, not the target. The functor satisfies the isotony axiom ($O_1 \subseteq O_2 \Rightarrow \mathcal{A}(O_1) \subseteq \mathcal{A}(O_2)$), Einstein causality (commutativity for spacelike-separated regions), and local covariance (naturality under isometric embeddings) \cite{Brunetti:2003,Moretti:2017}.
 \end{definition}
 
 \subsection{Detector Worldlines as Subobjects}\label{sec:detectors}
@@ -185,7 +188,7 @@ The functorial perspective explains why this function has its specific form: the
 
 \subsection{Anisotropy Scaling and Discrimination Threshold}\label{subsec:anisotropy-scaling}
 
-The structural distinction between SMBHB and cosmological GW sources is quantified by the anisotropy amplitude and its scaling with PTA configuration. Figure~\ref{fig:source-disc} illustrates the key differences: SMBHB anisotropy is $\mathcal{O}(1\text{--}10\%)$ and traces the local galaxy LSS, while cosmological anisotropy is $\mathcal{O}(10^{-5})$ set by primordial density fluctuations. The discrimination power improves with the number of pulsar pairs $P = N(N-1)/2$ as $d_{\mathrm{TV}} \gtrsim c \cdot P^{-1/2} \cdot |\sigma_N^2(\mathrm{SMBHB}) - \sigma_N^2(\mathrm{cosmo})|$, establishing a clear threshold for reliable source classification with current and future PTA arrays.
+The structural distinction between SMBHB and cosmological GW sources is quantified by the anisotropy amplitude and its scaling with PTA configuration. Figure~\ref{fig:source-disc} illustrates the key differences: SMBHB anisotropy is $\mathcal{O}(1\text{--}10\%)$ and traces the local galaxy LSS, while cosmological anisotropy is $\mathcal{O}(10^{-5})$ set by primordial density fluctuations. The discrimination power improves with the number of pulsar pairs $P = N(N-1)/2$ as $d_{\mathrm{TV}} \gtrsim c \cdot P^{-1/2} \cdot |\sigma_N^2(\mathrm{SMBHB}) - \sigma_N^2(\mathrm{cosmo})|$, establishing a clear threshold for reliable source classification. Figure~\ref{fig:scaling} shows the quantitative scaling of SMBHB anisotropy, noise floor, and cosmological level as functions of pulsar count, demonstrating the detectability outlook for current and future arrays.
 
 \begin{figure}[t]
 \centering
@@ -221,7 +224,7 @@ For PTA observations at frequency band $[f_1, f_2]$ with $N$ pulsars and observa
 \begin{equation}
 d_{\mathrm{TV}}(\omega_{\mathrm{SMBHB}}, \omega_{\mathrm{cosmo}}) \gtrsim c \cdot P^{-1/2} \cdot \left| \sigma_N^2(\mathrm{SMBHB}) - \sigma_N^2(\mathrm{cosmo}) \right|
 \end{equation}
-where $\sigma_N^2$ is the fractional variance of the source count in the PTA sky coverage, and $c$ is a constant depending on the spectral index difference $\Delta\gamma = |\gamma_{\rm SMBHB} - \gamma_{\rm cosmo}|$.
+where $\sigma_N^2$ is the fractional variance of the source count in the PTA sky coverage, and $c = c(S_h, \Delta\gamma, f_1, f_2)$ is a constant that depends on the spectral shape function $S_h$, the spectral index difference $\Delta\gamma = |\gamma_{\rm SMBHB} - \gamma_{\rm cosmo}|$, and the observation frequency band $[f_1, f_2]$. A precise evaluation of $c$ requires a full noise budget analysis and is left to future work.
 
 For SMBHBs, $\sigma_N^2 = \mathcal{O}(N_{\rm src}^{-1})$ due to Poisson discreteness of sources \cite{Rogers:2016}. For cosmological GWBs, the angular anisotropy is determined by the large-scale structure projection, producing corrections of order $\mathcal{O}(N_{\rm mode}^{-1})$ where $N_{\rm mode} \gg N_{\rm src}$ is the effective number of multipoles probed by the PTA \cite{Gong:2021}. The key distinction is that SMBHB anisotropy traces the local galaxy distribution (with $\mathcal{O}(1\text{--}10\%)$ LSS fluctuations), while cosmological anisotropy is limited by cosmic variance at the $\mathcal{O}(10^{-5})$ level from the primordial density field.
 \end{theorem}
@@ -301,11 +304,11 @@ Current data sensitivity to HD anisotropy is $\sim 0.1$ \cite{Isi:2024}, so SMBH
 \end{equation}
 This provides an orthogonal discriminant to spectral index alone.
 
-\item \textbf{Higher-order correlation functions:} Building on Fujimoto \& Takahashi \cite{Fujimoto:2026} and Mingolla et al. \cite{Mingolla:2023}, our framework predicts that the skewness of the HD correlation is non-zero only for discrete sources:
+\item \textbf{Higher-order correlation functions:} Building on Fujimoto \& Takahashi \cite{Fujimoto:2026} and Mingolla et al. \cite{Mingolla:2023}, our framework predicts that the skewness of the HD correlation is primarily governed by the confusion-noise regime in which many unresolved point sources interfere coherently. In this regime, the skewness is non-zero even when the source number is large and transitions toward a continuous background, as it is governed by a geometric three-point function of detector responses rather than by discreteness alone:
 \begin{equation}
-\langle\langle \zeta^3 \rangle\rangle \neq 0 \quad \text{if and only if sources are discrete (Poisson)}
+\langle\langle \zeta^3 \rangle\rangle \neq 0 \quad \Rightarrow \quad \text{non-Gaussian correlations from confusion noise or discreteness}
 \end{equation}
-The sign and magnitude of the skewness encode the source clustering properties. Non-HD correlation patterns (e.g., monopole, dipole) also provide complementary discrimination channels \cite{Mingolla:2023}.
+The sign and magnitude of the skewness encode the source clustering properties and the relative importance of Poisson shot noise versus confusion noise. Non-HD correlation patterns (e.g., monopole, dipole) also provide complementary discrimination channels \cite{Mingolla:2023}. We note that certain exotic source classes---including primordial black hole (PBH) GWBs and cosmic string networks---also produce non-zero skewness through confusion-noise mechanisms, which complicates the source-class identification based on skewness alone.
 \end{enumerate}
 
 \subsection{Statistical Framework}\label{sec:statistical}
@@ -325,6 +328,13 @@ For the SKAO era ($N \sim 200$ pulsars, $P \sim 20000$):
 \end{equation}
 
 These values suggest that SKAO-era PTA data can discriminate SMBHB anisotropy from cosmological levels at high confidence, provided the systematics are well-controlled. The key advantage of our framework is that it predicts the SMBHB anisotropy to correlate with galaxy surveys (via $\mathcal{Y}_{\ell m}^{\rm LSS}$), providing a cross-validation channel not available in standard multipole analysis.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\textwidth]{Fig3-scaling-SNR.png}
+\caption{Scaling figure: signal amplitude $d_{\rm signal}$ (SMBHB anisotropy $\propto N_{\rm src}^{-1/2}$, noise floor $\sim P^{-1/2}$, and cosmological level) versus pulsar count $N_{\rm p}$. Vertical markers indicate NANOGrav 15-year ($N_{\rm p}=68$) and SKAO ($N_{\rm p}=200$) configurations. SMBHB anisotropy for $N_{\rm src} \sim 10^4$ lies well above the noise floor at both epochs; for $N_{\rm src} \sim 10^5$, detection becomes marginal at SKAO. The cosmological level remains below the noise floor by two orders of magnitude across the entire range, confirming the practical irrelevance of cosmological anisotropy for PTA source discrimination.}
+\label{fig:scaling}
+\end{figure}
 
 \section{Discussion}\label{sec:discussion}
 
@@ -353,6 +363,7 @@ The key advantage is that our framework does not assume a specific source model 
 \item \textbf{Lorentzian cobordism:} Our framework assumes the existence of a Lorentzian extension of the cobordism category, which is still under development in mathematical physics \cite{Schreiber:2023}.
 \item \textbf{State dependence:} The discrimination invariant depends on the choice of vacuum state. We have focused on the Bunch-Davies vacuum for cosmological sources and the Minkowski vacuum for SMBHBs, but a full treatment requires analyzing the space of all Hadamard states \cite{Hollands:2003,Moretti:2017}.
 \item \textbf{Detector effects:} Our framework treats PTA pulsars as ideal point detectors. Real PTA data includes noise, timing systematics, and incomplete sky coverage that must be incorporated into the functorial framework.
+\item \textbf{Source-class degeneracy:} Our dichotomy (SMBHB versus cosmological) does not exclude the possibility that other source classes---notably primordial black hole (PBH) GWBs and cosmic string networks---could produce anisotropy signatures with comparable amplitudes and spatial correlations. A PBH GWB would trace dark matter distribution (similar to SMBHB tracing galaxy distribution) with potentially comparable anisotropy amplitudes $\mathcal{O}(1\text{--}10\%)$ \cite{Raidal:2017}. Distinguishing between these requires additional discriminants beyond anisotropy amplitude alone, such as spectral index ($\gamma = 2/3$ for SMBHB, potentially different for PBH) and multi-messenger cross-correlation. We leave a systematic treatment of source-class degeneracy for future work.
 \end{itemize}
 
 \section{Conclusion}\label{sec:conclusion}
@@ -366,6 +377,8 @@ We have rederived the Hellings--Downs correlation function within an extended al
 \end{itemize}
 
 Our framework provides a systematic, model-independent approach to GW source discrimination that can be tested with current and future PTA data. The key prediction---that the anisotropy amplitude scales as $N_{\rm src}^{-1}$ for SMBHBs (Poisson shot noise of discrete sources) but is fixed by the primordial power spectrum amplitude $\sim 10^{-5}$ for cosmological backgrounds (independent of source count)---is testable with SKAO-era observations.
+
+\textbf{Numerical summary:} For NANOGrav 15-year data ($N = 68$ pulsars, observation time $T = 15$ yr), the predicted SMBHB anisotropy amplitude $\mathcal{O}(1\text{--}10\%)$ is marginally within current detection sensitivity $\sim 0.1$ \cite{Isi:2024}. For the SKAO era ($N \sim 200$, $P \sim 20\,000$ pulsar pairs, $T = 10$ yr), the discrimination SNR for a dominant local SMBHB population ($N_{\rm src} \sim 10^4$) reaches $\mathcal{O}(1\text{--}3)$, making anisotropy-based source discrimination a concrete observable. The cosmological anisotropy ($\mathcal{O}(10^{-5})$) remains below the noise floor ($\sim P^{-1/2} \approx 7 \times 10^{-3}$) even with SKAO sensitivity, confirming that SMBHB-LSS correlation is the only practical anisotropy-based discriminant in the near term.
 
 \textbf{Cross-domain structural isomorphism:} The discrimination problem we address shares the same mathematical structure as problems in seemingly unrelated domains. In information theory, the total variation distance between algebraic states is equivalent to the minimum error probability in hypothesis testing---the same quantity that determines the capacity of a noisy communication channel. In statistical physics, the SMBHB anisotropy (Poisson shot noise) and the cosmological anisotropy (primordial fluctuations) are structurally analogous to thermal noise and quantum noise in a harmonic oscillator---both are Gaussian but with different variances that encode different microscopic physics. In machine learning, our PTA detector network functions as a pattern classifier: the algebraic states are class-conditional distributions, and the total variation distance is the classifier's separability margin. These analogies are not metaphorical; they reflect the same underlying structure of distinguishing Gaussian fields by their spatial correlation properties. The functorial QFT framework provides the mathematical language to express this isomorphism precisely, but the essential insight---that correlation structure encodes source identity---is universal across these domains.
 
@@ -491,20 +504,11 @@ A.~Kehagias and A.~Riotto,
 ``The PTA Hellings--Downs correlation unmasked by symmetries,''
 \textit{JCAP} \textbf{06} (2024) 059, DOI: 10.1088/1475-7516/2024/06/059.
 
-\bibitem{Lemke:2024}
-A.-M.~Lemke, A.~Mitridate, and K.~A.~Gersbach,
-``Detecting Gravitational Wave Anisotropies from Supermassive Black Hole Binaries,''
-\textit{Phys.\ Rev.\ D} \textbf{109} (2024) 103014, arXiv:2312.06654.
+\bibitem{Raidal:2017}
+M.~Raidal, V.~Vaskonen, and H.~Veerm\"ae,
+``Gravitational waves from primordial black hole mergers,''
+\textit{JCAP} \textbf{2017} (2017) no.09, 037, arXiv:1707.01480.
 
-\bibitem{Schenkel:2023}
-A.~Schenkel,
-``Lorentzian bordisms in algebraic quantum field theory,''
-\textit{Commun.\ Math.\ Phys.} (2023), arXiv:2203.09333.
-
-\bibitem{Benini:2019}
-M.~Benini, A.~Schenkel, and L.~Woike,
-``Involutive categories, colored $*$-operads and quantum field theory,''
-\textit{Lett.\ Math.\ Phys.} \textbf{109} (2019) 2109, arXiv:1808.06208.
 \end{thebibliography}
 
 \end{document}

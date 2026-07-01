@@ -39,7 +39,7 @@
 |------|------|------|
 | DistCat v6 (math.CT) | 📋 就绪 | MITM SSL + 作者确认 |
 | BayesFrame v2.0 (q-bio.NC) | 📋 就绪 | MITM SSL + 作者确认 |
-| D1-grav-waves v4 (gr-qc) | 📋 就绪 | MITM SSL + 作者确认 |
+| D1-grav-waves v13 (gr-qc) | ✅ ready_for_submission | v13: v12 + 3 uncited bibitems removed, 14 pages, 25 refs, 0 errors, 0 uncited. 作者确认上传 (2026-07-01) |
 | anyon-hawking (hep-th) | 📋 就绪 | MITM SSL + 作者确认 |
 | EMRI-D26 resonance (gr-qc) | 📋 就绪 | MITM SSL + 作者确认 |
 | Chimera v3 (Chaos) | 📋 就绪 | MITM SSL + 作者确认 |

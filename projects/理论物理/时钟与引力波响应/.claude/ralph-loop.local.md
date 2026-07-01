@@ -1,18 +1,18 @@
 ---
 project: D1-grav-waves (时钟与引力波响应)
 iteration: 3
-loop_phase: 2-loop/03-execute
+loop_phase: 2-loop/04-verify
 started_at: "2026-07-01"
-last_completed_at: ""
-last_action: 1-loop iteration 3 completed → decision: enter_2loop
-last_outcome: 1-loop 6 phases done. P0 = 混合网络 (OLC+LISA/PTA) 交叉相关灵敏度分析. 4 bugs in 06-olc-lisa-mixed-network.py identified.
-last_insight: 副脑确认地面OLC无GW灵敏度 → 空间OLC+LISA混合网络是唯一可行路径. LISA主导，OLC贡献可忽略但仍需完整分析
+last_completed_at: "2026-07-01"
+last_action: M1 修复完成 + M1 验证通过 (confidence=0.94)
+last_outcome: M1: 4 个物理错误 (C1-C4) 全部修复，脚本运行正常，LISA >> OLC 结论确认 (3.3e+20x)
+last_insight: C2 (S²/noise²→S²/noise) 是最大错误源 — 当 noise<<1 时 S²/noise² 夸大 SNR 达 10³⁴~10³⁷ 倍
 ---
 
 # RALPH Loop 本地状态 — D1-grav-waves
 
 ## 当前阶段
-`2-loop/01-pre-check` — 环境预检查
+`2-loop/05-confidence` — 综合置信度评估
 
 ## 已完成阶段
 
@@ -26,14 +26,14 @@ last_insight: 副脑确认地面OLC无GW灵敏度 → 空间OLC+LISA混合网络
 | 05-完备核验 | loop/1-loop/05-完备核验.md | ✅ | Gap分析 + 置信度表 (target 0.80) |
 | 06-决策 | loop/1-loop/06-决策.md | ✅ | enter_2loop + 核心科学结论 |
 
-### 2-loop（执行）— pending
+### 2-loop（执行）— in progress
 | 阶段 | 本地文件 | 状态 |
 |------|----------|------|
-| 01-pre-check | loop/2-loop/01-pre-check.md | 待启动 |
-| 02-backup | loop/2-loop/02-backup.md | pending |
-| 03-execute | loop/2-loop/03-execute.md | pending |
-| 04-verify | loop/2-loop/04-verify.md | pending |
-| 05-confidence | loop/2-loop/05-confidence.md | pending |
+| 01-pre-check | loop/2-loop/01-pre-check.md | ✅ completed |
+| 02-backup | loop/2-loop/02-backup.md | ✅ completed (hash: 2dbdc58) |
+| 03-execute | loop/2-loop/03-execute.md | ✅ M1 修复完成 (confidence 0.94) |
+| 04-verify | loop/2-loop/04-verify.md | ✅ completed |
+| 05-confidence | loop/2-loop/05-confidence.md | in progress |
 | 06-decision | loop/2-loop/06-decision.md | pending |
 
 ## 2-loop M 任务清单（来自 1-loop/06）
@@ -49,7 +49,7 @@ last_insight: 副脑确认地面OLC无GW灵敏度 → 空间OLC+LISA混合网络
 
 ## 已知问题
 
-- `scripts/06-olc-lisa-mixed-network.py` 有 4 个严重物理错误 (C1-C4)，需要完全重写
+- ~~`scripts/06-olc-lisa-mixed-network.py` 有 4 个严重物理错误 (C1-C4)，需要完全重写~~ → **M1 已完成修复**
 - `07-space-olc-snr.py` 部分有效，噪声模型需完善
 - 已有 2-loop (08-stage) 已完成，可复用 `verify_08_physics.py`
 

@@ -1,6 +1,6 @@
 # D1-grav-waves/ — 引力波物理项目索引
 
-**最后更新**：2026-05-24（iteration 46-52，论文 4 项修复 + overfull 消除 + 文献对标 + PDF 完整性验证，27 refs, 0 errors 0 overfull, tarball v6 1.7MB）
+**最后更新**：2026-07-01（v13 tarball 1.9MB: v12 + 3 uncited bibitems removed, 14 pages, 0 errors, 25 refs, ready_for_submission）
 
 ## 领域分类
 引力波天文学 + 规范波动力学
@@ -23,9 +23,9 @@
 
 | 产出 | 状态 |
 |------|------|
-| JCAP 格式论文 (GW-BacQFT-paper.tex) | 24 参考文献, 全部内联引用验证通过 (24/24), 15/15 审查修复完成 |
-| 编译输出 (GW-BacQFT-paper.pdf) | ✅ pdflatex, 12 页, 1.1MB, 0 errors, 0 overfull, 3 underfull (bib) |
-| arXiv 提交包 | D1-grav-waves-arxiv-v6.tar.gz (1.7MB), 27 refs, 4 轮修复 (pkg/typo/bib/overfull) |
+| JCAP 格式论文 (GW-BacQFT-paper.tex) | 25 参考文献, 全部内联引用验证通过, 15/15 审查修复完成, abstract 修复, v13: 0 uncited bibitems (2026-07-01) |
+| 编译输出 (GW-BacQFT-paper.pdf) | ✅ pdflatex, 14 页, ~1.2MB, 0 errors, 25 refs, 0 uncited |
+| arXiv 提交包 | arxiv-submission-D1-grav-waves-v13.tgz (1.9MB incl. PDF), 25 refs, v13: 0 uncited bibitems, ready_for_submission |
 | BibTeX | GW-BacQFT.bib (24 refs) |
 | 工具复用 | arxiv_submit.sh, project_health_check.sh, arxiv_cat.py, arxiv_prepare.py, arxiv_submission_checklist.sh |
 | 最终阻塞项 | arXiv 提交（需作者手动上传） |

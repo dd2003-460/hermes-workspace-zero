@@ -1,7 +1,7 @@
 ---
 project: D1-grav-waves (时钟与引力波响应)
 iteration: 3
-loop_phase: 2-loop/01-pre-check
+loop_phase: 2-loop/03-execute
 started_at: "2026-07-01"
 last_completed_at: ""
 last_action: 1-loop iteration 3 completed → decision: enter_2loop

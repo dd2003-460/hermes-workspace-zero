@@ -1,36 +1,24 @@
 # 02-backup（备份）
 
-**所属规格**：`/Users/a1-6/Desktop/workspace/loop/2-loop/02-backup.md`
-**状态**：completed
-**输入**：loop/2-loop/01-pre-check.md 产出
-**输出**：backups/YYYY-MM-DD/ + backup-log.md
+**状态**: completed
+**输入**: loop/2-loop/01-pre-check.md (pre-check 通过)
+**输出**: git commit 记录
 
 ---
-## 产出内容
 
-### Backup 记录 — 08-stage 执行前
+## 备份记录
 
-#### 备份日期
-2026-06-30
+- **hash**: 2dbdc58fc5425e8793012137ad983e7272f84784
+- **message**: backup before 2-loop 03-execute: mixed-network-analysis
+- **date**: 2026-07-01
 
-#### 备份清单
+## 回滚命令
+```bash
+cd /Users/a1-6/Desktop/workspace
+git checkout 2dbdc58fc5425e8793012137ad983e7272f84784
+```
 
-| 类别 | 文件数 | 关键文件 |
-|------|--------|---------|
-| 脚本 | 7 | 01-08.py 及 verify 脚本 |
-| memory | 8 | 01-olc 到 08-olc-*.md |
-| loop | 12 | loop/1-loop/ 和 loop/2-loop/ 全部阶段文件 |
-| 数据/图像 | 10+ | csv, png, npy, npz 文件 |
-
-#### 备份位置
-`backups/2026-06-28/` — 初始备份
-
-**此次 08-stage 的备份将在执行后写入 `backups/2026-06-30/`**
-
----
-## 完成时间
-last_completed_at: 2026-06-30
-
----
-## 回滚
-恢复 backups/2026-06-30/ 到原文件
+## 验证
+- [x] git add -A 通过
+- [x] commit 创建成功
+- [x] commit hash 非空

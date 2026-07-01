@@ -7,14 +7,13 @@ Phase 3: 探测 OLC 的唯一可行路径 — 混合网络与 LISA/PTA 联合分
 核心思想：
 - OLC 敏感频段：~0.1-100 Hz（高频）
 - LISA 敏感频段：~0.1 mHz-1 Hz（低频）
-- 两探测器的 ORF 和响应函数不同，但都对 SGWB 有响应
-- 混合网络 SNR = sqrt(SNR_OLC^2 + SNR_LISA^2 + 2*SNR_cross^2)
+- 两探测器独立观测 SGWB，混合网络 SNR = sqrt(SNR_OLC^2 + SNR_LISA^2)
+- 跨相关项（不同可观测量的交叉相关）无法定义（C1 修复）
 
-交叉关联 SNR 公式 (Allen 1996, Kim et al. 2012):
-  SNR^2 = 2 T_obs int_0^inf df [gamma_OLC*gamma_LISA*S_corr_OLC*S_corr_LISA]^2
-                                              / [S_y_OLC*S_y_LISA]
+单探测器 SNR 公式 (Allen 1987, Thorne 1987):
+  d(SNR^2)/df = 2 T_obs gamma^2 [S_corr(f)]^2 / S_noise(f)
 
-当 f 波段不重叠时 cross-term 小，主要增益来自覆盖率增加。
+SNR 计算公式 (S^2/S_noise 而非 S^2/S_noise^2，C2 修复)。
 """
 
 import numpy as np
@@ -51,11 +50,11 @@ def olc_s_corr(f, Omega_GW=OMEGA_GW, L=10.0):
     S_h = (2.0 * H_0**2 / np.pi**2) * Omega_GW * f**(-3.0)
     return S_h * olc_t_gw_sq(f, L)
 
-def olc_snr_integrated(f, L=10.0, T_obs=1.0, N_base=15, gamma_olc=0.53, Omega_GW=OMEGA_GW):
-    """Integrated OLC SNR for multiple baselines."""
-    dSNR2_df = (2.0 * T_obs * M_YR * gamma_olc**2
-                * olc_s_corr(f, Omega_GW, L)**2
-                / (olc_s_y(f, h_0=1e-17)**2))
+def olc_snr_integrated(f, L=10.0, T_obs=1.0, Omega_GW=OMEGA_GW):
+    """Integrated OLC SNR."""
+    # C2 FIX: S_signal^2 / S_noise (not S_noise^2) — Allen 1987, Thorne 1987
+    dSNR2_df = (2.0 * T_obs * M_YR * olc_s_corr(f, Omega_GW, L)**2
+                / olc_s_y(f, h_0=1e-17))
     try:
         snr2 = np.trapezoid(dSNR2_df, f)
     except AttributeError:
@@ -90,7 +89,9 @@ def lisa_snr_integrated(f, T_obs=1.0, gamma_lisa=0.5, Omega_GW=OMEGA_GW):
     """Integrated LISA SNR."""
     S_corr = lisa_s_corr(f, Omega_GW)
     S_noise = lisa_strain_psd(f)
-    dSNR2_df = 2.0 * T_obs * M_YR * gamma_lisa**2 * S_corr**2 / S_noise**2
+    # C2 FIX: S_signal^2 / S_noise (not S_noise^2) — Allen 1987
+    # C4 FIX: T_obs * M_YR for time in seconds
+    dSNR2_df = 2.0 * T_obs * M_YR * gamma_lisa**2 * S_corr**2 / S_noise
     try:
         snr2 = np.trapezoid(dSNR2_df, f)
     except AttributeError:
@@ -121,7 +122,9 @@ def olca_lisa_cross_snr(f, T_obs=1.0, N_base=15,
     S_corr_lisa = lisa_s_corr(f, Omega_GW)
     noise_lisa = lisa_strain_psd(f)
 
-    # Cross-correlation spectral density
+    # C1 FIX: OLC (fractional freq) and LISA (strain) are different observables.
+    # Cross-correlation between fundamentally different domains cannot be defined.
+    # The cross-term below is kept as a heuristic spectral overlap indicator only.
     dSNR2_df = (2.0 * T_obs * M_YR * N_base * gamma_cross**2
                 * S_corr_olc**2 * S_corr_lisa**2
                 / (noise_olc * noise_lisa))
@@ -133,21 +136,22 @@ def olca_lisa_cross_snr(f, T_obs=1.0, N_base=15,
 
 # ─── Combined network SNR ────────────────────────────────────────────────────
 
-def combined_snr(f_common, T_obs=1.0, N_base=15):
+def combined_snr(f_common, T_obs=1.0):
     """Total SNR for OLC+LISA mixed network.
 
-    Add dSNR^2/dlog(f) from both detectors on a shared log-frequency grid.
-    Since OLC and LISA have minimal frequency overlap, the cross-term is
-    negligible.
+    C4 FIX: For independent detectors, SNR_total^2 = SNR_OLC^2 + SNR_LISA^2.
+    No cross-correlation term between independent estimators.
+    N_base removed — network SNR scales as sqrt(N_baselines), not linearly.
+    T_obs in years, converted to seconds via M_YR.
     """
-    # OLC dSNR2 per log(f) bin
-    dSNR2_olc = (2.0 * T_obs * M_YR * N_base * 0.53**2
+    # OLC dSNR2 per log(f) bin (gamma removed: C3 K_arm=0.53 already in T_gw_sq)
+    dSNR2_olc = (2.0 * T_obs * M_YR
                  * olc_s_corr(f_common, OMEGA_GW)**2
-                 / olc_s_y(f_common, h_0=1e-17)**2)
-    # LISA dSNR2 per log(f) bin
+                 / olc_s_y(f_common, h_0=1e-17))
+    # LISA dSNR2 per log(f) bin (C2 FIX: S_noise^1 not S_noise^2)
     dSNR2_lisa = (2.0 * T_obs * M_YR * 0.5**2
                   * lisa_s_corr(f_common, OMEGA_GW)**2
-                  / lisa_strain_psd(f_common)**2)
+                  / lisa_strain_psd(f_common))
 
     # Only keep OLC dSNR^2 in its sensitive band (f > 0.01 Hz)
     dSNR2_olc = np.where(f_common >= 0.01, dSNR2_olc, 0.0)
@@ -168,16 +172,16 @@ def plot_sensitivity_curves():
     """Compare sensitivity curves for OLC, LISA, and mixed network."""
     f = np.logspace(-4, 2, 2000)
 
-    # OLC per-Hz SNR spectral density
-    dSNR2_olc = (2.0 * 1.0 * M_YR * 15 * 0.53**2
+    # OLC per-Hz SNR spectral density (C2: noise^1, C4: no N_base, C3: no gamma)
+    dSNR2_olc = (2.0 * 1.0 * M_YR
                  * olc_s_corr(f, OMEGA_GW, L=10.0)**2
-                 / olc_s_y(f, h_0=1e-17)**2)
+                 / olc_s_y(f, h_0=1e-17))
     dSNR_df_olc = np.sqrt(np.maximum(dSNR2_olc, 0))
 
-    # LISA per-Hz SNR spectral density (scaled to OMEGA_GW=1e-8 for comparison)
+    # LISA per-Hz SNR spectral density (C2: noise^1)
     dSNR2_lisa = (2.0 * 1.0 * M_YR * 0.5**2
                   * lisa_s_corr(f, OMEGA_GW)**2
-                  / lisa_strain_psd(f)**2)
+                  / lisa_strain_psd(f))
     dSNR_df_lisa = np.sqrt(np.maximum(dSNR2_lisa, 0))
 
     fig, ax = plt.subplots(1, 1, figsize=(10, 6))
@@ -223,12 +227,13 @@ def plot_frequency_coverage():
     f = np.logspace(-4, 2, 2000)
     T_obs = 1.0  # 1 year
 
-    dSNR2_olc = (2.0 * T_obs * M_YR * 15 * 0.53**2
+    # C2: noise^1, C4: no N_base, C3: no gamma
+    dSNR2_olc = (2.0 * T_obs * M_YR
                  * olc_s_corr(f, OMEGA_GW, L=10.0)**2
-                 / olc_s_y(f, h_0=1e-17)**2)
+                 / olc_s_y(f, h_0=1e-17))
     dSNR2_lisa = (2.0 * T_obs * M_YR * 0.5**2
                   * lisa_s_corr(f, OMEGA_GW)**2
-                  / lisa_strain_psd(f)**2)
+                  / lisa_strain_psd(f))
 
     # Integrate cumulatively to find SNR(f) at each frequency
     dSNR_df_olc = np.sqrt(np.maximum(dSNR2_olc, 0))
@@ -314,12 +319,13 @@ def plot_frequency_band_decomposition():
     T_obs = 1.0 * M_YR
 
     f = np.logspace(-4, 2, 2000)
-    dSNR2_olc = (2.0 * T_obs * 15 * 0.53**2
+    # C2: noise^1, C4: no N_base, C3: no gamma
+    dSNR2_olc = (2.0 * T_obs
                  * olc_s_corr(f, Omega_GW, L=10.0)**2
-                 / olc_s_y(f, h_0=1e-17)**2)
+                 / olc_s_y(f, h_0=1e-17))
     dSNR2_lisa = (2.0 * T_obs * 0.5**2
                   * lisa_s_corr(f, Omega_GW)**2
-                  / lisa_strain_psd(f)**2)
+                  / lisa_strain_psd(f))
 
     dSNR_df_olc = np.sqrt(np.maximum(dSNR2_olc, 0))
     dSNR_df_lisa = np.sqrt(np.maximum(dSNR2_lisa, 0))

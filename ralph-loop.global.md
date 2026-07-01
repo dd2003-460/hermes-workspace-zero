@@ -48,3 +48,38 @@
     - 每个 agent 的上下文应限于：阶段规格文件 + 当前输入文件内容
     - 任务完成后 agent 应当清除（不保留长期状态）
     - Leader 负责任务分配、进度观察、验证门禁
+
+11. **项目本地 loop 目录（步骤中间结果持久化）**
+    每个项目目录下必须有 `loop/` 子目录，按 global `loop/` 的结构镜像：
+    ```
+    projects/<project>/loop/
+    ├── INDEX.md                          ← 本项目的 loop 目录概览
+    ├── 1-loop/
+    │   ├── 01-任务澄清.md    ← 该阶段输出（对应 global 规格文件中的输出格式）
+    │   ├── 02-目标澄清.md
+    │   ├── 03-任务分解.md
+    │   ├── 04-信息搜集.md
+    │   ├── 05-完备核验.md
+    │   └── 06-决策.md
+    └── 2-loop/
+        ├── 01-pre-check.md
+        ├── 02-backup.md
+        ├── 03-execute.md
+        ├── 04-verify.md
+        ├── 05-confidence.md
+        └── 06-decision.md
+    ```
+
+    每个阶段的 .md 文件必须包含：
+    - **所属阶段**：指向 global loop 的哪个规格文件（如"本阶段按 `/Users/a1-6/Desktop/workspace/loop/1-loop/03-任务分解.md` 执行"）
+    - **输入**：上一步的输出文件路径
+    - **输出**：本阶段产出的具体内容
+    - **状态**：pending | in_progress | completed | needs_replan
+    - **完成时间**：last_completed_at
+    - **回滚**：回滚到上一状态的方式
+
+    这样做的好处：
+    - 中间信息（任务分解、工具清单、gap分析）永久保留在项目中
+    - 新 session 启动时直接读本项目的 loop 目录，不必从零开始
+    - 状态一目了然：哪个阶段做了、哪个没做、哪个需要重做
+    - 与 global loop 解耦：global 只定义"怎么做"，local 记录"做了什么+当前状态"

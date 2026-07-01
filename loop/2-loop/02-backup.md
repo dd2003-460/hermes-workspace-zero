@@ -1,70 +1,53 @@
 # 02-backup（备份）
 
 **输入**：`pre-check-result.md`（来自阶段 1）
-**输出**：备份文件（`backups/YYYY-MM-DD/<file>.bak`）
+**输出**：git commit 记录
 
 ---
 
 ## 操作步骤
 
-### Step 1：确定需要备份的文件
-从 `task-decomposition.md` 中提取所有涉及的文件路径。
-
-### Step 2：创建备份目录
+### Step 1：检查 git 仓库
+确认项目根目录已有 git 仓库。如未初始化，执行：
 ```bash
-mkdir -p backups/$(date +%Y-%m-%d)
+cd /path/to/project
+git init
+git add -A
+git commit -m "initial backup before 2-loop"
 ```
 
-### Step 3：执行备份
-**批量修改时每个文件单独备份**：
+### Step 2：执行备份
+在修改任何文件前，用 git 创建带时间戳的 commit：
 ```bash
-cp <file> backups/$(date +%Y-%d)/<file>.bak
+cd /path/to/project
+git add -A
+git commit -m "backup before 2-loop 03-execute: $ISSUE_NAME"
 ```
 
-### Step 4：diff 验证完整性
-```bash
-diff <file> backups/$(date +%Y-%m-%d)/<file>.bak
-```
-确认备份与原始文件一致。
+### Step 3：记录 commit hash
+记录备份的 git commit hash，写入 backup-log.md
 
-### Step 5：写入 backup-log.md
+### Step 4：写入 backup-log.md
 ```markdown
 # Backup Log
-## 备份文件
-- <file1>.bak
-- <file2>.bak
-...
+## git commit
+- hash: <SHA1>
+- message: backup before 2-loop 03-execute
+- date: <timestamp>
 
-## diff 验证
-- [x] 所有文件备份一致
-- [ ] [未通过验证的文件]
+## 回滚命令
+git checkout <hash>
 
-## 备份时间
-$(date)
+## 验证
+- [x] git add -A 通过
+- [x] commit 创建成功
 ```
-
----
-
-## 输出文件
-
-**必须存在**：备份文件（`backups/YYYY-MM-DD/`）+ `backup-log.md`
-
----
-
-## 前置依赖
-
-阶段 1 输出（`pre-check-result.md`）
-
----
-
-## 后置依赖
-
-本阶段通过 → 进入执行（阶段 3）
 
 ---
 
 ## 约束
 
-- **修改前必须备份**，不可跳过
-- 批量修改时每个文件单独备份
-- `diff` 验证完整性
+- **必须用 git 备份**，禁止使用文件复制方式
+- 备份 commit message 必须包含时间戳和任务名
+- 记录 commit hash 用于回滚
+- 不可跳过备份步骤

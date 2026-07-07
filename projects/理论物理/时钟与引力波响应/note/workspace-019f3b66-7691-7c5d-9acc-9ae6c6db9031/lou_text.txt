@@ -1,0 +1,2147 @@
+--- page 0
+ණൖ࿐໊ં໓
+ࣟ
+ቔᆀྠ଀ğ ੌૼᇆ
+ഽğ฿໓෻
+࿐໊োљğ ৘࿐ණൖ
+࿐॓ህြğ ৘ં໾৘
+஡အֆ໊ğ෮
+2026 ୍ 6 ᄅ
+--- page 1
+
+--- page 2
+Detecting the gravitational wave background using various
+configurations of the optical lattice atomic clock detector network
+A thesis submitted to
+University of Chinese Academy of Sciences
+in partial fulfillment of the requirement
+for the degree of
+Master of Natural Science
+in Theoretical Physics
+By
+LOU Mingzhi
+Supervisor: Professor ZHANG Yunlong
+Institute of Theoretical Physics, Chinese Academy of Sciences
+June, 2026
+--- page 3
+
+--- page 4
+॓࿐ჽն࿐
+࿐໊ં໓ჰԷྟലૼ
+۽࣮
+ః෰
+b
+ٚ
+ႮЧದӵքb
+ቔᆀద଀ğ
+ರ ௹ğ
+॓࿐ჽն࿐
+࿐໊ં໓൱ಃ൐Ⴈലૼ
+൐Ⴈ࿐໊ં໓
+ჰᄵđ
+đ
+҃Ч࿐
+ੰ
+щЧ࿐໊ં໓b
+ൡႨЧലૼb
+ഽద଀ğ
+ರ ௹ğ ರ ௹ğ
+--- page 5
+
+--- page 6
+ᅋ ေ
+ᅋ ေ
+ႄ৯ѯฐҩఖೂ
+LISA֥֮۷nHzൈᆔਙb
+ჰሰᇒč OLC֥
+ᇿbЧ໓ຶಡ OLCčSGWBĎ
+ඔ čORF྘
+༢b
+༅ਔ OLC ฐҩఖຩ઎ ORFࢌ
+ݦࠒ
+གྷਔ၂ᇕ ORFฐҩ
+֥ުORFb
+ษંਔ ORFܒ֥
+֥ORFٳׄ
+༅ਔো PTA྘༯ ORFएэ
+іૼğো PTA྘ᇏđORFбĠ
+྘đෛሢฐҩఖᇉྏए৖ᄹնđORFĠো PTA྘
+֥ORFކژHellings⚶Downs ౷ཌ
+྘ᄵіགྷԛა Hellings⚶Downs ౷ཌ
+֥OLCࣉ
+༅đѩა LISAaTaijiބTianQin؇
+b
+Սğ྘
+I
+--- page 7
+ࣟ
+II
+--- page 8
+Abstract
+Abstract
+Gravitational wave observation offers a new window for understanding the uni-
+verse. In the low-frequency band, space-based gravitational wave detectors such as
+LISA, Taiji, and TianQin are being actively developed, while in the lower nHz band,
+pulsar timing array (PTA) technique is utilized. In recent years, gravitational wave de-
+tection schemes based on optical lattice clock (OLC) have attracted attention due to their
+high precision and potential sensitivity advantages. This thesis investigates the detection
+capability of an OLC detector network for the stochastic gravitational wave background
+(SGWB), focusing on the relationship between the Overlap Reduction Function (ORF)
+and the geometric configuration of the detector network.
+This thesis first analyzes the invariance of the ORF of an OLC detector network un-
+der configuration transformations. It points out that, in addition to trivial equivalences
+such as swapping detector labels, global translations, and global orthogonal transfor-
+mations, a nontrivial transformation that leaves the ORF modulus invariant is discov-
+ered by analyzing the complex structure of the integrand. This transformation involves
+swapping the positions of the emitting and receiving lasers for each detector. Under the
+condition of equal arm lengths, both the real and imaginary parts of the ORF remain
+unchanged before and after the transformation. Furthermore, the geometric condition
+corresponding to a zero imaginary part of the ORF is discussed, and the corresponding
+configuration characterization is provided. Subsequently, numerical comparisons of the
+ORF are conducted for several typical coplanar, equal-arm configurations. The analysis
+focuses on the variation of the ORF with the detector angle, arm length, and detector sep-
+aration in PTA-like configurations and isosceles trapezoid configurations. The results
+indicate as follows: In PTA-like configurations, the peak frequency of the ORF curve is
+inversely proportional to the detector arm length; for isosceles trapezoid configurations,
+as the distance between the detector centroids increases, the ORF peak value decreases;
+the variation of the ORF peak value with the angle for PTA-like configurations and
+small-separation isosceles trapezoid configurations generally follows the angular corre-
+lation described by the Hellings ⚶Downs curve. In contrast, large-separation isosceles
+trapezoid configurations exhibit variation characteristics different from the Hellings ⚶
+Downs curve. Finally, a specific OLC detector network configuration is designed, its
+sensitivity is analyzed, and compared with the sensitivities of laser interferometer grav-
+itational wave detectors such as LISA, Taiji, and TianQin.
+Key Words: Optical Lattice Clock, Stochastic Gravitational Wave Background, Over-
+lap Reduction Function, Detector Network Configuration
+III
+--- page 9
+Detecting the gravitational wave background using various configurations of the optical lattice atomic clock
+detector network
+IV
+--- page 10
+ଢ ੣
+ଢ ੣
+ֻ1 ᅣ ႄ࿽ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅1
+1.1 ႄ৯ѯฐҩఖ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅1
+1.2ჰሰᇒႄ৯ѯฐҩఖ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 1
+1.3ࣟ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 2
+1.4ܒࢲ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅4
+ֻ2৘ં ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 5
+2.1ඔ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅5
+2.1.1ඔ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 5
+2.1.2ඔ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 7
+2.2ࣟ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅8
+2.3ඔ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 9
+ֻ3 ᅣ OLCඔ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 13
+3.1 OLCඔіղൔ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 13
+3.2 OLC྘ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅13
+3.3 ORFߐ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅15
+3.3.1 ORFߐ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅15
+3.3.2 ORFߐ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅17
+3.4ߐ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅23
+3.5༯ ORFྟᇉ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅24
+ֻ4 ᅣ OLCб ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 27
+4.1 ো PTA֥ORFб ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅27
+4.1.1֥࢘ࡃORF ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅27
+4.1.2֥ORF ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅31
+4.2֥ORFб ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅32
+4.2.1ູ 0°֥ORFб ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 33
+4.2.2ູ 20°֥ORFб ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 33
+4.2.3ဥะྙ ORFб ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 34
+4.2.4ဥะྙ ORFб ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 36
+4.3ࢲ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅38
+V
+--- page 11
+ࣟ
+ֻ5 ᅣ OLC؇⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 39
+5.1 Ⴕིႋэᄮല ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅39
+5.1.1؇⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 39
+5.1.2 OLC؇⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 41
+5.2 OLC྘ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅41
+5.3 OLCႋэ௶ਲૹ
+б ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅43
+5.4 OLC؇
+б ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅45
+ֻ6აᅚຬ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅49
+6.1ࢲ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅49
+6.2 अཋྟაᅚຬ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅50
+ҕॉ໓ང ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅51
+ᇁ྆ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅55
+ݔ⋅ 57
+VI
+--- page 12
+๭іଢ੣
+๭ଢ੣
+๭ 1-1ჰሰᇒႄ৯ѯฐҩఖൕၩ๭ [1] ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 2
+๭ 1-2ܱOLC۱OLC ა LISAб [2] ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 3
+๭ 3-1۱OLC౯
+฿ఖ෮ᄝ໊ᇂb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅14
+๭ 3-2 OLC ฐҩఖ 1ބOLC ฐҩఖ 2྘ູ
+OLC ฐҩఖ 1྘ູ OLC ฐҩఖ 2྘b ⋅ ⋅ ⋅ ⋅ 14
+๭ 3-3 OLC ฐҩఖ ORF๨ս
+іႮฐҩఖ 1ฐҩఖ 2э
+྘đ෱Ⴎฐҩఖ 3ฐҩఖ 4֩
+ฐҩఖ1ฐҩఖ 2 ၂๝
+໊ᇂb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 22
+๭ 3-4֥֝OLC ฐҩఖ ORF྘э
+ᇹཌb๝ᇕ࿾೤
+b ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅23
+๭ 4-1 OLCো PTAູ θb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 27
+๭ 4-2 Hellings-Downs ౷ཌb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅28
+๭ 4-3 ো PTA྘ 0°- 40°ඔb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 28
+๭ 4-4 ো PTA྘ 50°- 80°ඔb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 29
+๭ 4-5 ো PTA྘ 90°- 120°ඔb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 29
+๭ 4-6 ো PTA྘ 130°- 180°ඔb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 30
+๭ 4-7ো PTAбb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 31
+๭ 4-8྘ൕၩ๭bθđ| ⃗ 𝑚12|ए
+৖b ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅32
+๭ 4-9ູ 0°֥ORFбb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 33
+๭ 4-10ູ 20°֥ORFбb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 34
+๭ 4-11एູ 0྘ᄝ 0°- 40°֥ORFb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 34
+๭ 4-12एູ 0྘ᄝ 50°- 80°֥ORFb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 35
+๭ 4-13एູ 0྘ᄝ 90°- 120°֥ORFb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 35
+๭ 4-14एູ 0྘ᄝ 130°- 180°֥ORFb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 36
+๭ 4-15एູ 30 Gm྘ᄝ 0°- 60°֥ORFb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 37
+๭ 4-16एູ 30 Gm྘ᄝ 60°- 120°֥ORFb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 37
+๭ 4-17एູ 30 Gm྘ᄝ 120°- 180°֥ORFb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 38
+VII
+--- page 13
+ࣟ
+๭ 5-1 LISAbS ູ෾ဝđObSC1aSC2a
+SC3 ೘॒໏ྒԩႿၛ O࢘ࡃ
+60°ཌູ໏ྒ SC1đ৖ྏੱູ eb๭ோটჷႿ໓
+ང [3]b ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅42
+๭ 5-2 OLC྘b OLC໊
+ཌ
+ູ θູ Lए৖ູ db ⋅ ⋅ ⋅ ⋅ ⋅ 42
+๭ 5-3 LISA ა OLCбb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 44
+๭ 5-4 Taiji ა OLCбb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 44
+๭ 5-5 TianQin ა OLCбb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 45
+๭ 5-6 LISA ა OLCбb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 46
+๭ 5-7 Taiji ა OLCбb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 46
+๭ 5-8 TianQin ა OLCбb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 47
+іଢ੣
+і 5-1 LISA aTaijiaTianQinҕඔ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 40
+і 5-2৖ྏੱb ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ ⋅ 43
+VIII
+--- page 14
+ਙі
+ਙі
+ژ
+Symbol Description Unit
+Γ12ඔ 1
+𝐻ѱҕඔ km2 ⋅ s−1 ⋅ Mpc−1
+̃ℎ𝑛؇Hz−1/2
+𝑆𝑛؇Hz−1
+Ω𝑛௶ 1
+Ω𝑔𝑤௶ 1
+ෘሰ
+Symbol Description
+̂𝑂ژ
+෪ཿ
+KAGRA Kamioka Gravitational Wave Detector
+LIGO Laser Interferometer Gravitational-Wave Observatory
+LISA Laser Interferometer Space Antenna
+OLC Optical Lattice Clock
+ORF Overlap Reduction Function
+PTA Pulsar Timing Array
+SGWB Stochastic Gravitational Wave Background
+Sr Strontium
+IX
+--- page 15
+ࣟ
+X
+--- page 16
+ֻ1 ᅣ ႄ࿽
+ֻ1 ᅣ ႄ࿽
+ᄝൈॢ
+ӈັ
+ਔ
+Գ१b
+1.1 ႄ৯ѯฐҩఖ
+2015૫ႄ৯ѯฐҩఖ LIGOႄ৯ѯ [4]đषఓਔႄ৯
+૫ႄ৯ѯฐҩఖ
+ᇁ
+ࢳ[5–7]đLIGO [8]aVirgo[9]ބKAGRA[10]૫ႄ৯ѯฐҩఖ
+ᄝ 10Hz ၛഈ [11]b
+ႄ৯
+ѯฐҩఖbLISA฿
+ӮшӉჿູ2.5 × 109mྙđ໊Ⴟರ
+౯၂ఏಡರᄎྛđ ႨႿฐҩmHzႄ৯ѯb[12]b ๝ൈđTaiji[13]
+ބTianQin[14]௔ႄ৯ѯდᇥđఃᇏ Taiji ၛ
+3 × 109mطTianQin ၛ 1.7 × 108mടффӉ
+֥֮۷nHzൈᆔਙ čPulsar Timing Arrayđ
+PTAĎ [15]චྒ
+ႄ৯ѯ [16]ᆣऌ [17–20]b
+1.2ჰሰᇒႄ৯ѯฐҩఖ
+2016ჰሰᇒč Optical Lattice Clock, OLCႄ৯ѯฐҩ
+మ৯b OLCބ
+؇ࣚ[21,22]֥OLCۋ
+b
+໓ᅣ [1] ิԛਔ๭ 1-1ֆф OLC ႄ৯ѯฐҩఖđ෱Ⴎਆ॒໭຀ှ໏ྒ
+A ა B؇dbૄ॒໏ྒଽ҆Ї
+᫰čSrჰሰᇒbູਔ
+ᄝ
+ᄝҕॉᇉਈ
+a ಣ௎
+ഈđ
+ܻࠗ/ඏҀ
+1
+--- page 17
+ࣟ
+ᄮലb
+b໏ྒ Bຓ
+čPhase-Locked Loop, PLLሶটሱ A֕
+ؓ؊
+֥RamseyࡗTbA؊
+ܻࠗA֥Ramsey ཌྷ໊đBܻ֥ࠗުק
+B֥Ramsey؊
+ՖA֞BĎ đ
+֤
+Ⴕႄ৯ѯ
+ᇛ௹
+ӱ/і
+௴ী௔၍b
+๭ 1-1ჰሰᇒႄ৯ѯฐҩఖൕၩ๭ [1]
+1.3ࣟ
+čStochastic Gravitational Wave Background, SGWBĎ൞ႄ৯
+ྏ॓࿐ଢѓ [23]ӱ[24,25]đೂდ
+ᇥ༿ [26,27]ཌྷэ[28,29]a Вᅨ[30,31]ן
+Ӯ [32,33]b ฐҩSGWBնᇉ
+ၩၬb
+ฐҩ SGWB༅ [34,35]޺
+ඔ
+ط
+ݼ̃ 𝑠1(𝑓 )a
+2
+--- page 18
+ֻ1 ᅣ ႄ࿽
+̃ 𝑠2(𝑓 ) ॖၛཿቔ
+̃ 𝑠1(𝑓 ) = ̃ℎ1(𝑓 ) + ̃ 𝑛1(𝑓 ) , (1-1)
+̃ 𝑠2(𝑓 ) = ̃ℎ2(𝑓 ) + ̃ 𝑛2(𝑓 ) , (1-2)
+ఃᇏ ℎ1(𝑓 )aℎ2(𝑓 )ཙႋൻԛđ𝑛1(𝑓 )a𝑛2(𝑓 )ٳ
+ཌྷ
+֤ܱ֞
+⟨ ̃ 𝑠1(𝑓 ) ̃ 𝑠∗
+2(𝑓 ′)⟩ = ⟨ ̃ℎ1(𝑓 ) ̃ℎ∗
+2(𝑓 ′)⟩ + ⟨ ̃ℎ1(𝑓 ) ̃ 𝑛∗
+2⟩ + ⟨ ̃ 𝑛1(𝑓 ) ̃ℎ∗
+2(𝑓 ′)⟩
++ ⟨ ̃ 𝑛1(𝑓 ) ̃ 𝑛∗
+2(𝑓 ′)⟩ ,
+(1-3)
+đၹՎ ⟨ ̃ℎ∗
+𝑖 (𝑓 ) ̃ 𝑛𝑗(𝑓 ′)⟩ = 0 đ
+ྟ೐đᄵ
+⟨ ̃ 𝑛∗
+1(𝑓 ) ̃ 𝑛2(𝑓 ′)⟩ = 0 bቋᇔ
+⟨ ̃ 𝑠1(𝑓 ) ̃ 𝑠∗
+2(𝑓 ′)⟩ = ⟨ ̃ℎ1(𝑓 ) ̃ℎ∗
+2(𝑓 ′)⟩, (1-4)
+Ї
+ࡹ
+৫ᄮലଆ྘টཨԢĎ b
+ބPTA֥
+ฐҩఖđೂ LISAܱ
+ຩ઎b
+۱OLCؓ
+SGWBb໓ᅣ[2]іૼđOLCնჿбֆ၂ OLC
+ຶଽӑᄀਔ LISAb
+๭ 1-2ܱOLC۱OLC ა LISAб [2]
+3
+--- page 19
+ࣟ
+ཙ
+ޅ֥ࠫ
+bฐҩ
+ඔčOverlap Reduction Function,
+ORFb
+֥ORF༅
+іղൔ [36,37]ෘਆቆ OLCđฐ
+෬ OLC֥ORFཙႋa ౏ି
+֥OLC໙ีb
+࿙ᅳ ORF֥OLCඔ
+หᆘਈ༯ OLC ฐҩఖຩ઎ ORFđฐ෬ OLC ฐҩఖຩ
+઎ ORF༢b
+1.4ܒࢲ
+ඔđ
+ԛ
+۱OLCႄೆ၂ส OLC ฐ
+Ԥഈฐ෬ ORFඹᅣ
+бਔো PTA྘༯ ORF ෛфӉaฐ
+ھ
+྘༯ OLC௶đѩა LISAaTaijia
+TianQinაᅚຬb
+4
+--- page 20
+ֻ2৘ં
+ֻ2৘ં
+৘ંđႮՎႄԛ༯၂ᅣა OLC ฐҩఖຩ
+઎ ORFଽಸb
+2.1ඔ
+۱OLC֥ORF۱OLC ฐ
+طOLC௔ੱ
+۱OLC
+ඔb
+2.1.1ඔ
+ҕॉ Cornish [38]฿ఖAބBđAđBؿ
+Ֆ B ԮѬᇀ Aֆ໊൏ਈູ ̂ 𝑢đAބB ए৖ູ Lb
+ູ ̂ 𝑛b
+đ໡ૌၛ Aׄ,ཟູ +z֤
+B ໊Ⴟ x-z ௜૫đAB ა zቔ 𝜃b
+ཛॖіൕູğ
+d𝑠2 = −𝑐 2 d𝑡2 + (1 + ℎ cos 2𝜓) d𝑥2 + (1 − ℎ cos 2𝜓) d𝑦2 − 2ℎ sin 2𝜓 d𝑥d𝑦 + d𝑧2, (2-1)
+ఃᇏ 𝜓൏ਈა xđℎ = ℎ(𝑡 − 𝑧/𝑐)đ၇ঠႿൈॢቕ
+ᄝ x-z ௜૫ഈđႵ d𝑦 = 0 ౏ d𝑠2 = 0đၹՎğ
+0 = −𝑐 2 d𝑡2 + (1 + ℎ cos 2𝜓) d𝑥2 + d𝑧2, (2-2)
+ğ
+𝑥 = 𝜌 sin 𝜃, (2-3)
+𝑧 = 𝜌 cos 𝜃, (2-4)
+ഈൔսೆ (2-2)ൔğ
+𝑐2 d𝑡2 = (1 + ℎ cos 2𝜓 sin 2 𝜃) d𝜌 2 , (2-5)
+ğ
+𝑐 d𝑡 = ± √(1 + ℎ cos 2𝜓 sin2 𝜃) d𝜌 , (2-6)
+රğ
+𝑐 d𝑡 = ±(1 + 1
+2ℎ cos 2𝜓 sin2 𝜃) d𝜌 , (2-7)
+5
+--- page 21
+ࣟ
+࠺𝑡0ഝൈख़đ𝑡1ղ 𝜌ൈख़ູğ
+𝑡𝜌 = 𝑡 0 + 𝐿
+𝑐 − 𝜌
+𝑐 , (2-8)
+ሰՖ B֞Aԛğ
+𝑙(𝑡1) = ∫
+𝑡1
+𝑡0
+𝑐d𝑡 = 𝐿 + 1
+2 cos 2𝜓 sin2 𝜃 [∫
+𝐿
+0
+ℎ(𝑡0 + 𝐿
+𝑐 − 𝜌
+𝑐 − 𝜌 cos 𝜃
+𝑐 ) d𝜌] . (2-9)
+ູğ
+𝛿𝑙(𝑡1) = 1
+2 cos 2𝜓 sin2 𝜃 𝐼1, (2-10)
+ቔğ
+𝐼1 = ∫
+𝐿
+0
+ℎ(𝑡0 + 𝐿
+𝑐 − 𝜌
+𝑐 − 𝜌 cos 𝜃
+𝑐 ) d𝜌, (2-11)
+Ⴟֆ೤ѯğ
+ℎ(𝑞) = ℎ 0𝑒i𝜔𝑞 = ℎ 0𝑒i2𝜋𝑓 𝑞, (2-12)
+ٳࠒ( 2-11)ğ
+𝐼1 = ∫
+𝐿
+0
+ℎ0𝑒i2𝜋𝑓 (𝑡0+ 𝐿
+𝑐 − 𝜌
+𝑐 − 𝜌 cos 𝜃
+𝑐 ) d𝜌 = ℎ 0𝑒i2𝜋𝑓 (𝑡0+ 𝐿
+𝑐 )
+∫
+𝐿
+0
+𝑒−i 2𝜋𝑓
+𝑐 (1+cos 𝜃)𝜌 d𝜌, (2-13)
+ఃᇏ
+ℎ0𝑒i2𝜋𝑓 (𝑡0+ 𝐿
+𝑐 ) = ℎ(𝑡 1), (2-14)
+ູğ
+𝐼1 = ℎ(𝑡 1)𝐿 sinc [
+𝜋𝑓 𝐿
+𝑐 (1 + cos 𝜃)] 𝑒−i 𝜋𝑓 𝐿
+𝑐 (1+cos 𝜃), (2-15)
+սೆ (2-10)ğ
+𝛿𝑙(𝑡1) = 1
+2 cos 2𝜓 sin2 𝜃 ℎ(𝑡1)𝐿 sinc [
+𝜋𝑓 𝐿
+𝑐 (1 + cos 𝜃)] 𝑒−i 𝜋𝑓 𝐿
+𝑐 (1+cos 𝜃), (2-16)
+ӱ 𝑙 = 𝐿 ,ğ
+𝛿𝑙
+𝑙 = 1
+2 cos 2𝜓 sin2 𝜃 ℎ(𝑡1) sinc [
+𝜋𝑓 𝐿
+𝑐 (1 + cos 𝜃)] 𝑒−i 𝜋𝑓 𝐿
+𝑐 (1+cos 𝜃), (2-17)
+ਸ਼ຓđ ̂ 𝑢 ⋅ ̂ 𝑛 = − cos 𝜃,ൔ (2-17)ྙൔğ
+𝛿𝑙
+𝑙 = 1
+2 ̂ 𝑢𝑎 ̂ 𝑢𝑏 ℎ𝑎𝑏( ̂ 𝑛) 𝒯 ( ̂ 𝑢 ⋅ ̂ 𝑛, 𝑓 ) , (2-18)
+ඔູğ
+𝒯 ( ̂ 𝑢 ⋅ ̂ 𝑛, 𝑓 ) = sinc[
+𝜋𝑓 𝐿
+𝑐 (1 − ̂ 𝑢 ⋅ ̂ 𝑛)]𝑒−i 𝜋𝑓 𝐿
+𝑐 (1− ̂ 𝑢⋅ ̂ 𝑛). (2-19)
+6
+--- page 22
+ֻ2৘ં
+2.1.2ඔ
+௔ੱ
+ඔb
+֝𝛿𝑙/𝑙 ა 𝛿𝜈/𝜈ğ
+𝑠1(𝑡) = 𝛿𝜈(𝑡)
+𝜈0
+, (2-20)
+𝑠2(𝑡) = 𝛿𝑙(𝑡)
+𝐿 . (2-21)
+Чᆒཌྷູ໊ğ
+𝜙(𝑡) = 2𝜋𝜈 0 𝑡. (2-22)
+࿼Ӿ 𝛿𝑡(𝑡)ࢤ
+๝၂ѓӫൈख़ t֥؊𝑡 − 𝛿𝑡(𝑡) ൈख़đႿ൞ཌྷ໊ಠ
+ğ
+𝛿𝜙(𝑡) = 2𝜋𝜈 0 𝛿𝑡(𝑡), (2-23)
+ඔğ
+𝜈𝑟𝑒𝑐(𝑡) = 1
+2𝜋
+d𝜙𝑟𝑒𝑐
+d𝑡 , (2-24)
+ğ
+𝛿𝜈(𝑡) = 1
+2𝜋
+d 𝛿𝜙
+d𝑡 = 1
+2𝜋
+d
+d𝑡[2𝜋𝜈0 𝛿𝑡(𝑡)] = 𝜈 0
+d 𝛿𝑡
+d𝑡 , (2-25)
+ਆшԢၛ 𝜈0௔ੱொ၍ğ
+𝑠1(𝑡) = 𝛿𝜈(𝑡)
+𝜈0
+= d 𝛿𝑡
+d𝑡 , (2-26)
+൞ğ
+𝑠2(𝑡) = 𝛿𝑙(𝑡)
+𝐿 = 𝑐𝛿𝑡(𝑡)
+𝐿 , (2-27)
+ၹՎğ
+𝑠1(𝑡) = 𝛿𝜈(𝑡)
+𝜈0
+= 𝐿
+𝑐
+d
+d𝑡[𝑠2(𝑡)], (2-28)
+ႋӰഈ i2𝜋𝑓 ğ
+̃ 𝑠1(𝑓 ) = i2𝜋𝑓 𝐿
+𝑐 ̃ 𝑠2(𝑓 ). (2-29)
+ඔູğ
+𝒯 ( ̂ 𝑢 ⋅ ̂ 𝑛, 𝑓 ) =i2𝜋𝑓 𝐿
+𝑐 sinc[
+𝜋𝑓 𝐿
+𝑐 (1 − ̂ 𝑢 ⋅ ̂ 𝑛)]𝑒−i 𝜋𝑓 𝐿
+𝑐 (1− ̂ 𝑢⋅ ̂ 𝑛), (2-30)
+Ⴟൔ (2-19)ඔ
+ਔၹሰ i2𝜋𝑓 𝐿
+𝑐 b
+7
+--- page 23
+ࣟ
+2.2ࣟ
+ൈॢ
+b
+ࡗ𝑡໊ᇂ ⃗ 𝑥ॖၛіൕູ҂๝ԮѬ
+ཟ ̂ 𝑛a҂๝௔ੱ 𝑓ࡆן֥[39]ğ
+ℎ𝑖𝑗(𝑡, 𝑥) = ∑
+𝐴=+,× ∫
+∞
+−∞
+d𝑓 ∫ d2 ̂ 𝑛̃ℎ𝐴(𝑓 , ̂ 𝑛)𝐞𝐴
+𝑖𝑗( ̂ 𝑛) 𝑒i2𝜋𝑓 (𝑡− ̂ 𝑛⋅⃗ 𝑥/𝑐), (2-31)
+ږ̃ℎ𝐴(𝑓 , ̂ 𝑛)ಒ
+ྟѯྙট૭ඍఃྟᇉđఃनᆴູ
+⟨ ̃ℎ𝐴(𝑓 , ̂ 𝑛)⟩ = 0, (2-32)
+طℎ 𝑖𝑗(𝑡, 𝑥) ູൌඔđေ౰ડቀğ
+̃ℎ𝐴(−𝑓 , ̂ 𝑛) = ̃ℎ∗
+𝐴(𝑓 , ̂ 𝑛), (2-33)
+𝐴ଆൔđ 𝐞𝐴
+𝑖𝑗( ̂ 𝑛)ᅦਈđ ̂ 𝑛൞ႄ৯ѯԮѬ
+ཟđ ᆃ৚໡ૌ࿊ᄴ𝐞+ބ𝐞×b ෱ૌॖၛႨ౯ቕ
+ཟਈіൕ [40]ğ
+𝐞+
+𝑖𝑗( ̂ 𝑛) = ̂𝜃𝑖 ̂𝜃𝑗 − ̂𝜙𝑖 ̂𝜙𝑗,
+𝐞×
+𝑖𝑗( ̂ 𝑛) = ̂𝜃𝑖 ̂𝜙𝑗 + ̂𝜙𝑖 ̂𝜃𝑗,
+(2-34)
+ఃᇏ
+̂ 𝑛 = (sin 𝜃 cos 𝜙, sin 𝜙 sin 𝜃, cos 𝜃),
+̂𝜃 = (sin 𝜙, − cos 𝜙, 0),
+̂𝜙 = (cos 𝜙 cos 𝜃, sin 𝜙 cos 𝜃, − sin 𝜃).
+(2-35)
+ഡğ
+č1௜၍༯҂эđၹՎ௔ੱ
+௔ੱഈğ
+⟨ ̃ℎ𝐴(𝑓 , ̂ 𝑛) ̃ℎ∗
+𝐴′(𝑓 ′, ̂ 𝑛′)⟩ ∝ 𝛿(𝑓 − 𝑓 ′) , (2-36)
+č2ކࠢ{ ̃ℎ𝐴(𝑓 , ̂ 𝑛)}҃
+ऌ WickđၹՎ
+෮Ⴕ Nඔ ⟨ ̃ℎ𝐴(𝑡) ̃ℎ𝐴′(𝑡′)⟩ іൕb
+č3đ
+ၹՎğ
+⟨ ̃ℎ𝐴(𝑓 , ̂ 𝑛) ̃ℎ∗
+𝐴′(𝑓 ′, ̂ 𝑛′)⟩ ∝ 𝛿 2( ̂ 𝑛, ̂ 𝑛′) , (2-37)
+8
+--- page 24
+ֻ2৘ં
+č4đ ၹՎğ
+⟨ ̃ℎ𝐴(𝑓 , ̂ 𝑛) ̃ℎ∗
+𝐴′(𝑓 ′, ̂ 𝑛′)⟩ ∝ 𝛿(𝐴, 𝐴 ′) , (2-38)
+ඔ 𝑆ℎ(𝑓 ) іൕğ
+⟨ ̃ℎ𝐴(𝑓 , ̂Ω) ̃ℎ∗
+𝐴′(𝑓 ′, ̂Ω′)⟩ = 1
+2𝛿(𝑓 − 𝑓 ′)𝛿2(̂Ω, ̂Ω′)
+4𝜋 𝛿𝐴𝐴′ 𝑆ℎ(𝑓 ) . (2-39)
+ఃᇏ 𝑆ℎ(𝑓 )đડቀğ
+𝑆ℎ(𝑓 ) = 𝑆 ℎ(−𝑓 ) , (2-40)
+ၹՎൔ (2-39)ၹሰ 1
+2b
+2.3ඔ
+۱۲
+ູğ
+𝑠(𝑡) = ∑
+𝐴=+,× ∫
+∞
+−∞
+d𝑓 ∫ d2 ̂ 𝑛 𝑅𝐴(𝑓 , ̂ 𝑛) ̃ℎ𝐴(𝑓 , ̂ 𝑛) 𝑒i2𝜋𝑓 𝑡 , (2-41)
+ఃᇏ 𝑅𝐴(𝑓 , ̂ 𝑛)ؓAฐҩఖऎ
+طOLCඔູğ
+𝑅𝐴
+𝑂𝐿𝐶 (𝑓 , ̂ 𝑛) = 1
+2 𝑢𝑎𝑢𝑏 𝐞𝐴
+𝑎𝑏 𝒯𝑜𝑛𝑒( ̂ 𝑢 ⋅ ̂ 𝑛, 𝑓 ) 𝑒−i2𝜋𝑓 ̂ 𝑛⋅⃗ 𝑥/𝑐, (2-42)
+ఃᇏ ̂ 𝑢ູ OLCֆ໊൏ਈđ ⃗ 𝑥໊ᇂ൏ਈ
+ط𝒯𝑜𝑛𝑒( ̂ 𝑢 ⋅ ̂ 𝑛, 𝑓 )൞ OLCֆཟ৽ਫ਼Ԯ
+ඔđೂൔ (2-30)෮ൕb
+ൔ (2-41)ğ
+̃ 𝑠(𝑓 ) =∑
+𝐴=+,× ∫ d2 ̂ 𝑛 𝑅𝐴(𝑓 , ̂ 𝑛) ̃ℎ𝐴(𝑓 , ̂ 𝑛) , (2-43)
+֥
+ൻԛ 𝑠1(𝑡)ބ𝑠2(𝑡)ၬğ
+𝑌 = ∫
+𝑇 /2
+−𝑇 /2
+d𝑡 ∫
+𝑇 /2
+−𝑇 /2
+d𝑡′𝑠1(𝑡)𝑠2(𝑡′)𝑄(𝑡 − 𝑡′) , (2-44)
+ఃᇏ TđQඔđXđ ླ൐ఃྐᄮб
+b
+ࡼYğ
+𝑌 = ∫
+∞
+−∞
+d𝑓 ∫
+∞
+−∞
+d𝑓 ′
+∫
+∞
+−∞
+d𝑓 ″ 𝛿𝑇 (𝑓 − 𝑓 ″)𝛿𝑇 (𝑓 ′ − 𝑓 ″) ̃ 𝑠∗
+1(𝑓 ) ̃ 𝑠2(𝑓 ′) ̃𝑄(𝑓 ″) , (2-45)
+9
+--- page 25
+ࣟ
+ఃᇏ
+𝛿𝑇 (𝑓 ) = ∫
+𝑇 /2
+−𝑇 /2
+d𝑡 𝑒i2𝜋𝑓 𝑡 = sin 𝜋𝑓 𝑇
+𝜋𝑓 , (2-46)
+𝛿𝑇 (𝑓 ) ᄝ 𝑓 𝑇۱𝛿௔
+؍𝑓 = 10 −3 Hzࡗ𝑇 = 1 yearđ𝑓 𝑇 ≈ 3 × 10 4đ ၹՎॖႨ𝛿ඔูս 𝛿𝑇 (𝑓 )đ
+ൔ (2-44)эູğ
+𝑌 = ∫
+∞
+−∞
+d𝑓 ̃ 𝑠1(𝑓 ) ̃ 𝑠∗
+2(𝑓 ) ̃𝑄(𝑓 ) , (2-47)
+ऌྐᄮб S/NթᄝൈđS ൞ Yഡਆ
+ऌൔ (1-4)֤:
+𝑆 = ∫
+∞
+−∞
+d𝑓 ⟨ ̃ℎ1(𝑓 ) ̃ ℎ∗
+2(𝑓 )⟩ ̃𝑄(𝑓 )
+= ∑
+𝐴,𝐴′ ∫
+∞
+−∞
+d𝑓 ∫ d2 ̂ 𝑛∫ d2 ̂ 𝑛′𝑅𝐴
+1 (𝑓 , ̂ 𝑛)𝑅𝐴∗
+2 (𝑓 , ̂ 𝑛)⟨ ̃ℎ𝐴(𝑓 , ̂ 𝑛) ̃ℎ∗
+𝐴′(𝑓 ′, ̂ 𝑛′)⟩,
+(2-48)
+ऌൔ (2-39)ࠣ𝛿(0) = ∫𝑇 /2
+−𝑇 /2 d𝑡 = 𝑇 , ഈൔॖэູğ
+𝑆 = 𝑇
+2 ∫
+∞
+−∞
+d𝑓 𝑆ℎ(𝑓 )Γ12(𝑓 ) ̃𝑄(𝑓 ) , (2-49)
+ఃᇏ Γ12(𝑓 ) ູฐҩఖ 1ฐҩఖ 2ၬູğ
+Γ𝐼𝐽 (𝑓 ) = ∫
+d2 ̂ 𝑛
+4𝜋 𝑅𝐴
+𝐼 (𝑓 , ̂ 𝑛)𝑅𝐴∗
+𝐽 (𝑓 , ̂ 𝑛) , (2-50)
+Γ𝐼𝐽 (𝑓 )ඔđ౏ડቀğ
+Γ𝐼𝐽 (𝑓 ) = Γ ∗
+𝐽 𝐼(𝑓 ) , (2-51)
+ऌൔ (2-49)đSა |Γ𝐼𝐽 (𝑓 )|ੱ௶ 𝑆ℎ(𝑓 )౦ঃ༯đ
+֤Sଆ |Γ𝐼𝐽 (𝑓 )|ॖିնb
+ඔ Γ𝐼𝐽 (𝑓 )ཟႄ৯ѯཙႋ
+௶Ⴎ
+Γ𝐼𝐽 (𝑓 )b
+|Γ𝐼𝐽 (𝑓 )|đ
+၂҄൐Ⴈ |Γ𝐼𝐽 (𝑓 )|/√Γ𝐼𝐼 (𝑓 )Γ𝐽 𝐽(𝑓 )b
+ཌྷ
+ႋ
+֥|Γ𝐼𝐼 (𝑓 )| ္ቋնb
+༅ླ
+֥
+ҵၳb
+10
+--- page 26
+ֻ2৘ં
+ཌ౼
+ႄ৯
+ཟ၇
+ࡆ
+֥ܱ|Γ𝐼𝐽 (𝑓 )|౦
+֥|Γ𝐼𝐼 (𝑓 )|ӱ
+b
+ൈđORFᆴ္҂
+๝bORF֥ORF
+ඔऌ
+čೂ TDI֥ORFؓ
+OLC ᆃ၂ো྘ฐҩఖđฐ෬ OLC֥ORF҆
+ੰb
+11
+--- page 27
+ࣟ
+12
+--- page 28
+ֻ3 ᅣ OLCඔ
+ֻ3 ᅣ OLCඔ
+3.1 OLCඔіղൔ
+ඔіൕൔ (2-30),
+ࠧOLCᇏႄԛਔ
+ऌൔ (2-30)a (2-42)a (2-50)۱
+OLCູ 1ބ2ປᆜіղൔğ
+Γ12(𝑓 ) =∑
+𝜆 ∫
+𝑑2 ̂ 𝑛
+4𝜋 ̂ 𝑢𝑎
+1 ̂ 𝑢𝑏
+1 𝐞𝜆
+𝑎𝑏( ̂ 𝑛) ̂ 𝑢𝑐
+2 ̂ 𝑢𝑑
+2 𝐞𝜆
+𝑐𝑑 ( ̂ 𝑛)
+× sinc[
+𝜋𝑓 𝐿1
+𝑐 (1 − ̂ 𝑢1 ⋅ ̂ 𝑛)]sinc[
+𝜋𝑓 𝐿2
+𝑐 (1 − ̂ 𝑢2 ⋅ ̂ 𝑛)]
+× 𝐿1𝐿2 (
+𝜋𝑓
+𝑐 )
+2
+𝑒i𝛼12 𝑒i𝛽12, (3-1)
+ఃᇏᆷඔၹሰ
+𝛼12 = 2𝜋𝑓
+𝑐 (𝐿1
+2 ̂ 𝑢1 − 𝐿2
+2 ̂ 𝑢2 − ⃗ 𝑥1 + ⃗ 𝑥2) ⋅ ̂ 𝑛 , (3-2)
+𝛽12 = 𝜋𝑓
+𝑐 (𝐿2 − 𝐿1), (3-3)
+𝜆 = +, ×ଆൔb
+3.2 OLC྘
+۱OLCऎุіղൔ (3-1)đॖၛ
+ؓOLCႿ
+ؓOLC֥6৫ေ෍ğ
+č1Ďฐҩఖ 1໊ᇂ൏ਈ ⃗ 𝑥1b
+č2Ďฐҩఖ 1фӉ 𝐿1đ b
+č3Ďฐҩఖ 1ཟ ̂ 𝑢1b
+č4Ďฐҩఖ 2໊ᇂ൏ਈ ⃗ 𝑥2b
+č5Ďฐҩఖ 2фӉ 𝐿2đ b
+č6Ďฐҩఖ 2ཟ ̂ 𝑢2b
+۱OLC໊ᇂ⃗ 𝑥𝑖đ фӉ𝐿𝑖ބ
+ཟ൏ਈ ̂ 𝑢𝑖ቔ {⃗ 𝑥𝑖, 𝐿𝑖 ̂ 𝑢𝑖}đೂ๭ 3-1෮ൕb
+۱OLC௔ੱொ
+௔ੱொ၍ඔऌđ іགྷູਆ
+྘đ ২ೂ{⃗ 𝑥𝑖, 𝐿𝑖 ̂ 𝑢𝑖} ა {⃗ 𝑥𝑖 − 𝐿𝑖 ̂ 𝑢𝑖, −𝐿𝑖 ̂ 𝑢𝑖}ऌླေ࿊ᄴఃᇏ၂ቆඔ
+۱OLCb
+13
+--- page 29
+ࣟ
+1uL 
+1x
+๭ 3-1۱OLC֥ܻࠗ
+฿ఖ෮ᄝ໊ᇂb
+Figure 3-1 The configuration of OLC Detector . The arrow indicates the laser propagation
+direction, the sphere at the arrowhead indicates the position of the spacecraft receiving
+the laser.
+11uL 
+22uL 
+1x
+2x
+๭ 3-2 OLC ฐҩఖ 1ބOLC ฐҩఖ 2྘ູ OLC ฐҩఖ 1֥
+྘ູ OLC ฐҩఖ 2྘b
+Figure 3-2 The cross-correlation configuration of OLC Detector 1 and OLC Detector 2. The
+red configuration on the left represents the configuration of OLC Detector 1. The blue
+configuration on the right represents the configuration of OLC Detector 2.
+14
+--- page 30
+ֻ3 ᅣ OLCඔ
+۱OLCቔູ {⃗ 𝑥1, 𝐿1 ̂ 𝑢1, ⃗ 𝑥2, 𝐿2 ̂ 𝑢2}đೂ๭ 3-
+2֥OLCק۳ࠧ6ᆴĎ ь
+۱OLCඔb
+3.3 ORFߐ
+֥ק۳۱OLC྘ {⃗ 𝑥1, 𝐿1 ̂ 𝑢1, ⃗ 𝑥2, 𝐿2 ̂ 𝑢2}ؓ
+֥ORFູਔิശOLCؓSGWB֤
+ႋ ORF྘b
+đ໓ང [2] ᇏҐ
+۱OLCए৖ 𝑑 = 5 × 10 6 𝑚bЧ໓္Ґ౼ᆃ၂ए
+ཋᇅb
+۱OLC྘ {⃗ 𝑥1, 𝐿1 ̂ 𝑢1, ⃗ 𝑥2, 𝐿2 ̂ 𝑢2}ބ{⃗ 𝑥3, 𝐿3 ̂ 𝑢3, ⃗ 𝑥4, 𝐿4 ̂ 𝑢4}b
+ฐҩఖຩ઎ |Γ12(𝑓 )| ა |Γ34(𝑓 )|ඔ౷ཌđ
+ଖ၂௔ੱ 𝑓đ
+b
+ਸ਼ຓđՖ ORF۱ORFնཬb
+۱ORF֩ORF ଆ
+֤ORFb
+Ⴟ಩ၩ၂ቆჰOLC྘ {⃗ 𝑥1, 𝐿1 ̂ 𝑢1, ⃗ 𝑥2, 𝐿2 ̂ 𝑢2}ਸ਼
+၂ቆ OLCࢳ{⃗ 𝑥3, 𝐿3 ̂ 𝑢3, ⃗ 𝑥4, 𝐿4 ̂ 𝑢4}༢ğ
+⃗ 𝑥3 = 𝑓 1(⃗ 𝑥1, 𝐿1, ̂ 𝑢1, ⃗ 𝑥2, 𝐿2, ̂ 𝑢2) ,
+𝐿3 ̂ 𝑢3 = 𝑓 2(⃗ 𝑥1, 𝐿1, ̂ 𝑢1, ⃗ 𝑥2, 𝐿2, ̂ 𝑢2) ,
+⃗ 𝑥4 = 𝑓 3(⃗ 𝑥1, 𝐿1, ̂ 𝑢1, ⃗ 𝑥2, 𝐿2, ̂ 𝑢2) ,
+𝐿4 ̂ 𝑢4 = 𝑓 4(⃗ 𝑥1, 𝐿1, ̂ 𝑢1, ⃗ 𝑥2, 𝐿2, ̂ 𝑢2),
+(3-4)
+֤|Γ12(𝑓 )|=|Γ34(𝑓 )|b
+3.3.1 ORFߐ
+֞OLC ฐҩఖຩ઎ ORFb
+č1ğ
+{⃗ 𝑥3, 𝐿3 ̂ 𝑢3, ⃗ 𝑥4, 𝐿4 ̂ 𝑢4} = {⃗ 𝑥2, 𝐿2 ̂ 𝑢2, ⃗ 𝑥1, 𝐿1 ̂ 𝑢1} , (3-5)
+ࢳ{⃗ 𝑥2, 𝐿2 ̂ 𝑢2, ⃗ 𝑥1, 𝐿1 ̂ 𝑢1}྘ {⃗ 𝑥1, 𝐿1 ̂ 𝑢1, ⃗ 𝑥2, 𝐿2 ̂ 𝑢2}۱OLC
+ݼ1a2b
+ORFྟᇉđೂ (2-50)a (2-51)ࢌ
+֥ORFଆӉb
+15
+--- page 31
+ࣟ
+č2ğ
+{⃗ 𝑥3, 𝐿3 ̂ 𝑢3, ⃗ 𝑥4, 𝐿4 ̂ 𝑢4} = {⃗ 𝑥1 + ⃗ 𝑎, 𝐿1 ̂ 𝑢1, ⃗ 𝑥2 + ⃗ 𝑎, 𝐿2 ̂ 𝑢2} , (3-6)
+ࢳ{⃗ 𝑥1 + ⃗ 𝑎, 𝐿1 ̂ 𝑢1, ⃗ 𝑥2 + ⃗ 𝑎, 𝐿2 ̂ 𝑢2}྘ {⃗ 𝑥1, 𝐿1 ̂ 𝑢1, ⃗ 𝑥2, 𝐿2 ̂ 𝑢2}ᆜุ௜
+b
+ऌൔ (3-1)đ໊ᇂэਈᆺԛགྷᄝᆷඔၹሰ 𝛼12ުߐ,
+𝛼34 = 2𝜋𝑓
+𝑐 (𝐿3
+2 ̂ 𝑢3 − 𝐿4
+2 ̂ 𝑢4 − ⃗ 𝑥3 + ⃗ 𝑥4) ⋅ ̂ 𝑛
+= 2𝜋𝑓
+𝑐 (𝐿1
+2 ̂ 𝑢1 − 𝐿2
+2 ̂ 𝑢2 − ⃗ 𝑥1 − ⃗ 𝑎 + ⃗ 𝑥2 + ⃗ 𝑎) ⋅ ̂ 𝑛
+= 2𝜋𝑓
+𝑐 (𝐿1
+2 ̂ 𝑢1 − 𝐿2
+2 ̂ 𝑢2 − ⃗ 𝑥1 + ⃗ 𝑥2) ⋅ ̂ 𝑛
+= 𝛼 12 ,
+(3-7)
+эᆷඔၹሰ 𝛼12э ORFଆӉb
+྘b
+č3ğ
+{⃗ 𝑥3, 𝐿3 ̂ 𝑢3, ⃗ 𝑥4, 𝐿4 ̂ 𝑢4} = { ̂𝑂 ⃗ 𝑥1, 𝐿1 ̂𝑂 ̂ 𝑢1, ̂𝑂 ⃗ 𝑥2, 𝐿2 ̂𝑂 ̂ 𝑢2} , (3-8)
+ࢳ{ ̂𝑂 ⃗ 𝑥1, 𝐿1 ̂𝑂 ̂ 𝑢1, ̂𝑂 ⃗ 𝑥2, 𝐿2 ̂𝑂 ̂ 𝑢2}྘ {⃗ 𝑥1, 𝐿1 ̂ 𝑢1, ⃗ 𝑥2, 𝐿2 ̂ 𝑢2}ᆜุቓ၂
+ߐ𝑂(3)b
+ҳൔ (3-1)གྷ ⃗ 𝑥1a ̂ 𝑢1a⃗ 𝑥2a ̂ 𝑢2эਈ ̂ 𝑛ၛଽ
+ྙൔ၂ఏԛགྷđԢਔ 𝑢𝑎
+1 𝑢𝑏
+1 𝐞𝜆
+𝑎𝑏( ̂ 𝑛)ބ𝑢𝑎
+2 𝑢𝑏
+2 𝐞𝜆
+𝑎𝑏( ̂ 𝑛)ၹሰb
+֌ᄝൔ (2-34)֞𝐞+
+𝑎𝑏( ̂ 𝑛)a𝐞×
+𝑎𝑏( ̂ 𝑛)ཟਈ ̂ 𝑛a
+̂𝜃ބ̂𝜙 টіൕđఃᇏ ̂𝜃ބ̂𝜙ཟ ̂ 𝑛b
+ؓ̂ 𝑛ߐ̂𝑂đ ̂𝜃ބ̂𝜙ᆞ
+ߐ̂𝑂b
+ൔ (3-1)эਈ ̂ 𝑛ჭğ
+̂ 𝑛 →̂𝑂 ̂ 𝑛 , (3-9)
+ުٳࠒORFᆴb
+ߐ̂𝑂ؓ
+ა ̂ 𝑛۱̂𝑂b
+ᄝ ̂ 𝑢𝑎
+1 ̂ 𝑢𝑏
+1 𝐞𝜆
+𝑎𝑏( ̂ 𝑛)ބ̂ 𝑢𝑎
+2 ̂ 𝑢𝑏
+2 𝐞𝜆
+𝑎𝑏( ̂ 𝑛)ؓ̂ 𝑢1ބ̂ 𝑢2۱̂𝑂đ ২
+ೂğ
+̂ 𝑢𝑎
+1 ̂ 𝑢𝑏
+1 𝐞+
+𝑎𝑏( ̂ 𝑛) = ̂ 𝑢𝑎
+1 ̂ 𝑢𝑏
+1 ̂𝜃𝑎 ̂𝜃𝑏 − ̂ 𝑢𝑎
+1 ̂ 𝑢𝑏
+1 ̂𝜙𝑎 ̂𝜙𝑏
+= ( ̂ 𝑢1 ⋅ ̂𝜃)2 − ( ̂ 𝑢1 ⋅ ̂𝜙)2 ,
+(3-10)
+16
+--- page 32
+ֻ3 ᅣ OLCඔ
+ğ
+̂ 𝑢𝑎
+1 ̂ 𝑢𝑏
+1 𝐞+
+𝑎𝑏( ̂𝑂 ̂ 𝑛) = ( ̂ 𝑢1 ⋅ ̂𝑂 ̂𝜃)2 − ( ̂ 𝑢1 ⋅ ̂𝑂 ̂𝜙)2
+= ( ̂𝑂−1 ̂ 𝑢1 ⋅ ̂𝜃)2 − ( ̂𝑂−1 ̂ 𝑢1 ⋅ ̂𝜙)2 ,
+(3-11)
+ቓਔ၂Ց ̂𝑂č ̂𝑂๝ဢ
+Ď đ֌ORFਔൔ (3-8)b
+эਔቕѓ༢đ ၹ
+طORF ҂эb
+ো
+ᄝЌӻ ORF֥
+൞ ORFbູ
+྘ቔಪ๝b
+3.3.2 ORFߐ
+ඔ Γ12 ᆜ৘
+Ӯೂ༯ྙൔğ
+Γ12(𝑓 ) = ∑
+𝐴 ∫
+𝑑2 ̂ 𝑛
+4𝜋 ( ̂ 𝑢1)𝑎( ̂ 𝑢1)𝑏𝐞𝐴
+𝑎𝑏( ̂ 𝑛)( ̂ 𝑢2)𝑐( ̂ 𝑢2)𝑑𝐞𝐴
+𝑐𝑑 ( ̂ 𝑛)(
+𝜋𝑓
+𝑐 )
+2
+× 𝐿1𝐿2sinc[
+𝜋𝑓 𝐿1
+𝑐 (1 − ̂ 𝑢1 ⋅ ̂ 𝑛)]sinc[
+𝜋𝑓 𝐿2
+𝑐 (1 − ̂ 𝑢2 ⋅ ̂ 𝑛)]
+× 𝑒𝑖𝛼12𝑒𝑖𝛽12
+(3-12)
+ఃᇏᆷඔၹሰ
+𝛼12 = 2𝜋𝑓
+𝑐 (⃗ 𝑥2 − 𝐿2
+2 ̂ 𝑢2 + 𝐿1
+2 ̂ 𝑢1 − ⃗ 𝑥1) ⋅ ̂ 𝑛 , (3-13)
+𝛽12 = 𝜋𝑓 (𝐿2 − 𝐿1)/𝑐 , (3-14)
+ၬ൏ਈğ
+⃗ 𝑚12 = (⃗ 𝑥2 − 𝐿2
+2 ̂ 𝑢2) − (⃗ 𝑥1 − 𝐿1
+2 ̂ 𝑢1) , (3-15)
+Վൈğ
+𝛼12(𝑓 ) = 2𝜋𝑓
+𝑐 ⃗ 𝑚12 ⋅ ̂ 𝑛 , (3-16)
+ऌൔ (3-12), ᄝ಩၂௔ੱ 𝑓ݔࢲ֥ٳࠒ
+൏ਈđ ପહ
+௜૫ഈ
+ߐ𝑂(2),۱
+ߐ𝑂(2)э ORFଆӉb
+17
+--- page 33
+ࣟ
+නਫ਼൞ğ਷ Γ12ඔა Γ34ඔᄝ
+۱𝑂(2)࢘ږ
+ӈඔb
+ҳ Γ12ᄝ
+𝛼12ބ𝛽12 ᇏb໡ૌॖ༵਷ Γ12 ა Γ34ູਆো౦
+ঃğ
+𝐿3 = 𝐿 2, ̂ 𝑢3 = ̂ 𝑢2, 𝐿 4 = 𝐿 1, ̂ 𝑢4 = ̂ 𝑢1, (3-17)
+𝐿3 = 𝐿 1, ̂ 𝑢3 = ̂ 𝑢1, 𝐿 4 = 𝐿 2, ̂ 𝑢4 = ̂ 𝑢2. (3-18)
+b
+ࡼΓ12྘ {⃗ 𝑥1, 𝐿1 ̂ 𝑢1, ⃗ 𝑥2, 𝐿2 ̂ 𝑢2}྘ {X}b
+ऌഈ૫ਆো౦ঃđᆷඔၹሰ 𝛽ԛགྷਆᇕ౦ঃğ
+č1ൔቆ (3-17)౦ঃൈđ
+𝛽34 = 𝜋𝑓 (𝐿4 − 𝐿3)/𝑐 = 𝜋𝑓 (𝐿 1 − 𝐿2)/𝑐 = −𝛽 12 , (3-19)
+č2ൔቆ (3-18)౦ঃൈđ
+𝛽34 = 𝜋𝑓 (𝐿4 − 𝐿3)/𝑐 = 𝜋𝑓 (𝐿 2 − 𝐿1)/𝑐 = 𝛽 12 , (3-20)
+۱
+ၛ༯ਆᇕ౦ঃğ
+𝛼12𝛽12 − 𝛼34𝛽34 = 𝛾 , (3-21)
+𝛼12𝛽12 + 𝛼34𝛽34 = 𝛾 , (3-22)
+ఃᇏ 𝛾 ູ಩ၩӈൌඔb
+֤֞𝛼12 ა 𝛼34ູၛ༯
+ඹᇕ౦ঃğ
+č1၂ᇕ౦ঃđડቀ 𝛼12𝛽12 − 𝛼34𝛽34 = 𝛾 ౏ 𝛽34 = −𝛽 12bՎൈğ
+𝛼12𝛽12 − 𝛼34𝛽34 = (𝛼 12 + 𝛼34)𝛽12 = 𝛾 , (3-23)
+྘ A౦ঃ༯đᄝଖ၂௔ੱ 𝑓 ༯đ𝛽12ऌഈൔđླડ
+ቀ (𝛼12 + 𝛼34)ğ
+(⃗ 𝑥2 − 𝐿2
+2 ̂ 𝑢2 + 𝐿1
+2 ̂ 𝑢1 − ⃗ 𝑥1) ⋅ ̂ 𝑛 + (⃗ 𝑥4 − 𝐿4
+4 ̂ 𝑢4 + 𝐿3
+2 ̂ 𝑢3 − ⃗ 𝑥3) ⋅ ̂ 𝑛′ = 𝛾𝑐
+2𝜋𝑓 𝛽12
+, (3-24)
+భ૫ൔ (3-8)э ORFэਈ ̂ 𝑛’ྛ
+ఃა ̂ 𝑛đ౏Վൈ ORF ҂эbഈൔэູğ
+(⃗ 𝑥2 − 𝐿2
+2 ̂ 𝑢2 + 𝐿1
+2 ̂ 𝑢1 − ⃗ 𝑥1 + ⃗ 𝑥4 − 𝐿4
+2 ̂ 𝑢4 + 𝐿3
+2 ̂ 𝑢3 − ⃗ 𝑥3) ⋅ ̂ 𝑛 = 𝛾𝑐
+2𝜋𝑓 𝛽12
+, (3-25)
+18
+--- page 34
+ֻ3 ᅣ OLCඔ
+෮Ⴕ ̂ 𝑛ડቀđၹՎğ
+⃗ 𝑥2 − 𝐿2
+2 ̂ 𝑢2 + 𝐿1
+2 ̂ 𝑢1 − ⃗ 𝑥1 + ⃗ 𝑥4 − 𝐿4
+2 ̂ 𝑢4 + 𝐿3
+2 ̂ 𝑢3 − ⃗ 𝑥3 = ⃗0 , (3-26)
+ऌൔ (3-17)č𝛽34 = −𝛽 12ູğ
+⃗ 𝑥2 − 𝐿2
+2 ̂ 𝑢2 + 𝐿1
+2 ̂ 𝑢1 − ⃗ 𝑥1 + ⃗ 𝑥4 − 𝐿1
+2 ̂ 𝑢1 + 𝐿2
+2 ̂ 𝑢2 − ⃗ 𝑥3 = ⃗0 , (3-27)
+⃗ 𝑥2 − ⃗ 𝑥1 = ⃗ 𝑥3 − ⃗ 𝑥4 , (3-28)
+ॖཿቔğ
+{⃗ 𝑥3, 𝐿3 ̂ 𝑢3, ⃗ 𝑥4, 𝐿4 ̂ 𝑢4} = {⃗ 𝑥2 + ⃗ 𝑎, 𝐿2 ̂ 𝑢2, ⃗ 𝑥1 + ⃗ 𝑎, 𝐿1 ̂ 𝑢1} , (3-29)
+{⃗ 𝑥2 + ⃗ 𝑎, 𝐿2 ̂ 𝑢2, ⃗ 𝑥1 + ⃗ 𝑎, 𝐿1 ̂ 𝑢1}྘ {⃗ 𝑥1, 𝐿1 ̂ 𝑢1, ⃗ 𝑥2, 𝐿2 ̂ 𝑢2}ߐࢌ1đ2ݼ
+ᄜᆜุ௜၍ ⃗ 𝑎b
+č2ᇕ౦ঃđડቀ 𝛼12𝛽12 − 𝛼34𝛽34 = 𝛾 ౏ 𝛽34 = 𝛽 12bՎൈğ
+𝛼12𝛽12 − 𝛼34𝛽34 = (𝛼 12 − 𝛼34)𝛽12 = 𝛾 , (3-30)
+྘ A౦ঃ༯đᄝଖ၂௔ੱ 𝑓 ༯đ𝛽12ऌഈൔđླડ
+ቀ (𝛼12 − 𝛼34)ğ
+(⃗ 𝑥2 − 𝐿2
+2 ̂ 𝑢2 + 𝐿1
+2 ̂ 𝑢1 − ⃗ 𝑥1) ⋅ ̂ 𝑛 − (⃗ 𝑥4 − 𝐿4
+4 ̂ 𝑢4 + 𝐿3
+2 ̂ 𝑢3 − ⃗ 𝑥3) ⋅ ̂ 𝑛′ = 𝛾𝑐
+2𝜋𝑓 𝛽12
+, (3-31)
+భ૫ൔ (3-8)э ORFэਈ ̂ 𝑛’ྛ
+ఃა ̂ 𝑛đ౏Վൈ ORF ҂эbഈൔэູğ
+(⃗ 𝑥2 − 𝐿2
+2 ̂ 𝑢2 + 𝐿1
+2 ̂ 𝑢1 − ⃗ 𝑥1 − ⃗ 𝑥4 + 𝐿4
+2 ̂ 𝑢4 − 𝐿3
+2 ̂ 𝑢3 + ⃗ 𝑥3) ⋅ ̂ 𝑛 = 𝛾𝑐
+2𝜋𝑓 𝛽12
+, (3-32)
+෮Ⴕ ̂ 𝑛ડቀđၹՎğ
+⃗ 𝑥2 − 𝐿2
+2 ̂ 𝑢2 + 𝐿1
+2 ̂ 𝑢1 − ⃗ 𝑥1 − ⃗ 𝑥4 + 𝐿4
+2 ̂ 𝑢4 − 𝐿3
+2 ̂ 𝑢3 + ⃗ 𝑥3 = ⃗0 , (3-33)
+ऌൔ (3-18)č𝛽34 = 𝛽 12ູğ
+⃗ 𝑥2 − 𝐿2
+2 ̂ 𝑢2 + 𝐿1
+2 ̂ 𝑢1 − ⃗ 𝑥1 − ⃗ 𝑥4 + 𝐿2
+2 ̂ 𝑢2 − 𝐿1
+2 ̂ 𝑢1 + ⃗ 𝑥3 = ⃗0 , (3-34)
+⃗ 𝑥2 − ⃗ 𝑥1 = ⃗ 𝑥4 − ⃗ 𝑥3 , (3-35)
+ॖཿቔğ
+{⃗ 𝑥3, 𝐿3 ̂ 𝑢3, ⃗ 𝑥4, 𝐿4 ̂ 𝑢4} = {⃗ 𝑥1 + ⃗ 𝑎, 𝐿1 ̂ 𝑢1, ⃗ 𝑥2 + ⃗ 𝑎, 𝐿2 ̂ 𝑢2} , (3-36)
+{⃗ 𝑥2 + ⃗ 𝑎, 𝐿2 ̂ 𝑢2, ⃗ 𝑥1 + ⃗ 𝑎, 𝐿1 ̂ 𝑢1}྘ {⃗ 𝑥1, 𝐿1 ̂ 𝑢1, ⃗ 𝑥2, 𝐿2 ̂ 𝑢2} ᆜุ௜၍ ⃗ 𝑎֤
+b
+19
+--- page 35
+ࣟ
+č3೘ᇕ౦ঃđડቀ 𝛼12𝛽12 + 𝛼34𝛽34 = 𝛾 ౏ 𝛽34 = −𝛽 12bՎൈğ
+𝛼12𝛽12 + 𝛼34𝛽34 = (𝛼 12 − 𝛼34)𝛽12 = 𝛾 , (3-37)
+྘ A౦ঃ༯đᄝଖ၂௔ੱ 𝑓 ༯đ𝛽12ऌഈൔđླડ
+ቀ (𝛼12 − 𝛼34)ğ
+(⃗ 𝑥2 − 𝐿2
+2 ̂ 𝑢2 + 𝐿1
+2 ̂ 𝑢1 − ⃗ 𝑥1) ⋅ ̂ 𝑛 − (⃗ 𝑥4 − 𝐿4
+4 ̂ 𝑢4 + 𝐿3
+2 ̂ 𝑢3 − ⃗ 𝑥3) ⋅ ̂ 𝑛′ = 𝛾𝑐
+2𝜋𝑓 𝛽12
+, (3-38)
+భ૫ൔ (3-8)э ORFэਈ ̂ 𝑛’ྛ
+ఃა ̂ 𝑛đ౏Վൈ ORF ҂эbഈൔэູğ
+(⃗ 𝑥2 − 𝐿2
+2 ̂ 𝑢2 + 𝐿1
+2 ̂ 𝑢1 − ⃗ 𝑥1 − ⃗ 𝑥4 + 𝐿4
+2 ̂ 𝑢4 − 𝐿3
+2 ̂ 𝑢3 + ⃗ 𝑥3) ⋅ ̂ 𝑛 = 𝛾𝑐
+2𝜋𝑓 𝛽12
+, (3-39)
+෮Ⴕ ̂ 𝑛ડቀđၹՎğ
+⃗ 𝑥2 − 𝐿2
+2 ̂ 𝑢2 + 𝐿1
+2 ̂ 𝑢1 − ⃗ 𝑥1 − ⃗ 𝑥4 + 𝐿4
+2 ̂ 𝑢4 − 𝐿3
+2 ̂ 𝑢3 + ⃗ 𝑥3 = ⃗0 , (3-40)
+ऌൔ (3-17)č𝛽34 = −𝛽 12ູğ
+⃗ 𝑥2 − 𝐿2
+2 ̂ 𝑢2 + 𝐿1
+2 ̂ 𝑢1 − ⃗ 𝑥1 − ⃗ 𝑥4 + 𝐿1
+2 ̂ 𝑢1 − 𝐿2
+2 ̂ 𝑢2 + ⃗ 𝑥3 = ⃗0 , (3-41)
+(⃗ 𝑥2 − 𝐿2 ̂ 𝑢2) − (⃗ 𝑥1 − 𝐿1 ̂ 𝑢1) = ⃗ 𝑥4 − ⃗ 𝑥3 , (3-42)
+ॖཿቔğ
+{⃗ 𝑥3, 𝐿3 ̂ 𝑢3, ⃗ 𝑥4, 𝐿4 ̂ 𝑢4} = {⃗ 𝑥1 − 𝐿1 ̂ 𝑢1 + ⃗ 𝑎, 𝐿2 ̂ 𝑢2, ⃗ 𝑥2 − 𝐿2 ̂ 𝑢2 + ⃗ 𝑎, 𝐿1 ̂ 𝑢1} , (3-43)
+{⃗ 𝑥1−𝐿1 ̂ 𝑢1+ ⃗ 𝑎, 𝐿2 ̂ 𝑢2, ⃗ 𝑥2−𝐿2 ̂ 𝑢2+ ⃗ 𝑎, 𝐿1 ̂ 𝑢1}྘ {⃗ 𝑥1, 𝐿1 ̂ 𝑢1, ⃗ 𝑥2, 𝐿2 ̂ 𝑢2}
+ቔ
+྘ {𝑌 }b
+č4ඹᇕ౦ঃđડቀ 𝛼12𝛽12 + 𝛼34𝛽34 = 𝛾 ౏ 𝛽34 = 𝛽 12bՎൈğ
+𝛼12𝛽12 + 𝛼34𝛽34 = (𝛼 12 + 𝛼34)𝛽12 = 𝛾 , (3-44)
+྘ A౦ঃ༯đᄝଖ၂௔ੱ 𝑓 ༯đ𝛽12ऌഈൔđླડ
+ቀ (𝛼12 + 𝛼34)ğ
+(⃗ 𝑥2 − 𝐿2
+2 ̂ 𝑢2 + 𝐿1
+2 ̂ 𝑢1 − ⃗ 𝑥1) ⋅ ̂ 𝑛 + (⃗ 𝑥4 − 𝐿4
+4 ̂ 𝑢4 + 𝐿3
+2 ̂ 𝑢3 − ⃗ 𝑥3) ⋅ ̂ 𝑛′ = 𝛾𝑐
+2𝜋𝑓 𝛽12
+, (3-45)
+భ૫ൔ (3-8)э ORFэਈ ̂ 𝑛’ྛ
+ఃა ̂ 𝑛đ౏Վൈ ORF ҂эbഈൔэູğ
+(⃗ 𝑥2 − 𝐿2
+2 ̂ 𝑢2 + 𝐿1
+2 ̂ 𝑢1 − ⃗ 𝑥1 + ⃗ 𝑥4 − 𝐿4
+2 ̂ 𝑢4 + 𝐿3
+2 ̂ 𝑢3 − ⃗ 𝑥3) ⋅ ̂ 𝑛 = 𝛾𝑐
+2𝜋𝑓 𝛽12
+, (3-46)
+20
+--- page 36
+ֻ3 ᅣ OLCඔ
+෮Ⴕ ̂ 𝑛ડቀđၹՎğ
+⃗ 𝑥2 − 𝐿2
+2 ̂ 𝑢2 + 𝐿1
+2 ̂ 𝑢1 − ⃗ 𝑥1 + ⃗ 𝑥4 − 𝐿4
+2 ̂ 𝑢4 + 𝐿3
+2 ̂ 𝑢3 − ⃗ 𝑥3 = ⃗0 , (3-47)
+ऌൔ (3-17)č𝛽34 = 𝛽 12ູğ
+⃗ 𝑥2 − 𝐿2
+2 ̂ 𝑢2 + 𝐿1
+2 ̂ 𝑢1 − ⃗ 𝑥1 + ⃗ 𝑥4 − 𝐿2
+2 ̂ 𝑢2 + 𝐿1
+2 ̂ 𝑢1 − ⃗ 𝑥3 = ⃗0 , (3-48)
+(⃗ 𝑥2 − 𝐿2 ̂ 𝑢2) − (⃗ 𝑥1 − 𝐿1 ̂ 𝑢1) = ⃗ 𝑥3 − ⃗ 𝑥4 , (3-49)
+ॖཿቔğ
+{⃗ 𝑥3, 𝐿3 ̂ 𝑢3, ⃗ 𝑥4, 𝐿4 ̂ 𝑢4} = {⃗ 𝑥2 − 𝐿2 ̂ 𝑢2 + ⃗ 𝑎, 𝐿1 ̂ 𝑢1, ⃗ 𝑥1 − 𝐿1 ̂ 𝑢1 + ⃗ 𝑎, 𝐿2 ̂ 𝑢2} , (3-50)
+{⃗ 𝑥2 − 𝐿2 ̂ 𝑢2 + ⃗ 𝑎, 𝐿1 ̂ 𝑢1, ⃗ 𝑥1 − 𝐿1 ̂ 𝑢1 + ⃗ 𝑎, 𝐿2 ̂ 𝑢2}྘ {𝑋}ݖ
+྘ॖၛՖ (3-43)֥
+྘ {𝑌 }྘ {𝑌 } ಪ๝b
+ğ
+⃗ 𝑥3 = ⃗ 𝑥2 − 𝐿2 ̂ 𝑢2 + ⃗ 𝑎 ,
+𝐿3 ̂ 𝑢3 = 𝐿 1 ̂ 𝑢1 ,
+⃗ 𝑥4 = ⃗ 𝑥1 − 𝐿1 ̂ 𝑢1 + ⃗ 𝑎 ,
+𝐿4 ̂ 𝑢4 = 𝐿 2 ̂ 𝑢2 ,
+(3-51)
+҂ാ၂Ϯྟđ໡ૌॖၛ਷
+⃗ 𝑎 = 𝐿1 ̂ 𝑢1 + 𝐿2 ̂ 𝑢2 − ⃗ 𝑥1 − ⃗ 𝑥2, (3-52)
+֤֞
+𝑥3 = 𝐿 1 ̂ 𝑢1 − ⃗ 𝑥1 ,
+𝐿3 ̂ 𝑢3 = 𝐿 1 ̂ 𝑢1 ,
+⃗ 𝑥4 = 𝐿 2 ̂ 𝑢2 − ⃗ 𝑥2 ,
+𝐿4 ̂ 𝑢4 = 𝐿 2 ̂ 𝑢2 ,
+(3-53)
+ߐ𝑑𝑖𝑎𝑔{−1, −1, −1}э ORFĎ
+ğ
+⃗ 𝑥3 = ⃗ 𝑥1 − 𝐿1 ̂ 𝑢1 ,
+𝐿3 ̂ 𝑢3 = −𝐿 1 ̂ 𝑢1 ,
+⃗ 𝑥4 = ⃗ 𝑥2 − 𝐿2 ̂ 𝑢2 ,
+𝐿4 ̂ 𝑢4 = −𝐿 2 ̂ 𝑢2 ,
+(3-54)
+{⃗ 𝑥3, 𝐿3 ̂ 𝑢3, ⃗ 𝑥4, 𝐿4 ̂ 𝑢4} = {⃗ 𝑥1 − 𝐿1 ̂ 𝑢1, −𝐿1 ̂ 𝑢1, ⃗ 𝑥2 − 𝐿2 ̂ 𝑢2, −𝐿2 ̂ 𝑢2} , (3-55)
+Վൈ ⃗ 𝑥3 = ⃗ 𝑥1 − 𝐿1 ̂ 𝑢1đၩ໅ሢฐҩఖ 3໊ᇂ໊Ⴟฐҩఖ 1ࠗ
+ط𝐿3 ̂ 𝑢3 = −𝐿 1 ̂ 𝑢1đ ၩ໅ሢฐҩఖ3ཟაฐҩఖ 1đ ౏
+21
+--- page 37
+ࣟ
+đՎൈฐҩఖ 3Ⴟ൐Ⴈਔฐҩఖ 1ྐ
+ऌ⃗ 𝑥4 = ⃗ 𝑥2 − 𝐿2 ̂ 𝑢2 ა 𝐿4 ̂ 𝑢4 = −𝐿 2 ̂ 𝑢2đ ၩ໅ሢฐҩఖ4Ⴟ൐
+Ⴈਔฐҩఖ 2b
+ᄝ๭3-3ൕၩ๭b
+۱OLCए
+۱OLC໊
+ᇂb
+1x
+11uL 
+33uL 
+2x
+44uL 
+22uL 
+4x
+3x
+๭ 3-3 OLC ฐҩఖ ORF๨սіႮฐҩఖ 1ฐ
+ҩఖ 2྘đ෱Ⴎฐҩఖ 3ฐҩ
+ఖ 4ฐҩఖ
+1ฐҩఖ 2໊ᇂb
+Figure 3-3 Non-trivial configuration transformation of OLC detectors with the modulus of
+ORF invariant. The two arrows on the left represent the original configuration
+composed of detector 1 and detector 2. The two arrows on the right represent the
+transformed configuration after a non-trivial transformation, which consists of detector
+3 and detector 4. This non-trivial transformation can be summarized as swapping the
+positions of receiving and emitting lasers for both detector 1 and detector 2.
+྘đၹູğ
+{⃗ 𝑥5, 𝐿5 ̂ 𝑢5, ⃗ 𝑥6, 𝐿6 ̂ 𝑢6}
+={⃗ 𝑥3 − 𝐿3 ̂ 𝑢3, −𝐿3 ̂ 𝑢3, ⃗ 𝑥4 − 𝐿4 ̂ 𝑢4, −𝐿4 ̂ 𝑢4}
+={⃗ 𝑥1 − 𝐿1 ̂ 𝑢1 − 𝐿3 ̂ 𝑢3, −𝐿3 ̂ 𝑢3, ⃗ 𝑥2 − 𝐿2 ̂ 𝑢2 − 𝐿4 ̂ 𝑢4, −𝐿4 ̂ 𝑢4}
+={⃗ 𝑥1 − 𝐿1 ̂ 𝑢1 + 𝐿1 ̂ 𝑢1, −𝐿3 ̂ 𝑢3, ⃗ 𝑥2 − 𝐿2 ̂ 𝑢2 + 𝐿2 ̂ 𝑢2, 𝐿2 ̂ 𝑢2}
+={⃗ 𝑥1, 𝐿1 ̂ 𝑢1, ⃗ 𝑥2, 𝐿2 ̂ 𝑢2} ,
+(3-56)
+྘b
+22
+--- page 38
+ֻ3 ᅣ OLCඔ
+၂Ϯ౦ঃ༯đ𝐿1 ≠ 𝐿 2٤
+֥ުORF۱ORFཌྷҵაф
+႘ᄝᆷඔၹሰ 𝛽12 ഈb
+֒𝐿1 = 𝐿 2фӉൈđ 𝛽12 =
+𝛽34 = 0ط𝛼12 = 𝛼 34ᆀ 𝛼12 = −𝛼 34đΓ12(𝑓 ) = Γ 34(𝑓 )ᆀ Γ12(𝑓 ) =
+Γ∗
+34(𝑓 ),۱ORF۱ORFᣢb
+3.4ߐ
+1x
+11uL 
+2x
+3x
+4x
+22uL 
+33uL 
+44uL 
+๭ 3-4֥֝OLC ฐҩఖ ORF๨
+b
+Figure 3-4 Non-trivial configuration transformation of the OLC detector derived from early
+literature, which remains the modulus of ORF invariant. In the diagram, solid arrows
+represent the detector’s laser links, while dashed arrows indicate auxiliary lines.
+Arrows of the same color have equal lengths.
+ൔ (2-31)ႄ৯ѯၛᄪ௹໓ང [34]ൔᅚषğ
+ℎ𝑖𝑗(𝑡, 𝑥) = ∑
+𝐴=+,× ∫
+∞
+−∞
+d𝑓 ∫ d2 ̂ 𝑛̃ℎ𝐴(𝑓 , ̂ 𝑛)𝐞𝐴
+𝑖𝑗( ̂ 𝑛) 𝑒−i2𝜋𝑓 (𝑡− ̂ 𝑛⋅⃗ 𝑥/𝑐), (3-57)
+ൔ (2-31)ᇏ OLCඔэູğ
+𝑅𝐴
+𝑂𝐿𝐶 (𝑓 , ̂ 𝑛) = 1
+2 𝑢𝑎𝑢𝑏 𝐞𝐴
+𝑎𝑏 𝒯𝑜𝑛𝑒( ̂ 𝑢 ⋅ ̂ 𝑛, 𝑓 ) 𝑒i2𝜋𝑓 ̂ 𝑛⋅⃗ 𝑥/𝑐, (3-58)
+۱OLCඔ Γ12(𝑓 )ᆷඔၹሰ 𝛼12 эູğ
+𝛼12 = 2𝜋𝑓
+𝑐 (𝐿1
+2 ̂ 𝑢1 − 𝐿2
+2 ̂ 𝑢2 + ⃗ 𝑥1 − ⃗ 𝑥2) ⋅ ̂ 𝑛 , (3-59)
+23
+--- page 39
+ࣟ
+๝ဢđᄜ቎ᅶაൔ (3-17)ᇀൔ (3-50)ğ
+⃗ 𝑥3 = ⃗ 𝑥1 − 𝐿2 ̂ 𝑢2 + ⃗ 𝑎 ,
+𝐿3 ̂ 𝑢3 = 𝐿 1 ̂ 𝑢1 ,
+⃗ 𝑥4 = ⃗ 𝑥2 − 𝐿1 ̂ 𝑢1 + ⃗ 𝑎 ,
+𝐿4 ̂ 𝑢4 = 𝐿 2 ̂ 𝑢2 ,
+(3-60)
+ൔ (3-51)ਔ ⃗ 𝑥1 ა ⃗ 𝑥2b
+ᄝ๭3-4čᆃ৚౼ ⃗ 𝑎 =⃗0Ď b
+Ֆ๭3-4ฐҩఖ 1ބ2
+ฐҩఖ 3ބ4֥
+ُ
+ჹa अ
+ฐҩఖđ౏ ORF ҂эb
+3.5༯ ORFྟᇉ
+۱OLCфӉ 𝐿1 = 𝐿 2 = 𝐿đ ᄵ𝛽12 = 0۱OLC ฐҩ
+֥ORF ཿູೂ༯ྙൔč𝑘 = 2𝜋𝑓 /𝑐 Ď ğ
+Γ12(𝑓 ) = ∑
+𝐴 ∫
+𝑑2 ̂ 𝑛
+4𝜋 𝐹𝐴( ̂ 𝑛, 𝑓 ) 𝑒𝑖𝑘 ̂ 𝑛⋅ ⃗ 𝑚12 , (3-61)
+ఃᇏ
+𝐹𝐴( ̂ 𝑛, 𝑓 ) = ( ̂ 𝑢1)𝑎( ̂ 𝑢1)𝑏𝐞𝐴
+𝑎𝑏( ̂ 𝑛) ( ̂ 𝑢2)𝑐( ̂ 𝑢2)𝑑𝐞𝐴
+𝑐𝑑 ( ̂ 𝑛)(
+𝜋𝑓 𝐿
+𝑐 )
+2
+× sinc[
+𝜋𝑓 𝐿
+𝑐 (1 − ̂ 𝑢1 ⋅ ̂ 𝑛)]sinc[
+𝜋𝑓 𝐿
+𝑐 (1 − ̂ 𝑢2 ⋅ ̂ 𝑛)] ,
+(3-62)
+౏
+⃗ 𝑚12 = (⃗ 𝑥2 − 𝐿
+2 ̂ 𝑢2) − (⃗ 𝑥1 − 𝐿
+2 ̂ 𝑢1) , (3-63)
+ၬ൏ਈğ
+⃗ 𝑠 = ̂ 𝑢1 + ̂ 𝑢2 , (3-64)
+ݔ𝑠 ⋅ ⃗ 𝑚12 = 0 đᄵ Γ12(𝑓 )ྴູ҆ 0bՎൈđΓ12(𝑓 )ྴ҆ॖ
+ཿቔğ
+Im [Γ12(𝑓 )] = ∑
+𝐴 ∫
+𝑑2 ̂ 𝑛
+4𝜋 𝐹𝐴( ̂ 𝑛, 𝑓 ) sin(𝑘 ̂ 𝑛 ⋅ ⃗ 𝑚12) , (3-65)
+ಡᇠ ⃗ 𝑠࿈ሇ 180°ߐℛ đ
+ડቀğ
+d2(ℛ ̂ 𝑛) = d2 ̂ 𝑛 , (3-66)
+24
+--- page 40
+ֻ3 ᅣ OLCඔ
+ႮႿ࿈ሇᇠ௜ྛႿ ̂ 𝑢1 + ̂ 𝑢2ط̂ 𝑢1ބ̂ 𝑢2ֆ໊൏ਈđಸၞဒᆣğ
+ℛ ̂ 𝑢1 = ̂ 𝑢2 , (3-67)
+ℛ ̂ 𝑢2 = ̂ 𝑢1 , (3-68)
+Ⴛၹູ ⃗ 𝑠 ⋅ ⃗ 𝑚12 = 0đପહ ⃗ 𝑚12 ⟂ ⃗ 𝑠ࡼ𝑚12 ಡᇠ ⃗ 𝑠࿈ሇ 180°֤𝑚12ཟğ
+ℛ ⃗ 𝑚12 = − ⃗ 𝑚12 , (3-69)
+ਸ਼ຓႮ ℛ = ℛ −1ൔ (3-69)ğ
+⃗ 𝑚12 ⋅ (ℛ ̂ 𝑛) = (ℛ−1 ⃗ 𝑚12) ⋅ ̂ 𝑛 = (ℛ ⃗ 𝑚12) ⋅ ̂ 𝑛 = − ⃗ 𝑚12 ⋅ ̂ 𝑛 , (3-70)
+ၹՎ
+sin(𝑘 ⃗ 𝑚12 ⋅ ℛ ̂ 𝑛) = − sin(𝑘 ⃗ 𝑚12 ⋅ ̂ 𝑛) , (3-71)
+ൔ (3-67)ࠣ( 3-68)ğ
+1 − ̂ 𝑢1 ⋅ (ℛ ̂ 𝑛) = 1 − (ℛ−1 ̂ 𝑢1) ⋅ ̂ 𝑛 = 1 − (ℛ ̂ 𝑢1) ⋅ ̂ 𝑛 = 1 − ̂ 𝑢2 ⋅ ̂ 𝑛 , (3-72)
+๝৘
+1 − ̂ 𝑢2 ⋅ (ℛ ̂ 𝑛) = 1 − ̂ 𝑢1 ⋅ ̂ 𝑛 , (3-73)
+ط
+sinc[
+𝜋𝑓 𝐿
+𝑐 (1 − ̂ 𝑢1 ⋅ ℛ ̂ 𝑛)]sinc[
+𝜋𝑓 𝐿
+𝑐 (1 − ̂ 𝑢2 ⋅ ℛ ̂ 𝑛)]
+= sinc[
+𝜋𝑓 𝐿
+𝑐 (1 − ̂ 𝑢2 ⋅ ̂ 𝑛)]sinc[
+𝜋𝑓 𝐿
+𝑐 (1 − ̂ 𝑢1 ⋅ ̂ 𝑛)] ,
+(3-74)
+࠺
+𝑃𝐴( ̂ 𝑛) = ( ̂ 𝑢1)𝑎( ̂ 𝑢1)𝑏𝐞𝐴
+𝑎𝑏( ̂ 𝑛) ( ̂ 𝑢2)𝑐( ̂ 𝑢2)𝑑𝐞𝐴
+𝑐𝑑 ( ̂ 𝑛) , (3-75)
+ߐℛ ऌൔ (3-10)ა (3-11)ğ
+𝑃𝐴(ℛ ̂ 𝑛) = ( ̂ 𝑢1)𝑎 ( ̂ 𝑢1)𝑏 𝐞𝐴
+𝑎𝑏(ℛ ̂ 𝑛) ( ̂ 𝑢2)𝑐 ( ̂ 𝑢2)𝑑 𝐞𝐴
+𝑐𝑑 (ℛ ̂ 𝑛)
+= (ℛ−1 ̂ 𝑢1)𝑎 (ℛ−1 ̂ 𝑢1)𝑏 𝐞𝐴
+𝑎𝑏( ̂ 𝑛) (ℛ−1 ̂ 𝑢2)𝑐 (ℛ−1 ̂ 𝑢2)𝑑 𝐞𝐴
+𝑐𝑑 ( ̂ 𝑛)
+= (ℛ ̂ 𝑢1)𝑎 (ℛ ̂ 𝑢1)𝑏 𝐞𝐴
+𝑎𝑏( ̂ 𝑛) (ℛ ̂ 𝑢2)𝑐 (ℛ ̂ 𝑢2)𝑑 𝐞𝐴
+𝑐𝑑 ( ̂ 𝑛)
+= ( ̂ 𝑢2)𝑎 ( ̂ 𝑢2)𝑏 𝐞𝐴
+𝑎𝑏( ̂ 𝑛) ( ̂ 𝑢1)𝑐 ( ̂ 𝑢1)𝑑 𝐞𝐴
+𝑐𝑑 ( ̂ 𝑛)
+= 𝑃𝐴( ̂ 𝑛) ,
+(3-76)
+ൔ (3-62)a(3-74)ބ(3-76)ğ
+𝐹𝐴(ℛ ̂ 𝑛, 𝑓 ) = 𝐹𝐴( ̂ 𝑛, 𝑓 ) , (3-77)
+ൔ (3-65)a(3-71)ބ( 3-77)ğ
+∑
+𝐴
+𝐹𝐴(ℛ ̂ 𝑛, 𝑓 ) sin(𝑘ℛ ̂ 𝑛 ⋅ ⃗ 𝑚12) = −∑
+𝐴
+𝐹𝐴( ̂ 𝑛, 𝑓 ) sin(𝑘 ̂ 𝑛 ⋅ ⃗ 𝑚12) , (3-78)
+25
+--- page 41
+ࣟ
+Ⴛၹູ ̂ 𝑛 → ℛ ̂ 𝑛҂э:
+Im [Γ12(𝑓 )] =∑
+𝐴 ∫
+𝑑2 ̂ 𝑛
+4𝜋 𝐹𝐴( ̂ 𝑛, 𝑓 ) sin(𝑘 ̂ 𝑛 ⋅ ⃗ 𝑚12)
+=∑
+𝐴 ∫
+𝑑2 ̂ 𝑛
+4𝜋 𝐹𝐴(ℛ ̂ 𝑛, 𝑓 ) sin(𝑘 ℛ ̂ 𝑛 ⋅ ⃗ 𝑚12)
+= − Im [Γ12(𝑓 )] ,
+(3-79)
+ၹՎ
+Im [Γ12(𝑓 )] = 0 , (3-80)
+Ⴟ Γ12(𝑓 )ൌ҆ğ
+cos(𝑘 ⃗ 𝑚12 ⋅ ℛ ̂ 𝑛) = cos(𝑘 ⃗ 𝑚12 ⋅ ̂ 𝑛) , (3-81)
+Ⴟ 0֒𝐿1 = 𝐿 2 ౏ ⃗ 𝑠 ⋅ ⃗ 𝑚12 = 0 ൈđΓ12(𝑓 ) ᆺഺ༯ൌ҆đྴ҆၂
+ູ 0b
+⃗ 𝑚12ၩၬູฐҩఖ 1໊ᇂᆷཟฐҩఖ 2ᇏ
+൏ਈb
+⃗ 𝑚12 = (⃗ 𝑥2 − 𝐿
+2 ̂ 𝑢2) − (⃗ 𝑥1 − 𝐿
+2 ̂ 𝑢1) , (3-82)
+໊ᇂູ ⃗ 𝑦1ބ𝑦2đႵğ
+⃗ 𝑦1 = ⃗ 𝑥1 − 𝐿 ̂ 𝑢1 , (3-83)
+⃗ 𝑦2 = ⃗ 𝑥2 − 𝐿 ̂ 𝑢2 , (3-84)
+ၹՎğ
+|⃗ 𝑥2 − ⃗ 𝑦1|2 = | ⃗ 𝑚12 + 𝐿
+2 ⃗ 𝑠 |2 = | ⃗ 𝑚12|2 + 𝐿⃗ 𝑠 ⋅ ⃗ 𝑚12 + 𝐿2
+4 |⃗ 𝑠|2 , (3-85)
+ğ
+| ⃗ 𝑦2 − ⃗ 𝑥1|2 = | ⃗ 𝑚12 − 𝐿
+2 ⃗ 𝑠 |2 = | ⃗ 𝑚12|2 − 𝐿⃗ 𝑠 ⋅ ⃗ 𝑚12 + 𝐿2
+4 |⃗ 𝑠|2 , (3-86)
+ğ
+|⃗ 𝑥2 − ⃗ 𝑦1|2 − | ⃗ 𝑦2 − ⃗ 𝑥1|2 = 2𝐿⃗ 𝑠 ⋅ ⃗ 𝑚12 , (3-87)
+ၹՎ ⃗ 𝑠 ⋅ ⃗ 𝑚12 = 0Ⴟ |⃗ 𝑥2 − ⃗ 𝑦1| = | ⃗ 𝑦2 − ⃗ 𝑥1|bପહ Γ12(𝑓 )ྴູ҆ 0۱
+۱OLCđ౏ฐҩఖ 1ฐ
+ҩఖ 2Ⴟฐҩఖ 2ฐҩఖ 1৽ਫ਼
+۱OLC۱
+ྙĎ b
+26
+--- page 42
+ֻ4 ᅣ OLCб
+ֻ4 ᅣ OLCб
+ෘ OLC֥ORFࠫ
+֥ORF෮ႵOLC฿
+b
+4.1 ো PTA֥ORFб
+Ч໓ᇏো PTA۱OLCb২
+ೂ๭4-1֥𝑥1ބ𝑥2b
+1x
+1uL 
+2x
+2uL 
+θ
+๭ 4-1 OLCো PTAູ θb
+Figure 4-1 PTA-like configuration of the OLC detector network, with an included angle θ.
+࢘ࡃθфӉ Lb
+4.1.1֥࢘ࡃORF
+౦ঃ༯đো PTA֥ORF࢘ࡃθ༢b
+༅ো PTA྘ ORF࢘ࡃθ༢ᆭభđ༵ႄೆ PTAۀׅࣜ۱
+ࠧHellings⚶Downs ౷ཌ [41]b
+׿
+֥ק
+҃bHellings⚶Downsᄝ PTA྘ุགྷđఃऎ
+ุྙൔॖཿູğ
+Γ𝐻𝐷 (𝛾) = 1
+2 + 3 sin2 𝛾
+2 ln sin 𝛾
+2 − 1
+4 sin2 𝛾
+2 , (4-1)
+ఃᇏ 𝛾b
+๭4-2ᇅਔ Hellings⚶Downsູ 𝛾 = 49.3 ∘ ა 𝛾 = 121.7 ∘b
+໓ང [37]֞Hellings-Downs ౷ཌ൞ PTA֥ORFරb
+27
+--- page 43
+ࣟ
+๭ 4-2 Hellings-Downs ౷ཌb
+Figure 4-2 Hellings-Downs curve.
+๭ 4-3 ো PTA྘ 0°- 40°ඔb
+Figure 4-3 Overlap reduction function of the PTA-like configuration from 0°- 40°.
+28
+--- page 44
+ֻ4 ᅣ OLCб
+๭ 4-4 ো PTA྘ 50°- 80°ඔb
+Figure 4-4 Overlap reduction function of the PTA-like configuration from 50°- 80°.
+๭ 4-5 ো PTA྘ 90°- 120°ඔb
+Figure 4-5 Overlap reduction function of the PTA-like configuration from 90° ⚶120°.
+29
+--- page 45
+ࣟ
+๭ 4-6 ো PTA྘ 130°- 180°ඔb
+Figure 4-6 Overlap reduction function of the PTA-like configuration from 130°- 180°.
+ো PTA྘ડቀ ⃗ 𝑠 ⋅ ⃗ 𝑚12 = 0đః ORF ྴູ҆ 0֥ORF ູൌඔb
+фӉ L ູ 1010mູ10−5 Hz-100 Hzбਔᄝ0°-
+40°a50°- 80°a90°- 120°a130°- 180°ো PTAٳ
+љᄝ๭4-3a๭4-4a๭4-5a๭4-6ᇅਔԛটb
+໓ང [37]֞Hellings-Downs ౷ཌ൞ PTA֥ORFර b
+ᄝ๭4-3ᇏđ0°֥ORFቋնđၹູো PTA֥0°ႋ
+֥ORF۱10−5 Hz-100 Hz
+ुđORF ᄝ 0°- 40°ੰ
+ކژHellings-Downs ౷ཌ č๭4-2Ď ᇏ0°- 40°۱
+10−5 Hz-100 Hzଽ 0°- 30°֥ORFކژHellings-Downs
+౷ཌ 0°- 30°ྟູᆞᆴb40°֥ORFٳ
+đၹູ Hellings-Downs ౷ཌ൞ PTA֥ORF؋֥
+රđHellings-Downs ౷ཌᄝ 40° ൈູᆞᆴđၹՎো PTA֥ORF׻
+ູᆞᆴb
+ᄝ๭4-4۱10−5 Hz-100 HzुđORFଆӉᄝ 50°- 80° ౵
+ކژHellings-Downs ౷ཌč๭4-2Ďᇏ 50° ᇀ 80° ཌྷ
+۱10−5 Hz-100 Hzଽ 50°-80°֥ORF׻
+ކژHellings-Downs ౷ཌ 50°-80°ᆴb֌൞ ORFڵ
+൞ ORFᄀҵđၹՎ๭
+ᇏ 50°֥ORFቋҵđ 80°֥ORFቋ఼đѩ౏ 50°࣍ࢤ
+Hellings-DownsđၹՎ 50°ো PTA྘ ORFႿ 0b
+30
+--- page 46
+ֻ4 ᅣ OLCб
+ᄝ๭4-5۱10−5 Hz-100 HzुđORFᆴĎᄝ
+90°- 120°ކژHellings-Downs ౷ཌ č๭4-2Ď ᇏ90°-
+120°۱10−5 Hz-100 Hzଽ 90°- 120°֥
+ORFᆴđ ఃᇏ120°࣍ࢤHellings-Downsđ ෮ၛ120°ো
+PTA྘ ORFႿ 0b
+ᄝ๭4-6۱10−5 Hz-100 HzुđORFᆴĎᄝ
+130°-180°ކژHellings-Downs ౷ཌč๭4-2Ďᇏ
+130°- 180°۱10−5 Hz-100 Hzଽ 130°-
+180°֥ORFູᆞᆴb
+۱0°- 180°֥ORFކژ׻Hellings-Downs
+۱ORFᄝ
+đᆃ္ဒᆣਔ Hellings-Downs ౷ཌ൞ PTA֥ORF࣍
+ර [37]b
+4.1.2֥ORF
+ູ 20°౦ঃ༯đো PTA֥ORF༢b
+๭ 4-7ো PTAбb
+Figure 4-7 Comparison of the overlap reduction function magnitude for different arm
+lengths in the PTA-like configuration.
+๭4-7ো PTAଆӉđՖᇏॖၛ
+đORFbো PTA֥𝑥1 ა ⃗ 𝑥2 ᇗ
+གྷᄝ ORF іղൔ (3-1)эਈ f ა Lൔ၂๝ԛ
+གྷđ ၹՎL૫đ
+31
+--- page 47
+ࣟ
+ᄹӉđORF႘ਔฐҩఖཙ
+ཙႋđ
+фӉᄹӉb
+ՎຓđՖ๭4-7đো PTAཋᆴაф
+ো PTA྘ ORF༢đো PTA྘ ORFۚ
+b
+4.2֥ORFб
+Ч໓ᇏ OLC۱OLC۱
+฿ఖ๝ԩ
+шđೂ๭4-8ো PTAဥ
+྘္ડቀ⃗ 𝑠 ⋅ ⃗ 𝑚12 = 0đ ఃORF ྴ҆
+ູ 0֥ORFູൌඔb
+1x
+1uL 
+2x
+2uL 
+θ
+12m
+1x
+1uL 
+2x
+2uL 
+12m
+๭ 4-8྘ൕၩ๭bθđ| ⃗ 𝑚12|ए৖b
+Figure 4-8 Schematic diagram of the isosceles trapezoid configuration. θ is the included
+angle, and | ⃗ 𝑚12| is the distance between the midpoints of the two laser links.
+ए৖ູ |⃗ 𝑥1 − ⃗ 𝑥2|৽ਫ਼ᇏ
+ए৖ | ⃗ 𝑚12|ए৖Ďა ORFđၹູ
+Ֆ ORF іղൔ (3-12)ཛđ ᆺԛགྷᄝᆷඔၹሰ𝛼12 ଽ҆
+ა ̂ 𝑛൏ਈ ⃗ 𝑚12֒̂ 𝑢1 ҂эa ̂ 𝑢2ط
+𝑚12 эູ − ⃗ 𝑚12 ൈ ORF྘ቓਔ၂
+Ց๭3-3b
+྘ᄝ҂๝ए৖ | ⃗ 𝑚12|֥ORFູ
+1010mb
+32
+--- page 48
+ֻ4 ᅣ OLCб
+4.2.1ູ 0°֥ORFб
+๭ 4-9ູ 0°֥ORFбb
+Figure 4-9 Comparison of the ORF for the isosceles trapezoid configuration with an
+included angle of 0° under different distances.
+๭4-9ູ 0°ඔ
+Γ12(𝑓 )ए౦ྙđΓ12(𝑓 )ᆞᆴđඪૼՎ
+ྟb
+֮۷
+b
+ຓ
+ཙႋb
+4.2.2ູ 20°֥ORFб
+๭4-10ູ 20°֥ORFए 0
+mए 108m֥ORF࣍ࢤ100Hz֥ORF
+੻Ⴕҵљb
+Ֆ๭4-10ູ 20°ඔಯಖ
+ए౦ྙđೂ 108ma3 × 10 8ma1 × 10 9mđ
+࿡෎ᄹնđѩᄝ 10−2Hz֥
+֞3 × 109ma1 × 1010ma3 × 1010mđ
+ູ 0°
+b
+33
+--- page 49
+ࣟ
+๭ 4-10ູ 20°֥ORFбb
+Figure 4-10 Comparison of the ORF for the isosceles trapezoid configuration with an
+included angle of 20° under different distances.
+4.2.3ဥะྙ ORFб
+ए༯đ ๭4-10֥ORF๭4-9֥ORFđ ᄯӮᆃᇕҵၳ
+٤PTAܒ
+֥ORFಯಖ቎࿖Hellings-Downs
+ੰb
+๭ 4-11एູ 0྘ᄝ 0°- 40°֥ORFb
+Figure 4-11 ORF of the isosceles trapezoid configuration with a spacing of 0 from 0°- 40°.
+ᄝ๭4-11a๭4-12a๭4-13a๭4-14एູ 0ࡃ
+34
+--- page 50
+ֻ4 ᅣ OLCб
+๭ 4-12एູ 0྘ᄝ 50°- 80°֥ORFb
+Figure 4-12 ORF of the isosceles trapezoid configuration with a spacing of 0 from 50°- 80°.
+๭ 4-13एູ 0྘ᄝ 90°- 120°֥ORFb
+Figure 4-13 ORF of the isosceles trapezoid configuration with a spacing of 0 from 90°- 120°.
+35
+--- page 51
+ࣟ
+๭ 4-14एູ 0྘ᄝ 130°- 180°֥ORFb
+Figure 4-14 ORF of the isosceles trapezoid configuration with a spacing of 0 from 130°- 180°.
+࢘0°- 180°֥ORFфӉູ1010mਆฐҩఖᇉྏए৖ູ0b
+༅ඹᅦ๭ᇏ ORFएູ 0ဥะྙ
+ᆴ (10−2Hz࣍ڸ)ކژHellings-Downs֥
+ੰđᆃაো PTA֥ORF߶
+ᄝ 0ো PTA֥ࡗORFӈඔ
+྘ ORF ᇏა Hellings-Downsܱ
+b
+4.2.4ဥะྙ ORFб
+༯টđॉ੮фӉູ 1010mਆฐҩఖᇉྏए৖ູ 3 × 1010mb
+ᄝ๭4-15a๭4-16a๭4-17एູ 3࢘ࡃ
+0°֞180°֥ORF֥ORF֥ORFᆴᄝ 0°
+֞120°ᄝ120°֞180°ᄹđ ᆃაHellings-Downs ౷ཌ౷ཌପ
+֥ORFᆴᄝ 0°֞180°
+ѯ
+Ӊb
+36
+--- page 52
+ֻ4 ᅣ OLCб
+๭ 4-15एູ 30 Gm྘ᄝ 0°- 60°֥ORFb
+Figure 4-15 ORF of the isosceles trapezoid configuration with a spacing of 30 Gm from 0°-
+60°.
+๭ 4-16एູ 30 Gm྘ᄝ 60°- 120°֥ORFb
+Figure 4-16 ORF of the isosceles trapezoid configuration with a spacing of 30 Gm from 60°-
+120°.
+37
+--- page 53
+ࣟ
+๭ 4-17एູ 30 Gm྘ᄝ 120°- 180°֥ORFb
+Figure 4-17 ORF of the isosceles trapezoid configuration with a spacing of 30 Gm from
+120°- 180°.
+4.3ࢲ
+ෘ OLC֥ORFđॉ੮ਔ႕ཙฐ
+ҩఖຩ઎ ORFฐҩ
+ੰğ
+č1Ďো PTA྘༯đฐҩఖфӉა ORFбb
+č2Ď0°ა 20°྘đ ෛሢᇉྏए৖ᄹնđORFࡨ߶
+b
+č3Ďো PTA֥ORFܱ߄
+ކژHellings-Downsੰbა Hellings-Downsܱ
+ཛᄝো PTA྘ ORF֥ORF
+֥ORF߄
+༢đა Hellings-DownsੰႵ෮҂๝đః ORFᆴᄝ 0°
+֞120°ᄝ 120°֞180°ᄹb
+38
+--- page 54
+ֻ5 ᅣ OLC؇
+ֻ5 ᅣ OLC؇
+ਲૹ
+֥OLC֥
+ෘđѩა LISAaTaijiaTianQinਲ
+b
+5.1 Ⴕིႋэᄮല
+ᄮലb
+𝑠(𝑡) = ℎ(𝑡) + 𝑛(𝑡) , (5-1)
+ഡ𝑛(𝑡)ථᄮലđ⟨𝑛(𝑡)⟩ = 0 đSGWBหྟ
+ඔ (2-39)োරđऎุೂ༯:
+⟨ ̃ 𝑛(𝑓 ) ̃ 𝑛∗(𝑓 ′)⟩ = 1
+2𝛿(𝑓 − 𝑓 ′)𝑆𝑛(𝑓 ) , (5-2)
+𝑆𝑛(𝑓 )௔ੱ၇ঠྛູb
+5.1.1؇
+LISAaTaijiaTianQinট
+ܻݣ
+൞
+ܻ֤ࠗ
+ඔऌԩ
+b
+č Initial
+Noise Reduction Pipeline, INRePҩਈҐ
+֥
+௎၍ [42]bINReP෮
+༅b
+ᄝ INRePട čTime Delay Interferometry,
+TDIۄ
+ਔ 8ၛഈ [43,44]b
+ݖࣜTDI࿐
+ਈ༢๤čOptical Metrology System, OMSčaccĎᄮലđ
+ԛğ
+𝑃OMS(𝑓 ) = 𝐴 2
+OMS [1 + (
+2mHz
+𝑓 )
+4
+] , (5-3)
+39
+--- page 55
+ࣟ
+𝑃acc(𝑓 ) = 𝐴 2
+acc [1 + (
+0.4mHz
+𝑓 )
+2
+] [1 + (
+𝑓
+8mHz)
+4
+] , (5-4)
+ఃᇏ 𝐴OMSط𝐴accb҂
+ҕඔđі 5-1ਙԛਔ LISAa
+TaijiaTianQinҕඔb
+LISA Taiji TianQin
+𝐿 (10 9m) 2.5 3 0.17
+𝐴 2
+OMS (pm 2/Hz) 225 64 1
+𝐴 2
+acc (f m2/s4/Hz) 9 9 1
+і 5-1 LISAaTaijiaTianQinҕඔ
+Table 5-1 Arm lengths and noise amplitude parameters of LISA, Taiji, and TianQin
+ෙಖ TDI௔ੱᄮലđ֌๝ൈఃჅᄮല
+֥TDIӮሹ
+ᄮലđMichelson ྘ TDIॖіൕູ [45]ğ
+𝑁𝑚(𝑓 ) = 𝑃OMS(𝑓 )
+𝐿2 + 2 [1 + cos2
+(
+2𝜋𝑓 𝐿
+𝑐 )]
+𝑃acc(𝑓 )
+(2𝜋𝑓 )4𝐿2 (5-5)
+ӱູ 2𝐿đၹՎ
+ཨb
+؇̃ℎ𝑛(𝑓 )؇𝑆𝑛(𝑓 )௜
+ğ
+̃ℎ𝑛(𝑓 ) = √𝑆𝑛(𝑓 ) = √
+𝑁(𝑓 )
+𝑅(𝑓 ) . (5-6)
+𝑅(𝑓 )ඔ [38]ğ
+ℛ(𝑓 ) = ∑
+𝐴=+,× ∫
+𝑑2 ̂ 𝑛
+4𝜋 𝐹 𝜆( ̂ 𝑛, 𝑓 )𝐹𝜆∗( ̂ 𝑛, 𝑓 ), (5-7)
+ඔğ
+𝐹 𝜆( ̂ 𝑛, 𝑓 ) = 𝐷𝑎𝑏( ̂ 𝑛, 𝑓 )𝐞𝜆
+𝑎𝑏( ̂ 𝑛), (5-8)
+𝐷𝑎𝑏( ̂ 𝑛, 𝑓 )ູฐҩఖཙႋᅦਈđMichelson ྘ TDIฐҩఖཙႋᅦਈູğ
+𝐷𝑎𝑏
+𝑚 ( ̂ 𝑛, 𝑓 ) =1
+2[𝑢𝑎𝑢𝑏𝒯𝑚( ̂ 𝑢⋅ ̂ 𝑛, 𝑓 ) − 𝑣𝑎𝑣𝑏𝒯𝑚( ̂𝑣⋅ ̂ 𝑛, 𝑓 )], (5-9)
+40
+--- page 56
+ֻ5 ᅣ OLC؇
+̂ 𝑢ބ̂𝑣฿ఖ 1→2฿ఖ 1→3֥
+ඔ 𝒯𝑚( ̂ 𝑢⋅ ̂ 𝑛, 𝑓 )ඔğ
+𝒯𝑚( ̂ 𝑢⋅ ̂ 𝑛, 𝑓 ) =1
+2sinc[
+𝜋𝑓 𝐿
+𝑐 (1 − ̂ 𝑢⋅ ̂ 𝑛)]𝑒−i 𝜋𝑓 𝐿
+𝑐 (3+ ̂ 𝑢⋅ ̂ 𝑛)
++ 1
+2sinc[
+𝜋𝑓 𝐿
+𝑐 (1 + ̂ 𝑢⋅ ̂ 𝑛)]𝑒−i 𝜋𝑓 𝐿
+𝑐 (1+ ̂ 𝑢⋅ ̂ 𝑛).
+(5-10)
+5.1.2 OLC؇
+OLCğ ਈሰ๧႕ᄮല čQuantum Projection
+Noise, QPNሰ೛৬ᄮല čPhoton Shot Noise, PSNᄮല čAcceleration
+Noise, ANĎ b
+𝑁total (𝑓 ) = 𝑁 QPN(𝑓 ) + 𝑁PSN(𝑓 ) + 𝑁AN(𝑓 ) (5-11)
+ఃᇏ
+𝑁QPN(𝑓 ) = 2
+(2𝜋𝜈) 2𝑁𝑇 , (5-12)
+𝑁PSN(𝑓 ) = 2𝑓 2Δ𝐿
+𝜈2[(2𝜋𝑓 )2 + 𝜂𝑃𝐿Δ𝐿/(2𝜋ℏ𝜈) ]
+, (5-13)
+𝑁AN(𝑓 ) = 𝑆𝐿
+𝑐2(2𝜋𝑓 )2 . (5-14)
+ᆃ৚໡ૌ࿊ᄴਔ໓ང [1]ҕඔᆴğ
+𝜈 = 430 THz, 𝑁 = 7 × 10 6, 𝑇 = 160 s, 𝜂 = 0.5, (5-15)
+Δ𝐿 = 30mHz, 𝑃 𝐿 = 3 pW, 𝑆 𝐿 = 9fm2 s−4 Hz−1. (5-16)
+OLCၬູ [2]:
+̃ℎ12(𝑓 ) =
+⎡⎢⎢⎣
+(𝜏Δ𝑓 )(
+Γ2
+12(𝑓 )
+𝑁 2
+total (𝑓 ))
+⎤⎥⎥⎦
+−1/4
+, (5-17)
+ఃᇏ Γ12ཙႋđ 𝑋(𝑓 ) і
+ඔ 𝑋(𝑓 ) ᄝၛ 𝑓ູ Δ𝑓௜नᆴđ𝜏ҩൈӉb
+໓ང [2] ၂ဢđҐႨ 𝜏 = 1ࡗΔ𝑓 = 𝑓 /10 b
+5.2 OLC྘
+໓ང [3]ູ ± 60∘฿ఖđ ᄝડቀ၂
+ᆸ, ೂ๭5-1ླေ
+Ⴕğ
+č1฿ఖླေಡ 𝑂 ቓᇛ௹ູ 1ᇛ
+௹ა 𝑂ཨ
+ொᇂཛაཌྟཛb
+41
+--- page 57
+ࣟ
+č2љЌӻა 𝑂ਙ
+ྟ࿈ሇb
+č3฿ఖა 𝑂նb໓ᅣ [3]ᅚष༯ษં
+৖ྏੱ 𝑒ཬਈb
+ູ + 60∘ࠇ− 60∘಩ၩඔਈ
+ᆸb
+60
+o
+R(1+e)
+OR
+SC3
+SC1
+l/2
+SC2
+ε
+S
+l
+y
+z
+x
+Y
+Z
+X
+๭ 5-1 LISAbS ູ෾ဝđObSC1aSC2aSC3 ೘॒໏ྒԩ
+Ⴟၛ O࢘ࡃ60°ཌູ໏ྒ SC1ງჵ
+đ৖ྏੱູ eb๭ோটჷႿ໓ང [3]b
+Figure 5-1 LISA Geometric Orbits. S represents the Sun, and O is a point in the Earth’s
+orbit around the Sun. The three spacecraft, SC1, SC2, and SC3, are positioned on a
+circle centered at O, and the plane of the spacecrafts makes an angle of 60° with the
+ecliptic plane. The red line indicates the actual elliptical orbit of SC1, with an
+eccentricity e. Image from reference [3]
+L
+d θ
+๭ 5-2 OLC྘bOLC۱
+ູ θູ L۱
+ए৖ູ db
+Figure 5-2 Orbital configuration of the OLC detector network. The four spacecraft of the
+OLC detector network are all positioned on the same circle, with the entire spacecraft
+formation forming an isosceles trapezoid. The angle between the baseline directions of
+the two detectors is θ, and the arm length is L. The closest distance between the two
+detectors is d.
+42
+--- page 58
+ֻ5 ᅣ OLC؇
+࠹OLC฿ఖა 𝑂ए
+ഈॉ੮đॖၛ਷ OLC฿ఖ໊Ⴟၛ
+𝑂ਔೂ๭ 5-2ቔ
+OLC྘ {𝐴}קܥd = 5 × 106 mđθ = 25 ∘ए৖ҕ
+ॉਔ໓ང [2]฿ఖ
+ࣥr༢ູğ
+𝑟2 = ( 𝐿
+2 )2 + ( 𝑑
+2 sec 𝜃
+2 + 𝐿
+2 tan 𝜃
+2 )2 , (5-18)
+фӉҕඔ Lࣥr၂
+৖ྏੱ eğ
+𝑅2(1 + 𝑒)2 = (𝑅 + 𝑟
+2)2 + 3
+4𝑟2 , (5-19)
+ᆃ৚ Rए৖đඔᆴഈ໡ૌ౼ R = 1.496 × 10 11 mb
+5.3 OLCб
+ऌൔ(5-6)ބ(5-17)֤֞OLCۄܻࠗࡗ
+b
+і5-2ԛਔ OLCᇕфӉ
+ࣥr৖ྏੱ eğ
+фӉčGmĎ 0.17 2.5 3
+čGmĎ 0.1 1.44 1.73
+৖ྏੱ 3.34×10−4 4.9×10−3 5.8×10−3
+OLCčGmĎ 0.089 1.28 1.53
+OLC৖ྏੱ 2.98×10−4 4.3×10−3 5.2×10−3
+2 ПфӉ༯ OLCčGmĎ 0.178 2.56 3.07
+2 ПфӉ༯ OLC৖ྏੱ 5.95×10−4 8.7×10−3 1.04×10−2
+і 5-2৖ྏੱb
+Table 5-2 Satellite formation radius and orbital eccentricity under different arm lengths.
+౦ঃ༯đ๭5-2֥OLCб LISAa
+TaijiaTianQin৖ྏੱ္б෱ૌཬb
+ᇅਔ LISAaTaijiaTianQin ა OLC྘ {𝐴}ႋэ
+೘่౷ཌđఃᇏ၂่іൕ LISAടႄ৯
+43
+--- page 59
+ࣟ
+๭ 5-3 LISA ა OLCбb
+Figure 5-3 Comparison of strain spectral sensitivity between LISA and the OLC detector
+network.
+๭ 5-4 Taiji ა OLCбb
+Figure 5-4 Comparison of strain spectral sensitivity between Taiji and the OLC detector
+network.
+44
+--- page 60
+ֻ5 ᅣ OLC؇
+๭ 5-5 TianQin ა OLCбb
+Figure 5-5 Comparison of strain spectral sensitivity between Tianqin and the OLC detector
+network.
+֥OLC ฐҩఖ
+b
+๭đLISAބTaijiোරđOLC྘ {𝐴}ႋэ௶
+۱LISAބTaijiđLISAaTaiji֥
+ႪbTianQin ᄝ 10−4 HzႪႿ OLC
+྘ {𝐴}b
+ਸ਼ຓđ ᄝ๭5-3ᇏđ ᄝაLISA౦ঃ༯đOLC྘ {𝐴}
+ቋཬᆴᄝ 10−2 Hz ᇀ 10−1 HzطLISAቋཬ
+ᆴᄝ 10−3 Hz ᇀ 10−2 HzbਆП LISA֥OLC྘ {𝐴} ཌྷ
+௔ੱ๝ဢઋ
+ᄝ 10−2 Hz ᇀ 10−1 HzႿ LISAфӉ༯đ
+ᄯӮ OLC ฐҩఖა LISAჰၹ൞ᆃ৚൐Ⴈ
+֥LISA ᄮലଆ྘ა OLC҂๝b๭5-4๝৘b
+5.4 OLCб
+ğ
+Ω𝑔𝑤 = 4𝜋2𝑓 3
+3𝐻 2
+0
+𝑆ℎ(𝑓 ). (5-20)
+؇𝑆𝑛(𝑓 )௶ğ
+Ω𝑛ℎ2 = 4𝜋2𝑓 3
+3(𝐻0/ℎ)2 𝑆𝑛(𝑓 ) = 4𝜋2𝑓 3
+3(𝐻0/ℎ)2
+̃ℎ2
+𝑛(𝑓 ). (5-21)
+45
+--- page 61
+ࣟ
+Վԩđ𝐻0ѱҕඔđ๙ӈॖіൕູ 𝐻0 = 100 ℎ km s −1 Mpc−1bູਔх
+ҕඔ ℎ၇ঠđ໡ૌ൐Ⴈ 𝐻0/ℎ ≃ 3.24 × 10 −18 s−1၂҄đ
+๭5-3a๭5-4a๭5-5؇̃ℎ𝑛(𝑓 )؇
+௶ Ω𝑛ℎ2đ၇Ցᄝ๭5-6a๭5-7a๭5-8ᇅb
+๭ 5-6 LISA ა OLCбb
+Figure 5-6 Comparison of noise energy spectral density between LISA and the OLC
+detector network.
+๭ 5-7 Taiji ა OLCбb
+Figure 5-7 Comparison of noise energy spectral density between Taiji and the OLC detector
+network.
+46
+--- page 62
+ֻ5 ᅣ OLC؇
+๭ 5-8 TianQin ა OLCбb
+Figure 5-8 Comparison of noise energy spectral density between Tianqin and the OLC
+detector network.
+47
+--- page 63
+ࣟ
+48
+--- page 64
+ֻ6აᅚຬ
+ֻ6აᅚຬ
+6.1ࢲ
+ჰሰᇒ čOLC޺֥ࣟ
+ඔ čORFĎ
+ؓOLCടႄ৯ѯฐҩ
+ԛਔ
+۱OLCӮຩ઎ൈ ORFए
+႕ཙb
+ᄝ ORFՖၘႵ໓ང [36,37]ࢳުٳࠒ֥
+൞Ֆ ORFೆ൭đษં ORFܒ
+ਔ၂ো ORFܒُ
+۱OLCؿ
+໊ᇂb ORFႄ
+ӱᇏđ໡ૌ൞਷ Γ12(𝑓 ) ა
+Γ34(𝑓 )ཟ ̂ 𝑛ൡႨ
+ฐҩ౦ྙb
+ᇕ ORFᆀ ORFa
+൞ ORFҠ
+ؓORFᣢđ ၹՎՎൈORF ଆӉ҂эĠ ๭3-3۱
+ൈđ൞ ORF٤
+ުߐORFᆀ ORFਔ
+Ď b
+ษંਔ ORF֒
+۱OLC౏ડቀ ⃗ 𝑠 ⋅ ⃗ 𝑚12 = 0 ൈđORFॖ
+ྙൔğ|⃗ 𝑥2 − ⃗ 𝑦1| = | ⃗ 𝑦2 − ⃗ 𝑥1|ฐҩఖ 1ฐ
+ҩఖ 2Ⴟฐҩఖ 2ฐҩఖ 1৽ਫ਼
+ए৖b
+૫đЧ໓࿊౼ো PTAؓORF ෛфӉa
+༯đORF ෛ
+౴൝ა Hellings-Downs༢
+ളொ၍đORFྟbՎຓđฐҩఖфӉა ORF
+֮ࢆORFđ
+OLCק
+ᄖྟb
+྘༯ OLCႋ
+௶đѩა LISAaTaijiaTianQinടฐҩ
+49
+--- page 65
+ࣟ
+бb ཌྷбLISAaTaijiđOLCط
+б TianQinđOLCb
+࿽đ Ч໓ՖOLC֥ORFđ ࿙ᅳऎႵ
+ORF྘༯đORFࡗ
+ਔOLC֥ORFܱޅࠫ
+ֆཟ৽ਫ਼ฐ
+ඔb
+6.2 अཋྟაᅚຬ
+࿃ಯႵ၂ུ໙ีᆴ
+b
+ԛ ORFđໃ
+ൌဒၩၬၛ
+֥ORF ொ৖ Hellings-DownsҀ
+ԉb
+фӉൈ OLCླॉ੮
+ቋཬ
+໓ང[36,37]֥ORF
+ษં
+ႄ৯ѯѯჷ
+b
+֥ORFჿ
+ඔ Γ𝐼
+𝑎𝑏ඔ Γ𝑉
+𝑎𝑏༢đษં
+֤Γ𝑉
+𝑎𝑏࣮ORFࡃ
+ฐҩఖᄝ๝၂௜૫౏ჿඏਔ ⃗ 𝑠 ⋅ ⃗ 𝑚12 = 0ު
+؟۷OLC྘đ ѩቓORFऌ
+໓ང [36]ࡼLISAđ ၹՎ
+ᄖ৽ਫ਼
+หྟb
+50
+--- page 66
+ҕॉ໓ང
+ҕॉ໓ང
+[1] Kolkowitz S, Pikovski I, Langellier N, et al. Gravitational wave detection with optical lattice
+atomic clocks [J/OL]. Phys. Rev. D, 2016, 94(12): 124043. DOI: 10.1103/PhysRevD.94.
+124043.
+[2] Wang B, Li B, Xiao Q, et al. Space-based optical lattice clocks as gravitational wave detectors
+in search for new physics [J/OL]. Sci. China Phys. Mech. Astron., 2025, 68(4): 249512. DOI:
+10.1007/s11433-024-2573-3 .
+[3] Dhurandhar S V , Rajesh Nayak K, Koshti S, et al. Fundamentals of the LISA stable flight
+formation [J/OL]. Class. Quant. Grav., 2005, 22: 481-488. DOI: 10.1088/0264-9381/22/3/002.
+[4] Abbott B P, et al. Observation of Gravitational Waves from a Binary Black Hole Merger [J/OL].
+Phys. Rev. Lett., 2016, 116(6): 061102. DOI: 10.1103/PhysRevLett.116.061102.
+[5] Abbott B P, et al. GW170817: Observation of Gravitational Waves from a Binary Neutron
+Star Inspiral [J/OL]. Phys. Rev. Lett., 2017, 119(16): 161101. DOI: 10.1103/PhysRevLett.
+119.161101.
+[6] Abbott B P, et al. Tests of general relativity with GW150914 [J/OL]. Phys. Rev. Lett., 2016,
+116(22): 221101. DOI: 10.1103/PhysRevLett.116.221101.
+[7] Abbott R, et al. Observation of Gravitational Waves from Two Neutron Star–Black Hole Coa-
+lescences [J/OL]. Astrophys. J. Lett., 2021, 915(1): L5. DOI: 10.3847/2041-8213/ac082e.
+[8] Aasi J, et al. Advanced LIGO [J/OL]. Class. Quant. Grav., 2015, 32: 074001. DOI: 10.1088/
+0264-9381/32/7/074001.
+[9] Acernese F, et al. Advanced Virgo: a second-generation interferometric gravitational wave
+detector [J/OL]. Class. Quant. Grav., 2015, 32(2): 024001. DOI: 10.1088/0264-9381/32/2/
+024001.
+[10] Somiya K. Detector configuration of KAGRA: The Japanese cryogenic gravitational-wave
+detector [J/OL]. Class. Quant. Grav., 2012, 29: 124007. DOI: 10.1088/0264-9381/29/12/
+124007.
+[11] Punturo M, et al. The Einstein Telescope: A third-generation gravitational wave observatory
+[J/OL]. Class. Quant. Grav., 2010, 27: 194002. DOI: 10.1088/0264-9381/27/19/194002.
+[12] Bayle J B, Bonga B, Caprini C, et al. Overview and progress on the Laser Interferometer
+Space Antenna mission [J/OL]. Nature Astron., 2022, 6(12): 1334-1338. DOI: 10.1038/
+s41550-022-01847-0 .
+[13] Hu W R, Wu Y L. The Taiji Program in Space for gravitational wave physics and the nature
+of gravity [J/OL]. Natl. Sci. Rev., 2017, 4(5): 685-686. DOI: 10.1093/nsr/nwx116.
+[14] Luo J, et al. TianQin: a space-borne gravitational wave detector [J/OL]. Class. Quant. Grav.,
+2016, 33(3): 035010. DOI: 10.1088/0264-9381/33/3/035010.
+[15] Detweiler S L. Pulsar timing measurements and the search for gravitational waves [J/OL].
+Astrophys. J., 1979, 234: 1100-1104. DOI: 10.1086/157593.
+[16] Burke-Spolaor S, et al. The Astrophysics of Nanohertz Gravitational Waves [J/OL]. Astron.
+Astrophys. Rev., 2019, 27(1): 5. DOI: 10.1007/s00159-019-0115-7 .
+[17] Arzoumanian Z, et al. The NANOGrav 12.5 yr Data Set: Search for an Isotropic Stochastic
+Gravitational-wave Background [J/OL]. Astrophys. J. Lett., 2020, 905(2): L34. DOI: 10.3847/
+2041-8213/abd401.
+51
+--- page 67
+ࣟ
+[18] Goncharov B, et al. On the Evidence for a Common-spectrum Process in the Search for the
+Nanohertz Gravitational-wave Background with the Parkes Pulsar Timing Array [J/OL]. As-
+trophys. J. Lett., 2021, 917(2): L19. DOI: 10.3847/2041-8213/ac17f4.
+[19] Chen S, et al. Common-red-signal analysis with 24-yr high-precision timing of the Euro-
+pean Pulsar Timing Array: inferences in the stochastic gravitational-wave background search
+[J/OL]. Mon. Not. Roy. Astron. Soc., 2021, 508(4): 4970-4993. DOI: 10.1093/mnras/
+stab2833.
+[20] Antoniadis J, et al. The International Pulsar Timing Array second data release: Search for an
+isotropic gravitational wave background [J/OL]. Mon. Not. Roy. Astron. Soc., 2022, 510(4):
+4873-4887. DOI: 10.1093/mnras/stab3418.
+[21] Hinkley N, Sherman J A, Phillips N B, et al. An Atomic Clock with 10–18 Instability [J/OL].
+Science, 2013, 341(6151): 1215-1218. DOI: 10.1126/science.1240420.
+[22] Bloom B J, Nicholson T L, Williams J R, et al. An Optical Lattice Clock with Accuracy and
+Stability at the 10−18 Level [J/OL]. Nature, 2014, 506: 71-75. DOI: 10.1038/nature12941.
+[23] Christensen N. Stochastic Gravitational Wave Backgrounds [J/OL]. Rept. Prog. Phys., 2019,
+82(1): 016903. DOI: 10.1088/1361-6633/aae6b5.
+[24] Maggiore M. Gravitational wave experiments and early universe cosmology [J/OL]. Phys.
+Rept., 2000, 331: 283-367. DOI: 10.1016/S0370-1573(99)00102-7.
+[25] Caprini C, Figueroa D G. Cosmological Backgrounds of Gravitational Waves [J/OL]. Class.
+Quant. Grav., 2018, 35(16): 163001. DOI: 10.1088/1361-6382/aac608.
+[26] Damour T, Vilenkin A. Gravitational wave bursts from cusps and kinks on cosmic strings
+[J/OL]. Phys. Rev. D, 2001, 64: 064008. DOI: 10.1103/PhysRevD.64.064008.
+[27] Siemens X, Mandic V , Creighton J. Gravitational wave stochastic background from cosmic
+(super)strings [J/OL]. Phys. Rev. Lett., 2007, 98: 111101. DOI: 10.1103/PhysRevLett.98.
+111101.
+[28] Witten E. Cosmic Separation of Phases [J/OL]. Phys. Rev. D, 1984, 30: 272-285. DOI:
+10.1103/PhysRevD.30.272.
+[29] Kamionkowski M, Kosowsky A, Turner M S. Gravitational radiation from first order phase
+transitions [J/OL]. Phys. Rev. D, 1994, 49: 2837-2851. DOI: 10.1103/PhysRevD.49.2837.
+[30] Mukhanov V F, Feldman H A, Brandenberger R H. Theory of cosmological perturbations. Part
+1. Classical perturbations. Part 2. Quantum theory of perturbations. Part 3. Extensions [J/OL].
+Phys. Rept., 1992, 215: 203-333. DOI: 10.1016/0370-1573(92)90044-Z.
+[31] Turner M S. Detectability of inflation produced gravitational waves [J/OL]. Phys. Rev. D,
+1997, 55: R435-R439. DOI: 10.1103/PhysRevD.55.R435.
+[32] Farmer A J, Phinney E S. The gravitational wave background from cosmological compact
+binaries [J/OL]. Mon. Not. Roy. Astron. Soc., 2003, 346: 1197. DOI: 10.1111/j.1365-2966.
+2003.07176.x.
+[33] Taylor S R, Gair J R. Cosmology with the lights off: standard sirens in the Einstein Telescope
+era [J/OL]. Phys. Rev. D, 2012, 86: 023502. DOI: 10.1103/PhysRevD.86.023502.
+[34] Allen B, Romano J D. Detecting a stochastic background of gravitational radiation: Signal
+processing strategies and sensitivities [J/OL]. Phys. Rev. D, 1999, 59: 102001. DOI: 10.1103/
+PhysRevD.59.102001.
+[35] Thrane E, Romano J D. Sensitivity curves for searches for gravitational-wave backgrounds
+[J/OL]. Phys. Rev. D, 2013, 88(12): 124032. DOI: 10.1103/PhysRevD.88.124032.
+52
+--- page 68
+ҕॉ໓ང
+[36] Hu Y, Wang P P, Tan Y J, et al. Universal calculation approach of overlap reduction function
+for pulsar timing array and laser interferometer detector [J/OL]. Phys. Rev. D, 2025, 111(8):
+084065. DOI: 10.1103/PhysRevD.111.084065.
+[37] Hu Y, Wang P P, Tan Y J, et al. Full analytic expression of overlap reduction function for
+gravitational wave background with pulsar timing arrays [J/OL]. Phys. Rev. D, 2022, 106(2):
+024005. DOI: 10.1103/PhysRevD.106.024005.
+[38] Cornish N J, Larson S L. Space missions to detect the cosmic gravitational wave background
+[J/OL]. Class. Quant. Grav., 2001, 18: 3473-3496. DOI: 10.1088/0264-9381/18/17/308.
+[39] Finn L S, Larson S L, Romano J D. Detecting a Stochastic Gravitational-Wave Background:
+The Overlap Reduction Function [J/OL]. Phys. Rev. D, 2009, 79: 062003. DOI: 10.1103/
+PhysRevD.79.062003.
+[40] Yunes N, Siemens X, Yagi K. Gravitational-wave tests of general relativity with ground-based
+detectors and pulsar-timing arrays [J/OL]. Living Rev. Rel., 2025, 28(1): 3. DOI: 10.1007/
+s41114-024-00054-9 .
+[41] Hellings R w, Downs G s. UPPER LIMITS ON THE ISOTROPIC GRAVITATIONAL RADI-
+ATION BACKGROUND FROM PULSAR TIMING ANALYSIS [J/OL]. Astrophys. J. Lett.,
+1983, 265: L39-L42. DOI: 10.1086/183954.
+[42] Hellings R W. Elimination of clock jitter noise in space born laser interferometers [J/OL].
+Phys. Rev. D, 2001, 64: 022002. DOI: 10.1103/PhysRevD.64.022002.
+[43] Tinto M, Estabrook F B, Armstrong J W. Time delay interferometry for LISA [J/OL]. Phys.
+Rev. D, 2002, 65: 082003. DOI: 10.1103/PhysRevD.65.082003.
+[44] Tinto M, Hartwig O. Time-Delay Interferometry and Clock-Noise Calibration [J/OL]. Phys.
+Rev. D, 2018, 98(4): 042003. DOI: 10.1103/PhysRevD.98.042003.
+[45] Robson T, Cornish N J, Liu C. The construction and use of LISA sensitivity curves [J/OL].
+Class. Quant. Grav., 2019, 36(10): 105011. DOI: 10.1088/1361-6382/ab1101.
+53
+--- page 69
+ࣟ
+54
+--- page 70
+ᇁ ྆
+ᇁ ྆
+ለཿa
+໡
+ྏ໡ૌ
+൙౦b
+൩Ⴖ EigenLouđ
+໊
+৚ཿൂa7yaLlikeaPeskinaDavidacprҸ
+ӈ၂ఏທ඘
+ࡅ
+ໃটb
+ྏb
+2026 ୍ 3 ᄅ
+55
+--- page 71
+ࣟ
+56
+--- page 72
+ݔ
+ݔ
+৥ğ
+2017 ୍ 9 ᄅii2021 ୍ 6࿐ൖ࿐໊b
+2023 ୍ 9ණൖ࿐໊b
+৥ğ
+2021 ୍ 9 ᄅii2022 ୍ 1νЌ
+ӱഽb
+࿐ඌં໓ğ
+(1) Lou M., Su H., Yang T., Zhang, Y.-L.(2026). Detecting gravitational wave back-
+ground with equivalent configurations in the network of space based optical lat-
+tice clocks. arXiv[Preprint]. DOI: https://doi.org/10.48550/arXiv.2602.05714.
+(ᇏ)
+57
+--- page 73
+ࣟ
+58

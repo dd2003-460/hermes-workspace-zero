@@ -1,0 +1,25 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "This is the curated desktop workspace for OpenClaw.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dd2003-460/hermes-workspace-zero.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/dd2003-460/hermes-workspace-zero/issues"
+  },
+  "homepage": "https://github.com/dd2003-460/hermes-workspace-zero#readme",
+  "dependencies": {
+    "fetcher-mcp": "^0.3.9",
+    "playwright": "^1.61.1"
+  }
+}

@@ -9,11 +9,11 @@ started_at: "2026-07-07T07:58:36Z"
 
 /Users/a1-6/Desktop/workspace/projects/理论物理/时钟与引力波响应/CLAUDE.md
 
-loop_phase: 2-loop/01
-last_phase_change: "2026-07-07T18:52+0800"
-next_phase: 2-loop/01
-last_action: 1-loop/06 completed for P0-1 (decision-maker — enter_2loop with preconditions)
-last_outcome: P0-1 decision: enter_2loop. 11/11 AC coverage, 0 high-impact gaps, confidence 0.75. Preconditions: verify Hu PRD formula readability + fetch Tomassini (2007) from arXiv in 2-loop/01
+loop_phase: idle
+last_phase_change: "2026-07-07T19:40+0800"
+next_phase: 1-loop/01 (next task)
+last_action: 1-loop/06 decision: P1-1 enter_2loop
+last_outcome: P1-1 (JCAP 手征物理) 1-loop completed. 9/10 AC satisfied (1 可妥协). Decision: enter_2loop with confidence 0.85 (up from 0.82). loop/1-loop/06-决策-P1-1-Iteration1.md created.
 
 ## 1-loop/02 产出
 - P0-1 (Hu PRD): loop/1-loop/02-目标澄清-P0-1-Iteration1.md (completed)
@@ -37,3 +37,13 @@ last_outcome: P0-1 decision: enter_2loop. 11/11 AC coverage, 0 high-impact gaps,
 
 ## 1-loop/06 产出
 - P0-1 (Hu PRD): loop/1-loop/06-决策-P0-1-Iteration1.md (completed, decision: enter_2loop)
+- P1-1 (手征物理): loop/1-loop/06-决策-P1-1-Iteration1.md (completed, decision: enter_2loop, confidence 0.85)
+
+## 2-loop/01 产出
+- P0-1 (Hu PRD): loop/2-loop/01-pre-check-P0-1-Iteration1.md (completed, PASSED with 1 warning)
+
+## 2-loop/02 产出
+- P0-1 (Hu PRD): loop/2-loop/02-backup-P0-1-Iteration1.md (completed, git commit f456cd8)
+
+## 2-loop/03 产出
+- P0-1 (Hu PRD): note/P0-1-hu-prd-understanding.md (completed, 8 sections: ST1-ST8, Chinese language, comprehensive Hu PRD understanding)

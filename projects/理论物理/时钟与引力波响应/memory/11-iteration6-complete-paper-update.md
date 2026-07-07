@@ -5,7 +5,9 @@ metadata:
   type: project
 ---
 
-# Iteration 6 Complete: Triangular OLC Chiral ORF + Paper Update
+# Iteration 6 Complete: Triangular OLC Chiral ORF + Paper Update ⚠️ 废弃
+
+> **废弃声明 (2026-07-07)**: 论文更新基于 memory/10 的 bug 前结果（|Gamma^V| > 1e-3 单臂非共面）。迭代 8 审查报告已确认这些是假阳性。论文 §3.5.4 关于单臂非共面链路的描述需要删除。
 
 ## Full Cycle Summary
 

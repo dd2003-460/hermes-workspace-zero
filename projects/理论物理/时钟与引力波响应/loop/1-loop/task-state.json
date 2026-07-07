@@ -1,40 +1,56 @@
 {
-  "iteration": 5,
+  "iteration": 1,
   "phase": "decision",
+  "task": "P0-1",
+  "task_name": "Hu PRD 111.084065 通用 ORF 框架理解",
   "input": {
-    "source": "loop/1-loop/05-完备核验.md",
-    "gap_analysis_confidence": 0.71,
-    "high_impact_gaps": [
-      "测试 2 无单调性断言 (high impact)",
-      "判定标准 #4 无平坦性断言 (medium impact)",
-      "判定标准 #5 无峰值量级断言 (medium impact)"
+    "source": "loop/1-loop/05-完备核验-P0-1-Iteration1.md",
+    "acceptance_criteria_count": 11,
+    "subtasks": 8,
+    "gap_analysis_confidence": 0.75,
+    "high_impact_gaps": [],
+    "medium_impact_gaps": [
+      "Tomassini (2007) 原文不可用 — 有缓解措施（Hu PRD 包含足够描述）"
+    ],
+    "low_impact_gaps": [
+      "章节 vs 节术语不准确",
+      "Section V（TABLE I 数值比较）无显式子任务"
     ]
   },
   "output": {
     "decision": "enter_2loop",
-    "reason": "理论基础高置信度(0.90-0.99)，Gap为验证覆盖不足而非物理错误，可在2-loop前置步骤中精确修复",
-    "next_action": "执行 2-loop 流程，P0=补充断言，P1=运行chiral分析"
+    "reason": "11/11 验收标准覆盖，DAG 依赖合理，无高影响 Gap。置信度 0.75 达到进入阈值。前置条件：2-loop/01 验证 Hu PRD 公式可读性 + 尝试获取 Tomassini 原文。",
+    "preconditions": [
+      "2-loop/01: 验证 Hu PRD txt 中关键公式（Eq.(16),(18),(26),(27),(33)-(35),(38)-(40)）可读",
+      "2-loop/01: 尝试 arXiv 获取 Tomassini (2007) 原文（arXiv:gr-qc/0702019）"
+    ],
+    "next_action": "执行 2-loop 流程：pre-check → backup → execute ST1-ST8 → quality-check → confidence-judge → fork-decision"
   },
-  "novelty_assessment": "N0",
+  "novelty_assessment": "N1",
   "tool_inventory": [
-    "numpy 2.0.2 - 可用",
-    "scipy 1.13.1 - 可用",
-    "matplotlib 3.9.4 - 可用 (Agg)",
-    "/usr/bin/python3 3.9.6 - OOM风险已缓解"
+    "Hu PRD txt (2023 lines, 72KB) — 可用",
+    "Hu PRD PDF — 可用（辅助）",
+    "路线图笔记 (ralph-loop roadmap) — 部分可用（框架性概述）",
+    "Tomassini (2007) 原文 — 阻塞项（gr-qc/0702019）"
   ],
   "gap_analysis": [
-    {"dimension": "测试覆盖度（测试 2 无断言）", "status": "partial", "impact": "high"},
-    {"dimension": "判定标准 #4 覆盖度（无断言）", "status": "partial", "impact": "medium"},
-    {"dimension": "判定标准 #5 覆盖度（无断言）", "status": "partial", "impact": "medium"},
-    {"dimension": "天区平均不完整", "status": "partial", "impact": "low"}
+    {"dimension": "Tomassini 原文阻塞项", "status": "partial", "impact": "medium"},
+    {"dimension": "章节 vs 节术语", "status": "complete", "impact": "low"},
+    {"dimension": "Section V 覆盖", "status": "complete", "impact": "low"}
   ],
   "next_action": "enter_2loop",
   "decision": "enter_2loop",
   "subtasks": [
-    {"id": "P0", "name": "补充缺失断言", "priority": "P0", "precondition": "2-loop/01+02完成"},
-    {"id": "P1", "name": "运行chiral分析", "priority": "P1", "depends_on": "P0"},
-    {"id": "P2", "name": "结果验证和memory写入", "priority": "P2", "depends_on": "P1"}
+    {"id": "ST1", "name": "ORF 物理直觉解释", "priority": "P0", "status": "planned"},
+    {"id": "ST2", "name": "通用 ORF 留数定理推导", "priority": "P0", "depends_on": [], "risk": "high"},
+    {"id": "ST3", "name": "PTA ORF 完整表达式", "priority": "P1", "depends_on": ["ST2"]},
+    {"id": "ST4", "name": "GbLI ORF 两向链路", "priority": "P1", "depends_on": ["ST2"]},
+    {"id": "ST5", "name": "SbLI TDI 通道 ORF", "priority": "P1", "depends_on": ["ST2"], "risk": "high"},
+    {"id": "ST6", "name": "参数代换规则", "priority": "P1", "depends_on": ["ST2"]},
+    {"id": "ST7", "name": "Tomassini 对比分析", "priority": "P1", "depends_on": ["ST2","ST3","ST4","ST5"]},
+    {"id": "ST8", "name": "整合一致性检查", "priority": "P0", "depends_on": ["ST3","ST4","ST5","ST6","ST7"]}
   ],
-  "average_confidence": 0.71,
-  "decision_at": "2026-07-05"
+  "average_confidence": 0.75,
+  "decision_at": "2026-07-07T18:50+0800",
+  "decision_file": "loop/1-loop/06-决策-P0-1-Iteration1.md"
 }

@@ -5,7 +5,14 @@ metadata:
   type: project
 ---
 
-# Iteration 6: Triangular 3-Satellite OLC Chiral ORF
+---
+name: 10-olc-triangular-chiral-orf-iteration6
+description: ⚠️ 废弃 — Iteration 6 三角 OLC 手征 ORF（含 bug 前代码结果）
+---
+
+# Iteration 6: Triangular 3-Satellite OLC Chiral ORF ⚠️ 废弃
+
+> **废弃声明 (2026-07-07)**: 以下数值结果（特别是 "Non-Coplanar Single-Arm Pairs" 的 |Gamma^V| > 1e-3 结论）来自 `validate_orlando_response.py` 的天线方向图 bug 前代码。修复后，所有构型的 Gamma^V = 0（镜面对称性严格约束）。仅保留 R^I = -0.23（标准 ORF）可信，因为它来自已验证的代码。
 
 ## Result: Chiral ORF = Zero for ALL configurations
 

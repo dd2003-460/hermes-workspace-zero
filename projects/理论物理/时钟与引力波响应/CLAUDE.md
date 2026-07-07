@@ -9,12 +9,34 @@
 - **规则3**：必须经 1-loop(6阶段) → 2-loop(6阶段) 完整流程
 - **规则2**：每轮必须先读取任务索引和记忆文件
 
+## 当前项目方向（2026-07-07 重置）
+
+**方向**: 文献理解 → 理解材料 → 论文修正
+**优先级**: P0 理解原始文献 > P1 产生理解材料 > P2 论文修正
+
+**当前迭代**: 第 9 轮（重置后第一轮）
+**主任务文件**: `tasks/task-decomposition-v2.md`
+**项目状态**: `.claude/ralph-loop.local.md` → `loop_phase = idle`
+
+### 三轮原始文献
+1. **Hu PRD 111.084065** — 通用 ORF 框架（PTA + 激光干涉仪，无近似）
+2. **JCAP 2025** — 圆极化 SGWB 搜索，三角探测器网络，LISA-Taiji
+3. **楼明智硕士论文** — OLC 构型 ORF 分析，构型变换不变性
+
+### 理解标准
+在推进论文写作之前，必须完成三篇文献的深度理解材料：
+- 完整逻辑链（假设→推导→结论，每步不跳）
+- 关键公式详细推导（从第一性原理到最终表达式）
+- 交叉引用对比（三篇文献在 ORF/手征定义上是否一致）
+
 ## 角色职责
 1. 读取 `.claude/ralph-loop.local.md` → 确认当前阶段
 2. 按阶段规格分发任务给对应的 sub-agent
 3. 验收产出，不符合则退回
 4. 更新状态 → 进入下一阶段
-5. 每轮最后派发副脑质疑
+5. 每轮最后派发 sub-brain 质疑
+
+**当前轮次：1-loop/01 → 派发 clarifier 开始 P0-1（Hu PRD 理解）**
 
 **绝不亲自写代码/跑脚本。全部通过 Agent 分发。**
 
@@ -36,42 +58,15 @@
 | `fork-decider` | 2-loop/06 | completed / needs_replan / completed_with_branches | 05 done |
 | `sub-brain` | 每轮 | 质疑主脑判断，找盲区 | 每轮最后 |
 
-## 当前项目状态
-
-### 项目：D1-grav-waves（时钟与引力波响应）
-- **理论基础**：Hu PRD + Lou 硕士论文 OLC 传递函数
-- **核心发现**：
-  - 地面 OLC 对 GW 耦合 ~ $10^{-15}$，但 Schaffrath 2025 证明 trap 抑制使其基本不灵敏
-  - 空间 OLC 需要替代方案，与 LISA 仍有 ~$10^2$ 量级差距
-- **已有产出**：9 个 Python 脚本、8 个 memory 文件、3 阶段 loop 分析
-
-### 已完成迭代
-- **Iteration 1**：1-loop (01-06) + 2-loop (01-06) — ORF/噪声/SNR 基础分析
-- **Iteration 2**：1-loop + 2-loop (08-stage) — 空间 OLC 频段对比
-- **Iteration 3**：1-loop (01-06) 完成 → 决策 enter_2loop，P0 = 混合网络 (OLC+LISA)
-
-### 当前任务
-**1-loop (Iteration 3) 已完成**，决策：enter_2loop
-**P0 = 混合网络 (OLC+LISA/PTA) 交叉相关灵敏度分析**
-
-### 已知问题
-`scripts/06-olc-lisa-mixed-network.py` 存在 4 个严重物理错误：
-- C1: OLC (Hz) vs LISA ($Hz^{-1}$) 交叉相关项维度不一致
-- C2: SNR 公式用 S²/noise²，应为 S²/noise（Allen 1987）
-- C3: gamma_olc=0.53 混淆 K_sky 与 ORF
-- C4: "Mixed network SNR = sqrt(SNR_OLC² + SNR_Lisa² + 2*SNR_cross²)" 概念错误
-
-### 已有脚本清单
+## 产出格式要求（Agent 回报格式）
 ```
-01-olc-orf-solver.py       → ORF 求解器（已验证）
-02-olc-noise-spectrum.py   → 噪声谱建模（地面版，部分有效）
-03-olc-snr-solver.py       → SNR 计算（需修正）
-04-olc-3d-orf.py           → 3D ORF 可视化（已完成）
-05-olc-detection-requirements.py → 探测需求（已完成）
-06-olc-lisa-mixed-network.py  → 混合网络（需重写，有4个bug）
-07-space-olc-snr.py        → 空间 OLC SNR（部分有效）
-08-space-olc-band-comparison.py → 空间 OLC 频段对比（已完成）
-verify_08_physics.py       → 验证脚本 08-stage（已验证）
+<阶段> 完成报告:
+- 状态: [completed | failed | needs_rework]
+- 产出: 产出文件路径及说明
+- 关键发现: 核心发现
+- 置信度: 0-1
+- 遗留问题: 如有
+- next_brain_sub: [继续]
 ```
 
 ## 启动流程
@@ -87,14 +82,3 @@ verify_08_physics.py       → 验证脚本 08-stage（已验证）
 ## 阶段规格文件位置
 - 全局：`/Users/a1-6/Desktop/workspace/loop/1-loop/01-06.md` 和 `2-loop/01-06.md`
 - 本地产出：`loop/1-loop/` 和 `loop/2-loop/`
-
-## 产出格式要求（Agent 回报格式）
-```
-<阶段> 完成报告:
-- 状态: [completed | failed | needs_rework]
-- 产出: 产出文件路径及说明
-- 关键发现: 核心发现
-- 置信度: 0-1
-- 遗留问题: 如有
-- next_brain_sub: [继续]
-```

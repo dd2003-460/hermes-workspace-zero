@@ -1,12 +1,14 @@
 ---
 name: multi-constellation-chiral-orf-iteration7
-description: Iteration 7 多星座手征 ORF 计算结果 - Orlando 基准修正, sky-max norm_V = 1.0
+description: ⚠️ 废弃 — Iteration 7 多星座手征 ORF（含 bug 前代码结果）
 metadata:
   type: project
   created: 2026-07-06
 ---
 
-# Iteration 7: Multi-Constellation Chiral ORF
+# Iteration 7: Multi-Constellation Chiral ORF ⚠️ 废弃
+
+> **废弃声明 (2026-07-07)**: 以下 R^V 非零结果（特别是 LISA x Taiji sky-max = 1.0, OLC(30) x Taiji(0) = 0.99）来自可能存在天线方向图 bug 的代码。迭代 8 审查报告指出：平面探测器构型 R^V = 0 恒成立。LISA x Taiji 的 R^V ≠ 0 来源于空间相位因子 exp(-ik·Δx)，当前代码尚未实现。仅 R^I 部分可信。
 
 ## 脚本
 `scripts/11-multi-constellation-chiral-orf.py` — E-variable 版本，CW link sum 定义

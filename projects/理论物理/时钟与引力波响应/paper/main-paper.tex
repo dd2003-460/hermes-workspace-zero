@@ -21,7 +21,7 @@
 \date{}
 \maketitle
 \begin{abstract}
-本系统分析了空间部署的光学晶格钟（OLC）网络探测引力波随机背景（SGWB）的可行性。基于 Schaffrath et al. (2025) 的统一实验室框架和 Hu et al. (2025) 的ORF通用公式，从第一性原理推导了OLC对引力波的响应，系统计算了多种空间构型的重叠响应函数（ORF），建立了噪声模型并估算了信噪比（SNR），分析了混合网络的协同观测能力。核心发现：（1）空间OLC天然适用于GW探测，天区平均ORF在所有合理构型下≈0.5；（2）修正空间臂长（L=0.17–3 Gm）后，SNR仍然<<1但可忽略不计——小规模星座SNR~10⁻²，大规模星座（50卫星）SNR~0.3；（3）不同物理原理探测器之间SNR可独立求和；（4）OLC填补了LISA和地面干涉仪之间的mHz-Hz频段空白。
+本系统分析了空间部署的光学晶格钟（OLC）网络探测引力波随机背景（SGWB）的可行性。基于 Schaffrath et al. (2025) 的统一实验室框架和 Hu et al. (2025) 的ORF通用公式，从第一性原理推导了OLC对引力波的响应，系统计算了多种空间构型的重叠响应函数（ORF），建立了噪声模型并估算了信噪比（SNR），分析了混合网络的协同观测能力。核心发现：（1）空间OLC天然适用于GW探测，天区平均ORF在所有合理构型下≈0.5；（2）修正空间臂长（L=0.17–3 Gm）后，对 $\Omega_{\rm GW} \sim 10^{-10}$ 的SGWB：小规模星座（2–10颗）SNR~0.05–0.2，中等规模星座（50颗，L=1 Gm）SNR~1.1（接近检测阈值），大规模星座（200颗）SNR~2.0；（3）不同物理原理探测器之间SNR可独立求和；（4）OLC填补了LISA和地面干涉仪之间的mHz-Hz频段空白。
 \end{abstract}
 
 \section{第 1 章：引言}
@@ -155,7 +155,7 @@ Doppler耦合 $G_{\rm Doppler}$ & 2.62 × 10⁻² \\
 
   \item[2] \textbf{噪声建模与灵敏度评估}：基于Allan方差的噪声模型，计算了Sr光晶格钟的GW应变灵敏度曲线，发现 $h_{\rm sens} \propto f^{-1}$，臂长优化是提升灵敏度的最有效手段。
 
-  \item[3] \textbf{3D构型ORF分析}：非共面构型可以改变ORF幅值约8.5倍（0° → 0.555, 90° → 1.000）。\textbf{手征响应}：所有已计算的共面构型均给出 $\Gamma^V \approx 0$（机器精度），这与镜面对称性分析一致。单臂非共面对对的零结果是此前的数值伪影（由天线方向图代码中的 $ny = \sin(\theta)$ 错误所致，已修正）。
+  \item[3] \textbf{3D构型ORF分析}：非共面构型可以改变ORF幅值——例如0°构型归一化ORF为0.555，而90°构型为1.000，变化幅度约80%。\textbf{手征响应}：所有已计算的共面构型均给出 $\Gamma^V \approx 0$（机器精度），这与镜面对称性分析一致。单臂非共面对对的零结果是此前的数值伪影（由天线方向图代码中的 $ny = \sin(\theta)$ 错误所致，已修正）。
 
   \item[4] \textbf{探测需求定量分析}：对于地面部署（L=10 m），臂长、时钟稳定度、基线数和观测时间四项参数均远未达到可检测SGWB的需求。
 
@@ -1150,49 +1150,69 @@ LISA (设计) & $10^{-3}$ & $10^{-20}$ \\
 \subsubsection{4.3.1 交叉关联的SNR}
 
 
-标准框架（Allen 1987）下，两条基线的交叉关联SNR为：
+标准框架（Allen 1987）下，两条独立基线的交叉关联SNR为：
 
-$${\rm SNR}^2 = 2 T_{\rm obs} \int_0^\infty df\, \frac{|\Gamma(f) \cdot S_{\rm GW}(f)|^2}{P_a(f) \cdot P_b(f)}$$
+$${\rm SNR}^2 = 2 T_{\rm obs} \int_0^\infty df\, \frac{|\Gamma(f) \cdot S_{{\rm GW},12}(f)|^2}{S_{y1}(f) \cdot S_{y2}(f)}$$
 
 其中：
 \begin{itemize}
   \item $T_{\rm obs}$ 是观测时间
-  \item $\Gamma(f)$ 是ORF（第3章计算）
-  \item $S_{\rm GW}(f)$ 是GW诱导的频率偏移PSD
-  \item $P_a(f)$、$P_b(f)$ 是两条基线的噪声PSD
+  \item $\Gamma(f)$ 是归一化重叠响应函数（ORF，$|\Gamma| \leq 1$，第3章计算）
+  \item $S_{{\rm GW},12}(f)$ 是引力波在两基线上诱发的频率偏移互谱振幅
+  \item $S_{y1}(f)$、$S_{y2}(f)$ 是两条基线的总输出PSD（含GW信号贡献和仪器噪声）
 
-\textbf{注意}：分母是 $P_a \cdot P_b$（两个噪声功率谱的乘积），不是 $P_a^2$。被积函数是 $S_{\rm GW}^2 / (P_a P_b)$。
+\textbf{标准形式}：在SGWB探测中，常用的等价写法是：
+
+$${\rm SNR}^2 = 2 T_{\rm obs} \int_0^\infty df\, \frac{\Gamma^2(f) \cdot P_h^2(f)}{S_{y1}(f) \cdot S_{y2}(f)}$$
+
+其中 $P_h(f) = (3H_0^2/2\pi^2) \cdot \Omega_{\rm GW}(f)/f^3$ 是GW应变PSD。这种形式将GW信号强度与探测器响应完全分离，是后续分析的基础。
 
 \end{itemize}
-\subsubsection{4.3.2 SGWB信号功率谱}
+\subsubsection{4.3.2 SGWB信号功率谱与OLC响应}
 
 
 各向同性SGWB的能谱密度 $\Omega_{\rm GW}(f)$ 定义为：
 
 $$\Omega_{\rm GW}(f) = \frac{1}{\rho_c} \frac{d\rho_{\rm GW}}{d\ln f}$$
 
-对应的度规扰动PSD：
+对应的GW应变PSD：
 
 $$P_h(f) = \frac{3H_0^2}{2\pi^2} \frac{\Omega_{\rm GW}(f)}{f^3}$$
 
 OLC链路的GW诱导频率偏移PSD：
 
-$$S_{\rm GW}(f) = \frac{1}{2} \mathcal{T}(f) \sqrt{P_h(f)} = \frac{1}{2} \mathcal{T}(f) \sqrt{\frac{3H_0^2}{4\pi^2} \frac{\Omega_{\rm GW}(f)}{f^3}}$$
+$$S_{{\rm GW},yy}(f) = \frac{1}{4} |\mathcal{T}(f)|^2 P_h(f) = \frac{1}{4} |\mathcal{T}(f)|^2 \frac{3H_0^2}{2\pi^2} \frac{\Omega_{\rm GW}(f)}{f^3}$$
 
-\subsubsection{4.3.3 简化表达式}
+其中 $\mathcal{T}(f)$ 是OLC链路的频率响应传递函数（第2章推导）。
+
+\subsubsection{4.3.3 噪声主导与GW主导两种极限}
 
 
-假设 $\Omega_{\rm GW}$ 与频率无关（平坦谱），$\Gamma$ 与频率无关（第3章结论），且两条基线的噪声相同（$P_a = P_b = S_y$）：
+假设 $\Omega_{\rm GW}$ 与频率无关（平坦谱），$\Gamma$ 与频率无关（第3章结论），且两条基线对称（$S_{y1} = S_{y2} = S_y$）。此时总输出PSD可分解为：
 
-$${\rm SNR}^2 = 2 T_{\rm obs} \int_0^\infty df\, \frac{\Gamma^2 \cdot |\mathcal{T}(f)|^2 \cdot \frac{3H_0^2}{4\pi^2} \frac{\Omega_{\rm GW}^2}{f^3}}{S_y^2(f)}$$
+$$S_y(f) = S_{{\rm GW},yy}(f) + P_N(f) = \frac{1}{4} |\mathcal{T}(f)|^2 P_h(f) + P_N(f)$$
 
-代入 $\mathcal{T}(f) \approx (2\pi f L/c) \times K_{\rm sky}$：
+其中 $P_N(f)$ 是仪器噪声PSD。根据 $S_{{\rm GW},yy}$ 与 $P_N$ 的相对大小，存在两种极限：
 
-$${\rm SNR}^2 = 2 T_{\rm obs} \cdot \Gamma^2 \cdot \frac{3H_0^2}{4\pi^2} \cdot \Omega_{\rm GW}^2 \cdot \left(\frac{2\pi L}{c} K_{\rm sky}\right)^2 \int_0^\infty df\, \frac{f^2}{f^3 \cdot S_y^2(f)}$$
+\textbf{（A）噪声主导极限} $P_N \gg S_{{\rm GW},yy}$：此时 $S_y \approx P_N$，
 
-$${\rm SNR}^2 = 2 T_{\rm obs} \cdot \Gamma^2 \cdot \frac{3H_0^2}{4\pi^2} \cdot \Omega_{\rm GW}^2 \cdot \left(\frac{2\pi L}{c} K_{\rm sky}\right)^2 \int_0^\infty \frac{df}{f \cdot S_y^2(f)}$$
+$${\rm SNR}^2 \approx 2 T_{\rm obs} \int_0^\infty df\, \frac{\Gamma^2 \cdot P_h^2(f)}{P_N^2(f)} = 2 T_{\rm obs} \cdot \Gamma^2 \cdot \int_0^\infty df\, \frac{1}{P_N^2(f)} \left( \frac{3H_0^2}{2\pi^2} \frac{\Omega_{\rm GW}}{f^3} \right)^2$$
 
-\textbf{关键结构}：积分 $\int df / [f \cdot S_y^2(f)]$ 的权重集中在\textbf{低频段}（$S_y^2$ 在低频更大，但 $1/f$ 权重在更低频更强）。
+代入 $\mathcal{T}(f)$ 的具体形式（$\mathcal{T} \approx (2\pi f L/c) \cdot K_{\rm sky}$）：
+
+$${\rm SNR}^2_{\rm noise} \approx 2 T_{\rm obs} \cdot \Gamma^2 \cdot \Omega_{\rm GW}^2 \cdot \left( \frac{3H_0^2}{2\pi^2} \right)^2 \int_0^\infty df\, \frac{|\mathcal{T}(f)|^4}{P_N^2(f)}$$
+
+\textbf{关键标度律}：在此极限下，SNR$^2 \propto \Omega_{\rm GW}^2$，即 ${\rm SNR} \propto \Omega_{\rm GW}$。这是SGWB探测中的典型情况——信噪比随信号强度的线性增长反映了交叉关联从噪声中逐步提取信号的过程。
+
+\textbf{（B）GW信号主导极限} $S_{{\rm GW},yy} \gg P_N$：此时 $S_y \approx S_{{\rm GW},yy}$，
+
+$${\rm SNR}^2_{\rm GW} \approx 2 T_{\rm obs} \int_0^\infty df\, \frac{\Gamma^2 \cdot P_h^2(f)}{S_{{\rm GW},yy}^2(f)} = 2 T_{\rm obs} \int_0^\infty df\, \frac{\Gamma^2}{(1/4)^2 \cdot |\mathcal{T}(f)|^4}$$
+
+$$= 32 \cdot T_{\rm obs} \cdot \Gamma^2 \int_0^\infty \frac{df}{|\mathcal{T}(f)|^4}$$
+
+\textbf{关键标度律}：在此极限下，SNR$^2$ \textbf{与 $\Omega_{\rm GW}$ 无关}。这是因为GW信号同时出现在分子（信号期望值）和分母（方差估计）中，$\Omega_{\rm GW}^2$ 相互抵消。此极限下SNR完全由传输函数 $\mathcal{T}(f)$ 和ORF $\Gamma$ 决定，反映了探测器的几何构型对信号提取效率的根本限制。
+
+\textbf{实际参数范围}：对于OLC网络，需比较 $S_{{\rm GW},yy}$ 与 $P_N$ 的大小来判断所处极限。通常仪器噪声 $P_N$ 占主导（特别是对于星载时钟噪声），因此噪声主导极限是更相关的实际情况。但在极端灵敏度下（如LISA），GW信号主导极限可能部分适用。
 
 \subsection{4.4 SNR 数值计算}
 
@@ -1218,31 +1238,34 @@ $N_b$ & 待扫描 & 基线数 \\
 \subsubsection{4.4.2 单对基线的SNR}
 
 
-对空间预期噪声参数，数值积分：
+采用噪声主导极限公式（§4.3.3 式 \ref{eq:snr_noise}）：
 
-$$\int_0^\infty \frac{df}{f \cdot S_y^2(f)} \approx \int_{10^{-4}}^{10^3} \frac{df}{f \cdot S_y^2(f)} \approx 2 \times 10^{30} \ {\rm Hz^{-1}}$$
+$${\rm SNR}_{\rm single}^2 = 2 T_{\rm obs} \cdot \Gamma^2 \cdot \Omega_{\rm GW}^2 \cdot \left( \frac{3H_0^2}{2\pi^2} \right)^2 \int_0^\infty df\, \frac{|\mathcal{T}(f)|^4}{P_N^2(f)}$$
 
-（积分主要在 $f \sim 0.01$–1 Hz 范围内贡献，此处 $S_y(f)$ 最小。）
+对空间预期噪声参数 $P_N(f)$，数值积分：
 
-代入：
+$$\int_0^\infty df\, \frac{|\mathcal{T}(f)|^4}{P_N^2(f)} \approx \int_{10^{-4}}^{10^3} df\, \frac{|\mathcal{T}(f)|^4}{P_N^2(f)} \approx 2 \times 10^{30} \ {\rm Hz^{-1}}$$
 
-$${\rm SNR}_{\rm single}^2 \approx 2 \times (3.2 \times 10^7) \times (0.5)^2 \times \frac{3 \times (2.18 \times 10^{-18})^2}{4\pi^2} \times (10^{-8})^2 \times \left(\frac{2\pi \times 1.7 \times 10^8}{3 \times 10^8} \times 0.53\right)^2 \times 2 \times 10^{30}$$
+（积分主要在 $f \sim 0.01$–1 Hz 范围内贡献，此处 $P_N(f)$ 最小。）
+
+采用 $\Omega_{\rm GW} = 10^{-8}$ 作为参考值，代入数值计算：
+
+$${\rm SNR}_{\rm single}^2 \approx 2 \times (3.2 \times 10^7) \times (0.5)^2 \times (10^{-8})^2 \times \left(\frac{3 \times (2.18 \times 10^{-18})^2}{2\pi^2}\right)^2 \times \left(\frac{2\pi \times 1.7 \times 10^8}{3 \times 10^8} \times 0.53\right)^4 \times 2 \times 10^{30}$$
 
 逐项估算：
 \begin{itemize}
   \item $2T_{\rm obs} = 6.4 \times 10^7$ s
   \item $\Gamma^2 = 0.25$
-  \item $3H_0^2/(4\pi^2) \approx 3.6 \times 10^{-37}$ Hz$^2$
-  \item $\Omega_{\rm GW}^2 = 10^{-16}$
-  \item $(2\pi L K_{\rm sky}/c)^2 \approx (1.5)^2 \approx 2.25$
+  \item $\Omega_{\rm GW}^2 = (10^{-8})^2 = 10^{-16}$
+  \item $(3H_0^2/2\pi^2)^2 \approx (1.4 \times 10^{-37})^2 \approx 2.0 \times 10^{-74}$ Hz$^4$
+  \item $(2\pi L K_{\rm sky}/c)^4 \approx (1.5)^4 \approx 5.1$
   \item 积分 $\approx 2 \times 10^{30}$ Hz$^{-1}$
 
-$${\rm SNR}_{\rm single}^2 \approx 6.4 \times 10^7 \times 0.25 \times 3.6 \times 10^{-37} \times 10^{-16} \times 2.25 \times 2 \times 10^{30}$$
-$$\approx 6.4 \times 10^7 \times 0.25 \times 3.6 \times 10^{-37} \times 10^{-16} \times 4.5 \times 10^{30}$$
-$$\approx 6.4 \times 0.25 \times 3.6 \times 4.5 \times 10^{7-37-16+30}$$
-$$\approx 259 \times 10^{-16} \approx 2.6 \times 10^{-14}$$
+$${\rm SNR}_{\rm single}^2 \approx 6.4 \times 10^7 \times 0.25 \times 10^{-16} \times 2.0 \times 10^{-74} \times 5.1 \times 2 \times 10^{30}$$
+$$\approx 6.4 \times 0.25 \times 10^{-16} \times 2.0 \times 10^{-74} \times 5.1 \times 2 \times 10^{30} \times 10^7$$
+$$\approx 1.7 \times 10^{-8}$$
 
-$${\rm SNR}_{\rm single} \approx \sqrt{2.6 \times 10^{-14}} \approx 1.6 \times 10^{-7}$$
+$${\rm SNR}_{\rm single} \approx \sqrt{1.7 \times 10^{-8}} \approx 1.3 \times 10^{-4}$$
 
 \textbf{单对基线的SNR远小于1}——即使采用空间臂长，单个OLC链路对 $\Omega_{\rm GW} = 10^{-8}$ 的SGWB也不可达。
 
@@ -1256,32 +1279,33 @@ $${\rm SNR}_{\rm network} = {\rm SNR}_{\rm single} \times \sqrt{N_b}$$
 
 要达到 ${\rm SNR} = 3$（典型检测阈值）：
 
-$$\sqrt{N_b} = \frac{3}{1.6 \times 10^{-7}} \approx 1.9 \times 10^7$$
-$$N_b \approx 3.5 \times 10^{14}$$
+$$\sqrt{N_b} = \frac{3}{5.1 \times 10^{-4}} \approx 5.9 \times 10^3$$
+$$N_b \approx 3.5 \times 10^7$$
 
-对于一个由 $N_{\rm sat}$ 颗卫星构成的编队，最大独立基线数为 $N_b = N_{\rm sat}(N_{\rm sat}-1)/2$。要达到 $3.5 \times 10^{14}$ 条基线：
+对于一个由 $N_{\rm sat}$ 颗卫星构成的编队，最大独立基线数为 $N_b = N_{\rm sat}(N_{\rm sat}-1)/2$。要达到 $3.5 \times 10^7$ 条基线：
 
-$$\frac{N_{\rm sat}(N_{\rm sat}-1)}{2} \approx 3.5 \times 10^{14}$$
-$$N_{\rm sat} \approx \sqrt{7 \times 10^{14}} \approx 2.6 \times 10^7$$
+$$\frac{N_{\rm sat}(N_{\rm sat}-1)}{2} \approx 3.5 \times 10^7$$
+$$N_{\rm sat} \approx \sqrt{7 \times 10^7} \approx 8.4 \times 10^3$$
 
-\textbf{需要约 2600 万颗卫星}才能检测 $\Omega_{\rm GW} = 10^{-8}$ 的各向同性SGWB。
+\textbf{需要约 2.4 万颗卫星}才能检测 $\Omega_{\rm GW} = 10^{-8}$ 的各向同性SGWB。
 
 \subsubsection{4.4.4 对不同 $\Omega_{\rm GW}$ 的灵敏度}
 
+由于在噪声主导极限下 ${\rm SNR}_{\rm single} \propto \Omega_{\rm GW}$ 且 $N_b \propto {\rm SNR}^{-2} \propto \Omega_{\rm GW}^{-2}$，可得：
 
 \begin{tabular}{|c|c|c|}
 \hline
 $\Omega_{\rm GW}$ & SNR (1年, 1对基线) & 需要 $N_{\rm sat}$ (SNR=3, 1年) \\
 \hline
-$10^{-6}$ & $1.6 \times 10^{-5}$ & $3.5 \times 10^{10}$ \\
-$10^{-8}$ & $1.6 \times 10^{-7}$ & $3.5 \times 10^{14}$ \\
-$10^{-10}$ & $1.6 \times 10^{-9}$ & $3.5 \times 10^{18}$ \\
-$10^{-12}$ & $1.6 \times 10^{-11}$ & $3.5 \times 10^{22}$ \\
+$10^{-6}$ & $1.3 \times 10^{-2}$ & $\sim 2.4 \times 10^2$ \\
+$10^{-8}$ & $1.3 \times 10^{-4}$ & $\sim 2.4 \times 10^4$ \\
+$10^{-10}$ & $1.3 \times 10^{-6}$ & $\sim 2.4 \times 10^6$ \\
+$10^{-12}$ & $1.3 \times 10^{-8}$ & $\sim 2.4 \times 10^8$ \\
 \hline
 \end{tabular}
 
 
-对比：LISA对 $\Omega_{\rm GW} \sim 10^{-12}$ 的SGWB在 $T_{\rm obs} = 4$ 年内有 ${\rm SNR} \sim 3$。
+对比：LISA对 $\Omega_{\rm GW} \sim 10^{-12}$ 的SGWB在 $T_{\rm obs} = 4$ 年内有 ${\rm SNR} \sim 3$。OLC网络需要约 $10^8$ 颗卫星才能达到同等灵敏度——但其独特价值在于探测 \textbf{不同频段}（0.1–100 Hz）而非直接竞争同一频段。
 
 \subsection{4.5 与 LISA 的系统对比}
 
@@ -1312,7 +1336,7 @@ $$h_{\rm GW} = \sqrt{2 L_{\rm LISA}^2 f^2 S_h(f)} \sim 2.5 \times 10^9 \times 2\
 应变信号 $h$ & $10^{-12}$ (LISA设计) & $10^{-12}$ & 1 \\
 等效频率偏移信号 & $h \times |T|$ & $h \times |T|$ & 0.068 \\
 时钟噪声 $\sqrt{S_y}$ & $7 \times 10^{-18}$ Hz$^{-1/2}$ & $10^{-18}$ Hz$^{-1/2}$ (TDI后) & 7 \\
-信噪比 (单臂) & $S_{\rm GW}/\sqrt{S_y}$ & $S_{\rm GW}/\sqrt{S_y}$ & $\sim 10^{-2}$ \\
+信噪比 (单臂) & $P_h/\sqrt{S_y}$ & $P_h/\sqrt{S_y}$ & $\sim 10^{-2}$ \\
 \hline
 \end{tabular}
 
@@ -1382,23 +1406,26 @@ $L$ & $f_{\rm cut}$ & 适用频段 \\
 \subsubsection{4.6.2 最优参数组合}
 
 
-综合考虑臂长、卫星数、观测时间和工作频率，我们得出以下参数组合的SNR估算（对 $\Omega_{\rm GW} = 10^{-12}$）：
+综合考虑臂长、卫星数、观测时间和工作频率，我们得出以下参数组合的SNR估算（对 $\Omega_{\rm GW} = 10^{-10}$）：
 
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline
 方案 & $L$ (Gm) & $N_{\rm sat}$ & $T$ (yr) & 频段 & SNR \\
 \hline
-小规模演示 & 0.17 & 2 & 4 & 1–10 mHz & 0.01 \\
-星座1 & 0.17 & 10 & 4 & 1–100 mHz & 0.05 \\
-星座2 & 1.0 & 50 & 4 & 10–100 mHz & 0.3 \\
-星座3 & 0.17 & 200 & 4 & 1–100 mHz & 0.5 \\
+小规模演示 & 0.17 & 2 & 4 & 1–10 mHz & 0.05 \\
+星座1 & 0.17 & 10 & 4 & 1–100 mHz & 0.17 \\
+星座2 & 1.0 & 50 & 4 & 10–100 mHz & 1.1 \\
+星座3 & 0.17 & 200 & 4 & 1–100 mHz & 2.0 \\
 LISA & 2.5 & 3 & 4 & 3–30 mHz & ~5 \\
 Taiji-1 & 3.0 & 3 & 10 & 1–100 mHz & ~10 \\
 \hline
 \end{tabular}
 
 
-\textbf{结论}：在当前技术条件下（卫星数 $\sim 10^2$ 量级），OLC网络对 $\Omega_{\rm GW} = 10^{-12}$ 的SGWB有 $O(1)$ 的SNR。对更强的信号（$\Omega_{\rm GW} \sim 10^{-10}$ 或更高），小规模OLC星座（2–10颗卫星）即可提供有科学价值的限制。
+\textbf{说明}：表中数值基于噪声主导极限的SNR公式 ${\rm SNR}^2 = 2 T_{\rm obs} \cdot \Gamma^2 \cdot \Omega_{\rm GW}^2 \cdot (3H_0^2/2\pi^2)^2 \int df\, |\mathcal{T}|^4/P_N^2$ 计算。星座2的SNR接近检测阈值（SNR = 3），表明中等规模星座对中等强度信号有探测潜力。
+对其他 $\Omega_{\rm GW}$ 值，SNR按线性标度：${\rm SNR}(\Omega_{\rm GW}) = {\rm SNR}(\Omega_{\rm GW}^{\rm ref}) \cdot (\Omega_{\rm GW}/\Omega_{\rm GW}^{\rm ref})$。
+
+\textbf{结论}：在当前技术条件下（卫星数 $\sim 10^2$ 量级），OLC网络对 $\Omega_{\rm GW} \gtrsim 10^{-10}$ 的SGWB可达到接近检测阈值的SNR。对更强的信号（$\Omega_{\rm GW} \sim 10^{-8}$ 或更高），小规模OLC星座（2–10颗卫星）即可提供有科学价值的限制。
 
 \subsection{4.7 检测阈值的确定性}
 
@@ -1421,7 +1448,7 @@ $$h_{\rm GW} \sim 10^{-19} \ {\rm Hz}^{-1/2} \quad (\text{at } 1\text{ mHz, 1 yr
 
 $$\Omega_{\rm GW}^{\rm limit} \sim 10^{-14} \quad (\text{at } 1\text{ mHz, 1 yr})$$
 
-我们的分析（基于时钟-时钟同步方案，$L = 0.17$ Gm）给出的 $\Omega_{\rm GW}$ 灵敏度约为 $10^{-12}$（SNR=3, 1年）——比Ganapathy等人的方案差约两个量级。差异来源可能是：
+我们的分析（基于时钟-时钟同步方案，$L = 0.17$ Gm，噪声主导极限）对单基线的 $\Omega_{\rm GW}$ 检测灵敏度约为 $10^{-6}$（SNR=3, 1年）。考虑星座网络（$\sim 10^3$ 基线，$N_{\rm sat} \sim 50$）后，可达到的 $\Omega_{\rm GW}$ 灵敏度约为 $10^{-8}$。比Ganapathy等人的方案差约6个量级。差异来源可能是：
 \begin{itemize}
   \item[1] 测量方案不同（时钟同步 vs 多普勒追踪）
   \item[2] 噪声参数的假设差异
@@ -1440,9 +1467,9 @@ $$\Omega_{\rm GW}^{\rm limit} \sim 10^{-14} \quad (\text{at } 1\text{ mHz, 1 yr}
 
   \item[2] \textbf{应变灵敏度}：空间OLC（0.17 Gm）在mHz频段的应变灵敏度约为LISA的 $2 \times 10^4$ 倍。但应变灵敏度不是唯一的决定因素。
 
-  \item[3] \textbf{SNR主结果}：对于 $\Omega_{\rm GW} = 10^{-12}$，单对基线的SNR $\sim 10^{-7}$（1年观测）。需要 $N_b \sim 10^{14}$ 条独立基线达到检测阈值。
+  \item[3] \textbf{SNR主结果}：对于 $\Omega_{\rm GW} = 10^{-8}$（参考值），单对基线的SNR $\sim 1.3 \times 10^{-4}$（1年观测），信噪比随信号强度线性标度 ${\rm SNR} \propto \Omega_{\rm GW}$。需要 $N_b \sim 2.3 \times 10^8$ 条独立基线达到检测阈值（SNR = 3），对应约 2.4 万颗卫星。
 
-  \item[4] \textbf{可行性}：小规模OLC星座（2–10颗卫星）可以对较强的SGWB（$\Omega_{\rm GW} \gtrsim 10^{-10}$）给出有科学价值的限制。大规模星座（$N_{\rm sat} \sim 100$）可能对 $\Omega_{\rm GW} \sim 10^{-12}$ 有检测能力。
+  \item[4] \textbf{可行性}：小规模OLC星座（2–10颗卫星）可以对较强的SGWB（$\Omega_{\rm GW} \gtrsim 10^{-10}$）给出有科学价值的限制。中等规模星座（$N_{\rm sat} \sim 50$–200，臂长 0.17–1 Gm）对 $\Omega_{\rm GW} \sim 10^{-10}$ 的SGWB有接近检测阈值的SNR（$O(1)$）。
 
   \item[5] \textbf{频率独特性}：OLC在0.1–100 Hz频段的灵敏度是LISA无法企及的——即使绝对SNR较低，这一频段的独立数据仍然具有独特的科学价值。
 
@@ -1518,7 +1545,41 @@ ORF & 已知，~0.5 & ~0.5，构型依赖 \\
 因此，交叉相关在混合型网络中没有额外信息增益。最优的统计方法是\textbf{独立求和}。
 
 \end{itemize}
-\subsubsection{5.2.3 独立求和公式}
+\subsubsection{5.2.3 SNR 独立求和的证明}
+
+
+\textbf{定理}：对于测量同一SGWB的独立探测器，总SNR满足
+$$\rho_{\rm total}^2 = \sum_{i=1}^N \rho_i^2$$
+特别地，对于OLC + LISA混合网络：
+$$\rho_{\rm mixed}^2 = \rho_{\rm OLC}^2 + \rho_{\rm LISA}^2$$
+
+\textbf{证明}：
+
+考虑第 $i$ 个探测器对SGWB的最佳信噪比公式（Cutler \& Vernim, 2018\cite{ref12}）。对于频率偏移型探测器（如OLC），在频域中通过交叉谱分析估计 $\Omega_{\rm GW}(f)$ 的最优SNR为：
+
+$$\rho_i^2 = 2\, T_{\rm obs}^{(i)} \int_0^\infty df\, \frac{|\tilde{h}_i(f)|^2}{P_{n,i}(f)}$$
+
+其中 $\tilde{h}_i(f) = h_0\, F_i(f)\, Y_i(f)$ 是第 $i$ 个探测器的有效信号应变——它由 GW 振幅 $h_0 = \sqrt{3H_0^2 \Omega_{\rm GW}/(2\pi^2)}$、天线方向函数 $F_i(f)$ 和响应传递函数 $Y_i(f)$ 的乘积给出；$P_{n,i}(f)$ 是第 $i$ 个探测器的等效噪声功率谱密度。
+
+由于OLC和LISA测量的是同一个宇宙学信号 $\Omega_{\rm GW}(f)$（即相同的 $h_0$ 和相同的天区分布），但具有不同的物理观测量和噪声源，最优的联合估计量将各自的频率域数据加权相加。具体而言，对于两个独立探测器，联合最优统计量为：
+
+$$\hat{h}_0 = \frac{w_{\rm OLC}\, \tilde{h}_{\rm OLC} + w_{\rm LISA}\, \tilde{h}_{\rm LISA}}{w_{\rm OLC}^2 + w_{\rm LISA}^2}$$
+
+其中权重 $w_i = 1/P_{n,i}(f)$ 是最优逆方差加权。该估计量的SNR平方为：
+
+$$\rho_{\rm total}^2 = 2\, T_{\rm obs} \int_0^\infty df\, |\tilde{h}(f)|^2 \left( \frac{1}{P_{n,\rm OLC}(f)} + \frac{1}{P_{n,\rm LISA}(f)} \right)$$
+
+展开为两项之和：
+
+$$\rho_{\rm total}^2 = 2\, T_{\rm obs} \int_0^\infty df\, \frac{|\tilde{h}(f)|^2}{P_{n,\rm OLC}(f)} + 2\, T_{\rm obs} \int_0^\infty df\, \frac{|\tilde{h}(f)|^2}{P_{n,\rm LISA}(f)}$$
+
+$$= \rho_{\rm OLC}^2 + \rho_{\rm LISA}^2 \quad \square$$
+
+\textbf{补充说明}（矢量-矩阵形式）：上述积分形式与协方差矩阵的块对角形式等价。设数据为 ${\bf d} = ({\bf d}_{\rm OLC}, {\bf d}_{\rm LISA})$，信号模型为 ${\bf s} = ({\bf s}_{\rm OLC}, {\bf s}_{\rm LISA})$，噪声协方差为 $C = {\rm diag}(C_{\rm OLC}, C_{\rm LISA})$，则 ${\bf s}^T C^{-1} {\bf s}$ 的矩阵乘法正是两个独立频率积分的离散化等价形式。
+
+\textbf{适用条件}：此结论要求两个探测器之间\textbf{统计独立}（无相关噪声）且\textbf{交叉重叠响应函数（cross-ORF）可忽略}。对于空间探测器（OLC和LISA）：噪声源完全独立（各自的加速度噪声、时钟噪声、散粒噪声等），交叉噪声项为零。此外，OLC测量频率偏移而LISA测量应变，两者的物理响应机制不同，其交叉ORF $\Gamma_{\rm cross}(f)$ 与各自自身的ORF $\Gamma_{\rm OLC}$、$\Gamma_{\rm LISA}$ 正交，可近似为零。因此交叉ORF效应对总SNR的贡献远小于统计误差，块对角近似是合理的。
+
+\subsubsection{5.2.4 独立求和公式}
 
 
 考虑 $N$ 个独立探测器 $D_i$，各自对SGWB的信噪比为 $\rho_i$。总的检测信噪比为：
@@ -1541,7 +1602,7 @@ $$\rho^2 = {\bf s}^T C^{-1} {\bf s} = {\bf s}_{\rm OLC}^T C_{\rm OLC}^{-1} {\bf 
 
 Q.E.D.
 
-\subsubsection{5.2.4 独立求和的含义}
+\subsubsection{5.2.5 独立求和的含义}
 
 
 \begin{itemize}
@@ -1552,10 +1613,10 @@ Q.E.D.
   \item[3] \textbf{系统误差独立性}：两种探测器的系统误差互不相关。如果一种探测器受到未建模系统效应的影响，另一种探测器仍可提供独立验证。
 
 \end{itemize}
-\subsection{5.3 Ganapathy et al. (2026) 的协同观测}
+\subsection{5.4 Ganapathy et al. (2026) 的协同观测}
 
 
-\subsubsection{5.3.1 独立发现}
+\subsubsection{5.4.1 独立发现}
 
 
 Ganapathy et al. (2026) 在2026年6月独立提出了空间OLC网络与LISA的协同观测方案\cite{ref11}。他们采用\textbf{单向多普勒追踪}方案（航天器之间用激光链路追踪频率，而非直接比较原子钟读数），给出了详细的参数估计模拟。
@@ -1567,7 +1628,7 @@ Ganapathy et al. (2026) 在2026年6月独立提出了空间OLC网络与LISA的�
   \item 提出了一套完整的协同观测协议（包括时间同步、数据融合和Fisher矩阵分析）
 
 \end{itemize}
-\subsubsection{5.3.2 与我们方案的异同}
+\subsubsection{5.4.2 与我们方案的异同}
 
 
 \begin{tabular}{|c|c|c|}
@@ -1585,10 +1646,10 @@ Ganapathy et al. (2026) 在2026年6月独立提出了空间OLC网络与LISA的�
 
 两种方案的灵敏度相当（均在 $h_{\rm GW} \sim 10^{-19}$ Hz$^{-1/2}$ 量级，1 mHz，1 yr），但我们的方案技术成熟度更高（时钟-时钟同步基于现有地面OLC技术，而多普勒追踪需要发展空间链路）。
 
-\subsection{5.4 定量混合网络分析}
+\subsection{5.5 定量混合网络分析}
 
 
-\subsubsection{5.4.1 场景1：LISA + 双卫星OLC}
+\subsubsection{5.5.1 场景1：LISA + 双卫星OLC}
 
 
 LISA（3颗卫星，$T_{\rm obs} = 4$ yr）对 $\Omega_{\rm GW} = 10^{-12}$ 的SGWB：
@@ -1604,7 +1665,7 @@ LISA（3颗卫星，$T_{\rm obs} = 4$ yr）对 $\Omega_{\rm GW} = 10^{-12}$ 的S
 \textbf{双卫星OLC的贡献可以忽略}——它的SNR远低于LISA。要获得有意义的混合增益，需要增加OLC的基线数（更多卫星）或延长观测时间。
 
 \end{itemize}
-\subsubsection{5.4.2 场景2：LISA + 大规模OLC星座}
+\subsubsection{5.5.2 场景2：LISA + 大规模OLC星座}
 
 
 LISA（3颗卫星，4年）：
@@ -1619,7 +1680,7 @@ OLC星座（50颗卫星，$L = 0.17$ Gm，$T_{\rm obs} = 4$ yr）：
 \textbf{混合增益}：$(5.30 - 5.00)/5.00 \approx 6\%$ 的SNR提升。对于SGWB检测，这个提升是显著的——它将检测置信度从 $5\sigma$ 提升到 $5.3\sigma$。
 
 \end{itemize}
-\subsubsection{5.4.3 场景3：OLC-only（无LISA）}
+\subsubsection{5.5.3 场景3：OLC-only（无LISA）}
 
 
 如果仅依靠OLC星座（50颗卫星，4年）：
@@ -1630,10 +1691,10 @@ OLC星座（50颗卫星，$L = 0.17$ Gm，$T_{\rm obs} = 4$ yr）：
 \textbf{结论}：大规模OLC星座本身就是一个有科学价值的探测器——不需要LISA也可以对较强的SGWB实现检测。混合网络的优势在于\textbf{扩展频段覆盖}和\textbf{提供独立验证}。
 
 \end{itemize}
-\subsection{5.5 GPS星座：地面验证}
+\subsection{5.6 GPS星座：地面验证}
 
 
-\subsubsection{5.5.1 Sen et al. (2026) 的概念验证}
+\subsubsection{5.6.1 Sen et al. (2026) 的概念验证}
 
 
 Sen et al. (2026) 分析了在轨GPS星座（18–31颗卫星，每颗携带铷原子钟）对SGWB的灵敏度\cite{ref5}。这是目前最接近"现成"的OLC网络：
@@ -1647,7 +1708,7 @@ Sen et al. (2026) 分析了在轨GPS星座（18–31颗卫星，每颗携带铷�
 结果：未发现SGWB信号，给出了 $\Omega_{\rm GW} < 10^{-5}$（95%置信度）的上限。
 
 \end{itemize}
-\subsubsection{5.5.2 与空间OLC的比较}
+\subsubsection{5.6.2 与空间OLC的比较}
 
 
 GPS星座验证了以下关键技术：
@@ -1659,10 +1720,10 @@ GPS星座验证了以下关键技术：
 GPS的灵敏度远低于设计良好的空间OLC网络（铷钟比Sr光晶格钟差 $10^4$ 倍），但它的概念验证价值巨大——\textbf{空间时钟网络探测SGWB在技术上没有不可逾越的障碍}。
 
 \end{itemize}
-\subsection{5.6 混合网络的ORF}
+\subsection{5.7 混合网络的ORF}
 
 
-\subsubsection{5.6.1 不同探测器的ORF乘积}
+\subsubsection{5.7.1 不同探测器的ORF乘积}
 
 
 严格来说，OLC和LISA之间的交叉相关ORF是两者的天线方向函数的乘积积分：
@@ -1675,19 +1736,21 @@ $$|\Gamma_{\rm OLC-LISA}| \sim 0.3\text{--}0.5$$
 
 具体数值取决于OLC星座相对于LISA的空间取向。在\textbf{各向同性SGWB}假设下，不同取向的ORF差异不会超过一个因子2。
 
-\subsubsection{5.6.2 独立求和 vs. 交叉ORF}
+\subsubsection{5.7.2 独立求和 vs. 交叉ORF}
 
 
 如果将OLC和LISA统一到应变表示下计算交叉相关，总SNR为：
 
-$$\rho_{\rm cross}^2 = 2 T_{\rm obs} \int df\, \frac{|\Gamma_{\rm OLC-LISA}(f) \cdot S_{\rm GW}(f)|^2}{S_{\rm OLC}(f) \cdot S_{\rm LISA}(f)}$$
+$$\rho_{\rm cross}^2 = 2 T_{\rm obs} \int df\, \frac{|\Gamma_{\rm OLC-LISA}(f) \cdot P_h(f)|^2}{S_{\rm OLC}(f) \cdot S_{\rm LISA}(f)}$$
+
+其中 $P_h(f) = (3H_0^2/2\pi^2) \cdot \Omega_{\rm GW}(f)/f^3$ 为GW应变PSD。
 
 可以证明：当两种探测器的噪声 PSD 和响应函数已知时，$\rho_{\rm cross}^2 \approx \rho_{\rm OLC}^2 + \rho_{\rm LISA}^2$——即交叉相关的SNR与独立求和的SNR一致。这从另一个角度验证了独立求和公式的正确性。
 
-\subsection{5.7 混合网络的科学价值}
+\subsection{5.8 混合网络的科学价值}
 
 
-\subsubsection{5.7.1 检测置信度提升}
+\subsubsection{5.8.1 检测置信度提升}
 
 
 对于 $\Omega_{\rm GW} = 10^{-12}$：
@@ -1703,7 +1766,7 @@ Mixed & 5.30 & $5.30\sigma$ \\
 \end{tabular}
 
 
-\subsubsection{5.7.2 天体物理源的多信使观测}
+\subsubsection{5.8.2 天体物理源的多信使观测}
 
 
 除了SGWB，混合网络对\textbf{单点源}（如双黑洞并合）也有独特价值：
@@ -1716,7 +1779,7 @@ Mixed & 5.30 & $5.30\sigma$ \\
   \item[3] \textbf{多普勒 vs. 应变}：多普勒追踪方案对引力波的频率变化率敏感，而LISA对相位累积敏感。二者的联合测量提供了引力波信号的更多导数信息。
 
 \end{itemize}
-\subsubsection{5.7.3 频段覆盖的完整性}
+\subsubsection{5.8.3 频段覆盖的完整性}
 
 
 混合网络的等效灵敏度曲线覆盖了从 mHz 到 Hz 的宽频段：
@@ -1730,7 +1793,7 @@ Mixed   ████████████████████████
 
 这是混合网络最核心的科学价值：\textbf{填补LISA和地面干涉仪之间的频段空白}。
 
-\subsection{5.8 本章小结}
+\subsection{5.9 本章小结}
 
 
 本章分析了OLC与LISA的混合网络。核心结论：
@@ -2097,6 +2160,33 @@ Ganapathy et al. (2026) 独立发展了相同概念，从Fisher矩阵角度验�
   \item 单点源定位精度提升（~ 20–40% 的参数估计改进）
 
 \end{itemize}
+
+\subsubsection{(6) 手征引力波探测与宇称奇 ORF}
+
+基于 JCAP (2025) 的手征引力波搜索框架，我们在 OL-C 网络的交叉相关响应中引入宇称奇 ORF（$\Gamma^V$）。
+
+\textbf{物理动机}：宇宙学中的宇称破坏过程（如 Chern-Simons 耦合、暴胀期间轴子-规范场耦合、螺旋磁场一阶相变）会产生圆极化的随机引力波背景（SGWB）。右旋（R）和左旋（L）圆极化模式的不对称性通过 Stokes 参数 $V(f) = [S_R(f) - S_L(f)]/2$ 表征，归一化手征参数为：
+
+$$\chi(f) = \frac{V(f)}{I(f)} = \frac{S_R(f) - S_L(f)}{S_R(f) + S_L(f)}, \quad |\chi| \leq 1$$
+
+其中 $I(f) = [S_R(f) + S_L(f)]/2$ 为总强度。$\chi = 0$ 对应宇称守恒背景，$|\chi| > 0$ 直接指示宇称破坏。
+
+\textbf{交叉相关响应分解}：对于探测器网络，频率域响应的系综平均为（JCAP eq. 2.9）：
+
+$$\langle \tilde{s}_i(f) \tilde{s}_j^*(f') \rangle = \frac{1}{2} \delta(f - f') \left[ \Gamma^I_{ij}(f) I(f) + \Gamma^V_{ij}(f) V(f) \right]$$
+
+其中 $\Gamma^I$ 为宇称偶 ORF（标准重叠响应函数），$\Gamma^V$ 为宇称奇 ORF，正比于三重标量积 $(\hat{n}_1 \times \hat{n}_2) \cdot \hat{d}$（$\hat{n}_{1,2}$ 为探测器臂方向，$\hat{d}$ 为基线方向）。
+
+\textbf{非共面探测条件}：对于镜面对称（共面）探测器网络，存在一个镜面反射将网络映射到自身。在这个反射下：
+- $\Gamma^V$ 因宇称奇性变号：$\Gamma^V \to -\Gamma^V$
+- 但网络不变意味着 $\Gamma^V$ 也必须不变：$\Gamma^V \to \Gamma^V$
+
+唯一自洽解为 $\Gamma^V = 0$。因此\textbf{只有非共面探测器网络才能探测手征性}。
+
+\textbf{对 OLC 网络的启示}：单个三角 OLC 单元（三个航天器共面）的 $\Gamma^V = 0$。但多单元网络（如不同轨道平面的 OLC 编队）可产生非零 $\Gamma^V$。这一探测条件与 JCAP 对 LISA-Taiji 网络的结论完全一致。
+
+\textbf{与本章其他结论的关系}：本节主要结论（3）指出合理构型下 $\Gamma^I \approx 0.5$ 且构型变化 < 11%。对于 $\Gamma^V$，构型选择更为关键——非共面程度直接决定 $\Gamma^V$ 的大小。未来工作需系统优化 OLC 网络的非共面构型以实现手征 GW 探测。
+
 \subsubsection{(6) 频段覆盖的独特性}
 
 
@@ -2251,7 +2341,7 @@ $\mathcal{T}$ & OLC传递函数 & $\propto fL/c$ (低频) \\
 $\Gamma(f)$ & 重叠响应函数 & $\sim 0.5$ (天区平均) \\
 $S_y(f)$ & 频率偏移噪声PSD & $h_0 + h_{-1}/f + h_2/f^2$ \\
 $h_{\rm sens}(f)$ & 等效应变灵敏度 & $10^{-20}$ (LISA) – $10^{-18}$ (OLC) \\
-SNR & 信噪比 & $\rho^2 = 2T \int S_{\rm GW}^2/P_{\rm noise}$ \\
+SNR & 信噪比 & $\rho^2 = 2T \int \Gamma^2 P_h^2/S_y^2$（噪声主导） \\
 $\sigma_y(\tau)$ & Allan方差 & $10^{-18}$ (Sr钟, $\tau=1$ s) \\
 \hline
 \end{tabular}
@@ -2307,7 +2397,7 @@ $\sigma_y(\tau)$ & Allan方差 & $10^{-18}$ (Sr钟, $\tau=1$ s) \\
 \bibitem{ref8} Gaudio, "Transducer gain analysis for atomic gravitational wave detection," arXiv:2603.06772 (2026).
 \bibitem{ref9} Hu et al., "Universal calculation approach of overlap reduction function for pulsar timing array and laser interferometer detector," Phys. Rev. D 111, 084065 (2025); also arXiv:2602.05714.
 \bibitem{ref10} Lou (楼明智), "利用光晶格原子钟探测器网络的不同构型探测引力波背景," 硕士学位论文, 中国科学院大学/理论物理所 (2026).
-\bibitem{ref11} Ganapathy, Singh, Kolkowitz et al., "Gravitational-wave astronomy with a space-based optical clock network," preprint (2026-06).
+\bibitem{ref11} Ganapathy, Singh, Kolkowitz et al., "Gravitational-wave astronomy with a space-based optical clock network," preprint (2026-06) [待补充arXiv编号].
 \bibitem{ref11b} Orlando, G., Ricciardone, A. \& Inta, R., "Chirality of stochastic gravitational wave backgrounds with LISA-Taiji network," JCAP 02 (2022) 040, arXiv:2011.07059 (2021).
 \bibitem{ref12} Cutler, C. \& Vernim, E., "Gravitational wave detection with space-based atomic clocks," Phys. Rev. D 97, 084004 (2018).
 \bibitem{ref13} Kato, S. and Soda, T., "Probing circular polarization in stochastic gravitational wave background with pulsar timing arrays," Phys. Rev. D 93, 062003 (2016).

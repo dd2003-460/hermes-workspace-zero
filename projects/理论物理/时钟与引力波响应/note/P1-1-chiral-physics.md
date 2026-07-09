@@ -38,14 +38,14 @@ $$h_R = \frac{h_+ - i h_\times}{\sqrt{2}}, \quad h_L = \frac{h_+ + i h_\times}{\
 
 ## 2. Stokes 参数 S^I 和 S^V
 
-### 2.1  ensemble average 的形式
+### 2.1 系综平均与 Stokes 参数的定义
 
 SGWB 的统计特性由 Fourier 振幅的系综平均描述。
 
 **原文引用** (JCAP §2, eq. 2.2):
-$$\langle \tilde{h}_+(f, \hat{k}) \tilde{h}_+^*(f', \hat{k}') \rangle \quad \langle \tilde{h}_+(f, \hat{k}) \tilde{h}_\times^*(f', \hat{k}') \rangle$$
-$$\langle \tilde{h}_+^*(f, \hat{k}) \tilde{h}_\times(f', \hat{k}') \rangle \quad \langle \tilde{h}_\times(f, \hat{k}) \tilde{h}_\times^*(f', \hat{k}') \rangle$$
-$$= \frac{1}{2} \delta(f - f') \delta^2(\hat{k} - \hat{k}') \frac{1}{4\pi} \begin{pmatrix} I(f) - iV(f) \\ iV(f) \quad I(f) \end{pmatrix}$$
+$$\langle \tilde{h}_+(f, \hat{k}) \tilde{h}_+^*(f', \hat{k}') \rangle \quad \langle \tilde{h}_\times(f, \hat{k}) \tilde{h}_\times^*(f', \hat{k}') \rangle$$
+$$\langle \tilde{h}_+(f, \hat{k}) \tilde{h}_\times^*(f', \hat{k}') \rangle \quad \langle \tilde{h}_\times(f, \hat{k}) \tilde{h}_+^*(f', \hat{k}') \rangle$$
+$$= \frac{1}{2} \delta(f - f') \delta^2(\hat{k} - \hat{k}') \frac{1}{4\pi} \begin{pmatrix} I(f) & -iV(f) \\ iV(f) & I(f) \end{pmatrix}$$
 
 ### 2.2 I 和 V 的物理意义
 
@@ -62,7 +62,7 @@ $$\langle \tilde{h}_\Lambda(f, \hat{k}) \tilde{h}_{\Lambda'}^*(f', \hat{k}') \ra
 **原文引用** (JCAP §2, eq. 2.6):
 $$I(f) = \frac{1}{2}[S_R(f) + S_L(f)], \quad V(f) = \frac{1}{2}[S_R(f) - S_L(f)]$$
 
-### 2.3 核心物理
+### 2.3 核心物理与归一化
 
 | 参数 | 物理含义 | 数学定义 |
 |------|----------|----------|
@@ -73,6 +73,12 @@ $$I(f) = \frac{1}{2}[S_R(f) + S_L(f)], \quad V(f) = \frac{1}{2}[S_R(f) - S_L(f)]
 - **V > 0**: 右旋占优
 - **V < 0**: 左旋占优
 - **|V| = I**: 完全手征（纯 R 或纯 L）
+
+**归一化手征参数**：实际观测中使用的无量纲手征参数为
+$$\chi(f) = \frac{V(f)}{I(f)} = \frac{S_R(f) - S_L(f)}{S_R(f) + S_L(f)}$$
+**物理动机**：归一化消除了信号绝对强度的影响，使得不同频率、不同方向、不同探测器观测结果可以直接比较。由于 $|S_R| \leq S_R+S_L$，归一化后 $|\chi| \leq 1$ 天然给出手征性强度的理论边界。归一化参数的具体约定参见附录 P1-1-appendix-normalization.md。
+
+**物理诠释**：斯托克斯参数 $I$ 和 $V$ 的系综平均定义对应于引力波场的能-动量张量的角平均。$I$ 正比于引力波的能量通量，而 $V$ 正比于引力波角动量的手征部分。因此 $\chi = V/I$ 实际上是**每单位能量的角动量手征含量**——这是手征性的最根本物理定义。
 
 ### 2.4 为什么 Q 和 U 被忽略？
 
@@ -93,7 +99,7 @@ $$\chi(f) = \frac{\Omega^{V}(f)}{\Omega^{I}(f)} = \frac{V(f)}{I(f)} = \frac{S_R(
 
 其中 $\Omega^{I,V}$ 是分数能量密度谱：
 
-**原文引用** (JCAP §3.1, eq. 3.3):
+**原文引用** (JCAP §3.2, eq. 3.3):
 $$\Omega_I(f) = \frac{4\pi^2}{3H_0^2} f^3 I(f), \quad \Omega_V(f) = \frac{4\pi^2}{3H_0^2} f^3 V(f)$$
 
 ### 3.2 取值范围
@@ -144,6 +150,12 @@ JCAP 列举了三种主要机制：
 
 ### 5.2 交叉相关公式
 
+**交叉相关（cross-correlation）是提取各向同性 SGWB 信号的标准方法**。对于两个探测器 $i$ 和 $j$，对响应信号做时间交叉相关，可以利用 SGWB 的统计平稳性将信号从中随机噪声中提取出来。
+
+**一般 ORF 框架** (Hu PRD 111.084065 §II)：
+$$\Gamma^I_{ij}(f) = \int \frac{d^2\hat{k}}{4\pi} F_i^A(\hat{k}) F_j^A(\hat{k}) e^{i 2\pi f \hat{k} \cdot \vec{\Delta r}_{ij}/c}$$
+$$\Gamma^V_{ij}(f) = \int \frac{d^2\hat{k}}{4\pi} F_i^A(\hat{k}) F_j^B(\hat{k}) \epsilon_{AB}(\hat{k}) e^{i 2\pi f \hat{k} \cdot \vec{\Delta r}_{ij}/c}$$
+
 **原文引用** (JCAP §2.1, eq. 2.9):
 $$\langle \tilde{s}_i(f) \tilde{s}_j^*(f') \rangle = \frac{1}{2} \delta(f - f') \left[ \Gamma^I_{ij}(f) I(f) + \Gamma^V_{ij}(f) V(f) \right]$$
 
@@ -156,7 +168,13 @@ $$\Gamma^V_{ij}(f) \propto -i \int \frac{d^2\hat{k}}{4\pi} \left( e^+_{ab}(\hat{
 
 括号内的组合 $e^+ e^\times - e^\times e^+$ 是**宇称奇**的——它在空间反换下变号。而 $\Gamma^I$ 是宇称偶的。
 
-**物理直觉**：对于一个平面探测器网络，存在一个镜面反射将该网络映射到自身。在这个反射下，宇称奇的 $\Gamma^V$ 必须变号。但既然网络不变，$\Gamma^V$ 也必须保持不变。唯一可能的值就是 $\Gamma^V = 0$。
+**物理直觉（一）——宇称变换分析**：对于一个平面探测器网络，存在一个镜面反射将该网络映射到自身。在这个反射下，宇称奇的 $\Gamma^V$ 必须变号。但既然网络不变，$\Gamma^V$ 也必须保持不变。唯一可能的值就是 $\Gamma^V = 0$。
+
+**物理直觉（二）——几何解释**：$\Gamma^V$ 本质上正比于 $(\hat{n}_1 \times \hat{n}_2) \cdot \hat{d}$，其中 $\hat{n}_{1,2}$ 是两个臂的单位方向矢量，$\hat{d}$ 是探测器连线方向的单位矢量。这个三重标量积具有宇称奇性——它衡量的是两个臂构成的平面与探测器连线之间的"手性"关系。如果所有探测器都在同一平面内，则三重积为零。只有非共面排列（如两个探测器位于不同高度或不同轨道平面）才能产生非零的 $\Gamma^V$。
+
+**物理直觉（三）——可观测信号**：在实际交叉相关分析中，我们测量的是
+$$Y = \int df \, \tilde{s}_i^*(f) \tilde{s}_j(f) \, Q(f)$$
+其中 $Q(f)$ 是最佳滤波器。$Y$ 的期望值包含 $\Gamma^V V(f)$ 项。如果 $\Gamma^V = 0$，即使存在手征引力波背景（$V \neq 0$），交叉相关的信号中也**完全不含**手征信息。因此非共面探测器网络不是技术优化问题，而是**探测手征性的必要条件**。
 
 因此，**只有当探测器网络没有镜面对称性时（即非共面），才能探测到手征性。**
 
@@ -180,10 +198,11 @@ Maggiore 的 I(f) = S_R + S_L（两种极化的总和），而 JCAP 的 I(f) = (
 
 ## 7. 与项目的关系
 
-- **项目代码 `scripts/01-olc-orf-solver.py`** 中的 R^I 部分对应于 JCAP 的 $\Gamma^I$，需要确认是否已正确处理归一化因子
-- **记忆 15** (chi_orb 物理推理正确) 和 **记忆 16** (镜面对称性与 R^V = 0) 确认了我们之前关于手征性的直觉是正确的
+- **项目代码 `scripts/01-olc-orf-solver.py`** 中的 $\Gamma^I$ 部分对应于 Hu PRD 的 ORF 通用框架，需要确认是否已正确处理归一化因子
+- **记忆 15** (chi_orb 物理推理正确) 和 **记忆 16** (镜面对称性与 $\Gamma^V = 0$) 确认了我们之前关于手征性的直觉是正确的
 - JCAP 的 Stokes 参数定义与 PTA 文献（如 Seto 2006）一致
-- 对于 OLC（光学晶格钟）探测器，同样的手征理论框架适用——关键区别在于探测器张量的定义
+- 对于 OLC（光学晶格钟）探测器，手征探测的细节（如臂长不对称修正）参见楼明智硕士论文 §3
+- JCAP 2025 的手征 GW 搜索框架与 Hu PRD 的 ORF 通用框架兼容：Hu 给出了 $\Gamma^{I,V}$ 的一般定义，JCAP 在此基础上进一步分解出宇称奇偶的 ORF
 
 ---
 

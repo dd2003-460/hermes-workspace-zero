@@ -49,6 +49,13 @@
     - 每个 agent 的上下文应限于：阶段规格文件 + 当前输入文件内容
     - 任务完成后 agent 应当清除（不保留长期状态）
     - Leader 负责任务分配、进度观察、验证门禁
+    - **⚠️ 强制要求 — dispatch 时必须附带阶段确切要求**：
+      Commander 在通过 Agent 工具将子任务分派给 sub-agent 时，**必须**将 loop 对应阶段的完整规格附加到 Agent prompt 中。具体包括：
+      (a) **阶段规格文件全文**：从 `/Users/a1-6/Desktop/workspace/loop/` 读取的对应阶段 .md 文件（如 decomposer 阶段必须附带 `1-loop/03-任务分解.md` 全文）
+      (b) **Agent 规格文件**：从 `/Users/a1-6/Desktop/workspace/loop/agents/` 读取的对应 Agent .md 文件（如 `decomposer.md`）
+      (c) **项目特定产出文件**：该阶段需要读取的本地输入文件内容（如 1-loop/01-clarification.md、02-goal-definition.md）
+      (d) **项目任务分解文件**（如有）：如 1-loop/03-task-decomposition-chiral-orf.md 中对应子任务的完整定义
+      **不得**仅传递"上下文摘要"或"任务描述"而省略上述完整规格。每个 sub-agent 必须拥有与全局规格一致的信息，以保证决策与 Commander 的预期一致。
 
 11. **项目本地 loop 目录（步骤中间结果持久化）**
     每个项目目录下必须有 `loop/` 子目录，按 global `loop/` 的结构镜像：

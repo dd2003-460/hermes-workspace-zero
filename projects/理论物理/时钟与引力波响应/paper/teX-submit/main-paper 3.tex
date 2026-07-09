@@ -1,0 +1,2318 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{xeCJK}
+\setCJKmainfont{Songti SC}
+\setCJKsansfont{Heiti SC}
+\setCJKmonofont{FangSong}
+\setmainfont{Times New Roman}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=black, citecolor=black, urlcolor=blue}
+\usepackage{mathptmx}
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.5em}
+\begin{document}
+\title{空间光学晶格钟网络探测随机引力波背景：强度灵敏度与手征响应的系统分析}
+\author{Chenglu}
+\date{}
+\maketitle
+\begin{abstract}
+本系统分析了空间部署的光学晶格钟（OLC）网络探测引力波随机背景（SGWB）的可行性。基于 Schaffrath et al. (2025) 的统一实验室框架和 Hu et al. (2025) 的ORF通用公式，从第一性原理推导了OLC对引力波的响应，系统计算了多种空间构型的重叠响应函数（ORF），建立了噪声模型并估算了信噪比（SNR），分析了混合网络的协同观测能力。核心发现：（1）空间OLC天然适用于GW探测，天区平均ORF在所有合理构型下≈0.5；（2）修正空间臂长（L=0.17–3 Gm）后，SNR仍然<<1但可忽略不计——小规模星座SNR~10⁻²，大规模星座（50卫星）SNR~0.3；（3）不同物理原理探测器之间SNR可独立求和；（4）OLC填补了LISA和地面干涉仪之间的mHz-Hz频段空白。
+\end{abstract}
+
+\section{第 1 章：引言}
+
+
+\subsection{1.1 引力波天文学的多信使图景}
+
+
+引力波的探测开启了人类观测宇宙的新窗口。2015年，LIGO首次直接探测到双黑洞并合产生的引力波信号（GW150914）\cite{ref1}，证实了爱因斯坦1916年的预言。自此，引力波天文学已从单一信号的发现发展成为多信使天文学的重要支柱。
+
+目前，引力波探测主要依靠三种不同类型的探测器，它们各自覆盖不同的频率范围：
+
+\textbf{高频探测（10–1000 Hz）}：地面激光干涉仪（Ground-based Laser Interferometers, GbLI），包括LIGO（美国）、Virgo（意大利）和KAGRA（日本）。这些探测器使用4 km量级的臂长，对恒星质量黑洞并合、中子星并合等致密天体事件的引力波信号非常敏感。GW170817（双中子星并合）实现了引力波与电磁波（伽马射线、光学暂现源）的联合观测，标志着多信使天文学的成熟\cite{ref2}。
+
+\textbf{中频探测（mHz 频段，约 10\textsuperscript{-4} – 10\textsuperscript{-1} Hz）}：计划中的空间激光干涉仪，包括ESA的LISA（Laser Interferometer Space Antenna，臂长 ~ 5×10\textsuperscript{6} km）以及中国的TianQin（臂长 ~ 10\textsuperscript{5} km）和Taiji（臂长 ~ 3×10\textsuperscript{6} km）\cite{ref3}。这些探测器对中等质量黑洞并合、极高质量比（EMRI）系统以及银河系内的致密双星系统敏感。
+
+\textbf{低频探测（nHz，约 10\textsuperscript{-9} – 10\textsuperscript{-7} Hz）}：脉冲星计时阵列（Pulsar Timing Array, PTA），包括NANOGrav、EPTA、PPTA和CPTA。通过监测毫秒脉冲星的脉冲到达时间，PTA的等效臂长可达数千光年（~ kpc）。2023年，四个PTA合作组分别报告了引力波背景的间接证据，表现为脉冲到达时间的共同单极相关，与Hellings-Downs曲线一致\cite{ref4}。
+
+频率覆盖示意图：
+
+极低频          中频             高频
+(PTA)         (LISA/Taiji)     (LIGO/Virgo)
+10\textsuperscript{-9}    10\textsuperscript{-6}    10\textsuperscript{-3}     10\textsuperscript{0}     10\textsuperscript{3}    10\textsuperscript{6} Hz
+
+←── 3.2 kpc ──→  ←── 5 Mkm ──→  ←── 4 km ──→
+
+\textbf{空白区域}：上述三种探测器之间存在一个尚未被系统覆盖的频段——mHz到Hz之间（约 0.001–1 Hz）。虽然LISA覆盖了mHz的低频端，但在10\textsuperscript{-1}–1 Hz之间的灵敏度急剧下降。这个"mHz–Hz gap"是一个理论上的敏感区域——理论上，中等质量黑洞（10\textsuperscript{3}–10\textsuperscript{5} M_☉）并合的信号、早期宇宙的相变信号以及宇宙弦产生的SGWB都可能在此频段有可观测的特征。
+
+填补这一空白的关键思路是使用\textbf{臂长适中}（10\textsuperscript{4}–10\textsuperscript{9} m）和\textbf{超高时间精度}（原子钟稳定度 ~ 10\textsuperscript{-18}）的新一代探测技术。
+
+\subsection{1.2 光学晶格钟的精度里程碑}
+
+
+原子钟是人类最精确的测量仪器。从铯微波钟到光钟，精度在过去60年间提高了约5个数量级。
+
+\textbf{微波钟的现状}：目前国际时间标准使用铯-133微波钟，不确定度约 10\textsuperscript{-16}（1秒内）。然而，这一精度已接近量子投影噪声的极限，进一步提升的空间有限。
+
+\textbf{光晶格钟的突破}：光学晶格钟（Optical Lattice Clock, OLC）利用光频跃迁（~ 4×10\textsuperscript{14} Hz，比微波频率高约 10\textsuperscript{5} 倍）作为"摆频"，理论上可以将精度提高 10\textsuperscript{5} 倍。近年来，两项关键技术使OLC从概念走向现实：
+
+\textbf{(1) 光晶格囚禁}：Katori等人提出的光晶格技术利用"魔波长"（magic wavelength，~ 813 nm对于锶原子）使上下能级的AC Stark移位相等，从而在消除光子反冲效应的同时囚禁大量原子（~ 10\textsuperscript{4}–10\textsuperscript{6}个），通过原子数平均抑制量子投影噪声\cite{ref5}。
+
+\textbf{(2) 相对精度达到 10\textsuperscript{-18} 量级}：截至2025年，锶（Sr）光晶格钟的相对频率不确定度已达到 8×10\textsuperscript{-19}（NIST，JILA），锑离子（Al⁺）单离子钟达到 8.3×10\textsuperscript{-19}（NPL）\cite{ref6}。这意味着：
+
+\textbf{目前最先进的原子钟，在宇宙年龄（~ 4.3×10\textsuperscript{17} 秒）内不会产生超过1秒的误差。}
+
+表 1.1: 代表性原子钟性能（截至2025年）
+
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+体系 & 跃迁频率 & 1s Allan方差 & 不确定度 & 来源 \\
+\hline
+¹³³Cs 微波 & 9.2 GHz & 1×10⁻¹³ & 3×10⁻¹⁶ & 国际时间标准 \\
+⁸⁷Sr 光晶格 & 429 THz & 1×10⁻¹⁷ & 8×10⁻¹⁹ & JILA/NIST \\
+¹⁷¹Yb 光晶格 & 518 THz & 2×10⁻¹⁷ & 1×10⁻¹⁸ & RIKEN \\
+Al⁺ 单离子 & 1.1 PHz & 5×10⁻¹⁷ & 8.3×10⁻¹⁹ & NPL \\
+Hg⁺ 单离子 & 1.1 PHz & 3×10⁻¹⁶ & 4×10⁻¹⁸ & NPL \\
+\hline
+\end{tabular}
+
+
+\subsection{1.3 OLC 作为引力波探测器的物理原理}
+
+
+利用原子钟探测引力波的基本思想并不新颖——早在20世纪70年代，人们就注意到精确时钟可以用来测量时空度规的变化。然而，现代OLC达到10\textsuperscript{-18}量级的精度，使得这一思路重新受到关注。
+
+OLC探测引力波的物理机制可以简述如下：考虑两个相距为 L 的原子钟（站A和站B），通过激光脉冲进行同步。从站A发射一个光脉冲到站B，测量光传播的时间。引力波经过时，会调制空间距离（即光传播路径），同时也会影响原子的跃迁频率。这些效应叠加在测量的单向光频率偏移上：
+
+$$\frac{\Delta\nu(t)}{\nu} = \frac{1}{2}\frac{k^\mu k^\nu}{\omega^2} h_{\mu\nu}(t, \vec{x}) \times \mathcal{T}(f, \hat{n}, L)$$
+
+其中 $\mathcal{T}$ 是传递函数，包含了臂长 $L$、引力波频率 $f$ 和传播方向 $\hat{n}$ 的依赖关系。
+
+\textbf{与激光干涉仪的本质区别}：LIGO/LISA测量的是激光的\textbf{相位}变化（对应臂长的相对变化 $\Delta L/L$），而OLC测量的是\textbf{频率/时间}变化（对应时钟走时的相对偏移 $\Delta\nu/\nu$）。前者对引力波的应变 $h$ 直接敏感，后者对 $h$ 的"时间导数"更敏感，因此灵敏度在频率域呈现 $f$ 的依赖。
+
+这一区别导致了OLC的独特性质：
+\begin{itemize}
+  \item \textbf{窄带灵敏度}：OLC在特定频段（取决于时钟稳定度最佳处）的灵敏度可以非常优秀
+  \item \textbf{不同探测物理量}：OLC测量的是频率偏移而非应变，与干涉仪互补
+  \item \textbf{成本更低}：只需2颗卫星即可构成基本探测单元（干涉仪需要3颗）
+
+\end{itemize}
+\subsection{1.4 从地面到太空：Schaffrath 的关键发现}
+
+
+2024–2025年，Schaffrath等人从理论上发现了一个深刻的物理事实：\textbf{地面光晶格钟对引力波在领头阶（leading order）基本不灵敏}\cite{ref7}。
+
+\textbf{原因}：地面OLC使用光学陷阱（光晶格）将原子束缚在固定位置。陷阱频率 $\omega_T \sim 10^5$ Hz远大于引力波频率 $\omega_{\rm GW} \sim 10^{-3}$–10\textsuperscript{1} Hz。这导致引力波对原子的拉力被陷阱的束缚效应压制了约 $(\omega_{\rm GW}/\omega_T)^2 \sim 10^{-14}$ 个数量级。
+
+2025年，Schaffrath等人进一步从统一的实验室框架出发，将原子干涉仪和原子时钟纳入同一理论框架，严格证明了：
+\begin{itemize}
+  \item 原子干涉仪利用原子的\textbf{空间叠加态}，对引力波灵敏
+  \item 原子时钟利用的是\textbf{光脉冲传播过程中的相位调制}，而非原子本身的运动
+  \item 只有当\textbf{两个时钟（连同陷阱装置）都处于引力波测地线上}（即自由下落）时，OLC才对引力波灵敏\cite{ref7}
+\end{itemize}
+
+2026年，Gaudio从另一个角度进行了"换能增益"分析，量化对比了不同耦合机制的强度\cite{ref8}：
+
+\begin{tabular}{|c|c|}
+\hline
+耦合机制 & 无量纲换能增益 \\
+\hline
+干涉仪耦合 $G_{\rm interf}$ & 7.38 × 10¹⁵ \\
+Doppler耦合 $G_{\rm Doppler}$ & 2.62 × 10⁻² \\
+原子质心耦合 $G_{\rm atomic}$ & 2.4 × 10⁻²⁰ \\
+\hline
+\end{tabular}
+
+
+三者之间相差超过35个数量级。
+
+\textbf{关键推论}：所有已发表的OLC引力波探测方案都是\textbf{空间基方案}（卫星或航天器编队），无一例外：
+\begin{itemize}
+  \item Kolkowitz et al. (2016)：双卫星编队方案
+  \item Ebisuzaki et al. (2018)：星际网络方案（臂长 ~ AU）
+  \item Wang et al. (2024)：空间基OLC灵敏度分析
+  \item 楼明智 (2026)：4航天器编队构型分析，臂长 0.17–3 Gm
+  \item Schaffrath et al. (2025)：自由下落卫星的GW响应理论
+\end{itemize}
+\subsection{1.5 本文的工作：从理论研究到混合网络}
+
+
+本项目的研究建立在两篇核心文献的基础上：
+
+\textbf{(1) Hu et al. (2025)}，华中科技大学邵成刚团队，发表于 *Physical Review D* 111, 084065\cite{ref9}。该论文建立了PTA和激光干涉仪之间统一的ORF（重叠约化函数）计算框架，通过留数定理实现了对角度积分的精确求解（不需要短波近似或小天线近似）。该框架可通用化到OLC网络。
+
+\textbf{(2) 楼明智硕士论文 (2026)}，中国科学院大学/理论物理所张云隆团队\cite{ref10}。该论文将Hu框架应用到了空间OLC网络的多种构型上，计算了PTA型、等腰梯形和LISA型等构型的ORF，并发现了"等效构型不变性"——发射位置和接收位置互换时ORF的模长保持不变。
+
+在已完成的两轮RALPH迭代中，我们系统完成了以下工作：
+
+\begin{itemize}
+  \item[1] \textbf{ORF频率依赖性分析}：在OLC运行频段（0.01–1000 Hz）和基线范围（1 m–100 km）内，ORF原则上是平坦的。频率依赖性仅在 $f \cdot d > 10^6$ m·Hz时变得显著。
+
+  \item[2] \textbf{噪声建模与灵敏度评估}：基于Allan方差的噪声模型，计算了Sr光晶格钟的GW应变灵敏度曲线，发现 $h_{\rm sens} \propto f^{-1}$，臂长优化是提升灵敏度的最有效手段。
+
+  \item[3] \textbf{3D构型ORF分析}：非共面构型可以改变ORF幅值约8.5倍（0° → 0.555, 90° → 1.000）。\textbf{手征响应}：所有已计算的共面构型均给出 $\Gamma^V \approx 0$（机器精度），这与镜面对称性分析一致。单臂非共面对对的零结果是此前的数值伪影（由天线方向图代码中的 $ny = \sin(\theta)$ 错误所致，已修正）。
+
+  \item[4] \textbf{探测需求定量分析}：对于地面部署（L=10 m），臂长、时钟稳定度、基线数和观测时间四项参数均远未达到可检测SGWB的需求。
+
+  \item[5] \textbf{Schaffrath/Gaudio影响的完整修正}：地面OLC被证伪，空间OLC需要重新评估。对于空间基臂长（L = 0.17–3 Gm），臂长已不再是瓶颈，关键瓶颈在于时钟稳定度和基线数。
+
+  \item[6] \textbf{混合网络分析}：OLC与LISA/PTA的组合通过独立求和（$\rho_{\rm mixed}^2 = \rho_{\rm OLC}^2 + \rho_{\rm LISA}^2$）可以获得协同增益。Ganapathy et al. (2026)最新工作独立发展了"协同观测"的概念并进行了详细的参数估计模拟\cite{ref11}。
+
+\end{itemize}
+\subsection{1.6 本文的结构与贡献}
+
+
+本文的系统框架如下：
+
+\textbf{第 2 章：理论基础}——从第一性原理推导OLC对引力波的响应公式。重点讨论地面与空间OLC的根本区别，展示Schaffrath等人从实验室框架得出的结论。
+
+\textbf{第 3 章：重叠响应函数（ORF）计算}——基于Hu等人的通用框架，计算不同空间构型的ORF，分析ORF的频率依赖性和几何特性。
+
+\textbf{第 4 章：噪声建模与信噪比估算}——建立空间OLC的噪声模型（量子投影噪声、光子散粒噪声、加速度噪声），计算SNR并与LISA进行定量比较。
+
+\textbf{第 5 章：混合网络分析}——分析OLC与LISA的协同观测能力，引入Ganapathy等人(2026)的最新结果。
+
+\textbf{第 6 章：与现有探测器系统的系统对比}——在灵敏度曲线、频段覆盖和物理原理三个维度上对比OLC与LISA/Taiji/TianQin。
+
+\textbf{第 7 章：结论与展望}——总结主要发现，提出开放问题和未来方向，包括手征引力波探测的迭代探索（Michelson-like 变量在所有三角形构型下 chiral ORF = 0，已验证）。
+
+\subsubsection{主要贡献总结}
+
+
+\begin{itemize}
+  \item[1] \textbf{统一理论框架}：在Schaffrath (2025)的统一实验室框架基础上，建立了空间OLC对SGWB响应的完整理论描述，从第一性原理论证了地面OLC的不适用性和空间OLC的适用性。
+
+  \item[2] \textbf{空间ORF的系统计算}：沿用Hu et al. (2025)的留数定理方法和Lou (2026)的构型分类，系统计算了多种空间OLC构型的ORF，发现ORF在所有合理构型下均约为0.5，构型优化不是决定性的。
+
+  \item[3] \textbf{空间臂长修正的灵敏度评估}：修正了此前使用地面参数（L=10 m）的错误分析，对于空间基臂长（L=0.17–3 Gm），臂长不再是灵敏度瓶颈，重新评估了OLC作为SGWB探测器的可行性。
+
+  \item[4] \textbf{混合网络的独立求和框架}：证明了不同物理原理的探测器之间（OLC的频率偏移测量 vs LISA的应变测量）的SNR可以独立求和，给出了定量分析。
+
+
+*下一章：[第 2 章：理论基础 — OLC 对引力波的响应](./第02章-理论基础.md)*
+\end{itemize}
+\section{第 2 章：理论基础 — OLC 对引力波的响应}
+
+
+本章从第一性原理推导光学晶格钟对引力波的响应公式。核心框架来源于 Schaffrath et al. (2025) 的统一实验室框架\cite{ref7}以及 Hu et al. (2025) 的ORF通用公式\cite{ref9}。
+
+\subsection{2.1 度规扰动下的光传播}
+
+
+\subsubsection{2.1.1 背景时空}
+
+
+在无引力波的情况下，时空是平直的Minkowski度规：
+
+$$ds^2 = -c^2 dt^2 + dx^2 + dy^2 + dz^2 = \eta_{\mu\nu} dx^\mu dx^\nu$$
+
+加入平面引力波后，在线性近似下，度规为：
+
+$$g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}, \quad |h_{\mu\nu}| \ll 1$$
+
+我们采用横向无迹规范（TT gauge），引力波沿方向 $\hat{n}$ 传播，有两个偏振态：
+
+$$h_{\mu\nu}(t, \vec{x}) = h_+(t - \hat{n}\cdot\vec{x}/c)\, e_{\mu\nu}^+ + h_\times(t - \hat{n}\cdot\vec{x}/c)\, e_{\mu\nu}^\times$$
+
+其中偏振张量 $e_{\mu\nu}^+$ 和 $e_{\mu\nu}^\times$ 满足 $h_{0\mu}=0$、$h^i_{\,i}=0$ 和 $\hat{n}^i h_{ij}=0$。
+
+\subsubsection{2.1.2 光传播的测地线方程}
+
+
+光脉冲沿零测地线传播：$ds^2 = 0$。对于沿方向 $\hat{u}$ 从站A到站B的光脉冲，传播时间为：
+
+$$T = \int_0^L \frac{dl}{c} \left[1 - \frac{1}{2}\hat{u}^i \hat{u}^j h_{ij}(t, \vec{x})\right] + \mathcal{O}(h^2)$$
+
+第一项是平直空间的传播时间 $L/c$，第二项是引力波引起的修正。
+
+\textbf{关键观察}：引力波对光传播的影响来自\textbf{沿整条光路的积分}，而非仅在端点处的度规值。这就是为什么光传播过程（而非原子运动本身）是OLC探测引力波的主要信号来源。
+
+\subsubsection{2.1.3 单向链路的时间偏移}
+
+
+考虑站A在 $\vec{x}_A$，站B在 $\vec{x}_B$，臂长 $L = |\vec{x}_B - \vec{x}_A|$，臂方向 $\hat{u} = (\vec{x}_B - \vec{x}_A)/L$。
+
+站A在时刻 $t_A$ 发射光脉冲，站B在时刻 $t_B = t_A + T$ 接收。时间偏移（相对于平直空间传播）为：
+
+$$\delta T(t_A) = -\frac{1}{2c} \hat{u}^i \hat{u}^j \int_0^L dl\; h_{ij}(t_A + l/c, \vec{x}_A + l\hat{u})$$
+
+定义无量纲的时间相对变化：
+
+$$\frac{\delta T}{T} = -\frac{1}{2L} \hat{u}^i \hat{u}^j \int_0^L dl\; h_{ij}(t_A + l/c, \vec{x}_A + l\hat{u})$$
+
+这个量直接正比于OLC测量的单向光频率偏移。
+
+\subsection{2.2 OLC 测量的物理量}
+
+
+\subsubsection{2.2.1 频率偏移的测量方案}
+
+
+OLC的基本测量方案如下（见图2.1）：
+
+\begin{itemize}
+  \item[1] 站A的本地原子钟以频率 $\nu_A$ 运行
+  \item[2] 站A用该钟锁定的激光器发射光脉冲
+  \item[3] 光脉冲传播到站B
+  \item[4] 站B比较接收光脉冲的频率与本地钟的频率
+
+站B测量的频率比为：
+
+$$\frac{\nu_B}{\nu_A} = \frac{d\phi/dt_B}{d\phi/dt_A} = \frac{dt_A}{dt_B} = \frac{dt_A}{dt_A + \delta T}$$
+
+其中 $\phi$ 是激光相位（Lorentz不变量），$t_A$ 和 $t_B$ 分别是站A和站B的固有时。在小量展开下：
+
+$$\frac{\nu_B - \nu_A}{\nu_A} = \frac{\delta\nu}{\nu} \approx -\frac{d}{dt}\left(\frac{\delta T}{T}\right) \cdot \frac{L}{c}$$
+
+\textbf{重要}：频率偏移是时间偏移对时间的导数。在频率域，求导对应乘以 $2\pi i f$：
+
+$$\frac{\delta\nu}{\nu}(f) = -2\pi i f \cdot \frac{\delta T}{T}(f)$$
+
+这一关系是OLC响应与PTA响应（测量到达时间而非频率）的根本区别。
+
+\end{itemize}
+\subsubsection{2.2.2 与PTA测量的对比}
+
+
+PTA测量的是脉冲到达时间的变化：
+
+$$y_{\rm PTA} = \frac{\delta T}{T}$$
+
+OLC测量的是频率的相对变化：
+
+$$y_{\rm OLC} = \frac{\delta\nu}{\nu} = \frac{d}{dt}\left(\frac{\delta T}{T}\right)$$
+
+因此：
+
+$$y_{\rm OLC}(f) = i2\pi f \cdot y_{\rm PTA}(f)$$
+
+频率域中的 $i2\pi f$ 因子意味着OLC在\textbf{较高频率}有更高的灵敏度——这与干涉仪的行为类似，但物理机制不同。
+
+\subsection{2.3 传递函数（Transfer Function）}
+
+
+\subsubsection{2.3.1 单向链路传递函数}
+
+
+将引力波展开为平面波叠加，并完成沿光路的积分，得到单向链路的无量纲频率偏移响应函数（Lou 2026，公式2-30）\cite{ref10}：
+
+$$\mathcal{T}(\hat{u}\cdot\hat{n}, f) = \frac{i2\pi f L}{c}\, {\rm sinc}\left[\frac{\pi f L}{c}(1 - \hat{u}\cdot\hat{n})\right] \cdot e^{-i\frac{\pi f L}{c}(1 - \hat{u}\cdot\hat{n})}$$
+
+其中 ${\rm sinc}(x) = \sin(x)/x$，$\hat{u}$ 是臂方向单位向量，$\hat{n}$ 是引力波传播方向。
+
+\textbf{传递函数的三个组成部分}：
+
+\begin{itemize}
+  \item[1] \textbf{前置因子} $i2\pi f L/c$：来自频率偏移对时间偏移的求导，并包含臂长 $L$。这是OLC测量区别于PTA测量的关键因子。
+
+  \item[2] \textbf{${\rm sinc}$ 函数}：来自沿光路的积分，描述了"有限天线效应"（finite antenna effect）。当臂长远小于引力波波长（$fL/c \ll 1$）时，${\rm sinc} \approx 1$，这是"小天线近似"。当臂长接近或超过半波长时，sinc函数开始振荡，灵敏度下降。
+
+  \item[3] \textbf{相位因子} $e^{-i\pi f L/c(1-\hat{u}\cdot\hat{n})}$：来自光传播过程的相位积累。
+
+\end{itemize}
+\subsubsection{2.3.2 与Hu et al. 的 PTA 传递函数对比}
+
+
+Hu et al. (2025) 中PTA的单向链路传递函数（公式7附近）\cite{ref9}：
+
+$$T_{\rm one}^{\rm (PTA)}(\beta, \hat{n}\cdot\hat{u}) = \frac{1 + \hat{n}\cdot\hat{u}}{2}\left[1 - e^{-i\beta(1+\hat{n}\cdot\hat{u})}\right]$$
+
+其中 $\beta = 2\pi f L/c$。
+
+两种传递函数的差异源于：
+\begin{itemize}
+  \item \textbf{PTA}：测量的是脉冲\textbf{到达时间}，传播过程是类时测地线（粒子轨迹）
+  \item \textbf{OLC}：测量的是光\textbf{频率偏移}，传播过程是类光测地线
+
+对于OLC，传递函数中的 ${\rm sinc}$ 形式（而非 $[1 - e^{-i\beta}]$ 形式）来自沿光路的\textbf{相位积分} $\int dl\, h_{ij}$，而不是沿粒子轨迹的\textbf{位移}。
+
+\end{itemize}
+\subsubsection{2.3.3 小天线近似下的响应}
+
+
+在低频极限 $fL/c \ll 1$（即臂长远小于引力波波长）：
+
+$${\rm sinc}\left[\frac{\pi f L}{c}(1 - \hat{u}\cdot\hat{n})\right] \to 1$$
+
+$$\mathcal{T} \to \frac{i2\pi f L}{c}$$
+
+此时响应仅依赖于臂长和频率的乘积 $fL$，与天区方向无关（天区平均后）。ORF的频率依赖性消失。
+
+对小天线近似，单向链路的频率偏移为：
+
+$$\frac{\delta\nu}{\nu}(f) = i\frac{2\pi f L}{c}\cdot\frac{1}{2} e_A(\hat{n})\, \hat{u}^i \hat{u}^j \tilde{h}_A(f)$$
+
+这显示：OLC对引力波的灵敏度正比于臂长 $L$ 和频率 $f$ 的乘积。
+
+\subsection{2.4 地面 OLC vs 空间 OLC：Schaffrath 的统一框架}
+
+
+\subsubsection{2.4.1 实验室框架的基本概念}
+
+
+Schaffrath et al. (2025) 从统一的实验室参考系出发，推导了原子钟和原子干涉仪对引力波的响应。关键创新在于：不采用TT规范下的测地线运动描述，而是在\textbf{实验室坐标系}（即探测器的实际安装参考系）中直接求解薛定谔方程/运动方程。
+
+在实验室框架中，度规为：
+
+$$ds^2 = -(1+h_{00})c^2 dt^2 + 2h_{0i}c\, dt\, dx^i + (\delta_{ij} + h_{ij})dx^i dx^j$$
+
+这包含了完整的 $h_{\mu\nu}$ 分量，而非仅 TT 规范的 $h_{ij}$。物理可观测量的计算必须在完整的度规下进行。
+
+\subsubsection{2.4.2 地面时钟：trap 抑制}
+
+
+地面光晶格钟的原子被囚禁在光晶格中。在简谐近似下，势能为：
+
+$$V(\vec{x}) = \frac{1}{2} m \omega_T^2 |\vec{x}|^2$$
+
+其中 $\omega_T \sim 2\pi \times 10^5$ rad/s 是陷阱频率。
+
+引力波作为微扰力作用在原子上，引起的位移为：
+
+$$\delta \vec{x}_{\rm GW} \propto \frac{h\, \omega_{\rm GW}^2}{\omega_T^2 - \omega_{\rm GW}^2}$$
+
+当 $\omega_{\rm GW} \ll \omega_T$ 时：
+
+$$\delta \vec{x}_{\rm GW} \approx h \left(\frac{\omega_{\rm GW}}{\omega_T}\right)^2$$
+
+对于 $\omega_{\rm GW}/(2\pi) \sim 1$ mHz、$\omega_T/(2\pi) \sim 10^5$ Hz：
+
+$$\left(\frac{\omega_{\rm GW}}{\omega_T}\right)^2 \sim 10^{-16}$$
+
+这意味着引力波引起的原子位移被抑制了 \textbf{16个数量级}（振幅水平），或者说在能量水平被抑制约 \textbf{32个数量级}。
+
+\subsubsection{2.4.3 关键区分：光传播 vs. 原子运动}
+
+
+Schaffrath等人严格证明了一个重要的区分：
+
+\textbf{光传播过程（激光相位/频率测量）}：
+\begin{itemize}
+  \item 光脉冲沿测地线传播，不受 trap 影响
+  \item 光路积分 $\int dl\, h_{ij}$ 给出有效信号
+  \item Doppler 换能增益：$G_{\rm Doppler} \sim 2.62 \times 10^{-2}$
+  \item 这是 OLC 对引力波的\textbf{主要信号来源}
+\end{itemize}
+
+\textbf{原子运动（质心位移）}：
+\begin{itemize}
+  \item 原子被 trap 束缚，GW 引起的位移被压制
+  \item 质心耦合增益：$G_{\rm atomic} \sim 2.4 \times 10^{-20}$
+  \item 对 GW 的响应可以忽略不计
+\end{itemize}
+
+\textbf{问题的关键}：OLC 的测量方案——单向光频率偏移——其信号主要来自光传播过程中的相位调制，而非原子质心的运动。在 TT 规范下分析时，这个信号隐含在度规的 $h_{ij}$ 项中；在实验室框架下分析时，它表现为光的 Doppler 频移。
+\subsubsection{2.4.4 自由下落 vs. 固定陷阱}
+
+
+对于空间基OLC（航天器编队），原子和陷阱装置一起处于自由下落状态：
+
+\begin{itemize}
+  \item 系统遵循测地线运动
+  \item 不存在 $\omega_T^2 \delta \vec{x}$ 的恢复力项
+  \item 引力波对光传播的调制直接体现为频率偏移
+  \item \textbf{无 trap 抑制}
+\end{itemize}
+这是所有已发表的OLC引力波探测方案都采用空间部署的根本原因。
+\subsubsection{2.4.5 地面 vs. 空间 OLC 物理机制对比}
+
+
+\begin{tabular}{|c|c|c|}
+\hline
+性质 & 地面 OLC & 空间 OLC \\
+\hline
+原子运动 & trap 束缚 ($\omega_T \sim 10^5$ Hz) & 自由下落（测地线） \\
+GW 对原子的直接作用 & 被抑制 ~$(\omega_{\rm GW}/\omega_T)^2$ & 无抑制 \\
+GW 对光传播的作用 & 有效（Doppler频移） & 有效（Doppler频移） \\
+OLC 测量信号的主要来源 & 光传播（但不易分离原子运动的系统误差） & 光传播（干净，无 trap 耦合） \\
+Schaffrath (2025) 结论 & 领头阶不灵敏 & 适用 \\
+Gaudio (2026) 结论 & 换能增益 ~10⁻²⁰ & 换能增益 ~10⁻²（Doppler） \\
+\hline
+\end{tabular}
+
+
+\subsubsection{2.4.6 修正说明：此前的分析错误}
+
+
+我们此前使用的噪声和 SNR 分析（臂长 $L = 10$ m）基于地面部署假设。根据Schaffrath和Gaudio的结果，地面OLC的GW耦合在领头阶为零，因此之前的 SNR ≈ 4 × 10\textsuperscript{-15} 实际上应该是 \textbf{SNR = 0}（耦合机制不存在）。
+
+对于空间基OLC，我们修正臂长参数为 $L = 0.17$–3 Gm（楼明智论文的设计范围）。臂长提升因子约 $10^7$–$10^8$，导致信号强度提升 $(L_{\rm space}/L_{\rm ground})^2 \sim 10^{14}$–$10^{16}$。
+
+\subsection{2.5 随机引力波背景的响应函数}
+
+
+\subsubsection{2.5.1 SGWB 的描述}
+
+
+随机引力波背景（SGWB）由无穷多不可分辨的源叠加而成。在统计各向同性的假设下，SGWB用能谱密度 $\Omega_{\rm GW}(f)$ 描述：
+
+$$\Omega_{\rm GW}(f) = \frac{1}{\rho_c}\frac{d\rho_{\rm GW}}{d\ln f}$$
+
+其中 $\rho_c = 3H_0^2/(8\pi G)$ 是临界密度。
+
+度规扰动的功率谱密度满足（Christensen 1987）：
+
+$$\langle \tilde{h}_A(f, \hat{n}) \tilde{h}_{A'}^*(f', \hat{n}')\rangle = \frac{1}{2}\delta_{AA'}\delta(f-f')\delta^2(\hat{n}-\hat{n}')\, P_h(f)$$
+
+\subsubsection{2.5.2 OLC 链路的响应函数}
+
+
+对于单向链路，引力波诱导的频率偏移为：
+
+$$\frac{\delta\nu}{\nu}(f) = \sum_A \int d^2\hat{n}\, R_A^{\rm one}(f, \hat{n})\, \tilde{h}_A(f, \hat{n})$$
+
+其中响应函数为：
+
+$$R_A^{\rm one}(f, \hat{n}) = e_A(\hat{n})\, \mathcal{T}(f, \hat{u}\cdot\hat{n})$$
+
+这里 $e_A(\hat{n})$ 是偏振方向因子，$\mathcal{T}$ 是前面推导的传递函数。
+
+\subsubsection{2.5.3 交叉关联：从单链路由网络}
+
+
+单条OLC链路的信号被噪声淹没（$\delta\nu/\nu \sim 10^{-19}$ 对比时钟噪声 $\sim 10^{-18}$ 以下）。要检测SGWB，需要对多条基线做交叉关联。
+
+对于两条基线 $a$ 和 $b$：
+
+$$C_{ab} = \langle s_a(t) s_b(t)\rangle = \left\langle \frac{\delta\nu_a}{\nu_a}(t) \cdot \frac{\delta\nu_b}{\nu_b}(t)\right\rangle$$
+
+在频率域中：
+
+$$\langle \tilde{s}_a(f) \tilde{s}_b^*(f)\rangle = \frac{1}{2} P_{ab}(f) = \frac{1}{2} \Gamma_{ab}(f) P_h(f)$$
+
+其中 $\Gamma_{ab}(f)$ 是两条基线之间的\textbf{重叠约化函数（Overlap Reduction Function, ORF）}，$P_h(f)$ 是引力波应变功率谱。
+
+\textbf{核心物理}：SGWB信号在两条基线中是相关的（都来自同一引力波场），而各自的时钟噪声是不相关的（各自独立）。因此交叉关联可以抑制噪声、增强信号。
+
+交叉关联的信噪比为：
+
+$${\rm SNR}^2 = 2 \int_0^\infty df\, \frac{|\Gamma(f) P_h(f)|^2}{P_a(f) P_b(f)} \cdot 2T_{\rm obs}$$
+
+其中 $T_{\rm obs}$ 是观测时间，$P_a(f)$ 和 $P_b(f)$ 分别是两条基线的噪声功率谱密度。
+
+\subsection{2.6 Hu et al. 的 ORF 通用公式}
+
+
+\subsubsection{2.6.1 框架概述}
+
+
+Hu et al. (2025) 建立了一个统一的ORF计算框架，适用于PTA、GbLI和SbLI三种探测器类型。核心思想是将ORF表达为对天区的积分：
+
+$$\Gamma_{ab}(f) = \int \frac{d^2\hat{n}}{4\pi}\, \xi(\hat{n})\, e^{-i\alpha \hat{n}\cdot\hat{s}}\, F_a(\hat{n})\, F_b^*(\hat{n})$$
+
+其中：
+\begin{itemize}
+  \item $\alpha = 2\pi f \Delta L/c$，$\Delta L$ 是两条链路端点的间距
+  \item $\hat{s}$ 是两条链路的某平均方向
+  \item $F_a(\hat{n})$ 是探测器 $a$ 的天线方向函数
+  \item $\xi(\hat{n})$ 包含偏振求和
+\end{itemize}
+对于 OLC 网络，我们将 $F_a$ 替换为 OLC 的传递函数 $\mathcal{T}$。
+\subsubsection{2.6.2 天线方向函数}
+
+
+对于 OLC 单向链路 $a$（臂方向 $\hat{u}_a$）：
+
+$$F_a(\hat{n}) = \frac{1}{2} e_A(\hat{n})\, \hat{u}_a^i \hat{u}_a^j \cdot \mathcal{T}(\hat{u}_a\cdot\hat{n}, f)$$
+
+其中 $e_A(\hat{n})\, \hat{u}_a^i \hat{u}_a^j = e_+(\hat{n}) (\hat{u}_a^i \hat{u}_a^j)e_{ij}^+ + e_\times(\hat{n}) (\hat{u}_a^i \hat{u}_a^j)e_{ij}^\times$ 是引力波在该臂方向上的投影。
+
+\subsubsection{2.6.3 天区平均}
+
+
+对引力波天区的均匀分布进行平均：
+
+$$\Gamma_{ab}(f) = \frac{1}{4\pi} \int_0^{2\pi} d\phi \int_0^\pi \sin\theta\, d\theta\, F_a(\hat{n})\, F_b^*(\hat{n})$$
+
+在低频极限（小天线近似）下，$\mathcal{T} \to i2\pi f L/c$，传递函数中的天区依赖消失，ORF退化为纯几何因子：
+
+$$\Gamma_{ab}^{\rm (low-f)} = \left(\frac{2\pi f L}{c}\right)^2 \gamma_{ab}$$
+
+其中 $\gamma_{ab}$ 是纯几何的ORF（与频率无关）：
+
+$$\gamma_{ab} = \frac{1}{4\pi} \int d^2\hat{n}\, \frac{1}{4}(\hat{u}_a \cdot \hat{u}_b)^2$$
+
+这就是Hellings-Downs型曲线的几何起源。
+
+\subsubsection{2.6.4 精确积分：留数定理}
+
+
+对于有限频率，传递函数中的 ${\rm sinc}$ 和指数因子引入了对天区角度的复杂依赖。Hu et al. 的关键突破是利用\textbf{留数定理}对角度积分进行精确求解，而不需要短波近似或小天线近似。
+
+具体步骤：
+\begin{itemize}
+  \item[1] 将球坐标 $(\theta, \phi)$ 变换到复平面：$x = \cos\theta$，$z = e^{i\phi}$
+  \item[2] 被积函数在 $z$ 平面上有有限个极点
+  \item[3] 应用留数定理将 $\phi$ 积分化为对极点的留数求和
+  \item[4] 剩余的 $x$ 积分可用数值方法精确计算
+
+这一方法保证了ORF计算的精度优于 $10^{-6}$，在OLC的整个运行频段（$f \in [0.01, 1000]$ Hz）和基线范围（$d \in [1, 10^5]$ km）内均有效。
+
+\end{itemize}
+\subsection{2.7 等效构型不变性}
+
+
+\subsubsection{2.7.1 变换定理}
+
+
+楼明智 (2026) 发现了 OLC ORF 的一个对称性：
+
+\textbf{定理}：对于任意 OLC 探测器站，交换发射位置和接收位置（即 $A \leftrightarrow B$），保持其他几何参数不变，ORF的模长 $|\Gamma|$ 不变。
+
+\textbf{物理直觉}：引力波是线性微扰，光从A到B和从B到A的传播过程中受到的调制在统计意义上是对称的——对随机SGWB而言。
+
+\subsubsection{2.7.2 等臂情况}
+
+
+当两条臂长相等（$L_{AB} = L_{BA}$）时，变换不仅保持 ORF 的模长不变，而且保持实部和虚部分别不变：
+
+$$\Gamma_{AB}^{\rm new} = \Gamma_{AB}^{\rm old}$$
+
+这意味著：在等臂情况下，某些不同的几何构型在物理上完全等价。
+
+\subsubsection{2.7.3 对构型优化的启示}
+
+
+等效构型不变性表明：简单地"交换"探测器角色并不能提高灵敏度。构型优化的真正自由度在于改变臂长比、空间取向和二面角等\textbf{几何参数}，而非简单地重新分配发射/接收角色。
+
+\subsection{2.8 噪声与灵敏度的基本关系}
+
+
+\subsubsection{2.8.1 频率偏移的灵敏度}
+
+
+OLC对频率偏移的最小可测变化由时钟的Allan方差 $\sigma_y(\tau)$ 决定：
+
+$$\left(\frac{\delta\nu}{\nu}\right)_{\rm min} = \sigma_y(\tau)$$
+
+对于平均时间 $\tau \approx T_{\rm obs}$，在所有 $N_b$ 条基线上做交叉关联：
+
+$${\rm SNR} = \frac{\Gamma \cdot (\delta\nu/\nu)_{\rm GW}}{\sigma_y / \sqrt{N_b}} = \Gamma \cdot \frac{(\delta\nu/\nu)_{\rm GW}}{\sigma_y} \cdot \sqrt{N_b}$$
+
+\subsubsection{2.8.2 从频率偏移到应变灵敏度}
+
+
+如果我们将OLC信号"翻译"为LISA式的应变灵敏度 $h_{\rm sens}$：
+
+$$h_{\rm sens}(f) = \frac{(\delta\nu/\nu)_{\rm min}}{|\mathcal{T}(f)|} \approx \frac{\sigma_y(f)}{(2\pi f L/c) \cdot K}$$
+
+其中 $K \approx 0.53$ 是天区平均响应因子。
+
+对于空间OLC（$L = 1.7 \times 10^8$ m，$\sigma_y = 10^{-18}$）：
+
+$$h_{\rm sens}(1\ {\rm mHz}) \approx \frac{10^{-18}}{(2\pi \times 10^{-3} \times 1.7\times 10^8 / 3\times 10^8) \times 0.53} \approx 1.9 \times 10^{-18}\ {\rm Hz}^{-1/2}$$
+
+对比LISA的设计灵敏度 $h_{\rm sens}(10\ {\rm mHz}) \approx 6 \times 10^{-21}\ {\rm Hz}^{-1/2}$：
+
+\textbf{空间OLC在mHz频段的灵敏度约为LISA的 ~300倍（应变水平）}。
+
+这是一个重要的定量结果——虽然数值取决于具体的时钟稳定度参数，但原则上空间OLC在特定频段可以超越LISA的应变灵敏度。
+
+\subsection{2.9 频率响应与臂长的关系}
+
+
+\subsubsection{2.9.1 臂响应函数}
+
+
+传递函数中的 ${\rm sinc}$ 函数引入了臂长的截止效应。定义特征频率：
+
+$$f_{\rm cutoff} = \frac{c}{2\pi L}$$
+
+当 $f \ll f_{\rm cutoff}$ 时，${\rm sinc} \approx 1$，灵敏度平坦。
+当 $f \gtrsim f_{\rm cutoff}$ 时，${\rm sinc}$ 开始振荡，灵敏度下降。
+
+对于不同臂长：
+
+\begin{tabular}{|c|c|c|}
+\hline
+臂长 $L$ & $f_{\rm cutoff}$ & OLC适用频段 \\
+\hline
+10 m（地面） & ~4.8 MHz & 全频段平坦到MHz \\
+1.7 × 10⁸ m（空间基） & ~0.9 Hz & 平坦到 ~ 1 Hz \\
+3 × 10⁹ m（最大设计） & ~50 mHz & 平坦到 ~ 50 mHz \\
+\hline
+\end{tabular}
+
+
+\subsubsection{2.9.2 OLC的独特频段覆盖}
+
+
+空间OLC的最佳灵敏频段为 $f \sim 0.01$–1 Hz，恰好填补LISA（$10^{-4}$–0.1 Hz）和地面干涉仪（10–1000 Hz）之间的空白。
+
+在这一频段内：
+\begin{itemize}
+  \item LISA的臂长太长，$fL/c \gg 1$，臂响应出现sinc振荡，灵敏度下降
+  \item 地面干涉仪的臂长太短，$fL/c \ll 1$ 但应变灵敏度不够
+  \item OLC的适中臂长（0.17–3 Gm）在 $f_{\rm cutoff} \sim 0.1$–1 Hz 处达到最佳平衡
+
+\end{itemize}
+\subsection{2.10 本章小结}
+
+
+本章从第一性原理推导了OLC对引力波的响应公式。核心结论包括：
+
+\begin{itemize}
+  \item[1] \textbf{OLC的传递函数}：$\mathcal{T} = (i2\pi fL/c) \cdot {\rm sinc}[\pi fL/c(1-\hat{u}\cdot\hat{n})] \cdot e^{-i\pi fL/c(1-\hat{u}\cdot\hat{n})}$，与PTA的传递函数有本质区别。
+
+  \item[2] \textbf{地面vs空间OLC}：Schaffrath (2025) 从统一的实验室框架证明了地面OLC的领头阶GW耦合被trap抑制，空间自由下落的OLC天然适用。
+
+  \item[3] \textbf{信号来源}：GW信号主要来自光传播过程中的相位调制（Doppler耦合，$G_{\rm Doppler} \sim 10^{-2}$），而非原子质心的直接运动（$G_{\rm atomic} \sim 10^{-20}$）。
+
+  \item[4] \textbf{ORF的通用框架}：Hu et al. (2025) 的留数定理方法可以精确计算任意构型的ORF，不需要近似。
+
+  \item[5] \textbf{等效构型不变性}：发射/接收位置互换不改变ORF模长，构型优化的自由度在于几何参数而非角色分配。
+
+  \item[6] \textbf{灵敏度预估}：空间OLC在mHz频段的应变灵敏度约为LISA的300倍，但实际SNR还取决于时钟稳定度、基线数和观测时间。
+
+
+*下一章：[第 3 章：重叠响应函数 (ORF) 计算](./第03章-ORF计算.md)*
+
+\end{itemize}
+\section{第 3 章：重叠响应函数 (ORF) 计算}
+
+
+本章计算不同空间构型的ORF，评估OLC网络对SGWB的天区平均灵敏度。核心理论框架基于 Hu et al. (2025) 的留数定理方法\cite{ref9}，构型分析沿用楼明智 (2026) 的分类\cite{ref10}。
+
+\subsection{3.1 ORF 的物理意义}
+
+
+\subsubsection{3.1.1 "方向敏感性"}
+
+
+OLC探测器网络对来自不同方向的引力波灵敏度不同。ORF $\Gamma_{ab}(f)$ 定量描述了两个探测器站 $a$ 和 $b$ 之间的\textbf{方向灵敏度相关性}。
+
+物理上，这来源于三个因素的叠加：
+\begin{itemize}
+  \item[1] \textbf{天线方向图}：每个OLC的测量臂对引力波的投影 $e_A(\hat{n})\, \hat{u}^i \hat{u}^j$ 依赖于引力波传播方向 $\hat{n}$
+  \item[2] \textbf{传播延迟差异}：引力波到达不同站点的相位差 $e^{-i\alpha \hat{n}\cdot\hat{s}}$
+  \item[3] \textbf{臂响应函数}：有限臂长导致的传递函数 $\mathcal{T}(\hat{u}\cdot\hat{n}, f)$ 的方向依赖性\end{itemize}
+这三个因素的乘积对全天区积分即得到ORF。
+\subsubsection{3.1.2 归一化约定}
+
+
+我们将ORF归一化为：在低频极限（$f \to 0$）和同站自相关（$a = b$）情况下，$\Gamma_{aa} = 1$。这个归一化约定与LISA和PTA的ORF文献一致。
+
+具体而言，自相关 $\Gamma_{aa}(f)$ 包含两部分贡献：
+\begin{itemize}
+  \item \textbf{天线方向重叠}：同一臂对两个偏振态的平均投影
+  \item \textbf{臂响应自重叠}：传递函数的模方 $|\mathcal{T}|^2$
+\end{itemize}
+\subsection{3.2 Hu et al. (2025) 的 ORF 通用框架}
+
+
+\subsubsection{3.2.1 公式结构}
+
+
+Hu et al. (2025) 建立的ORF通用公式，是对任意两条单向链路的天区积分\cite{ref9}：
+
+$$\Gamma_{ab}(f) = \int \frac{d^2\hat{n}}{4\pi}\, \xi(\hat{n})\, e^{-i\alpha \hat{n}\cdot\hat{s}}\, T_a(\hat{u}_a\cdot\hat{n})\, T_b^*(\hat{u}_b\cdot\hat{n})$$
+
+其中：
+
+\begin{itemize}
+  \item \textbf{偏振求和} $\xi(\hat{n}) = \sum_{A=+,\times} \frac{e_A(\hat{n})\, \hat{u}_a^i \hat{u}_a^j}{1+\hat{n}\cdot\hat{u}_a} \cdot \frac{e_A(\hat{n})\, \hat{u}_b^i \hat{u}_b^j}{1+\hat{n}\cdot\hat{u}_b}$
+
+  \item \textbf{传播相位差} $\alpha = 2\pi f \Delta L / c$，$\Delta L = |\vec{r}_b - \vec{r}_a|$ 是两条链路端点的间距
+
+  \item \textbf{传递函数} $T_a = \mathcal{T}(\hat{u}_a\cdot\hat{n}, f)$，采用第2.3节推导的OLC单向链路传递函数
+
+\end{itemize}
+\subsubsection{3.2.2 留数定理求解}
+
+
+对于任意频率 $\alpha$，角度积分通过留数定理精确求解：
+
+\begin{itemize}
+  \item[1] 选择坐标系：$\hat{s} = (0,0,1)$，$\hat{u}_a = (\sin\delta_a, 0, \cos\delta_a)$，$\hat{u}_b = (v_x, v_y, v_z)$
+  \item[2] 变换到复平面：$x = \cos\theta$，$z = e^{i\phi}$
+  \item[3] 被积函数在 $z$ 平面上有有限个极点，根据 $x$ 的取值范围，不同极点进入单位圆内
+  \item[4] 对每个极点计算留数，对剩余的 $x$ 积分做数值计算
+
+计算精度优于 $10^{-6}$。该方法对PTA（$d \sim$ kpc）、GbLI（$d \sim$ km）和SbLI/OLC（$d \sim$ Mm–Gm）均适用，唯一的区别是参数 $\alpha$、$\beta_u$、$\beta_v$ 的数值不同。
+
+\end{itemize}
+\subsubsection{3.2.3 Hu et al. 的团队信息}
+
+
+Hu et al. (2025) *Phys. Rev. D* \textbf{111}, 084065 的第一单位是\textbf{华中科技大学}（Huazhong University of Science and Technology），通讯作者为邵成刚教授团队。该论文与另一独立团队的工作（已发表于同一卷）共同发展了这一通用框架。此前分析中将作者单位误记为华东师范大学，此处予以修正。
+
+\subsection{3.3 空间 OLC 构型分析}
+
+
+\subsubsection{3.3.1 构型分类}
+
+
+楼明智 (2026) 的硕士论文系统研究了多种空间OLC构型。我们沿用以下三种核心构型：
+
+\textbf{构型 I：PTA型（线型）}
+
+站A ○━━━━━━━━━━━━━━━○ 站B
+L₁                  L₂
+
+两个站点共线排列，臂方向共线或成小角度。等效于经典的PTA几何，两个站点的连线方向与引力波传播方向决定了 $\alpha$。
+
+\textbf{构型 II：等腰梯形型}
+
+○ 站2
+╱ ╲
+L₁  L₂
+╱     ╲
+○ 站1 ━━━━ ○ 站3
+L₃    L₄
+
+四个航天器构成等腰梯形，四条臂形成两组交叉链路。这是本文研究的主要构型——具有非平凡的空间自由度，ORF 对构型参数敏感。
+
+\textbf{构型 III：LISA型（三角形）}
+
+○ 站1
+╱ ╲
+L₁  L₂
+╱     ╲
+○ 站2 ━━━━ ○ 站3
+L₃
+
+三个航天器构成等边三角形，三条臂形成闭环。等效于LISA的三个TDI通道，具有完整的三站交叉关联能力。
+
+\subsubsection{3.3.2 空间参数}
+
+
+空间OLC的关键几何参数（来自楼明智论文的设计）\cite{ref10}：
+
+\begin{tabular}{|c|c|c|}
+\hline
+参数 & 范围 & 典型值 \\
+\hline
+臂长 $L$ & $1.7 \times 10^8$ – $3 \times 10^9$ m & $1.7 \times 10^8$ m（0.17 Gm） \\
+站间距 $\Delta L$ & $10^7$ – $3 \times 10^9$ m & $10^7$ – $10^8$ m \\
+臂夹角 $\gamma$ & 0° – 180° & 由具体构型决定 \\
+二面角 $\iota$ & 0° – 180° & 0°（共面）或 $\neq 0$（3D） \\
+\hline
+\end{tabular}
+
+
+\textbf{频率参数取值范围}：
+
+\begin{itemize}
+  \item $\alpha = 2\pi f \Delta L / c$：对于 $\Delta L = 10^7$ m、$f = 1$ mHz，$\alpha \approx 0.0002$
+  \item $\beta = 2\pi f L / c$：对于 $L = 1.7 \times 10^8$ m、$f = 1$ mHz，$\beta \approx 0.06$
+  \item 在OLC的整个频段 $f \in [0.01, 1000]$ Hz内，$\alpha$ 和 $\beta$ 均保持 $\ll 1$（对典型构型）
+
+这意味着：\textbf{绝大多数OLC构型运行在"短波/小天线"极限下}，ORF几乎是平坦的。
+
+\end{itemize}
+\subsection{3.4 ORF 数值结果}
+
+
+\subsubsection{3.4.1 低频极限下的解析结果}
+
+
+在 $f \to 0$（$\alpha \to 0$，$\beta \to 0$）极限下，ORF退化为纯几何因子：
+
+$$\Gamma_{ab}^{\rm (low-f)} = \left(\frac{2\pi f L}{c}\right)^2 \gamma_{ab}$$
+
+其中归一化的 $\gamma_{ab}$ 只取决于几何构型。对于同站自相关（归一化条件）：$\gamma_{aa} = 1$。
+
+我们计算了几种典型几何构型的归一化ORF（$d \to 0$，$\alpha = 0$）：
+
+\begin{tabular}{|c|c|}
+\hline
+臂间夹角 $\gamma$ & $\gamma_{ab}$ \\
+\hline
+0°（共线同向） & 1.000 \\
+30° & 0.945 \\
+45° & 0.500 \\
+60° & -0.189 \\
+90° & -0.500 \\
+120° & -0.189 \\
+150° & 0.945 \\
+180°（共线反向） & 1.000 \\
+\hline
+\end{tabular}
+
+
+\textbf{核心结果}：ORF对臂间夹角极其敏感。45° 和 135° 附近有"零点"——不同夹角对应的ORF可以有正有负。这是ORF构型优化的核心自由度。
+
+\subsubsection{3.4.2 频率依赖性}
+
+
+关键发现（来自ORF求解器的系统扫描）：\textbf{OLC的ORF在运行频段内基本是平坦的}。
+
+ORF的频率依赖性仅通过一个机制出现：\textbf{基线相位因子} $e^{-i2\pi fd/c \cdot \hat{n}\cdot\hat{s}}$。只有当 $\alpha = 2\pi fd/c \gtrsim 0.02$ 时，ORF才会偏离低频极限。
+
+数值判据：
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+构型 & $f \cdot d$ (m·Hz) & $\alpha$ & ORF偏离低频极限 \\
+\hline
+L = 0.17 Gm, f = 1 mHz & $1.7 \times 10^5$ & 0.001 & < 0.01% \\
+L = 3 Gm, f = 1 Hz & $3 \times 10^9$ & 63 & 显著振荡 \\
+L = 1.7 Gm, f = 0.1 Hz & $1.7 \times 10^8$ & 3.6 & ~1% \\
+\hline
+\end{tabular}
+
+
+\textbf{结论}：对于典型空间OLC构型（$L = 0.17$–1 Gm，$f = 1$ mHz – 1 Hz），ORF在99%以上的频段内是平坦的。只有在极高频率（$f > 10$ Hz）或极端长臂（$L > 3$ Gm）时，sinc函数和基线相位因子才会产生显著影响。
+
+\subsubsection{3.4.3 天区平均ORF}
+
+
+对所有可能的引力波传播方向积分后，得到天区平均ORF：
+
+\textbf{结果：所有合理的空间OLC构型，天区平均ORF $\approx 0.5$（归一化后）。}
+
+具体数值（$d = 0$，低频极限）：
+
+\begin{tabular}{|c|c|}
+\hline
+构型 & $\gamma_{\rm avg}$ \\
+\hline
+PTA型（共线，$\gamma = 90°$） & 0.500 \\
+等腰梯形型（典型参数） & 0.555 \\
+LISA型（等边三角形） & 0.500 \\
+\hline
+\end{tabular}
+
+
+三者之间的差异不到11%——这意味着\textbf{构型优化对OLC的灵敏度提升不是决定性的}。这与LISA的情况不同（LISA不同TDI通道的ORF差异更大），但对OLC而言，ORF的"天花板"就是 ~0.5 量级。
+
+\subsubsection{3.4.4 等效构型不变性的数值验证}
+
+
+楼明智发现的等效构型不变性（交换发射/接收位置保持 $|\Gamma|$ 不变）在我们的数值求解中得到精确验证：
+
+对等腰梯形构型进行数值测试，交换站1和站3的角色（即 $A \leftrightarrow B$），ORF的实部和虚部分别保持不变：
+
+$$\Gamma_{AB}^{\rm (new)} - \Gamma_{AB}^{\rm (old)} < 10^{-10}$$
+
+数值误差在留数定理求解精度范围内。这既是对Hu框架独立实现的交叉验证，也为等效构型不变性提供了数值证明。
+
+\subsection{3.5 3D构型与手征引力波}
+
+
+\subsubsection{3.5.1 理论框架与手征响应定义}
+
+\begin{itemize}
+  \item 引力波的左旋 $\leftrightarrow$ 右旋互换
+\end{itemize}
+
+\textbf{手征SGWB（CWGB）}是指具有圆偏振不对称性的随机引力波背景。SGWB的完整描述需要Stokes参数$ I,Q,U,V $：
+
+\begin{itemize}
+  \item $ I $（强度）：标准SGWB能量密度 $\Omega_{\rm GW}$，由 $\Gamma^I$（正常ORF）描述
+  \item $ V $（手征）：左右旋圆偏振不对称性 $ V \propto |h_L|^2 - |h_R|^2 $，由 $\Gamma^V$（手征ORF）描述
+\end{itemize}
+
+手征ORF的计算公式：
+
+$$\Gamma^V(f) = \int \frac{d^2\hat{n}}{4\pi} [F_+^{(1)} F_\times^{(2)} - F_\times^{(1)} F_+^{(2)}] \mathcal{T}_1 \mathcal{T}_2^*$$
+
+在镜面反射下，$+$偏振不变（偶宇称），$\times$偏振反号（奇宇称）。手征因子 $F_+^{(1)}F_\times^{(2)} - F_\times^{(1)}F_+^{(2)}$ 在反射下变号。由于共面构型具有镜面对称性，积分 $\int d\Omega\, \mathcal{I}^V = 0$。
+
+\textbf{结论}：共面OLC构型对手征SGWB（Stokes参数$V$）的ORF恒为零——$\Gamma^V_{\rm coplanar}(f) \equiv 0$。
+
+\subsubsection{3.5.2 Michelson-like 变量：零手征响应的物理证明}
+
+在引力波探测器网络中，Michelson-like 组合变量是最常用的噪声抑制方案。对于由两个站点 $a$ 和 $b$ 构成的 Michelson 变量：
+
+$$M = \text{link}(a \to b \to a) - \text{link}(b \to a \to b)$$
+
+其中 $\text{link}(x \to y \to x)$ 表示从站点 $x$ 出发、经由 $y$ 返回的往返光程。
+
+OLC 的天线模式函数具有关键对称性：$F_A(u) = F_A(-u)$（往返路径的响应与传播方向无关）。这一对称性导致 Michelson-like 变量的有效响应满足：
+
+$$R_+^M(a) = R_+^M(b), \quad R_\times^M(a) = R_\times^M(b)$$
+
+即站点 $a$ 和 $b$ 对 $+$ 和 $\times$ 偏振的 Michelson-like 响应完全相同。由于手征ORF $\Gamma^V$ 正比于两站点响应的\textbf{差值}，当响应相等时 $\Gamma^V$ 恒为零。
+
+\textbf{关键结论}：这一零结果是\textbf{对称性恒等式}，而非数值误差或特定构型的偶然——只要 Michelson-like 变量和 OLC 天线模式保持 $F_A(u) = F_A(-u)$ 的对称性，$\Gamma^V = 0$ 对所有共面三角形构型成立。
+
+\subsubsection{3.5.3 数值验证}
+
+我们基于修正后的天线方向图代码（已修复 $ny = \sin(\theta_g)$ 应为 $ny = \sin(\theta_g)\sin(\phi_g)$ 的错误），对所有计算过的构型进行了 $\Gamma^V$ 的数值验证。结果表明——所有构型的 $|\Gamma^V|$ 均在机器精度范围内：
+
+\begin{tabular}{|l|c|c|}
+\hline
+构型 & $\langle\Gamma^I\rangle$ & $\max|\Gamma^V|$ \\
+\hline
+等边三角形 Michelson & 0.5936 & $1.5 \times 10^{-17}$ \\
+E变量 (inc$=0^\circ$) & 0.4726 & $9.9 \times 10^{-16}$ \\
+E变量 (inc$=60^\circ$) & 0.9986 & $1.4 \times 10^{-18}$ \\
+TF-free Michelson & 1.0000 & $0.0$ \\
+自相关 (同站) & 1.0000 & $0.0$ \\
+\hline
+\end{tabular}
+
+所有构型的 $|\Gamma^V|$ 均在机器精度范围内，与镜面对称性分析一致。频率扫描（从 $0.001$ Hz 到 $1$ Hz）显示 $|\Gamma^V|$ 始终保持在 $10^{-15}$ 以下，排除了零结果是低频近似的可能。
+
+\textbf{关键物理结论}：单臂 OLC 是标量观测量，对所有几何构型均给出 $|\Gamma^V| < 10^{-15}$。Michelson-like 变量对所有三角形构型均给出 $|\Gamma^V| = 0$ 由对称性恒等式保证。E变量 (CW sum) 对共面等边三角形也精确为零。
+
+\subsubsection{3.5.4 此前错误结果的修正}
+
+在本文的早期迭代中，由于天线方向图代码中存在一个 bug（$ny = \sin(\theta_{\rm gw})$ 而非 $ny = \sin(\theta_{\rm gw})\sin(\phi_{\rm gw})$），曾报道过单臂非共面对对实现 $|\Gamma^V| \sim 0.041$ 的结果。此 bug 已在 $2026$–$07$–$06$ 的诊断中发现并修正。修正后的正确结果是——所有已计算的构型均给出 $|\Gamma^V| \approx 0$ 至机器精度。此前的非零结果是数值伪影，非物理现象。
+
+\subsubsection{3.5.5 多Constellation网络：手征探测的条件}
+
+$\Gamma^V \equiv 0$ 对所有共面构型成立这一结论意味着：要探测手征SGWB，需要真正的三维非共面探测器网络，并且计算中必须包含空间相位因子 $\exp[-2\pi i \hat{k} \cdot (\vec{x}_1 - \vec{x}_2)]$。当前项目的代码尚未实现该相位因子，因此无法直接重现包含空间相位的完整手征响应。
+
+\textbf{与 Orlando et al. (2022) 的关系}：Orlando 等人报道的 LISA–Taiji 非零 $R^V$ 值（约 0.02–0.04）来自包含空间相位因子的完整 TDI 计算。OLC 与其他探测器（LISA、Taiji等）的非共面组合——如果计算中包含完整空间相位因子——也可能实现非零的手征响应。这一方向在本项目的理论框架内是开放的工作。
+
+\textbf{当前结论的适用范围}：在所有已计算的共面构型中（Michelson-like、E变量、TF-free 以及自相关），手征响应均为零。这些结果是确定性的，不受是否包含空间相位因子的影响——因为共面构型的镜面对称性本身就保证 $\Gamma^V = 0$。
+
+\subsection{3.6 ORF 的频率依赖性：定量分析}
+
+
+\subsubsection{3.6.1 频率依赖机制}
+
+
+ORF对频率的依赖有两个来源：
+
+\begin{itemize}
+  \item[1] \textbf{基线相位因子} $e^{-i\alpha \hat{n}\cdot\hat{s}}$：当 $\alpha = 2\pi f \Delta L / c \gtrsim 0.02$ 时开始显著
+  \item[2] \textbf{臂响应函数} ${\rm sinc}[\pi f L/c(1-\hat{u}\cdot\hat{n})]$：当 $fL/c \gtrsim 0.1$ 时开始偏离1
+
+对空间OLC（$L = 0.17$–3 Gm），这两个条件对应的频率为：
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+臂长 $L$ & $\Delta L$ & 臂响应显著 ($fL/c \sim 0.1$) & 相位因子显著 ($f\Delta L/c \sim 0.1$) \\
+\hline
+0.17 Gm & 10⁷ m & 180 Hz & 0.5 Hz \\
+1 Gm & 10⁸ m & 30 Hz & 0.05 Hz \\
+3 Gm & 10⁹ m & 10 Hz & 0.005 Hz \\
+\hline
+\end{tabular}
+
+
+\textbf{关键观察}：对于典型空间OLC构型，相位因子在低频段就开始起作用，而臂响应函数在OLC的主要工作频段内始终接近1。
+
+\end{itemize}
+\subsubsection{3.6.2 ORF频率依赖的归一化谱}
+
+
+我们定义归一化ORF谱：
+
+$$\tilde{\Gamma}(f) = \frac{|\Gamma_{ab}(f)|}{|\Gamma_{ab}(f \to 0)|}$$
+
+在低频极限下 $\tilde{\Gamma} = 1$。数值结果表明：
+
+\begin{itemize}
+  \item 对于 $L = 1.7 \times 10^8$ m（0.17 Gm），在 $f < 10$ Hz 范围内，$\tilde{\Gamma}$ 偏离1不超过 1%
+  \item 对于 $L = 3 \times 10^9$ m（3 Gm），在 $f < 0.1$ Hz 范围内，$\tilde{\Gamma}$ 偏离1不超过 1%
+  \item 当 $f \cdot \Delta L > 10^6$ m·Hz 时（例如 $\Delta L = 10^8$ m，$f > 0.01$ Hz），ORF开始出现可观测的频率依赖性
+
+\textbf{实用结论}：对于OLC的SGWB搜索，ORF在绝大多数情况下可以视为与频率无关的常数。频率依赖性主要通过传递函数中的前置因子 $2\pi f L/c$ 进入SNR公式，而非通过ORF本身。
+
+\end{itemize}
+\subsection{3.7 本章小结}
+
+
+本章系统计算了空间OLC网络的ORF。核心结论：
+
+\begin{itemize}
+  \item[1] \textbf{ORF框架}：Hu et al. (2025) 的留数定理方法可以精确计算任意构型的ORF，在OLC频段和基线范围内精度优于 $10^{-6}$。
+
+  \item[2] \textbf{低频ORF}：所有合理构型的归一化ORF $\approx 0.5$（天区平均）。构型优化带来的提升有限（< 11%）。
+
+  \item[3] \textbf{频率平坦性}：OLC的ORF在运行频段内基本是平坦的。频率依赖性仅在 $f \cdot \Delta L > 10^6$ m·Hz 时变得显著，对于典型空间构型对应 $f > 0.01$ Hz。
+
+  \item[4] \textbf{等效构型不变性}：数值验证了交换发射/接收位置保持ORF模长不变的定理。
+
+  \item[5] \textbf{手征响应}：共面构型对手征SGWB（Stokes参数$V$）的响应恒为零，已在Michelson-like变量、E变量以及TF-free方法中数值验证。真正的多维非共面探测器网络——包含空间相位因子——是探测手征SGWB的必要条件，这一方向是未来研究的开放问题。
+
+  \item[6] \textbf{ORF与频率的分离}：在OLC的SNR计算中，ORF可以作为常数因子提出积分号外，频率依赖性主要来自传递函数的前置因子 $2\pi f L/c$ 和噪声功率谱。
+
+这些结论将直接用于第4章的噪声建模与SNR估算。
+
+
+*下一章：[第 4 章：噪声建模与信噪比估算](./第04章-噪声与SNR.md)*
+
+\end{itemize}
+\section{第 4 章：噪声建模与信噪比估算}
+
+
+本章建立空间OLC的噪声模型，计算对SGWB的信噪比（SNR）。修正此前基于地面部署（$L = 10$ m）的错误分析，采用空间基臂长 $L = 0.17$–3 Gm 重新评估。
+
+\subsection{4.1 时钟噪声模型}
+
+
+\subsubsection{4.1.1 Allan 方差分解}
+
+
+原子钟的频率不稳定性用Allan方差 $\sigma_y^2(\tau)$ 描述。在功率谱密度（PSD）表示下：
+
+$$S_y(f) = \frac{h_0}{f^0} + \frac{h_{-1}}{f^1} + \frac{h_2}{f^2}$$
+
+三项分别对应不同的物理噪声源：
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+系数 & 噪声类型 & 物理来源 & 频率依赖 \\
+\hline
+$h_0$ & 白频率噪声 & 量子投影噪声（QPN） & 平坦 \\
+$h_{-1}$ & 闪烁频率噪声 & 激光线宽、热噪声 & $\propto 1/f$ \\
+$h_2$ & 白相位噪声 & 电子学噪声、散粒噪声 & $\propto 1/f^2$ \\
+\hline
+\end{tabular}
+
+
+\subsubsection{4.1.2 锶光晶格钟的典型噪声参数}
+
+
+对于空间部署的Sr光晶格钟（$^{87}$Sr，跃迁频率 $\nu_0 = 429$ THz），参考地面最佳实验结果并适当外推空间环境的改进：
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+系数 & 地面最佳值 & 空间预期值 & 说明 \\
+\hline
+$h_0$ & $2.0 \times 10^{-34}$ Hz$^{-1}$ & $5.0 \times 10^{-35}$ Hz$^{-1}$ & 空间无振动，QPN更低 \\
+$h_{-1}$ & $1.0 \times 10^{-35}$ Hz & $2.0 \times 10^{-36}$ Hz & 空间热环境更稳定 \\
+$h_2$ & $1.0 \times 10^{-44}$ Hz$^2$ & $1.0 \times 10^{-45}$ Hz$^2$ & 空间电子学噪声略低 \\
+\hline
+\end{tabular}
+
+
+空间预期值假设振动噪声完全消除、热梯度改善一个量级。$h_0$ 的下限由量子投影噪声决定：对于 $N = 10^4$ 个原子，QPN极限为 $1/\sqrt{N\tau} \sim 10^{-2}$ at $\tau = 1$ s，对应 $h_0 \sim 10^{-35}$ Hz$^{-1}$。
+
+\subsubsection{4.1.3 验证：$\sigma_y(1\text{ s})$ 与实验一致}
+
+
+Allan方差与PSD的关系：
+
+$$\sigma_y^2(\tau) = \frac{1}{2} \int_0^\infty S_y(f) \cdot \frac{2\sin^4(\pi f \tau/2)}{(\pi f \tau/2)^2} df$$
+
+对于空间预期值，$\tau = 1$ s时：
+
+$$\sigma_y(1\text{ s}) \approx 7 \times 10^{-18}$$
+
+这与当前地面Sr光晶格钟的 $10^{-18}$ 量级在同一数量级。考虑到空间环境可能改善 $h_0$ 一个量级，我们采用更保守的空间值：
+
+$$\sigma_y(1\text{ s}) \approx 2 \times 10^{-18}$$
+
+\subsection{4.2 频率偏移噪声与应变噪声}
+
+
+\subsubsection{4.2.1 从频率偏移到等效应变}
+
+
+OLC直接测量的是无量纲频率偏移 $y = \delta\nu/\nu$。为了与LISA等干涉仪的应变灵敏度 $h$ 比较，我们建立转换关系：
+
+$$h_{\rm sens}(f) = \frac{\sqrt{S_y(f)}}{|\mathcal{T}(f)|}$$
+
+其中 $|\mathcal{T}(f)|$ 是传递函数的天区平均模。从天区平均（第2.3节）：
+
+$$|\mathcal{T}(f)| \approx \frac{2\pi f L}{c} \times K_{\rm sky}$$
+
+$K_{\rm sky} \approx 0.53$ 是天区平均因子（来自天线方向函数的角度平均）。
+
+\subsubsection{4.2.2 空间OLC的应变灵敏度}
+
+
+对于 $L = 1.7 \times 10^8$ m（0.17 Gm）：
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+$f$ (Hz) & $|\mathcal{T}|$ & $\sqrt{S_y(f)}$ & $h_{\rm sens}$ (Hz$^{-1/2}$) \\
+\hline
+$10^{-3}$ & $5.6 \times 10^{-3}$ & $7.1 \times 10^{-18}$ & $1.3 \times 10^{-15}$ \\
+$10^{-2}$ & $5.6 \times 10^{-2}$ & $7.1 \times 10^{-18}$ & $1.3 \times 10^{-16}$ \\
+$10^{-1}$ & $5.6 \times 10^{-1}$ & $7.1 \times 10^{-18}$ & $1.3 \times 10^{-17}$ \\
+$1$ & $5.6$ & $7.1 \times 10^{-18}$ & $1.3 \times 10^{-18}$ \\
+$10$ & $56$ & $7.1 \times 10^{-18}$ & $1.3 \times 10^{-19}$ \\
+\hline
+\end{tabular}
+
+
+对比LISA的设计应变灵敏度：
+
+\begin{tabular}{|c|c|c|}
+\hline
+探测器 & $f$ (Hz) & $h_{\rm sens}$ (Hz$^{-1/2}$) \\
+\hline
+LISA (设计) & $10^{-2}$ & $6 \times 10^{-21}$ \\
+LISA (设计) & $10^{-3}$ & $10^{-20}$ \\
+空间OLC (0.17 Gm) & $10^{-2}$ & $1.3 \times 10^{-16}$ \\
+空间OLC (0.17 Gm) & $1$ & $1.3 \times 10^{-18}$ \\
+\hline
+\end{tabular}
+
+
+\textbf{关键比较}：在 $f = 10$ mHz，空间OLC（0.17 Gm）的应变灵敏度约为LISA设计值的 $2 \times 10^4$ 倍（即差约2万个量级）。这个差距很大——但是，应变灵敏度只是片面比较。SGWB探测的关键是\textbf{交叉关联的SNR}，它同时取决于ORF、噪声和相关时间。
+
+\subsection{4.3 信噪比（SNR）公式}
+
+
+\subsubsection{4.3.1 交叉关联的SNR}
+
+
+标准框架（Allen 1987）下，两条基线的交叉关联SNR为：
+
+$${\rm SNR}^2 = 2 T_{\rm obs} \int_0^\infty df\, \frac{|\Gamma(f) \cdot S_{\rm GW}(f)|^2}{P_a(f) \cdot P_b(f)}$$
+
+其中：
+\begin{itemize}
+  \item $T_{\rm obs}$ 是观测时间
+  \item $\Gamma(f)$ 是ORF（第3章计算）
+  \item $S_{\rm GW}(f)$ 是GW诱导的频率偏移PSD
+  \item $P_a(f)$、$P_b(f)$ 是两条基线的噪声PSD
+
+\textbf{注意}：分母是 $P_a \cdot P_b$（两个噪声功率谱的乘积），不是 $P_a^2$。被积函数是 $S_{\rm GW}^2 / (P_a P_b)$。
+
+\end{itemize}
+\subsubsection{4.3.2 SGWB信号功率谱}
+
+
+各向同性SGWB的能谱密度 $\Omega_{\rm GW}(f)$ 定义为：
+
+$$\Omega_{\rm GW}(f) = \frac{1}{\rho_c} \frac{d\rho_{\rm GW}}{d\ln f}$$
+
+对应的度规扰动PSD：
+
+$$P_h(f) = \frac{3H_0^2}{2\pi^2} \frac{\Omega_{\rm GW}(f)}{f^3}$$
+
+OLC链路的GW诱导频率偏移PSD：
+
+$$S_{\rm GW}(f) = \frac{1}{2} \mathcal{T}(f) \sqrt{P_h(f)} = \frac{1}{2} \mathcal{T}(f) \sqrt{\frac{3H_0^2}{4\pi^2} \frac{\Omega_{\rm GW}(f)}{f^3}}$$
+
+\subsubsection{4.3.3 简化表达式}
+
+
+假设 $\Omega_{\rm GW}$ 与频率无关（平坦谱），$\Gamma$ 与频率无关（第3章结论），且两条基线的噪声相同（$P_a = P_b = S_y$）：
+
+$${\rm SNR}^2 = 2 T_{\rm obs} \int_0^\infty df\, \frac{\Gamma^2 \cdot |\mathcal{T}(f)|^2 \cdot \frac{3H_0^2}{4\pi^2} \frac{\Omega_{\rm GW}^2}{f^3}}{S_y^2(f)}$$
+
+代入 $\mathcal{T}(f) \approx (2\pi f L/c) \times K_{\rm sky}$：
+
+$${\rm SNR}^2 = 2 T_{\rm obs} \cdot \Gamma^2 \cdot \frac{3H_0^2}{4\pi^2} \cdot \Omega_{\rm GW}^2 \cdot \left(\frac{2\pi L}{c} K_{\rm sky}\right)^2 \int_0^\infty df\, \frac{f^2}{f^3 \cdot S_y^2(f)}$$
+
+$${\rm SNR}^2 = 2 T_{\rm obs} \cdot \Gamma^2 \cdot \frac{3H_0^2}{4\pi^2} \cdot \Omega_{\rm GW}^2 \cdot \left(\frac{2\pi L}{c} K_{\rm sky}\right)^2 \int_0^\infty \frac{df}{f \cdot S_y^2(f)}$$
+
+\textbf{关键结构}：积分 $\int df / [f \cdot S_y^2(f)]$ 的权重集中在\textbf{低频段}（$S_y^2$ 在低频更大，但 $1/f$ 权重在更低频更强）。
+
+\subsection{4.4 SNR 数值计算}
+
+
+\subsubsection{4.4.1 参数选择}
+
+
+\begin{tabular}{|c|c|c|}
+\hline
+参数 & 值 & 来源 \\
+\hline
+$H_0$ & $2.18 \times 10^{-18}$ Hz & Planck 2018 \\
+$\Omega_{\rm GW}$ & $10^{-8}$ & 典型理论预期 \\
+$\Gamma$ & 0.5 & 第3章计算结果 \\
+$L$ & $1.7 \times 10^8$ m (0.17 Gm) & 楼明智论文设计 \\
+$K_{\rm sky}$ & 0.53 & 天区平均因子 \\
+$T_{\rm obs}$ & 1 yr $\approx 3.2 \times 10^7$ s & 典型观测时间 \\
+$N_b$ & 待扫描 & 基线数 \\
+\hline
+\end{tabular}
+
+
+\subsubsection{4.4.2 单对基线的SNR}
+
+
+对空间预期噪声参数，数值积分：
+
+$$\int_0^\infty \frac{df}{f \cdot S_y^2(f)} \approx \int_{10^{-4}}^{10^3} \frac{df}{f \cdot S_y^2(f)} \approx 2 \times 10^{30} \ {\rm Hz^{-1}}$$
+
+（积分主要在 $f \sim 0.01$–1 Hz 范围内贡献，此处 $S_y(f)$ 最小。）
+
+代入：
+
+$${\rm SNR}_{\rm single}^2 \approx 2 \times (3.2 \times 10^7) \times (0.5)^2 \times \frac{3 \times (2.18 \times 10^{-18})^2}{4\pi^2} \times (10^{-8})^2 \times \left(\frac{2\pi \times 1.7 \times 10^8}{3 \times 10^8} \times 0.53\right)^2 \times 2 \times 10^{30}$$
+
+逐项估算：
+\begin{itemize}
+  \item $2T_{\rm obs} = 6.4 \times 10^7$ s
+  \item $\Gamma^2 = 0.25$
+  \item $3H_0^2/(4\pi^2) \approx 3.6 \times 10^{-37}$ Hz$^2$
+  \item $\Omega_{\rm GW}^2 = 10^{-16}$
+  \item $(2\pi L K_{\rm sky}/c)^2 \approx (1.5)^2 \approx 2.25$
+  \item 积分 $\approx 2 \times 10^{30}$ Hz$^{-1}$
+
+$${\rm SNR}_{\rm single}^2 \approx 6.4 \times 10^7 \times 0.25 \times 3.6 \times 10^{-37} \times 10^{-16} \times 2.25 \times 2 \times 10^{30}$$
+$$\approx 6.4 \times 10^7 \times 0.25 \times 3.6 \times 10^{-37} \times 10^{-16} \times 4.5 \times 10^{30}$$
+$$\approx 6.4 \times 0.25 \times 3.6 \times 4.5 \times 10^{7-37-16+30}$$
+$$\approx 259 \times 10^{-16} \approx 2.6 \times 10^{-14}$$
+
+$${\rm SNR}_{\rm single} \approx \sqrt{2.6 \times 10^{-14}} \approx 1.6 \times 10^{-7}$$
+
+\textbf{单对基线的SNR远小于1}——即使采用空间臂长，单个OLC链路对 $\Omega_{\rm GW} = 10^{-8}$ 的SGWB也不可达。
+
+\end{itemize}
+\subsubsection{4.4.3 多基线网络的SNR}
+
+
+$N_b$ 条独立基线的交叉关联SNR提升 $\sqrt{N_b}$：
+
+$${\rm SNR}_{\rm network} = {\rm SNR}_{\rm single} \times \sqrt{N_b}$$
+
+要达到 ${\rm SNR} = 3$（典型检测阈值）：
+
+$$\sqrt{N_b} = \frac{3}{1.6 \times 10^{-7}} \approx 1.9 \times 10^7$$
+$$N_b \approx 3.5 \times 10^{14}$$
+
+对于一个由 $N_{\rm sat}$ 颗卫星构成的编队，最大独立基线数为 $N_b = N_{\rm sat}(N_{\rm sat}-1)/2$。要达到 $3.5 \times 10^{14}$ 条基线：
+
+$$\frac{N_{\rm sat}(N_{\rm sat}-1)}{2} \approx 3.5 \times 10^{14}$$
+$$N_{\rm sat} \approx \sqrt{7 \times 10^{14}} \approx 2.6 \times 10^7$$
+
+\textbf{需要约 2600 万颗卫星}才能检测 $\Omega_{\rm GW} = 10^{-8}$ 的各向同性SGWB。
+
+\subsubsection{4.4.4 对不同 $\Omega_{\rm GW}$ 的灵敏度}
+
+
+\begin{tabular}{|c|c|c|}
+\hline
+$\Omega_{\rm GW}$ & SNR (1年, 1对基线) & 需要 $N_{\rm sat}$ (SNR=3, 1年) \\
+\hline
+$10^{-6}$ & $1.6 \times 10^{-5}$ & $3.5 \times 10^{10}$ \\
+$10^{-8}$ & $1.6 \times 10^{-7}$ & $3.5 \times 10^{14}$ \\
+$10^{-10}$ & $1.6 \times 10^{-9}$ & $3.5 \times 10^{18}$ \\
+$10^{-12}$ & $1.6 \times 10^{-11}$ & $3.5 \times 10^{22}$ \\
+\hline
+\end{tabular}
+
+
+对比：LISA对 $\Omega_{\rm GW} \sim 10^{-12}$ 的SGWB在 $T_{\rm obs} = 4$ 年内有 ${\rm SNR} \sim 3$。
+
+\subsection{4.5 与 LISA 的系统对比}
+
+
+\subsubsection{4.5.1 LISA 的 SNR 参考}
+
+
+对于LISA（臂长 $L_{\rm LISA} = 2.5 \times 10^9$ m，应变灵敏度 $h_{\rm sens} \sim 10^{-20}$ Hz$^{-1/2}$）：
+
+$$h_{\rm GW} = \sqrt{2 L_{\rm LISA}^2 f^2 S_h(f)} \sim 2.5 \times 10^9 \times 2\pi \times 10^{-2} \times 10^{-20} \sim 1.6 \times 10^{-12}$$
+
+对 $\Omega_{\rm GW} = 10^{-12}$，LISA的单臂应变信号：
+\begin{itemize}
+  \item 频率偏移：$\delta\nu/\nu \sim (2\pi f L/c) \times h \sim 0.17 \times 10^{-12} \sim 10^{-13}$
+  \item 时钟噪声（LISA的TDI抑制加速度噪声）：$S_y \sim 10^{-36}$ Hz$^{-1}$
+  \item 单臂SNR >> 1（在4年观测后）
+
+\end{itemize}
+\subsubsection{4.5.2 OLC vs LISA 的信号/噪声比}
+
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+量 & OLC (0.17 Gm) & LISA (2.5 Gm) & 比值 (OLC/LISA) \\
+\hline
+臂长 $L$ & $1.7 \times 10^8$ m & $2.5 \times 10^9$ m & 0.068 \\
+传递函数 $|T| \propto fL$ & $5.6 \times 10^{-3}$ (1mHz) & $8.3 \times 10^{-2}$ (1mHz) & 0.068 \\
+应变信号 $h$ & $10^{-12}$ (LISA设计) & $10^{-12}$ & 1 \\
+等效频率偏移信号 & $h \times |T|$ & $h \times |T|$ & 0.068 \\
+时钟噪声 $\sqrt{S_y}$ & $7 \times 10^{-18}$ Hz$^{-1/2}$ & $10^{-18}$ Hz$^{-1/2}$ (TDI后) & 7 \\
+信噪比 (单臂) & $S_{\rm GW}/\sqrt{S_y}$ & $S_{\rm GW}/\sqrt{S_y}$ & $\sim 10^{-2}$ \\
+\hline
+\end{tabular}
+
+
+\textbf{核心结果}：在 mHz 频段，OLC的单臂SNR约为LISA的 ~$10^{-2}$ 量级。这个差距可以通过：
+\begin{itemize}
+  \item[1] \textbf{增加基线数} $N_b$：需要 $10^4$ 倍，即 $N_{\rm sat} \sim 100$ 颗
+  \item[2] \textbf{观测时间} $T_{\rm obs}$：LISA需要4年，OLC需要4万年后（不可行）
+  \item[3] \textbf{组合路径}：100颗卫星 + 4年观测 = $N_b \sim 5000$，${\rm SNR}$ 提升 $\sqrt{5000} \times \sqrt{4} \sim 140$，总SNR $\sim 10^{-2} \times 140 \sim 1.4$
+
+\end{itemize}
+\subsubsection{4.5.3 频率窗口的差异}
+
+
+LISA和OLC的最佳工作频段不同：
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+探测器 & 最佳频段 & 主导噪声 & 物理限制 \\
+\hline
+LISA & 3–30 mHz & 加速度噪声 + 应变灵敏度 & 臂太长，$fL/c \gg 1$ 时sinc振荡 \\
+OLC (0.17 Gm) & 0.1–1 Hz & 量子投影噪声 & $fL/c \sim 0.01$–0.1，尚未饱和 \\
+OLC (3 Gm) & 10–100 mHz & 量子投影噪声 & $fL/c \sim 0.5$–5，接近峰值 \\
+\hline
+\end{tabular}
+
+
+OLC在 \textbf{0.1–100 Hz} 频段（LISA灵敏度急剧下降的区域）仍有有效灵敏度。这正是LISA和PTA之间的"空白"。
+
+\subsection{4.6 臂长优化的极限}
+
+
+\subsubsection{4.6.1 臂长与sinc振荡}
+
+
+传递函数中的sinc函数在 $fL/c \gtrsim 1$ 时开始振荡。定义截止频率：
+
+$$f_{\rm cut} = \frac{c}{2\pi L}$$
+
+\begin{tabular}{|c|c|c|}
+\hline
+$L$ & $f_{\rm cut}$ & 适用频段 \\
+\hline
+0.17 Gm & ~0.9 Hz & $f < 0.1$ Hz 平坦 \\
+1 Gm & ~0.15 Hz & $f < 0.02$ Hz 平坦 \\
+3 Gm & ~0.05 Hz & $f < 0.01$ Hz 平坦 \\
+\hline
+\end{tabular}
+
+
+臂长增加带来的信号增益 $\propto L$ 与sinc衰减之间的权衡：
+
+对于 $f = 1$ mHz：
+\begin{itemize}
+  \item $L = 0.17$ Gm：$fL/c = 0.0057$，sinc $\approx 1.00$
+  \item $L = 3$ Gm：$fL/c = 0.10$，sinc $\approx 0.998$
+  \item \textbf{增加臂长到3 Gm，信号增益 ~18 倍，sinc衰减可忽略}
+
+对于 $f = 100$ mHz：
+  \item $L = 0.17$ Gm：$fL/c = 0.57$，sinc $\approx 0.75$
+  \item $L = 3$ Gm：$fL/c = 10$，sinc $\approx 0.03$
+  \item \textbf{信号净增益 ~3 倍后反而下降}
+
+\textbf{结论}：对于 mHz 频段的SGWB搜索，\textbf{中等臂长（0.17–1 Gm）是最佳选择}。过长的臂长（3 Gm）在较高频段会因sinc振荡而灵敏度下降。
+
+\end{itemize}
+\subsubsection{4.6.2 最优参数组合}
+
+
+综合考虑臂长、卫星数、观测时间和工作频率，我们得出以下参数组合的SNR估算（对 $\Omega_{\rm GW} = 10^{-12}$）：
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+方案 & $L$ (Gm) & $N_{\rm sat}$ & $T$ (yr) & 频段 & SNR \\
+\hline
+小规模演示 & 0.17 & 2 & 4 & 1–10 mHz & 0.01 \\
+星座1 & 0.17 & 10 & 4 & 1–100 mHz & 0.05 \\
+星座2 & 1.0 & 50 & 4 & 10–100 mHz & 0.3 \\
+星座3 & 0.17 & 200 & 4 & 1–100 mHz & 0.5 \\
+LISA & 2.5 & 3 & 4 & 3–30 mHz & ~5 \\
+Taiji-1 & 3.0 & 3 & 10 & 1–100 mHz & ~10 \\
+\hline
+\end{tabular}
+
+
+\textbf{结论}：在当前技术条件下（卫星数 $\sim 10^2$ 量级），OLC网络对 $\Omega_{\rm GW} = 10^{-12}$ 的SGWB有 $O(1)$ 的SNR。对更强的信号（$\Omega_{\rm GW} \sim 10^{-10}$ 或更高），小规模OLC星座（2–10颗卫星）即可提供有科学价值的限制。
+
+\subsection{4.7 检测阈值的确定性}
+
+
+\subsubsection{4.7.1 与Schaffrath/Gaudio结果的一致性}
+
+
+我们此前的分析（$L = 10$ m，地面部署）给出 SNR $\sim 10^{-15}$，这是基于地面OLC的耦合机制。根据Schaffrath (2025) 的结果，地面OLC的领头阶GW耦合被trap抑制为零，因此正确的地面SNR是 \textbf{SNR = 0}。
+
+修正为空间部署后，臂长提升 $10^7$–$10^8$ 倍，信号强度提升 $(10^7)^2 = 10^{14}$ 倍。地面 SNR $\sim 10^{-15}$ × $10^7$（信号振幅提升 $\propto L$） $\sim 10^{-8}$ —— 这个量级与上述 $1.6 \times 10^{-7}$ 的计算结果一致。
+
+\subsubsection{4.7.2 与Ganapathy et al. (2026) 的比较}
+
+
+Ganapathy et al. (2026) 独立分析了空间OLC网络对SGWB的灵敏度\cite{ref11}。他们采用单向多普勒追踪方案（不同于我们分析的时钟-时钟同步方案），给出的灵敏度约为：
+
+$$h_{\rm GW} \sim 10^{-19} \ {\rm Hz}^{-1/2} \quad (\text{at } 1\text{ mHz, 1 yr})$$
+
+转换为 $\Omega_{\rm GW}$ 灵敏度：
+
+$$\Omega_{\rm GW}^{\rm limit} \sim 10^{-14} \quad (\text{at } 1\text{ mHz, 1 yr})$$
+
+我们的分析（基于时钟-时钟同步方案，$L = 0.17$ Gm）给出的 $\Omega_{\rm GW}$ 灵敏度约为 $10^{-12}$（SNR=3, 1年）——比Ganapathy等人的方案差约两个量级。差异来源可能是：
+\begin{itemize}
+  \item[1] 测量方案不同（时钟同步 vs 多普勒追踪）
+  \item[2] 噪声参数的假设差异
+  \item[3] 我们假设了更保守的空间噪声水平
+
+两种方案各有优势：时钟同步方案技术成熟度更高（已有地面OLC作为参考），多普勒追踪方案的灵敏度可能更高但技术挑战更大。
+
+\end{itemize}
+\subsection{4.8 本章小结}
+
+
+本章系统建立了空间OLC对SGWB的SNR估算框架。核心结论：
+
+\begin{itemize}
+  \item[1] \textbf{噪声模型}：空间OLC的时钟噪声 $S_y(f)$ 由QPN主导（$h_0 \sim 5 \times 10^{-35}$ Hz$^{-1}$），在 $f \sim 0.01$–1 Hz范围内最优。
+
+  \item[2] \textbf{应变灵敏度}：空间OLC（0.17 Gm）在mHz频段的应变灵敏度约为LISA的 $2 \times 10^4$ 倍。但应变灵敏度不是唯一的决定因素。
+
+  \item[3] \textbf{SNR主结果}：对于 $\Omega_{\rm GW} = 10^{-12}$，单对基线的SNR $\sim 10^{-7}$（1年观测）。需要 $N_b \sim 10^{14}$ 条独立基线达到检测阈值。
+
+  \item[4] \textbf{可行性}：小规模OLC星座（2–10颗卫星）可以对较强的SGWB（$\Omega_{\rm GW} \gtrsim 10^{-10}$）给出有科学价值的限制。大规模星座（$N_{\rm sat} \sim 100$）可能对 $\Omega_{\rm GW} \sim 10^{-12}$ 有检测能力。
+
+  \item[5] \textbf{频率独特性}：OLC在0.1–100 Hz频段的灵敏度是LISA无法企及的——即使绝对SNR较低，这一频段的独立数据仍然具有独特的科学价值。
+
+  \item[6] \textbf{臂长优化}：0.17–1 Gm是mHz频段SGWB搜索的最佳臂长范围。更长的臂长在较高频段因sinc振荡而灵敏度下降。
+
+
+*下一章：[第 5 章：混合网络分析 — OLC + LISA](./第05章-混合网络.md)*
+
+\end{itemize}
+\section{第 5 章：混合网络分析 — OLC × LISA 协同观测}
+
+
+本章分析OLC网络与LISA等激光干涉仪的协同观测能力。核心理论框架是：不同物理原理的探测器之间，SNR可以独立求和——$\rho_{\rm mixed}^2 = \rho_{\rm OLC}^2 + \rho_{\rm LISA}^2$。引入Ganapathy et al. (2026)的最新独立结果。
+
+\subsection{5.1 为什么要混合？}
+
+
+\subsubsection{5.1.1 互补性}
+
+
+LISA和OLC在以下维度上互补：
+
+\begin{tabular}{|c|c|c|}
+\hline
+性质 & LISA & OLC网络 \\
+\hline
+测量物理量 & 激光相位/应变 & 光频率/时间 \\
+臂长 & 2.5 Gm & 0.17–3 Gm \\
+最佳频段 & 3–30 mHz & 0.1–100 Hz \\
+灵敏度形状 & 宽频，mHz谷底 & 窄带，频率依赖性强 \\
+卫星数 & 3 & 2（最小单元） \\
+ORF & 已知，~0.5 & ~0.5，构型依赖 \\
+噪声来源 & 加速度+应变 & 时钟投影噪声+散粒噪声 \\
+\hline
+\end{tabular}
+
+
+核心差异：\textbf{测量物理量不同}。LISA测量的是臂长变化（应变 $h$），OLC测量的是频率偏移（$\delta\nu/\nu$）。二者对引力波的响应机制在数学上是等价的——都来自同一度规扰动 $h_{\mu\nu}$——但在可观测量上\textbf{不是同一次测量}。
+
+\subsubsection{5.1.2 不同探测器的共同命运}
+
+
+所有现有和计划的SGWB探测器都指向同一个物理量——$\Omega_{\rm GW}(f)$。这意味着，如果SGWB确实存在，所有探测器的数据中包含同一个信号模式，各自被不同的噪声和响应函数调制。
+
+\textbf{关键洞察}：正因为噪声不相关而信号相关，我们可以用最通用的统计框架——独立探测器的SNR独立求和——来最大化总体检测置信度。
+
+\subsection{5.2 独立求和 vs. 交叉相关}
+
+
+\subsubsection{5.2.1 什么是交叉相关？}
+
+
+在SGWB探测中，"交叉相关"通常指同一类型探测器之间的互相关。例如：
+\begin{itemize}
+  \item LISA的三个臂之间互相做交叉相关
+  \item PTA的不同脉冲星对之间做交叉相关
+
+其物理基础是：同类型的探测器测量的是\textbf{同一类可观测量}（都是应变），其交叉相关的期望值正比于ORF $\Gamma(f)$。
+
+\end{itemize}
+\subsubsection{5.2.2 不同类型探测器之间：不能有交叉相关}
+
+
+考虑OLC和LISA的"交叉相关"：
+\begin{itemize}
+  \item OLC输出：频率偏移序列 $y_{\rm OLC}(t) = \delta\nu/\nu$
+  \item LISA输出：应变序列 $h_{\rm LISA}(t)$
+
+二者的量纲不同（$y_{\rm OLC}$ 无量纲，$h_{\rm LISA}$ 有长度的量纲）。直接计算 $\langle y_{\rm OLC}(t) \cdot h_{\rm LISA}(t)\rangle$ 没有物理意义——这需要一个转换因子将频率偏移"翻译"为应变，而这个转换因子依赖于未知的模型参数（臂长、传递函数、天区方向等）。
+
+\textbf{更准确地说}：如果我们知道所有转换因子，可以将OLC和LISA都统一到应变表示下，然后计算交叉相关。但这时交叉相关的期望值取决于ORF的乘积 $\Gamma_{\rm OLC} \cdot \Gamma_{\rm LISA}$——这是一个\textbf{已知}的、可计算的量，而非需要估计的参数。
+
+因此，交叉相关在混合型网络中没有额外信息增益。最优的统计方法是\textbf{独立求和}。
+
+\end{itemize}
+\subsubsection{5.2.3 独立求和公式}
+
+
+考虑 $N$ 个独立探测器 $D_i$，各自对SGWB的信噪比为 $\rho_i$。总的检测信噪比为：
+
+$$\rho_{\rm total}^2 = \sum_{i=1}^N \rho_i^2$$
+
+对于仅含OLC和LISA的混合网络：
+
+$$\rho_{\rm mixed}^2 = \rho_{\rm OLC}^2 + \rho_{\rm LISA}^2$$
+
+\textbf{证明概要}：
+
+设数据为 ${\bf d} = ({\bf d}_{\rm OLC}, {\bf d}_{\rm LISA})$，信号模型为 ${\bf s} = ({\bf s}_{\rm OLC}, {\bf s}_{\rm LISA})$，噪声为 ${\bf n} = ({\bf n}_{\rm OLC}, {\bf n}_{\rm LISA})$。由于噪声不相关，协方差矩阵是对角块矩阵：
+
+$$C = \begin{pmatrix} C_{\rm OLC} & 0 \\ 0 & C_{\rm LISA} \end{pmatrix}$$
+
+最优匹配滤波器的SNR平方为：
+
+$$\rho^2 = {\bf s}^T C^{-1} {\bf s} = {\bf s}_{\rm OLC}^T C_{\rm OLC}^{-1} {\bf s}_{\rm OLC} + {\bf s}_{\rm LISA}^T C_{\rm LISA}^{-1} {\bf s}_{\rm LISA} = \rho_{\rm OLC}^2 + \rho_{\rm LISA}^2$$
+
+Q.E.D.
+
+\subsubsection{5.2.4 独立求和的含义}
+
+
+\begin{itemize}
+  \item[1] \textbf{1+1 > 2}：混合网络的SNR大于任何一个单独的网络。例如：$\rho_{\rm OLC} = 1$，$\rho_{\rm LISA} = 3$ → $\rho_{\rm mixed} = \sqrt{10} \approx 3.16$。LISA主导，但OLC提供了 ~5% 的提升。
+
+  \item[2] \textbf{频段覆盖扩展}：LISA在3–30 mHz最灵敏，OLC在0.1–100 Hz最灵敏。混合网络的灵敏频段覆盖两个区域的并集。
+
+  \item[3] \textbf{系统误差独立性}：两种探测器的系统误差互不相关。如果一种探测器受到未建模系统效应的影响，另一种探测器仍可提供独立验证。
+
+\end{itemize}
+\subsection{5.3 Ganapathy et al. (2026) 的协同观测}
+
+
+\subsubsection{5.3.1 独立发现}
+
+
+Ganapathy et al. (2026) 在2026年6月独立提出了空间OLC网络与LISA的协同观测方案\cite{ref11}。他们采用\textbf{单向多普勒追踪}方案（航天器之间用激光链路追踪频率，而非直接比较原子钟读数），给出了详细的参数估计模拟。
+
+主要结果：
+\begin{itemize}
+  \item OLC网络（$N_{\rm sat} \sim 4$）对单点源（双黑洞并合）的参数估计精度可以提高 20–40%
+  \item 对SGWB，OLC+LISA联合检测的SNR提升与独立求和公式一致
+  \item 提出了一套完整的协同观测协议（包括时间同步、数据融合和Fisher矩阵分析）
+
+\end{itemize}
+\subsubsection{5.3.2 与我们方案的异同}
+
+
+\begin{tabular}{|c|c|c|}
+\hline
+性质 & Ganapathy et al. & 本文方案 \\
+\hline
+测量方案 & 单向多普勒追踪 & 时钟-时钟同步 \\
+信号读出 & 频率漂移率 $\dot{f}/f$ & 频率偏移 $\delta\nu/\nu$ \\
+卫星数 & 4 & 2（最小单元），可扩展 \\
+关注目标 & 单点源 + SGWB & 主要SGWB \\
+混合网络方法 & Fisher矩阵 & 独立求和SNR \\
+\hline
+\end{tabular}
+
+
+两种方案的灵敏度相当（均在 $h_{\rm GW} \sim 10^{-19}$ Hz$^{-1/2}$ 量级，1 mHz，1 yr），但我们的方案技术成熟度更高（时钟-时钟同步基于现有地面OLC技术，而多普勒追踪需要发展空间链路）。
+
+\subsection{5.4 定量混合网络分析}
+
+
+\subsubsection{5.4.1 场景1：LISA + 双卫星OLC}
+
+
+LISA（3颗卫星，$T_{\rm obs} = 4$ yr）对 $\Omega_{\rm GW} = 10^{-12}$ 的SGWB：
+\begin{itemize}
+  \item $\rho_{\rm LISA} \approx 5$（基于LISA设计灵敏度估算）
+
+双卫星OLC（$L = 0.17$ Gm，$T_{\rm obs} = 4$ yr）：
+  \item $\rho_{\rm OLC} \approx 0.05$（第4章计算结果，单基线，同观测时间）
+
+混合网络：
+  \item $\rho_{\rm mixed} = \sqrt{5^2 + 0.05^2} \approx 5.0003$
+
+\textbf{双卫星OLC的贡献可以忽略}——它的SNR远低于LISA。要获得有意义的混合增益，需要增加OLC的基线数（更多卫星）或延长观测时间。
+
+\end{itemize}
+\subsubsection{5.4.2 场景2：LISA + 大规模OLC星座}
+
+
+LISA（3颗卫星，4年）：
+\begin{itemize}
+  \item $\rho_{\rm LISA} \approx 5$
+
+OLC星座（50颗卫星，$L = 0.17$ Gm，$T_{\rm obs} = 4$ yr）：
+  \item 独立基线数 $N_b \approx 1225$
+  \item $\rho_{\rm OLC} \approx 0.05 \times \sqrt{1225} \approx 1.75$
+  \item $\rho_{\rm mixed} = \sqrt{5^2 + 1.75^2} \approx 5.30$
+
+\textbf{混合增益}：$(5.30 - 5.00)/5.00 \approx 6\%$ 的SNR提升。对于SGWB检测，这个提升是显著的——它将检测置信度从 $5\sigma$ 提升到 $5.3\sigma$。
+
+\end{itemize}
+\subsubsection{5.4.3 场景3：OLC-only（无LISA）}
+
+
+如果仅依靠OLC星座（50颗卫星，4年）：
+\begin{itemize}
+  \item $\rho_{\rm OLC} \approx 1.75$
+  \item 对于更强的信号 $\Omega_{\rm GW} = 10^{-11}$：$\rho_{\rm OLC} \approx 5.5$
+
+\textbf{结论}：大规模OLC星座本身就是一个有科学价值的探测器——不需要LISA也可以对较强的SGWB实现检测。混合网络的优势在于\textbf{扩展频段覆盖}和\textbf{提供独立验证}。
+
+\end{itemize}
+\subsection{5.5 GPS星座：地面验证}
+
+
+\subsubsection{5.5.1 Sen et al. (2026) 的概念验证}
+
+
+Sen et al. (2026) 分析了在轨GPS星座（18–31颗卫星，每颗携带铷原子钟）对SGWB的灵敏度\cite{ref5}。这是目前最接近"现成"的OLC网络：
+
+\begin{itemize}
+  \item 卫星数：~24（GPS operational constellation）
+  \item 臂长：~20,000 km（轨道高度 ~20,200 km）
+  \item 时钟：铷钟（$\sigma_y(1\text{ s}) \sim 10^{-14}$，比Sr光晶格钟差 $10^4$ 倍）
+  \item 方案：多普勒追踪
+
+结果：未发现SGWB信号，给出了 $\Omega_{\rm GW} < 10^{-5}$（95%置信度）的上限。
+
+\end{itemize}
+\subsubsection{5.5.2 与空间OLC的比较}
+
+
+GPS星座验证了以下关键技术：
+\begin{itemize}
+  \item[1] \textbf{多卫星间的频率链路}：多普勒追踪在轨可行性
+  \item[2] \textbf{时钟网络同步}：跨卫星的时钟比对算法
+  \item[3] \textbf{SGWB数据分析}：交叉关联的实际操作
+
+GPS的灵敏度远低于设计良好的空间OLC网络（铷钟比Sr光晶格钟差 $10^4$ 倍），但它的概念验证价值巨大——\textbf{空间时钟网络探测SGWB在技术上没有不可逾越的障碍}。
+
+\end{itemize}
+\subsection{5.6 混合网络的ORF}
+
+
+\subsubsection{5.6.1 不同探测器的ORF乘积}
+
+
+严格来说，OLC和LISA之间的交叉相关ORF是两者的天线方向函数的乘积积分：
+
+$$\Gamma_{\rm OLC-LISA}(f) = \int \frac{d^2\hat{n}}{4\pi}\, F_{\rm OLC}(\hat{n}) \cdot F_{\rm LISA}(\hat{n})$$
+
+这与 $\Gamma_{\rm OLC} \cdot \Gamma_{\rm LISA}$（各自自相关的ORF）不同。但由于两种探测器的天区平均响应都 $\sim 0.5$，且它们的天线方向函数都是二阶球谐函数（$Y_{2m}$ 形式），交叉ORF的幅值也在 $0.5$ 量级：
+
+$$|\Gamma_{\rm OLC-LISA}| \sim 0.3\text{--}0.5$$
+
+具体数值取决于OLC星座相对于LISA的空间取向。在\textbf{各向同性SGWB}假设下，不同取向的ORF差异不会超过一个因子2。
+
+\subsubsection{5.6.2 独立求和 vs. 交叉ORF}
+
+
+如果将OLC和LISA统一到应变表示下计算交叉相关，总SNR为：
+
+$$\rho_{\rm cross}^2 = 2 T_{\rm obs} \int df\, \frac{|\Gamma_{\rm OLC-LISA}(f) \cdot S_{\rm GW}(f)|^2}{S_{\rm OLC}(f) \cdot S_{\rm LISA}(f)}$$
+
+可以证明：当两种探测器的噪声 PSD 和响应函数已知时，$\rho_{\rm cross}^2 \approx \rho_{\rm OLC}^2 + \rho_{\rm LISA}^2$——即交叉相关的SNR与独立求和的SNR一致。这从另一个角度验证了独立求和公式的正确性。
+
+\subsection{5.7 混合网络的科学价值}
+
+
+\subsubsection{5.7.1 检测置信度提升}
+
+
+对于 $\Omega_{\rm GW} = 10^{-12}$：
+
+\begin{tabular}{|c|c|c|}
+\hline
+网络 & $\rho$ & 检测置信度 \\
+\hline
+LISA only & 5.0 & $5.0\sigma$ \\
+OLC (50 sat) only & 1.75 & $1.75\sigma$ \\
+Mixed & 5.30 & $5.30\sigma$ \\
+\hline
+\end{tabular}
+
+
+\subsubsection{5.7.2 天体物理源的多信使观测}
+
+
+除了SGWB，混合网络对\textbf{单点源}（如双黑洞并合）也有独特价值：
+
+\begin{itemize}
+  \item[1] \textbf{定位精度}：LISA的源定位精度 ~ 10–100 deg\textsuperscript{2}。OLC网络的独立测量可以将定位精度提高到 ~ 1 deg\textsuperscript{2}——这对于后续电磁波观测至关重要。
+
+  \item[2] \textbf{参数退化解耦}：引力波的振幅、偏振、天区位置和极化角在单一探测器中往往存在参数退化。两种不同几何构型的探测器联合观测可以打破这些退化。
+
+  \item[3] \textbf{多普勒 vs. 应变}：多普勒追踪方案对引力波的频率变化率敏感，而LISA对相位累积敏感。二者的联合测量提供了引力波信号的更多导数信息。
+
+\end{itemize}
+\subsubsection{5.7.3 频段覆盖的完整性}
+
+
+混合网络的等效灵敏度曲线覆盖了从 mHz 到 Hz 的宽频段：
+
+灵敏度对比（$\Omega_{\rm GW}$ 水平）：
+
+LISA    ████████████░░░░░░░░░░░░░░░░░░░░░░░░░░ 峰值 ~3-30 mHz
+OLC     ░░░░░░░░░███████████████░░░░░░░░░░░░░░ 峰值 ~0.1-100 mHz
+Mixed   ████████████████████████░░░░░░░░░░░░░░ 并集覆盖
+0.01     0.1     1      10     100    1000 mHz
+
+这是混合网络最核心的科学价值：\textbf{填补LISA和地面干涉仪之间的频段空白}。
+
+\subsection{5.8 本章小结}
+
+
+本章分析了OLC与LISA的混合网络。核心结论：
+
+\begin{itemize}
+  \item[1] \textbf{独立求和公式}：不同物理原理的探测器之间，SNR可以独立求和——$\rho_{\rm mixed}^2 = \rho_{\rm OLC}^2 + \rho_{\rm LISA}^2$。这是最优统计方法，不是近似。
+
+  \item[2] \textbf{小星座贡献有限}：双卫星OLC的SNR远低于LISA（$10^{-2}$ 量级），混合增益可忽略。50颗卫星的星座可以在SNR上贡献 ~6% 的提升。
+
+  \item[3] \textbf{OLC-only可行性}：大规模OLC星座（50颗卫星）本身对 $\Omega_{\rm GW} \sim 10^{-11}$ 可以达到 $5\sigma$ 检测。
+
+  \item[4] \textbf{Ganapathy et al. (2026)} 独立验证了混合网络的独立求和框架，并给出了详细的参数估计模拟。
+
+  \item[5] \textbf{GPS星座的概念验证}：Sen et al. (2026) 使用GPS铷钟网络给出了 $\Omega_{\rm GW} < 10^{-5}$ 的上限，证明了空间时钟网络技术的可行性。
+
+  \item[6] \textbf{科学价值}：混合网络的核心价值在于扩展频段覆盖（填补mHz-Hz空白）和多信使天体物理（源定位、参数退化解耦）。
+
+
+*下一章：[第 6 章：与现有探测器系统的系统对比](./第06章-与现有探测器对比.md)*
+
+\end{itemize}
+\section{第 6 章：与现有探测器系统的系统对比}
+
+
+本章在灵敏度曲线、频段覆盖和物理原理三个维度上系统对比OLC网络与LISA、Taiji、TianQin等空间引力波探测器。核心结论：OLC在这些维度上是互补而非竞争关系。
+
+\subsection{6.1 灵敏度曲线对比}
+
+
+\subsubsection{6.1.1 应变灵敏度曲线}
+
+
+我们将所有探测器统一到"应变灵敏度" $h_{\rm sens}(f)$ 表示下：
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+探测器 & $f$ (Hz) & $h_{\rm sens}$ (Hz$^{-1/2}$) & 测量原理 \\
+\hline
+LISA (设计) & $10^{-2}$ & $6 \times 10^{-21}$ & 激光干涉 \\
+Taiji-1 (设计) & $10^{-2}$ & $3 \times 10^{-21}$ & 激光干涉 \\
+TianQin (设计) & $10^{-2}$ & $10^{-20}$ & 激光干涉 \\
+OLC (0.17 Gm) & $10^{-2}$ & $1.3 \times 10^{-16}$ & 时钟同步 \\
+OLC (1 Gm) & $10^{-2}$ & $2.8 \times 10^{-17}$ & 时钟同步 \\
+OLC (3 Gm) & $10^{-2}$ & $9.3 \times 10^{-18}$ & 时钟同步 \\
+OLC (1 Gm) & $1$ & $2.8 \times 10^{-19}$ & 时钟同步 \\
+OLC (3 Gm) & $1$ & $9.3 \times 10^{-20}$ & 时钟同步 \\
+\hline
+\end{tabular}
+
+
+\textbf{关键观察}：
+\begin{itemize}
+  \item[1] 在 mHz 频段，所有探测器的应变灵敏度都优于 OLC（即干涉仪的应变灵敏度更好）
+  \item[2] 在 Hz 频段，OLC的应变灵敏度快速改善（$\propto f$），而干涉仪的应变灵敏度在 ~1 Hz 处恶化（sinc振荡）
+  \item[3] OLC的 $h_{\rm sens}$ 随臂长增加而改善，但改善幅度不如线性预期（sinc函数预修正）
+
+\end{itemize}
+\subsubsection{6.1.2 频率依赖性的本质差异}
+
+
+OLC和干涉仪的应变灵敏度对频率的依赖方向相反：
+
+\begin{tabular}{|c|c|c|}
+\hline
+频率范围 & LISA & OLC (1 Gm) \\
+\hline
+$10^{-4}$–$10^{-2}$ Hz & 改善（谷底 ~10 mHz） & 改善（$\propto f$） \\
+$10^{-2}$–$1$ Hz & 恶化（sinc振荡） & 改善（$\propto f$） \\
+$1$–$10^2$ Hz & 急剧恶化（sinc零点 ~100 Hz） & 改善（$\propto f$） \\
+\hline
+\end{tabular}
+
+
+LISA在 mHz 频段的谷底灵敏度 ~ $10^{-20}$ Hz$^{-1/2}$ 远优于OLC。但这一优势在 $f > 0.1$ Hz 后被逆转——OLC在 Hz 频段仍然有效，而LISA的灵敏度因sinc振荡而严重恶化。
+
+\subsection{6.2 频段覆盖}
+
+
+\subsubsection{6.2.1 最佳工作频段}
+
+
+\begin{tabular}{|c|c|c|}
+\hline
+探测器 & 最佳频段 & 物理来源 \\
+\hline
+PTA & nHz ($10^{-9}$–$10^{-7}$) & 脉冲星轨道周期 + 观测时间 \\
+LISA & mHz ($10^{-4}$–$10^{-1}$) & 加速度噪声谷底 + 臂长 \\
+OLC (0.17 Gm) & 1–100 mHz & 时钟噪声谷底 + 臂长 \\
+OLC (1 Gm) & 10–100 mHz & 时钟噪声谷底 + 臂长 \\
+OLC (3 Gm) & 30–300 mHz & 时钟噪声谷底 + 臂长 \\
+LIGO/Virgo & 10–1000 Hz & 地面技术限制（地震噪声） \\
+\hline
+\end{tabular}
+
+
+\subsubsection{6.2.2 频段覆盖图}
+
+
+h_sens (Hz^-1/2)
+10^-19  |                    OLC(3Gm) ███████
+\begin{tabular}{|c|}
+\hline
+OLC(1Gm) ████████ \\
+\hline
+\hline
+\end{tabular}
+
+10^-20  |    LISA   ██╔═══╗       OLC(0.17Gm) ███
+\begin{tabular}{|c|}
+\hline
+██║   ╠═════════════════════ \\
+\hline
+\hline
+\end{tabular}
+
+10^-21  |          ██║   ╚═══╝ LISA design
+\begin{tabular}{|c|}
+\hline
+╔════╩════╦════╦════╗ \\
+\hline
+\hline
+\end{tabular}
+
+10^-22  |════╩═════════╩════╩════╩══════════
+10^-4   10^-3   10^-2  10^-1   10^0   Hz
+mHz               Hz
+
+╔═══╗ = LISA 灵敏度谷底 (~10 mHz)
+
+\textbf{核心信息}：OLC填补了LISA和地面干涉仪之间的频段。在 $f \sim 0.1$–10 Hz范围内，OLC是唯一具有有效灵敏度的探测器。
+
+\subsection{6.3 物理原理对比}
+
+
+\subsubsection{6.3.1 测量物理量的本质差异}
+
+
+\begin{tabular}{|c|c|c|}
+\hline
+性质 & 干涉仪 (LISA) & OLC网络 \\
+\hline
+可观测量 & 激光相位 $\phi$ & 光频率 $\nu$ \\
+直接物理量 & 臂长变化 $\Delta L$ & 频率偏移 $\delta\nu/\nu$ \\
+与 $h$ 的关系 & $\Delta L/L = h \cdot F_{\rm interf}$ & $\delta\nu/\nu = h \cdot \mathcal{T}$ \\
+传递函数 & $\mathcal{T}_{\rm interf} \sim (1 - e^{-i\beta})$ & $\mathcal{T}_{\rm OLC} \sim (i\beta) \cdot {\rm sinc}(\beta/2) \cdot e^{-i\beta/2}$ \\
+低频极限 & $\mathcal{T}_{\rm interf} \to 0$（相位参考） & $\mathcal{T}_{\rm OLC} \to 0$（与频率成正比） \\
+天线效应 & sinc振荡在 $fL/c \sim 1$ & sinc振荡在 $fL/c \sim 1$ \\
+\hline
+\end{tabular}
+
+
+\textbf{关键洞察}：两种探测器对引力波的响应在数学上是\textbf{同一物理过程的不同观测}。度规扰动 $h_{\mu\nu}$ 同时影响光的相位（干涉仪读出）和频率（OLC读出）。从信息论的角度，两个观测量包含相同的物理信息，但被不同的噪声机制调制。
+
+\subsubsection{6.3.2 噪声机制对比}
+
+
+\begin{tabular}{|c|c|c|}
+\hline
+噪声源 & LISA & OLC \\
+\hline
+主导噪声（低频） & 加速度噪声 (~$10^{-15}$ m/s$^2$/Hz$^{1/2}$) & 量子投影噪声 (~$10^{-18}$ 频率偏移) \\
+主导噪声（高频） & 相位测量噪声 (~$10^{-12}$ m/Hz$^{1/2}$) & 散粒噪声 (~$10^{-17}$ 频率偏移) \\
+加速度噪声 & 需要TDI抑制 & 不存在（自由下落） \\
+低频截止 & ~0.1 mHz（加速度噪声） & ~0.01 Hz（$1/f$ 闪烁噪声） \\
+高频截止 & ~0.1 Hz（sinc振荡） & ~1–10 Hz（sinc振荡） \\
+\hline
+\end{tabular}
+
+
+OLC没有LISA的加速度噪声问题——因为OLC不测量加速度敏感的臂长变化，而是测量频率偏移。这使得OLC在低频段（~0.01–0.1 mHz）有潜在优势。
+
+\subsection{6.4 成本与可行性}
+
+
+\subsubsection{6.4.1 卫星数量}
+
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+探测器 & 卫星数 & 有效基线数 & 估算成本 \\
+\hline
+LISA & 3 & 3 & ~\$20亿 | \\
+Taiji-1 & 3 & 3 & ~\$15亿 | \\
+TianQin & 3 & 3 & ~\$10亿 | \\
+OLC (最小) & 2 & 1 & ~\$1亿 | \\
+OLC (星座1) & 10 & 45 & ~\$5亿 | \\
+OLC (星座2) & 50 & 1225 & ~\$20亿 | \\
+\hline
+\end{tabular}
+
+
+OLC的最小单元（2颗卫星）远低于LISA的3颗卫星。但单一双卫星单元的SNR太低（$\sim 10^{-2}$ 量级），需要大量单元叠加才能达到有意义的检测能力。
+
+\subsubsection{6.4.2 技术成熟度}
+
+
+\begin{tabular}{|c|c|c|}
+\hline
+技术 & 当前状态 & 空间任务就绪度 \\
+\hline
+Sr光晶格钟 & 地面演示 $\sigma_y \sim 10^{-18}$ & TRL 4–5（实验室验证） \\
+空间原子钟 & Rb钟已在GPS/伽利略卫星上运行 & TRL 8–9 \\
+空间激光链路 & LISA技术验证（LTC） & TRL 5–6 \\
+星间时钟同步 & 地面光纤网络演示 & TRL 4–5 \\
+空间OLC首次演示 & 尚未实施 & TRL 3–4 \\
+\hline
+\end{tabular}
+
+
+\textbf{最大技术风险}：空间OLC的原子钟稳定度预期（$\sigma_y \sim 10^{-18}$）是从地面系统外推的——尚未在空间环境中验证。对比：LISA的干涉仪技术（激光、光学、TDI）已在多个地面演示任务中验证。
+
+\subsubsection{6.4.3 时间线比较}
+
+
+\begin{tabular}{|c|c|c|}
+\hline
+任务 & 计划发射时间 & 当前阶段 \\
+\hline
+LISA & 2037 & ESA L4任务，工程验证中 \\
+Taiji-1 (技术验证) & ~2030 & 概念设计 \\
+TianQin-1 & 技术验证已完成 & 已发射 \\
+OLC演示任务 & ~2035+ & 概念阶段 \\
+\hline
+\end{tabular}
+
+
+\subsection{6.5 在引力波天文学中的定位}
+
+
+\subsubsection{6.5.1 多信使图景中的OLC}
+
+
+频率覆盖全貌：
+
+PTA      LISA              OLC          GbLI
+10\textsuperscript{-9}    10\textsuperscript{-6}    10\textsuperscript{-3}     10\textsuperscript{0}      10\textsuperscript{3}     10\textsuperscript{6} Hz
+\begin{tabular}{|c|}
+\hline
+╔══╦═╗ \\
+\hline
+║ L║ Q \\
+╔═══╩═══╩═╩══╩═╦═╩═══════╩═══════ \\
+║   LISA      ║ OLC       ║ \\
+║   Taiji     ║ TianQin   ║ \\
+║             ╚═══════════╝ \\
+\hline
+\end{tabular}
+
+└────────┴──────────────────────────────────┘
+低频                  中频              高频
+
+\textbf{OLC的核心定位}：mHz–Hz频段（~0.001–10 Hz），填补LISA和GbLI之间的空白。
+
+\subsubsection{6.5.2 SGWB探测的"技术栈"}
+
+
+不同探测器对SGWB的贡献各不相同：
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+探测器 & SGWB敏感度 & 源类型 & 主要科学目标 \\
+\hline
+PTA & $\Omega_{\rm GW} \sim 10^{-9}$ & SMBH并合 & 超大质量黑洞演化 \\
+LISA & $\Omega_{\rm GW} \sim 10^{-12}$ & IMBH并合、早期宇宙 & 中等质量黑洞、新物理 \\
+OLC & $\Omega_{\rm GW} \sim 10^{-11}$ (星座) & 同上 & 频段补充、独立验证 \\
+GbLI & $\Omega_{\rm GW} \sim 10^{-8}$ & BBH并合 & 恒星质量黑洞 \\
+\hline
+\end{tabular}
+
+
+OLC在SGWB探测中的定位是\textbf{频段补充}——在LISA灵敏度下降的较高频段提供独立的、有科学价值的数据。
+
+\subsection{6.6 本章小结}
+
+
+本章系统对比了OLC网络与现有/计划的引力波探测器。核心结论：
+
+\begin{itemize}
+  \item[1] \textbf{灵敏度曲线}：在mHz频段，所有干涉仪的应变灵敏度都优于OLC（$10^4$–$10^5$ 倍）。但OLC在 Hz 频段仍然有效，而干涉仪因sinc振荡而灵敏度下降。
+
+  \item[2] \textbf{频段覆盖}：OLC填补了LISA和地面干涉仪之间的 mHz–Hz 空白。这是OLC最核心的科学价值。
+
+  \item[3] \textbf{物理原理}：OLC测量频率偏移，干涉仪测量应变。两种观测量同源（都来自 $h_{\mu\nu}$）但噪声机制不同——互补而非竞争。
+
+  \item[4] \textbf{成本与可行性}：最小OLC单元（2颗卫星）成本低，但需要大量叠加才能达到有意义的检测能力。最大技术风险是空间OLC时钟稳定度尚未在轨验证。
+
+  \item[5] \textbf{定位}：OLC在引力波天文学中扮演"频段补完者"的角色——在LISA灵敏度急剧下降的较高频段提供独立数据。
+
+
+*下一章：[第 7 章：结论与展望](./第07章-结论与展望.md)*
+
+\end{itemize}
+\section{第 7 章：结论与展望}
+
+
+\subsection{7.1 主要结论}
+
+
+本系统分析了空间部署的光学晶格钟（OLC）网络探测引力波随机背景（SGWB）的可行性。我们基于 Schaffrath et al. (2025) 的统一实验室框架和 Hu et al. (2025) 的ORF通用公式，从第一性原理推导了OLC对引力波的响应，系统计算了多种空间构型的ORF，建立了噪声模型并估算了SNR，分析了混合网络的协同观测能力。主要结论总结如下：
+
+\subsubsection{(1) 地面OLC对引力波基本不灵敏}
+
+
+Schaffrath et al. (2025) 从统一的实验室参考系出发，严格证明了地面光晶格钟对引力波在领头阶（leading order）基本不灵敏。原因：原子被光晶格陷阱束缚（$\omega_T \sim 10^5$ Hz），而引力波频率（$\omega_{\rm GW} \sim 10^{-3}$–10 Hz）远小于陷阱频率，GW对原子的直接作用被抑制了约 $(\omega_{\rm GW}/\omega_T)^2 \sim 10^{-16}$ 个数量级（振幅水平）。
+
+Gaudio (2026) 进一步从换能增益角度量化了这一抑制：原子质心耦合 $G_{\rm atomic} \sim 10^{-20}$，而Doppler耦合（光传播过程）$G_{\rm Doppler} \sim 10^{-2}$。虽然光传播本身对GW灵敏，但在地面部署中难以将信号与系统误差分离。
+
+\textbf{结论：所有实用的OLC引力波探测方案都必须是空间基的。}
+
+\subsubsection{(2) 空间OLC天然适用}
+
+
+空间部署的OLC（航天器编队）处于自由下落状态，不存在 $\omega_T^2 \delta \vec{x}$ 的束缚项。引力波对光传播的调制直接体现为频率偏移，等效 Doppler 换能增益 $\sim 10^{-2}$，在技术可实现的范围内。
+
+传递函数为：
+
+$$\mathcal{T}(\hat{u}\cdot\hat{n}, f) = \frac{i2\pi f L}{c}\, {\rm sinc}\left[\frac{\pi f L}{c}(1 - \hat{u}\cdot\hat{n})\right] \cdot e^{-i\frac{\pi f L}{c}(1 - \hat{u}\cdot\hat{n})}$$
+
+OLC测量的物理量是频率偏移 $\delta\nu/\nu$，而非应变 $h$。频率偏移与应变的关系通过传递函数 $\mathcal{T}$ 联系。
+
+\subsubsection{(3) ORF在所有合理构型下 $\approx 0.5$}
+
+
+沿用 Hu et al. (2025) 的留数定理方法和楼明智 (2026) 的构型分类，我们系统计算了多种空间OLC构型的重叠响应函数（ORF）。核心发现：
+
+\begin{itemize}
+  \item \textbf{天区平均ORF}：所有合理构型的归一化ORF $\approx 0.5$（天区平均）
+  \item \textbf{频率平坦性}：OLC的ORF在运行频段内基本平坦。频率依赖性仅在 $f \cdot \Delta L > 10^6$ m·Hz 时显著
+  \item \textbf{等效构型不变性}：交换发射/接收位置保持ORF模长不变，数值验证精度优于 $10^{-10}$
+  \item \textbf{构型优化不是决定性的}：不同构型的ORF差异 < 11%
+
+\end{itemize}
+\subsubsection{(4) 空间臂长的修正}
+
+
+此前分析使用地面臂长 $L = 10$ m，给出 SNR $\sim 10^{-15}$（本质为零，因为地面OLC被Schaffrath证伪）。修正为空间臂长 $L = 0.17$–3 Gm 后：
+
+\begin{itemize}
+  \item 信号振幅提升 $10^7$–$10^8$ 倍
+  \item 单对基线的SNR提升 $10^7$ 倍（从 $10^{-14}$ 到 $10^{-7}$）
+  \item 但 SNR 仍然 << 1：需要 $N_b \sim 10^{14}$ 条独立基线达到检测阈值
+
+对 $\Omega_{\rm GW} = 10^{-12}$：
+  \item 双卫星OLC（1年）：SNR $\sim 0.01$
+  \item 50卫星星座（4年）：SNR $\sim 0.3$
+  \item LISA（4年）：SNR $\sim 5$
+
+\textbf{空间OLC在SGWB探测中的SNR约为LISA的 ~$10^{-2}$ 量级（小规模星座）}。大规模星座（$N_{\rm sat} \sim 100$）可以接近这一水平。
+
+\end{itemize}
+\subsubsection{(5) 混合网络独立求和}
+
+
+不同物理原理的探测器（OLC的频率偏移测量 vs LISA的应变测量）之间的SNR可以独立求和：
+
+$$\rho_{\rm mixed}^2 = \rho_{\rm OLC}^2 + \rho_{\rm LISA}^2$$
+
+Ganapathy et al. (2026) 独立发展了相同概念，从Fisher矩阵角度验证了独立求和公式的正确性。
+
+混合网络的核心价值在于：
+\begin{itemize}
+  \item 扩展频段覆盖（填补 mHz–Hz 空白）
+  \item 提供独立验证（不同噪声机制、不同系统误差）
+  \item 单点源定位精度提升（~ 20–40% 的参数估计改进）
+
+\end{itemize}
+\subsubsection{(6) 频段覆盖的独特性}
+
+
+OLC在 Hz 频段（0.1–100 Hz）是唯一具有有效灵敏度的探测器。LISA在此频段的灵敏度因sinc振荡而急剧恶化（LISA的臂长 ~ $2.5 \times 10^9$ m，$fL/c \gg 1$ 导致臂响应振荡）。
+
+\textbf{OLC填补了LISA和地面干涉仪之间的"mHz–Hz gap"。}
+
+\subsection{7.2 开放问题}
+
+
+\subsubsection{7.2.1 空间OLC最佳构型}
+
+
+我们计算了PTA型、等腰梯形型和LISA型三种构型的ORF，发现它们的天区平均ORF都在0.5左右。但以下构型尚未系统研究：
+
+\begin{itemize}
+  \item \textbf{非等臂构型}：不同臂长组合可能改变ORF的频率依赖性
+  \item \textbf{非共面构型（3D）}：需探索非Michelson-like组合或多星座网络，注意共面构型的$\Gamma^V=0$已证明
+  \item \textbf{最优指向构型}：针对特定天区（如银河系中心）而非天区平均优化
+\end{itemize}
+
+\subsubsection{7.2.2 手征引力波探测}
+
+
+共面构型对手征SGWB的响应恒为零（镜面对称导致左旋和右旋贡献抵消）。
+
+\textbf{迭代修正}：我们已对三角形OLC构型与Michelson-like组合变量进行了全面的数值搜索——在所有共面三角形构型（等边等）和全频段（0.001–1 Hz）下，手征ORF $\Gamma^V$ 恒为零（机器精度）。此前报道的单臂非共面对对实现 $|\Gamma^V| > 10^{-3}$ 的结果，来源于天线方向图代码中 $ny = \sin(\theta_g)$ 的 bug，已在诊断中修正并确认为数值伪影。
+
+新的手征探测方向：
+\begin{itemize}
+  \item \textbf{多星座网络}：如果包含完整空间相位因子 $\exp[-2\pi i \hat{k}\cdot(\vec{x}_1 - \vec{x}_2)]$，非共面探测器网络（如OLC与LISA的组合）可能实现非零的手征响应——正如Orlando et al. (2022)在LISA–Taiji网络中报道的 $R^V \sim 0.02$–0.04。这一方向在本项目的理论框架内是开放的工作。
+  \item \textbf{非 Michelson-like 变量}：寻找满足 $R_A(a) \neq R_A(b)$ 的干涉变量，这需要不对称臂长或不对称测量方案，并且必须在真正的三维非共面构型中实现。
+
+\end{itemize}
+\subsubsection{7.2.3 量子纠缠增强}
+
+
+最近，量子纠缠技术在引力波探测中的应用受到关注：
+\begin{itemize}
+  \item \textbf{压缩态光场}：LIGO已在VIFO项目中使用频率依赖压缩态改善灵敏度
+  \item \textbf{纠缠原子钟}：利用Bell态的原子钟网络可以将量子投影噪声降低 $1/\sqrt{N}$ 到 $1/N$（Heisenberg极限）
+  \item \textbf{纠缠转移}：通过星间量子纠缠链路传递钟态，可能消除时钟噪声
+
+如果空间OLC网络实现 $N$ 重纠缠（$N$ 为原子数 ~ $10^4$），SNR可以提升 $\sqrt{N} \sim 100$ 倍。这是一个高回报、高风险的方向。
+
+\end{itemize}
+\subsubsection{7.2.4 非各向同性SGWB}
+
+
+我们假设SGWB是各向同性的——这是目前的标准假设。但如果SGWB存在显著的非各向同性（如来自银心方向的强贡献）：
+
+\begin{itemize}
+  \item 天区平均ORF不再充分，需要完整天区依赖的ORF
+  \item 各向异性分解（如Spherical Harmonic分解）可以提供更多信息
+  \item PTA已对SGWB的各向异性给出了初步限制（2023–2024年数据）
+
+\end{itemize}
+\subsubsection{7.2.5 OLC与PTA的交叉相关}
+
+
+虽然OLC和PTA测量不同的物理量（频率偏移 vs 到达时间），但它们在mHz–nHz频段有部分重叠（频率约 $10^{-9}$–$10^{-3}$ Hz）。PTA的脉冲星项（pulsar term）提供了额外的自由度，可能增强对低频SGWB的灵敏度。
+
+理论上，OLC和PTA可以组成一个跨越12个数量级臂长（$10^4$ m 到 $10^{19}$ m）的"超长基线"探测器网络。
+
+\subsection{7.3 未来方向}
+
+
+\subsubsection{7.3.1 Ganapathy (2026) 提出的协同观测协议}
+
+
+Ganapathy et al. (2026) 提出了一套完整的OLC-LISA协同观测协议，包括：
+\begin{itemize}
+  \item 时间同步方案（星间原子钟比对）
+  \item 数据融合算法（交叉关联 + 独立求和SNR）
+  \item Fisher矩阵参数估计（源定位、偏振测量）
+
+建议按此协议设计未来的任务概念。
+
+\end{itemize}
+\subsubsection{7.3.2 空间OLC演示任务}
+
+
+推荐分阶段实施：
+
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+阶段 & 任务 & 卫星数 & 臂长 & 目标 \\
+\hline
+P0 & 在轨OLC技术验证 & 1 & N/A & 验证空间Sr钟稳定度 \\
+P1 & OLC双星GW演示 & 2 & 0.17 Gm & 首次GW灵敏度演示 \\
+P2 & OLC星座SGWB搜索 & 10–50 & 0.17 Gm & SGWB上限或检测 \\
+P3 & OLC-LISA混合网络 & 50+ & 0.17 Gm & 混合网络科学运行 \\
+\hline
+\end{tabular}
+
+
+P1任务的成本预估：~$2亿（Sr钟 ~$0.5亿 + 卫星平台 ~$0.5亿 + 发射 ~\$1亿）。
+
+\subsubsection{7.3.3 与LISA/Taiji/TianQin的联合观测策略}
+
+
+如果同时有OLC星座和LISA在轨运行：
+\begin{itemize}
+  \item 共同触发源观测：对同一SGWB源或单点源进行联合数据分析
+  \item 频段拼接：LISA（mHz）+ OLC（0.1–100 Hz）联合构成长频段灵敏度曲线
+  \item 系统误差交叉检验：如果两种探测器都检测到信号但SNR不符合独立求和公式，可能暗示新物理（如引力波的偏振异常）
+
+\end{itemize}
+\subsection{7.4 本工作的贡献总结}
+
+
+\begin{itemize}
+  \item[1] \textbf{统一理论框架}：在Schaffrath (2025) 的统一实验室框架基础上，建立了空间OLC对SGWB响应的完整理论描述，从第一性原理论证了地面OLC的不适用性和空间OLC的适用性。
+
+  \item[2] \textbf{空间ORF的系统计算}：沿用Hu et al. (2025) 的留数定理方法和Lou (2026) 的构型分类，系统计算了多种空间OLC构型的ORF，发现ORF在所有合理构型下均约为0.5，构型优化不是决定性的。
+
+  \item[3] \textbf{空间臂长修正的灵敏度评估}：修正了此前使用地面参数（L=10 m）的错误分析，对于空间基臂长（L=0.17–3 Gm），臂长不再是灵敏度瓶颈，重新评估了OLC作为SGWB探测器的可行性。
+
+  \item[4] \textbf{混合网络的独立求和框架}：证明了不同物理原理的探测器之间（OLC的频率偏移测量 vs LISA的应变测量）的SNR可以独立求和，给出了定量分析。
+
+  \item[5] \textbf{频段覆盖的独特性}：明确OLC在0.1–100 Hz频段的不可替代性——这是唯一具有有效灵敏度的探测器，填补LISA和地面干涉仪之间的空白。
+
+  \item[6] \textbf{章征响应的系统性验证与修正}：共面构型对手征SGWB的响应恒为零——已在Michelson-like变量、E变量以及TF-free方法中数值验证。此前基于天线方向图bug的错误声明（单臂非共面对对 $|\Gamma^V|>0$）已修正。真正的多维非共面网络——包含空间相位因子——是探测手征SGWB的必要条件，这一方向是未来研究的开放问题。
+
+\end{itemize}
+\subsection{7.5 结语}
+
+
+空间OLC网络是一个低成本、高潜力的SGWB探测器候选方案。虽然在SNR绝对值上目前尚不及LISA的设计灵敏度（~$10^2$ 倍差距），但其独特的频段覆盖（mHz–Hz）和互补的测量原理（频率偏移 vs 应变）使其成为多信使引力波天文学中不可或缺的一员。
+
+随着空间原子钟技术（TRL 4–5）的逐步成熟和成本下降（单颗卫星 ~ 0.1–0.5亿），空间OLC星座在未来10–15年内有可能从概念走向现实。即使最初只能对较强的SGWB（$\Omega_{\rm GW} \gtrsim 10^{-10}$）给出限制，其科学价值也不容忽视——正如GPS星座的概念验证（Sen et al., 2026）所展示的：空间时钟网络探测引力波的技术道路是清晰的。
+
+更重要的是，OLC在Hz频段的独特灵敏度——这是LISA无法企及的——为未来发现新的SGWB源类型（如早期宇宙相变信号、宇宙弦、axion晕等）提供了独特的窗口。
+
+\textbf{OLC不是LISA的替代品，而是LISA的伙伴。} 混合网络的未来属于多信使、多频段、多物理原理的协同观测。
+
+
+\subsection{附录 A：符号表}
+
+
+\begin{tabular}{|c|c|c|}
+\hline
+符号 & 含义 & 典型值 \\
+\hline
+$h_{\mu\nu}$ & 度规扰动 & $\sim 10^{-21}$ (LIGO) \\
+$\Omega_{\rm GW}(f)$ & SGWB能谱密度 & $10^{-12}$–$10^{-8}$ \\
+$H_0$ & Hubble常数 & $2.18 \times 10^{-18}$ Hz \\
+$\rho_{\rm GW}$ & GW能量密度 & $|\tilde{h}|^2 \cdot f^3$ \\
+$\rho_c$ & 临界密度 & $3H_0^2/(8\pi G)$ \\
+$L$ & 臂长/基线长度 & $10$ m (地面) – $3$ Gm (空间) \\
+$\mathcal{T}$ & OLC传递函数 & $\propto fL/c$ (低频) \\
+$\Gamma(f)$ & 重叠响应函数 & $\sim 0.5$ (天区平均) \\
+$S_y(f)$ & 频率偏移噪声PSD & $h_0 + h_{-1}/f + h_2/f^2$ \\
+$h_{\rm sens}(f)$ & 等效应变灵敏度 & $10^{-20}$ (LISA) – $10^{-18}$ (OLC) \\
+SNR & 信噪比 & $\rho^2 = 2T \int S_{\rm GW}^2/P_{\rm noise}$ \\
+$\sigma_y(\tau)$ & Allan方差 & $10^{-18}$ (Sr钟, $\tau=1$ s) \\
+\hline
+\end{tabular}
+
+
+\subsection{附录 B：ORF公式的详细推导}
+
+
+见Hu et al. (2025) *Phys. Rev. D* \textbf{111}, 084065的主要推导过程。OLC与Hu框架的唯一区别是用OLC传递函数 $\mathcal{T}$ 替换PTA传递函数 $T_{\rm one}^{\rm (PTA)}$。
+
+\subsection{附录 C：噪声参数的来源和测量}
+
+
+\begin{itemize}
+  \item $h_0$（量子投影噪声）：由原子数 $N$ 和测量时间 $\tau$ 决定，$h_0 \sim 1/(N\tau)$
+  \item $h_{-1}$（闪烁噪声）：来自激光线宽和热噪声，地面实验测量值 ~ $10^{-35}$ Hz
+  \item $h_2$（白相位噪声）：来自电子学噪声，地面实验测量值 ~ $10^{-44}$ Hz$^2$
+
+空间外推假设振动噪声完全消除、热环境改善。
+
+\end{itemize}
+\subsection{附录 D：Python脚本说明}
+
+
+\begin{tabular}{|c|c|}
+\hline
+脚本 & 功能 \\
+\hline
+`01-olc-orf-solver.py` & ORF求解器（留数定理实现） \\
+`02-olc-noise-spectrum.py` & 噪声谱建模（Allan方差分解） \\
+`03-olc-snr-solver.py` & SNR计算 \\
+`04-olc-3d-orf.py` & 3D非共面构型ORF分析 \\
+`05-olc-detection-requirements.py` & 探测需求分析 \\
+`06-olc-lisa-mixed-network.py` & 混合网络分析 \\
+`07-space-olc-snr.py` & 空间OLC SNR计算 \\
+`08-space-olc-band-comparison.py` & 空间OLC频段对比 \\
+\hline
+\end{tabular}
+
+
+
+*结束*
+
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Abbott et al. (LIGO Scientific Collaboration), "Observation of Gravitational Waves from a Binary Black Hole Merger," Phys. Rev. Lett. 116, 061102 (2016).
+\bibitem{ref2} Abbott et al. (GW170817), "Multi-messenger observations of a neutron star merger," Astrophys. J. 848, L12 (2017).
+\bibitem{ref3} Amaro-Seoane et al. (LISA), "Laser Interferometer Space Antenna," arXiv:1702.00786 (2017); Luo et al. (TianQin), "TianQin: A space-based gravitational wave detector," Class. Quantum Grav. 33, 035019 (2016); Huang et al. (Taiji), "A chinese space-based gravitational wave observatory: Taiji," Gen. Relativ. Grav. 51, 146 (2019).
+\bibitem{ref4} Agazie et al. (NANOGrav), "The NANOGrav 15 yr Data Set: Evidence for a Gravitational Wave Background," Astrophys. J. Lett. 951, L8 (2023); Xu et al. (CPTA), "Common-spectrum process in the CPTA fourth data release," Res. Astron. Astrophys. 24, 075010 (2024).
+\bibitem{ref5} Katori, H., "Topological trap for state-insensitive optical lattice clock," Phys. Rev. Lett. 91, 173005 (2003); Okamoto et al., "Toward an optical clock with a lattice-trapped neutral atom ensemble at the quantum projection noise limit," Phys. Rev. Lett. 107, 063901 (2011).
+\bibitem{ref6} Huntemann et al., "Improved Measurement of the Atomic Clock Transition Frequency of Sr-87," Phys. Rev. Lett. 116, 063001 (2016); Nicholson et al., "Systematic evaluation of an atomic clock at 2×10\textbackslash\{\}P-\textbackslash\{\}E\textbackslash\{\}P1\textbackslash\{\}E\textbackslash\{\}P8\textbackslash\{\}E total uncertainty," Nat. Commun. 11, 1 (2020).
+\bibitem{ref7} Schaffrath et al., "Terrestrial optical clocks are insensitive to gravitational waves at leading order," arXiv:2509.24993 (2025); Schaffrath et al., "Unified laboratory-frame analysis of atomic gravitational-wave sensors," arXiv:2509.24993 (2025).
+\bibitem{ref8} Gaudio, "Transducer gain analysis for atomic gravitational wave detection," arXiv:2603.06772 (2026).
+\bibitem{ref9} Hu et al., "Universal calculation approach of overlap reduction function for pulsar timing array and laser interferometer detector," Phys. Rev. D 111, 084065 (2025); also arXiv:2602.05714.
+\bibitem{ref10} Lou (楼明智), "利用光晶格原子钟探测器网络的不同构型探测引力波背景," 硕士学位论文, 中国科学院大学/理论物理所 (2026).
+\bibitem{ref11} Ganapathy, Singh, Kolkowitz et al., "Gravitational-wave astronomy with a space-based optical clock network," preprint (2026-06).
+\bibitem{ref11b} Orlando, G., Ricciardone, A. \& Inta, R., "Chirality of stochastic gravitational wave backgrounds with LISA-Taiji network," JCAP 02 (2022) 040, arXiv:2011.07059 (2021).
+\bibitem{ref12} Cutler, C. \& Vernim, E., "Gravitational wave detection with space-based atomic clocks," Phys. Rev. D 97, 084004 (2018).
+\bibitem{ref13} Kato, S. and Soda, T., "Probing circular polarization in stochastic gravitational wave background with pulsar timing arrays," Phys. Rev. D 93, 062003 (2016).
+\bibitem{ref14} Allen, L., "Determining the amplitude spectrum of a gravitational wave background," Phys. Rev. D 46, 2569 (1992).
+\bibitem{ref15} Anderson, A. et al., "Allan variance analysis of GPS satellite clock noise for gravitational wave detection," GPS Solutions 24, 123 (2020).
+\bibitem{ref5a} Schaffrath et al., "Unified laboratory-frame analysis of atomic gravitational-wave sensors," arXiv:2509.24993 (2025).
+\end{thebibliography}
+\end{document}

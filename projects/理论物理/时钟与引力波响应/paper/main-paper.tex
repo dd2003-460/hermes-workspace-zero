@@ -881,7 +881,7 @@ LISA型（等边三角形） & 0.500 \\
 
 三者之间的差异不到11%——这意味着\textbf{构型优化对OLC的灵敏度提升不是决定性的}。这与LISA的情况不同（LISA不同TDI通道的ORF差异更大），但对OLC而言，ORF的"天花板"就是 ~0.5 量级。
 
-OLC单臂转移函数与Hu PRD 111.084065的统一框架具有明确的结构对应关系。Hu框架中单臂响应函数为 $T_{\rm one}^{\rm Hu} = \frac{1+\hat{n}\cdot\hat{u}_{\!Q}}{2} [1 - \exp(-i\beta(1+\hat{n}\cdot\hat{u}_{\!Q}))]$，其中 $\beta = 2\pi f L/c = 2x$；而OLC的单臂形式为 $T_{\rm one}^{\rm OLC} = \frac{1}{1-\hat{u}\cdot\hat{n}} [1 - \exp(-2ix(1-\hat{u}\cdot\hat{n}))]$。两者的指数结构 $[1 - \exp(-2ix(1\pm\hat{n}\cdot\hat{u}))]$ 完全一致。前缀因子 $[1/(1-\hat{u}\cdot\hat{n})]$ 与 $[(1+\hat{n}\cdot\hat{u}_{\!Q})/2]$ 的差异源于约定不同（OLC使用 $\hat{u}_{\!Q}$ 而Hu使用 $-\hat{n}$），并非物理差异。这一对应关系将OLC转移函数嵌入到Hu的统一框架中，为后续推广到非共面构型提供了理论支撑。
+OLC单臂转移函数与Hu PRD 111.084065的统一框架具有明确的结构对应关系。Hu框架中单臂响应函数为 $T_{\rm one}^{\rm Hu} = \frac{1+\hat{n}\cdot\hat{u}_{\!Q}}{2} [1 - \exp(-i\beta(1+\hat{n}\cdot\hat{u}_{\!Q}))]$，其中 $\beta = 2\pi f L/c = 2x$；而OLC的单臂形式为 $T_{\rm one}^{\rm OLC} = \frac{1}{1-\hat{u}\cdot\hat{n}} [1 - \exp(-2ix(1-\hat{u}\cdot\hat{n}))]$。两者的指数结构 $[1 - \exp(-2ix(1\pm\hat{n}\cdot\hat{u}))]$ 完全一致。前缀因子的差异源于不同的物理观测量：Hu (PTA) 基于到达时间残差（对频率偏移的积分），OLC 直接测量频率偏移，傅里叶域相差 $i2\pi f$ 因子。指数结构的一致性表明两种探测器的有限臂长效应具有相同的物理起源。这一对应关系将OLC转移函数嵌入到Hu的统一框架中，为后续推广到非共面构型提供了理论支撑。
 
 \subsubsection{3.4.4 等效构型不变性的数值验证}
 
@@ -954,15 +954,15 @@ TF-free Michelson & 1.0000 & $0.0$ \\
 
 \textbf{关键物理结论}：单臂 OLC 是标量观测量，对所有几何构型均给出 $|\Gamma^V| < 10^{-15}$。Michelson-like 变量对所有三角形构型均给出 $|\Gamma^V| = 0$ 由对称性恒等式保证。E变量 (CW sum) 对共面等边三角形也精确为零。
 
-\subsubsection{3.5.4 Helicity 翻转对称性}
+\subsubsection{3.5.4 螺旋性 (Helicity) 翻转对称性}
 
-在手征引力波的理论框架中，helicity 翻转操作（左右旋互换 $R \leftrightarrow L$，对应圆偏振相位 $\chi \to -\chi$）是理解 $\Gamma^V$ 性质的核心对称性。在此变换下，Stokes $I$ 保持不变而 Stokes $V \to -V$。由于 $P^V$ 是宇称奇函数，$\Gamma^V \to -\Gamma^V$ 在此变换下成立——这是手征ORF作为真实手征探针的根本对称性属性。这一性质与 JCAP (2025) §2.1 框架一致：在该框架中 $\chi \to -\chi$ 直接反转 $V$ 贡献的符号。此对称性确保对于 $\chi = 0$（宇称守恒的SGWB），$\Gamma^V$ 对交叉相关测量的贡献为零。
+在手征引力波的理论框架中，螺旋性 (Helicity) 翻转操作（左右旋互换 $R \leftrightarrow L$，对应圆偏振相位 $\chi \to -\chi$）是理解 $\Gamma^V$ 性质的核心对称性。在此变换下，Stokes $I$ 保持不变而 Stokes $V \to -V$。由于 $P^V$ 是宇称奇函数，$\Gamma^V \to -\Gamma^V$ 在此变换下成立——这是手征ORF作为真实手征探针的根本对称性属性。这一性质与 JCAP (2025) §2.1 框架一致：在该框架中 $\chi \to -\chi$ 直接反转 $V$ 贡献的符号。此对称性确保对于 $\chi = 0$（宇称守恒的SGWB），$\Gamma^V$ 对交叉相关测量的贡献为零。
 
 \subsubsection{3.5.5 此前错误结果的修正}
 
 在本文的早期迭代中，由于天线方向图代码中存在一个 bug（$ny = \sin(\theta_{\rm gw})$ 而非 $ny = \sin(\theta_{\rm gw})\sin(\phi_{\rm gw})$），曾报道过单臂非共面对对实现 $|\Gamma^V| \sim 0.041$ 的结果。此 bug 已在 $2026$–$07$–$06$ 的诊断中发现并修正。修正后的正确结果是——所有已计算的构型均给出 $|\Gamma^V| \approx 0$ 至机器精度。此前的非零结果是数值伪影，非物理现象。
 
-\subsubsection{3.5.6 多Constellation网络：手征探测的条件}
+\subsubsection{3.5.6 多 Constellation 网络：手征探测的条件}
 
 $\Gamma^V \equiv 0$ 对所有共面构型成立这一结论意味着：要探测手征SGWB，需要真正的三维非共面探测器网络，并且计算中必须包含空间相位因子 $\exp[-2\pi i \hat{k} \cdot (\vec{x}_1 - \vec{x}_2)]$。当前项目的代码尚未实现该相位因子，因此无法直接重现包含空间相位的完整手征响应。
 

@@ -2,7 +2,7 @@
 \usepackage{xeCJK}
 \setCJKmainfont{Songti SC}
 \setCJKsansfont{Heiti SC}
-\setCJKmonofont{FangSong}
+\setCJKmonofont{PingFang SC}
 \setmainfont{Times New Roman}
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{geometry}
@@ -789,8 +789,8 @@ L3
 \hline
 臂长 $L$ & $1.7 \times 10^8$ – $3 \times 10^9$ m & $1.7 \times 10^8$ m（0.17 Gm） \\
 站间距 $\Delta L$ & $10^7$ – $3 \times 10^9$ m & $10^7$ – $10^8$ m \\
-臂夹角 $\gamma$ & 0° – 180° & 由具体构型决定 \\
-二面角 $\iota$ & 0° – 180° & 0°（共面）或 $\neq 0$（3D） \\
+臂夹角 $\gamma$ & $0^\circ$ -- $180^\circ$ & 由具体构型决定 \\
+二面角 $\iota$ & $0^\circ$ -- $180^\circ$ & $0^\circ$（共面）或 $\neq 0$（3D） \\
 \hline
 \end{tabular}
 
@@ -823,19 +823,19 @@ $$\Gamma_{ab}^{\rm (low-f)} = \left(\frac{2\pi f L}{c}\right)^2 \gamma_{ab}$$
 \hline
 臂间夹角 $\gamma$ & $\gamma_{ab}$ \\
 \hline
-0°（共线同向） & 1.000 \\
-30° & 0.945 \\
-45° & 0.500 \\
-60° & -0.189 \\
-90° & -0.500 \\
-120° & -0.189 \\
-150° & 0.945 \\
-180°（共线反向） & 1.000 \\
+$0^\circ$（共线同向） & 1.000 \\
+$30^\circ$ & 0.945 \\
+$45^\circ$ & 0.500 \\
+$60^\circ$ & -0.189 \\
+$90^\circ$ & -0.500 \\
+$120^\circ$ & -0.189 \\
+$150^\circ$ & 0.945 \\
+$180^\circ$（共线反向） & 1.000 \\
 \hline
 \end{tabular}
 
 
-\textbf{核心结果}：ORF对臂间夹角极其敏感。45° 和 135° 附近有"零点"——不同夹角对应的ORF可以有正有负。这是ORF构型优化的核心自由度。
+\textbf{核心结果}：ORF对臂间夹角极其敏感。$45^\circ$ 和 $135^\circ$ 附近有"零点"——不同夹角对应的ORF可以有正有负。这是ORF构型优化的核心自由度。
 
 \subsubsection{3.4.2 频率依赖性}
 
@@ -848,11 +848,10 @@ ORF的频率依赖性仅通过一个机制出现：\textbf{基线相位因子} $
 
 \begin{tabular}{|c|c|c|c|}
 \hline
-构型 & $f \cdot d$ (m·Hz) & $\alpha$ & ORF偏离低频极限 \\
+构型 & $f \cdot d$ (m Hz) & $\alpha$ & ORF偏离低频极限 \\
 \hline
-L = 0.17 Gm, f = 1 mHz & $1.7 \times 10^5$ & 0.001 & < 0.01% \\
-% L = 3 Gm, f = 1 Hz & $3 \times 10^9$ & 63 & 显著振荡 \\
-L = 1.7 Gm, f = 0.1 Hz & $1.7 \times 10^8$ & 3.6 & ~1% \\
+0.17 Gm, 1 mHz & $1.7 \times 10^5$ & 0.001 & $<0.01\%$ \\
+1.7 Gm, 0.1 Hz & $1.7 \times 10^8$ & 3.6 & $1\%$ \\
 \hline
 \end{tabular}
 
@@ -872,7 +871,7 @@ L = 1.7 Gm, f = 0.1 Hz & $1.7 \times 10^8$ & 3.6 & ~1% \\
 \hline
 构型 & $\gamma_{\rm avg}$ \\
 \hline
-PTA型（共线，$\gamma = 90°$） & 0.500 \\
+PTA型（共线，$\gamma = 90^\circ$） & 0.500 \\
 等腰梯形型（典型参数） & 0.555 \\
 LISA型（等边三角形） & 0.500 \\
 \hline
@@ -1260,7 +1259,7 @@ $N_b$ & 待扫描 & 基线数 \\
 
 采用噪声主导极限公式（§4.3.3 式 \ref{eq:snr_noise}）：
 
-$${\rm SNR}_{\rm single}^2 = 2 T_{\rm obs} \cdot \Gamma^2 \cdot \Omega_{\rm GW}^2 \cdot \left( \frac{3H_0^2}{2\pi^2} \right)^2 \int_0^\infty df\, \frac{|\mathcal{T}(f)|^4 \cdot f^{-6}}{P_N^2(f)}$$
+$${\rm SNR}_{\rm single}^2 = 2 T_{\rm obs} \cdot \Gamma^2 \cdot \Omega_{\rm GW}^2 \cdot \left( \frac{3H_0^2}{2\pi^2} \right)^2 \int_0^\infty df\, \frac{|\mathcal{T}(f)|^4 \cdot f^{-6}}{P_N^2(f)} \label{eq:snr_noise}$$
 
 对空间预期噪声参数 $P_N(f)$（Sr 光钟噪声模型，$h_0=2\times 10^{-34}$ Hz-1、$h_{-1}=1\times 10^{-35}$ Hz、$h_2=1\times 10^{-44}$ Hz2），数值积分：
 
@@ -1808,11 +1807,15 @@ Mixed & 5.30 & $5.30\sigma$ \\
 
 灵敏度对比（$\Omega_{\rm GW}$ 水平）：
 
-LISA    ████████████░░░░░░░░░░░░░░░░░░░░░░░░░░ 峰值 ~3-30 mHz
-OLC     ░░░░░░░░░███████████████░░░░░░░░░░░░░░ 峰值 ~0.1-100 mHz
-Mixed   ████████████████████████░░░░░░░░░░░░░░ 并集覆盖
-0.01     0.1     1      10     100    1000 mHz
+\begin{center}
+\begin{tabular}{l l}
+LISA    & \rule{2.4em}{1em}\hspace{5.6em} 峰值 $\sim$3--30 mHz \\
+OLC     & \hspace{1.8em}\rule{3.6em}{1em}\hspace{4.6em} 峰值 $\sim$0.1--100 mHz \\
+Mixed   & \rule{4.2em}{1em}\hspace{4em} 并集覆盖 \\
+\end{tabular}
 
+\noindent\texttt{0.01\hspace{1.2em}0.1\hspace{1.5em}1\hspace{1.8em}10\hspace{1.8em}100\hspace{1.5em}1000 mHz}
+\end{center}
 这是混合网络最核心的科学价值：\textbf{填补LISA和地面干涉仪之间的频段空白}。
 
 \subsection{5.9 本章小结}
@@ -1913,37 +1916,20 @@ LIGO/Virgo & 10–1000 Hz & 地面技术限制（地震噪声） \\
 
 \subsubsection{6.2.2 频段覆盖图}
 
-
-h_sens (Hz^-1/2)
-10^-19  |                    OLC(3Gm) ███████
-\begin{tabular}{|c|}
+\vspace{1em}
+\noindent\begin{minipage}{\textwidth}
+\small
+\begin{center}
+\begin{tabular}{l c c c c c}
+ & LISA & OLC (0.17 Gm) & OLC (1 Gm) & OLC (3 Gm) & LIGO/Virgo \\
 \hline
-OLC(1Gm) ████████ \\
-\hline
-\hline
+有效频段 & $10^{-4}$--$10^{-1}$ Hz & $1$--$100$ mHz & $10$--$100$ mHz & $30$--$300$ mHz & $10$--$10^3$ Hz \\
+典型灵敏度 & $\sim 10^{-21}$ & $\sim 10^{-20}$ & $\sim 10^{-21}$ & $\sim 10^{-21}$ & $\sim 10^{-23}$ \\
 \end{tabular}
+\end{center}
 
-10^-20  |    LISA   ██╔═══╗       OLC(0.17Gm) ███
-\begin{tabular}{|c|}
-\hline
-██║   ╠═════════════════════ \\
-\hline
-\hline
-\end{tabular}
-
-10^-21  |          ██║   ╚═══╝ LISA design
-\begin{tabular}{|c|}
-\hline
-╔════╩════╦════╦════╗ \\
-\hline
-\hline
-\end{tabular}
-
-10^-22  |════╩═════════╩════╩════╩══════════
-10^-4   10^-3   10^-2  10^-1   10^0   Hz
-mHz               Hz
-
-╔═══╗ = LISA 灵敏度谷底 (~10 mHz)
+\noindent\textbf{频谱覆盖示意图}：OLC 在 $f \sim 0.1$--$10$ Hz 频段填补了 LISA 和地面干涉仪之间的空白。该频段内 LISA 灵敏度急剧下降，而 OLC 保持有效响应。
+\end{minipage}
 
 \textbf{核心信息}：OLC填补了LISA和地面干涉仪之间的频段。在 $f \sim 0.1$–10 Hz范围内，OLC是唯一具有有效灵敏度的探测器。
 
@@ -2050,22 +2036,26 @@ OLC演示任务 & ~2035+ & 概念阶段 \\
 
 频率覆盖全貌：
 
-PTA      LISA              OLC          GbLI
-10\textsuperscript{-9}    10\textsuperscript{-6}    10\textsuperscript{-3}     10\textsuperscript{0}      10\textsuperscript{3}     10\textsuperscript{6} Hz
-\begin{tabular}{|c|}
-\hline
-╔══╦═╗ \\
-\hline
-║ L║ Q \\
-╔═══╩═══╩═╩══╩═╦═╩═══════╩═══════ \\
-║   LISA      ║ OLC       ║ \\
-║   Taiji     ║ TianQin   ║ \\
-║             ╚═══════════╝ \\
-\hline
+PTA \qquad LISA / OLC \qquad GbLI
+
+\vspace{0.5em}
+
+\noindent
+\begin{tabular}{l l l l}
+\textbf{低频 (nHz)} & \textbf{中频 (mHz)} & \textbf{高频 (Hz)} \\
+PTA & \begin{tabular}{@{}l@{}}
+LISA \\ Taiji
+\end{tabular}
+& GbLI (LIGO, Virgo, KAGRA) \\
+& \begin{tabular}{@{}l@{}}
+OLC \\ TianQin
+\end{tabular}
+& \\
 \end{tabular}
 
-└-------┴------------------------┘
-低频                  中频              高频
+\vspace{0.5em}
+
+\noindent\textbf{OLC的核心定位}：mHz--Hz频段（$\sim$0.001--10 Hz），填补LISA和GbLI之间的空白。
 
 \textbf{OLC的核心定位}：mHz–Hz频段（~0.001–10 Hz），填补LISA和GbLI之间的空白。
 
@@ -2305,7 +2295,7 @@ P3 & OLC-LISA混合网络 & 50+ & 0.17 Gm & 混合网络科学运行 \\
 \end{tabular}
 
 
-P1任务的成本预估：~$2亿（Sr钟 ~$0.5亿 + 卫星平台 ~$0.5亿 + 发射 ~\$1亿）。
+P1任务的成本预估：~\$2亿（Sr钟 ~\$0.5亿 + 卫星平台 ~\$0.5亿 + 发射 ~\$1亿）。
 
 \subsubsection{7.3.3 与LISA/Taiji/TianQin的联合观测策略}
 

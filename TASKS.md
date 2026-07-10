@@ -51,7 +51,7 @@
 
 | 项目 | 任务文件 | 当前状态 |
 |------|----------|----------|
-| D1-grav-waves | tasks/TASKS.md | arXiv 提交包就绪 |
+| D1-grav-waves | tasks/TASKS.md | ✅ COMPLETE v13+ (iteration 48, 52-page PDF, all theoretical corrections applied, arXiv-ready) |
 | D1-persona-align | tasks/TASKS.md | T1-T47 完成 |
 | D1-academic-AI | tasks/TASKS.md | DistCat + Chimera + EMRI 就绪 |
 | D1-academic (BayesFrame) | bayesian-frame/tasks/ | JCR 论文 arXiv 就绪 |

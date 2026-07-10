@@ -48,7 +48,7 @@
 
 ←── 3.2 kpc ──→  ←── 5 Mkm ──→  ←── 4 km ──→
 
-\textbf{空白区域}：上述三种探测器之间存在一个尚未被系统覆盖的频段——mHz到Hz之间（约 0.001–1 Hz）。虽然LISA覆盖了mHz的低频端，但在10\textsuperscript{-1}–1 Hz之间的灵敏度急剧下降。这个"mHz–Hz gap"是一个理论上的敏感区域——理论上，中等质量黑洞（10\textsuperscript{3}–10\textsuperscript{5} M_☉）并合的信号、早期宇宙的相变信号以及宇宙弦产生的SGWB都可能在此频段有可观测的特征。
+\textbf{空白区域}：上述三种探测器之间存在一个尚未被系统覆盖的频段——mHz到Hz之间（约 0.001–1 Hz）。虽然LISA覆盖了mHz的低频端，但在10\textsuperscript{-1}–1 Hz之间的灵敏度急剧下降。这个"mHz–Hz gap"是一个理论上的敏感区域——理论上，中等质量黑洞（10\textsuperscript{3}–10\textsuperscript{5} $M_{\odot}$并合的信号、早期宇宙的相变信号以及宇宙弦产生的SGWB都可能在此频段有可观测的特征。
 
 填补这一空白的关键思路是使用\textbf{臂长适中}（10\textsuperscript{4}–10\textsuperscript{9} m）和\textbf{超高时间精度}（原子钟稳定度 ~ 10\textsuperscript{-18}）的新一代探测技术。
 
@@ -912,9 +912,15 @@ $$\Gamma_{AB}^{\rm (new)} - \Gamma_{AB}^{\rm (old)} < 10^{-10}$$
 
 手征ORF的计算公式：
 
-$$\Gamma^V(f) = \int \frac{d^2\hat{n}}{4\pi} [F_+^{(1)} F_\times^{(2)} - F_\times^{(1)} F_+^{(2)}] \mathcal{T}_1 \mathcal{T}_2^*$$
+$$\Gamma^V(f) = \int \frac{d^2\hat{n}}{4\pi} \, P^V(\hat{n}) \, \mathcal{T}_1 \mathcal{T}_2^*$$
 
-在镜面反射下，$+$偏振不变（偶宇称），$\times$偏振反号（奇宇称）。手征因子 $F_+^{(1)}F_\times^{(2)} - F_\times^{(1)}F_+^{(2)}$ 在反射下变号。由于共面构型具有镜面对称性，积分 $\int d\Omega\, \mathcal{I}^V = 0$。
+其中手征因子 $P^V(\hat{n}) \equiv F_+^{(1)}(\hat{n}) F_\times^{(2)}(\hat{n}) - F_\times^{(1)}(\hat{n}) F_+^{(2)}(\hat{n})$ 编码了两个探测器的几何构型对手征引力波的响应差异。
+
+\textbf{镜面对称性证明}：对于共面构型，存在一个反射平面包含所有探测器臂方向。在此反射操作 $R$ 下：(i) $\hat{n} \to \hat{n}' = R\hat{n}$ 为天空方向的反射映射；(ii) 探测器臂向量 $\hat{u}_i \to \hat{u}_i'$ 在反射下变换；(iii) $+$偏振不变（偶宇称），$\times$偏振反号（奇宇称），因此 $P^V(\hat{n}) \to -P^V(\hat{n}')$——手征因子是宇称奇函数；(iv) 传递函数 $\mathcal{T}_1\mathcal{T}_2^*$ 仅依赖于臂长和引力波频率，在反射下不变。由于反射将共面网络映射到自身，积分测度 $d^2\hat{n}$ 不变，故
+
+$$\Gamma^V = \int \frac{d^2\hat{n}}{4\pi} P^V(\hat{n}) \mathcal{T}_1\mathcal{T}_2^* = -\int \frac{d^2\hat{n}'}{4\pi} P^V(\hat{n}') \mathcal{T}_1'\mathcal{T}_2'^* = -\Gamma^V$$
+
+即 $\Gamma^V = -\Gamma^V \implies \Gamma^V = 0$。因此共面OLC构型对手征SGWB的ORF恒为零——这是镜面对称性的必然结果。
 
 \textbf{结论}：共面OLC构型对手征SGWB（Stokes参数$V$）的ORF恒为零——$\Gamma^V_{\rm coplanar}(f) \equiv 0$。
 
@@ -956,7 +962,11 @@ TF-free Michelson & 1.0000 & $0.0$ \\
 
 \subsubsection{3.5.4 螺旋性 (Helicity) 翻转对称性}
 
-在手征引力波的理论框架中，螺旋性 (Helicity) 翻转操作（左右旋互换 $R \leftrightarrow L$，对应圆偏振相位 $\chi \to -\chi$）是理解 $\Gamma^V$ 性质的核心对称性。在此变换下，Stokes $I$ 保持不变而 Stokes $V \to -V$。由于 $P^V$ 是宇称奇函数，$\Gamma^V \to -\Gamma^V$ 在此变换下成立——这是手征ORF作为真实手征探针的根本对称性属性。这一性质与 JCAP (2025) §2.1 框架一致：在该框架中 $\chi \to -\chi$ 直接反转 $V$ 贡献的符号。此对称性确保对于 $\chi = 0$（宇称守恒的SGWB），$\Gamma^V$ 对交叉相关测量的贡献为零。
+在手征引力波的理论框架中，螺旋性 (Helicity) 翻转操作（左右旋互换 $R \leftrightarrow L$，对应圆偏振相位 $\chi \to -\chi$）是理解 $\Gamma^V$ 性质的核心对称性。在此变换下，Stokes $I$ 保持不变而 Stokes $V \to -V$。
+
+$P^V(\hat{n}) = F_+^{(1)}(\hat{n})F_\times^{(2)}(\hat{n}) - F_\times^{(1)}(\hat{n})F_+^{(2)}(\hat{n})$ 的宇称奇性可从镜面反射论证得出：$+$偏振在反射下为偶宇称，$\times$偏振为奇宇称，因此 $P^V$ 在反射下变号（见§3.5.3镜面对称性证明）。这一宇称奇性与 helicity 翻转的对应关系为：helicity 翻转等价于将所有探测器臂方向反射，此时 $\hat{n}$ 积分中 $P^V \to -P^V$ 而 $\mathcal{T}_1\mathcal{T}_2^*$ 不变，故 $\Gamma^V \to -\Gamma^V$。
+
+$\Gamma^V \to -\Gamma^V$ 在此变换下成立——这是手征ORF作为真实手征探针的根本对称性属性。这一性质与 JCAP (2025) §2.1 框架一致：在该框架中 $\chi \to -\chi$ 直接反转 $V$ 贡献的符号。此对称性确保对于 $\chi = 0$（宇称守恒的SGWB），$\Gamma^V$ 对交叉相关测量的贡献为零。
 
 \subsubsection{3.5.5 此前错误结果的修正}
 

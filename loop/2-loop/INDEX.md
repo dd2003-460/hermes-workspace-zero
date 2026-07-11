@@ -39,6 +39,22 @@ pre-check → backup → execute → verify → confidence → decision
 - 测试失败 → 默认回滚，不得偷偷小修继续跑
 - 纯文档可豁免
 
+## 动态工作流强制执行
+
+**状态驱动流程**：工作流由 `ralph-loop.local.md`（项目内 `.claude/` 目录）中的 `loop_phase` 字段驱动。每次会话开始时必须读取并验证：
+1. `loop_phase` 指明当前阶段 → 严格按阶段文件执行
+2. `iteration` 字段 ≥ 已知的最大迭代号 → 否则状态已落后
+
+**流程不可跳过**：
+- 如果 `loop_phase` 为 1-loop/* → 必须先完成 1-loop 全部 6 阶段
+- 如果 `loop_phase` 为 2-loop/* → 必须先完成 2-loop 全部 6 阶段
+- 如果 `loop_phase` 为 idle → 进入新一轮 1-loop 规划
+
+**每轮约束**：
+- 必须产出可验证输出（文件/测试/报告），不能只是"更新了进度文件"
+- 必须在完成后更新 `last_action`、`last_outcome`、`last_insight`
+- 永远不要输出 `<promise>LOOP COMPLETE</promise>`
+
 ## 公共规则
 
 - 按索引读

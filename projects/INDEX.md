@@ -28,7 +28,8 @@
 | `AI-计算科学/D1-academic-AI/` | [DAI.1] | **arXiv 就绪**：DistCat 2-Cat 统一框架、Chimera 动力学 |
 | `AI-计算科学/D1-academic/` | [DA.1] | 广义学术工作（BayesFrame、方法论工具、学术协作） |
 | `AI-计算科学/D1-memory/` | [DM.1] | 记忆系统 |
-| `AI-计算科学/D1-continuous-agent/` | [CA.1] | Agent 持续循环机制 |
+|| `AI-计算科学/D1-continuous-agent/` | [CA.1] | Agent 持续循环机制 |
+|| `AI-计算科学/D1-browser-auto/` | [DBA.1] | **待启动**：本地 AI 驱动 Playwright 操控浏览器与网页大模型对话 |
 
 ### 写作 / 社会系统
 

@@ -5,10 +5,25 @@
 
 ---
 
+## Agent 使用规范
+
+预检查阶段**必须通过 Agent 验证所有条件**。Commander 不亲自检查文件存在性和工具可用性：
+
+| 场景 | 使用 Agent | 原因 |
+|------|-----------|------|
+| 文件存在性验证 | `Explore` Agent | Agent 快速遍历文件系统和 git 状态 |
+| 工具可用性验证 | `general-purpose` Agent | Agent 检查系统环境和依赖 |
+
+**强制要求**：
+- 所有文件检查必须通过 Agent 执行
+- pre-check 结论必须由至少一个 Agent 确认
+
+---
+
 ## 操作步骤
 
-### Step 1：验证任务包存在
-确认以下文件存在：
+### Step 1：验证任务包存在（Agent 执行）
+**通过 Agent 执行**：使用 `Explore` Agent 确认以下文件存在：
 - `task-definition.md`
 - `acceptance-criteria.md`
 - `task-decomposition.md`
@@ -16,25 +31,26 @@
 - `gap-analysis.json`
 - `decision.md`（确认 `enter_2loop: true`）
 
-### Step 2：验证阶段允许执行
-确认当前不是执行中状态：
+### Step 2：验证阶段允许执行（Agent 执行）
+**通过 Agent 执行**：使用 `Explore` Agent 确认当前不是执行中状态：
 - `task-state.json` 中 `phase != "execute"`
 - 如果有进行中的 2-loop 子任务，先完成或回滚
 
-### Step 3：验证核心文件和模块存在
-对于每个子任务，确认：
+### Step 3：验证核心文件和模块存在（Agent 执行）
+**通过 Agent 执行**：对每个子任务，Agent 确认：
 - 输入文件存在
 - 依赖的工具可用
 - 目标目录可写
 
-### Step 4：验证元数据明确
-确认以下字段在任务包中明确定义：
+### Step 4：验证元数据明确（Agent 辅助）
+**通过 Agent 辅助**：确认以下字段在任务包中明确定义：
 - `owner_project`：项目所有者
 - `working_paths`：工作路径
 - `expected_outputs`：预期输出
 - `rollback_target`：回滚目标
 
-### Step 5：验证修改位置符合项目规范
+### Step 5：验证修改位置符合项目规范（Agent 辅助）
+**通过 Agent 辅助**：确认：
 - 项目数据放在 `projects/<owner>/data/`，不放根 data/
 - 根 scripts/ 只放共享脚本
 - 所有变更记录到 `tasks/single_loop_state.json`

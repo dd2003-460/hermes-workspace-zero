@@ -10,7 +10,6 @@ type: executor
 **所属规格**: `/Users/a1-6/Desktop/workspace/loop/2-loop/03-execute.md`
 **输入**: 02-backup.md + 06-决策.md（M 任务清单）
 **输出**: 修正后的脚本、可视化图表、数据文件、执行记录
-**状态**: completed
 
 ---
 
@@ -32,7 +31,7 @@ type: executor
 ### 输出要求
 
 每个 M 任务必须产出：
-- 修正后的脚本（如 `scripts/06a-*.py`）
+- 修正后的脚本或程序
 - 可视化图表（PNG 格式）
 - 数据文件（CSV/npz 格式）
 

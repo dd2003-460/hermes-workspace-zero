@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+llm_gatherer/__main__.py
+llm_gatherer/browser.py
+llm_gatherer/cdp_client.py
+llm_gatherer/config.py
+llm_gatherer/llm_ask.py
+llm_gatherer/llm_interface.py
+llm_gatherer.egg-info/PKG-INFO
+llm_gatherer.egg-info/SOURCES.txt
+llm_gatherer.egg-info/dependency_links.txt
+llm_gatherer.egg-info/entry_points.txt
+llm_gatherer.egg-info/requires.txt
+llm_gatherer.egg-info/top_level.txt

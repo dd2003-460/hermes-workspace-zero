@@ -16,7 +16,7 @@ type: decision
 
 ## 阶段定义
 
-P1-6 的目标是：**基于 gap analysis 和置信度评估，做出决策。**
+本阶段的目标是：**基于 gap analysis 和置信度评估，做出进入 2-loop 或继续 1-loop 的决策。**
 
 ### 决策选项
 

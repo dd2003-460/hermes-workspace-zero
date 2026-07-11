@@ -24,5 +24,5 @@ type: team-lead
 
 ## Agent 团队管理
 
-按全局约束文档的 Agent 映射表（loop/agents/INDEX.md）分发任务。
+按 loop INDEX.md 和阶段规格文件分发任务。
 每个 Agent 的能力限制见各自的定义文件。

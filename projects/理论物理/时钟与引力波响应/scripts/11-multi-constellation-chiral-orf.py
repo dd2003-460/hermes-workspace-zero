@@ -354,6 +354,49 @@ def antenna_pattern_e_variable(tG, pG, a1, a2, a3, n, L, det_type='interferomete
     return R_plus, R_cross
 
 
+# ━━━ Spatial Phase Factor ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+def _spatial_phase_factor(f, delta_x, tG, pG):
+    """
+    Compute spatial phase factor exp(-2*pi*i*f/c * k_hat . Delta_x) for each sky pixel.
+
+    Args:
+        f: frequency (scalar or array)
+        delta_x: 3D separation vector from const1 to const2 (meters)
+        tG, pG: sky direction grid (theta, phi)
+
+    Returns:
+        phase: complex phase factor array, same shape as tG
+    """
+    k_hat = np.array([
+        np.sin(tG) * np.cos(pG),
+        np.sin(tG) * np.sin(pG),
+        np.cos(tG)
+    ])  # shape (3, ntheta, nphi)
+
+    delta_x_expanded = delta_x.reshape(3, 1, 1)  # broadcast over sky grid
+    k_dot_delta = np.sum(k_hat * delta_x_expanded, axis=0)  # shape (ntheta, nphi)
+
+    omega = 2.0 * np.pi * np.asarray(f)
+    phase = np.exp(-1j * omega / c * k_dot_delta)
+    return phase
+
+
+def _compute_delta_x(const1, const2):
+    """
+    Compute separation vector between constellation centroids.
+
+    Uses explicit reference_position if available.
+    Falls back to satellite position centroid.
+    """
+    if const1.reference_position is not None and const2.reference_position is not None:
+        return const1.reference_position - const2.reference_position
+
+    c1_centroid = np.mean(const1.positions, axis=0)
+    c2_centroid = np.mean(const2.positions, axis=0)
+    return c1_centroid - c2_centroid
+
+
 # ━━━ Constellation Class ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 class Constellation:
@@ -370,11 +413,12 @@ class Constellation:
     """
 
     def __init__(self, name, arm_length_m, inclination_rad, satellite_positions=None,
-                 rotation_phi=0.0):
+                 rotation_phi=0.0, reference_position=None):
         self.name = name
         self.L = arm_length_m
         self.inclination = inclination_rad
         self.rotation = rotation_phi
+        self.reference_position = reference_position
 
         if satellite_positions is not None:
             self.positions = satellite_positions
@@ -434,6 +478,10 @@ class Constellation:
         n_norm = np.linalg.norm(n)
         n = n / n_norm if n_norm > 1e-15 else np.array([0.0, 0.0, 1.0])
         return a1, a2, a3, n
+
+    def centroid(self):
+        """Compute the centroid of the constellation."""
+        return np.mean(self.positions, axis=0)
 
 
 def antenna_pattern_e_variable_universal(tG, pG, satellite_positions,
@@ -510,28 +558,35 @@ def compute_cross_e_variable_orf(f, const1, const2,
     """
     Compute cross-correlation ORF (I and V) using TDI E-variable responses.
 
+    Includes spatial phase factor exp(-i k · Delta_x) for multi-constellation
+    cross-correlation, as described in Orlando 2021 (arXiv:2011.07059).
+
     Gamma^I = integral dOmega [R_+1*R_+2 + R_×1*R_×2] / (4*pi)
     Gamma^V = integral dOmega [R_+1*R_×2 - R_×1*R_+2] / (4*pi)
-
-    The E-variable response is computed as a CW sum of one-way link responses,
-    matching Orlando's TDI E-variable definition.
     """
     tG = np.linspace(0, np.pi, ntheta)
     pG = np.linspace(0, 2*np.pi, nphi)
     TG, PG = np.meshgrid(tG, pG, indexing='ij')
     dOmega = np.pi / (ntheta - 1) * 2 * np.pi / nphi
 
-    # Compute E-variable responses via CW link sum
     R1p, R1x = antenna_pattern_e_variable_universal(
         TG, PG, const1.positions, const1.L, const1_type)
     R2p, R2x = antenna_pattern_e_variable_universal(
         TG, PG, const2.positions, const2.L, const2_type)
 
-    # Compute ORF using complex-conjugate cross-correlation.
-    # For complex antenna patterns, the cross-correlation is Re(R1* · R2).
-    # This ensures OLC and interferometer responses combine correctly.
-    gamma_I = np.real(np.sum(np.conj(R1p) * R2p + np.conj(R1x) * R2x)) * dOmega / (4 * np.pi)
-    gamma_V = np.real(np.sum(np.conj(R1p) * R2x - np.conj(R1x) * R2p)) * dOmega / (4 * np.pi)
+    # Spatial phase factor for inter-constellation separation
+    delta_x = _compute_delta_x(const1, const2)
+    if f is not None:
+        phase = _spatial_phase_factor(f, delta_x, TG, PG)
+    else:
+        phase = np.ones_like(TG)
+
+    # Cross-correlation with spatial phase
+    cross_corr = np.conj(R1p) * R2p + np.conj(R1x) * R2x
+    chiral_corr = np.conj(R1p) * R2x - np.conj(R1x) * R2p
+
+    gamma_I = np.real(np.sum(phase * cross_corr)) * dOmega / (4 * np.pi)
+    gamma_V = np.real(np.sum(phase * chiral_corr)) * dOmega / (4 * np.pi)
 
     return gamma_I, gamma_V
 
@@ -540,12 +595,10 @@ def compute_cross_e_variable_orf_sky_max(f, const1, const2,
                                           const1_type='olc', const2_type='interferometer',
                                           ntheta=32, nphi=64):
     """
-    Compute sky-maximized chiral ORF.
+    Compute sky-maximized chiral ORF with spatial phase factor.
 
     Returns the maximum absolute value of the per-pixel normalized chiral
-    integrand: |R_+1*R_×2 - R_×1*R_+2| / sqrt(auto1 * auto2) over sky.
-
-    This is the quantity comparable to Orlando's |Gamma^V|_max ~ 0.3.
+    integrand: |phase * (R_+1*R_×2 - R_×1*R_+2)| / sqrt(auto1 * auto2) over sky.
     """
     tG = np.linspace(0, np.pi, ntheta)
     pG = np.linspace(0, 2*np.pi, nphi)
@@ -557,16 +610,23 @@ def compute_cross_e_variable_orf_sky_max(f, const1, const2,
     R2p, R2x = antenna_pattern_e_variable_universal(
         TG, PG, const2.positions, const2.L, const2_type)
 
+    # Spatial phase factor
+    delta_x = _compute_delta_x(const1, const2)
+    if f is not None:
+        phase = _spatial_phase_factor(f, delta_x, TG, PG)
+    else:
+        phase = np.ones_like(TG)
+
     # Per-pixel auto-correlations
     auto1 = np.real(np.conj(R1p) * R1p + np.conj(R1x) * R1x)
     auto2 = np.real(np.conj(R2p) * R2p + np.conj(R2x) * R2x)
 
-    # Per-pixel chiral integrand (before sky averaging)
-    chiral_integrand = np.real(np.conj(R1p) * R2x - np.conj(R1x) * R2p)
+    # Per-pixel chiral integrand WITH spatial phase
+    chiral_integrand = np.real(np.conj(phase) * (np.conj(R1p) * R2x - np.conj(R1x) * R2p))
 
     # Sky-averaged ORF
-    gamma_I = np.real(np.sum(np.conj(R1p) * R2p + np.conj(R1x) * R2x)) * dOmega / (4 * np.pi)
-    gamma_V = np.sum(chiral_integrand) * dOmega / (4 * np.pi)
+    gamma_I = np.real(np.sum(phase * (np.conj(R1p) * R2p + np.conj(R1x) * R2x))) * dOmega / (4 * np.pi)
+    gamma_V = np.real(np.sum(phase * (np.conj(R1p) * R2x - np.conj(R1x) * R2p))) * dOmega / (4 * np.pi)
 
     # Sky-maximized normalized chiral: max over sky of |integrand| / sqrt(auto1*auto2)
     norm_factor = np.sqrt(auto1 * auto2)
@@ -594,19 +654,26 @@ def compute_cross_e_variable_orf_sky_max(f, const1, const2,
 
 def create_lisa():
     """LISA constellation: L = 2.5 Gm, inclination = 60 deg."""
-    const = Constellation('LISA', arm_length_m=2.5e9, inclination_rad=np.radians(60.0))
+    au = 1.496e11  # 1 AU in meters
+    pos = np.array([0.0, 0.0, au])  # LISA offset from Taiji
+    const = Constellation('LISA', arm_length_m=2.5e9, inclination_rad=np.radians(60.0),
+                          reference_position=pos)
     return const
 
 
 def create_taiji():
     """Taiji constellation: L = 2.5 Gm, inclination = 0 deg (ecliptic plane)."""
-    const = Constellation('Taiji', arm_length_m=2.5e9, inclination_rad=0.0)
+    pos = np.array([0.0, 0.0, 0.0])
+    const = Constellation('Taiji', arm_length_m=2.5e9, inclination_rad=0.0,
+                          reference_position=pos)
     return const
 
 
 def create_olc():
     """OLC constellation: L = 2.5 Gm, inclination = variable."""
-    const = Constellation('OLC', arm_length_m=2.5e9, inclination_rad=0.0)
+    pos = np.array([0.0, 0.0, 0.0])
+    const = Constellation('OLC', arm_length_m=2.5e9, inclination_rad=0.0,
+                          reference_position=pos)
     return const
 
 
@@ -620,7 +687,7 @@ def test_self_correlation():
     taiji1 = create_taiji()
     taiji2 = create_taiji()
 
-    gamma_I, gamma_V = compute_cross_e_variable_orf(None, taiji1, taiji2)
+    gamma_I, gamma_V = compute_cross_e_variable_orf(0.03, taiji1, taiji2)
 
     print(f"  Standard ORF (Taiji x Taiji): {gamma_I:.6f}")
     print(f"  Chiral ORF (Taiji x Taiji): {gamma_V:.2e}")
@@ -646,6 +713,10 @@ def test_taiji_lisa_benchmark():
 
     Acceptance range: 0.01 <= sky-max <= 1.0 (covers plausible Orlando values
     and accounts for different conventions).
+
+    Spatial phase: For Taiji-LISA separation ~1 AU, f=20 mHz,
+    lambda_gw = c/f ~ 1.5e10 m, separation ~ 1.5e11 m,
+    so f * d / c ~ 0.1 → phase effects at ~10% level.
     """
     print("\nTest 2: LISA x Taiji benchmark (Orlando 2021)")
     print("=" * 55)
@@ -653,20 +724,48 @@ def test_taiji_lisa_benchmark():
     lisa = create_lisa()  # LISA: i=60 deg
     taiji = create_taiji()  # Taiji: i=0 deg
 
+    f_bench = 20e-3  # 20 mHz
+
+    # Compute spatial phase argument
+    delta_x = _compute_delta_x(taiji, lisa)
+    d = np.linalg.norm(delta_x)
+    wavelength = 3.0e8 / f_bench
+    phase_arg = f_bench * d / 3.0e8
+    print(f"  Taiji-LISA separation: {d / 1.496e11:.3f} AU")
+    print(f"  GW wavelength at {f_bench*1e3:.1f} mHz: {wavelength / 1.496e11:.2f} AU")
+    print(f"  Phase argument f*d/c: {phase_arg:.3f}")
+
+    # WITH spatial phase
     gamma_I, gamma_V, sky_max_norm_V, sky_avg_norm_V, max_theta, max_phi = \
         compute_cross_e_variable_orf_sky_max(
-            None, lisa, taiji,
+            f_bench, lisa, taiji,
             const1_type='interferometer', const2_type='interferometer')
 
-    abs_gamma_V = abs(gamma_V)
-    print(f"  Standard ORF (sky-avg): {gamma_I:.6f}")
-    print(f"  Chiral ORF (sky-avg): {gamma_V:.2e}")
-    print(f"  |Gamma^V| (sky-avg): {abs_gamma_V:.6e}")
-    print(f"  Sky-avg norm_V: {sky_avg_norm_V:.6e}")
-    print(f"  Sky-max norm_V: {sky_max_norm_V:.6f}")
-    print(f"  Sky-max location: theta={max_theta:.1f}°, phi={max_phi:.1f}°")
-    print(f"  Expected |Gamma^V|_max ~ 0.3 (Orlando 2021, from figure)")
-    print(f"  Theoretical max = 1.0 (Cauchy-Schwarz bound)")
+    abs_gamma_V_with = abs(gamma_V)
+    print(f"\n  WITH spatial phase:")
+    print(f"    Standard ORF (sky-avg): {gamma_I:.6f}")
+    print(f"    Chiral ORF (sky-avg): {gamma_V:.2e}")
+    print(f"    |Gamma^V| (sky-avg): {abs_gamma_V_with:.6e}")
+    print(f"    Sky-max norm_V: {sky_max_norm_V:.6f}")
+    print(f"    Sky-max location: theta={max_theta:.1f}°, phi={max_phi:.1f}°")
+
+    # WITHOUT spatial phase (temporary: disable reference positions)
+    lisa_no_rp = Constellation('LISA', arm_length_m=2.5e9, inclination_rad=np.radians(60.0),
+                               reference_position=None)
+    taiji_no_rp = Constellation('Taiji', arm_length_m=2.5e9, inclination_rad=0.0,
+                                reference_position=None)
+    gamma_I0, gamma_V0, sky_max_norm_V0, sky_avg_norm_V0, _, _ = \
+        compute_cross_e_variable_orf_sky_max(
+            f_bench, lisa_no_rp, taiji_no_rp,
+            const1_type='interferometer', const2_type='interferometer')
+
+    abs_gamma_V_without = abs(gamma_V0)
+    print(f"\n  WITHOUT spatial phase (reference_position=None):")
+    print(f"    Chiral ORF (sky-avg): {gamma_V0:.2e}")
+    print(f"    |Gamma^V| (sky-avg): {abs_gamma_V_without:.6e}")
+
+    rel_diff = abs(abs_gamma_V_with - abs_gamma_V_without) / max(abs_gamma_V_without, 1e-15)
+    print(f"\n  Relative difference in |Gamma^V|: {rel_diff:.2%}")
 
     # Orlando's 0.3 is figure-reading approximate. Sky-max of ~1.0 is
     # physically correct for maximally orthogonal detector responses.
@@ -691,8 +790,9 @@ def test_olc_taiji_cross():
     olc = create_olc()
     taiji = create_taiji()
 
+    f_bench = 20e-3
     gamma_I, gamma_V = compute_cross_e_variable_orf(
-        None, olc, taiji,
+        f_bench, olc, taiji,
         const1_type='olc', const2_type='interferometer')
 
     abs_gamma_V = abs(gamma_V)
@@ -718,9 +818,10 @@ def test_olc_taiji_cross_nonzero():
     olc30 = Constellation('OLC_30', arm_length_m=2.5e9, inclination_rad=np.radians(30.0))
     taiji = create_taiji()
 
+    f_bench = 20e-3
     gamma_I, gamma_V, sky_max_norm_V, sky_avg_norm_V, max_theta, max_phi = \
         compute_cross_e_variable_orf_sky_max(
-            None, olc30, taiji,
+            f_bench, olc30, taiji,
             const1_type='olc', const2_type='interferometer')
 
     abs_gamma_V = abs(gamma_V)
@@ -752,7 +853,8 @@ def run_full_analysis():
     lisa = create_lisa()
     taiji = create_taiji()
 
-    gI, gV = compute_cross_e_variable_orf(None, lisa, taiji,
+    f_bench = 20e-3
+    gI, gV = compute_cross_e_variable_orf(f_bench, lisa, taiji,
                                            const1_type='interferometer',
                                            const2_type='interferometer')
     results_all['Taiji x LISA'] = {'gamma_I': gI, 'gamma_V': gV}
@@ -760,14 +862,14 @@ def run_full_analysis():
 
     # OLC x Taiji
     olc = create_olc()
-    gI, gV = compute_cross_e_variable_orf(None, olc, taiji,
+    gI, gV = compute_cross_e_variable_orf(f_bench, olc, taiji,
                                            const1_type='olc',
                                            const2_type='interferometer')
     results_all['OLC x Taiji'] = {'gamma_I': gI, 'gamma_V': gV}
     print(f"  {'OLC x Taiji':<25s}  {gI:12.6f}  {gV:14.2e}  {abs(gV):12.2e}")
 
     # OLC x LISA
-    gI, gV = compute_cross_e_variable_orf(None, olc, lisa,
+    gI, gV = compute_cross_e_variable_orf(f_bench, olc, lisa,
                                            const1_type='olc',
                                            const2_type='interferometer')
     results_all['OLC x LISA'] = {'gamma_I': gI, 'gamma_V': gV}
@@ -782,6 +884,7 @@ def run_inclination_scan():
     print("=" * 70)
 
     taiji = create_taiji()
+    f_scan = 0.03  # 30 mHz for consistent spatial phase
 
     inclinations = np.linspace(0, 90, 19)  # 0 to 90 deg
 
@@ -790,10 +893,10 @@ def run_inclination_scan():
     for deg in inclinations:
         rad = np.radians(deg)
         companion = Constellation(f'companion_{deg}', arm_length_m=2.5e9,
-                                   inclination_rad=rad)
+                                   inclination_rad=rad, reference_position=taiji.reference_position)
 
         gamma_I, gamma_V = compute_cross_e_variable_orf(
-            None, taiji, companion,
+            f_scan, taiji, companion,
             const1_type='interferometer', const2_type='interferometer')
 
         results['inclination'].append(deg)
@@ -996,23 +1099,25 @@ if __name__ == '__main__':
     elif cmd == 'quick':
         print("Quick multi-constellation chiral ORF preview (E-variable)...")
 
+        f_bench = 20e-3
+
         # Taiji x LISA
         lisa = create_lisa()
         taiji = create_taiji()
-        gI, gV = compute_cross_e_variable_orf(None, lisa, taiji,
+        gI, gV = compute_cross_e_variable_orf(f_bench, lisa, taiji,
                                                const1_type='interferometer',
                                                const2_type='interferometer')
         print(f"\n  Taiji x LISA: <Gamma^I> = {gI:.6f}, |Gamma^V| = {abs(gV):.6e}")
 
         # OLC x Taiji
         olc = create_olc()
-        gI, gV = compute_cross_e_variable_orf(None, olc, taiji,
+        gI, gV = compute_cross_e_variable_orf(f_bench, olc, taiji,
                                                const1_type='olc',
                                                const2_type='interferometer')
         print(f"  OLC x Taiji: <Gamma^I> = {gI:.6f}, |Gamma^V| = {abs(gV):.6e}")
 
         # OLC x LISA
-        gI, gV = compute_cross_e_variable_orf(None, olc, lisa,
+        gI, gV = compute_cross_e_variable_orf(f_bench, olc, lisa,
                                                const1_type='olc',
                                                const2_type='interferometer')
         print(f"  OLC x LISA: <Gamma^I> = {gI:.6f}, |Gamma^V| = {abs(gV):.6e}")

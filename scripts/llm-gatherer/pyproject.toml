@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llm-gatherer"
+version = "0.1.0"
+description = "RALPH loop information gathering — LLM chat via browser automation"
+requires-python = ">=3.10"
+dependencies = [
+    "playwright",
+]
+
+[project.scripts]
+llm-gatherer = "llm_gatherer.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["llm_gatherer*"]

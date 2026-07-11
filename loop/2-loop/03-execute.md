@@ -5,23 +5,44 @@
 
 ---
 
+## Agent 使用规范
+
+执行阶段**必须通过 Agent 分发子任务**。Commander 不亲自编写代码或写入文件：
+
+| 场景 | 使用 Agent | 原因 |
+|------|-----------|------|
+| 子任务代码/文档编写 | `general-purpose` Agent | 每个子任务由独立 Agent 执行，并行加速 |
+| 索引更新 | `Explore` Agent | Agent 更新 INDEX.md 等索引文件 |
+| 测试执行 | `Explore` Agent | Agent 运行测试脚本并收集结果 |
+
+**强制要求**：
+- 每个子任务必须由独立 Agent 执行（不通过 Commander）
+- 测试运行必须通过 Agent 执行
+- Commander 只负责分发和调度，不亲自编写任何代码或文件
+
+---
+
 ## 操作步骤
 
 ### Step 0：标注环节
 输出开头声明：`[环节: execute]`
 
-### Step 1：按 DAG 顺序执行子任务
-按照 `task-decomposition.md` 中定义的 DAG 依赖顺序，逐个执行子任务。
+### Step 1：按 DAG 顺序执行子任务（Agent 并行分发）
+按照 `task-decomposition.md` 中定义的 DAG 依赖顺序，**通过 Agent 并行分发**可并行的子任务：
+- 无依赖的子任务同时启动 Agent 执行
+- 有依赖的子任务等待前置 Agent 完成后启动
 
-### Step 2：真正做事
+### Step 2：真正做事（Agent 执行）
+**通过 Agent 执行**：Agent 负责：
 - 写文件、搜索、分析、更新索引
 - **不得只写模板然后标完成**
 - 新脚本/目录落在规范位置
 
-### Step 3：更新索引
-新入口/脚本必须更新对应 INDEX.md。
+### Step 3：更新索引（Agent 执行）
+**通过 Agent 执行**：新入口/脚本必须更新对应 INDEX.md。
 
-### Step 4：记录每个子任务的完成状态
+### Step 4：记录每个子任务的完成状态（Agent 记录）
+**通过 Agent 记录**：Agent 为每个子任务写入完成状态：
 ```markdown
 ## Subtask N: [名称]
 - 状态：completed / failed / skipped
@@ -30,7 +51,8 @@
 - 回滚：[如果失败如何回滚]
 ```
 
-### Step 5：执行测试
+### Step 5：执行测试（Agent 执行）
+**通过 Agent 执行**：Agent 运行测试脚本，收集结果。
 - 脚本/工具必须运行至少一次测试
 - 测试失败 → 默认回滚，不得偷偷小修继续跑
 - 纯文档可豁免

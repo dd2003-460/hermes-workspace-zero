@@ -5,18 +5,35 @@
 
 ---
 
+## Agent 使用规范
+
+分叉决策阶段**必须通过 Agent 执行决策**。Commander 不自行决定——分叉决策必须由专门的 Agent 给出：
+
+| 场景 | 使用 Agent | 原因 |
+|------|-----------|------|
+| 分叉决策执行 | `fork-decider` Agent | Agent 基于置信度报告做出分叉决策 |
+| 回滚目标确定 | `backup-agent` Agent | Agent 确定正确的回滚备份点 |
+
+**强制要求**：
+- 分叉决策（completed / completed_with_branches / needs_replan）必须由 `fork-decider` Agent 给出
+- 回滚操作必须由 `backup-agent` Agent 执行
+- Commander 只审核 Agent 的决策，不做独立分叉判断
+
+---
+
 ## 操作步骤
 
 ### Step 0：标注环节
 输出开头声明：`[环节: decision]`
 
-### Step 1：读取置信度报告
-从 `confidence-report.md` 中提取：
+### Step 1：读取置信度报告（Agent 执行）
+**通过 Agent 执行**：`fork-decider` Agent 从 `confidence-report.md` 中提取：
 - 总体置信度
 - 判定（低/中/高）
 - 遗留分支
 
-### Step 2：应用分叉规则
+### Step 2：应用分叉规则（Agent 执行）
+**通过 `fork-decider` Agent 执行**分叉规则：
 
 #### 规则 A：completed
 - **条件**：全部通过 + 置信度 > 0.6
@@ -56,7 +73,7 @@ completed_with_branches
 
 #### 规则 C：needs_replan
 - **条件**：置信度 < 0.3 或任何核验未通过
-- **动作**：回滚，回 1-loop
+- **动作**：通过 `backup-agent` Agent 回滚，回 1-loop
 
 ```markdown
 # Decision
@@ -73,8 +90,8 @@ needs_replan
 **任务失败，置信度 < 0.3 或核验未通过，需要回滚并重新规划**
 ```
 
-### Step 3：写入 decision.md（2-loop 版本）
-输出文件名：`decision-2loop.md`
+### Step 3：写入 decision.md（2-loop 版本）（Agent 辅助）
+**通过 Agent 辅助**：Agent 写入输出文件 `decision-2loop.md`。
 
 ---
 

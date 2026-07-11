@@ -1,4 +1,4 @@
-**最后更新**: 2026-06-23（loop状态管理改造完成）
+**最后更新**: 2026-07-11（LLM Gatherer 浏览器自动化已验证通过 + D1-grav-waves Iter11 空间相位）
 
 ---
 
@@ -24,6 +24,20 @@
 
 ## 🔴 当前 Focus
 
+### 信息搜集 — 浏览器控制大模型对话（LLM Gatherer v2）
+
+| 任务 | 状态 | 说明 |
+|------|------|------|
+| 需求定义 | ✅ 已完成 | 通过浏览器控制 Edge 已登录账号（Google/豆包等），与大模型对话做信息搜集和文件核对 |
+| 技术方案设计 | 📋 待开始 | 需要确定：1) 浏览器自动化方式（playwright/cdp 控制 Edge）；2) 对接哪些模型平台（Edge 内置 Copilot/豆包/通义等）；3) 本地文件上传核对的机制 |
+| 信息搜集能力 | 📋 待开始 | 目标：可通过自然语言让 AI 搜索信息、总结网页内容、对比多个来源 |
+| 文件核对能力 | 📋 待开始 | 目标：可上传本地文件（PDF/文本/代码等），让 AI 阅读并核对已有工作 |
+
+**核心要求**：
+- 用浏览器控制（或任何方法），可和大模型询问信息
+- Edge 已登录 Google、豆包等账号，利用已登录状态
+- 支持上传本地文件，与 AI 核对已有工作
+
 ### D1-goal-investigation — Agent Goal + Loop 状态管理
 
 | 任务 | 状态 | 说明 |
@@ -39,7 +53,7 @@
 |------|------|------|
 | DistCat v6 (math.CT) | 📋 就绪 | MITM SSL + 作者确认 |
 | BayesFrame v2.0 (q-bio.NC) | 📋 就绪 | MITM SSL + 作者确认 |
-| D1-grav-waves v13 (gr-qc) | ✅ ready_for_submission | v13: v12 + 3 uncited bibitems removed, 14 pages, 25 refs, 0 errors, 0 uncited. 作者确认上传 (2026-07-01) |
+| D1-grav-waves v14 (gr-qc) | 📋 待更新 | v13 已上传，Iter11 新增空间相位 exp(-ik·Δx) 实现（相对偏差 ~40%），论文需更新 §3.5 ORF 数值 |
 | anyon-hawking (hep-th) | 📋 就绪 | MITM SSL + 作者确认 |
 | EMRI-D26 resonance (gr-qc) | 📋 就绪 | MITM SSL + 作者确认 |
 | Chimera v3 (Chaos) | 📋 就绪 | MITM SSL + 作者确认 |
@@ -51,7 +65,7 @@
 
 | 项目 | 任务文件 | 当前状态 |
 |------|----------|----------|
-| D1-grav-waves | tasks/TASKS.md | ✅ COMPLETE v13+ (iteration 48, 52-page PDF, all theoretical corrections applied, arXiv-ready) |
+| D1-grav-waves (理论物理/时钟与引力波响应) | tasks/TASKS.md | ✅ arXiv v13 ready + Iter11 空间相位 exp(-ik·Δx) 实现完成（tests/benchmark/main 全通过，空间相位偏差 ~40%）；✅ LLM Gatherer 浏览器自动化已验证通过（Enter key + text stability detection, CDP-based pixel navigation）；✅ Iter79 论文 §3.5 数值更新完成（§3.5.6 新增 Iter11 结果，§3.5.5 新增空间相位偏差段，§3.5.4 新增 helicity 对称性分析，结论节同步更新；LaTeX 编译通过，cross-paper consistency 全通过） |
 | D1-persona-align | tasks/TASKS.md | T1-T47 完成 |
 | D1-academic-AI | tasks/TASKS.md | DistCat + Chimera + EMRI 就绪 |
 | D1-academic (BayesFrame) | bayesian-frame/tasks/ | JCR 论文 arXiv 就绪 |

@@ -426,12 +426,15 @@ Schaffrath等人严格证明了一个重要的区分：
 \hline
 性质 & 地面 OLC & 空间 OLC \\
 \hline
-原子运动 & trap 束缚 ($\omega_T \sim 10^5$ Hz) & 自由下落（测地线） \\
-GW 对原子的直接作用 & 被抑制 ~$(\omega_{\rm GW}/\omega_T)^2$ & 无抑制 \\
+原子运动 & trap 束缚 & 自由下落（测地线） \\
+ & ($\omega_T \sim 10^5$ Hz) & \\
+GW 对原子的直接作用 & 被抑制 & 无抑制 \\
+ & ~$(\omega_{\rm GW}/\omega_T)^2$ & \\
 GW 对光传播的作用 & 有效（Doppler频移） & 有效（Doppler频移） \\
-OLC 测量信号的主要来源 & 光传播（但不易分离原子运动的系统误差） & 光传播（干净，无 trap 耦合） \\
+OLC 测量信号来源 & 光传播（不易分离 & 光传播（干净， \\
+ & 系统误差） & 无 trap 耦合） \\
 Schaffrath (2025) 结论 & 领头阶不灵敏 & 适用 \\
-Gaudio (2026) 结论 & 换能增益 ~ $10^{0}\text{--}10^{-2}$ & 换能增益 ~ $10^{-2}$（Doppler） \\
+Gaudio (2026) 结论 & \shortstack{换能增益 \\ ~$10^{0}\text{--}10^{-2}$} & \shortstack{换能增益 \\ ~$10^{-2}$（Doppler）} \\
 \hline
 \end{tabular}
 
@@ -977,7 +980,7 @@ $\Gamma^V \to -\Gamma^V$ 在此变换下成立——这是手征ORF作为真实�
 
 \subsubsection{3.5.6 多 Constellation 网络：手征探测的条件}\label{sec:3.5.6}
 
-$\Gamma^V \equiv 0$ 对所有共面构型成立这一结论意味着：要探测手征SGWB，需要真正的三维非共面探测器网络，并且计算中必须包含空间相位因子 $\exp[-2\pi i \hat{k} \cdot (\vec{x}_1 - \vec{x}_2)]$。
+$\Gamma^V \equiv 0$ 对所有共面构型成立这一结论意味着：要探测手征SGWB，需要真正的三维非共面探测器网络，并且计算中必须包含空间相位因子 $\exp[-2\pi i \hat{k} \cdot (\vec{x}_1 - \vec{x}_2)]$。这一结论与 PTA 领域的手征/圆极化探测研究一致：Kato \& Soda 通过对 PTA 交叉相关的 Stokes $V$ 参数分析，独立证明了圆极化 SGWB 信号的非零探测需要探测器网络打破反射对称性 \cite{ref13}。
 
 \textbf{空间相位因子的数值影响}：迭代 11（`11-multi-constellation-chiral-orf.py`）已实现空间相位因子的完整计算。在 LISA (inclination $60^\circ$) $\times$ Taiji (ecliptic plane) benchmark 中，$f = 20$ mHz，探测器间距 $d = 1$ AU，相位参量 $f \cdot d/c = 9.973$（对应引力波波长 $\lambda_{\rm GW} \approx 0.1$ AU）。迭代计算显示：
 
@@ -997,6 +1000,8 @@ $\Gamma^V \equiv 0$ 对所有共面构型成立这一结论意味着：要探测
 
 \textbf{当前结论的适用范围}：在所有已计算的共面构型中（Michelson-like、E变量、TF-free 以及自相关），手征响应均为零。这些结果是确定性的，不受是否包含空间相位因子的影响——因为共面构型的镜面对称性本身就保证 $\Gamma^V = 0$。
 
+\textbf{与 JCAP 2025 数值结果的一致性}：JCAP (2025) 对 LISA--Taiji 网络的系统研究表明，手征灵敏度强烈依赖于 Taiji 轨道倾角——TAIJIm 构型（LISA 倾角 $+60^\circ$，Taiji 倾角 $-60^\circ$）在低频 $f \approx 1$ mHz 处的有效手征 ORF $\gamma_{\text{eff}}^V \approx 0.010$ 比 TAIJIp 构型（双倾角 $+60^\circ$）高约一个量级（JCAP 图 3，arXiv:2410.18916）。JCAP 还发现 $\gamma_{\text{eff}}^V$ 随两探测器平面夹角增大而增强，在正交构型附近达到最大（JCAP 图 7）。这与本节的倾角扫描结果（$|\Gamma^V|$ 在 $i_{\rm comp} \approx 45^\circ$ 处峰值，零倾斜和 $90^\circ$ 正交均为零）物理自洽：最大手征响应出现在两平面适度倾斜的构型，此时宇称对称破缺最强但尚未被正交对称性重新恢复。JCAP 的独立数值验证（基于完整 TDI 与轨道运动）进一步确认了本节的物理图像——手征探测需要非共面网络，且最优灵敏度出现在适度倾斜角附近。
+
 \subsection{3.6 ORF 的频率依赖性：定量分析}
 
 
@@ -1013,11 +1018,11 @@ ORF对频率的依赖有两个来源：
 
 \begin{tabular}{|c|c|c|c|}
 \hline
-臂长 $L$ & $\Delta L$ & 臂响应显著 ($fL/c \sim 0.1$) & 相位因子显著 ($f\Delta L/c \sim 0.1$) \\
+臂长 $L$ & $\Delta L$ & \shortstack{臂响应显著 \\ ($fL/c \sim 0.1$)} & \shortstack{相位因子显著 \\ ($f\Delta L/c \sim 0.1$)} \\
 \hline
-0.17 Gm $10^{7}$ m & 180 Hz & 0.5 Hz \\
-1 Gm $10^{8}$ m & 30 Hz & 0.05 Hz \\
-3 Gm $10^{9}$ m & 10 Hz & 0.005 Hz \\
+0.17 Gm $10^{7}$ m & 180 Hz & 0.5 Hz & \\
+1 Gm $10^{8}$ m & 30 Hz & 0.05 Hz & \\
+3 Gm $10^{9}$ m & 10 Hz & 0.005 Hz & \\
 \hline
 \end{tabular}
 
@@ -1371,10 +1376,13 @@ $$h_{\rm GW} = \sqrt{2 L_{\rm LISA}^2 f^2 S_h(f)} \sim 2.5 \times 10^9 \times 2\
 量 & OLC (0.17 Gm) & LISA (2.5 Gm) & 比值 (OLC/LISA) \\
 \hline
 臂长 $L$ & $1.7 \times 10^8$ m & $2.5 \times 10^9$ m & 0.068 \\
-传递函数 $|T| \propto fL$ & $5.6 \times 10^{-3}$ (1mHz) & $8.3 \times 10^{-2}$ (1mHz) & 0.068 \\
-应变信号 $h$ & $10^{-12}$ (LISA设计) & $10^{-12}$ & 1 \\
-等效频率偏移信号 & $h \times |T|$ & $h \times |T|$ & 0.068 \\
-时钟噪声 $\sqrt{S_y}$ & $7 \times 10^{-18}$ Hz$^{-1/2}$ & $10^{-18}$ Hz$^{-1/2}$ (TDI后) & 7 \\
+传递函数 $|T|$ & $5.6 \times 10^{-3}$ & $8.3 \times 10^{-2}$ & 0.068 \\
+  ($\propto fL$) & (1 mHz) & (1 mHz) & \\
+应变信号 $h$ & $10^{-12}$ & $10^{-12}$ & 1 \\
+  (LISA 设计) & & & \\
+等效频率偏移 & $h \times |T|$ & $h \times |T|$ & 0.068 \\
+时钟噪声 $\sqrt{S_y}$ & $7 \times 10^{-18}$ Hz$^{-1/2}$ & $10^{-18}$ Hz$^{-1/2}$ & 7 \\
+  & & (TDI 后) & \\
 信噪比 (单臂) & $P_h/\sqrt{S_y}$ & $P_h/\sqrt{S_y}$ & $\sim 10^{-2}$ \\
 \hline
 \end{tabular}
@@ -1396,9 +1404,12 @@ LISA和OLC的最佳工作频段不同：
 \hline
 探测器 & 最佳频段 & 主导噪声 & 物理限制 \\
 \hline
-LISA & 3–30 mHz & 加速度噪声 + 应变灵敏度 & 臂太长，$fL/c \gg 1$ 时sinc振荡 \\
-OLC (0.17 Gm) & 0.1–1 Hz & 量子投影噪声 & $fL/c \sim 0.01$–0.1，尚未饱和 \\
-OLC (3 Gm) & 10–100 mHz & 量子投影噪声 & $fL/c \sim 0.5$–5，接近峰值 \\
+LISA & 3–30 mHz & 加速度噪声 & 臂太长，$fL/c \gg 1$ \\
+  & & + 应变灵敏度 & 时 sinc 振荡 \\
+OLC (0.17 Gm) & 0.1–1 Hz & 量子投影噪声 & $fL/c \sim 0.01$–0.1 \\
+  & & & 尚未饱和 \\
+OLC (3 Gm) & 10–100 mHz & 量子投影噪声 & $fL/c \sim 0.5$–5 \\
+  & & & 接近峰值 \\
 \hline
 \end{tabular}
 
@@ -1980,11 +1991,15 @@ LIGO/Virgo & 10–1000 Hz & 地面技术限制（地震噪声） \\
 \hline
 噪声源 & LISA & OLC \\
 \hline
-主导噪声（低频） & 加速度噪声 (~$10^{-15}$ m/s$^2$/Hz$^{1/2}$) & 量子投影噪声 (~$10^{-18}$ 频率偏移) \\
-主导噪声（高频） & 相位测量噪声 (~$10^{-12}$ m/Hz$^{1/2}$) & 散粒噪声 (~$10^{-17}$ 频率偏移) \\
-加速度噪声 & 需要TDI抑制 & 不存在（自由下落） \\
-低频截止 & ~0.1 mHz（加速度噪声） & ~0.01 Hz（$1/f$ 闪烁噪声） \\
-高频截止 & ~0.1 Hz（sinc振荡） & ~1–10 Hz（sinc振荡） \\
+主导噪声（低频） & 加速度噪声 & 量子投影噪声 \\
+  & ($\sim 10^{-15}$ m/s$^2$/Hz$^{1/2}$) & ($\sim 10^{-18}$ 频率偏移) \\
+主导噪声（高频） & 相位测量噪声 & 散粒噪声 \\
+  & ($\sim 10^{-12}$ m/Hz$^{1/2}$) & ($\sim 10^{-17}$ 频率偏移) \\
+加速度噪声 & 需要 TDI 抑制 & 不存在（自由下落） \\
+低频截止 & $\sim 0.1$ mHz & $\sim 0.01$ Hz \\
+  & （加速度噪声） & ($1/f$ 闪烁噪声） \\
+高频截止 & $\sim 0.1$ Hz & $\sim 1$--$10$ Hz \\
+  & （sinc 振荡） & （sinc 振荡） \\
 \hline
 \end{tabular}
 
@@ -2016,7 +2031,7 @@ OLC的最小单元（2颗卫星）远低于LISA的3颗卫星。但单一双卫�
 \subsubsection{6.4.2 技术成熟度}
 
 
-\begin{tabular}{|c|c|c|}
+\begin{tabular}{|c|p{3.5cm}|p{3.5cm}|}
 \hline
 技术 & 当前状态 & 空间任务就绪度 \\
 \hline
@@ -2423,16 +2438,16 @@ $\sigma_y(\tau)$ & Allan方差 & $10^{-18}$ (Sr钟, $\tau=1$ s) \\
 \bibitem{ref4} Agazie et al. (NANOGrav), "The NANOGrav 15 yr Data Set: Evidence for a Gravitational Wave Background," Astrophys. J. Lett. 951, L8 (2023); Xu et al. (CPTA), "Common-spectrum process in the CPTA fourth data release," Res. Astron. Astrophys. 24, 075010 (2024).
 \bibitem{ref5} Katori, H., "Topological trap for state-insensitive optical lattice clock," Phys. Rev. Lett. 91, 173005 (2003); Okamoto et al., "Toward an optical clock with a lattice-trapped neutral atom ensemble at the quantum projection noise limit," Phys. Rev. Lett. 107, 063901 (2011).
 \bibitem{ref6} Huntemann et al., "Improved Measurement of the Atomic Clock Transition Frequency of Sr-87," Phys. Rev. Lett. 116, 063001 (2016); Nicholson et al., "Systematic evaluation of an atomic clock at 2×10\textbackslash\{\}P-\textbackslash\{\}E\textbackslash\{\}P1\textbackslash\{\}E\textbackslash\{\}P8\textbackslash\{\}E total uncertainty," Nat. Commun. 11, 1 (2020).
-\bibitem{ref7} Schaffrath et al., "Terrestrial optical clocks are insensitive to gravitational waves at leading order," arXiv:2509.24993 (2025); Schaffrath et al., "Unified laboratory-frame analysis of atomic gravitational-wave sensors," arXiv:2509.24993 (2025).
+\bibitem{ref7} Schaffrath et al., "Unified laboratory-frame analysis of atomic gravitational-wave sensors," arXiv:2509.24993 (2025).
 \bibitem{ref8} Gaudio, "Transducer gain analysis for atomic gravitational wave detection," arXiv:2603.06772 (2026).
 \bibitem{ref9} Hu et al., "Universal calculation approach of overlap reduction function for pulsar timing array and laser interferometer detector," Phys. Rev. D 111, 084065 (2025); also arXiv:2602.05714.
 \bibitem{ref10} Lou (楼明智), "利用光晶格原子钟探测器网络的不同构型探测引力波背景," 硕士学位论文, 中国科学院大学/理论物理所 (2026).
 \bibitem{ref11} Ganapathy, Singh, Kolkowitz et al., "Gravitational-wave astronomy with a space-based optical clock network," preprint (2026-06) [待补充arXiv编号].
 \bibitem{ref11b} Orlando, G., Ricciardone, A. \& Inta, R., "Chirality of stochastic gravitational wave backgrounds with LISA-Taiji network," JCAP 02 (2022) 040, arXiv:2011.07059 (2021).
+\bibitem{ref11c} Orlando, G., Ricciardone, A. \& Inta, R., "Exploring the chirality of stochastic gravitational-wave backgrounds with LISA-Taiji network," JCAP 24 (2025) 037, arXiv:2410.18916.
 \bibitem{ref12} Cutler, C. \& Vernim, E., "Gravitational wave detection with space-based atomic clocks," Phys. Rev. D 97, 084004 (2018).
 \bibitem{ref13} Kato, S. and Soda, T., "Probing circular polarization in stochastic gravitational wave background with pulsar timing arrays," Phys. Rev. D 93, 062003 (2016).
 \bibitem{ref14} Allen, L., "Determining the amplitude spectrum of a gravitational wave background," Phys. Rev. D 46, 2569 (1992).
 \bibitem{ref15} Anderson, A. et al., "Allan variance analysis of GPS satellite clock noise for gravitational wave detection," GPS Solutions 24, 123 (2020).
-\bibitem{ref5a} Schaffrath et al., "Unified laboratory-frame analysis of atomic gravitational-wave sensors," arXiv:2509.24993 (2025).
 \end{thebibliography}
 \end{document}

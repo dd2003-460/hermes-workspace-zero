@@ -56,6 +56,7 @@ async def cmd_ask_cdp(args):
     """提问 — CDP mode: control the user's already-running Chrome window."""
     service_name = args.service
     question = args.question
+    file_path = getattr(args, "file", None)
 
     if service_name not in SERVICE_MAP:
         print(f"不支持的服务: {service_name}")
@@ -63,24 +64,30 @@ async def cmd_ask_cdp(args):
 
     service_cfg = config.SERVICES[service_name]
     print(f"[llm-gatherer] 正在通过 CDP 连接 {service_cfg['name']} ...")
+    if file_path:
+        print(f"[llm-gatherer] 附加文件: {file_path}")
 
     client = await cdp_client.create_cdp_client()
     if not client:
         print("[llm-gatherer] 无法连接到 Chrome，请确保 Chrome 正在运行。")
         sys.exit(1)
 
-    page_info = cdp_client.find_chatgpt_page(client)
+    # Find page by service domain (not just ChatGPT)
+    page_info = cdp_client.find_service_page(client, service_name)
     if not page_info:
-        print("[llm-gatherer] 无法找到 ChatGPT 页面。")
-        print("[llm-gatherer] 请先打开 ChatGPT 页面后再试。")
+        print(f"[llm-gatherer] 无法找到 {service_cfg['name']} 页面。")
+        print(f"[llm-gatherer] 请先打开 {service_cfg['name']} 页面后再试。")
+        print(f"[llm-gatherer] 可用页面:")
+        for p in client.get("pages", []):
+            print(f"  - {p.get('url', '?')}")
         sys.exit(1)
 
-    # Check login status
-    if not await cdp_client.check_logged_in(page_info):
-        print("[llm-gatherer] 未检测到登录状态，请手动登录 ChatGPT。")
+    # Check login status (generic)
+    if not await cdp_client.check_logged_in_generic(page_info, service_name):
+        print(f"[llm-gatherer] 未检测到登录状态，请手动登录 {service_cfg['name']}。")
         sys.exit(1)
 
-    result = await cdp_client.ask_chatgpt_cdp(page_info, question, timeout=60)
+    result = await cdp_client.ask_cdp(page_info, service_name, question, file_path=file_path, timeout=60)
 
     print("\n" + "=" * 60)
     print("[llm-gatherer] 回复:")
@@ -194,6 +201,7 @@ def main():
     ask_cdp_parser = subparsers.add_parser("ask-cdp", help="向 LLM 提问（通过 CDP 控制已登录的 Chrome）")
     ask_cdp_parser.add_argument("service", choices=list(config.SERVICES.keys()), help="目标服务")
     ask_cdp_parser.add_argument("question", help="你的问题")
+    ask_cdp_parser.add_argument("--file", help="附加文件路径（上传给 LLM）")
 
     args = parser.parse_args()
     if not args.command:

@@ -11,6 +11,7 @@ Usage:
 """
 
 import asyncio
+import base64
 import json
 import os
 import subprocess
@@ -406,6 +407,38 @@ def find_chatgpt_page(client):
     return None
 
 
+# Service domain mapping
+_SERVICE_DOMAINS = {
+    "chatgpt": "chatgpt.com",
+    "gemini": "gemini.google.com",
+    "doubao": "doubao.com",
+    "kimi": "kimi.moonshot.cn",
+    "arena": "arena.ai",
+    "bigmodel": "bigmodel.cn",
+}
+
+
+def find_service_page(client, service_name: str):
+    """Find page for the given service by domain. Returns page info dict or None."""
+    domain = _SERVICE_DOMAINS.get(service_name)
+    if not domain:
+        print(f"[llm-gatherer] Unknown service: {service_name}")
+        return None
+    return find_page_by_domain(client, domain)
+
+
+def find_page_by_domain(client, domain):
+    """Find any page matching a domain. Returns page info dict or None."""
+    if not client:
+        return None
+    for p in client.get("pages", []):
+        url = p.get("url", "")
+        if domain in url:
+            print(f"[llm-gatherer] Found {domain} tab: {url}")
+            return p
+    return None
+
+
 def find_page_by_domain(client, domain):
     """Find any page matching a domain. Returns page info dict or None."""
     if not client:
@@ -419,18 +452,37 @@ def find_page_by_domain(client, domain):
 
 
 async def check_logged_in(page_info):
-    """Check login status via evaluate."""
+    """Check login status via evaluate (ChatGPT-specific)."""
+    return await check_logged_in_generic(page_info, "chatgpt")
+
+
+async def check_logged_in_generic(page_info, service_name: str):
+    """Generic login check by service. Returns True if user appears logged in."""
     ws_url = page_info["webSocketDebuggerUrl"]
+    url = page_info.get("url", "")
+    domain = _SERVICE_DOMAINS.get(service_name, "")
+
+    # Check: is this page on the expected domain?
+    if domain not in url:
+        print(f"[llm-gatherer] [WARN] URL {url} does not contain expected domain {domain}")
+
+    # Check: is there a visible login prompt or user menu?
+    # If no login button is visible, user is likely logged in
     result = await _cdp_evaluate_raw(ws_url, """
 (function() {
-    var el = document.getElementById('prompt-textarea');
-    if (!el) return {hasEditor: false, cookieLength: document.cookie.length, url: location.href, title: document.title};
-    return {
-        hasEditor: true,
-        cookieLength: document.cookie.length,
-        url: location.href,
-        title: document.title
-    };
+    // Check for login/signup buttons
+    var loginSelectors = [
+        'a[href*="login"]', 'a[href*="signin"]', 'a[href*="accounts.google.com"]',
+        'button[class*="login"]', 'button[class*="sign"]',
+        '[class*="login-btn"]', '[class*="sign-in"]'
+    ];
+    var loginVisible = false;
+    for (var sel of loginSelectors) {
+        if (document.querySelector(sel)) { loginVisible = true; break; }
+    }
+    // Check for textarea/editor (presence suggests logged-in for most services)
+    var hasEditor = !!(document.querySelector('textarea, [contenteditable="true"], [class*="editor"], [class*="composer"], [class*="input"]'));
+    return {loginVisible: loginVisible, hasEditor: hasEditor, url: location.href, title: document.title};
 })()""")
     if result is None:
         return False
@@ -439,20 +491,18 @@ async def check_logged_in(page_info):
         print(f"[llm-gatherer] Error: {inner.get('description', '')[:200]}")
         return False
     data = inner.get('value', {})
-    print(f"[llm-gatherer] Page state: url={data.get('url','?')} title={data.get('title','?')} hasEditor={data.get('hasEditor')} cookieLength={data.get('cookieLength',0)}")
-    # For ChatGPT pages: hasEditor may be false during navigation/loading;
-    # accept logged-in if URL points to chatgpt.com with non-empty cookies
-    url = data.get('url', '')
-    if 'chatgpt.com' in url:
-        # Logged in if cookies exist (auth via session cookie)
-        if data.get('cookieLength', 0) > 0:
-            print("[llm-gatherer] Logged in (chatgpt.com + cookies)")
-            return True
-        # Even without cookies, if it's chatgpt.com, allow proceed
-        # (will be caught later if truly unauthenticated)
-        print("[llm-gatherer] Appears to be ChatGPT page (proceeding)")
+    print(f"[llm-gatherer] Page state: url={data.get('url','?')} hasEditor={data.get('hasEditor')} loginVisible={data.get('loginVisible')}")
+
+    # If login button is visible, NOT logged in
+    if data.get('loginVisible'):
+        return False
+    # If editor exists, likely logged in
+    if data.get('hasEditor'):
+        print(f"[llm-gatherer] Logged in ({service_name})")
         return True
-    return data.get('hasEditor', False) or data.get('cookieLength', 0) > 0
+    # Allow proceeding anyway (may be loading)
+    print(f"[llm-gatherer] [WARN] Could not confirm login state, proceeding")
+    return True
 
 
 async def inject_api(page_info):
@@ -536,7 +586,123 @@ async def _cdp_send_enter_key(ws_url: str):
     return False
 
 
-async def ask_chatgpt_cdp(page_info, question: str, timeout: int = 60) -> str:
+async def _cdp_upload_file(ws_url: str, file_path: str, timeout: int = 15) -> bool:
+    """Upload a file to ChatGPT via CDP.
+    Strategy: find the file input element, create a DataTransfer with a File,
+    and dispatch a change event to trigger the upload UI.
+    """
+    abs_path = os.path.abspath(file_path)
+    if not os.path.isfile(abs_path):
+        print(f"[llm-gatherer] [WARN] File not found: {abs_path}")
+        return False
+
+    # Read file as base64
+    with open(abs_path, "rb") as f:
+        b64 = base64.b64encode(f.read()).decode("ascii")
+    ext = os.path.splitext(abs_path)[1].lstrip(".") or "txt"
+    mime = "application/octet-stream"
+    if ext == "pdf":
+        mime = "application/pdf"
+    elif ext in ("txt", "text"):
+        mime = "text/plain"
+    elif ext in ("md", "markdown"):
+        mime = "text/markdown"
+
+    # Step 1: Find the file input element (may be hidden, need its DOM node)
+    find_expr = """(function(){
+        var inputs = document.querySelectorAll('input[type="file"]');
+        for (var i = 0; i < inputs.length; i++) {
+            var el = inputs[i];
+            // Check if visible or if it's a child of a visible element
+            var rect = el.getBoundingClientRect();
+            if (rect.width > 0 && rect.height > 0) return {found:true, index:i};
+            // Hidden inputs under labels
+            var parent = el.parentElement;
+            if (parent && parent.offsetParent !== null) return {found:true, index:i};
+        }
+        // Try paperclip label
+        var labels = document.querySelectorAll('label[class*="file"], label[class*="attach"], [class*="paperclip"]');
+        for (var j = 0; j < labels.length; j++) {
+            var innerInput = labels[j].querySelector('input[type="file"]');
+            if (innerInput) return {found:true, index:'label'};
+        }
+        return {found:false};
+    })()"""
+    find_result = await _cdp_evaluate_raw(ws_url, find_expr)
+    if find_result is None:
+        print("[llm-gatherer] [WARN] File upload: find expr timed out")
+        return False
+    find_inner = find_result.get('result', {})
+    if find_inner.get('subtype') == 'error':
+        print(f"[llm-gatherer] [WARN] File upload find error: {find_inner.get('description','')[:200]}")
+        return False
+    find_data = find_inner.get('value', {})
+    if not find_data.get('found'):
+        print("[llm-gatherer] [WARN] File upload: no file input found on page")
+        return False
+
+    # Step 2: Create FileList via DataTransfer and dispatch change event
+    upload_expr = """(function(filePath, b64, mime) {
+        try {
+            // Try using DataTransfer (works in modern Chrome)
+            var dt = new DataTransfer();
+            var blob = new Blob([window.atob(b64)], { type: mime });
+            var fileName = filePath.split('/').pop();
+            var file = new File([blob], fileName, { type: mime, lastModified: Date.now() });
+            dt.items.add(file);
+            var inputs = document.querySelectorAll('input[type="file"]');
+            var targetInput = null;
+            // Use the same selector logic
+            for (var i = 0; i < inputs.length; i++) {
+                var el = inputs[i];
+                var rect = el.getBoundingClientRect();
+                if (rect.width > 0 && rect.height > 0) { targetInput = el; break; }
+                var parent = el.parentElement;
+                if (parent && parent.offsetParent !== null) { targetInput = el; break; }
+            }
+            if (!targetInput) {
+                var labels = document.querySelectorAll('label[class*="file"], label[class*="attach"], [class*="paperclip"]');
+                for (var j = 0; j < labels.length; j++) {
+                    var inner = labels[j].querySelector('input[type="file"]');
+                    if (inner) { targetInput = inner; break; }
+                }
+            }
+            if (!targetInput) return {success:false, error:'no target input'};
+            targetInput.files = dt.files;
+            targetInput.dispatchEvent(new Event('change', {bubbles:true}));
+            // Also dispatch input event for React
+            targetInput.dispatchEvent(new Event('input', {bubbles:true}));
+            return {success:true, fileName: fileName, fileCount: dt.files.length};
+        } catch(e) {
+            return {success:false, error: e.message};
+        }
+    })(filePath, b64, mime)"""
+
+    # Escape for CDP
+    esc_path = abs_path.replace("\\", "\\\\").replace("'", "\\'")
+    full_expr = upload_expr.replace("filePath", f"'{esc_path}'")
+    full_expr = full_expr.replace("b64", f"'{b64[:4096]}'")  # Truncate very large files
+    full_expr = full_expr.replace("mime", f"'{mime}'")
+
+    upload_result = await _cdp_evaluate_raw(ws_url, full_expr)
+    if upload_result is None:
+        print("[llm-gatherer] [WARN] File upload: evaluate timed out")
+        return False
+    upload_inner = upload_result.get('result', {})
+    if upload_inner.get('subtype') == 'error':
+        print(f"[llm-gatherer] [WARN] File upload error: {upload_inner.get('description','')[:200]}")
+        return False
+    upload_data = upload_inner.get('value', {})
+    if upload_data.get('success'):
+        print(f"[llm-gatherer] File uploaded via CDP: {upload_data.get('fileName', abs_path)} ({upload_data.get('fileCount',0)} file(s))")
+        await asyncio.sleep(3)  # Wait for upload processing
+        return True
+    else:
+        print(f"[llm-gatherer] [WARN] File upload failed: {upload_data.get('error', 'unknown')}")
+        return False
+
+
+async def ask_chatgpt_cdp(page_info, question: str, file_path: str | None = None, timeout: int = 60) -> str:
     """Send question and wait for reply using CDP pixel click + DOM polling."""
     ws_url = page_info["webSocketDebuggerUrl"]
     page_url = page_info.get("url", "")
@@ -582,6 +748,10 @@ async def ask_chatgpt_cdp(page_info, question: str, timeout: int = 60) -> str:
     # Inject API
     await inject_api(page_info)
 
+    # Upload file if provided
+    if file_path:
+        print(f"[llm-gatherer] Uploading file via CDP: {file_path}")
+        await _cdp_upload_file(ws_url, file_path)
     # Count assistant messages before sending (baseline)
     # On /new, this will be 0. Track it regardless for edge cases.
     count_before = await _cdp_evaluate_raw(ws_url,
@@ -691,6 +861,217 @@ b.click()})()""")
         # streaming is complete. DOM-based streaming detection is unreliable on
         # ChatGPT's SPA (cursor/blink classes and empty result-thinking divs persist
         # after the response is fully rendered).
+        if t == prev_text:
+            stable_count += 1
+            if stable_count >= 3:
+                print(f"[llm-gatherer] Reply stable after {i+1}s ({len(t)} chars)")
+                return str(t)
+        else:
+            stable_count = 0
+
+        if stable_count > 0 and i % 5 == 0:
+            print(f"  ... text stable ({stable_count}/3) text={len(t)} chars ({i+1}s)...")
+        prev_text = t
+
+    return "[超时] 未在 {}s 内收到回复".format(timeout)
+
+
+# ── Generic service dispatcher ───────────────────────────────────────────
+
+# Service-specific selectors
+_SERVICE_SELECTORS = {
+    "chatgpt": {
+        "textarea": "#prompt-textarea, .ProseMirror",
+        "send_selector": "button.composer-submit-button-color, button[aria-label*='send']",
+        "send_key": "enter",  # or "click"
+        "message_selector": '[data-message-author-role="assistant"]',
+        "navigate_url": "https://chatgpt.com/new",
+    },
+    "gemini": {
+        "textarea": "textarea[name='message'], [contenteditable='true']",
+        "send_selector": "#gtx-send, button[aria-label*='send']",
+        "send_key": "enter",
+        "message_selector": "[class*='ai-response'], [class*='ai-message'], [class*='generated-response']",
+        "navigate_url": "https://gemini.google.com",
+    },
+    "doubao": {
+        "textarea": "textarea, [contenteditable='true']",
+        "send_selector": "button[aria-label*='send'], .send-btn",
+        "send_key": "enter",
+        "message_selector": "[class*='ai-reply'], [class*='bot-message'], [class*='assistant']",
+        "navigate_url": "https://www.doubao.com/chat/",
+    },
+    "kimi": {
+        "textarea": "textarea, [contenteditable='true']",
+        "send_selector": "button[aria-label*='send'], .send-btn",
+        "send_key": "enter",
+        "message_selector": "[class*='ai-reply'], [class*='bot-message'], [class*='assistant']",
+        "navigate_url": "https://kimi.moonshot.cn",
+    },
+    "arena": {
+        "textarea": "textarea, [contenteditable='true'], [class*='message-input']",
+        "send_selector": "button[aria-label*='send'], .send-btn",
+        "send_key": "click",
+        "message_selector": "[class*='ai-reply'], [class*='bot-message'], [class*='assistant']",
+        "navigate_url": "https://arena.ai/agent",
+    },
+    "bigmodel": {
+        "textarea": "textarea, [contenteditable='true'], [class*='message-input']",
+        "send_selector": "button[aria-label*='send'], .send-btn",
+        "send_key": "enter",
+        "message_selector": "[class*='ai-reply'], [class*='bot-message'], [class*='assistant']",
+        "navigate_url": "https://bigmodel.cn",
+    },
+}
+
+
+def _get_selectors(service_name: str) -> dict | None:
+    """Get service-specific selectors. Returns None if unknown."""
+    return _SERVICE_SELECTORS.get(service_name)
+
+
+async def ask_cdp(page_info, service_name: str, question: str,
+                  file_path: str | None = None, timeout: int = 60) -> str:
+    """Generic CDP-based message send and reply extraction for any supported service.
+
+    This function:
+    1. Finds the message textarea via service selectors
+    2. Injects text and dispatches input events
+    3. Submits via Enter key or button click
+    4. Polls for new content and extracts the reply
+    """
+    selectors = _get_selectors(service_name)
+    if not selectors:
+        return f"[错误] 不支持的服务: {service_name} (仅支持: {', '.join(_SERVICE_SELECTORS.keys())})"
+
+    ws_url = page_info["webSocketDebuggerUrl"]
+    domain = _SERVICE_DOMAINS.get(service_name, "")
+
+    print(f"[llm-gatherer] Sending to {service_name} via CDP (domain: {domain})")
+
+    # Step 1: Navigate to new conversation if needed
+    current_url = page_info.get("url", "")
+    navigate_url = selectors["navigate_url"]
+    needs_navigate = True
+
+    # Don't navigate if already on a page that looks ready
+    if domain in current_url:
+        text_check = await _cdp_evaluate_raw(ws_url, f"!!document.querySelector('{selectors['textarea']}')")
+        if text_check and (text_check.get('result', {}).get('value') or False):
+            print(f"[llm-gatherer] Already on a ready {service_name} page")
+            needs_navigate = False
+
+    if needs_navigate:
+        print(f"[llm-gatherer] Navigating to {navigate_url}...")
+        editor_ready = await _cdp_navigate_and_wait_editor(ws_url, navigate_url, timeout=15)
+        if editor_ready:
+            page_url_result = await _cdp_evaluate_raw(ws_url, "location.href")
+            new_url = (page_url_result or {}).get('result', {}).get('value', navigate_url)
+            page_info = {**page_info, "url": new_url, "webSocketDebuggerUrl": ws_url}
+        else:
+            print(f"[llm-gatherer] [WARN] Navigation may not have succeeded, trying anyway...")
+
+    # Step 2: Inject text into textarea
+    textarea = selectors["textarea"]
+    esc_question = question.replace("'", "\\'").replace("\\", "\\\\")
+
+    # JS to set textarea content + dispatch events (generic approach for all services)
+    inject_expr = f"""(function() {{
+        var ta = document.querySelector('{textarea}');
+        if (!ta) return {{error: 'no textarea found'}};
+        // Try multiple methods to set value
+        if (ta.tagName === 'TEXTAREA' || ta.tagName === 'INPUT') {{
+            ta.value = '{esc_question}';
+        }} else {{
+            // contenteditable
+            ta.innerHTML = '{esc_question}';
+        }}
+        // Dispatch input and change events
+        ta.dispatchEvent(new Event('input', {{bubbles: true}}));
+        ta.dispatchEvent(new Event('change', {{bubbles: true}}));
+        ta.dispatchEvent(new KeyboardEvent('keydown', {{key: '{esc_question[0]}'}}));
+        ta.dispatchEvent(new KeyboardEvent('keyup', {{key: '{esc_question[0]}'}}));
+        return {{success: true, tagName: ta.tagName}};
+    }})()"""
+
+    inject_result = await _cdp_evaluate_raw(ws_url, inject_expr)
+    inject_inner = (inject_result or {}).get('result', {})
+    if inject_inner.get('subtype') == 'error':
+        return f"[错误] 文本注入失败: {inject_inner.get('description', '')[:200]}"
+    inject_data = inject_inner.get('value', {})
+    print(f"[llm-gatherer] Textarea injection: {json.dumps(inject_data, ensure_ascii=False)}")
+
+    if inject_data.get('error'):
+        return f"[错误] 注入失败: {inject_data['error']}"
+
+    await asyncio.sleep(0.5)
+
+    # Step 3: Submit message
+    send_key = selectors.get("send_key", "enter")
+    send_selector = selectors.get("send_selector", "")
+
+    if send_key == "enter":
+        print("[llm-gatherer] Submitting via Enter key...")
+        await _cdp_send_enter_key(ws_url)
+    else:
+        # Click send button
+        if send_selector:
+            print(f"[llm-gatherer] Submitting by clicking send button: {send_selector}")
+            click_expr = f"""(function() {{
+                var btn = document.querySelector('{send_selector}');
+                if (!btn) return {{error: 'no send button'}};
+                btn.click();
+                return {{success: true, tagName: btn.tagName}};
+            }})()"""
+            await _cdp_evaluate_raw(ws_url, click_expr)
+        else:
+            print("[llm-gatherer] [WARN] No send method configured, trying Enter fallback...")
+            await _cdp_send_enter_key(ws_url)
+
+    await asyncio.sleep(2)
+
+    # Step 4: Poll for reply
+    message_selector = selectors["message_selector"]
+    print(f"[llm-gatherer] Polling for reply ({timeout}s), message selector: {message_selector}")
+
+    prev_text = ''
+    stable_count = 0
+
+    for i in range(timeout):
+        await asyncio.sleep(1)
+
+        # Count existing messages
+        count_result = await _cdp_evaluate_raw(ws_url,
+            f"document.querySelectorAll('{message_selector}').length")
+        msg_count = 0
+        if count_result:
+            msg_count = (count_result.get('result', {}) or {}).get('value', 0)
+
+        # Get the last message's text
+        get_expr = f"""(function() {{
+            var msgs = document.querySelectorAll('{message_selector}');
+            if (!msgs || msgs.length === 0) return '';
+            // Try multiple extraction methods
+            var last = msgs[msgs.length - 1];
+            // Method 1: textContent
+            var text = last.textContent.trim();
+            // Method 2: inner text for structured content
+            if (!text) text = (last.innerText || '').trim();
+            return text.substring(0, 8000);
+        }})()"""
+        reply = await _cdp_evaluate_raw(ws_url, get_expr)
+        t = ''
+        if reply:
+            r = (reply or {}).get('result', {})
+            if r.get('subtype') != 'error':
+                t = r.get('value', '')
+
+        if not t:
+            if i % 5 == 0:
+                print(f"  ... waiting for reply ({i+1}s, message count: {msg_count})")
+            continue
+
+        # Text stability check
         if t == prev_text:
             stable_count += 1
             if stable_count >= 3:

@@ -77,14 +77,30 @@ def check_logged_in(page_or_ctx, service_cfg: dict) -> bool:
 def handle_login(context: BrowserContext, service_cfg: dict, timeout=120):
     """
     Handle login flow. Opens a page and waits for user to log in.
+
+    If service_cfg has `skip_login_wait: True`, only check logged-in status
+    (fast), and skip the long 120s waiting period. The caller should then
+    navigate directly to the chat URL.
     """
     page = context.new_page()
-    page.goto(service_cfg["url"])
-    page.wait_for_load_state("networkidle")
+    chat_url = service_cfg.get("chat_url", service_cfg["url"])
+    try:
+        page.goto(chat_url, timeout=60000, wait_until="networkidle")
+    except Exception:
+        # Slow network: fall back to domcontentloaded (page may still be loading)
+        try:
+            page.wait_for_load_state("domcontentloaded", timeout=30000)
+        except Exception:
+            pass
 
     if check_logged_in(page, service_cfg):
         print(f"[llm-gatherer] Login detected ({service_cfg['name']})")
         return True, page
+
+    skip = service_cfg.get("skip_login_wait", False)
+    if skip:
+        print(f"[llm-gatherer] Login not detected for {service_cfg['name']}, skipping wait (service configured with skip_login_wait)")
+        return False, None
 
     print(f"[llm-gatherer] Login not detected")
     print(f"[llm-gatherer] Please log in to {service_cfg['name']} in the browser")

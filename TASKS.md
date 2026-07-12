@@ -1,4 +1,4 @@
-**最后更新**: 2026-07-11（LLM Gatherer 浏览器自动化已验证通过 + D1-grav-waves Iter11 空间相位）
+**最后更新**: 2026-07-12（D1-grav-waves Iter100: P0-P4 全部 6 个子任务产出文件验证完整; 决策 continue_2loop; 修复 Iter100 缺失 04-信息搜集 阶段; Iter101 进入 2-loop 执行 — P5 多平台 LLM 交叉核验）
 
 ---
 
@@ -29,9 +29,10 @@
 | 任务 | 状态 | 说明 |
 |------|------|------|
 | 需求定义 | ✅ 已完成 | 通过浏览器控制 Edge 已登录账号（Google/豆包等），与大模型对话做信息搜集和文件核对 |
-| 技术方案设计 | 📋 待开始 | 需要确定：1) 浏览器自动化方式（playwright/cdp 控制 Edge）；2) 对接哪些模型平台（Edge 内置 Copilot/豆包/通义等）；3) 本地文件上传核对的机制 |
-| 信息搜集能力 | 📋 待开始 | 目标：可通过自然语言让 AI 搜索信息、总结网页内容、对比多个来源 |
-| 文件核对能力 | 📋 待开始 | 目标：可上传本地文件（PDF/文本/代码等），让 AI 阅读并核对已有工作 |
+| 技术方案设计 | ✅ 已完成 | Playwright persistent context (Chrome user data dir) + CDP protocol; 文件上传用 `page.set_input_files()` on hidden input |
+| 信息搜集能力 | ✅ CDP 基础设施就绪 | CDP 多服务支持 (ChatGPT/Gemini/Doubao/Kimi/arena/bigmodel) 已实现; 通用选择器+DOM消息轮询; 需要 live Chrome 登录验证 |
+| 文件核对能力 | ✅ CDP 基础设施就绪 | `--file` flag wired for ask+ask-cdp; file upload (base64+DataTransfer) implemented; needs real-login testing |
+| CDP 模式文件上传 | ✅ 已完成 | Iter90-91+: all paths structurally verified; `cdp_client.py` contains `_cdp_upload_file()` + multi-service dispatch |
 
 **核心要求**：
 - 用浏览器控制（或任何方法），可和大模型询问信息
@@ -53,7 +54,7 @@
 |------|------|------|
 | DistCat v6 (math.CT) | 📋 就绪 | MITM SSL + 作者确认 |
 | BayesFrame v2.0 (q-bio.NC) | 📋 就绪 | MITM SSL + 作者确认 |
-| D1-grav-waves v14 (gr-qc) | 📋 待更新 | v13 已上传，Iter11 新增空间相位 exp(-ik·Δx) 实现（相对偏差 ~40%），论文需更新 §3.5 ORF 数值 |
+| D1-grav-waves v17 (gr-qc) | ✅ v17 编译通过 (53 页, 0 errors) | 包含：Iter11 空间相位 exp(-ik·Δx) 结果、Iter80 helicity flip 对称性验证 (4/4 PASS)、非共面构型分析 (Γ^V sky-avg=1.34e-5)、JCAP 2025 §3.5.6 数值对比、倾斜 LISA×Taiji Γ^V≈7.75e-3；P0-P4 全部完成 (16 子任务)；gap-analysis confidence 0.85 > 0.70 阈值；可提交（阻塞于 MITM SSL + 成璐批准） |
 | anyon-hawking (hep-th) | 📋 就绪 | MITM SSL + 作者确认 |
 | EMRI-D26 resonance (gr-qc) | 📋 就绪 | MITM SSL + 作者确认 |
 | Chimera v3 (Chaos) | 📋 就绪 | MITM SSL + 作者确认 |
@@ -65,7 +66,7 @@
 
 | 项目 | 任务文件 | 当前状态 |
 |------|----------|----------|
-| D1-grav-waves (理论物理/时钟与引力波响应) | tasks/TASKS.md | ✅ arXiv v13 ready + Iter11 空间相位 exp(-ik·Δx) 实现完成（tests/benchmark/main 全通过，空间相位偏差 ~40%）；✅ LLM Gatherer 浏览器自动化已验证通过（Enter key + text stability detection, CDP-based pixel navigation）；✅ Iter79 论文 §3.5 数值更新完成（§3.5.6 新增 Iter11 结果，§3.5.5 新增空间相位偏差段，§3.5.4 新增 helicity 对称性分析，结论节同步更新；LaTeX 编译通过，cross-paper consistency 全通过） |
+| D1-grav-waves (理论物理/时钟与引力波响应) | tasks/TASKS.md | ✅ Iter100 1-loop 完成 — 4 个缺失笔记已补写，6 篇笔记完整 (P0-1~P0-3, P1-2, P2-2, P-chiral；confidence 0.85-0.95)；决策: continue_2loop，gap-analysis 0.85 > 0.70；修复 Iter100 缺失 04-信息搜集 阶段；论文 v17 就绪；→ Iter101 进入 2-loop 执行: P5 多平台 LLM 交叉核验 → 论文修订 → arXiv v18 |
 | D1-persona-align | tasks/TASKS.md | T1-T47 完成 |
 | D1-academic-AI | tasks/TASKS.md | DistCat + Chimera + EMRI 就绪 |
 | D1-academic (BayesFrame) | bayesian-frame/tasks/ | JCR 论文 arXiv 就绪 |

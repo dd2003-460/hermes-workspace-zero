@@ -412,12 +412,72 @@ where the inner product integrates over the sky with weight $d^2\hat{n}/4\pi$. T
 - The sinc-based OLC transfer function (rather than Hu's exponential form)
 - The phase factors $\alpha_{12}$ and $\beta_{12}$ that arise from the specific receiver-position convention
 
+**The I1–I4 decomposition**: Hu's key insight is that the ORF integrand factorizes into four terms by recognizing the structure of the one-way link response. For a one-way link from $\vec{r}_{\text{start}}$ to $\vec{r}_{\text{end}} = \vec{r}_{\text{start}} + L\hat{u}$, the response function (Hu Eq. (25)) is:
+$$R_A^{\text{one}} = e_{ab}^A(\hat{n}) \frac{u^a u^b}{2(1+\hat{n}\cdot\hat{u})} \left[ e^{i2\pi f \hat{n}\cdot\vec{r}_{\text{end}}/c} - e^{-i\beta} e^{i2\pi f \hat{n}\cdot\vec{r}_{\text{start}}/c} \right]$$
+where the first exponential is the "end-point term" (time reference at the receiver) and the second is the "start-point term" (with the extra phase $e^{-i\beta}$ from the transfer function). The ORF between two one-way links is the convolution of their response functions, which naturally splits into four parts:
+
+$$\Gamma^{\text{one}}(\alpha, \beta_u, \beta_v; \hat{s}, \hat{u}, \hat{v}) = \frac{1}{32\pi} \left[ I_1 - e^{-i\beta_u} I_2 - e^{i\beta_v} I_3 + e^{i(\beta_v-\beta_u)} I_4 \right] \tag{Hu Eq. (24)}$$
+
+Each $I_k$ corresponds to one of the four endpoint pairings:
+
+- **$I_1$**: Both links contribute their end-point terms. Depends on the vector connecting the two receivers $\vec{\alpha} = \alpha \hat{s} = \vec{x}_2 - \vec{x}_1$. This is the "Earth-term × Earth-term" analogue in PTA language.
+- **$I_2$**: Link 1 contributes its start-point term, link 2 contributes its end-point term. Depends on $\alpha_2 \hat{s}_2 = \alpha \hat{s} + \beta_u \hat{u}$.
+- **$I_3$**: Link 1 contributes its end-point term, link 2 contributes its start-point term. Depends on $\alpha_3 \hat{s}_3 = \alpha \hat{s} - \beta_v \hat{v}$.
+- **$I_4$**: Both links contribute their start-point terms. Depends on $\alpha_4 \hat{s}_4 = \alpha \hat{s} + \beta_u \hat{u} - \beta_v \hat{v}$. This is the "pulsar-term × pulsar-term" analogue.
+
+The geometric parameters are defined in the computational frame where the origin is at $\vec{r}_{u,\text{end}}$ and the z-axis is along the separation direction $\hat{s}$ (Hu Fig. 2):
+- $\beta_u = 2\pi f L_u / c$, $\beta_v = 2\pi f L_v / c$
+- $\alpha = 2\pi f \Delta L / c$ where $\Delta L = |\vec{x}_2 - \vec{x}_1|$
+- $\gamma$: angle between the two links, $\cos\gamma = \hat{u} \cdot \hat{v}$
+- $\delta_u$: angle between $\hat{u}$ and $\hat{s}$, $\cos\delta_u = \hat{u} \cdot \hat{s}$
+- $\delta_v$: angle between $\hat{v}$ and $\hat{s}$, $\cos\delta_v = \hat{v} \cdot \hat{s}$
+
+These six parameters $(\beta_u, \beta_v, \alpha, \gamma, \delta_u, \delta_v)$ completely specify the ORF. The same isomorphism as noted in Section 3.4: any configuration can be described by these six independent geometric quantities.
+
+**Computational framework for $I_1$**: Hu derives the analytic result for $I_1$ using contour integration in the complex plane. The integral is written as:
+$$I_1(\alpha; \hat{s}, \hat{u}, \hat{v}) = \int d^2\Omega_{\hat{n}} \, \xi(\hat{n}) e^{-i\alpha \hat{n}\cdot\hat{s}}$$
+where $\xi(\hat{n})$ is the product of the polarization contraction factors (the $\frac{1}{2}\hat{u}^a\hat{u}^b e^A_{ab}$ terms). The angular integral is converted to a contour integral over the unit circle in the complex plane via the transformation $(\theta, \phi) \to (x, z)$ with $x = \cos\theta$ and $z = e^{i\phi}$:
+$$I_1(\alpha; \hat{s}, \hat{u}, \hat{v}) = \int_{-1}^{1} dx \, e^{-i\alpha x} \oint_{|z|=1} \frac{dz}{iz} \xi(x, z)$$
+The integrand has five poles: $z_0 = 0$ (at the origin), and $z_1, z_2, z_3, z_4$ whose positions depend on $x$. The poles $z_1$ and $z_2$ are related to $\hat{u}$, while $z_3$ and $z_4$ are related to $\hat{v}$. Crucially, either $z_1$ or $z_2$ lies inside the unit circle (depending on whether $x < -\cos\delta_u$ or $x > -\cos\delta_u$), and similarly for $z_3, z_4$. The residue theorem yields:
+$$I_1 = 2\pi i \left[ \int_{-1}^{1} dx \, e^{-i\alpha x} R_0(x) + \int_{-1}^{-\cos\delta_u} dx \, e^{-i\alpha x} R_1(x) + \int_{-\cos\delta_u}^{1} dx \, e^{-i\alpha x} R_2(x) + \int_{-1}^{-\cos\delta_v} dx \, e^{-i\alpha x} R_3(x) + \int_{-\cos\delta_v}^{1} dx \, e^{-i\alpha x} R_4(x) \right]$$
+where $R_k(x)$ is the residue at pole $z_k$. After the remaining $x$-integrations (polynomial × exponential), the final result (Hu Eq. (18)) is an analytic expression in terms of $\alpha$, $\gamma$, $\delta_u$, $\delta_v$, the exponential integral function $\text{Ei}(z)$, and auxiliary parameters $\sigma_\pm$.
+
+**$I_2$, $I_3$, $I_4$ via parameter substitution**: The key elegance of Hu's method is that $I_2$, $I_3$, and $I_4$ are not independent integrals — they are obtained from $I_1$ by simple parameter substitutions. For $I_2$ (Hu Eq. (20)–(22)):
+$$I_2(\alpha, \beta_u; \hat{s}, \hat{u}, \hat{v}) = -e^{-i\beta_u} I_1(\alpha_2; \hat{s}_2, \hat{u}, \hat{v})$$
+where $\alpha_2 = |\alpha\hat{s} + \beta_u\hat{u}|$ and $\hat{s}_2 = (\alpha\hat{s} + \beta_u\hat{u})/\alpha_2$. The same $I_1$ formula is used, but with parameters replaced by $\alpha \to \alpha_2$, $\cos\delta_u \to \hat{u}\cdot\hat{s}_2$, $\cos\delta_v \to \hat{v}\cdot\hat{s}_2$. Similarly for $I_3$ and $I_4$ (Hu Eq. (23)).
+
+**PTA as the common-endpoint special case**: When the two one-way links share a common endpoint (as in PTA, where Earth is the common vertex), $\alpha = 0$ and $\Delta L = 0$. Hu Eq. (26)–(28) give the PTA ORF, which reduces to the Hellings-Downs curve in the limit $\beta_u, \beta_v \to \infty$ (pulsar-term averaging). The $I_1(0; \hat{s}, \hat{u}, \hat{v})$ term is evaluated separately (Hu Eq. (27)) to avoid the $\alpha=0$ singularity in the general expression.
+
+**Contrast with the OLC approach**: The OLC framework (Lou Eq. 3-1) computes the ORF by direct numerical sky integration of the full response product. Hu's analytic I1–I4 decomposition provides: (i) a complete analytic formula that can be evaluated without numerical integration, (ii) clear physical interpretation of each endpoint-pairing contribution, (iii) efficient computation of the ORF for any configuration using only the $I_1$ formula with parameter substitutions, and (iv) direct access to the pulsar-term corrections that are essential for PTA but negligible for OLC (since OLC arm lengths are much shorter than light-travel times to extragalactic sources).
+
+**Practical implication for OLC**: For OLC detectors with $L \sim 0.1$–3 Gm, the "start-point terms" (analogous to pulsar terms) are suppressed by the rapidly oscillating phase factors $e^{-i\beta_u}$ and $e^{i\beta_v}$ when averaged over frequency. However, for a narrow-band SGWB analysis, these terms may contribute coherently and should not be neglected in the full ORF calculation.
+
 ### 5.4 Hellings-Downs as the Long-Wavelength Limit
 
 The Hellings-Downs curve is the ORF for PTA in the limit $f \to 0$ (long-wavelength limit). In this limit:
 - The transfer function becomes $\mathcal{T} \to \frac{i 2\pi f L}{c}$ (dipole response, sinc $\to 1$)
 - The phase factors become unity
 - The ORF reduces to a purely geometric function of the angle $\gamma$ between baselines
+
+**Hu's derivation of Hellings-Downs** (Hu Eq. (27)): In the common-endpoint case ($\alpha=0$), the $I_1$ term is evaluated directly from the definition (without taking the $\alpha \to 0$ limit of the general formula):
+$$I_1(0; \hat{s}, \hat{u}, \hat{v}) = \frac{32\pi}{3} \left[ \frac{1}{2} - \frac{1}{4}\sin^2\left(\frac{\gamma}{2}\right) + 3\sin^2\left(\frac{\gamma}{2}\right)\ln\sin\left(\frac{\gamma}{2}\right) \right]$$
+The Hellings-Downs curve is then $\Gamma_{\text{HD}}(\gamma) = \frac{3}{32\pi} I_1(0; \hat{s}, \hat{u}, \hat{v})$, which recovers the standard form:
+$$\Gamma_{\text{HD}}(\gamma) = \frac{1}{2} + \frac{3}{2}\sin^2\left(\frac{\gamma}{2}\right)\ln\sin\left(\frac{\gamma}{2}\right) - \frac{1}{4}\sin^2\left(\frac{\gamma}{2}\right)$$
+The remaining terms in Hu's full PTA ORF (Eq. (28)) represent pulsar-term corrections that depend on the distances to the pulsars ($\beta_u, \beta_v$). These terms oscillate and decay as $1/\beta$ for large $\beta$ and average to zero for pulsars at large distances.
+
+**Connection to OLC**: For OLC detectors in the long-wavelength limit ($fL/c \ll 1$):
+- The sinc function $\to 1$
+- The phase factors $e^{-i\beta_u}$ and $e^{i\beta_v}$ oscillate rapidly for $fL \gg c$ (negligible for OLC since arm lengths are short)
+- The $\alpha$ phase factor depends on the separation distance $d = |\vec{x}_2 - \vec{x}_1|$
+
+For two OLC detectors at the same location ($\alpha = 0$), the ORF reduces to $\Gamma_{12}(f) = \Gamma_{11}(f)$ (self-correlation). For separated detectors at long wavelength, the ORF becomes:
+$$\Gamma_{12}(f \to 0) \approx \frac{\mathcal{T}_1(0) \mathcal{T}_2^*(0)}{|\mathcal{T}_1(0)| |\mathcal{T}_2(0)|} \Gamma_{\text{HD}}(\gamma) = \Gamma_{\text{HD}}(\gamma)$$
+since both transfer functions approach the same dipole response $\frac{i 2\pi f L}{c}$ (up to phase conventions). This demonstrates that **any Doppler-tracking detector** (PTA, OLC, laser interferometer) shares the same universal angular correlation structure in the long-wavelength, point-detector limit.
+
+**Deviation from Hellings-Downs**: At higher frequencies (or larger separations), the ORF deviates from Hellings-Downs due to:
+1. **Finite-arm suppression**: The sinc function modifies the transfer function, breaking the universal dipole response.
+2. **Phase decorrelation**: The $\alpha = 2\pi f d / c$ phase factor causes partial decoherence between spatially separated detectors.
+3. **Pulsar-term (start-point) contributions**: In the full Hu framework, the $I_2$, $I_3$, and $I_4$ terms contribute beyond the pure Hellings-Downs form.
 
 The fact that OLC detectors approach the Hellings-Downs curve at small separation confirms the consistency with Hu's framework: both PTA and OLC detectors reduce to the same geometric response in the long-wavelength, point-detector limit. The deviation from Hellings-Downs at larger frequencies/separations is a natural consequence of the finite-arm transfer function in the full framework.
 
@@ -428,10 +488,33 @@ The fact that OLC detectors approach the Hellings-Downs curve at small separatio
 | Response function definition | $R_A = D_{ab}e^A_{ab}$ (Hu Eq. 6) | $R_A = \frac{1}{2}u^a u^b e^A_{ab} \mathcal{T} e^{-i2\pi f\hat{n}\cdot\vec{x}/c}$ | Yes (same structure) |
 | $T_{\text{one}}$ formula | $\frac{1+\hat{n}\cdot\hat{u}}{2}[1-e^{-i\beta(1+\hat{n}\cdot\hat{u})}]$ | $\frac{i2\pi fL}{c}\text{sinc}[\cdots]e^{-i[\cdots]}$ | Yes (derivative convention) |
 | ORF definition | $\frac{1}{8\pi}\int d^2\Omega \sum R^I R^{J*}$ (Hu Eq. 8) | $\int \frac{d^2\hat{n}}{4\pi} R^I R^{J*}$ | Yes (convention factor) |
-| Full ORF two one-way links | Hu Eq. (24) | Eq. 3-1 (specialization) | Yes (compatible) |
+| Full ORF two one-way links | Hu Eq. (24): 4-term I1–I4 decomposition | Eq. 3-1 (numerical sky integration) | Yes (compatible; analytic vs. numeric) |
+| $I_1$ analytic formula | Hu Eq. (18): contour integration + residue theorem | Not derived analytically (num. integration) | N/A (OLC uses numeric) |
+| $I_2, I_3, I_4$ | From $I_1$ by parameter substitution (Hu Eq. 22–23) | Implicit in numeric integration | Yes (equivalent) |
+| 6 independent parameters | $\beta_u, \beta_v, \alpha, \gamma, \delta_u, \delta_v$ | $\vec{x}_1, L_1, \hat{u}_1, \vec{x}_2, L_2, \hat{u}_2$ | Yes (isomorphic) |
 | SGWB assumptions | Stationary, Gaussian, isotropic, unpolarized | Same four assumptions | Yes (identical) |
 | Cross-correlation signal | $S \propto T S_h \Gamma \tilde{Q}$ | Same | Yes (identical) |
-| Hellings-Downs limit | PTA long-wavelength | OLC small-separation | Yes (converge) |
+| Hellings-Downs limit | Hu Eq. (27): $I_1(0)$ + pulsar-term corrections | OLC small-separation convergence | Yes (converge) |
+| PTA special case | Hu Eq. (26)–(28): complete analytic ORF | Discussed qualitatively | Yes (PTA common to both) |
+
+### 5.6 Notation Mapping: Hu PRD $\leftrightarrow$ Lou OLC
+
+A direct mapping between the two frameworks' notation conventions is essential for cross-referencing formulas:
+
+| Symbol | Hu PRD | Lou OLC | Meaning |
+|--------|--------|---------|---------|
+| Arm length parameter | $\beta_u = 2\pi f L_u / c$ | Same | Dimensionless frequency |
+| Separation parameter | $\alpha = 2\pi f \Delta L / c$ | $\alpha_{12} = \frac{2\pi f}{c}(\frac{L_1}{2}\hat{u}_1 - \frac{L_2}{2}\hat{u}_2 - \vec{x}_1 + \vec{x}_2)\cdot\hat{n}$ | Phase from spatial separation |
+| Inter-arm angle | $\gamma$, $\cos\gamma = \hat{u}\cdot\hat{v}$ | Same (via $\theta$ in Lou) | Angle between baselines |
+| Response function | $R_A^{\text{one}}$ (Hu Eq. 6) | $R_A^{\text{OLC}}$ (Eq. 2-42) | Detector response to polarization $A$ |
+| Transfer function | $T_{\text{one}} = \frac{1+\hat{n}\cdot\hat{u}}{2}[1-e^{-i\beta(1+\hat{n}\cdot\hat{u})}]$ | $\mathcal{T}_{\text{one}} = \frac{i2\pi f L}{c}\text{sinc}[\cdots]e^{-i[\cdots]}$ | Frequency-domain response |
+| ORF | $\Gamma_{IJ} = \frac{1}{8\pi}\int d^2\Omega \sum R R^*$ (Hu Eq. 8) | $\Gamma_{12} = \int \frac{d^2\hat{n}}{4\pi} R R^*$ (Eq. 3-1) | Sky-averaged overlap |
+| Endpoint integrals | $I_1, I_2, I_3, I_4$ (Hu Eq. 18, 21, 23) | Not separated | Decomposition of ORF integrand |
+| Geometric parameters | $\alpha, \beta_u, \beta_v, \gamma, \delta_u, \delta_v$ | $\vec{x}_1, L_1, \hat{u}_1, \vec{x}_2, L_2, \hat{u}_2$ | Configuration specification |
+| Time reference | At receiver (end-point) | At receiver ($e^{-i2\pi f\hat{n}\cdot\vec{x}/c}$) | Same convention |
+| $T_{\text{one}}$ relation | Frequency-shift response | $\frac{d}{dt} T_{\text{one}}^{\text{Hu}}$ (derivative convention) | OLC measures derivative |
+
+**Key relationship**: $R_A^{\text{OLC}} = i 2\pi f \cdot R_A^{\text{Hu}} / (1+\hat{n}\cdot\hat{u})$ up to phase conventions. This reflects the derivative convention: OLC measures the time derivative of the quantity that PTA/Hu measures directly.
 
 ---
 

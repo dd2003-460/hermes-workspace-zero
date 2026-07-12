@@ -73,3 +73,16 @@
 3. **不建议做**: 与 HD 曲线的比较
    - HD 不适用于纯地球项 ORF
    - 已有完整分析
+
+## 多平台 AI 交叉核验
+
+> 详见 `tasks/task-multi-ai-xval.md`
+
+| 平台 | URL | 状态 |
+|------|-----|------|
+| Arena AI | https://arena.ai/agent | 待执行 |
+| 智谱 GLM-5.2 | https://bigmodel.cn/trialcenter/modeltrial/text?modelCode=glm-5.2 | 待执行 |
+| Google Gemini | https://aistudio.google.com/prompts/new_chat | 待执行 |
+| ChatGPT | https://chatgpt.com/ | 待执行 |
+
+**核验目标**: JCAP Eq. 2.16 中 b^V_0(ψ) = 4/5·(j_1-j_3) 和 b^V_1(ψ) = 4/35·j_3 的系数正确性

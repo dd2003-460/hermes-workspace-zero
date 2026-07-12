@@ -12,24 +12,25 @@ SERVICES = {
     "chatgpt": {
         "name": "ChatGPT (OpenAI)",
         "url": "https://chatgpt.com",
+        "chat_url": "https://chatgpt.com/c/00000000-0000-4000-8000-000000000000",
         "storage_state": STATE_DIR / "chatgpt.state.json",
-        # 检测是否已登录的 CSS 选择器
         "ready_selector": 'a[href*="/chat"]',
-        # Auth cookie name — indicates API auth is available
         "auth_cookie": "oai-sc",
-        # 登录页的选择器（可能因 Google 登录而不同）
         "login_selector": 'button[type="submit"], #gomen-signin-btn',
     },
     "gemini": {
         "name": "Google Gemini",
         "url": "https://gemini.google.com",
+        "chat_url": "https://gemini.google.com",  # Gemini uses same URL for chat
         "storage_state": STATE_DIR / "gemini.state.json",
         "ready_selector": 'textarea[name="message"], [aria-label*="message"]',
         "login_selector": 'a[href*="accounts.google.com"]',
+        "skip_login_wait": True,  # Landing page → auto-redirects to chat if logged in
     },
     "doubao": {
         "name": "豆包 (Doubao)",
         "url": "https://www.doubao.com",
+        "chat_url": "https://www.doubao.com/chat/",
         "storage_state": STATE_DIR / "doubao.state.json",
         "ready_selector": 'textarea[placeholder], #chat-input',
         "login_selector": 'a[href*="login"]',
@@ -37,9 +38,26 @@ SERVICES = {
     "kimi": {
         "name": "Kimi (月之暗面)",
         "url": "https://kimi.moonshot.cn",
+        "chat_url": "https://kimi.moonshot.cn",
         "storage_state": STATE_DIR / "kimi.state.json",
         "ready_selector": 'textarea, [contenteditable="true"]',
         "login_selector": 'a[href*="login"], .login-btn',
+    },
+    "arena": {
+        "name": "arena.ai (Agent)",
+        "url": "https://arena.ai/agent",
+        "chat_url": "https://arena.ai/agent",
+        "storage_state": STATE_DIR / "arena.state.json",
+        "ready_selector": 'textarea, [contenteditable="true"], [class*="chat-input"], [class*="message-input"]',
+        "login_selector": 'a[href*="login"], button[class*="login"], button[class*="sign"]',
+    },
+    "bigmodel": {
+        "name": "bigmodel.cn (GLM-5.2)",
+        "url": "https://bigmodel.cn",
+        "chat_url": "https://bigmodel.cn/personal/1066062442054835201",
+        "storage_state": STATE_DIR / "bigmodel.state.json",
+        "ready_selector": 'textarea, [contenteditable="true"], [class*="chat-input"], [class*="message-input"]',
+        "login_selector": 'a[href*="login"], button[class*="login"], button[class*="sign"]',
     },
 }
 

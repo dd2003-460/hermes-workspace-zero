@@ -2,7 +2,13 @@
 name: backup-agent
 type: executor
 ---
-# Backup-Agent — 2-loop/02 备份
+# AGENT-06a: Backup-Agent — 2-loop/02 备份
+
+**角色序号**: AGENT-06a
+**负责阶段**: 2-loop/02-backup
+**上游**: AGENT-06 (prechecker, 01-pre-check) — 接收 pre-check 通过信号后执行备份
+**下游**: AGENT-07 (executor, 03-执行) — 将备份位置传递给 executor
+**交接协议**: 产出备份副本 + `02-backup.md`（备份清单）→ 交付给 AGENT-07
 
 ## 系统指令（Phase Spec — 不可省略）
 # 02-Backup — 2-loop 备份阶段

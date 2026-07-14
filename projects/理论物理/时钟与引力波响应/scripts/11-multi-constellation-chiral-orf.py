@@ -34,35 +34,8 @@ import sys
 import time
 import os
 
-c = 299792458.0
-
-
-# ━━━ OLC One-Way Link Transfer Function (Lou Eq. 2-30) ━━━━━━━━━━━━━━━━━━━━━━━
-
-def olc_transfer_function(f, L, cos_nu):
-    """One-way link transfer function for OLC (Lou Eq. 2-30)."""
-    f = np.atleast_1d(f)
-    scalar_in = np.isscalar(f)
-    beta = np.pi * np.abs(f) * L / c
-    one_minus = 1.0 - np.abs(cos_nu)
-    sinc_arg = beta * one_minus
-    eps = 1e-15
-    sinc_v = np.where(np.abs(sinc_arg) < eps, 1.0, np.sin(sinc_arg) / sinc_arg)
-    phase = np.exp(-1j * beta * one_minus)
-    prefac = 1j * 2.0 * np.pi * np.abs(f) * L / c
-    result = prefac * sinc_v * phase
-    return result[0] if scalar_in else result
-
-
-def taiji_transfer_function(f, L, cos_nu):
-    """LISA/Taiji Michelson transfer function (standard interferometer)."""
-    f = np.atleast_1d(f)
-    scalar_in = np.isscalar(f)
-    beta = np.pi * np.abs(f) * L / c
-    sinc_val = np.where(np.abs(beta) < 1e-15, 1.0, np.sin(beta) / beta)
-    phase = np.exp(-1j * beta)
-    result = sinc_val * phase
-    return result[0] if scalar_in else result
+from src.core.constants import c
+from src.core.transfer import olc_transfer_function
 
 
 # ━━━ TDI E-variable Antenna Patterns ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -236,14 +209,9 @@ def e_variable_response_grid(tG, pG, arm_responses, positions, L, det_type='inte
     # Simplified: use the arm along x for transfer function evaluation
     # In reality, each link has its own cos_nu
 
-    if det_type == 'interferometer':
-        T = taiji_transfer_function(np.ones_like(tG), L, cos_nu)
-        T_real = np.real(T)
-        T_imag = np.imag(T)
-    else:
-        T = olc_transfer_function(np.ones_like(tG), L, cos_nu)
-        T_real = np.real(T)
-        T_imag = np.imag(T)
+    T = olc_transfer_function(np.ones_like(tG), L, cos_nu)
+    T_real = np.real(T)
+    T_imag = np.imag(T)
 
     return T_real, T_imag
 
@@ -328,10 +296,7 @@ def antenna_pattern_e_variable(tG, pG, a1, a2, a3, n, L, det_type='interferomete
 
     # Transfer function
     cos_nu = nx*a1[0] + ny*a1[1] + nz*a1[2]
-    if det_type == 'interferometer':
-        T = taiji_transfer_function(np.ones_like(tG), L, cos_nu)
-    else:
-        T = olc_transfer_function(np.ones_like(tG), L, cos_nu)
+    T = olc_transfer_function(np.ones_like(tG), L, cos_nu)
 
     # Detector tensor projections
     R_plus = 0.0
@@ -485,7 +450,7 @@ class Constellation:
 
 
 def antenna_pattern_e_variable_universal(tG, pG, satellite_positions,
-                                          L, det_type='interferometer'):
+                                          L, det_type='olc'):
     """
     E-variable antenna pattern via clockwise (CW) link sum.
 
@@ -539,10 +504,7 @@ def antenna_pattern_e_variable_universal(tG, pG, satellite_positions,
 
         # Per-link transfer function (one-way link)
         cos_nu = nx*u[0] + ny*u[1] + nz*u[2]
-        if det_type == 'interferometer':
-            T = taiji_transfer_function(np.ones_like(tG_a, dtype=np.float64), L, cos_nu)
-        else:
-            T = olc_transfer_function(np.ones_like(tG_a, dtype=np.float64), L, cos_nu)
+        T = olc_transfer_function(np.ones_like(tG_a, dtype=np.float64), L, cos_nu)
 
         R_plus += F_plus * T
         R_cross += F_cross * T
@@ -553,7 +515,7 @@ def antenna_pattern_e_variable_universal(tG, pG, satellite_positions,
 # ━━━ Cross-Constellation ORF Computation ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 def compute_cross_e_variable_orf(f, const1, const2,
-                                  const1_type='olc', const2_type='interferometer',
+                                  const1_type='olc', const2_type='olc',
                                   ntheta=32, nphi=64):
     """
     Compute cross-correlation ORF (I and V) using TDI E-variable responses.
@@ -592,7 +554,7 @@ def compute_cross_e_variable_orf(f, const1, const2,
 
 
 def compute_cross_e_variable_orf_sky_max(f, const1, const2,
-                                          const1_type='olc', const2_type='interferometer',
+                                          const1_type='olc', const2_type='olc',
                                           ntheta=32, nphi=64):
     """
     Compute sky-maximized chiral ORF with spatial phase factor.
@@ -653,18 +615,18 @@ def compute_cross_e_variable_orf_sky_max(f, const1, const2,
 # ━━━ Benchmark Constellations ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 def create_lisa():
-    """LISA constellation: L = 2.5 Gm, inclination = 60 deg."""
+    """LISA constellation: L = 2.5 Gm, inclination = pi/6 = 30 deg (v17 config)."""
     au = 1.496e11  # 1 AU in meters
     pos = np.array([0.0, 0.0, au])  # LISA offset from Taiji
-    const = Constellation('LISA', arm_length_m=2.5e9, inclination_rad=np.radians(60.0),
+    const = Constellation('LISA', arm_length_m=2.5e9, inclination_rad=np.radians(30.0),
                           reference_position=pos)
     return const
 
 
 def create_taiji():
-    """Taiji constellation: L = 2.5 Gm, inclination = 0 deg (ecliptic plane)."""
+    """Taiji constellation: L = 3.0 Gm, inclination = 0 deg (ecliptic plane)."""
     pos = np.array([0.0, 0.0, 0.0])
-    const = Constellation('Taiji', arm_length_m=2.5e9, inclination_rad=0.0,
+    const = Constellation('Taiji', arm_length_m=3.0e9, inclination_rad=0.0,
                           reference_position=pos)
     return const
 
@@ -704,7 +666,7 @@ def test_self_correlation():
 def test_taiji_lisa_benchmark():
     """Benchmark: Taiji x LISA chiral ORF.
 
-    Expected: |Gamma^V|_max ~ 0.3 (Orlando 2021) for 60 deg relative inclination.
+    v17 config: LISA i=pi/6=30 deg, Taiji i=0 deg → Γ^V = -7.75e-3
 
     NOTE: Orlando's 0.3 was read from a figure (approximate).
     The theoretical maximum of the normalized chiral integrand is 1.0
@@ -718,10 +680,10 @@ def test_taiji_lisa_benchmark():
     lambda_gw = c/f ~ 1.5e10 m, separation ~ 1.5e11 m,
     so f * d / c ~ 0.1 → phase effects at ~10% level.
     """
-    print("\nTest 2: LISA x Taiji benchmark (Orlando 2021)")
+    print("\nTest 2: LISA x Taiji benchmark (v17 config)")
     print("=" * 55)
 
-    lisa = create_lisa()  # LISA: i=60 deg
+    lisa = create_lisa()  # LISA: i=pi/6 = 30 deg
     taiji = create_taiji()  # Taiji: i=0 deg
 
     f_bench = 20e-3  # 20 mHz
@@ -739,7 +701,7 @@ def test_taiji_lisa_benchmark():
     gamma_I, gamma_V, sky_max_norm_V, sky_avg_norm_V, max_theta, max_phi = \
         compute_cross_e_variable_orf_sky_max(
             f_bench, lisa, taiji,
-            const1_type='interferometer', const2_type='interferometer')
+            const1_type='olc', const2_type='olc')
 
     abs_gamma_V_with = abs(gamma_V)
     print(f"\n  WITH spatial phase:")
@@ -750,9 +712,9 @@ def test_taiji_lisa_benchmark():
     print(f"    Sky-max location: theta={max_theta:.1f}°, phi={max_phi:.1f}°")
 
     # WITHOUT spatial phase (temporary: disable reference positions)
-    lisa_no_rp = Constellation('LISA', arm_length_m=2.5e9, inclination_rad=np.radians(60.0),
+    lisa_no_rp = Constellation('LISA', arm_length_m=2.5e9, inclination_rad=np.radians(30.0),
                                reference_position=None)
-    taiji_no_rp = Constellation('Taiji', arm_length_m=2.5e9, inclination_rad=0.0,
+    taiji_no_rp = Constellation('Taiji', arm_length_m=3.0e9, inclination_rad=0.0,
                                 reference_position=None)
     gamma_I0, gamma_V0, sky_max_norm_V0, sky_avg_norm_V0, _, _ = \
         compute_cross_e_variable_orf_sky_max(
@@ -793,7 +755,7 @@ def test_olc_taiji_cross():
     f_bench = 20e-3
     gamma_I, gamma_V = compute_cross_e_variable_orf(
         f_bench, olc, taiji,
-        const1_type='olc', const2_type='interferometer')
+        const1_type='olc', const2_type='olc')
 
     abs_gamma_V = abs(gamma_V)
     print(f"  Standard ORF: {gamma_I:.6f}")
@@ -822,7 +784,7 @@ def test_olc_taiji_cross_nonzero():
     gamma_I, gamma_V, sky_max_norm_V, sky_avg_norm_V, max_theta, max_phi = \
         compute_cross_e_variable_orf_sky_max(
             f_bench, olc30, taiji,
-            const1_type='olc', const2_type='interferometer')
+            const1_type='olc', const2_type='olc')
 
     abs_gamma_V = abs(gamma_V)
     print(f"  Standard ORF (sky-avg): {gamma_I:.6f}")
@@ -855,8 +817,8 @@ def run_full_analysis():
 
     f_bench = 20e-3
     gI, gV = compute_cross_e_variable_orf(f_bench, lisa, taiji,
-                                           const1_type='interferometer',
-                                           const2_type='interferometer')
+                                           const1_type='olc',
+                                           const2_type='olc')
     results_all['Taiji x LISA'] = {'gamma_I': gI, 'gamma_V': gV}
     print(f"  {'Taiji x LISA':<25s}  {gI:12.6f}  {gV:14.2e}  {abs(gV):12.2e}")
 
@@ -864,14 +826,14 @@ def run_full_analysis():
     olc = create_olc()
     gI, gV = compute_cross_e_variable_orf(f_bench, olc, taiji,
                                            const1_type='olc',
-                                           const2_type='interferometer')
+                                           const2_type='olc')
     results_all['OLC x Taiji'] = {'gamma_I': gI, 'gamma_V': gV}
     print(f"  {'OLC x Taiji':<25s}  {gI:12.6f}  {gV:14.2e}  {abs(gV):12.2e}")
 
     # OLC x LISA
     gI, gV = compute_cross_e_variable_orf(f_bench, olc, lisa,
                                            const1_type='olc',
-                                           const2_type='interferometer')
+                                           const2_type='olc')
     results_all['OLC x LISA'] = {'gamma_I': gI, 'gamma_V': gV}
     print(f"  {'OLC x LISA':<25s}  {gI:12.6f}  {gV:14.2e}  {abs(gV):12.2e}")
 
@@ -897,7 +859,7 @@ def run_inclination_scan():
 
         gamma_I, gamma_V = compute_cross_e_variable_orf(
             f_scan, taiji, companion,
-            const1_type='interferometer', const2_type='interferometer')
+            const1_type='olc', const2_type='olc')
 
         results['inclination'].append(deg)
         results['gamma_I'].append(gamma_I)
@@ -923,8 +885,8 @@ def run_frequency_scan_multi():
     freq_results['Taiji x LISA'] = {'f': f_vals, 'gamma_I': [], 'gamma_V': []}
     for f in f_vals:
         gI, gV = compute_cross_e_variable_orf(f, lisa, taiji,
-                                               const1_type='interferometer',
-                                               const2_type='interferometer')
+                                               const1_type='olc',
+                                               const2_type='olc')
         freq_results['Taiji x LISA']['gamma_I'].append(gI)
         freq_results['Taiji x LISA']['gamma_V'].append(gV)
 
@@ -933,7 +895,7 @@ def run_frequency_scan_multi():
     for f in f_vals:
         gI, gV = compute_cross_e_variable_orf(f, olc, taiji,
                                                const1_type='olc',
-                                               const2_type='interferometer')
+                                               const2_type='olc')
         freq_results['OLC x Taiji']['gamma_I'].append(gI)
         freq_results['OLC x Taiji']['gamma_V'].append(gV)
 
@@ -1105,21 +1067,21 @@ if __name__ == '__main__':
         lisa = create_lisa()
         taiji = create_taiji()
         gI, gV = compute_cross_e_variable_orf(f_bench, lisa, taiji,
-                                               const1_type='interferometer',
-                                               const2_type='interferometer')
+                                               const1_type='olc',
+                                               const2_type='olc')
         print(f"\n  Taiji x LISA: <Gamma^I> = {gI:.6f}, |Gamma^V| = {abs(gV):.6e}")
 
         # OLC x Taiji
         olc = create_olc()
         gI, gV = compute_cross_e_variable_orf(f_bench, olc, taiji,
                                                const1_type='olc',
-                                               const2_type='interferometer')
+                                               const2_type='olc')
         print(f"  OLC x Taiji: <Gamma^I> = {gI:.6f}, |Gamma^V| = {abs(gV):.6e}")
 
         # OLC x LISA
         gI, gV = compute_cross_e_variable_orf(f_bench, olc, lisa,
                                                const1_type='olc',
-                                               const2_type='interferometer')
+                                               const2_type='olc')
         print(f"  OLC x LISA: <Gamma^I> = {gI:.6f}, |Gamma^V| = {abs(gV):.6e}")
 
     else:

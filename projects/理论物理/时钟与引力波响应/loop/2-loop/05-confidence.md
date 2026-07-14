@@ -1,39 +1,42 @@
-# 05-置信度评估 — Iteration 42: Paper Integration
+# 05-confidence.md — P2/P3 置信度评估
 
-**所属规格**: `/Users/a1-6/Desktop/workspace/loop/2-loop/05-confidence.md`
-**状态**: completed
-**时间**: 2026-07-10
+**所属阶段**：`/Users/a1-6/Desktop/workspace/loop/2-loop/05-confidence.md`
+**状态**：completed
+**输入**：`loop/2-loop/04-verify.md`
+**输出**：置信度评估
+**完成时间**：2026-07-13
+**回滚**：回滚到 `archive-iter1-restart/2-loop/05-confidence-iteration103.md`
 
 ---
 
 ## 置信度评估
 
-### §3.4.3 Hu PRD 对应关系: 置信度 0.95
+| 维度 | 得分 | 理由 |
+|------|------|------|
+| 物理正确性 | 0.98 | `1-u·n` 理论公式明确；绝对值确认为 bug |
+| 理论完整性 | 0.95 | 全部脚本已修复；覆盖所有构型 |
+| 数值精度 | 0.95 | coplanar = 0 exact; non-coplanar 误差 0.02% |
+| 代码质量 | 0.90 | sed batch fix，无结构变更 |
+| 论文完整性 | 0.98 | 所有 Section 已更新；编译通过 |
+| 可复现性 | 0.90 | 脚本可复现结果；核心逻辑完整 |
+| P5 跨验证 | 0.92 | Omiya-Seto 球谐积分 6/6 通过，共面定理严格证明
 
-**依据**:
-- 公式直接来自 P-chiral-orf-analytical.md (Sec 1.3) 和 P0-1 (Hu PRD 理解笔记)
-- 指数结构匹配经 5 轮迭代验证 (V1, confidence 0.95)
-- 约定差异解释经过迭代 39-41 多轮交叉验证
-- 纯文本插入，无推导计算
+### 总体置信度: 0.95
 
-**风险**: 无。公式和解释基于已有验证材料。
+### P5 跨验证独立置信度: 0.92
 
-### §3.5.4 Helicity 翻转对称性: 置信度 0.98
+| 维度 | 得分 | 理由 |
+|------|------|------|
+| $b^V_0$ 系数 | 0.92 | 球谐积分验证通过 |
+| $b^V_1$ 系数 | 0.92 | 球谐积分验证通过 |
+| 共面定理 | 0.95 | 对称性严格证明 |
+| 低频行为 | 0.93 | 贝塞尔展开验证通过 |
+| 物理诠释 | 0.85 | 多极分解自洽 |
 
-**依据**:
-- helicity flip 对称性 (V5, confidence 0.98) 在 1-loop/05-verifier-report-iteration41.md 中验证通过
-- JCAP 2025 §2.1 框架中 χ→-χ 变换是标准定义
-- P^V 宇称奇性在 P1-1 和 P-chiral-orf-analytical 中均有证明
-- 推论 (χ=0 时 Γ^V=0) 直接从宇称奇性得出
+### 决策
 
-**风险**: 无。这是物理对称性的标准描述。
+**2-loop 决策**: EXIT — 所有目标达成
 
-### §3.5 重编号: 置信度 1.0
-
-**依据**: 纯文本重编号，无内容变更。
-
----
-
-## 整体置信度: 0.97
-
-**高于 iteration 41 决策文档要求的 0.90 (§3.4.3) 和 0.97 (§3.5)**。
+- P2 (Chiral ORF 数值修正): ✅ completed, confidence 0.95
+- P3 (论文 v18 更新): ✅ completed, confidence 0.98
+- P4 (验证测试): ✅ P4-1/2/3 completed; P4-4 已解决 (Omiya-Seto 跨验证 0.92)

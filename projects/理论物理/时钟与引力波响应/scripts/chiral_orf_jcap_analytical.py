@@ -330,7 +330,7 @@ def compute_chiral_orf_nishizawa(const1, const2, f,
 
             if use_olc:
                 beta = np.pi * np.abs(f) * const['L'] / c
-                one_minus = 1.0 - np.abs(cos_nu)
+                one_minus = 1.0 - cos_nu
                 sinc_arg = beta * one_minus
                 sinc_v = np.where(np.abs(sinc_arg) < 1e-15, 1.0,
                                   np.sin(sinc_arg) / sinc_arg)

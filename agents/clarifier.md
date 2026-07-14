@@ -2,7 +2,13 @@
 name: clarifier
 type: planner
 ---
-# Clarifier — 1-loop/01 任务澄清
+# AGENT-01: Clarifier — 1-loop/01 任务澄清
+
+**角色序号**: AGENT-01
+**负责阶段**: 1-loop/01-任务澄清
+**上游**: 人类用户（唯一输入源）
+**下游**: AGENT-02 (decomposer, 02-03)
+**交接协议**: 产出 `task-definition.md` → 交付给 AGENT-02
 
 ## 系统指令（Phase Spec — 不可省略）
 # 01-任务澄清

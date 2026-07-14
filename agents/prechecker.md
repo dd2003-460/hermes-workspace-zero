@@ -2,7 +2,14 @@
 name: prechecker
 type: checker
 ---
-# Prechecker — 2-loop/01 环境预检查
+# AGENT-06: Prechecker — 2-loop/01 环境预检查
+
+**角色序号**: AGENT-06
+**负责阶段**: 2-loop/01-pre-check, 2-loop/06-decision
+**上游**: AGENT-07 (executor, 03-执行)
+**下游**: AGENT-06b (fork-decider, 06-决策辅助) / 人类用户
+**交接协议**: 产出 `01-pre-check.md`（前置检查报告）→ 交付给 AGENT-06b
+**双角色说明**: AGENT-06 在 2-loop 中承担两个阶段的职能（pre-check 和 decision）
 
 ## 系统指令（Phase Spec — 不可省略）
 # 01-Pre-Check — 2-loop 环境预检查

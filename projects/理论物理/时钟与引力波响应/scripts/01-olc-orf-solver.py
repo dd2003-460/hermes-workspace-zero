@@ -31,112 +31,13 @@ import matplotlib.pyplot as plt
 import sys
 import time
 
-c = 299792458.0  # m/s
+from src.core.constants import c
+from src.core.orf import compute_orf_standard
 
 
-# ─── OLC Transfer Function ───────────────────────────────────────────────────
-def olc_transfer_function(f, L, cos_nu):
-    """
-    One-way link transfer function for OLC (Lou Eq. 2-30).
+# ─── Compatibility alias (deprecated, use compute_orf_standard directly) ───
+compute_orf_two_arm = compute_orf_standard
 
-    T(u·n, f) = (i * 2π * f * L / c)
-                * sinc[πfL/c * (1 - u·n)]
-                * exp[-i * πfL/c * (1 - u·n)]
-    """
-    f = np.atleast_1d(f)
-    scalar_in = np.isscalar(f)
-    beta = np.pi * np.abs(f) * L / c
-    one_minus = 1.0 - cos_nu
-    sinc_arg = beta * one_minus
-    eps = 1e-15
-    sinc_v = np.where(np.abs(sinc_arg) < eps, 1.0, np.sin(sinc_arg) / sinc_arg)
-    phase = np.exp(-1j * beta * one_minus)
-    prefac = 1j * 2.0 * np.pi * np.abs(f) * L / c
-    result = prefac * sinc_v * phase
-    return result[0] if scalar_in else result
-
-
-# ─── Antenna Patterns ────────────────────────────────────────────────────────
-def antenna_patterns(n_theta, n_phi, u_theta, u_phi):
-    """
-    F_A(n) = e_A^{ab}(n) * u_a * u_b
-    In spherical sky basis: e_+ = th⊗th - ph⊗ph, e_x = th⊗ph + ph⊗th
-    """
-    ct, st = np.cos(n_theta), np.sin(n_theta)
-    cp, sp = np.cos(n_phi), np.sin(n_phi)
-    cu_t, cu_p = np.cos(u_theta), np.cos(u_phi)
-    su_t, su_p = np.sin(u_theta), np.sin(u_phi)
-
-    # Arm unit vector
-    ux = su_t * cu_p
-    uy = su_t * su_p
-    uz = cu_t
-
-    # Sky tangent basis
-    th_x, th_y, th_z = ct * cp, ct * sp, -st
-    ph_x, ph_y, ph_z = -sp, cp, 0.0
-
-    F_plus = (th_x*ux)**2 + (th_y*uy)**2 + (th_z*uz)**2 \
-           - (ph_x*ux)**2 - (ph_y*uy)**2 - (ph_z*uz)**2
-    F_cross = 2.0 * (th_x*ux)*(ph_x*ux) + 2.0 * (th_y*uy)*(ph_y*uy) \
-            + 2.0 * (th_z*uz)*(ph_z*uz)
-    return F_plus, F_cross
-
-
-
-def compute_orf_two_arm(f, L1, L2, u_theta, u_phi, v_theta, v_phi,
-                        d, theta_s, phi_s, ntheta=60, nphi=120):
-    """Two-detector ORF with baseline separation.
-
-    Baseline propagation phase: exp(-i 2π f d n̂·s / c) captures
-    the GW travel-time delay between the two detector sites.
-    This is the ONLY site-dependent phase — combining it with
-    separate Hu PRD site factors would double-count.
-    """
-    thetas = np.linspace(0, np.pi, ntheta)
-    phis = np.linspace(0, 2*np.pi, nphi, endpoint=False)
-    tG, pG = np.meshgrid(thetas, phis, indexing='ij')
-    dO = np.sin(tG) * (2*np.pi/nphi) * (np.pi/ntheta)
-
-    nx = np.sin(tG)*np.cos(pG); ny = np.sin(tG)*np.sin(pG); nz = np.cos(tG)
-
-    # Arm unit vectors
-    u1 = np.array([np.sin(u_theta)*np.cos(u_phi),
-                    np.sin(u_theta)*np.sin(u_phi),
-                    np.cos(u_theta)])
-    v1 = np.array([np.sin(v_theta)*np.cos(v_phi),
-                    np.sin(v_theta)*np.sin(v_phi),
-                    np.cos(v_theta)])
-
-    # Baseline direction (sky propagation)
-    s = np.array([np.sin(theta_s)*np.cos(phi_s),
-                  np.sin(theta_s)*np.sin(phi_s),
-                  np.cos(theta_s)])
-
-    cos_nu = nx*u1[0] + ny*u1[1] + nz*u1[2]
-    cos_nv = nx*v1[0] + ny*v1[1] + nz*v1[2]
-
-    alpha = 2.0*np.pi*np.abs(f)*d/c
-    n_s = nx*s[0] + ny*s[1] + nz*s[2]
-    bp = np.exp(-1j*alpha*n_s)
-
-    T1 = olc_transfer_function(f, L1, cos_nu)
-    T2 = olc_transfer_function(f, L2, cos_nv)
-
-    F1p, F1x = antenna_patterns(tG, pG, u_theta, u_phi)
-    F2p, F2x = antenna_patterns(tG, pG, v_theta, v_phi)
-
-    S = (F1p*F2p + F1x*F2x) * T1 * np.conj(T2) * bp
-    corr = np.sum(S * dO)
-
-    magT1 = np.abs(T1)
-    magT2 = np.abs(T2)
-    auto1 = np.sum((F1p**2 + F1x**2) * magT1**2 * dO)
-    auto2 = np.sum((F2p**2 + F2x**2) * magT2**2 * dO)
-    denom = np.sqrt(auto1 * auto2)
-    if np.abs(denom) < 1e-30:
-        return 0.0
-    return corr / denom
 
 
 # ─── Orientation average: detector 2 rotated around detector 1 ────────────────
@@ -187,13 +88,6 @@ def compute_orf_orient_avg(f, L1, L2, arm_angle, gamma1, gamma2,
     return np.mean(vals)
 
 
-# ─── Sky-sky integration (standard Hu PRD approach) ──────────────────────────
-def compute_orf_sky_sky(f, L1, L2, u_theta, u_phi, v_theta, v_phi,
-                        d, theta_s, phi_s, ntheta=60, nphi=120):
-    """Same as compute_orf_two_arm but using sky-sky grid."""
-    return compute_orf_two_arm(f, L1, L2, u_theta, u_phi,
-                                v_theta, v_phi, d, theta_s, phi_s,
-                                ntheta, nphi)
 
 
 # ─── Full orf sweep with orientation average ─────────────────────────────────

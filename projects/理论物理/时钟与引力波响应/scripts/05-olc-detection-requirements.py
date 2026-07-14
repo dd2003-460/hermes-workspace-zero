@@ -28,7 +28,7 @@ from pathlib import Path
 
 # ─── Constants ───────────────────────────────────────────────────────────────
 
-C = 299792458.0        # speed of light [m/s]
+from src.core.constants import c        # speed of light [m/s]
 OMEGA_GW = 1e-8        # assumed SGWB energy density
 M_YR = 365.25 * 86400.0 # seconds per year
 H_0 = 67.4 * 1000.0 / 3.096e19  # H_0 in Hz ~ 2.18e-18
@@ -55,7 +55,7 @@ def sr_clock_s_y(f, h_0=None):
 
 def single_det_strain_psd(h_0, L, f):
     """Equivalent strain noise PSD."""
-    return h_0**2 * C**2 / (np.pi**2 * f**4 * L**2)
+    return h_0**2 * c**2 / (np.pi**2 * f**4 * L**2)
 
 # ─── ORF model (matching 01-olc-orf-solver.py) ───────────────────────────────
 
@@ -107,7 +107,7 @@ def compute_snr(L_meters, T_obs_yr, N_baseline, h_0, arm_angle_deg,
 
     # GW-induced frequency fluctuation PSD: S_corr = S_h * T^2
     S_h = (2.0 * H_0**2 / np.pi**2) * OMEGA_GW * f**(-3.0)
-    T_gw = (2.0 * np.pi * f * L_meters / C) * K_arm
+    T_gw = (2.0 * np.pi * f * L_meters / c) * K_arm
     S_corr = S_h * T_gw**2
 
     # Clock noise PSD
@@ -179,7 +179,7 @@ def iso_clock_detection(h_0=ALLOAN_REF, L=10.0):
     f_iso = 1.0  # Hz
 
     # Strain sensitivity
-    h_sens = h_0 * C / (np.pi * f_iso * L)
+    h_sens = h_0 * c / (np.pi * f_iso * L)
 
     # Assuming a detectable ISO signal
     h_signal = 1e-21

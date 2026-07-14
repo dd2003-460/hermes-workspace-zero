@@ -77,7 +77,7 @@ def link_antenna(u, th_x, th_y, th_z, ph_x, ph_y, ph_z):
 def link_transfer_magnitude(cos_nu, f, L):
     """One-way link transfer function magnitude: |W| = |sinc(beta*(1-cos_nu))|."""
     beta = np.pi * f * L / C
-    arg = beta * (1.0 - np.abs(cos_nu))
+    arg = beta * (1.0 - cos_nu)
     eps = 1e-15
     return np.where(np.abs(arg) < eps, 1.0, np.abs(np.sin(arg) / arg))
 
@@ -156,7 +156,7 @@ def cw_link_sum_response(th_gw, phi_gw, positions, f, L):
 
         cos_nu = nx * u[0] + ny * u[1] + nz * u[2]
         beta_link = np.pi * f * L / C
-        arg = beta_link * (1.0 - np.abs(cos_nu))
+        arg = beta_link * (1.0 - cos_nu)
         eps = 1e-15
         sinc_val = np.where(np.abs(arg) < eps, 1.0, np.sin(arg) / arg)
         phase = np.exp(-1j * beta_link)
@@ -192,7 +192,7 @@ def cw_ccw_difference(th_gw, phi_gw, positions, f, L):
 
         cos_nu = nx * u[0] + ny * u[1] + nz * u[2]
         beta_link = np.pi * f * L / C
-        arg = beta_link * (1.0 - np.abs(cos_nu))
+        arg = beta_link * (1.0 - cos_nu)
         eps = 1e-15
         sinc_val = np.where(np.abs(arg) < eps, 1.0, np.sin(arg) / arg)
         phase = np.exp(-1j * beta_link)

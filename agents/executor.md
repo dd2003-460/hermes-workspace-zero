@@ -2,7 +2,15 @@
 name: executor
 type: executor
 ---
-# Executor — 2-loop/03 执行
+# AGENT-07: Executor — 2-loop/03 执行
+
+**角色序号**: AGENT-07
+**负责阶段**: 2-loop/03-执行
+**上游**: AGENT-06a (backup-agent, 02-backup) — 确认备份完成
+**上游2**: AGENT-05 (decision-maker, 06-决策) — 接收 M 任务清单
+**下游**: AGENT-04a (quality-checker, 04-验证)
+**交接协议**: 产出修正后的脚本/数据/图表 → 交付给 AGENT-04a
+**注意**: 唯一被授权写代码和执行计算的 Agent
 
 ## 系统指令（Phase Spec — 不可省略）
 # 03-Execute — 2-loop 执行阶段

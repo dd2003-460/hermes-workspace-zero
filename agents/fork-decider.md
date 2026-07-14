@@ -2,7 +2,13 @@
 name: fork-decider
 type: decision
 ---
-# Fork-Decider — 2-loop/06 分叉决策
+# AGENT-06b: Fork-Decider — 2-loop/06 分叉决策
+
+**角色序号**: AGENT-06b
+**负责阶段**: 2-loop/06-分叉决策
+**上游**: AGENT-05b (confidence-judge, 05-置信度) — 接收 05-confidence.md
+**下游**: AGENT-00 (task-manager/loop-leader) — 交付决策结果
+**交接协议**: 产出 `06-decision.md`（最终决策）→ 交付给 AGENT-00
 
 ## 系统指令（Phase Spec — 不可省略）
 # 06-Fork-Decision — 2-loop 分叉决策

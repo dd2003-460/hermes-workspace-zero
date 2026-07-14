@@ -2,7 +2,14 @@
 name: confidence-judge
 type: judge
 ---
-# Confidence-Judge — 2-loop/05 置信度
+# AGENT-05b: Confidence-Judge — 2-loop/05 置信度
+
+**角色序号**: AGENT-05b
+**负责阶段**: 2-loop/05-置信度
+**上游**: AGENT-04a (quality-checker, 04-验证) — 接收 04-verify.md
+**下游**: AGENT-06b (fork-decider, 06-决策)
+**交接协议**: 产出 `05-confidence.md`（综合置信度评估）→ 交付给 AGENT-06b
+**双角色说明**: AGENT-05b 与 AGENT-05 (decision-maker, 1-loop) 不同，负责 2-loop 置信度评估
 
 ## 系统指令（Phase Spec — 不可省略）
 # 05-Confidence — 2-loop 综合置信度评估

@@ -1,65 +1,34 @@
 ---
 active: true
-iteration: 101
-session_id: current
+iteration: 15
+session_id: new-flow
 max_iterations: 0
 completion_promise: "ALL_WORK_COMPLETE"
-started_at: "2026-07-12T06:40:00Z"
-last_output_hash: ""
+started_at: "2026-07-14"
 ---
 
-# RALPH Loop — Local State
+# RALPH Loop — Local State (精简版)
 
 ## 当前状态
-- **iteration**: 101
-- **loop_phase**: 2-loop/01 — Iter101 pre-check 完成 (pre-check 通过)
-- **started_at**: 2026-07-10T12:00:00Z
-- **last_output_hash**: ""
-- **last_action**: Iter101 — pre-check 通过，环境/文件/任务包全部验证
-- **last_outcome**: pre-check-result.md 已写入；Python + XeLaTeX + 依赖 + 磁盘空间均就绪；6 篇笔记 + 4 个脚本全部验证存在
-- **agent_tasks**: completed
+- **iteration**: 16
+- **loop_phase**: 2-loop/03-execute (P1 代码去重)
+- **last_action**: Commander 05-完备核验 + 06-决策 ENTER 2-LOOP
+- **last_outcome**: 03-任务分解已完成，Commander 确认进入 2-loop 执行
+- **last_insight**: M0 可跳过（01 已充分扫描），直接开始 M2+M1（core 扩展）→ M3 → M4-M7 (D-class) → M8-M10 (B-class) → M11 (archive)
+- **agent_tasks**: none
+- **modules_remaining**: [M2, M1, M3, M7, M4, M5, M6, M8, M9, M10, M11]
 
-## 缺口跟踪
-1. **非共面 Γ^V 解析表达式** — COMPLETE (6/6 tests PASS)
-2. **螺旋度翻转对称性** — VERIFIED (Iter80, 4/4 PASS)
-3. **Nishizawa 2009 交叉验证** — optional
-4. **P^V 严格实现** — 待实施 (当前为近似)
-5. **sinc 传递函数替代指数** — 待实施 (当前使用指数形式)
+## 待办任务（来自 TASKS.md）
+- [x] P2-3: 精确单区匹配验证（寻找精确 θ/φ 为 R^V = -7.750753e-3）
+- [x] P2-4: 生成正确的结果表格和图表
+- [x] P3-1: 基于修正数值更新 paper main tex（Section 3.5.6 + 结论7）
+- [x] P3-2: 更新理论基础章节（7.2.2 手征引力波探测）
+- [x] P3-3: 添加 bug 修正说明
+- [x] P3-4: 编译验证（xelatex 51页，无错误）
+- [x] P4-4: Nishizawa 2009 交叉验证（可选）— 已解决: Nishizawa PRD 79, 082002 研究非张量偏振模式，非手征张量 GW；Omiya-Seto (2107.12001) 跨验证 7/7 通过 (0.95 置信度)
 
-## 完整笔记清单
-- `note/P0-1-hu-prd-understanding.md` — 588 行，Hu PRD 完整理解，置信度 0.95
-- `note/P0-2-hu-vs-code-analysis.md` — 180 行，Hu PRD vs 代码映射分析，置信度 0.85
-- `note/P0-3-hu-formula-derivation.md` — Hu I1-I4 完整公式推导，置信度 0.90
-- `note/P1-2-chiral-orf.md` — 279 行，手征 ORF 物理/几何/探测分析，置信度 0.85
-- `note/P2-2-olc-invariance.md` — 238 行，OLC 传递函数不变性，置信度 0.88
-- `note/P-chiral-orf-analytical.md` — 855 行，Hu I1-I4 + OLC sinc 统一推导，置信度 0.85
-
-## Loop 目录状态
-```
-loop/
-├── INDEX.md
-├── 1-loop/
-│   ├── 01-任务澄清.md — completed
-│   ├── 02-目标澄清.md — completed
-│   ├── 03-任务分解.md — completed (v2, P0-P5)
-│   ├── 04-信息搜集.md — completed
-│   ├── 04-信息搜集-iteration100.md — completed (填补 Iter100 缺失阶段)
-│   ├── 05-完备核验.md — completed
-│   └── 06-决策.md — completed (Iter100, decision: continue_2loop)
-└── 2-loop/
-    ├── 01-pre-check.md — completed (历史 Iter 2-99)
-    ├── 02-backup.md — completed
-    ├── 03-execute.md — completed
-    ├── 04-verify.md — completed
-    ├── 05-confidence.md — completed
-    └── 06-decision.md — completed
-```
-
-## 等待人类决策
-1. arXiv 提交 (7 篇就绪，阻塞于 MITM SSL + 批准)
-2. 新研究方向选择 (A: 2-loop 填缺口 / B: 新物理 / C: 切换项目)
-
-## Iter101 计划
-1. **P5: 多平台 LLM 交叉核验** — 将 4 个笔记上传至 Gemini, ChatGPT, Kimi, Doubao
-2. **基于核验结果更新论文理论部分**
-3. **准备 arXiv 提交 v18**
+## 新流程说明
+- 1-loop：任务澄清 → 目标澄清 → 任务分解 → 信息搜集 → 完备核验 → 决策
+- 2-loop：预检 → 备份 → 执行 → 验证 → 置信度 → 决策
+- 详细规格：/Users/a1-6/Desktop/workspace/loop/1loop.md 和 2loop.md
+- loop/ 目录结构已完整对齐 constraint 11 要求

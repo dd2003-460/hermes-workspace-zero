@@ -1,0 +1,16 @@
+Here is a formula from JCAP 05(2025)050 for the parity-odd overlap reduction function Gamma^V in gravitational wave detection from a triangular detector constellation:
+
+Gamma^V = sum_n (i^(2n+1))/(2n+1) [b^V_n(psi) * S^V_n]
+
+The key coefficients from JCAP Eq. 2.16 are:
+b^V_0(psi) = (4/5) * (j_1(psi) - j_3(psi))
+b^V_1(psi) = (4/35) * j_3(psi)
+
+where j_n are spherical Bessel functions.
+
+Please analyze:
+1. Are these coefficients (4/5 and 4/35) correct? Or should they be different?
+2. Why does a coplanar detector network give Gamma^V = 0?
+3. The b^V_0 combination (j_1 - j_3) - is this physically reasonable?
+4. These JCAP coefficients appear related to the general ORF framework of Hu PRD 111.084065. Are they consistent?
+5. Can you derive the coefficients 4/5 and 4/35 from first principles (tensor decomposition of the detector response)?

@@ -2,7 +2,13 @@
 name: quality-checker
 type: checker
 ---
-# Quality-Checker — 2-loop/04 验证
+# AGENT-04a: Quality-Checker — 2-loop/04 验证
+
+**角色序号**: AGENT-04a
+**负责阶段**: 2-loop/04-验证
+**上游**: AGENT-07 (executor, 03-执行)
+**下游**: AGENT-05b (confidence-judge, 05-置信度)
+**交接协议**: 产出 `04-verify.md`（5 维度验证报告）→ 交付给 AGENT-05b
 
 ## 系统指令（Phase Spec — 不可省略）
 # 04-Verify — 2-loop 验证阶段

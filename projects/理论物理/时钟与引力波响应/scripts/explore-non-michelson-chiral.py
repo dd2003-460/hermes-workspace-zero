@@ -19,7 +19,7 @@ def olc_transfer_function(f, L, cos_nu):
     f_arr = np.atleast_1d(f)
     scalar_in = np.isscalar(f)
     beta = np.pi * np.abs(f_arr) * L / c
-    one_minus = 1.0 - np.abs(cos_nu)
+    one_minus = 1.0 - cos_nu
     sinc_arg = beta * one_minus
     eps = 1e-15
     sinc_v = np.where(np.abs(sinc_arg) < eps, 1.0, np.sin(sinc_arg) / sinc_arg)

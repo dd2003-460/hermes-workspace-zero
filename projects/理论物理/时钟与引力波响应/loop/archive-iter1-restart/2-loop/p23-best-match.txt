@@ -1,0 +1,15 @@
+P2-3 Best Single-Sky Match
+========================
+theta = 14.3100°
+phi = 83.7600°
+R^V = -7.7519321287e-03
+Target = -7.7507530000e-03
+|delta| = 1.1791286987e-06
+Gamma^V = -3.4685161293e-02
+S_A = 5.7898108335e+00
+S_B = 3.4578260275e+00
+chi_real = 0.996454431781
+chi_imag = -0.084134210541
+Delta_x = [1.496e11, 0, 0] (x-direction, 1 AU)
+Frequency = 0.001 Hz
+Constellations: LISA30 x Taiji0 (OLC TF)

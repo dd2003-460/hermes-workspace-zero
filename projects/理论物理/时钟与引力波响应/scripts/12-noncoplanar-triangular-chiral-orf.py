@@ -38,26 +38,8 @@ import sys
 import time
 import os
 
-c = 299792458.0
-
-
-# ================================================================
-# OLC One-Way Link Transfer Function (Lou Eq. 2-30)
-# ================================================================
-
-def olc_transfer_function(f, L, cos_nu):
-    """One-way link transfer function for OLC (Lou Eq. 2-30)."""
-    f = np.atleast_1d(f)
-    scalar_in = np.isscalar(f)
-    beta = np.pi * np.abs(f) * L / c
-    one_minus = 1.0 - np.abs(cos_nu)
-    sinc_arg = beta * one_minus
-    eps = 1e-15
-    sinc_v = np.where(np.abs(sinc_arg) < eps, 1.0, np.sin(sinc_arg) / sinc_arg)
-    phase = np.exp(-1j * beta * one_minus)
-    prefac = 1j * 2.0 * np.pi * np.abs(f) * L / c
-    result = prefac * sinc_v * phase
-    return result[0] if scalar_in else result
+from src.core.constants import c
+from src.core.transfer import olc_transfer_function
 
 
 # ================================================================

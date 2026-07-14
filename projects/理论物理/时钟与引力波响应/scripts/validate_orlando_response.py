@@ -46,7 +46,7 @@ def link_antenna(u, th_x, th_y, th_z, ph_x, ph_y, ph_z):
 def link_transfer(cos_nu, f, L):
     """One-way link transfer function magnitude: |W| = sinc(beta(1 - cos_nu))."""
     beta = np.pi * f * L / C
-    arg = beta * (1.0 - np.abs(cos_nu))
+    arg = beta * (1.0 - cos_nu)
     eps = 1e-15
     return np.where(np.abs(arg) < eps, 1.0, np.sin(arg) / arg)
 

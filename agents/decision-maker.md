@@ -2,7 +2,19 @@
 name: decision-maker
 type: decision
 ---
-# Decision-Maker — 1-loop/06 决策
+# AGENT-05: Decision-Maker — 1-loop/06 决策
+
+**角色序号**: AGENT-05
+**负责阶段**: 1-loop/06-决策
+**上游**: AGENT-04 (verifier, 05-完备核验)
+**下游**: AGENT-07 (executor, 2-loop/03-执行)
+**交接协议**: 产出 `decision.md`（决策报告）→ 交付给 AGENT-07
+
+## 协作代理列表
+AGENT-05 可能依赖以下代理产出：
+- AGENT-04 (verifier): 完备核验报告
+- AGENT-04a (quality-checker): 质量检查（如需要）
+- AGENT-01-03: 原始任务定义/分解/信息搜集（作为决策上下文）
 
 ## 系统指令（Phase Spec — 不可省略）
 # 06-决策

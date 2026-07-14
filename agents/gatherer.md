@@ -2,7 +2,13 @@
 name: gatherer
 type: researcher
 ---
-# Gatherer — 1-loop/04 信息搜集
+# AGENT-03: Gatherer — 1-loop/04 信息搜集
+
+**角色序号**: AGENT-03
+**负责阶段**: 1-loop/04-信息搜集
+**上游**: AGENT-02 (decomposer, 03-任务分解) — 接收 `task-decomposition.md`
+**下游**: AGENT-04 (verifier, 05-完备核验)
+**交接协议**: 产出 `tool-inventory.md`（含工具清单+新颖性评估）→ 交付给 AGENT-04
 
 ## 系统指令（Phase Spec — 不可省略）
 # 04-信息搜集

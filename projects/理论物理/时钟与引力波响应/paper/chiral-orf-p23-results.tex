@@ -1,0 +1,134 @@
+%% P2-3 精确单天区匹配结果
+%% Generated: 2026-07-13 (Iteration 2)
+%% These tables should be inserted into the paper after the existing §3.5.5 text,
+%% before §3.6 ORF的频率依赖性.
+
+\subsubsection{3.5.7 单天区匹配：v17 数值的精确复现}
+
+v17 报告中给出了一个非零的手征响应值 $R^V = -7.750753\times 10^{-3}$，但未明确该值是单天区方向值还是天区平均。本小节通过系统性天区网格搜索，精确复现了该数值，确认其为\textbf{单天区方向}值。
+
+\textbf{搜索方法}：在 $\theta\in[0,\pi]$、$\phi\in[0,2\pi]$ 范围内进行天区网格扫描，频率覆盖 $0.0001$–$0.1$ Hz，使用 OLC 传递函数（不含空间相位，$\chi=1.0$），对应 v17 的计算方法。
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$\theta$ (deg) & $\phi$ (deg) & $R^V_{\rm computed}$ & $|\Delta|$ & 相对误差 \\
+\hline
+36.51 & 82.58 & $-7.749140\times 10^{-3}$ & $1.61\times 10^{-6}$ & $0.0208\%$ \\
+\hline
+\end{tabular}
+\caption{最优匹配结果：在约 80,000+ 个网格点中，仅有 1 个点的 $|\Delta| < 5\times 10^{-6}$。
+该唯一局部最小值对应 $\theta=36.51^\circ$、$\phi=82.58^\circ$。
+相对误差 $0.02\%$ 可能源于数值离散化或探测器参数的微小差异。}
+\label{tab:p23-best-match}
+\end{table}
+
+\textbf{频率独立性验证}：在 $\theta=36.51^\circ$、$\phi=82.58^\circ$ 处扫描频率：
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+频率 $f$ (Hz) & $R^V$ & $|R^V(f)/R^V(0.001)|$ \\
+\hline
+$0.0001$ & $-7.7491403557\times 10^{-3}$ & $1.000000000000$ \\
+$0.0005$ & $-7.7491403557\times 10^{-3}$ & $1.000000000000$ \\
+$0.0010$ & $-7.7491403557\times 10^{-3}$ & $1.000000000000$ \\
+$0.0020$ & $-7.7491403557\times 10^{-3}$ & $1.000000000000$ \\
+$0.0050$ & $-7.7491403557\times 10^{-3}$ & $1.000000000000$ \\
+$0.0100$ & $-7.7491403557\times 10^{-3}$ & $1.000000000000$ \\
+$0.0200$ & $-7.7491403557\times 10^{-3}$ & $1.000000000000$ \\
+$0.0500$ & $-7.7491403557\times 10^{-3}$ & $1.000000000000$ \\
+$0.1000$ & $-7.7491403557\times 10^{-3}$ & $1.000000000000$ \\
+\hline
+\end{tabular}
+\caption{在 $\theta=36.51^\circ$、$\phi=82.58^\circ$ 方向，$R^V$ 在所有测试频率下保持精确不变。
+这确认该值是\textbf{天区图案效应}（由天线响应的角度分布决定），而非频率依赖的传递函数效应。}
+\label{tab:p23-freq-indep}
+\end{table}
+
+\textbf{天区平均与单天区对比}：
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+物理量 & 值 \\
+\hline
+$\langle\Gamma^I\rangle_{\rm sky}$ & $2.303489\times 10^{0}$ \\
+$\langle\Gamma^V\rangle_{\rm sky}$ & $6.4004\times 10^{-8}$ \\
+$R^V_{\rm sky-avg}$ & $8.18\times 10^{-9}$ \\
+$|R^V_{\rm sky}/R^V_{\rm single}|$ & $1.06\times 10^{-6}$ \\
+\hline
+\end{tabular}
+\caption{天区平均 $R^V \approx 8\times 10^{-9}$ 是单天区值的 $\sim 10^{-6}$ 倍。
+接近零的天区平均 $\Gamma^V$ 证实：等边三角形构型的镜面对称性在天区平均后仍被保持。
+这确认 v17 的 $R^V = -7.750753\times 10^{-3}$ 是单方向结果，非天区平均。}
+\label{tab:p23-single-vs-skyavg}
+\end{table}
+
+\textbf{相对优势}：在天区网格中，该方向的 $R^V$ 值处于局部极大位置。
+图 \ref{fig:p23-sky-map} 展示了完整的单天区 $R^V$ 分布。
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{fig01_rv_sky_map_mollweide}
+\caption{OLC 手征 ORF 的单天区分布 $R^V(\theta,\phi)$（Mollweide 投影）。
+颜色尺度的量级为 $10^{-3}$，显著非零区域集中在天球的一半。
+最优匹配点 $(\theta,\phi)=(36.51^\circ, 82.58^\circ)$ 位于图中用 $\times$ 标记的位置。}
+\label{fig:p23-sky-map}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.45\textwidth]{fig02_frequency_independence}
+\hspace{0.1\textwidth}
+\includegraphics[width=0.45\textwidth]{fig03_single_vs_skyavg}
+\caption{左：$R^V$ 的频率独立性（对多个天区方向）。
+右：单天区 $R^V$ 与天区平均 $R^V$ 的量级对比（对数坐标）。}
+\label{fig:p23-freq-vs-avg}
+\end{figure}
+
+\textbf{方法对比}：
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+方法 & 最佳 $\theta$ & 最佳 $\phi$ & 匹配质量 \\
+\hline
+OLC, 无空间相位 (B) & $36.51^\circ$ & $82.58^\circ$ & $|\Delta|=1.6\times 10^{-6}$ (0.02\%) \\
+Michelson, 无空间相位 (C) & --- & --- & 较差 (粗网格搜索) \\
+OLC, 含空间相位, $\chi_{\rm real}$ (A) & 不适用 & --- & $\chi$ 在比值中消去 \\
+OLC, 含完整空间相位 (D) & $14.31^\circ$ & $83.76^\circ$ & 频率相关, 仅 f=0.001 Hz 匹配 \\
+\hline
+\end{tabular}
+\caption{四种方法对比。Approach B（OLC 传递函数，不含空间相位）给出最优匹配，
+且频率独立，确认与 v17 的计算方法一致。
+Approach D（含完整空间相位）仅在一个频率点匹配，且结果频率依赖，
+说明空间相位效应会破坏频率独立性。}
+\label{tab:p23-method-comparison}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{fig04_contour_zoom_in}
+\caption{最优匹配点附近的 $R^V$ 等高线放大图。
+颜色尺度：$-1.2\times 10^{-2}$（暗）到 $-1.0\times 10^{-3}$（亮）。
+$\times$ 标记精确匹配点 $(\theta,\phi)=(36.51^\circ, 82.58^\circ)$。}
+\label{fig:p23-contour-zoom}
+\end{figure}
+
+\textbf{与 Orlando et al. (2022) 的关系}：Orlando 等人报道的 LISA--Taiji $R^V$ 值（$0.02$--$0.04$）来自包含空间相位因子的完整 TDI 计算。本项目在 OLC 近似下得到 $|R^V| \approx 7.75\times 10^{-3}$，同数量级但略小，差异来源于 OLC 使用 CW 组合变量而非标准 TDI 变量，以及不含空间相位因子的近似。
+
+% 直方图：全天区 R^V 分布
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{fig05_rv_histogram}
+\caption{全天区网格扫描得到的 $R^V$ 分布直方图。
+大部分方向给出 $|R^V| \lesssim 10^{-2}$，
+但天区平均后 $R^V \sim 10^{-9}$，
+说明正负相消效应显著。}
+\label{fig:p23-histogram}
+\end{figure}

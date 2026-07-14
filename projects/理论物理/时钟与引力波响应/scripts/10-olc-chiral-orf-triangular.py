@@ -32,24 +32,8 @@ import sys
 import time
 import os
 
-c = 299792458.0
-
-
-# ━━━ OLC One-Way Link Transfer Function (Lou Eq. 2-30) ━━━━━━━━━━━━━━━━━━━━━━━
-
-def olc_transfer_function(f, L, cos_nu):
-    """One-way link transfer function for OLC (Lou Eq. 2-30)."""
-    f = np.atleast_1d(f)
-    scalar_in = np.isscalar(f)
-    beta = np.pi * np.abs(f) * L / c
-    one_minus = 1.0 - np.abs(cos_nu)
-    sinc_arg = beta * one_minus
-    eps = 1e-15
-    sinc_v = np.where(np.abs(sinc_arg) < eps, 1.0, np.sin(sinc_arg) / sinc_arg)
-    phase = np.exp(-1j * beta * one_minus)
-    prefac = 1j * 2.0 * np.pi * np.abs(f) * L / c
-    result = prefac * sinc_v * phase
-    return result[0] if scalar_in else result
+from src.core.constants import c
+from src.core.transfer import olc_transfer_function
 
 
 # ━━━ Single-link response (polarization contraction) ━━━━━━━━━━━━━━━━━━━━━━━━
@@ -94,20 +78,7 @@ def olc_link_response_grid(tG, pG, arm_theta, arm_phi, L):
     return R_plus * T, R_cross * T
 
 
-def antenna_patterns(ntheta, nphi, u_theta, u_phi):
-    """F_plus and F_cross antenna patterns (without transfer function)."""
-    ct, st = np.cos(ntheta), np.sin(ntheta)
-    cp, sp = np.cos(nphi), np.sin(nphi)
-    ux = np.sin(u_theta)*np.cos(u_phi)
-    uy = np.sin(u_theta)*np.sin(u_phi)
-    uz = np.cos(u_theta)
-    th_x, th_y, th_z = ct*cp, ct*sp, -st
-    ph_x, ph_y, ph_z = -sp, cp, 0.0
-    F_plus = (th_x*ux)**2 + (th_y*uy)**2 + (th_z*uz)**2 \
-           - (ph_x*ux)**2 - (ph_y*uy)**2 - (ph_z*uz)**2
-    F_cross = 2.0*(th_x*ux)*(ph_x*ux) + 2.0*(th_y*uy)*(ph_y*uy) \
-            + 2.0*(th_z*uz)*(ph_z*uz)
-    return F_plus, F_cross
+from src.core.antenna import antenna_patterns
 
 
 # ━━━ Triangular Constellation Geometry ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

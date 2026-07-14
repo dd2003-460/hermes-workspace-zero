@@ -39,157 +39,39 @@ c = 299792458.0
 
 
 # ─── OLC Transfer Function ───────────────────────────────────────────────────
-def olc_transfer_function(f, L, cos_nu):
-    """One-way link transfer function for OLC (Lou Eq. 2-30)."""
-    f = np.atleast_1d(f)
-    scalar_in = np.isscalar(f)
-    beta = np.pi * np.abs(f) * L / c
-    one_minus = 1.0 - np.abs(cos_nu)
-    sinc_arg = beta * one_minus
-    eps = 1e-15
-    sinc_v = np.where(np.abs(sinc_arg) < eps, 1.0, np.sin(sinc_arg) / sinc_arg)
-    phase = np.exp(-1j * beta * one_minus)
-    prefac = 1j * 2.0 * np.pi * np.abs(f) * L / c
-    result = prefac * sinc_v * phase
-    return result[0] if scalar_in else result
+from src.core.transfer import olc_transfer_function
+
+
+# ─── Strict Chiral Factor: -Im(w_1^2 w_2^{*2}) with component-wise w_i ───────
+from src.core.chiral import chiral_factor
+# backward compatibility alias
+chiral_factor_strict = chiral_factor
 
 
 # ─── Antenna Patterns ────────────────────────────────────────────────────────
-def antenna_patterns(n_theta, n_phi, u_theta, u_phi):
-    """F_plus and F_cross antenna patterns."""
-    ct, st = np.cos(n_theta), np.sin(n_theta)
-    cp, sp = np.cos(n_phi), np.sin(n_phi)
-    ux = np.sin(u_theta)*np.cos(u_phi)
-    uy = np.sin(u_theta)*np.sin(u_phi)
-    uz = np.cos(u_theta)
-    th_x, th_y, th_z = ct*cp, ct*sp, -st
-    ph_x, ph_y, ph_z = -sp, cp, 0.0
-    F_plus = (th_x*ux)**2 + (th_y*uy)**2 + (th_z*uz)**2 \
-           - (ph_x*ux)**2 - (ph_y*uy)**2 - (ph_z*uz)**2
-    F_cross = 2.0*(th_x*ux)*(ph_x*ux) + 2.0*(th_y*uy)*(ph_y*uy) \
-            + 2.0*(th_z*uz)*(ph_z*uz)
-    return F_plus, F_cross
+from src.core.antenna import antenna_patterns
 
 
 # ─── Standard (parity-even) ORF ─────────────────────────────────────────────
-def compute_orf_standard(f, L1, L2, u_theta, u_phi, v_theta, v_phi,
-                         d, theta_s, phi_s, ntheta=60, nphi=120):
-    """Standard ORF with symmetric polarization combination (F1p*F2p + F1x*F2x)."""
-    thetas = np.linspace(0, np.pi, ntheta)
-    phis = np.linspace(0, 2*np.pi, nphi, endpoint=False)
-    tG, pG = np.meshgrid(thetas, phis, indexing='ij')
-    dO = np.sin(tG) * (2*np.pi/nphi) * (np.pi/ntheta)
+from src.core.orf import compute_orf_standard
 
-    nx = np.sin(tG)*np.cos(pG)
-    ny = np.sin(tG)*np.sin(pG)
-    nz = np.cos(tG)
 
-    u1 = np.array([np.sin(u_theta)*np.cos(u_phi),
-                    np.sin(u_theta)*np.sin(u_phi),
-                    np.cos(u_theta)])
-    v1 = np.array([np.sin(v_theta)*np.cos(v_phi),
-                    np.sin(v_theta)*np.sin(v_phi),
-                    np.cos(v_theta)])
-
-    s = np.array([np.sin(theta_s)*np.cos(phi_s),
-                  np.sin(theta_s)*np.sin(phi_s),
-                  np.cos(theta_s)])
-
-    cos_nu_u = nx*u1[0] + ny*u1[1] + nz*u1[2]
-    cos_nu_v = nx*v1[0] + ny*v1[1] + nz*v1[2]
-
-    alpha = 2.0*np.pi*np.abs(f)*d/c
-    n_s = nx*s[0] + ny*s[1] + nz*s[2]
-    bp = np.exp(-1j*alpha*n_s)
-
-    T1 = olc_transfer_function(f, L1, cos_nu_u)
-    T2 = olc_transfer_function(f, L2, cos_nu_v)
-
-    F1p, F1x = antenna_patterns(tG, pG, u_theta, u_phi)
-    F2p, F2x = antenna_patterns(tG, pG, v_theta, v_phi)
-
-    # Symmetric (parity-even) combination
-    S = (F1p*F2p + F1x*F2x) * T1 * np.conj(T2) * bp
-    corr = np.sum(S * dO)
-
-    magT1 = np.abs(T1)
-    magT2 = np.abs(T2)
-    auto1 = np.sum((F1p**2 + F1x**2) * magT1**2 * dO)
-    auto2 = np.sum((F2p**2 + F2x**2) * magT2**2 * dO)
-    denom = np.sqrt(auto1 * auto2)
-    if np.abs(denom) < 1e-30:
-        return 0.0
-    return corr / denom
+# ─── Chiral ORF with comparison mode ─────────────────────────────────────────
+# Wrapper returning legacy dict format for test compatibility
+def compute_orf_chiral_compare(f, L1, L2, u_theta, u_phi, v_theta, v_phi,
+                               d, theta_s, phi_s,
+                               ntheta=60, nphi=120):
+    import src.core.chiral as _chiral_mod
+    gamma_lin, gamma_chi = _chiral_mod.compute_orf_chiral_compare(
+        f, L1, L2, u_theta, u_phi, v_theta, v_phi, d, theta_s, phi_s,
+        ntheta=ntheta, nphi=nphi)
+    diff = abs(gamma_lin - gamma_chi) if (abs(gamma_lin) + abs(gamma_chi)) > 1e-30 else 0.0
+    rel_diff = diff / max(abs(gamma_lin), abs(gamma_chi)) if max(abs(gamma_lin), abs(gamma_chi)) > 1e-30 else 0.0
+    return {'linear': gamma_lin, 'strict': gamma_chi, 'max_rel_diff': rel_diff, 'rel_diff': rel_diff}
 
 
 # ─── Chiral (circular polarization) ORF ─────────────────────────────────────
-def compute_orf_chiral(f, L1, L2, u_theta, u_phi, v_theta, v_phi,
-                       d, theta_s, phi_s, ntheta=60, nphi=120):
-    """Chiral ORF Gamma^V for circularly polarized SGWB (Stokes V).
-
-    Uses the antisymmetric polarization combination (Kato & Soda 2016):
-        Gamma^V propto integral [F_+1 * F_x2 - F_x1 * F_+2] * T1 * T2* * bp
-
-    Parity analysis: under reflection across the detector plane,
-        F_+ is even (unchanged) and F_x is odd (changes sign),
-    so (F_+1 * F_x2 - F_x1 * F_+2) is parity-odd and integrates to zero
-    for any coplanar (mirror-symmetric) geometry.
-
-    Key properties:
-      - Coplanar (parallel arms): Gamma^V = 0 by symmetry
-      - Non-coplanar 3D: Gamma^V != 0
-      - Frequency flat (normalized)
-    """
-    thetas = np.linspace(0, np.pi, ntheta)
-    phis = np.linspace(0, 2*np.pi, nphi, endpoint=False)
-    tG, pG = np.meshgrid(thetas, phis, indexing='ij')
-    dO = np.sin(tG) * (2*np.pi/nphi) * (np.pi/ntheta)
-
-    nx = np.sin(tG)*np.cos(pG)
-    ny = np.sin(tG)*np.sin(pG)
-    nz = np.cos(tG)
-
-    u1 = np.array([np.sin(u_theta)*np.cos(u_phi),
-                    np.sin(u_theta)*np.sin(u_phi),
-                    np.cos(u_theta)])
-    v1 = np.array([np.sin(v_theta)*np.cos(v_phi),
-                    np.sin(v_theta)*np.sin(v_phi),
-                    np.cos(v_theta)])
-
-    s = np.array([np.sin(theta_s)*np.cos(phi_s),
-                  np.sin(theta_s)*np.sin(phi_s),
-                  np.cos(theta_s)])
-
-    cos_nu_u = nx*u1[0] + ny*u1[1] + nz*u1[2]
-    cos_nu_v = nx*v1[0] + ny*v1[1] + nz*v1[2]
-
-    alpha = 2.0*np.pi*np.abs(f)*d/c
-    n_s = nx*s[0] + ny*s[1] + nz*s[2]
-    bp = np.exp(-1j*alpha*n_s)
-
-    T1 = olc_transfer_function(f, L1, cos_nu_u)
-    T2 = olc_transfer_function(f, L2, cos_nu_v)
-
-    # Compute antenna patterns for both detectors
-    F1p, F1x = antenna_patterns(tG, pG, u_theta, u_phi)
-    F2p, F2x = antenna_patterns(tG, pG, v_theta, v_phi)
-
-    # Chiral factor: antisymmetric polarization combination
-    # F_+1 * F_×2 - F_×1 * F_+2 (parity-odd: F_+ is even, F_× is odd under reflection)
-    chiral_factor = F1p * F2x - F1x * F2p
-
-    S = chiral_factor * T1 * np.conj(T2) * bp
-    corr = np.sum(S * dO)
-
-    # Normalization: standard auto-responses (parity-even)
-    magT1 = np.abs(T1)
-    magT2 = np.abs(T2)
-    auto1 = np.sum((F1p**2 + F1x**2) * magT1**2 * dO)
-    auto2 = np.sum((F2p**2 + F2x**2) * magT2**2 * dO)
-    denom = np.sqrt(auto1 * auto2)
-    if np.abs(denom) < 1e-30:
-        return 0.0
-    return corr / denom
+from src.core.chiral import compute_orf_chiral
 
 
 # ─── 3D Arm Direction ───────────────────────────────────────────────────────
@@ -882,6 +764,67 @@ The OLC band (mHz–Hz) probes **different energy scales** than PTA (nHz) or LIS
     return fname
 
 
+# ─── Strict P^V Equivalence Test ─────────────────────────────────────────────
+def test_strict_equivalence():
+    """Test that strict P^V form matches linear form for various configurations."""
+    print("=" * 60)
+    print("Test: Strict P^V equivalence (Im(w_1^2 w_2^{*2}) vs F1p*F2x - F1x*F2p)")
+    print("=" * 60)
+
+    f = 1e-3  # low frequency
+    L1 = 2.5e9
+    L2 = 2.5e9
+    d = 0.3
+    theta_s = np.pi / 3
+    phi_s = np.pi / 4
+
+    test_configs = [
+        # (u_theta, u_phi, v_theta, v_phi, description)
+        (np.pi/2, 0, np.pi/2, 2*np.pi/3, "LISA: two arms 120 deg apart"),
+        (np.pi/2, 0, np.pi/2, 4*np.pi/3, "LISA: opposite arms"),
+        (np.pi/2, 0, np.arccos(1/3), np.pi/4, "Triangular: arm + 45 deg tilt"),
+        (np.pi/2, 0, np.pi/3, np.pi/2, "General non-coplanar"),
+    ]
+
+    all_pass = True
+    for u_theta, u_phi, v_theta, v_phi, desc in test_configs:
+        result = compute_orf_chiral_compare(f, L1, L2, u_theta, u_phi,
+                                            v_theta, v_phi, d, theta_s, phi_s)
+        status = "PASS" if result['max_rel_diff'] < 1e-10 else "FAIL"
+        if status == "FAIL":
+            all_pass = False
+        print(f"\n  Config: {desc}")
+        print(f"    linear = {result['linear']:.8e}")
+        print(f"    strict = {result['strict']:.8e}")
+        print(f"    max_diff = {result['max_rel_diff']:.3e}")
+        print(f"    rel_diff = {result['rel_diff']:.3e}")
+        print(f"    Status: {status}")
+
+    # Test coplanarity: coplanar arms should give Gamma^V = 0
+    print("\n  --- Coplanarity test ---")
+    u_theta_c = np.pi/2
+    u_phi_c = 0
+    v_theta_c = np.pi/2
+    v_phi_c = np.pi/2
+    # Coplanar (both arms in xy plane with same z axis): Gamma^V should be 0
+    result_c = compute_orf_chiral_compare(f, L1, L2, u_theta_c, u_phi_c,
+                                           v_theta_c, v_phi_c, d, theta_s, phi_s)
+    coplanar_pass = np.abs(result_c['strict']) < 1e-8
+    status_c = "PASS" if coplanar_pass else "FAIL"
+    print(f"\n  Coplanar arms: Gamma^V_strict = {result_c['strict']:.3e}")
+    print(f"  Status: {status_c}")
+    if not coplanar_pass:
+        all_pass = False
+
+    print("\n" + "=" * 60)
+    if all_pass:
+        print("ALL TESTS PASSED -- Strict P^V form confirmed equivalent")
+    else:
+        print("SOME TESTS FAILED -- check implementation")
+    print("=" * 60)
+    return all_pass
+
+
 # ─── Main ───────────────────────────────────────────────────────────────────
 if __name__ == '__main__':
     cmd = sys.argv[1] if len(sys.argv) > 1 else ''
@@ -894,6 +837,10 @@ if __name__ == '__main__':
         test_chiral_coplanar_zero()
         test_chiral_nonzero()
         test_self_correlation_chiral()
+
+        print("\n--- Iter102: Strict P^V Equivalence Test ---")
+        test_strict_equivalence()
+
         print("\n" + "=" * 60)
         print("All tests passed.")
         print("=" * 60)

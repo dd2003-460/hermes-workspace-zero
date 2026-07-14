@@ -38,7 +38,7 @@ FREQS = [0.001, 0.01, 0.1]  # Hz
 def olc_transfer_function(f, L, cos_nu):
     """OLC one-way link transfer function (Lou thesis Eq. 2-30)."""
     beta = np.pi * np.abs(f) * L / c
-    one_minus = 1.0 - np.abs(cos_nu)
+    one_minus = 1.0 - cos_nu
     eps = 1e-15
     sinc_arg = beta * one_minus
     sinc_v = np.where(np.abs(sinc_arg) < eps, 1.0, np.sin(sinc_arg) / sinc_arg)

@@ -1,63 +1,114 @@
-# 2-loop — Execution 子阶段索引
+# 2-loop — 执行与 Review（精简版）
 
-本目录包含 2-loop（执行流程）的 6 个阶段文件，每个文件定义了一个阶段的：
-- **输入**（来自前一阶段或外部）
-- **操作步骤**（具体执行流程）
-- **输出**（产出文件）
-- **前置/后置依赖**
+> 取消 6 阶段划分。每个子任务执行一个固定循环：
+> **backup → execute → review/verify → commit**
 
-## 阶段列表
+## 不再存在的阶段
 
-| 编号 | 文件名 | 阶段名称 | 输入 | 输出 |
-|------|--------|----------|------|------|
-| 01 | 01-pre-check.md | 预检查 | 1-loop 产出 | pre-check-result.md |
-| 02 | 02-backup.md | 备份 | pre-check-result.md | backups/ + backup-log.md |
-| 03 | 03-execute.md | 执行 | backups/ | 修改后的文件 |
-| 04 | 04-verify.md | 验证 | 执行产出 | verification-report.md |
-| 05 | 05-confidence.md | 置信度检查 | verification-report.md | confidence-report.md |
-| 06 | 06-decision.md | 分叉决策 | confidence-report.md | decision-2loop.md |
+- ~~01-pre-check~~ → 并入 per-step 开头
+- ~~02-backup~~ → 保留为 per-step 第一步
+- ~~03-execute~~ → 保留为 per-step 第二步
+- ~~04-verify~~ → 拆分为 Review + 交叉验证
+- ~~05-confidence~~ → 砍掉。Review 通过=成功，不通过=失败，不评分
+- ~~06-decision~~ → 砍掉。结果只分通过/不通过，不通过则分解修复
 
-## 流程顺序
+## Per-Step 固定流程
+
+每个子任务独立执行以下循环，**每一步完成后必须等待验证通过才能进入下一步**：
 
 ```
-pre-check → backup → execute → verify → confidence → decision
+Step 0: 前置检查（前置子任务产出存在、输入数据可用）
+Step 1: git backup（commit 执行前状态，带子任务ID标记）
+Step 2: execute（按 plan.md 执行子任务）
+Step 3: review/verify（根据任务类型调用不同验证手段）
+Step 4: 交叉验证（所有 review 必须经网页 LLM 交叉确认）
+Step 5: 判定
+  - 通过 → commit + 标记完成，允许依赖本任务的后续任务启动
+  - 不通过 → 分解修复任务 + 重新规划修复方案
 ```
 
-## 读取顺序
+## Review/验证矩阵
 
-1. `../2-loop.md`（顶层流程定义）
-2. 按编号 01-06 顺序阅读子阶段文件
+| 任务类型 | Review 方式 | 交叉验证方式 | 通过标准 |
+|----------|-------------|--------------|----------|
+| **code** | 直接运行测试/单元测试/功能验证 | 网页 LLM review 代码逻辑、边界条件 | 测试通过 + LLM 确认逻辑正确 |
+| **paper/writing** | 传文件给网页 LLM 评审 | 人工审阅关键论点 | LLM 评审无异议 + 关键论点人工确认 |
+| **data_prediction** | 用实际数据/已知结果验证预测 | 网页 LLM 评估方法论合理性 | 误差在预期范围内 + LLM 确认方法合理 |
+| **research** | 结论与外部信息交叉验证 | 网页 LLM 评估逻辑完整性 | 无矛盾发现 + LLM 确认论证链完整 |
+| **other** | 按任务性质定义验证方式 | 网页 LLM 交叉确认 | 达到任务定义的成功标准 |
 
-## 目录规范
+## 交叉验证规则
 
-- 项目数据放 `projects/<owner>/data/`，不放根 data/
-- 根 scripts/ 只放共享脚本
+1. **所有 Review 必须包含网页 LLM 交叉验证**（纯代码测试是例外，但推荐也做 LLM 逻辑 review）
+2. 交叉验证方式：将任务产出 + Review 结果 + 关键疑点发送给网页大模型
+3. 网页 LLM 的结论：
+   - `PASS`: 确认 Review 结果可信 → 执行 commit
+   - `FAIL`: 发现 Review 遗漏的问题 → 进入修复分解
+   - `UNCERTAIN`: 信息不足无法判定 → 标记 AT_RISK + **触发人类确认门**
 
-## 测试规则
+### 人类确认门（UNCERTAIN 时）
 
-- 脚本/工具必须运行至少一次测试
-- 测试失败 → 默认回滚，不得偷偷小修继续跑
-- 纯文档可豁免
+当交叉验证返回 UNCERTAIN 时，**必须等待人类介入**：
 
-## 动态工作流强制执行
+```
+[人工确认 — 不确定状态]
+───────────────────
+任务 ID: {task-id}
+任务类型: {task-type}
+Review 结果: {review-result}
+交叉验证结果: UNCERTAIN
+关键疑点: {issues}
 
-**状态驱动流程**：工作流由 `ralph-loop.local.md`（项目内 `.claude/` 目录）中的 `loop_phase` 字段驱动。每次会话开始时必须读取并验证：
-1. `loop_phase` 指明当前阶段 → 严格按阶段文件执行
-2. `iteration` 字段 ≥ 已知的最大迭代号 → 否则状态已落后
+请决定：
+- APPROVE → 视为 PASS，继续执行
+- REJECT → 视为 FAIL，进入修复分解
+- COMMENT → 给出指导意见，代理根据意见重新执行
+───────────────────
+```
 
-**流程不可跳过**：
-- 如果 `loop_phase` 为 1-loop/* → 必须先完成 1-loop 全部 6 阶段
-- 如果 `loop_phase` 为 2-loop/* → 必须先完成 2-loop 全部 6 阶段
-- 如果 `loop_phase` 为 idle → 进入新一轮 1-loop 规划
+**注意**：
+- UNCERTAIN 的人类确认门在 2-loop 中是**唯一阻塞人类确认**的情况
+- 其余情况（PASS/FAIL）全部自主处理，不等待人类
 
-**每轮约束**：
-- 必须产出可验证输出（文件/测试/报告），不能只是"更新了进度文件"
-- 必须在完成后更新 `last_action`、`last_outcome`、`last_insight`
-- 永远不要输出 `<promise>LOOP COMPLETE</promise>`
+## 失败修复流程
 
-## 公共规则
+```
+Review 不通过 → 分解修复任务 → 重新规划 → 回到 per-step 循环
+```
 
-- 按索引读
-- 状态读写显式
-- 单任务路径
-- 结果和证据优先
+具体规则：
+1. **不允许原地重试同一方案** — 必须先分解修复任务
+2. 修复分解为子子任务（T1.1, T1.2...），每个子子任务也走完整 per-step 循环
+3. 修复方案写入 `<project>/fix-plan.md`（包含修复意图、方案、Review 策略）
+4. 修复后的产出覆盖原产出，不保留失败中间态
+5. **修复也需交叉验证** — 修复方案本身也通过网页 LLM 确认合理性
+6. **修复任务遵守多层分解规则**：
+   - 修复子任务 >3 → 分组，每组 ≤3
+   - 层级编号：T1.1, T1.2（L1） / T1.1.1, T1.1.2（L2） / T1.1.1.1（L3 最大深度）
+   - 每个子任务标注层级前缀：`[L1]` 或 `[L2]`
+   - 到 L3 仍不原子 → BLOCKED + 原因，不继续分解
+
+## Git 备份规则
+
+- 每次 execute 前必须 `git commit -m "[2-loop] backup: <task-id> pre-execution"`
+- 每次 commit 前必须 `git commit -m "[2-loop] commit: <task-id> completed"`
+- 修复任务的 backup 标记为 `[2-loop] backup: <task-id> fix`
+- backup 失败不影响执行，但记录到日志
+
+## 输出
+
+每个子任务完成后，更新 `<project>/plan.md` 中的任务状态：
+
+```markdown
+## 6. 子任务 DAG（执行后更新）
+
+- **T1**: [COMPLETED] → 产出: output.md
+  - Review: PASS (LLM cross-validate: PASS)
+  - 执行时间: 2026-07-13T20:30:00
+  - 失败次数: 0
+
+- **T2**: [IN_PROGRESS] → 产出: draft.md
+  - Review: FAIL → 已分解修复 [T2.1, T2.2]
+  - 修复方案: fix-plan.md
+  - 失败次数: 1
+```

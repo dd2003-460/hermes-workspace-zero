@@ -1,0 +1,15 @@
+{
+  "fields": [
+    {
+      "concept": "cross_validation_out",
+      "role": "交叉验证摘要",
+      "attribute": "04 产出后交叉验证：30 条 claim 中 10 已验证(结构/事实类)、20 uncertain(多为需实测/未量产的 spec-sheet 规格)；矛盾与缺口已在 verification_report 标注，不进入最终推荐。",
+      "disposition": "confirmed",
+      "rationale": "交叉验证已暴露不确定项（H100/MI300X 规格、compute/bandwidth ratio、Tensor Core 利用率、HBM3e/4 带宽、TPU 能效比、DVFS 降幅、多卡扩展效率均需实测/benchmark），可交付。",
+      "evidence_refs": ["04.5-r1.json verification_report"],
+      "confidence": 0.8,
+      "impact": "material",
+      "reversible": true
+    }
+  ]
+}

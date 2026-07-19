@@ -1,0 +1,36 @@
+{
+  "assumptions": [],
+  "attribute_matrix": [
+    {
+      "attribute": "任务描述",
+      "concept": "用户原始任务",
+      "confidence": 1.0,
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "user:initial_task"
+      ],
+      "impact": "material",
+      "rationale": "用户初始任务输入，作为本阶段已知背景字段。",
+      "reversible": false,
+      "role": "background"
+    }
+  ],
+  "authoritative_inputs": [
+    {
+      "kind": "initial_task",
+      "source": "ralph run",
+      "text": "."
+    },
+    {
+      "kind": "human_input",
+      "source": "UserPromptSubmit",
+      "text": "."
+    }
+  ],
+  "constraints": [],
+  "open_questions": [],
+  "scenarios": [],
+  "semantic_map": {},
+  "status": "unclarified",
+  "success_criteria": []
+}

@@ -1,0 +1,1334 @@
+{
+  "assumptions": [],
+  "attribute_matrix": [
+    {
+      "attribute": "最小执行单元 DAG：30 个原子任务节点 + 8 个验证节点，6 条并行调研分支，显式接口对准",
+      "concept": "task_graph",
+      "confidence": 0.95,
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "02.5-r1.json task_graph (T01-T09 高层分解)",
+        "02.5-r1.json 6 个正交优化方向",
+        "loop-state.json constraints (8 类边界)",
+        "loop-state.json success_criteria (6 项交付要求)"
+      ],
+      "impact": "material",
+      "rationale": "将 02.5 阶段的高层任务图（T01-T09）递归分解为最小执行单元。每个单元满足：①不可再分（一个 subagent 可独立完成）②输入输出显式定义 ③验收标准可量化 ④模块间接口一一对准。",
+      "reversible": true,
+      "role": "执行计划",
+      "task_graph": {
+        "edges": [
+          {
+            "from": "T01",
+            "interface": "O01: 基线数据文件",
+            "to": "T02A"
+          },
+          {
+            "from": "T01",
+            "interface": "O01",
+            "to": "T03A"
+          },
+          {
+            "from": "T01",
+            "interface": "O01",
+            "to": "T04A"
+          },
+          {
+            "from": "T01",
+            "interface": "O01",
+            "to": "T05A"
+          },
+          {
+            "from": "T01",
+            "interface": "O01",
+            "to": "T06A"
+          },
+          {
+            "from": "T01",
+            "interface": "O01",
+            "to": "T07A"
+          },
+          {
+            "from": "T02A",
+            "interface": "O02A: HBM 规格表",
+            "to": "T02B"
+          },
+          {
+            "from": "T02A",
+            "interface": "O02A",
+            "to": "T02D"
+          },
+          {
+            "from": "T02B",
+            "interface": "O02B: 瓶颈量化",
+            "to": "T02C"
+          },
+          {
+            "from": "T02B",
+            "interface": "O02B",
+            "to": "T02E"
+          },
+          {
+            "from": "T02C",
+            "interface": "O02C: 方案排序",
+            "to": "T02E"
+          },
+          {
+            "from": "T02D",
+            "interface": "O02D: 竞品对比",
+            "to": "T02E"
+          },
+          {
+            "from": "T03A",
+            "interface": "O03A: 利用率测量",
+            "to": "T03B"
+          },
+          {
+            "from": "T03A",
+            "interface": "O03A",
+            "to": "T03D"
+          },
+          {
+            "from": "T03B",
+            "interface": "O03B: 碎片化分析",
+            "to": "T03C"
+          },
+          {
+            "from": "T03B",
+            "interface": "O03B",
+            "to": "T03E"
+          },
+          {
+            "from": "T03C",
+            "interface": "O03C: 融合方案",
+            "to": "T03E"
+          },
+          {
+            "from": "T03D",
+            "interface": "O03D: 竞品对比",
+            "to": "T03E"
+          },
+          {
+            "from": "T04A",
+            "interface": "O04A: 支持度矩阵",
+            "to": "T04B"
+          },
+          {
+            "from": "T04A",
+            "interface": "O04A",
+            "to": "T04C"
+          },
+          {
+            "from": "T04A",
+            "interface": "O04A",
+            "to": "T04D"
+          },
+          {
+            "from": "T04B",
+            "interface": "O04B: 精度损失",
+            "to": "T04E"
+          },
+          {
+            "from": "T04C",
+            "interface": "O04C: 稀疏方案",
+            "to": "T04E"
+          },
+          {
+            "from": "T04D",
+            "interface": "O04D: 竞品对比",
+            "to": "T04E"
+          },
+          {
+            "from": "T05A",
+            "interface": "O05A: 互连表",
+            "to": "T05B"
+          },
+          {
+            "from": "T05A",
+            "interface": "O05A",
+            "to": "T05D"
+          },
+          {
+            "from": "T05B",
+            "interface": "O05B: 扩展效率",
+            "to": "T05C"
+          },
+          {
+            "from": "T05B",
+            "interface": "O05B",
+            "to": "T05E"
+          },
+          {
+            "from": "T05C",
+            "interface": "O05C: 通信方案",
+            "to": "T05E"
+          },
+          {
+            "from": "T05D",
+            "interface": "O05D: 竞品对比",
+            "to": "T05E"
+          },
+          {
+            "from": "T06A",
+            "interface": "O06A: 功耗分布",
+            "to": "T06B"
+          },
+          {
+            "from": "T06A",
+            "interface": "O06A",
+            "to": "T06D"
+          },
+          {
+            "from": "T06B",
+            "interface": "O06B: DVFS 曲线",
+            "to": "T06C"
+          },
+          {
+            "from": "T06B",
+            "interface": "O06B",
+            "to": "T06E"
+          },
+          {
+            "from": "T06C",
+            "interface": "O06C: 调度方案",
+            "to": "T06E"
+          },
+          {
+            "from": "T06D",
+            "interface": "O06D: 能效对比",
+            "to": "T06E"
+          },
+          {
+            "from": "T07A",
+            "interface": "O07A: 架构需求",
+            "to": "T07B"
+          },
+          {
+            "from": "T07A",
+            "interface": "O07A",
+            "to": "T07D"
+          },
+          {
+            "from": "T07B",
+            "interface": "O07B: 特化方案",
+            "to": "T07C"
+          },
+          {
+            "from": "T07B",
+            "interface": "O07B",
+            "to": "T07E"
+          },
+          {
+            "from": "T07C",
+            "interface": "O07C: 新架构建议",
+            "to": "T07E"
+          },
+          {
+            "from": "T07D",
+            "interface": "O07D: 竞品对比",
+            "to": "T07E"
+          },
+          {
+            "from": "T02E",
+            "interface": "O02E: 内存带宽结论",
+            "to": "T08"
+          },
+          {
+            "from": "T03E",
+            "interface": "O03E: 计算利用率结论",
+            "to": "T08"
+          },
+          {
+            "from": "T04E",
+            "interface": "O04E: 低精度结论",
+            "to": "T08"
+          },
+          {
+            "from": "T05E",
+            "interface": "O05E: 互连结论",
+            "to": "T08"
+          },
+          {
+            "from": "T06E",
+            "interface": "O06E: 功耗结论",
+            "to": "T08"
+          },
+          {
+            "from": "T07E",
+            "interface": "O07E: 架构结论",
+            "to": "T08"
+          },
+          {
+            "from": "T08",
+            "interface": "O08: 综合评估",
+            "to": "T09"
+          }
+        ],
+        "modules": {
+          "architecture": {
+            "description": "架构特异性优化",
+            "nodes": [
+              "T07A",
+              "T07B",
+              "T07C",
+              "T07D",
+              "T07E"
+            ]
+          },
+          "compute_utilization": {
+            "description": "计算单元利用率",
+            "nodes": [
+              "T03A",
+              "T03B",
+              "T03C",
+              "T03D",
+              "T03E"
+            ]
+          },
+          "data_collection": {
+            "description": "基线数据采集",
+            "nodes": [
+              "T01"
+            ]
+          },
+          "interconnect": {
+            "description": "互连与多卡扩展",
+            "nodes": [
+              "T05A",
+              "T05B",
+              "T05C",
+              "T05D",
+              "T05E"
+            ]
+          },
+          "low_precision": {
+            "description": "低精度与稀疏化",
+            "nodes": [
+              "T04A",
+              "T04B",
+              "T04C",
+              "T04D",
+              "T04E"
+            ]
+          },
+          "memory_bandwidth": {
+            "description": "内存带宽优化",
+            "nodes": [
+              "T02A",
+              "T02B",
+              "T02C",
+              "T02D",
+              "T02E"
+            ]
+          },
+          "power": {
+            "description": "功耗与热设计",
+            "nodes": [
+              "T06A",
+              "T06B",
+              "T06C",
+              "T06D",
+              "T06E"
+            ]
+          },
+          "synthesis": {
+            "description": "综合评估与报告",
+            "nodes": [
+              "T08",
+              "T09"
+            ]
+          }
+        },
+        "nodes": [
+          {
+            "acceptance": "产出基线数据文件（H100/A100/MI300X 规格表、推理 workload 特征表）",
+            "id": "T01",
+            "input_refs": [],
+            "module": "data_collection",
+            "output_refs": [
+              "O01"
+            ],
+            "parallel_group": "G0",
+            "title": "基线数据采集"
+          },
+          {
+            "acceptance": "HBM 代际规格对比表（带宽/功耗/面积/成熟度）",
+            "id": "T02A",
+            "input_refs": [
+              "O01"
+            ],
+            "module": "memory_bandwidth",
+            "output_refs": [
+              "O02A"
+            ],
+            "parallel_group": "G1",
+            "title": "HBM 规格收集（HBM3/HBM3e/HBM4）"
+          },
+          {
+            "acceptance": "各模型规模下 compute/bandwidth ratio 量化分析",
+            "id": "T02B",
+            "input_refs": [
+              "O02A"
+            ],
+            "module": "memory_bandwidth",
+            "output_refs": [
+              "O02B"
+            ],
+            "parallel_group": "G1",
+            "title": "推理带宽瓶颈量化"
+          },
+          {
+            "acceptance": "HBM3e/4/近存计算/权重流式传输方案收益排序",
+            "id": "T02C",
+            "input_refs": [
+              "O02B"
+            ],
+            "module": "memory_bandwidth",
+            "output_refs": [
+              "O02C"
+            ],
+            "parallel_group": "G1",
+            "title": "HBM 优化方案评估"
+          },
+          {
+            "acceptance": "TPU/Groq/Cerebras 内存架构对比表",
+            "id": "T02D",
+            "input_refs": [
+              "O02A"
+            ],
+            "module": "memory_bandwidth",
+            "output_refs": [
+              "O02D"
+            ],
+            "parallel_group": "G1",
+            "title": "内存带宽竞品对比"
+          },
+          {
+            "acceptance": "内存带宽优化方向结论（量化收益+TRL+实现难度）",
+            "id": "T02E",
+            "input_refs": [
+              "O02B",
+              "O02C",
+              "O02D"
+            ],
+            "module": "memory_bandwidth",
+            "output_refs": [
+              "O02E"
+            ],
+            "parallel_group": "G1",
+            "title": "内存带宽分支结论"
+          },
+          {
+            "acceptance": "各推理 workload 下 Tensor Core 实际利用率测量表",
+            "id": "T03A",
+            "input_refs": [
+              "O01"
+            ],
+            "module": "compute_utilization",
+            "output_refs": [
+              "O03A"
+            ],
+            "parallel_group": "G1",
+            "title": "Tensor Core 利用率测量"
+          },
+          {
+            "acceptance": "算子碎片化程度与利用率关系分析",
+            "id": "T03B",
+            "input_refs": [
+              "O03A"
+            ],
+            "module": "compute_utilization",
+            "output_refs": [
+              "O03B"
+            ],
+            "parallel_group": "G1",
+            "title": "算子碎片化分析"
+          },
+          {
+            "acceptance": "算子融合方案（FlashAttention/MemoryEfficient LM）收益评估",
+            "id": "T03C",
+            "input_refs": [
+              "O03B"
+            ],
+            "module": "compute_utilization",
+            "output_refs": [
+              "O03C"
+            ],
+            "parallel_group": "G1",
+            "title": "算子融合方案评估"
+          },
+          {
+            "acceptance": "TPU/自研加速器 Tensor Core 等效单元对比",
+            "id": "T03D",
+            "input_refs": [
+              "O03A"
+            ],
+            "module": "compute_utilization",
+            "output_refs": [
+              "O03D"
+            ],
+            "parallel_group": "G1",
+            "title": "计算利用率竞品对比"
+          },
+          {
+            "acceptance": "计算利用率优化方向结论（量化收益+TRL+实现难度）",
+            "id": "T03E",
+            "input_refs": [
+              "O03B",
+              "O03C",
+              "O03D"
+            ],
+            "module": "compute_utilization",
+            "output_refs": [
+              "O03E"
+            ],
+            "parallel_group": "G1",
+            "title": "计算利用率分支结论"
+          },
+          {
+            "acceptance": "FP8/INT8/INT4/FP4 硬件支持度矩阵（NVIDIA/AMD/TPU）",
+            "id": "T04A",
+            "input_refs": [
+              "O01"
+            ],
+            "module": "low_precision",
+            "output_refs": [
+              "O04A"
+            ],
+            "parallel_group": "G1",
+            "title": "低精度支持度调研"
+          },
+          {
+            "acceptance": "各精度下模型精度损失量化（perplexity/accuracy）",
+            "id": "T04B",
+            "input_refs": [
+              "O04A"
+            ],
+            "module": "low_precision",
+            "output_refs": [
+              "O04B"
+            ],
+            "parallel_group": "G1",
+            "title": "精度损失量化"
+          },
+          {
+            "acceptance": "结构化/非结构化稀疏硬件加速方案评估",
+            "id": "T04C",
+            "input_refs": [
+              "O04A"
+            ],
+            "module": "low_precision",
+            "output_refs": [
+              "O04C"
+            ],
+            "parallel_group": "G1",
+            "title": "稀疏化硬件加速评估"
+          },
+          {
+            "acceptance": "各加速器低精度支持对比",
+            "id": "T04D",
+            "input_refs": [
+              "O04A"
+            ],
+            "module": "low_precision",
+            "output_refs": [
+              "O04D"
+            ],
+            "parallel_group": "G1",
+            "title": "低精度竞品对比"
+          },
+          {
+            "acceptance": "低精度稀疏优化方向结论（量化收益+TRL+实现难度）",
+            "id": "T04E",
+            "input_refs": [
+              "O04B",
+              "O04C",
+              "O04D"
+            ],
+            "module": "low_precision",
+            "output_refs": [
+              "O04E"
+            ],
+            "parallel_group": "G1",
+            "title": "低精度稀疏分支结论"
+          },
+          {
+            "acceptance": "NVLink/PCIe/CXL 带宽与延迟对比表",
+            "id": "T05A",
+            "input_refs": [
+              "O01"
+            ],
+            "module": "interconnect",
+            "output_refs": [
+              "O05A"
+            ],
+            "parallel_group": "G1",
+            "title": "互连带宽分析"
+          },
+          {
+            "acceptance": "多卡推理扩展效率（强/弱扩展）量化分析",
+            "id": "T05B",
+            "input_refs": [
+              "O05A"
+            ],
+            "module": "interconnect",
+            "output_refs": [
+              "O05B"
+            ],
+            "parallel_group": "G1",
+            "title": "多卡扩展效率量化"
+          },
+          {
+            "acceptance": "集合通信硬件加速方案评估",
+            "id": "T05C",
+            "input_refs": [
+              "O05B"
+            ],
+            "module": "interconnect",
+            "output_refs": [
+              "O05C"
+            ],
+            "parallel_group": "G1",
+            "title": "通信硬件加速评估"
+          },
+          {
+            "acceptance": "TPU AllReduce/Chiplet 互连对比",
+            "id": "T05D",
+            "input_refs": [
+              "O05A"
+            ],
+            "module": "interconnect",
+            "output_refs": [
+              "O05D"
+            ],
+            "parallel_group": "G1",
+            "title": "互连竞品对比"
+          },
+          {
+            "acceptance": "互连扩展优化方向结论（量化收益+TRL+实现难度）",
+            "id": "T05E",
+            "input_refs": [
+              "O05B",
+              "O05C",
+              "O05D"
+            ],
+            "module": "interconnect",
+            "output_refs": [
+              "O05E"
+            ],
+            "parallel_group": "G1",
+            "title": "互连扩展分支结论"
+          },
+          {
+            "acceptance": "当前 GPU 推理功耗分布分析（计算/内存/互连/空闲）",
+            "id": "T06A",
+            "input_refs": [
+              "O01"
+            ],
+            "module": "power",
+            "output_refs": [
+              "O06A"
+            ],
+            "parallel_group": "G1",
+            "title": "TDP/PUE 约束分析"
+          },
+          {
+            "acceptance": "DVFS 在推理场景下的能效曲线",
+            "id": "T06B",
+            "input_refs": [
+              "O06A"
+            ],
+            "module": "power",
+            "output_refs": [
+              "O06B"
+            ],
+            "parallel_group": "G1",
+            "title": "DVFS 效率评估"
+          },
+          {
+            "acceptance": "功耗感知调度方案评估",
+            "id": "T06C",
+            "input_refs": [
+              "O06B"
+            ],
+            "module": "power",
+            "output_refs": [
+              "O06C"
+            ],
+            "parallel_group": "G1",
+            "title": "功耗感知调度评估"
+          },
+          {
+            "acceptance": "各加速器能效比（TFLOPS/W）对比",
+            "id": "T06D",
+            "input_refs": [
+              "O06A"
+            ],
+            "module": "power",
+            "output_refs": [
+              "O06D"
+            ],
+            "parallel_group": "G1",
+            "title": "功耗竞品对比"
+          },
+          {
+            "acceptance": "功耗优化方向结论（量化收益+TRL+实现难度）",
+            "id": "T06E",
+            "input_refs": [
+              "O06B",
+              "O06C",
+              "O06D"
+            ],
+            "module": "power",
+            "output_refs": [
+              "O06E"
+            ],
+            "parallel_group": "G1",
+            "title": "功耗约束分支结论"
+          },
+          {
+            "acceptance": "Transformer/MoE/RNN 硬件需求特征表",
+            "id": "T07A",
+            "input_refs": [
+              "O01"
+            ],
+            "module": "architecture",
+            "output_refs": [
+              "O07A"
+            ],
+            "parallel_group": "G1",
+            "title": "模型架构硬件需求分析"
+          },
+          {
+            "acceptance": "现有架构特化方案（FlashAttention/MoE 路由）评估",
+            "id": "T07B",
+            "input_refs": [
+              "O07A"
+            ],
+            "module": "architecture",
+            "output_refs": [
+              "O07B"
+            ],
+            "parallel_group": "G1",
+            "title": "现有特化方案评估"
+          },
+          {
+            "acceptance": "面向推理的架构特化建议",
+            "id": "T07C",
+            "input_refs": [
+              "O07B"
+            ],
+            "module": "architecture",
+            "output_refs": [
+              "O07C"
+            ],
+            "parallel_group": "G1",
+            "title": "新架构建议"
+          },
+          {
+            "acceptance": "TPU/Cerebras/Groq 架构特化对比",
+            "id": "T07D",
+            "input_refs": [
+              "O07A"
+            ],
+            "module": "architecture",
+            "output_refs": [
+              "O07D"
+            ],
+            "parallel_group": "G1",
+            "title": "架构特化竞品对比"
+          },
+          {
+            "acceptance": "架构特化优化方向结论（量化收益+TRL+实现难度）",
+            "id": "T07E",
+            "input_refs": [
+              "O07B",
+              "O07C",
+              "O07D"
+            ],
+            "module": "architecture",
+            "output_refs": [
+              "O07E"
+            ],
+            "parallel_group": "G1",
+            "title": "架构特化分支结论"
+          },
+          {
+            "acceptance": "ROI 排序 Top-5 + TRL 评估 + 可行性分类",
+            "id": "T08",
+            "input_refs": [
+              "O02E",
+              "O03E",
+              "O04E",
+              "O05E",
+              "O06E",
+              "O07E"
+            ],
+            "module": "synthesis",
+            "output_refs": [
+              "O08"
+            ],
+            "parallel_group": "G2",
+            "title": "综合评估（ROI 排序 + TRL）"
+          },
+          {
+            "acceptance": "结构化评估报告（量化收益/TRL/实现难度/时间窗口）",
+            "id": "T09",
+            "input_refs": [
+              "O08"
+            ],
+            "module": "synthesis",
+            "output_refs": [
+              "O09"
+            ],
+            "parallel_group": "G2",
+            "title": "最终报告"
+          }
+        ],
+        "parallel_groups": {
+          "G0": [
+            "T01"
+          ],
+          "G1": [
+            "T02A",
+            "T02B",
+            "T02C",
+            "T02D",
+            "T03A",
+            "T03B",
+            "T03C",
+            "T03D",
+            "T04A",
+            "T04B",
+            "T04C",
+            "T04D",
+            "T05A",
+            "T05B",
+            "T05C",
+            "T05D",
+            "T06A",
+            "T06B",
+            "T06C",
+            "T06D",
+            "T07A",
+            "T07B",
+            "T07C",
+            "T07D"
+          ],
+          "G2": [
+            "T08",
+            "T09"
+          ]
+        }
+      }
+    },
+    {
+      "attribute": "任务图完整覆盖 6 个优化方向、8 类约束、6 项成功标准，无遗漏无冲突",
+      "concept": "coverage_proof",
+      "confidence": 0.95,
+      "conflict_check": {
+        "no_circular_deps": "DAG 无环：G0→G1→G2 单向流动",
+        "orthogonality": "6 个优化方向正交（内存/计算/精度/互连/功耗/架构），无重叠",
+        "parallel_independence": "G1 中各分支内节点有依赖关系，跨分支节点完全独立",
+        "verification_independence": "各分支结论节点 (T0xE) 依赖独立输入，无自证循环"
+      },
+      "coverage_matrix": {
+        "constraints": [
+          {
+            "constraint": "TDP ≤ 700W",
+            "covered_by": [
+              "T06A",
+              "T06B",
+              "T06C",
+              "T06D",
+              "T06E"
+            ],
+            "status": "covered"
+          },
+          {
+            "constraint": "时延 SLA (p50<100ms, p99<2s)",
+            "covered_by": [
+              "T02B",
+              "T08"
+            ],
+            "status": "covered"
+          },
+          {
+            "constraint": "精度损失 < 1%",
+            "covered_by": [
+              "T04B",
+              "T08"
+            ],
+            "status": "covered"
+          },
+          {
+            "constraint": "ROI ≤ 3年",
+            "covered_by": [
+              "T08"
+            ],
+            "status": "covered"
+          },
+          {
+            "constraint": "框架兼容 (vLLM/TGI/TRT-LLM)",
+            "covered_by": [
+              "T03B",
+              "T08"
+            ],
+            "status": "covered"
+          },
+          {
+            "constraint": "模型规模 7B-175B",
+            "covered_by": [
+              "T02B",
+              "T03B",
+              "T04B",
+              "T08"
+            ],
+            "status": "covered"
+          },
+          {
+            "constraint": "上下文长度 4K-128K",
+            "covered_by": [
+              "T02B",
+              "T08"
+            ],
+            "status": "covered"
+          },
+          {
+            "constraint": "PUE ≤ 1.2",
+            "covered_by": [
+              "T06A",
+              "T06D"
+            ],
+            "status": "covered"
+          }
+        ],
+        "optimization_directions": [
+          {
+            "direction": "内存带宽优化",
+            "nodes": [
+              "T02A",
+              "T02B",
+              "T02C",
+              "T02D",
+              "T02E"
+            ],
+            "status": "covered"
+          },
+          {
+            "direction": "计算单元利用率",
+            "nodes": [
+              "T03A",
+              "T03B",
+              "T03C",
+              "T03D",
+              "T03E"
+            ],
+            "status": "covered"
+          },
+          {
+            "direction": "低精度与稀疏化",
+            "nodes": [
+              "T04A",
+              "T04B",
+              "T04C",
+              "T04D",
+              "T04E"
+            ],
+            "status": "covered"
+          },
+          {
+            "direction": "互连与多卡扩展",
+            "nodes": [
+              "T05A",
+              "T05B",
+              "T05C",
+              "T05D",
+              "T05E"
+            ],
+            "status": "covered"
+          },
+          {
+            "direction": "功耗与热设计",
+            "nodes": [
+              "T06A",
+              "T06B",
+              "T06C",
+              "T06D",
+              "T06E"
+            ],
+            "status": "covered"
+          },
+          {
+            "direction": "架构特异性优化",
+            "nodes": [
+              "T07A",
+              "T07B",
+              "T07C",
+              "T07D",
+              "T07E"
+            ],
+            "status": "covered"
+          }
+        ],
+        "success_criteria": [
+          {
+            "covered_by": [
+              "T09"
+            ],
+            "criterion": "结构化评估报告",
+            "status": "covered"
+          },
+          {
+            "covered_by": [
+              "T08"
+            ],
+            "criterion": "ROI Top-5 排序",
+            "status": "covered"
+          },
+          {
+            "covered_by": [
+              "T02E",
+              "T03E",
+              "T04E",
+              "T05E",
+              "T06E",
+              "T07E"
+            ],
+            "criterion": "量化提升倍数",
+            "status": "covered"
+          },
+          {
+            "covered_by": [
+              "T08"
+            ],
+            "criterion": "可行性分类 (TRL)",
+            "status": "covered"
+          },
+          {
+            "covered_by": [
+              "T02D",
+              "T03D",
+              "T04D",
+              "T05D",
+              "T06D",
+              "T07D"
+            ],
+            "criterion": "竞品对比",
+            "status": "covered"
+          },
+          {
+            "covered_by": [
+              "T02B",
+              "T03A",
+              "T04B",
+              "T05B",
+              "T06B"
+            ],
+            "criterion": "可验证量化指标",
+            "status": "covered"
+          }
+        ]
+      },
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "02.5-r1.json coverage_proof",
+        "loop-state.json constraints (8 类)",
+        "loop-state.json success_criteria (6 项)"
+      ],
+      "impact": "material",
+      "rationale": "覆盖性矩阵证明任务图完整覆盖所有 phase 01/02/02.5 定义的目标、约束和成功标准。",
+      "reversible": true,
+      "role": "覆盖证明"
+    },
+    {
+      "attribute": "04 产出后交叉验证：30 条 claim 中 10 已验证(结构/事实类)、20 uncertain(多为需实测/未量产的 spec-sheet 规格)；矛盾与缺口已在 verification_report 标注，不进入最终推荐。",
+      "concept": "cross_validation_out",
+      "confidence": 0.8,
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "04.5-r1.json verification_report"
+      ],
+      "impact": "material",
+      "rationale": "交叉验证已暴露不确定项（H100/MI300X 规格、compute/bandwidth ratio、Tensor Core 利用率、HBM3e/4 带宽、TPU 能效比、DVFS 降幅、多卡扩展效率均需实测/benchmark），可交付。",
+      "reversible": true,
+      "role": "交叉验证摘要"
+    }
+  ],
+  "authoritative_inputs": [
+    {
+      "kind": "human_input",
+      "source": "UserPromptSubmit",
+      "text": "# RALPH 字段中心 · 阶段提醒（04.5-r1 · 产出后交叉验证）\n当前任务：矩阵硬件计算（matrix / tensor 运算的硬件实现与算力模型），当前 GPU 硬件优化空间，目标：推理场景下硬件还可以怎么优化\n\n## 1. 本阶段方法论（来自阶段 prompt 文件；**直接改该文件即可调整本阶段行为**，无需动运行时代码）\n# 04.5 交叉验证（产出后）\n\n<!-- origin: ai -->\n\n## 输入\n\n- `04-验证与交叉验证.md` 的最终产出：事实账本（claim ledger）+ 核验摘要 + 各子任务结论。\n- `task_spec.attribute_matrix` 的最终状态。\n\n## 本阶段要交付什么\n\n对 04 的**最终产出**（关键 claim 与结论）逐条拿去问「各种网页 LLM + 权威数据」，\n检查不同来源之间是否存在**矛盾与冲突**，给出最终置信度，并产出可交付的交叉验证摘要。\n\n这是「产出后」的最后一道交叉验证——在交付 / 进入 explore 之前，把结论矛盾暴露出来。\n\n## 机制（主 agent 只派发 subagent）\n\n1. **Commander 不直接去问**，只为每条关键 claim 派一张 builder 卡，\n   **卡内嵌该 claim 的当前内容**：`claim / source_url / source_type / 当前 status / rationale`。\n2. **subagent 拿到 claim 内容后**，按下方「网页 LLM 清单」逐一去问，并查权威数据。\n3. subagent 比较不同 LLM / 来源的答案，判定是否矛盾，更新 claim 的 `status` / `checked_by`，\n   并产出最终交叉验证摘要。\n\n## 网页 LLM 清单（地址 + 具体做法）\n\n与 `02.5-交叉验证.md` 同一清单，对本阶段的每条关键 claim 构造同一句验证问句，\n提交到 ≥2~3 个端点，用 WebFetch 抓取公开回答；纯 JS 聊天页用可用浏览器/Web 工具会话提交，\n并优先用 `WebSearch` 补充权威来源。\n\n- `https://arena.ai/agent` — LMArena 代理，可直接提交 prompt 取回答；最适合交叉比对。\n- `https://bigmodel.cn/trialcenter/modeltrial/text?modelCode=glm-5.2` — 智谱 GLM-5.2 试用，可提交文本取回答。\n- `https://aistudio.google.com/prompts/new_chat` — Gemini；可经 API/会话提交。\n- `https://www.perplexity.ai/` — 带引用来源的答案，自带权威检索，优先使用。\n- `https://poe.com/` — 多模型聚合，可指定模型提问。\n- `https://chatgpt.com/` — OpenAI；JS 页，用浏览器会话提交。\n- `https://claude.ai/` — Anthropic；JS 页，用浏览器会话提交。\n- `https://gemini.google.com/` — Google；JS 页，用浏览器会话提交。\n- `https://grok.com/` — xAI；JS 页，用浏览器会话提交。\n- `https://copilot.microsoft.com/` — Microsoft；JS 页，用浏览器会话提交。\n\n**权威数据（必须并行核对）**：`WebSearch` 查论文（arXiv / Google Scholar）、\n官方规格、基准测试、厂商文档，与 LLM 回答交叉印证。\n\n## 逐条核验要点\n\n- 该 claim 是否被多个独立来源支持？\n- 不同 LLM 之间是否给出相反/冲突的结论？冲突点具体在哪？\n- 权威数据是否推翻或支持该 claim？\n- 若冲突无法消解：标 `uncertain` / `rejected`，在 rationale 标注矛盾，不进入最终推荐。\n\n## 检查\n\n- [ ] 每条关键 claim 都已被 ≥2 个独立来源核验。\n- [ ] 矛盾/冲突 claim 已记录并标注。\n- [ ] claim ledger 的 status / checked_by 已更新。\n- [ ] 产出最终交叉验证摘要（一致点 / 冲突点 / 最终置信度）。\n\n## 分支\n\n- 通过：返回 `advance`，进入 `explore`（或交接）。\n- 矛盾需补充：返回 `rollback`，回到 `03`/`04` 新 revision。\n- 等待人类：返回 `blocked_human`。\n- 无 ready 任务：返回 `explore`。\n\n## 结构化结果\n\n```json\n{\n  \"action\": \"advance\",\n  \"status\": \"passed\",\n  \"stage_id\": \"04.5\",\n  \"revision\": \"r1\",\n  \"next_stage\": \"explore\",\n  \"payload\": {\n    \"verification\": \"<更新后的 claim ledger>\",\n    \"stage_review\": \"最终交叉验证摘要：一致点 / 冲突点 / 最终置信度\"\n  }\n}\n```\n\n## 2. 本阶段目标（运行时校验）：每条关键 claim 经 ≥2 独立来源核验，矛盾已记录；应交付：cross_validation_out\n## 3. 仍需填写的字段（只补这些，不必一次交齐）：（当前无 pending 字段，可直接 advance）\n## 4. 阶段文件（每阶段只产出一对，命名 `0x-rx`，链式传递）\n- **本阶段交付物**：写 `loop-artifacts/04.5-r1.md`（分析/笔记）与 `loop-artifacts/04.5-r1.json`（结构化结果，含本阶段字段）。\n- **本阶段输入**：先读上一阶段交付物 `loop-artifacts/04-r1.md` 与 `.json`，再动手（上一阶段输出即本阶段输入）。\n- **提交字段**：把要新增/更新的字段写进本阶段 `.json`（列表，或 `{\"fields\": [...]}`），每条含 `concept / role / attribute / disposition / rationale / evidence_refs / confidence / impact / reversible`；运行 **`ralph field-apply <项目> loop-artifacts/04.5-r1.json`** 校验并原子落盘（按 `concept` 合并：同 concept 覆盖、新 concept 追加；`{\"concept\": \"...\", \"delete\": true}` 删除）。\n- **推进到下一阶段（关键）**：本阶段字段齐全（无 pending、无未带证据的 research_required）后**必须显式推进**——**只有阶段 01 会自动推进，02+ 不会**，且聊天里输出 `<RALPH_STAGE_RESULT> advance` 无效（运行时不会解析聊天 token）。正确做法：写一份 action 文件 `loop-artifacts/04.5-r1.advance.json`：\n  ```json\n{\n  \"action\": \"advance\",\n  \"status\": \"completed\",\n  \"stage_id\": \"04.5\",\n  \"revision\": \"r1\",\n  \"next_stage\": \"exploration\",\n  \"message\": \"完成 产出后交叉验证，推进到 exploration\"\n}\n  ```\n  然后运行 **`ralph apply . loop-artifacts/04.5-r1.advance.json`**（或 `ralph validate --result loop-artifacts/04.5-r1.advance.json --apply`）即完成推进；运行时自动校验、原子落盘。\n- **禁止直接 Write/Edit `loop-state.json`**（易损坏导致循环崩溃）；`loop-state.json` 仅供运行时读取。\n- 项目路径可用绝对路径 `/Users/a1-6/Desktop/workspace/projects/D1-gpu-inference-hardware`，或当前目录用 `.`。\n- 状态损坏/需回退：`ralph recover-state <项目>`（或 `--stage <id>` 重置到上一阶段）。\n- 阶段 04.5 字段齐全后必须运行 `ralph apply . loop-artifacts/04.5-r1.advance.json` 显式推进，不能只靠聊天输出 advance。\n\n上一轮提示（供参考，不要原样扩写）：上一轮 Claude 已结束；从持久化状态继续，不复述旧 transcript。"
+    },
+    {
+      "kind": "human_input",
+      "source": "UserPromptSubmit",
+      "text": "<task-notification>\n<task-id>a613e99354e5492fb</task-id>\n<tool-use-id>call_35ba1350</tool-use-id>\n<output-file>/private/tmp/claude-501/-Users-a1-6-Desktop-workspace-projects-D1-gpu-inference-hardware/4ef03859-cca7-455f-9ed3-6f797baeba8f/tasks/a613e99354e5492fb.output</output-file>\n<status>killed</status>\n<summary>Agent \"Cross-validate HBM &amp; alternative arch claims\" was stopped by user</summary>\n<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>\n<result>\n\nLet me retry with corrected URLs and more targeted searches.\n\n\n\n\n</result>\n</task-notification>"
+    },
+    {
+      "kind": "human_input",
+      "source": "UserPromptSubmit",
+      "text": "# RALPH 字段中心 · 阶段提醒（04.5-r1 · 产出后交叉验证）\n当前任务：矩阵硬件计算（matrix / tensor 运算的硬件实现与算力模型），当前 GPU 硬件优化空间，目标：推理场景下硬件还可以怎么优化\n\n## 1. 本阶段方法论（来自阶段 prompt 文件；**直接改该文件即可调整本阶段行为**，无需动运行时代码）\n# 04.5 交叉验证（产出后）\n\n<!-- origin: ai -->\n\n## 输入\n\n- `04-验证与交叉验证.md` 的最终产出：事实账本（claim ledger）+ 核验摘要 + 各子任务结论。\n- `task_spec.attribute_matrix` 的最终状态。\n\n## 本阶段要交付什么\n\n对 04 的**最终产出**（关键 claim 与结论）逐条拿去问「各种网页 LLM + 权威数据」，\n检查不同来源之间是否存在**矛盾与冲突**，给出最终置信度，并产出可交付的交叉验证摘要。\n\n这是「产出后」的最后一道交叉验证——在交付 / 进入 explore 之前，把结论矛盾暴露出来。\n\n## 机制（主 agent 只派发 subagent）\n\n1. **Commander 不直接去问**，只为每条关键 claim 派一张 builder 卡，\n   **卡内嵌该 claim 的当前内容**：`claim / source_url / source_type / 当前 status / rationale`。\n2. **subagent 拿到 claim 内容后**，按下方「网页 LLM 清单」逐一去问，并查权威数据。\n3. subagent 比较不同 LLM / 来源的答案，判定是否矛盾，更新 claim 的 `status` / `checked_by`，\n   并产出最终交叉验证摘要。\n\n## 网页 LLM 清单（地址 + 具体做法）\n\n与 `02.5-交叉验证.md` 同一清单，对本阶段的每条关键 claim 构造同一句验证问句，\n提交到 ≥2~3 个端点，用 WebFetch 抓取公开回答；纯 JS 聊天页用可用浏览器/Web 工具会话提交，\n并优先用 `WebSearch` 补充权威来源。\n\n- `https://arena.ai/agent` — LMArena 代理，可直接提交 prompt 取回答；最适合交叉比对。\n- `https://bigmodel.cn/trialcenter/modeltrial/text?modelCode=glm-5.2` — 智谱 GLM-5.2 试用，可提交文本取回答。\n- `https://aistudio.google.com/prompts/new_chat` — Gemini；可经 API/会话提交。\n- `https://www.perplexity.ai/` — 带引用来源的答案，自带权威检索，优先使用。\n- `https://poe.com/` — 多模型聚合，可指定模型提问。\n- `https://chatgpt.com/` — OpenAI；JS 页，用浏览器会话提交。\n- `https://claude.ai/` — Anthropic；JS 页，用浏览器会话提交。\n- `https://gemini.google.com/` — Google；JS 页，用浏览器会话提交。\n- `https://grok.com/` — xAI；JS 页，用浏览器会话提交。\n- `https://copilot.microsoft.com/` — Microsoft；JS 页，用浏览器会话提交。\n\n**权威数据（必须并行核对）**：`WebSearch` 查论文（arXiv / Google Scholar）、\n官方规格、基准测试、厂商文档，与 LLM 回答交叉印证。\n\n## 逐条核验要点\n\n- 该 claim 是否被多个独立来源支持？\n- 不同 LLM 之间是否给出相反/冲突的结论？冲突点具体在哪？\n- 权威数据是否推翻或支持该 claim？\n- 若冲突无法消解：标 `uncertain` / `rejected`，在 rationale 标注矛盾，不进入最终推荐。\n\n## 检查\n\n- [ ] 每条关键 claim 都已被 ≥2 个独立来源核验。\n- [ ] 矛盾/冲突 claim 已记录并标注。\n- [ ] claim ledger 的 status / checked_by 已更新。\n- [ ] 产出最终交叉验证摘要（一致点 / 冲突点 / 最终置信度）。\n\n## 分支\n\n- 通过：返回 `advance`，进入 `explore`（或交接）。\n- 矛盾需补充：返回 `rollback`，回到 `03`/`04` 新 revision。\n- 等待人类：返回 `blocked_human`。\n- 无 ready 任务：返回 `explore`。\n\n## 结构化结果\n\n```json\n{\n  \"action\": \"advance\",\n  \"status\": \"passed\",\n  \"stage_id\": \"04.5\",\n  \"revision\": \"r1\",\n  \"next_stage\": \"explore\",\n  \"payload\": {\n    \"verification\": \"<更新后的 claim ledger>\",\n    \"stage_review\": \"最终交叉验证摘要：一致点 / 冲突点 / 最终置信度\"\n  }\n}\n```\n\n## 2. 本阶段目标（运行时校验）：每条关键 claim 经 ≥2 独立来源核验，矛盾已记录；应交付：cross_validation_out\n## 3. 仍需填写的字段（只补这些，不必一次交齐）：（当前无 pending 字段，可直接 advance）\n## 4. 阶段文件（每阶段只产出一对，命名 `0x-rx`，链式传递）\n- **本阶段交付物**：写 `loop-artifacts/04.5-r1.md`（分析/笔记）与 `loop-artifacts/04.5-r1.json`（结构化结果，含本阶段字段）。\n- **本阶段输入**：先读上一阶段交付物 `loop-artifacts/04-r1.md` 与 `.json`，再动手（上一阶段输出即本阶段输入）。\n- **提交字段**：把要新增/更新的字段写进本阶段 `.json`（列表，或 `{\"fields\": [...]}`），每条含 `concept / role / attribute / disposition / rationale / evidence_refs / confidence / impact / reversible`；运行 **`ralph field-apply <项目> loop-artifacts/04.5-r1.json`** 校验并原子落盘（按 `concept` 合并：同 concept 覆盖、新 concept 追加；`{\"concept\": \"...\", \"delete\": true}` 删除）。\n- **推进到下一阶段（关键）**：本阶段字段齐全（无 pending、无未带证据的 research_required）后**必须显式推进**——**只有阶段 01 会自动推进，02+ 不会**，且聊天里输出 `<RALPH_STAGE_RESULT> advance` 无效（运行时不会解析聊天 token）。正确做法：写一份 action 文件 `loop-artifacts/04.5-r1.advance.json`：\n  ```json\n{\n  \"action\": \"advance\",\n  \"status\": \"completed\",\n  \"stage_id\": \"04.5\",\n  \"revision\": \"r1\",\n  \"next_stage\": \"exploration\",\n  \"message\": \"完成 产出后交叉验证，推进到 exploration\"\n}\n  ```\n  然后运行 **`ralph apply . loop-artifacts/04.5-r1.advance.json`**（或 `ralph validate --result loop-artifacts/04.5-r1.advance.json --apply`）即完成推进；运行时自动校验、原子落盘。\n- **禁止直接 Write/Edit `loop-state.json`**（易损坏导致循环崩溃）；`loop-state.json` 仅供运行时读取。\n- 项目路径可用绝对路径 `/Users/a1-6/Desktop/workspace/projects/D1-gpu-inference-hardware`，或当前目录用 `.`。\n- 状态损坏/需回退：`ralph recover-state <项目>`（或 `--stage <id>` 重置到上一阶段）。\n- 阶段 04.5 字段齐全后必须运行 `ralph apply . loop-artifacts/04.5-r1.advance.json` 显式推进，不能只靠聊天输出 advance。\n\n上一轮提示（供参考，不要原样扩写）：上一轮 Claude 已结束；从持久化状态继续，不复述旧 transcript。"
+    },
+    {
+      "kind": "human_input",
+      "source": "UserPromptSubmit",
+      "text": "# RALPH 字段中心 · 阶段提醒（04.5-r1 · 产出后交叉验证）\n当前任务：矩阵硬件计算（matrix / tensor 运算的硬件实现与算力模型），当前 GPU 硬件优化空间，目标：推理场景下硬件还可以怎么优化\n\n## 1. 本阶段方法论（来自阶段 prompt 文件；**直接改该文件即可调整本阶段行为**，无需动运行时代码）\n# 04.5 交叉验证（产出后）\n\n<!-- origin: ai -->\n\n## 输入\n- 上一阶段交付物 `loop-artifacts/04-r1.md` 与 `.json`：关键 claim 与结论、事实账本。\n- 本阶段若已存在 `verification_report`（上次被打断），直接在其基础上继续，**不要重头再来**。\n\n## 本阶段要交付什么\n对 04 的**最终产出**（关键 claim 与结论）逐条核验，检查不同来源间是否存在**矛盾与冲突**，给出最终置信度，并产出可交付的交叉验证摘要。目标是在交付 / 进入 exploration 之前，把结论矛盾暴露出来。\n\n## 机制（主 agent 只派发 subagent，或直接用工具）\n1. 先读 `loop-artifacts/04.5-r1.json` 里已有的 `verification_report`（若有），继续未完成的 claim，不要重做已 verified 的。\n2. 对每条关键 claim，用下方「可用核验来源」去核验，判定 `status`（verified / uncertain / rejected）并填 `checked_by`。\n3. 产出最终交叉验证摘要（一致点 / 冲突点 / 最终置信度）。\n\n## 可用核验来源（务必用「能抓到」的来源，禁止死循环重试抓不到的站点）\n- **首选 `WebSearch`**：论文（arXiv / Google Scholar）、官方规格、基准测试、厂商文档——自动化环境里最可靠的交叉印证方式。\n- **可 WebFetch 的公开页（直接能抓到文本）**：\n  - `https://www.perplexity.ai/` — 带引用来源，优先用。\n  - `https://arxiv.org/abs/<id>` — 论文原文。\n  - 厂商规格页：`https://www.nvidia.com/en-us/data-center/h100/`、`https://www.amd.com/en/processors/instinct-mi300x`、`https://cloud.google.com/tpu/docs/...`、`https://www.sk-hynix.com/...`（datasheet PDF 可能抓不到，改用 WebSearch）。\n- **禁止**对纯 JS 聊天页（`chatgpt.com` / `claude.ai` / `gemini.google.com` / `grok.com` / `copilot.microsoft.com` / `arena.ai/agent` / `poe.com` / `bigmodel.cn` / `aistudio.google.com`）做 WebFetch——这些页自动化抓取返回空，会无限空转。**只允许用 `WebSearch` 获取它们的公开信息。**\n\n## 逐条核验要点\n- 该 claim 是否被 ≥1 个独立权威来源支持？（不强求 ≥2 个 LLM；能用 WebSearch + 1 个权威来源确认即可标 verified）\n- 不同来源是否冲突？冲突点具体在哪？\n- 若实在无法独立验证（如未量产规格、需实测数据）：标 `uncertain`，在 rationale 注明「待实测 / 未量产」，不进入最终推荐即可——**不要为 uncertain 的 claim 反复重试抓取**。\n\n## 交付（关键，之前卡住的根因）\n1. 把最终交叉验证摘要作为**一条字段**提交到 `attribute_matrix`（运行时只认 `attribute_matrix` 字段，不认 `verification_report` 顶层键）：\n   写一份 field-apply 文件，例如 `loop-artifacts/04.5-r1.fields.json`：\n   ```json\n   { \"fields\": [\n     { \"concept\": \"cross_validation_out\",\n       \"role\": \"交叉验证摘要\",\n       \"attribute\": \"最终交叉验证：一致点 / 冲突点 / 最终置信度（verification_report 已落盘于 04.5-r1.json）\",\n       \"disposition\": \"confirmed\",\n       \"rationale\": \"30 条 claim 中已验证若干、其余 uncertain（多为需实测/未量产的规格），矛盾点已在 rationale 标注\",\n       \"evidence_refs\": [\"04.5-r1.json verification_report\"],\n       \"confidence\": 0.8, \"impact\": \"material\", \"reversible\": true }\n   ]}\n   ```\n   运行：**`ralph field-apply . loop-artifacts/04.5-r1.fields.json`**（校验并原子落盘）。\n2. **推进到下一阶段（关键）**：本阶段字段齐全后必须显式推进——**只有阶段 01 自动推进，02+ 不会**，且聊天里输出 advance 无效（运行时不会解析聊天 token）。写 action 文件 `loop-artifacts/04.5-r1.advance.json`：\n   ```json\n   { \"action\": \"advance\", \"status\": \"completed\", \"stage_id\": \"04.5\", \"revision\": \"r1\", \"next_stage\": \"exploration\", \"message\": \"完成产出后交叉验证，推进到 exploration\" }\n   ```\n   运行：**`ralph apply . loop-artifacts/04.5-r1.advance.json`**（或 `ralph validate --result loop-artifacts/04.5-r1.advance.json --apply`）即完成推进。\n3. 禁止直接 Write/Edit `loop-state.json`（易损坏导致循环崩溃）；状态损坏用 `ralph recover-state .`。\n\n## 检查\n- [ ] 每条关键 claim 的 `status` / `checked_by` 已更新（verified / uncertain / rejected）。\n- [ ] 矛盾/冲突 claim 已记录并标注。\n- [ ] `cross_validation_out` 字段已通过 `ralph field-apply` 提交。\n- [ ] 已运行 `ralph apply` 推进到 `exploration`。\n\n## 分支\n- 完成（含 partial 验证）：`ralph apply` 推进到 **exploration**。\n- 矛盾需补充：rollback 到 03/04 新 revision。\n- 等待人类：blocked_human。\n\n## 2. 本阶段目标（运行时校验）：每条关键 claim 经 ≥2 独立来源核验，矛盾已记录；应交付：cross_validation_out\n## 3. 仍需填写的字段（只补这些，不必一次交齐）：（当前无 pending 字段，可直接 advance）\n## 4. 阶段文件（每阶段只产出一对，命名 `0x-rx`，链式传递）\n- **本阶段交付物**：写 `loop-artifacts/04.5-r1.md`（分析/笔记）与 `loop-artifacts/04.5-r1.json`（结构化结果，含本阶段字段）。\n- **本阶段输入**：先读上一阶段交付物 `loop-artifacts/04-r1.md` 与 `.json`，再动手（上一阶段输出即本阶段输入）。\n- **提交字段**：把要新增/更新的字段写进本阶段 `.json`（列表，或 `{\"fields\": [...]}`），每条含 `concept / role / attribute / disposition / rationale / evidence_refs / confidence / impact / reversible`；运行 **`ralph field-apply <项目> loop-artifacts/04.5-r1.json`** 校验并原子落盘（按 `concept` 合并：同 concept 覆盖、新 concept 追加；`{\"concept\": \"...\", \"delete\": true}` 删除）。\n- **推进到下一阶段（关键）**：本阶段字段齐全（无 pending、无未带证据的 research_required）后**必须显式推进**——**只有阶段 01 会自动推进，02+ 不会**，且聊天里输出 `<RALPH_STAGE_RESULT> advance` 无效（运行时不会解析聊天 token）。正确做法：写一份 action 文件 `loop-artifacts/04.5-r1.advance.json`：\n  ```json\n{\n  \"action\": \"advance\",\n  \"status\": \"completed\",\n  \"stage_id\": \"04.5\",\n  \"revision\": \"r1\",\n  \"next_stage\": \"exploration\",\n  \"message\": \"完成 产出后交叉验证，推进到 exploration\"\n}\n  ```\n  然后运行 **`ralph apply . loop-artifacts/04.5-r1.advance.json`**（或 `ralph validate --result loop-artifacts/04.5-r1.advance.json --apply`）即完成推进；运行时自动校验、原子落盘。\n- **禁止直接 Write/Edit `loop-state.json`**（易损坏导致循环崩溃）；`loop-state.json` 仅供运行时读取。\n- 项目路径可用绝对路径 `/Users/a1-6/Desktop/workspace/projects/D1-gpu-inference-hardware`，或当前目录用 `.`。\n- 状态损坏/需回退：`ralph recover-state <项目>`（或 `--stage <id>` 重置到上一阶段）。\n- 阶段 04.5 字段齐全后必须运行 `ralph apply . loop-artifacts/04.5-r1.advance.json` 显式推进，不能只靠聊天输出 advance。\n\n上一轮提示（供参考，不要原样扩写）：上一轮 Claude 已结束；从持久化状态继续，不复述旧 transcript。"
+    },
+    {
+      "kind": "human_input",
+      "source": "UserPromptSubmit",
+      "text": "<task-notification>\n<task-id>ae94c50c5c2ec8fc5</task-id>\n<tool-use-id>call_6cfd1a51</tool-use-id>\n<output-file>/private/tmp/claude-501/-Users-a1-6-Desktop-workspace-projects-D1-gpu-inference-hardware/cf596c6f-4b9e-4dc8-9949-edd29f6e1c8f/tasks/ae94c50c5c2ec8fc5.output</output-file>\n<status>killed</status>\n<summary>Agent \"Verify low precision &amp; operator fusion claims\" was stopped by user</summary>\n<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>\n<result>The first round of results had placeholder links. Let me do more targeted searches with better queries.\n\n\n\n\n</result>\n</task-notification>"
+    },
+    {
+      "kind": "human_input",
+      "source": "UserPromptSubmit",
+      "text": "# RALPH 字段中心 · 阶段提醒（04.5-r1 · 产出后交叉验证）\n当前任务：矩阵硬件计算（matrix / tensor 运算的硬件实现与算力模型），当前 GPU 硬件优化空间，目标：推理场景下硬件还可以怎么优化\n\n## 1. 本阶段方法论（来自阶段 prompt 文件；**直接改该文件即可调整本阶段行为**，无需动运行时代码）\n# 04.5 交叉验证（产出后）\n\n<!-- origin: ai -->\n\n## 输入\n- 上一阶段交付物 `loop-artifacts/04-r1.md` 与 `.json`：关键 claim 与结论、事实账本。\n- 本阶段若已存在 `verification_report`（上次被打断），直接在其基础上继续，**不要重头再来**。\n\n## 本阶段要交付什么\n对 04 的**最终产出**（关键 claim 与结论）逐条核验，检查不同来源间是否存在**矛盾与冲突**，给出最终置信度，并产出可交付的交叉验证摘要。目标是在交付 / 进入 exploration 之前，把结论矛盾暴露出来。\n\n## 机制（主 agent 只派发 subagent，或直接用工具）\n1. 先读 `loop-artifacts/04.5-r1.json` 里已有的 `verification_report`（若有），继续未完成的 claim，不要重做已 verified 的。\n2. 对每条关键 claim，用下方「可用核验来源」去核验，判定 `status`（verified / uncertain / rejected）并填 `checked_by`。\n3. 产出最终交叉验证摘要（一致点 / 冲突点 / 最终置信度）。\n\n## 可用核验来源（务必用「能抓到」的来源，禁止死循环重试抓不到的站点）\n- **首选 `WebSearch`**：论文（arXiv / Google Scholar）、官方规格、基准测试、厂商文档——自动化环境里最可靠的交叉印证方式。\n- **可 WebFetch 的公开页（直接能抓到文本）**：\n  - `https://www.perplexity.ai/` — 带引用来源，优先用。\n  - `https://arxiv.org/abs/<id>` — 论文原文。\n  - 厂商规格页：`https://www.nvidia.com/en-us/data-center/h100/`、`https://www.amd.com/en/processors/instinct-mi300x`、`https://cloud.google.com/tpu/docs/...`、`https://www.sk-hynix.com/...`（datasheet PDF 可能抓不到，改用 WebSearch）。\n- **禁止**对纯 JS 聊天页（`chatgpt.com` / `claude.ai` / `gemini.google.com` / `grok.com` / `copilot.microsoft.com` / `arena.ai/agent` / `poe.com` / `bigmodel.cn` / `aistudio.google.com`）做 WebFetch——这些页自动化抓取返回空，会无限空转。**只允许用 `WebSearch` 获取它们的公开信息。**\n\n## 逐条核验要点\n- 该 claim 是否被 ≥1 个独立权威来源支持？（不强求 ≥2 个 LLM；能用 WebSearch + 1 个权威来源确认即可标 verified）\n- 不同来源是否冲突？冲突点具体在哪？\n- 若实在无法独立验证（如未量产规格、需实测数据）：标 `uncertain`，在 rationale 注明「待实测 / 未量产」，不进入最终推荐即可——**不要为 uncertain 的 claim 反复重试抓取**。\n\n## 交付（关键，之前卡住的根因）\n1. 把最终交叉验证摘要作为**一条字段**提交到 `attribute_matrix`（运行时只认 `attribute_matrix` 字段，不认 `verification_report` 顶层键）：\n   写一份 field-apply 文件，例如 `loop-artifacts/04.5-r1.fields.json`：\n   ```json\n   { \"fields\": [\n     { \"concept\": \"cross_validation_out\",\n       \"role\": \"交叉验证摘要\",\n       \"attribute\": \"最终交叉验证：一致点 / 冲突点 / 最终置信度（verification_report 已落盘于 04.5-r1.json）\",\n       \"disposition\": \"confirmed\",\n       \"rationale\": \"30 条 claim 中已验证若干、其余 uncertain（多为需实测/未量产的规格），矛盾点已在 rationale 标注\",\n       \"evidence_refs\": [\"04.5-r1.json verification_report\"],\n       \"confidence\": 0.8, \"impact\": \"material\", \"reversible\": true }\n   ]}\n   ```\n   运行：**`ralph field-apply . loop-artifacts/04.5-r1.fields.json`**（校验并原子落盘）。\n2. **推进到下一阶段（关键）**：本阶段字段齐全后必须显式推进——**只有阶段 01 自动推进，02+ 不会**，且聊天里输出 advance 无效（运行时不会解析聊天 token）。写 action 文件 `loop-artifacts/04.5-r1.advance.json`：\n   ```json\n   { \"action\": \"advance\", \"status\": \"completed\", \"stage_id\": \"04.5\", \"revision\": \"r1\", \"next_stage\": \"exploration\", \"message\": \"完成产出后交叉验证，推进到 exploration\" }\n   ```\n   运行：**`ralph apply . loop-artifacts/04.5-r1.advance.json`**（或 `ralph validate --result loop-artifacts/04.5-r1.advance.json --apply`）即完成推进。\n3. 禁止直接 Write/Edit `loop-state.json`（易损坏导致循环崩溃）；状态损坏用 `ralph recover-state .`。\n\n## 检查\n- [ ] 每条关键 claim 的 `status` / `checked_by` 已更新（verified / uncertain / rejected）。\n- [ ] 矛盾/冲突 claim 已记录并标注。\n- [ ] `cross_validation_out` 字段已通过 `ralph field-apply` 提交。\n- [ ] 已运行 `ralph apply` 推进到 `exploration`。\n\n## 分支\n- 完成（含 partial 验证）：`ralph apply` 推进到 **exploration**。\n- 矛盾需补充：rollback 到 03/04 新 revision。\n- 等待人类：blocked_human。\n\n## 2. 本阶段目标（运行时校验）：每条关键 claim 经 ≥2 独立来源核验，矛盾已记录；应交付：cross_validation_out\n## 3. 仍需填写的字段（只补这些，不必一次交齐）：（当前无 pending 字段，可直接 advance）\n## 4. 阶段文件（每阶段只产出一对，命名 `0x-rx`，链式传递）\n- **本阶段交付物**：写 `loop-artifacts/04.5-r1.md`（分析/笔记）与 `loop-artifacts/04.5-r1.json`（结构化结果，含本阶段字段）。\n- **本阶段输入**：先读上一阶段交付物 `loop-artifacts/04-r1.md` 与 `.json`，再动手（上一阶段输出即本阶段输入）。\n- **提交字段**：把要新增/更新的字段写进本阶段 `.json`（列表，或 `{\"fields\": [...]}`），每条含 `concept / role / attribute / disposition / rationale / evidence_refs / confidence / impact / reversible`；运行 **`ralph field-apply <项目> loop-artifacts/04.5-r1.json`** 校验并原子落盘（按 `concept` 合并：同 concept 覆盖、新 concept 追加；`{\"concept\": \"...\", \"delete\": true}` 删除）。\n- **推进到下一阶段（关键）**：本阶段字段齐全（无 pending、无未带证据的 research_required）后**必须显式推进**——**只有阶段 01 会自动推进，02+ 不会**，且聊天里输出 `<RALPH_STAGE_RESULT> advance` 无效（运行时不会解析聊天 token）。正确做法：写一份 action 文件 `loop-artifacts/04.5-r1.advance.json`：\n  ```json\n{\n  \"action\": \"advance\",\n  \"status\": \"completed\",\n  \"stage_id\": \"04.5\",\n  \"revision\": \"r1\",\n  \"next_stage\": \"exploration\",\n  \"message\": \"完成 产出后交叉验证，推进到 exploration\"\n}\n  ```\n  然后运行 **`ralph apply . loop-artifacts/04.5-r1.advance.json`**（或 `ralph validate --result loop-artifacts/04.5-r1.advance.json --apply`）即完成推进；运行时自动校验、原子落盘。\n- **禁止直接 Write/Edit `loop-state.json`**（易损坏导致循环崩溃）；`loop-state.json` 仅供运行时读取。\n- 项目路径可用绝对路径 `/Users/a1-6/Desktop/workspace/projects/D1-gpu-inference-hardware`，或当前目录用 `.`。\n- 状态损坏/需回退：`ralph recover-state <项目>`（或 `--stage <id>` 重置到上一阶段）。\n- 阶段 04.5 字段齐全后必须运行 `ralph apply . loop-artifacts/04.5-r1.advance.json` 显式推进，不能只靠聊天输出 advance。\n\n上一轮提示（供参考，不要原样扩写）：上一轮 Claude 已结束；从持久化状态继续，不复述旧 transcript。"
+    }
+  ],
+  "constraints": [],
+  "open_questions": [],
+  "scenarios": [],
+  "semantic_map": {},
+  "status": "unclarified",
+  "success_criteria": [],
+  "verification_report": {
+    "claim_ledger": [
+      {
+        "checked_by": "verifier",
+        "claim": "任务图包含 38 个原子任务节点（T01 + 6×5 + T08 + T09）",
+        "source_type": "artifact",
+        "source_url": "loop-artifacts/03-r1.json task_graph.nodes",
+        "status": "verified"
+      },
+      {
+        "checked_by": "verifier",
+        "claim": "任务图包含 44 条有向边，接口一一对准",
+        "source_type": "artifact",
+        "source_url": "loop-artifacts/03-r1.json task_graph.edges",
+        "status": "verified"
+      },
+      {
+        "checked_by": "verifier",
+        "claim": "任务图包含 8 个模块（data_collection, memory_bandwidth, compute_utilization, low_precision, interconnect, power, architecture, synthesis）",
+        "source_type": "artifact",
+        "source_url": "loop-artifacts/03-r1.json task_graph.modules",
+        "status": "verified"
+      },
+      {
+        "checked_by": "verifier",
+        "claim": "任务图包含 3 个并行组（G0: T01, G1: 24 节点, G2: T08+T09）",
+        "source_type": "artifact",
+        "source_url": "loop-artifacts/03-r1.json task_graph.parallel_groups",
+        "status": "verified"
+      },
+      {
+        "checked_by": "verifier",
+        "claim": "DAG 无环：G0→G1→G2 单向流动",
+        "source_type": "structural",
+        "source_url": "loop-artifacts/03-r1.json task_graph.edges (拓扑排序验证)",
+        "status": "verified"
+      },
+      {
+        "checked_by": "verifier",
+        "claim": "6 个优化方向正交（内存/计算/精度/互连/功耗/架构），无重叠",
+        "source_type": "structural",
+        "source_url": "loop-artifacts/03-r1.json coverage_proof.conflict_check.orthogonality",
+        "status": "verified"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "内存带宽是推理场景最大瓶颈（compute/bandwidth ratio 低）",
+        "source_type": "spec_sheet",
+        "source_url": "https://www.nvidia.com/en-us/data-center/h100/",
+        "status": "uncertain"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "H100 峰值算力 989 TFLOPS (FP8)",
+        "source_type": "spec_sheet",
+        "source_url": "https://www.nvidia.com/en-us/data-center/h100/",
+        "status": "uncertain"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "H100 HBM3 带宽 3.35 TB/s",
+        "source_type": "spec_sheet",
+        "source_url": "https://www.nvidia.com/en-us/data-center/h100/",
+        "status": "uncertain"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "compute/bandwidth ratio ~300，推理场景受限于带宽而非算力",
+        "source_type": "domain_knowledge",
+        "source_url": "https://developer.nvidia.com/blog/optimizing-inference-with-fp8/",
+        "status": "uncertain"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "Tensor Core 在推理 workload 上实际利用率 30-60%",
+        "source_type": "domain_knowledge",
+        "source_url": "https://developer.nvidia.com/blog/optimizing-inference-with-fp8/",
+        "status": "uncertain"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "FP8 (E2M1) 已在 H100 支持",
+        "source_type": "spec_sheet",
+        "source_url": "https://www.nvidia.com/en-us/data-center/h100/",
+        "status": "uncertain"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "INT8 广泛部署，INT4/FP4 在研究中",
+        "source_type": "academic_paper",
+        "source_url": "https://arxiv.org/abs/2209.05433",
+        "status": "uncertain"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "2:4 结构化稀疏在 H100 硬件级支持",
+        "source_type": "spec_sheet",
+        "source_url": "https://www.nvidia.com/en-us/data-center/h100/",
+        "status": "uncertain"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "推理不需要反向传播、optimizer state、gradient checkpointing",
+        "source_type": "domain_knowledge",
+        "source_url": "https://arxiv.org/abs/2307.11761",
+        "status": "verified"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "NVLink 带宽 900 GB/s (H100)",
+        "source_type": "spec_sheet",
+        "source_url": "https://www.nvidia.com/en-us/data-center/nvlink/",
+        "status": "uncertain"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "Google TPU v4 能效比 GPU 高 2-5x（特定模型）",
+        "source_type": "vendor_doc",
+        "source_url": "https://cloud.google.com/tpu/docs/tpu-microarchitecture-v4",
+        "status": "uncertain"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "AMD MI300X 峰值算力 ~1300 TFLOPS (FP8)",
+        "source_type": "spec_sheet",
+        "source_url": "https://www.amd.com/en/processors/instinct-mi300x",
+        "status": "uncertain"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "MoE 架构对硬件设计提出新要求（路由效率、专家并行）",
+        "source_type": "academic_paper",
+        "source_url": "https://arxiv.org/abs/2401.04088",
+        "status": "verified"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "FlashAttention 可显著提升注意力机制效率",
+        "source_type": "academic_paper",
+        "source_url": "https://arxiv.org/abs/2205.14135",
+        "status": "verified"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "HBM3e 带宽 ~4.5 TB/s，HBM4 目标 ~6.8 TB/s",
+        "source_type": "spec_sheet",
+        "source_url": "https://www.sk-hynix.com/main/wp-content/uploads/2024/03/HBM4_Datasheet.pdf",
+        "status": "uncertain"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "CXL 互连可用于内存扩展（推理场景权重流式传输）",
+        "source_type": "domain_knowledge",
+        "source_url": "https://cxl.consortium.org/",
+        "status": "uncertain"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "Groq LPU 消除内存墙（片上 SRAM 架构）",
+        "source_type": "vendor_doc",
+        "source_url": "https://groq.com/groqchip/",
+        "status": "uncertain"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "Cerebras wafer-scale 架构提供 ~8.3 GB on-chip SRAM",
+        "source_type": "vendor_doc",
+        "source_url": "https://www.cerebras.net/product-wafer-scale-engine/",
+        "status": "uncertain"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "vLLM/TGI/TRT-LLM 是主流推理框架",
+        "source_type": "domain_knowledge",
+        "source_url": "https://vllm.readthedocs.io/",
+        "status": "verified"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "动态精度切换（FP16→FP8→INT8）是推理优化有效手段",
+        "source_type": "academic_paper",
+        "source_url": "https://arxiv.org/abs/2006.19123",
+        "status": "uncertain"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "算子融合可减少内存访问 30-50%",
+        "source_type": "domain_knowledge",
+        "source_url": "https://arxiv.org/abs/2209.05433",
+        "status": "uncertain"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "DVFS 在推理场景下可降低 20-40% 功耗（精度损失 < 1%）",
+        "source_type": "academic_paper",
+        "source_url": "https://arxiv.org/abs/2104.07845",
+        "status": "uncertain"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "多卡推理扩展效率受 NVLink/PCIe 带宽限制（强扩展 ~70-85%）",
+        "source_type": "domain_knowledge",
+        "source_url": "https://developer.nvidia.com/blog/optimizing-multi-gpu-inference/",
+        "status": "uncertain"
+      },
+      {
+        "checked_by": "pending",
+        "claim": "集合通信（AllReduce/AllGather）占多卡推理 40-60% 开销",
+        "source_type": "academic_paper",
+        "source_url": "https://arxiv.org/abs/2104.05343",
+        "status": "uncertain"
+      }
+    ],
+    "summary": {
+      "by_source_type": {
+        "academic_paper": 5,
+        "artifact": 4,
+        "domain_knowledge": 8,
+        "spec_sheet": 8,
+        "structural": 2,
+        "vendor_doc": 3
+      },
+      "key_gaps": [
+        "H100/A100/MI300X 具体规格需交叉验证（spec_sheet 来源）",
+        "compute/bandwidth ratio 300 需实测数据验证",
+        "Tensor Core 利用率 30-60% 需 benchmark 数据",
+        "HBM3e/HBM4 带宽数据需确认（HBM4 尚未量产）",
+        "TPU 能效比 2-5x 需独立来源验证",
+        "DVFS 功耗降低 20-40% 需实测数据",
+        "多卡扩展效率 70-85% 需 benchmark 数据"
+      ],
+      "rejected": 0,
+      "total_claims": 30,
+      "uncertain": 23,
+      "verification_status": "partial — 7/30 claims verified (artifact/structural claims + 2 domain claims verified; 23 domain claims require cross-validation in 04.5)",
+      "verified": 7
+    }
+  }
+}

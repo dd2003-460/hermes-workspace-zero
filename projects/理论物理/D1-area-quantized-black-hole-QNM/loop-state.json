@@ -1,21 +1,74 @@
 {
-  "project_id": "D1-area-quantized-black-hole-QNM",
-  "loop_phase": "1-loop/decision",
-  "iteration": 40,
-  "status": "active",
-  "current_task": "审稿意见修正 — Teukolsky+AIM 框架搭建 (P1)",
-  "last_action": "Gemini review (review/01.md): 论文被判方法论缺陷，需转向晚期回声 + Teukolsky 方程",
-  "last_outcome": "审稿人判定三个致命错误：①靶点选错(主QNM不携带视界信息) ②方程选错(RW不适用Kerr) ③分析选错(FFT峰值法)",
-  "last_insight": "面积量子化的正确观测信号是：1)晚期回声(主信号衰减后的回波包) 2)潮汐加热抑制(2.5PN相移)。能级间隙~32kHz对应LIGO高频端/ET范围。",
-  "last_updated": "2026-06-27",
-  "session_id": "ada2e24c-13b0-4896-88ff-ba033e18f049",
-  "blocker": null,
-  "next_phase_action": "进入 2-loop: P1-1 Teukolsky 方程框架搭建 → P1-2 AIM 离散化 → P1-3 Schwarzschild 回归测试",
-  "formulations_explored": [
-    "dehghan",
-    "cho",
-    "raw",
-    "gemini_review"
+  "active_tasks": {},
+  "allowed_actions": [
+    "advance",
+    "rollback",
+    "blocked_human",
+    "skip_blocked",
+    "candidate",
+    "explore",
+    "dispatch",
+    "join",
+    "repair_prompt"
   ],
-  "conclusion": "simple reflective BC → 主 QNM 不变（结论正确），但需换靶点到晚期回声。I-5 结论需补 Teukolsky+AIM 框架。"
+  "history": [],
+  "iteration": 41,
+  "last_action": null,
+  "last_event_id": null,
+  "last_result": null,
+  "legacy": {
+    "blocker": null,
+    "conclusion": "simple reflective BC → 主 QNM 不变（结论正确），但需换靶点到晚期回声。I-5 结论需补 Teukolsky+AIM 框架。iter41: 开始Teukolsky框架重建。",
+    "current_task": "P1-1 Teukolsky 方程框架搭建 — P1-3 Schwarzschild 回归测试",
+    "formulations_explored": [
+      "dehghan",
+      "cho",
+      "raw",
+      "gemini_review",
+      "teukolsky_rebuild"
+    ],
+    "iteration": 41,
+    "last_action": "iter40 Gemini review 判定方法论缺陷; iter41 进入 2-loop 执行: 验证 Teukolsky+AIM 实现",
+    "last_insight": "面积量子化的正确观测信号是：1)晚期回声(主信号衰减后的回波包) 2)潮汐加热抑制(2.5PN相移)。能级间隙~32kHz对应LIGO高频端/ET范围。",
+    "last_outcome": "已完成代码评估: d1-teukolsky-aim-v1.py 代码质量差(大量自我推导注释), 需基于 leaver_schwarzschild.py + teukolsky_rw_limit.md 重建",
+    "last_updated": "2026-07-15",
+    "loop_phase": "2-loop/execute (ENTERING)",
+    "next_phase_action": "执行: 1)更新状态到iter41 2)运行d1-teukolsky-aim-v1.py验证 3)如失败则基于leaver_schwarzschild.py创建clean实现 4)对比Berti benchmark",
+    "project_id": "D1-area-quantized-black-hole-QNM",
+    "session_id": "ada2e24c-13b0-4896-88ff-ba033e18f049",
+    "status": "active"
+  },
+  "plan": {
+    "joins": [],
+    "nodes": [],
+    "parallel_groups": [],
+    "revision": "r1"
+  },
+  "project_id": "D1-area-quantized-black-hole-QNM",
+  "queue": {
+    "blocked_human": [],
+    "candidates": [],
+    "ready": []
+  },
+  "schema_version": 2,
+  "stage": {
+    "failure_condition": "关键目标或约束缺失",
+    "id": "01",
+    "input_description": "用户目标、范围和约束",
+    "name": "目标与约束",
+    "on_failure": "01",
+    "on_human_block": "exploration",
+    "on_success": "02",
+    "required_outputs": [
+      "goal_summary",
+      "constraints"
+    ],
+    "revision": "r1",
+    "success_condition": "目标和约束结构化"
+  },
+  "status": "running",
+  "task": {
+    "description": "研究本地 GPU",
+    "source": "ralph run"
+  }
 }

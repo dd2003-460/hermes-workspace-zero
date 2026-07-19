@@ -44,11 +44,11 @@ Step 5: 判定
 3. 网页 LLM 的结论：
    - `PASS`: 确认 Review 结果可信 → 执行 commit
    - `FAIL`: 发现 Review 遗漏的问题 → 进入修复分解
-   - `UNCERTAIN`: 信息不足无法判定 → 标记 AT_RISK + **触发人类确认门**
+   - `UNCERTAIN`: 信息不足无法判定 → 标记 `blocked_human`，跳过当前任务并继续队列
 
 ### 人类确认门（UNCERTAIN 时）
 
-当交叉验证返回 UNCERTAIN 时，**必须等待人类介入**：
+当交叉验证返回 UNCERTAIN 时，当前子任务进入 `blocked_human`，但 Commander **不得等待并阻塞整个循环**：
 
 ```
 [人工确认 — 不确定状态]
@@ -59,7 +59,7 @@ Review 结果: {review-result}
 交叉验证结果: UNCERTAIN
 关键疑点: {issues}
 
-请决定：
+请在人类方便时决定：
 - APPROVE → 视为 PASS，继续执行
 - REJECT → 视为 FAIL，进入修复分解
 - COMMENT → 给出指导意见，代理根据意见重新执行
@@ -67,7 +67,8 @@ Review 结果: {review-result}
 ```
 
 **注意**：
-- UNCERTAIN 的人类确认门在 2-loop 中是**唯一阻塞人类确认**的情况
+- 当前子任务等待确认，其他 ready 任务继续执行
+- 如果没有 ready 任务，进入 exploration 并生成 candidate tasks
 - 其余情况（PASS/FAIL）全部自主处理，不等待人类
 
 ## 失败修复流程
@@ -80,13 +81,13 @@ Review 不通过 → 分解修复任务 → 重新规划 → 回到 per-step 循
 1. **不允许原地重试同一方案** — 必须先分解修复任务
 2. 修复分解为子子任务（T1.1, T1.2...），每个子子任务也走完整 per-step 循环
 3. 修复方案写入 `<project>/fix-plan.md`（包含修复意图、方案、Review 策略）
-4. 修复后的产出覆盖原产出，不保留失败中间态
+4. 修复后的产出使用新 revision 关联原产出；失败中间态保存在 `loop-events.md` 和 artifact
 5. **修复也需交叉验证** — 修复方案本身也通过网页 LLM 确认合理性
 6. **修复任务遵守多层分解规则**：
-   - 修复子任务 >3 → 分组，每组 ≤3
-   - 层级编号：T1.1, T1.2（L1） / T1.1.1, T1.1.2（L2） / T1.1.1.1（L3 最大深度）
-   - 每个子任务标注层级前缀：`[L1]` 或 `[L2]`
-   - 到 L3 仍不原子 → BLOCKED + 原因，不继续分解
+   - 不设置固定的计划修订次数或 DAG 深度上限
+   - 每一层必须声明输入、输出、条件和依赖
+   - 同一并行层级必须正交且无写入冲突
+   - 如果无法继续分解，标记原因并转入 `blocked_human` 或 `exploration`
 
 ## Git 备份规则
 

@@ -1,0 +1,30 @@
+#!/bin/bash
+set -euo pipefail
+
+ROOT="/Users/a1-6/Desktop/workspace"
+PROJECT="${1:-$PWD}"
+RALPH_BIN="${HOME}/.local/bin/ralph"
+MODE="${RALPH_HOOK_MODE:-enforce}"
+
+if [[ ! -x "$RALPH_BIN" ]]; then
+  RALPH_BIN="$ROOT/scripts/ralph-runtime/.venv/bin/ralph"
+fi
+
+if [[ "${RALPH_ONCE:-0}" == "1" ]]; then
+  if [[ "$#" -ge 2 ]]; then
+    shift
+    exec "$RALPH_BIN" run "$PROJECT" "$*" --mode "$MODE"
+  fi
+  exec "$RALPH_BIN" start "$PROJECT" --mode "$MODE" --launch
+fi
+
+if [[ "$#" -ge 2 ]]; then
+  shift
+  exec "$RALPH_BIN" loop "$PROJECT" "$*" --mode "$MODE"
+fi
+
+if [[ -f "$PROJECT/loop-state.json" ]]; then
+  exec "$RALPH_BIN" loop "$PROJECT" --mode "$MODE"
+fi
+
+exec "$RALPH_BIN" start "$PROJECT" --mode "$MODE" --launch

@@ -1,0 +1,94 @@
+{
+  "authoritative_inputs": [
+    {
+      "kind": "initial_task",
+      "source": "ralph run",
+      "text": "我需要跑本地 AI，帮我调研性价比最高的 GPU"
+    },
+    {
+      "kind": "human_input",
+      "source": "UserPromptSubmit",
+      "text": "我需要跑本地 AI，帮我调研性价比最高的 GPU"
+    },
+    {
+      "kind": "human_input",
+      "source": "UserPromptSubmit",
+      "text": "# RALPH 短恢复指令\n\n当前阶段：01-r1（目标与约束）\n项目状态：running\n当前任务：我需要跑本地 AI，帮我调研性价比最高的 GPU\n\n权威输入（不要把完整内容复制进上下文）：\n- `loop-state.json`：当前唯一状态和阶段完整条件\n- `loop-artifacts/contracts/01-r1-stage-contract.md`：当前阶段契约\n- `loop-artifacts/contracts/01-r1-submission-template.json`：唯一提交模板\n\n恢复规则：\n1. 先读取 `loop-state.json`，确认仍处于 `01-r1`。\n2. 只按 `loop-artifacts/contracts/01-r1-stage-contract.md` 和 `loop-artifacts/contracts/01-r1-submission-template.json` 工作。\n3. 这是一个新的 Commander 上下文；从持久化状态继续当前阶段，不复述历史，不读取完整 loop-events.md。若下面列出 pending 卡，下一次工具调用必须直接使用 Agent 派发该卡；不要先用 Bash、Write、Edit 或继续读取文件。pending 卡按唯一模板派发一次；dispatched 卡不要重派，等待子代理回执；没有可执行卡时才提交当前阶段结果。不要把运行时中断当作阶段失败。\n\n阶段 01 审计已完成但 verdict=rollback，当前唯一继续动作是 clarify。\n不要等待人类、不要再次派发已完成的 auditor、不要使用 Write/Edit 或读取完整事件日志。\n直接输出一个完整的 <RALPH_STAGE_RESULT>：action=clarify，payload.task_spec 必须填写七类语义角色、attribute_matrix、约束、假设、场景、成功标准和 requirements_audit；payload.repair 必须引用本轮 rollback auditor。\n{\n  \"action\": \"clarify\",\n  \"status\": \"structured_pending_audit\",\n  \"stage_id\": \"01\",\n  \"revision\": \"r1\",\n  \"next_stage\": null,\n  \"rollback_to\": null,\n  \"evidence\": [],\n  \"artifact_refs\": [],\n  \"message\": \"根据独立审计回滚原因完成语义分解；运行时会递增 revision 并重新派发门禁。\",\n  \"payload\": {\n    \"task_spec\": {\n      \"semantic_map\": {\n        \"background\": [],\n        \"decision_object\": [],\n        \"objective\": [],\n        \"comparison_set\": [],\n        \"constraints\": [],\n        \"deliverable\": [],\n        \"uncertainty\": []\n      },\n      \"attribute_matrix\": [],\n      \"constraints\": [],\n      \"assumptions\": [],\n      \"open_questions\": [],\n      \"scenarios\": [],\n      \"success_criteria\": [],\n      \"requirements_audit\": {\n        \"card_id\": \"01-r1-requirements-auditor\",\n        \"artifact_ref\": \"\",\n        \"summary\": \"\"\n      }\n    },\n    \"repair\": {\n      \"auditor_card_id\": \"01-r1-requirements-auditor\",\n      \"auditor_verdict\": \"rollback\",\n      \"audit_artifact_ref\": \"\",\n      \"reason\": \"\"\n    }\n  }\n}\n\n本次恢复原因（仅作诊断，不要原样扩写）：\n上一轮 Claude 已结束；从持久化状态继续，不复述旧 transcript。"
+    }
+  ],
+  "context_mode": "bounded_artifacts",
+  "current_stage_cards": [
+    {
+      "card_ref": "loop-artifacts/task-cards/01-r1-requirements-auditor.md",
+      "id": "01-r1-requirements-auditor",
+      "status": "completed",
+      "task_id": null,
+      "title": "需求、遗漏和假设审计"
+    }
+  ],
+  "purpose": "供独立阶段门禁审计；不包含 Commander 主对话或隐藏推理。",
+  "stage": {
+    "failure_condition": "关键目标或约束缺失",
+    "id": "01",
+    "input_description": "用户目标、范围和约束",
+    "name": "目标与约束",
+    "on_failure": "01",
+    "on_success": "02",
+    "required_outputs": [
+      "goal_summary",
+      "constraints"
+    ],
+    "revision": "r1",
+    "success_condition": "目标和约束结构化"
+  },
+  "structured_inputs": {
+    "decision": {},
+    "handoff": {},
+    "last_exploration": null,
+    "plan": {
+      "joins": [],
+      "nodes": [],
+      "parallel_groups": [],
+      "revision": "r1"
+    },
+    "queue": {
+      "blocked_human": [],
+      "candidates": [],
+      "ready": []
+    },
+    "task_intake": null,
+    "task_spec": {
+      "assumptions": [],
+      "attribute_matrix": [],
+      "authoritative_inputs": [
+        {
+          "kind": "initial_task",
+          "source": "ralph run",
+          "text": "我需要跑本地 AI，帮我调研性价比最高的 GPU"
+        },
+        {
+          "kind": "human_input",
+          "source": "UserPromptSubmit",
+          "text": "我需要跑本地 AI，帮我调研性价比最高的 GPU"
+        },
+        {
+          "kind": "human_input",
+          "source": "UserPromptSubmit",
+          "text": "# RALPH 短恢复指令\n\n当前阶段：01-r1（目标与约束）\n项目状态：running\n当前任务：我需要跑本地 AI，帮我调研性价比最高的 GPU\n\n权威输入（不要把完整内容复制进上下文）：\n- `loop-state.json`：当前唯一状态和阶段完整条件\n- `loop-artifacts/contracts/01-r1-stage-contract.md`：当前阶段契约\n- `loop-artifacts/contracts/01-r1-submission-template.json`：唯一提交模板\n\n恢复规则：\n1. 先读取 `loop-state.json`，确认仍处于 `01-r1`。\n2. 只按 `loop-artifacts/contracts/01-r1-stage-contract.md` 和 `loop-artifacts/contracts/01-r1-submission-template.json` 工作。\n3. 这是一个新的 Commander 上下文；从持久化状态继续当前阶段，不复述历史，不读取完整 loop-events.md。若下面列出 pending 卡，下一次工具调用必须直接使用 Agent 派发该卡；不要先用 Bash、Write、Edit 或继续读取文件。pending 卡按唯一模板派发一次；dispatched 卡不要重派，等待子代理回执；没有可执行卡时才提交当前阶段结果。不要把运行时中断当作阶段失败。\n\n阶段 01 审计已完成但 verdict=rollback，当前唯一继续动作是 clarify。\n不要等待人类、不要再次派发已完成的 auditor、不要使用 Write/Edit 或读取完整事件日志。\n直接输出一个完整的 <RALPH_STAGE_RESULT>：action=clarify，payload.task_spec 必须填写七类语义角色、attribute_matrix、约束、假设、场景、成功标准和 requirements_audit；payload.repair 必须引用本轮 rollback auditor。\n{\n  \"action\": \"clarify\",\n  \"status\": \"structured_pending_audit\",\n  \"stage_id\": \"01\",\n  \"revision\": \"r1\",\n  \"next_stage\": null,\n  \"rollback_to\": null,\n  \"evidence\": [],\n  \"artifact_refs\": [],\n  \"message\": \"根据独立审计回滚原因完成语义分解；运行时会递增 revision 并重新派发门禁。\",\n  \"payload\": {\n    \"task_spec\": {\n      \"semantic_map\": {\n        \"background\": [],\n        \"decision_object\": [],\n        \"objective\": [],\n        \"comparison_set\": [],\n        \"constraints\": [],\n        \"deliverable\": [],\n        \"uncertainty\": []\n      },\n      \"attribute_matrix\": [],\n      \"constraints\": [],\n      \"assumptions\": [],\n      \"open_questions\": [],\n      \"scenarios\": [],\n      \"success_criteria\": [],\n      \"requirements_audit\": {\n        \"card_id\": \"01-r1-requirements-auditor\",\n        \"artifact_ref\": \"\",\n        \"summary\": \"\"\n      }\n    },\n    \"repair\": {\n      \"auditor_card_id\": \"01-r1-requirements-auditor\",\n      \"auditor_verdict\": \"rollback\",\n      \"audit_artifact_ref\": \"\",\n      \"reason\": \"\"\n    }\n  }\n}\n\n本次恢复原因（仅作诊断，不要原样扩写）：\n上一轮 Claude 已结束；从持久化状态继续，不复述旧 transcript。"
+        }
+      ],
+      "constraints": [],
+      "open_questions": [],
+      "scenarios": [],
+      "semantic_map": {},
+      "status": "unclarified",
+      "success_criteria": []
+    },
+    "verification": {}
+  },
+  "submission_template_ref": "loop-artifacts/contracts/01-r1-submission-template.json",
+  "task": {
+    "description": "我需要跑本地 AI，帮我调研性价比最高的 GPU",
+    "source": "ralph run"
+  }
+}

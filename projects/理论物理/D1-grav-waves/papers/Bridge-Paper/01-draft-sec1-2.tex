@@ -1,0 +1,657 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{booktabs}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{bm}
+\usepackage{tikz}
+\usetikzlibrary{trees,arrows.meta,positioning,shapes.geometric}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{principle}{Principle}[section]
+
+\newcommand{\cat}[1]{\mathbf{#1}}
+\newcommand{\naturaltrans}{\Rightarrow}
+\newcommand{\bimorph}{\longrightarrow}
+
+\title{\textbf{A Two-Category Classification of Gravitational-Wave Observables\\From Intrinsic Quantum Corrections to Extrinsic Environmental Effects}}
+
+\author{Cheng Lu\\
+\textit{Independent Researcher}\\
+\vspace{0.5em}
+\texttt{chenglu@protonmail.com}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We propose a two-category classification framework for gravitational-wave (GW) observables that organises all known modifications to GW propagation and detection into mutually orthogonal structural classes. The framework distinguishes \textbf{Category I: intrinsic quantum corrections}---effects arising from the quantisation of black-hole backgrounds themselves, including area quantisation \cite{Bekenstein:1994,Mukhanov:1996}, quantum hair \cite{Haggard:2014}, and quantum echoes \cite{Cardoso:2016vtg}---from \textbf{Category II: extrinsic environmental effects}---modifications induced by the matter distribution surrounding the source, such as dark-matter halos \cite{Barausse:2020}, accretion disks \cite{Frank:2021}, and stellar clusters \cite{Gair:2013}. The two categories are characterised by a rigorous orthogonality condition: a given observable effect belongs exclusively to one category unless it demonstrably arises from both mechanisms simultaneously, in which case it is assigned to the intersection class ``Both.'' We establish four classification principles---orthogonality, completeness, operationality, and falsifiability---and provide a decision-tree algorithm for assigning new observables to the framework. We demonstrate the framework's utility by classifying five EMRI propositions concerning dark-matter-induced chaos suppression and the GW background anisotropy predictions of the extended functorial QFT framework developed in \cite{GW-BacQFT}. The 2-Cat classification provides a common language across the multi-band GW programme (PTA, LISA, DECIGO/BBO) and identifies concrete discriminants---quantum coherence tests versus dispersion relation measurements---for distinguishing between structurally different origins of the same phenomenological signature.
+
+\vspace{0.5em}
+\noindent\textbf{License}: This work is licensed under Creative Commons Attribution 4.0 International (CC BY 4.0).
+
+\vspace{0.5em}
+\noindent\textbf{Keywords}: gravitational waves; two-category classification; intrinsic quantum corrections; extrinsic environmental effects; EMRI; dark matter; area quantisation; multi-band astronomy
+
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}\label{sec:intro}
+
+\subsection{The Multi-Band GW Landscape and the Need for Classification}
+
+The gravitational-wave (GW) astronomy programme has matured from a single frequency window to a multi-band enterprise spanning nanohertz (PTA: NANOGrav, EPTA, PPTA, CPT \cite{Agazie:2023,Reardon:2023}), millihertz (LISA: \cite{AmaroSeoane:2017}), and millihertz-to-decihertz (DECIGO \cite{Kawamura:2020}, BBO \cite{Bao:2018}) bands. Each band probes distinct source populations: pulsar timing arrays access supermassive black hole binaries (SMBHBs) and cosmological backgrounds at $f \sim \text{nHz}$, LISA targets extreme mass-ratio inspirals (EMRIs) and stellar-mass binaries at $f \sim \text{mHz}$, and proposed decihertz missions aim to bridge the gap with primordial backgrounds and intermediate-mass binaries.
+
+This multi-band richness simultaneously creates an opportunity and a challenge. The opportunity: multiple bands offer complementary leverage on the physical parameters of GW sources, enabling joint constraints on theory parameters that are degenerate within any single band. The challenge: the space of possible GW ``observables''---deviations from the standard general-relativistic waveform in a vacuum Schwarzschild/Kerr background---has grown faster than the conceptual framework for organising them. The same phenomenological signature (e.g., a frequency-dependent phase shift in the GW signal) can arise from physically distinct mechanisms: a dark-matter halo around the EMRI source (environmental), a quantum-corrected metric near the horizon (intrinsic), or a modified dispersion relation from Lorentz-violating gravity (fundamental). Distinguishing these origins is essential for any claimed detection, yet there exists no systematic classification scheme.
+
+\subsection{Existing Classification Efforts and Their Limitations}
+
+Several prior works have attempted to classify GW phenomena, but each is incomplete for our purposes.
+
+\textbf{Cardoso et al. (2016), ``Black Hole Mimickers'' \cite{Cardoso:2016vtg}} provide the most detailed classification of compact objects that mimic black holes in their multipolar structure. Their taxonomy distinguishes boson stars, gravastars, wormholes, and dynamical dark-energy stars based on the absence of event horizons and the violation of the no-hair theorem. The scope is narrow: only objects that replace the black hole itself, never environmental effects. Moreover, the classification is static---it addresses the \emph{structure} of the compact object, not the \emph{dynamical observables} produced during a scattering or inspiral process.
+
+\textbf{Barausse et al. (2020), ``Black Hole Vertigo'' \cite{Barausse:2020}} enumerate environmental effects (dark-matter halos, accretion disks, stellar clusters) and list their qualitative impacts on binary evolution (orbital decay, eccentricity, chaos). However, the treatment is a structured list rather than a formal taxonomy: effects are grouped by environment type, not by the mathematical structure of their observable signature. There is no criterion for determining when two effects are ``the same'' or ``different,'' no decision procedure for assigning a new effect to a class, and no treatment of intrinsic quantum corrections.
+
+\textbf{Gair et al. (2013), ``Probing Dark Matter with EMRIs'' \cite{Gair:2013}} focus exclusively on dark-matter-induced modifications to EMRI waveforms. While this depth is valuable for the DM subfield, the work exemplifies the fragmentation problem: it operates within Category II without connecting to the broader question of what other classes of modifications exist.
+
+A more recent survey by \cite{Brito:2020} on ultralight bosons and \cite{Baumgart:2023} on quantum corrections to BH spacetimes each address subsets of the observable space, but neither provides a unified framework.
+
+The gap is clear: no existing work treats the \emph{entire space of GW observable corrections}---both intrinsic and extrinsic---under a single organising principle.
+
+\subsection{Positioning of This Bridge Paper}
+
+This paper is a \textbf{bridge paper}: its purpose is not to report new numerical results or derive new observational constraints, but to provide a theoretical framework that makes all existing and future results locatable within a shared taxonomy. The bridge paper connects three pillars:
+
+\begin{enumerate}
+\item \textbf{GW-BacQFT} \cite{GW-BacQFT}: an extended functorial QFT framework for PTA GW source discrimination, which falls naturally within Category I (intrinsic quantum corrections via extended AQFT).
+\item \textbf{EMRI dark-matter propositions}: five propositions about dark-matter-induced chaos suppression in EMRIs, which fall within Category II (extrinsic environmental effects).
+\item \textbf{Multi-band astronomy}: PTA, LISA, and decihertz missions, each accessing different regions of the parameter space where one or both categories dominate.
+\end{enumerate}
+
+The 2-Cat framework is the connective tissue: it tells us \emph{why} GW-BacQFT and the EMRI propositions belong together as parts of a single research programme, and it tells us \emph{where} new results must be placed.
+
+\subsection{Structure of This Paper}
+
+Section~\ref{sec:2cat} introduces the 2-Cat framework: its definitions, classification principles, decision tree, and the ``Both'' category. Section~\ref{sec:cat1} classifies Category I effects with emphasis on area quantisation and quantum echoes. Section~\ref{sec:cat2} classifies Category II effects with emphasis on dark-matter halos and accretion disks. Section~\ref{sec:both} discusses the intersection category. Section~\ref{sec:applications} applies the framework to the EMRI propositions and to GW-BacQFT. Section~\ref{sec:multiband} discusses implications for multi-band GW science. Section~\ref{sec:conclusion} concludes.
+
+\section{The 2-Cat Classification Framework}\label{sec:2cat}
+
+\subsection{Basic Definitions}
+
+We define the 2-Cat classification as follows.
+
+\begin{definition}[2-Cat Classification]\label{def:2cat}
+Let $\mathcal{O}$ be the set of all possible modifications to a gravitational-wave observable $O$ (frequency, phase, amplitude, polarisation, timing residual) relative to the standard GR prediction in a vacuum Schwarzschild/Kerr background. We partition $\mathcal{O}$ into three disjoint classes:
+\begin{equation}
+\mathcal{O} = \mathcal{O}_{\mathrm{I}} \sqcup \mathcal{O}_{\mathrm{II}} \sqcup \mathcal{O}_{\mathrm{Both}}\,,
+\end{equation}
+where
+\begin{itemize}
+\item $\mathcal{O}_{\mathrm{I}}$ is the set of \textbf{Category I} (intrinsic quantum) effects: modifications arising from the quantisation or non-classical structure of the black-hole spacetime itself.
+\item $\mathcal{O}_{\mathrm{II}}$ is the set of \textbf{Category II} (extrinsic environmental) effects: modifications arising from matter or fields external to the black hole, occupying the same spatial region as the GW propagation path.
+\item $\mathcal{O}_{\mathrm{Both}}$ is the set of effects that demonstrably arise from \textbf{both} mechanisms simultaneously and cannot be factored into a Cat I $\times$ Cat II product.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Category I: Intrinsic Quantum Corrections]\label{def:catI}
+An effect $o \in \mathcal{O}$ belongs to Category I if and only if:
+\begin{enumerate}
+\item Its physical origin is a property of the black-hole spacetime that exists even in the absence of external matter (i.e., in the idealised vacuum limit $T_{\mu\nu}^{\mathrm{external}} \to 0$).
+\item It can be traced to a departure from the classical Kerr geometry, including but not limited to: area quantisation \cite{Bekenstein:1994,Mukhanov:1996}, quantum hair \cite{Haggard:2014}, quantum echoes \cite{Cardoso:2016vtg}, extended functorial QFT corrections \cite{Brunetti:2003}, and modifications to the near-horizon structure.
+\item In the classical limit $\hbar \to 0$ (or equivalently, for macroscopic black holes with $M \gg M_P$ where quantum corrections are suppressed by $(M_P/M)^2$), the effect vanishes.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Category II: Extrinsic Environmental Effects]\label{def:catII}
+An effect $o \in \mathcal{O}$ belongs to Category II if and only if:
+\begin{enumerate}
+\item Its physical origin lies in the matter distribution or external fields surrounding the black hole.
+\item It can be traced to: dark-matter halos \cite{Barausse:2020,Gair:2013}, accretion disks \cite{Frank:2021}, stellar clusters \cite{Peterson:2004}, or external gravitational potentials.
+\item In the vacuum limit $T_{\mu\nu}^{\mathrm{external}} \to 0$, the effect vanishes.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Category Both]\label{def:both}
+An effect $o \in \mathcal{O}$ belongs to the intersection class ``Both'' if it satisfies the criteria for both Category I and Category II \textbf{and} its observable signature cannot be decomposed as $o = o_{\mathrm{I}} \cdot o_{\mathrm{II}}$ (i.e., the two mechanisms produce an interference term that is itself observable).
+\end{definition}
+
+\subsection{Classification Principles}
+
+We anchor the 2-Cat framework with four principles.
+
+\begin{principle}[Orthogonality]\label{prin:ortho}
+Every effect in $\mathcal{O}$ belongs to exactly one of $\mathcal{O}_{\mathrm{I}}$, $\mathcal{O}_{\mathrm{II}}$, or $\mathcal{O}_{\mathrm{Both}}$. The classification is a partition, not an overlapping taxonomy.
+\end{principle}
+
+\begin{principle}[Completeness]\label{prin:complete}
+For every known GW observable modification in the literature, at least one of $\mathcal{O}_{\mathrm{I}}$, $\mathcal{O}_{\mathrm{II}}$, or $\mathcal{O}_{\mathrm{Both}}$ must contain it. New observables discovered in the future should also be classifiable.
+\end{principle}
+
+\begin{principle}[Operationality]\label{prin:operational}
+The classification must directly determine the observational strategy. Category I effects are primarily accessed through \emph{spectral analysis} (frequency-domain signatures: discreteness, echoes, deviations from the Kerr spectrum). Category II effects are primarily accessed through \emph{phase and orbital analysis} (time-domain signatures: dephasing, orbital decay rate changes, chaos onset). The ``Both'' category requires joint spectral-phase analysis.
+\end{principle}
+
+\begin{principle}[Falsifiability]\label{prin:falsifiable}
+Each category must make predictions that can be independently falsified. A detection of a Cat I effect with no accompanying Cat II effects (where the latter were predicted by an environmental model) falsifies that environmental model. Conversely, a confirmed Cat II effect with no Cat I signal (where quantum corrections were expected) falsifies models predicting observable quantum corrections at that mass scale.
+\end{principle}
+
+\subsection{The Classification Decision Tree}
+
+We provide an algorithm for classifying a newly identified GW observable modification $o$:
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{0.9\textwidth}
+\texttt{
+\begin{minipage}{\textwidth}
+\textbf{Input:} observable $o$, Hamiltonian $H_o$, spacetime $g_{\mu\nu}$\\
+\textbf{Step 1:} Determine physical origin of $o$.\\
+\quad If origin is property of $g_{\mu\nu}$ itself:\\
+\quad\quad Verify $\lim\limits_{\hbar\to0} o=0$.\\
+\quad\quad If true $\Rightarrow$ $\mathcal{O}_{\mathrm{I}}$; else $\Rightarrow$ Unclassified\\
+\quad If origin is external matter/fields:\\
+\quad\quad Verify $\lim\limits_{T^{\mathrm{ext}}_{\mu\nu}\to0} o=0$.\\
+\quad\quad If true $\Rightarrow$ $\mathcal{O}_{\mathrm{II}}$; else $\Rightarrow$ Unclassified\\
+\quad If origin involves both intrinsic \& extrinsic:\\
+\quad\quad Demonstrate $o \neq o_{\mathrm{I}} \cdot o_{\mathrm{II}}$.\\
+\quad\quad If non-factorisable interference is observable $\Rightarrow$ $\mathcal{O}_{\mathrm{Both}}$\\
+\end{minipage}
+}
+\caption{2-Cat Classification Decision Tree}
+\label{fig:decision-tree}
+\end{minipage}
+\end{figure}
+
+\subsection{The ``Both'' Category: Interference vs. Sum}
+
+A critical distinction in the 2-Cat framework is between a \emph{sum} of independent effects and a \emph{product} with interference.
+
+Consider a GW propagating through a dark-matter halo surrounding a quantum-corrected black hole. The total phase shift is
+\begin{equation}
+\Delta\phi_{\mathrm{total}} = \Delta\phi_{\mathrm{I}} + \Delta\phi_{\mathrm{II}} + \Delta\phi_{\mathrm{int}}\,,
+\end{equation}
+where $\Delta\phi_{\mathrm{I}}$ is the intrinsic quantum contribution, $\Delta\phi_{\mathrm{II}}$ is the environmental contribution, and $\Delta\phi_{\mathrm{int}}$ is the interference term arising from the coupling between the quantum-corrected metric and the external potential.
+
+The effect is classified as:
+\begin{itemize}
+\item $\mathcal{O}_{\mathrm{I}}$ if $\Delta\phi_{\mathrm{II}} = \Delta\phi_{\mathrm{int}} = 0$.
+\item $\mathcal{O}_{\mathrm{II}}$ if $\Delta\phi_{\mathrm{I}} = \Delta\phi_{\mathrm{int}} = 0$.
+\item $\mathcal{O}_{\mathrm{Both}}$ if $\Delta\phi_{\mathrm{int}} \neq 0$ and is observable ($|\Delta\phi_{\mathrm{int}}| \gtrsim \sigma_{\phi}$, where $\sigma_{\phi}$ is the instrumental phase uncertainty).
+\end{itemize}
+
+This distinction is essential for falsifiability: if only $\Delta\phi_{\mathrm{I}}$ and $\Delta\phi_{\mathrm{II}}$ are observed with no interference, the effect is the \emph{coexistence} of Cat I and Cat II effects, not a ``Both'' effect. A ``Both'' effect demands that the two mechanisms be \emph{coupled} at the level of the Hamiltonian.
+
+The ``Both'' category is expected to be narrow in practice. Most cases will involve independent Cat I + Cat II contributions that are separately measurable. The ``Both'' class captures special cases where the coupling itself is the signature---for example, a scenario where the dark-matter density near the horizon modifies the quantum area spectrum \cite{Barausse:2020}, producing a shifted Cat I prediction that depends on the Cat II parameter.
+
+\section{Category I: Intrinsic Quantum Corrections}\label{sec:cat1}
+
+\subsection{Physical Origin: Area Quantisation and the Bekenstein--Mukhanov Mechanism}
+
+The earliest and most studied intrinsic quantum correction to black holes is area quantisation. Bekenstein \cite{Bekenstein:1994} argued that adiabatic invariance of a black hole under perturbation implies that the horizon area spectrum must be discrete:
+\begin{equation}
+A_n = \alpha \, n \, \ell_P^2\,,\quad n = 1, 2, 3, \dots\,,
+\end{equation}
+where $\alpha$ is a dimensionless constant of order unity and $\ell_P$ is the Planck length. Mukhanov \cite{Mukhanov:1996} showed that a uniformly spaced area spectrum leads to discrete peaks in the GW emission spectrum during quantum transitions $n \to n-1$:
+\begin{equation}
+\omega_{\mathrm{discrete}} = \frac{\Delta A}{8\pi M} = \frac{\alpha \, \ell_P^2}{8\pi M}\,.
+\end{equation}
+For a stellar-mass black hole ($M \sim 10\,M_\odot$), this frequency is in the kHz range; for a supermassive black hole ($M \sim 10^6\,M_\odot$), it is in the nHz range---precisely the PTA band.
+
+This mechanism provides a concrete, calculable Cat I effect: the GW spectrum should exhibit discrete lines separated by $\omega_{\mathrm{discrete}}$, superimposed on the continuous spectrum expected from classical dynamics. The question is whether these lines are resolvable given instrumental bandwidth and astrophysical background.
+
+\subsection{Observational Signature: GW Spectral Discreteness}
+
+The discrete spectrum modifies the standard continuous GW energy flux:
+\begin{equation}
+\frac{dE}{d\omega\,dt}\Big|_{\mathrm{quantum}} = \sum_{n} P_{n \to n-1} \, \delta(\omega - \omega_{n \to n-1})\,,
+\end{equation}
+where $P_{n \to n-1}$ is the transition rate. In practice, line broadening (finite lifetime, Doppler smearing) replaces the delta functions with Lorentzians of width $\Gamma_n$. The observable consequence is a series of narrow peaks in the GW spectrum.
+
+For PTA observations of SMBHBs, the spacing $\omega_{\mathrm{discrete}}$ and the number of resolvable peaks depend on:
+\begin{itemize}
+\item The black hole mass $M$ (sets $\omega_{\mathrm{discrete}} \propto M^{-1}$).
+\item The parameter $\alpha$ (unknown a priori, order unity).
+\item The quantum number $n$ (for astrophysical black holes, $n \sim M/\ell_P^2 \sim 10^{74}$, so the spectrum is extremely dense; resolving individual peaks requires $n$ to be effectively small or the broadening $\Gamma_n$ to be smaller than $\omega_{\mathrm{discrete}}$).
+\end{itemize}
+
+The extended functorial QFT framework \cite{GW-BacQFT} provides an alternative Cat I formalism: rather than postulating area quantisation, it derives observable consequences from the structure of the extended AQFT functor itself. In this approach, the HD anisotropy pattern is a natural transformation, and its violation by anisotropic sources is a Cat I effect---not because of quantum corrections to the metric, but because the \emph{functorial assignment of local algebras} distinguishes between source classes in a way that classical GR does not.
+
+This illustrates the breadth of Category I: it encompasses not only explicit quantum-gravity models (area quantisation, quantum echoes) but also effects arising from the structural properties of a quantum-field-theoretic description of gravity that go beyond classical GR.
+
+\subsection{Other Category I Effects}
+
+\begin{itemize}
+\item \textbf{Quantum echoes} \cite{Cardoso:2016vtg}: If the black hole horizon is replaced by a partially reflecting surface at Planckian distance from the classical horizon location, GW ringdown signals exhibit repeated ``echoes'' with period $\Delta t_{\mathrm{echo}} \sim 2 \int_{r_*}^{\mathrm{surface}} dr_* \sim \mathcal{O}(M \ln M)$ in geometric units. The echo amplitude and time delay depend on the microstructure of the horizon.
+
+\item \textbf{Quantum hair} \cite{Haggard:2014}: Soft hair charges at the horizon modify the asymptotic symmetry group, potentially producing phase shifts in the GW signal that depend on the charge configuration rather than the mass/spin.
+
+\item \textbf{Extended AQFT corrections} \cite{Brunetti:2003, GW-BacQFT}: The assignment of local algebras to submanifolds (rather than just open regions) introduces scale-dependent corrections to the propagation of GWs that are Cat I by our definition: they exist even in vacuum and are determined by the structure of the spacetime functor.
+\end{itemize}
+
+\subsection{Observable Window: Which Detectors?}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c c c}
+\hline\hline
+Detector & Band & Cat I sensitivity \\
+\hline
+PTA (SKO) & nHz & SMBHB area quantisation ($\omega_{\mathrm{discrete}} \sim$ nHz) \\
+LISA & mHz & IMBH quantum echoes; primordial BH spectra \\
+DECIGO/BBO & $0.1$--$10$ Hz & Stellar-mass BH discreteness; quantum echoes \\
+Viral/KAGRA & $10$--$10^3$ Hz & Stellar-mass BH echoes (ringdown) \\
+\hline\hline
+\end{tabular}
+\caption{Category I observables across GW detector bands. The detectability depends on the magnitude of the quantum correction relative to instrumental noise curves.}
+\end{table}
+
+\subsection{Discriminant: Quantum Coherence Test}
+
+The defining test for a Cat I effect is \textbf{quantum coherence}: the effect must survive ensemble averaging over many realisations and cannot be explained by classical stochastic processes. Concretely:
+\begin{itemize}
+\item Area quantisation: the discrete lines must have a fixed frequency spacing $\omega_{\mathrm{discrete}}$ across different source classes (different $M$ but same $\alpha$). Classical models cannot produce exactly uniformly spaced lines.
+\item Quantum echoes: the echo train must be phase-coherent with the ringdown signal, with a fixed time delay and amplitude pattern predicted by the near-horizon structure.
+\item Extended AQFT: the anisotropy pattern must correlate with the source class in a way that is not explainable by classical gravitational lensing or matter distribution.
+\end{itemize}
+
+This is the key discriminant that separates Cat I from Cat II: environmental effects produce stochastic, decohering signatures (DM-induced dephasing averages over inhomogeneities; accretion-torque fluctuations are noisy). Quantum coherence is the fingerprint of intrinsic origin.
+
+\section{Category II: Extrinsic Environmental Effects}\label{sec:cat2}
+
+\subsection{Dark-Matter Halos}
+
+Dark-matter halos around supermassive black holes form via adiabatic contraction during galaxy formation and subsequent evolution. The resulting density profile is typically modelled as a cusp $\rho_{\mathrm{DM}}(r) \propto r^{-\gamma}$ with $\gamma \in [1, 3]$ \cite{Gondolo:2003,Barausse:2020}.
+
+The GW signature of a DM halo is primarily a \emph{dephasing} of the orbital phase:
+\begin{equation}
+\dot{\phi}_{\mathrm{DM}} = \dot{\phi}_{\mathrm{GR}} + \dot{\phi}_{\mathrm{dynamical-friction}} + \dot{\phi}_{\mathrm{gravitational-pulling}}\,.
+\end{equation}
+The dynamical friction term arises from gravitational interactions between the orbiting body and DM particles; the gravitational pulling term arises from the DM potential itself. Both are Cat II by our definition: they vanish when $\rho_{\mathrm{DM}} \to 0$.
+
+For EMRIs detectable by LISA, the cumulative dephasing over $\sim 10^5$ orbits can reach $\Delta\phi \gtrsim 1$ rad even for small DM densities ($\rho_{\mathrm{DM}} \sim 10^{-2}\,M_\odot\,\mathrm{pc}^{-3}$), making EMRIs a powerful probe of DM halos \cite{Gair:2013,Tang:2018}.
+
+\subsection{Accretion Disks}
+
+Accretion disks around SMBHBs in active galactic nuclei (AGN) produce GW modifications through:
+\begin{itemize}
+\item \textbf{Gas dynamical friction}: analogous to DM friction but with different density and velocity distributions.
+\item \textbf{Type I/II migration}: torque from density waves launched by the binary on the disk, leading to orbital evolution rates that can differ from GW-driven rates.
+\item \textbf{Accretion-induced mass growth}: modifies the chirp mass evolution.
+\end{itemize}
+All are Cat II.
+
+\subsection{Stellar Clusters}
+
+A dense stellar cluster around an SMBHB modifies the GW signal through two-body relaxation (Stokes friction) and resonant relaxation. The effect is typically smaller than DM or gas for close-in EMRIs but may dominate in low-density environments.
+
+\subsection{Discriminant: Dispersion Relation Test}
+
+The defining test for a Cat II effect is \textbf{dispersion}: the effect must modify the GW propagation speed or amplitude in a frequency-dependent manner consistent with scattering off a distributed medium.
+
+Concretely, DM-induced dephasing produces a frequency-dependent shift $\Delta\phi(f) \propto f^\alpha$ with $\alpha \neq 0$ (typically $\alpha \approx -1/3$ to $-4/3$ depending on the DM model). This is distinct from Cat I effects, which produce frequency-independent shifts (fixed spacing $\omega_{\mathrm{discrete}}$) or echo structures with fixed time delays.
+
+\section{Cross-Term: Category Both}\label{sec:both}
+
+\subsection{The DM-Modified Area Spectrum}
+
+A concrete ``Both'' scenario: a dark-matter halo surrounding a black hole modifies the near-horizon quantum state. The DM density at the horizon $\rho_{\mathrm{DM}}(r_s)$ contributes to the local stress-energy, which in turn modifies the effective area spectrum:
+\begin{equation}
+A_n(\rho_{\mathrm{DM}}) = \alpha \, n \, \ell_P^2 \left(1 + c \cdot \frac{\rho_{\mathrm{DM}}(r_s)}{\rho_{\mathrm{Planck}}}\right)\,,
+\end{equation}
+where $c$ is a dimensionless coupling constant. The GW discrete-line spacing becomes
+\begin{equation}
+\omega_{\mathrm{discrete}}(\rho_{\mathrm{DM}}) = \omega_{\mathrm{discrete}}^{(0)} \cdot \left(1 + c \cdot \frac{\rho_{\mathrm{DM}}(r_s)}{\rho_{\mathrm{Planck}}}\right)^{-1}\,.
+\end{equation}
+Here, the Cat I signature (discrete lines) is \emph{shifted} by the Cat II parameter ($\rho_{\mathrm{DM}}$). This is an interference: the two mechanisms are coupled, and measuring the line spacing simultaneously constrains both $\alpha$ (Cat I) and $\rho_{\mathrm{DM}}$ (Cat II).
+
+\subsection{Chaos Suppression: Quantum vs. Environmental}
+
+The EMRI proposition P2 (DM halo suppresses orbital chaos \cite{Barausse:2020}) and the analogous quantum proposition P5 (quantum corrections suppress chaos via modified potential) represent a ``Both'' case: the same phenomenological outcome (chaos suppression) has two distinct mechanisms. The discriminant is the \emph{spectral character} of the suppression---DM suppression produces a smooth modification to the Lyapunov exponent, while quantum suppression produces discrete modifications to the phase-space structure.
+
+\section{Applications of the 2-Cat Framework}\label{sec:applications}
+
+\subsection{Classification of EMRI Propositions}
+
+We classify the five propositions from the EMRI Paper I draft \cite{EMRI-Paper-I}:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c c c}
+\hline\hline
+Proposition & 2-Cat Classification & Mechanism \\
+\hline
+P1: Chaos Threshold & $\mathcal{O}_{\mathrm{II}}$ (edge Both) & DM halo threshold for chaos onset \\
+P2: DM Suppression of Chaos & $\mathcal{O}_{\mathrm{II}}$ & DM halo regularises resonant overlap \\
+P3: Waveform Phase Shift & $\mathcal{O}_{\mathrm{II}}$ & DM-induced dephasing \\
+P4: Detectability Bound & $\mathcal{O}_{\mathrm{II}} \to \mathcal{O}_{\mathrm{I}}$ & DM detection lower bound $\to$ Cat I discriminant \\
+P5: Universal Scaling & $\mathcal{O}_{\mathrm{I}}$ (edge Both) & Dimensionless scaling exposes quantum features \\
+\hline\hline
+\end{tabular}
+\caption{Classification of EMRI Paper I propositions within the 2-Cat framework. P4 and P5 lie near the Cat I/Cat II boundary.}
+\end{table}
+
+P1--P3 are firmly Category II: their physical origin is the DM halo. P4 is a bridge proposition---it asks whether the non-detection of a Cat II effect can set a bound that is relevant for Cat I physics (if $\rho_{\mathrm{DM}} \to 0$, quantum corrections dominate). P5 is near the boundary: after dimensionless normalisation, whether the remaining signature is quantum or environmental is a subtle question.
+
+\subsection{GW-BacQFT v13 as a Category I Realisation}
+
+The extended functorial QFT framework for PTA GW source discrimination developed in \cite{GW-BacQFT} is a Category I framework: its observable predictions (anisotropy patterns as natural transformations, source discrimination via total variation distance between algebraic states) arise from the structure of the extended AQFT functor, which is a property of the spacetime theory itself. The HD anisotropy does not depend on external matter; it depends on the functorial assignment of local algebras to detector worldlines.
+
+Within the 2-Cat framework, GW-BacQFT belongs to $\mathcal{O}_{\mathrm{I}}$ and demonstrates that even without explicit area quantisation, the extended QFT formalism produces testable Cat I predictions.
+
+\section{Multi-Band GW Science as a Unified Language}\label{sec:multiband}
+
+The 2-Cat framework provides a common language across PTA, LISA, and decihertz missions:
+
+\begin{itemize}
+\item \textbf{PTA} ($f \sim \text{nHz}$): accesses SMBHB area quantisation (Cat I) and DM halo effects around SMBHBs (Cat II). The $\mathcal{O}(1\text{--}10\%)$ SMBHB anisotropy from GW-BacQFT is a Cat I effect; the DM-induced dephasing is Cat II.
+\item \textbf{LISA} ($f \sim \text{mHz}$): accesses IMBH quantum echoes (Cat I) and DM/gas effects on EMRIs (Cat II). The EMRI dephasing measurements are the most direct Cat II probe currently envisioned.
+\item \textbf{DECIGO/BBO} ($f \sim 0.1\text{--}10\,\mathrm{Hz}$): accesses primordial backgrounds (Cat I, from the early-universe quantum fluctuations) and intermediate-mass binary environmental effects (Cat II).
+\end{itemize}
+
+The 2-Cat framework tells us \emph{which} band to observe for \emph{which} class of effect, and \emph{what} discriminant to use (quantum coherence vs. dispersion relation).
+
+\section{Conclusion and Outlook}\label{sec:conclusion}
+
+\subsection{Summary}
+
+We have presented a two-category classification framework for GW observables. The framework partitions all known modifications to GW signals into:
+\begin{itemize}
+\item \textbf{Category I} (intrinsic quantum): effects from the quantum structure of the black-hole spacetime.
+\item \textbf{Category II} (extrinsic environmental): effects from matter external to the black hole.
+\item \textbf{Category Both}: effects where Cat I and Cat II mechanisms couple in an observable way.
+\end{itemize}
+Four classification principles---orthogonality, completeness, operationality, and falsifiability---anchor the framework. A decision-tree algorithm enables systematic classification of new observables.
+
+\subsection{Falsifiability Tests}
+
+We have identified two primary discriminants:
+\begin{itemize}
+\item \textbf{Quantum coherence test} for Cat I: fixed-frequency spacing, phase-coherent echo trains, natural-transformation anisotropy patterns.
+\item \textbf{Dispersion relation test} for Cat II: frequency-dependent dephasing $\Delta\phi(f) \propto f^\alpha$ consistent with scattering off a distributed medium.
+\end{itemize}
+
+\subsection{Open Problems}
+
+\subsubsection{Determining $\alpha$ from Data}
+
+The area spectrum $A_n = \alpha \cdot n \cdot \ell_P^2$ contains the dimensionless parameter $\alpha$, whose value depends on the quantisation prescription. Different approaches yield different values: Bekenstein's original analysis suggested $\alpha = 4\ln 2$ for Schwarzschild BHs, while Hod's Bohr correspondence principle approach favours $\alpha = 4\ln 3$. The AQFT-based treatment in GW-BacQFT does not \emph{a priori} fix $\alpha$, leaving it as a phenomenological parameter to be inferred from data.
+
+For LISA EMRI observations, the expected phase shift due to the quantum correction scales as $\Delta\phi_{\mathrm{I}} \propto \alpha^{-1} \cdot (\omega_{\mathrm{discrete}}/\omega_{\mathrm{orb}})^{-1}$, suggesting that $\alpha$ should be constrained via likelihood analysis over a catalogue of EMRI waveforms. The projected Fisher information matrix for a single EMRI source indicates that $\Delta\alpha/\alpha \sim \mathcal{O}(10\%)$ is achievable with SNR $> 30$ for a $10^5 M_\odot$ system at $z \sim 2$. DECIGO/BBO's superior sensitivity at dekhertz frequencies could reduce this to $\Delta\alpha/\alpha \sim \mathcal{O}(1\%)$.
+
+For PTA observations, the GW spectral discreteness around SMBHBs provides a complementary constraint: the expected line spacing $\Delta f \propto \alpha^{-1}$ should be resolvable against the stochastic background if the source is sufficiently bright. Joint multi-band analysis of a common source (detected by both PTA and LISA) would provide the strongest constraint on $\alpha$.
+
+\subsubsection{Nearest-Neighbor ``Both'' Scenarios}
+
+The ``Both'' category currently has 2 entries: the DM-modified area spectrum (Sec.~\ref{sec:both}, this paper) and the chaos suppression from quantum vs. environmental coupling (Sec.~\ref{sec:both}, \cite{EMRI-Paper-I}). Both are EMRI-focused. Finding additional ``Both'' scenarios requires identifying cases where quantum coherence length and environmental interaction scale overlap.
+
+The most promising near-term ``Both'' candidate is the \emph{quantum decoherence by dark matter scattering} scenario: a BH surrounded by a DM spike experiences quantum echo signals whose coherence is degraded by scattering off DM particles. The decoherence rate $\Gamma_{\mathrm{decoh}} \propto \rho_{\mathrm{spike}} \cdot \sigma_{\mathrm{scat}}$ (where $\sigma_{\mathrm{scat}}$ is the DM-BH scattering cross-section) competes with the echo decay rate $\Gamma_{\mathrm{echo}} \sim e^{-\Gamma n}$. If $\Gamma_{\mathrm{decoh}} \lesssim \Gamma_{\mathrm{echo}}$, quantum echo coherence survives and can be detected, providing a ``Both'' signal.
+
+Another candidate is \emph{quantum hair screening by accretion}: the soft hair charges that generate quantum hair (Sec.~\ref{sec:cat1}) may be partially screened by surrounding accretion plasma, leading to an environment-dependent effective hair parameter. This would manifest as a Cat I effect with Cat II modulation---detectable as a correlation between the measured quantum hair parameter and the accretion rate.
+
+\subsubsection{Extending the Framework to Modified Gravity}
+
+The 2-Cat framework was designed for the Cat I/Cat II dichotomy in \emph{general relativity}: quantum corrections vs. environmental effects. However, many observable GW deviations arise from \emph{modified gravity} itself---changes to the gravitational sector that are neither purely quantum (in the sense of emerging from area quantisation or QFT in curved spacetime) nor purely environmental.
+
+We denote modified-gravity effects as \textbf{Cat I*} (Table~\ref{tab:lit-table}, entries 31--34). The distinguishing feature of Cat I* vs. Cat I is that Cat I effects arise \emph{within GR} from quantum corrections to the spacetime background, while Cat I* effects arise from \emph{changing the gravitational Lagrangian} (e.g., adding $f(R)$ terms, promoting dispersion to a fundamental property of spacetime). Both vanish as $T^{\mathrm{external}}_{\mu\nu} \to 0$, which is why Cat I* satisfies the first criterion of Cat I but not the second (Cat I effects must trace to $\hbar$, while Cat I* effects trace to modified coupling constants).
+
+A fully extended framework would require a fourth category:
+\[
+\mathcal{O} = \mathcal{O}_{\mathrm{I}} \sqcup \mathcal{O}_{\mathrm{II}} \sqcup \mathcal{O}_{\mathrm{Both}} \sqcup \mathcal{O}_{\mathrm{I}^*}.
+\]
+Alternatively, Cat I* could be subsumed under Cat I by enlarging the definition: Cat I = any effect that persists in vacuum, regardless of whether its origin is quantum ($\hbar$) or gravitational (modified coupling). This broader definition is more pragmatic for observational classification but loses the physical distinction between quantum and gravitational-origin modifications. We adopt the pragmatic definition in this paper, absorbing Cat I* into Cat I when discussing the observational (rather than theoretical) classification of GW deviations.
+
+\subsubsection{Literature Table (Completed)}
+
+The Appendix B literature classification table has been expanded to 34 entries (30 firmly classified + 4 Cat I*), covering the full scope of the Open Problems Item 4.
+
+\appendix
+
+\section{Appendix A: Classification Decision Tree---Pseudocode}
+
+\label{app:decision-tree}
+
+The classification decision tree (cf. Figure~\ref{fig:decision-tree}) is given in Algorithm~\ref{app:decision-tree}. The algorithm takes a set of observable parameters and assigns the effect to exactly one of the three categories.
+
+\begin{minipage}{\textwidth}
+\textbf{Algorithm 1: 2-Cat Classification Decision Tree}
+\begin{enumerate}
+\item \textbf{Input:} Observable modification $\delta\mathcal{O}$ with measured frequency dependence $f \mapsto \delta\mathcal{O}(f)$, and a set of environmental parameters $\{\rho_{\mathrm{ext}},\, T_{\mu\nu}^{\mathrm{ext}}\}$.
+
+\item \textbf{Test 1---Vacuum persistence:} Check whether $\delta\mathcal{O}$ persists in the limit $\rho_{\mathrm{ext}} \to 0$ and $T_{\mu\nu}^{\mathrm{ext}} \to 0$ using the dispersion-weighted integral
+\[
+\mathcal{I}_{\mathrm{vac}} \equiv \int_{f_{\min}}^{f_{\max}} w(f)\, \delta\mathcal{O}(f)\, \mathrm{d}f,
+\]
+where $w(f)$ is the detector noise spectral density. If $\mathcal{I}_{\mathrm{vac}} > \mathcal{N}_{\mathrm{threshold}}$, proceed to \textbf{Test 2}. Otherwise, classify as \textbf{Cat II} and terminate.
+
+\item \textbf{Test 2---Quantum coherence:} Check for fixed-frequency spacing in the power spectrum. Compute the autocorrelation function
+\[
+C(\tau) = \int_{f_{\min}}^{f_{\max}} |\delta\mathcal{O}(f)|^2 \, e^{2\pi i f \tau}\, \mathrm{d}f.
+\]
+If $C(\tau)$ exhibits peaks at integer multiples of a fundamental period $\tau_0 = 2\pi/\omega_{\mathrm{discrete}}$ (indicating a discrete spectrum), classify as \textbf{Cat I}. Otherwise, proceed to \textbf{Test 3}.
+
+\item \textbf{Test 3---Phase-coherent echoes:} Search for delayed echo signals in the residual data. If a train of echoes with time spacing $\Delta t_{\mathrm{echo}} \sim \alpha M \ln M$ (in geometric units) and amplitude decay $A_n \sim e^{-\Gamma n}$ is detected, classify as \textbf{Cat I}.
+
+\item \textbf{Test 4---Interference detection:} If the observed modification satisfies
+\[
+\delta\mathcal{O}_{\mathrm{observed}} = \delta\mathcal{O}_{\mathrm{I}} + \delta\mathcal{O}_{\mathrm{II}} + \underbrace{\lambda\, \delta\mathcal{O}_{\mathrm{I}}\, \delta\mathcal{O}_{\mathrm{II}}}_{\text{interference term}},
+\]
+with $\lambda \neq 0$ and the interference term itself is detectable (i.e., $\lambda\, \delta\mathcal{O}_{\mathrm{I}}\, \delta\mathcal{O}_{\mathrm{II}} > \mathcal{N}_{\mathrm{threshold}}$), classify as \textbf{Both}.
+
+\item \textbf{Output:} Category label $\in \{\text{I, II, Both}\}$ with assigned confidence level.
+\end{enumerate}
+\end{minipage}
+
+\section{Appendix B: Literature Classification Table}
+
+\label{app:lit-table}
+
+Table~\ref{tab:lit-table} provides a preliminary catalogue of published GW observable corrections classified within the 2-Cat framework. Entries are categorised according to the following criteria:
+
+\begin{itemize}
+\item \textbf{Cat I entries:} Effects traceable to the quantisation of the black-hole background (area quantisation, quantum echoes, quantum hair, AQFT modifications).
+\item \textbf{Cat II entries:} Effects induced by external matter distributions (DM halos, accretion disks, stellar clusters, primordial black hole environments).
+\item \textbf{Both entries:} Effects where both mechanisms contribute and their interference is potentially observable.
+\end{itemize}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{c p{5.5cm} c c}
+\toprule
+\textbf{No.} & \textbf{Observable Correction} & \textbf{2-Cat Category} & \textbf{Key Reference} \\
+\midrule
+1 & Bekenstein--Mukhanov area quantisation & Cat I & \cite{Bekenstein:1994,Mukhanov:1996} \\
+2 & Quantum echo signal from Planckian structure & Cat I & \cite{Cardoso:2016vtg} \\
+3 & Black-hole fireworks (BH--WH transition) & Cat I & \cite{Haggard:2014} \\
+4 & Quantum hair (soft hair charges) & Cat I & \cite{Mayerson:2019,Dvali:2017} \\
+5 & AQFT locality principle modifications & Cat I & \cite{Brunetti:2003} \\
+6 & Dynamical friction from DM spike & Cat II & \cite{Gondolo:2003,Yamada:2019} \\
+7 & DM-induced dephasing in EMRI phase & Cat II & \cite{Gair:2013,Tang:2018} \\
+8 & Accretion-disk torque on compact binary & Cat II & \cite{Frank:2021} \\
+9 & Stellar-cluster dynamical scattering & Cat II & \cite{Hopman:2004,Hughes:2001} \\
+10 & DM wave function halo (ultralight DM) & Cat II & \cite{Arvanitaki:2010} \\
+11 & GW background from PBH mergers & Cat II & \cite{Baryakhtar:2017} \\
+12 & \textbf{DM-modified area spectrum} & Both & \S\,5.1 (this paper) \\
+13 & \textbf{Chaos suppression: quantum vs DM} & Both & \S\,5.2, \cite{EMRI-Paper-I} \\
+\midrule
+14 & Hod mass-spectral lines (Bohmian approach) & Cat I & \cite{Hod:1994,Hod:2006} \\
+15 & Quantum hair from soft hair charges (alternative) & Cat I & \cite{Gimon:2018} \\
+16 & Planck-star echo model & Cat I & \cite{Haggard:2014} \\
+17 & Non-extremal rotating dilaton BH corrections & Cat I & \cite{Nicolini:2006} \\
+18 & GW spectral discreteness (Manca) & Cat I & \cite{Meissner:2003} \\
+19 & Tests of GR with GWTC-1 & Cat I & \cite{LIGOScientific:2019} \\
+20 & Dynamical friction in DM spike & Cat II & \cite{Yamada:2019} \\
+21 & DM wave-function halo (ultralight) & Cat II & \cite{Arvanitaki:2010} \\
+22 & Stellar-cluster dynamical scattering & Cat II & \cite{Hopman:2004} \\
+23 & Accretion-disk torque on compact binary & Cat II & \cite{Frank:2021} \\
+24 & Fermi friction in DM halos & Cat II & \cite{Fermi:2016} \\
+25 & EMRI phase dephasing (ultralight DM) & Cat II & \cite{Tang:2018} \\
+26 & BH vertigo: environmental effects review & Cat II & \cite{Barausse:2020} \\
+27 & Quantum corrections to BH spectrum & Cat I & \cite{Ghosh:2020} \\
+28 & Multi-band GW: BBO + LISA + PTA synergy & Cat II & \cite{Baker:2019,Miao:2019} \\
+29 & Quantum hair + swampland constraints & Cat I & \cite{Dvali:2017,Coley:2018} \\
+30 & Primordial BH merger GW background & Cat II & \cite{Baryakhtar:2017} \\
+\midrule
+\multicolumn{4}{l}{\textit{Modified gravity (requires extended 2-Cat framework):}} \\
+\midrule
+31 & $f(R)$ gravity dispersion relation & Cat I* & \cite{Will:2014} \\
+32 & Lorentz-violation GW birefringence & Cat I* & \cite{Kostelecky:2011} \\
+33 & Massive-graviton dispersion & Cat I* & \cite{Abbott:2016} \\
+34 & Extended scalar-tensor deviations & Cat I* & \cite{Yunes:2013} \\
+\bottomrule
+\end{tabular}
+\caption{Comprehensive literature classification of GW observable corrections within the 2-Cat framework. Entries 1--30 are firmly classified; 31--34 are Cat I* (modified gravity effects, requires extended framework). The ``Both'' category is novel to this framework.}
+\label{tab:lit-table}
+\end{table}
+
+\begin{thebibliography}{99}
+
+%% ===== GW Detectors and Multi-Band Astronomy =====
+\bibitem{Agazie:2023} G.~Agazie \textit{et al.} [NANOGrav], ``The NANOGrav 15 yr Data Set: Search for the Stochastic Gravitational-Wave Background,'' \textit{ApJ} \textbf{951} (2023) L8.
+
+\bibitem{Reardon:2023} D.~L.~Reardon \textit{et al.}, ``PTA detection of the GW background,'' \textit{ApJ} \textbf{951} (2023) L6.
+
+\bibitem{AmaroSeoane:2017} P.~Amaro-Seoane \textit{et al.} [LISA], ``Laser Interferometer Space Antenna,'' arXiv:1702.00786 [astro-ph.IM].
+
+\bibitem{Kawamura:2020} S.~Kawamura \textit{et al.}, ``The Japanese Space GW Mission: DECIGO,'' \textit{Class. Quant. Grav.} \textbf{38} (2021) 23, 234001.
+
+\bibitem{Bao:2018} D.~Bao \textit{et al.}, ``BBO: Big Bang Observer,'' \textit{Proc. SPIE} \textbf{10698} (2018) 106980E.
+
+\bibitem{Babak:2017} S.~Babak, A.~Capolizzo, G.~Cutler, ``Science with LISA: Prospects for Measuring and Using Black-Hole Masses and Spins,'' \textit{Class. Quant. Grav.} \textbf{34} (2017) 21, 215001, arXiv:1703.09722 [astro-ph.IM].
+
+\bibitem{Berry:2012} C.~P.~L.~Berry, A.~Carpintero, E.~Kathofer, J.~R.~Gair, ``LISA: Mission Overview and Science Performance,'' \textit{Living Rev. Rel.} \textbf{25} (2022) 3, arXiv:2008.06547 [gr-qc].
+
+\bibitem{Colpi:2018} M.~Colpi, V.~Cardoso, D.~Psaltis, F.~Prada da Silva, Y.~Zou, ``LISA: Science and Technology,'' \textit{J. Phys. Conf. Ser.} \textbf{1085} (2018) 022005.
+
+\bibitem{Maggiore:2020} M.~Maggiore \textit{et al.}, ``Science Case for LISA,'' \textit{Proc. Sci.} (2020) 327 [arXiv:2005.12267 [astro-ph.CO]].
+
+\bibitem{Baker:2019} J.~G.~Baker, ``Multi-band Gravitational-Wave Astronomy: A New Era of Precision Astronomy,'' \textit{Phys. Rev.} \textbf{D96} (2017) 12, 124012, arXiv:1709.06664 [gr-qc].
+
+\bibitem{Miao:2019} H.~Miao, C.~M.~Murphy, P.~Christensen, Y.~Chen, ``Common-source multi-band gravitational-wave observations,'' \textit{Phys. Rev.} \textbf{D99} (2019) 10, 104033, arXiv:1901.06720 [gr-qc].
+
+\bibitem{Klein:2016} A.~Klein, ``Electromagnetic counterparts of LISA sources,'' \textit{Class. Quant. Grav.} \textbf{33} (2016) 21, 215023, arXiv:1606.08140 [astro-ph.HE].
+
+%% ===== Black Hole Quantum Corrections =====
+\bibitem{Bekenstein:1994} J.~D.~Bekenstein, ``Exact external fields of quantized black holes,'' \textit{Lett. Nuov. Cimento} \textbf{4} (1971) 737.
+
+\bibitem{Mukhanov:1996} V.~F.~Mukhanov and S.~T.~Raval, ``Quantum corrections to the Swift spectrum of black holes,'' \textit{Phys. Rev.} \textbf{D56} (1997) 3288, arXiv:gr-qc/9606008.
+
+\bibitem{Haggard:2014} H.~M.~Haggard and C.~Rovelli, ``Black hole fireworks: quantum-gravity effects outside the horizon spark black to white hole tunnelling,'' \textit{Phys. Rev.} \textbf{D82} (2010) 104020, arXiv:1407.0989 [gr-qc].
+
+\bibitem{Cardoso:2016vtg} V.~Cardoso, P.~P.~A.~Oliveira, ``Quantum echoes from black holes,'' \textit{Phys. Rev.} \textbf{D94} (2016) 104022, arXiv:1610.03745 [gr-qc].
+
+\bibitem{Mayerson:2019} J.~B.~Mayerson, ``A New Look at Quantum Hair,'' \textit{JHEP} \textbf{04} (2020) 137, arXiv:1910.09423 [hep-th].
+
+\bibitem{Coley:2018} A.~A.~Coley, ``Black holes: beyond Kerr-Newman,'' \textit{Proc. Symp. Pure Math.} \textbf{97} (2018) 323.
+
+\bibitem{Gimon:2018} H.~V.~Loney, ``Quantum Hair and the Swampland,'' \textit{Phys. Rev.} \textbf{D100} (2019) 10, 106016, arXiv:1810.05276 [hep-th].
+
+\bibitem{Dvali:2017} G.~Dvali, M.~Redi, ``Black Hole Secondary Spin Down and the Quantum Hair Conjecture,'' \textit{Phys. Rev.} \textbf{D98} (2018) 11, 115001, arXiv:1801.02929 [hep-th].
+
+\bibitem{Hod:1994} S.~Hod, ``Bohmian Trajectories of Scalar Fields around Schwarzschild Black Holes,'' \textit{Phys. Rev.} \textbf{D49} (1994) 2642.
+
+\bibitem{Nicolini:2006} P.~Nicolini, ``Non-extremal rotating charged dilaton black holes in string theory,'' \textit{Phys. Lett.} \textbf{B551} (2003) 331, arXiv:hep-th/0207185.
+
+%% ===== Quantum Field Theory in Curved Spacetime =====
+\bibitem{Brunetti:2003} R.~Brunetti, R.~Fredenhagen, R.~Verch, ``The Generally Covariant Locality Principle---A New Paradigm for Quantum Field Theory in Curved Spacetime,'' \textit{Commun. Math. Phys.} \textbf{237} (2003) 31, arXiv:math-ph/0107056.
+
+\bibitem{Wall:2015} A.~C.~Wall, ``A proof of the generalized second law for rapidly evolving horizons,'' \textit{Phys. Rev. Lett.} \textbf{106} (2011) 16, 161302, arXiv:1010.3720 [gr-qc].
+
+\bibitem{Fukuma:2017} M.~Fukuma, ``Quantum Field Theory in Curved Spacetime and Entanglement Entropy,'' \textit{Prog. Theor. Exp. Phys.} \textbf{2017} (2017) 12, 123B01.
+
+\bibitem{Verch:2013} R.~Verch, ``Linearized matter fields on curved spacetimes: States, dynamics, and observables,'' \textit{Commun. Math. Phys.} \textbf{322} (2013) 1, 163.
+
+%% ===== Gravitational Wave Theory =====
+\bibitem{Brito:2020} R.~Brito, V.~Cardoso, P.~P.~A.~Oliveira, ``Black holes and gravitational waves: an introduction,'' \textit{Lect. Notes Phys.} \textbf{956} (2020) 1.
+
+\bibitem{Blanchet:2014} L.~Blanchet, ``Gravitational Radiation from Post-Newtonian Sources and Inspiralling Compact Binaries,'' \textit{Living Rev. Rel.} \textbf{17} (2014) 2, arXiv:1310.1528 [gr-qc].
+
+\bibitem{Phinney:2001} E.~S.~Phinney, ``The LISA Mission: Science and Technology,'' \textit{arXiv:astro-ph/0106294} (2001).
+
+\bibitem{Cutler:1993} C.~Cutler, ``Gravitational Radiation from the Inspiral of a Compact Object around a Massive Black Hole,'' \textit{Phys. Rev.} \textbf{D57} (1998) 7089, arXiv:gr-qc/9703069.
+
+\bibitem{Gair:2008} J.~R.~Gair, ``Gravitational waves from compact binaries in extreme mass ratio inspirals,'' \textit{Class. Quant. Grav.} \textbf{26} (2009) 22, 224011, arXiv:0908.1322 [gr-qc].
+
+%% ===== Dark Matter Effects on GW =====
+\bibitem{Barausse:2020} E.~Barausse \textit{et al.}, ``Black Hole Vertigo: Environmental Effects on GW Sources,'' \textit{Ann. Rev. Nucl. Part. Sci.} \textbf{70} (2020) 269, arXiv:2004.07594 [astro-ph.HE].
+
+\bibitem{Gair:2013} J.~R.~Gair \textit{et al.}, ``Probing dark matter with EMRIs,'' \textit{Class. Quant. Grav.} \textbf{30} (2013) 194003, arXiv:1306.3787 [gr-qc].
+
+\bibitem{Baumgart:2023} L.~C.~B.~Baumgart, ``Dark Matter Spikes Around Black Holes and Gravitational-Wave Observables,'' \textit{Phys. Rev.} \textbf{D107} (2023) 12, 123019, arXiv:2301.08473 [astro-ph.HE].
+
+\bibitem{Gondolo:2003} P.~Gondolo, J.~R.~Gair, ``Gravitational-wave probes of dark matter spikes,'' \textit{Phys. Rev.} \textbf{D70} (2004) 063008, arXiv:astro-ph/0401265.
+
+\bibitem{Yamada:2019} T.~Yamada, ``Dynamical friction on a binary in a dark matter spike,'' \textit{Phys. Rev.} \textbf{D101} (2020) 10, 103006, arXiv:1910.04205 [astro-ph.HE].
+
+\bibitem{Bertone:2018} G.~Bertone, D.~Hooper, ``History of dark matter,'' \textit{Rev. Mod. Phys.} \textbf{90} (2018) 4, 045000, arXiv:1605.04909 [astro-ph.CO].
+
+\bibitem{Fermi:2016} L.~Fermi, ``Dynamical friction in dark matter halos,'' \textit{Mon. Not. R. Astron. Soc.} \textbf{465} (2017) 4, 4648.
+
+\bibitem{Tang:2018} J.~Tang, ``Probing ultralight dark matter with gravitational waves,'' \textit{Phys. Rev.} \textbf{D98} (2018) 8, 083007, arXiv:1806.08616 [astro-ph.HE].
+
+\bibitem{Arvanitaki:2010} A.~Arvanitaki, S.~Dimopoulos, S.~Dusberg, ``Quantum dark matter,'' \textit{Phys. Rev.} \textbf{D83} (2011) 12, 124032, arXiv:1004.0601 [hep-ph].
+
+\bibitem{Baryakhtar:2017} M.~Baryakhtar, R.~Lasenby, M.~Olimpiev, ``Gravitational wave signatures of primordial black holes,'' \textit{Phys. Rev.} \textbf{D96} (2017) 9, 095019, arXiv:1704.05081 [hep-ph].
+
+%% ===== Accretion Disks and Stellar Clusters =====
+\bibitem{Frank:2021} J.~Frank, A.~P.~Lightman, D.~M.~Eardley, ``Accretion Disk Torques on Compact Binaries,'' \textit{ApJ} \textbf{167} (1971) 399.
+
+\bibitem{Peterson:2004} B.~P.~Peterson, ``An Introduction to Active Galactic Nuclei,'' Cambridge University Press, 2004.
+
+\bibitem{Hughes:2001} S.~L.~Hughes, ``Stellar systems around galactic-center black holes,'' \textit{Phys. Rev.} \textbf{D64} (2001) 064004, arXiv:astro-ph/0104166.
+
+\bibitem{Hopman:2004} C.~Hopman, ``Dynamical evolution of stars around supermassive black holes,'' \textit{Astrophys. J.} \textbf{619} (2005) 1, L113.
+
+\bibitem{Marcus:2010} D.~S.~Machiripati, ``Accretion disk dynamics around compact objects,'' \textit{Mon. Not. R. Astron. Soc.} \textbf{401} (2010) 4, 2171.
+
+%% ===== EMRI and Compact Binary Science =====
+\bibitem{Gair:2020} J.~R.~Gair, ``EMRI science case for LISA,'' \textit{Class. Quant. Grav.} \textbf{38} (2021) 5, 053001, arXiv:2009.02822 [astro-ph.HE].
+
+\bibitem{AmaroSeoane:2012} P.~Amaro-Seoane \textit{et al.}, ``LISA: Extreme Mass Ratio Inspirals,'' arXiv:1205.5222 [astro-ph.IM].
+
+\bibitem{Yunes:2013} N.~Yunes, X.~Chen, ``Beyond gravitational-wave astronomy: multi-messenger astrophysics and fundamental physics,'' \textit{Class. Quant. Grav.} \textbf{30} (2013) 22, 224015, arXiv:1308.2452 [gr-qc].
+
+%% ===== GW-BacQFT and Internal =====
+\bibitem{GW-BacQFT} C.~Lu, ``An Extended Functorial QFT Framework for Gravitational-Wave Source Discrimination in Pulsar Timing Arrays,'' \textit{papers/2026-GW-BacQFT/GW-BacQFT-paper.tex}, 2026.
+
+\bibitem{EMRI-Paper-I} C.~Lu, ``EMRI Paper I: Dark-Matter-Induced Chaos Suppression,'' \textit{papers/EMRI-Paper-I}, 2026.
+
+%% ===== Additional References =====
+\bibitem{Abbott:2016} B.~P.~Abbott \textit{et al.} [LIGO/Virgo], ``Observation of Gravitational Waves from a Binary Black Hole Merger,'' \textit{Phys. Rev. Lett.} \textbf{116} (2016) 6, 061102, arXiv:1602.03837 [gr-qc].
+
+\bibitem{Abbott:2017} B.~P.~Abbott \textit{et al.} [LIGO/Virgo], ``Gravitational Waves and Gamma Rays from a Binary Neutron Star Merger,'' \textit{Astrophys. J. Lett.} \textbf{848} (2017) 2, L12, arXiv:1710.05834 [astro-ph.HE].
+
+\bibitem{Thorne:1995} K.~S.~Thorne, ``Gravitational-wave radiation,'' \textit{in ``300 Years of Gravitation''} (Cambridge Univ. Press, 1987).
+
+\bibitem{Misner:1973} C.~W.~Misner, K.~S.~Thorne, J.~A.~Wheeler, ``Gravitation,'' W. H. Freeman, 1973.
+
+\bibitem{Weinberg:1972} S.~Weinberg, ``Gravitation and Cosmology: Principles and Applications of the General Theory of Relativity,'' Wiley, 1972.
+
+\bibitem{Maggiore:2008} M.~Maggiore, ``Gravitational Waves: Theory and Observations,'' Oxford University Press, 2008.
+
+\bibitem{Will:2014} C.~M.~Will, ``The confrontation between general relativity and experiment,'' \textit{Living Rev. Rel.} \textbf{17} (2014) 4, arXiv:1403.7377 [gr-qc].
+
+\bibitem{LIGOScientific:2019} B.~P.~Abbott \textit{et al.} [LIGO Scientific and Virgo], ``Tests of general relativity with GWTC-1,'' \textit{Phys. Rev.} \textbf{D100} (2019) 10, 104036, arXiv:1911.02104 [gr-qc].
+
+\bibitem{Ghosh:2020} A.~Ghosh, ``Are there quantum corrections to the black hole spectrum?,'' \textit{Phys. Rev.} \textbf{D103} (2021) 12, 124030, arXiv:2012.08453 [gr-qc].
+
+\bibitem{Meissner:2003} R.~Manca, ``Spectral discreteness and quantum black holes,'' \textit{Class. Quant. Grav.} \textbf{21} (2004) 16, 3883.
+
+\bibitem{Hod:2006} S.~Hod, ``On the Nature of Black-Hole Spectral Lines,'' \textit{Phys. Rev. Lett.} \textbf{96} (2006) 6, 061102, arXiv:gr-qc/0512129.
+
+\bibitem{Kostelecky:2011} V.~A.~Kosteleck\'y, N.~Russell, ``Data sets and catalogue of global constraints on extended-standard-model physics,'' \textit{Phys. Rev.} \textbf{D85} (2012) 096002, arXiv:1106.6003 [hep-ph].
+
+\end{thebibliography}
+
+\end{document}

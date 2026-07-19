@@ -1,0 +1,117 @@
+{
+  "authoritative_inputs": [
+    {
+      "kind": "initial_task",
+      "source": "ralph run",
+      "text": "RALPH 流程试运行：建立一个金融市场数据分析与预测研究原型。先严格读取 loop-state.json、当前阶段契约和任务卡，只做当前阶段，不能跳步。核心目标：研究信息泄露、数据发布时间/修订、幸存者偏差、选择偏差、滚动窗口与特征泄露；同时研究资金博弈、拥挤度、仓位、流动性、资金费率或公开可获得的同类时间戳信号。任何模型与回测都必须仅使用当时可得数据，采用滚动/走步样本外验证、明确训练/验证/测试时间边界、基准模型、交易成本和不确定性；把“稳定一段时间”定义为预先注册的连续样本外窗口指标，绝不承诺盈利或保证预测成功。先主动补全资产类别、频率、持有期、数据源与评价指标；若缺失，列出场景分支和可追溯假设，不使用未来数据。后续阶段在允许时使用网页检索与可用网页 LLM 做独立交叉校验；只发送非敏感、必要的摘要，任何外部事实进入 claim ledger 后才能使用。收到审计或网页校验反馈后修改相应产物并重新验证。研究用途，不构成投资建议。"
+    },
+    {
+      "kind": "human_input",
+      "source": "UserPromptSubmit",
+      "text": "RALPH 流程试运行：建立一个金融市场数据分析与预测研究原型。先严格读取 loop-state.json、当前阶段契约和任务卡，只做当前阶段，不能跳步。核心目标：研究信息泄露、数据发布时间/修订、幸存者偏差、选择偏差、滚动窗口与特征泄露；同时研究资金博弈、拥挤度、仓位、流动性、资金费率或公开可获得的同类时间戳信号。任何模型与回测都必须仅使用当时可得数据，采用滚动/走步样本外验证、明确训练/验证/测试时间边界、基准模型、交易成本和不确定性；把“稳定一段时间”定义为预先注册的连续样本外窗口指标，绝不承诺盈利或保证预测成功。先主动补全资产类别、频率、持有期、数据源与评价指标；若缺失，列出场景分支和可追溯假设，不使用未来数据。后续阶段在允许时使用网页检索与可用网页 LLM 做独立交叉校验；只发送非敏感、必要的摘要，任何外部事实进入 claim ledger 后才能使用。收到审计或网页校验反馈后修改相应产物并重新验证。研究用途，不构成投资建议。"
+    },
+    {
+      "kind": "human_input",
+      "source": "UserPromptSubmit",
+      "text": "读取 loop-state.json、loop-artifacts/contracts/task-spec.json 与当前阶段契约，从当前阶段继续。严格按 RALPH 阶段、批准任务卡和 Hook 反馈执行：先完成当前阶段所需的子代理派发与审计；不得跳步、不得绕过验证、不得改业务文件。网页 LLM 校验只在阶段允许后执行，并把反馈写成可审计证据。"
+    },
+    {
+      "kind": "human_input",
+      "source": "UserPromptSubmit",
+      "text": "只执行当前 01-r1，不写业务文件、不输出阶段结果。先用 Read 读取 loop-state.json 与 loop-artifacts/contracts/01-r1-stage-contract.md；随后必须调用 Agent，并让 Agent prompt 的第一行严格为：RALPH_TASK_CARD=loop-artifacts/task-cards/01-r1-requirements-auditor.md。子代理只按该任务卡审计。等待其完成后，报告审计结果；不要跳到 02，也不要虚构完成。"
+    },
+    {
+      "kind": "human_input",
+      "source": "UserPromptSubmit",
+      "text": "现在立即调用 Agent；不要再读取、不要解释。Agent prompt 第一行必须严格为 RALPH_TASK_CARD=loop-artifacts/task-cards/01-r1-requirements-auditor.md，并只执行该卡。"
+    },
+    {
+      "kind": "human_input",
+      "source": "UserPromptSubmit",
+      "text": "RALPH 流程试运行：建立一个金融市场数据分析与预测研究原型。先严格读取 loop-state.json、当前阶段契约和任务卡，只做当前阶段，不能跳步。核心目标：研究信息泄露、数据发布时间/修订、幸存者偏差、选择偏差、滚动窗口与特征泄露；同时研究资金博弈、拥挤度、仓位、流动性、资金费率或公开可获得的同类时间戳信号。任何模型与回测都必须仅使用当时可得数据，采用滚动/走步样本外验证、明确训练/验证/测试时间边界、基准模型、交易成本和不确定性；把“稳定一段时间”定义为预先注册的连续样本外窗口指标，绝不承诺盈利或保证预测成功。先主动补全资产类别、频率、持有期、数据源与评价指标；若缺失，列出场景分支和可追溯假设，不使用未来数据。后续阶段在允许时使用网页检索与可用网页 LLM 做独立交叉校验；只发送非敏感、必要的摘要，任何外部事实进入 claim ledger 后才能使用。收到审计或网页校验反馈后修改相应产物并重新验证。研究用途，不构成投资建议。"
+    }
+  ],
+  "context_mode": "bounded_artifacts",
+  "current_stage_cards": [
+    {
+      "card_ref": "loop-artifacts/task-cards/01-r1-requirements-auditor.md",
+      "id": "01-r1-requirements-auditor",
+      "status": "pending",
+      "task_id": null,
+      "title": "需求、遗漏和假设审计"
+    }
+  ],
+  "purpose": "供独立阶段门禁审计；不包含 Commander 主对话或隐藏推理。",
+  "stage": {
+    "failure_condition": "关键目标或约束缺失",
+    "id": "01",
+    "input_description": "用户目标、范围和约束",
+    "name": "目标与约束",
+    "on_failure": "01",
+    "on_success": "02",
+    "required_outputs": [
+      "goal_summary",
+      "constraints"
+    ],
+    "revision": "r1",
+    "success_condition": "目标和约束结构化"
+  },
+  "structured_inputs": {
+    "decision": {},
+    "handoff": {},
+    "plan": {
+      "joins": [],
+      "nodes": [],
+      "parallel_groups": [],
+      "revision": "r1"
+    },
+    "task_spec": {
+      "assumptions": [],
+      "attribute_matrix": [],
+      "authoritative_inputs": [
+        {
+          "kind": "initial_task",
+          "source": "ralph run",
+          "text": "RALPH 流程试运行：建立一个金融市场数据分析与预测研究原型。先严格读取 loop-state.json、当前阶段契约和任务卡，只做当前阶段，不能跳步。核心目标：研究信息泄露、数据发布时间/修订、幸存者偏差、选择偏差、滚动窗口与特征泄露；同时研究资金博弈、拥挤度、仓位、流动性、资金费率或公开可获得的同类时间戳信号。任何模型与回测都必须仅使用当时可得数据，采用滚动/走步样本外验证、明确训练/验证/测试时间边界、基准模型、交易成本和不确定性；把“稳定一段时间”定义为预先注册的连续样本外窗口指标，绝不承诺盈利或保证预测成功。先主动补全资产类别、频率、持有期、数据源与评价指标；若缺失，列出场景分支和可追溯假设，不使用未来数据。后续阶段在允许时使用网页检索与可用网页 LLM 做独立交叉校验；只发送非敏感、必要的摘要，任何外部事实进入 claim ledger 后才能使用。收到审计或网页校验反馈后修改相应产物并重新验证。研究用途，不构成投资建议。"
+        },
+        {
+          "kind": "human_input",
+          "source": "UserPromptSubmit",
+          "text": "RALPH 流程试运行：建立一个金融市场数据分析与预测研究原型。先严格读取 loop-state.json、当前阶段契约和任务卡，只做当前阶段，不能跳步。核心目标：研究信息泄露、数据发布时间/修订、幸存者偏差、选择偏差、滚动窗口与特征泄露；同时研究资金博弈、拥挤度、仓位、流动性、资金费率或公开可获得的同类时间戳信号。任何模型与回测都必须仅使用当时可得数据，采用滚动/走步样本外验证、明确训练/验证/测试时间边界、基准模型、交易成本和不确定性；把“稳定一段时间”定义为预先注册的连续样本外窗口指标，绝不承诺盈利或保证预测成功。先主动补全资产类别、频率、持有期、数据源与评价指标；若缺失，列出场景分支和可追溯假设，不使用未来数据。后续阶段在允许时使用网页检索与可用网页 LLM 做独立交叉校验；只发送非敏感、必要的摘要，任何外部事实进入 claim ledger 后才能使用。收到审计或网页校验反馈后修改相应产物并重新验证。研究用途，不构成投资建议。"
+        },
+        {
+          "kind": "human_input",
+          "source": "UserPromptSubmit",
+          "text": "读取 loop-state.json、loop-artifacts/contracts/task-spec.json 与当前阶段契约，从当前阶段继续。严格按 RALPH 阶段、批准任务卡和 Hook 反馈执行：先完成当前阶段所需的子代理派发与审计；不得跳步、不得绕过验证、不得改业务文件。网页 LLM 校验只在阶段允许后执行，并把反馈写成可审计证据。"
+        },
+        {
+          "kind": "human_input",
+          "source": "UserPromptSubmit",
+          "text": "只执行当前 01-r1，不写业务文件、不输出阶段结果。先用 Read 读取 loop-state.json 与 loop-artifacts/contracts/01-r1-stage-contract.md；随后必须调用 Agent，并让 Agent prompt 的第一行严格为：RALPH_TASK_CARD=loop-artifacts/task-cards/01-r1-requirements-auditor.md。子代理只按该任务卡审计。等待其完成后，报告审计结果；不要跳到 02，也不要虚构完成。"
+        },
+        {
+          "kind": "human_input",
+          "source": "UserPromptSubmit",
+          "text": "现在立即调用 Agent；不要再读取、不要解释。Agent prompt 第一行必须严格为 RALPH_TASK_CARD=loop-artifacts/task-cards/01-r1-requirements-auditor.md，并只执行该卡。"
+        },
+        {
+          "kind": "human_input",
+          "source": "UserPromptSubmit",
+          "text": "RALPH 流程试运行：建立一个金融市场数据分析与预测研究原型。先严格读取 loop-state.json、当前阶段契约和任务卡，只做当前阶段，不能跳步。核心目标：研究信息泄露、数据发布时间/修订、幸存者偏差、选择偏差、滚动窗口与特征泄露；同时研究资金博弈、拥挤度、仓位、流动性、资金费率或公开可获得的同类时间戳信号。任何模型与回测都必须仅使用当时可得数据，采用滚动/走步样本外验证、明确训练/验证/测试时间边界、基准模型、交易成本和不确定性；把“稳定一段时间”定义为预先注册的连续样本外窗口指标，绝不承诺盈利或保证预测成功。先主动补全资产类别、频率、持有期、数据源与评价指标；若缺失，列出场景分支和可追溯假设，不使用未来数据。后续阶段在允许时使用网页检索与可用网页 LLM 做独立交叉校验；只发送非敏感、必要的摘要，任何外部事实进入 claim ledger 后才能使用。收到审计或网页校验反馈后修改相应产物并重新验证。研究用途，不构成投资建议。"
+        }
+      ],
+      "constraints": [],
+      "open_questions": [],
+      "scenarios": [],
+      "semantic_map": {},
+      "status": "unclarified",
+      "success_criteria": []
+    },
+    "verification": {}
+  },
+  "submission_template_ref": "loop-artifacts/contracts/01-r1-submission-template.json",
+  "task": {
+    "description": "RALPH 流程试运行：建立一个金融市场数据分析与预测研究原型。先严格读取 loop-state.json、当前阶段契约和任务卡，只做当前阶段，不能跳步。核心目标：研究信息泄露、数据发布时间/修订、幸存者偏差、选择偏差、滚动窗口与特征泄露；同时研究资金博弈、拥挤度、仓位、流动性、资金费率或公开可获得的同类时间戳信号。任何模型与回测都必须仅使用当时可得数据，采用滚动/走步样本外验证、明确训练/验证/测试时间边界、基准模型、交易成本和不确定性；把“稳定一段时间”定义为预先注册的连续样本外窗口指标，绝不承诺盈利或保证预测成功。先主动补全资产类别、频率、持有期、数据源与评价指标；若缺失，列出场景分支和可追溯假设，不使用未来数据。后续阶段在允许时使用网页检索与可用网页 LLM 做独立交叉校验；只发送非敏感、必要的摘要，任何外部事实进入 claim ledger 后才能使用。收到审计或网页校验反馈后修改相应产物并重新验证。研究用途，不构成投资建议。",
+    "source": "ralph run"
+  }
+}

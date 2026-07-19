@@ -1,0 +1,8 @@
+{
+  "action": "advance",
+  "status": "completed",
+  "stage_id": "exploration",
+  "revision": "r1",
+  "next_stage": "01",
+  "message": "完成探索与任务接续：扫描任务板发现 4 个候选任务，选定 T-kv-cache-hw（KV Cache 硬件优化，P1）进入 01"
+}

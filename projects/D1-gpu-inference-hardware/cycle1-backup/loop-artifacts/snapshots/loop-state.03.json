@@ -1,0 +1,89 @@
+{
+  "active_tasks": {},
+  "allowed_actions": [
+    "advance",
+    "rollback",
+    "blocked_human",
+    "skip_blocked",
+    "candidate",
+    "explore",
+    "dispatch",
+    "join",
+    "clarify",
+    "repair_prompt"
+  ],
+  "clarification_history": [],
+  "current_artifact": "loop-artifacts/03-r1.json",
+  "execution_summary": {
+    "artifact_refs": [],
+    "completed_task_ids": [],
+    "unresolved_claims": []
+  },
+  "exploration_history": [],
+  "history": [
+    {
+      "action": "advance",
+      "internal_state": "stage_02",
+      "revision": "r1",
+      "stage_id": "01"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_02_5",
+      "revision": "r1",
+      "stage_id": "02"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_03",
+      "revision": "r1",
+      "stage_id": "02.5"
+    }
+  ],
+  "last_action": "advance",
+  "last_event_id": "581c811c-a7c6-4c6d-8db1-20e32fa14ffd",
+  "last_exploration": null,
+  "last_result": {
+    "action": "advance",
+    "artifact_refs": [],
+    "evidence": [],
+    "message": "完成交叉验证，推进到 03",
+    "next_stage": "03",
+    "revision": "r1",
+    "rollback_to": null,
+    "stage_id": "02.5",
+    "status": "completed"
+  },
+  "plan": {},
+  "project_id": "D1-ralph-smoke-matrix",
+  "queue": {
+    "blocked_human": [],
+    "candidates": [],
+    "ready": []
+  },
+  "run_history": [],
+  "schema_version": 4,
+  "stage": {
+    "failure_condition": "分解不完整、接口未对齐或耦合不清",
+    "id": "03",
+    "input_description": "已调研、已交叉验证的字段；把任务分解到最小执行单元，模块间接口清晰对准、解耦",
+    "name": "执行任务分解",
+    "on_failure": "02.5",
+    "on_human_block": "exploration",
+    "on_success": "04",
+    "required_outputs": [
+      "task_graph",
+      "coverage_proof"
+    ],
+    "revision": "r1",
+    "success_condition": "任务图分解到最小执行单元，接口清晰对准、模块化解耦，无遗漏无冲突"
+  },
+  "status": "running",
+  "task": {
+    "description": "矩阵硬件计算（matrix / tensor 运算的硬件实现与算力模型），当前 GPU 硬件优化空间，目标：推理场景下硬件还可以怎么优化",
+    "source": "ralph run"
+  },
+  "task_intake": null,
+  "task_intake_history": [],
+  "verification": {}
+}

@@ -1,0 +1,121 @@
+{
+  "active_tasks": {},
+  "allowed_actions": [
+    "advance",
+    "rollback",
+    "blocked_human",
+    "skip_blocked",
+    "candidate",
+    "explore",
+    "dispatch",
+    "join",
+    "clarify",
+    "repair_prompt"
+  ],
+  "clarification_history": [],
+  "current_artifact": "loop-artifacts/02-r1.json",
+  "execution_summary": {
+    "artifact_refs": [],
+    "completed_task_ids": [],
+    "unresolved_claims": []
+  },
+  "exploration_history": [],
+  "history": [
+    {
+      "action": "advance",
+      "internal_state": "stage_02",
+      "revision": "r1",
+      "stage_id": "01"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_02_5",
+      "revision": "r1",
+      "stage_id": "02"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_03",
+      "revision": "r1",
+      "stage_id": "02.5"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_04",
+      "revision": "r1",
+      "stage_id": "03"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_04_5",
+      "revision": "r1",
+      "stage_id": "04"
+    },
+    {
+      "action": "advance",
+      "internal_state": "exploration",
+      "revision": "r1",
+      "stage_id": "04.5"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_01",
+      "revision": "r1",
+      "stage_id": "exploration"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_02",
+      "revision": "r1",
+      "stage_id": "01"
+    }
+  ],
+  "last_action": "advance",
+  "last_event_id": "9e97eb7d-a768-4186-8f6f-b41c4f275bb0",
+  "last_exploration": null,
+  "last_result": {
+    "action": "advance",
+    "artifact_refs": [],
+    "evidence": [],
+    "message": "",
+    "next_stage": "02",
+    "payload": {
+      "stage_review": "字段门禁自动通过：本阶段所有 required 字段均已 disposition 完成（无 pending、无 research_required 未带 evidence）。运行时按字段完成自动推进，不再要求模型输出 <RALPH_STAGE_RESULT> token。"
+    },
+    "revision": "r1",
+    "rollback_to": null,
+    "stage_id": "01",
+    "status": "passed"
+  },
+  "plan": {},
+  "project_id": "D1-ralph-smoke-matrix",
+  "queue": {
+    "blocked_human": [],
+    "candidates": [],
+    "ready": []
+  },
+  "run_history": [],
+  "schema_version": 4,
+  "stage": {
+    "failure_condition": "存在未调研或证据不足的 research_required 字段",
+    "id": "02",
+    "input_description": "目标 + 已知背景 = 已知与目标的差额；针对该差额派窄调研 subagent 直接搜索（关键词不加年份，获取最新结果）",
+    "name": "未知信息调研",
+    "on_failure": "02",
+    "on_human_block": "exploration",
+    "on_success": "02.5",
+    "required_outputs": [
+      "research_findings"
+    ],
+    "revision": "r1",
+    "success_condition": "所有 research_required 字段已调研带回 evidence_refs，无未带证据的调研字段"
+  },
+  "status": "running",
+  "task": {
+    "description": ".",
+    "source": "ralph run"
+  },
+  "task_intake": null,
+  "task_intake_history": [],
+  "verification": {}
+}

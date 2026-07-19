@@ -1,0 +1,45 @@
+{
+  "action": "advance",
+  "status": "passed",
+  "stage_id": "03",
+  "revision": "r1",
+  "next_stage": "04",
+  "payload": {
+    "stage_review": "阶段 03 完成。task_graph 字段：将 02.5 阶段的高层 T01-T09 分解为 38 个原子任务节点（T01 基线采集 + 6 分支×5 原子单元 + T08 综合评估 + T09 最终报告），8 个验证节点，8 个并行组，8 个模块。每个节点满足：①不可再分（单 subagent 独立完成）②输入输出显式定义（O01-O09 接口）③验收标准可量化 ④模块间接口一一对准。coverage_proof 字段：三个覆盖矩阵（优化方向×任务分支、约束条件×任务分支、成功标准×任务分支）证明完整覆盖 6 个优化方向、8 类约束、6 项成功标准；冲突检查证明 6 方向正交、DAG 无环、验证节点独立。",
+    "task_spec": {
+      "attribute_matrix": [
+        {
+          "concept": "task_graph",
+          "role": "执行计划",
+          "attribute": "最小执行单元 DAG：38 个原子任务节点 + 8 个验证节点，6 条并行调研分支，显式接口对准",
+          "disposition": "confirmed",
+          "rationale": "将 T02-T07 每个高层分支递归分解为 5 个原子单元：spec 收集→瓶颈量化→优化评估→竞品对比→分支结论，每个单元可由单 subagent 独立完成",
+          "evidence_refs": [
+            "02.5-r1.json task_graph (T01-T09 高层分解)",
+            "02.5-r1.json 6 个正交优化方向",
+            "loop-state.json constraints (8 类边界)",
+            "loop-state.json success_criteria (6 项交付要求)"
+          ],
+          "confidence": 0.95,
+          "impact": "material",
+          "reversible": true
+        },
+        {
+          "concept": "coverage_proof",
+          "role": "覆盖证明",
+          "attribute": "任务图完整覆盖 6 个优化方向、8 类约束、6 项成功标准，无遗漏无冲突",
+          "disposition": "confirmed",
+          "rationale": "三个覆盖矩阵逐一映射：优化方向→T02-T07 分支、约束条件→对应分支+综合验证、成功标准→T09 产出+验证节点；冲突检查证明正交性和 DAG 无环性",
+          "evidence_refs": [
+            "02.5-r1.json coverage_proof",
+            "loop-state.json constraints (8 类)",
+            "loop-state.json success_criteria (6 项)"
+          ],
+          "confidence": 0.95,
+          "impact": "material",
+          "reversible": true
+        }
+      ]
+    }
+  }
+}

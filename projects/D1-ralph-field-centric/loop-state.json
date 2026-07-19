@@ -1,0 +1,58 @@
+{
+  "active_tasks": {},
+  "allowed_actions": [
+    "advance",
+    "rollback",
+    "blocked_human",
+    "skip_blocked",
+    "candidate",
+    "explore",
+    "dispatch",
+    "join",
+    "clarify",
+    "repair_prompt"
+  ],
+  "clarification_history": [],
+  "exploration_history": [],
+  "history": [],
+  "last_action": null,
+  "last_event_id": null,
+  "last_exploration": null,
+  "last_result": null,
+  "plan": {
+    "joins": [],
+    "nodes": [],
+    "parallel_groups": [],
+    "revision": "r1"
+  },
+  "project_id": "D1-ralph-field-centric",
+  "queue": {
+    "blocked_human": [],
+    "candidates": [],
+    "ready": []
+  },
+  "run_history": [],
+  "schema_version": 4,
+  "stage": {
+    "failure_condition": "关键目标或约束缺失",
+    "id": "01",
+    "input_description": "用户目标、范围和约束",
+    "name": "目标与约束",
+    "on_failure": "01",
+    "on_human_block": "exploration",
+    "on_success": "02",
+    "required_outputs": [
+      "goal_summary",
+      "constraints"
+    ],
+    "revision": "r1",
+    "success_condition": "目标和约束结构化"
+  },
+  "status": "running",
+  "task": {
+    "description": "把 RALPH 从「卡片中心、刚性强制」的编排重构为「字段中心、动态、可跨节点流动」的编排：放宽主 agent 限制、开放字段写入、动态新增节点条件、按字段派发调研 subagent，评估其对普通 agent 稳定性与质量的提升。",
+    "source": "user request 2026-07-18"
+  },
+  "task_spec": null,
+  "subagent_cards": {}
+}

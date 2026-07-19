@@ -1,0 +1,36 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli hook pretooluse --mode shadow"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli hook posttooluse --mode shadow"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli hook stop --mode shadow"
+          }
+        ]
+      }
+    ]
+  }
+}

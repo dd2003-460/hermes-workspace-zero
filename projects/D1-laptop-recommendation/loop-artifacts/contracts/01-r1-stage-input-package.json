@@ -1,0 +1,69 @@
+{
+  "authoritative_inputs": [],
+  "context_mode": "bounded_artifacts",
+  "current_stage_cards": [
+    {
+      "card_ref": "loop-artifacts/task-cards/01-r1-builder-task_spec.md",
+      "id": "01-r1-builder-task_spec",
+      "status": "pending",
+      "task_id": null,
+      "title": "任务规格构造"
+    },
+    {
+      "card_ref": "loop-artifacts/task-cards/01-r1-requirements-auditor.md",
+      "id": "01-r1-requirements-auditor",
+      "status": "pending",
+      "task_id": null,
+      "title": "需求、遗漏和假设审计"
+    }
+  ],
+  "purpose": "供独立阶段门禁审计；不包含 Commander 主对话或隐藏推理。",
+  "stage": {
+    "failure_condition": "关键目标或约束缺失",
+    "id": "01",
+    "input_description": "用户目标、范围和约束",
+    "name": "目标与约束",
+    "on_failure": "01",
+    "on_success": "02",
+    "required_outputs": [
+      "goal_summary",
+      "constraints"
+    ],
+    "revision": "r1",
+    "success_condition": "目标和约束结构化"
+  },
+  "structured_inputs": {
+    "decision": {},
+    "handoff": {},
+    "last_exploration": null,
+    "plan": {
+      "joins": [],
+      "nodes": [],
+      "parallel_groups": [],
+      "revision": "r1"
+    },
+    "queue": {
+      "blocked_human": [],
+      "candidates": [],
+      "ready": []
+    },
+    "task_intake": null,
+    "task_spec": {
+      "assumptions": [],
+      "attribute_matrix": [],
+      "authoritative_inputs": [],
+      "constraints": [],
+      "open_questions": [],
+      "scenarios": [],
+      "semantic_map": {},
+      "status": "unclarified",
+      "success_criteria": []
+    },
+    "verification": {}
+  },
+  "submission_template_ref": "loop-artifacts/contracts/01-r1-submission-template.json",
+  "task": {
+    "description": "",
+    "source": null
+  }
+}

@@ -36,11 +36,11 @@ fi
         project_id=$(jq -r '.project_id // empty' "$state_file" 2>/dev/null)
         [ -z "$project_id" ] && continue
 
-        phase=$(jq -r '.loop_phase // "unknown"' "$state_file" 2>/dev/null)
-        iter=$(jq -r '.iteration // 0' "$state_file" 2>/dev/null)
+        phase=$(jq -r '.stage.id // .loop_phase // "unknown"' "$state_file" 2>/dev/null)
+        iter=$(jq -r '.stage.revision // .iteration // 0' "$state_file" 2>/dev/null)
         status=$(jq -r '.status // "unknown"' "$state_file" 2>/dev/null)
-        task=$(jq -r '.current_task // "—" | if . == "null" then "—" else . end' "$state_file" 2>/dev/null)
-        blocker=$(jq -r '.blocker // "null"' "$state_file" 2>/dev/null)
+        task=$(jq -r '.current_task // .stage.name // .stage.id // "—" | if . == "null" then "—" else . end' "$state_file" 2>/dev/null)
+        blocker=$(jq -r '.blocker // (.queue.blocked_human[0].message // "null")' "$state_file" 2>/dev/null)
 
         # Relative path from projects/
         rel_path=$(dirname "$state_file" | sed "s|$PROJECTS_DIR/||")

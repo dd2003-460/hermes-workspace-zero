@@ -30,6 +30,9 @@
 | `AI-计算科学/D1-memory/` | [DM.1] | 记忆系统 |
 || `AI-计算科学/D1-continuous-agent/` | [CA.1] | Agent 持续循环机制 |
 || `AI-计算科学/D1-browser-auto/` | [DBA.1] | **待启动**：本地 AI 驱动 Playwright 操控浏览器与网页大模型对话 |
+| `D1-ralph-field-centric/` | [DRF.1] | **待启动**：RALPH 字段中心化重构规划（放宽主 agent 限制、字段级流动、按字段派发调研 subagent，评估弱模型稳定性/质量） |
+| `D1-gpu-inference-hardware/` | [DGH.1] | GPU 推理硬件优化空间研究（矩阵/tensor 硬件计算；推理场景硬件还能怎么优化） |
+| `D1-gpu-kv-cache/` | [DGK.1] | **由 DGH.1 衍生**：KV Cache 硬件优化——片上 SRAM 缓存 / 专用 KV 存储 / PagedAttention 硬件化 |
 
 ### 写作 / 社会系统
 
@@ -37,6 +40,7 @@
 |------|--------|------|
 | `写作-社会系统/D1-aging-economics/` | [DAE.1] | 老龄化对区域经济影响实证研究 |
 | `写作-社会系统/D1-writing/` | [DW.1] | 写作工作 |
+| `/Users/a1-6/D1-academic/学术/writing/动机社会` (D1-writing-motivation-society) | [DMS.1] | 《动机社会》中文书稿(ctex+xelatex)——RALPH 接管:干净编译 + 按 part1_core_logic 风格修缮后续 AI 生成章节 |
 
 ---
 

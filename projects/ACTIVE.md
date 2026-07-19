@@ -1,15 +1,19 @@
 # ACTIVE — 活跃项目面板
 
-**自动生成**: 2026-06-23 02:09 — 由 scripts/aggregate-active.sh 聚合
-**人工更新**: 2026-07-12 — D1-grav-waves 加入（v17 论文就绪，4 个笔记缺失需补写，P5 交叉验证待执行）
+**自动生成**: 2026-07-16 00:31 — 由 scripts/aggregate-active.sh 聚合
 
 ## 焦点项目
 
 | 项目 | 相对路径 | 阶段 | 迭代 | 状态 | 当前任务 |
 |------|----------|------|------|------|----------|
-| D1-grav-waves | `理论物理/D1-grav-waves/` | 1-loop→2-loop→idle | 100 | active | 补写 4 缺失笔记 + P5 多平台 LLM 交叉验证 |
-| D1-goal-investigation | `理论物理/D1-goal-investigation/` | 1-loop/decision | 14 | active | 端到端 session 验证 + Codex/Hermes 机制对比 |
-| D1-area-quantized-black-hole-QNM | `理论物理/D1-area-quantized-black-hole-QNM/` | 1-loop/decision | 14 | active | Teukolsky+AIM 实现路线 |
+| D1-ralph-runtime-smoke-20260715 | `D1-ralph-runtime-smoke-20260715/` | 02 | r1 | running | 任务分解 |
+| motivation_society | `理论物理/写作-社会系统/D1-writing/motivation_society/` | 01 | r1 | running | 目标与约束 |
+| D1-persona-align | `AI-计算科学/D1-persona-align/` | 01 | r1 | running | 目标与约束 |
+| D1-goal-investigation | `理论物理/D1-goal-investigation/` | 1-loop/decision | 21 | completed | D1 研究目标完成，项目归档 |
+| D1-financial-market-analysis | `AI-计算科学/D1-financial-market-analysis/` | 01 | r1 | running | 目标与约束 |
+| D1-area-quantized-black-hole-QNM | `理论物理/D1-area-quantized-black-hole-QNM/` | 01 | r1 | running | 目标与约束 |
+| D1-ai-agent-hardware | `D1-ai-agent-hardware/` | 01 | r1 | running | 目标与约束 |
+| D1-grav-waves | `理论物理/D1-grav-waves/` | IDLE | 21 | complete | 无 — 项目已完成 ⚠️ arXiv 提交需作者手动上传 — 不可自动绕过 |
 
 ---
 

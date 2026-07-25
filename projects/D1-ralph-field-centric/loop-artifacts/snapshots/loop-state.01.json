@@ -1,0 +1,62 @@
+{
+  "active_tasks": {},
+  "allowed_actions": [
+    "advance",
+    "rollback",
+    "blocked_human",
+    "skip_blocked",
+    "candidate",
+    "explore",
+    "dispatch",
+    "join",
+    "clarify",
+    "repair_prompt"
+  ],
+  "clarification_history": [],
+  "current_artifact": "loop-artifacts/stages/01/r1/state.json",
+  "exploration_history": [],
+  "field_tasks": [],
+  "graph_tasks": [],
+  "history": [],
+  "last_action": null,
+  "last_event_id": null,
+  "last_exploration": null,
+  "last_result": null,
+  "plan": {
+    "joins": [],
+    "nodes": [],
+    "parallel_groups": [],
+    "revision": "r1"
+  },
+  "project_id": "D1-ralph-field-centric",
+  "queue": {
+    "blocked_human": [],
+    "candidates": [],
+    "ready": []
+  },
+  "run_history": [],
+  "schema_version": 4,
+  "stage": {
+    "failure_condition": "三字段未填齐或后两者重叠/目标未包含",
+    "id": "01",
+    "input_description": "只填 3 个字段：目标因素(goal)、已知因素(known，含假设/默认推断偏好)、未知因素(unknown)；目标须包含后两者，已知与未知词语不重叠",
+    "name": "目标与背景分解",
+    "on_failure": "01",
+    "on_human_block": "exploration",
+    "on_success": "02",
+    "required_outputs": [
+      "goal",
+      "known",
+      "unknown"
+    ],
+    "revision": "r1",
+    "success_condition": "仅填 goal/known/unknown 三字段，goal⊇known 且 goal⊇unknown，known 与 unknown 词语无重叠，无 pending"
+  },
+  "status": "running",
+  "task": {
+    "description": "把 RALPH 从「卡片中心、刚性强制」的编排重构为「字段中心、动态、可跨节点流动」的编排：放宽主 agent 限制、开放字段写入、动态新增节点条件、按字段派发调研 subagent，评估其对普通 agent 稳定性与质量的提升。",
+    "source": "user request 2026-07-18"
+  },
+  "task_intake": null,
+  "task_intake_history": []
+}

@@ -1,10 +1,10 @@
-"""Stage contracts and controlled subagent task cards.
+"""Stage contracts and controlled field/task documents.
 
 The state machine owns the workflow.  This module turns a stage into two
 concrete, inspectable documents:
 
 * a stage contract for the Commander; and
-* a bounded task card for each permitted subagent.
+* a small field or DAG task file for each permitted subagent.
 
 It intentionally decomposes *decision semantics*, not arbitrary words.  A
 leaf is complete when it can be confirmed, inferred from evidence, asked of
@@ -22,6 +22,7 @@ from pathlib import Path, PurePosixPath
 from typing import Any, Mapping
 
 from .dag import DAGValidationError, ready_tasks
+from .runtime_config import field_mode_enabled
 
 
 CONTRACT_DIR = "loop-artifacts/contracts"
@@ -180,9 +181,9 @@ LOOP_METHODOLOGY["exploration"] = [
     "探索节点不是终止节点：先读项目 tasks/TASKS.md，运行只读命令 ralph task-next . 看是否有依赖已满足的 ready/pending 任务。",
     "有可接取任务时，在 payload.exploration.selected_task 完整记录 task_id/title/source/source_path/priority/reason，以 selection_mode=task_board 重新进入 01。",
     "没有可接取任务时，必须自主发现新任务：围绕用户目标 / 项目缺口 / 已有研究，做一轮轻量调研（WebSearch、读 memory/），生成 1~3 个候选方向。",
-    "对每个候选方向，直接把它写成 tasks/TASKS.md 的新表格行（列：ID、任务(目标)、状态=pending/ready、优先级、依赖、背景），即「入队」而非只在内存返回 candidate，也不是静默执行。",
-    "写完后再次运行 ralph task-next . 选出最高优先级 ready 任务，进入 01 澄清其背景与目标（背景列即作为 01 输入）。",
-    "候选必须包含研究摘要、理由和范围；写进任务板的条目才是可接取任务。完成前必须派发 exploration-auditor（审计任务板扫描、发现依据、写入的任务条目）。",
+    "候选必须包含研究摘要、理由和范围，并显式标记 status=candidate；候选只进入 queue，不能被静默执行，也不能用带 candidate selected_task 的 advance 绕过批准。",
+    "候选探索先返回 preference_brief 给主 Agent 分析；只有后续从 tasks/TASKS.md 选出 ready/pending 任务，才以 selection_mode=task_board 进入 01 澄清背景与目标。",
+    "候选如需持久进入任务板，写成 tasks/TASKS.md 的新表格行（列：ID、任务(目标)、状态=pending、优先级、依赖、背景）；这仍是入队，不代表自动执行。",
 ]
 
 
@@ -912,7 +913,7 @@ def ensure_stage_cards(state: Mapping[str, Any]) -> dict[str, Any]:
     """
 
     updated = copy.deepcopy(dict(state))
-    if os.environ.get("RALPH_FIELD_GATE"):
+    if field_mode_enabled():
         # Field-centric mode: drop any orphaned builder/gate cards left by a
         # previous enforce run so the Commander is not forced to dispatch them and
         # so render() / the field gate see a clean field table.
@@ -1373,7 +1374,7 @@ def _field_contract_text(state: Mapping[str, Any], *, stage_id: str, revision: s
         "",
         f"阶段：{stage_id}-{revision}",
         "",
-        "## 你只维护一张字段表（不强制子代理卡片）",
+        "## 你只维护一张字段表（不强制固定任务文件）",
         "",
         f"- 权威输入：`loop-state.json`、`{contract_ref}`、`{submission_ref}`。",
         "- 用 `ralph field-apply` 把字段原子写入字段表（**禁止直接 Write/Edit `loop-state.json`**，运行时只读它）。",
@@ -1391,8 +1392,8 @@ def _field_contract_text(state: Mapping[str, Any], *, stage_id: str, revision: s
         "",
         "字段 + 本阶段 required_outputs 齐全后，**用命令显式推进**——运行时不会解析聊天里的 `<RALPH_STAGE_RESULT>` token（只有 stage 01 字段齐全会**自动**推进）。",
         "正确动作：",
-        "1. 若本阶段字段有更新，先落盘：`ralph field-apply . loop-artifacts/%s-%s.json`（或把 action 写进同一文件）。" % (stage_id, revision),
-        "2. 写 advance 动作文件 `loop-artifacts/%s-%s.advance.json`：" % (stage_id, revision),
+        "1. 若本阶段字段有更新，先落盘：`ralph field-apply . loop-artifacts/stages/%s/%s/fields.json`（或写入同目录字段增量文件）。" % (stage_id, revision),
+        "2. 写 advance 动作文件 `loop-artifacts/stages/%s/%s/advance.json`：" % (stage_id, revision),
         "```json",
         "{",
         '  "action": "advance",',
@@ -1404,7 +1405,7 @@ def _field_contract_text(state: Mapping[str, Any], *, stage_id: str, revision: s
         '                "task_spec": "<即 loop-state.json 里的 task_spec（含完整 attribute_matrix）>" }',
         "}",
         "```",
-        "3. 运行 **`ralph apply . loop-artifacts/%s-%s.advance.json`**（等效 `ralph validate --result ... --apply`）即完成推进；运行时自动校验、原子落盘。" % (stage_id, revision),
+        "3. 运行 **`ralph apply . loop-artifacts/stages/%s/%s/advance.json`**（等效 `ralph validate --result ... --apply`）即完成推进；运行时自动校验、原子落盘。" % (stage_id, revision),
         "",
         "只有「用户/项目/环境都无答案、不能推断或研究、且会改变硬可行性/硬预算/验收」的字段，",
         "才在 `payload.questions` 一次性提问；否则不要用 `blocked_human` 卡住。",
@@ -1499,7 +1500,7 @@ def stage_contract_text(state: Mapping[str, Any]) -> str:
     # it via the <RALPH_STAGE_RESULT> action; the assemble/validate card flow
     # is intentionally absent.  Emit a field-table contract instead so a freshly
     # materialized contract file does not re-teach the old card workflow.
-    if os.environ.get("RALPH_FIELD_GATE"):
+    if field_mode_enabled():
         return _field_contract_text(state, stage_id=stage_id, revision=revision)
     lines = [
         "# RALPH 阶段契约",
@@ -1712,7 +1713,11 @@ def _write_if_changed(path: Path, content: str) -> None:
 
 
 def materialize_contract_documents(root: str | Path, state: Mapping[str, Any]) -> list[str]:
-    """Write deterministic, project-local contract and task-card documents."""
+    """Write deterministic, project-local stage contract documents.
+
+    Field mode never materializes the historical card directory.  The active
+    dispatch surface is ``stages/<stage>/<revision>/tasks/*.json``.
+    """
 
     root = Path(root)
     stage = state.get("stage", {})
@@ -1738,7 +1743,7 @@ def materialize_contract_documents(root: str | Path, state: Mapping[str, Any]) -
     contract_ref = f"{CONTRACT_DIR}/{stage_id}-{revision}-stage-contract.md"
     _write_if_changed(root / contract_ref, stage_contract_text(state))
     written = [str(task_spec_path.relative_to(root)), input_package_ref, submission_ref, contract_ref]
-    if not os.environ.get("RALPH_FIELD_GATE"):
+    if not field_mode_enabled():
         for card in cards_for_current_stage(state):
             ref = normalize_card_ref(str(card.get("card_ref", "")))
             if ref is None:

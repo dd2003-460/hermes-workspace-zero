@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import hashlib
 import os
+import re
 import time
 from pathlib import Path
 from typing import Any, Mapping
@@ -21,6 +22,21 @@ from .contracts import (
 from .events import append_observation, apply_and_record, read_events
 from .feedback import feedback_context, gate_feedback, render_feedback, tool_feedback
 from .result_artifacts import state_stage_artifact_dir
+from .runtime_config import effective_tool_decision, field_mode_enabled, max_field_web_attempts, max_parallel_fields
+from .field_tasks import (
+    claim_field_task,
+    bind_field_task,
+    current_field_tasks,
+    field_task_by_agent,
+    field_task_by_ref,
+    field_task_ref_from_prompt,
+    field_task_requires_agent,
+    increment_field_web_attempt,
+    update_field_task_metadata,
+    update_field_task_metadata_transaction,
+    rebind_field_task_to_path,
+    materialize_field_tasks,
+)
 
 
 # A Stop Hook repair is useful only while the current Claude context is still
@@ -89,10 +105,10 @@ def _commander_event_log_error(
         detected="Commander 正在读取完整 loop-events.md；这会把旧工具输出重新注入上下文并放大 KV cache。",
         correction="停止当前 Read；事件日志是诊断摘要，不是工作输入。",
         next_action=(
-            "需要诊断时只运行一次 `ralph events . --tail 20`；若任务卡是 dispatched，"
-            "直接等待 SubagentStop。"
+            "需要诊断时只运行一次 `ralph events . --tail 20`；若字段任务正在运行，"
+            "直接等待 field-apply 或字段生命周期回执。"
         ),
-        forbidden="继续 Read/cat/tail 循环、重派 Agent、Write 任务卡或把 dispatched 改成 blocked_human。",
+        forbidden="继续 Read/cat/tail 循环、重复派发字段 Agent，或把运行中字段误标为 blocked_human。",
     )
 
 
@@ -171,6 +187,69 @@ def _response_mapping(payload: Mapping[str, Any]) -> Mapping[str, Any]:
     return response if isinstance(response, Mapping) else {}
 
 
+def _tool_failure(payload: Mapping[str, Any]) -> tuple[bool, str]:
+    """Detect failed/blocked external tools without copying their full output.
+
+    Search providers often return a successful HTTP wrapper whose result is an
+    error page or a 403.  Treating that as useful evidence is worse than a
+    bounded fallback: it makes a local Agent retry the same dead endpoint
+    indefinitely.  This helper intentionally only returns a short diagnostic.
+    """
+
+    raw = payload.get("tool_response")
+    values: list[Any]
+    if isinstance(raw, list):
+        values = raw
+    else:
+        values = [raw]
+    for value in values:
+        if not isinstance(value, Mapping):
+            continue
+        status = str(value.get("status", "")).lower()
+        code = value.get("code")
+        text = " ".join(
+            str(value.get(key, ""))
+            for key in ("error", "stderr", "message", "result", "content", "codeText")
+            if value.get(key) is not None
+        )
+        # Some WebSearch providers return HTTP-200-shaped envelopes even when
+        # no search was performed.  ``searchCount=0`` with a one-line
+        # conversational placeholder or a serialized tool call is not
+        # evidence and must enter the bounded fallback path instead of making
+        # the field Agent retry forever.
+        results = value.get("results")
+        search_count = value.get("searchCount")
+        placeholder = isinstance(results, list) and all(
+            isinstance(item, str)
+            and (
+                "i'll search" in item.lower()
+                or "<tool_call>" in item.lower()
+                or "<|im_start|>" in item.lower()
+                or '"query"' in item.lower()
+                or "no results" in item.lower()
+            )
+            for item in results
+        )
+        empty_search = (
+            isinstance(search_count, int)
+            and search_count <= 0
+            and isinstance(results, list)
+            and (not results or placeholder)
+        )
+        failed = (
+            value.get("success") is False
+            or value.get("is_error") is True
+            or value.get("isError") is True
+            or status in {"failed", "error", "cancelled"}
+            or (isinstance(code, int) and code >= 400)
+            or bool(re.search(r"(?:HTTP\s*)?(?:4\d\d|5\d\d)\b|forbidden|no response from model|search error|fetch failed", text, re.I))
+            or empty_search
+        )
+        if failed:
+            return True, _bounded_hook_text(text or value, 700)
+    return False, ""
+
+
 def _agent_response_status(response: Mapping[str, Any]) -> str:
     # An unstructured tool response is not proof that a subagent finished.
     # Keep the card pending completion until SubagentStop rather than allowing
@@ -187,11 +266,24 @@ def _agent_response_status(response: Mapping[str, Any]) -> str:
 
 def _agent_id(payload: Mapping[str, Any]) -> str | None:
     response = _response_mapping(payload)
-    for source in (response, payload):
+    sources: list[Any] = [response, payload]
+    raw_response = payload.get("tool_response")
+    if isinstance(raw_response, list):
+        sources.extend(raw_response)
+    for source in sources:
+        if not isinstance(source, Mapping):
+            continue
         for key in ("agent_id", "agentId", "subagent_id", "subagentId"):
             value = source.get(key)
             if value:
                 return str(value)
+        # Claude Code sometimes returns the asynchronous Agent receipt as a
+        # text content block instead of a JSON object.
+        text = source.get("text") or source.get("content")
+        if isinstance(text, str):
+            match = re.search(r"agent_id:\s*([^\s]+)", text)
+            if match:
+                return match.group(1)
     # Claude Code documents the direct agent_id on SubagentStart/Stop.  Some
     # tool hook payloads instead expose the child transcript path; it has the
     # stable `agent-<id>.jsonl` form, so use it as a compatibility fallback.
@@ -204,6 +296,84 @@ def _agent_id(payload: Mapping[str, Any]) -> str | None:
             candidate = name[len("agent-") : -len(".jsonl")]
             if candidate:
                 return candidate
+    # Supervisor-launched top-level workers do not receive Claude's
+    # SubagentStart payload.  Their launcher supplies this durable identity so
+    # the same Hook field/web guards apply to them as to nested workers.
+    environment_agent_id = os.environ.get("RALPH_AGENT_ID", "").strip()
+    if environment_agent_id:
+        return environment_agent_id
+    return None
+
+
+def _field_task_from_agent_input(state: Mapping[str, Any], tool_input: Mapping[str, Any]) -> dict[str, Any] | None:
+    prompt = tool_input.get("prompt") or tool_input.get("instructions") or tool_input.get("input")
+    ref = field_task_ref_from_prompt(prompt)
+    return field_task_by_ref(state, ref)
+
+
+def _field_task_from_path(
+    root: Path,
+    state: Mapping[str, Any],
+    target: str | None,
+) -> dict[str, Any] | None:
+    """Resolve a tool path against the project root and find its field task.
+
+    Do not call ``Path.resolve()`` on a relative tool path before joining the
+    project root.  Hook processes inherit the workspace's cwd, which may be
+    different from the project being supervised; doing so was the source of
+    a cross-project ``relative_to`` crash in the worker hook.
+    """
+
+    resolved = _resolved_target(root, target)
+    if resolved is None:
+        return None
+    for task in current_field_tasks(state):
+        path = task.get("path")
+        if not path:
+            continue
+        try:
+            if (root / str(path)).resolve() == resolved:
+                return dict(task)
+        except OSError:
+            continue
+    return None
+
+
+def _field_task_path_hint(root: Path, state: Mapping[str, Any], target: str | None) -> str | None:
+    """Return the canonical JSON task path for a field-task read.
+
+    This is used for both a hallucinated ``.js`` sibling and a valid ``.json``
+    task path: Commander should dispatch the field Agent, not read the
+    worker's input into its own context.
+    """
+
+    if not target:
+        return None
+    candidate = Path(str(target)).expanduser()
+    if not candidate.is_absolute():
+        candidate = root / candidate
+    if candidate.suffix == ".js":
+        json_candidate = candidate.with_suffix(".json")
+    elif candidate.suffix == ".json":
+        json_candidate = candidate
+    else:
+        return None
+    try:
+        if json_candidate.exists():
+            return str(json_candidate.relative_to(root))
+    except ValueError:
+        pass
+    for task in current_field_tasks(state):
+        path = task.get("path")
+        if not path:
+            continue
+        try:
+            if (root / str(path)).resolve() == json_candidate.resolve():
+                return str(path)
+        except OSError:
+            continue
+        if candidate.suffix == ".js" and Path(str(path)).stem == candidate.stem:
+            return str(path)
     return None
 
 
@@ -485,11 +655,121 @@ def _apply_agent_result(root: Path, output: str) -> dict[str, Any]:
 
 
 def _stop_response(reason: str, mode: str) -> dict[str, Any]:
-    if mode == "shadow":
-        # Stop only supports a blocking decision. A systemMessage makes the
-        # shadow decision visible without changing whether Claude may stop.
-        return {"systemMessage": "RALPH shadow：" + reason}
+    if mode in {"shadow", "hybrid"}:
+        # Stop only supports a blocking decision.  Hybrid deliberately lets a
+        # malformed draft end the turn; the outer supervisor can start a short
+        # recovery context instead of trapping a local model in a repair loop.
+        label = "shadow" if mode == "shadow" else "hybrid"
+        return {"systemMessage": f"RALPH {label}：" + reason}
     return {"decision": "block", "reason": reason[:12000]}
+
+
+def _field_command_hint(
+    stage: Mapping[str, Any] | None = None,
+    state: Mapping[str, Any] | None = None,
+) -> str:
+    stage = stage if isinstance(stage, Mapping) else {}
+    stage_id = str(stage.get("id", "01"))
+    revision = str(stage.get("revision", "r1"))
+    draft = f"loop-artifacts/stages/{stage_id}/{revision}/fields.json"
+    advance = f"loop-artifacts/stages/{stage_id}/{revision}/advance.json"
+    hint = (
+        "RALPH 当前阶段命令提示（Hook 每次工具调用都会重复注入）：只修改当前阶段草稿，不要直接修改 loop-state.json。"
+        f"若草稿不存在先运行 `ralph field-init .`；把新增/修改字段写入 `{draft}`，格式为 `{{\"fields\":[{{\"concept\":\"...\","
+        "\"role\":\"...\",\"attribute\":\"...\",\"disposition\":\"pending|confirmed|"
+        "assumed_default|research_required\",\"rationale\":\"...\",\"evidence_refs\":[]}}]}}`，"
+        f"然后运行 `ralph field-apply . {draft}`（校验 + 增量合并 + 原子保存）。语法错误、空字段或缺字段时只修复命令输出列出的项目；空的 pending 字段可以保留，已通过字段保留不重写。"
+        f"DAG 节点只写自己的 task JSON，再运行 `ralph graph-apply . <节点文件>`（校验依赖 + 更新 ready/Join）。"
+        f"全部字段和节点通过后，写 `{advance}` 并运行 `ralph apply . {advance}`（最终校验 + 状态转换 + 事件记录）。"
+        "候选/探索任务用 `ralph task-next .`；诊断只用 `ralph status .`（或 `ralph field-status .`）、"
+        "`ralph events . --tail 20`、`ralph validate .` 或 `ralph render . <file>`；"
+        "上下文中断后用 `ralph resume .`，不要重复读取完整 loop-events.md。"
+    )
+    if stage_id == "exploration":
+        hint += (
+            " 探索是尾节点而非终止：先运行 `ralph task-next .`；人类阻塞任务直接跳过。"
+            "候选必须带研究摘要/理由/范围并标记 `status=candidate`，用 `candidate` 动作写入 queue，"
+            "不要用未获批准的 candidate selected_task 提交 `advance`；只有选中 tasks/TASKS.md 的 ready/pending 任务才用 `selection_mode=task_board` 返回 01。"
+        )
+    tasks = state.get("field_tasks", []) if isinstance(state, Mapping) else []
+    if tasks:
+        ready = [
+            item for item in tasks
+            if isinstance(item, Mapping) and str(item.get("status", "")) in {"ready", "pending"}
+        ]
+        active = [
+            item for item in tasks
+            if isinstance(item, Mapping) and str(item.get("status", "")) in {"dispatching", "dispatched"}
+        ]
+        deferred = [
+            item for item in tasks
+            if isinstance(item, Mapping) and str(item.get("status", "")) == "deferred"
+        ]
+        hint += f" 当前共有 {len(tasks)} 个字段任务，本轮最多处理 {max_parallel_fields()} 个 ready 字段；"
+        hint += "当前批次完成后再处理下一批。"
+        if active:
+            hint += " 正在运行（禁止重复派发）：" + "、".join(
+                f"{item.get('concept')}[{item.get('status')}]"
+                for item in active[:max_parallel_fields()]
+            ) + "。"
+        hint += " 当前批次："
+        hint += "；".join(
+            f"{item.get('concept')}→{item.get('path')}"
+            for item in ready[:max_parallel_fields()]
+            if isinstance(item, Mapping) and item.get("concept") and item.get("path")
+        )
+        if len(ready) > max_parallel_fields():
+            hint += f"；其余 {len(ready) - max_parallel_fields()} 个 ready 字段稍后处理"
+        if deferred:
+            hint += f"；另有 {len(deferred)} 个不完整字段将在下一次 supervisor 上下文重新开放"
+        hint += "。对 disposition=research_required 的字段，当前阶段必须逐项调用 Agent；"
+        hint += "prompt 第一行使用 `RALPH_FIELD_TASK=<path>`，每个 Agent 只处理一个字段，"
+        hint += "优先把结果写回该任务文件的 field 对象并运行 `ralph field-apply . <任务文件>`；若命令报错，只按错误提示增量修复同一文件并重试。"
+    graph_tasks = state.get("graph_tasks", []) if isinstance(state, Mapping) else []
+    if graph_tasks:
+        hint += (
+            " 当前已有执行 DAG 节点：子代理只修改自己的 graph task JSON，"
+            "完成后运行 `ralph graph-apply . <节点文件>`；runtime 会校验 depends_on、"
+            "原子更新 plan.completed 并重新计算 ready/blocked/Join。不要直接修改 plan 或 loop-state.json。"
+        )
+    return hint
+
+
+def _dispatch_first_repetitions(root: Path) -> int:
+    """Count repeated field-dispatch gate attempts in the current cycle.
+
+    Hybrid mode intentionally gives the model one soft correction.  A weak
+    local model can otherwise keep reading the same files forever because the
+    internal decision is denied but the effective permission is still allow.
+    After two repetitions the gate becomes a real deny for that tool call.
+    """
+
+    count = 0
+    for event in reversed(read_events(root / "loop-events.md")):
+        event_type = str(event.get("type", ""))
+        if event_type == "supervisor_cycle_started":
+            break
+        if event_type != "pretooluse_observed":
+            continue
+        observation = event.get("observation")
+        if not isinstance(observation, Mapping):
+            continue
+        reason = str(observation.get("reason", ""))
+        if "RALPH_FEEDBACK[FIELD_DISPATCH_FIRST]" in reason:
+            count += 1
+    return count
+
+
+def _escalate_dispatch_first_feedback(root: Path, reason: str) -> str:
+    if "RALPH_FEEDBACK[FIELD_DISPATCH_FIRST]" not in reason:
+        return reason
+    if _dispatch_first_repetitions(root) < 2:
+        return reason
+    return reason.replace(
+        "RALPH_FEEDBACK[FIELD_DISPATCH_FIRST]",
+        "RALPH_FEEDBACK[FIELD_DISPATCH_FIRST_ESCALATED]",
+        1,
+    )
 
 
 def _bounded_hook_text(value: Any, limit: int = 6000) -> str:
@@ -680,22 +960,39 @@ def _record_runtime_interruption(
     )
 
 
-def handle_pretooluse(payload: Mapping[str, Any], mode: str = "enforce") -> dict[str, Any]:
+def handle_pretooluse(payload: Mapping[str, Any], mode: str = "hybrid") -> dict[str, Any]:
     root = _find_project_root(payload)
     if root is None:
         return {"decision": "allow", "reason": "no loop-state.json found"}
     state = load_state(root / "loop-state.json")
+    if field_mode_enabled():
+        # Materialization is normally already persisted by the supervisor.
+        # Avoid writing an unchanged snapshot on every concurrent PreToolUse:
+        # that stale write could erase a sibling Agent's reservation before
+        # claim_field_task acquires its transaction lock.
+        before = repr(state.get("field_tasks"))
+        materialize_field_tasks(root, state)
+        if repr(state.get("field_tasks")) != before:
+            save_state(root / "loop-state.json", state)
     tool_name = str(payload.get("tool_name", ""))
     tool_input = _tool_input(payload)
     agent_id = _agent_id(payload)
-    bound_card = _card_for_agent(state, agent_id)
+    bound_card = None if field_mode_enabled() else _card_for_agent(state, agent_id)
     slice_owner_bind = False
-    if bound_card is None and tool_name in {"Write", "Edit"}:
+    if not field_mode_enabled() and bound_card is None and tool_name in {"Write", "Edit"}:
         owner = _slice_owner_card(root, state, _target_path(tool_input))
         if owner is not None:
             bound_card = owner
             slice_owner_bind = True
-    role = "worker" if bound_card is not None else str(payload.get("ralph_role") or os.environ.get("RALPH_ROLE", "commander"))
+    # Field-mode workers intentionally have no legacy task-card binding.  A
+    # Claude subagent still carries an agent_id, so use that identity to keep
+    # the Commander-only dispatch gate from blocking the worker's own Read,
+    # WebSearch, Write, and field-apply steps.
+    role = (
+        "worker"
+        if bound_card is not None or (field_mode_enabled() and bool(agent_id))
+        else str(payload.get("ralph_role") or os.environ.get("RALPH_ROLE", "commander"))
+    )
     # Commander must never read long documents or subagent-only artifacts. A
     # single large Read (e.g. the stage-input-package embeds the whole
     # task_spec and is ~18K tokens) can blow the 60k context window in one
@@ -703,6 +1000,25 @@ def handle_pretooluse(payload: Mapping[str, Any], mode: str = "enforce") -> dict
     # Commander only dispatches subagents; the subagents read the docs.
     _commander_read_denied = False
     _commander_read_reason = None
+    if role == "commander" and tool_name == "Read" and field_mode_enabled():
+        canonical_task = _field_task_path_hint(root, state, _target_path(tool_input))
+        if canonical_task:
+            _commander_read_denied = True
+            _commander_read_reason = tool_feedback(
+                "FIELD_TASK_PATH_CORRECTION",
+                detected=(
+                    f"Commander 尝试直接读取字段任务文件 `{_target_path(tool_input)}`。"
+                    if str(_target_path(tool_input)).endswith(".json")
+                    else f"任务文件路径使用了不存在的扩展名：`{_target_path(tool_input)}`。"
+                ),
+                correction=(
+                    f"字段任务文件是受控输入；正确路径为 `{canonical_task}`，但 Commander 不需要读取它。"
+                    if str(_target_path(tool_input)).endswith(".json")
+                    else f"字段任务文件是 JSON，不是 JavaScript；正确路径为 `{canonical_task}`。"
+                ),
+                next_action="不要读取任务文件来构造总报告；下一次工具调用仍必须是带 RALPH_FIELD_TASK 标记的 Agent。",
+                forbidden="创建 `.js` 副本、读取多个任务文件或绕过 field-apply。",
+            )
     if role == "commander" and tool_name in {"Read", "Grep", "Glob"}:
         _tgt = _target_path(tool_input)
         if _tgt:
@@ -714,7 +1030,6 @@ def handle_pretooluse(payload: Mapping[str, Any], mode: str = "enforce") -> dict
                 seg in _rp
                 for seg in (
                     "/loop-artifacts/contracts/",
-                    "/loop-artifacts/stages/",
                     "/loop-artifacts/task-cards/",
                     "/loop-artifacts/gate-reviews/",
                 )
@@ -722,10 +1037,10 @@ def handle_pretooluse(payload: Mapping[str, Any], mode: str = "enforce") -> dict
                 _commander_read_denied = True
                 _commander_read_reason = tool_feedback(
                     "COMMANDER_DOC_READ",
-                    detected=f"Commander 尝试读取子代理专用文档 `{_tgt}`。",
-                    correction="Commander 只负责派发子代理；契约/模板/切片/输入包/任务卡由子代理读取。",
-                    next_action="直接派发当前 pending 任务卡，不要读取这些文档。",
-                    forbidden="用 Read/Grep/Glob 读取 loop-artifacts 下的长文档。",
+                    detected=f"Commander 尝试读取受限阶段文档 `{_tgt}`。",
+                    correction="字段任务文件已经包含单字段输入；不要读取完整契约、门禁回执或历史阶段文档。",
+                    next_action="直接按当前字段任务提示派发 Agent，或读取有限事件摘要。",
+                    forbidden="用 Read/Grep/Glob 读取完整契约、gate review 或历史阶段文档。",
                 )
             else:
                 try:
@@ -735,7 +1050,7 @@ def handle_pretooluse(payload: Mapping[str, Any], mode: str = "enforce") -> dict
                             "COMMANDER_LONG_READ",
                             detected=f"Commander 尝试读取约 {_resolved.stat().st_size // 1024}KB 的长文档 `{_tgt}`。",
                             correction="Commander 上下文窗口只有 60k，长文档会一次性撑爆它。",
-                            next_action="直接派发 pending 任务卡；长文档由子代理读取。",
+                            next_action="直接派发当前 ready 字段；长文档由字段 Agent 读取。",
                             forbidden="用 Read/Grep/Glob 读取超过 ~25KB 的文件。",
                         )
                 except OSError:
@@ -764,17 +1079,226 @@ def handle_pretooluse(payload: Mapping[str, Any], mode: str = "enforce") -> dict
             decision_value = "deny"
             decision_reason = card_error
 
-    if tool_name == "Agent" and decision_value == "allow":
-        card, card_error = _agent_card_error(state, tool_input)
-        if card_error:
+    # Keep the first correction soft in hybrid mode, but make an unchanged
+    # repeated Read/Bash/etc. converge to a hard denial.  This prevents the
+    # exact read-loop observed with local models while preserving a forgiving
+    # first attempt for normal Commander diagnostics.
+    decision_reason = _escalate_dispatch_first_feedback(root, decision_reason)
+
+    field_task = _field_task_from_agent_input(state, tool_input) if field_mode_enabled() and tool_name == "Agent" else None
+    owned_field_task = field_task_by_agent(state, agent_id) if field_mode_enabled() else None
+    # A child task path is authoritative.  Rebind before applying the write
+    # guard: SubagentStart can arrive with a stale/swapped identity, so the
+    # first Read/Edit of the actual task file must repair ownership rather than
+    # being rejected as an apparent cross-task write.
+    if field_mode_enabled() and role == "worker" and agent_id and _target_path(tool_input):
+        path_task = _field_task_from_path(root, state, _target_path(tool_input))
+        if path_task is not None and (owned_field_task is None or owned_field_task.get("id") != path_task.get("id")):
+            state, rebound = rebind_field_task_to_path(root, agent_id, str(path_task.get("path", "")))
+            if rebound is not None:
+                owned_field_task = rebound
+                _record(
+                    root,
+                    "field_task_rebound_from_worker_path",
+                    {
+                        "agent_id": agent_id,
+                        "field_task_id": rebound.get("id"),
+                        "path": rebound.get("path"),
+                        "reason": "worker task path is authoritative after parallel identity mismatch",
+                    },
+                )
+    worker_path_error: str | None = None
+    if (
+        field_mode_enabled()
+        and role == "worker"
+        and owned_field_task is not None
+        and tool_name in {"Write", "Edit"}
+        and _target_path(tool_input)
+    ):
+        expected = _resolved_target(root, str(owned_field_task.get("path", "")))
+        actual = _resolved_target(root, _target_path(tool_input))
+        if expected is not None and actual != expected:
+            worker_path_error = tool_feedback(
+                "FIELD_TASK_PATH_CORRECTION",
+                detected=f"worker 尝试修改不属于自己的字段文件 `{_target_path(tool_input)}`。",
+                correction=f"当前 worker 只能修改自己的 task JSON：`{owned_field_task.get('path')}`。",
+                next_action=(
+                    f"立即 Write/Edit `{owned_field_task.get('path')}` 的 `field` 对象，"
+                    f"然后运行 `ralph field-apply . {owned_field_task.get('path')}`。"
+                ),
+                forbidden="修改 fields.json、loop-state.json、其他字段任务或项目业务文件。",
+            )
+    if worker_path_error:
+        decision_value = "deny"
+        decision_reason = worker_path_error
+    if (
+        field_mode_enabled()
+        and role == "worker"
+        and tool_name == "Read"
+        and owned_field_task is not None
+        and int(owned_field_task.get("field_read_count", 0) or 0) >= 1
+    ):
+        decision_value = "deny"
+        decision_reason = tool_feedback(
+            "FIELD_WRITE_AFTER_READ",
+            detected=f"字段任务 `{owned_field_task.get('id')}` 已经读取自己的 task JSON，仍再次请求 Read。",
+            correction="字段 worker 读取一次即可；当前内容已经足够进行增量填写。",
+            next_action=(
+                f"立即用 Write/Edit 修改 `{owned_field_task.get('path')}` 的 field 对象，"
+                f"然后运行 `ralph field-apply . {owned_field_task.get('path')}`。"
+            ),
+            forbidden="重复 Read/Grep/Glob、读取其他任务或只输出自然语言而不提交字段。",
+        )
+    if (
+        field_mode_enabled()
+        and role == "worker"
+        and tool_name in {"WebSearch", "WebFetch"}
+        and owned_field_task is not None
+        and int(owned_field_task.get("web_failures", 0) or 0) >= 2
+    ):
+        decision_value = "deny"
+        decision_reason = tool_feedback(
+            "FIELD_WEB_FAILURE_LOOP",
+            detected=(
+                f"字段 `{owned_field_task.get('concept', '')}` 的外部搜索已连续失败 "
+                f"{owned_field_task.get('web_failures')} 次。"
+            ),
+            correction="停止重复搜索；外部证据源当前不可用，不得把错误页当作证据。",
+            next_action=(
+                f"直接把研究结论增量写回 `{owned_field_task.get('path')}`："
+                "保留 disposition=research_required、evidence_refs=[]，在 rationale 写明失败原因，"
+                "然后运行 `ralph field-apply . <任务文件>`。"
+            ),
+            forbidden="继续调用 WebSearch/WebFetch、伪造 URL、自然语言结束而不写入任务文件。",
+        )
+    if (
+        field_mode_enabled()
+        and role == "worker"
+        and tool_name in {"WebSearch", "WebFetch"}
+        and owned_field_task is not None
+        and decision_value == "allow"
+    ):
+        max_attempts = max_field_web_attempts()
+        attempts = int(owned_field_task.get("web_attempts", 0) or 0)
+        if attempts >= max_attempts:
             decision_value = "deny"
-            decision_reason = card_error
+            decision_reason = tool_feedback(
+                "FIELD_WEB_ATTEMPT_LIMIT",
+                detected=(
+                    f"字段 `{owned_field_task.get('concept', '')}` 已达到网页工具尝试上限 "
+                    f"({attempts}/{max_attempts})。"
+                ),
+                correction="不要等待挂起的网页请求，也不要再次搜索；直接提交当前字段的可验证草稿或待补状态。",
+                next_action=(
+                    f"增量写回 `{owned_field_task.get('path')}`：保留 disposition=research_required、"
+                    "evidence_refs=[]，在 rationale 说明外部工具不可用，然后运行 `ralph field-apply . <任务文件>`。"
+                ),
+                forbidden="继续调用 WebSearch/WebFetch、伪造来源或只返回自然语言而不提交字段文件。",
+            )
         else:
-            card_id = str(card["id"])
-            decision_value = "allow"
-            decision_reason = f"approved task card {card_id}"
-            if card.get("status") == "pending":
-                state = _save_card_status(root, state, card_id, "dispatched")
+            state, attempts = increment_field_web_attempt(root, str(owned_field_task["id"]))
+            # Keep the in-hook lookup in sync for the subsequent failure
+            # handling and event path.
+            owned_field_task["web_attempts"] = attempts
+    auto_bound_field_path: str | None = None
+    if field_mode_enabled() and role == "commander" and tool_name == "Agent" and decision_value == "allow":
+        ready_research = [
+            item for item in current_field_tasks(state, {"ready", "pending"})
+            if field_task_requires_agent(item)
+        ]
+        if field_task is not None and not field_task_requires_agent(field_task):
+            decision_value = "deny"
+            decision_reason = tool_feedback(
+                "FIELD_AGENT_NOT_NEEDED",
+                detected=f"字段 `{field_task.get('concept', '')}` 是 `{field_task.get('disposition', 'pending')}` 结构字段，不是 research_required。",
+                correction="pending/assumed_default 字段由 Commander 直接增量填写；只有 research_required 字段才派独立 Agent。",
+                next_action="直接 Write/Edit 当前阶段 fields.json（不改 loop-state.json），然后运行 `ralph field-apply . <fields.json>`；若确实需要外部事实，先把该字段标记为 research_required。",
+                forbidden="为结构化填空字段派无边界 Agent，或让未绑定 Agent 改写项目文件。",
+            )
+        if ready_research and field_task is None:
+            first = ready_research[0]
+            if mode == "hybrid":
+                # Some local Claude-compatible frontends put the child task in
+                # ``description`` and silently drop the prompt's first line.
+                # Do not turn that formatting omission into a dead loop: the
+                # queue itself is authoritative, so reserve exactly the first
+                # ready field and let SubagentStart bind the child.  The narrow
+                # one-field boundary and field-apply gate remain unchanged.
+                field_task = dict(first)
+                auto_bound_field_path = str(first.get("path", ""))
+                decision_reason = tool_feedback(
+                    "FIELD_TASK_MARKER_AUTOFILLED",
+                    detected="Agent prompt 缺少 RALPH_FIELD_TASK 标记，但当前只有受控的 ready 字段队列。",
+                    correction=f"runtime 已自动绑定一个字段：`{auto_bound_field_path}`。",
+                    next_action="子代理只处理这个字段，读取任务文件、增量填写 field，并运行 `ralph field-apply`。",
+                    forbidden="不要把多个字段合并到一个 Agent，不要直接修改 loop-state.json。",
+                )
+            else:
+                decision_value = "deny"
+                decision_reason = tool_feedback(
+                    "FIELD_TASK_MARKER_REQUIRED",
+                    detected="当前阶段存在未派发的 research_required 字段，但 Agent prompt 没有绑定有效字段任务。",
+                    correction=f"只派发一个字段；prompt 第一行必须是 `RALPH_FIELD_TASK={first.get('path', '<task-file>')}`。",
+                    next_action="把该字段交给一个窄 Agent；不要派发无边界的总研究 Agent。",
+                    forbidden="省略 RALPH_FIELD_TASK、把多个字段合并到一个 Agent 或自行生成总研究报告。",
+                )
+        elif not ready_research and field_task is None:
+            decision_value = "deny"
+            decision_reason = tool_feedback(
+                "FIELD_AGENT_NOT_NEEDED",
+                detected="当前没有 ready/pending 的 research_required 字段任务。",
+                correction="本轮应由 Commander 直接增量填写结构字段，不需要启动无边界 Agent。",
+                next_action="写入当前阶段的 fields.json 后运行 `ralph field-apply . <fields.json>`；填写完成后按提示运行 `ralph apply`。",
+                forbidden="没有 research_required 字段时派发未绑定 Agent，或把结构分解交给旧 task-card/auditor 协议。",
+            )
+        elif field_task and str(field_task.get("status", "")) in {"dispatching", "dispatched"}:
+            decision_value = "deny"
+            decision_reason = tool_feedback(
+                "FIELD_TASK_DUPLICATE",
+                detected=f"字段任务 `{field_task.get('id')}` 已处于 {field_task.get('status')} 生命周期状态。",
+                correction="保留已有子代理，不要重复派发同一字段；等待 SubagentStop 或 field-apply。",
+                next_action="继续当前批次的其他 ready 字段，或等待子代理完成。",
+                forbidden="重复 Agent、复制任务文件或把运行中任务标记 blocked_human。",
+            )
+
+    if tool_name == "Agent" and decision_value == "allow":
+        if field_mode_enabled():
+            # There is no legacy card gate.  A research_required field still
+            # requires one narrow Agent dispatch, while pending/default fields
+            # may be filled by Commander incrementally.
+            if "FIELD_TASK_MARKER_AUTOFILLED" not in decision_reason:
+                decision_reason = "field mode: narrow Agent allowed; one Agent per research field"
+            if field_task is not None:
+                # Reserve by task id under a file lock.  Two sibling Agent
+                # hooks may arrive concurrently; saving the pre-hook snapshot
+                # here would let the second call erase the first reservation.
+                dispatch_name = tool_input.get("name") or tool_input.get("description")
+                state, claimed = claim_field_task(
+                    root,
+                    str(field_task["id"]),
+                    dispatch_name=str(dispatch_name) if dispatch_name else None,
+                )
+                if claimed is None:
+                    decision_value = "deny"
+                    decision_reason = tool_feedback(
+                        "FIELD_TASK_CLAIM_LOST",
+                        detected=f"字段任务 `{field_task.get('id')}` 已被其他生命周期事件占用。",
+                        correction="保留已有字段 Agent，不重复派发同一字段。",
+                        next_action="等待 SubagentStop；如果任务失败，由 supervisor 重新打开该字段。",
+                        forbidden="重复调用 Agent、覆盖其他字段或把内部运行状态标记为 blocked_human。",
+                    )
+        else:
+            card, card_error = _agent_card_error(state, tool_input)
+            if card_error:
+                decision_value = "deny"
+                decision_reason = card_error
+            elif card is not None:
+                card_id = str(card["id"])
+                decision_reason = f"approved task card {card_id}"
+                if card.get("status") == "pending":
+                    state = _save_card_status(root, state, card_id, "dispatched")
+            else:
+                decision_reason = "untracked Agent allowed in hybrid field workflow"
     _record(
         root,
         "pretooluse_observed",
@@ -786,28 +1310,74 @@ def handle_pretooluse(payload: Mapping[str, Any], mode: str = "enforce") -> dict
             "reason": decision_reason,
             "task_card_id": card_id,
             "agent_id": agent_id,
+            "target_path": _target_path(tool_input),
+            "command": _bounded_hook_text(_command(tool_input), 700) if tool_name == "Bash" else None,
         },
     )
-    effective = "allow" if mode == "shadow" else decision_value
-    return {
+    effective = effective_tool_decision(decision_value, decision_reason, mode)
+    response: dict[str, Any] = {
         "hookSpecificOutput": {
             "hookEventName": "PreToolUse",
             "permissionDecision": effective,
             "permissionDecisionReason": f"{decision_reason} (mode={mode})",
         }
     }
+    if field_mode_enabled() and role == "commander":
+        response["hookSpecificOutput"]["additionalContext"] = _field_command_hint(
+            state.get("stage") if isinstance(state, Mapping) else None,
+            state,
+        )
+        if auto_bound_field_path:
+            response["hookSpecificOutput"]["additionalContext"] += (
+                f"\n本次 Agent 已由 runtime 自动绑定字段任务 `{auto_bound_field_path}`；"
+                "不要重新派发该字段，子代理完成后等待 field-apply 回执。"
+            )
+    elif field_mode_enabled() and role == "worker":
+        response["hookSpecificOutput"]["additionalContext"] = (
+            "RALPH 字段 Agent 命令提示：只修改自己的 task JSON 的 field 对象；"
+            "JSON 草稿可多轮填写。每次修改后运行 `ralph field-apply . <自己的任务文件>`；"
+            "语法或字段错误只修复命令列出的项目并重试，已通过字段保留；"
+            "如果是 DAG 节点，改用 `ralph graph-apply . <自己的节点文件>`。"
+            "不要修改 loop-state.json；外部工具失败时不伪造来源，写入 research_required、"
+            "空 evidence_refs 和 rationale 后仍运行 field-apply。"
+        )
+    return response
 
 
-def handle_posttooluse(payload: Mapping[str, Any], mode: str = "enforce") -> dict[str, Any]:
+def handle_posttooluse(payload: Mapping[str, Any], mode: str = "hybrid") -> dict[str, Any]:
     root = _find_project_root(payload)
     if root is not None:
         tool_name = str(payload.get("tool_name", ""))
         tool_input = _tool_input(payload)
+        state = load_state(root / "loop-state.json")
+        if field_mode_enabled():
+            materialize_field_tasks(root, state)
+        owned_field_task = field_task_by_agent(state, _agent_id(payload)) if field_mode_enabled() else None
         card_id: str | None = None
         card_status: str | None = None
         if tool_name == "Agent":
-            state = load_state(root / "loop-state.json")
-            card = card_by_ref(state, task_card_marker(tool_input))
+            if field_mode_enabled():
+                field_task = _field_task_from_agent_input(state, tool_input)
+                raw_response = payload.get("tool_response")
+                response_map = _response_mapping(payload)
+                failed = (
+                    isinstance(response_map, Mapping)
+                    and (response_map.get("success") is False or str(response_map.get("status", "")).lower() in {"failed", "error", "cancelled"})
+                )
+                if field_task is not None:
+                    state = update_field_task_metadata_transaction(
+                        root,
+                        str(field_task["id"]),
+                        status="ready" if failed else "dispatched",
+                        # The asynchronous child identity is authoritative at
+                        # SubagentStart.  Do not let two concurrent
+                        # PostToolUse events assign the same parent/child id
+                        # to sibling fields before that lifecycle event.
+                        agent_id=None,
+                        agent_alias=None if failed else _agent_id(payload),
+                        last_error="Agent tool failed before SubagentStart" if failed else None,
+                    )
+            card = None if field_mode_enabled() else card_by_ref(state, task_card_marker(tool_input))
             if card is not None:
                 card_id = str(card["id"])
                 card_status = _agent_response_status(_response_mapping(payload))
@@ -830,11 +1400,134 @@ def handle_posttooluse(payload: Mapping[str, Any], mode: str = "enforce") -> dic
                 "agent_id": _agent_id(payload),
             },
         )
+        # A command/file write is allowed to be incremental, but a failed
+        # command must produce an actionable repair prompt immediately.  This
+        # keeps a weak local model from treating stderr as a stage failure or
+        # silently continuing with an unapplied draft.
+        response_map = _response_mapping(payload)
+        external_failed, external_detail = _tool_failure(payload)
+        if (
+            field_mode_enabled()
+            and owned_field_task is not None
+            and tool_name in {"WebSearch", "WebFetch"}
+            and not external_failed
+            and int(owned_field_task.get("web_failures", 0) or 0) > 0
+        ):
+            # The fuse counts consecutive failures, not a lifetime total.
+            # A real source result restores the field's retry budget.
+            state = update_field_task_metadata_transaction(
+                root,
+                str(owned_field_task["id"]),
+                web_failures=0,
+                web_attempts=0,
+                last_error="",
+            )
+        if (
+            field_mode_enabled()
+            and owned_field_task is not None
+            and tool_name in {"WebSearch", "WebFetch"}
+            and external_failed
+        ):
+            failures = int(owned_field_task.get("web_failures", 0) or 0) + 1
+            state = update_field_task_metadata_transaction(
+                root,
+                str(owned_field_task["id"]),
+                web_failures=failures,
+                last_error=external_detail or "外部搜索工具失败",
+            )
+            _record(
+                root,
+                "field_external_tool_failed",
+                {
+                    "field_task_id": owned_field_task.get("id"),
+                    "concept": owned_field_task.get("concept"),
+                    "tool_name": tool_name,
+                    "failure_count": failures,
+                    "detail": external_detail,
+                },
+            )
+            return {
+                "hookSpecificOutput": {
+                    "hookEventName": "PostToolUse",
+                    "additionalContext": (
+                        f"RALPH 外部工具 `{tool_name}` 失败（第 {failures} 次）：{external_detail}\n"
+                        + (
+                            "不要继续重复搜索。现在把该字段写回任务文件，保留 "
+                            "disposition=research_required 和空 evidence_refs，并在 rationale 说明来源不可用，"
+                            "然后运行 `ralph field-apply . <任务文件>`。"
+                            if failures >= 2
+                            else "可换一个权威来源重试一次；若再次失败，必须按字段降级规则写回任务文件。"
+                        )
+                    ),
+                }
+            }
+        if (
+            field_mode_enabled()
+            and owned_field_task is not None
+            and tool_name in {"WebSearch", "WebFetch"}
+            and not external_failed
+        ):
+            # A successful search is evidence input, not permission to keep
+            # searching indefinitely.  Push small local models out of the
+            # tool loop and into the incremental Write -> field-apply step.
+            return {
+                "hookSpecificOutput": {
+                    "hookEventName": "PostToolUse",
+                    "additionalContext": (
+                        "RALPH 外部证据工具已返回结果。下一次工具调用必须是 Write 或 Edit 自己的任务 JSON，"
+                        "把可验证结论和来源写入当前 field 的 attribute/rationale/evidence_refs；"
+                        "不要再次搜索、不要读取其他文件。写入后立即运行同一个 `ralph field-apply`；"
+                        "若结果不足以确认，保留 disposition=research_required 并在 rationale 标注待补证据。"
+                    ),
+                }
+            }
+        failed = (
+            response_map.get("success") is False
+            or response_map.get("is_error") is True
+            or response_map.get("isError") is True
+            or str(response_map.get("status", "")).lower() in {"failed", "error", "cancelled"}
+            or response_map.get("exit_code") not in (None, 0)
+        )
+        if field_mode_enabled() and failed and tool_name in {"Bash", "Write", "Edit"}:
+            detail = _bounded_hook_text(
+                response_map.get("stderr") or response_map.get("error") or response_map.get("message") or response_map,
+                900,
+            )
+            return {
+                "hookSpecificOutput": {
+                    "hookEventName": "PostToolUse",
+                    "additionalContext": (
+                        "RALPH 增量命令未通过；状态尚未因本次失败而改变。"
+                        f"错误摘要：{detail}\n"
+                        "只修复错误指出的 JSON 语法或缺失字段，保留已通过字段，"
+                        "然后重新运行同一个 `ralph field-apply . <字段文件>`；"
+                        "不要直接修改 loop-state.json，也不要重做其他字段。"
+                    ),
+                }
+            }
+        if field_mode_enabled() and owned_field_task is not None and tool_name == "Read":
+            task_path = str(owned_field_task.get("path") or "自己的字段任务文件")
+            update_field_task_metadata_transaction(
+                root,
+                str(owned_field_task.get("id")),
+                field_read_count=int(owned_field_task.get("field_read_count", 0) or 0) + 1,
+            )
+            return {
+                "hookSpecificOutput": {
+                    "hookEventName": "PostToolUse",
+                    "additionalContext": (
+                        "RALPH 字段增量硬顺序提示：你已经读取了自己的任务文件。"
+                        f"下一次工具调用必须是 Write 或 Edit `{task_path}` 的 `field` 对象，"
+                        "只填写/修复当前 concept；不要再次 Read、Grep、Glob、规划总报告或读取其他文件。"
+                        f"写入后立即运行 `ralph field-apply . {task_path}`；若命令报错，只按报错列出的字段增量修复并重试。"
+                    ),
+                }
+            }
     return {}
 
 
-def handle_subagentstart(payload: Mapping[str, Any], mode: str = "enforce") -> dict[str, Any]:
-    """Bind a newly spawned Claude subagent to its already-approved card."""
+def handle_subagentstart(payload: Mapping[str, Any], mode: str = "hybrid") -> dict[str, Any]:
+    """Bind a newly spawned subagent to one current field task."""
 
     root = _find_project_root(payload)
     if root is None:
@@ -844,32 +1537,71 @@ def handle_subagentstart(payload: Mapping[str, Any], mode: str = "enforce") -> d
         _record(root, "subagentstart_observed", {"mode": mode, "reason": "missing_agent_id"})
         return {}
     state = load_state(root / "loop-state.json")
-    card, reason = _bind_waiting_card(root, state, agent_id)
-    if card is None:
-        _record(
-            root,
-            "subagentstart_observed",
-            {"mode": mode, "agent_id": agent_id, "agent_type": payload.get("agent_type"), "reason": reason},
-        )
-        return {}
-
-    allowed_tools = ", ".join(str(tool) for tool in card.get("allowed_tools", [])) or "无"
-    context = (
-        f"RALPH 已将你绑定到任务卡 {card['id']}。你是独立 worker，不是 Commander；"
-        f"只可使用：{allowed_tools}。只读取任务卡及其 document_refs，不得改 loop-state.json，"
-        "不得自行推进阶段。若本卡是阶段门禁，结束时必须返回带 <RALPH_GATE_REVIEW> 标记的完整 JSON。"
-    )
+    if field_mode_enabled():
+        materialize_field_tasks(root, state)
+    if field_mode_enabled():
+        task = field_task_by_agent(state, agent_id)
+        if task is None:
+            candidates = [
+                item for item in current_field_tasks(state, {"dispatching", "dispatched"})
+                if not item.get("agent_id")
+            ]
+            # Claude exposes the child name as ``agent_type`` on
+            # SubagentStart.  Preserve the parent Agent's requested name at
+            # reservation time so parallel starts bind by identity, not by
+            # timing/order.  Order-based fallback remains for integrations
+            # that do not expose agent_type.
+            agent_type = str(payload.get("agent_type") or "").strip().lower()
+            if agent_type:
+                named = [
+                    item for item in candidates
+                    if str(item.get("dispatch_name") or "").strip().lower() == agent_type
+                ]
+                if named:
+                    candidates = named
+            if candidates:
+                # Claude may emit two SubagentStart events in an order that
+                # differs from the parent tool responses.  The dispatch queue
+                # is still the authoritative binding order; waiting for a
+                # unique candidate leaves parallel fields unbound forever.
+                # PostToolUse/SubagentStop add aliases when Claude exposes a
+                # second identifier for the same child.
+                # Re-select and bind under the dispatch lock; the local
+                # candidate list may already be stale when sibling hooks race.
+                requested_name = str(candidates[0].get("dispatch_name") or "")
+                state, task = bind_field_task(root, agent_id, dispatch_name=requested_name)
+        if task is not None:
+            context = (
+                f"RALPH 字段 Agent 已绑定任务 `{task.get('id')}`，只处理概念 `{task.get('concept')}`。"
+                f"先读取 `{task.get('path')}`，把结果增量写入该文件的 field 对象；"
+                "不要修改 loop-state.json、其他字段或完整事件日志。"
+                f"填写后必须运行 `ralph field-apply . {task.get('path')}`；命令返回字段问题时只修复列出的项目并重试。"
+            )
+            _record(
+                root,
+                "field_task_bound",
+                {"mode": mode, "agent_id": agent_id, "field_task_id": task.get("id"), "path": task.get("path")},
+            )
+            return {
+                "hookSpecificOutput": {
+                    "hookEventName": "SubagentStart",
+                    "additionalContext": context,
+                }
+            }
+    # The historical task-card protocol is deliberately not a fallback.  A
+    # SubagentStart without a field binding is observable but unowned; letting
+    # it run would make a later natural-language result look like completion.
     _record(
         root,
-        "subagent_card_bound",
-        {"mode": mode, "agent_id": agent_id, "agent_type": payload.get("agent_type"), "task_card_id": card["id"]},
+        "subagentstart_unbound",
+        {
+            "mode": mode,
+            "agent_id": agent_id,
+            "agent_type": payload.get("agent_type"),
+            "reason": "no current field task binding",
+        },
     )
-    return {
-        "hookSpecificOutput": {
-            "hookEventName": "SubagentStart",
-            "additionalContext": context,
-        }
-    }
+    return {"systemMessage": "RALPH：该子代理没有绑定当前字段任务；不要写入项目或提交结果。"}
 
 
 def _parse_gate_review(output: str) -> tuple[dict[str, Any] | None, str | None]:
@@ -1052,6 +1784,8 @@ def _revert_card_to_pending(root: Path, card_id: str) -> None:
     """Undo a hollow completion so the Commander must actually re-run the card."""
 
     state = load_state(root / "loop-state.json")
+    if field_mode_enabled():
+        materialize_field_tasks(root, state)
     card = state.get("subagent_cards", {}).get(str(card_id))
     if not isinstance(card, Mapping):
         return
@@ -1066,7 +1800,7 @@ def _revert_card_to_pending(root: Path, card_id: str) -> None:
     materialize_contract_documents(root, state)
 
 
-def handle_subagentstop(payload: Mapping[str, Any], mode: str = "enforce") -> dict[str, Any]:
+def handle_subagentstop(payload: Mapping[str, Any], mode: str = "hybrid") -> dict[str, Any]:
     """Close asynchronous task cards when Claude Code reports a subagent stop."""
 
     root = _find_project_root(payload)
@@ -1077,154 +1811,82 @@ def handle_subagentstop(payload: Mapping[str, Any], mode: str = "enforce") -> di
         _record(root, "subagentstop_observed", {"mode": mode, "reason": "missing_agent_id"})
         return {}
     state = load_state(root / "loop-state.json")
-    matched = _card_for_agent(state, agent_id)
-    if matched is None:
-        matched, bind_reason = _bind_waiting_card(root, state, agent_id)
-        if matched is None:
-            _record(root, "subagentstop_observed", {"mode": mode, "agent_id": agent_id, "reason": bind_reason or "untracked_agent"})
+    if field_mode_enabled():
+        materialize_field_tasks(root, state)
+    if field_mode_enabled():
+        field_task = field_task_by_agent(state, agent_id)
+        if field_task is not None:
+            concept = str(field_task.get("concept", ""))
+            matrix = (state.get("task_spec", {}) or {}).get("attribute_matrix", [])
+            current = next(
+                (item for item in matrix if isinstance(item, Mapping) and str(item.get("concept", "")) == concept),
+                None,
+            ) if isinstance(matrix, list) else None
+            stop_reason = str(payload.get("stop_reason", "")).lower()
+            failed = bool(payload.get("error")) or stop_reason in {"error", "failed", "cancelled", "aborted"}
+            disposition = str(current.get("disposition", "")) if isinstance(current, Mapping) else ""
+            complete = disposition in {"confirmed", "inferred", "assumed_default"}
+            apply_count = int(field_task.get("apply_count", 0) or 0)
+            apply_baseline = int(field_task.get("apply_count_at_dispatch", 0) or 0)
+            applied_this_run = apply_count > apply_baseline
+            if failed or (not complete and not applied_this_run):
+                state = update_field_task_metadata_transaction(
+                    root,
+                    str(field_task["id"]),
+                    status="ready",
+                    last_error=("子代理异常退出" if failed else "子代理结束前未通过 field-apply"),
+                )
+                _record(
+                    root,
+                    "field_task_reopened",
+                    {
+                        "mode": mode,
+                        "agent_id": agent_id,
+                        "field_task_id": field_task.get("id"),
+                        "concept": concept,
+                        "reason": "failed" if failed else "field_not_applied",
+                    },
+                )
+                return {
+                    "systemMessage": (
+                        f"RALPH 字段任务 `{field_task.get('id')}` 尚未形成可接受字段，已恢复 ready；"
+                        "不要把自然语言回执当成完成。下次由 Commander 重新派发该单字段 Agent，"
+                        "并让它写任务文件后运行 field-apply。"
+                    )
+                }
+            # An incomplete but successfully applied draft is still a valid
+            # field attempt.  Defer it until the next supervisor context so
+            # the Commander can process other ready fields without an
+            # immediate same-context retry loop.  It is not terminal: the
+            # stage gate still needs the missing evidence.
+            state = update_field_task_metadata_transaction(
+                root,
+                str(field_task["id"]),
+                status="deferred",
+            )
+            _record(
+                root,
+                "field_task_deferred",
+                {
+                    "mode": mode,
+                    "agent_id": agent_id,
+                    "field_task_id": field_task.get("id"),
+                    "concept": concept,
+                    "reason": "incomplete draft applied; retry at next supervisor context",
+                },
+            )
             return {}
-        _record(root, "subagent_card_bound_on_stop", {"mode": mode, "agent_id": agent_id, "task_card_id": matched["id"]})
-    already_completed = matched.get("status") == "completed"
-    stop_reason = str(payload.get("stop_reason", "")).lower()
-    failed = bool(payload.get("error")) or stop_reason in {"error", "failed", "cancelled", "aborted"}
-    if not failed and not matched.get("is_stage_gate"):
-        expected_slice = next(
-            (
-                ref
-                for ref in matched.get("input_refs", [])
-                if isinstance(ref, str) and ref.startswith("loop-artifacts/stages/")
-            ),
-            None,
-        )
-        if expected_slice and not (root / expected_slice).exists():
-            message = (
-                f"builder 子代理 {matched['id']} 未写入其切片文件 `{expected_slice}`。"
-                "请先 Write 该文件（顶层对象即 payload.<key>），再结束；不要只返回自然语言。"
-            )
-            _record(root, "builder_slice_missing", {"task_card_id": matched["id"], "expected_slice": expected_slice})
-            if mode == "shadow":
-                return {"systemMessage": "RALPH shadow：" + message}
-            _revert_card_to_pending(root, str(matched["id"]))
-            return {"decision": "block", "reason": message}
-        if expected_slice and _slice_still_skeleton(root, expected_slice, state):
-            message = (
-                f"builder 子代理 {matched['id']} 只是把切片内容当作自然语言返回，"
-                f"并没有用 Edit 工具修改骨架文件 `{expected_slice}`。"
-                "该文件仍等于运行时预生成的空骨架。必须用 Edit 把每个占位/空字段替换为真实值；"
-                "禁止把 JSON 作为纯文本返回。"
-            )
-            _record(root, "builder_slice_unfilled", {"task_card_id": matched["id"], "expected_slice": expected_slice})
-            if mode == "shadow":
-                return {"systemMessage": "RALPH shadow：" + message}
-            _revert_card_to_pending(root, str(matched["id"]))
-            return {"decision": "block", "reason": message}
-        missing_roles = _slice_missing_roles(root, expected_slice, state, matched.get("slice_roles"))
-        if missing_roles:
-            owned = matched.get("slice_roles")
-            scope = f"你负责的 {', '.join(owned)} 中" if owned else "七类语义角色中"
-            message = (
-                f"builder 子代理 {matched['id']} 的切片 `{expected_slice}` {scope}仍缺以下语义角色："
-                f"{', '.join(missing_roles)}。"
-                "这是增量填写：已填的语义角色不要重写，只针对仍为空（空数组）的角色用 Edit 补充真实条目，"
-                "并补上对应 attribute_matrix 叶节点（concept/role/attribute/disposition/rationale）。"
-                "你负责的角色都非空后才算完成。"
-            )
-            _record(
-                root,
-                "builder_slice_incomplete",
-                {"task_card_id": matched["id"], "expected_slice": expected_slice, "missing_roles": missing_roles},
-            )
-            if mode == "shadow":
-                return {"systemMessage": "RALPH shadow：" + message}
-            _revert_card_to_pending(root, str(matched["id"]))
-            return {"decision": "block", "reason": message}
-        _record(
-            root,
-            "builder_slice_written",
-            {"task_card_id": matched["id"], "expected_slice": expected_slice},
-        )
-    gate_review_ref: str | None = None
-    gate_verdict: str | None = None
-    if not failed and matched.get("is_stage_gate"):
-        output = payload.get("last_assistant_message")
-        review, review_error = _parse_gate_review(output if isinstance(output, str) else "")
-        if review_error is None and review is not None:
-            review_error = _gate_review_error(matched, review)
-        if review_error:
-            raw_output = output if isinstance(output, str) else ""
-            artifact_ref = _invalid_output_artifact(root, _output_digest(raw_output), raw_output)
-            _record(
-                root,
-                "subagent_gate_review_rejected",
-                {"mode": mode, "agent_id": agent_id, "task_card_id": matched["id"], "error": review_error, "artifact_ref": artifact_ref},
-                output=raw_output,
-            )
-            repair = gate_feedback(
-                card_id=str(matched["id"]),
-                error=feedback_context(review_error),
-                expected=_gate_receipt_format(matched),
-            )
-            if mode == "shadow":
-                return {"systemMessage": "RALPH shadow：" + repair}
-            return {"decision": "block", "reason": repair}
-        artifact_ref = _write_gate_review_artifact(root, str(matched["id"]), review)
-        gate_review_ref = artifact_ref
-        gate_verdict = str(review.get("verdict"))
-        _record(
-            root,
-            "subagent_gate_review_received",
-            {"mode": mode, "agent_id": agent_id, "task_card_id": matched["id"], "artifact_ref": artifact_ref, "verdict": review.get("verdict")},
-        )
-    if already_completed:
-        _record(
-            root,
-            "subagentstop_observed",
-            {"mode": mode, "agent_id": agent_id, "task_card_id": matched["id"], "reason": "already_completed"},
-        )
-        return {}
-    if failed and not matched.get("is_stage_gate"):
-        # A builder subagent died (e.g. the local backend's prefill memory
-        # guard killed it).  Marking it "failed" would deadlock the Commander
-        # forever (it cannot re-dispatch a failed card and just waits on the
-        # unresolved binding).  Reopen it as pending so the loop can retry it
-        # once resources free up, instead of rolling back the whole stage.
-        _revert_card_to_pending(root, str(matched["id"]))
-        _record(
-            root,
-            "builder_card_reverted_pending",
-            {"mode": mode, "agent_id": agent_id, "task_card_id": matched["id"], "reason": "subagent_failed_reopen_for_retry"},
-        )
-        return {"systemMessage": "RALPH：构建子代理异常退出，任务卡已重新置为 pending 以便重试；待资源恢复后由 Commander 重新派发。"}
-    status = "failed" if failed else "completed"
-    updated_state = _save_card_status(root, state, str(matched["id"]), status, agent_id=agent_id)
-    if status == "completed" and matched.get("slice_roles"):
-        stage = updated_state.get("stage", {})
-        groups = factor_groups(updated_state, str(stage.get("id")), "task_spec")
-        partial_ids = [
-            f"{stage.get('id')}-{stage.get('revision', 'r1')}-builder-task_spec-{group}"
-            for group, _ in groups
-        ]
-        if all(updated_state.get("subagent_cards", {}).get(pid, {}).get("status") == "completed" for pid in partial_ids):
-            merged = merge_task_spec_partials(
-                root, str(stage.get("id")), str(stage.get("revision", "r1")), updated_state
-            )
-            if merged is not None:
-                _record(root, "slice_merged", {"task_card_id": matched["id"], "canonical_slice": merged})
-    if status == "completed" and gate_review_ref:
-        updated_card = updated_state["subagent_cards"][str(matched["id"])]
-        updated_card["gate_review_ref"] = gate_review_ref
-        updated_card["gate_verdict"] = gate_verdict
-        save_state(root / "loop-state.json", updated_state)
-        materialize_contract_documents(root, updated_state)
+    # Field-centric mode has no card/auditor fallback.  A lifecycle event
+    # without a current field binding is recorded only; it cannot mutate state.
     _record(
         root,
-        "subagent_card_completed" if status == "completed" else "subagent_card_failed",
-        {"mode": mode, "agent_id": agent_id, "task_card_id": matched["id"], "status": status},
+        "subagentstop_unbound",
+        {"mode": mode, "agent_id": agent_id, "reason": "no current field task binding"},
     )
     return {}
 
 
-def handle_userpromptsubmit(payload: Mapping[str, Any], mode: str = "enforce") -> dict[str, Any]:
+def handle_userpromptsubmit(payload: Mapping[str, Any], mode: str = "hybrid") -> dict[str, Any]:
     """Persist every human clarification as canonical task input before Claude sees it."""
 
     root = _find_project_root(payload)
@@ -1246,7 +1908,7 @@ def handle_userpromptsubmit(payload: Mapping[str, Any], mode: str = "enforce") -
     return {}
 
 
-def handle_precompact(payload: Mapping[str, Any], mode: str = "enforce") -> dict[str, Any]:
+def handle_precompact(payload: Mapping[str, Any], mode: str = "hybrid") -> dict[str, Any]:
     """Record a compaction attempt without ever blocking it.
 
     PreCompact is deliberately observational. Blocking compaction while the
@@ -1270,7 +1932,7 @@ def handle_precompact(payload: Mapping[str, Any], mode: str = "enforce") -> dict
     return {}
 
 
-def handle_postcompact(payload: Mapping[str, Any], mode: str = "enforce") -> dict[str, Any]:
+def handle_postcompact(payload: Mapping[str, Any], mode: str = "hybrid") -> dict[str, Any]:
     """Record completion and a bounded excerpt of Claude's compact summary."""
 
     root = _find_project_root(payload)
@@ -1294,13 +1956,16 @@ def handle_postcompact(payload: Mapping[str, Any], mode: str = "enforce") -> dic
 
 def handle_stop(
     payload: Mapping[str, Any],
-    mode: str = "enforce",
+    mode: str = "hybrid",
     auto_apply: bool = True,
 ) -> dict[str, Any]:
     root = _find_project_root(payload)
     if root is None:
         return {}
     state = load_state(root / "loop-state.json")
+    if field_mode_enabled():
+        materialize_field_tasks(root, state)
+        save_state(root / "loop-state.json", state)
     if state.get("status") in {"completed", "stopped"}:
         return {}
     if state.get("status") == "blocked_human":
@@ -1339,68 +2004,62 @@ def handle_stop(
         # the same stage and can be resumed explicitly.
         return {"systemMessage": _runtime_stop_message(state, kind, excerpt)[:3000]}
 
-    # A Commander is allowed to finish its current turn while an internal
-    # auditor/worker is still running.  Blocking this stop would make the
-    # model search for a way around the already-correct dispatched state,
-    # often by rereading loop-events.md or attempting a forbidden Write.
-    # This does not advance the stage and does not complete the card; the
-    # SubagentStop Hook remains the only completion authority.
+    # A Commander is allowed to finish its current turn while a field worker
+    # is still running.  The outer supervisor owns recovery if Claude exits
+    # without a SubagentStop event; hybrid mode must not trap a weak local
+    # model in a StopHook/read loop just because a durable task is dispatched.
     output = payload.get("last_assistant_message")
     candidate_action = None
     if auto_apply and isinstance(output, str) and output.strip():
-        # Peek only at the action name.  A valid clarify result is the one
-        # controlled exception: it is the Commander response to a completed
-        # auditor rollback and must be allowed to reach the validator instead
-        # of being hidden behind a stale dispatched-card wait.
+        # Peek only at the action name for diagnostics.  The old task-card
+        # exception is no longer part of the active protocol.
         try:
             candidate_action = parse_action(output)
         except Exception:
             candidate_action = None
 
-    waiting_cards = _current_dispatched_cards(state)
-    if waiting_cards and not stop_hook_active and (
-        candidate_action is None or candidate_action.action != "clarify"
-    ):
-        card_ids = [str(card.get("id", "?")) for card in waiting_cards]
+    waiting_field_tasks = current_field_tasks(state, {"dispatching", "dispatched"})
+    if waiting_field_tasks and not stop_hook_active:
+        task_ids = [str(task.get("id", "?")) for task in waiting_field_tasks]
         _record(
             root,
-            "stop_allowed_waiting_for_subagent",
+            "stop_blocked_waiting_for_field_agents",
             {
-                "task_card_ids": card_ids,
+                "field_task_ids": task_ids,
                 "state_preserved": True,
                 "advance_allowed": False,
-                "recovery": "wait_for_subagent_stop_then_ralph_resume",
+                "recovery": "wait_for_subagent_stop_then_field_apply",
             },
         )
+        reason = (
+            "RALPH 字段 Agent 仍标记为运行中（"
+            + ", ".join(task_ids)
+            + "）。hybrid 模式允许本轮结束；supervisor 会检查是否有真实进程，"
+            "并在没有 field-apply/SubagentStop 时自动重开任务。不要把它们标记为完成或 blocked_human。"
+        )
+        if mode == "enforce":
+            return {"decision": "block", "reason": reason}
+        return {"systemMessage": "RALPH hybrid：" + reason}
+    if waiting_field_tasks and stop_hook_active:
+        _record(
+            root,
+            "stop_blocked_waiting_for_field_agents",
+            {
+                "field_task_ids": [str(task.get("id", "?")) for task in waiting_field_tasks],
+                "state_preserved": True,
+                "stop_hook_active": True,
+            },
+        )
+        if mode == "enforce":
+            return {
+                "decision": "block",
+                "reason": "字段 Agent 尚未完成；继续等待 SubagentStop，不要启动新的上下文。",
+            }
         return {
             "systemMessage": (
-                "RALPH 已保留当前状态并结束 Commander 本轮：内部任务卡仍为 dispatched（"
-                + ", ".join(card_ids)
-                + "）。等待 SubagentStop 回执；不要重派、不要 Write 任务卡、不要标记 blocked_human。"
-                "收到回执后用 `ralph resume <项目路径>` 开启短上下文继续。"
+                "RALPH hybrid：字段 Agent 尚未完成；允许本轮结束，supervisor 将从任务文件恢复。"
             )
         }
-    if waiting_cards and stop_hook_active and (
-        candidate_action is None or candidate_action.action != "clarify"
-    ):
-        # Claude Code may invoke Stop again with stop_hook_active=true while
-        # an Agent task is still dispatched.  Do not parse an old Commander
-        # message in that re-entry: it can be a stale advance/clarify result
-        # from before the task was launched and would create a false protocol
-        # repair loop.  Preserve the card; the outer supervisor will reconcile
-        # it after the process exits, using the gate receipt as authority.
-        _record(
-            root,
-            "stop_allowed_waiting_for_subagent",
-            {
-                "task_card_ids": [str(card.get("id", "?")) for card in waiting_cards],
-                "state_preserved": True,
-                "advance_allowed": False,
-                "stop_hook_active": True,
-                "recovery": "subagentstop_or_outer_ralph_loop",
-            },
-        )
-        return {}
 
     result: dict[str, Any] | None = None
     if auto_apply and isinstance(output, str) and output.strip():
@@ -1415,8 +2074,8 @@ def handle_stop(
             # Commander in the loop and point it at the next concrete action.
             return _stop_response(
                 "该结构化阶段结果已经应用过（重复输出），状态已保存且未改变。请勿重复提交；"
-                "直接按当前阶段继续唯一允许的下一个动作：若有 pending 任务卡就派发它，"
-                "否则输出 advance / clarify。",
+                "直接按当前阶段继续唯一允许的下一个动作：若有 ready 字段就派发它，"
+                "否则修复草稿或输出 advance / clarify。",
                 mode,
             )
         if result["status"] == "applied":
@@ -1561,7 +2220,7 @@ def handle_stop(
 def handle_hook(
     event: str,
     payload: Mapping[str, Any],
-    mode: str = "enforce",
+    mode: str = "hybrid",
     auto_apply: bool = True,
 ) -> dict[str, Any]:
     if event == "pretooluse":
@@ -1586,7 +2245,7 @@ def handle_hook(
 def run_hook(
     event: str,
     payload_text: str,
-    mode: str = "enforce",
+    mode: str = "hybrid",
     auto_apply: bool = True,
 ) -> str:
     payload = json.loads(payload_text or "{}")
@@ -1595,9 +2254,10 @@ def run_hook(
         # Canonical turn-completion marker. Claude idles at the interactive
         # prompt after a Stop and never exits on its own, so the outer
         # `ralph loop` supervisor watches for this marker and relaunches the
-        # next fresh context immediately instead of waiting for the 600s idle
-        # timeout. This keeps the AI working uninterrupted.
+        # next fresh context immediately. A blocked Stop must not emit this
+        # marker: field Agents belong to the current Claude context and would
+        # otherwise be killed before SubagentStop arrives.
         root = _find_project_root(payload)
-        if root is not None:
+        if root is not None and result.get("decision") != "block":
             _record(root, "ralph_stop_handled", {"mode": mode, "auto_apply": auto_apply})
     return json.dumps(result, ensure_ascii=False)

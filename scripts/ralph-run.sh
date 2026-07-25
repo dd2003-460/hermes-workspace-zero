@@ -8,7 +8,7 @@ PY=/Users/a1-6/.local/share/ralph-runtime/venv/bin/python
 cd "$PROJECT" || exit 1
 while true; do
   RALPH_FIELD_GATE=1 RALPH_PROMPT_TEMPLATE=stage_prompt_fieldcentric.md \
-    "$RALPH" loop . --mode shadow --dangerously-skip-permissions \
+    "$RALPH" loop . --mode hybrid --dangerously-skip-permissions \
     --idle-timeout 600 --auto-compact-window 40000 --auto-compact-percent 80 \
     2>&1 | tee "$PROJECT/ralph.log"
   rc=$?

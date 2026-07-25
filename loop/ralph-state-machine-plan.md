@@ -166,3 +166,250 @@ PreToolUse 依次判断角色权限、当前阶段策略、具体工具和路径
 - `ralph loop` 默认启用 1800 秒无事件/状态活动看门狗；超时只终止卡住的 Claude 上下文，不删除状态，并在下一轮使用新上下文恢复。
 - 本轮新增回归覆盖 clarify 状态转换、迟到 Hook 不回退、有效 gate receipt 回收和 supervisor cycle；运行时测试共 95 项，全部通过。
 - 已增加同上下文协议修复预算、pending 卡首动作强制、重复 Stop 等待保护，以及阶段范围结果工件和 `ralph validate <project> --result <artifact> [--apply]`；新增回归后测试继续全部通过。
+
+### 2026-07-25 增量字段协议与真实会话修正
+
+- 当前活动协议改为 field-centric；旧 task card/auditor 不再进入 Prompt、Hook 决策或活动生命周期。历史卡片代码和文件仅为迁移/审计兼容，不得重新激活旧流程。
+- `field-init`、`field-apply`、`apply`、`ralph resume` 等命令现在由 PreToolUse/Stop Hook 按当前阶段持续提示；Agent 不需要记忆命令。普通空字段、部分填写和 JSON 语法错误都采用增量修复，不回滚整个阶段。
+- `research_required` 每个 concept 生成一个 `field_task`；Agent prompt 必须带 `RALPH_FIELD_TASK=<task.json>`。PreToolUse 标记 `dispatching`，PostToolUse/SubagentStart 绑定 Agent，SubagentStop 完成或恢复 `ready`。
+- 有活动字段 Agent 时，`enforce` Stop Hook 才阻止父 Commander 结束；`hybrid` 只记录软提示并交给 supervisor 恢复，避免本地模型陷入 StopHook/Read 循环。若父上下文因 API/OOM 真的死亡，下一轮 supervisor 才会把残留任务恢复为 `ready`。
+- 修复了本地模型把 `.json` 任务文件误写成 `.js` 的错误：Hook 给出 canonical JSON 路径和唯一下一步，不创建副本。
+- `role: task_graph` 字段现在由 `field-apply` 调用 `validate_plan(strict=True)` 校验；校验失败不写状态。通过后为每个 DAG node 生成 `graph_task` 文件，保留依赖、并行组、正交键、输入/输出、前后置条件和写入范围。
+- 并发字段合并使用项目级锁；默认最多 2 个本地字段 Agent，只是资源限制，不改变 DAG 的逻辑并行关系。
+- 删除全局 `~/.claude/settings.json` 中历史 `claude-code-monitor` 的全套 Hook，受控 RALPH 项目只保留项目级 RALPH Hook，避免重复 Stop/PreToolUse 控制器。
+- 当前新增/修改代码通过 `test_field_workflow.py` 的 15 项针对性测试和 Python compileall；历史 card-centric 测试不再作为当前 field workflow 的验收标准。
+
+### 2026-07-25 Hook 命令提示与上下文退出恢复
+
+- 当前活动状态不再创建或恢复 `subagent_cards`；旧卡片只作为历史迁移/审计代码，不进入字段运行路径，也不再生成旧任务卡目录。
+- PreToolUse 对 Commander 的每种工具调用都注入统一命令提示：`field-init`、增量 `field-apply`、`render`、有限 `events` 和 `apply`，并明确禁止直接修改 `loop-state.json`。
+- PostToolUse 发现 Bash/Write/Edit 失败时，直接返回短修复提示：只修复错误列出的 JSON/字段，保留已通过字段，再重试同一个 `field-apply`。
+- 字段草稿允许多轮填写；同一 `concept` 增量合并，已通过字段不会被空草稿覆盖。字段任务文件是 Agent 的唯一工作面，状态文件只能由 runtime 原子更新。
+- Stop Hook 继续保护活动字段 Agent；若 Claude 因 Stop Hook 次数上限、API/OOM 退出而没有 `SubagentStop`，外层 supervisor 在每个 cycle 结束后把残留 `dispatching/dispatched` 字段恢复为 `ready`，下一轮短上下文继续。
+- 本轮验证：活动字段工作流测试 `24 passed`，Python 模块编译通过；历史卡片测试不再作为当前验收入口。
+
+### 2026-07-25 真实并行会话修正（第二批）
+
+- 外部搜索失败熔断现在识别 HTTP 错误、403、无响应、`searchCount=0`、空结果以及只返回 `<tool_call>`/占位文本的伪成功包；连续两次后禁止继续 WebSearch/WebFetch，要求字段 Agent 将 `research_required`、空 `evidence_refs` 和待补原因增量写回并运行 `field-apply`。
+- 字段任务的生命周期元数据以 `loop-state.json` 为准；任务文件只保存可编辑的 `field` 草稿，物化过程不会再用旧 `ready` 覆盖当前 `dispatched`。
+- 并行字段派发增加项目级文件锁和按任务 ID 的原子预约，避免两个并发 PreToolUse 写回旧快照导致丢失预约。
+- SubagentStart 保存并使用 Agent 名称/`agent_type` 做身份绑定；启动顺序相反时仍绑定到正确 concept，不再按到达顺序误配字段。
+- 真实会话已验证两个并行字段分别绑定到“最大模型规模”和“token 生成速度”；定向回归测试现为 `29 passed`，compileall 通过。
+- 连续失败熔断在成功的网页响应后会归零；当前定向回归测试现为 `30 passed`，compileall 通过。
+
+### 2026-07-25 增量提示和重复工具动作收敛（第三批）
+
+- Commander 的 Hook 提示现在只展示当前批次的 ready 字段（默认最多 2 个）和正在运行字段，不再把全部动态任务文件塞进主上下文；下一批由下一轮状态重新渲染。字段数量仍由当前 `attribute_matrix` 动态决定，不写死为六个。
+- Commander 和 Worker 的每次 PreToolUse 都会注入当前可用命令：`status`、有限 `events`、`field-init`、增量 `field-apply`、`validate`、`render`、`apply` 和 `resume`。Worker 提示只指向自己的 task JSON，避免把状态文件当作可编辑草稿。
+- `field-apply` 继续作为唯一增量写入口：JSON 语法错误、字段缺失、DAG 错误只拒绝本次提交并返回修复项；已通过 concept 不会被空草稿覆盖，成功提交会留下 apply receipt，允许字段 Agent 在不完整时释放并让下一批继续。
+- `FIELD_DISPATCH_FIRST` 在 hybrid 模式第一次是软提醒；同一 supervisor cycle 内重复两次后升级为 `FIELD_DISPATCH_FIRST_ESCALATED` 硬拒绝，防止本地模型反复 Read/规划而不派字段 Agent。状态保护、危险副作用、越界路径和活动人类阻塞始终硬拒绝。
+- 默认单字段网页工具最多尝试 3 次；连续 2 次失败进入字段级熔断，成功结果会清零计数。失败不伪造证据，只要求字段 Agent 把待补原因增量写回并运行 `field-apply`。
+- 本批修改后的新字段工作流测试仍全部通过（`test_field_workflow.py`），模块编译通过；历史 card-centric 测试与旧卡片文件不属于当前活动协议。
+- 字段流程外的 Commander 协调工具（例如 `SendMessage`）在 hybrid 中按 `TOOL_STAGE_SCOPE_FIELD` 硬拒绝；当前增量字段回归测试为 `33 passed`，避免“已派发后再发错误消息接口”造成假性停滞。
+- `SubagentStart` 的候选选择和 agent identity 写入现在在同一项目锁内完成；并发到达时不会再把两个字段代理绑定到同一 concept。`PostToolUse:Agent` 只保留 parent/child 别名，不抢占正式 primary binding。
+- 不完整但已经 `field-apply` 的字段不再标记为终态 `completed`，而是进入 `deferred`；当前上下文结束后由 supervisor 自动恢复为 `ready`，保证外部证据暂时不可用时既不立即循环，也不丢失后续重试机会。
+- 修复了 Claude Code 并行 `SubagentStart` 身份与实际子代理 prompt 可能交换的问题：worker 第一次访问的 task JSON 路径是最终身份事实，Hook 会原子重绑 `agent_id` 到该字段；相对路径始终先按项目根解析，避免跨项目 cwd 触发 Hook 崩溃。
+- Commander 直接读取当前字段 task JSON 现在会被 Hook 拒绝并提示派发 Agent；如果模型收到派发反馈后仍无活动字段 Agent，supervisor 默认 90 秒触发专项恢复，保存状态并启动新上下文。可用 `RALPH_FIELD_DISPATCH_STALL_SECONDS` 调整或设为 `0` 禁用。
+- 当前 field-centric 定向回归测试为 `35 passed`（新增任务路径身份修复、Commander 任务文件读取门禁与增量提示回归），模块编译通过；历史 card-centric 测试保留为迁移审计样例，不作为当前活动协议验收入口。
+- 现场恢复实验已验证：模型连续两轮“先读任务文件/不派 Agent”时，Hook 拒绝越权读取，专项 supervisor 看门狗触发新上下文；第三轮按提示启动两个字段 Agent，两个 task JSON 首次读取路径与字段身份一致，当前状态均为 `dispatched`。
+- 外部搜索失败后的字段 Agent 也增加独立恢复边界：达到字段熔断且长期没有 `field-apply` 时，supervisor 保存任务文件并在新上下文重开，不把网络/本地模型无响应误判为阶段完成。
+### 2026-07-25：字段子代理无提交进度时的恢复
+
+现场实验发现：两个字段 Agent 能正确读取各自任务文件，但本地 Claude 在网页工具前长时间思考时，主 Claude 的 Stop Hook 会一直等待 `SubagentStop`。原先的 supervisor 只在网页失败熔断后恢复，因此这种“没有失败事件、也没有 field-apply”的情况仍可能空转。
+
+现在 `RALPH_FIELD_AGENT_STALL_SECONDS` 同时检查：字段仍为 `dispatching/dispatched`、`apply_count` 没有增加、任务的 `updated_at` 超过窗口，或网页失败熔断已达到阈值。恢复只终止当前 Claude 上下文，保留字段任务和草稿；下一 supervisor cycle 通过 `reopen_stale_field_tasks` 重开为 `ready`，再由新上下文继续派发。默认窗口为 300 秒，现场可用环境变量缩短测试或放大以容纳弱设备的长思考。
+
+### 2026-07-25：required output 门禁与 DAG 节点增量提交
+
+字段 gate 现在同时检查当前节点的 `required_outputs`，不会因为 attribute matrix 的叶字段都已填写就跳过 `research_findings`、`cross_validation`、`task_graph` 或 `coverage_proof`。缺口以软提示返回，仍可多轮增量填写；状态推进命令只有在缺口清零后才通过。
+
+执行 DAG 增加 `ralph graph-apply PROJECT NODE_FILE`：子代理只修改自己的 `graph_task` JSON，runtime 校验 JSON、节点存在、依赖已完成以及 output/evidence 非空，随后原子更新 `plan.completed`，重新计算 ready/blocked/Join。并行节点可以独立提交，Join 只有所有依赖完成后开放；禁止直接改 `plan` 或 `loop-state.json`。
+
+本轮字段工作流定向测试为 `40 passed`，compileall 和 `git diff --check` 通过。
+
+当前活动验收入口为 `test_field_workflow.py`、`test_dag.py` 和 `test_decomposition_benchmark.py`；合计 `51 passed`。完整测试目录中仍有历史 card-centric 用例，它们主动访问旧 `subagent_cards`、旧 02→03 节点顺序和旧 prompt 文本，因此会失败；这属于旧协议测试未迁移，不是当前运行时重新启用旧卡片。它们保留作迁移审计证据，不作为 field-centric 发布门禁。
+
+现场 GPU 项目还暴露了一个独立限制：本地 Claude 的网页工具在多个字段上未产生可用结果，runtime 已按设计保留 `research_required`、不伪造 evidence，并通过字段 watchdog 重开上下文。这个现场实验不能证明真实网页研究已完成；它证明的是“不响应也不会永久卡死或误推进”。
+
+### 2026-07-25：Hook 命令提示、增量提交和自动 worker 修正
+
+- PreToolUse 现在对 Commander/Worker 持续提示 `field-init`、`field-apply`、`graph-apply`、`validate`、`render`、`status`、有限 `events`、`apply` 和 `resume`；提示明确说明同一文件可多轮填写、只修复错误列出的字段、保留已有通过字段。
+- `field-apply` 是唯一字段增量写入口，`graph-apply` 是唯一 DAG 节点完成入口，`apply` 是唯一阶段状态转换入口；语法错误、缺字段和依赖错误只拒绝本次提交，不回滚已保存内容。
+- 活动运行时不再回退到旧 task-card/auditor 协议；无字段绑定的 SubagentStart/Stop 只记事件，不会凭自然语言完成旧卡。历史卡片文件和迁移代码不属于活动状态。
+- hybrid StopHook 对残留 `dispatching/dispatched` 字段只做软提示并交给 supervisor 恢复；只有 `enforce` 才硬阻塞。这样本地模型不会因为没有 SubagentStop 而陷入 StopHook/Read 循环。
+- 新增可选 `RALPH_AUTO_FIELD_WORKERS=1`：Commander 不派 Agent 时，supervisor 可直接启动有界的独立字段 worker。worker 使用 `RALPH_AGENT_ID`、相同 Hook 和任务文件，启动失败自动释放预约；字段无进度时允许父 Commander 换短上下文，但不会重复 claim 活动 worker。
+- 定向字段/DAG/benchmark 验收共 52 项通过；模块编译通过。完整旧 card-centric 测试不再是当前发布门禁。
+
+### 2026-07-25：自动 worker 独立超时与有限工具预算
+
+- 自动字段 worker 增加独立生命周期超时（`RALPH_AUTO_FIELD_WORKER_TIMEOUT`，默认 1800 秒）；超时会终止 worker、清除 agent 绑定、恢复 `ready` 并记录事件，不会留下永久 `dispatched` 槽位。
+- 自动 worker 提示明确要求：读取自己的字段后立即增量填写，网页最多尝试两次；没有有效结果时提交 `research_required + evidence_refs=[] + rationale`，不得只返回自然语言。
+- 现场新会话已确认新提示和动态 task identity 注入成功；当前两个字段 worker 正在运行，尚未产生 `field-apply`，因此研究阶段仍未被误判为完成。
+
+### 2026-07-25：worker 超时回收移入监督心跳
+
+- 现场事件显示：网页工具返回只含 `<tool_call>` 的伪失败包后，字段 worker 可能继续占用本地模型上下文；旧实现只在 Commander 轮次边界回收，存在等待边界过长的问题。
+- `_run_claude_supervised` 现在每个监督心跳调用 `_reap_auto_field_workers`。worker 超过 `RALPH_AUTO_FIELD_WORKER_TIMEOUT` 后立即终止、清除绑定、恢复 `ready` 并保留草稿；Commander 可继续由新上下文处理，不会永久卡在 `dispatched`。
+- 现场确认：worker 超时事件已写入 `loop-events.md`，字段没有伪造 evidence，状态仍为 `research_required/ready`，说明恢复路径生效但网页研究本身尚未完成。
+- 定向字段/DAG/benchmark 验收仍为 52 项通过；compileall 和 `git diff --check` 通过。
+- 又清理了活动路径中的旧卡片残留：field-centric `ralph loop` 启动和轮次结束不再调用 legacy card reconciliation；Hook 也不再从旧 `subagent_cards` 绑定 Commander/Worker。旧实现只留在迁移/审计函数中，不会影响当前队列。
+
+### 2026-07-25：deferred 字段公平调度
+
+- 真实 GPU 会话暴露了队列饥饿：一个网页证据暂不可用的字段进入 `deferred` 后，下一 supervisor 曾一次性重开所有 deferred，自动 worker 可能反复抢回同一字段。
+- 现在只要还有 `ready/pending` 字段，deferred 不重开；ready 队列耗尽后才重开最旧的一个 deferred。这样不会跳过未完成字段，也不会让单个外部失败字段阻塞其他正交因素。
+- 定向 field/DAG/benchmark 验收现为 53 项通过；compileall 和 `git diff --check` 通过。
+
+### 2026-07-25：stage-01 自动字段与拒绝反馈验收
+
+- 为 stage 01 缺失的 `goal/known/unknown` required outputs 自动物化独立 pending field task；不依赖 Commander 一次性写大 JSON。
+- 真实隔离 smoke 会话验证了：重复 Bash 越权会触发 idle watchdog 换上下文；自动 worker 能进入单字段任务；运行时占位字段不会被 `field-apply` 当作真实进度，超时后回到 `ready` 并记录 `auto_field_draft_apply_failed_on_timeout`。
+- 真实 smoke 还验证了新项目首次启动的 Claude 目录信任确认是外部前置交互，不是 RALPH 状态机阻塞；确认后才进入 Claude 会话。
+- 自动字段 worker 默认使用 `low effort`（可由 `RALPH_AUTO_FIELD_EFFORT` 覆盖），任务元数据显式包含 `role/attribute`，减少字段为空导致的误操作。
+- 定向 field/DAG/benchmark 验收现为 55 项通过；compileall 和 `git diff --check` 通过。
+
+### 2026-07-25：移除不可达旧策略并收紧诊断输出
+
+- 删除 `stage_policy.py` 中永远不可达的旧 task-card/auditor 分支；字段中心策略成为唯一工具决策路径，避免残留卡片文件重新影响 Hook 提示。
+- 删除 `SubagentStop` 中永远不可达的旧卡片完成/门禁回执分支；无字段绑定的生命周期事件只记录，不改变状态。
+- `ralph status` 默认改为有限摘要，只显示阶段、字段/DAG 计数和当前 artifact；完整状态必须显式使用 `ralph status <project> --full`，防止状态诊断再次撑大模型上下文。
+- 状态加载增加 artifact 与最近结构化结果的富集合并：阶段 artifact 只剩种子字段时，不会覆盖 `last_result` 中更完整的分解；新增回归测试验证这一恢复路径。
+- 当前定向验收为 `58 passed`（field workflow、DAG、分解 benchmark、status/supervisor 兼容测试），compileall 和 `git diff --check` 通过。
+- 真实会话进一步发现：字段已恢复为 `ready` 时，旧 Claude worker 进程可能仍存活。supervisor 现在按持久化生命周期回收这类 orphan worker，并记录 `auto_field_worker_orphan_reaped`，避免资源泄漏和重复派发假象；新增测试已通过。
+- 为满足“一条命令持续运行”，自动字段 worker 改为默认启用；它仍受 `RALPH_MAX_PARALLEL_FIELDS`、字段级工具预算和 `RALPH_AUTO_FIELD_WORKER_TIMEOUT=1800` 约束。纯 Commander 实验可显式设置 `RALPH_AUTO_FIELD_WORKERS=0`。
+
+### 2026-07-25：缺少字段标记时的混合模式自绑定
+
+- 真实会话发现，本地 Claude 有时会把 Agent 描述传给工具，却丢失 prompt 第一行的 `RALPH_FIELD_TASK`。若一律硬拒绝，字段队列本身没有问题，主 Agent 却可能因格式遗漏停在原地。
+- hybrid 模式现在从当前 `ready/pending` 队列自动绑定一个字段并继续；仍然一 Agent 一字段，子代理仍必须写自己的任务 JSON 并运行 `ralph field-apply`。enforce 模式继续要求显式 `RALPH_FIELD_TASK`，用于严格验收。
+- 新增回归测试确认自动绑定不会扩大任务范围；本轮定向验收为 60 项通过。该修复解决的是派发格式鲁棒性，不代表外部网页工具一定可用。
+
+### 2026-07-25：低内存设备避免首轮双 Claude 并发
+
+- 现场观察到自动字段 worker 与 Commander 在首轮同时启动，会让本地 MLX 同时保留两个上下文；这会把模型/ KV cache 的资源问题误表现成状态机停滞。
+- 现在首轮只启动 Commander；只有 Commander 上下文结束且 ready 字段仍未派发时，下一轮才启动有界自动 worker。字段队列、Hook 和 `field-apply` 规则不变。
+- 新增回归测试验证首轮不调用 fallback、第二轮才允许调用；本轮 field/DAG/benchmark/node/supervisor 定向测试为 62 项通过。
+
+### 2026-07-25：监督器重启时回收嵌套 Claude
+
+- 真实 watchdog 实验发现：父 Commander 被 idle recovery 终止后，旧 nested Claude 仍存活，造成字段长期保持 `dispatched` 的幽灵任务。
+- `_run_claude_supervised` 现在为每个 Commander 建立独立进程组；watchdog 先终止整个进程组，再进入下一轮。重启现场已确认旧 nested Claude 消失，字段从 `dispatched` 恢复为 `ready`，新上下文重新获得完整队列。
+
+### 2026-07-25：首次无动作也进入派发看门狗
+
+- 现场还发现，Commander 可能在收到阶段提示后长时间思考，却没有产生任何工具反馈；旧逻辑只有在先犯一次派发错误后才启动 90 秒 watchdog。
+- 现在只要当前 supervisor cycle 有 ready/pending 字段且没有 active 字段 Agent，就开始计时；超时后由进程组恢复和 fallback worker 接管。已有子代理或正在进行的窄研究不会被这个看门狗打断。
+
+### 2026-07-25：自动 worker 心跳回收与完整链路现场验收
+
+- 真实 GPU 项目现场确认了 `supervisor_field_dispatch_stall_recovery`、`field_tasks_reopened_after_cycle`、`auto_field_worker_started` 和 `auto_field_worker_stall_reaped`：本地网页工具失败或模型停在 Read 后，字段不会永久保持 `dispatched`。
+- 修复自动 worker 与父 Commander 生命周期脱节的问题：fallback worker 现在使用独立进程组；其自身字段心跳超过 `RALPH_FIELD_AGENT_STALL_SECONDS` 时会被回收、保留草稿并释放为 `ready`。旧版继承监督器进程组的 worker 只终止自身 PID，避免误杀 shell/监督器。
+- Commander 的 `COMMANDER_BASH_SCOPE_FIELD` 反馈在存在 ready/pending 字段时明确要求“下一次工具调用必须是带 `RALPH_FIELD_TASK` 的 Agent”，减少被拒后重复 Bash。
+- 在 field-centric 项目现场以受控 `field-apply` / `apply` / `graph-apply` 走通了 01 → 02 → 02.5 → 03 → 04 → 04.5 → exploration：02 动态生成 3 个独立研究字段；03 的 T1.1/T1.2 并行完成后才开放 J1；Join 完成后进入验证和探索；探索候选进入 queue，未被静默执行。
+- 现场真实 Agent 的限制也被保留为事实：本地模型在两个 stage-01 字段 worker 中只读取任务文件，未完成 field-apply；该项被标为可逆 `assumed_default`，并产生下一轮 `candidate`，没有被伪造为成功。
+- 旧 exploration 测试已迁移为当前 candidate 入队语义，不再依赖旧 `subagent_cards`。当前 field/DAG/benchmark/节点/候选/监督器定向验收为 65 项通过，compileall 和 `git diff --check` 通过。
+- 对一个新建最小项目做了第二次真实 Agent 复测：将 pending worker 提示压缩为明确的 Read → 修改自己的 task JSON → `field-apply` 三步后，worker 仍只执行 Read，90 秒无增量回执后被回收。结论是当前本地 Claude/oMLX 会话执行工具链仍不稳定；这是 Agent/运行环境问题，不是 `field-apply` 或状态门禁问题。该复测项目保留为失败样本，状态为 01/r1、3 个字段 ready。
+
+### 2026-07-25：旧策略断言迁移与挂起复测收尾
+
+- 长窗口复测继续观察约 5 分钟后，字段 worker CPU 接近空闲，仍只有 Read、没有 `field-apply`；确认“继续等待”不会增加证据。手动停止测试 supervisor 后通过 runtime 的 stale-field 恢复函数将该样例重新置为 3 个 `ready` 字段，避免留下幽灵 `dispatched` 状态。
+- 将仍要求 `RALPH_TASK_CARD`、auditor 和旧派发顺序的 `stage_policy` 测试迁移为字段协议断言：普通文件可增量编辑，`loop-state.json` 仍硬保护；ready research field 必须提示 `RALPH_FIELD_TASK`；错误命令必须改用 `field-apply` / `graph-apply` / `apply`。
+- 清理 Hook 可见的旧任务卡措辞：完整事件日志只允许有限 `ralph events --tail`，阶段文档读取提示改为当前字段 Agent，修复提示不再把中途自然语言称为旧协议错误。
+- 当前字段/DAG/benchmark/node/candidate/stage-policy 定向验收为 `66 passed`；compileall 和 `git diff --check` 通过。完整历史 card-centric 测试仍保留用于迁移审计，不属于活动 field-centric 发布门禁。
+
+### 2026-07-25：长思考窗口、Read 无进展门禁与恢复任务保护
+
+- 本地 Qwen 现场确认：默认字段派发看门狗过短时，Commander 在真正发出 Agent 前就被 supervisor 终止。`RALPH_FIELD_DISPATCH_STALL_SECONDS` 默认调整为 600 秒，已派发字段无进展窗口 `RALPH_FIELD_AGENT_STALL_SECONDS` 默认调整为 900 秒；两者仍可由实验环境覆盖。
+- Worker 的 Hook 现在记录 `field_read_count`。同一字段前 3 次 Read 仍允许并持续注入“下一步必须 Write/Edit → field-apply”的增量提示，第 4 次重复 Read 才硬拒绝并给出 `FIELD_READ_LIMIT`，避免弱模型因过早硬拒绝直接结束子代理，也避免无限读循环。
+- 真实现场出现了可验证的 `field_increment_applied`：stage-01 的真实字段 Agent 把 `goal` 写入 task JSON 并通过 `ralph field-apply` 合并，事件记录了 remaining.required_outputs=`known,unknown`。这证明字段文件→校验→原子合并链路实际可用；后续 `known/unknown` 现场仍可能因本地 Agent 停在 Read 而未提交，不能把它们伪造为完成。
+- 修复恢复命令的状态保护：对一个仍在运行的项目重复传入稍有不同的任务文字，不再调用会重建 `task_spec` 的 `set_task`，而是保留当前 stage/字段并追加 authoritative input；只有已完成项目才通过 `start_new_task` 创建新 run。这样中断恢复不会抹掉已通过字段。
+- 真实实验中发现旧 supervisor 子进程会在父进程结束后独立存活；本轮通过独占 supervisor 锁、独立进程组和 stale/orphan 回收清理了现场遗留进程，所有被中断字段均回到 `ready`，状态文件未损坏。
+- 新增/更新增量读门禁、任务描述保护测试；当前字段增量定向测试 5 项通过，模块 compileall 通过。完整历史 card-centric 测试仍不能作为当前协议门禁，原因是它们主动断言已删除的 `subagent_cards`、旧 prompt 和旧节点顺序。
+
+### 2026-07-25：修复 pending 字段被误派 Agent 的活动路径漏洞
+
+- 真实复测发现：虽然 Prompt 已写“只有 `research_required` 才派 Agent”，Hook 的旧分支仍把所有 `ready/pending` 字段放入自动绑定队列；因此 stage-01 的 `known/unknown` 结构字段仍可能被绑定成旧式子代理。
+- Hook 现在只从 `research_required` 队列绑定 Agent；没有研究字段时，Commander 的 Agent 调用硬拒绝为 `FIELD_AGENT_NOT_NEEDED`，要求回到 `fields.json → ralph field-apply`。显式标记为 pending 的 Agent 也被拒绝，不再形成未绑定子代理或旧 auditor 回退。
+- `_field_dispatch_stall_requested` 同时覆盖 pending 结构字段和 research 字段：若 Commander 长时间没有产生增量状态变化，supervisor 会按可配置窗口启动新上下文；该看门狗不创建 Agent，只恢复 Commander，因此不会复活旧协议。
+- 真实会话中已观察到：旧逻辑曾触发 `FIELD_TASK_PATH_CORRECTION` / `COMMANDER_BASH_SCOPE_FIELD` 后仍停在 01；停止并清理后状态保持 `known/unknown=ready`，没有把未完成字段标为成功。新逻辑需在下一次会话中继续验证 Commander 的实际 `field-apply`。
+- 真实 smoke 随后实际产生 `supervisor_field_dispatch_stall_recovery`（临时窗口 90 秒），并启动 fresh context；停止后 `known/unknown` 仍为 `ready`，没有幽灵 Agent 或伪完成。
+- Hook/策略又补齐了 pending 字段的 Bash 反馈：不再错误提示“下一次必须 Agent”，而是明确 `Write/Edit fields.json → field-apply`；增加 `ralph field-status` 只读别名，降低本地模型调用不存在诊断命令的失败率。
+- 本轮定向字段/策略/CLI/DAG/benchmark 测试 `86 passed`，compileall 和 `git diff --check` 通过；完整历史 card-centric 测试仍仅作迁移审计。
+
+### 2026-07-25：增量恢复预算修正与 worker 提示压缩
+
+- 发现一个恢复边界问题：字段 worker 的 `field_read_count` 曾随任务永久保留。旧 worker 读满 3 次后被 watchdog 重开，新 worker 可能一启动就触发 `FIELD_READ_LIMIT`，形成“恢复后仍不能读”的假死。
+- `claim_field_task` 和 stale 重开现在按每次新的派发尝试将 `field_read_count`、网页失败/尝试计数清零，并把计数同步回任务 JSON；已通过字段内容和 `apply_count` 不受影响。
+- pending 结构字段的自动 worker prompt 压缩为固定三步：读取自己的 task JSON → 只改当前 `field` → 执行 `ralph field-apply`。研究字段仍保留有限外部证据尝试和不可验证时的 `research_required` 降级路径。
+- 新增恢复回归测试，验证 stale retry 可以重新读取；定向测试、compileall 需在本次现场复测后再次记录。
+
+现场复测结果：使用临时 `RALPH_FIELD_DISPATCH_STALL_SECONDS=60`、`RALPH_FIELD_AGENT_STALL_SECONDS=90` 和 `RALPH_AUTO_FIELD_WORKER_TIMEOUT=180`，旧的 stage-01 `known/unknown` 字段均能重新派发；两个 worker 随后均因本地模型没有产生 `field-apply` 而被 `auto_field_worker_stall_reaped` 回收，任务回到 `ready`，进程组清理完成。该实验验证了恢复与防幽灵进程，不证明本地模型已经稳定执行三步动作；当前字段仍未推进，保持真实失败状态。定向验收现为 `87 passed`，compileall 与 `git diff --check` 通过。
+
+同一现场还确认低内存设备不应默认并发两个本地字段 worker；实际并行能力保留在 DAG，`RALPH_MAX_PARALLEL_FIELDS` 默认降为 `1`，需要时再显式提高。
+
+### 2026-07-25：fallback worker 与 Commander 串行化
+
+- 进一步发现：即使首轮不并发，fallback worker 启动后旧 supervisor 仍会在同一轮立刻启动新的 Commander；这会再次形成两个本地 Claude 上下文竞争 KV cache。
+- 现在 supervisor 在 `auto_field_worker_started` 后等待该 worker 完成或被 watchdog 回收，只有 worker slot 释放后才启动下一轮 Commander。worker 退出但没有 `field-apply` 时，Runtime 立即清除绑定、重置 Read 预算并恢复 `ready`。
+- 真实现场验证了事件顺序：`auto_field_worker_stall_reaped` → 下一次 `supervisor_cycle_started`；worker 期间进程表只有一个 Claude 子进程。新增串行监督器回归测试；当前定向测试、compileall 和 diff 检查通过。
+- 实时 Commander prompt 现在只保留当前任务、当前字段、命令和阶段方法摘要；完整阶段文档与默认画像不再每轮重复注入。现场生成的普通 prompt 约 3.5k 字符、compact recovery 约 2.6k 字符，减少本地模型首次工具调用前的 prefill 压力。
+- 自动 worker 不再使用 `claude --bare`：`--bare` 会跳过 RALPH Hook，导致 worker 读完 task JSON 后得不到 PostToolUse 的增量写入提醒。现在 worker 加载项目级 `settings.ralph.json`，仍只开放 Read/Write/Edit/Bash 和自己的 task prompt；本地 endpoint/model 继续从用户环境复制。下一次真实现场需验证 Hook 是否将停在 Read 的 worker 推动到 `field-apply`。
+
+### 2026-07-25：stage-02 动态字段恢复与 worker 工具边界复测
+
+- 真实 stage-01 已通过绝对路径的 `ralph field-apply`，并自动进入 stage-02；但 stage-02 恢复了 stage-01 的因素矩阵后，旧判断把它误认为“已有研究字段”，导致研究队列为空。现在 materializer 会识别真正的 `research_findings/research_required` 条目；若不存在，就从 stage-01 的 `unknown` 按分隔因素动态生成独立字段任务。
+- 真实复测确认 stage-02 已落盘 2 个 `research_required` 字段，Commander 没有派发时由 supervisor 启动有界 auto worker；任务生命周期按 `ready → dispatched → ready` 恢复，没有伪造完成。
+- 真实 worker 曾把“外部搜索”错误实现为 Bash/curl；Hook 记录了实际命令并继续拒绝。自动 worker 现在显式开放 `WebSearch/WebFetch`，禁止 Bash/curl/python/grep 搜索，外部工具失败时保留 `research_required + evidence_refs=[] + rationale`。
+- worker 只允许执行受控 `ralph field-apply` 的 Bash 命令；命令解析器改为 shlex 单命令解析，兼容绝对路径、引号、`cd`、环境变量和 `command` 前缀，但仍拒绝 shell 链接、重定向和任意文件操作。
+- 同一字段第二次 Read 已改为硬反馈 `FIELD_WRITE_AFTER_READ`，hybrid 也会真正 deny；成功 WebSearch 的 PostToolUse 会立即要求 Write/Edit → field-apply，避免模型在搜索后继续循环。
+- 现场仍发现本地 Qwen 在外部搜索失败后可能没有写字段；supervisor 已按字段心跳回收 worker，状态保持 `ready`。这证明恢复和安全边界有效，但尚未证明本地模型能稳定完成 stage-02 的证据提交；该限制不能被状态机伪装成成功。
+- 本轮定向 field/stage-policy 测试通过，compileall 通过。当前真实项目仍在 stage-02，字段任务为 2 个 `ready`，等待可验证证据或下一轮受控 worker。
+
+补充现场结果：成功 WebSearch 的 PostToolUse 现在会直接返回 Write/Edit → `field-apply` 指令；外部搜索失败则不允许转为 Bash/curl。手动结束实验 supervisor 后，使用同一个 runtime 的 stale-field 恢复函数将残留 `dispatched` 恢复为 `ready`，并确认没有存活的项目 supervisor/worker 进程。相关 field/stage-policy/DAG/候选测试、compileall 和本次改动范围 diff 检查均通过；历史项目事件日志的既有尾随空格未修改。
+
+### 2026-07-25：flow-only 增量字段与真实链路复测
+
+- `PromptRenderer` 现在在任务描述包含“不要求实际网页研究”或显式 `flow_only` 时，向 Commander 明确注入 flow-only 规则：仍必须执行“一字段一 Agent → Read → Write/Edit → field-apply”，但不调用网页工具、不伪造来源，使用 `inferred` 进行流程验证。
+- `loop-state.json` 的 authoritative inputs 现在会丢弃自动生成的 RALPH 提示、去重并限制长度；现场一次保存把 17 条约 31KB 的重复输入压缩为 1 条，避免事件/提示无限回灌上下文。
+- 缺失的 required output 不再只在 stage 01 物化；02.5 的 `cross_validation`、03 的 `task_graph/coverage_proof` 和后续阶段也会生成增量字段任务。真实链路已验证：02 的两个字段、02.5 的 cross_validation、03 的两个 required output 均能通过同一套 Read → Edit → 受控 field-apply。
+- worker 的受控 `ralph field-apply` Bash 白名单统一适用于所有字段阶段；此前 02.5 worker 被旧策略误拒的问题已修复。回归测试：`test_field_workflow.py` + `test_stage_policy.py` 定向结果为 66 项通过，compileall 通过。
+- 03 不再接受“写了一段 task_graph 描述”作为 DAG 完成。flow-only 下若没有结构化 `task_graph.nodes`，字段会重新开放为 pending；专用 worker 提示要求生成两个正交并行节点 `T1.1/T1.2`（`G1`、不同 `orthogonal_key`、不同 `writes`）和 Join `J1`。
+- 真实项目 `/Users/a1-6/Desktop/workspace/projects/D1-ralph-real-chain` 已产生并通过 DAG 校验：`T1.1`、`T1.2` 为 G1 并行 ready，`J1` 依赖两者并被正确标记 blocked；03 因结构化 DAG 已存在才推进到 04。停止现场 supervisor 后，`verification_report` 字段已由 runtime 恢复为 ready，没有留下存活的该项目进程。
+- 本次现场仍是 flow-only：`inferred` 只证明流程和字段门禁，不证明 GPU 事实、网页证据或 DAG 节点业务执行结果。真实研究模式仍要求 `research_required + evidence_refs`，不能沿用 flow-only 的自动推进。
+
+### 2026-07-25：命令准入与真正的增量提交修复
+
+- 现场复测确认了一个活动路径漏洞：当存在 `research_required` 字段时，旧 Hook 会把 Commander 的所有非 Agent 工具都挡住，连 `field-init`、`field-apply`、`graph-apply` 和 `apply` 也会被拒绝。这会直接造成“字段可以多次填写，但提交命令永远到不了”的假死。
+- 现在受控 `ralph` 命令在字段派发提示之前统一放行；Commander 仍不能直接写 `loop-state.json`，但可以增量写当前阶段 `fields.json`/`advance.json`，再交给 runtime 校验、合并和原子保存。普通 Bash、越界写入和状态文件修改仍硬拒绝。
+- `field-apply` 不再拒绝运行时生成的空 `pending` 占位。它只校验本次实际提交的结构；未完成字段通过 `remaining.pending/researching/required_outputs` 返回，阶段门禁仍阻止提前 `apply`。JSON 语法错误只拒绝本次提交并给出行列与同一重试命令，`loop-state.json` 保持不变。
+- Hook 的每次工具提示现在明确列出 `field-init`、`field-apply`、`graph-apply`、`apply`、`task-next`、`status`、`events`、`validate`、`render` 和 `resume`；增量修复规则明确为“只修复错误列出的字段，保留已通过字段”。
+- 自动 worker 启动后把 PID 写入字段生命周期。新 supervisor 启动时会回收上一 supervisor 遗留的持久化 worker，再恢复字段为 `ready`，避免旧 Claude 进程继续占用 MLX/KV cache 或形成重复派发幽灵。
+- 定向 `test_stage_policy.py` + `test_field_workflow.py` 通过；compileall 通过。真实复测中 `preference_brief` 已产生真实 `field_increment_applied`，而 `candidate_tasks` worker 仍出现“Read 后不 Write/field-apply”的模型侧停滞；该失败被保留为可恢复状态，不能伪造为探索完成。
+## 2026-07-25：探索尾节点与命令提示最终修复
+
+本轮把“候选任务”和“选中任务”明确分开：
+
+- `candidate` 动作只把候选写入 `state.queue.candidates`，保留 `status=candidate`，同时保存 `preference_brief`；它不会启动 01，也不会静默执行。
+- `advance` 的 `payload.exploration.selected_task` 只接受 `selection_mode=task_board` 的 ready/pending 任务；未获批准的 candidate 会被 runtime 拒绝，避免候选误执行。
+- 探索阶段仍是尾节点而非终止；没有 ready 任务时返回偏好和候选，下一轮由主 Agent 分析后再分解；有人类阻塞的任务直接跳过。
+
+Hook 与实时 Prompt 现在每次都提示：
+
+```text
+field-init → Write/Edit 当前阶段 fields.json → field-apply
+graph task JSON → graph-apply
+所有字段/节点通过 → advance.json → apply
+上下文中断 → resume
+```
+
+普通字段缺失是软提示：可以保存空的 `pending` 占位并多轮增量修改；`field-apply` 只合并当前 `concept`，不会覆盖其他已通过字段。JSON 语法错误、字段格式错误、DAG 依赖/环/正交性/写冲突错误都会在本次命令中拒绝且不改变状态，并返回修复位置。只有阶段推进才执行完整门禁。
+
+本轮验证证据：
+
+- 实际 Claude/Qwen 链已走过 `01 → 02 → 02.5 → 03 → 04 → 04.5 → exploration`；其中 02 动态生成字段，03 生成两个正交并行节点 `T1.1/T1.2` 与 Join `J1`。
+- 通过真实 `ralph graph-apply` 依次完成 `T1.1`、`T1.2`、`J1`；Join 在两个依赖完成后才变为 completed。
+- 探索字段通过增量 `field-apply` 完成；实际提交 `candidate` 动作后，事件日志记录 `candidate_created`，状态仍为 exploration，候选只存在队列。
+- 一个旧格式的探索 `advance.json` 因缺少 `payload.exploration` 被拒绝；补齐后又因候选未获批准被拒绝。这两个拒绝均没有改写状态，证明门禁仍有效。
+- 字段、Hook、DAG、CLI、节点、候选和分解 benchmark 回归测试全部通过；编译检查通过。
+
+当前结论：旧 task-card/auditor 不再是活动运行协议；历史文件和兼容函数仅保留作迁移/审计，不会从旧卡恢复活动任务或阻止字段流程。当前默认协议是“字段增量 + runtime 命令 + Hook 准入 + 结构化动作”。

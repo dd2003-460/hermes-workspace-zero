@@ -1,0 +1,11 @@
+{
+  "action": "rollback",
+  "status": "failed",
+  "stage_id": "04",
+  "revision": "r1",
+  "next_stage": "03",
+  "rollback_to": "03",
+  "evidence": ["stage 03 graph validation replay"],
+  "artifact_refs": [],
+  "message": "回到 03，修复 task_graph 的结构化 DAG 后再继续。"
+}

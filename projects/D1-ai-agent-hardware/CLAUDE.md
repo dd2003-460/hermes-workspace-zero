@@ -1,48 +1,34 @@
-# CLAUDE.md — RALPH Loop Project Template
+# CLAUDE.md — RALPH 字段增量项目
 
-## 你是谁
-你是 RALPH Loop 的 **Commander**（指挥官），负责此项目的自主研究编排。
+本项目使用字段中心 RALPH runtime。当前阶段以 `loop-state.json.stage` 为准。
 
-**核心规则**：
-- 通过 Agent 工具分发任务，禁止 Commander 亲自执行底层工作
-- 每个 Agent 结束时返回结构化 RALPH 动作
-- 完整 loop：必须经过 1-loop → 2-loop；动态阶段由 `loop-state.json` 提供
-- 记忆优先：每轮必须先读取任务索引和记忆文件
-- 人类阻塞只阻塞当前任务，必须标记并跳过，不停止整个循环
+## 必须遵守
 
-## 全局 Agent 团队
+- 可多轮增量填写，不要求一次完成任务分解。
+- 若当前阶段草稿不存在，运行 `ralph field-init .`。
+- 只修改 `loop-artifacts/stages/<stage>/<revision>/fields.json`，再运行 `ralph field-apply . <文件>`。
+- 不得直接 Write/Edit `loop-state.json`；由 runtime 负责字段校验、合并和原子保存。
+- 语法错误或缺字段时，只修复 Hook/命令列出的项目，已通过字段保留。
+- 字段和 required outputs 完成后写同目录 `advance.json`，运行 `ralph apply . <advance.json>`。
+- 对 `research_required` 字段，Agent 是必需的窄任务协作者；一个字段派发一个 Agent，prompt 第一行必须带 `RALPH_FIELD_TASK=<task.json>`，给出字段范围、证据要求和 JSON 输出格式。只有 `confirmed` / `inferred` / `assumed_default` 字段可由 Commander 自己增量填写。
+- 不要因为普通缺失字段停止；只有无法推断、研究或采用默认值的硬可行性问题才记录 `open-questions.md`。
+- 不要读取完整 `loop-events.md`；诊断用 `ralph events . --tail 20`。
 
-项目内 `.claude/agents/` 应指向 `/Users/a1-6/Desktop/workspace/agents/`（symlink）。
-如果没有，创建 symlink：
-```bash
-mkdir -p .claude && ln -sf /Users/a1-6/Desktop/workspace/agents .claude/agents
-```
+## 阶段重点
 
-Loop 阶段文件：
-- `/Users/a1-6/Desktop/workspace/loop/1-loop/` — 1-loop 6个阶段定义
-- `/Users/a1-6/Desktop/workspace/loop/2-loop/` — 2-loop 6个阶段定义
+- `01`：背景、决策对象、目标、比较集合、约束、交付物和未知因素。
+- `02`：对 `research_required` 字段补证据；研究引出的未知继续作为 pending 字段增殖。
+- `02.5`：对关键事实做独立来源交叉验证。
+- `03`：拆解和执行最小正交 DAG；并行节点写入范围不得冲突。
+- `04` / `04.5`：验证产物、claim、来源、日期和适用条件。
+- `05` / `06`：形成决策、交接、任务板选择和 exploration candidate。
 
-## 项目方向
+## 权威文件
 
-<!-- 在此填写项目方向、优先级、研究问题 -->
+- `loop-state.json`：唯一状态。
+- `loop-events.md`：有限可观察事件摘要。
+- `loop-artifacts/stages/<stage>/<revision>/fields.json`：增量字段。
+- `loop-artifacts/stages/<stage>/<revision>/fields.md`：runtime 自动生成的可读快照。
+- `loop-artifacts/stages/<stage>/<revision>/advance.json`：阶段动作。
 
-## 状态文件
-
-当前迭代和状态记录在：
-- `loop-state.json` — 唯一运行状态，包含当前阶段完整输入、输出、条件和下一步 Prompt
-- `loop-events.md` — 追加式 Markdown 事件日志
-- `.claude/ralph-loop.local.md` — 旧版插件兼容副本，不作为新运行时状态来源
-
-启动和恢复：
-
-```bash
-ralph run "任务描述"
-```
-
-在 workspace 根目录执行时，`ralph run "任务描述"` 会先匹配 `projects/` 下的已有项目；匹配不到才创建新的 `D1-*` 项目。已有旧版 `.claude/ralph-loop.local.md` 的项目也会迁移并继续使用。需要指定路径时使用 `ralph run <project> "任务描述"`。
-
-## 每轮结束动作
-
-1. 由运行时更新 `loop-state.json`
-2. 由运行时追加 `loop-events.md`
-3. 调用同步脚本更新 `projects/ACTIVE.md`
+项目由 `ralph run` / `ralph loop` 初始化或恢复；默认 Hook 模式是 `hybrid`。受保护状态文件、危险副作用和越界路径仍会硬拒绝，普通字段缺失只返回提示。

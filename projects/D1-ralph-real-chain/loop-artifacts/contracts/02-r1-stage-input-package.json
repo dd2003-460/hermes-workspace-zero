@@ -1,0 +1,69 @@
+{
+  "authoritative_inputs": [
+    "loop-artifacts/stages/01/r1/state.json"
+  ],
+  "context_mode": "bounded_artifacts",
+  "current_stage_cards": [],
+  "purpose": "供独立阶段门禁审计；不包含 Commander 主对话或隐藏推理。",
+  "stage": {
+    "failure_condition": "存在未调研或证据不足的 research_required 字段",
+    "id": "02",
+    "input_description": "目标 + 已知背景 = 已知与目标的差额；针对该差额派窄调研 subagent 直接搜索（关键词不加年份，获取最新结果）",
+    "name": "未知信息调研",
+    "on_failure": "02",
+    "on_success": "02.5",
+    "required_outputs": [
+      "research_findings"
+    ],
+    "revision": "r1",
+    "success_condition": "所有 research_required 字段已调研带回 evidence_refs，无未带证据的调研字段"
+  },
+  "structured_inputs": {
+    "decision": {},
+    "handoff": {},
+    "last_exploration": null,
+    "plan": {
+      "joins": [],
+      "nodes": [],
+      "parallel_groups": [],
+      "revision": "r1"
+    },
+    "queue": {
+      "blocked_human": [],
+      "candidates": [],
+      "ready": []
+    },
+    "task_intake": null,
+    "task_spec": {
+      "attribute_matrix": [
+        {
+          "attribute": "验证并记录：未知因素：当前阶段尚未明确定义的问题边界",
+          "concept": "研究未知因素：未知因素：当前阶段尚未明确定义的问题边界",
+          "disposition": "inferred",
+          "evidence_refs": [],
+          "rationale": "flow-only 流程实验：此字段仅用于验证阶段 02 的字段分发与 field-apply 流程链路，不依赖外部研究。问题边界在阶段 01 尚未明确定义，故以 inferred 标记为流程推断项，evidence_refs 保持空数组。",
+          "role": "research_findings"
+        },
+        {
+          "attribute": "验证并记录：约束条件或决策变量",
+          "concept": "研究未知因素：约束条件或决策变量",
+          "confidence": 0.5,
+          "disposition": "inferred",
+          "evidence_refs": [],
+          "rationale": "flow-only 流程实验：本字段仅用于验证 02 阶段字段写入流程。约束条件/决策变量为阶段 01 自动拆分的未知因素节点，在真实研究中需通过调研获取可验证证据；此处以 inferred  disposition 标记流程验证用途，evidence_refs 保持空数组。",
+          "role": "research_findings"
+        }
+      ],
+      "authoritative_inputs": [
+        "loop-artifacts/stages/01/r1/state.json"
+      ],
+      "status": "research_pending"
+    },
+    "verification": {}
+  },
+  "submission_template_ref": "loop-artifacts/contracts/02-r1-submission-template.json",
+  "task": {
+    "description": "测试状态机完整链路：先分解本地 AI GPU 调研的目标、已知和未知因素；再把未知因素拆成独立研究字段，最后构造两个正交执行任务和 Join。测试阶段流程，不要求实际网页研究。",
+    "source": "ralph run"
+  }
+}

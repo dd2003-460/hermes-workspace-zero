@@ -1,0 +1,21 @@
+{
+  "card_id": "02-r1-inference-benchmark",
+  "title": "Inference Performance Benchmark — Token/s for 35B Models",
+  "description": "Measure or collect 2026 inference performance data for ALL comparison set items running a ~35B parameter model. This is the core performance metric. For each GPU, report: (1) text-generation throughput in tokens/second (auto-regressive, batch size 1), (2) first-token latency (time to first generated token), (3) performance at different quantization levels: FP16, INT8, INT4 (where applicable), (4) context length scaling: performance at 4K, 32K, and 128K context (does memory bandwidth become the bottleneck?), (5) framework-specific performance: llama.cpp, vLLM, TensorRT-LLM, MLX (for Mac), (6) real-world model examples: Llama 3.1 35B (or latest 35B-class model available in 2026), Mistral 7B×5 (MoE ~35B active), Qwen 2.5 32B. If direct measurement is not possible, collect published benchmarks from reputable sources (TechPowerUp, Gamers Nexus, MLPerf, Papers With Code, individual reviewer benchmarks) and note measurement methodology. Cross-validate all performance claims by checking at least 2 independent sources. For Mac Studio, measure or benchmark using MLX with equivalent models. For cloud baseline, report equivalent instance performance.",
+  "inputs": [
+    "02-r1-gpu-pricing (for hardware spec context)"
+  ],
+  "outputs": [
+    "per-GPU token/s table at FP16/INT8/INT4",
+    "first-token latency comparison",
+    "context length scaling analysis",
+    "framework-specific performance breakdown",
+    "cross-validated source URLs for all benchmarks",
+    "quantization impact analysis (accuracy vs speed tradeoff)"
+  ],
+  "dependencies": [
+    "02-r1-gpu-pricing"
+  ],
+  "covers": ["SC1", "SC2", "SC5"],
+  "parallel": true
+}

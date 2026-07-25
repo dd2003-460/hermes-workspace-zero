@@ -1,0 +1,12 @@
+{
+  "action": "advance",
+  "status": "passed",
+  "stage_id": "04",
+  "revision": "r1",
+  "next_stage": "04.5",
+  "evidence": [
+    "loop-artifacts/stages/04/r1/fields.md",
+    "loop-artifacts/stages/03/r1/tasks/03-r1-node-J1.json"
+  ],
+  "message": "执行产物、字段门禁和 DAG Join 证据验证通过，进入产出后交叉验证。"
+}

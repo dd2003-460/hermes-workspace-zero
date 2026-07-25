@@ -1,0 +1,44 @@
+{
+  "apply_count": 1,
+  "apply_count_at_dispatch": 0,
+  "attribute": "请填写 preference_brief 的正交因素分解",
+  "concept": "阶段 01 输出：preference_brief",
+  "dispatch_name": "auto-field-039018a83923",
+  "disposition": "pending",
+  "field": {
+    "attribute": "探索偏好：优先复用 tasks 内 ready 任务；新候选必须显式标记 candidate；优先低成本、可验证、可迁移方案",
+    "concept": "阶段 01 输出：preference_brief",
+    "confidence": 0.9,
+    "disposition": "inferred",
+    "evidence_refs": [],
+    "rationale": "flow-only 人工增量回放：用于验证探索阶段 preference_brief 从 pending 到 inferred 的字段合并和门禁链路，不代表新的用户偏好确认。",
+    "role": "preference_brief"
+  },
+  "field_read_count": 1,
+  "flow_only": true,
+  "id": "exploration-r1-field-01-preference_brief-b82eb05842",
+  "input_refs": [
+    "loop-artifacts/stages/exploration/r1/fields.json"
+  ],
+  "instruction": "只处理字段 `阶段 01 输出：preference_brief`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/exploration/r1/tasks/exploration-r1-field-01-preference_brief-b82eb05842.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。flow-only 流程实验不调用网页工具、不伪造来源；完成后使用 disposition=inferred，在 rationale 标明仅用于验证流程，evidence_refs 保持空数组。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+  "last_applied_at": "2026-07-25T01:47:26.642275+00:00",
+  "last_error": "worker 已保存增量草稿，等待后续上下文补充证据",
+  "output_schema": {
+    "attribute": "string",
+    "concept": "阶段 01 输出：preference_brief",
+    "confidence": "number 0..1",
+    "disposition": "confirmed|inferred|assumed_default|research_required",
+    "evidence_refs": "array[string]",
+    "rationale": "string",
+    "role": "string"
+  },
+  "revision": "r1",
+  "role": "preference_brief",
+  "schema_version": 1,
+  "stage_id": "exploration",
+  "status": "deferred",
+  "type": "field_task",
+  "updated_at": "2026-07-25T01:47:26.645782+00:00",
+  "web_attempts": 0,
+  "web_failures": 0
+}

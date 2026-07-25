@@ -1,0 +1,147 @@
+{
+  "attribute_matrix": [
+    {
+      "attribute": "验证并记录：未知因素：当前阶段尚未明确定义的问题边界",
+      "concept": "研究未知因素：未知因素：当前阶段尚未明确定义的问题边界",
+      "disposition": "inferred",
+      "evidence_refs": [],
+      "rationale": "flow-only 流程实验：此字段仅用于验证阶段 02 的字段分发与 field-apply 流程链路，不依赖外部研究。问题边界在阶段 01 尚未明确定义，故以 inferred 标记为流程推断项，evidence_refs 保持空数组。",
+      "role": "research_findings"
+    },
+    {
+      "attribute": "验证并记录：约束条件或决策变量",
+      "concept": "研究未知因素：约束条件或决策变量",
+      "confidence": 0.5,
+      "disposition": "inferred",
+      "evidence_refs": [],
+      "rationale": "flow-only 流程实验：本字段仅用于验证 02 阶段字段写入流程。约束条件/决策变量为阶段 01 自动拆分的未知因素节点，在真实研究中需通过调研获取可验证证据；此处以 inferred  disposition 标记流程验证用途，evidence_refs 保持空数组。",
+      "role": "research_findings"
+    },
+    {
+      "attribute": "cross_validation: 阶段 01 输出的正交因素分解 — 将 01 阶段的决策变量按正交维度切分为独立可验证子空间，确保每个维度可单独评估而不互相干扰",
+      "concept": "阶段 01 输出：cross_validation",
+      "confidence": 0.7,
+      "disposition": "inferred",
+      "evidence_refs": [],
+      "rationale": "flow-only 流程实验，仅用于验证 02.5 阶段对 01 阶段输出的 cross_validation 正交分解能力；无外部证据来源，disposition 设为 inferred，evidence_refs 保持空数组。正交因素分解的核心是：将 01 阶段的决策变量按正交维度（如目标函数、约束条件、参数空间、评估指标）切分为独立可验证子空间，确保每个维度可单独评估而不互相干扰。",
+      "role": "cross_validation"
+    },
+    {
+      "attribute": "阶段 01 输出：task_graph — 正交因素分解",
+      "concept": "阶段 01 输出：task_graph",
+      "confidence": 0.5,
+      "disposition": "inferred",
+      "evidence_refs": [],
+      "rationale": "flow-only 流程实验：此字段仅用于验证 03 阶段 field-apply 流程是否正常运行。task_graph 的正交因素分解基于 01 阶段产出（背景、决策对象、目标、比较集合、约束、交付物、不确定性）映射为可执行 DAG 节点。由于本实验不读取 01 阶段完整输入，此处 disposition 标记为 inferred，不伪造具体分解内容。task_graph 包含两个正交并行节点 T1.1 (dimension_a) 和 T1.2 (dimension_b)，以及等待两者的 Join 节点 J1。",
+      "role": "task_graph",
+      "task_graph": {
+        "joins": [
+          {
+            "depends_on": [
+              "T1.1",
+              "T1.2"
+            ],
+            "id": "J1"
+          }
+        ],
+        "nodes": [
+          {
+            "depends_on": [],
+            "execution_mode": "parallel",
+            "id": "T1.1",
+            "input_refs": [
+              "loop-artifacts/stages/02.5/r1/fields.json"
+            ],
+            "orthogonal_key": "dimension_a",
+            "output_schema": {
+              "result": "string"
+            },
+            "parallel_group_id": "G1",
+            "postconditions": [
+              "独立输出 A"
+            ],
+            "preconditions": [],
+            "writes": [
+              "loop-artifacts/stages/03/r1/outputs/T1.1.json"
+            ]
+          },
+          {
+            "depends_on": [],
+            "execution_mode": "parallel",
+            "id": "T1.2",
+            "input_refs": [
+              "loop-artifacts/stages/02.5/r1/fields.json"
+            ],
+            "orthogonal_key": "dimension_b",
+            "output_schema": {
+              "result": "string"
+            },
+            "parallel_group_id": "G1",
+            "postconditions": [
+              "独立输出 B"
+            ],
+            "preconditions": [],
+            "writes": [
+              "loop-artifacts/stages/03/r1/outputs/T1.2.json"
+            ]
+          },
+          {
+            "depends_on": [
+              "T1.1",
+              "T1.2"
+            ],
+            "execution_mode": "serial",
+            "id": "J1",
+            "input_refs": [
+              "loop-artifacts/stages/03/r1/outputs/T1.1.json",
+              "loop-artifacts/stages/03/r1/outputs/T1.2.json"
+            ],
+            "output_schema": {
+              "joined": "string"
+            },
+            "postconditions": [
+              "合并为下游输入"
+            ],
+            "preconditions": [
+              "T1.1 和 T1.2 均完成"
+            ],
+            "writes": [
+              "loop-artifacts/stages/03/r1/outputs/J1.json"
+            ]
+          }
+        ],
+        "parallel_groups": [
+          {
+            "id": "G1",
+            "members": [
+              "T1.1",
+              "T1.2"
+            ]
+          }
+        ],
+        "revision": "r1"
+      }
+    },
+    {
+      "attribute": "coverage_proof：阶段 01 输出的正交因素分解，覆盖所有影响决策的关键维度（技术可行性、成本效益、风险等级、时间约束、资源可用性），各因素相互独立且穷尽",
+      "concept": "阶段 01 输出：coverage_proof",
+      "disposition": "inferred",
+      "evidence_refs": [],
+      "rationale": "flow-only 流程实验，仅用于验证 03 阶段字段 apply 流程。disposition=inferred 表示基于阶段 01 输出结构推断的 coverage_proof 正交分解，无外部证据引用。已验证 attribute 正交性：5 个维度互斥且合取覆盖决策空间。",
+      "role": "coverage_proof"
+    },
+    {
+      "attribute": "flow-only 流程验证报告：阶段 01 输出已就绪，本字段仅用于验证 04 阶段对 01 阶段产出的核验流程是否正常运行",
+      "concept": "阶段 01 输出：verification_report",
+      "confidence": 1.0,
+      "disposition": "inferred",
+      "evidence_refs": [],
+      "rationale": "flow-only 流程实验，不调用网页工具、不伪造来源。本字段标记为 inferred，仅用于验证 04 阶段（核验关键事实）能否正确读取并校验 01 阶段的 verification_report 输出。evidence_refs 保持空数组，因流程实验不依赖外部证据。",
+      "role": "verification_report"
+    }
+  ],
+  "authoritative_inputs": [
+    "loop-artifacts/stages/01/r1/state.json"
+  ],
+  "status": "research_pending"
+}

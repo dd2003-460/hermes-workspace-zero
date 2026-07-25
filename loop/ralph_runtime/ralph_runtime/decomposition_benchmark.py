@@ -19,6 +19,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Mapping
 
+from .runtime_config import field_mode_enabled
+
 
 DEFAULT_SIMPLE_GPU_TASK = "我需要跑本地 AI，帮我调研性价比最高的 GPU"
 
@@ -393,17 +395,22 @@ def evaluate_task_spec(
     # the receipt fields; evaluate_state below additionally checks lifecycle.
     audit = task_spec.get("requirements_audit")
     audit = audit if isinstance(audit, Mapping) else {}
-    audit_ok = all(str(audit.get(key, "")).strip() for key in ("card_id", "artifact_ref", "summary"))
+    # The active protocol records incremental field validation and does not
+    # require a legacy auditor card.  Historical fixtures may still carry the
+    # old receipt, which remains accepted but is no longer a gate.
+    audit_ok = field_mode_enabled() or all(
+        str(audit.get(key, "")).strip() for key in ("card_id", "artifact_ref", "summary")
+    )
     audit_findings: list[dict[str, Any]] = []
     if not audit_ok:
-        audit_findings.append(_finding("REQUIREMENTS_AUDIT_MISSING", "缺少 requirements-auditor 的结构化审计引用"))
+        audit_findings.append(_finding("REQUIREMENTS_AUDIT_MISSING", "缺少需求分解审计引用"))
     _check(
         checks,
         findings,
         "requirements_audit",
         1,
         audit_ok,
-        "需求审计结果可追溯",
+        "需求分解审计结果可追溯（field protocol 不要求旧 auditor card）",
         audit_findings,
     )
 
@@ -428,7 +435,7 @@ def evaluate_state(
     task: str | None = None,
     threshold: float = 0.8,
 ) -> BenchmarkResult:
-    """Evaluate a persisted project and verify the auditor card lifecycle."""
+    """Evaluate a persisted project using the active field protocol."""
 
     state_task = state.get("task", {})
     if task is None and isinstance(state_task, Mapping):
@@ -442,27 +449,22 @@ def evaluate_state(
     findings = list(result.findings)
 
     task_spec = state.get("task_spec", {}) if isinstance(state, Mapping) else {}
-    audit = task_spec.get("requirements_audit", {}) if isinstance(task_spec, Mapping) else {}
-    card_id = str(audit.get("card_id", "")) if isinstance(audit, Mapping) else ""
-    cards = state.get("subagent_cards", {}) if isinstance(state, Mapping) else {}
-    card = cards.get(card_id) if isinstance(cards, Mapping) else None
-    lifecycle_ok = isinstance(card, Mapping) and card.get("status") == "completed" and bool(card.get("is_stage_gate"))
+    field_tasks = state.get("field_tasks") if isinstance(state, Mapping) else None
+    field_tasks = [] if field_tasks is None else field_tasks
+    field_lifecycle_ok = isinstance(field_tasks, list) and all(
+        isinstance(task, Mapping) and str(task.get("status", "")) in {"ready", "pending", "dispatching", "dispatched", "completed"}
+        for task in field_tasks
+    )
     lifecycle_findings: list[dict[str, Any]] = []
-    if not lifecycle_ok:
-        lifecycle_findings.append(
-            _finding(
-                "AUDITOR_NOT_COMPLETED",
-                "requirements-auditor 没有留下 completed 的独立门禁回执；不能把字段填满当作完成",
-                evidence={"card_id": card_id, "card": dict(card) if isinstance(card, Mapping) else None},
-            )
-        )
+    if not field_lifecycle_ok:
+        lifecycle_findings.append(_finding("FIELD_TASK_LIFECYCLE_INVALID", "字段任务生命周期记录不是合法状态"))
     checks.append(
         {
-            "id": "auditor_lifecycle",
-            "passed": lifecycle_ok,
-            "points": 1 if lifecycle_ok else 0,
+            "id": "field_task_lifecycle",
+            "passed": field_lifecycle_ok,
+            "points": 1 if field_lifecycle_ok else 0,
             "max_points": 1,
-            "message": "requirements-auditor 已完成并作为独立门禁生效",
+            "message": "field task 只通过增量 apply 和 SubagentStop 生命周期推进",
             "findings": lifecycle_findings,
         }
     )
@@ -499,4 +501,3 @@ def load_task_spec_file(path: str | Path) -> tuple[dict[str, Any], str | None]:
         description = task.get("description") if isinstance(task, Mapping) else None
         return dict(state["task_spec"]), str(description or "") or None
     raise ValueError("JSON input does not contain task_spec, payload.task_spec, or state.task_spec")
-

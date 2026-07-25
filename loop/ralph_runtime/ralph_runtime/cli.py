@@ -3,20 +3,28 @@
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager
+import hashlib
+import inspect
 import json
 import os
 import shlex
 import shutil
+import signal
 import subprocess
 import sys
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping
 
+try:
+    import fcntl
+except ImportError:  # pragma: no cover - Windows fallback
+    fcntl = None
+
 from .contracts import (
     cards_for_current_stage,
-    ensure_builder_skeletons,
-    reconcile_partial_merges,
     materialize_contract_documents,
     stage_result_ref,
     stage_submission_template,
@@ -30,9 +38,10 @@ from .decomposition_benchmark import (
 from .prompt_renderer import PromptRenderer
 from .replay_runner import run_fixture_file
 from .events import append_observation, apply_and_record, read_events, replay_events
-from .dag import validate_plan
+from .dag import DAGValidationError, validate_plan
+from .graph_tasks import apply_graph_task, materialize_graph_tasks
 from .hooks import run_hook
-from .result_artifacts import resolve_result_artifact
+from .result_artifacts import resolve_result_artifact, state_stage_artifact_dir
 from .project_resolver import ProjectResolution, resolve_project
 from .nodes import DEFAULT_GRAPH, NodeGraph
 from .state import (
@@ -43,15 +52,68 @@ from .state import (
     save_state,
     set_task,
     start_new_task,
+    record_human_input,
     update_subagent_card,
     field_completeness,
     _explode_comma_fields,
 )
 from .protocol import collect_validation_issues, parse_action, validate_action
 from .task_board import TaskBoardError, read_task_board, select_next_task
+from .runtime_config import HOOK_MODES, default_hook_mode, field_mode_enabled, flow_only_mode, max_parallel_fields
+from .field_tasks import (
+    claim_field_task,
+    materialize_field_tasks,
+    reopen_deferred_field_tasks,
+    reopen_stale_field_tasks,
+    update_field_task_metadata_transaction,
+    field_task_requires_agent,
+)
 
 
 MAX_EVENT_TAIL = 20
+
+
+class SupervisorAlreadyRunning(RuntimeError):
+    """Raised when a second durable supervisor targets the same project."""
+
+
+@contextmanager
+def _supervisor_lock(root: Path):
+    """Allow exactly one ``ralph loop`` owner per project.
+
+    Field reservations are protected by a separate lock, but that is not
+    enough for two parent supervisors: both can launch Claude contexts and
+    race while reading/writing the same ``loop-state.json``.  The lock is
+    advisory and process-owned, so it is released automatically when the
+    supervisor exits or is killed.
+    """
+
+    lock_path = root / "loop-artifacts" / ".ralph-supervisor.lock"
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    handle = lock_path.open("a+", encoding="utf-8")
+    try:
+        if fcntl is None:  # pragma: no cover - Windows fallback
+            raise SupervisorAlreadyRunning(
+                "当前平台没有可用的进程锁；请不要同时启动两个 ralph loop。"
+            )
+        try:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as exc:
+            raise SupervisorAlreadyRunning(
+                f"项目已有 ralph loop 运行：{root}。"
+                "请先运行 `ralph status <project>`，不要重复启动 supervisor。"
+            ) from exc
+        handle.seek(0)
+        handle.truncate()
+        handle.write(json.dumps({"pid": os.getpid(), "project": str(root)}, ensure_ascii=False))
+        handle.flush()
+        yield
+    finally:
+        try:
+            if fcntl is not None:
+                fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
+        finally:
+            handle.close()
 
 
 PROJECT_CLAUDE_FALLBACK = """# CLAUDE.md — RALPH project
@@ -61,20 +123,15 @@ PROJECT_CLAUDE_FALLBACK = """# CLAUDE.md — RALPH project
 ## RALPH 运行规则
 
 - 先读取 `loop-state.json`，当前阶段以其中的 `stage` 为准。
-- 按当前阶段执行，不自行跳过验证或修改 `loop-state.json`。
-- 通过 Agent 工具派发实际执行任务；Commander 负责分解、验证和决策。
-- 不得裸派 Agent。只可使用 `loop-state.json.subagent_cards` 中批准任务卡的
-  `RALPH_TASK_CARD=<路径>` 作为 Agent prompt 第一行；Hook 会拒绝其他派发。
-- 任务卡、阶段契约、输入包和提交模板由运行时生成；Commander 不得用 Agent、Write 或 Edit 创建或修复它们。
-- 任务卡为 `dispatched` 时表示内部子代理正在运行，不是 `blocked_human`；不得重派、不得绕过 Hook，等待 `SubagentStop`。
-- 01 必须先做语义分解与需求审计，02 必须生成并审计 DAG，03 完成所有任务后还要审计 Join，04 必须核验关键事实，05/06 分别审计决策与交接。
+- 允许多轮增量填写，不要求一次生成完整任务分解。
+- 若字段草稿不存在，先运行 `ralph field-init .`；把字段增量写入 `loop-artifacts/stages/<stage>/<revision>/fields.json`，然后运行 `ralph field-apply . <字段文件>`。
+- 不得用 Write/Edit 直接修改 `loop-state.json`；字段通过 runtime 原子合并。
+- 普通缺失字段只按 Hook 提示继续修复；受保护文件、危险副作用和 `ralph apply` 才使用硬门禁。
+- 通过阶段时写入同目录 `advance.json`，运行 `ralph apply . <advance.json>`。
+- Agent 是可选的窄任务协作者；研究字段和 DAG 节点分别使用自己的受控 JSON，不靠自然语言回执判定完成。
 - 人类阻塞只阻塞当前任务，应返回 `blocked_human` 并继续其他 ready 任务。
-- 阶段结束时返回 `<RALPH_STAGE_RESULT>` 结构化 JSON 动作。
 - 过程记录在 `loop-events.md`，完整输出放在 `loop-artifacts/`。
-- Commander 不得直接读取完整 `loop-events.md`；需要诊断时运行一次 `ralph events . --tail 20` 获取有限摘要。
-- `loop-artifacts/contracts/task-spec.json` 是当前人类输入的规范副本；
-  `loop-artifacts/task-cards/` 是子代理唯一应读取的任务边界。
-- 独立门禁只读取 `stage-input-package.json`、阶段契约和 `submission-template.json`；通过阶段时 Commander 必须复制填写该模板并提交 `payload.stage_review`。
+- 需要诊断时运行 `ralph events . --tail 20` 获取有限摘要，不要复制完整事件日志。
 
 本次任务由启动命令的最后一个参数提供。先理解任务，再从 `loop-state.json` 的当前阶段开始。
 """
@@ -160,7 +217,7 @@ def _ensure_project_scaffold(root: Path) -> list[str]:
 def prepare_project(
     project: str | Path,
     task: str | None = None,
-    mode: str = "enforce",
+    mode: str = "hybrid",
     record_session: bool = False,
     fresh_if_completed: bool = False,
 ) -> tuple[Path, Path, bool, list[str]]:
@@ -192,14 +249,25 @@ def prepare_project(
         else:
             current_task = current.get("task", {}) if isinstance(current.get("task"), dict) else {}
             if current_task.get("description") != task:
-                save_state(state_path, set_task(current, task))
+                # A repeated ``ralph loop <project> <task>`` is a resume/update
+                # operation, not permission to erase an in-progress semantic
+                # decomposition.  ``set_task`` intentionally creates a fresh
+                # task_spec and therefore used to wipe fields already accepted
+                # by field-apply when the user slightly rephrased the prompt.
+                # Preserve the current stage/spec and append the new wording as
+                # authoritative input instead; only a completed project uses
+                # start_new_task above to create a genuinely fresh run.
+                updated = dict(current)
+                updated["task"] = {"description": task, "source": "ralph loop"}
+                updated = record_human_input(updated, task, source="ralph loop")
+                save_state(state_path, updated)
 
     events_path = root / "loop-events.md"
     events_path.touch(exist_ok=True)
     persisted_state = load_state(state_path)
+    materialize_field_tasks(root, persisted_state)
     save_state(state_path, persisted_state)
     materialize_contract_documents(root, persisted_state)
-    ensure_builder_skeletons(persisted_state, root)
     created = _ensure_project_scaffold(root)
     settings_path = install_hooks(root, mode)
     if record_session:
@@ -227,6 +295,18 @@ def build_parser() -> argparse.ArgumentParser:
 
     status = sub.add_parser("status")
     status.add_argument("project")
+    status.add_argument(
+        "--full",
+        action="store_true",
+        help="输出完整 loop-state.json；默认只输出不注入大上下文的摘要",
+    )
+
+    field_status = sub.add_parser(
+        "field-status",
+        help="status 的字段中心别名：只输出当前字段/DAG 的有限摘要，避免读取完整事件日志",
+    )
+    field_status.add_argument("project")
+    field_status.add_argument("--full", action="store_true", help="输出完整 loop-state.json")
 
     events = sub.add_parser(
         "events",
@@ -259,6 +339,19 @@ def build_parser() -> argparse.ArgumentParser:
     )
     field_apply.add_argument("project", nargs="?", default=".", help="项目目录（默认当前目录）")
     field_apply.add_argument("fields_file", help="字段增量 JSON：列表，或 {fields:[...]} / {attribute_matrix:[...]}")
+
+    field_init = sub.add_parser(
+        "field-init",
+        help="创建当前阶段的空字段草稿；已有草稿不覆盖，供 Agent 增量填写后再 field-apply",
+    )
+    field_init.add_argument("project", nargs="?", default=".", help="项目目录（默认当前目录）")
+
+    graph_apply = sub.add_parser(
+        "graph-apply",
+        help="校验并完成一个 DAG 节点；按依赖更新 plan.completed、ready 节点和 Join 状态",
+    )
+    graph_apply.add_argument("project", nargs="?", default=".", help="项目目录（默认当前目录）")
+    graph_apply.add_argument("task_file", help="当前阶段 graph task JSON")
 
     render_parser = sub.add_parser(
         "render",
@@ -311,7 +404,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     benchmark = sub.add_parser(
         "benchmark-decomposition",
-        help="只读评估简单 GPU 任务的完整语义分解和 auditor 生命周期",
+        help="只读评估简单 GPU 任务的完整语义分解和字段校验生命周期",
     )
     benchmark.add_argument("project", nargs="?", default=".")
     benchmark.add_argument(
@@ -321,19 +414,6 @@ def build_parser() -> argparse.ArgumentParser:
     )
     benchmark.add_argument("--task", default=None, help="覆盖 benchmark 报告中的任务描述")
     benchmark.add_argument("--threshold", type=float, default=0.8, help="通过阈值，默认 0.8")
-
-    recover = sub.add_parser(
-        "recover-card",
-        help="仅恢复没有有效门禁回执、却被错误标为完成/失败的任务卡",
-    )
-    recover.add_argument("project")
-    recover.add_argument("card_id")
-    recover.add_argument("--reason", required=True, help="写入事件日志的恢复原因")
-    recover.add_argument(
-        "--force-dispatched",
-        action="store_true",
-        help="确认子代理已退出且没有 SubagentStop 回执后，恢复残留 dispatched 卡",
-    )
 
     hook = sub.add_parser("hook")
     hook.add_argument(
@@ -349,16 +429,16 @@ def build_parser() -> argparse.ArgumentParser:
             "stop",
         ),
     )
-    hook.add_argument("--mode", choices=("shadow", "enforce"), default=os.environ.get("RALPH_HOOK_MODE", "enforce"))
+    hook.add_argument("--mode", choices=HOOK_MODES, default=default_hook_mode())
     hook.add_argument("--no-auto-apply", action="store_true", help="只记录 Stop 输出，不自动应用结构化动作")
 
     install = sub.add_parser("install-hooks")
     install.add_argument("project")
-    install.add_argument("--mode", choices=("shadow", "enforce"), default="enforce")
+    install.add_argument("--mode", choices=HOOK_MODES, default="hybrid")
 
     start = sub.add_parser("start")
     start.add_argument("project", nargs="?", default=".")
-    start.add_argument("--mode", choices=("shadow", "enforce"), default=os.environ.get("RALPH_HOOK_MODE", "enforce"))
+    start.add_argument("--mode", choices=HOOK_MODES, default=default_hook_mode())
     start.add_argument("--launch", action="store_true")
     start.add_argument("--prompt", default=None)
     start.add_argument("--effort", choices=("low", "medium", "high", "xhigh", "max"), default=None)
@@ -370,7 +450,7 @@ def build_parser() -> argparse.ArgumentParser:
         help="从 loop-state.json 开一个短上下文的新 Claude 会话，恢复被运行时错误中断的阶段",
     )
     resume.add_argument("project", nargs="?", default=".")
-    resume.add_argument("--mode", choices=("shadow", "enforce"), default=os.environ.get("RALPH_HOOK_MODE", "enforce"))
+    resume.add_argument("--mode", choices=HOOK_MODES, default=default_hook_mode())
     resume.add_argument("--prompt", default=None, help="覆盖自动生成的短恢复指令")
     resume.add_argument("--effort", choices=("low", "medium", "high", "xhigh", "max"), default=None)
     resume.add_argument("--model", default=None, help="仅本次 Claude 会话使用的模型名")
@@ -380,7 +460,7 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("project_or_task", help="项目路径，或在省略 task 时直接填写任务描述")
     run.add_argument("task", nargs="?", help="显式项目路径模式下的任务描述")
     run.add_argument("--workspace", default=None, help="自动项目模式使用的 workspace 根目录")
-    run.add_argument("--mode", choices=("shadow", "enforce"), default=os.environ.get("RALPH_HOOK_MODE", "enforce"))
+    run.add_argument("--mode", choices=HOOK_MODES, default=default_hook_mode())
     run.add_argument("--effort", choices=("low", "medium", "high", "xhigh", "max"), default=None)
     run.add_argument("--model", default=None, help="仅本次 Claude 会话使用的模型名")
     run.add_argument(
@@ -397,7 +477,7 @@ def build_parser() -> argparse.ArgumentParser:
     loop.add_argument("project_or_task", help="项目路径，或在省略 task 时直接填写任务描述")
     loop.add_argument("task", nargs="?", help="显式项目路径模式下的任务描述")
     loop.add_argument("--workspace", default=None, help="自动项目模式使用的 workspace 根目录")
-    loop.add_argument("--mode", choices=("shadow", "enforce"), default=os.environ.get("RALPH_HOOK_MODE", "enforce"))
+    loop.add_argument("--mode", choices=HOOK_MODES, default=default_hook_mode())
     loop.add_argument("--effort", choices=("low", "medium", "high", "xhigh", "max"), default=None)
     loop.add_argument("--model", default=None, help="仅本次 Claude 会话使用的模型名")
     loop.add_argument("--max-cycles", type=int, default=0, help="最多运行多少个新上下文；0 表示持续运行")
@@ -510,7 +590,7 @@ def _add_compaction_arguments(parser: argparse.ArgumentParser) -> None:
     )
 
 
-def install_hooks(project: str | Path, mode: str = "enforce") -> Path:
+def install_hooks(project: str | Path, mode: str = "hybrid") -> Path:
     root = Path(project).expanduser().resolve()
     root.mkdir(parents=True, exist_ok=True)
     state_path = root / "loop-state.json"
@@ -652,6 +732,10 @@ def reconcile_stale_cards(
     launched exit and can wait a short grace period first.
     """
 
+    if field_mode_enabled():
+        # Legacy card records are historical evidence only.  They must not
+        # re-enter the active execution path during a field-centric resume.
+        return []
     root = _project_root(project)
     state_path = root / "loop-state.json"
     state = load_state(state_path)
@@ -924,6 +1008,55 @@ def events_tail(project: str | Path, limit: int = 20) -> dict[str, object]:
     }
 
 
+def status_summary(state: Mapping[str, Any], project: str | Path) -> dict[str, object]:
+    """Return a bounded status view suitable for a Commander prompt.
+
+    ``loop-state.json`` intentionally contains complete stage input, field
+    tasks, DAG metadata and history.  Printing it from the command suggested
+    by Hook used to re-inject all of that into Claude's context.  Status is a
+    dashboard, not a state export; ``ralph status --full`` remains available
+    for humans and diagnostics.
+    """
+
+    stage = state.get("stage") if isinstance(state.get("stage"), Mapping) else {}
+    tasks = state.get("field_tasks") if isinstance(state.get("field_tasks"), list) else []
+    graph = state.get("graph_tasks") if isinstance(state.get("graph_tasks"), list) else []
+    task_spec = state.get("task_spec") if isinstance(state.get("task_spec"), Mapping) else {}
+    matrix = task_spec.get("attribute_matrix") if isinstance(task_spec.get("attribute_matrix"), list) else []
+    counts: dict[str, int] = {}
+    for item in tasks:
+        if isinstance(item, Mapping):
+            status = str(item.get("status") or "unknown")
+            counts[status] = counts.get(status, 0) + 1
+    graph_counts: dict[str, int] = {}
+    for item in graph:
+        if isinstance(item, Mapping):
+            status = str(item.get("status") or "unknown")
+            graph_counts[status] = graph_counts.get(status, 0) + 1
+    description = state.get("task", {}).get("description", "") if isinstance(state.get("task"), Mapping) else ""
+    description = str(description).replace("\n", " ").strip()
+    if len(description) > 240:
+        description = description[:237] + "..."
+    return {
+        "project": str(Path(project).expanduser().resolve()),
+        "task": description,
+        "status": state.get("status"),
+        "stage": {
+            "id": stage.get("id"),
+            "revision": stage.get("revision"),
+            "name": stage.get("name"),
+            "next_stage": stage.get("on_success"),
+        },
+        "last_action": state.get("last_action"),
+        "last_event_id": state.get("last_event_id"),
+        "fields": {"total": len(matrix), "tasks": len(tasks), "by_status": counts},
+        "graph": {"tasks": len(graph), "by_status": graph_counts},
+        "current_artifact": state.get("current_artifact"),
+        "event_log": str((Path(project).expanduser().resolve() / "loop-events.md")),
+        "hint": "需要完整状态时运行 ralph status <project> --full；需要事件时运行 ralph events <project> --tail 20。",
+    }
+
+
 def start_project(
     project: str | Path,
     mode: str,
@@ -1031,7 +1164,7 @@ def _resolve_run_project(project_or_task: str | Path, task: str | None, workspac
 def run_project(
     project_or_task: str | Path,
     task: str | None = None,
-    mode: str = "enforce",
+    mode: str = "hybrid",
     workspace: str | Path | None = None,
     effort: str | None = None,
     model: str | None = None,
@@ -1103,6 +1236,15 @@ def _resolve_loop_project(
         if not isinstance(description, str) or not description.strip():
             raise ValueError("项目 loop-state.json 没有可恢复的 task.description")
         return _project_root(candidate), description.strip(), None
+    if task is None and (
+        candidate.is_absolute()
+        or str(project_or_task).startswith(("./", "../", "~/"))
+    ):
+        raise ValueError(
+            f"`{project_or_task}` 看起来是项目路径，但没有任务描述；请使用："
+            f"ralph loop {project_or_task!s} '<任务描述>'。"
+            "如果只想用一个输入自动创建项目，请直接运行 `ralph loop '<任务描述>'`。"
+        )
     return _resolve_run_project(project_or_task, task, workspace)
 
 
@@ -1115,12 +1257,171 @@ def _count_event_markers(path: Path, marker: str) -> int:
         return 0
 
 
+def _field_dispatch_stall_requested(root: Path, event_path: Path) -> bool:
+    """Detect a recoverable Commander dispatch stall without parsing all events.
+
+    A local model can acknowledge a field correction in prose, or simply keep
+    thinking, without writing the next incremental draft.  This is different
+    from an active child or a slow web search: the combination of ready fields
+    and no active field children is enough to start the bounded watchdog.  The
+    caller supplies the grace interval, so a normal long reasoning window can
+    be configured while a silent Commander cannot consume the general idle
+    timeout.  Pending structural fields are included; only
+    ``research_required`` fields may create an Agent, so this watchdog never
+    recreates the old auditor dispatch path.
+    """
+
+    try:
+        state = load_state(root / "loop-state.json")
+    except (OSError, ValueError):
+        return False
+    tasks = state.get("field_tasks", [])
+    if not isinstance(tasks, list):
+        return False
+    ready = [
+        task for task in tasks
+        if isinstance(task, Mapping)
+        and str(task.get("status", "")) in {"ready", "pending"}
+    ]
+    active = [
+        task for task in tasks
+        if isinstance(task, Mapping)
+        and str(task.get("status", "")) in {"dispatching", "dispatched"}
+    ]
+    if not ready or active:
+        return False
+    try:
+        # The event file is append-only and can be large.  The latest cycle
+        # marker and feedback are always near the tail, so avoid read_events()
+        # here and read only a bounded suffix on each watchdog tick.
+        with event_path.open("rb") as handle:
+            handle.seek(0, 2)
+            handle.seek(max(0, handle.tell() - 160_000))
+            tail = handle.read().decode("utf-8", errors="ignore")
+    except OSError:
+        return False
+    cycle_pos = tail.rfind("supervisor_cycle_started")
+    if cycle_pos < 0:
+        return False
+    # The cycle marker is also a cheap guard against a stale ready queue from
+    # an older session.  Once this supervisor cycle is active, the queue is the
+    # durable work signal; no additional natural-language rejection is needed
+    # before the watchdog starts.
+    return True
+
+
+def _field_agent_stall_requested(root: Path, *, exclude_ids: set[str] | None = None) -> bool:
+    """Detect a field child that cannot make durable progress.
+
+    Once a field has reached the bounded web-failure path, the only valid next
+    action is to save an incomplete draft with ``field-apply``.  A child that
+    keeps the task ``dispatched`` without applying that draft is recoverable at
+    the next supervisor boundary.  The same applies to a child that has not
+    changed its task record for a long time: Claude can remain in an internal
+    thinking/tool-retry loop without producing a SubagentStop receipt, which
+    otherwise leaves the parent Stop Hook waiting forever.
+
+    This is deliberately only a *request* for a fresh Claude context.  The
+    field draft and queue remain durable, and ``reopen_stale_field_tasks``
+    reopens the task after the child context is terminated.  The timeout is
+    configured by ``RALPH_FIELD_AGENT_STALL_SECONDS`` (default 900 seconds).
+    """
+
+    try:
+        state = load_state(root / "loop-state.json")
+    except (OSError, ValueError):
+        return False
+    tasks = state.get("field_tasks", [])
+    if not isinstance(tasks, list):
+        return False
+    excluded = {str(item) for item in (exclude_ids or set())}
+    now = datetime.now(timezone.utc)
+    for task in tasks:
+        if not isinstance(task, Mapping) or str(task.get("id", "")) in excluded:
+            continue
+        if _field_task_stall_requested(task, now=now):
+            return True
+    return False
+
+
+def _field_task_stall_requested(task: Mapping[str, Any], *, now: datetime | None = None) -> bool:
+    """Return whether one dispatched field has exceeded its durable heartbeat.
+
+    This helper is shared by the parent-Commander watchdog and the separately
+    launched fallback workers.  Previously only the parent was watched; an
+    automatic worker could therefore remain alive after its parent restarted,
+    leaving the task permanently ``dispatched`` even though it had produced
+    no new draft or ``field-apply`` receipt.
+    """
+
+    if str(task.get("status", "")) not in {"dispatching", "dispatched"}:
+        return False
+    if int(task.get("apply_count", 0) or 0) > int(task.get("apply_count_at_dispatch", 0) or 0):
+        return False
+    if int(task.get("web_failures", 0) or 0) >= 2:
+        return True
+    updated_at = task.get("updated_at")
+    if not updated_at:
+        return False
+    try:
+        heartbeat = datetime.fromisoformat(str(updated_at).replace("Z", "+00:00"))
+        if heartbeat.tzinfo is None:
+            heartbeat = heartbeat.replace(tzinfo=timezone.utc)
+    except (TypeError, ValueError):
+        return False
+    current = now or datetime.now(timezone.utc)
+    return (current - heartbeat).total_seconds() >= _field_agent_stall_seconds()
+
+
+def _field_agent_stall_seconds() -> float:
+    """Read the configurable no-progress watchdog interval."""
+
+    try:
+        return max(0.0, float(os.environ.get("RALPH_FIELD_AGENT_STALL_SECONDS", "900")))
+    except ValueError:
+        return 300.0
+
+
+def _terminate_process_group(process: subprocess.Popen[Any], *, timeout: float = 10.0) -> None:
+    """Terminate a Claude process and any nested Claude children it owns."""
+
+    group_id: int | None = None
+    if os.name != "nt":
+        try:
+            group_id = os.getpgid(process.pid)
+            # Older workers (and small test doubles) may have inherited the
+            # supervisor's process group.  Killing that group would also kill
+            # the supervisor or the invoking shell.  Only group-kill a worker
+            # that was explicitly started in its own session.
+            if group_id == os.getpgrp():
+                group_id = None
+            else:
+                os.killpg(group_id, signal.SIGTERM)
+        except (OSError, ProcessLookupError):
+            group_id = None
+    if group_id is None:
+        process.terminate()
+    try:
+        process.wait(timeout=timeout)
+    except subprocess.TimeoutExpired:
+        if group_id is not None:
+            try:
+                os.killpg(group_id, signal.SIGKILL)
+            except (OSError, ProcessLookupError):
+                pass
+        else:
+            process.kill()
+        process.wait(timeout=timeout)
+
+
 def _run_claude_supervised(
     command: list[str],
     *,
     cwd: Path,
     env: dict[str, str],
     idle_timeout: float,
+    protected_field_task_ids: set[str] | None = None,
+    auto_workers: dict[str, dict[str, Any]] | None = None,
 ) -> tuple[int, bool]:
     """Run Claude while watching the durable state/event files for progress.
 
@@ -1129,32 +1430,68 @@ def _run_claude_supervised(
     between turns. To keep the AI working uninterrupted, we watch for the
     ``ralph_stop_handled`` marker that the Stop hook emits on every completed
     turn: once a new marker appears and Claude stays idle afterwards, we
-    relaunch a fresh context after a short grace period. Any file activity
-    (Claude still producing output) cancels the pending relaunch, so we never
-    kill a turn that is still making progress.
+    relaunch a fresh context after a short grace period. Durable state changes
+    cancel the pending relaunch; noisy event-log writes alone do not count as
+    progress, so repeated Hook feedback cannot create an infinite loop.
     """
 
-    process = subprocess.Popen(command, cwd=cwd, env=env)
+    # Put Commander and every Claude child it launches in their own process
+    # group.  A watchdog restart must not leave a nested Agent alive after the
+    # parent context is replaced; otherwise the durable field remains
+    # ``dispatched`` and the next context sees a ghost worker.
+    process = subprocess.Popen(
+        command,
+        cwd=cwd,
+        env=env,
+        start_new_session=(os.name != "nt"),
+    )
     last_activity = time.monotonic()
-    last_mtime = 0.0
+    # Event logging is intentionally noisy: every PreToolUse denial and
+    # bounded feedback message appends to loop-events.md.  Treating that file
+    # as generic activity lets a weak model keep an idle loop alive forever by
+    # repeating the same rejected tool call.  Durable state changes are the
+    # progress signal; the stop marker is watched separately below.
+    last_state_mtime = 0.0
     state_path = cwd / "loop-state.json"
     event_path = cwd / "loop-events.md"
-    for path in (state_path, event_path):
-        try:
-            last_mtime = max(last_mtime, path.stat().st_mtime)
-        except OSError:
-            pass
+    try:
+        last_state_mtime = state_path.stat().st_mtime
+    except OSError:
+        pass
     stop_marker = "ralph_stop_handled"
     relaunch_grace = 6.0
     last_stop_count = _count_event_markers(event_path, stop_marker)
     pending_relaunch_at: float | None = None
+    field_stall_since: float | None = None
+    field_agent_stall_since: float | None = None
+    try:
+        # Local 35B models can spend several minutes deciding the first Agent
+        # call. A short watchdog used to kill the Commander immediately
+        # before that call, making the durable queue look like a dispatch bug.
+        field_stall_timeout = max(0.0, float(os.environ.get("RALPH_FIELD_DISPATCH_STALL_SECONDS", "600")))
+    except ValueError:
+        field_stall_timeout = 90.0
 
     def _terminate() -> tuple[int, bool]:
-        process.terminate()
+        group_id: int | None = None
+        if os.name != "nt":
+            try:
+                group_id = os.getpgid(process.pid)
+                os.killpg(group_id, signal.SIGTERM)
+            except (OSError, ProcessLookupError):
+                group_id = None
+        if group_id is None:
+            process.terminate()
         try:
             process.wait(timeout=10)
         except subprocess.TimeoutExpired:
-            process.kill()
+            if group_id is not None:
+                try:
+                    os.killpg(group_id, signal.SIGKILL)
+                except (OSError, ProcessLookupError):
+                    pass
+            else:
+                process.kill()
             process.wait(timeout=10)
         return process.returncode if process.returncode is not None else 124, True
 
@@ -1162,14 +1499,18 @@ def _run_claude_supervised(
         return_code = process.poll()
         if return_code is not None:
             return return_code, False
-        newest_mtime = last_activity
-        for path in (state_path, event_path):
-            try:
-                newest_mtime = max(newest_mtime, path.stat().st_mtime)
-            except OSError:
-                pass
-        if newest_mtime > last_mtime:
-            last_mtime = newest_mtime
+        # Reap independently launched field workers while the Commander is
+        # still alive.  Previously this happened only at a supervisor cycle
+        # boundary, so a local model that stalled after WebSearch could hold
+        # a dispatched field indefinitely even though its timeout had passed.
+        if auto_workers:
+            _reap_auto_field_workers(cwd, auto_workers)
+        try:
+            newest_state_mtime = state_path.stat().st_mtime
+        except OSError:
+            newest_state_mtime = last_state_mtime
+        if newest_state_mtime > last_state_mtime:
+            last_state_mtime = newest_state_mtime
             last_activity = time.monotonic()
             # Claude is producing output -> cancel any pending relaunch.
             pending_relaunch_at = None
@@ -1181,6 +1522,50 @@ def _run_claude_supervised(
         now = time.monotonic()
         if pending_relaunch_at is not None and now >= pending_relaunch_at:
             return _terminate()
+        # Do not wait for the general 30-minute idle timeout when the model
+        # has explicitly been told to dispatch a ready field but produced no
+        # child call.  A fresh context is the safe recovery boundary; the
+        # durable field files and task queue remain unchanged.
+        if field_stall_timeout > 0 and _field_dispatch_stall_requested(cwd, event_path):
+            if field_stall_since is None:
+                field_stall_since = now
+            elif now - field_stall_since >= field_stall_timeout:
+                append_observation(
+                    event_path,
+                    "supervisor_field_dispatch_stall_recovery",
+                    {
+                        "timeout_seconds": field_stall_timeout,
+                        "state_preserved": True,
+                        "next_action": "fresh_context",
+                        "reason": "field dispatch feedback repeated without an active child",
+                    },
+                )
+                return _terminate()
+        else:
+            field_stall_since = None
+        field_agent_stall_timeout = _field_agent_stall_seconds()
+        # Top-level auto workers are separate processes.  They must not make
+        # the parent Commander immune to the no-progress watchdog: replacing
+        # the parent context is safe because the worker's dispatched task is
+        # durable and cannot be claimed again.  The protected IDs are still
+        # used at the cycle boundary so a live worker is not reopened.
+        if field_agent_stall_timeout > 0 and _field_agent_stall_requested(cwd):
+            if field_agent_stall_since is None:
+                field_agent_stall_since = now
+            elif now - field_agent_stall_since >= field_agent_stall_timeout:
+                append_observation(
+                    event_path,
+                    "supervisor_field_agent_stall_recovery",
+                    {
+                        "timeout_seconds": field_agent_stall_timeout,
+                        "state_preserved": True,
+                        "next_action": "fresh_context",
+                        "reason": "field Agent reached web-failure fuse or exceeded no-progress window without field-apply",
+                    },
+                )
+                return _terminate()
+        else:
+            field_agent_stall_since = None
         if idle_timeout > 0 and now - last_activity >= idle_timeout:
             return _terminate()
         time.sleep(min(5.0, max(0.25, idle_timeout / 10 if idle_timeout > 0 else 5.0)))
@@ -1189,7 +1574,7 @@ def _run_claude_supervised(
 def _field_engine_tick(root: Path, state: dict) -> bool:
     """Field-centric per-cycle reconcile + auto-advance.
 
-    Runs once per supervisor cycle in ``RALPH_FIELD_GATE`` mode (before the
+    Runs once per supervisor cycle in field-centric mode (before the
     Commander context launches):
 
     - Explodes comma-separated field ``attribute`` values into independent
@@ -1200,6 +1585,10 @@ def _field_engine_tick(root: Path, state: dict) -> bool:
     - When the current stage is ``01`` and every field is dispositioned (no
       ``pending`` / no ``research_required`` without ``evidence_refs``), advances
       automatically -- the model does NOT need to emit ``<RALPH_STAGE_RESULT>``.
+    - In the explicit ``flow_only`` test mode, the same mechanical gate also
+      advances later field stages after their inferred drafts are applied. This
+      keeps a no-web workflow from stopping only because the Commander failed
+      to compose a redundant ``advance.json``.
 
     Stages 02-06 keep their normal contract validation (the field gate only
     short-cuts stage 01), so they are not trivially skipped.
@@ -1209,6 +1598,14 @@ def _field_engine_tick(root: Path, state: dict) -> bool:
 
     state_path = root / "loop-state.json"
     live = load_state(state_path)
+    before_spec = live.get("task_spec")
+    before_tasks = live.get("field_tasks")
+    materialize_field_tasks(root, live)
+    # Persist stage-entry synthesis (especially stage 02 research fields) so
+    # the next Hook/Commander sees the same queue instead of rebuilding a
+    # transient in-memory list on every cycle.
+    if live.get("task_spec") != before_spec or live.get("field_tasks") != before_tasks:
+        save_state(state_path, live)
     spec = live.get("task_spec")
     if not isinstance(spec, Mapping):
         return False
@@ -1226,9 +1623,17 @@ def _field_engine_tick(root: Path, state: dict) -> bool:
 
     stage = live.get("stage", {})
     current = str(stage.get("id", ""))
-    if current != "01":
+    if current != "01" and not flow_only_mode(live):
         return False
-    verdict = field_completeness(exploded)
+    if current == "03" and flow_only_mode(live):
+        plan = live.get("plan") if isinstance(live.get("plan"), Mapping) else {}
+        nodes = plan.get("nodes") if isinstance(plan, Mapping) else None
+        joins = plan.get("joins") if isinstance(plan, Mapping) else None
+        if not isinstance(nodes, list) or len(nodes) < 3 or not isinstance(joins, list) or not joins:
+            # Field completeness alone cannot certify a task decomposition;
+            # the structured DAG must first pass field-apply's validator.
+            return False
+    verdict = field_completeness(exploded, stage.get("required_outputs") or [])
     if not verdict["complete"]:
         return False
     next_stage = str(stage.get("on_success") or "")
@@ -1258,10 +1663,626 @@ def _field_engine_tick(root: Path, state: dict) -> bool:
     return True
 
 
-def loop_project(
+def _auto_field_workers_enabled() -> bool:
+    # The one-command workflow must not depend on a weak Commander remembering
+    # to dispatch its first field Agent. Keep the bounded worker fallback on by
+    # default; set RALPH_AUTO_FIELD_WORKERS=0 for diagnostics or pure-Commander
+    # experiments.
+    value = os.environ.get("RALPH_AUTO_FIELD_WORKERS", "1").strip().lower()
+    return value in {"1", "true", "yes", "on"}
+
+
+def _auto_pending_field_workers_enabled() -> bool:
+    """Allow the fallback worker to finish structural pending fields.
+
+    Commander remains the preferred editor for ``pending`` fields.  A weak
+    local Commander can nevertheless terminate immediately after a Hook
+    correction; without this fallback the durable queue would stay ready
+    forever.  The worker still writes one task JSON and must pass
+    ``field-apply`` before the field is considered complete.
+    """
+
+    value = os.environ.get("RALPH_AUTO_PENDING_FIELD_WORKERS", "1").strip().lower()
+    return value in {"1", "true", "yes", "on"}
+
+
+AUTO_FIELD_WORKER_SYSTEM_PROMPT = """你是 RALPH 的单字段执行 worker。
+
+只处理用户消息中给出的一个 RALPH_FIELD_TASK 文件。不要规划总任务，不要读取
+loop-state.json、loop-events.md、CLAUDE.md、AGENTS.md 或其他任务文件，不要向人类
+提问，不要派发子代理。
+
+固定动作顺序：
+1. Read 这个 task JSON；
+2. 如果字段是 research_required，最多使用两次 WebSearch/WebFetch；禁止用 Bash、curl、
+   python、grep 或其他 shell 命令搜索网页。工具不可用或没有可靠来源时，保留
+   research_required、空 evidence_refs，并在 rationale 说明待补原因；不要伪造来源；
+3. 立即用 Write 或 Edit 修改同一个 JSON 的 field 对象，至少填写真实的 attribute、
+   rationale、disposition（confirmed/inferred/assumed_default/research_required 之一），
+   已有字段保留；
+4. 用 Bash 执行消息中给出的 ralph field-apply 命令；如果校验报错，只修复报错列出的
+   当前字段并再次执行同一个命令。
+
+不要只返回自然语言。完成 field-apply 后直接结束。"""
+
+
+def _auto_field_worker_environment(environment: Mapping[str, str]) -> dict[str, str]:
+    """Keep local Claude settings available to the bounded worker.
+
+    The worker now loads the project RALPH settings so PreToolUse/PostToolUse
+    can provide the incremental Write -> field-apply feedback.  Copying the
+    scalar user env values is still needed because the project settings file
+    contains hooks, not the local endpoint/model configuration.
+    """
+
+    result = dict(environment)
+    settings_path = Path.home() / ".claude" / "settings.json"
+    try:
+        settings = json.loads(settings_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return result
+    values = settings.get("env") if isinstance(settings, Mapping) else None
+    if isinstance(values, Mapping):
+        for key, value in values.items():
+            if isinstance(key, str) and isinstance(value, (str, int, float, bool)):
+                result.setdefault(key, str(value))
+    return result
+
+
+def _auto_field_worker_prompt(task: Mapping[str, Any], project_root: Path) -> str:
+    path = str(task.get("path", ""))
+    task_path = (project_root / path).resolve()
+    # Claude's Bash tool can execute with the workspace cwd even when the
+    # Claude process was launched from the project.  Never make the critical
+    # field-apply step depend on that ambient cwd.
+    apply_command = f"ralph field-apply {shlex.quote(str(project_root))} {shlex.quote(str(task_path))}"
+    disposition = str(task.get("disposition", ""))
+    if bool(task.get("flow_only")):
+        if str(task.get("role", "")) == "task_graph":
+            graph_json = json.dumps(
+                {
+                    "revision": str(task.get("revision", "r1")),
+                    "nodes": [
+                        {
+                            "id": "T1.1",
+                            "depends_on": [],
+                            "execution_mode": "parallel",
+                            "parallel_group_id": "G1",
+                            "orthogonal_key": "dimension_a",
+                            "input_refs": ["loop-artifacts/stages/02.5/r1/fields.json"],
+                            "output_schema": {"result": "string"},
+                            "preconditions": [],
+                            "postconditions": ["独立输出 A"],
+                            "writes": ["loop-artifacts/stages/03/r1/outputs/T1.1.json"],
+                        },
+                        {
+                            "id": "T1.2",
+                            "depends_on": [],
+                            "execution_mode": "parallel",
+                            "parallel_group_id": "G1",
+                            "orthogonal_key": "dimension_b",
+                            "input_refs": ["loop-artifacts/stages/02.5/r1/fields.json"],
+                            "output_schema": {"result": "string"},
+                            "preconditions": [],
+                            "postconditions": ["独立输出 B"],
+                            "writes": ["loop-artifacts/stages/03/r1/outputs/T1.2.json"],
+                        },
+                        {
+                            "id": "J1",
+                            "depends_on": ["T1.1", "T1.2"],
+                            "execution_mode": "serial",
+                            "input_refs": [
+                                "loop-artifacts/stages/03/r1/outputs/T1.1.json",
+                                "loop-artifacts/stages/03/r1/outputs/T1.2.json",
+                            ],
+                            "output_schema": {"joined": "string"},
+                            "preconditions": ["T1.1 和 T1.2 均完成"],
+                            "postconditions": ["合并为下游输入"],
+                            "writes": ["loop-artifacts/stages/03/r1/outputs/J1.json"],
+                        },
+                    ],
+                    "parallel_groups": [{"id": "G1", "members": ["T1.1", "T1.2"]}],
+                    "joins": [{"id": "J1", "depends_on": ["T1.1", "T1.2"]}],
+                },
+                ensure_ascii=False,
+            )
+            return (
+                f"RALPH_FIELD_TASK={path}\n"
+                f"这是 flow-only 流程实验，只处理 `{task.get('concept', '')}`；不要调用网页工具，不要读取其他文件。"
+                "严格执行三步并在第 3 步结束："
+                f"1) Read `{path}`；2) 立即 Write/Edit 同一文件的 `field`，保留 concept/role，"
+                f"加入结构化 `task_graph` 对象（必须包含两个正交并行节点 T1.1、T1.2，parallel_group_id=G1，"
+                f"以及等待两者的 Join 节点 J1）。建议 payload：{graph_json}。"
+                f"disposition 使用 inferred，填写 rationale，evidence_refs 保持空数组；"
+                f"3) Bash 执行 `{apply_command}`。若命令报错，只按 DAG 校验错误增量修复同一文件后重试；"
+                "禁止只输出自然语言、重复 Read 或修改 loop-state.json。"
+            )
+        return (
+            f"RALPH_FIELD_TASK={path}\n"
+            f"这是 flow-only 流程实验，只处理 `{task.get('concept', '')}`；不要调用 WebSearch/WebFetch，"
+            "不要用 Bash/curl/python 搜索，不要读取其他文件。严格执行三步并在第 3 步结束："
+            f"1) Read `{path}`；2) 立即 Write/Edit 同一文件的 field，保留真实 attribute，填写 rationale，"
+            "disposition 使用 inferred，evidence_refs 保持空数组，并标明仅用于验证流程；"
+            f"3) Bash 执行 `{apply_command}`。若命令报错，只按报错修复同一文件后重试；"
+            "禁止只输出自然语言、重复 Read 或修改 loop-state.json。"
+        )
+    if disposition == "pending":
+        role = task.get("role", "")
+        if isinstance(task.get("field"), Mapping):
+            role = task["field"].get("role", role)
+        # Keep this prompt deliberately short.  The former version repeated
+        # the system prompt and research fallback instructions, which made a
+        # small local model spend its whole turn reasoning instead of taking
+        # the first Write action.
+        return (
+            f"RALPH_FIELD_TASK={path}\n"
+            f"只处理 `{task.get('concept', '')}`（role={role}）。不搜索网页，不读其他文件。\n"
+            f"严格执行三步并在第 3 步结束：1) Read `{path}`；"
+            f"2) 立即 Write/Edit 同一文件的 `field`，把占位 attribute 改成最小真实内容，填写 rationale，"
+            f"disposition 使用 `confirmed` 或 `inferred`，保留 evidence_refs=[]；"
+            f"3) Bash 执行 `{apply_command}`。\n"
+            "若命令报错，只按报错修正同一文件后重试；禁止只输出自然语言、重复 Read 或修改 loop-state.json。"
+        )
+    research_instruction = (
+        "只处理这个 research_required 字段；先读取任务文件，最多使用两次 WebSearch/WebFetch。"
+        "禁止用 Bash/curl/python/grep 搜索网页；没有可用工具或可靠来源时不要伪造 URL，"
+        "写回 research_required、空 evidence_refs 和待补原因，仍运行 field-apply。"
+    )
+    return (
+        f"RALPH_FIELD_TASK={path}\n"
+        f"{research_instruction} 结果只写回 `{path}` 的 `field` 对象，然后 Bash 执行 "
+        f"`{apply_command}`。不要读取完整 loop-state.json 或 loop-events.md，"
+        "不要规划总报告；完成 field-apply 后直接结束。"
+    )
+
+
+def _auto_field_worker_timeout_seconds() -> float:
+    """Bound a supervisor-launched worker independently of its parent.
+
+    The parent Commander may be replaced frequently while a worker is doing
+    useful long reasoning, so this timeout is deliberately separate from the
+    parent field-stall timeout.  It is still finite: a worker that never
+    produces ``field-apply`` must eventually release its slot.
+    """
+
+    try:
+        return max(0.0, float(os.environ.get("RALPH_AUTO_FIELD_WORKER_TIMEOUT", "1800")))
+    except ValueError:
+        return 1800.0
+
+
+def _launch_auto_field_workers(
+    root: Path,
+    settings_path: Path,
+    environment: Mapping[str, str],
+    *,
+    model: str | None,
+    effort: str | None,
+    skip_permissions: bool,
+    workers: dict[str, dict[str, Any]],
+) -> list[str]:
+    """Launch bounded top-level field workers as a recovery fallback.
+
+    Commander remains the normal dispatcher.  This fallback is opt-in and is
+    used when a weak/local Commander repeatedly fails to emit ``Agent``.  It
+    launches the same narrow field prompt in an independent Claude process,
+    while preserving the exact field-task lifecycle and Hook validation.
+    """
+
+    if not _auto_field_workers_enabled():
+        return []
+    state = load_state(root / "loop-state.json")
+    tasks = [
+        item for item in state.get("field_tasks", [])
+        if isinstance(item, Mapping)
+        and str(item.get("status", "")) in {"ready", "pending"}
+        and (
+            field_task_requires_agent(item)
+            or (
+                _auto_pending_field_workers_enabled()
+                and str(item.get("disposition", "")).strip().lower() == "pending"
+            )
+        )
+    ]
+    capacity = max(0, max_parallel_fields() - len(workers))
+    if capacity <= 0:
+        return []
+    launched: list[str] = []
+    for candidate in tasks[:capacity]:
+        task_id = str(candidate.get("id", ""))
+        if not task_id or task_id in workers:
+            continue
+        auto_id = f"auto-field-{hashlib.sha1(task_id.encode()).hexdigest()[:12]}"
+        _, claimed = claim_field_task(root, task_id, dispatch_name=auto_id)
+        if claimed is None:
+            continue
+        update_field_task_metadata_transaction(
+            root,
+            task_id,
+            status="dispatched",
+            agent_id=auto_id,
+            dispatch_name=auto_id,
+        )
+        claimed = next(
+            (
+                item
+                for item in load_state(root / "loop-state.json").get("field_tasks", [])
+                if isinstance(item, Mapping) and str(item.get("id")) == task_id
+            ),
+            claimed,
+        )
+        worker_env = _auto_field_worker_environment(environment)
+        worker_env["RALPH_ROLE"] = "worker"
+        worker_env["RALPH_AGENT_ID"] = auto_id
+        worker_effort = effort or os.environ.get("RALPH_AUTO_FIELD_EFFORT", "low")
+        command = _with_skip_permissions(
+            _with_model(
+                _with_effort(
+                    [
+                        _claude_executable(),
+                        "--settings",
+                        str(settings_path),
+                        "--setting-sources",
+                        "user,project,local",
+                        "--system-prompt",
+                        AUTO_FIELD_WORKER_SYSTEM_PROMPT,
+                        "--tools",
+                        "Read,Write,Edit,Bash,WebSearch,WebFetch",
+                        "--allowedTools",
+                        "Read",
+                        "Write",
+                        "Edit",
+                        "Bash",
+                        "WebSearch",
+                        "WebFetch",
+                        "--permission-mode",
+                        "bypassPermissions",
+                        "--no-session-persistence",
+                        "-p",
+                    ],
+                    worker_effort,
+                ),
+                model,
+            ),
+            skip_permissions,
+        )
+        command.append(_auto_field_worker_prompt(claimed, root))
+        log_dir = root / "loop-artifacts" / "worker-logs"
+        log_dir.mkdir(parents=True, exist_ok=True)
+        log_handle = (log_dir / f"{task_id}.log").open("ab")
+        try:
+            process = subprocess.Popen(
+                command,
+                cwd=root,
+                env=worker_env,
+                stdout=log_handle,
+                stderr=subprocess.STDOUT,
+                # A fallback worker may itself launch a Claude child.  Give
+                # it a private group so stale-worker recovery cannot leave a
+                # nested process consuming local-model memory.
+                start_new_session=(os.name != "nt"),
+            )
+        except OSError as exc:
+            # Claiming a task is itself a state mutation.  If the external
+            # Claude executable cannot be started, release that claim in the
+            # same recovery path instead of leaving a permanent dispatched
+            # phantom behind.
+            log_handle.close()
+            update_field_task_metadata_transaction(
+                root,
+                task_id,
+                status="ready",
+                clear_agent_id=True,
+                clear_agent_ids=True,
+                last_error=f"自动 worker 启动失败：{exc}",
+            )
+            append_observation(
+                root / "loop-events.md",
+                "auto_field_worker_start_failed",
+                {"field_task_id": task_id, "agent_id": auto_id, "error": str(exc)},
+            )
+            continue
+        update_field_task_metadata_transaction(
+            root,
+            task_id,
+            worker_pid=process.pid,
+        )
+        workers[task_id] = {
+            "process": process,
+            "log": log_handle,
+            "agent_id": auto_id,
+            "started_at": time.monotonic(),
+        }
+        append_observation(
+            root / "loop-events.md",
+            "auto_field_worker_started",
+            {"field_task_id": task_id, "agent_id": auto_id, "pid": process.pid},
+        )
+        launched.append(task_id)
+    return launched
+
+
+def _reap_auto_field_workers(root: Path, workers: dict[str, dict[str, Any]]) -> set[str]:
+    """Reap finished fallback workers and return IDs still owned by live ones."""
+
+    live_ids: set[str] = set()
+    for task_id, record in list(workers.items()):
+        process = record.get("process")
+        if not isinstance(process, subprocess.Popen):
+            workers.pop(task_id, None)
+            continue
+        return_code = process.poll()
+        if return_code is None:
+            # A field can be reopened by a lifecycle Hook or a new supervisor
+            # context while the old Claude process is still alive.  Keeping
+            # that orphan around makes the next ready task look duplicated
+            # and wastes local-model memory.  The persisted task lifecycle is
+            # authoritative: a live worker is valid only while its task is
+            # still dispatched to that worker.
+            live_state = load_state(root / "loop-state.json")
+            live_task = next(
+                (
+                    item for item in live_state.get("field_tasks", [])
+                    if isinstance(item, Mapping) and str(item.get("id", "")) == str(task_id)
+                ),
+                None,
+            )
+            if not isinstance(live_task, Mapping) or str(live_task.get("status", "")) not in {
+                "dispatching",
+                "dispatched",
+            }:
+                _terminate_process_group(process)
+                log_handle = record.get("log")
+                if hasattr(log_handle, "close"):
+                    log_handle.close()
+                append_observation(
+                    root / "loop-events.md",
+                    "auto_field_worker_orphan_reaped",
+                    {
+                        "field_task_id": task_id,
+                        "agent_id": record.get("agent_id"),
+                        "task_status": live_task.get("status") if isinstance(live_task, Mapping) else "missing",
+                        "state_preserved": True,
+                    },
+                )
+                workers.pop(task_id, None)
+                continue
+            # The parent-Commander watchdog can restart while a fallback
+            # worker is still alive.  Do not treat that process as proof of
+            # progress: if its durable task heartbeat is stale, it is the
+            # worker itself that is stuck.  Release the slot while preserving
+            # its task JSON/draft for the next bounded attempt.
+            if _field_task_stall_requested(live_task):
+                _terminate_process_group(process)
+                log_handle = record.get("log")
+                if hasattr(log_handle, "close"):
+                    log_handle.close()
+                update_field_task_metadata_transaction(
+                    root,
+                    task_id,
+                    status="ready",
+                    clear_agent_id=True,
+                    clear_agent_ids=True,
+                    last_error="自动 worker 心跳超时，已保留增量草稿并释放字段重试",
+                )
+                append_observation(
+                    root / "loop-events.md",
+                    "auto_field_worker_stall_reaped",
+                    {
+                        "field_task_id": task_id,
+                        "agent_id": record.get("agent_id"),
+                        "timeout_seconds": _field_agent_stall_seconds(),
+                        "state_preserved": True,
+                        "next_action": "ready_retry",
+                    },
+                )
+                workers.pop(task_id, None)
+                continue
+            started_at = record.get("started_at")
+            timeout = _auto_field_worker_timeout_seconds()
+            if (
+                timeout > 0
+                and isinstance(started_at, (int, float))
+                and time.monotonic() - float(started_at) >= timeout
+            ):
+                _terminate_process_group(process)
+                log_handle = record.get("log")
+                if hasattr(log_handle, "close"):
+                    log_handle.close()
+                # Preserve an already-written draft even when the worker
+                # stalled before it managed to run ``field-apply``.  This is
+                # still validated by the same command and therefore cannot
+                # corrupt loop-state.json; invalid JSON simply remains a
+                # repairable draft for the next context.
+                task_path: Path | None = None
+                live_before_apply = load_state(root / "loop-state.json")
+                for item in live_before_apply.get("field_tasks", []):
+                    if isinstance(item, Mapping) and str(item.get("id", "")) == task_id:
+                        candidate = item.get("path")
+                        if candidate:
+                            task_path = root / str(candidate)
+                        break
+                auto_applied = False
+                if task_path is not None and task_path.exists():
+                    try:
+                        result = apply_fields(root, task_path)
+                        auto_applied = bool(result.get("ok"))
+                        append_observation(
+                            root / "loop-events.md",
+                            "auto_field_draft_applied_on_timeout",
+                            {
+                                "field_task_id": task_id,
+                                "agent_id": record.get("agent_id"),
+                                "fields_file": str(task_path.relative_to(root)),
+                                "remaining": result.get("remaining"),
+                            },
+                        )
+                    except (OSError, ValueError, KeyError) as exc:
+                        append_observation(
+                            root / "loop-events.md",
+                            "auto_field_draft_apply_failed_on_timeout",
+                            {
+                                "field_task_id": task_id,
+                                "agent_id": record.get("agent_id"),
+                                "error": str(exc),
+                            },
+                        )
+                live_after_apply = load_state(root / "loop-state.json")
+                task_after_apply = next(
+                    (
+                        item for item in live_after_apply.get("field_tasks", [])
+                        if isinstance(item, Mapping) and str(item.get("id", "")) == task_id
+                    ),
+                    {},
+                )
+                # A completed draft must not be regressed to ready merely
+                # because its worker failed to exit.  Incomplete or invalid
+                # drafts are reopened for the next bounded attempt.
+                final_status = (
+                    "completed"
+                    if auto_applied and str(task_after_apply.get("status", "")) == "completed"
+                    else "ready"
+                )
+                update_field_task_metadata_transaction(
+                    root,
+                    task_id,
+                    status=final_status,
+                    clear_agent_id=True,
+                    clear_agent_ids=True,
+                    last_error=(
+                        None
+                        if final_status == "completed"
+                        else f"自动 worker 超过 {timeout:g} 秒未完成 field-apply，已释放并重试"
+                    ),
+                )
+                append_observation(
+                    root / "loop-events.md",
+                    "auto_field_worker_timeout",
+                    {
+                        "field_task_id": task_id,
+                        "agent_id": record.get("agent_id"),
+                        "timeout_seconds": timeout,
+                        "state_preserved": True,
+                    },
+                )
+                workers.pop(task_id, None)
+                continue
+            live_ids.add(task_id)
+            continue
+        log_handle = record.get("log")
+        if hasattr(log_handle, "close"):
+            log_handle.close()
+        # ``--bare`` workers do not reliably emit the normal SubagentStop
+        # lifecycle event.  If the process exits without increasing
+        # apply_count, release its durable reservation immediately instead of
+        # leaving a dispatched ghost until the next Commander cycle.
+        finished_state = load_state(root / "loop-state.json")
+        finished_task = next(
+            (
+                item for item in finished_state.get("field_tasks", [])
+                if isinstance(item, Mapping) and str(item.get("id", "")) == str(task_id)
+            ),
+            None,
+        )
+        if (
+            isinstance(finished_task, Mapping)
+            and str(finished_task.get("status", "")) in {"dispatching", "dispatched"}
+            and int(finished_task.get("apply_count", 0) or 0)
+            <= int(finished_task.get("apply_count_at_dispatch", 0) or 0)
+        ):
+            update_field_task_metadata_transaction(
+                root,
+                task_id,
+                status="ready",
+                clear_agent_id=True,
+                clear_agent_ids=True,
+                field_read_count=0,
+                last_error="自动 worker 退出但未提交 field-apply，已恢复字段并交给新的短上下文",
+            )
+            append_observation(
+                root / "loop-events.md",
+                "auto_field_worker_finished_without_apply",
+                {
+                    "field_task_id": task_id,
+                    "agent_id": record.get("agent_id"),
+                    "return_code": return_code,
+                    "state_preserved": True,
+                    "next_action": "ready_retry",
+                },
+            )
+        append_observation(
+            root / "loop-events.md",
+            "auto_field_worker_finished",
+            {
+                "field_task_id": task_id,
+                "agent_id": record.get("agent_id"),
+                "return_code": return_code,
+            },
+        )
+        workers.pop(task_id, None)
+    return live_ids
+
+
+def _wait_for_auto_field_workers(root: Path, workers: dict[str, dict[str, Any]]) -> None:
+    """Wait for fallback workers without starting a second Claude context.
+
+    On small local-model devices a fallback worker and a fresh Commander are
+    not independent useful work: they compete for the same weights/KV cache.
+    The old loop launched both in the same supervisor iteration.  Keep the
+    durable queue active, reap finished/stalled workers, and return only when
+    the worker slot is released.  The outer loop then decides whether to
+    start a new Commander or retry another bounded worker.
+    """
+
+    while workers:
+        _reap_auto_field_workers(root, workers)
+        if workers:
+            time.sleep(1.0)
+
+
+def _reap_persisted_auto_workers(root: Path, state: Mapping[str, Any]) -> list[int]:
+    """Reap fallback workers left by a previous supervisor process."""
+
+    reaped: list[int] = []
+    tasks = state.get("field_tasks", []) if isinstance(state.get("field_tasks"), list) else []
+    for task in tasks:
+        if not isinstance(task, Mapping) or str(task.get("status", "")) not in {"dispatching", "dispatched"}:
+            continue
+        try:
+            pid = int(task.get("worker_pid", 0) or 0)
+        except (TypeError, ValueError):
+            pid = 0
+        if pid <= 0:
+            continue
+        try:
+            os.kill(pid, signal.SIGTERM)
+            reaped.append(pid)
+        except ProcessLookupError:
+            pass
+        except OSError:
+            continue
+        update_field_task_metadata_transaction(
+            root,
+            str(task.get("id", "")),
+            status="ready",
+            clear_agent_id=True,
+            clear_agent_ids=True,
+            last_error="上一监督器已退出，已回收持久化 worker 并保留增量草稿",
+            worker_pid=0,
+        )
+    if reaped:
+        append_observation(
+            root / "loop-events.md",
+            "auto_field_worker_persisted_orphan_reaped",
+            {"pids": reaped, "state_preserved": True, "next_action": "ready_retry"},
+        )
+    return reaped
+
+
+def _loop_project_impl(
     project_or_task: str | Path,
     task: str | None = None,
-    mode: str = "enforce",
+    mode: str = "hybrid",
     workspace: str | Path | None = None,
     effort: str | None = None,
     model: str | None = None,
@@ -1273,6 +2294,7 @@ def loop_project(
     idle_timeout: float = 1800.0,
     wait_human: bool = False,
     skip_permissions: bool = False,
+    _resolved: tuple[Path, str, ProjectResolution | None] | None = None,
 ) -> int:
     """Keep advancing a project by launching fresh Claude contexts.
 
@@ -1287,7 +2309,10 @@ def loop_project(
         raise ValueError("max-cycles 不能小于 0")
     if retry_delay < 0 or agent_grace_seconds < 0 or idle_timeout < 0:
         raise ValueError("retry-delay、agent-grace-seconds 和 idle-timeout 不能小于 0")
-    project, task_text, resolution = _resolve_loop_project(project_or_task, task, workspace)
+    if _resolved is None:
+        project, task_text, resolution = _resolve_loop_project(project_or_task, task, workspace)
+    else:
+        project, task_text, resolution = _resolved
     root, settings_path, is_new, created = prepare_project(
         project,
         task=task_text,
@@ -1299,16 +2324,34 @@ def loop_project(
         # Startup reconciliation is safe for a project whose previous owner
         # is no longer this supervisor process.
         time.sleep(min(agent_grace_seconds, 60.0))
-    startup_reconciled = reconcile_stale_cards(
-        root,
-        reason="ralph loop startup recovered cards left by an earlier Claude session",
-    )
+    # The active protocol is field-centric.  Legacy task cards are retained
+    # only for migration/audit inspection and must not be reactivated or
+    # mutated when a field-centric project starts.
+    startup_reconciled = []
+    startup_state = load_state(root / "loop-state.json")
+    startup_reconciled.extend(_reap_persisted_auto_workers(root, startup_state))
+    startup_state = load_state(root / "loop-state.json")
+    stale_field_tasks = reopen_stale_field_tasks(root, startup_state)
+    deferred_field_tasks = reopen_deferred_field_tasks(root, startup_state)
+    if stale_field_tasks or deferred_field_tasks:
+        save_state(root / "loop-state.json", startup_state)
+        append_observation(
+            root / "loop-events.md",
+            "field_tasks_reopened_on_startup",
+            {
+                "field_task_ids": stale_field_tasks,
+                "deferred_field_task_ids": deferred_field_tasks,
+                "reason": "new supervisor context reopened stale and deferred field tasks",
+            },
+        )
     environment, compact_window, compact_percent = _claude_environment(
         auto_compact_window,
         auto_compact_percent,
     )
     first_prompt = task_text if is_new else None
     cycle = 0
+    auto_workers: dict[str, dict[str, Any]] = {}
+    suppress_auto_fallback = False
     print("RALPH loop project:", root)
     if resolution is not None:
         print("RALPH workspace:", resolution.workspace)
@@ -1320,17 +2363,13 @@ def loop_project(
     print("Idle watchdog:", "disabled" if idle_timeout == 0 else f"{idle_timeout:g} seconds")
 
     while max_cycles == 0 or cycle < max_cycles:
+        _reap_auto_field_workers(root, auto_workers)
         state = load_state(root / "loop-state.json")
-        field_mode = bool(os.environ.get("RALPH_FIELD_GATE"))
-        if not field_mode:
-            # Card-centric mode: pre-generate builder skeletons and merge partials.
-            ensure_builder_skeletons(state, root)
-            reconcile_partial_merges(root, state)
-        else:
-            # Field-centric mode: the Commander writes task_spec.attribute_matrix
-            # directly. Explode comma fields + auto-advance stage 01 when complete.
-            if _field_engine_tick(root, state):
-                continue
+        # Field-centric mode is the only normal execution path.  The runtime
+        # reconciles drafts and can auto-advance stage 01 when its fields are
+        # complete; all later stages require an explicit validated apply.
+        if _field_engine_tick(root, state):
+            continue
         status = str(state.get("status", "running"))
         if status in {"completed", "stopped"}:
             print("RALPH terminal state:", status)
@@ -1360,6 +2399,34 @@ def loop_project(
             )
             print("Auto-skipped blocked_human ->", next_stage)
             continue
+
+        # Optional recovery fallback for a local Commander that repeatedly
+        # thinks instead of emitting the required Agent tool call.  Workers
+        # are still bounded by the same max-parallel setting and use the same
+        # field task files/Hook validation as Commander-launched children.
+        if _auto_field_workers_enabled() and cycle > 0 and not suppress_auto_fallback:
+            # The first context belongs to Commander.  Starting a fallback
+            # worker before Commander has had a chance to dispatch creates two
+            # local Claude processes on small machines and can trigger an MLX
+            # KV/memory guard even though the field queue is valid.  After a
+            # context boundary, the same durable queue becomes eligible for
+            # the bounded fallback worker.
+            launched_auto_workers = _launch_auto_field_workers(
+                root,
+                settings_path,
+                environment,
+                model=model,
+                effort=effort,
+                skip_permissions=skip_permissions,
+                workers=auto_workers,
+            )
+            if launched_auto_workers:
+                # Do not launch a Commander in the same iteration.  A local
+                # Qwen/MLX process must finish or be reaped before another
+                # Claude context is allowed to allocate KV cache.
+                _wait_for_auto_field_workers(root, auto_workers)
+                suppress_auto_fallback = True
+                continue
 
         recovery_prompt = PromptRenderer().compact_recovery_prompt(
             state,
@@ -1400,12 +2467,27 @@ def loop_project(
             },
         )
         print(f"RALPH cycle {cycle}: launching fresh Claude context")
-        return_code, timed_out = _run_claude_supervised(
-            command,
-            cwd=root,
-            env=environment,
-            idle_timeout=idle_timeout,
-        )
+        supervisor_kwargs = {
+            "cwd": root,
+            "env": environment,
+            "idle_timeout": idle_timeout,
+            "protected_field_task_ids": set(auto_workers),
+            "auto_workers": auto_workers,
+        }
+        # Keep small test/integration adapters that implement the original
+        # three-argument runner usable. The production supervisor accepts the
+        # bounded worker arguments; a compatible adapter simply cannot manage
+        # those optional recovery workers itself.
+        parameters = inspect.signature(_run_claude_supervised).parameters
+        if "protected_field_task_ids" not in parameters:
+            supervisor_kwargs.pop("protected_field_task_ids")
+        if "auto_workers" not in parameters:
+            supervisor_kwargs.pop("auto_workers")
+        return_code, timed_out = _run_claude_supervised(command, **supervisor_kwargs)
+        # A Commander boundary is the next opportunity for the bounded
+        # fallback worker.  The flag only suppresses the immediate retry after
+        # one worker attempt, preventing an infinite worker-only loop.
+        suppress_auto_fallback = False
         if agent_grace_seconds:
             time.sleep(min(agent_grace_seconds, 60.0))
         if timed_out:
@@ -1420,13 +2502,41 @@ def loop_project(
                     "next_action": "fresh_context",
                 },
             )
+        # Do not reconcile legacy task cards from the active field workflow.
+        # Their historical state remains available for audit but cannot affect
+        # the current queue or stage transition.
+        reconciled = []
+        # Field Agents are owned by the Claude context that launched them.  If
+        # that context ended because Stop Hook hit Claude's safety cap, an API
+        # reset, or a memory guard, SubagentStop may never arrive.  Reopen the
+        # live field files at this supervisor boundary so the next fresh
+        # context can dispatch them again instead of inheriting a phantom
+        # ``dispatched`` state forever.
         try:
-            reconciled = reconcile_stale_cards(
+            after_cycle_state = load_state(root / "loop-state.json")
+            live_auto_worker_ids = _reap_auto_field_workers(root, auto_workers)
+            reopened_fields = reopen_stale_field_tasks(
                 root,
-                reason=f"ralph loop cycle {cycle} ended with Claude return code {return_code}",
+                after_cycle_state,
+                exclude_ids=live_auto_worker_ids,
             )
+            deferred_fields = reopen_deferred_field_tasks(root, after_cycle_state)
+            if reopened_fields or deferred_fields:
+                save_state(root / "loop-state.json", after_cycle_state)
+                append_observation(
+                    root / "loop-events.md",
+                    "field_tasks_reopened_after_cycle",
+                    {
+                        "field_task_ids": reopened_fields,
+                        "deferred_field_task_ids": deferred_fields,
+                        "reason": "Claude context ended without SubagentStop",
+                        "cycle": cycle,
+                        "auto_workers": sorted(live_auto_worker_ids),
+                    },
+                )
         except (OSError, ValueError) as exc:
-            reconciled = [{"error": str(exc)}]
+            reopened_fields = [f"error: {exc}"]
+            deferred_fields = []
         append_observation(
             root / "loop-events.md",
             "supervisor_cycle_finished",
@@ -1434,16 +2544,61 @@ def loop_project(
                 "cycle": cycle,
                 "return_code": return_code,
                 "reconciled_cards": reconciled,
+                "reopened_fields": reopened_fields,
+                "deferred_fields_reopened": deferred_fields,
                 "next_action": "fresh_context" if max_cycles == 0 or cycle < max_cycles else "supervisor_limit",
             },
         )
-        print(f"RALPH cycle {cycle} ended with return code {return_code}; reconciled {len(reconciled)} card(s).")
+        print(
+            f"RALPH cycle {cycle} ended with return code {return_code}; "
+            f"reopened {len(reopened_fields)} field task(s)."
+        )
         if max_cycles and cycle >= max_cycles:
             print("Reached --max-cycles; persistent state remains resumable.")
             return 0
         if retry_delay:
             time.sleep(min(retry_delay, 60.0))
     return 0
+
+
+def loop_project(
+    project_or_task: str | Path,
+    task: str | None = None,
+    mode: str = "hybrid",
+    workspace: str | Path | None = None,
+    effort: str | None = None,
+    model: str | None = None,
+    auto_compact_window: int | None = None,
+    auto_compact_percent: int | None = None,
+    max_cycles: int = 0,
+    retry_delay: float = 3.0,
+    agent_grace_seconds: float = 5.0,
+    idle_timeout: float = 1800.0,
+    wait_human: bool = False,
+    skip_permissions: bool = False,
+) -> int:
+    """Run one project under an exclusive durable supervisor lock."""
+
+    resolved = _resolve_loop_project(project_or_task, task, workspace)
+    root = _project_root(resolved[0])
+    with _supervisor_lock(root):
+        return _loop_project_impl(
+            project_or_task,
+            task,
+            mode,
+            workspace,
+            effort,
+            model,
+            auto_compact_window,
+            auto_compact_percent,
+            max_cycles,
+            retry_delay,
+            agent_grace_seconds,
+            idle_timeout,
+            wait_human,
+            skip_permissions,
+            _resolved=resolved,
+        )
 
 
 def _print_project_error(project: str | Path, error: Exception) -> None:
@@ -1505,51 +2660,6 @@ def validate_result_artifact(
             "last_event_id": updated.get("last_event_id"),
         }
     return report
-
-
-def _tokenize(text: object) -> set[str]:
-    """Split a field's textual content into comparable word tokens.
-
-    Handles Chinese / English mixed text: keeps CJK runs as whole tokens and
-    splits latin words on common delimiters, lower-cased."""
-    if not isinstance(text, str):
-        text = str(text)
-    import re as _re
-
-    toks: set[str] = set()
-    for seg in _re.split(r"[\s,，、;；/|()（）]+", text):
-        seg = seg.strip().lower()
-        if not seg:
-            continue
-        # CJK characters: treat each maximal CJK run as one token
-        for m in _re.finditer(r"[\u4e00-\u9fff]+|[a-z0-9]+", seg):
-            toks.add(m.group(0))
-    return toks
-
-
-def _stage01_check(matrix: list[dict]) -> None:
-    """Validate the stage-01 three-field constraint before commit.
-
-    - exactly the concepts ``goal`` / ``known`` / ``unknown`` must be present;
-    - ``goal`` must contain both ``known`` and ``unknown`` (token superset);
-    - ``known`` and ``unknown`` must share no token."""
-    by = {str(f.get("concept")): f for f in matrix if isinstance(f, dict)}
-    if not ({"goal", "known", "unknown"} <= set(by)):
-        return  # not a full stage-01 set yet; skip (incremental applies)
-    goal = _tokenize(by["goal"].get("attribute", ""))
-    known = _tokenize(by["known"].get("attribute", ""))
-    unknown = _tokenize(by["unknown"].get("attribute", ""))
-    if not goal or not known or not unknown:
-        raise ValueError("stage-01: goal/known/unknown 的 attribute 不能为空")
-    if not known <= goal:
-        missing = known - goal
-        raise ValueError(f"stage-01: 已知因素词语未全部包含在目标中: {sorted(missing)}")
-    if not unknown <= goal:
-        missing = unknown - goal
-        raise ValueError(f"stage-01: 未知因素词语未全部包含在目标中: {sorted(missing)}")
-    overlap = known & unknown
-    if overlap:
-        raise ValueError(f"stage-01: 已知与未知因素词语重叠: {sorted(overlap)}")
 
 
 def _fields_from_any(obj: object) -> list[dict]:
@@ -1656,7 +2766,37 @@ def render_matrix_md(
     return "\n".join(lines).rstrip() + "\n"
 
 
+@contextmanager
+def _field_apply_lock(root: Path):
+    """Serialize concurrent per-field merges from parallel subagents."""
+
+    lock_path = root / "loop-artifacts" / ".field-apply.lock"
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    handle = lock_path.open("a+", encoding="utf-8")
+    try:
+        if fcntl is not None:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
+        yield
+    finally:
+        if fcntl is not None:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
+        handle.close()
+
+
 def apply_fields(project: str | Path, fields_file: str | Path) -> dict[str, object]:
+    """Validate and atomically merge one incremental field draft.
+
+    Parallel field agents may call this command at the same time.  The lock
+    covers the load/merge/save transaction, so one agent cannot overwrite a
+    sibling agent's newly accepted field.
+    """
+
+    root = _project_root(project)
+    with _field_apply_lock(root):
+        return _apply_fields_unlocked(root, fields_file)
+
+
+def _apply_fields_unlocked(root: Path, fields_file: str | Path) -> dict[str, object]:
     """Field-validation command used by the Commander in field-centric mode.
 
     The Commander never edits ``loop-state.json`` directly.  It writes a small
@@ -1666,13 +2806,34 @@ def apply_fields(project: str | Path, fields_file: str | Path) -> dict[str, obje
     commits atomically via :func:`save_state`.  This makes a corrupt write
     impossible: the runtime owns the only write path."""
 
-    root = _project_root(project)
     state = load_state(root / "loop-state.json", graph=DEFAULT_GRAPH)
-    raw = json.loads(Path(fields_file).read_text(encoding="utf-8"))
+    fields_path = Path(fields_file).expanduser()
+    if not fields_path.is_absolute():
+        fields_path = root / fields_path
+    fields_path = fields_path.resolve()
+    allowed_dir = state_stage_artifact_dir(root, state).resolve()
+    if allowed_dir not in fields_path.parents:
+        raise ValueError(
+            f"字段草稿必须位于当前阶段目录 `{allowed_dir.relative_to(root)}` 或其 tasks 子目录；"
+            f"请把文件移动到该目录后再运行 `ralph field-apply {root} <fields.json>`"
+        )
+    try:
+        raw = json.loads(fields_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise ValueError(
+            f"字段草稿 JSON 语法错误：第 {exc.lineno} 行、第 {exc.colno} 列：{exc.msg}。"
+            f"只修复 `{fields_path}` 的 JSON 语法，然后重运行："
+            f"ralph field-apply {root} {fields_file}"
+        ) from exc
     if isinstance(raw, list):
         fields = raw
     elif isinstance(raw, dict):
-        fields = raw.get("fields") or raw.get("attribute_matrix") or []
+        fields = raw.get("fields") or raw.get("attribute_matrix")
+        if fields is None and isinstance(raw.get("field"), dict):
+            fields = [raw["field"]]
+        if fields is None and raw.get("concept"):
+            fields = [raw]
+        fields = fields or []
     else:
         raise ValueError("fields file must be a list or {fields:[...]}/{attribute_matrix:[...]}")
     if not isinstance(fields, list):
@@ -1692,20 +2853,78 @@ def apply_fields(project: str | Path, fields_file: str | Path) -> dict[str, obje
         for i, f in enumerate(matrix)
         if isinstance(f, dict)
     }
+    current_stage = str(state.get("stage", {}).get("id", "")) if isinstance(state.get("stage"), dict) else ""
     added = removed = 0
+    allowed_dispositions = {"confirmed", "inferred", "assumed_default", "research_required", "pending"}
+    seen_concepts: set[str] = set()
     for f in fields:
         if not isinstance(f, dict):
             raise ValueError(f"field entry must be an object: {f!r}")
         if f.get("delete"):
             concept = str(f.get("concept"))
+            if not concept or concept == "None":
+                raise ValueError("删除字段必须提供非空 concept")
             if concept in by_concept:
                 matrix.pop(by_concept[concept])
                 removed += 1
             continue
+        graph_payload = None
+        if str(f.get("role", "")) == "task_graph":
+            for key in ("task_graph", "graph", "value"):
+                if isinstance(f.get(key), Mapping):
+                    graph_payload = f[key]
+                    break
+            # A graph field may omit the human-readable attribute because its
+            # actual value is the structured `task_graph` object.
+            if graph_payload is not None and not f.get("attribute"):
+                f = dict(f)
+                f["attribute"] = "validated execution DAG"
         for req in ("concept", "attribute", "disposition", "role"):
             if not f.get(req):
                 raise ValueError(f"field missing required key '{req}': {f!r}")
         concept = str(f.get("concept"))
+        if concept in seen_concepts:
+            raise ValueError(f"字段草稿中 concept 重复：{concept!r}；同一字段只保留最后一个版本")
+        seen_concepts.add(concept)
+        if f.get("disposition") not in allowed_dispositions:
+            raise ValueError(
+                f"字段 {concept!r} 的 disposition 无效：{f.get('disposition')!r}；"
+                f"允许值：{', '.join(sorted(allowed_dispositions))}"
+            )
+        if (
+            os.environ.get("RALPH_ROLE", "").strip().lower() == "worker"
+            and flow_only_mode(state)
+            and f.get("disposition") == "pending"
+            and (
+                str(f.get("attribute", "")).startswith("请填写 ")
+                or str(f.get("rationale", "")).startswith("由运行时为缺失")
+            )
+        ):
+            raise ValueError(
+                f"字段 {concept!r} 仍是空 pending 占位；worker 必须先用 Write/Edit 填写真实 attribute 和 rationale，"
+                "并将 disposition 设为 inferred，再重试同一个 field-apply。Commander 的其他空字段可以保留 pending。"
+            )
+        # ``pending`` is an intentional editable placeholder.  The field
+        # protocol is incremental: a Commander may submit one completed field
+        # while leaving other required outputs empty for a later turn.  The
+        # stage gate, not field-apply, decides whether the remaining pending
+        # placeholders are sufficient to advance.
+        if graph_payload is not None:
+            try:
+                validate_plan(graph_payload, strict=True)
+            except (DAGValidationError, TypeError, ValueError) as exc:
+                raise ValueError(
+                    f"字段 {concept!r} 的 task_graph 校验失败：{exc}。"
+                    "只修复 nodes、depends_on、parallel_group_id、orthogonal_key、writes 或 output_schema，"
+                    "然后重新运行 field-apply；状态尚未写入。"
+                ) from exc
+            state["plan"] = json.loads(json.dumps(graph_payload, ensure_ascii=False))
+        refs = f.get("evidence_refs", [])
+        if not isinstance(refs, list):
+            raise ValueError(f"字段 {concept!r} 的 evidence_refs 必须是数组")
+        confidence = f.get("confidence")
+        if confidence is not None and (not isinstance(confidence, (int, float)) or not 0 <= confidence <= 1):
+            raise ValueError(f"字段 {concept!r} 的 confidence 必须是 0 到 1 之间的数字")
         if concept in by_concept:
             matrix[by_concept[concept]] = f
         else:
@@ -1713,37 +2932,142 @@ def apply_fields(project: str | Path, fields_file: str | Path) -> dict[str, obje
             by_concept[concept] = len(matrix) - 1
         added += 1
 
-    current_stage = str(state.get("stage", {}).get("id", "")) if isinstance(state.get("stage"), dict) else ""
-    if current_stage == "01":
-        _stage01_check(matrix)
-
+    materialize_field_tasks(root, state)
+    materialize_graph_tasks(root, state)
     save_state(root / "loop-state.json", state)
+    # Record an accepted incremental submission on the exact field task file.
+    # SubagentStop uses this receipt to distinguish a valid incomplete draft
+    # from an Agent that merely returned natural language without applying it.
+    applied_at = datetime.now(timezone.utc).isoformat()
+    relative_fields_path = str(fields_path.relative_to(root))
+    applied_task_id: str | None = None
+    for field_task in state.get("field_tasks", []):
+        if not isinstance(field_task, Mapping) or str(field_task.get("path")) != relative_fields_path:
+            continue
+        current_count = int(field_task.get("apply_count", 0) or 0) + 1
+        applied_task_id = str(field_task["id"])
+        state = update_field_task_metadata_transaction(
+            root,
+            applied_task_id,
+            apply_count=current_count,
+            last_applied_at=applied_at,
+        )
+        break
 
-    # 自动把最新阶段文件渲染成易读 .md（agent 只写 JSON，人读 MD）。best-effort。
+    # A supervisor-launched top-level field worker has no Claude
+    # ``SubagentStop`` lifecycle event.  Let its successful field-apply release
+    # the durable reservation so the worker's Stop Hook can exit normally.
+    # Incomplete evidence is deferred for a later supervisor context; it is
+    # never treated as a successful research result.
+    if applied_task_id and os.environ.get("RALPH_ROLE", "").strip().lower() == "worker":
+        live_after_apply = load_state(root / "loop-state.json")
+        task_record = next(
+            (item for item in live_after_apply.get("field_tasks", [])
+             if isinstance(item, Mapping) and str(item.get("id")) == applied_task_id),
+            None,
+        )
+        concept = str(task_record.get("concept", "")) if isinstance(task_record, Mapping) else ""
+        matrix_after_apply = (live_after_apply.get("task_spec") or {}).get("attribute_matrix", [])
+        field_after_apply = next(
+            (item for item in matrix_after_apply
+             if isinstance(item, Mapping) and str(item.get("concept", "")) == concept),
+            None,
+        ) if isinstance(matrix_after_apply, list) else None
+        disposition = str(field_after_apply.get("disposition", "")) if isinstance(field_after_apply, Mapping) else ""
+        refs = field_after_apply.get("evidence_refs") if isinstance(field_after_apply, Mapping) else []
+        flow_only = bool(task_record.get("flow_only")) if isinstance(task_record, Mapping) else False
+        complete = disposition in {"confirmed", "inferred", "assumed_default"} or (
+            flow_only and disposition == "research_required"
+        ) or (
+            disposition == "research_required" and isinstance(refs, list) and bool(refs)
+        )
+        update_field_task_metadata_transaction(
+            root,
+            applied_task_id,
+            status="completed" if complete else "deferred",
+            clear_agent_id=True,
+            clear_agent_ids=True,
+            last_error=None if complete else "worker 已保存增量草稿，等待后续上下文补充证据",
+        )
+
+    # 自动把当前字段草稿渲染成易读 .md（agent 只写 JSON，人读 MD）。best-effort。
     rendered_md: str | None = None
     try:
-        ca = state.get("current_artifact")
-        if ca:
-            art = root / str(ca)
-            if art.exists():
-                spec = json.loads(art.read_text(encoding="utf-8"))
-                fields = _fields_from_any(spec)
-                if fields:
-                    md = render_matrix_md(
-                        fields,
-                        title=f"{current_stage or '?'} 阶段字段快照",
-                        source=ca,
-                    )
-                    md_path = art.with_suffix(".md")
-                    md_path.write_text(md, encoding="utf-8")
-                    rendered_md = str(md_path)
+        fields = _fields_from_any(state.get("task_spec", {}))
+        if fields:
+            md = render_matrix_md(
+                fields,
+                title=f"{current_stage or '?'} 阶段字段快照",
+                source=str(fields_path.relative_to(root)),
+            )
+            md_path = fields_path.with_suffix(".md")
+            md_path.write_text(md, encoding="utf-8")
+            rendered_md = str(md_path)
     except Exception:
         rendered_md = None
 
-    result: dict[str, object] = {"ok": True, "added": added, "removed": removed, "total": len(matrix)}
+    stage = state.get("stage") if isinstance(state.get("stage"), dict) else {}
+    completeness = field_completeness(matrix, stage.get("required_outputs") or [])
+    result: dict[str, object] = {
+        "ok": True,
+        "added": added,
+        "removed": removed,
+        "total": len(matrix),
+        "remaining": completeness,
+        "next": (
+            "继续填写 remaining.required_outputs / pending / researching / splittable"
+            if not completeness["complete"]
+            else "字段门禁已通过；阶段 02+ 写 advance.json 后运行 ralph apply"
+        ),
+    }
     if rendered_md:
         result["rendered_md"] = rendered_md
+    append_observation(
+        root / "loop-events.md",
+        "field_increment_applied",
+        {
+            "stage": current_stage,
+            "revision": stage.get("revision") if isinstance(stage, Mapping) else None,
+            "fields_file": str(fields_path.relative_to(root)),
+            "concepts": [
+                str(field.get("concept"))
+                for field in fields
+                if isinstance(field, Mapping) and field.get("concept")
+            ],
+            "added": added,
+            "removed": removed,
+            "remaining": completeness,
+            "state_changed": True,
+            "output_excerpt_source": "field_apply_result",
+        },
+        output=json.dumps(result, ensure_ascii=False, sort_keys=True),
+        artifacts=[str(fields_path.relative_to(root))] + ([rendered_md] if rendered_md else []),
+    )
     return result
+
+
+def init_fields(project: str | Path) -> dict[str, object]:
+    """Create the safe, stage-scoped incremental draft without overwriting it."""
+
+    root = _project_root(project)
+    state_path = root / "loop-state.json"
+    if not state_path.exists():
+        prepare_project(root, mode="hybrid")
+    state = load_state(state_path, graph=DEFAULT_GRAPH)
+    directory = state_stage_artifact_dir(root, state)
+    directory.mkdir(parents=True, exist_ok=True)
+    fields_path = directory / "fields.json"
+    created = False
+    if not fields_path.exists():
+        fields_path.write_text('{\n  "fields": []\n}\n', encoding="utf-8")
+        created = True
+    return {
+        "ok": True,
+        "created": created,
+        "fields_file": str(fields_path),
+        "stage": state.get("stage", {}),
+        "next": f"填写该文件后运行 `ralph field-apply {root} {fields_path}`",
+    }
 
 
 def recover_state_cmd(
@@ -1809,9 +3133,10 @@ def render_cmd(project: str | Path, json_file: str | Path | None = None) -> dict
         title = f"{src.stem} 字段快照"
     else:
         state = load_state(root / "loop-state.json", graph=DEFAULT_GRAPH)
-        ca = state.get("current_artifact")
+        draft = state_stage_artifact_dir(root, state) / "fields.json"
+        ca = str(draft.relative_to(root)) if draft.exists() else state.get("current_artifact")
         if not ca:
-            return {"ok": False, "error": "no current_artifact in loop-state.json; pass a json-file"}
+            return {"ok": False, "error": "当前没有阶段字段文件；先运行 ralph field-init"}
         src = root / str(ca)
         if not src.exists():
             return {"ok": False, "error": f"artifact not found: {src}"}
@@ -1884,12 +3209,20 @@ def main(argv: list[str] | None = None) -> int:
         if path.exists():
             print(f"state already exists: {path}", file=sys.stderr)
             return 2
-        prepare_project(path.parent, mode="enforce")
+        prepare_project(path.parent, mode="hybrid")
         print(path)
         return 0
-    if args.command == "status":
-        state = load_state(_state_path(args.project))
-        print(json.dumps(state, ensure_ascii=False, indent=2, sort_keys=True))
+    if args.command in {"status", "field-status"}:
+        state_path = _state_path(args.project)
+        state = load_state(state_path)
+        if not args.full:
+            # Materialize only the bounded queue view needed by the dashboard;
+            # do not save the complete state or inject it into stdout.
+            root = state_path.parent
+            materialize_field_tasks(root, state)
+            materialize_graph_tasks(root, state)
+        view = state if args.full else status_summary(state, args.project)
+        print(json.dumps(view, ensure_ascii=False, indent=2, sort_keys=True))
         return 0
     if args.command == "events":
         try:
@@ -1915,15 +3248,45 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps({"prompt_sha256": prompt_hash, "action": action.to_dict(), "state": updated}, ensure_ascii=False, indent=2))
         return 0
     if args.command == "apply":
-        path = _state_path(args.project)
-        raw = json.loads(Path(args.action_file).read_text(encoding="utf-8"))
-        updated = apply_and_record(path, path.parent / "loop-events.md", raw)
-        print(json.dumps(updated, ensure_ascii=False, indent=2, sort_keys=True))
-        return 0
+        try:
+            report = validate_result_artifact(args.project, args.action_file, apply=True)
+            print(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True))
+            return 0 if report.get("valid") else 1
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            print(
+                json.dumps(
+                    {
+                        "valid": False,
+                        "applied": False,
+                        "error": (
+                            f"提交文件无法解析或校验：{exc}。只修复 `{args.action_file}`，"
+                            f"然后重运行 `ralph apply {args.project} {args.action_file}`。"
+                        ),
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                ),
+                file=sys.stderr,
+            )
+            return 1
     if args.command == "field-apply":
         try:
             report = apply_fields(args.project, args.fields_file)
             print(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True))
+            return 0
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            print(json.dumps({"ok": False, "error": str(exc)}, ensure_ascii=False, indent=2), file=sys.stderr)
+            return 1
+    if args.command == "field-init":
+        try:
+            print(json.dumps(init_fields(args.project), ensure_ascii=False, indent=2, sort_keys=True))
+            return 0
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            print(json.dumps({"ok": False, "error": str(exc)}, ensure_ascii=False, indent=2), file=sys.stderr)
+            return 1
+    if args.command == "graph-apply":
+        try:
+            print(json.dumps(apply_graph_task(args.project, args.task_file), ensure_ascii=False, indent=2, sort_keys=True))
             return 0
         except (OSError, ValueError, json.JSONDecodeError) as exc:
             print(json.dumps({"ok": False, "error": str(exc)}, ensure_ascii=False, indent=2), file=sys.stderr)
@@ -1990,24 +3353,6 @@ def main(argv: list[str] | None = None) -> int:
             return 0 if report["passed"] else 1
         except (OSError, ValueError, json.JSONDecodeError) as exc:
             print(f"RALPH 无法运行分解 benchmark：{exc}", file=sys.stderr)
-            return 2
-    if args.command == "recover-card":
-        try:
-            print(
-                json.dumps(
-                    recover_card(
-                        args.project,
-                        args.card_id,
-                        args.reason,
-                        force_dispatched=args.force_dispatched,
-                    ),
-                    ensure_ascii=False,
-                    indent=2,
-                )
-            )
-            return 0
-        except (OSError, ValueError) as exc:
-            print(f"RALPH 无法恢复任务卡：{exc}", file=sys.stderr)
             return 2
     if args.command == "hook":
         print(run_hook(args.event, sys.stdin.read(), args.mode, auto_apply=not args.no_auto_apply))
@@ -2093,6 +3438,9 @@ def main(argv: list[str] | None = None) -> int:
             except KeyboardInterrupt:
                 print("RALPH supervisor interrupted by user; stopping.")
                 return 130
+            except SupervisorAlreadyRunning as exc:
+                print(f"RALPH supervisor 未启动：{exc}", file=sys.stderr)
+                return 2
             except Exception as exc:  # noqa: BLE001 - supervisor must self-heal
                 print(f"RALPH supervisor crashed: {exc!r}; restarting in 10s")
                 time.sleep(10)

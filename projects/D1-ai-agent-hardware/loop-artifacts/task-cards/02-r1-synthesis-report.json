@@ -1,0 +1,35 @@
+{
+  "card_id": "02-r1-synthesis-report",
+  "title": "Final Synthesis Report — Consolidated Findings & Recommendations",
+  "description": "Produce the final consolidated report that synthesizes all research findings into a single coherent document. This is the last stage — it depends on all other task cards. The report must include: (1) Executive summary: top-line recommendation for each scenario in 1 paragraph, (2) Complete comparison table: all 9 hardware items + cloud baseline across all 8 attributes (price, VRAM, bandwidth, tokens/s, training score, power, compatibility, cost-performance score), (3) Cost-performance ranked list with formula explanation, (4) Scenario-based Top-1 recommendations with detailed justification, (5) Mac vs NVIDIA quantified comparison (not just separate analysis), (6) Risk analysis summary with mitigation strategies, (7) All assumptions documented in a dedicated section, (8) Source bibliography with all URLs, (9) Confidence level for each major claim (high/medium/low based on source agreement), (10) Limitations of the analysis (what could not be measured, what was estimated). The report must be self-contained — a reader should be able to make an informed GPU purchase decision based solely on this document.",
+  "inputs": [
+    "02-r1-gpu-pricing outputs",
+    "02-r1-inference-benchmark outputs",
+    "02-r1-training-feasibility outputs",
+    "02-r1-power-thermal outputs",
+    "02-r1-mac-vs-nvidia outputs",
+    "02-r1-scenario-recommendations outputs",
+    "02-r1-risk-analysis outputs",
+    "02-r1-cost-performance-formula outputs"
+  ],
+  "outputs": [
+    "final consolidated report (Markdown or PDF)",
+    "complete comparison table",
+    "executive summary",
+    "source bibliography with URLs",
+    "confidence levels for all claims",
+    "limitations section"
+  ],
+  "dependencies": [
+    "02-r1-gpu-pricing",
+    "02-r1-inference-benchmark",
+    "02-r1-training-feasibility",
+    "02-r1-power-thermal",
+    "02-r1-mac-vs-nvidia",
+    "02-r1-scenario-recommendations",
+    "02-r1-risk-analysis",
+    "02-r1-cost-performance-formula"
+  ],
+  "covers": ["SC1", "SC2", "SC3", "SC4", "SC5", "SC6", "SC7"],
+  "parallel": false
+}

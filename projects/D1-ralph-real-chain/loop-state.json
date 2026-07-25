@@ -1,0 +1,402 @@
+{
+  "active_tasks": {},
+  "allowed_actions": [
+    "advance",
+    "rollback",
+    "blocked_human",
+    "skip_blocked",
+    "candidate",
+    "explore",
+    "dispatch",
+    "join",
+    "clarify",
+    "repair_prompt"
+  ],
+  "clarification_history": [],
+  "current_artifact": "loop-artifacts/stages/exploration/r1/state.json",
+  "exploration_history": [],
+  "field_tasks": [],
+  "graph_tasks": [
+    {
+      "depends_on": [],
+      "evidence": [
+        "flow-only graph execution test: T1.1"
+      ],
+      "execution_mode": "parallel",
+      "id": "exploration-r1-node-T1.1",
+      "input_refs": [
+        "loop-artifacts/stages/02.5/r1/fields.json"
+      ],
+      "instruction": "只执行 DAG 节点 `T1.1`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "T1.1",
+      "orthogonal_key": "dimension_a",
+      "output": {
+        "result": "dimension_a flow-only output"
+      },
+      "output_schema": {
+        "result": "string"
+      },
+      "parallel_group_id": "G1",
+      "parent_id": null,
+      "path": "loop-artifacts/stages/exploration/r1/tasks/exploration-r1-node-T1.1.json",
+      "postconditions": [
+        "独立输出 A"
+      ],
+      "preconditions": [],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "exploration",
+      "status": "completed",
+      "type": "graph_task",
+      "updated_at": "2026-07-25T02:02:59.574889+00:00",
+      "writes": [
+        "loop-artifacts/stages/03/r1/outputs/T1.1.json"
+      ]
+    },
+    {
+      "depends_on": [],
+      "evidence": [
+        "flow-only graph execution test: T1.2"
+      ],
+      "execution_mode": "parallel",
+      "id": "exploration-r1-node-T1.2",
+      "input_refs": [
+        "loop-artifacts/stages/02.5/r1/fields.json"
+      ],
+      "instruction": "只执行 DAG 节点 `T1.2`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "T1.2",
+      "orthogonal_key": "dimension_b",
+      "output": {
+        "result": "dimension_b flow-only output"
+      },
+      "output_schema": {
+        "result": "string"
+      },
+      "parallel_group_id": "G1",
+      "parent_id": null,
+      "path": "loop-artifacts/stages/exploration/r1/tasks/exploration-r1-node-T1.2.json",
+      "postconditions": [
+        "独立输出 B"
+      ],
+      "preconditions": [],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "exploration",
+      "status": "completed",
+      "type": "graph_task",
+      "updated_at": "2026-07-25T02:02:59.715544+00:00",
+      "writes": [
+        "loop-artifacts/stages/03/r1/outputs/T1.2.json"
+      ]
+    },
+    {
+      "depends_on": [
+        "T1.1",
+        "T1.2"
+      ],
+      "evidence": [
+        "flow-only graph execution test: J1 join"
+      ],
+      "execution_mode": "serial",
+      "id": "exploration-r1-node-J1",
+      "input_refs": [
+        "loop-artifacts/stages/03/r1/outputs/T1.1.json",
+        "loop-artifacts/stages/03/r1/outputs/T1.2.json"
+      ],
+      "instruction": "只执行 DAG 节点 `J1`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "J1",
+      "orthogonal_key": null,
+      "output": {
+        "joined": "joined flow-only outputs from T1.1 and T1.2"
+      },
+      "output_schema": {
+        "joined": "string"
+      },
+      "parallel_group_id": null,
+      "parent_id": null,
+      "path": "loop-artifacts/stages/exploration/r1/tasks/exploration-r1-node-J1.json",
+      "postconditions": [
+        "合并为下游输入"
+      ],
+      "preconditions": [
+        "T1.1 和 T1.2 均完成"
+      ],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "exploration",
+      "status": "completed",
+      "type": "graph_task",
+      "updated_at": "2026-07-25T02:02:59.848007+00:00",
+      "writes": [
+        "loop-artifacts/stages/03/r1/outputs/J1.json"
+      ]
+    }
+  ],
+  "history": [
+    {
+      "action": "advance",
+      "internal_state": "stage_02",
+      "revision": "r1",
+      "stage_id": "01"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_02_5",
+      "revision": "r1",
+      "stage_id": "02"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_03",
+      "revision": "r1",
+      "stage_id": "02.5"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_04",
+      "revision": "r1",
+      "stage_id": "03"
+    },
+    {
+      "action": "rollback",
+      "internal_state": "stage_03",
+      "revision": "r1",
+      "stage_id": "04"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_04",
+      "revision": "r1",
+      "stage_id": "03"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_04_5",
+      "revision": "r1",
+      "stage_id": "04"
+    },
+    {
+      "action": "advance",
+      "internal_state": "exploration",
+      "revision": "r1",
+      "stage_id": "04.5"
+    },
+    {
+      "action": "candidate",
+      "internal_state": "exploration",
+      "revision": "r1",
+      "stage_id": "exploration"
+    }
+  ],
+  "last_action": "candidate",
+  "last_event_id": "a976645f-feb2-4976-9c6f-33de67ff2cf3",
+  "last_exploration": {
+    "candidate_tasks": [
+      {
+        "preference_brief": "探索偏好：优先复用 tasks 内 ready 任务；新候选必须显式标记 candidate；优先低成本、可验证、可迁移方案。",
+        "reason": "这是本轮状态机试验中仍可独立验证的低成本后续任务。",
+        "research_summary": "验证候选任务只进入队列、不被静默执行，并检查中断后能从状态与事件恢复。",
+        "scanned_sources": [
+          "tasks/TASKS.md",
+          "loop-events.md"
+        ],
+        "scope": "仅测试 runtime 字段门禁、DAG Join 和恢复，不进行真实网页研究。",
+        "title": "验证字段增量提交与图执行恢复"
+      }
+    ],
+    "preference_brief": "探索偏好：优先复用 tasks 内 ready 任务；新候选必须显式标记 candidate；优先低成本、可验证、可迁移方案。",
+    "scanned_sources": [
+      "tasks/TASKS.md",
+      "loop-events.md"
+    ],
+    "selection_mode": "candidate"
+  },
+  "last_result": {
+    "action": "candidate",
+    "artifact_refs": [],
+    "evidence": [],
+    "message": "候选任务已写入队列，等待主 Agent 按偏好分析后再分解；本次不自动执行。",
+    "next_stage": null,
+    "payload": {
+      "preference_brief": "探索偏好：优先复用 tasks 内 ready 任务；新候选必须显式标记 candidate；优先低成本、可验证、可迁移方案。",
+      "reason": "这是本轮状态机试验中仍可独立验证的低成本后续任务。",
+      "research_summary": "验证候选任务只进入队列、不被静默执行，并检查中断后能从状态与事件恢复。",
+      "scanned_sources": [
+        "tasks/TASKS.md",
+        "loop-events.md"
+      ],
+      "scope": "仅测试 runtime 字段门禁、DAG Join 和恢复，不进行真实网页研究。",
+      "title": "验证字段增量提交与图执行恢复"
+    },
+    "revision": "r1",
+    "rollback_to": null,
+    "stage_id": "exploration",
+    "status": "candidate"
+  },
+  "plan": {
+    "completed": [
+      "J1",
+      "T1.1",
+      "T1.2"
+    ],
+    "joins": [
+      {
+        "depends_on": [
+          "T1.1",
+          "T1.2"
+        ],
+        "id": "J1"
+      }
+    ],
+    "nodes": [
+      {
+        "depends_on": [],
+        "execution_mode": "parallel",
+        "id": "T1.1",
+        "input_refs": [
+          "loop-artifacts/stages/02.5/r1/fields.json"
+        ],
+        "orthogonal_key": "dimension_a",
+        "output_schema": {
+          "result": "string"
+        },
+        "parallel_group_id": "G1",
+        "postconditions": [
+          "独立输出 A"
+        ],
+        "preconditions": [],
+        "writes": [
+          "loop-artifacts/stages/03/r1/outputs/T1.1.json"
+        ]
+      },
+      {
+        "depends_on": [],
+        "execution_mode": "parallel",
+        "id": "T1.2",
+        "input_refs": [
+          "loop-artifacts/stages/02.5/r1/fields.json"
+        ],
+        "orthogonal_key": "dimension_b",
+        "output_schema": {
+          "result": "string"
+        },
+        "parallel_group_id": "G1",
+        "postconditions": [
+          "独立输出 B"
+        ],
+        "preconditions": [],
+        "writes": [
+          "loop-artifacts/stages/03/r1/outputs/T1.2.json"
+        ]
+      },
+      {
+        "depends_on": [
+          "T1.1",
+          "T1.2"
+        ],
+        "execution_mode": "serial",
+        "id": "J1",
+        "input_refs": [
+          "loop-artifacts/stages/03/r1/outputs/T1.1.json",
+          "loop-artifacts/stages/03/r1/outputs/T1.2.json"
+        ],
+        "output_schema": {
+          "joined": "string"
+        },
+        "postconditions": [
+          "合并为下游输入"
+        ],
+        "preconditions": [
+          "T1.1 和 T1.2 均完成"
+        ],
+        "writes": [
+          "loop-artifacts/stages/03/r1/outputs/J1.json"
+        ]
+      }
+    ],
+    "parallel_groups": [
+      {
+        "id": "G1",
+        "members": [
+          "T1.1",
+          "T1.2"
+        ]
+      }
+    ],
+    "ready": [],
+    "revision": "r1",
+    "task_results": {
+      "J1": {
+        "evidence": [
+          "flow-only graph execution test: J1 join"
+        ],
+        "output": {
+          "joined": "joined flow-only outputs from T1.1 and T1.2"
+        },
+        "updated_at": "2026-07-25T02:02:59.844291+00:00"
+      },
+      "T1.1": {
+        "evidence": [
+          "flow-only graph execution test: T1.1"
+        ],
+        "output": {
+          "result": "dimension_a flow-only output"
+        },
+        "updated_at": "2026-07-25T02:02:59.571339+00:00"
+      },
+      "T1.2": {
+        "evidence": [
+          "flow-only graph execution test: T1.2"
+        ],
+        "output": {
+          "result": "dimension_b flow-only output"
+        },
+        "updated_at": "2026-07-25T02:02:59.711443+00:00"
+      }
+    }
+  },
+  "project_id": "D1-ralph-real-chain",
+  "queue": {
+    "blocked_human": [],
+    "candidates": [
+      {
+        "preference_brief": "探索偏好：优先复用 tasks 内 ready 任务；新候选必须显式标记 candidate；优先低成本、可验证、可迁移方案。",
+        "reason": "这是本轮状态机试验中仍可独立验证的低成本后续任务。",
+        "research_summary": "验证候选任务只进入队列、不被静默执行，并检查中断后能从状态与事件恢复。",
+        "scanned_sources": [
+          "tasks/TASKS.md",
+          "loop-events.md"
+        ],
+        "scope": "仅测试 runtime 字段门禁、DAG Join 和恢复，不进行真实网页研究。",
+        "stage_id": "exploration",
+        "status": "candidate",
+        "title": "验证字段增量提交与图执行恢复"
+      }
+    ],
+    "ready": []
+  },
+  "run_history": [],
+  "schema_version": 4,
+  "stage": {
+    "failure_condition": "探索输入不足",
+    "id": "exploration",
+    "input_description": "全局偏好、项目 tasks/ 和当前队列",
+    "name": "探索与任务接续",
+    "on_failure": "exploration",
+    "on_human_block": "exploration",
+    "on_success": "01",
+    "required_outputs": [
+      "preference_brief",
+      "candidate_tasks"
+    ],
+    "revision": "r1",
+    "success_condition": "已扫描任务板并选定可执行任务，或已输出带 candidate 标记的新目标"
+  },
+  "status": "exploration",
+  "task": {
+    "description": "测试状态机完整链路：先分解本地 AI GPU 调研的目标、已知和未知因素；再把未知因素拆成独立研究字段，最后构造两个正交执行任务和 Join。测试阶段流程，不要求实际网页研究。",
+    "source": "ralph run"
+  },
+  "task_intake": null,
+  "task_intake_history": []
+}

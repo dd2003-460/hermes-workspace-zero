@@ -1,0 +1,23 @@
+{
+  "card_id": "02-r1-risk-analysis",
+  "title": "Risk Analysis — Market, Technical, and Depreciation Risks",
+  "description": "Identify and quantify risks associated with each recommendation. Cover: (1) Used/Refurb Market Risk: RTX 3090 used market — mining card risk, wear level, warranty status, how to verify condition, return policies. (2) New Product Depreciation Risk: RTX 50-series just launched — will prices drop? will 60-series make 50-series obsolete? timing analysis for purchase decision. (3) Compatibility Risk: driver issues (Linux vs Windows), framework support (does llama.cpp support this GPU?), motherboard PCIe slot version (PCIe 3.0 vs 4.0 bandwidth impact), power connector availability. (4) Supply Chain Risk: availability, lead times, regional pricing differences (US vs China vs EU), import duties. (5) Performance Degradation Risk: will the GPU maintain performance over time? thermal degradation? (6) Cloud Alternative Risk: if cloud becomes cheaper, when does the math flip? (7) Model Evolution Risk: if 70B models become the norm, will 24GB VRAM be insufficient? (8) eGPU Specific Risks: PCIe bandwidth loss (typically 20-30%), enclosure cost ($300-500), Thunderbolt compatibility, thermal throttling in enclosures. Each risk must include: likelihood (high/medium/low), impact (high/medium/low), mitigation strategy, and monitoring indicator (how to know if the risk materializes).",
+  "inputs": [
+    "02-r1-gpu-pricing (for market data)",
+    "02-r1-inference-benchmark (for compatibility data)"
+  ],
+  "outputs": [
+    "risk register with likelihood/impact/mitigation for each risk",
+    "used/refurb market verification guide",
+    "new product depreciation timeline",
+    "compatibility checklist per GPU",
+    "cloud cost flip analysis",
+    "eGPU-specific risk assessment"
+  ],
+  "dependencies": [
+    "02-r1-gpu-pricing",
+    "02-r1-inference-benchmark"
+  ],
+  "covers": ["SC4", "SC7"],
+  "parallel": true
+}

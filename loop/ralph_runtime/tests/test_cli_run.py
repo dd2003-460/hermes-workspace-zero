@@ -76,6 +76,13 @@ def test_prepare_existing_project_reuses_stage_and_updates_task(tmp_path: Path):
     state = load_state(state_path)
     state["stage"]["id"] = "03"
     state["status"] = "running"
+    state["task_spec"]["attribute_matrix"] = [{
+        "concept": "已通过字段",
+        "role": "known",
+        "attribute": "保留这个结果",
+        "disposition": "confirmed",
+        "evidence_refs": [],
+    }]
     state_path.write_text(json.dumps(state, ensure_ascii=False), encoding="utf-8")
 
     _, _, is_new, _ = cli.prepare_project(project, task="第二项任务")
@@ -83,6 +90,7 @@ def test_prepare_existing_project_reuses_stage_and_updates_task(tmp_path: Path):
     assert is_new is False
     assert updated["stage"]["id"] == "03"
     assert updated["task"]["description"] == "第二项任务"
+    assert updated["task_spec"]["attribute_matrix"][0]["concept"] == "已通过字段"
 
 
 def test_events_tail_returns_bounded_summaries(tmp_path: Path):
@@ -106,6 +114,27 @@ def test_events_tail_returns_bounded_summaries(tmp_path: Path):
     assert len(json.dumps(result, ensure_ascii=False)) < 5000
     assert all("output_excerpt" in event for event in result["events"])
     assert cli.events_tail(project, limit=100)["tail_limit"] == 20
+
+
+def test_status_summary_does_not_dump_full_state_or_event_history(tmp_path: Path):
+    project = tmp_path / "status-project"
+    cli.prepare_project(project, task="测试状态摘要")
+    state = load_state(project / "loop-state.json")
+    state["task_spec"]["attribute_matrix"] = [
+        {
+            "concept": "长字段",
+            "role": "unknown",
+            "attribute": "x" * 10000,
+            "disposition": "pending",
+        }
+    ]
+    state["history"] = [{"output": "y" * 10000}]
+    summary = cli.status_summary(state, project)
+    encoded = json.dumps(summary, ensure_ascii=False)
+    assert len(encoded) < 3000
+    assert summary["fields"]["total"] == 1
+    assert "长字段" not in encoded
+    assert "yyyy" not in encoded
 
 
 def test_prepare_project_migrates_legacy_loop_header(tmp_path: Path):
@@ -335,3 +364,81 @@ def test_loop_project_launches_fresh_context_and_stops_at_cycle_limit(tmp_path: 
     events = (tmp_path / "supervised-project" / "loop-events.md").read_text(encoding="utf-8")
     assert "supervisor_cycle_started" in events
     assert "supervisor_cycle_finished" in events
+
+
+def test_auto_field_workers_are_fallback_after_first_commander_cycle(tmp_path: Path, monkeypatch):
+    calls = []
+
+    def fake_runner(command, cwd, env, idle_timeout):
+        return 17, False
+
+    def fake_launch(*args, **kwargs):
+        calls.append(True)
+        return []
+
+    monkeypatch.setenv("RALPH_AUTO_FIELD_WORKERS", "1")
+    monkeypatch.setattr(cli, "_run_claude_supervised", fake_runner)
+    monkeypatch.setattr(cli, "_launch_auto_field_workers", fake_launch)
+    monkeypatch.setattr(cli, "_claude_executable", lambda: "claude")
+
+    assert cli.loop_project(
+        tmp_path / "fallback-project",
+        task="测试自动字段 fallback",
+        mode="shadow",
+        max_cycles=2,
+        retry_delay=0,
+        agent_grace_seconds=0,
+        idle_timeout=0,
+    ) == 0
+    # Commander owns the first context; fallback is considered only at the
+    # next cycle boundary, avoiding two local Claude processes at startup.
+    assert len(calls) == 1
+
+
+def test_auto_field_worker_is_waited_before_next_commander_context(tmp_path: Path, monkeypatch):
+    order = []
+
+    def fake_runner(command, cwd, env, idle_timeout):
+        order.append("commander")
+        return 17, False
+
+    def fake_launch(*args, **kwargs):
+        order.append("worker-start")
+        return ["field-1"]
+
+    def fake_wait(*args, **kwargs):
+        order.append("worker-finished")
+
+    monkeypatch.setenv("RALPH_AUTO_FIELD_WORKERS", "1")
+    monkeypatch.setattr(cli, "_run_claude_supervised", fake_runner)
+    monkeypatch.setattr(cli, "_launch_auto_field_workers", fake_launch)
+    monkeypatch.setattr(cli, "_wait_for_auto_field_workers", fake_wait)
+    monkeypatch.setattr(cli, "_claude_executable", lambda: "claude")
+
+    assert cli.loop_project(
+        tmp_path / "serial-fallback-project",
+        task="测试字段 worker 串行恢复",
+        mode="shadow",
+        max_cycles=2,
+        retry_delay=0,
+        agent_grace_seconds=0,
+        idle_timeout=0,
+    ) == 0
+    assert order == ["commander", "worker-start", "worker-finished", "commander"]
+
+
+def test_supervisor_lock_rejects_second_owner(tmp_path: Path):
+    project = tmp_path / "locked-project"
+    with cli._supervisor_lock(project):
+        import pytest
+
+        with pytest.raises(cli.SupervisorAlreadyRunning, match="已有 ralph loop"):
+            with cli._supervisor_lock(project):
+                pass
+
+
+def test_loop_rejects_absolute_project_without_task(tmp_path: Path):
+    import pytest
+
+    with pytest.raises(ValueError, match="看起来是项目路径"):
+        cli._resolve_loop_project(tmp_path / "missing-project", None, None)

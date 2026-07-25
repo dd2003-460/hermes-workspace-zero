@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import os
 import re
@@ -14,6 +15,7 @@ from .contracts import ensure_stage_cards
 from .machine import transition_for_action
 from .nodes import DEFAULT_GRAPH, NodeGraph
 from .protocol import ActionResult, ProtocolError, validate_action
+from .runtime_config import field_mode_enabled
 
 
 DEFAULT_ALLOWED_ACTIONS = [
@@ -27,14 +29,14 @@ CURRENT_SCHEMA_VERSION = 4
 def _initial_task_spec(task: str, source: str | None) -> dict[str, Any]:
     """Create the canonical input record before clarification is complete.
 
-    In field-centric mode (``RALPH_FIELD_GATE`` set) the attribute_matrix is
+    In field-centric mode (the default) the attribute_matrix is
     seeded with the task itself as a ``confirmed`` background field, so the
     field gate has a real starting point ("已知背景字段就是已有条件") and the
     Commander only fills the remaining gaps.
     """
 
     attribute_matrix: list[dict[str, Any]] = []
-    if os.environ.get("RALPH_FIELD_GATE") and task:
+    if field_mode_enabled() and task:
         attribute_matrix.append({
             "concept": "用户原始任务",
             "role": "background",
@@ -92,7 +94,10 @@ def _explode_comma_fields(matrix: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return out
 
 
-def field_completeness(matrix: list[dict[str, Any]]) -> dict[str, Any]:
+def field_completeness(
+    matrix: list[dict[str, Any]],
+    required_outputs: list[str] | tuple[str, ...] | None = None,
+) -> dict[str, Any]:
     """Return the v2 completion verdict used by the field gate.
 
     - splittable: fields whose ``attribute`` still contains a comma.
@@ -104,6 +109,7 @@ def field_completeness(matrix: list[dict[str, Any]]) -> dict[str, Any]:
     splittable: list[str] = []
     researching: list[str] = []
     pending: list[str] = []
+    required_missing: list[str] = []
     if isinstance(matrix, list):
         for leaf in matrix:
             if not isinstance(leaf, Mapping):
@@ -120,12 +126,44 @@ def field_completeness(matrix: list[dict[str, Any]]) -> dict[str, Any]:
                 refs = leaf.get("evidence_refs")
                 if not isinstance(refs, list) or not refs:
                     researching.append(concept)
+    if required_outputs:
+        present: set[str] = set()
+        for leaf in matrix if isinstance(matrix, list) else []:
+            if not isinstance(leaf, Mapping):
+                continue
+            for key in ("concept", "role", "attribute"):
+                value = leaf.get(key)
+                if isinstance(value, str) and value.strip():
+                    present.add(value.strip())
+        required_missing = [
+            str(output) for output in required_outputs
+            if str(output).strip() and str(output).strip() not in present
+        ]
     return {
         "splittable": splittable,
         "researching": researching,
         "pending": pending,
-        "complete": not (splittable or researching or pending),
+        "required_outputs": required_missing,
+        "complete": not (splittable or researching or pending or required_missing),
     }
+
+
+def _normalize_task_spec_aliases(spec: Mapping[str, Any]) -> dict[str, Any]:
+    """Normalize dispositions from the historical card-centric protocol."""
+
+    normalized = copy.deepcopy(dict(spec))
+    matrix = normalized.get("attribute_matrix")
+    aliases = {
+        "research": "research_required",
+        "research-needed": "research_required",
+        "assume": "assumed_default",
+        "inferred_default": "assumed_default",
+    }
+    if isinstance(matrix, list):
+        for field in matrix:
+            if isinstance(field, dict) and field.get("disposition") in aliases:
+                field["disposition"] = aliases[field["disposition"]]
+    return normalized
 
 
 def create_state(
@@ -164,7 +202,6 @@ def create_state(
         "last_event_id": None,
         "history": [],
         "run_history": [],
-        "subagent_cards": {},
     }
     return ensure_stage_cards(state)
 
@@ -198,7 +235,19 @@ def migrate_state(raw: Mapping[str, Any], graph: NodeGraph = DEFAULT_GRAPH) -> d
         state.setdefault("exploration_history", [])
         state.setdefault("last_exploration", None)
         state.setdefault("clarification_history", [])
-        state.setdefault("subagent_cards", {})
+        # The field protocol is the only active state shape.  Historical
+        # card data is never resurrected into a live state document.
+        state.pop("subagent_cards", None)
+        # Normalize stage metadata from pre-field projects.  Old projects
+        # often kept a compatible stage id but an obsolete name, outputs and
+        # success condition; retaining those values makes the prompt describe
+        # one graph while the machine validates another.
+        current_stage = state.get("stage", {})
+        current_stage_id = str(current_stage.get("id", "01")) if isinstance(current_stage, Mapping) else "01"
+        if current_stage_id in graph:
+            revision = str(current_stage.get("revision", "r1")) if isinstance(current_stage, Mapping) else "r1"
+            node = graph.get(current_stage_id)
+            state["stage"] = {"id": node.id, "revision": revision, **node.to_dict()}
         return ensure_stage_cards(state)
 
     phase = str(raw.get("loop_phase", raw.get("stage_id", "01")))
@@ -272,11 +321,30 @@ def set_task(state: Mapping[str, Any], task: str, source: str = "ralph run") -> 
 def record_human_input(
     state: Mapping[str, Any], text: str, source: str = "UserPromptSubmit"
 ) -> dict[str, Any]:
-    """Append a user clarification to the canonical task input, never to history only."""
+    """Append compact real-human input without accumulating RALPH prompts.
+
+    Claude receives rendered RALPH recovery prompts through the same
+    ``UserPromptSubmit`` Hook as human messages.  Generated prompts remain
+    observable in ``loop-events.md`` but must not become new authoritative
+    requirements on every cycle.
+    """
 
     cleaned = text.strip()
     if not cleaned:
         return copy.deepcopy(dict(state))
+    generated_markers = (
+        "# RALPH 字段增量提示",
+        "RALPH_FIELD_TASK=",
+        "<RALPH_STAGE_RESULT>",
+    )
+    if source == "UserPromptSubmit" and any(marker in cleaned for marker in generated_markers):
+        return copy.deepcopy(dict(state))
+    digest = hashlib.sha256(cleaned.encode("utf-8")).hexdigest()[:16]
+    bounded = (
+        cleaned
+        if len(cleaned) <= 4000
+        else cleaned[:4000] + "\n[… human input truncated in state; full event is in loop-events.md …]"
+    )
     updated = copy.deepcopy(dict(state))
     task_spec = updated.setdefault("task_spec", _initial_task_spec("", None))
     if not isinstance(task_spec, dict):
@@ -286,12 +354,57 @@ def record_human_input(
     if not isinstance(inputs, list):
         inputs = []
         task_spec["authoritative_inputs"] = inputs
-    entry = {"kind": "human_input", "source": source, "text": cleaned}
-    if not inputs or inputs[-1] != entry:
+    entry = {
+        "kind": "human_input",
+        "source": source,
+        "text": bounded,
+        "characters": len(cleaned),
+        "sha256": digest,
+    }
+    if not any(
+        isinstance(item, Mapping) and str(item.get("sha256", "")) == digest
+        for item in inputs
+    ):
         inputs.append(entry)
     if updated.get("status") == "blocked_human":
         updated["status"] = "running"
     return ensure_stage_cards(updated)
+
+
+def _compact_authoritative_inputs(state: dict[str, Any]) -> None:
+    """Bound and deduplicate task inputs before every state serialization."""
+
+    task_spec = state.get("task_spec")
+    if not isinstance(task_spec, dict):
+        return
+    inputs = task_spec.get("authoritative_inputs")
+    if not isinstance(inputs, list):
+        return
+    compacted: list[Any] = []
+    seen: set[str] = set()
+    generated_markers = ("# RALPH 字段增量提示", "RALPH_FIELD_TASK=", "<RALPH_STAGE_RESULT>")
+    for item in inputs:
+        if not isinstance(item, Mapping):
+            compacted.append(item)
+            continue
+        text = str(item.get("text", ""))
+        if str(item.get("kind", "")) == "human_input" and any(marker in text for marker in generated_markers):
+            continue
+        digest = str(item.get("sha256", "")) or hashlib.sha256(text.encode("utf-8")).hexdigest()[:16]
+        if digest in seen:
+            continue
+        seen.add(digest)
+        normalized = dict(item)
+        if text:
+            normalized["characters"] = int(item.get("characters", len(text)) or len(text))
+            normalized["sha256"] = digest
+            normalized["text"] = (
+                text
+                if len(text) <= 4000
+                else text[:4000] + "\n[… human input truncated in state; full event is in loop-events.md …]"
+            )
+        compacted.append(normalized)
+    task_spec["authoritative_inputs"] = compacted
 
 
 def update_subagent_card(
@@ -515,6 +628,12 @@ def _load_stage_cards(root: Path, state: dict[str, Any]) -> None:
     """Merge persisted per-stage card files back into ``state['subagent_cards']``
     (on top of any cards already present, e.g. legacy inline cards)."""
 
+    # The card files are historical implementation details.  Field-centric
+    # mode must not resurrect them when loading an old project, otherwise a
+    # stale ``dispatched`` card can make StopHook believe work is still live.
+    if field_mode_enabled():
+        state.pop("subagent_cards", None)
+        return
     d = root / "loop-artifacts" / "stages"
     if not d.is_dir():
         return
@@ -541,7 +660,7 @@ def _attach_stage_artifact(path: Path, state: dict[str, Any], raw: Mapping[str, 
     """Re-merge the trimmed ``task_spec`` back from its stage artifact.
 
     ``save_state`` strips ``task_spec`` out of ``loop-state.json`` into
-    ``loop-artifacts/<stage>-<rev>.json`` (the 0x-rx.json).  On load we read it
+    ``loop-artifacts/stages/<stage>/<revision>/state.json``.  On load we read it
     back so the in-memory state keeps the full field table for the gate/prompts,
     while the on-disk ``loop-state.json`` stays minimal."""
 
@@ -555,8 +674,56 @@ def _attach_stage_artifact(path: Path, state: dict[str, Any], raw: Mapping[str, 
         spec = json.loads(artifact.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError, ValueError):
         return
-    if isinstance(spec, Mapping):
-        state["task_spec"] = spec
+    artifact_spec = _normalize_task_spec_aliases(spec) if isinstance(spec, Mapping) else {}
+
+    # A stage transition can leave a compact artifact containing only the
+    # original task while the same transition's structured result still holds
+    # the complete decomposition.  Do not let the compact copy erase the
+    # richer one on the next load.  Merge both sources by concept; artifact
+    # values win for concepts that exist in both because they are the newest
+    # stage-local edits.
+    last_result = raw.get("last_result") if isinstance(raw, Mapping) else None
+    payload = last_result.get("payload") if isinstance(last_result, Mapping) else None
+    recovered = payload.get("task_spec") if isinstance(payload, Mapping) else None
+    recovered_spec = _normalize_task_spec_aliases(recovered) if isinstance(recovered, Mapping) else {}
+
+    def _richness(value: Mapping[str, Any]) -> int:
+        matrix = value.get("attribute_matrix") if isinstance(value.get("attribute_matrix"), list) else []
+        semantic = value.get("semantic_map") if isinstance(value.get("semantic_map"), Mapping) else {}
+        return len(matrix) + sum(len(item) if isinstance(item, list) else bool(item) for item in semantic.values())
+
+    if artifact_spec and recovered_spec and _richness(recovered_spec) > _richness(artifact_spec):
+        merged = copy.deepcopy(dict(recovered_spec))
+        for key, value in artifact_spec.items():
+            if key == "attribute_matrix" and isinstance(value, list):
+                by_concept = {
+                    str(item.get("concept")): index
+                    for index, item in enumerate(merged.get("attribute_matrix", []))
+                    if isinstance(item, Mapping) and item.get("concept")
+                }
+                matrix = merged.setdefault("attribute_matrix", [])
+                for item in value:
+                    if not isinstance(item, Mapping):
+                        continue
+                    concept = str(item.get("concept", ""))
+                    if concept in by_concept:
+                        matrix[by_concept[concept]] = copy.deepcopy(dict(item))
+                    else:
+                        by_concept[concept] = len(matrix)
+                        matrix.append(copy.deepcopy(dict(item)))
+            elif key == "semantic_map" and isinstance(value, Mapping):
+                semantic = merged.setdefault("semantic_map", {})
+                if not isinstance(semantic, dict):
+                    semantic = {}
+                    merged["semantic_map"] = semantic
+                semantic.update(copy.deepcopy(dict(value)))
+            else:
+                merged[key] = copy.deepcopy(value)
+        state["task_spec"] = merged
+    elif artifact_spec:
+        state["task_spec"] = artifact_spec
+    elif recovered_spec:
+        state["task_spec"] = recovered_spec
 
 
 def _recover_state_file(path: Path, graph: NodeGraph, exc: Exception) -> dict[str, Any] | None:
@@ -622,25 +789,29 @@ def save_state(path: str | Path, state: Mapping[str, Any]) -> None:
     path = Path(path)
     root = path.parent
     root.mkdir(parents=True, exist_ok=True)
+    persisted = copy.deepcopy(dict(state))
+    _compact_authoritative_inputs(persisted)
     # Persist the heavy per-stage intermediate process outside loop-state.json,
     # then serialize a slim copy without subagent_cards.
-    _persist_stage_cards(root, state)
-    slim = dict(state)
+    if not field_mode_enabled():
+        _persist_stage_cards(root, persisted)
+    slim = dict(persisted)
     slim.pop("subagent_cards", None)
     # 把最占体积的 task_spec（含 attribute_matrix）剥离到本阶段的「阶段文件」
-    # loop-artifacts/<stage>-<rev>.json（即 0x-rx.json），loop-state.json 只保留
+    # loop-artifacts/stages/<stage>/<revision>/state.json，loop-state.json 只保留
     # 状态标记 + 指针，磁盘上极小、不易损坏。内存态仍保留 task_spec 供字段门禁/提示使用。
-    stage = state.get("stage") if isinstance(state, Mapping) else None
-    if isinstance(stage, Mapping) and isinstance(state.get("task_spec"), Mapping) and state["task_spec"]:
-        seg = _safe_segment(str(stage.get("id", "unknown")), str(stage.get("revision", "r1")))
-        artifact_path = root / "loop-artifacts" / f"{seg}.json"
+    stage = persisted.get("stage") if isinstance(persisted, Mapping) else None
+    if isinstance(stage, Mapping) and isinstance(persisted.get("task_spec"), Mapping) and persisted["task_spec"]:
+        stage_id = re.sub(r"[^A-Za-z0-9_.-]", "_", str(stage.get("id", "unknown")))
+        revision = re.sub(r"[^A-Za-z0-9_.-]", "_", str(stage.get("revision", "r1")))
+        artifact_path = root / "loop-artifacts" / "stages" / stage_id / revision / "state.json"
         artifact_path.parent.mkdir(parents=True, exist_ok=True)
         artifact_path.write_text(
-            json.dumps(state["task_spec"], ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+            json.dumps(persisted["task_spec"], ensure_ascii=False, indent=2, sort_keys=True) + "\n",
             encoding="utf-8",
         )
         slim.pop("task_spec", None)
-        slim["current_artifact"] = f"loop-artifacts/{seg}.json"
+        slim["current_artifact"] = str(artifact_path.relative_to(root))
     encoded = json.dumps(slim, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
 
     # Keep a ``.bak`` of the previously-persisted (valid) content so a future

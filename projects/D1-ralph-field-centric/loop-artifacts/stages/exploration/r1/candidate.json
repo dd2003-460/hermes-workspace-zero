@@ -1,0 +1,14 @@
+{
+  "action": "candidate",
+  "status": "candidate",
+  "stage_id": "exploration",
+  "revision": "r1",
+  "payload": {
+    "title": "用更短的字段 worker prompt 重测 goal/known/unknown",
+    "research_summary": "现场 worker 两次只读取任务文件后被 watchdog 回收，尚未完成 field-apply；需要减少上下文并再次验证。",
+    "reason": "真实 Agent 字段写入是当前唯一未验证的关键能力，不能被 assumed_default 永久替代。",
+    "scope": "只测试 stage 01 三个字段的增量写入、field-apply 和自动推进，不做网页研究。",
+    "preference_brief": "继续优先验证本地 Agent 字段写入，再验证网页调研。",
+    "scanned_sources": ["loop-events.md", "loop/ralph_runtime/tests/test_field_workflow.py"]
+  }
+}

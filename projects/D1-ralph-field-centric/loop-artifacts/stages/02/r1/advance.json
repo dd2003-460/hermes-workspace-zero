@@ -1,0 +1,12 @@
+{
+  "action": "advance",
+  "status": "passed",
+  "stage_id": "02",
+  "revision": "r1",
+  "next_stage": "02.5",
+  "evidence": [
+    "loop-artifacts/stages/02/r1/fields.md",
+    "loop-events.md"
+  ],
+  "message": "完成动态字段调研链路验证，推进到 02.5；真实 Agent 字段写入仍标记为可逆假设。"
+}

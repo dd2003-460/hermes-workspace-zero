@@ -40,7 +40,7 @@
 |------|--------|------|
 | `写作-社会系统/D1-aging-economics/` | [DAE.1] | 老龄化对区域经济影响实证研究 |
 | `写作-社会系统/D1-writing/` | [DW.1] | 写作工作 |
-| `/Users/a1-6/D1-academic/学术/writing/动机社会` (D1-writing-motivation-society) | [DMS.1] | 《动机社会》中文书稿(ctex+xelatex)——RALPH 接管:干净编译 + 按 part1_core_logic 风格修缮后续 AI 生成章节 |
+| `写作-社会系统/D1-writing/motivation_society/` | [DMS.1] | 《动机社会》中文书稿(ctex+xelatex)——RALPH 接管:干净编译 + 按 part1_core_logic 风格修缮后续 AI 生成章节；Stop 钩子强制分解+进度条 |
 
 ---
 

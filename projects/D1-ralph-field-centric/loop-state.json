@@ -13,46 +13,368 @@
     "repair_prompt"
   ],
   "clarification_history": [],
+  "current_artifact": "loop-artifacts/stages/exploration/r1/state.json",
   "exploration_history": [],
-  "history": [],
-  "last_action": null,
-  "last_event_id": null,
-  "last_exploration": null,
-  "last_result": null,
+  "field_tasks": [],
+  "graph_tasks": [
+    {
+      "depends_on": [],
+      "execution_mode": "parallel",
+      "id": "exploration-r1-node-T1.1",
+      "input_refs": [
+        "loop-events.md"
+      ],
+      "instruction": "只执行 DAG 节点 `T1.1`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "T1.1",
+      "orthogonal_key": "field_worker_recovery",
+      "output_schema": {
+        "facts": "array",
+        "status": "string"
+      },
+      "parallel_group_id": "G1",
+      "parent_id": null,
+      "path": "loop-artifacts/stages/exploration/r1/tasks/exploration-r1-node-T1.1.json",
+      "postconditions": [
+        "worker outcome recorded"
+      ],
+      "preconditions": [
+        "field task exists"
+      ],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "exploration",
+      "status": "completed",
+      "type": "graph_task",
+      "writes": [
+        "worker-recovery.json"
+      ]
+    },
+    {
+      "depends_on": [],
+      "execution_mode": "parallel",
+      "id": "exploration-r1-node-T1.2",
+      "input_refs": [
+        "loop-artifacts/stages/02/r1/fields.json"
+      ],
+      "instruction": "只执行 DAG 节点 `T1.2`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "T1.2",
+      "orthogonal_key": "dynamic_factor_count",
+      "output_schema": {
+        "count": "integer",
+        "factors": "array"
+      },
+      "parallel_group_id": "G1",
+      "parent_id": null,
+      "path": "loop-artifacts/stages/exploration/r1/tasks/exploration-r1-node-T1.2.json",
+      "postconditions": [
+        "factor task count recorded"
+      ],
+      "preconditions": [
+        "research fields are materialized"
+      ],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "exploration",
+      "status": "completed",
+      "type": "graph_task",
+      "writes": [
+        "factor-count.json"
+      ]
+    },
+    {
+      "depends_on": [
+        "T1.1",
+        "T1.2"
+      ],
+      "execution_mode": "serial",
+      "id": "exploration-r1-node-J1",
+      "input_refs": [
+        "worker-recovery.json",
+        "factor-count.json"
+      ],
+      "instruction": "只执行 DAG 节点 `J1`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "J1",
+      "orthogonal_key": null,
+      "output_schema": {
+        "execution_summary": "string"
+      },
+      "parallel_group_id": null,
+      "parent_id": null,
+      "path": "loop-artifacts/stages/exploration/r1/tasks/exploration-r1-node-J1.json",
+      "postconditions": [
+        "joined execution summary exists"
+      ],
+      "preconditions": [
+        "T1.1 and T1.2 complete"
+      ],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "exploration",
+      "status": "completed",
+      "type": "graph_task",
+      "writes": [
+        "execution-join.json"
+      ]
+    }
+  ],
+  "history": [
+    {
+      "action": "advance",
+      "internal_state": "stage_02",
+      "revision": "r1",
+      "stage_id": "01"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_02_5",
+      "revision": "r1",
+      "stage_id": "02"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_03",
+      "revision": "r1",
+      "stage_id": "02.5"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_04",
+      "revision": "r1",
+      "stage_id": "03"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_04_5",
+      "revision": "r1",
+      "stage_id": "04"
+    },
+    {
+      "action": "advance",
+      "internal_state": "exploration",
+      "revision": "r1",
+      "stage_id": "04.5"
+    },
+    {
+      "action": "candidate",
+      "internal_state": "exploration",
+      "revision": "r1",
+      "stage_id": "exploration"
+    }
+  ],
+  "last_action": "candidate",
+  "last_event_id": "b0db0933-6073-49e9-8877-36ce230ef41c",
+  "last_exploration": {
+    "candidate_tasks": [
+      {
+        "preference_brief": "继续优先验证本地 Agent 字段写入，再验证网页调研。",
+        "reason": "真实 Agent 字段写入是当前唯一未验证的关键能力，不能被 assumed_default 永久替代。",
+        "research_summary": "现场 worker 两次只读取任务文件后被 watchdog 回收，尚未完成 field-apply；需要减少上下文并再次验证。",
+        "scanned_sources": [
+          "loop-events.md",
+          "loop/ralph_runtime/tests/test_field_workflow.py"
+        ],
+        "scope": "只测试 stage 01 三个字段的增量写入、field-apply 和自动推进，不做网页研究。",
+        "title": "用更短的字段 worker prompt 重测 goal/known/unknown"
+      }
+    ],
+    "preference_brief": "继续优先验证本地 Agent 字段写入，再验证网页调研。",
+    "scanned_sources": [
+      "loop-events.md",
+      "loop/ralph_runtime/tests/test_field_workflow.py"
+    ],
+    "selection_mode": "candidate"
+  },
+  "last_result": {
+    "action": "candidate",
+    "artifact_refs": [],
+    "evidence": [],
+    "message": "",
+    "next_stage": null,
+    "payload": {
+      "preference_brief": "继续优先验证本地 Agent 字段写入，再验证网页调研。",
+      "reason": "真实 Agent 字段写入是当前唯一未验证的关键能力，不能被 assumed_default 永久替代。",
+      "research_summary": "现场 worker 两次只读取任务文件后被 watchdog 回收，尚未完成 field-apply；需要减少上下文并再次验证。",
+      "scanned_sources": [
+        "loop-events.md",
+        "loop/ralph_runtime/tests/test_field_workflow.py"
+      ],
+      "scope": "只测试 stage 01 三个字段的增量写入、field-apply 和自动推进，不做网页研究。",
+      "title": "用更短的字段 worker prompt 重测 goal/known/unknown"
+    },
+    "revision": "r1",
+    "rollback_to": null,
+    "stage_id": "exploration",
+    "status": "candidate"
+  },
   "plan": {
-    "joins": [],
-    "nodes": [],
-    "parallel_groups": [],
-    "revision": "r1"
+    "completed": [
+      "J1",
+      "T1.1",
+      "T1.2"
+    ],
+    "joins": [
+      {
+        "depends_on": [
+          "T1.1",
+          "T1.2"
+        ],
+        "id": "J1"
+      }
+    ],
+    "nodes": [
+      {
+        "depends_on": [],
+        "execution_mode": "parallel",
+        "id": "T1.1",
+        "input_refs": [
+          "loop-events.md"
+        ],
+        "orthogonal_key": "field_worker_recovery",
+        "output_schema": {
+          "facts": "array",
+          "status": "string"
+        },
+        "parallel_group_id": "G1",
+        "postconditions": [
+          "worker outcome recorded"
+        ],
+        "preconditions": [
+          "field task exists"
+        ],
+        "writes": [
+          "worker-recovery.json"
+        ]
+      },
+      {
+        "depends_on": [],
+        "execution_mode": "parallel",
+        "id": "T1.2",
+        "input_refs": [
+          "loop-artifacts/stages/02/r1/fields.json"
+        ],
+        "orthogonal_key": "dynamic_factor_count",
+        "output_schema": {
+          "count": "integer",
+          "factors": "array"
+        },
+        "parallel_group_id": "G1",
+        "postconditions": [
+          "factor task count recorded"
+        ],
+        "preconditions": [
+          "research fields are materialized"
+        ],
+        "writes": [
+          "factor-count.json"
+        ]
+      },
+      {
+        "depends_on": [
+          "T1.1",
+          "T1.2"
+        ],
+        "id": "J1",
+        "input_refs": [
+          "worker-recovery.json",
+          "factor-count.json"
+        ],
+        "output_schema": {
+          "execution_summary": "string"
+        },
+        "postconditions": [
+          "joined execution summary exists"
+        ],
+        "preconditions": [
+          "T1.1 and T1.2 complete"
+        ],
+        "writes": [
+          "execution-join.json"
+        ]
+      }
+    ],
+    "ready": [],
+    "task_results": {
+      "J1": {
+        "evidence": [
+          "worker-recovery.json",
+          "factor-count.json"
+        ],
+        "output": {
+          "execution_summary": "两个正交并行节点均完成，Join 合并恢复结果与动态因素计数。"
+        },
+        "updated_at": "2026-07-24T21:54:09.466914+00:00"
+      },
+      "T1.1": {
+        "evidence": [
+          "loop-events.md#auto_field_worker_stall_reaped"
+        ],
+        "output": {
+          "facts": [
+            "watchdog recovered a stalled field worker",
+            "state remained durable"
+          ],
+          "status": "recovered"
+        },
+        "updated_at": "2026-07-24T21:53:51.254963+00:00"
+      },
+      "T1.2": {
+        "evidence": [
+          "loop-artifacts/stages/02/r1/fields.json"
+        ],
+        "output": {
+          "count": 3,
+          "factors": [
+            "真实 Agent 字段写入能力",
+            "Hook 拒绝后的恢复能力",
+            "动态任务与 DAG 构造验证"
+          ]
+        },
+        "updated_at": "2026-07-24T21:53:51.391427+00:00"
+      }
+    }
   },
   "project_id": "D1-ralph-field-centric",
   "queue": {
     "blocked_human": [],
-    "candidates": [],
+    "candidates": [
+      {
+        "preference_brief": "继续优先验证本地 Agent 字段写入，再验证网页调研。",
+        "reason": "真实 Agent 字段写入是当前唯一未验证的关键能力，不能被 assumed_default 永久替代。",
+        "research_summary": "现场 worker 两次只读取任务文件后被 watchdog 回收，尚未完成 field-apply；需要减少上下文并再次验证。",
+        "scanned_sources": [
+          "loop-events.md",
+          "loop/ralph_runtime/tests/test_field_workflow.py"
+        ],
+        "scope": "只测试 stage 01 三个字段的增量写入、field-apply 和自动推进，不做网页研究。",
+        "stage_id": "exploration",
+        "status": "candidate",
+        "title": "用更短的字段 worker prompt 重测 goal/known/unknown"
+      }
+    ],
     "ready": []
   },
   "run_history": [],
   "schema_version": 4,
   "stage": {
-    "failure_condition": "关键目标或约束缺失",
-    "id": "01",
-    "input_description": "用户目标、范围和约束",
-    "name": "目标与约束",
-    "on_failure": "01",
+    "failure_condition": "探索输入不足",
+    "id": "exploration",
+    "input_description": "全局偏好、项目 tasks/ 和当前队列",
+    "name": "探索与任务接续",
+    "on_failure": "exploration",
     "on_human_block": "exploration",
-    "on_success": "02",
+    "on_success": "01",
     "required_outputs": [
-      "goal_summary",
-      "constraints"
+      "preference_brief",
+      "candidate_tasks"
     ],
     "revision": "r1",
-    "success_condition": "目标和约束结构化"
+    "success_condition": "已扫描任务板并选定可执行任务，或已输出带 candidate 标记的新目标"
   },
-  "status": "running",
+  "status": "exploration",
   "task": {
     "description": "把 RALPH 从「卡片中心、刚性强制」的编排重构为「字段中心、动态、可跨节点流动」的编排：放宽主 agent 限制、开放字段写入、动态新增节点条件、按字段派发调研 subagent，评估其对普通 agent 稳定性与质量的提升。",
     "source": "user request 2026-07-18"
   },
-  "task_spec": null,
-  "subagent_cards": {}
+  "task_intake": null,
+  "task_intake_history": []
 }

@@ -1,0 +1,46 @@
+{
+  "agent_id": "auto-field-cad3be91f32d",
+  "agent_ids": [
+    "auto-field-cad3be91f32d"
+  ],
+  "apply_count_at_dispatch": 0,
+  "attribute": "请填写 verification_report 的正交因素分解",
+  "concept": "阶段 01 输出：verification_report",
+  "dispatch_name": "auto-field-cad3be91f32d",
+  "disposition": "pending",
+  "field": {
+    "attribute": "flow-only 流程验证报告：阶段 01 输出已就绪，本字段仅用于验证 04 阶段对 01 阶段产出的核验流程是否正常运行",
+    "concept": "阶段 01 输出：verification_report",
+    "confidence": 1.0,
+    "disposition": "inferred",
+    "evidence_refs": [],
+    "rationale": "flow-only 流程实验，不调用网页工具、不伪造来源。本字段标记为 inferred，仅用于验证 04 阶段（核验关键事实）能否正确读取并校验 01 阶段的 verification_report 输出。evidence_refs 保持空数组，因流程实验不依赖外部证据。",
+    "role": "verification_report"
+  },
+  "field_read_count": 1,
+  "flow_only": true,
+  "id": "04-r1-field-01-verification_report-113ddc4d32",
+  "input_refs": [
+    "loop-artifacts/stages/04/r1/fields.json"
+  ],
+  "instruction": "只处理字段 `阶段 01 输出：verification_report`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/04/r1/tasks/04-r1-field-01-verification_report-113ddc4d32.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。flow-only 流程实验不调用网页工具、不伪造来源；完成后使用 disposition=inferred，在 rationale 标明仅用于验证流程，evidence_refs 保持空数组。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+  "last_error": "",
+  "output_schema": {
+    "attribute": "string",
+    "concept": "阶段 01 输出：verification_report",
+    "confidence": "number 0..1",
+    "disposition": "confirmed|inferred|assumed_default|research_required",
+    "evidence_refs": "array[string]",
+    "rationale": "string",
+    "role": "string"
+  },
+  "revision": "r1",
+  "role": "verification_report",
+  "schema_version": 1,
+  "stage_id": "04",
+  "status": "dispatched",
+  "type": "field_task",
+  "updated_at": "2026-07-25T01:37:26.236752+00:00",
+  "web_attempts": 0,
+  "web_failures": 0
+}

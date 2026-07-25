@@ -96,6 +96,28 @@ def validate_plan(plan: Mapping[str, Any], strict: bool = True) -> DAGReport:
             )
     _cycle_check(nodes)
 
+    raw_joins = plan.get("joins", [])
+    if raw_joins is not None and not isinstance(raw_joins, list):
+        raise DAGValidationError("plan.joins must be an array")
+    for raw_join in raw_joins or []:
+        if isinstance(raw_join, str):
+            join_id = raw_join
+            declared_dependencies = None
+        elif isinstance(raw_join, Mapping):
+            join_id = str(raw_join.get("id", raw_join.get("node_id", "")))
+            declared_dependencies = raw_join.get("depends_on")
+        else:
+            raise DAGValidationError("each join must be a node id or object")
+        if join_id not in nodes:
+            raise DAGValidationError(f"join references missing task: {join_id}")
+        dependencies = nodes[join_id].depends_on
+        if len(dependencies) < 2:
+            raise DAGValidationError(f"join {join_id} must depend on at least two tasks")
+        if declared_dependencies is not None:
+            declared = tuple(str(item) for item in declared_dependencies)
+            if set(declared) != set(dependencies):
+                raise DAGValidationError(f"join {join_id} depends_on does not match its node")
+
     groups: dict[str, list[TaskNode]] = {}
     for node in nodes_list:
         if node.parallel_group_id:

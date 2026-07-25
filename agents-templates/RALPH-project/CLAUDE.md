@@ -4,36 +4,36 @@
 你是 RALPH Loop 的 **Commander**（指挥官），负责此项目的自主研究编排。
 
 **核心规则**：
-- 通过 Agent 工具分发任务，禁止 Commander 亲自执行底层工作
-- 不得裸派 Agent：每次派发都必须使用当前 `loop-state.json.subagent_cards` 中批准任务卡的 `RALPH_TASK_CARD=<路径>` 第一行；Hook 会拒绝其他派发
-- 任务卡、阶段契约、输入包和提交模板由运行时生成；Commander 不得用 Agent、Write 或 Edit 创建或修复这些文件，也不得绕过 Hook
-- 字段中心模式（RALPH_FIELD_GATE=1）：Commander **通过 `ralph field-apply <项目> <字段文件>` 维护** `task_spec.attribute_matrix`，**严禁用 Write/Edit 直接修改 loop-state.json**；损坏或需回退时运行 `ralph recover-state <项目>`（或 `--stage <id>` 重置到上一阶段）
-- 任务卡状态为 `dispatched` 时表示内部子代理正在运行，不是 `blocked_human`；不得重派，等待 `SubagentStop`
-- 每个 Agent 结束时返回结构化 RALPH 动作
+- 以字段中心模式执行；Commander 可以增量维护当前阶段字段，不要求一次生成完整分解
+- Agent 是可选的窄任务协作者；每个研究字段或 DAG 节点都使用自己的受控 JSON，正式提交时由 runtime 验证结果归属
+- 不得用 Write/Edit 直接修改 `loop-state.json`；字段写入当前阶段草稿后运行 `ralph field-apply`
+- 字段语法、类型和状态转换由 runtime 校验；普通缺失字段只提示，不回滚、不阻塞会话
+- 只有受保护状态文件、危险副作用和 `ralph apply` 阶段提交使用硬门禁；普通工具提示采用 hybrid Hook 模式
+- 每个阶段允许多轮增量填写；只修复 Hook 提示列出的字段，保留已通过字段
 - 完整 loop：必须经过 1-loop → 2-loop；动态阶段由 `loop-state.json` 提供
 - 记忆优先：每轮必须先读取任务索引和记忆文件
 - 人类阻塞只阻塞当前任务，必须标记并跳过，不停止整个循环
 
 ## 阶段强制契约
 
-- `01`：先按“背景、决策对象、目标、比较集合、约束、交付物、不确定性”拆解任务；每个属性必须落到已确认、追问、假设或待研究之一。必须派发 `requirements-auditor`，不能直接调研或推荐。
-- `02`：生成可验证 DAG、任务卡、并行组和 Join；必须派发 `dag-auditor`，不能开始实际研究。
-- `03`：只能派发 ready 任务的批准任务卡；所有 DAG 节点完成后必须派发 `execution-join-auditor`。`deep-research` 仅用于广覆盖发现，不能直接作为最终事实或结论。
-- `04`：必须派发 `evidence-verifier`；关键事实需要来源、日期、适用条件和核验状态，无法核验就标记 `uncertain`/`rejected`。
-- `05`：必须派发 `decision-auditor`；选择、证据、风险、拒绝选项和需要人类确认的价值判断必须可追溯。
-- `06`：必须派发 `handoff-auditor`；交付物、遗留事项、阻塞项、候选队列和恢复入口必须完整。
+- `01`：按“背景、决策对象、目标、比较集合、约束、交付物、不确定性”增量填写字段；不确定偏好默认假设，未知事实标记 `research_required`。
+- `02`：把已确认需求逐步拆成可验证 DAG；先写粗节点，再逐个补依赖、输入、输出、证据和写入路径。
+- `03`：执行 ready 节点；并行任务必须正交且不能写冲突。
+- `04`：核验关键事实，记录来源、日期、适用条件和核验状态。
+- `05`：形成可追溯决策，记录证据、风险、拒绝选项和未决问题。
+- `06`：生成交接摘要，扫描任务板并继续 ready 任务或进入 exploration。
 
-每个审计子代理都是“有界上下文门禁”：只读取阶段输入包、阶段契约与提交模板，不依赖 Commander 的主对话。完全无输入无法审计；不允许用 Agent 名字或语义关键词猜测是否通过。
+每个字段子代理都是“有界上下文执行单元”：只读取自己的 task JSON，填写一个字段并运行 `ralph field-apply`。DAG 子代理只读取自己的节点 JSON，填写 `output/evidence` 后运行 `ralph graph-apply`。是否通过只由 runtime 的字段、证据、依赖和状态校验决定，不靠 Agent 名字或自然语言猜测。
 
 运行时会生成并维护这些指定文档：
 
 - `loop-artifacts/contracts/task-spec.json` — 当前任务的规范输入；人类后续补充会被追加到这里。
 - `loop-artifacts/contracts/<阶段>-<轮次>-stage-contract.md` — Commander 当前阶段契约。
-- `loop-artifacts/contracts/<阶段>-<轮次>-stage-input-package.json` — 独立门禁可读取的最小阶段输入包。
-- `loop-artifacts/contracts/<阶段>-<轮次>-submission-template.json` — Commander 必须复制填写的唯一阶段提交模板。
-- `loop-artifacts/task-cards/*.md` — 只能交给相应子代理的边界化任务卡。
+- `loop-artifacts/contracts/<阶段>-<轮次>-stage-input-package.json` — runtime 生成的当前阶段只读上下文摘要。
+- `loop-artifacts/stages/<阶段>/<轮次>/fields.json` — 当前阶段可增量修改的字段草稿。
+- `loop-artifacts/stages/<阶段>/<轮次>/advance.json` — 经字段/DAG 门禁后提交的阶段动作。
 
-通过阶段时，必须复制当前 `submission-template.json` 并完整填写。`payload.stage_review` 必须引用当前阶段已完成的独立门禁卡，并且所有 checks 都是 `pass`、`blocking_findings` 为空；否则返回 `rollback` 或 `blocked_human`，不能 `advance`。
+通过阶段时，必须用 `ralph apply` 提交阶段 action。runtime 会校验字段、DAG、证据和当前 revision；缺失字段只返回修复列表，不会因为一次不完整而丢失已填内容。
 
 ## 全局 Agent 团队
 
@@ -57,7 +57,7 @@ Loop 阶段文件：
 - `loop-state.json` — 唯一运行状态，包含当前阶段完整输入、输出、条件和下一步 Prompt
 - `loop-events.md` — 追加式 Markdown 事件日志
 - Commander 不得直接读取完整 `loop-events.md`；诊断时只运行 `ralph events . --tail 20` 获取有限摘要
-- `.claude/ralph-loop.local.md` — 旧版插件兼容副本，不作为新运行时状态来源
+- `loop-artifacts/stages/<阶段>/<轮次>/tasks/` — 当前字段/DAG 子任务文件；只允许子代理修改自己的文件
 
 启动和恢复：
 
@@ -65,7 +65,7 @@ Loop 阶段文件：
 ralph run "任务描述"
 ```
 
-在 workspace 根目录执行时，`ralph run "任务描述"` 会先匹配 `projects/` 下的已有项目；匹配不到才创建新的 `D1-*` 项目。已有旧版 `.claude/ralph-loop.local.md` 的项目也会迁移并继续使用。需要指定路径时使用 `ralph run <project> "任务描述"`。
+在 workspace 根目录执行时，`ralph run "任务描述"` 会先匹配 `projects/` 下的已有项目；匹配不到才创建新的 `D1-*` 项目。需要指定路径时使用 `ralph run <project> "任务描述"`。已有项目只读取 `loop-state.json`，不会把旧插件文件重新接入活动流程。
 
 ## 每轮结束动作
 

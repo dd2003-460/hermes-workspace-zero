@@ -1,0 +1,35 @@
+{
+  "depends_on": [],
+  "evidence": [
+    "flow-only graph execution test: T1.2"
+  ],
+  "execution_mode": "parallel",
+  "id": "exploration-r1-node-T1.2",
+  "input_refs": [
+    "loop-artifacts/stages/02.5/r1/fields.json"
+  ],
+  "instruction": "只执行 DAG 节点 `T1.2`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+  "node_id": "T1.2",
+  "orthogonal_key": "dimension_b",
+  "output": {
+    "result": "dimension_b flow-only output"
+  },
+  "output_schema": {
+    "result": "string"
+  },
+  "parallel_group_id": "G1",
+  "parent_id": null,
+  "postconditions": [
+    "独立输出 B"
+  ],
+  "preconditions": [],
+  "revision": "r1",
+  "schema_version": 1,
+  "stage_id": "exploration",
+  "status": "completed",
+  "type": "graph_task",
+  "updated_at": "2026-07-25T02:02:59.715544+00:00",
+  "writes": [
+    "loop-artifacts/stages/03/r1/outputs/T1.2.json"
+  ]
+}

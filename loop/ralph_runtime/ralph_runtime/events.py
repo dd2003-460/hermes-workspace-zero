@@ -320,6 +320,7 @@ def append_observation(
     observation_type: str,
     payload: Mapping[str, Any],
     output: str | None = None,
+    artifacts: Iterable[str] = (),
 ) -> dict[str, Any]:
     event = {
         "event_id": str(uuid.uuid4()),
@@ -331,5 +332,5 @@ def append_observation(
         event["stage"] = payload["stage"]
     if payload.get("revision") is not None:
         event["revision"] = payload["revision"]
-    append_event(path, event, agent_output=output)
+    append_event(path, event, agent_output=output, artifacts=artifacts)
     return event

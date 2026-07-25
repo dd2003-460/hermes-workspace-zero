@@ -1,29 +1,45 @@
-# RALPH 阶段契约
+# RALPH 字段中心 · 阶段契约
 
 阶段：02-r1
 
-## 固定提交接口
+## 你只维护一张字段表（不强制固定任务文件）
 
-本阶段推进采用「builder 构造 + gate 审计 + assemble 合成」的填空式流程；Commander 只做编排，不内联大段 payload：
-1. 若有 builder 构造卡（角色含 `-writer`/`-assembler`），先逐个派发；它在 `loop-artifacts/stages/<stage>/<rev>/<key>.json` 写好一个 payload 切片后返回。
-2. 待所有 builder 完成，再派发独立阶段门禁（auditor）卡；它读取合成结果并只返回 `<RALPH_GATE_REVIEW>`。
-3. 门禁完成后运行 `ralph assemble` 把切片合成为 `loop-artifacts/stages/<stage>-<rev>-result.json`，并自动注入门禁回执。
-4. 运行 `ralph validate --result <结果路径>` 机械复核；若有字段问题，让对应 builder 改切片后重跑 assemble，不要手工改大 JSON。
-5. 复核通过后运行 `ralph validate --result <结果路径> --apply` 提交；或在最后直接输出一个 `<RALPH_STAGE_RESULT>`（其内部即该结果文件内容）。
-exploration 尾节点无 builder，直接按下方契约输出 exploration payload 即可。
-任务卡、阶段契约、输入包和提交模板由运行时物化；Commander 不得用 Agent、Write 或 Edit 创建/修复它们（builder 写切片是运行时批准的例外）。
-任务卡为 `dispatched` 时表示内部子代理正在运行，不是 `blocked_human`；不得重派或循环读取 `loop-events.md`，等待 `SubagentStop`。
+- 权威输入：`loop-state.json`、`loop-artifacts/contracts/02-r1-stage-contract.md`、`loop-artifacts/contracts/02-r1-submission-template.json`。
+- 用 `ralph field-apply` 把字段原子写入字段表（**禁止直接 Write/Edit `loop-state.json`**，运行时只读它）。
+- 每条字段形如：concept / role / attribute / disposition / rationale / evidence_refs / confidence / impact / reversible。
+- disposition 取英文枚举值之一：confirmed / assumed_default / research_required / pending；直接照抄。
+- 例：{"concept": "字段名", "role": "背景", "attribute": "具体属性", "disposition": "confirmed", "rationale": "...", "evidence_refs": [], "confidence": 1.0, "impact": "material", "reversible": true}。
+- `confirmed`=已知背景；`assumed_default`=不确定偏好（默认全范围，无人类输入）；
+`research_required`=未知事实（派单字段调研 subagent 带回 evidence_refs）；`pending`=尚未处理。
+- 对每个 `research_required` 字段，用 Agent 派**只填这一个字段**的窄调研 subagent；它把该字段 JSON 交回，你合并进表。
+- 每回填一个字段，若引出新的未知项，作为新的 `pending` 字段加进同一张表（差集=新字段，自动增殖）。
+- **只回传空缺**：系统只告诉你还差哪些 `pending` 字段；你照着补，不会因为没一次交齐而失败。
+- `loop-artifacts/` 下的长文档（契约/输入包/提交模板）由子代理读取；Commander 自身直接维护字段表，不要再派发任务卡。
 
-## 通用语义分解规则
+## 提交（用命令，不要输出 token）
 
-先按决策语义而非字面词语拆解：background、decision_object、objective、comparison_set、constraints、deliverable、uncertainty。
+字段 + 本阶段 required_outputs 齐全后，**用命令显式推进**——运行时不会解析聊天里的 `<RALPH_STAGE_RESULT>` token（只有 stage 01 字段齐全会**自动**推进）。
+正确动作：
+1. 若本阶段字段有更新，先落盘：`ralph field-apply . loop-artifacts/stages/02/r1/fields.json`（或写入同目录字段增量文件）。
+2. 写 advance 动作文件 `loop-artifacts/stages/02/r1/advance.json`：
+```json
+{
+  "action": "advance",
+  "status": "passed",
+  "stage_id": "02",
+  "revision": "r1",
+  "next_stage": "<节点图上本阶段的后继 id>",
+  "payload": { "stage_review": "<简述已满足的字段条件与依据>", 
+                "task_spec": "<即 loop-state.json 里的 task_spec（含完整 attribute_matrix）>" }
+}
+```
+3. 运行 **`ralph apply . loop-artifacts/stages/02/r1/advance.json`**（等效 `ralph validate --result ... --apply`）即完成推进；运行时自动校验、原子落盘。
 
-对每个语义角色展开会改变决策的隐藏属性；当属性已能被确认、合理推断、向人类追问、明确假设或变成可验证研究任务时，停止继续拆分。禁止无穷拆词、把未单独命名的字段自动变成问题，或无证据静默假设。
+只有「用户/项目/环境都无答案、不能推断或研究、且会改变硬可行性/硬预算/验收」的字段，
+才在 `payload.questions` 一次性提问；否则不要用 `blocked_human` 卡住。
 
-需求分流闸门：用户明确输入/历史补充 > 项目状态与文档 > 本地环境与配置 > 工具研究 > 高置信推断 > 默认假设/场景。只有当信息无法确认、推断或研究，会改变硬可行性/硬预算/验收标准/价值授权，且不能用场景覆盖时，才使用 ask_human。模型档位未知时先检查本地配置，仍未知就建立 30-35B 与更大模型场景并研究内存；用户已明确购买本地硬件或候选集合已包含云服务时，不得重复追问这些事实。
+## 02：调研分解结果（字段化）
 
-## 02：DAG 与任务卡
-
-必须把已澄清需求拆为正交、可验证、可并行/合并的任务图。
-每个研究节点都要有 title、objective、证据计划、验收条件、输入输出、依赖和写入路径。
-完成前必须派发 dag-auditor；本阶段禁止实际外部研究。
+对 01 的每个 `research_required` 字段派窄调研 subagent，把结果写回 `attribute_matrix`（带 evidence_refs）。
+调研完成字段置 `confirmed` / `assumed_default`；引出新未知项作为 `pending` 字段增殖，直到无 `pending`。
+同时为每个分解项整理「后续执行需要什么」雏形，供 03 细化。本阶段不做交叉验证（在 02.5）。

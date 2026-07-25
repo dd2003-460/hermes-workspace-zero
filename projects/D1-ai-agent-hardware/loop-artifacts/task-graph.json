@@ -1,0 +1,136 @@
+{
+  "version": "1.0",
+  "stage": "02-r1",
+  "description": "Task dependency graph for GPU cost-performance research",
+  "nodes": [
+    {
+      "id": "02-r1-gpu-pricing",
+      "title": "2026 GPU Pricing & Spec Sheet",
+      "critical_path": true,
+      "estimated_hours": 4,
+      "can_parallel": true
+    },
+    {
+      "id": "02-r1-inference-benchmark",
+      "title": "Inference Performance Benchmark",
+      "critical_path": true,
+      "estimated_hours": 6,
+      "can_parallel": true
+    },
+    {
+      "id": "02-r1-training-feasibility",
+      "title": "Training Feasibility Assessment",
+      "critical_path": false,
+      "estimated_hours": 3,
+      "can_parallel": true
+    },
+    {
+      "id": "02-r1-power-thermal",
+      "title": "Power Consumption & Thermal Analysis",
+      "critical_path": false,
+      "estimated_hours": 2,
+      "can_parallel": true
+    },
+    {
+      "id": "02-r1-mac-vs-nvidia",
+      "title": "Mac vs NVIDIA Direct Comparison",
+      "critical_path": true,
+      "estimated_hours": 4,
+      "can_parallel": true
+    },
+    {
+      "id": "02-r1-cost-performance-formula",
+      "title": "Cost-Performance Formula",
+      "critical_path": true,
+      "estimated_hours": 3,
+      "can_parallel": true
+    },
+    {
+      "id": "02-r1-risk-analysis",
+      "title": "Risk Analysis",
+      "critical_path": false,
+      "estimated_hours": 3,
+      "can_parallel": true
+    },
+    {
+      "id": "02-r1-scenario-recommendations",
+      "title": "Scenario-Based Top-1 Recommendations",
+      "critical_path": true,
+      "estimated_hours": 3,
+      "can_parallel": true
+    },
+    {
+      "id": "02-r1-synthesis-report",
+      "title": "Final Synthesis Report",
+      "critical_path": true,
+      "estimated_hours": 4,
+      "can_parallel": false
+    }
+  ],
+  "edges": [
+    {"from": "02-r1-gpu-pricing", "to": "02-r1-inference-benchmark", "type": "data"},
+    {"from": "02-r1-gpu-pricing", "to": "02-r1-training-feasibility", "type": "data"},
+    {"from": "02-r1-gpu-pricing", "to": "02-r1-power-thermal", "type": "data"},
+    {"from": "02-r1-gpu-pricing", "to": "02-r1-mac-vs-nvidia", "type": "data"},
+    {"from": "02-r1-gpu-pricing", "to": "02-r1-cost-performance-formula", "type": "data"},
+    {"from": "02-r1-gpu-pricing", "to": "02-r1-risk-analysis", "type": "data"},
+    {"from": "02-r1-inference-benchmark", "to": "02-r1-training-feasibility", "type": "data"},
+    {"from": "02-r1-inference-benchmark", "to": "02-r1-mac-vs-nvidia", "type": "data"},
+    {"from": "02-r1-inference-benchmark", "to": "02-r1-cost-performance-formula", "type": "data"},
+    {"from": "02-r1-inference-benchmark", "to": "02-r1-risk-analysis", "type": "data"},
+    {"from": "02-r1-power-thermal", "to": "02-r1-mac-vs-nvidia", "type": "data"},
+    {"from": "02-r1-training-feasibility", "to": "02-r1-cost-performance-formula", "type": "data"},
+    {"from": "02-r1-mac-vs-nvidia", "to": "02-r1-scenario-recommendations", "type": "data"},
+    {"from": "02-r1-cost-performance-formula", "to": "02-r1-scenario-recommendations", "type": "data"},
+    {"from": "02-r1-risk-analysis", "to": "02-r1-scenario-recommendations", "type": "data"},
+    {"from": "02-r1-gpu-pricing", "to": "02-r1-scenario-recommendations", "type": "data"},
+    {"from": "02-r1-inference-benchmark", "to": "02-r1-scenario-recommendations", "type": "data"},
+    {"from": "02-r1-training-feasibility", "to": "02-r1-scenario-recommendations", "type": "data"},
+    {"from": "02-r1-power-thermal", "to": "02-r1-scenario-recommendations", "type": "data"},
+    {"from": "02-r1-gpu-pricing", "to": "02-r1-synthesis-report", "type": "data"},
+    {"from": "02-r1-inference-benchmark", "to": "02-r1-synthesis-report", "type": "data"},
+    {"from": "02-r1-training-feasibility", "to": "02-r1-synthesis-report", "type": "data"},
+    {"from": "02-r1-power-thermal", "to": "02-r1-synthesis-report", "type": "data"},
+    {"from": "02-r1-mac-vs-nvidia", "to": "02-r1-synthesis-report", "type": "data"},
+    {"from": "02-r1-scenario-recommendations", "to": "02-r1-synthesis-report", "type": "data"},
+    {"from": "02-r1-risk-analysis", "to": "02-r1-synthesis-report", "type": "data"},
+    {"from": "02-r1-cost-performance-formula", "to": "02-r1-synthesis-report", "type": "data"}
+  ],
+  "parallel_groups": [
+    {
+      "group": "phase1_parallel",
+      "description": "All data collection tasks that only depend on gpu-pricing",
+      "tasks": [
+        "02-r1-inference-benchmark",
+        "02-r1-training-feasibility",
+        "02-r1-power-thermal",
+        "02-r1-mac-vs-nvidia",
+        "02-r1-cost-performance-formula",
+        "02-r1-risk-analysis"
+      ]
+    },
+    {
+      "group": "phase2_parallel",
+      "description": "Recommendations that depend on phase1 outputs",
+      "tasks": [
+        "02-r1-scenario-recommendations"
+      ]
+    },
+    {
+      "group": "phase3_sequential",
+      "description": "Final synthesis — must be last",
+      "tasks": [
+        "02-r1-synthesis-report"
+      ]
+    }
+  ],
+  "critical_path": [
+    "02-r1-gpu-pricing",
+    "02-r1-inference-benchmark",
+    "02-r1-cost-performance-formula",
+    "02-r1-scenario-recommendations",
+    "02-r1-synthesis-report"
+  ],
+  "total_estimated_hours": 34,
+  "parallel_estimated_hours": 14
+}

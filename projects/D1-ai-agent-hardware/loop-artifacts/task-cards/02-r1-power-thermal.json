@@ -1,0 +1,21 @@
+{
+  "card_id": "02-r1-power-thermal",
+  "title": "Power Consumption & Thermal Analysis",
+  "description": "Measure or collect power consumption and thermal data for all comparison set GPUs under inference load. For each GPU, report: (1) Idle power (W), (2) Inference load power at 50% and 100% utilization (W), (3) Peak power (including transient spikes), (4) Thermal throttling threshold and behavior (at what temperature does clock speed drop?), (5) Cooling solution quality: single-fan vs dual-fan vs triple-fan, reference vs AIB partner designs, (6) Noise level at full load (dB) where available, (7) Electricity cost analysis: monthly electricity cost at typical usage patterns (4 hrs/day inference), (8) Power supply requirements: minimum PSU wattage, connector type (1x8-pin, 12VHPWR, 2x8-pin), (9) Thermal design for sustained workloads: can the GPU maintain boost clock for hours of continuous inference? (important for long context generation), (10) eGPU thermal considerations: external enclosure thermal impact on performance. Sources: TechPowerUp, Gamers Nexus, Hardware Unboxed, Tom's Hardware, and independent measurements. For Mac Studio, report Apple's published TDP and measured power consumption.",
+  "inputs": [
+    "02-r1-gpu-pricing (for hardware specs)"
+  ],
+  "outputs": [
+    "per-GPU power consumption table (idle/load/peak)",
+    "thermal throttling analysis",
+    "electricity cost estimates",
+    "PSU requirements summary",
+    "eGPU thermal impact analysis",
+    "source URLs for all measurements"
+  ],
+  "dependencies": [
+    "02-r1-gpu-pricing"
+  ],
+  "covers": ["SC1", "SC4", "SC7"],
+  "parallel": true
+}

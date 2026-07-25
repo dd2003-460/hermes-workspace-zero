@@ -7,7 +7,7 @@ from ralph_runtime.decomposition_benchmark import (
     evaluate_state,
     evaluate_task_spec,
 )
-from ralph_runtime.state import create_state, update_subagent_card
+from ralph_runtime.state import create_state
 
 
 FIXTURE = Path(__file__).parent / "fixtures" / "decomposition_simple_gpu.json"
@@ -73,19 +73,13 @@ def test_benchmark_rejects_questions_for_explicit_or_researchable_facts():
     assert any(item["code"] == "UNNECESSARY_HUMAN_QUESTION" for item in result.findings)
 
 
-def test_state_benchmark_requires_completed_independent_auditor():
+def test_state_benchmark_uses_field_task_lifecycle_without_legacy_auditor():
     fixture = fixture_spec()
     state = create_state("decomposition-fixture", task=DEFAULT_SIMPLE_GPU_TASK)
     state["task_spec"] = copy.deepcopy(fixture["task_spec"])
     state["task_spec"]["status"] = "clarified"
 
-    incomplete = evaluate_state(state)
-    assert incomplete.passed is False
-    assert any(item["code"] == "AUDITOR_NOT_COMPLETED" for item in incomplete.findings)
-
-    card_id = "01-r1-requirements-auditor"
-    state = update_subagent_card(state, card_id, "completed")
-    complete = evaluate_state(state)
-    assert complete.passed is True
-    assert all(check["passed"] for check in complete.checks)
-
+    state["field_tasks"] = []
+    result = evaluate_state(state)
+    assert result.passed is True
+    assert not any(item["code"] == "AUDITOR_NOT_COMPLETED" for item in result.findings)

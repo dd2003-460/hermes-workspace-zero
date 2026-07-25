@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli hook userpromptsubmit --mode enforce"
+            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli hook userpromptsubmit --mode hybrid"
           }
         ]
       }
@@ -16,7 +16,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli hook pretooluse --mode enforce"
+            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli hook pretooluse --mode hybrid"
           }
         ]
       }
@@ -27,7 +27,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli hook posttooluse --mode enforce"
+            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli hook posttooluse --mode hybrid"
           }
         ]
       }
@@ -37,7 +37,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli hook subagentstart --mode enforce"
+            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli hook subagentstart --mode hybrid"
           }
         ]
       }
@@ -47,7 +47,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli hook subagentstop --mode enforce"
+            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli hook subagentstop --mode hybrid"
           }
         ]
       }
@@ -58,7 +58,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli hook precompact --mode enforce"
+            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli hook precompact --mode hybrid"
           }
         ]
       }
@@ -69,7 +69,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli hook postcompact --mode enforce"
+            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli hook postcompact --mode hybrid"
           }
         ]
       }
@@ -79,7 +79,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli hook stop --mode enforce"
+            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli hook stop --mode hybrid"
           }
         ]
       }

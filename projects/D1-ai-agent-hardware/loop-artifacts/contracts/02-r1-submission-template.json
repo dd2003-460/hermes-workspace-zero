@@ -3,7 +3,7 @@
   "artifact_refs": [],
   "evidence": [],
   "message": "填写本阶段为何满足成功条件，以及仍然不成立的边界。",
-  "next_stage": "03",
+  "next_stage": "02.5",
   "payload": {
     "plan": {
       "coverage_proof": [],

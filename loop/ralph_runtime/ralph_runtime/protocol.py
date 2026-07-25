@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from typing import Any, Mapping
 
 from .dag import DAGValidationError, validate_plan
+from .runtime_config import field_mode_enabled
 
 
 ALLOWED_ACTIONS = frozenset(
@@ -687,13 +688,19 @@ def _collect_field_gate_issues(state: Mapping[str, Any], payload: Mapping[str, A
     existing tests are untouched.
     """
     import os
-    if not os.environ.get("RALPH_FIELD_GATE"):
+    if not field_mode_enabled():
         return []
     issues: list[str] = []
+    stage = state.get("stage", {}) if isinstance(state.get("stage"), Mapping) else {}
+    if str(stage.get("id", "")) == "exploration":
+        # Exploration is a queue/choice node, not an attribute-matrix node.
+        # Requiring a synthetic task_spec here would make the tail node
+        # impossible to use after the field-centric migration.
+        return _collect_exploration_issues(payload if isinstance(payload, Mapping) else {})
     # In field mode the agent proposes a new matrix via the payload; prefer it
     # over the (possibly stale) persisted state so the gate validates what the
     # agent is actually submitting this turn.
-    if os.environ.get("RALPH_FIELD_GATE") and isinstance(payload.get("task_spec"), Mapping):
+    if field_mode_enabled() and isinstance(payload.get("task_spec"), Mapping):
         spec = payload.get("task_spec")
     else:
         spec = state.get("task_spec") if isinstance(state.get("task_spec"), Mapping) else (
@@ -704,7 +711,14 @@ def _collect_field_gate_issues(state: Mapping[str, Any], payload: Mapping[str, A
         issues.append("task_spec.attribute_matrix 为空：本阶段尚无字段可校验（先按契约填字段）")
         return issues
     from .state import field_completeness
-    verdict = field_completeness(matrix)
+    # ``required_outputs`` are part of the current node contract, not an
+    # optional decoration.  Keep this check here (as well as in
+    # ``ralph field-apply``) so a complete-looking field table cannot silently
+    # jump over an output such as ``research_findings``, ``cross_validation``
+    # or ``task_graph``.  The output may be supplied incrementally as a field
+    # whose concept/role/attribute matches the contract name.
+    required_outputs = stage.get("required_outputs", []) if isinstance(stage, Mapping) else []
+    verdict = field_completeness(matrix, required_outputs)
     if verdict["complete"]:
         return issues
     if verdict["splittable"]:
@@ -722,6 +736,25 @@ def _collect_field_gate_issues(state: Mapping[str, Any], payload: Mapping[str, A
             "以下字段尚未标注 disposition（confirmed/assumed_default/research_required）："
             + "，".join(verdict["pending"])
         )
+    if verdict["required_outputs"]:
+        issues.append(
+            "本阶段仍缺少 required_outputs（可增量添加 concept/role/attribute 同名字段）："
+            + "，".join(verdict["required_outputs"])
+        )
+    if str(stage.get("id", "")) == "03":
+        plan = state.get("plan") if isinstance(state.get("plan"), Mapping) else {}
+        nodes = plan.get("nodes", []) if isinstance(plan, Mapping) else []
+        completed = {str(item) for item in (plan.get("completed", []) if isinstance(plan, Mapping) else [])}
+        pending_nodes = [
+            str(node.get("id", "?"))
+            for node in nodes
+            if isinstance(node, Mapping) and str(node.get("id", "")) not in completed
+        ]
+        if pending_nodes:
+            issues.append(
+                "DAG 仍有未完成节点（先由子代理填写节点文件并运行 `ralph graph-apply`）："
+                + "，".join(pending_nodes)
+            )
     if issues:
         issues.append("分解完全后可运行 `ralph advance` 或输出 <RALPH_STAGE_RESULT> advance 进入下一阶段。")
     return issues
@@ -807,7 +840,7 @@ def collect_validation_issues(
         return issues
     if action.action != "advance":
         return issues
-    if os.environ.get("RALPH_FIELD_GATE"):
+    if field_mode_enabled():
         # Field-centric mode: the field gate is the only gate.  It validates
         # that every required field is dispositioned (no pending / no
         # research_required-without-evidence) and, on success, skips the heavy

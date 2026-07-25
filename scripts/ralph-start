@@ -4,7 +4,13 @@ set -euo pipefail
 ROOT="/Users/a1-6/Desktop/workspace"
 PROJECT="${1:-$PWD}"
 RALPH_BIN="${HOME}/.local/bin/ralph"
-MODE="${RALPH_HOOK_MODE:-enforce}"
+MODE="${RALPH_HOOK_MODE:-hybrid}"
+
+# Field-centric incremental workflow is the only normal runtime path.  Keep
+# this explicit at the shell boundary so `ralph-start`, `ralph run` and
+# `ralph loop` behave the same way regardless of the caller's environment.
+export RALPH_FIELD_GATE=1
+export RALPH_PROMPT_TEMPLATE=stage_prompt_fieldcentric.md
 
 if [[ ! -x "$RALPH_BIN" ]]; then
   RALPH_BIN="$ROOT/scripts/ralph-runtime/.venv/bin/ralph"

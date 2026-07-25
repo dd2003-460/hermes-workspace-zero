@@ -31,6 +31,13 @@ __pycache__/
 .ralph/iterations/
 .ralph/prd.md
 
+# RALPH runtime locks and transient progress markers
+**/.field-apply.lock
+**/.field-dispatch.lock
+**/.graph-apply.lock
+**/.ralph-supervisor.lock
+**/.progress_gate.json
+
 # Subbrain reports (output, not source)
 memory/notes/subbrain_*.md
 

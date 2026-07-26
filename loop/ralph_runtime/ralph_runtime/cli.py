@@ -481,6 +481,12 @@ def build_parser() -> argparse.ArgumentParser:
     loop.add_argument("--effort", choices=("low", "medium", "high", "xhigh", "max"), default=None)
     loop.add_argument("--model", default=None, help="仅本次 Claude 会话使用的模型名")
     loop.add_argument("--max-cycles", type=int, default=0, help="最多运行多少个新上下文；0 表示持续运行")
+    loop.add_argument(
+        "--max-failed-cycles",
+        type=int,
+        default=3,
+        help="连续非零退出多少轮后熔断；0 表示不熔断",
+    )
     loop.add_argument("--retry-delay", type=float, default=3.0, help="会话退出后再次启动前等待秒数")
     loop.add_argument("--agent-grace-seconds", type=float, default=5.0, help="回收残留任务卡前等待秒数")
     loop.add_argument("--idle-timeout", type=float, default=1800.0, help="无状态/事件活动多久后重启当前上下文；0 表示不启用")
@@ -2294,6 +2300,7 @@ def _loop_project_impl(
     idle_timeout: float = 1800.0,
     wait_human: bool = False,
     skip_permissions: bool = False,
+    max_failed_cycles: int = 3,
     _resolved: tuple[Path, str, ProjectResolution | None] | None = None,
 ) -> int:
     """Keep advancing a project by launching fresh Claude contexts.
@@ -2307,6 +2314,8 @@ def _loop_project_impl(
 
     if max_cycles < 0:
         raise ValueError("max-cycles 不能小于 0")
+    if max_failed_cycles < 0:
+        raise ValueError("max-failed-cycles 不能小于 0")
     if retry_delay < 0 or agent_grace_seconds < 0 or idle_timeout < 0:
         raise ValueError("retry-delay、agent-grace-seconds 和 idle-timeout 不能小于 0")
     if _resolved is None:
@@ -2350,6 +2359,7 @@ def _loop_project_impl(
     )
     first_prompt = task_text if is_new else None
     cycle = 0
+    consecutive_failed_cycles = 0
     auto_workers: dict[str, dict[str, Any]] = {}
     suppress_auto_fallback = False
     print("RALPH loop project:", root)
@@ -2484,6 +2494,10 @@ def _loop_project_impl(
         if "auto_workers" not in parameters:
             supervisor_kwargs.pop("auto_workers")
         return_code, timed_out = _run_claude_supervised(command, **supervisor_kwargs)
+        if return_code == 0:
+            consecutive_failed_cycles = 0
+        else:
+            consecutive_failed_cycles += 1
         # A Commander boundary is the next opportunity for the bounded
         # fallback worker.  The flag only suppresses the immediate retry after
         # one worker attempt, preventing an infinite worker-only loop.
@@ -2556,6 +2570,25 @@ def _loop_project_impl(
         if max_cycles and cycle >= max_cycles:
             print("Reached --max-cycles; persistent state remains resumable.")
             return 0
+        if max_failed_cycles and consecutive_failed_cycles >= max_failed_cycles:
+            append_observation(
+                root / "loop-events.md",
+                "supervisor_circuit_breaker",
+                {
+                    "cycle": cycle,
+                    "return_code": return_code,
+                    "consecutive_failed_cycles": consecutive_failed_cycles,
+                    "max_failed_cycles": max_failed_cycles,
+                    "state_preserved": True,
+                    "next_action": "manual_recovery",
+                },
+            )
+            print(
+                "RALPH circuit breaker: "
+                f"{consecutive_failed_cycles} consecutive failed cycles; "
+                "persistent state remains resumable."
+            )
+            return 1
         if retry_delay:
             time.sleep(min(retry_delay, 60.0))
     return 0
@@ -2576,6 +2609,7 @@ def loop_project(
     idle_timeout: float = 1800.0,
     wait_human: bool = False,
     skip_permissions: bool = False,
+    max_failed_cycles: int = 3,
 ) -> int:
     """Run one project under an exclusive durable supervisor lock."""
 
@@ -2597,6 +2631,7 @@ def loop_project(
             idle_timeout,
             wait_human,
             skip_permissions,
+            max_failed_cycles=max_failed_cycles,
             _resolved=resolved,
         )
 
@@ -3406,12 +3441,8 @@ def main(argv: list[str] | None = None) -> int:
             _print_project_error(args.project_or_task, exc)
             return 2
     if args.command == "loop":
-        # Self-healing supervisor: the loop must never die.  State and artifacts
-        # on disk are the source of truth, so a crashed/exit supervisor can
-        # always respawn a fresh bounded context from durable state.  We wrap
-        # loop_project in a restart loop: a clean terminal state (rc==0) stops;
-        # any crash or non-zero exit restarts the supervisor instead of ending
-        # the process (which would otherwise tear down the whole tmux session).
+        # Unexpected exceptions are retried from durable state, while an
+        # explicit circuit-breaker result is terminal for this invocation.
         while True:
             try:
                 rc = loop_project(
@@ -3429,12 +3460,15 @@ def main(argv: list[str] | None = None) -> int:
                     args.idle_timeout,
                     args.wait_human,
                     args.dangerously_skip_permissions,
+                    max_failed_cycles=args.max_failed_cycles,
                 )
                 if rc == 0:
                     return 0
-                print(f"RALPH supervisor exited with code {rc}; restarting in 5s")
-                time.sleep(5)
-                continue
+                print(
+                    f"RALPH supervisor stopped with code {rc}; "
+                    "persistent state remains resumable."
+                )
+                return rc
             except KeyboardInterrupt:
                 print("RALPH supervisor interrupted by user; stopping.")
                 return 130

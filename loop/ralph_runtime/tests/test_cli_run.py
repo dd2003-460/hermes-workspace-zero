@@ -366,6 +366,30 @@ def test_loop_project_launches_fresh_context_and_stops_at_cycle_limit(tmp_path: 
     assert "supervisor_cycle_finished" in events
 
 
+def test_loop_project_circuit_breaker_stops_repeated_failed_cycles(tmp_path: Path, monkeypatch):
+    calls = []
+
+    def fake_runner(command, cwd, env, idle_timeout):
+        calls.append(True)
+        return 143, False
+
+    monkeypatch.setattr(cli, "_run_claude_supervised", fake_runner)
+    monkeypatch.setattr(cli, "_claude_executable", lambda: "claude")
+
+    assert cli.loop_project(
+        tmp_path / "circuit-breaker-project",
+        task="测试失败熔断",
+        mode="shadow",
+        max_failed_cycles=2,
+        retry_delay=0,
+        agent_grace_seconds=0,
+        idle_timeout=0,
+    ) == 1
+    assert len(calls) == 2
+    events = (tmp_path / "circuit-breaker-project" / "loop-events.md").read_text(encoding="utf-8")
+    assert "supervisor_circuit_breaker" in events
+
+
 def test_auto_field_workers_are_fallback_after_first_commander_cycle(tmp_path: Path, monkeypatch):
     calls = []
 

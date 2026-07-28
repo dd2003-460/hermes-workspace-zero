@@ -192,6 +192,27 @@ Stop       → 默认阻止退出，并在同一 Claude 会话中注入下一轮
 - 只有内存、连接或进程级中断才由 supervisor 从 `loop-state.json` 启动短上下文恢复。这些情形不能可靠地在已损坏的会话中修复。
 - 如需旧的“每个 Stop 后新上下文”实验模式，显式使用 `--stop-policy fresh` 或设置 `RALPH_STOP_POLICY=fresh`。项目 Hook 可用 `ralph install-hooks <project> --stop-policy inline` 重新安装。
 
+### 可审计的网页 LLM 交叉核验
+
+`WebSearch`/`WebFetch` 只能获取公开资料，不能可靠地向登录式网页聊天页提交问题。因此“网页 LLM 已询问”不是提示词声明，而必须有 `ralph web-llm-check` 写出的阶段回执。先为至少两个独立的 OpenAI 兼容 HTTPS provider 配置**环境变量名**（不要把密钥写进项目）：
+
+```bash
+export RALPH_WEB_LLM_PROVIDERS_JSON='[
+  {"id":"provider-a","endpoint":"https://api.example-a.com/v1/chat/completions","model":"model-a","api_key_env":"PROVIDER_A_API_KEY"},
+  {"id":"provider-b","endpoint":"https://api.example-b.com/v1/chat/completions","model":"model-b","api_key_env":"PROVIDER_B_API_KEY"}
+]'
+export PROVIDER_A_API_KEY='…'
+export PROVIDER_B_API_KEY='…'
+```
+
+把当前阶段目录内的请求文件写为 `{ "claim": "…", "context": "…" }`，然后运行：
+
+```bash
+ralph web-llm-check . loop-artifacts/stages/02.5/r1/web-llm-request.json
+```
+
+命令只保存 provider、模型、端点主机、时间、回答和哈希，不保存密钥。少于两个成功 provider、未配置 provider 或没有回执时，任务只能标记为“权威来源交叉核验”，不得声称已完成网页 LLM 交叉验证。LLM 回答只用于发现反例或遗漏；事实仍必须由至少两份独立权威来源支持。
+
 如果 Claude 上下文在 `SubagentStop` 前退出，supervisor 会在 cycle 边界自动将残留字段任务恢复为 `ready`，避免幽灵 `dispatched` 永久卡住。
 
 如果 Commander 已收到字段提示，却持续没有写入增量草稿，supervisor 会在默认 600 秒后结束这个无进展上下文，并从持久化状态启动新的短上下文。这个恢复针对“有 ready/pending 字段、无活动字段 Agent”的组合；不会打断正在运行的子代理或正常网页研究。只有明确标记为 `research_required` 的字段才允许创建 Agent，结构字段不会因此恢复成旧 auditor 派发。可用 `RALPH_FIELD_DISPATCH_STALL_SECONDS` 调整，设为 `0` 禁用该专项看门狗。

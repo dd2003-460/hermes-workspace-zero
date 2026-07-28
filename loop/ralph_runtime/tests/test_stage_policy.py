@@ -63,6 +63,13 @@ def test_worker_accepts_absolute_ralph_field_apply_command():
     assert decide_tool(state, "worker", "Bash", command=command).decision == "allow"
 
 
+def test_worker_accepts_auditable_web_llm_check_command():
+    state = create_state("fixture")
+    state["stage"]["id"] = "02.5"
+    command = "ralph web-llm-check . loop-artifacts/stages/02.5/r1/tasks/field.json"
+    assert decide_tool(state, "worker", "Bash", command=command).decision == "allow"
+
+
 def test_exploration_field_worker_can_write_and_apply_its_field():
     state = create_state("fixture")
     state["stage"]["id"] = "exploration"

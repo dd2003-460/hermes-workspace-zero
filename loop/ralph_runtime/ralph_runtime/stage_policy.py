@@ -30,8 +30,9 @@ def _is_controlled_ralph_command(command: str | None, role: str) -> bool:
     Claude Code may execute a Bash tool with ``/Users/.../ralph`` or with a
     harmless ``cd <project> && ralph`` prefix.  A literal ``startswith`` check
     treated those equivalent commands as untrusted and blocked the only
-    sanctioned field submission step.  Keep the worker narrower: it may only
-    invoke ``field-apply``; Commander may use the read-only/status commands too.
+    sanctioned field submission step.  Keep the worker narrow: it may invoke
+    ``field-apply`` and the auditable ``web-llm-check`` receipt command;
+    Commander may use the read-only/status commands too.
     Shell chaining after the CLI is deliberately rejected.
     """
     if not command:
@@ -61,7 +62,7 @@ def _is_controlled_ralph_command(command: str | None, role: str) -> bool:
     if not tokens:
         return False
     if role == "worker":
-        return tokens[0] == "field-apply"
+        return tokens[0] in {"field-apply", "web-llm-check"}
     return True
 
 
@@ -269,7 +270,8 @@ def decide_tool(
             if role == "worker":
                 next_action = (
                     "字段 worker 不要用 Bash 读取或写入普通项目文件；只执行自己的受控命令："
-                    "`ralph field-apply . <自己的任务文件>`。"
+                    "`ralph field-apply . <自己的任务文件>`；已配置网页 LLM 时可运行 "
+                    "`ralph web-llm-check . <自己的任务文件>`。"
                 )
                 feedback_code = "WORKER_BASH_SCOPE_FIELD"
                 detected = "字段 worker 试图用 Bash 执行未受控的文件读写命令。"

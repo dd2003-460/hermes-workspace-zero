@@ -74,6 +74,16 @@ def test_compact_recovery_prompt_does_not_render_full_stage_payload():
     assert "当前计划" not in recovery.text
 
 
+def test_compact_recovery_prompt_starts_with_one_idempotent_field_action():
+    state = create_state("fixture", task="先读取 brief.md，再完成质量审计")
+    recovery = PromptRenderer().compact_recovery_prompt(state, reason="新会话")
+
+    assert len(recovery.text) < 1500
+    assert "RALPH 最小恢复" in recovery.text
+    assert "下一次工具调用只执行 `ralph field-init .`" in recovery.text
+    assert "advance.json 示例" not in recovery.text
+
+
 def test_fresh_recovery_prompt_continues_instead_of_ending_session():
     state = create_state("fixture", task="继续当前阶段")
     state["subagent_cards"] = {

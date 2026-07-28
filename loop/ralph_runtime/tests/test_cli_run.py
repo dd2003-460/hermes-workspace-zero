@@ -78,7 +78,7 @@ def test_validate_result_artifact_checks_then_atomically_applies(tmp_path: Path)
     assert load_state(project / "loop-state.json")["stage"]["id"] == "02"
 
 
-def test_prepare_existing_project_reuses_stage_and_updates_task(tmp_path: Path):
+def test_prepare_existing_project_preserves_canonical_task_and_records_new_input(tmp_path: Path):
     project = tmp_path / "existing-project"
     cli.prepare_project(project, task="第一项任务")
     state_path = project / "loop-state.json"
@@ -98,8 +98,13 @@ def test_prepare_existing_project_reuses_stage_and_updates_task(tmp_path: Path):
     updated = load_state(state_path)
     assert is_new is False
     assert updated["stage"]["id"] == "03"
-    assert updated["task"]["description"] == "第二项任务"
+    assert updated["task"]["description"] == "第一项任务"
     assert updated["task_spec"]["attribute_matrix"][0]["concept"] == "已通过字段"
+    assert any(
+        item.get("source") == "ralph loop" and item.get("text") == "第二项任务"
+        for item in updated["task_spec"]["authoritative_inputs"]
+    )
+    assert "task_update_preserved_as_input" in (project / "loop-events.md").read_text(encoding="utf-8")
 
 
 def test_events_tail_returns_bounded_summaries(tmp_path: Path):

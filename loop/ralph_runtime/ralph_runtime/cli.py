@@ -59,6 +59,7 @@ from .state import (
 )
 from .protocol import collect_validation_issues, parse_action, validate_action
 from .task_board import TaskBoardError, read_task_board, select_next_task
+from .web_llm import run_web_llm_cross_check
 from .runtime_config import (
     HOOK_MODES,
     STOP_POLICIES,
@@ -237,6 +238,7 @@ def prepare_project(
     state_path = root / "loop-state.json"
     is_new = not state_path.exists()
     reopened_from_completed = False
+    task_update_preserved = False
     if is_new:
         legacy_state = load_legacy_markdown(
             root / ".claude" / "ralph-loop.local.md",
@@ -258,18 +260,17 @@ def prepare_project(
         else:
             current_task = current.get("task", {}) if isinstance(current.get("task"), dict) else {}
             if current_task.get("description") != task:
-                # A repeated ``ralph loop <project> <task>`` is a resume/update
-                # operation, not permission to erase an in-progress semantic
-                # decomposition.  ``set_task`` intentionally creates a fresh
-                # task_spec and therefore used to wipe fields already accepted
-                # by field-apply when the user slightly rephrased the prompt.
-                # Preserve the current stage/spec and append the new wording as
-                # authoritative input instead; only a completed project uses
-                # start_new_task above to create a genuinely fresh run.
-                updated = dict(current)
-                updated["task"] = {"description": task, "source": "ralph loop"}
-                updated = record_human_input(updated, task, source="ralph loop")
+                # A repeated ``ralph loop <project> <task>`` may be a
+                # refinement, but it may also be an entirely different job.
+                # Never overwrite the active task while retaining its old
+                # stage/field decomposition: that hybrid state is internally
+                # contradictory and makes a Commander validate unrelated
+                # fields.  Keep the canonical task immutable until an
+                # explicit new-task transition; preserve the new wording as a
+                # human input for the current task to integrate or defer.
+                updated = record_human_input(current, task, source="ralph loop")
                 save_state(state_path, updated)
+                task_update_preserved = True
 
     events_path = root / "loop-events.md"
     events_path.touch(exist_ok=True)
@@ -290,6 +291,18 @@ def prepare_project(
                 "created_files": created,
                 "hook_mode": mode,
                 "reopened_from_completed": reopened_from_completed,
+                "task_update_preserved_as_input": task_update_preserved,
+            },
+        )
+    if task_update_preserved:
+        append_observation(
+            events_path,
+            "task_update_preserved_as_input",
+            {
+                "stage": persisted_state.get("stage", {}).get("id"),
+                "revision": persisted_state.get("stage", {}).get("revision"),
+                "canonical_task_preserved": True,
+                "reason": "new task text was recorded as human input instead of overwriting active decomposition",
             },
         )
     return root, settings_path, is_new, created
@@ -354,6 +367,16 @@ def build_parser() -> argparse.ArgumentParser:
         help="创建当前阶段的空字段草稿；已有草稿不覆盖，供 Agent 增量填写后再 field-apply",
     )
     field_init.add_argument("project", nargs="?", default=".", help="项目目录（默认当前目录）")
+
+    web_llm_check = sub.add_parser(
+        "web-llm-check",
+        help="调用已配置的两个以上网页 LLM API，并把可审计的交叉核验回执写入当前阶段目录",
+    )
+    web_llm_check.add_argument("project", nargs="?", default=".", help="项目目录（默认当前目录）")
+    web_llm_check.add_argument(
+        "request_file",
+        help="当前阶段目录内的 {claim, context?, providers?} JSON，或含 field.attribute 的单字段 task JSON",
+    )
 
     graph_apply = sub.add_parser(
         "graph-apply",
@@ -3356,6 +3379,13 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "field-init":
         try:
             print(json.dumps(init_fields(args.project), ensure_ascii=False, indent=2, sort_keys=True))
+            return 0
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            print(json.dumps({"ok": False, "error": str(exc)}, ensure_ascii=False, indent=2), file=sys.stderr)
+            return 1
+    if args.command == "web-llm-check":
+        try:
+            print(json.dumps(run_web_llm_cross_check(args.project, args.request_file), ensure_ascii=False, indent=2, sort_keys=True))
             return 0
         except (OSError, ValueError, json.JSONDecodeError) as exc:
             print(json.dumps({"ok": False, "error": str(exc)}, ensure_ascii=False, indent=2), file=sys.stderr)

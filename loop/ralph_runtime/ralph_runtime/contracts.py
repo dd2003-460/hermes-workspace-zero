@@ -134,7 +134,8 @@ LOOP_METHODOLOGY: dict[str, list[str]] = {
         "（concept/attribute/disposition/evidence/rationale）作为参数。",
         "网页 LLM 清单与具体做法见 loop/1-loop/02.5-交叉验证.md"
         "（arena.ai/agent、bigmodel glm-5.2、aistudio、perplexity、poe、chatgpt、claude、gemini、grok、copilot 等）。",
-        "每条字段向 ≥2~3 个不同网页 LLM 提同一验证问题，并 WebSearch 查权威来源"
+        "仅已配置时才通过 `ralph web-llm-check` 向 ≥2 个不同网页 LLM 提同一验证问题；"
+        "必须保留回执。无回执不得声称已询问 LLM。无论是否配置，都须 WebSearch 查独立权威来源"
         "（论文/官方规格/基准/厂商文档）交叉印证。",
         "比较不同 LLM / 来源答案，更新字段 confidence / disposition / evidence_refs / rationale，并产出交叉验证摘要。",
     ],
@@ -158,7 +159,8 @@ LOOP_METHODOLOGY: dict[str, list[str]] = {
         "Commander 只派发 subagent，不直接去问；每张 builder 卡内嵌该 claim 的当前内容"
         "（claim/source_url/source_type/status/rationale）作为参数。",
         "网页 LLM 清单与具体做法见 loop/1-loop/04.5-交叉验证.md（与 02.5 同一清单）。",
-        "每条 claim 向 ≥2~3 个不同网页 LLM 提同一验证问题，并 WebSearch 查权威来源交叉印证。",
+        "仅已配置时才通过 `ralph web-llm-check` 向 ≥2 个不同网页 LLM 提同一验证问题，并保留回执；"
+        "无回执不得声称已询问 LLM。WebSearch 的独立权威来源仍是事实核验依据。",
         "比较不同 LLM / 来源答案，更新 claim 的 status / checked_by，并产出最终交叉验证摘要。",
     ],
     "05": [

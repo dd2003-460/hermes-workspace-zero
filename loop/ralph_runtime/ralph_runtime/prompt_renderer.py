@@ -189,6 +189,61 @@ class PromptRenderer:
             "message": f"完成 {stage_name}，推进到 {next_stage}",
         }, ensure_ascii=False, indent=2)
 
+        authoritative_inputs = spec.get("authoritative_inputs", []) if isinstance(spec, Mapping) else []
+        canonical_description = str(task.get("description", "")).strip()
+        recent_human_inputs = [
+            str(item.get("text", "")).strip()
+            for item in authoritative_inputs
+            if isinstance(item, Mapping)
+            and str(item.get("kind", "")) == "human_input"
+            and str(item.get("text", "")).strip()
+            and str(item.get("text", "")).strip() != canonical_description
+        ][-2:]
+
+        # A fresh local-model context must make its first tool call quickly.
+        # The durable stage document and CLAUDE.md remain available on disk;
+        # replaying the full stage manual before the first action causes an
+        # expensive prefill and invites a plan-only response.  Give one safe,
+        # idempotent command and the narrow state delta instead.
+        if compact:
+            next_action = (
+                f"下一次工具调用只执行 `ralph field-init .`。该命令不会覆盖已有草稿；"
+                f"完成后只修改 `{fields_file}` 并运行 `ralph field-apply . {fields_file}`。"
+            )
+            if urgent_task is not None:
+                urgent_path = str(urgent_task.get("path", ""))
+                urgent_concept = str(urgent_task.get("concept", ""))
+                next_action = (
+                    f"下一次工具调用必须是 Agent，第一行写 `RALPH_FIELD_TASK={urgent_path}`，"
+                    f"且只处理 `{urgent_concept}`；不要先读日志、Grep、Glob 或写总报告。"
+                )
+            compact_lines = [
+                f"# RALPH 最小恢复（{stage_id}-{revision} · {stage_name}）",
+                f"当前任务：{self._short_text(task.get('description', ''), 420) or '以项目文件为准'}",
+                "",
+                "## 立即动作（不要先总结、规划或重读历史）",
+                next_action,
+                "",
+                f"成功条件：{success or '以节点定义为准'}",
+                f"仍需填写：{missing_line}",
+                "不要直接修改 `loop-state.json`；普通缺失不能伪装成 blocked_human。",
+            ]
+            if stage_id in {"02.5", "04.5"}:
+                compact_lines.append(
+                    "网页 LLM 只有 `ralph web-llm-check` 产生且含两个成功 provider 的回执才可计入；"
+                    "LLM 回答不替代两个独立权威来源。"
+                )
+            if recent_human_inputs:
+                compact_lines.extend([
+                    "",
+                    "## 最近人类补充（先判断是否与当前任务一致；不一致时保留为待整合输入，不要覆盖当前字段）",
+                    *[f"- {self._short_text(item, 500)}" for item in recent_human_inputs],
+                ])
+            if reason:
+                compact_lines.extend(["", f"上一轮诊断：{self._short_text(reason, 420)}"])
+            text = "\n".join(compact_lines).rstrip() + "\n"
+            return RenderedPrompt(text=text, sha256=hashlib.sha256(text.encode("utf-8")).hexdigest())
+
         lines = [
             f"# RALPH 字段增量提示（{stage_id}-{revision} · {stage_name}）",
             f"当前任务：{description or '以 loop-state.json 为准'}",

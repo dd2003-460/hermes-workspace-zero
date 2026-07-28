@@ -22,7 +22,13 @@ from .contracts import (
 from .events import append_observation, apply_and_record, read_events
 from .feedback import feedback_context, gate_feedback, render_feedback, tool_feedback
 from .result_artifacts import state_stage_artifact_dir
-from .runtime_config import effective_tool_decision, field_mode_enabled, max_field_web_attempts, max_parallel_fields
+from .runtime_config import (
+    STOP_POLICIES,
+    effective_tool_decision,
+    field_mode_enabled,
+    max_field_web_attempts,
+    max_parallel_fields,
+)
 from .field_tasks import (
     claim_field_task,
     bind_field_task,
@@ -40,11 +46,9 @@ from .field_tasks import (
 
 
 # A Stop Hook repair is useful only while the current Claude context is still
-# making a bounded attempt to comply.  Local models can otherwise keep
-# emitting slightly different XML/partial JSON forever; the event log changes
-# on every rejection, so an activity-only watchdog cannot detect that loop.
-# After this many consecutive protocol failures in one supervisor cycle, let
-# the process end and let the outer ``ralph loop`` launch a fresh context.
+# making a bounded attempt to comply.  In inline mode the budget switches the
+# prompt from syntax repair to strategy revision; it must not discard the
+# context merely because a model emitted malformed XML several times.
 MAX_PROTOCOL_REPAIRS_PER_CONTEXT = 3
 from .prompt_renderer import PromptRenderer
 from .protocol import parse_action
@@ -654,7 +658,13 @@ def _apply_agent_result(root: Path, output: str) -> dict[str, Any]:
         }
 
 
-def _stop_response(reason: str, mode: str) -> dict[str, Any]:
+def _stop_response(reason: str, mode: str, stop_policy: str = "fresh") -> dict[str, Any]:
+    if stop_policy == "inline":
+        return {
+            "decision": "block",
+            "reason": reason[:12000],
+            "systemMessage": "RALPH inline continuation: keep the current Claude context and continue from durable state.",
+        }
     if mode in {"shadow", "hybrid"}:
         # Stop only supports a blocking decision.  Hybrid deliberately lets a
         # malformed draft end the turn; the outer supervisor can start a short
@@ -662,6 +672,95 @@ def _stop_response(reason: str, mode: str) -> dict[str, Any]:
         label = "shadow" if mode == "shadow" else "hybrid"
         return {"systemMessage": f"RALPH {label}：" + reason}
     return {"decision": "block", "reason": reason[:12000]}
+
+
+def _inline_stop_repeat_count(root: Path, output_digest: str) -> int:
+    """Count consecutive identical inline Stops without a tool/state event.
+
+    The official Ralph Loop plugin uses an output hash to avoid feeding an
+    identical answer back forever.  Here the hash does not terminate work: it
+    upgrades the next prompt to a strategy-revision instruction while keeping
+    the same Claude context alive.
+    """
+
+    count = 0
+    progress_events = {
+        "posttooluse_observed",
+        "field_increment_applied",
+        "stage_advanced",
+        "stage_rollback",
+        "task_spec_clarified",
+        "action_recorded",
+        "human_input_received",
+    }
+    for event in reversed(read_events(root / "loop-events.md")):
+        event_type = str(event.get("type", ""))
+        if event_type == "inline_stop_intercepted":
+            observation = event.get("observation")
+            previous = observation.get("output_sha256") if isinstance(observation, Mapping) else None
+            if previous == output_digest:
+                count += 1
+                continue
+            break
+        if event_type in progress_events:
+            break
+    return count
+
+
+def _inline_stop_response(
+    root: Path,
+    state: Mapping[str, Any],
+    *,
+    reason: str,
+    output: str | None,
+    event_reason: str,
+) -> dict[str, Any]:
+    """Block Stop and feed a bounded, state-aware prompt into this context."""
+
+    visible_output = _bounded_hook_text(output, 2400)
+    output_digest = _output_digest(visible_output) if visible_output else ""
+    repeated = _inline_stop_repeat_count(root, output_digest) if output_digest else 0
+    stage = state.get("stage") if isinstance(state.get("stage"), Mapping) else {}
+    _record(
+        root,
+        "inline_stop_intercepted",
+        {
+            "stage": stage.get("id"),
+            "revision": stage.get("revision"),
+            "reason": event_reason,
+            "output_sha256": output_digest or None,
+            "identical_stop_count": repeated + 1 if output_digest else 0,
+            "state_preserved": True,
+            "recovery": "same_claude_context",
+        },
+    )
+    repeat_instruction = ""
+    if repeated + 1 >= MAX_PROTOCOL_REPAIRS_PER_CONTEXT:
+        repeat_instruction = (
+            "\n\n## 策略切换（禁止重复上一轮）\n"
+            f"你已经在没有工具/状态进展的情况下给出相同输出 {repeated + 1} 次。"
+            "不要再次解释或重发同一结果；先检查当前阶段状态和最近错误，"
+            "再执行一个与上一轮不同的最小诊断、修复或验证动作。"
+        )
+    prior_output = ""
+    if visible_output:
+        prior_output = (
+            "\n\n## 上一轮可见输出（仅用于继续，不要照抄）\n"
+            "<RALPH_LAST_OUTPUT>\n"
+            + visible_output
+            + "\n</RALPH_LAST_OUTPUT>\n"
+        )
+    continuation = (
+        "# RALPH 同上下文继续\n"
+        "Stop 已被拦截：不要退出、不要从头规划，也不要假装完成。"
+        "保留当前 Claude 上下文；先检查持久化状态和已产生的文件，再做一个具体动作。"
+        "若本轮已有可验证进展，先运行对应的 `ralph field-apply`、`ralph graph-apply` 或 "
+        "`ralph apply` 记录状态；不要直接编辑 `loop-state.json`。\n\n"
+        + reason
+        + prior_output
+        + repeat_instruction
+    )
+    return _stop_response(continuation, mode="enforce", stop_policy="inline")
 
 
 def _field_command_hint(
@@ -1958,7 +2057,10 @@ def handle_stop(
     payload: Mapping[str, Any],
     mode: str = "hybrid",
     auto_apply: bool = True,
+    stop_policy: str = "fresh",
 ) -> dict[str, Any]:
+    if stop_policy not in STOP_POLICIES:
+        stop_policy = "fresh"
     root = _find_project_root(payload)
     if root is None:
         return {}
@@ -1983,6 +2085,7 @@ def handle_stop(
             return {}
 
     stop_hook_active = bool(payload.get("stop_hook_active"))
+    inline_stop = stop_policy == "inline"
 
     # Infrastructure failures must be handled before parsing the final Agent
     # message. In particular, an oMLX prefill rejection can arrive as text in
@@ -2037,6 +2140,17 @@ def handle_stop(
             + "）。hybrid 模式允许本轮结束；supervisor 会检查是否有真实进程，"
             "并在没有 field-apply/SubagentStop 时自动重开任务。不要把它们标记为完成或 blocked_human。"
         )
+        if inline_stop:
+            return _inline_stop_response(
+                root,
+                state,
+                reason=(
+                    "字段 Agent 仍在运行。不要重派、不要改写任务状态；"
+                    "等待 SubagentStop 回执，或检查它已写入的单字段草稿后运行 field-apply。"
+                ),
+                output=output if isinstance(output, str) else None,
+                event_reason="waiting_for_field_agents",
+            )
         if mode == "enforce":
             return {"decision": "block", "reason": reason}
         return {"systemMessage": "RALPH hybrid：" + reason}
@@ -2050,6 +2164,14 @@ def handle_stop(
                 "stop_hook_active": True,
             },
         )
+        if inline_stop:
+            return _inline_stop_response(
+                root,
+                state,
+                reason="字段 Agent 尚未完成；继续等待 SubagentStop，不要启动新的上下文或重复派发。",
+                output=output if isinstance(output, str) else None,
+                event_reason="waiting_for_field_agents_reentry",
+            )
         if mode == "enforce":
             return {
                 "decision": "block",
@@ -2072,12 +2194,20 @@ def handle_stop(
             )
             # Never allow an idle stop on a no-progress duplicate: keep the
             # Commander in the loop and point it at the next concrete action.
-            return _stop_response(
+            duplicate_reason = (
                 "该结构化阶段结果已经应用过（重复输出），状态已保存且未改变。请勿重复提交；"
                 "直接按当前阶段继续唯一允许的下一个动作：若有 ready 字段就派发它，"
-                "否则修复草稿或输出 advance / clarify。",
-                mode,
+                "否则修复草稿或输出 advance / clarify。"
             )
+            if inline_stop:
+                return _inline_stop_response(
+                    root,
+                    state,
+                    reason=duplicate_reason,
+                    output=output,
+                    event_reason="duplicate_agent_output",
+                )
+            return _stop_response(duplicate_reason, mode, stop_policy)
         if result["status"] == "applied":
             state = load_state(root / "loop-state.json")
             action = result["action"]
@@ -2112,6 +2242,14 @@ def handle_stop(
                 "请继续执行新的当前阶段：\n"
                 + prompt
             )
+            if inline_stop:
+                return _inline_stop_response(
+                    root,
+                    state,
+                    reason=reason,
+                    output=output,
+                    event_reason="action_applied",
+                )
             if stop_hook_active:
                 _record(
                     root,
@@ -2124,7 +2262,7 @@ def handle_stop(
                 "stop_intercepted_after_apply",
                 {"action": action["action"], "stage": state.get("stage", {}).get("id")},
             )
-            return _stop_response(reason, mode)
+            return _stop_response(reason, mode, stop_policy)
 
         # Invalid output is not allowed to alter state. Give the Agent a
         # generated repair prompt; enforce mode turns it into a real block.
@@ -2149,6 +2287,20 @@ def handle_stop(
         )
         repair_count = _consecutive_protocol_rejections(root)
         if repair_count >= MAX_PROTOCOL_REPAIRS_PER_CONTEXT:
+            if inline_stop:
+                strategy_reason = (
+                    "同一上下文已连续输出无效阶段结果。不要继续修补 XML/JSON 格式，也不要退出重开；"
+                    "先停止输出 RALPH_STAGE_RESULT，检查当前阶段、任务文件和上一次校验错误，"
+                    "然后执行一个能产生新证据的工具动作。\n\n"
+                    + repair
+                )
+                return _inline_stop_response(
+                    root,
+                    state,
+                    reason=strategy_reason,
+                    output=output,
+                    event_reason="protocol_strategy_revision",
+                )
             # Returning only a systemMessage deliberately allows Claude to
             # stop.  The durable state is unchanged; the outer supervisor
             # observes the exit and starts a fresh context with a compact
@@ -2177,7 +2329,7 @@ def handle_stop(
                     forbidden="修改 loop-state.json、伪造已通过、继续同一格式修复循环。",
                 )[:3000]
             }
-        if stop_hook_active:
+        if stop_hook_active and not inline_stop:
             _record(
                 root,
                 "stop_hook_guarded",
@@ -2190,10 +2342,18 @@ def handle_stop(
             # context instead of repairing inline. The repair budget escape
             # hatch above still allows a stop once MAX_PROTOCOL_REPAIRS_PER_CONTEXT
             # is reached.
-            return _stop_response(reason, mode)
-        return _stop_response(reason, mode)
+            return _stop_response(reason, mode, stop_policy)
+        if inline_stop:
+            return _inline_stop_response(
+                root,
+                state,
+                reason=reason,
+                output=output,
+                event_reason="invalid_stage_result",
+            )
+        return _stop_response(reason, mode, stop_policy)
 
-    if stop_hook_active:
+    if stop_hook_active and not inline_stop:
         _record(root, "stop_hook_guarded", {"reason": "stop_hook_active"})
         return {}
 
@@ -2214,7 +2374,15 @@ def handle_stop(
         + prompt
     )
     _record(root, "stop_intercepted", {"status": state.get("status"), "stage": state.get("stage", {}).get("id")})
-    return _stop_response(reason, mode)
+    if inline_stop:
+        return _inline_stop_response(
+            root,
+            state,
+            reason=reason,
+            output=output if isinstance(output, str) else None,
+            event_reason="stop_without_action",
+        )
+    return _stop_response(reason, mode, stop_policy)
 
 
 def handle_hook(
@@ -2222,6 +2390,7 @@ def handle_hook(
     payload: Mapping[str, Any],
     mode: str = "hybrid",
     auto_apply: bool = True,
+    stop_policy: str = "fresh",
 ) -> dict[str, Any]:
     if event == "pretooluse":
         return handle_pretooluse(payload, mode)
@@ -2238,7 +2407,7 @@ def handle_hook(
     if event == "postcompact":
         return handle_postcompact(payload, mode)
     if event == "stop":
-        return handle_stop(payload, mode, auto_apply=auto_apply)
+        return handle_stop(payload, mode, auto_apply=auto_apply, stop_policy=stop_policy)
     raise ValueError(f"unsupported Hook event: {event}")
 
 
@@ -2247,9 +2416,10 @@ def run_hook(
     payload_text: str,
     mode: str = "hybrid",
     auto_apply: bool = True,
+    stop_policy: str = "fresh",
 ) -> str:
     payload = json.loads(payload_text or "{}")
-    result = handle_hook(event, payload, mode, auto_apply=auto_apply)
+    result = handle_hook(event, payload, mode, auto_apply=auto_apply, stop_policy=stop_policy)
     if event == "stop":
         # Canonical turn-completion marker. Claude idles at the interactive
         # prompt after a Stop and never exits on its own, so the outer
@@ -2259,5 +2429,9 @@ def run_hook(
         # otherwise be killed before SubagentStop arrives.
         root = _find_project_root(payload)
         if root is not None and result.get("decision") != "block":
-            _record(root, "ralph_stop_handled", {"mode": mode, "auto_apply": auto_apply})
+            _record(
+                root,
+                "ralph_stop_handled",
+                {"mode": mode, "auto_apply": auto_apply, "stop_policy": stop_policy},
+            )
     return json.dumps(result, ensure_ascii=False)

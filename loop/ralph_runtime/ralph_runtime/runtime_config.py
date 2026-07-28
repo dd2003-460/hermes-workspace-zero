@@ -13,6 +13,7 @@ from typing import Any, Mapping
 
 
 HOOK_MODES = ("shadow", "hybrid", "enforce")
+STOP_POLICIES = ("inline", "fresh")
 
 
 def max_parallel_fields() -> int:
@@ -67,6 +68,19 @@ def flow_only_mode(state: Mapping[str, Any]) -> bool:
 def default_hook_mode() -> str:
     value = os.environ.get("RALPH_HOOK_MODE", "hybrid").strip().lower()
     return value if value in HOOK_MODES else "hybrid"
+
+
+def default_stop_policy() -> str:
+    """Choose how normal Claude Stop events continue a RALPH task.
+
+    ``inline`` mirrors the Ralph Loop plugin: Stop is blocked and Claude sees
+    a bounded continuation prompt in its existing transcript.  ``fresh`` is
+    retained for memory-constrained experiments that deliberately want the
+    outer supervisor to start a new context after each completed turn.
+    """
+
+    value = os.environ.get("RALPH_STOP_POLICY", "inline").strip().lower()
+    return value if value in STOP_POLICIES else "inline"
 
 
 # These are safety boundaries, not ordinary protocol guidance.  In hybrid

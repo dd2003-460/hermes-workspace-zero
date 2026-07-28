@@ -81,7 +81,7 @@ ralph field-apply ./my-project \
   loop-artifacts/stages/02/r1/tasks/<task-id>.json
 ```
 
-并行组仍由 DAG 描述；本地模型默认最多同时运行 1 个字段子代理，完成一批后再派下一批。需要调整时设置 `RALPH_MAX_PARALLEL_FIELDS`，这只限制资源占用，不改变任务之间的逻辑依赖。若 Commander 连续不产生可持久化进度，`ralph loop` 会换一个短上下文；仍在运行的字段 worker 不会被重复 claim。
+并行组仍由 DAG 描述；本地模型默认最多同时运行 1 个字段子代理，完成一批后再派下一批。需要调整时设置 `RALPH_MAX_PARALLEL_FIELDS`，这只限制资源占用，不改变任务之间的逻辑依赖。正常 Stop 会在同一 Commander 上下文中继续；若进程实际中断，仍在运行的字段 worker 不会被重复 claim。
 
 最小字段格式：
 
@@ -183,10 +183,14 @@ PreToolUse  → 判断工具是否触及受保护资源，并注入字段命令�
 PostToolUse → 记录有限工具结果，不保存完整上下文
 PreCompact  → 记录压缩开始
 PostCompact → 记录压缩摘要
-Stop       → 尝试应用结构化结果；失败则返回短修复提示
+Stop       → 默认阻止退出，并在同一 Claude 会话中注入下一轮提示
 ```
 
-默认模式是 `hybrid`：
+默认模式是 `hybrid`，默认 Stop 策略是 `inline`：
+
+- 正常 Stop 返回 Claude Code 标准的 `decision: block`。模型不退出、不丢上下文，收到包含上轮摘要和当前恢复目标的提示后继续工作；若输出重复，提示会要求转换诊断/修复策略。
+- 只有内存、连接或进程级中断才由 supervisor 从 `loop-state.json` 启动短上下文恢复。这些情形不能可靠地在已损坏的会话中修复。
+- 如需旧的“每个 Stop 后新上下文”实验模式，显式使用 `--stop-policy fresh` 或设置 `RALPH_STOP_POLICY=fresh`。项目 Hook 可用 `ralph install-hooks <project> --stop-policy inline` 重新安装。
 
 如果 Claude 上下文在 `SubagentStop` 前退出，supervisor 会在 cycle 边界自动将残留字段任务恢复为 `ready`，避免幽灵 `dispatched` 永久卡住。
 
@@ -199,7 +203,7 @@ Stop       → 尝试应用结构化结果；失败则返回短修复提示
 - 字段 Agent 已启动：状态保存为 `dispatched`，Stop Hook 阻止父 Commander 提前结束，直到收到 `SubagentStop` 或由下一次 supervisor 启动恢复为 `ready`。同一字段最多允许重复 Read 3 次；之后重复 Read 会被 Hook 拒绝，唯一下一步是 Write/Edit 后运行 `field-apply`。
 - Commander 不能用未列入当前阶段白名单的协调工具（例如 `SendMessage`、任意任务管理工具）催促子代理；子代理完成后由生命周期事件和字段文件驱动下一轮。这样可以避免模型调用错误的消息接口，把工具参数错误误判为研究失败。
 - 直接写 `loop-state.json`、危险副作用、越界路径、活动人类阻塞：硬拒绝。
-- Stop 的协议错误不会无限把同一长上下文锁住；它返回短提示，允许 `ralph resume` 从持久化状态创建新上下文。
+- Stop 的协议错误默认不会丢掉同一长上下文；重复输出会注入“策略切换”提示，要求先做不同的诊断、修复或验证动作。仅 `fresh` 策略才允许 `ralph resume` 从持久化状态创建新上下文。
 - supervisor 的 idle 进度只看 `loop-state.json` 的实际变化；`pretooluse_observed` 等噪声事件不会延长 idle 计时，因此重复被拒绝的 Bash/Read 不会形成无限反馈循环。
 - 两个并行 Agent 的预约由项目锁按 `task-id` 原子完成；SubagentStart 再按 Agent 名称绑定，避免并发到达顺序造成字段串线。
 - 网页工具若返回 HTTP 错误、403、零结果或占位工具调用，连续两次后会被 Hook 熔断；单个字段默认最多发起 3 次网页工具尝试。Agent 必须把当前字段保留为 `research_required`、写明待补原因并运行 `field-apply`，不能无限重试或伪造来源。成功拿到有效结果后，失败计数和尝试计数会自动归零。

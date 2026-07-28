@@ -59,7 +59,15 @@ from .state import (
 )
 from .protocol import collect_validation_issues, parse_action, validate_action
 from .task_board import TaskBoardError, read_task_board, select_next_task
-from .runtime_config import HOOK_MODES, default_hook_mode, field_mode_enabled, flow_only_mode, max_parallel_fields
+from .runtime_config import (
+    HOOK_MODES,
+    STOP_POLICIES,
+    default_hook_mode,
+    default_stop_policy,
+    field_mode_enabled,
+    flow_only_mode,
+    max_parallel_fields,
+)
 from .field_tasks import (
     claim_field_task,
     materialize_field_tasks,
@@ -220,6 +228,7 @@ def prepare_project(
     mode: str = "hybrid",
     record_session: bool = False,
     fresh_if_completed: bool = False,
+    stop_policy: str | None = None,
 ) -> tuple[Path, Path, bool, list[str]]:
     """Ensure a project can start and optionally attach the user's task."""
 
@@ -269,7 +278,7 @@ def prepare_project(
     save_state(state_path, persisted_state)
     materialize_contract_documents(root, persisted_state)
     created = _ensure_project_scaffold(root)
-    settings_path = install_hooks(root, mode)
+    settings_path = install_hooks(root, mode, stop_policy=stop_policy)
     if record_session:
         append_observation(
             events_path,
@@ -430,15 +439,18 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
     hook.add_argument("--mode", choices=HOOK_MODES, default=default_hook_mode())
+    hook.add_argument("--stop-policy", choices=STOP_POLICIES, default=default_stop_policy())
     hook.add_argument("--no-auto-apply", action="store_true", help="只记录 Stop 输出，不自动应用结构化动作")
 
     install = sub.add_parser("install-hooks")
     install.add_argument("project")
     install.add_argument("--mode", choices=HOOK_MODES, default="hybrid")
+    install.add_argument("--stop-policy", choices=STOP_POLICIES, default=default_stop_policy())
 
     start = sub.add_parser("start")
     start.add_argument("project", nargs="?", default=".")
     start.add_argument("--mode", choices=HOOK_MODES, default=default_hook_mode())
+    start.add_argument("--stop-policy", choices=STOP_POLICIES, default=default_stop_policy())
     start.add_argument("--launch", action="store_true")
     start.add_argument("--prompt", default=None)
     start.add_argument("--effort", choices=("low", "medium", "high", "xhigh", "max"), default=None)
@@ -451,6 +463,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     resume.add_argument("project", nargs="?", default=".")
     resume.add_argument("--mode", choices=HOOK_MODES, default=default_hook_mode())
+    resume.add_argument("--stop-policy", choices=STOP_POLICIES, default=default_stop_policy())
     resume.add_argument("--prompt", default=None, help="覆盖自动生成的短恢复指令")
     resume.add_argument("--effort", choices=("low", "medium", "high", "xhigh", "max"), default=None)
     resume.add_argument("--model", default=None, help="仅本次 Claude 会话使用的模型名")
@@ -461,6 +474,7 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("task", nargs="?", help="显式项目路径模式下的任务描述")
     run.add_argument("--workspace", default=None, help="自动项目模式使用的 workspace 根目录")
     run.add_argument("--mode", choices=HOOK_MODES, default=default_hook_mode())
+    run.add_argument("--stop-policy", choices=STOP_POLICIES, default=default_stop_policy())
     run.add_argument("--effort", choices=("low", "medium", "high", "xhigh", "max"), default=None)
     run.add_argument("--model", default=None, help="仅本次 Claude 会话使用的模型名")
     run.add_argument(
@@ -472,12 +486,13 @@ def build_parser() -> argparse.ArgumentParser:
 
     loop = sub.add_parser(
         "loop",
-        help="持续监督：每轮用新的 Claude 上下文从 loop-state.json 继续，直到完成或显式等待人类",
+        help="持续监督：Stop 默认在同一 Claude 上下文继续；运行时中断才从 loop-state.json 恢复",
     )
     loop.add_argument("project_or_task", help="项目路径，或在省略 task 时直接填写任务描述")
     loop.add_argument("task", nargs="?", help="显式项目路径模式下的任务描述")
     loop.add_argument("--workspace", default=None, help="自动项目模式使用的 workspace 根目录")
     loop.add_argument("--mode", choices=HOOK_MODES, default=default_hook_mode())
+    loop.add_argument("--stop-policy", choices=STOP_POLICIES, default=default_stop_policy())
     loop.add_argument("--effort", choices=("low", "medium", "high", "xhigh", "max"), default=None)
     loop.add_argument("--model", default=None, help="仅本次 Claude 会话使用的模型名")
     loop.add_argument("--max-cycles", type=int, default=0, help="最多运行多少个新上下文；0 表示持续运行")
@@ -501,8 +516,11 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def _hook_command(event: str, mode: str) -> str:
-    return f"{shlex.quote(sys.executable)} -m ralph_runtime.cli hook {event} --mode {shlex.quote(mode)}"
+def _hook_command(event: str, mode: str, stop_policy: str = "inline") -> str:
+    command = f"{shlex.quote(sys.executable)} -m ralph_runtime.cli hook {event} --mode {shlex.quote(mode)}"
+    if event == "stop":
+        command += f" --stop-policy {shlex.quote(stop_policy)}"
+    return command
 
 
 def _with_effort(command: list[str], effort: str | None) -> list[str]:
@@ -596,8 +614,15 @@ def _add_compaction_arguments(parser: argparse.ArgumentParser) -> None:
     )
 
 
-def install_hooks(project: str | Path, mode: str = "hybrid") -> Path:
+def install_hooks(
+    project: str | Path,
+    mode: str = "hybrid",
+    stop_policy: str | None = None,
+) -> Path:
     root = Path(project).expanduser().resolve()
+    selected_stop_policy = stop_policy or default_stop_policy()
+    if selected_stop_policy not in STOP_POLICIES:
+        raise ValueError(f"unsupported stop policy: {selected_stop_policy}")
     root.mkdir(parents=True, exist_ok=True)
     state_path = root / "loop-state.json"
     if not state_path.exists():
@@ -614,7 +639,16 @@ def install_hooks(project: str | Path, mode: str = "hybrid") -> Path:
             "SubagentStop": [{"hooks": [{"type": "command", "command": _hook_command("subagentstop", mode)}]}],
             "PreCompact": [{"matcher": ".*", "hooks": [{"type": "command", "command": _hook_command("precompact", mode)}]}],
             "PostCompact": [{"matcher": ".*", "hooks": [{"type": "command", "command": _hook_command("postcompact", mode)}]}],
-            "Stop": [{"hooks": [{"type": "command", "command": _hook_command("stop", mode)}]}],
+            "Stop": [
+                {
+                    "hooks": [
+                        {
+                            "type": "command",
+                            "command": _hook_command("stop", mode, selected_stop_policy),
+                        }
+                    ]
+                }
+            ],
         }
     }
     settings_path.write_text(json.dumps(settings, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -1072,8 +1106,9 @@ def start_project(
     model: str | None = None,
     auto_compact_window: int | None = None,
     auto_compact_percent: int | None = None,
+    stop_policy: str | None = None,
 ) -> int:
-    root, settings_path, _, _ = prepare_project(project, mode=mode)
+    root, settings_path, _, _ = prepare_project(project, mode=mode, stop_policy=stop_policy)
     environment, compact_window, compact_percent = _claude_environment(
         auto_compact_window,
         auto_compact_percent,
@@ -1104,6 +1139,7 @@ def resume_project(
     model: str | None = None,
     auto_compact_window: int | None = None,
     auto_compact_percent: int | None = None,
+    stop_policy: str | None = None,
 ) -> int:
     """Start a fresh Claude context while preserving the project state.
 
@@ -1116,6 +1152,7 @@ def resume_project(
         project,
         mode=mode,
         record_session=True,
+        stop_policy=stop_policy,
     )
     environment, compact_window, compact_percent = _claude_environment(
         auto_compact_window,
@@ -1177,6 +1214,7 @@ def run_project(
     auto_compact_window: int | None = None,
     auto_compact_percent: int | None = None,
     skip_permissions: bool = False,
+    stop_policy: str | None = None,
 ) -> int:
     """Initialize/reuse a project and start Claude; task-only mode auto-resolves it."""
 
@@ -1190,6 +1228,7 @@ def run_project(
         mode=mode,
         record_session=True,
         fresh_if_completed=True,
+        stop_policy=stop_policy,
     )
     environment, compact_window, compact_percent = _claude_environment(
         auto_compact_window,
@@ -1431,13 +1470,12 @@ def _run_claude_supervised(
 ) -> tuple[int, bool]:
     """Run Claude while watching the durable state/event files for progress.
 
-    Claude idles at the interactive prompt after a Stop hook and never exits on
-    its own, so a naive supervisor would wait for ``idle_timeout`` (600s)
-    between turns. To keep the AI working uninterrupted, we watch for the
-    ``ralph_stop_handled`` marker that the Stop hook emits on every completed
-    turn: once a new marker appears and Claude stays idle afterwards, we
-    relaunch a fresh context after a short grace period. Durable state changes
-    cancel the pending relaunch; noisy event-log writes alone do not count as
+    The legacy ``fresh`` Stop policy lets Claude idle after a completed turn.
+    In that mode we watch for ``ralph_stop_handled`` and relaunch after a
+    short grace period. The default ``inline`` policy returns ``decision:
+    block`` instead, so it deliberately emits no marker and this supervisor
+    leaves the existing Claude process running. Durable state changes cancel
+    a pending legacy relaunch; noisy event-log writes alone do not count as
     progress, so repeated Hook feedback cannot create an infinite loop.
     """
 
@@ -2301,15 +2339,15 @@ def _loop_project_impl(
     wait_human: bool = False,
     skip_permissions: bool = False,
     max_failed_cycles: int = 3,
+    stop_policy: str | None = None,
     _resolved: tuple[Path, str, ProjectResolution | None] | None = None,
 ) -> int:
-    """Keep advancing a project by launching fresh Claude contexts.
+    """Keep advancing a project while preserving normal Claude sessions.
 
-    Stop Hook can protect a live context, but it cannot resurrect a process
-    lost to an API reset, memory guard or terminal closure. This outer loop is
-    the durable liveness mechanism: state and artifacts are the source of
-    truth, and every retry gets a bounded fresh prompt rather than the old
-    transcript.
+    Normal Stop events use the inline Hook and remain in the same transcript.
+    This outer loop is only the durable recovery boundary for a process lost
+    to an API reset, memory guard, terminal closure, or a configured watchdog;
+    state and artifacts let such a recovery start with a bounded fresh prompt.
     """
 
     if max_cycles < 0:
@@ -2328,6 +2366,7 @@ def _loop_project_impl(
         mode=mode,
         record_session=True,
         fresh_if_completed=True,
+        stop_policy=stop_policy,
     )
     if agent_grace_seconds:
         # Startup reconciliation is safe for a project whose previous owner
@@ -2610,6 +2649,7 @@ def loop_project(
     wait_human: bool = False,
     skip_permissions: bool = False,
     max_failed_cycles: int = 3,
+    stop_policy: str | None = None,
 ) -> int:
     """Run one project under an exclusive durable supervisor lock."""
 
@@ -2632,6 +2672,7 @@ def loop_project(
             wait_human,
             skip_permissions,
             max_failed_cycles=max_failed_cycles,
+            stop_policy=stop_policy,
             _resolved=resolved,
         )
 
@@ -3390,10 +3431,18 @@ def main(argv: list[str] | None = None) -> int:
             print(f"RALPH 无法运行分解 benchmark：{exc}", file=sys.stderr)
             return 2
     if args.command == "hook":
-        print(run_hook(args.event, sys.stdin.read(), args.mode, auto_apply=not args.no_auto_apply))
+        print(
+            run_hook(
+                args.event,
+                sys.stdin.read(),
+                args.mode,
+                auto_apply=not args.no_auto_apply,
+                stop_policy=args.stop_policy,
+            )
+        )
         return 0
     if args.command == "install-hooks":
-        print(install_hooks(args.project, args.mode))
+        print(install_hooks(args.project, args.mode, stop_policy=args.stop_policy))
         return 0
     if args.command == "start":
         try:
@@ -3406,6 +3455,7 @@ def main(argv: list[str] | None = None) -> int:
                 args.model,
                 args.auto_compact_window,
                 args.auto_compact_percent,
+                stop_policy=args.stop_policy,
             )
         except (OSError, ValueError) as exc:
             _print_project_error(args.project, exc)
@@ -3420,6 +3470,7 @@ def main(argv: list[str] | None = None) -> int:
                 args.model,
                 args.auto_compact_window,
                 args.auto_compact_percent,
+                stop_policy=args.stop_policy,
             )
         except (OSError, ValueError) as exc:
             _print_project_error(args.project, exc)
@@ -3436,6 +3487,7 @@ def main(argv: list[str] | None = None) -> int:
                 args.auto_compact_window,
                 args.auto_compact_percent,
                 args.dangerously_skip_permissions,
+                stop_policy=args.stop_policy,
             )
         except (OSError, ValueError) as exc:
             _print_project_error(args.project_or_task, exc)
@@ -3461,6 +3513,7 @@ def main(argv: list[str] | None = None) -> int:
                     args.wait_human,
                     args.dangerously_skip_permissions,
                     max_failed_cycles=args.max_failed_cycles,
+                    stop_policy=args.stop_policy,
                 )
                 if rc == 0:
                     return 0

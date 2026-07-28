@@ -6,6 +6,7 @@ from ralph_runtime.hooks import (
     handle_pretooluse,
     handle_stop,
     handle_subagentstop,
+    run_hook,
 )
 from ralph_runtime.state import create_state, load_state, save_state, update_subagent_card
 from conftest import complete_required_card, stage_one_payload
@@ -95,6 +96,54 @@ def test_stop_shadow_does_not_block(tmp_path):
     result = handle_stop({"cwd": str(tmp_path)}, mode="shadow")
     assert "decision" not in result
     assert "systemMessage" in result
+
+
+def test_stop_inline_blocks_and_continues_in_the_same_context(tmp_path):
+    save_state(tmp_path / "loop-state.json", create_state("fixture"))
+    result = handle_stop(
+        {
+            "cwd": str(tmp_path),
+            "last_assistant_message": "我刚完成诊断，下一步准备运行验证。",
+        },
+        mode="hybrid",
+        stop_policy="inline",
+    )
+
+    assert result["decision"] == "block"
+    assert "RALPH 同上下文继续" in result["reason"]
+    assert "我刚完成诊断" in result["reason"]
+    assert any(event["type"] == "inline_stop_intercepted" for event in read_events(tmp_path / "loop-events.md"))
+
+
+def test_run_hook_inline_stop_does_not_emit_fresh_context_marker(tmp_path):
+    save_state(tmp_path / "loop-state.json", create_state("fixture"))
+    result = json.loads(
+        run_hook(
+            "stop",
+            json.dumps({"cwd": str(tmp_path), "last_assistant_message": "继续验证"}),
+            mode="hybrid",
+            stop_policy="inline",
+        )
+    )
+
+    assert result["decision"] == "block"
+    assert not any(event["type"] == "ralph_stop_handled" for event in read_events(tmp_path / "loop-events.md"))
+
+
+def test_inline_stop_repeated_output_switches_strategy_without_new_context(tmp_path):
+    save_state(tmp_path / "loop-state.json", create_state("fixture"))
+    payload = {
+        "cwd": str(tmp_path),
+        "last_assistant_message": '{"action":"advance","status":"passed","stage_id":"01","revision":"r1"}',
+    }
+
+    results = [handle_stop(payload, mode="hybrid", stop_policy="inline") for _ in range(3)]
+
+    assert all(result["decision"] == "block" for result in results)
+    assert "策略切换" in results[-1]["reason"]
+    events = read_events(tmp_path / "loop-events.md")
+    assert sum(event["type"] == "inline_stop_intercepted" for event in events) == 3
+    assert not any(event["type"] == "ralph_stop_handled" for event in events)
 
 
 def test_stop_enforce_blocks_running_state_but_guard_allows(tmp_path):

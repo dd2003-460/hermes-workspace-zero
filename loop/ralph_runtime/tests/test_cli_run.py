@@ -34,6 +34,15 @@ def test_prepare_project_creates_scaffold_and_persists_task(tmp_path: Path):
     assert "session_started" in (root / "loop-events.md").read_text(encoding="utf-8")
 
 
+def test_prepare_project_installs_inline_stop_hook_by_default(tmp_path: Path):
+    project = tmp_path / "inline-stop-project"
+    _, settings, _, _ = cli.prepare_project(project, task="测试同上下文继续")
+
+    config = json.loads(settings.read_text(encoding="utf-8"))
+    command = config["hooks"]["Stop"][0]["hooks"][0]["command"]
+    assert "--stop-policy inline" in command
+
+
 def test_validate_result_artifact_checks_then_atomically_applies(tmp_path: Path):
     project = tmp_path / "artifact-project"
     project.mkdir()

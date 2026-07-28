@@ -362,11 +362,6 @@ def _field_task_path_hint(root: Path, state: Mapping[str, Any], target: str | No
         json_candidate = candidate
     else:
         return None
-    try:
-        if json_candidate.exists():
-            return str(json_candidate.relative_to(root))
-    except ValueError:
-        pass
     for task in current_field_tasks(state):
         path = task.get("path")
         if not path:

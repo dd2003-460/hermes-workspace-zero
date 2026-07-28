@@ -38,6 +38,10 @@ def _is_controlled_ralph_command(command: str | None, role: str) -> bool:
     if not command:
         return False
     text = str(command).strip()
+    # Claude Code commonly appends a stderr-only redirect to a status command.
+    # It does not alter project data, unlike stdout redirection, so normalize it
+    # before the deliberately strict shell-syntax guard below.
+    text = re.sub(r"(?:^|\s)2>(?:&1|/dev/null)(?=\s|$)", "", text)
     if any(token in text for token in (";", "|", ">", "<", "\n", "\r")):
         return False
     # Permit the shell wrapper Claude sometimes adds for the project cwd.
@@ -63,6 +67,47 @@ def _is_controlled_ralph_command(command: str | None, role: str) -> bool:
         return False
     if role == "worker":
         return tokens[0] in {"field-apply", "web-llm-check"}
+    return True
+
+
+def _is_safe_commander_diagnostic(command: str | None) -> bool:
+    """Allow a tiny read-only shell surface for Commander orientation.
+
+    Local models commonly begin an unfamiliar project with ``ls`` before they
+    follow the field prompt.  Blocking that harmless first observation turns a
+    recoverable prompt mismatch into repeated Hook feedback.  Keep the escape
+    hatch deliberately narrow: only ``ls``/``pwd``/``which`` and controlled
+    ``ralph`` commands are allowed, with an optional stderr redirect; no
+    expansion, pipes, substitutions, or writes.
+    """
+
+    if not command:
+        return False
+    text = str(command).strip()
+    if not text or any(marker in text for marker in ("|", "<", "$", "`", "\n", "\r")):
+        return False
+    # ``ls path 2>/dev/null; ls other 2>/dev/null`` is the exact harmless
+    # shape Claude Code emits while it checks a newly created project.
+    text = re.sub(r"(?:^|\s)2>/dev/null(?=\s|;|$)", "", text)
+    if ">" in text:
+        return False
+    parts = [part.strip() for part in re.split(r"\s*(?:;|&&)\s*", text) if part.strip()]
+    if not parts:
+        return False
+    for part in parts:
+        try:
+            tokens = shlex.split(part, posix=True)
+        except ValueError:
+            return False
+        if not tokens:
+            return False
+        executable = tokens[0].rsplit("/", 1)[-1]
+        if executable == "ralph":
+            if not _is_controlled_ralph_command(part, "commander"):
+                return False
+            continue
+        if executable not in {"ls", "pwd", "which"}:
+            return False
     return True
 
 
@@ -235,6 +280,8 @@ def decide_tool(
         # sibling research field is running.
         if tool_name == "Bash" and command and _is_controlled_ralph_command(command, role):
             return ToolDecision("allow", "controlled ralph runtime command")
+        if role == "commander" and tool_name == "Bash" and _is_safe_commander_diagnostic(command):
+            return ToolDecision("allow", "safe read-only commander diagnostic")
         if role == "commander" and tool_name in {"Write", "Edit"} and _is_incremental_stage_file(target_path, state):
             return ToolDecision("allow", "incremental current-stage draft")
         if role == "commander" and tool_name not in {"Agent", "Write", "Edit"}:

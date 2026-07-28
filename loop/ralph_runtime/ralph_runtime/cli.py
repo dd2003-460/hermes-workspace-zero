@@ -370,7 +370,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     web_llm_check = sub.add_parser(
         "web-llm-check",
-        help="调用已配置的两个以上网页 LLM API，并把可审计的交叉核验回执写入当前阶段目录",
+        help="调用已配置的两个以上网页 LLM API 或受控 Playwright UI，并把可审计的交叉核验回执写入当前阶段目录",
     )
     web_llm_check.add_argument("project", nargs="?", default=".", help="项目目录（默认当前目录）")
     web_llm_check.add_argument(
@@ -522,12 +522,12 @@ def build_parser() -> argparse.ArgumentParser:
     loop.add_argument(
         "--max-failed-cycles",
         type=int,
-        default=3,
-        help="连续非零退出多少轮后熔断；0 表示不熔断",
+        default=0,
+        help="连续非零退出多少轮后熔断；默认 0 表示持续恢复、不熔断",
     )
     loop.add_argument("--retry-delay", type=float, default=3.0, help="会话退出后再次启动前等待秒数")
     loop.add_argument("--agent-grace-seconds", type=float, default=5.0, help="回收残留任务卡前等待秒数")
-    loop.add_argument("--idle-timeout", type=float, default=1800.0, help="无状态/事件活动多久后重启当前上下文；0 表示不启用")
+    loop.add_argument("--idle-timeout", type=float, default=0.0, help="无状态/事件活动多久后重启当前上下文；默认 0 表示不启用")
     loop.add_argument("--wait-human", action="store_true", help="遇到 blocked_human 时等待人类，而不是按策略跳过")
     loop.add_argument(
         "--dangerously-skip-permissions",
@@ -1392,7 +1392,7 @@ def _field_agent_stall_requested(root: Path, *, exclude_ids: set[str] | None = N
     This is deliberately only a *request* for a fresh Claude context.  The
     field draft and queue remain durable, and ``reopen_stale_field_tasks``
     reopens the task after the child context is terminated.  The timeout is
-    configured by ``RALPH_FIELD_AGENT_STALL_SECONDS`` (default 900 seconds).
+    configured by ``RALPH_FIELD_AGENT_STALL_SECONDS`` (disabled by default).
     """
 
     try:
@@ -1445,9 +1445,9 @@ def _field_agent_stall_seconds() -> float:
     """Read the configurable no-progress watchdog interval."""
 
     try:
-        return max(0.0, float(os.environ.get("RALPH_FIELD_AGENT_STALL_SECONDS", "900")))
+        return max(0.0, float(os.environ.get("RALPH_FIELD_AGENT_STALL_SECONDS", "0")))
     except ValueError:
-        return 300.0
+        return 0.0
 
 
 def _terminate_process_group(process: subprocess.Popen[Any], *, timeout: float = 10.0) -> None:
@@ -1532,12 +1532,12 @@ def _run_claude_supervised(
     field_stall_since: float | None = None
     field_agent_stall_since: float | None = None
     try:
-        # Local 35B models can spend several minutes deciding the first Agent
-        # call. A short watchdog used to kill the Commander immediately
-        # before that call, making the durable queue look like a dispatch bug.
-        field_stall_timeout = max(0.0, float(os.environ.get("RALPH_FIELD_DISPATCH_STALL_SECONDS", "600")))
+        # Watchdogs are opt-in: an agent needs room to diagnose an earlier
+        # attempt in the same context instead of being force-restarted merely
+        # for taking a long research or reasoning turn.
+        field_stall_timeout = max(0.0, float(os.environ.get("RALPH_FIELD_DISPATCH_STALL_SECONDS", "0")))
     except ValueError:
-        field_stall_timeout = 90.0
+        field_stall_timeout = 0.0
 
     def _terminate() -> tuple[int, bool]:
         group_id: int | None = None
@@ -1904,18 +1904,18 @@ def _auto_field_worker_prompt(task: Mapping[str, Any], project_root: Path) -> st
 
 
 def _auto_field_worker_timeout_seconds() -> float:
-    """Bound a supervisor-launched worker independently of its parent.
+    """Read an optional worker timeout independently of its parent.
 
     The parent Commander may be replaced frequently while a worker is doing
     useful long reasoning, so this timeout is deliberately separate from the
-    parent field-stall timeout.  It is still finite: a worker that never
-    produces ``field-apply`` must eventually release its slot.
+    parent field-stall timeout.  It is disabled by default: a user who wants
+    a hard capacity boundary can opt in with the environment variable.
     """
 
     try:
-        return max(0.0, float(os.environ.get("RALPH_AUTO_FIELD_WORKER_TIMEOUT", "1800")))
+        return max(0.0, float(os.environ.get("RALPH_AUTO_FIELD_WORKER_TIMEOUT", "0")))
     except ValueError:
-        return 1800.0
+        return 0.0
 
 
 def _launch_auto_field_workers(
@@ -2358,10 +2358,10 @@ def _loop_project_impl(
     max_cycles: int = 0,
     retry_delay: float = 3.0,
     agent_grace_seconds: float = 5.0,
-    idle_timeout: float = 1800.0,
+    idle_timeout: float = 0.0,
     wait_human: bool = False,
     skip_permissions: bool = False,
-    max_failed_cycles: int = 3,
+    max_failed_cycles: int = 0,
     stop_policy: str | None = None,
     _resolved: tuple[Path, str, ProjectResolution | None] | None = None,
 ) -> int:
@@ -2419,7 +2419,24 @@ def _loop_project_impl(
         auto_compact_window,
         auto_compact_percent,
     )
-    first_prompt = task_text if is_new else None
+    # A new project used to receive only the raw user task, while every later
+    # cycle received the compact field-state recovery prompt.  That asymmetry
+    # makes a local Commander spend its first context on unbounded research
+    # before it has materialized the stage fields.  Start with the same small,
+    # durable state cue as a continuation: it preserves the user's task in
+    # loop-state.json but gives an immediately executable, idempotent first
+    # action instead of relying on Hook rejections to teach the workflow.
+    first_prompt = (
+        PromptRenderer().compact_recovery_prompt(
+            startup_state,
+            reason="新项目首次启动；从当前阶段的最小状态动作开始，不要先做无界搜索或总报告。",
+            error_kind="initial",
+            fresh_session=True,
+            root=str(root),
+        ).text
+        if is_new
+        else None
+    )
     cycle = 0
     consecutive_failed_cycles = 0
     auto_workers: dict[str, dict[str, Any]] = {}
@@ -2507,6 +2524,7 @@ def _loop_project_impl(
             fresh_session=True,
             root=str(root),
         ).text
+        initial_prompt = first_prompt is not None
         prompt = first_prompt or recovery_prompt
         first_prompt = None
         command = _with_skip_permissions(
@@ -2535,7 +2553,7 @@ def _loop_project_impl(
                 "max_cycles": max_cycles,
                 "stage": state.get("stage", {}).get("id"),
                 "revision": state.get("stage", {}).get("revision"),
-                "prompt_kind": "initial_task" if prompt == task_text and cycle == 1 else "fresh_recovery",
+                "prompt_kind": "initial_state" if initial_prompt and cycle == 1 else "fresh_recovery",
             },
         )
         print(f"RALPH cycle {cycle}: launching fresh Claude context")
@@ -2668,10 +2686,10 @@ def loop_project(
     max_cycles: int = 0,
     retry_delay: float = 3.0,
     agent_grace_seconds: float = 5.0,
-    idle_timeout: float = 1800.0,
+    idle_timeout: float = 0.0,
     wait_human: bool = False,
     skip_permissions: bool = False,
-    max_failed_cycles: int = 3,
+    max_failed_cycles: int = 0,
     stop_policy: str | None = None,
 ) -> int:
     """Run one project under an exclusive durable supervisor lock."""

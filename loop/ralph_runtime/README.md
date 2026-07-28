@@ -194,7 +194,7 @@ Stop       → 默认阻止退出，并在同一 Claude 会话中注入下一轮
 
 ### 可审计的网页 LLM 交叉核验
 
-`WebSearch`/`WebFetch` 只能获取公开资料，不能可靠地向登录式网页聊天页提交问题。因此“网页 LLM 已询问”不是提示词声明，而必须有 `ralph web-llm-check` 写出的阶段回执。先为至少两个独立的 OpenAI 兼容 HTTPS provider 配置**环境变量名**（不要把密钥写进项目）：
+`WebSearch`/`WebFetch` 只能获取公开资料，不能可靠地向登录式网页聊天页提交问题。因此“网页 LLM 已询问”不是提示词声明，而必须有 `ralph web-llm-check` 写出的阶段回执。可为至少两个独立的 OpenAI 兼容 HTTPS provider 配置**环境变量名**（不要把密钥写进项目）：
 
 ```bash
 export RALPH_WEB_LLM_PROVIDERS_JSON='[
@@ -205,19 +205,31 @@ export PROVIDER_A_API_KEY='…'
 export PROVIDER_B_API_KEY='…'
 ```
 
+若需要让 RALPH 用 Playwright 启动可见浏览器、逐字输入同一核验问题并读取网页回复，也可配置浏览器 provider（无需、也不会读取已有浏览器 cookie 或凭据）：
+
+```bash
+export RALPH_WEB_LLM_BROWSER_PROVIDERS_JSON='[
+  {"id":"perplexity-review","site":"perplexity"},
+  {"id":"chatgpt-review","site":"chatgpt"}
+]'
+export RALPH_WEB_LLM_BROWSER_HEADLESS=0
+```
+
+浏览器 provider 使用全新的临时上下文。需要登录的站点会在可见窗口中报告登录缺失，不会尝试填写账号或密码；用户登录后再重新运行即可。API 与浏览器 provider 可以混合，但必须总共至少有两个不同 provider 才会计入交叉核验。
+
 把当前阶段目录内的请求文件写为 `{ "claim": "…", "context": "…" }`，然后运行：
 
 ```bash
 ralph web-llm-check . loop-artifacts/stages/02.5/r1/web-llm-request.json
 ```
 
-命令只保存 provider、模型、端点主机、时间、回答和哈希，不保存密钥。少于两个成功 provider、未配置 provider 或没有回执时，任务只能标记为“权威来源交叉核验”，不得声称已完成网页 LLM 交叉验证。LLM 回答只用于发现反例或遗漏；事实仍必须由至少两份独立权威来源支持。
+命令只保存 provider、模型、端点主机、传输方式、时间、回答和哈希，不保存密钥、cookie 或登录状态。少于两个成功 provider、未配置 provider 或没有回执时，任务只能标记为“权威来源交叉核验”，不得声称已完成网页 LLM 交叉验证。LLM 回答只用于发现反例或遗漏；事实仍必须由至少两份独立权威来源支持。
 
 如果 Claude 上下文在 `SubagentStop` 前退出，supervisor 会在 cycle 边界自动将残留字段任务恢复为 `ready`，避免幽灵 `dispatched` 永久卡住。
 
-如果 Commander 已收到字段提示，却持续没有写入增量草稿，supervisor 会在默认 600 秒后结束这个无进展上下文，并从持久化状态启动新的短上下文。这个恢复针对“有 ready/pending 字段、无活动字段 Agent”的组合；不会打断正在运行的子代理或正常网页研究。只有明确标记为 `research_required` 的字段才允许创建 Agent，结构字段不会因此恢复成旧 auditor 派发。可用 `RALPH_FIELD_DISPATCH_STALL_SECONDS` 调整，设为 `0` 禁用该专项看门狗。
+默认不会因为无状态写入、字段派发迟缓、Agent 长时间研究或连续失败而结束或重开 Claude 上下文。Commander 在同一上下文内收到 Hook 的阶段性修复提示，并继续更新当前字段；状态和上轮错误都保留。只有用户显式设置 `--idle-timeout`、`--max-failed-cycles`、`RALPH_FIELD_DISPATCH_STALL_SECONDS` 或 `RALPH_FIELD_AGENT_STALL_SECONDS` 时，supervisor 才会把相应等待阈值当作一次可恢复的 fresh-context 边界。
 
-字段 Agent 在网页工具连续失败达到熔断阈值后，或在派发后长期没有更新任务文件/执行 `field-apply`，如果仍保持 `dispatched`，supervisor 默认再等待 900 秒后恢复新上下文；这不会丢弃任务文件或字段草稿。这样可以处理本地模型一直思考、网页工具卡住、或父 Claude 永远等待 `SubagentStop` 的情况。可用 `RALPH_FIELD_AGENT_STALL_SECONDS` 调整，设为 `0` 禁用。正常的长研究应把这个值设大，而不是删除恢复机制。
+若显式启用字段 Agent 监视，运行时会在网页工具连续失败或派发后长期未执行 `field-apply` 时记录原因，并以持久化任务文件恢复。默认关闭这个监视；长研究和自我修复不应被框架误判为无进展。
 
 - 字段缺失、普通阶段范围错误：允许工具继续，但在 Hook 上下文中明确告诉 Agent 修复什么。即使有 research 字段等待 Agent，Commander 仍可增量编辑当前阶段 `fields.json`，并执行 `field-init`、`field-apply`、`graph-apply`、`apply`、`status`、`events`、`validate`、`render`、`task-next`；这些受控 `ralph` 命令不会被“先派 Agent”提示拦截。未列入协议的 Bash、直接状态文件修改和越界写入仍会被拒绝。
 - `research_required` 字段：逻辑上硬性要求一个字段对应一个 Agent；正常情况下 Agent prompt 带 `RALPH_FIELD_TASK=<task.json>`。如果本地前端丢掉了这行，hybrid Hook 会从 ready 队列自动绑定一个字段并继续，仍不允许合并多个字段；enforce 模式继续要求显式标记。两种模式都不能先读完整日志或直接改状态。

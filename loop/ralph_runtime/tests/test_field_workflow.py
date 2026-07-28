@@ -1464,6 +1464,25 @@ def test_commander_cannot_read_current_field_task(tmp_path: Path):
     assert "Agent" in output["permissionDecisionReason"]
 
 
+def test_commander_can_read_current_stage_fields_draft(tmp_path: Path):
+    root = _project(tmp_path)
+    state = load_state(root / "loop-state.json")
+    state["stage"]["id"] = "02.5"
+    save_state(root / "loop-state.json", state)
+    fields_file = init_fields(root)["fields_file"]
+
+    result = handle_pretooluse({
+        "cwd": str(root),
+        "tool_name": "Read",
+        "tool_input": {"file_path": fields_file},
+        "ralph_role": "commander",
+    }, mode="hybrid")
+
+    output = result["hookSpecificOutput"]
+    assert output["permissionDecision"] == "allow"
+    assert "FIELD_TASK_PATH_CORRECTION" not in output["permissionDecisionReason"]
+
+
 def test_task_graph_field_is_validated_and_materialized_incrementally(tmp_path: Path):
     root = _project(tmp_path)
     draft = Path(init_fields(root)["fields_file"])

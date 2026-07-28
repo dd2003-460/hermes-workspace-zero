@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -78,3 +79,31 @@ def test_web_llm_cross_check_refuses_unconfigured_or_single_provider(tmp_path: P
 
     with pytest.raises(WebLLMConfigurationError, match="至少配置两个"):
         run_web_llm_cross_check(project, request.relative_to(project))
+
+
+def test_web_llm_cross_check_accepts_playwright_browser_receipts(tmp_path: Path, monkeypatch):
+    project = tmp_path / "browser-web-llm-project"
+    cli.prepare_project(project, task="验证一个主张")
+    request = project / "loop-artifacts" / "stages" / "01" / "r1" / "cross-check.json"
+    request.write_text('{"claim":"需要核验"}\n', encoding="utf-8")
+    monkeypatch.setenv("RALPH_WEB_LLM_BROWSER_PROVIDERS_JSON", json.dumps([
+        {"id": "perplexity-review", "site": "perplexity"},
+        {"id": "chatgpt-review", "site": "chatgpt"},
+    ]))
+    monkeypatch.delenv("RALPH_WEB_LLM_PROVIDERS_JSON", raising=False)
+
+    def fake_run(command, **kwargs):
+        payload = json.loads(kwargs["input"])
+        assert command[0] == "node"
+        assert payload["headless"] is False
+        return SimpleNamespace(returncode=0, stdout=json.dumps({
+            "response": f"uncertain from {payload['site']}",
+            "page_url": payload["url"],
+        }), stderr="")
+
+    monkeypatch.setattr("ralph_runtime.web_llm.subprocess.run", fake_run)
+    report = run_web_llm_cross_check(project, request.relative_to(project))
+
+    assert report["successful_provider_ids"] == ["perplexity-review", "chatgpt-review"]
+    receipt = json.loads((project / report["receipt"]).read_text(encoding="utf-8"))
+    assert {item["transport"] for item in receipt["responses"]} == {"browser_playwright"}

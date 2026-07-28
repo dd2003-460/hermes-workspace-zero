@@ -374,7 +374,8 @@ def test_loop_project_launches_fresh_context_and_stops_at_cycle_limit(tmp_path: 
         idle_timeout=0,
     ) == 0
     assert observed["cwd"] == (tmp_path / "supervised-project").resolve()
-    assert observed["command"][-1] == "测试持续监督"
+    assert "当前任务：测试持续监督" in observed["command"][-1]
+    assert "下一次工具调用只执行 `ralph field-init .`" in observed["command"][-1]
     events = (tmp_path / "supervised-project" / "loop-events.md").read_text(encoding="utf-8")
     assert "supervisor_cycle_started" in events
     assert "supervisor_cycle_finished" in events

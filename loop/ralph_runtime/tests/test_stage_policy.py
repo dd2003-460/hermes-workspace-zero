@@ -50,10 +50,19 @@ def test_commander_can_submit_incremental_draft_while_research_is_ready():
 def test_commander_bash_is_controller_only():
     state = create_state("fixture")
     assert decide_tool(state, "commander", "Bash", command="ralph status .").decision == "allow"
+    assert decide_tool(state, "commander", "Bash", command="ralph events . --tail 10 2>&1").decision == "allow"
     decision = decide_tool(state, "commander", "Bash", command="rm -rf x")
     assert decision.decision == "deny"
     assert "field-apply" in decision.reason
     assert "不要用 cat、python、sed、echo" in decision.reason
+
+
+def test_commander_can_list_a_new_project_without_widening_shell_writes():
+    state = create_state("fixture")
+    command = "ls /tmp/project/projects/ 2>/dev/null; ls /tmp/project/loop-artifacts/ 2>/dev/null"
+    assert decide_tool(state, "commander", "Bash", command=command).decision == "allow"
+    assert decide_tool(state, "commander", "Bash", command="which ralph && ralph status . 2>&1").decision == "allow"
+    assert decide_tool(state, "commander", "Bash", command="ls /tmp/project; rm -rf /tmp/project").decision == "deny"
 
 
 def test_worker_accepts_absolute_ralph_field_apply_command():

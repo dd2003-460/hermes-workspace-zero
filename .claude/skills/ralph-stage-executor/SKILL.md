@@ -52,6 +52,19 @@ After at most two failed WebSearch/WebFetch attempts:
    obtain source leads and a receipt. Read the exact primary/authority pages
    before using any lead as evidence.
 
+## Execute a DAG node completely
+
+After a stage-03 `task_graph` has passed `field-apply`, process only one ready
+`graph_task` at a time:
+
+1. Read its JSON and respect `depends_on` and `writes`.
+2. Write every declared `writes` path as a non-empty project artifact.
+3. Add non-empty `output` and `evidence` to that same graph-task JSON.
+4. Run `ralph graph-apply . <graph-task.json>`.
+
+Do not mark a node complete in prose or edit `plan`/`loop-state.json`. A join
+becomes ready only after its dependencies have passed `graph-apply`.
+
 ## Phase contracts
 
 | Phase | Required proof before advance |

@@ -1,36 +1,44 @@
 # RALPH Runtime
 
-这是项目级 RALPH 状态机运行时。当前唯一主路径是：
+这是项目级 RALPH 运行时。新项目的默认路径是 prompt-first：阶段内容和可读状态均为 Markdown；运行时只保存阶段游标，并由同一 Claude TUI 的 Stop Hook 在完成标记后提示下一阶段。
 
 ```text
 一个命令 + 一个任务描述
         ↓
-初始化或读取 loop-state.json
+初始化或读取 ralph-loop.md
         ↓
-Hook 注入当前阶段提示
+01 因素分解（已有条件 / 空缺）
         ↓
-Agent 多轮增量填写 fields.json
+02 资料与网页 AI 线索 → 02.5 交叉核验
         ↓
-ralph field-apply（机械校验 + 合并 + 原子保存）
+03 行动分解 → 04 执行核对 → 04.5 独立复核
         ↓
-ralph apply（阶段结果校验 + 状态机转换）
-        ↓
-新阶段 / rollback / exploration
+每阶段 Markdown 末尾 `<!-- ralph: done -->` → Stop Hook 在同一会话提示下一阶段
 ```
 
-旧的 task card、强制 auditor 卡和 Commander 必须先派卡的流程不再是默认执行路径。旧文件可以保留作历史证据，但运行时不会从它们恢复活动任务，也不会因为残留旧卡阻止 StopHook。当前唯一活动协议是：字段草稿 → `field-apply` → 阶段动作 → `apply`。
+此路径没有字段 role/disposition、DAG、`field-apply`、网页熔断或工具读写拒绝；它不评判 Markdown 语义。`ralph-loop.md` 仅保存游标，完成标记才会推进。旧字段运行时保留兼容：已有 `loop-state.json` 会继续使用旧路径，新建旧项目请显式 `ralph init PROJECT --workflow field`。
 
 ## 最简单的用法
 
 在任意项目目录执行：
 
 ```bash
-ralph run ./my-project "我需要调研性价比最高的 GPU，并给出本地 AI 使用建议"
-# 单输入模式：自动在 workspace/projects 下匹配或创建项目
-ralph run "我需要调研性价比最高的 GPU，并给出本地 AI 使用建议"
+ralph loop ./my-project "我需要调研性价比最高的 GPU，并给出本地 AI 使用建议"
+# 也可先建 Markdown 项目，随后补任务
+ralph init ./my-project
+ralph loop ./my-project "我需要调研性价比最高的 GPU，并给出本地 AI 使用建议"
 ```
 
-如果目录不存在，运行时会创建目录、初始化状态和项目级 Claude 配置；如果目录已有 `loop-state.json`，则继续当前状态。它不会把项目路径解释成当前工作目录之外的绝对根路径，也不会直接修改业务文件。
+如果目录不存在，运行时会创建目录、初始化 Markdown 游标和项目级 Claude 配置；如果目录已有 `loop-state.json`，则保留旧字段兼容路径。它不会把项目路径解释成当前工作目录之外的绝对根路径，也不会直接修改业务文件。
+
+查看 Markdown 游标与当前阶段提示：
+
+```bash
+ralph prompt-first status ./my-project
+ralph prompt-first render ./my-project
+# 阶段 02 中由本地 Claude 调用；复用已获人类授权的专用 Playwright profile
+ralph prompt-first web-llm ./my-project "需要审阅的主张" --context "阶段 01 的相关空缺"
+```
 
 查看当前状态：
 
@@ -286,7 +294,10 @@ Hook 会在 Commander/Worker 的每次工具调用中重复注入命令用法；
 | 命令 | 用途 |
 |---|---|
 | `ralph run "TASK"` / `ralph run PROJECT TASK` | 自动匹配/创建项目，或指定项目初始化/恢复并启动受控 Claude 会话 |
-| `ralph init PROJECT` | 只初始化项目，不启动模型 |
+| `ralph init PROJECT` | 默认创建 prompt-first Markdown 项目（无任务时首个 `ralph loop PROJECT TASK` 会采用任务）；旧字段模式使用 `--workflow field` |
+| `ralph loop PROJECT TASK` | 新显式项目默认使用 prompt-first；同一 TUI 仅凭 Markdown 完成标记经 Stop Hook 推进 |
+| `ralph prompt-first {init,status,render,loop}` | 显式使用或检查 Markdown-only 流程 |
+| `ralph prompt-first web-llm PROJECT QUESTION --context TEXT` | 用全局/项目授权的本地 Playwright 或 API 网页 LLM 交叉询问，写入 Markdown 回执；不参与阶段语义门禁 |
 | `ralph resume PROJECT` | 从现有状态启动短上下文继续 |
 | `ralph status PROJECT` | 输出当前状态；默认是有限摘要，`--full` 才输出完整状态 |
 | `ralph field-status PROJECT` | `status` 的字段中心别名；查看字段/DAG 有限摘要，`--full` 才输出完整状态 |

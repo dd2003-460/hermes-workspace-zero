@@ -13,6 +13,7 @@ from ralph_runtime.web_llm import (
     configured_browser_providers,
     global_browser_authorization_path,
     open_browser_login,
+    run_prompt_first_web_llm_cross_check,
     run_web_llm_cross_check,
 )
 
@@ -116,6 +117,48 @@ def test_web_llm_cross_check_accepts_playwright_browser_receipts(tmp_path: Path,
     assert report["successful_provider_ids"] == ["perplexity-review", "chatgpt-review"]
     receipt = json.loads((project / report["receipt"]).read_text(encoding="utf-8"))
     assert {item["transport"] for item in receipt["responses"]} == {"browser_playwright"}
+
+
+def test_prompt_first_web_llm_writes_markdown_receipt_without_field_state(tmp_path: Path, monkeypatch):
+    project = tmp_path / "prompt-first-browser-project"
+    monkeypatch.setenv("RALPH_WEB_LLM_BROWSER_PROVIDERS_JSON", json.dumps([
+        {"id": "perplexity-review", "site": "perplexity"},
+        {"id": "chatgpt-review", "site": "chatgpt"},
+    ]))
+    monkeypatch.delenv("RALPH_WEB_LLM_PROVIDERS_JSON", raising=False)
+
+    def fake_run(command, **kwargs):
+        payload = json.loads(kwargs["input"])
+        return SimpleNamespace(returncode=0, stdout=json.dumps({
+            "response": f"review from {payload['site']}",
+            "page_url": payload["url"],
+        }), stderr="")
+
+    monkeypatch.setattr("ralph_runtime.web_llm.subprocess.run", fake_run)
+    report = run_prompt_first_web_llm_cross_check(project, "检查科普写作主张", "普通读者")
+
+    receipt = project / report["receipt"]
+    assert report["successful_provider_ids"] == ["perplexity-review", "chatgpt-review"]
+    assert receipt.suffix == ".md"
+    assert "网页 AI 交叉询问回执" in receipt.read_text(encoding="utf-8")
+
+
+def test_prompt_first_web_llm_cli_generates_question_from_markdown_task(tmp_path: Path, monkeypatch, capsys):
+    from ralph_runtime import prompt_first
+
+    prompt_first.initialize(tmp_path, "检查一个写作主张")
+    captured = {}
+
+    def fake_prompt_first_check(project, question, context):
+        captured.update({"project": Path(project), "question": question, "context": context})
+        return {"ok": True, "receipt": "loop-artifacts/prompt-first/02-web-llm-cross-check.md"}
+
+    monkeypatch.setattr(cli, "run_prompt_first_web_llm_cross_check", fake_prompt_first_check)
+
+    assert cli.main(["prompt-first", "web-llm", str(tmp_path)]) == 0
+    assert "检查一个写作主张" in captured["question"]
+    assert captured["context"].startswith("当前阶段：01")
+    assert json.loads(capsys.readouterr().out)["ok"] is True
 
 
 def test_human_project_browser_authorization_enables_local_agent_runner(tmp_path: Path, monkeypatch):

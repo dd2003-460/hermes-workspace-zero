@@ -95,7 +95,10 @@ def _is_controlled_ralph_command(command: str | None, role: str) -> bool:
     if not tokens:
         return False
     if role == "worker":
-        return tokens[0] in {"field-apply", "web-llm-check"}
+        # A graph-node worker has the same narrow ownership model as a field
+        # worker, but its durable completion boundary is graph-apply rather
+        # than field-apply.
+        return tokens[0] in {"field-apply", "graph-apply", "web-llm-check"}
     return tokens[0] in _COMMANDER_RALPH_COMMANDS
 
 

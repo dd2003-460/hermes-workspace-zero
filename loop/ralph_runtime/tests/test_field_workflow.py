@@ -7,7 +7,13 @@ from concurrent.futures import ThreadPoolExecutor
 
 import pytest
 
-from ralph_runtime.cli import _field_agent_stall_requested, _reap_auto_field_workers, apply_fields, init_fields
+from ralph_runtime.cli import (
+    _field_agent_stall_requested,
+    _field_task_stall_requested,
+    _reap_auto_field_workers,
+    apply_fields,
+    init_fields,
+)
 from ralph_runtime.field_tasks import (
     claim_field_task,
     materialize_field_tasks,
@@ -17,12 +23,13 @@ from ralph_runtime.field_tasks import (
 )
 from ralph_runtime.graph_tasks import apply_graph_task, materialize_graph_tasks
 from ralph_runtime.events import apply_and_record
-from ralph_runtime.hooks import handle_posttooluse, handle_pretooluse, handle_stop, handle_subagentstart, handle_subagentstop
+from ralph_runtime.hooks import handle_posttooluse, handle_pretooluse, handle_stop, handle_subagentstart, handle_subagentstop, handle_userpromptsubmit
 from ralph_runtime.prompt_renderer import PromptRenderer
 from ralph_runtime.protocol import ProtocolError, parse_action, validate_action
 from ralph_runtime.result_artifacts import state_stage_artifact_dir
 from ralph_runtime.stage_policy import decide_tool
 from ralph_runtime.state import create_state, load_state, record_human_input, save_state
+import ralph_runtime.cli as cli
 
 
 def _project(tmp_path: Path) -> Path:
@@ -30,6 +37,39 @@ def _project(tmp_path: Path) -> Path:
     root.mkdir()
     save_state(root / "loop-state.json", create_state("project", task="调研本地 AI GPU"))
     return root
+
+
+def _flow_graph() -> dict:
+    return {
+        "nodes": [
+            {
+                "id": "T1.1", "depends_on": [], "execution_mode": "parallel",
+                "parallel_group_id": "G1", "orthogonal_key": "dimension_a",
+                "input_refs": [], "output_schema": {"result": "string"},
+                "preconditions": [], "postconditions": ["A"],
+                "writes": ["loop-artifacts/stages/03/r1/outputs/T1.1.json"],
+            },
+            {
+                "id": "T1.2", "depends_on": [], "execution_mode": "parallel",
+                "parallel_group_id": "G1", "orthogonal_key": "dimension_b",
+                "input_refs": [], "output_schema": {"result": "string"},
+                "preconditions": [], "postconditions": ["B"],
+                "writes": ["loop-artifacts/stages/03/r1/outputs/T1.2.json"],
+            },
+            {
+                "id": "J1", "depends_on": ["T1.1", "T1.2"], "execution_mode": "serial",
+                "input_refs": [
+                    "loop-artifacts/stages/03/r1/outputs/T1.1.json",
+                    "loop-artifacts/stages/03/r1/outputs/T1.2.json",
+                ],
+                "output_schema": {"joined": "string"},
+                "preconditions": ["inputs complete"], "postconditions": ["joined"],
+                "writes": ["loop-artifacts/stages/03/r1/outputs/J1.json"],
+            },
+        ],
+        "parallel_groups": [{"id": "G1", "members": ["T1.1", "T1.2"]}],
+        "joins": [{"id": "J1", "depends_on": ["T1.1", "T1.2"]}],
+    }
 
 
 def test_field_init_creates_stage_scoped_draft_without_overwriting(tmp_path: Path):
@@ -54,8 +94,6 @@ def test_stage_prompts_advertise_stage_executor_skill():
 
 
 def test_ralph_attaches_stage_executor_skill_as_system_context(tmp_path: Path, monkeypatch):
-    import ralph_runtime.cli as cli
-
     skill = tmp_path / "ralph-stage-executor.md"
     skill.write_text(
         "---\nname: ralph-stage-executor\ndescription: test\n---\n\n# Workflow\nUse field-status first.\n",
@@ -70,6 +108,184 @@ def test_ralph_attaches_stage_executor_skill_as_system_context(tmp_path: Path, m
     index = command.index("--append-system-prompt")
     assert "Required RALPH stage-execution skill" in command[index + 1]
     assert "Use field-status first." in command[index + 1]
+
+
+def test_auto_field_worker_loads_stage_skill_before_its_prompt(tmp_path: Path, monkeypatch):
+    """Fallback contexts must receive the same workflow as their Commander."""
+
+    root = _project(tmp_path)
+    state = load_state(root / "loop-state.json")
+    state["task_spec"]["attribute_matrix"] = [{
+        "concept": "阶段 01 输出：goal",
+        "role": "goal",
+        "attribute": "给出一个最小目标",
+        "disposition": "pending",
+        "rationale": "测试恢复 worker 的阶段技能注入。",
+        "evidence_refs": [],
+    }]
+    save_state(root / "loop-state.json", state)
+    task = materialize_field_tasks(root, state)[0]
+    save_state(root / "loop-state.json", state)
+
+    skill = tmp_path / "ralph-stage-executor.md"
+    skill.write_text(
+        "---\nname: ralph-stage-executor\ndescription: test\n---\n\n# Worker workflow\nApply one field.\n",
+        encoding="utf-8",
+    )
+    started: list[list[str]] = []
+
+    class FakeProcess:
+        pid = 4242
+
+    def fake_popen(command, **kwargs):
+        started.append(command)
+        return FakeProcess()
+
+    monkeypatch.setenv("RALPH_STAGE_EXECUTOR_SKILL", str(skill))
+    monkeypatch.setenv("RALPH_AUTO_FIELD_WORKERS", "1")
+    monkeypatch.setenv("RALPH_AUTO_PENDING_FIELD_WORKERS", "1")
+    monkeypatch.setattr(cli, "_claude_executable", lambda: "claude")
+    monkeypatch.setattr(cli.subprocess, "Popen", fake_popen)
+
+    workers: dict[str, dict] = {}
+    assert cli._launch_auto_field_workers(
+        root,
+        root / ".claude" / "settings.ralph.json",
+        {},
+        model=None,
+        effort="low",
+        skip_permissions=False,
+        workers=workers,
+    ) == [task["id"]]
+
+    command = started[0]
+    skill_index = command.index("--append-system-prompt")
+    prompt_index = command.index("-p")
+    assert skill_index < prompt_index == len(command) - 2
+    assert "Required RALPH stage-execution skill" in command[skill_index + 1]
+    assert "Apply one field." in command[skill_index + 1]
+    assert command[prompt_index + 1].startswith("RALPH_FIELD_TASK=")
+
+
+def test_auto_graph_worker_loads_skill_and_uses_graph_apply(tmp_path: Path, monkeypatch):
+    root = _project(tmp_path)
+    state = load_state(root / "loop-state.json")
+    state["stage"] = {**state["stage"], "id": "03", "revision": "r1"}
+    state["plan"] = _flow_graph()
+    materialize_graph_tasks(root, state)
+    save_state(root / "loop-state.json", state)
+
+    skill = tmp_path / "ralph-stage-executor.md"
+    skill.write_text("# Graph workflow\nRun graph-apply.\n", encoding="utf-8")
+    started: list[list[str]] = []
+
+    class FakeProcess:
+        pid = 4243
+
+    def fake_popen(command, **kwargs):
+        started.append(command)
+        return FakeProcess()
+
+    monkeypatch.setenv("RALPH_STAGE_EXECUTOR_SKILL", str(skill))
+    monkeypatch.setattr(cli, "_claude_executable", lambda: "claude")
+    monkeypatch.setattr(cli.subprocess, "Popen", fake_popen)
+    workers: dict[str, dict] = {}
+    launched = cli._launch_auto_graph_workers(
+        root,
+        root / ".claude" / "settings.ralph.json",
+        {},
+        model=None,
+        effort="low",
+        skip_permissions=False,
+        workers=workers,
+    )
+
+    assert launched == ["03-r1-node-T1.1"]
+    command = started[0]
+    assert command.index("--append-system-prompt") < command.index("-p") == len(command) - 2
+    assert "Graph workflow" in command[command.index("--append-system-prompt") + 1]
+    assert "RALPH_GRAPH_TASK=" in command[-1]
+    assert "ralph graph-apply" in command[-1]
+    decision = decide_tool(state, "worker", "Bash", command="ralph graph-apply . task.json")
+    assert decision.decision == "allow"
+
+
+def test_flow_stage03_waits_for_graph_apply_artifacts_before_auto_advance(tmp_path: Path):
+    root = _project(tmp_path)
+    state = load_state(root / "loop-state.json")
+    graph = _flow_graph()
+    state["run_mode"] = "flow_only"
+    state["stage"] = {
+        **state["stage"], "id": "03", "revision": "r1", "on_success": "04",
+        "required_outputs": ["task_graph", "coverage_proof"],
+    }
+    state["task_spec"]["attribute_matrix"] = [
+        {"concept": "task_graph", "role": "task_graph", "attribute": "validated graph", "task_graph": graph, "disposition": "inferred", "rationale": "仅用于验证流程", "evidence_refs": []},
+        {"concept": "coverage_proof", "role": "coverage_proof", "attribute": "covers all nodes", "disposition": "inferred", "rationale": "仅用于验证流程", "evidence_refs": []},
+    ]
+    state["plan"] = graph
+    save_state(root / "loop-state.json", state)
+
+    assert cli._field_engine_tick(root, state) is False
+    assert load_state(root / "loop-state.json")["stage"]["id"] == "03"
+
+    completed_graph = _flow_graph()
+    completed_graph["completed"] = ["T1.1", "T1.2", "J1"]
+    completed_graph["task_results"] = {}
+    for node in completed_graph["nodes"]:
+        ref = node["writes"][0]
+        output = root / ref
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(json.dumps({"node": node["id"]}), encoding="utf-8")
+        completed_graph["task_results"][node["id"]] = {
+            "artifact_refs": [ref],
+            "output": {"node": node["id"]},
+            "evidence": [ref],
+        }
+    live = load_state(root / "loop-state.json")
+    live["plan"] = completed_graph
+    save_state(root / "loop-state.json", live)
+
+    assert cli._field_engine_tick(root, live) is True
+    assert load_state(root / "loop-state.json")["stage"]["id"] == "04"
+
+
+def test_flow_final_cross_validation_marks_run_completed(tmp_path: Path):
+    root = _project(tmp_path)
+    state = load_state(root / "loop-state.json")
+    state["run_mode"] = "flow_only"
+    state["stage"] = {
+        **state["stage"], "id": "04.5", "revision": "r1", "on_success": "exploration",
+        "required_outputs": ["cross_validation_out"],
+    }
+    state["task_spec"]["attribute_matrix"] = [{
+        "concept": "cross_validation_out", "role": "cross_validation_out",
+        "attribute": "独立核验、矛盾与残余不确定性已记录",
+        "disposition": "inferred", "rationale": "仅用于验证流程", "evidence_refs": [],
+    }]
+    save_state(root / "loop-state.json", state)
+
+    assert cli._field_engine_tick(root, state) is True
+    assert load_state(root / "loop-state.json")["status"] == "completed"
+
+
+def test_flow_only_stage02_auto_advance_does_not_require_web_evidence(tmp_path: Path):
+    root = _project(tmp_path)
+    state = load_state(root / "loop-state.json")
+    state["run_mode"] = "flow_only"
+    state["stage"] = {
+        **state["stage"], "id": "02", "revision": "r1", "on_success": "02.5",
+        "required_outputs": ["research_findings"],
+    }
+    state["task_spec"]["attribute_matrix"] = [{
+        "concept": "闭环研究结论", "role": "research_findings",
+        "attribute": "本地固定输入的推导结论", "disposition": "inferred",
+        "rationale": "仅用于验证流程", "evidence_refs": [],
+    }]
+    save_state(root / "loop-state.json", state)
+
+    assert cli._field_engine_tick(root, state) is True
+    assert load_state(root / "loop-state.json")["stage"]["id"] == "02.5"
 
 
 def test_field_tasks_are_generated_from_current_factor_count(tmp_path: Path):
@@ -181,6 +397,30 @@ def test_flow_only_worker_cannot_submit_unchanged_pending_placeholder(tmp_path: 
     with pytest.raises(ValueError, match="worker 必须先用 Write/Edit"):
         apply_fields(root, task_path)
     assert load_state(root / "loop-state.json")["task_spec"]["attribute_matrix"][0]["disposition"] == "pending"
+
+
+def test_flow_only_worker_research_draft_is_merged_as_inferred(tmp_path: Path, monkeypatch):
+    root = _project(tmp_path)
+    state = load_state(root / "loop-state.json")
+    state["run_mode"] = "flow_only"
+    state["stage"] = {**state["stage"], "id": "02", "required_outputs": ["research_findings"]}
+    state["task_spec"]["attribute_matrix"] = [{
+        "concept": "闭环未知项", "role": "research_findings", "attribute": "虚构本地输入",
+        "disposition": "research_required", "rationale": "初始 synthetic 字段", "evidence_refs": [],
+    }]
+    save_state(root / "loop-state.json", state)
+    task_path = root / materialize_field_tasks(root, state)[0]["path"]
+    task = json.loads(task_path.read_text(encoding="utf-8"))
+    task["field"].update({
+        "disposition": "research_required", "rationale": "网页被禁用，因此保留闭环测试结论", "evidence_refs": [],
+    })
+    task_path.write_text(json.dumps(task, ensure_ascii=False), encoding="utf-8")
+
+    monkeypatch.setenv("RALPH_ROLE", "worker")
+    assert apply_fields(root, task_path)["ok"] is True
+    merged = load_state(root / "loop-state.json")["task_spec"]["attribute_matrix"][0]
+    assert merged["disposition"] == "inferred"
+    assert "仅用于验证流程" in merged["rationale"]
 
 
 def test_field_apply_is_incremental_and_preserves_previous_fields(tmp_path: Path):
@@ -531,6 +771,23 @@ def test_stale_auto_worker_releases_dispatched_slot_and_preserves_process_group(
     assert live["field_tasks"][0].get("agent_id") is None
     assert process.poll() is not None
     assert "auto_field_worker_stall_reaped" in (root / "loop-events.md").read_text(encoding="utf-8")
+
+
+def test_disabled_field_worker_heartbeat_does_not_reap_a_fresh_reservation(monkeypatch):
+    """The default disabled watchdog must not turn every elapsed duration into a stall."""
+
+    now = datetime.now(timezone.utc)
+    task = {
+        "status": "dispatched",
+        "web_failures": 0,
+        "updated_at": (now - timedelta(seconds=120)).isoformat(),
+    }
+
+    monkeypatch.delenv("RALPH_FIELD_AGENT_STALL_SECONDS", raising=False)
+    assert _field_task_stall_requested(task, now=now) is False
+
+    monkeypatch.setenv("RALPH_FIELD_AGENT_STALL_SECONDS", "90")
+    assert _field_task_stall_requested(task, now=now) is True
 
 
 def test_invalid_json_draft_does_not_mutate_state(tmp_path: Path):
@@ -923,6 +1180,14 @@ def test_generated_ralph_prompt_does_not_accumulate_as_authoritative_input(tmp_p
         "# RALPH 字段增量提示（02-r1）\nRALPH_FIELD_TASK=loop-artifacts/x.json",
     )
     assert len(updated["task_spec"]["authoritative_inputs"]) == before
+    recovery = "# RALPH 最小恢复（01-r1）\n下一次工具调用只执行 `ralph field-init .`。"
+    assert record_human_input(updated, recovery) == updated
+
+    handle_userpromptsubmit({"cwd": str(root), "prompt": recovery})
+    persisted = load_state(root / "loop-state.json")
+    assert persisted == state
+    event_log = root / "loop-events.md"
+    assert not event_log.exists() or "human_input_received" not in event_log.read_text(encoding="utf-8")
 
 
 def test_real_human_input_is_deduplicated_and_bounded(tmp_path: Path):

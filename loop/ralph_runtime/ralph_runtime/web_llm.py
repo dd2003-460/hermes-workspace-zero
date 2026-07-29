@@ -543,6 +543,101 @@ def _timeout_seconds() -> float:
         return 45.0
 
 
+def _write_markdown_receipt(path: Path, claim: str, context: str, responses: list[Mapping[str, Any]]) -> None:
+    """Persist browser/API review evidence as Markdown for prompt-first projects."""
+
+    lines = [
+        "# 网页 AI 交叉询问回执",
+        "",
+        f"- 时间：{datetime.now(timezone.utc).isoformat()}",
+        "- 性质：网页 AI 回答仅是审阅线索，不是权威事实来源。",
+        "",
+        "## 询问主张",
+        "",
+        claim,
+        "",
+        "## 上下文",
+        "",
+        context or "（无额外上下文）",
+        "",
+        "## 回执",
+        "",
+    ]
+    for item in responses:
+        lines.extend([
+            f"### {item.get('provider_id', 'unknown provider')}",
+            "",
+            f"- 传输：{item.get('transport', 'api')}",
+            f"- 状态：{item.get('status', 'error')}",
+        ])
+        if item.get("page_url"):
+            lines.append(f"- 页面：{item['page_url']}")
+        if item.get("error"):
+            lines.append(f"- 错误：{item['error']}")
+        response = str(item.get("response") or "").strip()
+        if response:
+            lines.extend(["", "回答：", "", *[f"    {line}" for line in response.splitlines()]])
+        lines.append("")
+    lines.extend([
+        "## 使用限制",
+        "",
+        "将上述回答与独立来源分开记录；不得把网页 AI 的未引证说法写成已验证事实。",
+        "",
+    ])
+    encoded = "\n".join(lines)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, temporary = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=path.parent)
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            handle.write(encoded)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary, path)
+    finally:
+        if os.path.exists(temporary):
+            os.unlink(temporary)
+
+
+def run_prompt_first_web_llm_cross_check(
+    project: str | Path,
+    claim: str,
+    context: str = "",
+) -> dict[str, Any]:
+    """Use configured local browser/API reviewers without field/DAG state.
+
+    The sole durable result is a Markdown receipt under the prompt-first
+    artifacts.  This is an execution helper, not a stage-quality gate.
+    """
+
+    root = Path(project).expanduser().resolve()
+    bounded_claim = _bounded_text(claim, 4000)
+    bounded_context = _bounded_text(context, 6000)
+    if not bounded_claim:
+        raise ValueError("prompt-first 网页 AI 询问需要非空问题或主张")
+    providers = _all_providers(root)
+    if len(providers) < 2:
+        raise WebLLMConfigurationError(
+            "至少配置两个独立 web-LLM provider 才能执行交叉询问；"
+            "可由人类预先运行 `ralph web-llm-authorize --global`。"
+        )
+    responses = [
+        (
+            _ask_browser_provider(provider, bounded_claim, bounded_context, _timeout_seconds())
+            if provider.get("site")
+            else _ask_provider(provider, bounded_claim, bounded_context, _timeout_seconds())
+        )
+        for provider in providers
+    ]
+    output = root / "loop-artifacts" / "prompt-first" / "02-web-llm-cross-check.md"
+    _write_markdown_receipt(output, bounded_claim, bounded_context, responses)
+    return {
+        "ok": True,
+        "receipt": str(output.relative_to(root)),
+        "successful_provider_ids": [item["provider_id"] for item in responses if item.get("status") == "ok"],
+        "failed_provider_ids": [item["provider_id"] for item in responses if item.get("status") != "ok"],
+    }
+
+
 def run_web_llm_cross_check(project: str | Path, request_file: str | Path) -> dict[str, Any]:
     """Ask configured independent providers and persist a durable receipt."""
 

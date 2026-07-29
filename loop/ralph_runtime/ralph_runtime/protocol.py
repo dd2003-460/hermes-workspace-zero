@@ -10,7 +10,7 @@ from typing import Any, Mapping
 from urllib.parse import urlparse
 
 from .dag import DAGValidationError, validate_plan
-from .runtime_config import field_mode_enabled
+from .runtime_config import field_mode_enabled, flow_only_mode
 
 
 ALLOWED_ACTIONS = frozenset(
@@ -951,8 +951,14 @@ def _collect_field_gate_issues(state: Mapping[str, Any], payload: Mapping[str, A
     # the web sources are claim-level, or a DAG was actually executed.  Keep
     # these independent gates after field_completeness rather than returning
     # early, which was the route that let the GPU test formally pass 01→04.5.
-    issues.extend(_external_evidence_issues(matrix, stage_id))
-    issues.extend(_cross_validation_issues(matrix, stage_id))
+    # A closed-world flow-only E2E deliberately proves orchestration with
+    # inferred local inputs; it must not manufacture web citations or
+    # claim-level external validation records merely to satisfy production
+    # research gates.  Keep the structural DAG execution gate below active in
+    # both modes, so this exception cannot turn the test into a trivial pass.
+    if not flow_only_mode(state):
+        issues.extend(_external_evidence_issues(matrix, stage_id))
+        issues.extend(_cross_validation_issues(matrix, stage_id))
     if stage_id == "03":
         issues.extend(_execution_gate_issues(state))
     if issues:

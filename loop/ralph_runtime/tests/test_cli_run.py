@@ -107,6 +107,26 @@ def test_prepare_existing_project_preserves_canonical_task_and_records_new_input
     assert "task_update_preserved_as_input" in (project / "loop-events.md").read_text(encoding="utf-8")
 
 
+def test_prepare_empty_initialized_project_adopts_first_explicit_task(tmp_path: Path):
+    project = tmp_path / "empty-initialized-project"
+    cli.prepare_project(project)
+
+    _, _, is_new, _ = cli.prepare_project(project, task="flow_only：完成离线流程测试")
+    updated = load_state(project / "loop-state.json")
+
+    assert is_new is False
+    assert updated["task"] == {
+        "description": "flow_only：完成离线流程测试",
+        "source": "ralph loop",
+    }
+    assert updated["task_spec"]["authoritative_inputs"][0]["kind"] == "initial_task"
+    assert updated["task_spec"]["authoritative_inputs"][0]["source"] == "ralph loop"
+    assert updated["task_spec"]["authoritative_inputs"][0]["text"] == "flow_only：完成离线流程测试"
+    events = (project / "loop-events.md").read_text(encoding="utf-8")
+    assert "empty_task_adopted" in events
+    assert "task_update_preserved_as_input" not in events
+
+
 def test_events_tail_returns_bounded_summaries(tmp_path: Path):
     project = tmp_path / "event-project"
     cli.prepare_project(project, task="测试事件摘要")

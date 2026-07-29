@@ -36,6 +36,15 @@ from .decomposition_benchmark import (
     load_task_spec_file,
 )
 from .prompt_renderer import PromptRenderer
+from .prompt_first import (
+    handle_stop as handle_prompt_first_stop,
+    initialize as initialize_prompt_first,
+    load_state as load_prompt_first_state,
+    render_prompt as render_prompt_first,
+    state_path as prompt_first_state_path,
+    status_summary as prompt_first_status_summary,
+    system_prompt as prompt_first_system_prompt,
+)
 from .replay_runner import run_fixture_file
 from .events import append_observation, apply_and_record, read_events, replay_events
 from .dag import DAGValidationError, validate_plan
@@ -62,6 +71,7 @@ from .task_board import TaskBoardError, read_task_board, select_next_task
 from .web_llm import (
     authorize_browser_providers,
     open_browser_login,
+    run_prompt_first_web_llm_cross_check,
     run_web_llm_cross_check,
     web_llm_crosscheck_enabled,
 )
@@ -289,6 +299,7 @@ def prepare_project(
     is_new = not state_path.exists()
     reopened_from_completed = False
     task_update_preserved = False
+    empty_task_adopted = False
     if is_new:
         legacy_state = load_legacy_markdown(
             root / ".claude" / "ralph-loop.local.md",
@@ -309,7 +320,18 @@ def prepare_project(
             save_state(state_path, current)
         else:
             current_task = current.get("task", {}) if isinstance(current.get("task"), dict) else {}
-            if current_task.get("description") != task:
+            current_description = str(current_task.get("description") or "").strip()
+            if not current_description:
+                # ``ralph init`` deliberately creates a task-less scaffold.
+                # The first explicit `ralph loop <project> <task>` must adopt
+                # that task rather than treating it as a late refinement of a
+                # non-existent job.  Otherwise task-specific modes (such as
+                # flow_only) disappear into authoritative_inputs while the
+                # field queue is generated with the wrong policy.
+                current = set_task(current, task, source="ralph loop")
+                save_state(state_path, current)
+                empty_task_adopted = True
+            elif current_description != task:
                 # A repeated ``ralph loop <project> <task>`` may be a
                 # refinement, but it may also be an entirely different job.
                 # Never overwrite the active task while retaining its old
@@ -341,7 +363,19 @@ def prepare_project(
                 "created_files": created,
                 "hook_mode": mode,
                 "reopened_from_completed": reopened_from_completed,
+                "empty_task_adopted": empty_task_adopted,
                 "task_update_preserved_as_input": task_update_preserved,
+            },
+        )
+    if empty_task_adopted:
+        append_observation(
+            events_path,
+            "empty_task_adopted",
+            {
+                "stage": persisted_state.get("stage", {}).get("id"),
+                "revision": persisted_state.get("stage", {}).get("revision"),
+                "source": "ralph loop",
+                "reason": "empty ralph init scaffold adopted its first explicit loop task",
             },
         )
     if task_update_preserved:
@@ -364,6 +398,12 @@ def build_parser() -> argparse.ArgumentParser:
 
     init = sub.add_parser("init")
     init.add_argument("project")
+    init.add_argument(
+        "--workflow",
+        choices=("prompt-first", "field"),
+        default="prompt-first",
+        help="默认创建 Markdown prompt-first 项目；旧字段运行时用 --workflow field。",
+    )
 
     status = sub.add_parser("status")
     status.add_argument("project")
@@ -604,6 +644,12 @@ def build_parser() -> argparse.ArgumentParser:
     loop.add_argument("project_or_task", help="项目路径，或在省略 task 时直接填写任务描述")
     loop.add_argument("task", nargs="?", help="显式项目路径模式下的任务描述")
     loop.add_argument("--workspace", default=None, help="自动项目模式使用的 workspace 根目录")
+    loop.add_argument(
+        "--workflow",
+        choices=("auto", "prompt-first", "field"),
+        default="auto",
+        help="auto：新显式项目用 Markdown prompt-first，已有 loop-state.json 保持字段兼容；可显式覆盖。",
+    )
     loop.add_argument("--mode", choices=HOOK_MODES, default=default_hook_mode())
     loop.add_argument("--stop-policy", choices=STOP_POLICIES, default=default_stop_policy())
     loop.add_argument("--effort", choices=("low", "medium", "high", "xhigh", "max"), default=None)
@@ -625,6 +671,40 @@ def build_parser() -> argparse.ArgumentParser:
         help="跳过 Claude Code 交互式权限确认（RALPH Hook 仍强制派发/校验规则），便于无人值守可见 TUI",
     )
     _add_compaction_arguments(loop)
+
+    prompt_first = sub.add_parser(
+        "prompt-first",
+        help="Markdown 阶段卡工作流：无字段/DAG/工具语义校验，只用 Stop Hook 续跑。",
+    )
+    prompt_first_sub = prompt_first.add_subparsers(dest="prompt_first_command", required=True)
+    prompt_first_init = prompt_first_sub.add_parser("init", help="创建 ralph-loop.md 与阶段 01 Markdown 模板")
+    prompt_first_init.add_argument("project", nargs="?", default=".")
+    prompt_first_init.add_argument("task", nargs="?", default="")
+    prompt_first_status = prompt_first_sub.add_parser("status", help="查看 Markdown 阶段游标")
+    prompt_first_status.add_argument("project", nargs="?", default=".")
+    prompt_first_render = prompt_first_sub.add_parser("render", help="渲染当前阶段的短提示")
+    prompt_first_render.add_argument("project", nargs="?", default=".")
+    prompt_first_loop = prompt_first_sub.add_parser("loop", help="在同一 Commander/TUI 中持续完成 Markdown 阶段")
+    prompt_first_loop.add_argument("project")
+    prompt_first_loop.add_argument("task")
+    prompt_first_loop.add_argument("--effort", choices=("low", "medium", "high", "xhigh", "max"), default=None)
+    prompt_first_loop.add_argument("--model", default=None)
+    prompt_first_loop.add_argument("--max-cycles", type=int, default=0)
+    prompt_first_loop.add_argument("--retry-delay", type=float, default=3.0)
+    prompt_first_loop.add_argument("--idle-timeout", type=float, default=0.0)
+    prompt_first_loop.add_argument("--dangerously-skip-permissions", action="store_true")
+    _add_compaction_arguments(prompt_first_loop)
+    prompt_first_web = prompt_first_sub.add_parser(
+        "web-llm",
+        help="用已授权的本地 Playwright/API 网页 LLM 做一次交叉询问，并写 Markdown 回执",
+    )
+    prompt_first_web.add_argument("project", nargs="?", default=".")
+    prompt_first_web.add_argument("question", nargs="?", default="", help="可选的聚焦主张；省略时从当前 Markdown 任务生成")
+    prompt_first_web.add_argument("--context", default="", help="给网页 LLM 的简短背景")
+    # This is installed into the prompt-first settings file as its sole Hook.
+    # It is intentionally a top-level command so Claude Code can invoke it
+    # without needing to understand argparse's nested subcommands.
+    sub.add_parser("prompt-first-stop", help=argparse.SUPPRESS)
 
     return parser
 
@@ -766,6 +846,66 @@ def install_hooks(
     }
     settings_path.write_text(json.dumps(settings, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return settings_path
+
+
+def _prompt_first_hook_command() -> str:
+    return f"{shlex.quote(sys.executable)} -m ralph_runtime.cli prompt-first-stop"
+
+
+def install_prompt_first_hooks(project: str | Path) -> Path:
+    """Install only an inline Markdown Stop Hook, never tool gatekeepers."""
+
+    root = Path(project).expanduser().resolve()
+    root.mkdir(parents=True, exist_ok=True)
+    settings_path = root / ".claude" / "settings.ralph-prompt-first.json"
+    settings_path.parent.mkdir(parents=True, exist_ok=True)
+    settings = {
+        "hooks": {
+            "Stop": [{"hooks": [{"type": "command", "command": _prompt_first_hook_command()}]}],
+        }
+    }
+    settings_path.write_text(json.dumps(settings, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return settings_path
+
+
+def _ensure_prompt_first_scaffold(root: Path) -> list[str]:
+    """Add a concise project instruction without overwriting user guidance."""
+
+    created: list[str] = []
+    claude_path = root / "CLAUDE.md"
+    if not claude_path.exists():
+        claude_path.write_text(
+            "# RALPH Prompt-First\n\n"
+            "Read `ralph-loop.md` and its current Markdown artifact. Work through the "
+            "stage in ordinary Markdown, then append `<!-- ralph: done -->`. "
+            "Do not use field/DAG JSON workflows in this project.\n",
+            encoding="utf-8",
+        )
+        created.append(str(claude_path))
+    return created
+
+
+def _prompt_first_skill_context() -> tuple[str, Path | None]:
+    workspace = _workspace_root()
+    candidates = [
+        workspace / ".claude" / "skills" / "ralph-prompt-first" / "SKILL.md"
+        if workspace is not None else None,
+        Path.home() / ".claude" / "skills" / "ralph-prompt-first" / "SKILL.md",
+    ]
+    for path in candidates:
+        if path is None:
+            continue
+        try:
+            raw = path.read_text(encoding="utf-8").strip()
+        except OSError:
+            continue
+        if raw.startswith("---"):
+            _, marker, body = raw.partition("\n---")
+            if marker:
+                raw = body.lstrip()
+        if raw:
+            return "# Required RALPH prompt-first skill\n\n" + raw[:6_000], path
+    return prompt_first_system_prompt(), None
 
 
 def recover_card(
@@ -1521,6 +1661,13 @@ def _field_task_stall_requested(task: Mapping[str, Any], *, now: datetime | None
         return False
     if int(task.get("web_failures", 0) or 0) >= 2:
         return True
+    # ``0`` explicitly disables the heartbeat watchdog.  A live fallback
+    # worker is checked immediately after its reservation is written, so
+    # comparing its brand-new timestamp against a zero-second timeout would
+    # otherwise reap every worker before it can make its first Read/Write.
+    timeout = _field_agent_stall_seconds()
+    if timeout <= 0:
+        return False
     updated_at = task.get("updated_at")
     if not updated_at:
         return False
@@ -1531,7 +1678,7 @@ def _field_task_stall_requested(task: Mapping[str, Any], *, now: datetime | None
     except (TypeError, ValueError):
         return False
     current = now or datetime.now(timezone.utc)
-    return (current - heartbeat).total_seconds() >= _field_agent_stall_seconds()
+    return (current - heartbeat).total_seconds() >= timeout
 
 
 def _field_agent_stall_seconds() -> float:
@@ -1731,6 +1878,147 @@ def _run_claude_supervised(
         time.sleep(min(5.0, max(0.25, idle_timeout / 10 if idle_timeout > 0 else 5.0)))
 
 
+def _run_prompt_first_supervised(
+    command: list[str],
+    *,
+    cwd: Path,
+    env: dict[str, str],
+    idle_timeout: float,
+) -> tuple[int, bool]:
+    """Run a prompt-first Commander without field/card watchdogs.
+
+    A normal Stop is blocked by the Markdown Stop Hook and remains in this
+    process.  The outer loop only sees genuine process exit, or an explicitly
+    configured idle watchdog; a zero timeout never replaces live reasoning.
+    """
+
+    process = subprocess.Popen(command, cwd=cwd, env=env, start_new_session=(os.name != "nt"))
+    cursor = prompt_first_state_path(cwd)
+    try:
+        last_mtime = cursor.stat().st_mtime
+    except OSError:
+        last_mtime = 0.0
+    last_activity = time.monotonic()
+    while True:
+        return_code = process.poll()
+        if return_code is not None:
+            return return_code, False
+        try:
+            newest_mtime = cursor.stat().st_mtime
+        except OSError:
+            newest_mtime = last_mtime
+        if newest_mtime > last_mtime:
+            last_mtime = newest_mtime
+            last_activity = time.monotonic()
+        if idle_timeout > 0 and time.monotonic() - last_activity >= idle_timeout:
+            _terminate_process_group(process)
+            return process.returncode if process.returncode is not None else 124, True
+        time.sleep(min(5.0, max(0.25, idle_timeout / 10 if idle_timeout > 0 else 5.0)))
+
+
+def prompt_first_loop_project(
+    project: str | Path,
+    task: str,
+    *,
+    effort: str | None = None,
+    model: str | None = None,
+    max_cycles: int = 0,
+    retry_delay: float = 3.0,
+    idle_timeout: float = 0.0,
+    skip_permissions: bool = False,
+    auto_compact_window: int | None = None,
+    auto_compact_percent: int | None = None,
+) -> int:
+    """Run the Markdown-only default workflow for a new project."""
+
+    if max_cycles < 0 or retry_delay < 0 or idle_timeout < 0:
+        raise ValueError("max-cycles、retry-delay 和 idle-timeout 不能小于 0")
+    root = Path(project).expanduser().resolve()
+    with _supervisor_lock(root):
+        state = initialize_prompt_first(root, task)
+        created = _ensure_prompt_first_scaffold(root)
+        settings_path = install_prompt_first_hooks(root)
+        event_path = root / "loop-events.md"
+        event_path.touch(exist_ok=True)
+        environment, compact_window, compact_percent = _claude_environment(
+            auto_compact_window, auto_compact_percent,
+        )
+        append_observation(
+            event_path,
+            "prompt_first_session_started",
+            {
+                "stage": state["stage"],
+                "revision": state["revision"],
+                "state_file": "ralph-loop.md",
+                "current_artifact": state["current_artifact"],
+                "created_files": created,
+                "tool_gates": False,
+                "semantic_validation": False,
+                "idle_timeout": idle_timeout,
+            },
+        )
+        print("RALPH prompt-first project:", root)
+        print("Auto compact:", f"capacity={compact_window}, trigger≈{compact_window * compact_percent // 100} tokens")
+        print("Idle watchdog:", "disabled" if idle_timeout == 0 else f"{idle_timeout:g} seconds")
+        cycle = 0
+        while max_cycles == 0 or cycle < max_cycles:
+            state = load_prompt_first_state(root)
+            if state["status"] == "completed":
+                print("RALPH prompt-first completed:", root)
+                return 0
+            prompt = render_prompt_first(
+                root,
+                reason="新项目从当前 Markdown 阶段开始" if cycle == 0 else "上一个 Claude 进程已退出；从 Markdown 游标继续",
+            )
+            command = _with_skip_permissions(
+                _with_model(
+                    _with_effort(
+                        [
+                            _claude_executable(),
+                            "--settings", str(settings_path),
+                            "--setting-sources", "user,project,local",
+                        ],
+                        effort,
+                    ),
+                    model,
+                ),
+                skip_permissions,
+            )
+            skill_context, skill_path = _prompt_first_skill_context()
+            command.extend(["--append-system-prompt", skill_context, prompt])
+            cycle += 1
+            append_observation(
+                event_path,
+                "prompt_first_commander_started",
+                {
+                    "cycle": cycle,
+                    "stage": state["stage"],
+                    "revision": state["revision"],
+                    "skill": str(skill_path) if skill_path is not None else "builtin",
+                    "same_context_stop_policy": "inline",
+                },
+            )
+            print(f"RALPH prompt-first cycle {cycle}: launching Claude")
+            return_code, timed_out = _run_prompt_first_supervised(
+                command, cwd=root, env=environment, idle_timeout=idle_timeout,
+            )
+            append_observation(
+                event_path,
+                "prompt_first_commander_finished",
+                {
+                    "cycle": cycle,
+                    "return_code": return_code,
+                    "timed_out": timed_out,
+                    "next_action": "fresh_context_only_after_process_exit",
+                },
+            )
+            if max_cycles and cycle >= max_cycles:
+                return 0
+            if retry_delay:
+                time.sleep(min(retry_delay, 60.0))
+    return 0
+
+
 def _field_engine_tick(root: Path, state: dict) -> bool:
     """Field-centric per-cycle reconcile + auto-advance.
 
@@ -1793,9 +2081,40 @@ def _field_engine_tick(root: Path, state: dict) -> bool:
             # Field completeness alone cannot certify a task decomposition;
             # the structured DAG must first pass field-apply's validator.
             return False
+        node_ids = {str(node.get("id", "")) for node in nodes if isinstance(node, Mapping)}
+        completed = {str(node_id) for node_id in (plan.get("completed") or [])}
+        results = plan.get("task_results") if isinstance(plan.get("task_results"), Mapping) else {}
+        if not node_ids or not node_ids.issubset(completed):
+            return False
+        # graph-apply is the only normal producer of task_results and checks
+        # every declared write. Requiring its receipts prevents a flow-only
+        # test from advancing with a diagram but no executed node artifacts.
+        for node_id in node_ids:
+            result = results.get(node_id) if isinstance(results, Mapping) else None
+            refs = result.get("artifact_refs") if isinstance(result, Mapping) else None
+            if not isinstance(refs, list) or not refs:
+                return False
+            for ref in refs:
+                candidate = (root / str(ref)).resolve()
+                if root not in candidate.parents or not candidate.is_file() or candidate.stat().st_size <= 0:
+                    return False
     verdict = field_completeness(exploded, stage.get("required_outputs") or [])
     if not verdict["complete"]:
         return False
+    if current == "04.5" and flow_only_mode(live):
+        # The normal graph deliberately returns 04.5 to exploration so a real
+        # project can keep discovering work. A closed-world E2E fixture has a
+        # finite contract: after its final independent cross-check, close the
+        # run without silently cycling through exploration -> 01 again.
+        live["status"] = "completed"
+        save_state(state_path, live)
+        append_observation(
+            root / "loop-events.md",
+            "flow_only_final_completed",
+            {"stage": current, "revision": stage.get("revision"), "state_preserved": True},
+        )
+        print("[field-gate] flow-only final stage completed")
+        return True
     next_stage = str(stage.get("on_success") or "")
     if not next_stage or next_stage == current:
         return False
@@ -1861,7 +2180,11 @@ loop-state.json、loop-events.md、CLAUDE.md、AGENTS.md 或其他任务文件�
    rationale、disposition（confirmed/inferred/assumed_default/research_required 之一），
    已有字段保留；
 4. 用 Bash 执行消息中给出的 ralph field-apply 命令；如果校验报错，只修复报错列出的
-   当前字段并再次执行同一个命令。
+当前字段并再次执行同一个命令。
+
+当用户消息说 flow-only/不要求实际网页研究时，这条闭环测试规则优先：不调用网页，
+必须使用 disposition=inferred、evidence_refs=[]，并在 rationale 写“仅用于验证流程”。
+不要把这类 synthetic 字段写成 research_required。
 
 不要只返回自然语言。完成 field-apply 后直接结束。"""
 
@@ -2098,7 +2421,6 @@ def _launch_auto_field_workers(
                         "--permission-mode",
                         "bypassPermissions",
                         "--no-session-persistence",
-                        "-p",
                     ],
                     worker_effort,
                 ),
@@ -2106,7 +2428,12 @@ def _launch_auto_field_workers(
             ),
             skip_permissions,
         )
-        command.append(_auto_field_worker_prompt(claimed, root))
+        # A fallback worker is still a RALPH Claude context, not a blind
+        # subprocess.  Give it the same canonical stage skill as the
+        # Commander before its narrow task prompt.  Keep ``-p`` last: placing
+        # an option after it makes Claude parse the option as the prompt value.
+        _append_stage_executor_skill(command)
+        command.extend(["-p", _auto_field_worker_prompt(claimed, root)])
         log_dir = root / "loop-artifacts" / "worker-logs"
         log_dir.mkdir(parents=True, exist_ok=True)
         log_handle = (log_dir / f"{task_id}.log").open("ab")
@@ -2400,6 +2727,204 @@ def _wait_for_auto_field_workers(root: Path, workers: dict[str, dict[str, Any]])
             time.sleep(1.0)
 
 
+def _auto_graph_workers_enabled() -> bool:
+    """Return whether the stage-03 node recovery worker is enabled."""
+
+    value = os.environ.get("RALPH_AUTO_GRAPH_WORKERS", "1").strip().lower()
+    return value in {"1", "true", "yes", "on"}
+
+
+def _auto_graph_worker_timeout_seconds() -> float:
+    """Bound a graph-node recovery worker without discarding its artifacts."""
+
+    try:
+        return max(0.0, float(os.environ.get("RALPH_AUTO_GRAPH_WORKER_TIMEOUT", "0")))
+    except ValueError:
+        return 0.0
+
+
+AUTO_GRAPH_WORKER_SYSTEM_PROMPT = """你是 RALPH 的单个 DAG 节点执行 worker。
+
+只处理用户消息中给出的一个 RALPH_GRAPH_TASK 文件。不要读取
+loop-state.json、loop-events.md、CLAUDE.md、AGENTS.md 或其他节点任务，不要派发
+子代理，不要向人类提问。
+
+固定动作顺序：
+1. Read 这个 graph task JSON；
+2. 只在消息给出的 writes 路径写出非空交付文件；
+3. Edit 同一个 graph task JSON，填写非空 output 和 evidence；
+4. 用 Bash 运行消息给出的 ralph graph-apply 命令。
+
+如果校验失败，只修改当前节点 JSON 或其声明的 writes 文件，然后重试。完成
+graph-apply 后直接结束；绝不直接修改 loop-state.json。"""
+
+
+def _auto_graph_worker_prompt(task: Mapping[str, Any], project_root: Path) -> str:
+    """Render the bounded, write-backed prompt for one ready graph node."""
+
+    path = str(task.get("path", ""))
+    task_path = (project_root / path).resolve()
+    writes = [str(item) for item in task.get("writes", []) if isinstance(item, str) and item.strip()]
+    graph_apply = f"ralph graph-apply {shlex.quote(str(project_root))} {shlex.quote(str(task_path))}"
+    flow_only = "这是 flow-only 流程实验；不调用网页工具、不伪造来源。" if str(task.get("stage_id")) == "03" else ""
+    return (
+        f"RALPH_GRAPH_TASK={path}\n"
+        f"只执行节点 `{task.get('node_id', '')}`。{flow_only} 严格执行四步并在第 4 步结束："
+        f"1) Read `{path}`；"
+        f"2) 只用 Write 创建每个声明写入路径（{json.dumps(writes, ensure_ascii=False)}）的非空 JSON 交付物；"
+        f"3) Edit 同一任务 JSON，填写非空 `output` 和 `evidence`；"
+        f"4) Bash 执行 `{graph_apply}`。"
+        "若命令报错，只按依赖、output 或 writes 缺失提示修复当前节点后重试；"
+        "禁止修改 loop-state.json、其他节点任务或未声明路径。"
+    )
+
+
+def _launch_auto_graph_workers(
+    root: Path,
+    settings_path: Path,
+    environment: Mapping[str, str],
+    *,
+    model: str | None,
+    effort: str | None,
+    skip_permissions: bool,
+    workers: dict[str, dict[str, Any]],
+) -> list[str]:
+    """Launch one bounded worker for a ready DAG node after field recovery.
+
+    Graph tasks derive their ready state from ``plan.completed`` and therefore
+    need no second mutable reservation protocol.  The supervisor waits for
+    each worker, so selecting one ready node is deterministic and never races
+    another local Claude process.
+    """
+
+    if not _auto_graph_workers_enabled() or workers:
+        return []
+    state = load_state(root / "loop-state.json")
+    task = next(
+        (
+            item for item in state.get("graph_tasks", [])
+            if isinstance(item, Mapping) and str(item.get("status", "")) == "ready"
+        ),
+        None,
+    )
+    if not isinstance(task, Mapping):
+        return []
+    task_id = str(task.get("id", ""))
+    if not task_id:
+        return []
+    auto_id = f"auto-graph-{hashlib.sha1(task_id.encode()).hexdigest()[:12]}"
+    worker_env = _auto_field_worker_environment(environment)
+    worker_env["RALPH_ROLE"] = "worker"
+    worker_env["RALPH_AGENT_ID"] = auto_id
+    worker_effort = effort or os.environ.get("RALPH_AUTO_GRAPH_EFFORT", "low")
+    command = _with_skip_permissions(
+        _with_model(
+            _with_effort(
+                [
+                    _claude_executable(),
+                    "--settings",
+                    str(settings_path),
+                    "--setting-sources",
+                    "user,project,local",
+                    "--system-prompt",
+                    AUTO_GRAPH_WORKER_SYSTEM_PROMPT,
+                    "--tools",
+                    "Read,Write,Edit,Bash",
+                    "--allowedTools",
+                    "Read",
+                    "Write",
+                    "Edit",
+                    "Bash",
+                    "--permission-mode",
+                    "bypassPermissions",
+                    "--no-session-persistence",
+                ],
+                worker_effort,
+            ),
+            model,
+        ),
+        skip_permissions,
+    )
+    _append_stage_executor_skill(command)
+    command.extend(["-p", _auto_graph_worker_prompt(task, root)])
+    log_dir = root / "loop-artifacts" / "worker-logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    log_handle = (log_dir / f"{task_id}.log").open("ab")
+    try:
+        process = subprocess.Popen(
+            command,
+            cwd=root,
+            env=worker_env,
+            stdout=log_handle,
+            stderr=subprocess.STDOUT,
+            start_new_session=(os.name != "nt"),
+        )
+    except OSError as exc:
+        log_handle.close()
+        append_observation(
+            root / "loop-events.md",
+            "auto_graph_worker_start_failed",
+            {"graph_task_id": task_id, "agent_id": auto_id, "error": str(exc)},
+        )
+        return []
+    workers[task_id] = {
+        "process": process,
+        "log": log_handle,
+        "agent_id": auto_id,
+        "started_at": time.monotonic(),
+    }
+    append_observation(
+        root / "loop-events.md",
+        "auto_graph_worker_started",
+        {"graph_task_id": task_id, "node_id": task.get("node_id"), "agent_id": auto_id, "pid": process.pid},
+    )
+    return [task_id]
+
+
+def _reap_auto_graph_workers(root: Path, workers: dict[str, dict[str, Any]]) -> None:
+    """Close finished graph-worker logs and recover the local-model slot."""
+
+    for task_id, record in list(workers.items()):
+        process = record.get("process")
+        if not isinstance(process, subprocess.Popen):
+            workers.pop(task_id, None)
+            continue
+        return_code = process.poll()
+        started_at = record.get("started_at")
+        timeout = _auto_graph_worker_timeout_seconds()
+        if return_code is None and timeout > 0 and isinstance(started_at, (int, float)) and time.monotonic() - float(started_at) >= timeout:
+            _terminate_process_group(process)
+            return_code = process.returncode
+            event_type = "auto_graph_worker_timeout"
+        elif return_code is None:
+            continue
+        else:
+            event_type = "auto_graph_worker_finished"
+        log_handle = record.get("log")
+        if hasattr(log_handle, "close"):
+            log_handle.close()
+        append_observation(
+            root / "loop-events.md",
+            event_type,
+            {
+                "graph_task_id": task_id,
+                "agent_id": record.get("agent_id"),
+                "return_code": return_code,
+                "state_preserved": True,
+            },
+        )
+        workers.pop(task_id, None)
+
+
+def _wait_for_auto_graph_workers(root: Path, workers: dict[str, dict[str, Any]]) -> None:
+    """Serialize graph recovery workers on memory-constrained local models."""
+
+    while workers:
+        _reap_auto_graph_workers(root, workers)
+        if workers:
+            time.sleep(1.0)
+
+
 def _reap_persisted_auto_workers(root: Path, state: Mapping[str, Any]) -> list[int]:
     """Reap fallback workers left by a previous supervisor process."""
 
@@ -2533,6 +3058,7 @@ def _loop_project_impl(
     cycle = 0
     consecutive_failed_cycles = 0
     auto_workers: dict[str, dict[str, Any]] = {}
+    auto_graph_workers: dict[str, dict[str, Any]] = {}
     suppress_auto_fallback = False
     print("RALPH loop project:", root)
     if resolution is not None:
@@ -2546,6 +3072,7 @@ def _loop_project_impl(
 
     while max_cycles == 0 or cycle < max_cycles:
         _reap_auto_field_workers(root, auto_workers)
+        _reap_auto_graph_workers(root, auto_graph_workers)
         state = load_state(root / "loop-state.json")
         # Field-centric mode is the only normal execution path.  The runtime
         # reconciles drafts and can auto-advance stage 01 when its fields are
@@ -2607,6 +3134,23 @@ def _loop_project_impl(
                 # Qwen/MLX process must finish or be reaped before another
                 # Claude context is allowed to allocate KV cache.
                 _wait_for_auto_field_workers(root, auto_workers)
+                suppress_auto_fallback = True
+                continue
+        if _auto_graph_workers_enabled() and not suppress_auto_fallback:
+            launched_auto_graph_workers = _launch_auto_graph_workers(
+                root,
+                settings_path,
+                environment,
+                model=model,
+                effort=effort,
+                skip_permissions=skip_permissions,
+                workers=auto_graph_workers,
+            )
+            if launched_auto_graph_workers:
+                # A graph node may create a declared output consumed by its
+                # join. Wait for graph-apply to atomically recalculate ready
+                # nodes before considering another Commander context.
+                _wait_for_auto_graph_workers(root, auto_graph_workers)
                 suppress_auto_fallback = True
                 continue
 
@@ -3113,6 +3657,7 @@ def _apply_fields_unlocked(root: Path, fields_file: str | Path) -> dict[str, obj
         if isinstance(f, dict)
     }
     current_stage = str(state.get("stage", {}).get("id", "")) if isinstance(state.get("stage"), dict) else ""
+    flow_only = flow_only_mode(state)
     added = removed = 0
     allowed_dispositions = {"confirmed", "inferred", "assumed_default", "research_required", "pending"}
     seen_concepts: set[str] = set()
@@ -3161,6 +3706,19 @@ def _apply_fields_unlocked(root: Path, fields_file: str | Path) -> dict[str, obj
                 f"字段 {concept!r} 的 disposition 无效：{f.get('disposition')!r}；"
                 f"允许值：{', '.join(sorted(allowed_dispositions))}"
             )
+        # In an explicitly closed-world flow test a worker may still follow
+        # the generic evidence rule from a surrounding skill and save a
+        # synthetic leaf as research_required. That is not an unresolved
+        # real-world claim: preserving it verbatim would recreate the same
+        # task forever even though the prompt forbids web access. Normalize at
+        # the atomic merge boundary so the durable state reflects the declared
+        # test semantics while retaining the worker's rationale.
+        if flow_only and f.get("disposition") == "research_required":
+            f = dict(f)
+            f["disposition"] = "inferred"
+            rationale = str(f.get("rationale") or "").strip()
+            marker = "仅用于验证流程"
+            f["rationale"] = rationale if marker in rationale else (f"{rationale}；{marker}".strip("；"))
         if (
             os.environ.get("RALPH_ROLE", "").strip().lower() == "worker"
             and flow_only_mode(state)
@@ -3195,11 +3753,12 @@ def _apply_fields_unlocked(root: Path, fields_file: str | Path) -> dict[str, obj
         # Fail fast for fabricated "confirmed" research.  A worker may still
         # save a failed lookup as research_required with no refs (so the next
         # context can retry); only an asserted external fact is rejected here.
-        if str(f.get("disposition") or "") in {"confirmed", "inferred", "assumed_default"}:
+        if not flow_only and str(f.get("disposition") or "") in {"confirmed", "inferred", "assumed_default"}:
             evidence_issues = _external_evidence_issues([f], current_stage)
             if evidence_issues:
                 raise ValueError("；".join(evidence_issues))
-        _validate_cross_validation_receipts(root, current_stage, f)
+        if not flow_only:
+            _validate_cross_validation_receipts(root, current_stage, f)
         confidence = f.get("confidence")
         if confidence is not None and (not isinstance(confidence, (int, float)) or not 0 <= confidence <= 1):
             raise ValueError(f"字段 {concept!r} 的 confidence 必须是 0 到 1 之间的数字")
@@ -3482,7 +4041,74 @@ def watch_cmd(project: str | Path, *, interval: float = 5.0, max_lines: int = 42
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    if args.command == "prompt-first-stop":
+        try:
+            payload = json.loads(sys.stdin.read() or "{}")
+            print(json.dumps(handle_prompt_first_stop(payload), ensure_ascii=False))
+            return 0
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            print(json.dumps({"error": str(exc)}, ensure_ascii=False), file=sys.stderr)
+            return 1
+    if args.command == "prompt-first":
+        try:
+            if args.prompt_first_command == "init":
+                state = initialize_prompt_first(args.project, args.task)
+                print(json.dumps(prompt_first_status_summary(args.project), ensure_ascii=False, indent=2, sort_keys=True))
+                return 0
+            if args.prompt_first_command == "status":
+                print(json.dumps(prompt_first_status_summary(args.project), ensure_ascii=False, indent=2, sort_keys=True))
+                return 0
+            if args.prompt_first_command == "render":
+                print(render_prompt_first(args.project), end="")
+                return 0
+            if args.prompt_first_command == "loop":
+                return prompt_first_loop_project(
+                    args.project,
+                    args.task,
+                    effort=args.effort,
+                    model=args.model,
+                    max_cycles=args.max_cycles,
+                    retry_delay=args.retry_delay,
+                    idle_timeout=args.idle_timeout,
+                    skip_permissions=args.dangerously_skip_permissions,
+                    auto_compact_window=args.auto_compact_window,
+                    auto_compact_percent=args.auto_compact_percent,
+                )
+            if args.prompt_first_command == "web-llm":
+                question = args.question.strip()
+                context = args.context
+                if not question:
+                    current = load_prompt_first_state(args.project)
+                    question = (
+                        "请审阅当前任务的关键主张与不确定性，指出需要独立来源核验的部分："
+                        f"{current['task']}"
+                    )
+                    context = context or f"当前阶段：{current['stage']}；请给出克制、可核验的审阅线索。"
+                print(json.dumps(
+                    run_prompt_first_web_llm_cross_check(args.project, question, context),
+                    ensure_ascii=False,
+                    indent=2,
+                    sort_keys=True,
+                ))
+                return 0
+        except (OSError, ValueError, SupervisorAlreadyRunning) as exc:
+            _print_project_error(getattr(args, "project", "."), exc)
+            return 2
     if args.command == "init":
+        if args.workflow == "prompt-first":
+            prompt_state = prompt_first_state_path(args.project)
+            if prompt_state.exists():
+                print(f"state already exists: {prompt_state}", file=sys.stderr)
+                return 2
+            if _state_path(args.project).exists():
+                print(
+                    f"field state already exists: {_state_path(args.project)}; use the existing legacy project or a new directory",
+                    file=sys.stderr,
+                )
+                return 2
+            initialize_prompt_first(args.project, "")
+            print(prompt_state)
+            return 0
         path = _state_path(args.project)
         if path.exists():
             print(f"state already exists: {path}", file=sys.stderr)
@@ -3750,6 +4376,43 @@ def main(argv: list[str] | None = None) -> int:
             _print_project_error(args.project_or_task, exc)
             return 2
     if args.command == "loop":
+        requested_workflow = args.workflow
+        explicit_root = Path(args.project_or_task).expanduser()
+        has_field_state = _state_path(explicit_root).exists()
+        has_prompt_state = prompt_first_state_path(explicit_root).exists()
+        workflow = requested_workflow
+        if workflow == "auto":
+            # Preserve legacy projects.  A newly named explicit project gets
+            # the concise Markdown workflow by default; task-only legacy
+            # invocations keep their existing resolver behavior.
+            workflow = "field" if has_field_state or args.task is None else "prompt-first"
+            if has_prompt_state and not has_field_state:
+                workflow = "prompt-first"
+        if workflow == "prompt-first":
+            try:
+                prompt_task = args.task
+                if prompt_task is None:
+                    if not has_prompt_state:
+                        raise ValueError("prompt-first 新项目需要显式任务：ralph loop <project> <task>")
+                    prompt_task = load_prompt_first_state(explicit_root)["task"]
+                return prompt_first_loop_project(
+                    explicit_root,
+                    prompt_task,
+                    effort=args.effort,
+                    model=args.model,
+                    max_cycles=args.max_cycles,
+                    retry_delay=args.retry_delay,
+                    idle_timeout=args.idle_timeout,
+                    skip_permissions=args.dangerously_skip_permissions,
+                    auto_compact_window=args.auto_compact_window,
+                    auto_compact_percent=args.auto_compact_percent,
+                )
+            except KeyboardInterrupt:
+                print("RALPH prompt-first supervisor interrupted by user; stopping.")
+                return 130
+            except (OSError, ValueError, SupervisorAlreadyRunning) as exc:
+                _print_project_error(explicit_root, exc)
+                return 2
         # Unexpected exceptions are retried from durable state, while an
         # explicit circuit-breaker result is terminal for this invocation.
         while True:

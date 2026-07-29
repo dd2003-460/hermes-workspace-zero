@@ -301,8 +301,11 @@ class PromptRenderer:
             f"2. 只修改 `{fields_file}`，可多轮填写；同一 `concept` 更新，其他已通过字段保留。",
             f"3. 每次填写后运行 `ralph field-apply . {fields_file}`；只修复命令列出的 JSON/字段问题。",
             "4. 不要直接 Write/Edit `loop-state.json`；不要把普通缺失误报为 blocked_human。",
-            "5. research_required 必须带 evidence_refs；不可推断的硬可行性问题才写入 open-questions。",
-            "6. 字段和 required_outputs 都完成后写入下面的 advance.json，再运行 `ralph apply`。",
+            "5. research_required 必须带 evidence_refs；具体外部事实不能只引用站点首页。当前价格/市场/最新兼容性必须带 observed_at；"
+            "搜索或浏览器失败时保持 research_required/uncertain，禁止写成“已验证”。",
+            "6. 02.5/04.5 要逐 claim 填 validation_records（两个独立来源、observed_at、verdict）；已配置网页 LLM 时必须引用成功回执。"
+            "03 必须提交 role=task_graph 的结构化 DAG，并让每个节点真实写出 node.writes 文件后 graph-apply。",
+            "7. 字段和 required_outputs 都完成后写入下面的 advance.json，再运行 `ralph apply`。",
             "",
             f"## advance.json 示例：`{advance_file}`",
             "```json",
@@ -403,7 +406,7 @@ class PromptRenderer:
                     f"- `{task.get('id', '')}` 节点 `{task.get('node_id', '')}`：status={task.get('status', '')}；"
                     f"depends_on={task.get('depends_on', [])}；任务文件 `{task.get('path', '')}`。"
                 )
-            lines.append("节点草稿也可增量填写；每次写入自己的节点文件后运行 `ralph graph-apply . <节点文件>`，由 runtime 校验依赖并更新 ready/blocked/Join，再由 Commander 提交 advance。")
+            lines.append("每个节点先写出它 node.writes 声明的实际非空文件，再增量填写自己的节点 JSON 并运行 `ralph graph-apply . <节点文件>`；runtime 校验依赖和交付文件并更新 ready/blocked/Join，再由 Commander 提交 advance。")
         if error_kind in {"memory_guard", "connection", "timeout", "api_error", "runtime"}:
             lines.extend([
                 "",

@@ -82,13 +82,13 @@ DEFAULT_GRAPH = NodeGraph(
         LoopNode(
             "02.5", "调研后交叉验证", "02 的调研结果与字段；逐字段派 subagent 去问多种网页 LLM + 权威数据，检查矛盾",
             ("cross_validation",),
-            "每个关键调研字段经 ≥2 独立来源核验，矛盾已记录并更新 confidence", "核验不足或矛盾未处置",
+            "每个关键调研字段有逐 claim validation_records（≥2 独立具体来源、日期、裁决），矛盾已记录并更新 confidence", "核验不足或矛盾未处置",
             "03", "02", "exploration"
         ),
         LoopNode(
             "03", "执行任务分解", "已调研、已交叉验证的字段；把任务分解到最小执行单元，模块间接口清晰对准、解耦",
             ("task_graph", "coverage_proof"),
-            "任务图分解到最小执行单元，接口清晰对准、模块化解耦，无遗漏无冲突",
+            "结构化任务图分解到最小执行单元且所有节点已写出 declared artifacts 并经 graph-apply 回写，接口清晰对准、模块化解耦，无遗漏无冲突",
             "分解不完整、接口未对齐或耦合不清", "04", "02.5", "exploration"
         ),
         LoopNode(
@@ -97,7 +97,7 @@ DEFAULT_GRAPH = NodeGraph(
         ),
         LoopNode(
             "04.5", "产出后交叉验证", "04 的 claim ledger 与结论", ("cross_validation_out",),
-            "每条关键 claim 经 ≥2 独立来源核验，矛盾已记录", "核验不足或矛盾未处置", "exploration", "04", "exploration"
+            "每条关键 claim 有逐 claim validation_records（≥2 独立具体来源、日期、裁决），矛盾已记录", "核验不足或矛盾未处置", "exploration", "04", "exploration"
         ),
         LoopNode(
             "05", "决策", "验证报告和候选方案", ("decision",),

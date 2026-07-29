@@ -79,11 +79,11 @@ def test_worker_accepts_auditable_web_llm_check_command():
     assert decide_tool(state, "worker", "Bash", command=command).decision == "allow"
 
 
-def test_web_llm_check_is_limited_to_cross_validation_stages():
+def test_web_llm_check_allows_stage02_source_lead_recovery():
     state = create_state("fixture")
     state["stage"]["id"] = "02"
     command = "ralph web-llm-check . loop-artifacts/stages/02/r1/tasks/field.json"
-    assert decide_tool(state, "worker", "Bash", command=command).decision == "deny"
+    assert decide_tool(state, "worker", "Bash", command=command).decision == "allow"
 
 
 def test_agent_cannot_self_authorize_browser_sites_or_start_nested_supervisor():

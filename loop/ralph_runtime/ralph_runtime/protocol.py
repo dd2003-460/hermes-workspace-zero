@@ -7,6 +7,7 @@ import os
 import re
 from dataclasses import dataclass
 from typing import Any, Mapping
+from urllib.parse import urlparse
 
 from .dag import DAGValidationError, validate_plan
 from .runtime_config import field_mode_enabled
@@ -30,6 +31,212 @@ ALLOWED_ACTIONS = frozenset(
 
 class ProtocolError(ValueError):
     """Raised when an Agent result cannot be safely accepted."""
+
+
+_EXTERNAL_FACT_ROLES = frozenset(
+    {
+        "market_data",
+        "benchmark_data",
+        "spec_data",
+        "research_findings",
+        "ecosystem_analysis",
+    }
+)
+_CURRENT_MARKET_MARKERS = (
+    "current",
+    "latest",
+    "price",
+    "market",
+    "listing",
+    "现价",
+    "当前",
+    "最新",
+    "价格",
+    "行情",
+    "市场",
+    "报价",
+)
+_CROSS_VALIDATION_ROLES = frozenset({"cross_validation", "cross_validation_out", "validation"})
+_VALIDATION_VERDICTS = frozenset({"supported", "contradicted", "uncertain"})
+
+
+def _field_text(field: Mapping[str, Any]) -> str:
+    return " ".join(
+        str(field.get(key) or "")
+        for key in ("concept", "role", "attribute", "rationale")
+    ).lower()
+
+
+def _is_specific_source_url(value: Any) -> bool:
+    """Accept a claim-level public URL, never a bare site/home-page citation."""
+
+    if not isinstance(value, str) or not value.strip():
+        return False
+    parsed = urlparse(value.strip())
+    return parsed.scheme == "https" and bool(parsed.netloc) and bool(parsed.path.strip("/"))
+
+
+def _is_current_market_field(field: Mapping[str, Any]) -> bool:
+    role = str(field.get("role") or "").strip().lower()
+    return role == "market_data" or any(marker in _field_text(field) for marker in _CURRENT_MARKET_MARKERS)
+
+
+def _needs_external_evidence(field: Mapping[str, Any]) -> bool:
+    role = str(field.get("role") or "").strip().lower()
+    return role in _EXTERNAL_FACT_ROLES or _is_current_market_field(field)
+
+
+def _external_evidence_issues(matrix: list[Any], stage_id: str) -> list[str]:
+    """Reject invented current facts and generic-domain citations.
+
+    A field table is intentionally flexible, but an external fact cannot become
+    ``confirmed`` merely because it names a website.  These checks begin at
+    research stage 02: stage 01 may record *what needs research*, while later
+    stages must carry claim-level sources.  Market facts additionally require
+    an observation date, because a stale price is not a current price.
+    """
+
+    if stage_id not in {"02", "02.5", "03", "04", "04.5"}:
+        return []
+    issues: list[str] = []
+    for raw in matrix:
+        if not isinstance(raw, Mapping) or not _needs_external_evidence(raw):
+            continue
+        disposition = str(raw.get("disposition") or "")
+        if disposition == "assumed_default":
+            concept = str(raw.get("concept") or raw.get("attribute") or "?")
+            issues.append(
+                f"外部事实字段 {concept} 不能用 assumed_default 绕过调研；默认只适用于偏好，事实应保留 research_required/uncertain。"
+            )
+            continue
+        if disposition == "pending":
+            continue
+        concept = str(raw.get("concept") or raw.get("attribute") or "?")
+        refs = raw.get("evidence_refs")
+        specific_refs = [item for item in refs if _is_specific_source_url(item)] if isinstance(refs, list) else []
+        if not specific_refs:
+            issues.append(
+                f"外部事实字段 {concept} 缺少可复核的具体 HTTPS 来源；站点首页/根域名不是证据。"
+            )
+        if _is_current_market_field(raw):
+            observed_at = raw.get("observed_at")
+            if not isinstance(observed_at, str) or not re.match(r"^\d{4}-\d{2}-\d{2}(?:T|$)", observed_at.strip()):
+                issues.append(
+                    f"时效字段 {concept} 必须提供 observed_at（ISO 日期/时间）；无法现场核对时降为 research_required 或 uncertain。"
+                )
+    return issues
+
+
+def _cross_validation_issues(matrix: list[Any], stage_id: str) -> list[str]:
+    """Require claim-level, independently sourced cross-validation records."""
+
+    if stage_id not in {"02.5", "04.5"}:
+        return []
+    issues: list[str] = []
+    records_by_field: list[tuple[str, list[Any]]] = []
+    for raw in matrix:
+        if not isinstance(raw, Mapping):
+            continue
+        role = str(raw.get("role") or "").strip().lower()
+        concept = str(raw.get("concept") or "")
+        if role not in _CROSS_VALIDATION_ROLES and concept not in {"cross_validation", "cross_validation_out"}:
+            continue
+        records = raw.get("validation_records")
+        label = concept or role or "cross_validation"
+        if not isinstance(records, list) or not records:
+            issues.append(
+                f"交叉验证字段 {label} 缺少 validation_records；不能用一段摘要宣称“已由多源验证”。"
+            )
+            continue
+        records_by_field.append((label, records))
+        for index, record in enumerate(records):
+            prefix = f"交叉验证 {label}.validation_records[{index}]"
+            if not isinstance(record, Mapping):
+                issues.append(f"{prefix} 必须是对象")
+                continue
+            claim = record.get("claim") or record.get("claim_ref")
+            if not isinstance(claim, str) or not claim.strip():
+                issues.append(f"{prefix} 必须填写 claim 或 claim_ref")
+            refs = record.get("source_refs")
+            if not isinstance(refs, list):
+                issues.append(f"{prefix}.source_refs 必须是来源数组")
+            else:
+                specific = [ref for ref in refs if _is_specific_source_url(ref)]
+                hosts = {urlparse(ref).netloc.lower() for ref in specific}
+                if len(hosts) < 2:
+                    issues.append(f"{prefix} 必须包含两个不同域名的具体 HTTPS 来源")
+            verdict = record.get("verdict")
+            if verdict not in _VALIDATION_VERDICTS:
+                issues.append(f"{prefix}.verdict 必须为 supported / contradicted / uncertain")
+            observed_at = record.get("observed_at")
+            if not isinstance(observed_at, str) or not re.match(r"^\d{4}-\d{2}-\d{2}(?:T|$)", observed_at.strip()):
+                issues.append(f"{prefix}.observed_at 必须是 ISO 日期/时间")
+
+    if not records_by_field:
+        issues.append("本阶段缺少 cross_validation 字段；必须逐 claim 记录独立来源、裁决与 observed_at。")
+        return issues
+
+    # At 02.5 each evidence-backed research field needs an explicit record;
+    # otherwise a model can validate one convenient fact and call the whole
+    # research packet verified.  Stage 04.5 validates the claim ledger summary
+    # instead, so it is deliberately not subject to this field-name matching.
+    if stage_id == "02.5":
+        expected = {
+            str(raw.get("concept") or "")
+            for raw in matrix
+            if isinstance(raw, Mapping)
+            and str(raw.get("concept") or "")
+            and str(raw.get("role") or "").strip().lower() not in _CROSS_VALIDATION_ROLES
+            and isinstance(raw.get("evidence_refs"), list)
+            and raw.get("evidence_refs")
+        }
+        recorded = {
+            str(record.get("claim_ref") or "")
+            for _, records in records_by_field
+            for record in records
+            if isinstance(record, Mapping)
+        }
+        missing = sorted(expected - recorded)
+        if missing:
+            issues.append(
+                "02.5 尚未逐字段交叉核验以下已调研字段（validation_records.claim_ref 必须精确引用 concept）："
+                + "，".join(missing)
+            )
+    return issues
+
+
+def _execution_gate_issues(state: Mapping[str, Any]) -> list[str]:
+    """Field-mode equivalent of the legacy execution-summary gate."""
+
+    issues: list[str] = []
+    plan = state.get("plan") if isinstance(state.get("plan"), Mapping) else {}
+    nodes = plan.get("nodes", []) if isinstance(plan, Mapping) else []
+    if not isinstance(nodes, list) or not nodes:
+        return ["阶段 03 必须先用 role=task_graph 的结构化 task_graph 提交可执行 DAG；自然语言任务列表不算。"]
+    try:
+        validate_plan(plan, strict=True)
+    except (DAGValidationError, TypeError, ValueError) as exc:
+        return [f"阶段 03 task_graph 无效：{exc}"]
+    expected = {str(node.get("id")) for node in nodes if isinstance(node, Mapping)}
+    completed = {str(item) for item in (plan.get("completed", []) if isinstance(plan, Mapping) else [])}
+    pending = sorted(expected - completed)
+    if pending:
+        issues.append("DAG 仍有未完成节点（先执行并运行 ralph graph-apply）：" + "，".join(pending))
+    results = plan.get("task_results") if isinstance(plan, Mapping) else None
+    if not isinstance(results, Mapping):
+        issues.append("阶段 03 缺少 plan.task_results；不能只把节点 ID 标为 completed。")
+        return issues
+    for node_id in sorted(expected):
+        result = results.get(node_id)
+        if not isinstance(result, Mapping):
+            issues.append(f"DAG 节点 {node_id} 缺少结构化 task_result。")
+            continue
+        if result.get("output") in (None, "", {}, []) and not result.get("evidence"):
+            issues.append(f"DAG 节点 {node_id} 的 task_result 缺少 output/evidence。")
+        refs = result.get("artifact_refs")
+        if not isinstance(refs, list) or not refs:
+            issues.append(f"DAG 节点 {node_id} 的 task_result 缺少实际交付 artifact_refs。")
+    return issues
 
 
 def _next_revision(current: str) -> str:
@@ -719,8 +926,6 @@ def _collect_field_gate_issues(state: Mapping[str, Any], payload: Mapping[str, A
     # whose concept/role/attribute matches the contract name.
     required_outputs = stage.get("required_outputs", []) if isinstance(stage, Mapping) else []
     verdict = field_completeness(matrix, required_outputs)
-    if verdict["complete"]:
-        return issues
     if verdict["splittable"]:
         issues.append(
             "以下维度还可继续分解（用逗号分隔的子维度仍可拆成独立字段，补上即可）："
@@ -741,20 +946,15 @@ def _collect_field_gate_issues(state: Mapping[str, Any], payload: Mapping[str, A
             "本阶段仍缺少 required_outputs（可增量添加 concept/role/attribute 同名字段）："
             + "，".join(verdict["required_outputs"])
         )
-    if str(stage.get("id", "")) == "03":
-        plan = state.get("plan") if isinstance(state.get("plan"), Mapping) else {}
-        nodes = plan.get("nodes", []) if isinstance(plan, Mapping) else []
-        completed = {str(item) for item in (plan.get("completed", []) if isinstance(plan, Mapping) else [])}
-        pending_nodes = [
-            str(node.get("id", "?"))
-            for node in nodes
-            if isinstance(node, Mapping) and str(node.get("id", "")) not in completed
-        ]
-        if pending_nodes:
-            issues.append(
-                "DAG 仍有未完成节点（先由子代理填写节点文件并运行 `ralph graph-apply`）："
-                + "，".join(pending_nodes)
-            )
+    stage_id = str(stage.get("id", ""))
+    # Completion of a *field table* never proves that the research happened,
+    # the web sources are claim-level, or a DAG was actually executed.  Keep
+    # these independent gates after field_completeness rather than returning
+    # early, which was the route that let the GPU test formally pass 01→04.5.
+    issues.extend(_external_evidence_issues(matrix, stage_id))
+    issues.extend(_cross_validation_issues(matrix, stage_id))
+    if stage_id == "03":
+        issues.extend(_execution_gate_issues(state))
     if issues:
         issues.append("分解完全后可运行 `ralph advance` 或输出 <RALPH_STAGE_RESULT> advance 进入下一阶段。")
     return issues

@@ -88,6 +88,36 @@ def _preserve(path: Path, generated: dict[str, Any]) -> dict[str, Any]:
     return merged
 
 
+def _declared_artifacts_exist(root: Path, node: Mapping[str, Any]) -> tuple[list[str], list[str]]:
+    """Return safe, declared output paths and any that a worker did not write.
+
+    ``graph-apply`` is the completion boundary.  Accepting an inline `output`
+    while every path in ``writes`` is absent lets a model mark a report task
+    complete without producing the report.  Resolve each declared path under
+    the project root so an absolute path or ``..`` cannot be smuggled through
+    the execution record.
+    """
+
+    declared = node.get("writes", [])
+    if not isinstance(declared, list) or not declared:
+        return [], ["<node declares no writes>"]
+    safe: list[str] = []
+    missing: list[str] = []
+    for raw in declared:
+        if not isinstance(raw, str) or not raw.strip():
+            missing.append(str(raw))
+            continue
+        candidate = (root / raw).resolve()
+        if root not in candidate.parents:
+            missing.append(raw)
+            continue
+        relative = str(candidate.relative_to(root))
+        safe.append(relative)
+        if not candidate.is_file() or candidate.stat().st_size == 0:
+            missing.append(relative)
+    return safe, missing
+
+
 def materialize_graph_tasks(root: str | Path, state: dict[str, Any]) -> list[dict[str, Any]]:
     """Create one task file per plan node without changing the plan itself."""
 
@@ -193,6 +223,13 @@ def apply_graph_task(root: str | Path, task_file: str | Path) -> dict[str, Any]:
     evidence = raw.get("evidence", [])
     if output in (None, "", {}, []) and not evidence:
         raise ValueError(f"节点 {node_id} 缺少 output 或 evidence；允许多轮填写后再运行 graph-apply")
+    artifact_refs, missing_artifacts = _declared_artifacts_exist(root, node)
+    if missing_artifacts:
+        raise ValueError(
+            f"节点 {node_id} 还没有写出声明的交付文件：{', '.join(missing_artifacts)}。"
+            "先只写 node.writes 中的项目内相对路径，再运行 graph-apply；"
+            "任务 JSON 里的 output 不能替代实际交付文件。"
+        )
     with _graph_apply_lock(root):
         # Reload inside the lock so two parallel workers cannot lose each
         # other's completed node.
@@ -207,6 +244,7 @@ def apply_graph_task(root: str | Path, task_file: str | Path) -> dict[str, Any]:
             plan.setdefault("task_results", {})[node_id] = {
                 "output": output,
                 "evidence": evidence,
+                "artifact_refs": artifact_refs,
                 "updated_at": datetime.now(timezone.utc).isoformat(),
             }
             materialize_graph_tasks(root, state)

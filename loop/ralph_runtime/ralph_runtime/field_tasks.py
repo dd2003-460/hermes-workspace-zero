@@ -609,8 +609,9 @@ def materialize_field_tasks(root: str | Path, state: dict[str, Any]) -> list[dic
             item for item in prior_matrix
             if isinstance(item, Mapping)
             and (
-                str(item.get("role", "")).strip() == "unknown"
+                str(item.get("role", "")).strip() in {"unknown", "unknown_factors"}
                 or str(item.get("concept", "")).strip().endswith("输出：unknown")
+                or str(item.get("concept", "")).strip().lower() == "unknown"
             )
         ]
         # Prefer a recovered stage-01 matrix already attached to the current
@@ -620,8 +621,9 @@ def materialize_field_tasks(root: str | Path, state: dict[str, Any]) -> list[dic
             item for item in source_matrix
             if isinstance(item, Mapping)
             and (
-                str(item.get("role", "")).strip() == "unknown"
+                str(item.get("role", "")).strip() in {"unknown", "unknown_factors"}
                 or str(item.get("concept", "")).strip().endswith("输出：unknown")
+                or str(item.get("concept", "")).strip().lower() == "unknown"
             )
         ]
         if current_unknowns:

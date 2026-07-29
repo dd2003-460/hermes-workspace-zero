@@ -44,18 +44,26 @@ def test_candidate_requires_payload():
 
 def test_stage_one_accepts_high_confidence_inferred_attribute():
     state = create_state("fixture")
-    from conftest import complete_required_card, stage_one_payload
-
-    state = complete_required_card(state)
-    payload = stage_one_payload()
-    payload["task_spec"]["attribute_matrix"][0]["disposition"] = "inferred"
-    payload["task_spec"]["attribute_matrix"][0]["rationale"] = "由用户任务和项目环境共同推断"
+    state["task_spec"]["attribute_matrix"] = [
+        {
+            "concept": "goal", "role": "objective", "attribute": "有证据的本地 GPU 推荐",
+            "disposition": "confirmed", "rationale": "用户目标", "evidence_refs": ["user:task"],
+        },
+        {
+            "concept": "known", "role": "known", "attribute": "个人开发者预算有限",
+            "disposition": "inferred", "rationale": "由用户任务和项目环境共同推断", "evidence_refs": ["user:task"],
+        },
+        {
+            "concept": "unknown", "role": "unknown", "attribute": "当前价格和兼容性",
+            "disposition": "confirmed", "rationale": "明确记录为下一阶段待研究事实", "evidence_refs": [],
+        },
+    ]
     action = parse_action(json.dumps({
         "action": "advance",
         "status": "passed",
         "stage_id": "01",
         "revision": "r1",
         "next_stage": "02",
-        "payload": payload,
+        "payload": {},
     }, ensure_ascii=False))
     validate_action(action, state)

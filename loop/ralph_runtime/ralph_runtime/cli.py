@@ -57,9 +57,14 @@ from .state import (
     field_completeness,
     _explode_comma_fields,
 )
-from .protocol import collect_validation_issues, parse_action, validate_action
+from .protocol import _external_evidence_issues, collect_validation_issues, parse_action, validate_action
 from .task_board import TaskBoardError, read_task_board, select_next_task
-from .web_llm import authorize_browser_providers, open_browser_login, run_web_llm_cross_check
+from .web_llm import (
+    authorize_browser_providers,
+    open_browser_login,
+    run_web_llm_cross_check,
+    web_llm_crosscheck_enabled,
+)
 from .runtime_config import (
     HOOK_MODES,
     STOP_POLICIES,
@@ -2947,6 +2952,53 @@ def apply_fields(project: str | Path, fields_file: str | Path) -> dict[str, obje
         return _apply_fields_unlocked(root, fields_file)
 
 
+def _is_cross_validation_field(field: Mapping[str, Any], stage_id: str) -> bool:
+    if stage_id not in {"02.5", "04.5"}:
+        return False
+    role = str(field.get("role") or "").strip().lower()
+    concept = str(field.get("concept") or "").strip()
+    return role in {"cross_validation", "cross_validation_out", "validation"} or concept in {
+        "cross_validation",
+        "cross_validation_out",
+    }
+
+
+def _successful_web_llm_receipt(root: Path, reference: Any) -> bool:
+    """Validate a real, successful cross-check receipt without trusting prose."""
+
+    if not isinstance(reference, str) or not reference.strip():
+        return False
+    candidate = (root / reference).resolve()
+    if root not in candidate.parents or not candidate.is_file():
+        return False
+    try:
+        document = json.loads(candidate.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError, ValueError):
+        return False
+    providers = document.get("successful_provider_ids") if isinstance(document, Mapping) else None
+    return (
+        isinstance(document, Mapping)
+        and document.get("kind") == "ralph_web_llm_cross_check"
+        and isinstance(providers, list)
+        and len({str(item) for item in providers if str(item).strip()}) >= 2
+    )
+
+
+def _validate_cross_validation_receipts(root: Path, stage_id: str, field: Mapping[str, Any]) -> None:
+    """Enforce web-LLM use when a human-authorized provider pair is available."""
+
+    if not _is_cross_validation_field(field, stage_id) or not web_llm_crosscheck_enabled(root):
+        return
+    refs = field.get("evidence_refs")
+    valid = [ref for ref in refs if _successful_web_llm_receipt(root, ref)] if isinstance(refs, list) else []
+    if not valid:
+        raise ValueError(
+            "本项目已配置至少两个经人类授权的网页 LLM；交叉验证字段必须引用 "
+            "`ralph web-llm-check` 产生的成功回执（其中含 >=2 successful_provider_ids）。"
+            "登录未完成或网页失败时不要写“已询问 LLM”，保留 research_required / uncertain 并记录失败。"
+        )
+
+
 def _apply_fields_unlocked(root: Path, fields_file: str | Path) -> dict[str, object]:
     """Field-validation command used by the Commander in field-centric mode.
 
@@ -3020,11 +3072,22 @@ def _apply_fields_unlocked(root: Path, fields_file: str | Path) -> dict[str, obj
                 removed += 1
             continue
         graph_payload = None
-        if str(f.get("role", "")) == "task_graph":
+        is_task_graph = str(f.get("role", "")) == "task_graph" or str(f.get("concept", "")) == "task_graph"
+        if is_task_graph:
+            if str(f.get("role", "")) != "task_graph":
+                raise ValueError(
+                    "concept=task_graph 的字段 role 必须精确为 task_graph；"
+                    "自然语言 decomposition/coverage 不能代替可执行 DAG。"
+                )
             for key in ("task_graph", "graph", "value"):
                 if isinstance(f.get(key), Mapping):
                     graph_payload = f[key]
                     break
+            if graph_payload is None:
+                raise ValueError(
+                    "task_graph 字段必须包含结构化 task_graph/graph/value 对象；"
+                    "不要把节点描述塞进 attribute 文本。"
+                )
             # A graph field may omit the human-readable attribute because its
             # actual value is the structured `task_graph` object.
             if graph_payload is not None and not f.get("attribute"):
@@ -3073,6 +3136,14 @@ def _apply_fields_unlocked(root: Path, fields_file: str | Path) -> dict[str, obj
         refs = f.get("evidence_refs", [])
         if not isinstance(refs, list):
             raise ValueError(f"字段 {concept!r} 的 evidence_refs 必须是数组")
+        # Fail fast for fabricated "confirmed" research.  A worker may still
+        # save a failed lookup as research_required with no refs (so the next
+        # context can retry); only an asserted external fact is rejected here.
+        if str(f.get("disposition") or "") in {"confirmed", "inferred", "assumed_default"}:
+            evidence_issues = _external_evidence_issues([f], current_stage)
+            if evidence_issues:
+                raise ValueError("；".join(evidence_issues))
+        _validate_cross_validation_receipts(root, current_stage, f)
         confidence = f.get("confidence")
         if confidence is not None and (not isinstance(confidence, (int, float)) or not 0 <= confidence <= 1):
             raise ValueError(f"字段 {concept!r} 的 confidence 必须是 0 到 1 之间的数字")

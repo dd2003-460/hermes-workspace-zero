@@ -114,11 +114,16 @@ LOOP_METHODOLOGY: dict[str, list[str]] = {
         "提问闸门（先推断后提问）：仅当同时满足“用户/项目/环境均无答案、不能推断或研究、"
         "会改变硬可行性/硬预算/验收标准/价值授权、不能用场景覆盖”四项，才生成用户问题。",
         "置信度门槛：所有 MUST 类约束已确认、整体置信度 ≥ 0.7 才继续；< 0.5 回退重新澄清。",
-        "分解项先记为 concept，其需要的事实标 research_required，供 02 调研。",
+        "分解项先记为 concept，其需要的事实标 research_required，供 02 调研。当前价格、在售性、最新规格/兼容性、"
+        "基准数据绝不能在 01 仅凭训练记忆标 confirmed；最多记录为“待调研的未知项”。",
     ],
     "02": [
         "本阶段 = 调研分解结果：对 01 的每个 research_required 字段派窄调研 subagent，带回 evidence_refs。",
-        "调研完成字段处置变为 confirmed / assumed_default；引出新未知项作为 pending 字段增殖，直到无 pending。",
+        "调研完成字段处置变为 confirmed / assumed_default；引出新未知项作为 pending 字段增殖，直到无 pending。"
+        "外部事实必须引用具体 HTTPS 页面，不能只写网站首页；当前市场/价格字段还必须带 observed_at（ISO 日期）。"
+        "抓取失败或没有结果时维持 research_required/uncertain，绝不能改写成“已验证”。",
+        "若同一字段的 WebSearch/WebFetch 已失败，且项目已配置两个获人类授权网页 LLM，可在 02 运行 `ralph web-llm-check`"
+        "向它们索取可复核的来源线索；回执仅是线索/反驳信号，仍须用具体权威页面独立验证，不能直接作为事实证据。",
         "同时为每个分解项整理「后续执行需要什么」雏形，供 03 细化。",
         "每个任务必须有输入 AND 输出、继续条件 AND 回退条件；任务 ID 唯一；DAG 无环。",
         "每个 MUST 类约束必须被至少一个任务覆盖。",
@@ -138,14 +143,18 @@ LOOP_METHODOLOGY: dict[str, list[str]] = {
         "仅在项目已获人类浏览器授权或已配置 API 时，才通过 `ralph web-llm-check` 向 ≥2 个不同网页 LLM 提同一验证问题；"
         "必须保留回执。无回执不得声称已询问 LLM。无论是否配置，都须 WebSearch 查独立权威来源"
         "（论文/官方规格/基准/厂商文档）交叉印证。",
-        "比较不同 LLM / 来源答案，更新字段 confidence / disposition / evidence_refs / rationale，并产出交叉验证摘要。",
+        "比较不同 LLM / 来源答案，更新字段 confidence / disposition / evidence_refs / rationale，并产出交叉验证摘要。"
+        "摘要必须有 validation_records：每个 claim_ref 对应两个不同域名的具体来源、observed_at、"
+        "supported/contradicted/uncertain 裁决；一段概述不能替代逐 claim 记录。",
     ],
     "03": [
         "本阶段 = 执行任务分解（含调研 + 后续行动）：把已调研、已交叉验证的分解项细化为可执行子任务图并执行。",
         "子任务图正交、可验证、DAG 无环；并行节点显式标注 execution_mode / parallel_group_id；Join 声明 join_policy。",
         "含调研子任务（继续填 attribute_matrix，产出 evidence_refs）与后续行动子任务（实现/计算/实验/写作）。",
         "只派发当前 ready 任务的已批准任务卡；不得裸派 Agent，也不得跨任务代替决策。",
-        "所有 DAG 节点完成后才出现 execution-join-auditor；该门禁完成前禁止进入 04。",
+        "所有 DAG 节点完成后才出现 execution-join-auditor；该门禁完成前禁止进入 04。"
+        "每个节点必须实际写出 node.writes 声明的非空项目内文件，再运行 ralph graph-apply；"
+        "仅在任务 JSON 写“完成”或把 completed ID 填进状态不算执行。",
         "阶段结束必须产生可验证 artifact 与结构化动作；失败 rollback 或新 revision；无任务 explore。",
     ],
     "04": [
@@ -162,7 +171,9 @@ LOOP_METHODOLOGY: dict[str, list[str]] = {
         "网页 LLM 清单与具体做法见 loop/1-loop/04.5-交叉验证.md（与 02.5 同一清单）。",
         "仅在项目已获人类浏览器授权或已配置 API 时，才通过 `ralph web-llm-check` 向 ≥2 个不同网页 LLM 提同一验证问题，并保留回执；"
         "无回执不得声称已询问 LLM。WebSearch 的独立权威来源仍是事实核验依据。",
-        "比较不同 LLM / 来源答案，更新 claim 的 status / checked_by，并产出最终交叉验证摘要。",
+        "比较不同 LLM / 来源答案，更新 claim 的 status / checked_by，并产出最终交叉验证摘要。"
+        "若网页 LLM 已获授权，交叉验证字段必须引用 web-llm-check 的成功回执；否则只能明确写未授权/失败，"
+        "不能把普通网页来源伪称为 LLM 询问。",
     ],
     "05": [
         "（新管线已弃用 05/06：决策在 03/04 内联完成，交接由 explore 承担。本条目仅兼容旧任务。）",
@@ -1384,8 +1395,9 @@ def _field_contract_text(state: Mapping[str, Any], *, stage_id: str, revision: s
         "- 每条字段形如：concept / role / attribute / disposition / rationale / evidence_refs / confidence / impact / reversible。",
         "- disposition 取英文枚举值之一：confirmed / assumed_default / research_required / pending；直接照抄。",
         '- 例：{"concept": "字段名", "role": "背景", "attribute": "具体属性", "disposition": "confirmed", "rationale": "...", "evidence_refs": [], "confidence": 1.0, "impact": "material", "reversible": true}。',
-        "- `confirmed`=已知背景；`assumed_default`=不确定偏好（默认全范围，无人类输入）；",
-        "`research_required`=未知事实（派单字段调研 subagent 带回 evidence_refs）；`pending`=尚未处理。",
+        "- `confirmed`=已知背景或已有可复核证据的事实；`assumed_default`=不确定偏好（默认全范围，无人类输入）；",
+        "`research_required`=未知事实（派单字段调研 subagent 带回 evidence_refs）；`pending`=尚未处理。"
+        "当前价格/在售性/最新兼容性/基准等外部事实在查到具体来源前不得标 confirmed。",
         "- 对每个 `research_required` 字段，用 Agent 派**只填这一个字段**的窄调研 subagent；它把该字段 JSON 交回，你合并进表。",
         "- 每回填一个字段，若引出新的未知项，作为新的 `pending` 字段加进同一张表（差集=新字段，自动增殖）。",
         "- **只回传空缺**：系统只告诉你还差哪些 `pending` 字段；你照着补，不会因为没一次交齐而失败。",
@@ -1420,7 +1432,8 @@ def _field_contract_text(state: Mapping[str, Any], *, stage_id: str, revision: s
                 "## 01：目标 / 背景 / 约束 + 分解（字段化）",
                 "",
                 "把目标、范围、约束、已知背景整理为字段写入 `attribute_matrix`；",
-                "不确定偏好用 `assumed_default`（默认全范围），未知事实用 `research_required` 派调研。",
+                "不确定偏好用 `assumed_default`（默认全范围），未知事实用 `research_required` 派调研；"
+                "01 只记录“哪些事实未知”，不把训练记忆中的当前价格、基准或最新规格写成已证实事实。",
                 "同时把目标拆成分解项记为 concept，其需要的事实标 research_required，供 02 调研。",
                 "读 `loop-artifacts/contracts/01-r1-stage-contract.md` 与输入包确认验收标准所需的字段集合。",
             ]
@@ -1431,7 +1444,10 @@ def _field_contract_text(state: Mapping[str, Any], *, stage_id: str, revision: s
                 "",
                 "## 02：调研分解结果（字段化）",
                 "",
-                "对 01 的每个 `research_required` 字段派窄调研 subagent，把结果写回 `attribute_matrix`（带 evidence_refs）。",
+                "对 01 的每个 `research_required` 字段派窄调研 subagent，把结果写回 `attribute_matrix`（带具体 evidence_refs）。"
+                "站点首页无效；当前市场事实须额外填 observed_at（ISO 日期）。",
+                "若同一字段的 WebSearch/WebFetch 连续失败、且已配置两个网页 LLM，可运行 `ralph web-llm-check` 询问具体来源线索；"
+                "LLM 回执不是一手证据，必须据此再验证实际页面，做不到就保留 research_required/uncertain。",
                 "调研完成字段置 `confirmed` / `assumed_default`；引出新未知项作为 `pending` 字段增殖，直到无 `pending`。",
                 "同时为每个分解项整理「后续执行需要什么」雏形，供 03 细化。本阶段不做交叉验证（在 02.5）。",
             ]
@@ -1444,7 +1460,8 @@ def _field_contract_text(state: Mapping[str, Any], *, stage_id: str, revision: s
                 "",
                 "对 02 的每个关键调研字段，逐字段派 subagent 去问各种网页 LLM + 权威数据，检查矛盾与冲突。",
                 "每张派发卡内嵌该字段的当前内容（concept/attribute/disposition/evidence/rationale）作为参数；subagent 不读无关文档。",
-                "网页 LLM 清单与做法见 `loop/1-loop/02.5-交叉验证.md`。比较不同 LLM / 来源答案，更新字段 confidence/disposition/evidence_refs/rationale，并产出交叉验证摘要。",
+                "网页 LLM 清单与做法见 `loop/1-loop/02.5-交叉验证.md`。比较不同 LLM / 来源答案，更新字段 confidence/disposition/evidence_refs/rationale，并产出交叉验证摘要。"
+                "交付必须有 validation_records（每条 claim_ref 的两个独立来源、observed_at、verdict），不能用一段“已验证”摘要过关。",
             ]
         )
     elif stage_id == "03":
@@ -1453,8 +1470,9 @@ def _field_contract_text(state: Mapping[str, Any], *, stage_id: str, revision: s
                 "",
                 "## 03：执行任务分解（含调研 + 后续行动）（字段化）",
                 "",
-                "把已调研、已交叉验证的分解项细化为可执行子任务图并执行；含调研子任务与后续行动子任务。",
-                "调研子任务继续填 `attribute_matrix` 并产出 `evidence_refs`；所有产物汇总到 `execution_summary`。",
+                "把已调研、已交叉验证的分解项细化为 role=task_graph 的结构化 DAG 并执行；含调研子任务与后续行动子任务。"
+                "attribute 中的自然语言节点列表无效。",
+                "每个节点必须先写出 node.writes 声明的实际非空文件，再运行 `ralph graph-apply`；调研子任务继续填 `attribute_matrix` 并产出 `evidence_refs`。",
             ]
         )
     elif stage_id == "04":

@@ -1568,6 +1568,11 @@ def test_graph_apply_completes_parallel_nodes_then_opens_join(tmp_path: Path):
     for task in first_batch:
         path = root / task["path"]
         payload = json.loads(path.read_text(encoding="utf-8"))
+        node = next(node for node in graph["nodes"] if node["id"] == task["node_id"])
+        for relative in node["writes"]:
+            output_path = root / relative
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            output_path.write_text(f"result for {task['node_id']}", encoding="utf-8")
         payload.update({"output": {"node": task["node_id"]}, "evidence": [f"{task['node_id']}.json"]})
         path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
         assert apply_graph_task(root, path)["status"] == "completed"
@@ -1576,6 +1581,7 @@ def test_graph_apply_completes_parallel_nodes_then_opens_join(tmp_path: Path):
     join = next(task for task in state["graph_tasks"] if task["node_id"] == "J1")
     assert join["status"] == "ready"
     join_path = root / join["path"]
+    (root / "artifacts/join.md").write_text("joined recommendation", encoding="utf-8")
     join_payload = json.loads(join_path.read_text(encoding="utf-8"))
     join_payload.update({"output": {"recommendation": "join"}, "evidence": ["join.json"]})
     join_path.write_text(json.dumps(join_payload, ensure_ascii=False), encoding="utf-8")
@@ -1584,7 +1590,10 @@ def test_graph_apply_completes_parallel_nodes_then_opens_join(tmp_path: Path):
     assert set(final["plan"]["completed"]) == {"T1.1", "T1.2", "J1"}
 
 
-def test_field_chain_research_cross_validation_and_execution_dag(tmp_path: Path):
+def test_field_chain_research_cross_validation_and_execution_dag(tmp_path: Path, monkeypatch):
+    # The integration fixture exercises the no-provider path; real authorized
+    # projects have separate receipt tests and must use web-llm-check.
+    monkeypatch.setattr("ralph_runtime.cli.web_llm_crosscheck_enabled", lambda project: False)
     root = _project(tmp_path)
     state = load_state(root / "loop-state.json")
     state["stage"] = {**state["stage"], "id": "02", "revision": "r1"}
@@ -1604,11 +1613,11 @@ def test_field_chain_research_cross_validation_and_execution_dag(tmp_path: Path)
     draft.write_text(json.dumps({"fields": [
         {
             "concept": "显存容量", "role": "constraint", "attribute": "最大模型规模",
-            "disposition": "confirmed", "evidence_refs": ["source-vram"],
+            "disposition": "confirmed", "evidence_refs": ["https://spec.example.com/gpu/vram"],
         },
         {
             "concept": "research_findings", "role": "research_findings", "attribute": "字段调研汇总",
-            "disposition": "confirmed", "evidence_refs": ["source-vram"],
+            "disposition": "confirmed", "evidence_refs": ["https://research.example.com/vram-report"],
         },
     ]}, ensure_ascii=False), encoding="utf-8")
     assert apply_fields(root, draft)["remaining"]["complete"] is True
@@ -1620,7 +1629,11 @@ def test_field_chain_research_cross_validation_and_execution_dag(tmp_path: Path)
     draft = Path(init_fields(root)["fields_file"])
     draft.write_text(json.dumps({"fields": [{
         "concept": "cross_validation", "role": "cross_validation", "attribute": "交叉验证摘要",
-        "disposition": "confirmed", "evidence_refs": ["llm-a", "llm-b"],
+        "disposition": "confirmed", "evidence_refs": ["https://review-a.example.com/vram", "https://review-b.example.com/vram"],
+        "validation_records": [
+            {"claim_ref": "显存容量", "source_refs": ["https://review-a.example.com/vram", "https://review-b.example.com/vram"], "observed_at": "2026-07-29T00:00:00+08:00", "verdict": "supported"},
+            {"claim_ref": "research_findings", "source_refs": ["https://research.example.com/vram-report", "https://review-b.example.com/vram"], "observed_at": "2026-07-29T00:00:00+08:00", "verdict": "supported"},
+        ],
     }]}, ensure_ascii=False), encoding="utf-8")
     assert apply_fields(root, draft)["remaining"]["complete"] is True
     apply_and_record(
@@ -1649,12 +1662,18 @@ def test_field_chain_research_cross_validation_and_execution_dag(tmp_path: Path)
             continue
         path = root / task["path"]
         payload = json.loads(path.read_text(encoding="utf-8"))
+        node = next(node for node in graph["nodes"] if node["id"] == task["node_id"])
+        for relative in node["writes"]:
+            output_path = root / relative
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            output_path.write_text(f"result for {task['node_id']}", encoding="utf-8")
         payload.update({"output": {"node": task["node_id"]}, "evidence": [task["node_id"] + ".json"]})
         path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
         apply_graph_task(root, path)
     join = next(task for task in load_state(root / "loop-state.json")["graph_tasks"] if task["node_id"] == "J1")
     assert join["status"] == "ready"
     join_path = root / join["path"]
+    (root / "join.json").write_text("joined recommendation", encoding="utf-8")
     payload = json.loads(join_path.read_text(encoding="utf-8"))
     payload.update({"output": {"recommendation": "ok"}, "evidence": ["join.json"]})
     join_path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
@@ -1687,6 +1706,93 @@ def test_exploration_tail_is_not_blocked_by_empty_attribute_matrix(tmp_path: Pat
         },
     })
     validate_action(action, state)
+
+
+def test_stage03_field_gate_rejects_prose_graph_and_unexecuted_plan(tmp_path: Path):
+    root = _project(tmp_path)
+    state = load_state(root / "loop-state.json")
+    state["stage"] = {**state["stage"], "id": "03", "required_outputs": ["task_graph", "coverage_proof"]}
+    state["task_spec"] = {"attribute_matrix": [
+        {
+            "concept": "task_graph", "role": "decomposition", "attribute": "NODE-1 then NODE-2",
+            "disposition": "confirmed", "evidence_refs": [],
+        },
+        {
+            "concept": "coverage_proof", "role": "coverage", "attribute": "all covered",
+            "disposition": "confirmed", "evidence_refs": [],
+        },
+    ]}
+    action = parse_action({
+        "action": "advance", "status": "passed", "stage_id": "03", "revision": "r1", "next_stage": "04", "payload": {},
+    })
+    with pytest.raises(ProtocolError, match="结构化 task_graph"):
+        validate_action(action, state)
+
+
+def test_stage02_field_gate_rejects_generic_domain_for_current_market_fact(tmp_path: Path):
+    root = _project(tmp_path)
+    state = load_state(root / "loop-state.json")
+    state["stage"] = {**state["stage"], "id": "02", "required_outputs": ["research_findings"]}
+    state["task_spec"] = {"attribute_matrix": [
+        {
+            "concept": "research_findings", "role": "research_findings", "attribute": "current GPU market price",
+            "disposition": "confirmed", "evidence_refs": ["https://www.jd.com"],
+        },
+    ]}
+    action = parse_action({
+        "action": "advance", "status": "passed", "stage_id": "02", "revision": "r1", "next_stage": "02.5", "payload": {},
+    })
+    with pytest.raises(ProtocolError, match="具体 HTTPS 来源"):
+        validate_action(action, state)
+
+
+def test_field_apply_rejects_asserted_market_fact_with_site_homepage(tmp_path: Path):
+    root = _project(tmp_path)
+    state = load_state(root / "loop-state.json")
+    state["stage"] = {**state["stage"], "id": "02", "required_outputs": ["research_findings"]}
+    save_state(root / "loop-state.json", state)
+    draft = Path(init_fields(root)["fields_file"])
+    draft.write_text(json.dumps({"fields": [{
+        "concept": "research_findings", "role": "research_findings", "attribute": "current GPU market price",
+        "disposition": "confirmed", "evidence_refs": ["https://www.jd.com"],
+    }]}), encoding="utf-8")
+    with pytest.raises(ValueError, match="具体 HTTPS 来源"):
+        apply_fields(root, draft)
+
+
+def test_cross_validation_requires_claim_level_records(tmp_path: Path):
+    root = _project(tmp_path)
+    state = load_state(root / "loop-state.json")
+    state["stage"] = {**state["stage"], "id": "02.5", "required_outputs": ["cross_validation"]}
+    state["task_spec"] = {"attribute_matrix": [
+        {
+            "concept": "GPU price", "role": "research_findings", "attribute": "price evidence",
+            "disposition": "confirmed", "evidence_refs": ["https://shop.example.com/item/1"],
+        },
+        {
+            "concept": "cross_validation", "role": "validation", "attribute": "summary",
+            "disposition": "confirmed", "evidence_refs": ["https://source-a.example.com/a", "https://source-b.example.com/b"],
+        },
+    ]}
+    action = parse_action({
+        "action": "advance", "status": "passed", "stage_id": "02.5", "revision": "r1", "next_stage": "03", "payload": {},
+    })
+    with pytest.raises(ProtocolError, match="validation_records"):
+        validate_action(action, state)
+
+
+def test_field_apply_rejects_task_graph_written_as_prose(tmp_path: Path):
+    root = _project(tmp_path)
+    state = load_state(root / "loop-state.json")
+    state["stage"] = {**state["stage"], "id": "03", "required_outputs": ["task_graph", "coverage_proof"]}
+    save_state(root / "loop-state.json", state)
+    draft = Path(init_fields(root)["fields_file"])
+    draft.write_text(json.dumps({"fields": [{
+        "concept": "task_graph", "role": "decomposition", "attribute": "a prose task list",
+        "disposition": "confirmed", "evidence_refs": [],
+    }]}), encoding="utf-8")
+    with pytest.raises(ValueError, match="role 必须精确为 task_graph"):
+        apply_fields(root, draft)
 
 
 def test_invalid_task_graph_does_not_mutate_state(tmp_path: Path):

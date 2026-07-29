@@ -1,11 +1,20 @@
 from pathlib import Path
 import sys
 
+import pytest
+
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from ralph_runtime.state import update_subagent_card
+
+
+@pytest.fixture(autouse=True)
+def _isolate_ralph_global_config(tmp_path, monkeypatch):
+    """Keep tests independent from a developer's real global browser login."""
+
+    monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path / "xdg-config"))
 
 
 def complete_required_card(state, stage_id: str = "01"):

@@ -308,15 +308,15 @@ def decide_tool(
         # otherwise a Commander cannot submit an incremental draft while a
         # sibling research field is running.
         if tool_name == "Bash" and command and _is_controlled_ralph_command(command, role):
-            if _is_web_llm_check_command(command) and stage_id not in {"02.5", "04.5"}:
+            if _is_web_llm_check_command(command) and stage_id not in {"02", "02.5", "04.5"}:
                 return ToolDecision(
                     "deny",
                     tool_feedback(
                         "WEB_LLM_STAGE_SCOPE",
                         detected=f"当前阶段是 {stage_id}，却尝试运行网页 LLM 交叉核验。",
-                        correction="网页 LLM 仅用于 02.5 / 04.5 的对抗性核验；先完成当前阶段字段。",
-                        next_action="继续当前阶段协议；进入 02.5 或 04.5 后再用自己的 task JSON 运行 web-llm-check。",
-                        forbidden="在目标澄清、调研、执行或 exploration 阶段发送网页 LLM 问题。",
+                        correction="网页 LLM 仅可用于 02 的受控来源线索恢复，或 02.5 / 04.5 的对抗性核验；先完成当前阶段字段。",
+                        next_action="02 中只能用自己的任务 JSON 询问可复核来源线索，随后仍须用具体权威页面验证；其他阶段进入 02.5 或 04.5 后再运行 web-llm-check。",
+                        forbidden="在目标澄清、执行或 exploration 阶段发送网页 LLM 问题，或把 LLM 回复当作一手事实来源。",
                     ),
                 )
             return ToolDecision("allow", "controlled ralph runtime command")

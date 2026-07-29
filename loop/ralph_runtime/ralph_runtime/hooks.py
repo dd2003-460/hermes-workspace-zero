@@ -54,6 +54,7 @@ from .prompt_renderer import PromptRenderer
 from .protocol import parse_action
 from .stage_policy import decide_tool
 from .state import load_state, record_human_input, save_state, update_subagent_card
+from .web_llm import web_llm_crosscheck_enabled
 
 
 def _find_project_root(payload: Mapping[str, Any]) -> Path | None:
@@ -773,7 +774,7 @@ def _field_command_hint(
         "\"role\":\"...\",\"attribute\":\"...\",\"disposition\":\"pending|confirmed|"
         "assumed_default|research_required\",\"rationale\":\"...\",\"evidence_refs\":[]}}]}}`，"
         f"然后运行 `ralph field-apply . {draft}`（校验 + 增量合并 + 原子保存）。语法错误、空字段或缺字段时只修复命令输出列出的项目；空的 pending 字段可以保留，已通过字段保留不重写。"
-        f"DAG 节点只写自己的 task JSON，再运行 `ralph graph-apply . <节点文件>`（校验依赖 + 更新 ready/Join）。"
+        f"DAG 节点先写自己 node.writes 声明的实际非空文件，再更新自己的 task JSON 并运行 `ralph graph-apply . <节点文件>`（校验依赖 + 交付文件 + 更新 ready/Join）。"
         f"全部字段和节点通过后，写 `{advance}` 并运行 `ralph apply . {advance}`（最终校验 + 状态转换 + 事件记录）。"
         "候选/探索任务用 `ralph task-next .`；诊断只用 `ralph status .`（或 `ralph field-status .`）、"
         "`ralph events . --tail 20`、`ralph validate .` 或 `ralph render . <file>`；"
@@ -822,8 +823,8 @@ def _field_command_hint(
     graph_tasks = state.get("graph_tasks", []) if isinstance(state, Mapping) else []
     if graph_tasks:
         hint += (
-            " 当前已有执行 DAG 节点：子代理只修改自己的 graph task JSON，"
-            "完成后运行 `ralph graph-apply . <节点文件>`；runtime 会校验 depends_on、"
+            " 当前已有执行 DAG 节点：子代理先写自己 node.writes 声明的实际非空文件，再修改自己的 graph task JSON，"
+            "完成后运行 `ralph graph-apply . <节点文件>`；runtime 会校验 depends_on 与交付文件、"
             "原子更新 plan.completed 并重新计算 ready/blocked/Join。不要直接修改 plan 或 loop-state.json。"
         )
     return hint
@@ -1251,6 +1252,20 @@ def handle_pretooluse(payload: Mapping[str, Any], mode: str = "hybrid") -> dict[
         and int(owned_field_task.get("web_failures", 0) or 0) >= 2
     ):
         decision_value = "deny"
+        stage_id = str((state.get("stage") or {}).get("id") or "") if isinstance(state, Mapping) else ""
+        if stage_id == "02" and web_llm_crosscheck_enabled(root):
+            next_action = (
+                f"先运行 `ralph web-llm-check . {owned_field_task.get('path')}`，向已授权网页 LLM 询问具体可复核来源线索；"
+                "回执只是线索，随后必须验证实际 HTTPS 页面。若仍没有具体页面，再把研究结论增量写回 "
+                f"`{owned_field_task.get('path')}`：保留 disposition=research_required、evidence_refs=[]，"
+                "在 rationale 写明失败原因，然后运行 `ralph field-apply . <任务文件>`。"
+            )
+        else:
+            next_action = (
+                f"直接把研究结论增量写回 `{owned_field_task.get('path')}`："
+                "保留 disposition=research_required、evidence_refs=[]，在 rationale 写明失败原因，"
+                "然后运行 `ralph field-apply . <任务文件>`。"
+            )
         decision_reason = tool_feedback(
             "FIELD_WEB_FAILURE_LOOP",
             detected=(
@@ -1258,11 +1273,7 @@ def handle_pretooluse(payload: Mapping[str, Any], mode: str = "hybrid") -> dict[
                 f"{owned_field_task.get('web_failures')} 次。"
             ),
             correction="停止重复搜索；外部证据源当前不可用，不得把错误页当作证据。",
-            next_action=(
-                f"直接把研究结论增量写回 `{owned_field_task.get('path')}`："
-                "保留 disposition=research_required、evidence_refs=[]，在 rationale 写明失败原因，"
-                "然后运行 `ralph field-apply . <任务文件>`。"
-            ),
+            next_action=next_action,
             forbidden="继续调用 WebSearch/WebFetch、伪造 URL、自然语言结束而不写入任务文件。",
         )
     if (

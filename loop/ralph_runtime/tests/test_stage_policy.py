@@ -187,12 +187,13 @@ def test_ask_user_feedback_routes_to_field_or_open_question():
     assert "禁止 Commander 向人类提问" in decision.reason
 
 
-def test_disallowed_tool_routes_to_current_stage_policy():
+def test_stage_executor_skill_is_allowed_for_commander_in_every_phase():
     state = create_state("fixture")
-    decision = decide_tool(state, "commander", "Skill")
-    assert decision.decision == "deny"
-    assert "RALPH_FEEDBACK[TOOL_STAGE_SCOPE_FIELD]" in decision.reason
-    assert "字段中心模式" in decision.reason
+    for stage_id in ("01", "02", "02.5", "03", "04", "04.5", "05", "06", "exploration"):
+        state["stage"]["id"] = stage_id
+        decision = decide_tool(state, "commander", "Skill")
+        assert decision.decision == "allow", stage_id
+    assert "field-centric mode" in decision.reason
 
 
 def test_blocked_human_feedback_stops_further_tool_calls():

@@ -179,26 +179,26 @@ class StagePolicy:
 DEFAULT_STAGE_POLICIES = {
     # 01/02/04/05/06 allow bounded Agent work and incremental field writes;
     # loop-state.json remains protected by the dedicated target-path guard.
-    "01": StagePolicy("01", ("Agent", "ToolSearch", "Read", "Glob", "Grep", "Bash", "Write", "Edit"), ("Read", "Glob", "Grep", "Bash", "Write", "Edit"), ("advance", "rollback", "clarify", "blocked_human", "explore")),
+    "01": StagePolicy("01", ("Agent", "Skill", "ToolSearch", "Read", "Glob", "Grep", "Bash", "Write", "Edit"), ("Read", "Glob", "Grep", "Bash", "Write", "Edit"), ("advance", "rollback", "clarify", "blocked_human", "explore")),
     # Field research workers need their own web/search tools.  The previous
     # card-era policy omitted them, so a correctly dispatched field Agent was
     # repeatedly denied at the tool layer and could never produce evidence.
-    "02": StagePolicy("02", ("Agent", "ToolSearch", "Read", "Glob", "Grep", "Bash", "WebSearch", "WebFetch", "Write", "Edit"), ("Read", "Glob", "Grep", "ToolSearch", "Bash", "WebSearch", "WebFetch", "Write", "Edit"), ("advance", "rollback", "blocked_human", "candidate", "explore")),
+    "02": StagePolicy("02", ("Agent", "Skill", "ToolSearch", "Read", "Glob", "Grep", "Bash", "WebSearch", "WebFetch", "Write", "Edit"), ("Read", "Glob", "Grep", "ToolSearch", "Bash", "WebSearch", "WebFetch", "Write", "Edit"), ("advance", "rollback", "blocked_human", "candidate", "explore")),
     # Cross-validation stages: the Commander dispatches per-field subagents that
     # consult various web LLMs + authoritative sources, and may also research
     # directly.  Web tools are required here.
-    "02.5": StagePolicy("02.5", ("Agent", "ToolSearch", "Read", "Glob", "Grep", "Bash", "WebSearch", "WebFetch", "Write", "Edit"), ("Read", "Glob", "Grep", "WebSearch", "WebFetch", "Write", "Edit"), ("advance", "rollback", "blocked_human", "explore")),
-    "04.5": StagePolicy("04.5", ("Agent", "ToolSearch", "Read", "Glob", "Grep", "Bash", "WebSearch", "WebFetch", "Write", "Edit"), ("Read", "Glob", "Grep", "WebSearch", "WebFetch", "Write", "Edit"), ("advance", "rollback", "blocked_human", "explore")),
+    "02.5": StagePolicy("02.5", ("Agent", "Skill", "ToolSearch", "Read", "Glob", "Grep", "Bash", "WebSearch", "WebFetch", "Write", "Edit"), ("Read", "Glob", "Grep", "WebSearch", "WebFetch", "Write", "Edit"), ("advance", "rollback", "blocked_human", "explore")),
+    "04.5": StagePolicy("04.5", ("Agent", "Skill", "ToolSearch", "Read", "Glob", "Grep", "Bash", "WebSearch", "WebFetch", "Write", "Edit"), ("Read", "Glob", "Grep", "WebSearch", "WebFetch", "Write", "Edit"), ("advance", "rollback", "blocked_human", "explore")),
     # Broad discovery belongs only to execution.  It remains evidence
     # acquisition, not a substitute for the later verification stage.
     "03": StagePolicy("03", ("Agent", "ToolSearch", "Read", "Glob", "Grep", "Bash", "Skill", "WebSearch", "WebFetch"), ("Read", "Glob", "Grep", "Bash", "Write", "Edit", "Skill", "WebSearch", "WebFetch"), ("advance", "rollback", "blocked_human", "dispatch", "join")),
-    "04": StagePolicy("04", ("Agent", "ToolSearch", "Read", "Glob", "Grep", "Bash", "WebSearch", "WebFetch", "Write", "Edit"), ("Read", "Glob", "Grep", "Bash", "WebSearch", "WebFetch", "Write", "Edit"), ("advance", "rollback", "blocked_human", "explore")),
-    "05": StagePolicy("05", ("Agent", "ToolSearch", "Read", "Glob", "Grep", "Bash", "Write", "Edit"), ("Read", "Glob", "Grep", "Write", "Edit"), ("advance", "rollback", "blocked_human", "explore")),
-    "06": StagePolicy("06", ("Agent", "ToolSearch", "Read", "Glob", "Grep", "Bash", "Write", "Edit"), ("Read", "Glob", "Grep", "Write", "Edit"), ("advance", "rollback", "blocked_human", "explore")),
+    "04": StagePolicy("04", ("Agent", "Skill", "ToolSearch", "Read", "Glob", "Grep", "Bash", "WebSearch", "WebFetch", "Write", "Edit"), ("Read", "Glob", "Grep", "Bash", "WebSearch", "WebFetch", "Write", "Edit"), ("advance", "rollback", "blocked_human", "explore")),
+    "05": StagePolicy("05", ("Agent", "Skill", "ToolSearch", "Read", "Glob", "Grep", "Bash", "Write", "Edit"), ("Read", "Glob", "Grep", "Write", "Edit"), ("advance", "rollback", "blocked_human", "explore")),
+    "06": StagePolicy("06", ("Agent", "Skill", "ToolSearch", "Read", "Glob", "Grep", "Bash", "Write", "Edit"), ("Read", "Glob", "Grep", "Write", "Edit"), ("advance", "rollback", "blocked_human", "explore")),
     # Exploration is read-only for *project/business* outputs, but its
     # required preference/candidate fields still use the same incremental
     # task JSON -> field-apply path as every other stage.
-    "exploration": StagePolicy("exploration", ("Agent", "ToolSearch", "Read", "Glob", "Grep", "Bash"), ("Read", "Glob", "Grep", "Bash", "Write", "Edit"), ("advance", "candidate", "blocked_human", "explore"), read_only=False),
+    "exploration": StagePolicy("exploration", ("Agent", "Skill", "ToolSearch", "Read", "Glob", "Grep", "Bash"), ("Read", "Glob", "Grep", "Bash", "Write", "Edit"), ("advance", "candidate", "blocked_human", "explore"), read_only=False),
 }
 
 

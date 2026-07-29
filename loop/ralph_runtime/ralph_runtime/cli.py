@@ -59,7 +59,7 @@ from .state import (
 )
 from .protocol import collect_validation_issues, parse_action, validate_action
 from .task_board import TaskBoardError, read_task_board, select_next_task
-from .web_llm import authorize_browser_providers, run_web_llm_cross_check
+from .web_llm import authorize_browser_providers, open_browser_login, run_web_llm_cross_check
 from .runtime_config import (
     HOOK_MODES,
     STOP_POLICIES,
@@ -388,6 +388,28 @@ def build_parser() -> argparse.ArgumentParser:
         nargs="+",
         choices=("perplexity", "chatgpt", "gemini"),
         help="授权的网页 LLM；省略时授权全部三个受支持站点。",
+    )
+    web_llm_authorize.add_argument(
+        "--global",
+        dest="global_scope",
+        action="store_true",
+        help="写入用户级授权，供所有项目复用；只有人类可执行。",
+    )
+    web_llm_authorize.add_argument(
+        "--profile-dir",
+        help="专用持久 Playwright profile 目录；首次需人类手动登录一次，之后各项目复用。",
+    )
+
+    web_llm_login = sub.add_parser(
+        "web-llm-login",
+        help="打开专用持久 profile 供人类一次性登录；不发送任何 LLM 提问。",
+    )
+    web_llm_login.add_argument("site", choices=("perplexity", "chatgpt", "gemini"))
+    web_llm_login.add_argument(
+        "--wait-seconds",
+        type=int,
+        default=900,
+        help="可见登录窗口保留秒数（30–3600，默认 900）。",
     )
 
     graph_apply = sub.add_parser(
@@ -3422,7 +3444,29 @@ def main(argv: list[str] | None = None) -> int:
             return 1
     if args.command == "web-llm-authorize":
         try:
-            print(json.dumps(authorize_browser_providers(args.project, args.providers), ensure_ascii=False, indent=2, sort_keys=True))
+            print(json.dumps(
+                authorize_browser_providers(
+                    args.project,
+                    args.providers,
+                    global_scope=args.global_scope,
+                    browser_profile=args.profile_dir,
+                ),
+                ensure_ascii=False,
+                indent=2,
+                sort_keys=True,
+            ))
+            return 0
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            print(json.dumps({"ok": False, "error": str(exc)}, ensure_ascii=False, indent=2), file=sys.stderr)
+            return 1
+    if args.command == "web-llm-login":
+        try:
+            print(json.dumps(
+                open_browser_login(args.site, wait_seconds=args.wait_seconds),
+                ensure_ascii=False,
+                indent=2,
+                sort_keys=True,
+            ))
             return 0
         except (OSError, ValueError, json.JSONDecodeError) as exc:
             print(json.dumps({"ok": False, "error": str(exc)}, ensure_ascii=False, indent=2), file=sys.stderr)

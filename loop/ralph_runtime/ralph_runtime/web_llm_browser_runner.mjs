@@ -77,22 +77,33 @@ async function gemini(page, prompt) {
 
 try {
   const config = JSON.parse(Buffer.concat(chunks).toString("utf8"));
-  if (!config || typeof config.prompt !== "string" || !config.prompt.trim()) throw new Error("missing prompt");
+  const loginMode = config && config.mode === "login";
+  if (!loginMode && (!config || typeof config.prompt !== "string" || !config.prompt.trim())) throw new Error("missing prompt");
   if (!config || typeof config.url !== "string" || !config.url.startsWith("https://")) throw new Error("missing HTTPS url");
-  const browser = await chromium.launch({ headless: Boolean(config.headless) });
+  const persistentProfile = typeof config.profile_dir === "string" && config.profile_dir.trim();
+  const launchOptions = { headless: Boolean(config.headless) };
+  const browser = persistentProfile ? null : await chromium.launch(launchOptions);
+  const context = persistentProfile
+    ? await chromium.launchPersistentContext(config.profile_dir, { ...launchOptions, locale: "zh-CN" })
+    : await browser.newContext({ locale: "zh-CN" });
   try {
-    const context = await browser.newContext({ locale: "zh-CN" });
     const page = await context.newPage();
     page.setDefaultTimeout(Math.max(5_000, Math.min(Number(config.timeout_ms) || 45_000, 120_000)));
     await page.goto(config.url, { waitUntil: "domcontentloaded" });
-    const response = await ({
-      perplexity,
-      chatgpt,
-      gemini,
-    }[config.site] || (() => { throw new Error(`unsupported browser site: ${config.site}`); }))(page, config.prompt);
-    process.stdout.write(JSON.stringify({ response, page_url: page.url() }));
+    if (loginMode) {
+      await page.waitForTimeout(Math.max(30_000, Math.min(Number(config.timeout_ms) || 900_000, 3_600_000)));
+      process.stdout.write(JSON.stringify({ login_completed: true, page_url: page.url() }));
+    } else {
+      const response = await ({
+        perplexity,
+        chatgpt,
+        gemini,
+      }[config.site] || (() => { throw new Error(`unsupported browser site: ${config.site}`); }))(page, config.prompt);
+      process.stdout.write(JSON.stringify({ response, page_url: page.url() }));
+    }
   } finally {
-    await browser.close();
+    await context.close();
+    if (browser) await browser.close();
   }
 } catch (error) {
   fail(error instanceof Error ? error.message : error);

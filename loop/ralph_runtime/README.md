@@ -223,6 +223,16 @@ export RALPH_WEB_LLM_BROWSER_HEADLESS=0
 
 浏览器 provider 使用全新的临时上下文。需要登录的站点会在可见窗口中报告登录缺失，不会尝试填写账号或密码，也不会复用或读取已有浏览器 cookie；此时将错误留在回执中而非伪造结果。API 与浏览器 provider 可以混合，但必须总共至少有两个不同 provider 才会计入交叉核验。
 
+若人类明确希望**所有未来项目**都能用同一账号提问，可设置全局授权和一个**专用**持久 Playwright profile：
+
+```bash
+ralph web-llm-authorize --global \
+  --providers perplexity chatgpt gemini \
+  --profile-dir "$HOME/.local/share/ralph-runtime/browser-profile"
+```
+
+首次使用该空 profile 时，人类需在弹出的可见浏览器中自行登录一次；之后所有 RALPH 项目都会复用它，无需每次登录或重复授权。不要把 profile 指向日常 Chrome、Codex in-app Browser 或其他现有 profile：运行时不会读取、复制或导入那些 cookie / 密码 / 会话。全局授权意味着符合阶段契约的任务摘要会被发送到所选网页 LLM；敏感项目请改用项目级授权或关闭全局配置。
+
 把当前阶段目录内的请求文件写为 `{ "claim": "…", "context": "…" }`，然后运行：
 
 ```bash

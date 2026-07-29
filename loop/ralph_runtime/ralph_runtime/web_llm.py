@@ -41,6 +41,7 @@ _BROWSER_AUTHORIZATION_RELATIVE_PATH = Path(
     "loop-artifacts/contracts/web-llm-browser-authorization.json"
 )
 _BROWSER_AUTHORIZATION_KIND = "ralph_web_llm_browser_authorization"
+_GLOBAL_BROWSER_AUTHORIZATION_KIND = "ralph_web_llm_browser_global_authorization"
 
 
 def _bounded_text(value: Any, limit: int) -> str:
@@ -156,6 +157,13 @@ def browser_authorization_path(project: str | Path) -> Path:
     return Path(project).expanduser().resolve() / _BROWSER_AUTHORIZATION_RELATIVE_PATH
 
 
+def global_browser_authorization_path() -> Path:
+    """Return the user-owned, cross-project browser authorization path."""
+
+    config_home = Path(os.environ.get("XDG_CONFIG_HOME", Path.home() / ".config"))
+    return config_home.expanduser().resolve() / "ralph-runtime" / "web-llm-browser.json"
+
+
 def _project_browser_providers(project: str | Path) -> list[dict[str, str]]:
     path = browser_authorization_path(project)
     if not path.is_file():
@@ -178,6 +186,52 @@ def _project_browser_providers(project: str | Path) -> list[dict[str, str]]:
     )
 
 
+def _global_browser_authorization() -> Mapping[str, Any] | None:
+    path = global_browser_authorization_path()
+    if not path.is_file():
+        return None
+    try:
+        document = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise WebLLMConfigurationError(f"全局浏览器授权文件 JSON 语法错误：{path}") from exc
+    if not isinstance(document, Mapping):
+        raise WebLLMConfigurationError("全局浏览器授权文件必须是对象")
+    if document.get("kind") != _GLOBAL_BROWSER_AUTHORIZATION_KIND or document.get("authorized_by") != "human":
+        raise WebLLMConfigurationError(
+            "全局浏览器授权文件缺少人类授权标记；请由人类运行 `ralph web-llm-authorize --global`。"
+        )
+    return document
+
+
+def browser_profile_dir() -> str | None:
+    """Return an explicitly configured dedicated persistent browser profile.
+
+    The path is never stored in receipts.  It is deliberately separate from
+    the user's regular browser profile so RALPH never reads or imports existing
+    cookies, passwords, or session stores.  An environment override is useful
+    for ephemeral test environments; normal users set it once in the global
+    human authorization file.
+    """
+
+    candidate = os.environ.get("RALPH_WEB_LLM_BROWSER_PROFILE_DIR", "").strip()
+    if not candidate:
+        document = _global_browser_authorization()
+        candidate = str(document.get("browser_profile_dir", "")).strip() if document else ""
+    if not candidate:
+        return None
+    return str(Path(candidate).expanduser().resolve())
+
+
+def _global_browser_providers() -> list[dict[str, str]]:
+    document = _global_browser_authorization()
+    if document is None:
+        return []
+    return _parse_browser_providers(
+        document.get("providers", []),
+        source="全局浏览器授权文件 providers",
+    )
+
+
 def configured_browser_providers(
     raw: str | None = None,
     *,
@@ -196,13 +250,18 @@ def configured_browser_providers(
     if payload.strip():
         return _parse_browser_providers(payload, source="RALPH_WEB_LLM_BROWSER_PROVIDERS_JSON")
     if project is not None:
-        return _project_browser_providers(project)
-    return []
+        project_providers = _project_browser_providers(project)
+        if project_providers:
+            return project_providers
+    return _global_browser_providers()
 
 
 def authorize_browser_providers(
     project: str | Path,
     sites: list[str] | tuple[str, ...] | None = None,
+    *,
+    global_scope: bool = False,
+    browser_profile: str | Path | None = None,
 ) -> dict[str, Any]:
     """Persist an explicit human authorization for supported browser sites.
 
@@ -226,16 +285,24 @@ def authorize_browser_providers(
         {"id": f"{site}-review", "site": site, "url": _BROWSER_SITES[site]}
         for site in selected
     ]
+    output = global_browser_authorization_path() if global_scope else browser_authorization_path(root)
     document = {
         "schema_version": 1,
-        "kind": _BROWSER_AUTHORIZATION_KIND,
+        "kind": _GLOBAL_BROWSER_AUTHORIZATION_KIND if global_scope else _BROWSER_AUTHORIZATION_KIND,
         "authorized_by": "human",
         "authorized_at": datetime.now(timezone.utc).isoformat(),
+        "scope": "global" if global_scope else "project",
         "source": "loop/1-loop/02.5-交叉验证.md and loop/1-loop/04.5-交叉验证.md URL allowlist",
         "providers": providers,
         "privacy": "Fresh Playwright contexts only; no cookie, credential, or browser-profile access.",
     }
-    output = browser_authorization_path(root)
+    if browser_profile is not None:
+        profile = str(Path(browser_profile).expanduser().resolve())
+        document["browser_profile_dir"] = profile
+        document["privacy"] = (
+            "Dedicated persistent Playwright profile only; do not point at a regular browser profile. "
+            "No cookie, credential, or password extraction."
+        )
     output.parent.mkdir(parents=True, exist_ok=True)
     encoded = json.dumps(document, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
     fd, temporary = tempfile.mkstemp(prefix=f".{output.name}.", suffix=".tmp", dir=output.parent)
@@ -250,8 +317,10 @@ def authorize_browser_providers(
             os.unlink(temporary)
     return {
         "ok": True,
-        "authorization": str(output.relative_to(root)),
+        "authorization": str(output) if global_scope else str(output.relative_to(root)),
         "provider_ids": [provider["id"] for provider in _parse_browser_providers(providers, source="authorization")],
+        "scope": "global" if global_scope else "project",
+        "persistent_profile": bool(browser_profile is not None),
         "requires_two_providers": True,
     }
 
@@ -375,6 +444,9 @@ def _ask_browser_provider(provider: Mapping[str, str], claim: str, context: str,
         in {"1", "true", "yes"},
         "timeout_ms": int(timeout * 1000),
     }
+    profile_dir = browser_profile_dir()
+    if profile_dir:
+        payload["profile_dir"] = profile_dir
     try:
         completed = subprocess.run(
             ["node", str(runner)],
@@ -411,6 +483,57 @@ def _ask_browser_provider(provider: Mapping[str, str], claim: str, context: str,
         }
     )
     return receipt
+
+
+def open_browser_login(site: str, *, wait_seconds: int = 900) -> dict[str, Any]:
+    """Open a dedicated persistent profile for one-time human sign-in.
+
+    This command sends no prompt.  It only keeps a visible browser open long
+    enough for the human to complete the provider's normal login flow.  The
+    resulting session stays in the dedicated RALPH profile for later local
+    Agent browser checks.
+    """
+
+    normalized_site = str(site).strip().lower()
+    if normalized_site not in _BROWSER_SITES:
+        raise WebLLMConfigurationError(
+            f"不支持的 browser provider：{normalized_site}；可选：{', '.join(sorted(_BROWSER_SITES))}"
+        )
+    profile_dir = browser_profile_dir()
+    if not profile_dir:
+        raise WebLLMConfigurationError(
+            "未配置专用持久浏览器 profile；先由人类运行 `ralph web-llm-authorize --global --profile-dir <目录>`。"
+        )
+    runner = _browser_runner_path()
+    if not runner.is_file():
+        raise OSError(f"browser runner missing: {runner.name}")
+    wait_seconds = max(30, min(int(wait_seconds), 3600))
+    payload = {
+        "mode": "login",
+        "site": normalized_site,
+        "url": _BROWSER_SITES[normalized_site],
+        "profile_dir": profile_dir,
+        "headless": False,
+        "timeout_ms": wait_seconds * 1000,
+    }
+    completed = subprocess.run(
+        ["node", str(runner)],
+        input=json.dumps(payload, ensure_ascii=False),
+        text=True,
+        capture_output=True,
+        timeout=wait_seconds + 20,
+        check=False,
+    )
+    if completed.returncode != 0:
+        raise WebLLMConfigurationError(
+            _bounded_text(completed.stderr or completed.stdout or "browser login runner failed", 500)
+        )
+    return {
+        "ok": True,
+        "site": normalized_site,
+        "profile_dir": profile_dir,
+        "message": "可见浏览器会话已结束；后续 RALPH 项目将复用此专用 profile。",
+    }
 
 
 def _timeout_seconds() -> float:

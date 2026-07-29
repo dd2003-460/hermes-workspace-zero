@@ -9,6 +9,10 @@ from ralph_runtime.web_llm import (
     WebLLMConfigurationError,
     authorize_browser_providers,
     browser_authorization_path,
+    browser_profile_dir,
+    configured_browser_providers,
+    global_browser_authorization_path,
+    open_browser_login,
     run_web_llm_cross_check,
 )
 
@@ -152,3 +156,52 @@ def test_web_llm_authorize_cli_writes_human_scoped_configuration(tmp_path: Path,
     result = json.loads(capsys.readouterr().out)
     assert result["provider_ids"] == ["perplexity-review", "chatgpt-review"]
     assert browser_authorization_path(project).is_file()
+
+
+def test_global_browser_authorization_reuses_dedicated_profile_across_projects(tmp_path: Path, monkeypatch):
+    config_home = tmp_path / "config"
+    profile = tmp_path / "dedicated-ralph-profile"
+    monkeypatch.setenv("XDG_CONFIG_HOME", str(config_home))
+    monkeypatch.delenv("RALPH_WEB_LLM_BROWSER_PROVIDERS_JSON", raising=False)
+    monkeypatch.delenv("RALPH_WEB_LLM_BROWSER_PROFILE_DIR", raising=False)
+
+    authorization = authorize_browser_providers(
+        tmp_path / "ignored-project",
+        ["perplexity", "gemini"],
+        global_scope=True,
+        browser_profile=profile,
+    )
+
+    assert authorization["scope"] == "global"
+    assert authorization["persistent_profile"] is True
+    assert global_browser_authorization_path().is_file()
+    assert browser_profile_dir() == str(profile.resolve())
+    assert [item["id"] for item in configured_browser_providers(project=tmp_path / "another-project")] == [
+        "perplexity-review", "gemini-review",
+    ]
+
+
+def test_browser_login_uses_dedicated_profile_without_sending_a_prompt(tmp_path: Path, monkeypatch):
+    monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path / "config"))
+    profile = tmp_path / "dedicated-ralph-profile"
+    authorize_browser_providers(
+        tmp_path / "ignored-project",
+        ["perplexity", "chatgpt"],
+        global_scope=True,
+        browser_profile=profile,
+    )
+
+    def fake_run(command, **kwargs):
+        payload = json.loads(kwargs["input"])
+        assert command[0] == "node"
+        assert payload["mode"] == "login"
+        assert payload["site"] == "perplexity"
+        assert payload["profile_dir"] == str(profile.resolve())
+        assert "prompt" not in payload
+        return SimpleNamespace(returncode=0, stdout='{"login_completed":true}', stderr="")
+
+    monkeypatch.setattr("ralph_runtime.web_llm.subprocess.run", fake_run)
+    result = open_browser_login("perplexity", wait_seconds=30)
+
+    assert result["ok"] is True
+    assert result["profile_dir"] == str(profile.resolve())

@@ -41,6 +41,7 @@ from .field_tasks import (
     update_field_task_metadata,
     update_field_task_metadata_transaction,
     rebind_field_task_to_path,
+    settle_field_agent_tool_response,
     materialize_field_tasks,
 )
 
@@ -1470,17 +1471,15 @@ def handle_posttooluse(payload: Mapping[str, Any], mode: str = "hybrid") -> dict
                     and (response_map.get("success") is False or str(response_map.get("status", "")).lower() in {"failed", "error", "cancelled"})
                 )
                 if field_task is not None:
-                    state = update_field_task_metadata_transaction(
+                    state, _settled = settle_field_agent_tool_response(
                         root,
                         str(field_task["id"]),
-                        status="ready" if failed else "dispatched",
+                        failed=failed,
                         # The asynchronous child identity is authoritative at
-                        # SubagentStart.  Do not let two concurrent
-                        # PostToolUse events assign the same parent/child id
-                        # to sibling fields before that lifecycle event.
-                        agent_id=None,
+                        # SubagentStart.  This is only an alias for an active
+                        # reservation, and must not revive a task that its
+                        # SubagentStop hook has already deferred/completed.
                         agent_alias=None if failed else _agent_id(payload),
-                        last_error="Agent tool failed before SubagentStart" if failed else None,
                     )
             card = None if field_mode_enabled() else card_by_ref(state, task_card_marker(tool_input))
             if card is not None:

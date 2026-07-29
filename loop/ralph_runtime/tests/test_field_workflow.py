@@ -247,6 +247,46 @@ def test_applied_incomplete_field_attempt_allows_next_field_without_fake_pass(tm
     assert live["field_tasks"][0]["status"] == "ready"
 
 
+def test_late_parent_agent_receipt_does_not_revive_deferred_field(tmp_path: Path):
+    """SubagentStop may precede PostToolUse(Agent) in Claude's hook stream."""
+
+    root = _project(tmp_path)
+    state = load_state(root / "loop-state.json")
+    state["stage"]["id"] = "02"
+    state["task_spec"]["attribute_matrix"] = [{
+        "concept": "价格证据",
+        "role": "research_findings",
+        "attribute": "当前市场价",
+        "disposition": "research_required",
+        "evidence_refs": [],
+    }]
+    tasks = materialize_field_tasks(root, state)
+    state["field_tasks"][0].update({
+        "status": "dispatched",
+        "agent_id": "child-price",
+        "agent_ids": ["child-price"],
+        "apply_count": 1,
+        "apply_count_at_dispatch": 0,
+    })
+    save_state(root / "loop-state.json", state)
+
+    handle_subagentstop(
+        {"cwd": str(root), "agent_id": "child-price", "stop_reason": "completed"},
+        mode="hybrid",
+    )
+    task_path = tasks[0]["path"]
+    handle_posttooluse({
+        "cwd": str(root),
+        "tool_name": "Agent",
+        "tool_input": {"prompt": f"RALPH_FIELD_TASK={task_path}\n只处理一个字段"},
+        "tool_response": {"status": "completed", "agentId": "child-price"},
+    }, mode="hybrid")
+
+    live = load_state(root / "loop-state.json")
+    assert live["field_tasks"][0]["status"] == "deferred"
+    assert live["field_tasks"][0].get("agent_id") == "child-price"
+
+
 def test_top_level_worker_field_apply_releases_its_reservation(tmp_path: Path, monkeypatch):
     root = _project(tmp_path)
     state = load_state(root / "loop-state.json")

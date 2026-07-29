@@ -118,6 +118,62 @@ def update_field_task_metadata_transaction(
         return state
 
 
+def settle_field_agent_tool_response(
+    root: str | Path,
+    task_id: str,
+    *,
+    failed: bool,
+    agent_alias: str | None = None,
+) -> tuple[dict[str, Any], bool]:
+    """Record a parent ``Agent`` tool response without reviving a finished child.
+
+    Claude Code does not guarantee that ``PostToolUse(Agent)`` arrives before
+    ``SubagentStop``.  A successful child can therefore be moved to
+    ``deferred`` by its Stop hook and then immediately be written back to
+    ``dispatched`` by the parent's late tool receipt.  Treat terminal lifecycle
+    states as authoritative and only settle an *active* reservation here.
+
+    The check and update deliberately share the field dispatch lock: a stale
+    hook snapshot must never overwrite a newer Stop-hook transition.
+    """
+
+    from .state import load_state, save_state
+
+    state_path = Path(root) / "loop-state.json"
+    with _dispatch_lock(root):
+        state = load_state(state_path)
+        task = next(
+            (
+                item
+                for item in state.get("field_tasks", [])
+                if isinstance(item, dict) and str(item.get("id", "")) == str(task_id)
+            ),
+            None,
+        )
+        if task is None or str(task.get("status", "")) not in {"dispatching", "dispatched"}:
+            return state, False
+        if failed:
+            update_field_task_metadata(
+                root,
+                state,
+                task_id,
+                status="ready",
+                clear_agent_id=True,
+                clear_agent_ids=True,
+                last_error="Agent tool failed before a usable SubagentStop receipt",
+            )
+        else:
+            update_field_task_metadata(
+                root,
+                state,
+                task_id,
+                status="dispatched",
+                agent_alias=agent_alias,
+            )
+        save_state(state_path, state)
+        return state, True
+
+
 def bind_field_task(
     root: str | Path,
     agent_id: str,

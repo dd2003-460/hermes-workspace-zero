@@ -1099,6 +1099,20 @@ def handle_pretooluse(payload: Mapping[str, Any], mode: str = "hybrid") -> dict[
     if role == "commander" and tool_name == "Read" and field_mode_enabled():
         canonical_task = _field_task_path_hint(root, state, _target_path(tool_input))
         if canonical_task:
+            attempted_task = _field_task_from_path(root, state, canonical_task)
+            requires_agent = bool(attempted_task and field_task_requires_agent(attempted_task))
+            stage = state.get("stage", {}) if isinstance(state, Mapping) else {}
+            stage_id = str(stage.get("id", "01"))
+            revision = str(stage.get("revision", "r1"))
+            fields_path = f"loop-artifacts/stages/{stage_id}/{revision}/fields.json"
+            next_action = (
+                "不要读取任务文件来构造总报告；下一次工具调用仍必须是带 RALPH_FIELD_TASK 标记的 Agent。"
+                if requires_agent
+                else (
+                    f"不要读取结构字段任务卡；直接 Write/Edit 当前阶段草稿 `{fields_path}`，"
+                    f"然后运行 `ralph field-apply . {fields_path}`。"
+                )
+            )
             _commander_read_denied = True
             _commander_read_reason = tool_feedback(
                 "FIELD_TASK_PATH_CORRECTION",
@@ -1112,7 +1126,7 @@ def handle_pretooluse(payload: Mapping[str, Any], mode: str = "hybrid") -> dict[
                     if str(_target_path(tool_input)).endswith(".json")
                     else f"字段任务文件是 JSON，不是 JavaScript；正确路径为 `{canonical_task}`。"
                 ),
-                next_action="不要读取任务文件来构造总报告；下一次工具调用仍必须是带 RALPH_FIELD_TASK 标记的 Agent。",
+                next_action=next_action,
                 forbidden="创建 `.js` 副本、读取多个任务文件或绕过 field-apply。",
             )
     if role == "commander" and tool_name in {"Read", "Grep", "Glob"}:

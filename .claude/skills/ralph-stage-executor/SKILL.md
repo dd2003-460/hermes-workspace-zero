@@ -22,6 +22,18 @@ discipline; `ralph` validation remains the authority.
 Never modify `loop-state.json` directly. Never call a stage complete because
 the prose sounds plausible: submit the artifact and let `ralph` validate it.
 
+## Flow-only experiments
+
+When the runtime says `flow-only`, `test_flow`, or that no actual web research
+is required, treat the stated fictional/local inputs as closed-world test data:
+
+- Do not call web tools and do not create `research_required` fields solely
+  because a fictional system lacks real-world sources.
+- Use `disposition=inferred`, an explicit “仅用于验证流程” rationale, and
+  `evidence_refs=[]` for the synthetic details required to exercise a stage.
+- Still create the required structured artifacts, apply them through `ralph`,
+  and let the normal phase validators reject malformed fields/DAGs.
+
 ## Process one field completely
 
 For a current fact, obtain a claim-level HTTPS source and record the exact URL,

@@ -53,6 +53,25 @@ def test_stage_prompts_advertise_stage_executor_skill():
     assert "/ralph-stage-executor" in renderer.compact_recovery_prompt(state).text
 
 
+def test_ralph_attaches_stage_executor_skill_as_system_context(tmp_path: Path, monkeypatch):
+    import ralph_runtime.cli as cli
+
+    skill = tmp_path / "ralph-stage-executor.md"
+    skill.write_text(
+        "---\nname: ralph-stage-executor\ndescription: test\n---\n\n# Workflow\nUse field-status first.\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setenv("RALPH_STAGE_EXECUTOR_SKILL", str(skill))
+    command = ["claude"]
+
+    source = cli._append_stage_executor_skill(command)
+
+    assert source == skill
+    index = command.index("--append-system-prompt")
+    assert "Required RALPH stage-execution skill" in command[index + 1]
+    assert "Use field-status first." in command[index + 1]
+
+
 def test_field_tasks_are_generated_from_current_factor_count(tmp_path: Path):
     root = _project(tmp_path)
     state = load_state(root / "loop-state.json")
@@ -1547,6 +1566,34 @@ def test_commander_cannot_read_current_field_task(tmp_path: Path):
     assert output["permissionDecision"] == "deny"
     assert "FIELD_TASK_PATH_CORRECTION" in output["permissionDecisionReason"]
     assert "Agent" in output["permissionDecisionReason"]
+
+
+def test_commander_read_of_pending_field_task_recovers_to_stage_draft(tmp_path: Path):
+    root = _project(tmp_path)
+    state = load_state(root / "loop-state.json")
+    state["stage"]["id"] = "01"
+    state["task_spec"]["attribute_matrix"] = [{
+        "concept": "目标",
+        "role": "goal",
+        "attribute": "完成离线比较工作流",
+        "disposition": "pending",
+        "evidence_refs": [],
+    }]
+    save_state(root / "loop-state.json", state)
+    task = materialize_field_tasks(root, load_state(root / "loop-state.json"))[0]
+
+    result = handle_pretooluse({
+        "cwd": str(root),
+        "tool_name": "Read",
+        "tool_input": {"file_path": task["path"]},
+        "ralph_role": "commander",
+    }, mode="hybrid")
+
+    output = result["hookSpecificOutput"]
+    assert output["permissionDecision"] == "deny"
+    assert "FIELD_TASK_PATH_CORRECTION" in output["permissionDecisionReason"]
+    assert "fields.json" in output["permissionDecisionReason"]
+    assert "Agent" not in output["permissionDecisionReason"]
 
 
 def test_commander_can_read_current_stage_fields_draft(tmp_path: Path):

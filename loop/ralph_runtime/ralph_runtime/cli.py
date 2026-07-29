@@ -210,6 +210,50 @@ def _claude_executable() -> str:
     )
 
 
+def _stage_executor_skill_context() -> tuple[str | None, Path | None]:
+    """Load the user-owned stage skill as bounded Claude system context.
+
+    A literal ``/ralph-stage-executor`` inside a generated user prompt is not
+    a reliable slash-command invocation: local models may merely quote it or
+    ignore it.  The global skill remains the single editable source, while
+    this adapter makes its workflow available to every fresh RALPH Commander
+    context before the first tool choice.
+    """
+
+    override = os.environ.get("RALPH_STAGE_EXECUTOR_SKILL", "").strip()
+    candidates = [Path(override).expanduser()] if override else []
+    candidates.append(Path.home() / ".claude" / "skills" / "ralph-stage-executor" / "SKILL.md")
+    for path in candidates:
+        try:
+            raw = path.read_text(encoding="utf-8").strip()
+        except OSError:
+            continue
+        if not raw:
+            continue
+        if raw.startswith("---"):
+            _, marker, body = raw.partition("\n---")
+            if marker:
+                raw = body.lstrip()
+        # A skill is guidance, not an unbounded replacement system prompt.
+        return (
+            "# Required RALPH stage-execution skill\n"
+            "Treat the following workflow as mandatory guidance. Runtime Hook "
+            "decisions and ralph validation remain authoritative.\n\n"
+            + raw[:12_000],
+            path,
+        )
+    return None, None
+
+
+def _append_stage_executor_skill(command: list[str]) -> Path | None:
+    """Attach the global RALPH skill to a fresh Commander without duplicating it."""
+
+    context, path = _stage_executor_skill_context()
+    if context:
+        command.extend(["--append-system-prompt", context])
+    return path
+
+
 def _ensure_project_scaffold(root: Path) -> list[str]:
     """Create only missing project bootstrap files; never overwrite user files."""
 
@@ -1189,6 +1233,7 @@ def start_project(
         ),
         model,
     )
+    _append_stage_executor_skill(command)
     if prompt:
         command.extend(["-p", prompt])
     print("RALPH project:", root)
@@ -1247,6 +1292,7 @@ def resume_project(
         ),
         model,
     )
+    _append_stage_executor_skill(command)
     # A positional prompt starts an interactive session. Do not use
     # `--continue`: that would re-send the oversized transcript we are
     # recovering from.
@@ -1319,6 +1365,7 @@ def run_project(
         ),
         skip_permissions,
     )
+    _append_stage_executor_skill(command)
     command.append(task)
     print("RALPH project:", root)
     if resolution is not None:
@@ -2589,6 +2636,7 @@ def _loop_project_impl(
             ),
             skip_permissions,
         )
+        skill_path = _append_stage_executor_skill(command)
         command.append(prompt)
         cycle += 1
         append_observation(
@@ -2600,6 +2648,7 @@ def _loop_project_impl(
                 "stage": state.get("stage", {}).get("id"),
                 "revision": state.get("stage", {}).get("revision"),
                 "prompt_kind": "initial_state" if initial_prompt and cycle == 1 else "fresh_recovery",
+                "stage_executor_skill": str(skill_path) if skill_path is not None else None,
             },
         )
         print(f"RALPH cycle {cycle}: launching fresh Claude context")

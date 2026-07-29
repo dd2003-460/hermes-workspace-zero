@@ -96,6 +96,7 @@ def test_research_tools_are_scoped_to_stage_two(tmp_path: Path):
     assert "先逐字执行一次 `ralph prompt-first web-llm .`" in stage_two_prompt
     assert "不要为同一空缺反复空搜" in stage_two_prompt
     assert "绝不可写成“搜集到证据”" in stage_two_prompt
+    assert "所有 provider 都失败" in stage_two_prompt
     assert "当前阶段不为未来阶段提前浏览" not in stage_two_prompt
 
 

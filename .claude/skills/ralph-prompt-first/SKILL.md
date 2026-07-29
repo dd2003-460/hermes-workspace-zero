@@ -17,7 +17,9 @@ write the complete current stage document.
   source/date/observation/uncertainty. A browser/Playwright web-LLM response is
   a lead, not invented evidence. In stage 02, run exactly `ralph prompt-first
   web-llm .` once before generic web search; record its Markdown receipt or a
-  truthful tool/login/page failure. A zero-result search is not evidence.
+  truthful tool/login/page failure. If all providers fail, record that and move
+  directly to the next section; do not start WebSearch/Fetch. A zero-result
+  search is not evidence.
 - When the current Markdown is genuinely ready, append exactly
   `<!-- ralph: done -->` on its own line. The Stop Hook then supplies the next
   stage in the same Claude session. It does not grade semantics. The marker is

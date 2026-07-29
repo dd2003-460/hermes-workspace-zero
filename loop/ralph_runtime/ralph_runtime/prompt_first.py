@@ -238,6 +238,8 @@ def render_prompt(root: str | Path, *, reason: str = "继续当前阶段") -> st
             "3. 仅本阶段可搜集外部资料。先逐字执行一次 `ralph prompt-first web-llm .`；"
             "它会用当前任务自动生成问题、调用已获人类授权的本地 Playwright/API 网页 LLM，并把真实回执写到 `loop-artifacts/prompt-first/02-web-llm-cross-check.md`。"
             "无论成功、登录受限还是工具不可用，都在本阶段 Markdown 中记录回执路径、结果和局限。网页 AI 只是线索。\n"
+            "   若回执中的所有 provider 都失败，立即把“网页 AI 不可用”写入当前 Markdown 并结束资料搜集，直接进入暂定结论与未解决空缺；此时不要再调用 WebSearch 或 Fetch。\n"
+            "   只有至少一个 provider 成功时，才可针对一个明确空缺补充一次独立来源；不要把网页 AI 回答当来源。\n"
             "   若任一额外外部查询返回零结果或错误，立即把该观察写入当前 Markdown 并继续本阶段；不要为同一空缺反复空搜。\n"
             "   `Did 0 searches`、空 Fetch 或工具错误不是资料，绝不可写成“搜集到证据”；只有具体 URL/标题/日期可写入来源与观察。\n"
         )

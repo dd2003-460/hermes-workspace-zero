@@ -12,6 +12,33 @@ from .runtime_config import field_mode_enabled
 from .field_tasks import field_task_requires_agent
 
 
+_COMMANDER_RALPH_COMMANDS = {
+    "apply",
+    "assemble",
+    "events",
+    "field-apply",
+    "field-init",
+    "field-status",
+    "graph-apply",
+    "prompt",
+    "recover-state",
+    "render",
+    "status",
+    "task-next",
+    "validate",
+    "web-llm-check",
+}
+
+
+def _is_web_llm_check_command(command: str | None) -> bool:
+    """Recognise the one external-facing runtime action after CLI validation."""
+
+    return bool(
+        command
+        and re.search(r"(?:^|\s)(?:[^\s]*/)?ralph\s+web-llm-check(?:\s|$)", str(command))
+    )
+
+
 def _field_gate_active(state: Mapping[str, Any]) -> bool:
     """True when the runtime is in field-centric mode for this project.
 
@@ -31,8 +58,10 @@ def _is_controlled_ralph_command(command: str | None, role: str) -> bool:
     harmless ``cd <project> && ralph`` prefix.  A literal ``startswith`` check
     treated those equivalent commands as untrusted and blocked the only
     sanctioned field submission step.  Keep the worker narrow: it may invoke
-    ``field-apply`` and the auditable ``web-llm-check`` receipt command;
-    Commander may use the read-only/status commands too.
+    ``field-apply`` and the auditable ``web-llm-check`` receipt command.
+    Commander has an explicit protocol-command allowlist, rather than every
+    CLI command: in particular it cannot start nested supervisors with
+    ``resume``/``loop`` or self-authorize external browser actions.
     Shell chaining after the CLI is deliberately rejected.
     """
     if not command:
@@ -67,7 +96,7 @@ def _is_controlled_ralph_command(command: str | None, role: str) -> bool:
         return False
     if role == "worker":
         return tokens[0] in {"field-apply", "web-llm-check"}
-    return True
+    return tokens[0] in _COMMANDER_RALPH_COMMANDS
 
 
 def _is_safe_commander_diagnostic(command: str | None) -> bool:
@@ -88,7 +117,7 @@ def _is_safe_commander_diagnostic(command: str | None) -> bool:
         return False
     # ``ls path 2>/dev/null; ls other 2>/dev/null`` is the exact harmless
     # shape Claude Code emits while it checks a newly created project.
-    text = re.sub(r"(?:^|\s)2>/dev/null(?=\s|;|$)", "", text)
+    text = re.sub(r"(?:^|\s)2>(?:&1|/dev/null)(?=\s|;|$)", "", text)
     if ">" in text:
         return False
     parts = [part.strip() for part in re.split(r"\s*(?:;|&&)\s*", text) if part.strip()]
@@ -279,6 +308,17 @@ def decide_tool(
         # otherwise a Commander cannot submit an incremental draft while a
         # sibling research field is running.
         if tool_name == "Bash" and command and _is_controlled_ralph_command(command, role):
+            if _is_web_llm_check_command(command) and stage_id not in {"02.5", "04.5"}:
+                return ToolDecision(
+                    "deny",
+                    tool_feedback(
+                        "WEB_LLM_STAGE_SCOPE",
+                        detected=f"当前阶段是 {stage_id}，却尝试运行网页 LLM 交叉核验。",
+                        correction="网页 LLM 仅用于 02.5 / 04.5 的对抗性核验；先完成当前阶段字段。",
+                        next_action="继续当前阶段协议；进入 02.5 或 04.5 后再用自己的 task JSON 运行 web-llm-check。",
+                        forbidden="在目标澄清、调研、执行或 exploration 阶段发送网页 LLM 问题。",
+                    ),
+                )
             return ToolDecision("allow", "controlled ralph runtime command")
         if role == "commander" and tool_name == "Bash" and _is_safe_commander_diagnostic(command):
             return ToolDecision("allow", "safe read-only commander diagnostic")

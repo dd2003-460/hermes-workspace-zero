@@ -205,7 +205,13 @@ export PROVIDER_A_API_KEY='…'
 export PROVIDER_B_API_KEY='…'
 ```
 
-若需要让 RALPH 用 Playwright 启动可见浏览器、逐字输入同一核验问题并读取网页回复，也可配置浏览器 provider（无需、也不会读取已有浏览器 cookie 或凭据）：
+若需要让 RALPH 内的本地 Agent 用 Playwright 启动可见浏览器、逐字输入同一核验问题、提交并读取网页回复，**先由人类为该项目一次性授权**（站点与 02.5 / 04.5 loop prompt 的 allowlist 对应）：
+
+```bash
+ralph web-llm-authorize . --providers perplexity chatgpt gemini
+```
+
+命令只写入 `loop-artifacts/contracts/web-llm-browser-authorization.json`，其中只有授权站点和公开 URL。阶段 Agent 无权执行这个 control-plane 命令；授权后它只能在交叉验证阶段运行 `ralph web-llm-check`，因此实际浏览器输入与提交是**本地 Agent 的动作**，不是提示词中的虚假声明。也可以使用一次性的环境变量覆盖项目授权（适合 CI）：
 
 ```bash
 export RALPH_WEB_LLM_BROWSER_PROVIDERS_JSON='[
@@ -215,7 +221,7 @@ export RALPH_WEB_LLM_BROWSER_PROVIDERS_JSON='[
 export RALPH_WEB_LLM_BROWSER_HEADLESS=0
 ```
 
-浏览器 provider 使用全新的临时上下文。需要登录的站点会在可见窗口中报告登录缺失，不会尝试填写账号或密码；用户登录后再重新运行即可。API 与浏览器 provider 可以混合，但必须总共至少有两个不同 provider 才会计入交叉核验。
+浏览器 provider 使用全新的临时上下文。需要登录的站点会在可见窗口中报告登录缺失，不会尝试填写账号或密码，也不会复用或读取已有浏览器 cookie；此时将错误留在回执中而非伪造结果。API 与浏览器 provider 可以混合，但必须总共至少有两个不同 provider 才会计入交叉核验。
 
 把当前阶段目录内的请求文件写为 `{ "claim": "…", "context": "…" }`，然后运行：
 

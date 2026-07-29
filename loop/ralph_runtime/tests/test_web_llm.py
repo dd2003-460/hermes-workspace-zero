@@ -5,7 +5,12 @@ from types import SimpleNamespace
 import pytest
 
 from ralph_runtime import cli
-from ralph_runtime.web_llm import WebLLMConfigurationError, run_web_llm_cross_check
+from ralph_runtime.web_llm import (
+    WebLLMConfigurationError,
+    authorize_browser_providers,
+    browser_authorization_path,
+    run_web_llm_cross_check,
+)
 
 
 class _Response:
@@ -107,3 +112,43 @@ def test_web_llm_cross_check_accepts_playwright_browser_receipts(tmp_path: Path,
     assert report["successful_provider_ids"] == ["perplexity-review", "chatgpt-review"]
     receipt = json.loads((project / report["receipt"]).read_text(encoding="utf-8"))
     assert {item["transport"] for item in receipt["responses"]} == {"browser_playwright"}
+
+
+def test_human_project_browser_authorization_enables_local_agent_runner(tmp_path: Path, monkeypatch):
+    project = tmp_path / "authorized-browser-project"
+    cli.prepare_project(project, task="验证一个主张")
+    request = project / "loop-artifacts" / "stages" / "01" / "r1" / "cross-check.json"
+    request.write_text('{"claim":"需要核验"}\n', encoding="utf-8")
+    authorization = authorize_browser_providers(project, ["perplexity", "gemini"])
+    document = json.loads(browser_authorization_path(project).read_text(encoding="utf-8"))
+    assert authorization["provider_ids"] == ["perplexity-review", "gemini-review"]
+    assert document["authorized_by"] == "human"
+    assert document["providers"][0]["url"] == "https://www.perplexity.ai/"
+    monkeypatch.delenv("RALPH_WEB_LLM_PROVIDERS_JSON", raising=False)
+    monkeypatch.delenv("RALPH_WEB_LLM_BROWSER_PROVIDERS_JSON", raising=False)
+
+    def fake_run(command, **kwargs):
+        payload = json.loads(kwargs["input"])
+        assert command[0] == "node"
+        return SimpleNamespace(returncode=0, stdout=json.dumps({
+            "response": f"uncertain from {payload['site']}",
+            "page_url": payload["url"],
+        }), stderr="")
+
+    monkeypatch.setattr("ralph_runtime.web_llm.subprocess.run", fake_run)
+    report = run_web_llm_cross_check(project, request.relative_to(project))
+
+    assert report["successful_provider_ids"] == ["perplexity-review", "gemini-review"]
+
+
+def test_web_llm_authorize_cli_writes_human_scoped_configuration(tmp_path: Path, capsys):
+    project = tmp_path / "cli-authorized-browser-project"
+    cli.prepare_project(project, task="验证一个主张")
+
+    assert cli.main([
+        "web-llm-authorize", str(project), "--providers", "perplexity", "chatgpt",
+    ]) == 0
+
+    result = json.loads(capsys.readouterr().out)
+    assert result["provider_ids"] == ["perplexity-review", "chatgpt-review"]
+    assert browser_authorization_path(project).is_file()

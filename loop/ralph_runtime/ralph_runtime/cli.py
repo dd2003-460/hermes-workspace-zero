@@ -59,7 +59,7 @@ from .state import (
 )
 from .protocol import collect_validation_issues, parse_action, validate_action
 from .task_board import TaskBoardError, read_task_board, select_next_task
-from .web_llm import run_web_llm_cross_check
+from .web_llm import authorize_browser_providers, run_web_llm_cross_check
 from .runtime_config import (
     HOOK_MODES,
     STOP_POLICIES,
@@ -376,6 +376,18 @@ def build_parser() -> argparse.ArgumentParser:
     web_llm_check.add_argument(
         "request_file",
         help="当前阶段目录内的 {claim, context?, providers?} JSON，或含 field.attribute 的单字段 task JSON",
+    )
+
+    web_llm_authorize = sub.add_parser(
+        "web-llm-authorize",
+        help="由人类为本项目授权受控 Playwright 网页 LLM 站点；阶段 Agent 无权自行执行。",
+    )
+    web_llm_authorize.add_argument("project", nargs="?", default=".", help="项目目录（默认当前目录）")
+    web_llm_authorize.add_argument(
+        "--providers",
+        nargs="+",
+        choices=("perplexity", "chatgpt", "gemini"),
+        help="授权的网页 LLM；省略时授权全部三个受支持站点。",
     )
 
     graph_apply = sub.add_parser(
@@ -3404,6 +3416,13 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "web-llm-check":
         try:
             print(json.dumps(run_web_llm_cross_check(args.project, args.request_file), ensure_ascii=False, indent=2, sort_keys=True))
+            return 0
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            print(json.dumps({"ok": False, "error": str(exc)}, ensure_ascii=False, indent=2), file=sys.stderr)
+            return 1
+    if args.command == "web-llm-authorize":
+        try:
+            print(json.dumps(authorize_browser_providers(args.project, args.providers), ensure_ascii=False, indent=2, sort_keys=True))
             return 0
         except (OSError, ValueError, json.JSONDecodeError) as exc:
             print(json.dumps({"ok": False, "error": str(exc)}, ensure_ascii=False, indent=2), file=sys.stderr)

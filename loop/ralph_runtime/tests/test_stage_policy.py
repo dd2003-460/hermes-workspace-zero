@@ -79,6 +79,25 @@ def test_worker_accepts_auditable_web_llm_check_command():
     assert decide_tool(state, "worker", "Bash", command=command).decision == "allow"
 
 
+def test_web_llm_check_is_limited_to_cross_validation_stages():
+    state = create_state("fixture")
+    state["stage"]["id"] = "02"
+    command = "ralph web-llm-check . loop-artifacts/stages/02/r1/tasks/field.json"
+    assert decide_tool(state, "worker", "Bash", command=command).decision == "deny"
+
+
+def test_agent_cannot_self_authorize_browser_sites_or_start_nested_supervisor():
+    state = create_state("fixture")
+    assert decide_tool(
+        state,
+        "commander",
+        "Bash",
+        command="ralph web-llm-authorize . --providers perplexity chatgpt",
+    ).decision == "deny"
+    assert decide_tool(state, "worker", "Bash", command="ralph web-llm-authorize .").decision == "deny"
+    assert decide_tool(state, "commander", "Bash", command="ralph resume .").decision == "deny"
+
+
 def test_exploration_field_worker_can_write_and_apply_its_field():
     state = create_state("fixture")
     state["stage"]["id"] = "exploration"

@@ -231,6 +231,7 @@ class PromptRenderer:
             if stage_id in {"02.5", "04.5"}:
                 compact_lines.append(
                     "网页 LLM 只有 `ralph web-llm-check` 产生且含两个成功 provider 的回执才可计入；"
+                    "项目获人类浏览器授权时，该命令由本地 Agent 用受控 Playwright 实际输入并提交问题；"
                     "LLM 回答不替代两个独立权威来源。"
                 )
             if recent_human_inputs:

@@ -37,6 +37,10 @@ _BROWSER_SITES = {
     "chatgpt": "https://chatgpt.com/",
     "gemini": "https://gemini.google.com/app",
 }
+_BROWSER_AUTHORIZATION_RELATIVE_PATH = Path(
+    "loop-artifacts/contracts/web-llm-browser-authorization.json"
+)
+_BROWSER_AUTHORIZATION_KIND = "ralph_web_llm_browser_authorization"
 
 
 def _bounded_text(value: Any, limit: int) -> str:
@@ -97,25 +101,20 @@ def configured_providers(raw: str | None = None) -> list[dict[str, str]]:
     return providers
 
 
-def configured_browser_providers(raw: str | None = None) -> list[dict[str, str]]:
-    """Read browser-UI providers that the local Playwright runner may use.
+def _parse_browser_providers(payload: str | list[Any], *, source: str) -> list[dict[str, str]]:
+    """Validate browser providers from an environment value or authorization file."""
 
-    ``RALPH_WEB_LLM_BROWSER_PROVIDERS_JSON`` is a JSON array containing
-    ``id`` and ``site``.  ``site`` is deliberately a small allowlist of public
-    LLM web applications, with an optional HTTPS ``url`` override for a
-    user-authorized compatible deployment.  Credentials and browser storage
-    are never part of this configuration or a persisted receipt.
-    """
-
-    payload = raw if raw is not None else os.environ.get("RALPH_WEB_LLM_BROWSER_PROVIDERS_JSON", "")
-    if not payload.strip():
-        return []
-    try:
-        items = json.loads(payload)
-    except json.JSONDecodeError as exc:
-        raise WebLLMConfigurationError("RALPH_WEB_LLM_BROWSER_PROVIDERS_JSON 必须是 JSON 数组") from exc
+    if isinstance(payload, str):
+        if not payload.strip():
+            return []
+        try:
+            items = json.loads(payload)
+        except json.JSONDecodeError as exc:
+            raise WebLLMConfigurationError(f"{source} 必须是 JSON 数组") from exc
+    else:
+        items = payload
     if not isinstance(items, list):
-        raise WebLLMConfigurationError("RALPH_WEB_LLM_BROWSER_PROVIDERS_JSON 必须是 JSON 数组")
+        raise WebLLMConfigurationError(f"{source} 必须是 JSON 数组")
 
     providers: list[dict[str, str]] = []
     seen: set[str] = set()
@@ -151,19 +150,125 @@ def configured_browser_providers(raw: str | None = None) -> list[dict[str, str]]
     return providers
 
 
-def _all_providers() -> list[dict[str, str]]:
-    providers = [*configured_providers(), *configured_browser_providers()]
+def browser_authorization_path(project: str | Path) -> Path:
+    """Return the durable project-local browser authorization path."""
+
+    return Path(project).expanduser().resolve() / _BROWSER_AUTHORIZATION_RELATIVE_PATH
+
+
+def _project_browser_providers(project: str | Path) -> list[dict[str, str]]:
+    path = browser_authorization_path(project)
+    if not path.is_file():
+        return []
+    try:
+        document = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise WebLLMConfigurationError(
+            f"项目浏览器授权文件 JSON 语法错误：{path.relative_to(Path(project).expanduser().resolve())}"
+        ) from exc
+    if not isinstance(document, Mapping):
+        raise WebLLMConfigurationError("项目浏览器授权文件必须是对象")
+    if document.get("kind") != _BROWSER_AUTHORIZATION_KIND or document.get("authorized_by") != "human":
+        raise WebLLMConfigurationError(
+            "项目浏览器授权文件缺少人类授权标记；请由人类运行 `ralph web-llm-authorize`。"
+        )
+    return _parse_browser_providers(
+        document.get("providers", []),
+        source="项目浏览器授权文件 providers",
+    )
+
+
+def configured_browser_providers(
+    raw: str | None = None,
+    *,
+    project: str | Path | None = None,
+) -> list[dict[str, str]]:
+    """Read browser-UI providers that the local Playwright runner may use.
+
+    ``RALPH_WEB_LLM_BROWSER_PROVIDERS_JSON`` is a JSON array containing
+    ``id`` and ``site``.  ``site`` is deliberately a small allowlist of public
+    LLM web applications, with an optional HTTPS ``url`` override for a
+    user-authorized compatible deployment.  Credentials and browser storage
+    are never part of this configuration or a persisted receipt.
+    """
+
+    payload = raw if raw is not None else os.environ.get("RALPH_WEB_LLM_BROWSER_PROVIDERS_JSON", "")
+    if payload.strip():
+        return _parse_browser_providers(payload, source="RALPH_WEB_LLM_BROWSER_PROVIDERS_JSON")
+    if project is not None:
+        return _project_browser_providers(project)
+    return []
+
+
+def authorize_browser_providers(
+    project: str | Path,
+    sites: list[str] | tuple[str, ...] | None = None,
+) -> dict[str, Any]:
+    """Persist an explicit human authorization for supported browser sites.
+
+    This is intentionally a control-plane operation: stage agents may use the
+    resulting authorization through ``web-llm-check`` but StagePolicy never
+    permits them to execute this command themselves.  The file contains only
+    public URLs and no browser profile, cookies, passwords or API keys.
+    """
+
+    root = Path(project).expanduser().resolve()
+    requested = [str(site).strip().lower() for site in (sites or tuple(_BROWSER_SITES))]
+    if not requested:
+        raise WebLLMConfigurationError("至少选择一个受支持的 browser provider")
+    invalid = sorted({site for site in requested if site not in _BROWSER_SITES})
+    if invalid:
+        raise WebLLMConfigurationError(
+            f"不支持的 browser provider：{', '.join(invalid)}；可选：{', '.join(sorted(_BROWSER_SITES))}"
+        )
+    selected = list(dict.fromkeys(requested))
+    providers = [
+        {"id": f"{site}-review", "site": site, "url": _BROWSER_SITES[site]}
+        for site in selected
+    ]
+    document = {
+        "schema_version": 1,
+        "kind": _BROWSER_AUTHORIZATION_KIND,
+        "authorized_by": "human",
+        "authorized_at": datetime.now(timezone.utc).isoformat(),
+        "source": "loop/1-loop/02.5-交叉验证.md and loop/1-loop/04.5-交叉验证.md URL allowlist",
+        "providers": providers,
+        "privacy": "Fresh Playwright contexts only; no cookie, credential, or browser-profile access.",
+    }
+    output = browser_authorization_path(root)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    encoded = json.dumps(document, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+    fd, temporary = tempfile.mkstemp(prefix=f".{output.name}.", suffix=".tmp", dir=output.parent)
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            handle.write(encoded)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary, output)
+    finally:
+        if os.path.exists(temporary):
+            os.unlink(temporary)
+    return {
+        "ok": True,
+        "authorization": str(output.relative_to(root)),
+        "provider_ids": [provider["id"] for provider in _parse_browser_providers(providers, source="authorization")],
+        "requires_two_providers": True,
+    }
+
+
+def _all_providers(project: str | Path | None = None) -> list[dict[str, str]]:
+    providers = [*configured_providers(), *configured_browser_providers(project=project)]
     ids = [provider["id"] for provider in providers]
     if len(set(ids)) != len(ids):
         raise WebLLMConfigurationError("API provider 与 browser provider 的 id 不能重复")
     return providers
 
 
-def web_llm_crosscheck_enabled() -> bool:
+def web_llm_crosscheck_enabled(project: str | Path | None = None) -> bool:
     """Whether the runtime can honestly require actual web-LLM receipts."""
 
     try:
-        return len(_all_providers()) >= 2
+        return len(_all_providers(project)) >= 2
     except WebLLMConfigurationError:
         return False
 
@@ -343,7 +448,7 @@ def run_web_llm_cross_check(project: str | Path, request_file: str | Path) -> di
     context = _bounded_text(request_data.get("context") or field.get("rationale"), 6000)
     if not claim:
         raise ValueError("web-LLM 请求需要非空 claim")
-    providers = _all_providers()
+    providers = _all_providers(root)
     requested = request_data.get("providers")
     if requested is not None:
         if not isinstance(requested, list) or not all(isinstance(item, str) and item.strip() for item in requested):
@@ -353,8 +458,9 @@ def run_web_llm_cross_check(project: str | Path, request_file: str | Path) -> di
     if len(providers) < 2:
         raise WebLLMConfigurationError(
             "至少配置两个独立 web-LLM provider 才能执行交叉核验；"
-            "设置 RALPH_WEB_LLM_PROVIDERS_JSON（API）或 "
-            "RALPH_WEB_LLM_BROWSER_PROVIDERS_JSON（受控 Playwright 网页 UI）。"
+            "设置 RALPH_WEB_LLM_PROVIDERS_JSON（API）、"
+            "RALPH_WEB_LLM_BROWSER_PROVIDERS_JSON（受控 Playwright 网页 UI），"
+            "或由人类运行 `ralph web-llm-authorize <project>`。"
         )
 
     responses = [

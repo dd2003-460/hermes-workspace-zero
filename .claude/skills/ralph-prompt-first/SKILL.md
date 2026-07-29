@@ -20,6 +20,8 @@ write the complete current stage document.
   truthful tool/login/page failure. If all providers fail, record that and move
   directly to the next section; do not start WebSearch/Fetch. A zero-result
   search is not evidence.
+- In stage 04.5, write one concise bullet under each review heading and append
+  the marker in that same final Write; do not keep researching.
 - When the current Markdown is genuinely ready, append exactly
   `<!-- ralph: done -->` on its own line. The Stop Hook then supplies the next
   stage in the same Claude session. It does not grade semantics. The marker is

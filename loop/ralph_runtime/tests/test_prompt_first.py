@@ -110,6 +110,20 @@ def test_final_marker_completes_without_content_gate(tmp_path: Path):
     assert prompt_first.load_state(tmp_path)["status"] == "completed"
 
 
+def test_final_stage_prompt_forces_one_write_and_no_more_research(tmp_path: Path):
+    state = prompt_first.initialize(tmp_path, "最终复核测试")
+    for stage_id in ("01", "02", "02.5", "03", "04"):
+        current = prompt_first.load_state(tmp_path)
+        (tmp_path / current["current_artifact"]).write_text("<!-- ralph: done -->\n", encoding="utf-8")
+        prompt_first.advance_if_marked_done(tmp_path)
+
+    prompt = prompt_first.render_prompt(tmp_path)
+
+    assert prompt.startswith("完成当前阶段所需输入的读取后，下一工具调用必须是 Write")
+    assert "这是最终阶段：不要再读取其他文件、搜索或扩展分析" in prompt
+    assert "同一次写入的末尾追加完成标记" in prompt
+
+
 def test_prompt_first_settings_only_install_markdown_stop_hook(tmp_path: Path):
     settings_path = cli.install_prompt_first_hooks(tmp_path)
     settings = json.loads(settings_path.read_text(encoding="utf-8"))

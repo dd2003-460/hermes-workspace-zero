@@ -247,8 +247,15 @@ def render_prompt(root: str | Path, *, reason: str = "继续当前阶段") -> st
         tool_scope = (
             "3. 当前阶段不为未来阶段提前浏览、搜索或询问网页 AI；只处理本阶段要求的输入与工件。\n"
         )
+    final_stage_scope = ""
+    if stage.id == "04.5":
+        final_stage_scope = (
+            "这是最终阶段：不要再读取其他文件、搜索或扩展分析。下一次工具调用必须直接 Write 当前工件，"
+            "在四个标题下各写至少一条复核内容，并在同一次写入的末尾追加完成标记；写完立即结束。\n\n"
+        )
     return (
         f"完成当前阶段所需输入的读取后，下一工具调用必须是 Write `{state['current_artifact']}`，直接写入本阶段完整 Markdown；不要先解释、额外搜索或 Edit 模板。\n\n"
+        f"{final_stage_scope}"
         "# RALPH Prompt-First\n"
         "保持当前 Claude 会话连续工作；不要等待人工确认，也不要重启、创建字段任务或输出 JSON 协议。\n\n"
         f"当前阶段：{stage.id} · {stage.title}\n"

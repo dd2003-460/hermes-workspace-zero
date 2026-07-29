@@ -45,6 +45,14 @@ def test_field_init_creates_stage_scoped_draft_without_overwriting(tmp_path: Pat
     assert json.loads(draft.read_text(encoding="utf-8")) == {"fields": []}
 
 
+def test_stage_prompts_advertise_stage_executor_skill():
+    state = create_state("skill-prompt", task="完成 RALPH 阶段")
+    renderer = PromptRenderer()
+
+    assert "/ralph-stage-executor" in renderer.render(state).text
+    assert "/ralph-stage-executor" in renderer.compact_recovery_prompt(state).text
+
+
 def test_field_tasks_are_generated_from_current_factor_count(tmp_path: Path):
     root = _project(tmp_path)
     state = load_state(root / "loop-state.json")

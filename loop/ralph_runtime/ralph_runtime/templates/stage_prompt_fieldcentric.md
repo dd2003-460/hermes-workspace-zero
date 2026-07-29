@@ -8,6 +8,11 @@
 $task_json
 ```
 
+## 工作技能
+
+若项目存在 `.claude/skills/ralph-stage-executor/SKILL.md`，先调用
+`/ralph-stage-executor` 并遵循其阶段工作流；`ralph` 命令的校验结果始终优先。
+
 ## 当前批次硬顺序（必须先执行）
 
 只要下方列出 `research_required` 字段，Commander 的下一次工具调用必须是 `Agent`。不要先 `Read/Grep/Glob` 字段任务 JSON、`loop-state.json` 或事件日志；任务文件路径和字段概念已经在提示中给出。由子代理读取自己的任务文件，Commander 只负责按一字段一 Agent 派发。

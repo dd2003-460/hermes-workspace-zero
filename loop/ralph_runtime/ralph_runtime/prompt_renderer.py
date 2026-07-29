@@ -221,6 +221,9 @@ class PromptRenderer:
                 f"# RALPH 最小恢复（{stage_id}-{revision} · {stage_name}）",
                 f"当前任务：{self._short_text(task.get('description', ''), 420) or '以项目文件为准'}",
                 "",
+                "若项目存在 `.claude/skills/ralph-stage-executor/SKILL.md`，先调用 `/ralph-stage-executor`；"
+                "但以本轮 `ralph` 校验结果为准。",
+                "",
                 "## 立即动作（不要先总结、规划或重读历史）",
                 next_action,
                 "",
@@ -248,6 +251,9 @@ class PromptRenderer:
         lines = [
             f"# RALPH 字段增量提示（{stage_id}-{revision} · {stage_name}）",
             f"当前任务：{description or '以 loop-state.json 为准'}",
+            "",
+            "若项目存在 `.claude/skills/ralph-stage-executor/SKILL.md`，先调用 `/ralph-stage-executor`；"
+            "但以本轮 `ralph` 校验结果为准。",
             "",
         ]
         if flow_only_mode(state):

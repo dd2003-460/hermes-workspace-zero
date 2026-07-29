@@ -102,12 +102,11 @@ def _is_controlled_ralph_command(command: str | None, role: str) -> bool:
 def _is_safe_commander_diagnostic(command: str | None) -> bool:
     """Allow a tiny read-only shell surface for Commander orientation.
 
-    Local models commonly begin an unfamiliar project with ``ls`` before they
-    follow the field prompt.  Blocking that harmless first observation turns a
-    recoverable prompt mismatch into repeated Hook feedback.  Keep the escape
-    hatch deliberately narrow: only ``ls``/``pwd``/``which`` and controlled
-    ``ralph`` commands are allowed, with an optional stderr redirect; no
-    expansion, pipes, substitutions, or writes.
+    Local models commonly use ``cat``/``sed -n`` to inspect the draft returned
+    by ``ralph field-status``. Blocking that harmless observation turns a
+    recoverable prompt mismatch into repeated Hook feedback. Allow read-only
+    inspection of RALPH state/artifacts, but keep arbitrary project files and
+    every shell write outside this escape hatch.
     """
 
     if not command:
@@ -135,9 +134,60 @@ def _is_safe_commander_diagnostic(command: str | None) -> bool:
             if not _is_controlled_ralph_command(part, "commander"):
                 return False
             continue
-        if executable not in {"ls", "pwd", "which"}:
+        if executable in {"ls", "pwd", "which"}:
+            continue
+        if executable in {"cat", "head", "tail"}:
+            paths = _readonly_command_paths(executable, tokens[1:])
+            if not paths or not all(_is_ralph_readonly_path(path) for path in paths):
+                return False
+            continue
+        if executable == "sed":
+            # Only support the common display form: ``sed -n '1,120p' file``.
+            # ``-i`` and a general sed program can modify files, so they stay
+            # outside the Bash allowance.
+            if len(tokens) != 4 or tokens[1] != "-n" or not re.fullmatch(r"[0-9, $p]+", tokens[2]):
+                return False
+            if not _is_ralph_readonly_path(tokens[3]):
+                return False
+            continue
+        else:
             return False
     return True
+
+
+def _is_ralph_readonly_path(path: str) -> bool:
+    """Keep permissive shell reads inside the active RALPH protocol surface."""
+
+    normalized = str(path).replace("\\", "/").rstrip("/")
+    return (
+        normalized == "loop-state.json"
+        or normalized.endswith("/loop-state.json")
+        or normalized == "loop-events.md"
+        or normalized.endswith("/loop-events.md")
+        or normalized.startswith("loop-artifacts/")
+        or "/loop-artifacts/" in normalized
+    )
+
+
+def _readonly_command_paths(executable: str, args: list[str]) -> list[str]:
+    """Extract file operands without mistaking ``head -n 40`` for a path."""
+
+    paths: list[str] = []
+    index = 0
+    while index < len(args):
+        token = args[index]
+        if token == "--":
+            paths.extend(args[index + 1 :])
+            break
+        if executable in {"head", "tail"} and token in {"-n", "--lines", "-c", "--bytes"}:
+            index += 2
+            continue
+        if token.startswith("-"):
+            index += 1
+            continue
+        paths.append(token)
+        index += 1
+    return paths
 
 
 def _is_incremental_stage_file(target_path: str | None, state: Mapping[str, Any]) -> bool:
@@ -376,7 +426,7 @@ def decide_tool(
                     "当前只有 pending/assumed_default 结构字段：用 Write/Edit 填写当前阶段 fields.json，"
                     "再运行 `ralph field-apply . <fields.json>`；不要派 Agent。也可使用 "
                     "`ralph status/field-status/events/render/field-init/validate/apply`，"
-                    "不要用 cat、python、sed、echo 绕过 runtime。"
+                    "只读 `cat/head/tail/sed -n` RALPH 工件可以；不要用 Bash 写入或绕过 field-apply。"
                 )
                 feedback_code = "COMMANDER_BASH_SCOPE_FIELD"
                 detected = "Commander 试图用 Bash 直接读取或写入项目文件。"
@@ -388,7 +438,7 @@ def decide_tool(
                     correction="字段流程只允许用受控 `ralph` 命令；字段草稿由 Write/Edit 写入阶段目录，"
                     "再用 `ralph field-apply` 校验合并。",
                     next_action=next_action,
-                    forbidden="Bash 直接读写 loop-state.json、loop-events.md 或批量复制上下文。",
+                    forbidden="Bash 直接写 loop-state.json、工件文件或批量复制上下文。",
                 ),
             )
         # Field-centric research: external facts (latest GPU, price quotes) are

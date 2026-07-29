@@ -54,7 +54,7 @@ def test_commander_bash_is_controller_only():
     decision = decide_tool(state, "commander", "Bash", command="rm -rf x")
     assert decision.decision == "deny"
     assert "field-apply" in decision.reason
-    assert "不要用 cat、python、sed、echo" in decision.reason
+    assert "不要用 Bash 写入或绕过 field-apply" in decision.reason
 
 
 def test_commander_can_list_a_new_project_without_widening_shell_writes():
@@ -63,6 +63,17 @@ def test_commander_can_list_a_new_project_without_widening_shell_writes():
     assert decide_tool(state, "commander", "Bash", command=command).decision == "allow"
     assert decide_tool(state, "commander", "Bash", command="which ralph && ralph status . 2>&1").decision == "allow"
     assert decide_tool(state, "commander", "Bash", command="ls /tmp/project; rm -rf /tmp/project").decision == "deny"
+
+
+def test_commander_can_read_ralph_artifacts_without_shell_write_capability():
+    state = create_state("fixture")
+    fields = "loop-artifacts/stages/01/r1/fields.json"
+    assert decide_tool(state, "commander", "Bash", command=f"cat {fields} 2>&1").decision == "allow"
+    assert decide_tool(state, "commander", "Bash", command=f"head -n 40 {fields}").decision == "allow"
+    assert decide_tool(state, "commander", "Bash", command=f"sed -n '1,120p' {fields}").decision == "allow"
+    assert decide_tool(state, "commander", "Bash", command="cat .env").decision == "deny"
+    assert decide_tool(state, "commander", "Bash", command=f"cat {fields} > copied.json").decision == "deny"
+    assert decide_tool(state, "commander", "Bash", command=f"sed -i '' 's/a/b/' {fields}").decision == "deny"
 
 
 def test_worker_accepts_absolute_ralph_field_apply_command():

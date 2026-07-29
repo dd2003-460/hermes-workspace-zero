@@ -77,6 +77,7 @@ from .runtime_config import (
 from .field_tasks import (
     claim_field_task,
     materialize_field_tasks,
+    reconcile_applied_field_tasks,
     reopen_deferred_field_tasks,
     reopen_stale_field_tasks,
     update_field_task_metadata_transaction,
@@ -372,6 +373,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="创建当前阶段的空字段草稿；已有草稿不覆盖，供 Agent 增量填写后再 field-apply",
     )
     field_init.add_argument("project", nargs="?", default=".", help="项目目录（默认当前目录）")
+
+    field_reconcile = sub.add_parser(
+        "field-reconcile",
+        help="无损修复已 field-apply 但仍残留 dispatched 的字段任务；保留草稿和事件，仅重新开放待补字段。",
+    )
+    field_reconcile.add_argument("project", nargs="?", default=".", help="项目目录（默认当前目录）")
 
     web_llm_check = sub.add_parser(
         "web-llm-check",
@@ -3502,6 +3509,25 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "field-init":
         try:
             print(json.dumps(init_fields(args.project), ensure_ascii=False, indent=2, sort_keys=True))
+            return 0
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            print(json.dumps({"ok": False, "error": str(exc)}, ensure_ascii=False, indent=2), file=sys.stderr)
+            return 1
+    if args.command == "field-reconcile":
+        try:
+            root = _project_root(args.project)
+            state_path = root / "loop-state.json"
+            state = load_state(state_path)
+            materialize_field_tasks(root, state)
+            reconciled = reconcile_applied_field_tasks(root, state)
+            if reconciled:
+                save_state(state_path, state)
+                append_observation(
+                    root / "loop-events.md",
+                    "field_tasks_reconciled_after_late_agent_receipt",
+                    {"tasks": reconciled, "state_preserved": True},
+                )
+            print(json.dumps({"ok": True, "reconciled": reconciled, "state_preserved": True}, ensure_ascii=False, indent=2))
             return 0
         except (OSError, ValueError, json.JSONDecodeError) as exc:
             print(json.dumps({"ok": False, "error": str(exc)}, ensure_ascii=False, indent=2), file=sys.stderr)

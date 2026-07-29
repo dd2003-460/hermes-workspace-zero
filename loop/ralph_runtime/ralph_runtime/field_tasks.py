@@ -502,6 +502,59 @@ def reopen_stale_field_tasks(
     return reopened
 
 
+def reconcile_applied_field_tasks(root: str | Path, state: dict[str, Any]) -> list[dict[str, str]]:
+    """Recover field tasks whose child applied a draft but a late hook rewound them.
+
+    This is narrower than generic stale-worker recovery: an ``apply_count``
+    greater than the dispatch baseline is durable evidence that the child did
+    useful work.  No process needs to be terminated and no draft is removed.
+    It is therefore safe to run while the parent Commander still exists, and
+    it repairs historical state produced before lifecycle event ordering was
+    made transactional.
+    """
+
+    matrix = (
+        (state.get("task_spec") or {}).get("attribute_matrix", [])
+        if isinstance(state.get("task_spec"), Mapping)
+        else []
+    )
+    fields_by_concept = {
+        str(field.get("concept", "")): field
+        for field in matrix
+        if isinstance(field, Mapping)
+    } if isinstance(matrix, list) else {}
+    reconciled: list[dict[str, str]] = []
+    for task in current_field_tasks(state, {"dispatching", "dispatched"}):
+        task_id = str(task.get("id", ""))
+        if not task_id:
+            continue
+        if int(task.get("apply_count", 0) or 0) <= int(task.get("apply_count_at_dispatch", 0) or 0):
+            continue
+        field = fields_by_concept.get(str(task.get("concept", "")), {})
+        disposition = _normalized_disposition(field.get("disposition")) if isinstance(field, Mapping) else ""
+        refs = field.get("evidence_refs") if isinstance(field, Mapping) else []
+        complete = disposition in {"confirmed", "inferred", "assumed_default"} or (
+            disposition == "research_required" and isinstance(refs, list) and bool(refs)
+        )
+        status = "completed" if complete else "ready"
+        update_field_task_metadata(
+            root,
+            state,
+            task_id,
+            status=status,
+            clear_agent_id=not complete,
+            clear_agent_ids=not complete,
+            field_read_count=0 if not complete else None,
+            last_error=(
+                "已提交字段被迟到的 Agent 回执错误标回 dispatched；保留结果并标记完成"
+                if complete
+                else "已提交不完整字段被迟到的 Agent 回执错误标回 dispatched；保留草稿并重新开放补证"
+            ),
+        )
+        reconciled.append({"field_task_id": task_id, "status": status})
+    return reconciled
+
+
 def reopen_deferred_field_tasks(root: str | Path, state: dict[str, Any]) -> list[str]:
     """Reopen deferred fields fairly at a fresh supervisor boundary.
 

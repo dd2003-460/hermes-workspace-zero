@@ -8,7 +8,13 @@ from concurrent.futures import ThreadPoolExecutor
 import pytest
 
 from ralph_runtime.cli import _field_agent_stall_requested, _reap_auto_field_workers, apply_fields, init_fields
-from ralph_runtime.field_tasks import claim_field_task, materialize_field_tasks, reopen_deferred_field_tasks, rebind_field_task_to_path
+from ralph_runtime.field_tasks import (
+    claim_field_task,
+    materialize_field_tasks,
+    reconcile_applied_field_tasks,
+    reopen_deferred_field_tasks,
+    rebind_field_task_to_path,
+)
 from ralph_runtime.graph_tasks import apply_graph_task, materialize_graph_tasks
 from ralph_runtime.events import apply_and_record
 from ralph_runtime.hooks import handle_posttooluse, handle_pretooluse, handle_stop, handle_subagentstart, handle_subagentstop
@@ -285,6 +291,37 @@ def test_late_parent_agent_receipt_does_not_revive_deferred_field(tmp_path: Path
     live = load_state(root / "loop-state.json")
     assert live["field_tasks"][0]["status"] == "deferred"
     assert live["field_tasks"][0].get("agent_id") == "child-price"
+
+
+def test_reconcile_applied_field_reopens_historical_late_receipt_without_losing_draft(tmp_path: Path):
+    root = _project(tmp_path)
+    state = load_state(root / "loop-state.json")
+    state["stage"]["id"] = "02"
+    state["task_spec"]["attribute_matrix"] = [{
+        "concept": "价格证据",
+        "role": "research_findings",
+        "attribute": "当前市场价",
+        "disposition": "research_required",
+        "rationale": "第一次来源请求失败，保留为待补。",
+        "evidence_refs": [],
+    }]
+    tasks = materialize_field_tasks(root, state)
+    state["field_tasks"][0].update({
+        "status": "dispatched",
+        "agent_id": "old-child",
+        "agent_ids": ["old-child"],
+        "apply_count": 1,
+        "apply_count_at_dispatch": 0,
+    })
+    save_state(root / "loop-state.json", state)
+
+    reconciled = reconcile_applied_field_tasks(root, state)
+
+    assert reconciled == [{"field_task_id": tasks[0]["id"], "status": "ready"}]
+    assert state["field_tasks"][0]["status"] == "ready"
+    assert state["field_tasks"][0].get("agent_id") is None
+    draft = json.loads((root / tasks[0]["path"]).read_text(encoding="utf-8"))
+    assert draft["field"]["rationale"] == "第一次来源请求失败，保留为待补。"
 
 
 def test_top_level_worker_field_apply_releases_its_reservation(tmp_path: Path, monkeypatch):

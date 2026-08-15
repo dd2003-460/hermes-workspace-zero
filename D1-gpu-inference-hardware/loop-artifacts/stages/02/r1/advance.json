@@ -1,0 +1,14 @@
+{
+  "action": "advance",
+  "status": "running",
+  "stage_id": "02",
+  "revision": "r1",
+  "next_stage": "02.5",
+  "artifact_refs": [
+    "loop-artifacts/stages/02/r1/fields.json",
+    "loop-artifacts/stages/02/r1/fields.md"
+  ],
+  "evidence": [],
+  "message": "阶段 02 调研完成：RTX 5090 价格已验证（NewEgg $4,199-$7,046），中文二手价格/MI300X 性能/双 GPU 方案/量化精度损失为推断值（置信度 0.5）。",
+  "rollback_to": null
+}

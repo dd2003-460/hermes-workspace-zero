@@ -1,0 +1,9 @@
+{
+  "status": "running",
+  "stage_id": "01",
+  "revision": "r1",
+  "action": "advance",
+  "summary": "阶段 01 完成。所有字段已确认：1) RTX 3090 二手性价比最高（$25-33/GB VRAM） 2) RTX 4090 全能标杆 3) RTX 5090 新一代旗舰 32GB 4) 多卡仅在>32GB显存需求时有意义 5) 工作站卡个人用途不推荐 6) Mac Studio适合超大模型低速推理。进入阶段 02 制定详细调研 DAG。",
+  "fields_completed": ["goal", "known", "unknown", "consumer_gpu_price_performance", "multi_card_vs_single_card", "workstation_mac_alternatives"],
+  "next_stage": "02"
+}

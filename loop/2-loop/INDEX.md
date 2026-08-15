@@ -46,6 +46,16 @@ Step 5: 判定
    - `FAIL`: 发现 Review 遗漏的问题 → 进入修复分解
    - `UNCERTAIN`: 信息不足无法判定 → 标记 `blocked_human`，跳过当前任务并继续队列
 
+### 网页 LLM 交叉验证技能
+
+**`gpu-web-cross-verify`** — 专为 GPU 调研项目设计的多源核验流程（web_fetch/browser 多源交叉验证）
+
+- **触发**：硬件规格、价格、兼容性等关键事实验证
+- **方法**：≥2 个独立来源一致才标记 verified，记录来源 URL/日期/置信度/核验状态
+- **位置**：`~/.hermes/skills/gpu-web-cross-verify/SKILL.md`
+- **集成**：在 2-loop Step 4 (交叉验证) 中调用，替代手动网页搜索
+- **报告输出**：`loop-artifacts/verification-reports/YYYY-MM-DD-{fact-slug}.json`
+
 ### 人类确认门（UNCERTAIN 时）
 
 当交叉验证返回 UNCERTAIN 时，当前子任务进入 `blocked_human`，但 Commander **不得等待并阻塞整个循环**：

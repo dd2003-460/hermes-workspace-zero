@@ -1149,14 +1149,24 @@
         "claim": "H100 峰值算力 989 TFLOPS (FP8)",
         "source_type": "spec_sheet",
         "source_url": "https://www.nvidia.com/en-us/data-center/h100/",
-        "status": "uncertain"
+        "status": "invalid",
+        "confidence": 0.95,
+        "rationale": "NVIDIA 官网 datasheet 显示 FP8 峰值算力为 1979 TFLOPS，989 TFLOPS 可能是 FP16 或其他精度",
+        "evidence_refs": [
+          "https://www.nvidia.com/en-us/data-center/h100/"
+        ]
       },
       {
         "checked_by": "pending",
         "claim": "H100 HBM3 带宽 3.35 TB/s",
         "source_type": "spec_sheet",
         "source_url": "https://www.nvidia.com/en-us/data-center/h100/",
-        "status": "uncertain"
+        "status": "verified",
+        "confidence": 0.99,
+        "rationale": "NVIDIA 官网 datasheet 确认 HBM3 带宽为 3.35 TB/s",
+        "evidence_refs": [
+          "https://www.nvidia.com/en-us/data-center/h100/"
+        ]
       },
       {
         "checked_by": "pending",
@@ -1205,7 +1215,12 @@
         "claim": "NVLink 带宽 900 GB/s (H100)",
         "source_type": "spec_sheet",
         "source_url": "https://www.nvidia.com/en-us/data-center/nvlink/",
-        "status": "uncertain"
+        "status": "verified",
+        "confidence": 0.99,
+        "rationale": "NVIDIA 官网 datasheet 确认 NVLink 带宽为 900 GB/s",
+        "evidence_refs": [
+          "https://www.nvidia.com/en-us/data-center/h100/"
+        ]
       },
       {
         "checked_by": "pending",
@@ -1219,7 +1234,12 @@
         "claim": "AMD MI300X 峰值算力 ~1300 TFLOPS (FP8)",
         "source_type": "spec_sheet",
         "source_url": "https://www.amd.com/en/processors/instinct-mi300x",
-        "status": "uncertain"
+        "status": "invalid",
+        "confidence": 0.95,
+        "rationale": "Wikipedia 显示 MI300X FP8 峰值算力为 2250 TFLOPS，1300 TFLOPS 明显偏低",
+        "evidence_refs": [
+          "https://en.wikipedia.org/wiki/AMD_MI300X"
+        ]
       },
       {
         "checked_by": "pending",

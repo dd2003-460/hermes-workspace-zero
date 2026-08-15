@@ -1,0 +1,63 @@
+{
+  "attribute_matrix": [
+    {
+      "attribute": "构建本地 AI Agent 推理硬件选型方案：在消费级/准专业级范围内，找出性价比最高的 GPU/加速卡，支持 20B-70B 参数模型本地推理",
+      "concept": "阶段 01 输出：goal",
+      "confidence": 0.95,
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "user_initial_task"
+      ],
+      "factor_index": 1,
+      "impact": "material",
+      "rationale": "用户原始任务：调研本地 AI Agent 硬件选型。目标明确。",
+      "reversible": false,
+      "role": "goal",
+      "source_unknown": null
+    },
+    {
+      "attribute": "已有调研基础：patrickwhelan-uk/llm-inference-benchmarks GitHub 仓库实测数据（RTX 5090/M2 Max），硬件选型报告初稿（置信度 0.6-0.7，中文市场数据缺失）",
+      "concept": "阶段 01 输出：known",
+      "confidence": 0.85,
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "硬件调研-本地AI-agent-性价比.md",
+        "https://github.com/patrickwhelan-uk/llm-inference-benchmarks"
+      ],
+      "factor_index": 2,
+      "impact": "material",
+      "rationale": "项目已有硬件调研报告（2026-07-14），包含 RTX 5090 和 M2 Max 的实测基准数据。但报告置信度仅 0.6-0.7，主要问题是：(1) 中文二手市场数据缺失；(2) 价格信息基于 NewEgg 估算，未验证中国市场价格；(3) AMD MI300X 无实测数据；(4) 双卡 NVLink 方案未验证。",
+      "reversible": true,
+      "role": "known",
+      "source_unknown": null
+    },
+    {
+      "attribute": "未知因素：(1) 中文二手市场 RTX 3090/4090 实际成交价格；(2) AMD MI300X 本地 LLM 推理性能；(3) RTX 5090 实际零售价与现货；(4) 双 GPU 方案 NVLink/PCIe 兼容性；(5) 20B-70B 模型量化精度损失。以上需在 stage 02 调研。",
+      "concept": "阶段 01 输出：unknown",
+      "confidence": 0.5,
+      "disposition": "inferred",
+      "evidence_refs": [],
+      "factor_index": 3,
+      "impact": "material",
+      "rationale": "基于现有报告置信度 0.6-0.7 推断的未知因素。5 个具体未知项需在 stage 02 通过 WebSearch/WebFetch 调研。",
+      "reversible": true,
+      "role": "unknown",
+      "source_unknown": null
+    }
+  ],
+  "authoritative_inputs": [
+    {
+      "characters": 44,
+      "kind": "initial_task",
+      "sha256": "a18c420a446a27f8",
+      "source": "ralph loop",
+      "text": "调研本地 AI Agent 推理硬件选型"
+    }
+  ],
+  "constraints": [],
+  "open_questions": [],
+  "scenarios": [],
+  "semantic_map": {},
+  "status": "unclarified",
+  "success_criteria": []
+}

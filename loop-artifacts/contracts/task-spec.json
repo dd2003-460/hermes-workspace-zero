@@ -1,0 +1,85 @@
+{
+  "stage": {
+    "id": "03",
+    "revision": "r1"
+  },
+  "task": {
+    "description": "以 loop-state.json 为准，执行 1-loop 阶段 01 目标与背景分解",
+    "source": "ralph loop"
+  },
+  "task_spec": {
+    "attribute_matrix": [
+      {
+        "attribute": "cross_validation",
+        "concept": "cross_validation",
+        "disposition": "confirmed",
+        "evidence_refs": [
+          "loop-artifacts/stages/02.5/r1/cross_validation.md",
+          "loop-artifacts/stages/02.5/r1/state.json",
+          "loop-artifacts/stages/02/r1/web-llm/receipt-perplexity-2026-08-15.md",
+          "loop-artifacts/stages/02/r1/web-llm/receipt-chatgpt-2026-08-15.md"
+        ],
+        "rationale": "逐 claim 交叉验证完成：5 个主张均通过 ≥2 独立来源验证，所有 verdict = supported，无矛盾。verified_prerequisites_for_stage_03: [\"DAG 验证必须保留在 code 层 (confidence 0.98)\", \"prompt-first 和 code-based 使用不同的状态管理机制 (confidence 0.97)\", \"prompt-first 和 code-based 是替代实现，不是互补组件 (confidence 0.97)\", \"验证规则必须区分 code-based（确定性）和 prompt-first（自然语言） (confidence 0.97)\", \"核心能力必须在 code 层 (confidence 0.99)\"]",
+        "role": "output",
+        "validation_records": [
+          {
+            "claim": "prompt-first RALPH 框架的关键不确定性 — 5 个主张均通过 ≥2 独立来源交叉验证",
+            "claim_ref": "cross_validation",
+            "confidence": 0.98,
+            "detail": {
+              "claims_validated": [
+                {
+                  "claim": "prompt-first 无法直接复现 DAG 验证",
+                  "confidence": 0.98,
+                  "id": "C1"
+                },
+                {
+                  "claim": "loop-state.json 不需要为 prompt-first 扩展 schema",
+                  "confidence": 0.97,
+                  "id": "C2"
+                },
+                {
+                  "claim": "prompt-first 与 ralph-stage-executor 是并行/替代实现",
+                  "confidence": 0.97,
+                  "id": "C3"
+                },
+                {
+                  "claim": "验证规则根本不同 — code-based 用程序化验证，prompt-first 用独立 Reviewer 子进程",
+                  "confidence": 0.97,
+                  "id": "C4"
+                },
+                {
+                  "claim": "核心能力必须在 code 层，阶段推进/质量门控/规则定义可由 prompt 实现",
+                  "confidence": 0.99,
+                  "id": "C5"
+                }
+              ],
+              "contradictions": [],
+              "counterexamples": [],
+              "source_biases": [
+                "Perplexity 和 ChatGPT 均基于 GPT-4 模型，可能存在模型偏见，但两者查询独立、回答独立，且与源码分析一致"
+              ],
+              "time_sensitivity": [
+                "源码分析基于 2026-08-15 版本，prompt-first system_prompt 可能在未来版本中变化"
+              ],
+              "verified_prerequisites_for_stage_03": [
+                "DAG 验证必须保留在 code 层 (confidence 0.98)",
+                "prompt-first 和 code-based 使用不同的状态管理机制 (confidence 0.97)",
+                "prompt-first 和 code-based 是替代实现，不是互补组件 (confidence 0.97)",
+                "验证规则必须区分 code-based（确定性）和 prompt-first（自然语言） (confidence 0.97)",
+                "核心能力必须在 code 层 (confidence 0.99)"
+              ]
+            },
+            "observed_at": "2026-08-15T14:00:00Z",
+            "source_refs": [
+              "https://github.com/dd2003-460/hermes-workspace-zero/blob/main/loop/ralph_runtime/ralph_runtime/dag.py",
+              "https://www.perplexity.ai/s/prompt-first-code-based-agent-comparison",
+              "https://chatgpt.com/c/6a800022-ef90-83ee-b792-4f7ff7646cb6"
+            ],
+            "verdict": "supported"
+          }
+        ]
+      }
+    ]
+  }
+}

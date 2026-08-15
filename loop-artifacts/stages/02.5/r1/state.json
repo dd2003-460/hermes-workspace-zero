@@ -1,0 +1,98 @@
+{
+  "cross_validation": [
+    {
+      "claim_id": "C1",
+      "claim": "prompt-first 无法直接复现 DAG 验证",
+      "source_a": "源码 dag.py — cycle_check(), write_conflict(), parallel_group() 均为纯函数",
+      "source_b": "Perplexity (2026-08-15) — 'No guaranteed topological order'",
+      "source_c": "ChatGPT (2026-08-15) — 'Dependencies are scheduler constraints the model decides to follow'",
+      "verdict": "consistent",
+      "confidence": 0.98,
+      "evidence_refs": [
+        "https://github.com/dd2003-460/hermes-workspace-zero/blob/main/loop/ralph_runtime/ralph_runtime/dag.py",
+        "loop-artifacts/stages/02/r1/web-llm/receipt-perplexity-2026-08-15.md",
+        "loop-artifacts/stages/02/r1/web-llm/receipt-chatgpt-2026-08-15.md"
+      ]
+    },
+    {
+      "claim_id": "C2",
+      "claim": "loop-state.json 不需要为 prompt-first 扩展 schema",
+      "source_a": "源码 state.py — LoopState 管理 task_spec/graph_spec/field_states；prompt_first.py 使用 ralph-loop.md 作为简单 cursor",
+      "source_b": "Perplexity (2026-08-15) — 'No versioning, no checkpoints, no rollback'",
+      "source_c": "ChatGPT (2026-08-15) — 'Semantic state vs durable state'",
+      "verdict": "consistent",
+      "confidence": 0.97,
+      "evidence_refs": [
+        "https://github.com/dd2003-460/hermes-workspace-zero/blob/main/loop/ralph_runtime/ralph_runtime/state.py",
+        "https://github.com/dd2003-460/hermes-workspace-zero/blob/main/loop/ralph_runtime/ralph_runtime/prompt_first.py",
+        "loop-artifacts/stages/02/r1/web-llm/receipt-perplexity-2026-08-15.md",
+        "loop-artifacts/stages/02/r1/web-llm/receipt-chatgpt-2026-08-15.md"
+      ]
+    },
+    {
+      "claim_id": "C3",
+      "claim": "prompt-first 与 ralph-stage-executor 是并行/替代实现",
+      "source_a": "源码 — ralph prompt-first 是独立 subcommand，与 ralph init/status/field-apply 并行",
+      "source_b": "Perplexity (2026-08-15) — 二元对比 prompt-first vs code-based",
+      "source_c": "ChatGPT (2026-08-15) — 3 级架构层次确认替代关系",
+      "verdict": "consistent",
+      "confidence": 0.97,
+      "evidence_refs": [
+        "https://github.com/dd2003-460/hermes-workspace-zero/blob/main/loop/ralph_runtime/ralph_runtime/prompt_first.py",
+        "loop-artifacts/stages/02/r1/web-llm/receipt-perplexity-2026-08-15.md",
+        "loop-artifacts/stages/02/r1/web-llm/receipt-chatgpt-2026-08-15.md"
+      ]
+    },
+    {
+      "claim_id": "C4",
+      "claim": "验证规则根本不同 — code-based 用程序化验证，prompt-first 用独立 Reviewer 子进程",
+      "source_a": "源码 — prompt_first.py 有独立 review 子命令；dag.py 和 field_tasks.py 中的验证是程序化的",
+      "source_b": "Perplexity (2026-08-15) — 'Relies on model judgment for failure/retry/recovery'",
+      "source_c": "ChatGPT (2026-08-15) — 'Deterministic check → state transition → LLM confirmation'",
+      "verdict": "consistent",
+      "confidence": 0.97,
+      "evidence_refs": [
+        "https://github.com/dd2003-460/hermes-workspace-zero/blob/main/loop/ralph_runtime/ralph_runtime/prompt_first.py",
+        "loop-artifacts/stages/02/r1/web-llm/receipt-perplexity-2026-08-15.md",
+        "loop-artifacts/stages/02/r1/web-llm/receipt-chatgpt-2026-08-15.md"
+      ]
+    },
+    {
+      "claim_id": "C5",
+      "claim": "核心能力必须在 code 层，阶段推进/质量门控/规则定义可由 prompt 实现",
+      "source_a": "源码 — prompt_first.py system_prompt 禁止 'Do not invent JSON state machines'；dag.py 和 field_tasks.py 中的核心能力是 code-only",
+      "source_b": "Perplexity (2026-08-15) — 'Structural issues requiring runtime semantics'",
+      "source_c": "ChatGPT (2026-08-15) — 'If order/state/failure behavior affects money, data, time, or external consequences, don't leave it to prompt alone'",
+      "verdict": "consistent",
+      "confidence": 0.99,
+      "evidence_refs": [
+        "https://github.com/dd2003-460/hermes-workspace-zero/blob/main/loop/ralph_runtime/ralph_runtime/prompt_first.py",
+        "loop-artifacts/stages/02/r1/web-llm/receipt-perplexity-2026-08-15.md",
+        "loop-artifacts/stages/02/r1/web-llm/receipt-chatgpt-2026-08-15.md"
+      ]
+    }
+  ],
+  "contradictions": [],
+  "evidence_boundaries": {
+    "verified_prerequisites_for_stage_03": [
+      "DAG 验证必须保留在 code 层 (confidence 0.98)",
+      "prompt-first 和 code-based 使用不同的状态管理机制 (confidence 0.97)",
+      "prompt-first 和 code-based 是替代实现，不是互补组件 (confidence 0.97)",
+      "验证规则必须区分 code-based（确定性）和 prompt-first（自然语言） (confidence 0.97)",
+      "核心能力必须在 code 层 (confidence 0.99)"
+    ],
+    "unverifiable_claims": [],
+    "counterexamples": [],
+    "source_biases": [
+      "Perplexity 和 ChatGPT 均基于 GPT-4 模型，可能存在模型偏见，但两者查询独立、回答独立，且与源码分析一致"
+    ],
+    "time_sensitivity": [
+      "源码分析基于 2026-08-15 版本，prompt-first system_prompt 可能在未来版本中变化"
+    ],
+    "reresearch_needed": false,
+    "repair_stage": null
+  },
+  "status": "complete",
+  "stage_id": "02.5",
+  "revision": "r1"
+}

@@ -1,0 +1,7 @@
+{
+  "id": "01-r1-field-04-dual-gpu-569c06c5c8",
+  "attribute": "消费级双 GPU 方案（RTX 3090 双卡/RTX 4090 双卡）的 NVLink/PCIe 兼容性、散热、实际可用显存",
+  "concept": "未知因素 04：双 GPU 方案可行性",
+  "role": "unknown",
+  "instruction": "只处理字段 `未知因素 04：双 GPU 方案可行性`。调研消费级双 GPU 方案的 NVLink/PCIe 兼容性、散热和实际可用显存。使用 WebSearch 搜索双卡方案实测。最多尝试两次网页工具。填写后运行 ralph field-apply 合并。"
+}

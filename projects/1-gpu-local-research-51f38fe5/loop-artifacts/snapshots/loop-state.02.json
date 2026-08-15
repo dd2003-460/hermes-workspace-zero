@@ -1,0 +1,77 @@
+{
+  "active_tasks": {},
+  "allowed_actions": [
+    "advance",
+    "rollback",
+    "blocked_human",
+    "skip_blocked",
+    "candidate",
+    "explore",
+    "dispatch",
+    "join",
+    "clarify",
+    "repair_prompt"
+  ],
+  "clarification_history": [],
+  "current_artifact": "loop-artifacts/stages/02/r1/state.json",
+  "exploration_history": [],
+  "field_tasks": [],
+  "graph_tasks": [],
+  "history": [
+    {
+      "action": "advance",
+      "internal_state": "stage_02",
+      "revision": "r1",
+      "stage_id": "01"
+    }
+  ],
+  "last_action": "advance",
+  "last_event_id": "c278dc96-22b2-4077-97db-5a69dd750f2d",
+  "last_exploration": null,
+  "last_result": {
+    "action": "advance",
+    "artifact_refs": [],
+    "evidence": [],
+    "message": "",
+    "next_stage": "02",
+    "revision": "r1",
+    "rollback_to": null,
+    "stage_id": "01",
+    "status": "running"
+  },
+  "plan": {
+    "joins": [],
+    "nodes": [],
+    "parallel_groups": [],
+    "revision": "r1"
+  },
+  "project_id": "1-gpu-local-research-51f38fe5",
+  "queue": {
+    "blocked_human": [],
+    "candidates": [],
+    "ready": []
+  },
+  "run_history": [],
+  "schema_version": 4,
+  "stage": {
+    "failure_condition": "存在未调研或证据不足的 research_required 字段",
+    "id": "02",
+    "input_description": "目标 + 已知背景 = 已知与目标的差额；针对该差额派窄调研 subagent 直接搜索（关键词不加年份，获取最新结果）",
+    "name": "未知信息调研",
+    "on_failure": "02",
+    "on_human_block": "exploration",
+    "on_success": "02.5",
+    "required_outputs": [
+      "research_findings"
+    ],
+    "revision": "r1",
+    "success_condition": "所有 research_required 字段已调研带回 evidence_refs，无未带证据的调研字段"
+  },
+  "status": "running",
+  "task": {
+    "description": "我需要调研性价比最高的本地 GPU",
+    "source": "ralph run"
+  },
+  "task_intake": null,
+  "task_intake_history": []
+}

@@ -8,15 +8,19 @@ import hashlib
 import inspect
 import json
 import os
+import re
 import shlex
 import shutil
 import signal
 import subprocess
 import sys
 import time
+import urllib.error
+import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping
+from zoneinfo import ZoneInfo
 
 try:
     import fcntl
@@ -37,9 +41,16 @@ from .decomposition_benchmark import (
 )
 from .prompt_renderer import PromptRenderer
 from .prompt_first import (
+    artifact_sha256,
     handle_stop as handle_prompt_first_stop,
+    handle_pre_tool as handle_prompt_first_pre_tool,
+    handle_precompact as handle_prompt_first_precompact,
     initialize as initialize_prompt_first,
+    load_stage_rules,
+    handle_post_tool as handle_prompt_first_post_tool,
+    handle_postcompact as handle_prompt_first_postcompact,
     load_state as load_prompt_first_state,
+    record_reviewer_result,
     render_prompt as render_prompt_first,
     state_path as prompt_first_state_path,
     status_summary as prompt_first_status_summary,
@@ -161,15 +172,12 @@ PROJECT_CLAUDE_FALLBACK = """# CLAUDE.md — RALPH project
 本次任务由启动命令的最后一个参数提供。先理解任务，再从 `loop-state.json` 的当前阶段开始。
 """
 
-# The local oMLX setup in this workspace starts applying memory pressure well
-# before the model's advertised context window. Keep RALPH's Claude sessions
-# on a smaller, explicit compaction budget without changing ordinary Claude
-# sessions launched by the user.
-# The latest local oMLX trace rejected a 41,472-token prefill while the model
-# was already above the balanced safety cap. A ~32k proactive target is a
-# safer starting point; users can raise it explicitly after measuring headroom.
-DEFAULT_AUTO_COMPACT_WINDOW = 40_000
-DEFAULT_AUTOCOMPACT_PERCENT = 80
+# Keep RALPH's Claude sessions on an explicit compaction budget.  The product
+# of these two values is the target at which Claude Code requests compaction.
+# 100k * 50% gives the requested ~50k-token trigger while leaving the local
+# oMLX backend well below its advertised 240k context ceiling.
+DEFAULT_AUTO_COMPACT_WINDOW = 100_000
+DEFAULT_AUTOCOMPACT_PERCENT = 50
 
 
 def _state_path(project: str | Path) -> Path:
@@ -694,6 +702,14 @@ def build_parser() -> argparse.ArgumentParser:
     prompt_first_loop.add_argument("--idle-timeout", type=float, default=0.0)
     prompt_first_loop.add_argument("--dangerously-skip-permissions", action="store_true")
     _add_compaction_arguments(prompt_first_loop)
+    prompt_first_review = prompt_first_sub.add_parser(
+        "review",
+        help="在独立只读 Claude 上下文中审阅当前阶段并写入 Reviewer 回执",
+    )
+    prompt_first_review.add_argument("project")
+    prompt_first_review.add_argument("--effort", choices=("low", "medium", "high", "xhigh", "max"), default=None)
+    prompt_first_review.add_argument("--model", default=None)
+    prompt_first_review.add_argument("--dangerously-skip-permissions", action="store_true")
     prompt_first_web = prompt_first_sub.add_parser(
         "web-llm",
         help="用已授权的本地 Playwright/API 网页 LLM 做一次交叉询问，并写 Markdown 回执",
@@ -704,6 +720,10 @@ def build_parser() -> argparse.ArgumentParser:
     # This is installed into the prompt-first settings file as its sole Hook.
     # It is intentionally a top-level command so Claude Code can invoke it
     # without needing to understand argparse's nested subcommands.
+    sub.add_parser("prompt-first-post-tool", help=argparse.SUPPRESS)
+    sub.add_parser("prompt-first-pre-tool", help=argparse.SUPPRESS)
+    sub.add_parser("prompt-first-precompact", help=argparse.SUPPRESS)
+    sub.add_parser("prompt-first-postcompact", help=argparse.SUPPRESS)
     sub.add_parser("prompt-first-stop", help=argparse.SUPPRESS)
 
     return parser
@@ -754,7 +774,7 @@ def _claude_environment(
     ``CLAUDE_CODE_AUTO_COMPACT_WINDOW`` is the capacity used by Claude Code's
     compaction calculation, while ``CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`` is the
     percentage at which compaction is requested. The defaults therefore aim
-    at roughly 32k tokens (40k * 80%), leaving room for the compaction request
+    at roughly 50k tokens (100k * 50%), leaving room for the compaction request
     before oMLX reaches the active-prefill memory guard.
     """
 
@@ -797,13 +817,13 @@ def _add_compaction_arguments(parser: argparse.ArgumentParser) -> None:
         "--auto-compact-window",
         type=int,
         default=None,
-        help="本次 RALPH 会话用于自动压缩计算的容量；默认 40000，配合 80%% 约在 32k 触发",
+        help="本次 RALPH 会话用于自动压缩计算的容量；默认 100000，配合 50%% 约在 50k 触发",
     )
     parser.add_argument(
         "--auto-compact-percent",
         type=int,
         default=None,
-        help="自动压缩触发百分比（1-100）；默认 80",
+        help="自动压缩触发百分比（1-100）；默认 50",
     )
 
 
@@ -852,16 +872,75 @@ def _prompt_first_hook_command() -> str:
     return f"{shlex.quote(sys.executable)} -m ralph_runtime.cli prompt-first-stop"
 
 
+def _prompt_first_post_tool_hook_command() -> str:
+    return f"{shlex.quote(sys.executable)} -m ralph_runtime.cli prompt-first-post-tool"
+
+
+def _prompt_first_pre_tool_hook_command() -> str:
+    return f"{shlex.quote(sys.executable)} -m ralph_runtime.cli prompt-first-pre-tool"
+
+
+def _prompt_first_precompact_hook_command() -> str:
+    return f"{shlex.quote(sys.executable)} -m ralph_runtime.cli prompt-first-precompact"
+
+
+def _prompt_first_postcompact_hook_command() -> str:
+    return f"{shlex.quote(sys.executable)} -m ralph_runtime.cli prompt-first-postcompact"
+
+
 def install_prompt_first_hooks(project: str | Path) -> Path:
-    """Install only an inline Markdown Stop Hook, never tool gatekeepers."""
+    """Install prompt-first routing hooks and a narrow research liveness guard."""
 
     root = Path(project).expanduser().resolve()
     root.mkdir(parents=True, exist_ok=True)
     settings_path = root / ".claude" / "settings.ralph-prompt-first.json"
     settings_path.parent.mkdir(parents=True, exist_ok=True)
     settings = {
+        # Manual Herdr ``claude --resume`` must receive the same proactive
+        # compaction budget as the supervisor-launched process. Without this
+        # project-level env, a long same-context Reviewer loop can reach the
+        # provider's hard context limit before Stop Hook gets another chance.
+        "env": {
+            "CLAUDE_CODE_AUTO_COMPACT_WINDOW": str(DEFAULT_AUTO_COMPACT_WINDOW),
+            "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": str(DEFAULT_AUTOCOMPACT_PERCENT),
+        },
         "hooks": {
-            "Stop": [{"hooks": [{"type": "command", "command": _prompt_first_hook_command()}]}],
+            "PreToolUse": [{
+                "matcher": ".*",
+                "hooks": [{
+                    "type": "command",
+                    "command": _prompt_first_pre_tool_hook_command(),
+                }],
+            }],
+            "PostToolUse": [
+                {
+                    "matcher": ".*",
+                    # A prompt-first Write is followed by a synchronous
+                    # Reviewer.  A blocking result must end this assistant
+                    # turn so Claude's Stop Hook can route the result; true
+                    # explicitly tells Claude to keep reasoning in the same
+                    # turn and can create an unbounded transcript.
+                    "continueOnBlock": False,
+                    "hooks": [{
+                        "type": "command",
+                        "command": _prompt_first_post_tool_hook_command(),
+                        "timeout": 600,
+                    }],
+                }
+            ],
+            "PreCompact": [{"matcher": ".*", "hooks": [{
+                "type": "command",
+                "command": _prompt_first_precompact_hook_command(),
+            }]}],
+            "PostCompact": [{"matcher": ".*", "hooks": [{
+                "type": "command",
+                "command": _prompt_first_postcompact_hook_command(),
+            }]}],
+            "Stop": [{"hooks": [{
+                "type": "command",
+                "command": _prompt_first_hook_command(),
+                "timeout": 600,
+            }]}],
         }
     }
     settings_path.write_text(json.dumps(settings, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -876,9 +955,14 @@ def _ensure_prompt_first_scaffold(root: Path) -> list[str]:
     if not claude_path.exists():
         claude_path.write_text(
             "# RALPH Prompt-First\n\n"
-            "Read `ralph-loop.md` and its current Markdown artifact. Work through the "
-            "stage in ordinary Markdown, then append `<!-- ralph: done -->`. "
-            "Do not use field/DAG JSON workflows in this project.\n",
+            "For an untouched automatic template, use the injected cursor, task, target, and stage rules; "
+            "because Claude Code's Write requires a prior Read, read the current artifact once and then write it. "
+            "For substantive work or a Reviewer revision, "
+            "read `ralph-loop.md` and the current Markdown artifact. Work through the "
+            "stage in ordinary Markdown. Stop after writing; the Stop Hook launches "
+            "an independent Reviewer and persists `latest-review.md`. Append "
+            "`<!-- ralph: done -->` only after Reviewer pass. A revise verdict stays "
+            "in the same stage. Do not use field/DAG JSON workflows in this project.\n",
             encoding="utf-8",
         )
         created.append(str(claude_path))
@@ -906,6 +990,241 @@ def _prompt_first_skill_context() -> tuple[str, Path | None]:
         if raw:
             return "# Required RALPH prompt-first skill\n\n" + raw[:6_000], path
     return prompt_first_system_prompt(), None
+
+
+def _prompt_first_reviewer_prompt(root: Path, state: Mapping[str, str]) -> str:
+    artifact = root / state["current_artifact"]
+    rules = load_stage_rules(root, state["stage"])
+    try:
+        artifact_text = artifact.read_text(encoding="utf-8")
+    except OSError as exc:
+        artifact_text = f"（无法读取当前工件快照：{exc}）"
+    current_date = datetime.now(ZoneInfo("Asia/Shanghai")).date().isoformat()
+    return (
+        "你是 RALPH 的独立阶段 Reviewer，不是 Commander，也不是执行者。\n"
+        "运行时已经从磁盘读取并注入了当前阶段规则和 Markdown 工件的精确快照；"
+        "直接依据下面的快照审阅，不要调用任何工具。你没有文件写入、搜索、网页或编译权限。"
+        "不要说‘我先读取’、不要输出审阅计划，也不要以半截思考结束；快照已经完整提供。"
+        "直接返回命令行提供的结构化 Reviewer 回执，不要输出 JSON 之外的文字。\n\n"
+        f"项目任务：{state['task']}\n"
+        f"当前日期（Asia/Shanghai）：{current_date}\n"
+        f"阶段：{state['stage']}\n"
+        f"阶段规则文件：{rules['path'] or '缺失'}\n"
+        f"当前工件：{artifact}\n\n"
+        "--- 阶段规则（仍须以文件内容为准） ---\n"
+        f"{rules['text']}\n"
+        "--- 阶段规则结束 ---\n\n"
+        "--- 当前 Markdown 工件快照（只读） ---\n"
+        f"{artifact_text}\n"
+        "--- 当前 Markdown 工件快照结束 ---\n\n"
+        "审阅时完全依据上面的外部规则，尤其是其中的 Reviewer 质检标准；"
+        "不要增加 Python 或本提示词中没有定义的字段门槛。\n"
+        "对发现的每个问题说明位置、影响和具体修复行动；如果问题需要回到更早阶段补输入，"
+        "repair_stage 写对应更早阶段；如果只需修订当前工件，写当前阶段。只有当前工件可以交给下一阶段时才 pass，"
+        "不确定或存在关键缺口时必须 revise。\n\n"
+        "这是强制输出协议：即使工件极短或信息不足，也必须给出具体缺口并判定 revise；"
+        "不要调用工具、不要返回审阅计划、不要复述整个工件。请只返回命令行提供的 JSON schema，"
+        "其中 report 不超过约 800 个中文字符，findings 最多 6 项；完成判断后立即结束。\n"
+    )
+
+
+def _prompt_first_reviewer_schema() -> dict[str, object]:
+    return {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {
+            "report": {"type": "string"},
+            "findings": {
+                "type": "array",
+                "maxItems": 6,
+                "items": {
+                    "type": "object",
+                    "additionalProperties": False,
+                    "properties": {
+                        "location": {"type": "string"},
+                        "impact": {"type": "string"},
+                        "evidence_gap": {"type": "string"},
+                        "repair_action": {"type": "string"},
+                    },
+                    "required": ["location", "impact", "evidence_gap", "repair_action"],
+                },
+            },
+            "verdict": {"type": "string", "enum": ["pass", "revise"]},
+            "repair_stage": {"type": "string"},
+        },
+        "required": ["report", "findings", "verdict", "repair_stage"],
+    }
+
+
+def _local_omlx_api_key() -> str:
+    configured = os.environ.get("OMLX_API_KEY", "").strip()
+    if configured:
+        return configured
+    settings = Path.home() / ".omlx" / "settings.json"
+    try:
+        data = json.loads(settings.read_text(encoding="utf-8"))
+    except (OSError, ValueError, json.JSONDecodeError):
+        return ""
+    return str(data.get("auth", {}).get("api_key", "")).strip()
+
+
+def _local_omlx_reviewer(
+    system: str,
+    prompt: str,
+    *,
+    schema: dict[str, object],
+    model: str | None,
+) -> str | None:
+    """Run the Reviewer directly against the local default model, serially."""
+
+    base_url = os.environ.get(
+        "RALPH_PROMPT_FIRST_OMLX_URL", "http://127.0.0.1:8000"
+    ).rstrip("/")
+    headers = {"Content-Type": "application/json"}
+    api_key = _local_omlx_api_key()
+    if api_key:
+        headers["Authorization"] = f"Bearer {api_key}"
+    try:
+        status_request = urllib.request.Request(f"{base_url}/api/status", headers=headers)
+        with urllib.request.urlopen(status_request, timeout=2) as response:
+            status = json.loads(response.read().decode("utf-8"))
+        default_model = str(status.get("default_model", "")).strip()
+        if not default_model:
+            return None
+        payload = {
+            "model": model or default_model,
+            "messages": [
+                {"role": "system", "content": system},
+                {"role": "user", "content": prompt},
+            ],
+            "max_tokens": 2048,
+            "temperature": 0,
+            "chat_template_kwargs": {"enable_thinking": False},
+            "response_format": {
+                "type": "json_schema",
+                "json_schema": {"name": "ralph_reviewer", "schema": schema},
+            },
+        }
+        request = urllib.request.Request(
+            f"{base_url}/v1/chat/completions",
+            data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
+            headers=headers,
+            method="POST",
+        )
+        with urllib.request.urlopen(request) as response:
+            result = json.loads(response.read().decode("utf-8"))
+        content = result.get("choices", [{}])[0].get("message", {}).get("content")
+        return str(content) if content else None
+    except (OSError, ValueError, json.JSONDecodeError, KeyError, IndexError, urllib.error.URLError):
+        return None
+
+
+def prompt_first_review_project(
+    project: str | Path,
+    *,
+    effort: str | None = None,
+    model: str | None = None,
+    skip_permissions: bool = False,
+) -> int:
+    """Run a read-only independent reviewer and persist its routing receipt."""
+
+    root = Path(project).expanduser().resolve()
+    state = load_prompt_first_state(root)
+    artifact = root / state["current_artifact"]
+    system = (
+        "You are an independent, adversarial RALPH stage reviewer. "
+        "The stage rule Markdown supplied in the user prompt is authoritative. "
+        "Do not edit, create, delete, or execute project files. Report concrete "
+        "findings and never manufacture evidence. The parent Commander will "
+        "receive your report and must repair before it can advance."
+    )
+    reviewer_prompt = _prompt_first_reviewer_prompt(root, state)
+    reviewer_schema = json.dumps(
+        _prompt_first_reviewer_schema(),
+        ensure_ascii=False,
+        separators=(",", ":"),
+    )
+    transport = os.environ.get("RALPH_PROMPT_FIRST_REVIEW_TRANSPORT", "auto").strip().lower()
+    if transport in {"auto", "omlx"}:
+        local_output = _local_omlx_reviewer(
+            system,
+            reviewer_prompt,
+            schema=_prompt_first_reviewer_schema(),
+            model=model,
+        )
+        if local_output is not None:
+            summary = record_reviewer_result(root, local_output, return_code=0)
+            print(
+                json.dumps(
+                    {
+                        **summary,
+                        "artifact": state["current_artifact"],
+                        "artifact_sha256": artifact_sha256(artifact),
+                        "reviewer_transport": "omlx",
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                    sort_keys=True,
+                )
+            )
+            return 0 if summary["verdict"] in {"pass", "revise"} else 2
+
+    command = [
+        _claude_executable(),
+        "-p",
+        "--output-format",
+        "json",
+        "--json-schema",
+        reviewer_schema,
+        "--no-session-persistence",
+        "--permission-mode",
+        "plan",
+        "--setting-sources",
+        "user",
+        "--disable-slash-commands",
+        "--tools",
+        "",
+        # The Reviewer is a read-only one-turn classifier.  Inheriting Claude's
+        # full default system prompt (skills, agent registry, environment and
+        # tool descriptions) needlessly expands the local model context and can
+        # push a substantive Markdown review past Claude Code's 600s Stop-hook
+        # ceiling.  Keep the same provider-default model, but give this role a
+        # minimal system prompt; the complete stage rules and artifact snapshot
+        # remain in the user prompt below.
+        "--system-prompt",
+        system,
+        reviewer_prompt,
+    ]
+    command = _with_skip_permissions(
+        _with_model(_with_effort(command, effort), model),
+        skip_permissions,
+    )
+    completed = subprocess.run(
+        command,
+        cwd=root,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    summary = record_reviewer_result(
+        root,
+        completed.stdout,
+        return_code=completed.returncode,
+        error_output=completed.stderr,
+    )
+    print(
+        json.dumps(
+            {
+                **summary,
+                "artifact": state["current_artifact"],
+                "artifact_sha256": artifact_sha256(artifact),
+            },
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+    )
+    return 0 if summary["verdict"] in {"pass", "revise"} else 2
 
 
 def recover_card(
@@ -1722,6 +2041,51 @@ def _terminate_process_group(process: subprocess.Popen[Any], *, timeout: float =
         process.wait(timeout=timeout)
 
 
+_HARD_CONTEXT_ERROR_MARKERS = (
+    "Prompt too long",
+    "exceeds max context window",
+    "maximum context length",
+    "context length exceeded",
+    "prompt is too long",
+)
+
+
+def _context_error_excerpt(text: str) -> str | None:
+    """Return a bounded hard-context error line, if one is present."""
+
+    for line in reversed(str(text or "").splitlines()):
+        candidate = line.strip()
+        if candidate and any(marker.lower() in candidate.lower() for marker in _HARD_CONTEXT_ERROR_MARKERS):
+            return candidate[:600]
+    return None
+
+
+def _claude_transcript_for_process(pid: int) -> Path | None:
+    """Resolve Claude's JSONL transcript from its per-process session record."""
+
+    metadata_path = Path.home() / ".claude" / "sessions" / f"{pid}.json"
+    try:
+        metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+        session_id = str(metadata.get("sessionId") or "").strip()
+    except (OSError, ValueError, json.JSONDecodeError):
+        return None
+    if not session_id:
+        return None
+    projects_root = Path.home() / ".claude" / "projects"
+    if not projects_root.is_dir():
+        return None
+    # Claude Code stores the file beneath a sanitized cwd directory.  A
+    # filename search avoids reimplementing that sanitization and is bounded
+    # to one project transcript rather than reading the whole history.
+    try:
+        for candidate in projects_root.rglob(f"{session_id}.jsonl"):
+            if candidate.is_file():
+                return candidate
+    except OSError:
+        return None
+    return None
+
+
 def _run_claude_supervised(
     command: list[str],
     *,
@@ -1899,10 +2263,54 @@ def _run_prompt_first_supervised(
     except OSError:
         last_mtime = 0.0
     last_activity = time.monotonic()
+    transcript_path: Path | None = None
+    transcript_offset: int | None = None
+
+    def _new_hard_context_error() -> str | None:
+        """Read only newly appended transcript bytes for an unrecoverable error."""
+
+        nonlocal transcript_path, transcript_offset
+        if transcript_path is None:
+            transcript_path = _claude_transcript_for_process(process.pid)
+        if transcript_path is None:
+            return None
+        try:
+            size = transcript_path.stat().st_size
+            if transcript_offset is None:
+                # Include the current tail in case the metadata appeared just
+                # after Claude wrote the error, but never reread a large
+                # transcript on every watchdog tick.
+                transcript_offset = max(0, size - 128_000)
+            elif size < transcript_offset:
+                transcript_offset = 0
+            if size <= transcript_offset:
+                return None
+            with transcript_path.open("rb") as handle:
+                handle.seek(transcript_offset)
+                text = handle.read(size - transcript_offset).decode("utf-8", errors="replace")
+            transcript_offset = size
+        except OSError:
+            return None
+        return _context_error_excerpt(text)
+
     while True:
         return_code = process.poll()
         if return_code is not None:
             return return_code, False
+        context_error = _new_hard_context_error()
+        if context_error is not None:
+            append_observation(
+                cwd / "loop-events.md",
+                "prompt_first_context_error_recovery",
+                {
+                    "process_pid": process.pid,
+                    "error_excerpt": context_error,
+                    "state_preserved": True,
+                    "next_action": "fresh_context_from_markdown",
+                },
+            )
+            _terminate_process_group(process)
+            return 75, True
         try:
             newest_mtime = cursor.stat().st_mtime
         except OSError:
@@ -4049,6 +4457,38 @@ def main(argv: list[str] | None = None) -> int:
         except (OSError, ValueError, json.JSONDecodeError) as exc:
             print(json.dumps({"error": str(exc)}, ensure_ascii=False), file=sys.stderr)
             return 1
+    if args.command == "prompt-first-pre-tool":
+        try:
+            payload = json.loads(sys.stdin.read() or "{}")
+            print(json.dumps(handle_prompt_first_pre_tool(payload), ensure_ascii=False))
+            return 0
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            print(json.dumps({"error": str(exc)}, ensure_ascii=False), file=sys.stderr)
+            return 1
+    if args.command == "prompt-first-precompact":
+        try:
+            payload = json.loads(sys.stdin.read() or "{}")
+            print(json.dumps(handle_prompt_first_precompact(payload), ensure_ascii=False))
+            return 0
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            print(json.dumps({"error": str(exc)}, ensure_ascii=False), file=sys.stderr)
+            return 1
+    if args.command == "prompt-first-postcompact":
+        try:
+            payload = json.loads(sys.stdin.read() or "{}")
+            print(json.dumps(handle_prompt_first_postcompact(payload), ensure_ascii=False))
+            return 0
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            print(json.dumps({"error": str(exc)}, ensure_ascii=False), file=sys.stderr)
+            return 1
+    if args.command == "prompt-first-post-tool":
+        try:
+            payload = json.loads(sys.stdin.read() or "{}")
+            print(json.dumps(handle_prompt_first_post_tool(payload), ensure_ascii=False))
+            return 0
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            print(json.dumps({"error": str(exc)}, ensure_ascii=False), file=sys.stderr)
+            return 1
     if args.command == "prompt-first":
         try:
             if args.prompt_first_command == "init":
@@ -4061,6 +4501,13 @@ def main(argv: list[str] | None = None) -> int:
             if args.prompt_first_command == "render":
                 print(render_prompt_first(args.project), end="")
                 return 0
+            if args.prompt_first_command == "review":
+                return prompt_first_review_project(
+                    args.project,
+                    effort=args.effort,
+                    model=args.model,
+                    skip_permissions=args.dangerously_skip_permissions,
+                )
             if args.prompt_first_command == "loop":
                 return prompt_first_loop_project(
                     args.project,

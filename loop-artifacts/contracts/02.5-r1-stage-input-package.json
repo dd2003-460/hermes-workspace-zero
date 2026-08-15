@@ -1,0 +1,77 @@
+{
+  "authoritative_inputs": [
+    "loop-artifacts/stages/01/r1/state.json"
+  ],
+  "context_mode": "bounded_artifacts",
+  "current_stage_cards": [],
+  "purpose": "供独立阶段门禁审计；不包含 Commander 主对话或隐藏推理。",
+  "stage": {
+    "failure_condition": "核验不足或矛盾未处置",
+    "id": "02.5",
+    "input_description": "02 的调研结果与字段；逐字段派 subagent 去问多种网页 LLM + 权威数据，检查矛盾",
+    "name": "调研后交叉验证",
+    "on_failure": "02",
+    "on_success": "03",
+    "required_outputs": [
+      "cross_validation"
+    ],
+    "revision": "r1",
+    "success_condition": "每个关键调研字段有逐 claim validation_records（≥2 独立具体来源、日期、裁决），矛盾已记录并更新 confidence"
+  },
+  "structured_inputs": {
+    "decision": {},
+    "handoff": {},
+    "last_exploration": null,
+    "plan": {
+      "joins": [],
+      "nodes": [],
+      "parallel_groups": [],
+      "revision": "r1"
+    },
+    "queue": {
+      "blocked_human": [],
+      "candidates": [],
+      "ready": []
+    },
+    "task_intake": null,
+    "task_spec": {
+      "attribute_matrix": [
+        {
+          "attribute": "验证并记录：prompt-first RALPH 框架的关键不确定性",
+          "concept": "研究未知因素：prompt-first RALPH 框架的关键不确定性",
+          "confidence": 0.95,
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://github.com/dd2003-460/hermes-workspace-zero/blob/main/loop/ralph_runtime/ralph_runtime/prompt_first.py",
+            "https://github.com/dd2003-460/hermes-workspace-zero/blob/main/loop/ralph_runtime/ralph_runtime/state.py",
+            "https://github.com/dd2003-460/hermes-workspace-zero/blob/main/loop/ralph_runtime/ralph_runtime/dag.py",
+            "https://github.com/dd2003-460/hermes-workspace-zero/blob/main/loop/ralph_runtime/ralph_runtime/field_tasks.py",
+            "https://github.com/dd2003-460/hermes-workspace-zero/blob/main/loop/ralph_runtime/ralph_runtime/machine.py",
+            "https://github.com/dd2003-460/hermes-workspace-zero/blob/main/loop/prompt-first/00-common-review.md",
+            "https://github.com/dd2003-460/hermes-workspace-zero/blob/main/loop/prompt-first/01-goal-decomposition.md",
+            "https://github.com/dd2003-460/hermes-workspace-zero/blob/main/loop/prompt-first/02-information-research.md",
+            "https://github.com/dd2003-460/hermes-workspace-zero/blob/main/loop/prompt-first/02.5-cross-check.md",
+            "https://github.com/dd2003-460/hermes-workspace-zero/blob/main/loop/prompt-first/03-action-decomposition.md",
+            "https://github.com/dd2003-460/hermes-workspace-zero/blob/main/loop/prompt-first/04-execution-verification.md",
+            "https://github.com/dd2003-460/hermes-workspace-zero/blob/main/loop/prompt-first/04.5-final-review.md",
+            "https://github.com/dd2003-460/hermes-workspace-zero/blob/main/loop/ralph_runtime/ralph_runtime/protocol.py",
+            "loop-artifacts/stages/02/r1/web-llm/receipt-perplexity-2026-08-15.md",
+            "loop-artifacts/stages/02/r1/web-llm/receipt-chatgpt-2026-08-15.md"
+          ],
+          "rationale": "通过完整源码分析确认5个关键不确定性：1) prompt-first 无法直接复现 DAG 验证（dag.py 的 cycle_check/write_conflict/parallel_group 验证是 code-only 的，prompt-first 无 DAG 概念）；2) loop-state.json 不需要为 prompt-first 扩展 schema，两者使用完全不同的状态文件（ralph-loop.md 的简单 cursor vs code-based 的复杂 task_spec）；3) prompt-first 与 ralph-stage-executor skill 是并行/替代实现，CLI 有独立的 subcommand 集合（ralph prompt-first vs ralph init/status/field-apply）；4) 验证规则根本不同 — code-based 用程序化 DAG/field 验证，prompt-first 用独立 Reviewer 子进程（ralph prompt-first review）；5) DAG 验证、field schemas、原子 field-apply、写冲突检测必须保留在 code 层；阶段推进、质量门控、规则定义可由 prompt 实现。prompt-first 的 system_prompt 明确禁止：'Do not invent JSON state machines, field roles, or semantic validation'。经两个独立网页 LLM（Perplexity、ChatGPT）交叉验证：Perplexity 确认 prompt-first 在状态管理（无版本化/回滚）、错误处理（无异常类型/重试策略）、DAG 依赖（无拓扑序保证）方面存在根本局限；ChatGPT 进一步提出3级架构层次（prompt-first → declarative+runtime → dynamic+state machine），确认 'prompt 擅长表达应该发生什么，code/runtime 擅长保证什么必须发生、什么时候发生、失败后怎么办'。两个 LLM 结论与源码分析一致。",
+          "role": "research_findings"
+        }
+      ],
+      "authoritative_inputs": [
+        "loop-artifacts/stages/01/r1/state.json"
+      ],
+      "status": "research_pending"
+    },
+    "verification": {}
+  },
+  "submission_template_ref": "loop-artifacts/contracts/02.5-r1-submission-template.json",
+  "task": {
+    "description": "以 loop-state.json 为准，执行 1-loop 阶段 01 目标与背景分解",
+    "source": "ralph loop"
+  }
+}

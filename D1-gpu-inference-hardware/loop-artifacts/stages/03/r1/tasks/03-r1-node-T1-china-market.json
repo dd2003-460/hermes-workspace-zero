@@ -1,0 +1,35 @@
+{
+  "depends_on": [],
+  "execution_mode": "parallel",
+  "id": "03-r1-node-T1-china-market",
+  "input_refs": [],
+  "instruction": "只执行 DAG 节点 `T1-china-market`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+  "node_id": "T1-china-market",
+  "orthogonal_key": "china_market",
+  "output": {
+    "evidence": [
+      "tasks/T1-china-market-report.md"
+    ],
+    "file": "tasks/T1-china-market-report.md",
+    "summary": "T1-china-market 调研报告已完成"
+  },
+  "output_schema": {
+    "content": "中文二手 RTX 3090/4090 价格调研",
+    "type": "markdown_report"
+  },
+  "parallel_group_id": "pg-research",
+  "parent_id": null,
+  "postconditions": [
+    "价格数据已验证"
+  ],
+  "preconditions": [],
+  "revision": "r1",
+  "schema_version": 1,
+  "stage_id": "03",
+  "status": "completed",
+  "type": "graph_task",
+  "updated_at": "2026-08-13T12:51:25.962938+00:00",
+  "writes": [
+    "tasks/T1-china-market-report.md"
+  ]
+}

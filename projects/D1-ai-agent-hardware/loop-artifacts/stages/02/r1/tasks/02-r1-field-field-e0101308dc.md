@@ -2,13 +2,13 @@
 
 > 由 `ralph render` 自动从 `loop-artifacts/stages/02/r1/tasks/02-r1-field-field-e0101308dc.json` 生成，请勿手改。
 
-> 生成时间：2026-07-25 04:01
+> 生成时间：2026-08-08 19:58
 
 ## 概览
 
-- 字段总数：**8**
-- 待办（pending / research_required）：**6**
-- 分组：constraint×3、objective×2、comparison_set×2、uncertainty×1
+- 字段总数：**9**
+- 待办（pending / research_required）：**5**
+- 分组：constraint×3、objective×2、comparison_set×2、uncertainty×1、background×1
 
 ## 字段明细
 
@@ -16,7 +16,7 @@
 
 | 要素 (concept) | 属性 | 状态 | 置信度 | 影响 | 可逆 |
 |---|---|---|---|---|---|
-| 决定可加载的最大模型规模 | VRAM 容量 | research_required |  |  |  |
+| 决定可加载的最大模型规模 | VRAM 容量 | confirmed | 0.95 |  |  |
 | 总拥有成本（含电源/机箱升级） | 价格 | research_required | 0.90 | material | 是 |
 | 电源需求和机箱兼容性 | 功耗/散热 | assumed_default | 0.70 | material | 是 |
 
@@ -40,11 +40,22 @@
 |---|---|---|---|---|---|
 | LLM 推理 / 图像生成 / 语音 / 多模态 — 不同负载对 GPU 需求不同 | AI 工作负载类型 | assumed_default | 0.60 | material | 是 |
 
+### background
+
+| 要素 (concept) | 属性 | 状态 | 置信度 | 影响 | 可逆 |
+|---|---|---|---|---|---|
+| 用户原始任务 | 任务描述 | confirmed | 1.00 | material | 否 |
+
 ## 证据与备注
 
 ### 决定可加载的最大模型规模
 
-LLM 推理显存需求有明确公式：FP16=2bytes/param, 4-bit=0.7bytes/param。32B model @ 4-bit ≈ 22GB。这是硬物理约束。
+LLM 推理显存需求有明确公式：FP16=2bytes/param, 4-bit≈0.7-0.8bytes/param（含 KV cache）。32B model @ 4-bit ≈ 22-26GB 权重显存。这是硬物理约束——决定可加载的最大模型规模。Hugging Face Llama 3 博客确认 8B 模型 4-bit 加载约 7GB，需消费级 GPU（3090/4090）。NVIDIA 官网确认 RTX 4090 24GB、4080 Super/4070 Ti Super/4060 Ti 均为 16GB VRAM。
+
+证据：
+- https://en.wikipedia.org/wiki/RTX_40_series — RTX 4090 24GB/4080 Super 16GB/4070 Ti Super 16GB/4060 Ti 16GB VRAM 规格确认
+- https://huggingface.co/blog/llama3 — 4-bit loading 8B model ~7GB, consumer GPU (3090/4090) 推荐
+- LLM 显存公式: FP16=2bytes/param, 4-bit=0.7-0.8bytes/param (含 KV cache)。8B@4bit≈7-8GB, 14B@4bit≈12-14GB, 32B@4bit≈22-26GB, 70B@4bit≈45-55GB
 
 ### 决定推理 token 生成速度
 
@@ -73,3 +84,10 @@ M3 Ultra 192GB Unified Memory 可加载 70B+ 模型，但 Apple Silicon 推理�
 ### LLM 推理 / 图像生成 / 语音 / 多模态 — 不同负载对 GPU 需求不同
 
 LLM 推理看重 VRAM + 带宽；Stable Diffusion 看重 CUDA cores + VRAM；Whisper 语音对 GPU 要求较低。假设以 LLM 为主（当前主流需求），图像生成作为第二场景。
+
+### 用户原始任务
+
+用户初始任务输入，作为本阶段已知背景字段。
+
+证据：
+- user:initial_task

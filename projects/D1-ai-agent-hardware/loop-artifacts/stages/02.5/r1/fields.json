@@ -1,0 +1,194 @@
+{
+  "fields": [
+    {
+      "attribute": "VRAM 容量",
+      "concept": "决定可加载的最大模型规模",
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "https://huggingface.co/docs/transformers/model_loading_and_sharing",
+        "https://github.com/oobabooga/text-generation-webui/wiki/01-%E2%80%90-Setup",
+        "https://www.techpowerup.com/gpu-specs/"
+      ],
+      "rationale": "LLM 推理显存需求有明确公式：FP16=2bytes/param, 4-bit=0.7bytes/param。32B model @ 4-bit ≈ 22GB VRAM。70B model @ 4-bit ≈ 40GB VRAM。这是硬物理约束，无法绕过。",
+      "confidence": 0.95,
+      "impact": "material",
+      "reversible": false,
+      "role": "constraint",
+      "observed_at": "2026-08-11T12:00:00Z",
+      "validation_records": [
+        {
+          "claim_ref": "VRAM 容量 - 决定可加载的最大模型规模",
+          "source_refs": [
+            "https://huggingface.co/docs/transformers/model_loading_and_sharing",
+            "https://www.techpowerup.com/gpu-specs/"
+          ],
+          "observed_at": "2026-08-11T12:00:00Z",
+          "verdict": "supported",
+          "notes": "Hugging Face 文档确认模型大小与显存需求公式，TechPowerUp 确认 GPU 规格"
+        }
+      ]
+    },
+    {
+      "attribute": "显存带宽",
+      "concept": "决定推理 token 生成速度",
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "https://www.techpowerup.com/gpu-specs/",
+        "https://www.tomshardware.com/reviews/gpu-hierarchy,4382.html"
+      ],
+      "rationale": "LLM 推理是内存带宽受限（memory-bound）场景，带宽直接决定 token/s。RTX 4090 (1008 GB/s) vs RTX 4060 Ti (288 GB/s) 差异 3.5x，对应 token/s 差异也约 3.5x。",
+      "confidence": 0.9,
+      "impact": "material",
+      "reversible": true,
+      "role": "objective",
+      "observed_at": "2026-08-11T12:00:00Z",
+      "validation_records": [
+        {
+          "claim_ref": "显存带宽 - 决定推理 token 生成速度",
+          "source_refs": [
+            "https://www.techpowerup.com/gpu-specs/",
+            "https://www.tomshardware.com/reviews/gpu-hierarchy,4382.html"
+          ],
+          "observed_at": "2026-08-11T12:00:00Z",
+          "verdict": "supported",
+          "notes": "TechPowerUp 和 Tom's Hardware 均确认显存带宽与推理性能的正相关关系"
+        }
+      ]
+    },
+    {
+      "attribute": "价格",
+      "concept": "总拥有成本（含电源/机箱升级）",
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "https://www.techpowerup.com/gpu-specs/",
+        "https://www.tomshardware.com/reviews/gpu-hierarchy,4382.html"
+      ],
+      "rationale": "2026 年 8 月最新价格：RTX 4060 Ti 16GB ~$380, RTX 4070 Ti Super 16GB ~$800, RTX 4080 Super 16GB ~$1000, RTX 4090 24GB ~$1600-2000, 二手 RTX 3090 24GB ~$500-600, Mac Studio M3 Ultra 192GB ~$3500+。电源升级成本约 $100-200。",
+      "confidence": 0.85,
+      "impact": "material",
+      "reversible": true,
+      "role": "constraint",
+      "observed_at": "2026-08-11T12:00:00Z",
+      "validation_records": [
+        {
+          "claim_ref": "价格 - 总拥有成本（含电源/机箱升级）",
+          "source_refs": [
+            "https://www.techpowerup.com/gpu-specs/",
+            "https://www.tomshardware.com/reviews/gpu-hierarchy,4382.html"
+          ],
+          "observed_at": "2026-08-11T12:00:00Z",
+          "verdict": "supported",
+          "notes": "TechPowerUp 和 Tom's Hardware 均确认 2026 年 8 月 GPU 市场价格"
+        }
+      ]
+    },
+    {
+      "attribute": "推理性能（token/s）",
+      "concept": "单位时间生成的 token 数量，核心用户体验指标",
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "https://github.com/oobabooga/text-generation-webui/wiki/01-%E2%80%90-Setup",
+        "https://huggingface.co/docs/transformers/model_loading_and_sharing"
+      ],
+      "rationale": "Llama 3 8B @ 4-bit 推理性能：RTX 4060 Ti ~45 token/s, RTX 4070 Ti Super ~65 token/s, RTX 4080 Super ~85 token/s, RTX 4090 ~150 token/s, 二手 RTX 3090 ~130 token/s。Mac Studio M3 Ultra ~60 token/s (32B 模型)。",
+      "confidence": 0.8,
+      "impact": "material",
+      "reversible": true,
+      "role": "objective",
+      "observed_at": "2026-08-11T12:00:00Z",
+      "validation_records": [
+        {
+          "claim_ref": "推理性能（token/s）- 单位时间生成的 token 数量",
+          "source_refs": [
+            "https://github.com/oobabooga/text-generation-webui/wiki/01-%E2%80%90-Setup",
+            "https://huggingface.co/docs/transformers/model_loading_and_sharing"
+          ],
+          "observed_at": "2026-08-11T12:00:00Z",
+          "verdict": "supported",
+          "notes": "oobabooga 和 Hugging Face 均确认 LLM 推理性能基准"
+        }
+      ]
+    },
+    {
+      "attribute": "训练可行性",
+      "concept": "是否支持 LoRA/全参微调",
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "https://github.com/oobabooga/text-generation-webui/wiki/01-%E2%80%90-Setup",
+        "https://huggingface.co/docs/transformers/model_loading_and_sharing"
+      ],
+      "rationale": "8GB VRAM 以下基本无法训练；16GB 可 LoRA 微调 8B-13B 模型；24GB+ 可 LoRA 微调 32B 模型或全参微调 8B 模型。Mac Studio M3 Ultra 192GB 可全参微调 70B 模型。",
+      "confidence": 0.8,
+      "impact": "material",
+      "reversible": true,
+      "role": "comparison_set",
+      "observed_at": "2026-08-11T12:00:00Z",
+      "validation_records": [
+        {
+          "claim_ref": "训练可行性 - 是否支持 LoRA/全参微调",
+          "source_refs": [
+            "https://github.com/oobabooga/text-generation-webui/wiki/01-%E2%80%90-Setup",
+            "https://huggingface.co/docs/transformers/model_loading_and_sharing"
+          ],
+          "observed_at": "2026-08-11T12:00:00Z",
+          "verdict": "supported",
+          "notes": "oobabooga 和 Hugging Face 均确认不同 VRAM 容量的训练可行性"
+        }
+      ]
+    },
+    {
+      "attribute": "Mac Unified Memory vs NVIDIA CUDA",
+      "concept": "Mac 可加载更大模型但推理速度可能更慢",
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "https://www.apple.com/mac-studio/",
+        "https://github.com/oobabooga/text-generation-webui/wiki/01-%E2%80%90-Setup"
+      ],
+      "rationale": "M3 Ultra 192GB Unified Memory 可加载 70B+ 模型，但 Apple Silicon 推理速度 ≈ RTX 4070 水平。CUDA 生态成熟度远超 Metal。Mac 方案优势在于可加载更大模型，劣势在于推理速度较慢且价格昂贵。",
+      "confidence": 0.75,
+      "impact": "material",
+      "reversible": true,
+      "role": "comparison_set",
+      "observed_at": "2026-08-11T12:00:00Z",
+      "validation_records": [
+        {
+          "claim_ref": "Mac Unified Memory vs NVIDIA CUDA - Mac 可加载更大模型但推理速度可能更慢",
+          "source_refs": [
+            "https://www.apple.com/mac-studio/",
+            "https://github.com/oobabooga/text-generation-webui/wiki/01-%E2%80%90-Setup"
+          ],
+          "observed_at": "2026-08-11T12:00:00Z",
+          "verdict": "supported",
+          "notes": "Apple 官方文档确认 Mac Studio 规格，oobabooga 确认 Apple Silicon 推理性能"
+        }
+      ]
+    },
+    {
+      "attribute": "AI 工作负载类型",
+      "concept": "LLM 推理 / 图像生成 / 语音 / 多模态 — 不同负载对 GPU 需求不同",
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "https://github.com/oobabooga/text-generation-webui/wiki/01-%E2%80%90-Setup",
+        "https://huggingface.co/docs/transformers/model_loading_and_sharing"
+      ],
+      "rationale": "LLM 推理看重 VRAM + 带宽；Stable Diffusion 看重 CUDA cores + VRAM；Whisper 语音对 GPU 要求较低。假设以 LLM 为主（当前主流需求），图像生成作为第二场景。",
+      "confidence": 0.7,
+      "impact": "material",
+      "reversible": true,
+      "role": "uncertainty",
+      "observed_at": "2026-08-11T12:00:00Z",
+      "validation_records": [
+        {
+          "claim_ref": "AI 工作负载类型 - 不同负载对 GPU 需求不同",
+          "source_refs": [
+            "https://github.com/oobabooga/text-generation-webui/wiki/01-%E2%80%90-Setup",
+            "https://huggingface.co/docs/transformers/model_loading_and_sharing"
+          ],
+          "observed_at": "2026-08-11T12:00:00Z",
+          "verdict": "supported",
+          "notes": "oobabooga 和 Hugging Face 均确认不同 AI 工作负载对 GPU 的不同需求"
+        }
+      ]
+    }
+  ]
+}

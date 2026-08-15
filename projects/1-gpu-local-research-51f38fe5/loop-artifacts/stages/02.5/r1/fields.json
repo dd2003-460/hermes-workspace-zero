@@ -1,0 +1,29 @@
+{
+  "fields": [
+    {
+      "concept": "cross_validation",
+      "role": "cross_validation",
+      "attribute": "对 02 阶段调研结果进行 ≥2 独立来源交叉验证",
+      "disposition": "research_required",
+      "confidence": 0.5,
+      "impact": "material",
+      "reversible": false,
+      "evidence_refs": [],
+      "rationale": "02 阶段仅使用 Newegg 单一来源，需要至少 2 个独立来源（如 TechPowerUp GPU Box、Amazon、B&H Photo、eBay、Reddit 用户反馈等）验证 GPU 价格和性能数据。必须使用网页 LLM（LMArena、Perplexity、ChatGPT 等）进行交叉验证。",
+      "validation_targets": [
+        "RTX 5090 实际市场价格（Newegg $4,099-$4,999 是否准确）",
+        "RTX 3090 二手价格范围（Newegg $1,400-$2,195 是否准确）",
+        "RTX 4090 实际性能数据（NVIDIA 官方 TFLOP vs 实测）",
+        "RTX 5080 实际市场价格（Newegg $1,250-$2,303 是否准确）",
+        "RTX 6000 Ada 实际市场价格（Newegg $5,989-$9,760 是否准确）",
+        "RTX 4090D 中国出口版规格限制（是否确实降低 tensor core 性能）"
+      ],
+      "required_web_llm_sources": [
+        "LMArena (lmarena.ai) - 匿名可用",
+        "Perplexity (perplexity.ai) - 需要登录",
+        "ChatGPT (chatgpt.com) - 需要登录",
+        "Gemini (gemini.google.com) - Google 账号"
+      ]
+    }
+  ]
+}

@@ -2015,6 +2015,12 @@ def handle_userpromptsubmit(payload: Mapping[str, Any], mode: str = "hybrid") ->
         return {}
     state = load_state(root / "loop-state.json")
     updated = record_human_input(state, text)
+    # Claude Code sends Hook-injected recovery text through the same event as
+    # an actual human message.  The state helper returns an unchanged copy for
+    # such generated prompts; do not write a misleading human-input event or
+    # regenerate contracts in that case.
+    if updated == state:
+        return {}
     save_state(root / "loop-state.json", updated)
     materialize_contract_documents(root, updated)
     _record(

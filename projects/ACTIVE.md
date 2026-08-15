@@ -13,6 +13,7 @@
 | D1-financial-market-analysis | `AI-计算科学/D1-financial-market-analysis/` | 01 | r1 | running | 目标与约束 |
 | D1-area-quantized-black-hole-QNM | `理论物理/D1-area-quantized-black-hole-QNM/` | 01 | r1 | running | 目标与约束 |
 | D1-ai-agent-hardware | `D1-ai-agent-hardware/` | 01 | r1 | running | 目标与约束 |
+| D1-gpu-inference-hardware | `D1-gpu-inference-hardware/` | 03 | r1 | complete | 方案设计与决策完成，ego-browser 获取 10+ 数据源，量化数据三重验证 |
 | D1-grav-waves | `理论物理/D1-grav-waves/` | IDLE | 21 | complete | 无 — 项目已完成 ⚠️ arXiv 提交需作者手动上传 — 不可自动绕过 |
 
 ---

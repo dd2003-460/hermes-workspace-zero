@@ -1,0 +1,55 @@
+{
+  "type": "graph_task",
+  "revision": "r1",
+  "nodes": [
+    {
+      "node_id": "T1",
+      "description": "验证中文二手 RTX 3090/4090 价格",
+      "depends_on": [],
+      "writes": ["tasks/T1-china-market-report.md"],
+      "status": "completed",
+      "evidence": ["https://aiqicha.baidu.com", "闲鱼/知乎二手市场"]
+    },
+    {
+      "node_id": "T2",
+      "description": "验证 AMD MI300X LLM 推理性能",
+      "depends_on": [],
+      "writes": ["tasks/T2-mi300x-report.md"],
+      "status": "completed",
+      "evidence": ["https://sub-pulse.com", "https://github.com/amd/mi300x-inference"]
+    },
+    {
+      "node_id": "T3",
+      "description": "验证双 GPU NVLink 方案",
+      "depends_on": [],
+      "writes": ["tasks/T3-dual-gpu-report.md"],
+      "status": "completed",
+      "evidence": ["https://hardware-corner.net/benchmarks", "vLLM tensor parallelism"]
+    },
+    {
+      "node_id": "T4",
+      "description": "验证量化精度损失",
+      "depends_on": [],
+      "writes": ["tasks/T4-quantization-report.md"],
+      "status": "completed",
+      "evidence": ["https://arxiv.org/abs/2411.02355", "https://github.com/Aswathy-K/llm-quantization-benchmark", "https://iotdigitaltwinplm.com"]
+    },
+    {
+      "node_id": "T5",
+      "description": "综合推荐方案",
+      "depends_on": ["T1", "T2", "T3", "T4"],
+      "writes": ["tasks/T5-final-recommendation.md"],
+      "status": "completed",
+      "evidence": ["tasks/T5-final-recommendation.md"]
+    }
+  ],
+  "edges": [
+    {"from": "T1", "to": "T5"},
+    {"from": "T2", "to": "T5"},
+    {"from": "T3", "to": "T5"},
+    {"from": "T4", "to": "T5"}
+  ],
+  "parallel_groups": [["T1", "T2", "T3", "T4"]],
+  "critical_path": ["T5"],
+  "joins": ["T5"]
+}

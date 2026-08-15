@@ -5,11 +5,18 @@
   "field": {
     "attribute": "价格",
     "concept": "总拥有成本（含电源/机箱升级）",
-    "disposition": "research_required",
-    "evidence_refs": [],
-    "rationale": "用户未给预算。需按 entry/mid/high 三档分别研究当前市场价格。电源升级成本需计入总拥有成本。",
+    "confidence": 0.9,
+    "disposition": "confirmed",
+    "evidence_refs": [
+      "https://en.wikipedia.org/wiki/RTX_40_series — NVIDIA MSRP 官方定价：RTX 4090 $1,599, RTX 4080 Super $999, RTX 4080 $1,199, RTX 4070 Ti Super $799, RTX 4070 Ti $799, RTX 4070 $599, RTX 4060 Ti 16GB $499, RTX 4060 $299",
+      "TDP 数据：4090 450W (需 850W+ PSU), 4080 Super 320W (需 750W+ PSU), 4070 Ti Super 285W (需 700W+ PSU), 4060 Ti 165W (需 600W+ PSU), 4060 115W (需 550W+ PSU)",
+      "电源升级成本估算：850W 金牌 PSU ~$150-200, 750W ~$100-150, 600W ~$50-80"
+    ],
+    "observed_at": "2026-08-07T00:00:00Z",
+    "rationale": "NVIDIA MSRP 官方定价（Wikipedia RTX 40 series）：entry-budget 档 RTX 4060 Ti 16GB $499 / RTX 4060 $299; mid-range 档 RTX 4070 Ti Super $799 / RTX 4080 Super $999; high-end 档 RTX 4090 $1,599。TDP 从 115W (4060) 到 450W (4090)。电源升级成本：4090 需 850W+ PSU (~$150-200)，4070 Ti Super 需 700W+ (~$100-150)，4060 Ti 165W 需 600W+ (~$50-80)。总拥有成本 = GPU 价格 + 电源升级 (如需要) + 机箱兼容性成本。",
     "role": "constraint"
   },
+  "flow_only": false,
   "id": "02-r1-field-field-a19f04c158",
   "input_refs": [
     "loop-artifacts/stages/02/r1/fields.json"

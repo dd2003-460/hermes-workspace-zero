@@ -1,0 +1,8 @@
+{
+  "status": "running",
+  "stage_id": "02.5",
+  "revision": "r1",
+  "action": "advance",
+  "summary": "阶段 02.5 完成。交叉验证结果：阶段 02 调研数据来自单一来源 Newegg (2026-07-25)，置信度 0.6。主要矛盾：RTX 5090 市场价 $4,099-$4,999 远高于 MSRP $1,999；RTX 3090 二手价格 $1,400-$2,195 高于预期。未覆盖：eBay 二手价格、TechPowerUp GPU Box 数据、专业计算卡 A100/H100/AMD MI300X。这些 gap 将在阶段 03 补充调研。",
+  "next_stage": "03"
+}

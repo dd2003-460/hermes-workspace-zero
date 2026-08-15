@@ -240,4 +240,52 @@ ralph-status
 | `<project>/.claude/ralph-loop.local.md` | 项目全局状态副本 |
 | `<project>/loop-state.json` | 项目本地状态 |
 
+---
+
+## 网页 LLM 交叉验证流程
+
+### 核心原则
+
+1. **关键结论必须通过 ≥2 个不同 LLM 服务验证**（Gemini, ChatGPT, GLM, arena.ai, 豆包, Kimi 等）
+2. **不同 LLM 给出矛盾答案时，记录矛盾点并进一步搜索核实**
+3. **禁止对纯 JS 聊天页做 WebFetch**（返回空，会无限空转）
+
+### 网页 LLM 地址清单
+
+| 站点 | URL | 自动化状态 |
+|------|-----|-----------|
+| Perplexity | `https://perplexity.ai` | ✅ 已实现（ralph_runtime） |
+| ChatGPT | `https://chatgpt.com` | ✅ 已实现（ralph_runtime） |
+| Gemini | `https://gemini.google.com` | ✅ 已实现（ralph_runtime） |
+| LMArena | `https://arena.ai/agent` | ⚠️ 需授权 |
+| Claude | `https://claude.ai` | ⚠️ 需授权 |
+| Poe | `https://poe.com` | ⚠️ 需授权 |
+| Grok | `https://grok.com` | ⚠️ 需授权 |
+| Copilot | `https://copilot.microsoft.com` | ⚠️ 需授权 |
+| 百度智能 | `https://aistudio.google.com` | ⚠️ 需授权 |
+| 智谱 | `https://bigmodel.cn` | ⚠️ 需授权 |
+
+### 浏览器自动化实现
+
+- **Runner**: `loop/ralph_runtime/ralph_runtime/web_llm_browser_runner.mjs`
+- **Python 封装**: `loop/ralph_runtime/ralph_runtime/web_llm.py`
+- **CSS 选择器定位**（不用 ref ID，直接用 CSS loc）：
+  - ChatGPT: `#prompt-textarea` → `button[data-testid="send-button"]`
+  - Gemini: `[contenteditable="true"]` → `button[aria-label*="发送"]`
+  - Perplexity: `textbox` → `button[aria-label="提交"]`
+
+### 操作流程
+
+1. **人类授权**（一次性）: `ralph web-llm-authorize <项目> --providers perplexity chatgpt gemini`
+2. **Agent 提交验证**: `ralph web-llm-check . <request.json>`
+3. **收集回执**: `web-llm/*.json`
+4. **交叉比对**: 记录矛盾，更新 confidence
+
+### Skill 索引
+
+- 完整流程: `~/.hermes/skills/web-llm-cross-verify/SKILL.md`
+- 1-loop 02.5: `loop/1-loop/loop-legacy/02.5-交叉验证.md`
+- 1-loop 04.5: `loop/1-loop/loop-legacy/04.5-交叉验证.md`
+- Agent 准则: `agents/gatherer.md` §LLM 网页版交流通用准则
+
 *This file is yours to modify. You are the one who works here.*

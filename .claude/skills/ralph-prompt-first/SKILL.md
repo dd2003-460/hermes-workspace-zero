@@ -5,29 +5,21 @@ description: Run a RALPH task through short Markdown stages in one continuous Cl
 
 # RALPH Prompt-First
 
-`ralph-loop.md` names the sole current Markdown artifact and stage. Read it,
-but never edit it: the Stop Hook alone maintains its mechanical cursor. Then
-write the complete current stage document.
+`ralph-loop.md` is the durable stage cursor; never edit it. Runtime injects the
+current task, target, and external stage rules. Because Claude Code's `Write`
+requires a prior `Read`, read the current artifact once, then use the
+PostToolUse reminder to write the complete Markdown artifact. Do not narrate a
+plan or create JSON field/DAG state.
 
-- Never create `loop-state.json`, field tasks, DAG JSON, or stage-result JSON.
-- First substantive entry: `Write` the whole current Markdown file with a
-  title and useful content. Use `Edit` only for later changes; on any Edit
-  failure, immediately return to `Write` rather than reporting the error.
-- Use the current prompt's stage requirements. For external claims, record
-  source/date/observation/uncertainty. A browser/Playwright web-LLM response is
-  a lead, not invented evidence. In stage 02, run exactly `ralph prompt-first
-  web-llm .` once before generic web search; record its Markdown receipt or a
-  truthful tool/login/page failure. If all providers fail, record that and move
-  directly to the next section; do not start WebSearch/Fetch. A zero-result
-  search is not evidence.
-- In stage 04.5, write one concise bullet under each review heading and append
-  the marker in that same final Write; do not keep researching.
-- When the current Markdown is genuinely ready, append exactly
-  `<!-- ralph: done -->` on its own line. The Stop Hook then supplies the next
-  stage in the same Claude session. It does not grade semantics. The marker is
-  the final write of this turn: stop immediately after it; never start a later
-  stage or browse for it before the hook advances the cursor. Record uncertainty
-  in Markdown; never delete a marker after writing it for self-review.
+Follow the injected stage rules and record real sources, dates, observations,
+and uncertainty. A browser/Playwright web-LLM response is a lead, not evidence.
+After substantive writing, stop. The Stop Hook launches the independent
+read-only Reviewer. Do not run it manually, append the done marker before a
+matching Reviewer pass, or start the next stage yourself. On `revise`, use the
+latest review to repair its declared stage in the same session. Prefer one
+complete `Write` of the current Markdown over patch-style `Edit` calls, then
+stop for a new automatic review.
 
-Ordinary project reads and writes are allowed. Do not fabricate sources,
-browser actions, or results.
+Never write a `ralph-review` routing block or a self-authored `verdict` into
+the stage Markdown. The runtime owns review receipts; the stage artifact is
+only for the work, sources, evidence, uncertainty, and repair record.

@@ -25,6 +25,17 @@ DEFAULT_ALLOWED_ACTIONS = [
 
 CURRENT_SCHEMA_VERSION = 4
 
+# Hook-delivered runtime prompts share Claude Code's UserPromptSubmit channel
+# with real user text.  These prefixes are therefore an identity boundary, not
+# a display convention: generated recovery text must never become a new
+# authoritative requirement on the next loop.
+_GENERATED_RALPH_PROMPT_MARKERS = (
+    "# RALPH 最小恢复",
+    "# RALPH 字段增量提示",
+    "RALPH_FIELD_TASK=",
+    "<RALPH_STAGE_RESULT>",
+)
+
 
 def _initial_task_spec(task: str, source: str | None) -> dict[str, Any]:
     """Create the canonical input record before clarification is complete.
@@ -332,12 +343,7 @@ def record_human_input(
     cleaned = text.strip()
     if not cleaned:
         return copy.deepcopy(dict(state))
-    generated_markers = (
-        "# RALPH 字段增量提示",
-        "RALPH_FIELD_TASK=",
-        "<RALPH_STAGE_RESULT>",
-    )
-    if source == "UserPromptSubmit" and any(marker in cleaned for marker in generated_markers):
+    if source == "UserPromptSubmit" and any(marker in cleaned for marker in _GENERATED_RALPH_PROMPT_MARKERS):
         return copy.deepcopy(dict(state))
     digest = hashlib.sha256(cleaned.encode("utf-8")).hexdigest()[:16]
     bounded = (
@@ -382,13 +388,12 @@ def _compact_authoritative_inputs(state: dict[str, Any]) -> None:
         return
     compacted: list[Any] = []
     seen: set[str] = set()
-    generated_markers = ("# RALPH 字段增量提示", "RALPH_FIELD_TASK=", "<RALPH_STAGE_RESULT>")
     for item in inputs:
         if not isinstance(item, Mapping):
             compacted.append(item)
             continue
         text = str(item.get("text", ""))
-        if str(item.get("kind", "")) == "human_input" and any(marker in text for marker in generated_markers):
+        if str(item.get("kind", "")) == "human_input" and any(marker in text for marker in _GENERATED_RALPH_PROMPT_MARKERS):
             continue
         digest = str(item.get("sha256", "")) or hashlib.sha256(text.encode("utf-8")).hexdigest()[:16]
         if digest in seen:

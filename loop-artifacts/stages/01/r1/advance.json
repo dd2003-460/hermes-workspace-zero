@@ -1,0 +1,14 @@
+{
+  "action": "advance",
+  "artifact_refs": [
+    "loop-artifacts/stages/01/r1/fields.json",
+    "loop-artifacts/stages/01/r1/fields.md"
+  ],
+  "evidence": [],
+  "message": "阶段 01 目标与背景分解已完成：goal（构建通用 prompt-first RALPH 运行时框架）、known（ralph CLI 命令集、prompt-first skill 结构、阶段 prompt 文件、loop-state 状态机、AGENTS.md 循环原则）、unknown（prompt-first 能否覆盖所有 edge cases、schema 扩展需求、与现有 skill 关系、validation rules 差异、通用化边界）三字段已填齐且通过门禁校验。",
+  "next_stage": "02",
+  "revision": "r1",
+  "rollback_to": null,
+  "stage_id": "01",
+  "status": "running"
+}

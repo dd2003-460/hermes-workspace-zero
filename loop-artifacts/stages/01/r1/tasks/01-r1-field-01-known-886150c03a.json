@@ -3,11 +3,18 @@
   "concept": "阶段 01 输出：known",
   "disposition": "pending",
   "field": {
-    "attribute": "请填写 known 的正交因素分解",
+    "attribute": "prompt-first RALPH 框架的已知条件：ralph CLI 命令集、prompt-first skill 结构、阶段 prompt 文件、loop-state 状态机、AGENTS.md 循环原则",
     "concept": "阶段 01 输出：known",
-    "disposition": "pending",
-    "evidence_refs": [],
-    "rationale": "由运行时为缺失的 required output 生成的增量字段任务。",
+    "confidence": 0.9,
+    "disposition": "confirmed",
+    "evidence_refs": [
+      ".claude/skills/ralph-prompt-first/SKILL.md",
+      "loop/prompt-first/00-common-review.md",
+      "loop/prompt-first/01-goal-decomposition.md",
+      "AGENTS.md",
+      "loop-state.json"
+    ],
+    "rationale": "从项目文件直接验证的已知条件：(1) ralph CLI 存在并支持 field-init/field-apply/field-status/graph-apply/advance 等命令；(2) .claude/skills/ralph-prompt-first/SKILL.md 定义了 prompt-first 框架的启动协议；(3) loop/prompt-first/ 目录下有 00-06 共 7 个阶段 prompt 文件（含 02.5 cross-check）；(4) AGENTS.md 定义了 1-loop/2-loop 强制流程、RALPH 人类确认机制、置信度驱动自主原则；(5) loop-state.json 定义了状态机结构（status/field_tasks/graph_tasks/plan 等）；(6) ralph-stage-executor skill 存在，提供运行时执行和校验能力。",
     "role": "known"
   },
   "flow_only": false,

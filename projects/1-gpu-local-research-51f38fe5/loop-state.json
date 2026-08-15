@@ -1,0 +1,111 @@
+{
+  "active_tasks": {},
+  "allowed_actions": [
+    "advance",
+    "rollback",
+    "blocked_human",
+    "skip_blocked",
+    "candidate",
+    "explore",
+    "dispatch",
+    "join",
+    "clarify",
+    "repair_prompt"
+  ],
+  "clarification_history": [],
+  "current_artifact": "loop-artifacts/stages/02.5/r1/state.json",
+  "exploration_history": [],
+  "field_tasks": [
+    {
+      "attribute": "请填写 cross_validation 的正交因素分解",
+      "concept": "阶段 01 输出：cross_validation",
+      "disposition": "pending",
+      "flow_only": false,
+      "id": "02.5-r1-field-01-cross_validation-54a7379f66",
+      "input_refs": [
+        "loop-artifacts/stages/02.5/r1/fields.json"
+      ],
+      "instruction": "只处理字段 `阶段 01 输出：cross_validation`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/02.5/r1/tasks/02.5-r1-field-01-cross_validation-54a7379f66.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+      "output_schema": {
+        "attribute": "string",
+        "concept": "阶段 01 输出：cross_validation",
+        "confidence": "number 0..1",
+        "disposition": "confirmed|inferred|assumed_default|research_required",
+        "evidence_refs": "array[string]",
+        "rationale": "string",
+        "role": "string"
+      },
+      "path": "loop-artifacts/stages/02.5/r1/tasks/02.5-r1-field-01-cross_validation-54a7379f66.json",
+      "revision": "r1",
+      "role": "cross_validation",
+      "schema_version": 1,
+      "stage_id": "02.5",
+      "status": "ready",
+      "type": "field_task"
+    }
+  ],
+  "graph_tasks": [],
+  "history": [
+    {
+      "action": "advance",
+      "internal_state": "stage_02",
+      "revision": "r1",
+      "stage_id": "01"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_02_5",
+      "revision": "r1",
+      "stage_id": "02"
+    }
+  ],
+  "last_action": "advance",
+  "last_event_id": "8b90442e-6ebd-4ceb-8b2e-24458e8ce155",
+  "last_exploration": null,
+  "last_result": {
+    "action": "advance",
+    "artifact_refs": [],
+    "evidence": [],
+    "message": "",
+    "next_stage": "02.5",
+    "revision": "r1",
+    "rollback_to": null,
+    "stage_id": "02",
+    "status": "running"
+  },
+  "plan": {
+    "joins": [],
+    "nodes": [],
+    "parallel_groups": [],
+    "revision": "r1"
+  },
+  "project_id": "1-gpu-local-research-51f38fe5",
+  "queue": {
+    "blocked_human": [],
+    "candidates": [],
+    "ready": []
+  },
+  "run_history": [],
+  "schema_version": 4,
+  "stage": {
+    "failure_condition": "核验不足或矛盾未处置",
+    "id": "02.5",
+    "input_description": "02 的调研结果与字段；逐字段派 subagent 去问多种网页 LLM + 权威数据，检查矛盾",
+    "name": "调研后交叉验证",
+    "on_failure": "02",
+    "on_human_block": "exploration",
+    "on_success": "03",
+    "required_outputs": [
+      "cross_validation"
+    ],
+    "revision": "r1",
+    "success_condition": "每个关键调研字段经 ≥2 独立来源核验，矛盾已记录并更新 confidence"
+  },
+  "status": "running",
+  "task": {
+    "description": "我需要调研性价比最高的本地 GPU",
+    "source": "ralph run"
+  },
+  "task_intake": null,
+  "task_intake_history": []
+}

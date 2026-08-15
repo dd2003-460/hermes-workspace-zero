@@ -1,0 +1,65 @@
+{
+  "env": {
+    "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "100000",
+    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "50"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli prompt-first-pre-tool"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": ".*",
+        "continueOnBlock": false,
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli prompt-first-post-tool",
+            "timeout": 600
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli prompt-first-precompact"
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli prompt-first-postcompact"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/a1-6/.local/share/ralph-runtime/venv/bin/python -m ralph_runtime.cli prompt-first-stop",
+            "timeout": 600
+          }
+        ]
+      }
+    ]
+  }
+}

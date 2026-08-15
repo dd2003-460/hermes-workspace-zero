@@ -1,0 +1,7 @@
+{
+  "id": "01-r1-field-02-mi300x-performance-AMD-d5357d0b9c",
+  "attribute": "AMD MI300X 在本地 LLM 推理中的实际性能（ROCm 兼容性、吞吐、显存带宽利用率）",
+  "concept": "未知因素 02：AMD MI300X 本地推理性能",
+  "role": "unknown",
+  "instruction": "只处理字段 `未知因素 02：AMD MI300X 本地推理性能`。调研 AMD MI300X 在本地 LLM 推理中的实际性能，包括 ROCm 兼容性、吞吐量和显存带宽利用率。使用 WebSearch 搜索最新实测数据。最多尝试两次网页工具。填写后运行 ralph field-apply 合并。"
+}

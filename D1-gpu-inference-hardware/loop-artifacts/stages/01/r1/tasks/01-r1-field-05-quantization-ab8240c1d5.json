@@ -1,0 +1,7 @@
+{
+  "id": "01-r1-field-05-quantization-ab8240c1d5",
+  "attribute": "20B-70B 参数模型在消费级硬件上的量化精度损失（INT4/INT8/FP8 vs FP16）",
+  "concept": "未知因素 05：量化精度损失",
+  "role": "unknown",
+  "instruction": "只处理字段 `未知因素 05：量化精度损失`。调研 20B-70B 参数模型在消费级硬件上的量化精度损失（INT4/INT8/FP8 vs FP16）。使用 WebSearch 搜索量化基准测试。最多尝试两次网页工具。填写后运行 ralph field-apply 合并。"
+}

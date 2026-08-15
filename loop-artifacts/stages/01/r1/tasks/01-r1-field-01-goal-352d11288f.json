@@ -3,11 +3,15 @@
   "concept": "阶段 01 输出：goal",
   "disposition": "pending",
   "field": {
-    "attribute": "请填写 goal 的正交因素分解",
+    "attribute": "构建通用 prompt-first RALPH 运行时框架：所有阶段以 Markdown prompt 定义，运行时通过 ralph CLI 驱动，无需按任务修改代码",
     "concept": "阶段 01 输出：goal",
-    "disposition": "pending",
-    "evidence_refs": [],
-    "rationale": "由运行时为缺失的 required output 生成的增量字段任务。",
+    "confidence": 0.95,
+    "disposition": "confirmed",
+    "evidence_refs": [
+      ".claude/skills/ralph-prompt-first/SKILL.md",
+      "loop/prompt-first/01-goal-decomposition.md"
+    ],
+    "rationale": "从 ralph-prompt-first SKILL.md 和 loop/prompt-first/ 目录结构可知：项目目标是把 RALPH 的每个阶段（01-06）定义为纯 Markdown prompt 文件，运行时通过 ralph CLI 命令（field-init/field-apply/graph-apply/advance）驱动，实现通用化——同一套 prompt-first 框架可应用于任何任务，无需为每个任务修改代码。",
     "role": "goal"
   },
   "flow_only": false,

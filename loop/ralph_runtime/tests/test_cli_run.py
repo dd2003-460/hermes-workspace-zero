@@ -223,8 +223,8 @@ def test_run_project_passes_task_as_interactive_prompt(tmp_path: Path, monkeypat
     assert observed["cwd"] == (tmp_path / "run-project").resolve()
     assert observed["command"][-1] == "完成一个最小测试"
     assert "-p" not in observed["command"]
-    assert observed["env"]["CLAUDE_CODE_AUTO_COMPACT_WINDOW"] == "40000"
-    assert observed["env"]["CLAUDE_AUTOCOMPACT_PCT_OVERRIDE"] == "80"
+    assert observed["env"]["CLAUDE_CODE_AUTO_COMPACT_WINDOW"] == str(cli.DEFAULT_AUTO_COMPACT_WINDOW)
+    assert observed["env"]["CLAUDE_AUTOCOMPACT_PCT_OVERRIDE"] == str(cli.DEFAULT_AUTOCOMPACT_PERCENT)
 
 
 def test_run_project_passes_session_only_model_override(tmp_path: Path, monkeypatch):

@@ -17,7 +17,7 @@ from .field_tasks import field_task_requires_agent
 
 
 SOUL_PATH = Path(os.environ.get("RALPH_SOUL_PATH", "/Users/a1-6/Desktop/workspace/AGENTS.md"))
-_LOOP_1_DIR = Path(__file__).resolve().parents[2] / "1-loop"
+_LOOP_1_DIR = Path(__file__).resolve().parents[2] / "1-loop" / "loop-legacy"
 STAGE_PROMPT_FILES = {
     "00": "00-综述.md",
     "01": "01-目标与背景分解.md",
@@ -59,7 +59,16 @@ def _soul_defaults_bullets() -> list[str]:
     ]
 
 
-def _read_stage_prompt_file(stage_id: str, limit: int = 3500) -> str:
+def _read_stage_prompt_file(stage_id: str) -> str:
+    """Read the full 1-loop legacy stage prompt file without truncation.
+
+    The repository keeps the original loop documents as research history,
+    but their old card-centric instructions must not be copied into a live
+    model prompt.  Keep the methodology and examples, remove only obsolete
+    dispatch/receipt lines, and normalize their artifact references.
+    Also remove validation/check requirements (e.g. "检查", "必须遵守")
+    that are enforced by the runtime, not by the prompt.
+    """
     filename = STAGE_PROMPT_FILES.get(str(stage_id))
     if not filename:
         return ""
@@ -68,24 +77,44 @@ def _read_stage_prompt_file(stage_id: str, limit: int = 3500) -> str:
         text = path.read_text(encoding="utf-8").strip()
     except OSError:
         return ""
-    # The repository keeps the original loop documents as research history,
-    # but their old card-centric instructions must not be copied into a live
-    # model prompt.  Keep the methodology and examples, remove only obsolete
-    # dispatch/receipt lines, and normalize their artifact references.
+    # Remove obsolete card-centric markers that are not relevant to field-based execution.
     legacy_markers = (
         "任务卡", "task card", "builder 卡", "auditor 卡", "requirements-auditor",
         "dag-auditor", "execution-join-auditor", "RALPH_TASK_CARD",
     )
-    filtered = [line for line in text.splitlines() if not any(marker in line for marker in legacy_markers)]
-    text = "\n".join(filtered)
+    # Remove validation/check requirements that are enforced by the runtime, not by the prompt.
+    validation_markers = (
+        "## 检查",
+        "## 必须遵守",
+        "## 分支",
+        "## 交付",
+    )
+    # Filter out validation sections entirely (they are runtime-enforced).
+    lines = text.splitlines()
+    filtered_lines = []
+    skip_section = False
+    for line in lines:
+        # Check if we're entering a section to skip
+        if any(line.strip().startswith(marker) for marker in validation_markers):
+            skip_section = True
+            continue
+        if skip_section:
+            # Skip lines until we hit a new top-level section (##) or end of file
+            if line.strip().startswith("## "):
+                skip_section = False
+                filtered_lines.append(line)
+            continue
+        # Also filter legacy markers
+        if not any(marker in line for marker in legacy_markers):
+            filtered_lines.append(line)
+    text = "\n".join(filtered_lines)
+    # Normalize old artifact references to the new field-based paths.
     text = re.sub(
         r"(?:loop-artifacts/)?([0-9]+(?:\.[0-9]+)?)-r([0-9]+)\.(json|md)",
         r"loop-artifacts/stages/\1/r\2/fields.\3",
         text,
     )
-    if len(text) <= limit:
-        return text
-    return text[: limit - 80] + f"\n[… 已截断，完整方法论在 {path} …]"
+    return text
 
 
 def resolve_template_path() -> Path:
@@ -285,16 +314,10 @@ class PromptRenderer:
         lines.extend([
             "",
             "## 当前阶段方法论",
-            # Keep live prompts small.  The full loop document remains the
-            # durable specification on disk; repeating 3.5k characters plus
-            # the soul defaults on every recovery is wasteful for local MLX
-            # models and can delay the first tool call.  A narrow excerpt is
-            # enough to orient the current stage, while the agent can read
-            # the one current stage file when it needs detail.
-            _read_stage_prompt_file(
-                stage_id,
-                limit=700 if compact else (1000 if urgent_task is not None else 1600),
-            ),
+            # The full 1-loop legacy stage document is now injected without truncation.
+            # The agent can read the complete methodology; the durable specification
+            # remains on disk at the original path for reference.
+            _read_stage_prompt_file(stage_id),
             "",
             f"## 阶段成功条件（runtime 校验）\n{success or '以节点定义为准'}",
             f"应交付字段角色：{'、'.join(outputs) or '按当前任务补充'}",
@@ -307,8 +330,7 @@ class PromptRenderer:
             f"2. 只修改 `{fields_file}`，可多轮填写；同一 `concept` 更新，其他已通过字段保留。",
             f"3. 每次填写后运行 `ralph field-apply . {fields_file}`；只修复命令列出的 JSON/字段问题。",
             "4. 不要直接 Write/Edit `loop-state.json`；不要把普通缺失误报为 blocked_human。",
-            "5. research_required 必须带 evidence_refs；具体外部事实不能只引用站点首页。当前价格/市场/最新兼容性必须带 observed_at；"
-            "搜索或浏览器失败时保持 research_required/uncertain，禁止写成“已验证”。",
+            "5. research_required 字段应尽可能带 evidence_refs 和 observed_at；搜索或浏览器失败时保持 research_required/uncertain，禁止写成\u201c已验证\u201d。evidence_refs 是软提示，不是硬性阻塞条件。",
             "6. 02.5/04.5 要逐 claim 填 validation_records（两个独立来源、observed_at、verdict）；已配置网页 LLM 时必须引用成功回执。"
             "03 必须提交 role=task_graph 的结构化 DAG，并让每个节点真实写出 node.writes 文件后 graph-apply。",
             "7. 字段和 required_outputs 都完成后写入下面的 advance.json，再运行 `ralph apply`。",
@@ -323,6 +345,11 @@ class PromptRenderer:
             "普通缺失是软提示，不会因为增量填写而卡死；直接修改状态文件、危险副作用、越界路径和活动人类阻塞仍会硬拒绝。",
             "对 research_required 字段，Agent 是当前阶段的逐字段执行方式；必须一字段一派发，不需要预先批准。"
             "对 pending/assumed_default 字段可由 Commander 自己增量填写。",
+            # Web-LLM cross-verification skill is available for stages 02.5 and 04.5.
+            # The skill file is at ~/.hermes/skills/web-llm-cross-verify/SKILL.md and
+            # contains the complete address list, CSS selectors, and operation flow.
+            # Claude Code agents can load it via the skill mechanism or read it directly.
+            "网页 LLM 交叉验证 Skill: `~/.hermes/skills/web-llm-cross-verify/SKILL.md` 包含完整地址清单、CSS 选择器、操作流程。02.5/04.5 阶段必须引用此 skill。",
             # Default preferences are already available through the project
             # instructions.  Do not duplicate the full block in every live
             # recovery prompt; this is a major source of needless context.

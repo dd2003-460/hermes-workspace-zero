@@ -1,0 +1,3 @@
+# RALPH Prompt-First
+
+For an untouched automatic template, use the injected cursor, task, target, and stage rules; because Claude Code's Write requires a prior Read, read the current artifact once and then write it. For substantive work or a Reviewer revision, read `ralph-loop.md` and the current Markdown artifact. Work through the stage in ordinary Markdown. Stop after writing; the Stop Hook launches an independent Reviewer and persists `latest-review.md`. Append `<!-- ralph: done -->` only after Reviewer pass. A revise verdict stays in the same stage. Do not use field/DAG JSON workflows in this project.

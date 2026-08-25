@@ -1,0 +1,4 @@
+{
+  "field": { "concept": "LLM推理性能基准数据" },
+  "attribute": "各GPU运行LLM的实测推理基准：H100/MI300X/H200/A100/RTX 4090/5090的tokens/s (7B/70B/175B模型)"
+}

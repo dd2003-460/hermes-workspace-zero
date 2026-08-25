@@ -13,13 +13,15 @@
     "repair_prompt"
   ],
   "clarification_history": [],
-  "current_artifact": "loop-artifacts/02-r1.json",
+  "current_artifact": "loop-artifacts/stages/02/r1/state.json",
   "execution_summary": {
     "artifact_refs": [],
     "completed_task_ids": [],
     "unresolved_claims": []
   },
   "exploration_history": [],
+  "field_tasks": [],
+  "graph_tasks": [],
   "history": [
     {
       "action": "advance",
@@ -71,21 +73,18 @@
     }
   ],
   "last_action": "advance",
-  "last_event_id": "9e97eb7d-a768-4186-8f6f-b41c4f275bb0",
+  "last_event_id": "6205d3af-984a-4fcc-a466-511e54bb5d30",
   "last_exploration": null,
   "last_result": {
     "action": "advance",
     "artifact_refs": [],
     "evidence": [],
-    "message": "",
+    "message": "完成目标与背景分解，8项unknown已识别，推进到未知信息调研阶段",
     "next_stage": "02",
-    "payload": {
-      "stage_review": "字段门禁自动通过：本阶段所有 required 字段均已 disposition 完成（无 pending、无 research_required 未带 evidence）。运行时按字段完成自动推进，不再要求模型输出 <RALPH_STAGE_RESULT> token。"
-    },
     "revision": "r1",
     "rollback_to": null,
     "stage_id": "01",
-    "status": "passed"
+    "status": "completed"
   },
   "plan": {},
   "project_id": "D1-ralph-smoke-matrix",

@@ -1,0 +1,44 @@
+{
+  "depends_on": [
+    "T03",
+    "T04",
+    "T05",
+    "T06"
+  ],
+  "execution_mode": "serial",
+  "id": "04-r1-node-T07",
+  "input_refs": [
+    "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json",
+    "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json",
+    "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json",
+    "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json"
+  ],
+  "instruction": "只执行 DAG 节点 `T07`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+  "node_id": "T07",
+  "orthogonal_key": null,
+  "output_schema": {
+    "confidence": "0.0-1.0",
+    "gpu_scores": "object keyed by gpu_name",
+    "recommendation": {
+      "best_edge": "string",
+      "best_overall": "string",
+      "best_performance": "string",
+      "best_value": "string",
+      "rationale": "string"
+    },
+    "remaining_uncertainties": [
+      "string"
+    ],
+    "scoring_criteria": "array of {criterion, weight 0-1}"
+  },
+  "parallel_group_id": null,
+  "parent_id": null,
+  "postconditions": [],
+  "preconditions": [],
+  "revision": "r1",
+  "schema_version": 1,
+  "stage_id": "04",
+  "status": "completed",
+  "type": "graph_task",
+  "writes": []
+}

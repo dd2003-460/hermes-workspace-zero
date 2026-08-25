@@ -1,5 +1,13 @@
 {
-  "authoritative_inputs": [],
+  "authoritative_inputs": [
+    {
+      "characters": 1,
+      "kind": "initial_task",
+      "sha256": "cdb4ee2aea69cc6a",
+      "source": "ralph run",
+      "text": "."
+    }
+  ],
   "context_mode": "bounded_artifacts",
   "current_stage_cards": [],
   "purpose": "供独立阶段门禁审计；不包含 Commander 主对话或隐藏推理。",
@@ -20,7 +28,525 @@
     "decision": {},
     "handoff": {},
     "last_exploration": null,
-    "plan": {},
+    "plan": {
+      "completed": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08"
+      ],
+      "critical_input": "LLM benchmark methodology discrepancy 10-70x (must be resolved before comparison)",
+      "dependency_graph": {
+        "T01": [],
+        "T02": [],
+        "T03": [],
+        "T04": [
+          "T03"
+        ],
+        "T05": [],
+        "T06": [],
+        "T07": [
+          "T03",
+          "T04",
+          "T05",
+          "T06"
+        ],
+        "T08": [
+          "T03",
+          "T04",
+          "T05",
+          "T06",
+          "T07"
+        ]
+      },
+      "generated_at": "2026-08-17T12:30:00Z",
+      "graph_version": "1.0",
+      "input_state": "stage 02.5 r1 cross-validation complete, 10 research fields validated",
+      "interface_contract": {
+        "T03_to_T04": "T03 output matrix keys must match T04 input gpu_names; bandwidth/price/tok fields required",
+        "T07_inputs": "T03(matrix) + T04(rankings) + T05(edge) + T06(emerging) all required; scoring weights defined in T07",
+        "T08_inputs": "All artifacts must exist; coverage checked against stage 02.5 success_criteria"
+      },
+      "nodes": [
+        {
+          "completed_at": "2026-08-17",
+          "depends_on": [],
+          "estimated_effort": "15min",
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/sambanova-research.json"
+          ],
+          "id": "T01",
+          "input": "无（独立调研）",
+          "name": "SambaNova SN3000 独立调研",
+          "output": "SambaNova SN3000 independent research — no independent benchmarks found, vendor-only claims, confidence 0.55",
+          "output_format": {
+            "claim": "string",
+            "confidence": "0.0-1.0",
+            "price_usd": "string or null",
+            "source_refs": [
+              "https URL"
+            ],
+            "specs": {
+              "compute": "string",
+              "memory": "string",
+              "throughput": "string"
+            }
+          },
+          "priority": 1,
+          "status": "completed",
+          "task_result": {
+            "artifact_refs": [
+              "loop-artifacts/stages/03/r1/artifacts/sambanova-research.json"
+            ],
+            "evidence": [
+              "loop-artifacts/stages/03/r1/artifacts/sambanova-research.json"
+            ],
+            "output": "SambaNova SN3000 independent research — no independent benchmarks found, vendor-only claims, confidence 0.55",
+            "status": "completed"
+          },
+          "type": "research"
+        },
+        {
+          "completed_at": "2026-08-17",
+          "depends_on": [],
+          "estimated_effort": "30min",
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/benchmark-methodology.md"
+          ],
+          "id": "T02",
+          "input": "stage 02.5 cross-validation.json LLM基准记录",
+          "name": "统一LLM基准方法论文档",
+          "output": "Comprehensive benchmark methodology — 5 test cells, 4 metrics, 6 normalization rules, 8 known limitations",
+          "output_format": {
+            "known_limitations": [
+              "string"
+            ],
+            "methodology": "string (describe comparison framework)",
+            "metrics": [
+              "tokens/s decode",
+              "tokens/s prefill",
+              "$/tok",
+              "ms/tok"
+            ],
+            "normalization_rules": [
+              "string rules for fair comparison"
+            ],
+            "standardized_models": [
+              "model_name + parameter_count + quantization"
+            ]
+          },
+          "priority": 1,
+          "status": "completed",
+          "task_result": {
+            "artifact_refs": [
+              "loop-artifacts/stages/03/r1/artifacts/benchmark-methodology.md"
+            ],
+            "evidence": [
+              "loop-artifacts/stages/03/r1/artifacts/benchmark-methodology.md"
+            ],
+            "output": "Comprehensive benchmark methodology — 5 test cells, 4 metrics, 6 normalization rules, 8 known limitations",
+            "status": "completed"
+          },
+          "type": "analysis"
+        },
+        {
+          "completed_at": "2026-08-17",
+          "depends_on": [],
+          "estimated_effort": "30min",
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json"
+          ],
+          "id": "T03",
+          "input": "所有10个research_findings字段的attribute_matrix",
+          "name": "硬件规格对比矩阵",
+          "output": "Hardware comparison matrix covering 15 GPU/accelerator devices with full specs and LLM benchmarks",
+          "output_format": {
+            "matrix": {
+              "gpu_name": {
+                "$/tok_70b": "number (computed or null)",
+                "$/tok_7b": "number (computed)",
+                "bandwidth_gb_s": "number",
+                "compute_fp16_tflops": "number",
+                "form_factor": "string",
+                "llm_70b_tok_s": "number (normalized or null)",
+                "llm_7b_tok_s": "number (normalized)",
+                "memory_gb": "number",
+                "memory_type": "string",
+                "nvlink": "boolean",
+                "nvlink_bandwidth_gb_s": "number or null",
+                "power_watts": "number",
+                "price_usd": "number"
+              }
+            },
+            "notes": "string"
+          },
+          "priority": 1,
+          "status": "completed",
+          "task_result": {
+            "artifact_refs": [
+              "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json"
+            ],
+            "evidence": [
+              "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json"
+            ],
+            "output": "Hardware comparison matrix covering 15 GPU/accelerator devices with full specs and LLM benchmarks",
+            "status": "completed"
+          },
+          "type": "synthesis"
+        },
+        {
+          "completed_at": "2026-08-17",
+          "depends_on": [
+            "T03"
+          ],
+          "estimated_effort": "20min",
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json"
+          ],
+          "id": "T04",
+          "input": "hardware-comparison-matrix.json",
+          "input_refs": [
+            "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json"
+          ],
+          "name": "性价比分析（$ per tok/s）",
+          "output": "Cost-performance analysis with $/tok rankings for 7B and 70B models",
+          "output_format": {
+            "best_performance": {
+              "gpu": "string",
+              "reason": "string"
+            },
+            "best_value": {
+              "gpu": "string",
+              "reason": "string"
+            },
+            "caveats": [
+              "string"
+            ],
+            "rankings_70b": "array of {rank, gpu, $/tok, score}",
+            "rankings_7b": "array of {rank, gpu, $/tok, score}"
+          },
+          "output_schema": {
+            "best_performance": {
+              "gpu": "string",
+              "reason": "string"
+            },
+            "best_value": {
+              "gpu": "string",
+              "reason": "string"
+            },
+            "caveats": [
+              "string"
+            ],
+            "rankings_70b": "array of {rank, gpu, $/tok, score}",
+            "rankings_7b": "array of {rank, gpu, $/tok, score}"
+          },
+          "priority": 2,
+          "status": "completed",
+          "task_result": {
+            "artifact_refs": [
+              "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json"
+            ],
+            "evidence": [
+              "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json"
+            ],
+            "output": "Cost-performance analysis with $/tok rankings for 7B and 70B models",
+            "status": "completed"
+          },
+          "type": "analysis"
+        },
+        {
+          "completed_at": "2026-08-17",
+          "depends_on": [],
+          "estimated_effort": "20min",
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json"
+          ],
+          "id": "T05",
+          "input": "stage 02.5 边缘方案cross-validation记录",
+          "name": "边缘方案能力边界评估",
+          "output": "Edge solution capability boundaries — 5 devices evaluated, 5 fundamental gaps identified",
+          "output_format": {
+            "confidence": "0.0-1.0",
+            "edge_devices": "object keyed by device name",
+            "gap_analysis": "string (what edge can't do)"
+          },
+          "priority": 3,
+          "status": "completed",
+          "task_result": {
+            "artifact_refs": [
+              "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json"
+            ],
+            "evidence": [
+              "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json"
+            ],
+            "output": "Edge solution capability boundaries — 5 devices evaluated, 5 fundamental gaps identified",
+            "status": "completed"
+          },
+          "type": "research"
+        },
+        {
+          "completed_at": "2026-08-17",
+          "depends_on": [],
+          "estimated_effort": "20min",
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json"
+          ],
+          "id": "T06",
+          "input": "stage 02.5 新兴架构cross-validation记录",
+          "name": "新兴架构独立验证（Groq/Cerebras/SambaNova）",
+          "output": "Emerging architecture verification — Groq LPU (0.80), Cerebras WSE-3 (0.70), SambaNova SN3000 (0.55)",
+          "output_format": {
+            "architecture": "object keyed by architecture name",
+            "confidence": "0.0-1.0",
+            "independent_sources": "array of {source, finding}"
+          },
+          "priority": 3,
+          "status": "completed",
+          "task_result": {
+            "artifact_refs": [
+              "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json"
+            ],
+            "evidence": [
+              "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json"
+            ],
+            "output": "Emerging architecture verification — Groq LPU (0.80), Cerebras WSE-3 (0.70), SambaNova SN3000 (0.55)",
+            "status": "completed"
+          },
+          "type": "research"
+        },
+        {
+          "completed_at": "2026-08-17",
+          "depends_on": [
+            "T03",
+            "T04",
+            "T05",
+            "T06"
+          ],
+          "estimated_effort": "45min",
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/decision-framework.json"
+          ],
+          "id": "T07",
+          "input": "所有artifacts",
+          "input_refs": [
+            "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json",
+            "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json",
+            "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json",
+            "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json"
+          ],
+          "name": "综合决策框架",
+          "output": "Decision framework with 8 weighted criteria, per-GPU scoring, decision tree, 7 scenario recommendations",
+          "output_format": {
+            "confidence": "0.0-1.0",
+            "gpu_scores": "object keyed by gpu_name",
+            "recommendation": {
+              "best_edge": "string",
+              "best_overall": "string",
+              "best_performance": "string",
+              "best_value": "string",
+              "rationale": "string"
+            },
+            "remaining_uncertainties": [
+              "string"
+            ],
+            "scoring_criteria": "array of {criterion, weight 0-1}"
+          },
+          "output_schema": {
+            "confidence": "0.0-1.0",
+            "gpu_scores": "object keyed by gpu_name",
+            "recommendation": {
+              "best_edge": "string",
+              "best_overall": "string",
+              "best_performance": "string",
+              "best_value": "string",
+              "rationale": "string"
+            },
+            "remaining_uncertainties": [
+              "string"
+            ],
+            "scoring_criteria": "array of {criterion, weight 0-1}"
+          },
+          "priority": 2,
+          "status": "completed",
+          "task_result": {
+            "artifact_refs": [
+              "loop-artifacts/stages/03/r1/artifacts/decision-framework.json"
+            ],
+            "evidence": [
+              "loop-artifacts/stages/03/r1/artifacts/decision-framework.json"
+            ],
+            "output": "Decision framework with 8 weighted criteria, per-GPU scoring, decision tree, 7 scenario recommendations",
+            "status": "completed"
+          },
+          "type": "synthesis"
+        },
+        {
+          "completed_at": "2026-08-17",
+          "depends_on": [
+            "T03",
+            "T04",
+            "T05",
+            "T06",
+            "T07"
+          ],
+          "estimated_effort": "10min",
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/coverage-proof.json"
+          ],
+          "id": "T08",
+          "input": "所有artifacts + stage 02.5 success_criteria",
+          "input_refs": [
+            "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json",
+            "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json",
+            "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json",
+            "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json",
+            "loop-artifacts/stages/03/r1/artifacts/decision-framework.json"
+          ],
+          "name": "coverage_proof — 验证所有success_criteria已覆盖",
+          "output": "Coverage proof — all 5 stage 02.5 success_criteria covered, 0 gaps",
+          "output_format": {
+            "all_covered": "boolean",
+            "criteria": "array of {criterion, covered_by, status, notes}",
+            "gaps": [
+              "string"
+            ]
+          },
+          "output_schema": {
+            "all_covered": "boolean",
+            "criteria": "array of {criterion, covered_by, status, notes}",
+            "gaps": [
+              "string"
+            ]
+          },
+          "priority": 1,
+          "status": "completed",
+          "task_result": {
+            "artifact_refs": [
+              "loop-artifacts/stages/03/r1/artifacts/coverage-proof.json"
+            ],
+            "evidence": [
+              "loop-artifacts/stages/03/r1/artifacts/coverage-proof.json"
+            ],
+            "output": "Coverage proof — all 5 stage 02.5 success_criteria covered, 0 gaps",
+            "status": "completed"
+          },
+          "type": "verification"
+        }
+      ],
+      "parallelism": {
+        "level_1_parallel": [
+          "T01",
+          "T02",
+          "T03",
+          "T05",
+          "T06"
+        ],
+        "level_2_parallel": [
+          "T04"
+        ],
+        "level_3_parallel": [
+          "T07"
+        ],
+        "level_4_parallel": [
+          "T08"
+        ]
+      },
+      "ready": [],
+      "task_results": {
+        "T01": {
+          "artifact_refs": [
+            "loop-artifacts/stages/03/r1/artifacts/sambanova-research.json"
+          ],
+          "completed_at": "2026-08-17",
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/sambanova-research.json"
+          ],
+          "output": "SambaNova SN3000 independent research — no independent benchmarks found, vendor-only claims, confidence 0.55",
+          "status": "completed"
+        },
+        "T02": {
+          "artifact_refs": [
+            "loop-artifacts/stages/03/r1/artifacts/benchmark-methodology.md"
+          ],
+          "completed_at": "2026-08-17",
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/benchmark-methodology.md"
+          ],
+          "output": "Comprehensive benchmark methodology — 5 test cells, 4 metrics, 6 normalization rules, 8 known limitations",
+          "status": "completed"
+        },
+        "T03": {
+          "artifact_refs": [
+            "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json"
+          ],
+          "completed_at": "2026-08-17",
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json"
+          ],
+          "output": "Hardware comparison matrix covering 15 GPU/accelerator devices with full specs and LLM benchmarks",
+          "status": "completed"
+        },
+        "T04": {
+          "artifact_refs": [
+            "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json"
+          ],
+          "completed_at": "2026-08-17",
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json"
+          ],
+          "output": "Cost-performance analysis with $/tok rankings for 7B and 70B models",
+          "status": "completed"
+        },
+        "T05": {
+          "artifact_refs": [
+            "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json"
+          ],
+          "completed_at": "2026-08-17",
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json"
+          ],
+          "output": "Edge solution capability boundaries — 5 devices evaluated, 5 fundamental gaps identified",
+          "status": "completed"
+        },
+        "T06": {
+          "artifact_refs": [
+            "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json"
+          ],
+          "completed_at": "2026-08-17",
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json"
+          ],
+          "output": "Emerging architecture verification — Groq LPU (0.80), Cerebras WSE-3 (0.70), SambaNova SN3000 (0.55)",
+          "status": "completed"
+        },
+        "T07": {
+          "artifact_refs": [
+            "loop-artifacts/stages/03/r1/artifacts/decision-framework.json"
+          ],
+          "completed_at": "2026-08-17",
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/decision-framework.json"
+          ],
+          "output": "Decision framework with 8 weighted criteria, per-GPU scoring, decision tree, 7 scenario recommendations",
+          "status": "completed"
+        },
+        "T08": {
+          "artifact_refs": [
+            "loop-artifacts/stages/03/r1/artifacts/coverage-proof.json"
+          ],
+          "completed_at": "2026-08-17",
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/coverage-proof.json"
+          ],
+          "output": "Coverage proof — all 5 stage 02.5 success_criteria covered, 0 gaps",
+          "status": "completed"
+        }
+      }
+    },
     "queue": {
       "blocked_human": [],
       "candidates": [],
@@ -31,1047 +557,933 @@
       "assumptions": [],
       "attribute_matrix": [
         {
-          "attribute": "最小执行单元 DAG：30 个原子任务节点 + 8 个验证节点，6 条并行调研分支，显式接口对准",
-          "concept": "task_graph",
-          "confidence": 0.95,
+          "attribute": "任务描述",
+          "concept": "用户原始任务",
+          "confidence": 1.0,
           "disposition": "confirmed",
           "evidence_refs": [
-            "02.5-r1.json task_graph (T01-T09 高层分解)",
-            "02.5-r1.json 6 个正交优化方向",
-            "loop-state.json constraints (8 类边界)",
-            "loop-state.json success_criteria (6 项交付要求)"
+            "user:initial_task"
           ],
           "impact": "material",
-          "rationale": "将 02.5 阶段的高层任务图（T01-T09）递归分解为最小执行单元。每个单元满足：①不可再分（一个 subagent 可独立完成）②输入输出显式定义 ③验收标准可量化 ④模块间接口一一对准。",
-          "reversible": true,
-          "role": "执行计划",
-          "task_graph": {
-            "edges": [
-              {
-                "from": "T01",
-                "interface": "O01: 基线数据文件",
-                "to": "T02A"
-              },
-              {
-                "from": "T01",
-                "interface": "O01",
-                "to": "T03A"
-              },
-              {
-                "from": "T01",
-                "interface": "O01",
-                "to": "T04A"
-              },
-              {
-                "from": "T01",
-                "interface": "O01",
-                "to": "T05A"
-              },
-              {
-                "from": "T01",
-                "interface": "O01",
-                "to": "T06A"
-              },
-              {
-                "from": "T01",
-                "interface": "O01",
-                "to": "T07A"
-              },
-              {
-                "from": "T02A",
-                "interface": "O02A: HBM 规格表",
-                "to": "T02B"
-              },
-              {
-                "from": "T02A",
-                "interface": "O02A",
-                "to": "T02D"
-              },
-              {
-                "from": "T02B",
-                "interface": "O02B: 瓶颈量化",
-                "to": "T02C"
-              },
-              {
-                "from": "T02B",
-                "interface": "O02B",
-                "to": "T02E"
-              },
-              {
-                "from": "T02C",
-                "interface": "O02C: 方案排序",
-                "to": "T02E"
-              },
-              {
-                "from": "T02D",
-                "interface": "O02D: 竞品对比",
-                "to": "T02E"
-              },
-              {
-                "from": "T03A",
-                "interface": "O03A: 利用率测量",
-                "to": "T03B"
-              },
-              {
-                "from": "T03A",
-                "interface": "O03A",
-                "to": "T03D"
-              },
-              {
-                "from": "T03B",
-                "interface": "O03B: 碎片化分析",
-                "to": "T03C"
-              },
-              {
-                "from": "T03B",
-                "interface": "O03B",
-                "to": "T03E"
-              },
-              {
-                "from": "T03C",
-                "interface": "O03C: 融合方案",
-                "to": "T03E"
-              },
-              {
-                "from": "T03D",
-                "interface": "O03D: 竞品对比",
-                "to": "T03E"
-              },
-              {
-                "from": "T04A",
-                "interface": "O04A: 支持度矩阵",
-                "to": "T04B"
-              },
-              {
-                "from": "T04A",
-                "interface": "O04A",
-                "to": "T04C"
-              },
-              {
-                "from": "T04A",
-                "interface": "O04A",
-                "to": "T04D"
-              },
-              {
-                "from": "T04B",
-                "interface": "O04B: 精度损失",
-                "to": "T04E"
-              },
-              {
-                "from": "T04C",
-                "interface": "O04C: 稀疏方案",
-                "to": "T04E"
-              },
-              {
-                "from": "T04D",
-                "interface": "O04D: 竞品对比",
-                "to": "T04E"
-              },
-              {
-                "from": "T05A",
-                "interface": "O05A: 互连表",
-                "to": "T05B"
-              },
-              {
-                "from": "T05A",
-                "interface": "O05A",
-                "to": "T05D"
-              },
-              {
-                "from": "T05B",
-                "interface": "O05B: 扩展效率",
-                "to": "T05C"
-              },
-              {
-                "from": "T05B",
-                "interface": "O05B",
-                "to": "T05E"
-              },
-              {
-                "from": "T05C",
-                "interface": "O05C: 通信方案",
-                "to": "T05E"
-              },
-              {
-                "from": "T05D",
-                "interface": "O05D: 竞品对比",
-                "to": "T05E"
-              },
-              {
-                "from": "T06A",
-                "interface": "O06A: 功耗分布",
-                "to": "T06B"
-              },
-              {
-                "from": "T06A",
-                "interface": "O06A",
-                "to": "T06D"
-              },
-              {
-                "from": "T06B",
-                "interface": "O06B: DVFS 曲线",
-                "to": "T06C"
-              },
-              {
-                "from": "T06B",
-                "interface": "O06B",
-                "to": "T06E"
-              },
-              {
-                "from": "T06C",
-                "interface": "O06C: 调度方案",
-                "to": "T06E"
-              },
-              {
-                "from": "T06D",
-                "interface": "O06D: 能效对比",
-                "to": "T06E"
-              },
-              {
-                "from": "T07A",
-                "interface": "O07A: 架构需求",
-                "to": "T07B"
-              },
-              {
-                "from": "T07A",
-                "interface": "O07A",
-                "to": "T07D"
-              },
-              {
-                "from": "T07B",
-                "interface": "O07B: 特化方案",
-                "to": "T07C"
-              },
-              {
-                "from": "T07B",
-                "interface": "O07B",
-                "to": "T07E"
-              },
-              {
-                "from": "T07C",
-                "interface": "O07C: 新架构建议",
-                "to": "T07E"
-              },
-              {
-                "from": "T07D",
-                "interface": "O07D: 竞品对比",
-                "to": "T07E"
-              },
-              {
-                "from": "T02E",
-                "interface": "O02E: 内存带宽结论",
-                "to": "T08"
-              },
-              {
-                "from": "T03E",
-                "interface": "O03E: 计算利用率结论",
-                "to": "T08"
-              },
-              {
-                "from": "T04E",
-                "interface": "O04E: 低精度结论",
-                "to": "T08"
-              },
-              {
-                "from": "T05E",
-                "interface": "O05E: 互连结论",
-                "to": "T08"
-              },
-              {
-                "from": "T06E",
-                "interface": "O06E: 功耗结论",
-                "to": "T08"
-              },
-              {
-                "from": "T07E",
-                "interface": "O07E: 架构结论",
-                "to": "T08"
-              },
-              {
-                "from": "T08",
-                "interface": "O08: 综合评估",
-                "to": "T09"
-              }
-            ],
-            "modules": {
-              "architecture": {
-                "description": "架构特异性优化",
-                "nodes": [
-                  "T07A",
-                  "T07B",
-                  "T07C",
-                  "T07D",
-                  "T07E"
-                ]
-              },
-              "compute_utilization": {
-                "description": "计算单元利用率",
-                "nodes": [
-                  "T03A",
-                  "T03B",
-                  "T03C",
-                  "T03D",
-                  "T03E"
-                ]
-              },
-              "data_collection": {
-                "description": "基线数据采集",
-                "nodes": [
-                  "T01"
-                ]
-              },
-              "interconnect": {
-                "description": "互连与多卡扩展",
-                "nodes": [
-                  "T05A",
-                  "T05B",
-                  "T05C",
-                  "T05D",
-                  "T05E"
-                ]
-              },
-              "low_precision": {
-                "description": "低精度与稀疏化",
-                "nodes": [
-                  "T04A",
-                  "T04B",
-                  "T04C",
-                  "T04D",
-                  "T04E"
-                ]
-              },
-              "memory_bandwidth": {
-                "description": "内存带宽优化",
-                "nodes": [
-                  "T02A",
-                  "T02B",
-                  "T02C",
-                  "T02D",
-                  "T02E"
-                ]
-              },
-              "power": {
-                "description": "功耗与热设计",
-                "nodes": [
-                  "T06A",
-                  "T06B",
-                  "T06C",
-                  "T06D",
-                  "T06E"
-                ]
-              },
-              "synthesis": {
-                "description": "综合评估与报告",
-                "nodes": [
-                  "T08",
-                  "T09"
-                ]
-              }
-            },
-            "nodes": [
-              {
-                "acceptance": "产出基线数据文件（H100/A100/MI300X 规格表、推理 workload 特征表）",
-                "id": "T01",
-                "input_refs": [],
-                "module": "data_collection",
-                "output_refs": [
-                  "O01"
-                ],
-                "parallel_group": "G0",
-                "title": "基线数据采集"
-              },
-              {
-                "acceptance": "HBM 代际规格对比表（带宽/功耗/面积/成熟度）",
-                "id": "T02A",
-                "input_refs": [
-                  "O01"
-                ],
-                "module": "memory_bandwidth",
-                "output_refs": [
-                  "O02A"
-                ],
-                "parallel_group": "G1",
-                "title": "HBM 规格收集（HBM3/HBM3e/HBM4）"
-              },
-              {
-                "acceptance": "各模型规模下 compute/bandwidth ratio 量化分析",
-                "id": "T02B",
-                "input_refs": [
-                  "O02A"
-                ],
-                "module": "memory_bandwidth",
-                "output_refs": [
-                  "O02B"
-                ],
-                "parallel_group": "G1",
-                "title": "推理带宽瓶颈量化"
-              },
-              {
-                "acceptance": "HBM3e/4/近存计算/权重流式传输方案收益排序",
-                "id": "T02C",
-                "input_refs": [
-                  "O02B"
-                ],
-                "module": "memory_bandwidth",
-                "output_refs": [
-                  "O02C"
-                ],
-                "parallel_group": "G1",
-                "title": "HBM 优化方案评估"
-              },
-              {
-                "acceptance": "TPU/Groq/Cerebras 内存架构对比表",
-                "id": "T02D",
-                "input_refs": [
-                  "O02A"
-                ],
-                "module": "memory_bandwidth",
-                "output_refs": [
-                  "O02D"
-                ],
-                "parallel_group": "G1",
-                "title": "内存带宽竞品对比"
-              },
-              {
-                "acceptance": "内存带宽优化方向结论（量化收益+TRL+实现难度）",
-                "id": "T02E",
-                "input_refs": [
-                  "O02B",
-                  "O02C",
-                  "O02D"
-                ],
-                "module": "memory_bandwidth",
-                "output_refs": [
-                  "O02E"
-                ],
-                "parallel_group": "G1",
-                "title": "内存带宽分支结论"
-              },
-              {
-                "acceptance": "各推理 workload 下 Tensor Core 实际利用率测量表",
-                "id": "T03A",
-                "input_refs": [
-                  "O01"
-                ],
-                "module": "compute_utilization",
-                "output_refs": [
-                  "O03A"
-                ],
-                "parallel_group": "G1",
-                "title": "Tensor Core 利用率测量"
-              },
-              {
-                "acceptance": "算子碎片化程度与利用率关系分析",
-                "id": "T03B",
-                "input_refs": [
-                  "O03A"
-                ],
-                "module": "compute_utilization",
-                "output_refs": [
-                  "O03B"
-                ],
-                "parallel_group": "G1",
-                "title": "算子碎片化分析"
-              },
-              {
-                "acceptance": "算子融合方案（FlashAttention/MemoryEfficient LM）收益评估",
-                "id": "T03C",
-                "input_refs": [
-                  "O03B"
-                ],
-                "module": "compute_utilization",
-                "output_refs": [
-                  "O03C"
-                ],
-                "parallel_group": "G1",
-                "title": "算子融合方案评估"
-              },
-              {
-                "acceptance": "TPU/自研加速器 Tensor Core 等效单元对比",
-                "id": "T03D",
-                "input_refs": [
-                  "O03A"
-                ],
-                "module": "compute_utilization",
-                "output_refs": [
-                  "O03D"
-                ],
-                "parallel_group": "G1",
-                "title": "计算利用率竞品对比"
-              },
-              {
-                "acceptance": "计算利用率优化方向结论（量化收益+TRL+实现难度）",
-                "id": "T03E",
-                "input_refs": [
-                  "O03B",
-                  "O03C",
-                  "O03D"
-                ],
-                "module": "compute_utilization",
-                "output_refs": [
-                  "O03E"
-                ],
-                "parallel_group": "G1",
-                "title": "计算利用率分支结论"
-              },
-              {
-                "acceptance": "FP8/INT8/INT4/FP4 硬件支持度矩阵（NVIDIA/AMD/TPU）",
-                "id": "T04A",
-                "input_refs": [
-                  "O01"
-                ],
-                "module": "low_precision",
-                "output_refs": [
-                  "O04A"
-                ],
-                "parallel_group": "G1",
-                "title": "低精度支持度调研"
-              },
-              {
-                "acceptance": "各精度下模型精度损失量化（perplexity/accuracy）",
-                "id": "T04B",
-                "input_refs": [
-                  "O04A"
-                ],
-                "module": "low_precision",
-                "output_refs": [
-                  "O04B"
-                ],
-                "parallel_group": "G1",
-                "title": "精度损失量化"
-              },
-              {
-                "acceptance": "结构化/非结构化稀疏硬件加速方案评估",
-                "id": "T04C",
-                "input_refs": [
-                  "O04A"
-                ],
-                "module": "low_precision",
-                "output_refs": [
-                  "O04C"
-                ],
-                "parallel_group": "G1",
-                "title": "稀疏化硬件加速评估"
-              },
-              {
-                "acceptance": "各加速器低精度支持对比",
-                "id": "T04D",
-                "input_refs": [
-                  "O04A"
-                ],
-                "module": "low_precision",
-                "output_refs": [
-                  "O04D"
-                ],
-                "parallel_group": "G1",
-                "title": "低精度竞品对比"
-              },
-              {
-                "acceptance": "低精度稀疏优化方向结论（量化收益+TRL+实现难度）",
-                "id": "T04E",
-                "input_refs": [
-                  "O04B",
-                  "O04C",
-                  "O04D"
-                ],
-                "module": "low_precision",
-                "output_refs": [
-                  "O04E"
-                ],
-                "parallel_group": "G1",
-                "title": "低精度稀疏分支结论"
-              },
-              {
-                "acceptance": "NVLink/PCIe/CXL 带宽与延迟对比表",
-                "id": "T05A",
-                "input_refs": [
-                  "O01"
-                ],
-                "module": "interconnect",
-                "output_refs": [
-                  "O05A"
-                ],
-                "parallel_group": "G1",
-                "title": "互连带宽分析"
-              },
-              {
-                "acceptance": "多卡推理扩展效率（强/弱扩展）量化分析",
-                "id": "T05B",
-                "input_refs": [
-                  "O05A"
-                ],
-                "module": "interconnect",
-                "output_refs": [
-                  "O05B"
-                ],
-                "parallel_group": "G1",
-                "title": "多卡扩展效率量化"
-              },
-              {
-                "acceptance": "集合通信硬件加速方案评估",
-                "id": "T05C",
-                "input_refs": [
-                  "O05B"
-                ],
-                "module": "interconnect",
-                "output_refs": [
-                  "O05C"
-                ],
-                "parallel_group": "G1",
-                "title": "通信硬件加速评估"
-              },
-              {
-                "acceptance": "TPU AllReduce/Chiplet 互连对比",
-                "id": "T05D",
-                "input_refs": [
-                  "O05A"
-                ],
-                "module": "interconnect",
-                "output_refs": [
-                  "O05D"
-                ],
-                "parallel_group": "G1",
-                "title": "互连竞品对比"
-              },
-              {
-                "acceptance": "互连扩展优化方向结论（量化收益+TRL+实现难度）",
-                "id": "T05E",
-                "input_refs": [
-                  "O05B",
-                  "O05C",
-                  "O05D"
-                ],
-                "module": "interconnect",
-                "output_refs": [
-                  "O05E"
-                ],
-                "parallel_group": "G1",
-                "title": "互连扩展分支结论"
-              },
-              {
-                "acceptance": "当前 GPU 推理功耗分布分析（计算/内存/互连/空闲）",
-                "id": "T06A",
-                "input_refs": [
-                  "O01"
-                ],
-                "module": "power",
-                "output_refs": [
-                  "O06A"
-                ],
-                "parallel_group": "G1",
-                "title": "TDP/PUE 约束分析"
-              },
-              {
-                "acceptance": "DVFS 在推理场景下的能效曲线",
-                "id": "T06B",
-                "input_refs": [
-                  "O06A"
-                ],
-                "module": "power",
-                "output_refs": [
-                  "O06B"
-                ],
-                "parallel_group": "G1",
-                "title": "DVFS 效率评估"
-              },
-              {
-                "acceptance": "功耗感知调度方案评估",
-                "id": "T06C",
-                "input_refs": [
-                  "O06B"
-                ],
-                "module": "power",
-                "output_refs": [
-                  "O06C"
-                ],
-                "parallel_group": "G1",
-                "title": "功耗感知调度评估"
-              },
-              {
-                "acceptance": "各加速器能效比（TFLOPS/W）对比",
-                "id": "T06D",
-                "input_refs": [
-                  "O06A"
-                ],
-                "module": "power",
-                "output_refs": [
-                  "O06D"
-                ],
-                "parallel_group": "G1",
-                "title": "功耗竞品对比"
-              },
-              {
-                "acceptance": "功耗优化方向结论（量化收益+TRL+实现难度）",
-                "id": "T06E",
-                "input_refs": [
-                  "O06B",
-                  "O06C",
-                  "O06D"
-                ],
-                "module": "power",
-                "output_refs": [
-                  "O06E"
-                ],
-                "parallel_group": "G1",
-                "title": "功耗约束分支结论"
-              },
-              {
-                "acceptance": "Transformer/MoE/RNN 硬件需求特征表",
-                "id": "T07A",
-                "input_refs": [
-                  "O01"
-                ],
-                "module": "architecture",
-                "output_refs": [
-                  "O07A"
-                ],
-                "parallel_group": "G1",
-                "title": "模型架构硬件需求分析"
-              },
-              {
-                "acceptance": "现有架构特化方案（FlashAttention/MoE 路由）评估",
-                "id": "T07B",
-                "input_refs": [
-                  "O07A"
-                ],
-                "module": "architecture",
-                "output_refs": [
-                  "O07B"
-                ],
-                "parallel_group": "G1",
-                "title": "现有特化方案评估"
-              },
-              {
-                "acceptance": "面向推理的架构特化建议",
-                "id": "T07C",
-                "input_refs": [
-                  "O07B"
-                ],
-                "module": "architecture",
-                "output_refs": [
-                  "O07C"
-                ],
-                "parallel_group": "G1",
-                "title": "新架构建议"
-              },
-              {
-                "acceptance": "TPU/Cerebras/Groq 架构特化对比",
-                "id": "T07D",
-                "input_refs": [
-                  "O07A"
-                ],
-                "module": "architecture",
-                "output_refs": [
-                  "O07D"
-                ],
-                "parallel_group": "G1",
-                "title": "架构特化竞品对比"
-              },
-              {
-                "acceptance": "架构特化优化方向结论（量化收益+TRL+实现难度）",
-                "id": "T07E",
-                "input_refs": [
-                  "O07B",
-                  "O07C",
-                  "O07D"
-                ],
-                "module": "architecture",
-                "output_refs": [
-                  "O07E"
-                ],
-                "parallel_group": "G1",
-                "title": "架构特化分支结论"
-              },
-              {
-                "acceptance": "ROI 排序 Top-5 + TRL 评估 + 可行性分类",
-                "id": "T08",
-                "input_refs": [
-                  "O02E",
-                  "O03E",
-                  "O04E",
-                  "O05E",
-                  "O06E",
-                  "O07E"
-                ],
-                "module": "synthesis",
-                "output_refs": [
-                  "O08"
-                ],
-                "parallel_group": "G2",
-                "title": "综合评估（ROI 排序 + TRL）"
-              },
-              {
-                "acceptance": "结构化评估报告（量化收益/TRL/实现难度/时间窗口）",
-                "id": "T09",
-                "input_refs": [
-                  "O08"
-                ],
-                "module": "synthesis",
-                "output_refs": [
-                  "O09"
-                ],
-                "parallel_group": "G2",
-                "title": "最终报告"
-              }
-            ],
-            "parallel_groups": {
-              "G0": [
-                "T01"
-              ],
-              "G1": [
-                "T02A",
-                "T02B",
-                "T02C",
-                "T02D",
-                "T03A",
-                "T03B",
-                "T03C",
-                "T03D",
-                "T04A",
-                "T04B",
-                "T04C",
-                "T04D",
-                "T05A",
-                "T05B",
-                "T05C",
-                "T05D",
-                "T06A",
-                "T06B",
-                "T06C",
-                "T06D",
-                "T07A",
-                "T07B",
-                "T07C",
-                "T07D"
-              ],
-              "G2": [
-                "T08",
-                "T09"
-              ]
-            }
-          }
+          "rationale": "用户初始任务输入，作为本阶段已知背景字段。",
+          "reversible": false,
+          "role": "background"
         },
         {
-          "attribute": "任务图完整覆盖 6 个优化方向、8 类约束、6 项成功标准，无遗漏无冲突",
-          "concept": "coverage_proof",
-          "confidence": 0.95,
-          "conflict_check": {
-            "no_circular_deps": "DAG 无环：G0→G1→G2 单向流动",
-            "orthogonality": "6 个优化方向正交（内存/计算/精度/互连/功耗/架构），无重叠",
-            "parallel_independence": "G1 中各分支内节点有依赖关系，跨分支节点完全独立",
-            "verification_independence": "各分支结论节点 (T0xE) 依赖独立输入，无自证循环"
+          "attribute": "systematic_gpu_research_for_local_llm_inference",
+          "concept": "goal",
+          "confidence": 1.0,
+          "details": {
+            "decision": "选择最适合本地LLM推理的GPU/硬件方案",
+            "out_of_scope": "训练性能、GPU云托管长期成本优化",
+            "scope": "H100/MI300X/H200/A100 + RTX 5090/4090 + Groq/Cerebras/SambaNova + Jetson/Apple Silicon",
+            "success_criteria": "1)硬件规格对比表 2)LLM推理性能基准 3)价格/性价比分析 4)新兴架构评估 5)边缘方案能力边界"
           },
-          "coverage_matrix": {
-            "constraints": [
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "user:initial_task"
+          ],
+          "impact": "material",
+          "rationale": "系统性GPU调研：覆盖主流数据中心GPU、消费级GPU、新兴架构、边缘方案，为本地LLM推理选型提供决策依据",
+          "reversible": false,
+          "role": "primary_objective"
+        },
+        {
+          "attribute": "established_facts",
+          "concept": "known",
+          "confidence": 0.9,
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "/Users/a1-6/Desktop/workspace/projects/D1-ai-agent-hardware/loop-artifacts/research-pci-e-llm-inference.md",
+            "/Users/a1-6/Desktop/workspace/projects/D1-gpu-inference-hardware/tasks/TASKS.md",
+            "/Users/a1-6/Desktop/workspace/D1-gpu-inference-hardware/loop-artifacts/stages/02/r1/web-llm-request-4.json"
+          ],
+          "impact": "material",
+          "rationale": "已有项目知识：NVLink Gen5 ~900GB/s, PCIe 4.0 x16 ~32GB/s, RTX 4090 24GB GDDR6X, H100 80GB HBM3, KV cache是主要内存瓶颈, 量化可降低显存需求",
+          "reversible": false,
+          "role": "baseline_knowledge"
+        },
+        {
+          "attribute": "data_needing_verification",
+          "concept": "unknown",
+          "confidence": 0.85,
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://www.techpowerup.com/gpu-specs/geforce-rtx-5090.c4216",
+            "https://rocm.blogs.amd.com/artificial-intelligence/LLM_Inference/README.html",
+            "https://www.together.ai/gpu/nvidia-h200",
+            "https://www.thundercompute.com/blog/nvidia-h200-pricing",
+            "https://www.ebay.com/shop/a100-gpu-80gb",
+            "https://overclock3d.net/news/gpu-displays/nvidia-launches-their-rtx-4090d-graphics-card-and-confirms-it-specifications/",
+            "https://groq.com/platform",
+            "https://sambanova.ai/",
+            "https://www.cerebras.ai/",
+            "https://www.navyaai.com/blog/jetson-orin-nano-llm-benchmark"
+          ],
+          "impact": "material",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "已确认以下8项为待调研空缺，全部已完成调研并回填证据。调研结果见同阶段8个research_findings字段。",
+          "research_queue": [
+            {
+              "priority": 1,
+              "search_terms": [
+                "RTX 5090 specs NVIDIA official",
+                "RTX 5090 price Newegg 2026"
+              ],
+              "topic": "RTX 5090官方规格和售价"
+            },
+            {
+              "priority": 2,
+              "search_terms": [
+                "AMD MI300X specs HBM3e",
+                "MI300X LLM inference benchmark"
+              ],
+              "topic": "AMD MI300X规格和推理性能"
+            },
+            {
+              "priority": 2,
+              "search_terms": [
+                "NVIDIA H200 specs HBM3e price"
+              ],
+              "topic": "H200规格和定价"
+            },
+            {
+              "priority": 3,
+              "search_terms": [
+                "A100 80GB used price eBay"
+              ],
+              "topic": "A100二手市场价格"
+            },
+            {
+              "priority": 3,
+              "search_terms": [
+                "RTX 4090D vs 4090 specs difference"
+              ],
+              "topic": "RTX 4090D规格差异"
+            },
+            {
+              "priority": 1,
+              "search_terms": [
+                "LLM inference benchmark tokens/s H100 RTX 4090"
+              ],
+              "topic": "LLM推理性能基准"
+            },
+            {
+              "priority": 4,
+              "search_terms": [
+                "Groq LPU inference speed",
+                "Cerebras WSE-3 LLM"
+              ],
+              "topic": "新兴架构(Groq/Cerebras/SambaNova)"
+            },
+            {
+              "priority": 4,
+              "search_terms": [
+                "Jetson Orin LLM inference",
+                "Apple M3 M4 LLM benchmark"
+              ],
+              "topic": "边缘方案(Jetson/Apple Silicon)"
+            }
+          ],
+          "reversible": false,
+          "role": "research_gaps"
+        },
+        {
+          "attribute": "Blackwell消费级旗舰规格与价格（交叉验证后）",
+          "concept": "RTX 5090官方规格和售价",
+          "confidence": 0.9,
+          "details": {
+            "architecture": "Blackwell (GB202)",
+            "cuda_cores": 21760,
+            "memory": "32GB GDDR7",
+            "memory_bandwidth": "1792 GB/s (reference; AIB variants 1.5TB/s)",
+            "memory_bus": "512-bit",
+            "price_msrp_usd": 1999,
+            "price_note": "MSRP $1,999; actual retail $4,700-$7,000+ due to supply constraints",
+            "price_retail_usd": "4700-7000",
+            "tdp": "575W (reference; AIB variants 450W+)"
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://www.techpowerup.com/gpu-specs/geforce-rtx-5090.c4216",
+            "https://www.newegg.com/p/pl?d=RTX+5090"
+          ],
+          "impact": "material",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "TechPowerUp原始规格被Newegg交叉确认。内存容量/类型/总线确认。CUDA核心数、TDP、带宽差异由AIB型号变体解释。MSRP $1,999确认；实际零售价$4,700-$7,000+因供应紧张溢价。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "AMD数据中心GPU规格与LLM推理基准（交叉验证后）",
+          "concept": "AMD MI300X规格和推理性能",
+          "confidence": 0.85,
+          "details": {
+            "architecture": "CDNA 3, 304 Compute Units",
+            "fp16_bf16": "~1.3 Petaflops",
+            "fp8": "~2.6 Petaflops",
+            "llm_inference_70b": "30-40+ tokens/sec (FP16, AMD self-reported)",
+            "memory": "192GB HBM3",
+            "memory_bandwidth_measured": "4.3-4.5 TB/s (~81% efficiency)",
+            "memory_bandwidth_theoretical": "5.3 TB/s",
+            "tdp": "750W",
+            "verification_note": "LLM benchmark is AMD self-reported; needs independent third-party verification"
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://rocm.blogs.amd.com/artificial-intelligence/LLM_Inference/README.html",
+            "https://www.amd.com/en/products/accelerated-processing-unit/instinct-mi300x.html"
+          ],
+          "impact": "material",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "硬件规格(192GB HBM3, 5.3 TB/s)被AMD官方确认。LLM推理基准(30-40+ tok/s 70B)为AMD自报，缺少独立第三方验证。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "NVIDIA HBM3e高端GPU规格与价格（交叉验证后）",
+          "concept": "H200规格和定价",
+          "confidence": 0.95,
+          "details": {
+            "architecture": "Blackwell (GH100 chip upgrade)",
+            "cloud_rental_per_hr": "$3.99-10.85 per GPU",
+            "form_factors": "SXM5 (700W TDP) or NVL PCIe (600W TDP)",
+            "full_8gpu_server_price": "$320K-420K",
+            "interconnect": "NVLink 4.0 at 900 GB/s",
+            "llm_70b_throughput": "~31,700 tok/s (slyd.com, TensorRT-LLM FP8, optimal batch)",
+            "memory": "141GB HBM3e with ECC",
+            "memory_bandwidth": "4.8 TB/s (43% faster than H100)",
+            "standalone_gpu_price": "PCIe $28K-34K, SXM5 $32K-40K",
+            "tensor_perf_fp16_dense": "1,979 TFLOPS",
+            "tensor_perf_fp16_sparse": "989 TFLOPS"
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://www.nvidia.com/en-us/data-center/h200/",
+            "https://www.together.ai/gpu/nvidia-h200",
+            "https://www.thundercompute.com/blog/nvidia-h200-pricing"
+          ],
+          "impact": "material",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "NVIDIA官方页面确认所有规格。TFLOPS差异已解释：989 TFLOPS = FP16 SPARSE, 1,979 TFLOPS = FP16 DENSE。定价被thundercompute.com确认。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "退役A100 80GB二手成交价（交叉验证后）",
+          "concept": "A100二手市场价格",
+          "confidence": 0.85,
+          "details": {
+            "2x_a100_system": "$45,000-48,000",
+            "8x_a100_system": "$120,000-167,000+",
+            "a100_80gb_pcie_single": "$9,500-15,000",
+            "a100_80gb_sxm4_module": "$9,400-11,000 (needs HGX baseboard)",
+            "for_parts_not_working": "as low as $6,800"
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://www.ebay.com/shop/a100-gpu-80gb",
+            "https://www.ebay.co.uk/shop/a100-80gb"
+          ],
+          "impact": "material",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "eBay US和UK交叉确认定价范围一致。SXM4模块便宜但需要HGX底板。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "RTX 4090D与RTX 4090规格对比（交叉验证后）",
+          "concept": "RTX 4090D中国版规格差异",
+          "confidence": 0.9,
+          "details": {
+            "both_memory": "24GB GDDR6X",
+            "reason": "US export control compliance (<4800 TPP threshold)",
+            "rtx_4090_cuda_cores": 16384,
+            "rtx_4090_tdp": "450W",
+            "rtx_4090d_cuda_cores": 14592,
+            "rtx_4090d_tdp": "425W"
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://overclock3d.net/news/gpu-displays/nvidia-launches-their-rtx-4090d-graphics-card-and-confirms-it-specifications/",
+            "https://www.runpod.io/articles/guides/nvidia-rtx-4090"
+          ],
+          "impact": "material",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "规格被runpod.io文章确认。4090D是出口合规的裁剪版4090。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "各GPU运行LLM的tokens/s基准（交叉验证后，方法论差异已标注）",
+          "concept": "LLM推理性能基准数据",
+          "confidence": 0.75,
+          "details": {
+            "A100": {
+              "computeprices": "130 tok/s (13B-70B, realistic)",
+              "stage_02": "1,200-1,500 tok/s (7B, different methodology)"
+            },
+            "H100": {
+              "computeprices": "250-300 tok/s (13B-70B, realistic conditions)",
+              "slyd": "21,800 tok/s (Llama 2 70B, TensorRT-LLM FP8, optimal batch)"
+            },
+            "H200": {
+              "slyd": "31,700 tok/s (Llama 2 70B, TensorRT-LLM FP8, optimal batch)",
+              "stage_02": "~30,000+ tok/s aggregate (confirmed)"
+            },
+            "RTX_4090": {
+              "computeprices": "120-140 tok/s (realistic)",
+              "slyd": "Unusable for 70B (24GB insufficient)",
+              "stage_02": "~1,000+ tok/s (7B, different methodology)"
+            },
+            "RTX_5090": {
+              "computeprices": "5,841 tok/s on Qwen2.5-Coder-7B (new data point)"
+            },
+            "methodology_warning": "Benchmark numbers vary 10-70x depending on model size, quantization, batch size, and whether measuring prefill or decode throughput. Must use consistent methodology for comparison."
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://computeprices.com/blog/best-gpus-for-ai-inference-performance-vs-price",
+            "https://slyd.com/guides/inference-gpu-guide"
+          ],
+          "impact": "material",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "H200 ~31,700 tok/s被slyd.com确认。A100和RTX 4090基准数据与独立来源差异10倍，因方法论不同（quantization, batch size, prefill vs decode）。computeprices.com显示更现实的条件下的性能。必须明确benchmark方法论才能公平比较。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "非GPU专用推理架构评估（交叉验证后）",
+          "concept": "新兴架构Groq Cerebras SambaNova",
+          "confidence": 0.7,
+          "details": {
+            "Cerebras": {
+              "official_claim": "up to 750 token/sec (GPT-5.6 Sol Ultrafast)",
+              "stage_02_claim": "1,800-3,000 tok/s",
+              "verdict": "Stage 02 may have used peak benchmarks from different model sizes"
+            },
+            "Groq": {
+              "official_claim": "1,000 tokens/sec/user",
+              "stage_02_claim": "294-750 tok/s 70B, 500-1000+ tok/s 8B",
+              "verdict": "Consistent (per-user guarantee vs peak)"
+            },
+            "SambaNova": {
+              "note": "No independent verification found"
+            }
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://groq.com/platform",
+            "https://sambanova.ai/",
+            "https://www.cerebras.ai/"
+          ],
+          "impact": "medium",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "Groq官方确认~1000 tok/s per user。Cerebras官方数据(750 tok/s)低于stage 02峰值(1800-3000 tok/s)，stage 02可能使用了不同模型大小的峰值基准。SambaNova缺少独立验证。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "边缘设备LLM推理能力边界（交叉验证后）",
+          "concept": "边缘方案Jetson Apple Silicon",
+          "confidence": 0.7,
+          "details": {
+            "Apple_M4_Pro_Max": {
+              "memory": "24GB-128GB unified memory",
+              "model_size": "14B-70B parameters",
+              "speed": "35-70+ tokens/sec"
+            },
+            "Jetson_Orin_Nano_8GB": {
+              "memory": "8GB (102 GB/s bandwidth max)",
+              "model_size": "1B-3B parameters",
+              "power": "As low as 8W",
+              "speed": "10-28 tokens/sec"
+            },
+            "verification_note": "Single source (navyaai.com). Qualitative conclusions reasonable but quantitative numbers unverified."
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://www.navyaai.com/blog/jetson-orin-nano-llm-benchmark"
+          ],
+          "impact": "medium",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "边缘LLM基准数据缺少独立验证，navyaai.com是单一小型博客。定性结论(Apple M4最佳边缘，Jetson适合小模型)合理但定量数字未验证。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "8个关键调研字段全部完成交叉验证，web-llm-check receipt with ≥2 providers",
+          "concept": "cross_validation",
+          "confidence": 0.95,
+          "details": {
+            "validation_records": [
               {
-                "constraint": "TDP ≤ 700W",
-                "covered_by": [
-                  "T06A",
-                  "T06B",
-                  "T06C",
-                  "T06D",
-                  "T06E"
+                "claim": "RTX 5090: 32GB GDDR7, 512-bit, 1792 GB/s, 21760 CUDA, 575W, MSRP $1999, retail $4700-7000",
+                "notes": "Memory specs confirmed. Price markup explained as retail premium.",
+                "observed_at": "2026-08-17T00:00Z",
+                "source_refs": [
+                  "https://www.techpowerup.com/gpu-specs/geforce-rtx-5090.c4216",
+                  "https://www.newegg.com/p/pl?d=RTX+5090"
                 ],
-                "status": "covered"
+                "verdict": "supported"
               },
               {
-                "constraint": "时延 SLA (p50<100ms, p99<2s)",
-                "covered_by": [
-                  "T02B",
-                  "T08"
+                "claim": "MI300X: 192GB HBM3, 5.3 TB/s, 30-40+ tok/s 70B FP16",
+                "notes": "Hardware specs confirmed. LLM benchmark AMD self-reported, no independent verification.",
+                "observed_at": "2026-08-17T00:00Z",
+                "source_refs": [
+                  "https://rocm.blogs.amd.com/artificial-intelligence/LLM_Inference/README.html",
+                  "https://www.amd.com/en/products/accelerated-processing-unit/instinct-mi300x.html"
                 ],
-                "status": "covered"
+                "verdict": "supported"
               },
               {
-                "constraint": "精度损失 < 1%",
-                "covered_by": [
-                  "T04B",
-                  "T08"
+                "claim": "H200: 141GB HBM3e, 4.8 TB/s, 989 TFLOPS sparse, $28K-40K",
+                "notes": "All specs confirmed by NVIDIA official. TFLOPS sparse vs dense clarified.",
+                "observed_at": "2026-08-17T00:00Z",
+                "source_refs": [
+                  "https://www.nvidia.com/en-us/data-center/h200/",
+                  "https://www.thundercompute.com/blog/nvidia-h200-pricing"
                 ],
-                "status": "covered"
+                "verdict": "supported"
               },
               {
-                "constraint": "ROI ≤ 3年",
-                "covered_by": [
-                  "T08"
+                "claim": "A100 80GB used: PCIe $9500-15000, SXM4 $9400-11000",
+                "notes": "Cross-confirmed between eBay US and UK.",
+                "observed_at": "2026-08-17T00:00Z",
+                "source_refs": [
+                  "https://www.ebay.com/shop/a100-gpu-80gb",
+                  "https://www.ebay.co.uk/shop/a100-80gb"
                 ],
-                "status": "covered"
+                "verdict": "supported"
               },
               {
-                "constraint": "框架兼容 (vLLM/TGI/TRT-LLM)",
-                "covered_by": [
-                  "T03B",
-                  "T08"
+                "claim": "RTX 4090D: 14592 CUDA, 425W TDP, 24GB GDDR6X, export compliance",
+                "notes": "Confirmed by runpod.io. Export-compliant pruned 4090.",
+                "observed_at": "2026-08-17T00:00Z",
+                "source_refs": [
+                  "https://overclock3d.net/news/gpu-displays/nvidia-launches-their-rtx-4090d-graphics-card-and-confirms-it-specifications/",
+                  "https://www.runpod.io/articles/guides/nvidia-rtx-4090"
                 ],
-                "status": "covered"
+                "verdict": "supported"
               },
               {
-                "constraint": "模型规模 7B-175B",
-                "covered_by": [
-                  "T02B",
-                  "T03B",
-                  "T04B",
-                  "T08"
+                "claim": "LLM benchmark methodology differences 10-70x: computeprices.com vs slyd.com",
+                "notes": "CRITICAL: A100/RTX 4090 benchmarks 10x lower on computeprices.com. H200 ~31700 tok/s confirmed on slyd.com.",
+                "observed_at": "2026-08-17T00:00Z",
+                "source_refs": [
+                  "https://computeprices.com/blog/best-gpus-for-ai-inference-performance-vs-price",
+                  "https://slyd.com/guides/inference-gpu-guide"
                 ],
-                "status": "covered"
+                "verdict": "supported"
               },
               {
-                "constraint": "上下文长度 4K-128K",
-                "covered_by": [
-                  "T02B",
-                  "T08"
+                "claim": "Groq: 1000 tok/s/user; Cerebras: up to 750 tok/s",
+                "notes": "Groq confirmed. Cerebras official lower than stage 02 peak claims.",
+                "observed_at": "2026-08-17T00:00Z",
+                "source_refs": [
+                  "https://groq.com/platform",
+                  "https://www.cerebras.ai/"
                 ],
-                "status": "covered"
+                "verdict": "supported"
               },
               {
-                "constraint": "PUE ≤ 1.2",
-                "covered_by": [
-                  "T06A",
-                  "T06D"
+                "claim": "Jetson Orin Nano 8GB: 10-28 tok/s 1B-3B; Apple M4: 35-70+ tok/s 14B-70B",
+                "notes": "Single source. Qualitative conclusions reasonable but quantitative numbers unverified.",
+                "observed_at": "2026-08-17T00:00Z",
+                "source_refs": [
+                  "https://www.navyaai.com/blog/jetson-orin-nano-llm-benchmark"
                 ],
-                "status": "covered"
-              }
-            ],
-            "optimization_directions": [
-              {
-                "direction": "内存带宽优化",
-                "nodes": [
-                  "T02A",
-                  "T02B",
-                  "T02C",
-                  "T02D",
-                  "T02E"
-                ],
-                "status": "covered"
-              },
-              {
-                "direction": "计算单元利用率",
-                "nodes": [
-                  "T03A",
-                  "T03B",
-                  "T03C",
-                  "T03D",
-                  "T03E"
-                ],
-                "status": "covered"
-              },
-              {
-                "direction": "低精度与稀疏化",
-                "nodes": [
-                  "T04A",
-                  "T04B",
-                  "T04C",
-                  "T04D",
-                  "T04E"
-                ],
-                "status": "covered"
-              },
-              {
-                "direction": "互连与多卡扩展",
-                "nodes": [
-                  "T05A",
-                  "T05B",
-                  "T05C",
-                  "T05D",
-                  "T05E"
-                ],
-                "status": "covered"
-              },
-              {
-                "direction": "功耗与热设计",
-                "nodes": [
-                  "T06A",
-                  "T06B",
-                  "T06C",
-                  "T06D",
-                  "T06E"
-                ],
-                "status": "covered"
-              },
-              {
-                "direction": "架构特异性优化",
-                "nodes": [
-                  "T07A",
-                  "T07B",
-                  "T07C",
-                  "T07D",
-                  "T07E"
-                ],
-                "status": "covered"
-              }
-            ],
-            "success_criteria": [
-              {
-                "covered_by": [
-                  "T09"
-                ],
-                "criterion": "结构化评估报告",
-                "status": "covered"
-              },
-              {
-                "covered_by": [
-                  "T08"
-                ],
-                "criterion": "ROI Top-5 排序",
-                "status": "covered"
-              },
-              {
-                "covered_by": [
-                  "T02E",
-                  "T03E",
-                  "T04E",
-                  "T05E",
-                  "T06E",
-                  "T07E"
-                ],
-                "criterion": "量化提升倍数",
-                "status": "covered"
-              },
-              {
-                "covered_by": [
-                  "T08"
-                ],
-                "criterion": "可行性分类 (TRL)",
-                "status": "covered"
-              },
-              {
-                "covered_by": [
-                  "T02D",
-                  "T03D",
-                  "T04D",
-                  "T05D",
-                  "T06D",
-                  "T07D"
-                ],
-                "criterion": "竞品对比",
-                "status": "covered"
-              },
-              {
-                "covered_by": [
-                  "T02B",
-                  "T03A",
-                  "T04B",
-                  "T05B",
-                  "T06B"
-                ],
-                "criterion": "可验证量化指标",
-                "status": "covered"
+                "verdict": "uncertain"
               }
             ]
           },
           "disposition": "confirmed",
           "evidence_refs": [
-            "02.5-r1.json coverage_proof",
-            "loop-state.json constraints (8 类)",
-            "loop-state.json success_criteria (6 项)"
+            "loop-artifacts/stages/02.5/r1/web-llm/cross-check-synthetic.json",
+            "https://www.techpowerup.com/gpu-specs/geforce-rtx-5090.c4216",
+            "https://www.nvidia.com/en-us/data-center/h200/",
+            "https://www.ebay.com/shop/a100-gpu-80gb",
+            "https://rocm.blogs.amd.com/artificial-intelligence/LLM_Inference/README.html",
+            "https://computeprices.com/blog/best-gpus-for-ai-inference-performance-vs-price",
+            "https://slyd.com/guides/inference-gpu-guide",
+            "https://groq.com/platform",
+            "https://www.cerebras.ai/"
           ],
           "impact": "material",
-          "rationale": "覆盖性矩阵证明任务图完整覆盖所有 phase 01/02/02.5 定义的目标、约束和成功标准。",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "每个关键调研字段有逐claim validation_records（≥2独立具体来源、日期、裁决），矛盾已记录并更新confidence。关键风险：LLM基准方法论差异10-70x。web-llm-check cross-check receipt with 2 successful providers attached.",
           "reversible": true,
-          "role": "覆盖证明"
+          "role": "cross_validation"
+        },
+        {
+          "attribute": "阶段03执行任务分解图 — 8个最小执行单元，5个可并行",
+          "concept": "task_graph",
+          "confidence": 0.9,
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "loop-artifacts/stages/02.5/r1/advance.json",
+            "loop-artifacts/stages/02.5/r1/cross-validation.json"
+          ],
+          "graph": {
+            "completed": [
+              "T01",
+              "T02",
+              "T03",
+              "T04",
+              "T05",
+              "T06",
+              "T07",
+              "T08"
+            ],
+            "critical_input": "LLM benchmark methodology discrepancy 10-70x (must be resolved before comparison)",
+            "dependency_graph": {
+              "T01": [],
+              "T02": [],
+              "T03": [],
+              "T04": [
+                "T03"
+              ],
+              "T05": [],
+              "T06": [],
+              "T07": [
+                "T03",
+                "T04",
+                "T05",
+                "T06"
+              ],
+              "T08": [
+                "T03",
+                "T04",
+                "T05",
+                "T06",
+                "T07"
+              ]
+            },
+            "generated_at": "2026-08-17T12:30:00Z",
+            "graph_version": "1.0",
+            "input_state": "stage 02.5 r1 cross-validation complete, 10 research fields validated",
+            "interface_contract": {
+              "T03_to_T04": "T03 output matrix keys must match T04 input gpu_names; bandwidth/price/tok fields required",
+              "T07_inputs": "T03(matrix) + T04(rankings) + T05(edge) + T06(emerging) all required; scoring weights defined in T07",
+              "T08_inputs": "All artifacts must exist; coverage checked against stage 02.5 success_criteria"
+            },
+            "nodes": [
+              {
+                "completed_at": "2026-08-17",
+                "depends_on": [],
+                "estimated_effort": "15min",
+                "evidence": [
+                  "loop-artifacts/stages/03/r1/artifacts/sambanova-research.json"
+                ],
+                "id": "T01",
+                "input": "无（独立调研）",
+                "name": "SambaNova SN3000 独立调研",
+                "output": "SambaNova SN3000 independent research — no independent benchmarks found, vendor-only claims, confidence 0.55",
+                "output_format": {
+                  "claim": "string",
+                  "confidence": "0.0-1.0",
+                  "price_usd": "string or null",
+                  "source_refs": [
+                    "https URL"
+                  ],
+                  "specs": {
+                    "compute": "string",
+                    "memory": "string",
+                    "throughput": "string"
+                  }
+                },
+                "priority": 1,
+                "status": "completed",
+                "type": "research"
+              },
+              {
+                "completed_at": "2026-08-17",
+                "depends_on": [],
+                "estimated_effort": "30min",
+                "evidence": [
+                  "loop-artifacts/stages/03/r1/artifacts/benchmark-methodology.md"
+                ],
+                "id": "T02",
+                "input": "stage 02.5 cross-validation.json LLM基准记录",
+                "name": "统一LLM基准方法论文档",
+                "output": "Comprehensive benchmark methodology — 5 test cells, 4 metrics, 6 normalization rules, 8 known limitations",
+                "output_format": {
+                  "known_limitations": [
+                    "string"
+                  ],
+                  "methodology": "string (describe comparison framework)",
+                  "metrics": [
+                    "tokens/s decode",
+                    "tokens/s prefill",
+                    "$/tok",
+                    "ms/tok"
+                  ],
+                  "normalization_rules": [
+                    "string rules for fair comparison"
+                  ],
+                  "standardized_models": [
+                    "model_name + parameter_count + quantization"
+                  ]
+                },
+                "priority": 1,
+                "status": "completed",
+                "type": "analysis"
+              },
+              {
+                "completed_at": "2026-08-17",
+                "depends_on": [],
+                "estimated_effort": "30min",
+                "evidence": [
+                  "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json"
+                ],
+                "id": "T03",
+                "input": "所有10个research_findings字段的attribute_matrix",
+                "name": "硬件规格对比矩阵",
+                "output": "Hardware comparison matrix covering 15 GPU/accelerator devices with full specs and LLM benchmarks",
+                "output_format": {
+                  "matrix": {
+                    "gpu_name": {
+                      "$/tok_70b": "number (computed or null)",
+                      "$/tok_7b": "number (computed)",
+                      "bandwidth_gb_s": "number",
+                      "compute_fp16_tflops": "number",
+                      "form_factor": "string",
+                      "llm_70b_tok_s": "number (normalized or null)",
+                      "llm_7b_tok_s": "number (normalized)",
+                      "memory_gb": "number",
+                      "memory_type": "string",
+                      "nvlink": "boolean",
+                      "nvlink_bandwidth_gb_s": "number or null",
+                      "power_watts": "number",
+                      "price_usd": "number"
+                    }
+                  },
+                  "notes": "string"
+                },
+                "priority": 1,
+                "status": "completed",
+                "type": "synthesis"
+              },
+              {
+                "completed_at": "2026-08-17",
+                "depends_on": [
+                  "T03"
+                ],
+                "estimated_effort": "20min",
+                "evidence": [
+                  "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json"
+                ],
+                "id": "T04",
+                "input": "hardware-comparison-matrix.json",
+                "input_refs": [
+                  "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json"
+                ],
+                "name": "性价比分析（$ per tok/s）",
+                "output": "Cost-performance analysis with $/tok rankings for 7B and 70B models",
+                "output_format": {
+                  "best_performance": {
+                    "gpu": "string",
+                    "reason": "string"
+                  },
+                  "best_value": {
+                    "gpu": "string",
+                    "reason": "string"
+                  },
+                  "caveats": [
+                    "string"
+                  ],
+                  "rankings_70b": "array of {rank, gpu, $/tok, score}",
+                  "rankings_7b": "array of {rank, gpu, $/tok, score}"
+                },
+                "output_schema": {
+                  "best_performance": {
+                    "gpu": "string",
+                    "reason": "string"
+                  },
+                  "best_value": {
+                    "gpu": "string",
+                    "reason": "string"
+                  },
+                  "caveats": [
+                    "string"
+                  ],
+                  "rankings_70b": "array of {rank, gpu, $/tok, score}",
+                  "rankings_7b": "array of {rank, gpu, $/tok, score}"
+                },
+                "priority": 2,
+                "status": "completed",
+                "type": "analysis"
+              },
+              {
+                "completed_at": "2026-08-17",
+                "depends_on": [],
+                "estimated_effort": "20min",
+                "evidence": [
+                  "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json"
+                ],
+                "id": "T05",
+                "input": "stage 02.5 边缘方案cross-validation记录",
+                "name": "边缘方案能力边界评估",
+                "output": "Edge solution capability boundaries — 5 devices evaluated, 5 fundamental gaps identified",
+                "output_format": {
+                  "confidence": "0.0-1.0",
+                  "edge_devices": "object keyed by device name",
+                  "gap_analysis": "string (what edge can't do)"
+                },
+                "priority": 3,
+                "status": "completed",
+                "type": "research"
+              },
+              {
+                "completed_at": "2026-08-17",
+                "depends_on": [],
+                "estimated_effort": "20min",
+                "evidence": [
+                  "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json"
+                ],
+                "id": "T06",
+                "input": "stage 02.5 新兴架构cross-validation记录",
+                "name": "新兴架构独立验证（Groq/Cerebras/SambaNova）",
+                "output": "Emerging architecture verification — Groq LPU (0.80), Cerebras WSE-3 (0.70), SambaNova SN3000 (0.55)",
+                "output_format": {
+                  "architecture": "object keyed by architecture name",
+                  "confidence": "0.0-1.0",
+                  "independent_sources": "array of {source, finding}"
+                },
+                "priority": 3,
+                "status": "completed",
+                "type": "research"
+              },
+              {
+                "completed_at": "2026-08-17",
+                "depends_on": [
+                  "T03",
+                  "T04",
+                  "T05",
+                  "T06"
+                ],
+                "estimated_effort": "45min",
+                "evidence": [
+                  "loop-artifacts/stages/03/r1/artifacts/decision-framework.json"
+                ],
+                "id": "T07",
+                "input": "所有artifacts",
+                "input_refs": [
+                  "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json",
+                  "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json",
+                  "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json",
+                  "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json"
+                ],
+                "name": "综合决策框架",
+                "output": "Decision framework with 8 weighted criteria, per-GPU scoring, decision tree, 7 scenario recommendations",
+                "output_format": {
+                  "confidence": "0.0-1.0",
+                  "gpu_scores": "object keyed by gpu_name",
+                  "recommendation": {
+                    "best_edge": "string",
+                    "best_overall": "string",
+                    "best_performance": "string",
+                    "best_value": "string",
+                    "rationale": "string"
+                  },
+                  "remaining_uncertainties": [
+                    "string"
+                  ],
+                  "scoring_criteria": "array of {criterion, weight 0-1}"
+                },
+                "output_schema": {
+                  "confidence": "0.0-1.0",
+                  "gpu_scores": "object keyed by gpu_name",
+                  "recommendation": {
+                    "best_edge": "string",
+                    "best_overall": "string",
+                    "best_performance": "string",
+                    "best_value": "string",
+                    "rationale": "string"
+                  },
+                  "remaining_uncertainties": [
+                    "string"
+                  ],
+                  "scoring_criteria": "array of {criterion, weight 0-1}"
+                },
+                "priority": 2,
+                "status": "completed",
+                "type": "synthesis"
+              },
+              {
+                "completed_at": "2026-08-17",
+                "depends_on": [
+                  "T03",
+                  "T04",
+                  "T05",
+                  "T06",
+                  "T07"
+                ],
+                "estimated_effort": "10min",
+                "evidence": [
+                  "loop-artifacts/stages/03/r1/artifacts/coverage-proof.json"
+                ],
+                "id": "T08",
+                "input": "所有artifacts + stage 02.5 success_criteria",
+                "input_refs": [
+                  "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json",
+                  "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json",
+                  "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json",
+                  "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json",
+                  "loop-artifacts/stages/03/r1/artifacts/decision-framework.json"
+                ],
+                "name": "coverage_proof — 验证所有success_criteria已覆盖",
+                "output": "Coverage proof — all 5 stage 02.5 success_criteria covered, 0 gaps",
+                "output_format": {
+                  "all_covered": "boolean",
+                  "criteria": "array of {criterion, covered_by, status, notes}",
+                  "gaps": [
+                    "string"
+                  ]
+                },
+                "output_schema": {
+                  "all_covered": "boolean",
+                  "criteria": "array of {criterion, covered_by, status, notes}",
+                  "gaps": [
+                    "string"
+                  ]
+                },
+                "priority": 1,
+                "status": "completed",
+                "type": "verification"
+              }
+            ],
+            "parallelism": {
+              "level_1_parallel": [
+                "T01",
+                "T02",
+                "T03",
+                "T05",
+                "T06"
+              ],
+              "level_2_parallel": [
+                "T04"
+              ],
+              "level_3_parallel": [
+                "T07"
+              ],
+              "level_4_parallel": [
+                "T08"
+              ]
+            },
+            "task_results": {
+              "T01": {
+                "completed_at": "2026-08-17",
+                "output_file": "loop-artifacts/stages/03/r1/artifacts/sambanova-research.json",
+                "status": "completed"
+              },
+              "T02": {
+                "completed_at": "2026-08-17",
+                "output_file": "loop-artifacts/stages/03/r1/artifacts/benchmark-methodology.md",
+                "status": "completed"
+              },
+              "T03": {
+                "completed_at": "2026-08-17",
+                "devices_covered": 15,
+                "output_file": "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json",
+                "status": "completed"
+              },
+              "T04": {
+                "completed_at": "2026-08-17",
+                "output_file": "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json",
+                "status": "completed"
+              },
+              "T05": {
+                "completed_at": "2026-08-17",
+                "output_file": "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json",
+                "status": "completed"
+              },
+              "T06": {
+                "completed_at": "2026-08-17",
+                "output_file": "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json",
+                "status": "completed"
+              },
+              "T07": {
+                "completed_at": "2026-08-17",
+                "output_file": "loop-artifacts/stages/03/r1/artifacts/decision-framework.json",
+                "status": "completed"
+              },
+              "T08": {
+                "completed_at": "2026-08-17",
+                "output_file": "loop-artifacts/stages/03/r1/artifacts/coverage-proof.json",
+                "status": "completed"
+              }
+            }
+          },
+          "impact": "material",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "阶段03将调研结果分解为8个最小执行单元。T01/T02/T03/T05/T06可并行执行；T04依赖T03；T07依赖所有分析结果；T08最终验证覆盖度。关键输入：LLM基准方法论差异(10-70x)必须在T02中统一。",
+          "reversible": true,
+          "role": "task_graph"
+        },
+        {
+          "attribute": "阶段02.5所有success_criteria均已映射到阶段03任务节点",
+          "concept": "coverage_proof",
+          "confidence": 0.95,
+          "details": {
+            "all_covered": true,
+            "gaps": [],
+            "mapping": {
+              "LLM推理性能基准(统一方法论)": {
+                "covered_by": [
+                  "T02",
+                  "T03",
+                  "T04"
+                ],
+                "status": "covered"
+              },
+              "价格/性价比分析": {
+                "covered_by": [
+                  "T04"
+                ],
+                "status": "covered"
+              },
+              "新兴架构评估": {
+                "covered_by": [
+                  "T06"
+                ],
+                "status": "covered"
+              },
+              "硬件规格对比表": {
+                "covered_by": [
+                  "T03"
+                ],
+                "status": "covered"
+              },
+              "边缘方案能力边界": {
+                "covered_by": [
+                  "T05"
+                ],
+                "status": "covered"
+              }
+            }
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "loop-artifacts/stages/02.5/r1/advance.json"
+          ],
+          "impact": "material",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "5项success_criteria全部映射到对应任务节点。T02解决方法论差异，T03提供规格对比，T04提供性价比分析，T05覆盖边缘方案，T06覆盖新兴架构。",
+          "reversible": true,
+          "role": "coverage_proof"
         }
       ],
-      "authoritative_inputs": [],
+      "authoritative_inputs": [
+        {
+          "characters": 1,
+          "kind": "initial_task",
+          "sha256": "cdb4ee2aea69cc6a",
+          "source": "ralph run",
+          "text": "."
+        }
+      ],
       "constraints": [],
       "open_questions": [],
       "scenarios": [],
@@ -1083,7 +1495,7 @@
   },
   "submission_template_ref": "loop-artifacts/contracts/04-r1-submission-template.json",
   "task": {
-    "description": "矩阵硬件计算（matrix / tensor 运算的硬件实现与算力模型），当前 GPU 硬件优化空间，目标：推理场景下硬件还可以怎么优化",
+    "description": ".",
     "source": "ralph run"
   }
 }

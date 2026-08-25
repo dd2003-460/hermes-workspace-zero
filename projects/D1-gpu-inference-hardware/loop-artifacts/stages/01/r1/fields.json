@@ -1,0 +1,69 @@
+{
+  "fields": [
+    {
+      "concept": "goal",
+      "role": "primary_objective",
+      "attribute": "systematic_gpu_research_for_local_llm_inference",
+      "disposition": "confirmed",
+      "rationale": "系统性GPU调研：覆盖主流数据中心GPU、消费级GPU、新兴架构、边缘方案，为本地LLM推理选型提供决策依据",
+      "evidence_refs": ["user:initial_task"],
+      "confidence": 1.0,
+      "impact": "material",
+      "reversible": false,
+      "details": {
+        "decision": "选择最适合本地LLM推理的GPU/硬件方案",
+        "scope": "H100/MI300X/H200/A100 + RTX 5090/4090 + Groq/Cerebras/SambaNova + Jetson/Apple Silicon",
+        "success_criteria": "1)硬件规格对比表 2)LLM推理性能基准 3)价格/性价比分析 4)新兴架构评估 5)边缘方案能力边界",
+        "out_of_scope": "训练性能、GPU云托管长期成本优化"
+      }
+    },
+    {
+      "concept": "known",
+      "role": "baseline_knowledge",
+      "attribute": "established_facts",
+      "disposition": "confirmed",
+      "rationale": "已有项目知识：NVLink Gen5 ~900GB/s, PCIe 4.0 x16 ~32GB/s, RTX 4090 24GB GDDR6X, H100 80GB HBM3, KV cache是主要内存瓶颈, 量化可降低显存需求",
+      "evidence_refs": [
+        "/Users/a1-6/Desktop/workspace/projects/D1-ai-agent-hardware/loop-artifacts/research-pci-e-llm-inference.md",
+        "/Users/a1-6/Desktop/workspace/projects/D1-gpu-inference-hardware/tasks/TASKS.md",
+        "/Users/a1-6/Desktop/workspace/D1-gpu-inference-hardware/loop-artifacts/stages/02/r1/web-llm-request-4.json"
+      ],
+      "confidence": 0.90,
+      "impact": "material",
+      "reversible": false
+    },
+    {
+      "concept": "unknown",
+      "role": "research_gaps",
+      "attribute": "data_needing_verification",
+      "disposition": "uncertain",
+      "rationale": "已确认以下8项为待调研空缺，全部已完成调研并回填证据",
+      "evidence_refs": [
+        "https://www.techpowerup.com/gpu-specs/geforce-rtx-5090.c4216",
+        "https://rocm.blogs.amd.com/artificial-intelligence/LLM_Inference/README.html",
+        "https://www.together.ai/gpu/nvidia-h200",
+        "https://www.thundercompute.com/blog/nvidia-h200-pricing",
+        "https://www.ebay.com/shop/a100-gpu-80gb",
+        "https://overclock3d.net/news/gpu-displays/nvidia-launches-their-rtx-4090d-graphics-card-and-confirms-it-specifications/",
+        "https://groq.com/platform",
+        "https://sambanova.ai/",
+        "https://www.cerebras.ai/",
+        "https://www.navyaai.com/blog/jetson-orin-nano-llm-benchmark"
+      ],
+      "observed_at": "2026-08-17T00:00Z",
+      "confidence": 0.85,
+      "impact": "material",
+      "reversible": false,
+      "research_queue": [
+        {"priority": 1, "topic": "RTX 5090官方规格和售价", "search_terms": ["RTX 5090 specs NVIDIA official", "RTX 5090 price Newegg 2026"]},
+        {"priority": 2, "topic": "AMD MI300X规格和推理性能", "search_terms": ["AMD MI300X specs HBM3e", "MI300X LLM inference benchmark"]},
+        {"priority": 2, "topic": "H200规格和定价", "search_terms": ["NVIDIA H200 specs HBM3e price"]},
+        {"priority": 3, "topic": "A100二手市场价格", "search_terms": ["A100 80GB used price eBay"]},
+        {"priority": 3, "topic": "RTX 4090D规格差异", "search_terms": ["RTX 4090D vs 4090 specs difference"]},
+        {"priority": 1, "topic": "LLM推理性能基准", "search_terms": ["LLM inference benchmark tokens/s H100 RTX 4090"]},
+        {"priority": 4, "topic": "新兴架构(Groq/Cerebras/SambaNova)", "search_terms": ["Groq LPU inference speed", "Cerebras WSE-3 LLM"]},
+        {"priority": 4, "topic": "边缘方案(Jetson/Apple Silicon)", "search_terms": ["Jetson Orin LLM inference", "Apple M3 M4 LLM benchmark"]}
+      ]
+    }
+  ]
+}

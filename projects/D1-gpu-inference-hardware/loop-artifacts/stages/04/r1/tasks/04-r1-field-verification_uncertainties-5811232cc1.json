@@ -1,0 +1,34 @@
+{
+  "attribute": "8项remaining_uncertainties处理 — 每项给出缓解措施或置信度调整",
+  "concept": "verification_uncertainties",
+  "disposition": "pending",
+  "field": {
+    "attribute": "8项remaining_uncertainties处理 — 每项给出缓解措施或置信度调整",
+    "concept": "verification_uncertainties",
+    "disposition": "pending",
+    "evidence_refs": [],
+    "rationale": "阶段03的8项remaining_uncertainties需要在阶段04中逐项处理：RTX 5090吞吐量、MI300X定价、ROCm成熟度、M4 Max吞吐量、RTX 5090价格波动、H200 NVLink扩展、Groq/Cerebras定价、SambaNova不透明",
+    "role": "verification"
+  },
+  "flow_only": false,
+  "id": "04-r1-field-verification_uncertainties-5811232cc1",
+  "input_refs": [
+    "loop-artifacts/stages/04/r1/fields.json"
+  ],
+  "instruction": "只处理字段 `verification_uncertainties`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/04/r1/tasks/04-r1-field-verification_uncertainties-5811232cc1.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+  "output_schema": {
+    "attribute": "string",
+    "concept": "verification_uncertainties",
+    "confidence": "number 0..1",
+    "disposition": "confirmed|inferred|assumed_default|research_required",
+    "evidence_refs": "array[string]",
+    "rationale": "string",
+    "role": "string"
+  },
+  "revision": "r1",
+  "role": "verification",
+  "schema_version": 1,
+  "stage_id": "04",
+  "status": "ready",
+  "type": "field_task"
+}

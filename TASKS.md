@@ -49,7 +49,7 @@
 | D1-goal-investigation | — | completed (iter21)，研究目标达成，置信度 0.9 |
 | adsl-spin-connection | — | 已删除 tasks.md 和 loop 目录 |
 | D1-ai-agent-hardware (iter42 GPU选型) | tasks/TASKS.md | ⚠️ 项目完结但有质量问题: 中文二手市场数据(闲鱼/hardwareswap)未被WebSearch抓取, 全部推算. 价格 $2,000-2,500 可能偏低, 需重新验证. 置信度实际 0.6-0.7. |
-| D1-gpu-inference-hardware (RALPH Loop) | D1-gpu-inference-hardware/ | ✅ RALPH 01-03 完成，04 待执行。ego-browser 已获取全部关键数据（10+ 数据源），量化精度损失获 3 重交叉验证。完整报告: tasks/T5-final-recommendation.md |
+| D1-gpu-inference-hardware (RALPH Loop) | D1-gpu-inference-hardware/ | ✅ RALPH 01-03 完成，04 待执行。ego-browser 已获取全部关键数据（10+ 数据源），量化精度损失获 3 重交叉验证。完整报告: tasks/T5-final-recommendation.md。新增 T-gpu-research (P1): 系统性 GPU 调研 |
 | D1-financial-market-analysis | tasks/TASKS.md | 🔄 RALPH 01-r1，优先需求审计与无未来数据规则 |
 | motivation_society | tasks/TASKS.md | 🔄 RALPH 01-r1，优先 LaTeX 编译基线与最小修复 |
 | D1-area-quantized-black-hole-QNM | loop/ | ⏳ iter43 QNM 1-loop 02-任务分解完成, 待 03-05. 方向: Leaver 连分数法求 Kerr QNM. 已验证 Schwarzschild 等谱性基线 (rel_dist=10⁻¹²). |

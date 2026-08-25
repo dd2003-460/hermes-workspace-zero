@@ -1,0 +1,4 @@
+{
+  "field": { "concept": "新兴架构(Groq/Cerebras/SambaNova)" },
+  "attribute": "非GPU专用推理架构：Groq LPU、Cerebras WSE-3、SambaNova DataScale的LLM推理性能和成本评估"
+}

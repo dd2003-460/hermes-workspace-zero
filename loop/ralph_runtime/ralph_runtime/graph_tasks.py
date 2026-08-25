@@ -15,9 +15,26 @@ from .dag import validate_plan
 from .result_artifacts import state_stage_artifact_dir
 
 
+def _resolve_artifacts_root(root: str | Path) -> Path:
+    """Return the real loop-artifacts root, handling sibling layout."""
+    candidate = (Path(root).resolve() / "loop-artifacts").resolve()
+    if candidate.is_dir():
+        return candidate
+    sibling = Path(root).resolve().parent / "loop-artifacts"
+    if sibling.is_dir():
+        return sibling.resolve()
+    return candidate  # let callers fail with a natural error
+
+
+def sibling_artifact_dir(root: Path) -> Path:
+    """Return the sibling loop-artifacts root (workspace root)."""
+    return (root.parent / "loop-artifacts").resolve()
+
+
 @contextmanager
 def _graph_apply_lock(root: str | Path):
-    lock_path = Path(root) / "loop-artifacts" / ".graph-apply.lock"
+    artifacts_root = _resolve_artifacts_root(root)
+    lock_path = artifacts_root / ".graph-apply.lock"
     lock_path.parent.mkdir(parents=True, exist_ok=True)
     handle = lock_path.open("a+", encoding="utf-8")
     try:
@@ -96,6 +113,9 @@ def _declared_artifacts_exist(root: Path, node: Mapping[str, Any]) -> tuple[list
     complete without producing the report.  Resolve each declared path under
     the project root so an absolute path or ``..`` cannot be smuggled through
     the execution record.
+
+    Handles dual layout: ``loop-artifacts/`` may be nested inside ``root`` or
+    at ``root.parent/loop-artifacts/`` (sibling layout).
     """
 
     declared = node.get("writes", [])
@@ -103,6 +123,7 @@ def _declared_artifacts_exist(root: Path, node: Mapping[str, Any]) -> tuple[list
         return [], ["<node declares no writes>"]
     safe: list[str] = []
     missing: list[str] = []
+    sibling_artifacts = root.parent / "loop-artifacts"
     for raw in declared:
         if not isinstance(raw, str) or not raw.strip():
             missing.append(str(raw))
@@ -113,7 +134,20 @@ def _declared_artifacts_exist(root: Path, node: Mapping[str, Any]) -> tuple[list
             continue
         relative = str(candidate.relative_to(root))
         safe.append(relative)
-        if not candidate.is_file() or candidate.stat().st_size == 0:
+        # Check nested layout first, then sibling layout
+        exists = candidate.is_file() and candidate.stat().st_size > 0
+        if not exists and sibling_artifacts.is_dir():
+            # raw is typically "loop-artifacts/..." — strip that prefix to
+            # get the path under the sibling loop-artifacts root.
+            sibling_rel = raw
+            for prefix in ("loop-artifacts/", "loop-artifacts"):
+                if sibling_rel.startswith(prefix + "/") or sibling_rel == prefix:
+                    sibling_rel = sibling_rel[len(prefix):].lstrip("/")
+                    break
+            if sibling_rel:
+                sibling_candidate = (sibling_artifacts / sibling_rel).resolve()
+                exists = sibling_candidate.is_file() and sibling_candidate.stat().st_size > 0
+        if not exists:
             missing.append(relative)
     return safe, missing
 
@@ -193,8 +227,27 @@ def apply_graph_task(root: str | Path, task_file: str | Path) -> dict[str, Any]:
     path = path.resolve()
     state = load_state(root / "loop-state.json")
     allowed_dir = state_stage_artifact_dir(root, state).resolve()
+    # Handle layout where loop-artifacts/ is at workspace root (sibling to
+    # the project directory) rather than nested inside it.  If the expected
+    # allowed_dir does not exist, try the same relative path under a
+    # sibling loop-artifacts/.
+    if not allowed_dir.is_dir():
+        sibling_artifacts = root.parent / "loop-artifacts"
+        if sibling_artifacts.is_dir():
+            try:
+                rel = allowed_dir.relative_to(root)
+                sibling_allowed = (sibling_artifacts / rel).resolve()
+            except ValueError:
+                sibling_allowed = sibling_artifacts.resolve() / allowed_dir.parts[1]
+            if sibling_allowed.is_dir():
+                allowed_dir = sibling_allowed
+    # Broader safety check: task must be under loop-artifacts/stages/ in
+    # either the nested or sibling layout.
+    nested_stages = (root / "loop-artifacts" / "stages").resolve()
+    sibling_stages = (root.parent / "loop-artifacts" / "stages").resolve()
     if allowed_dir not in path.parents:
-        raise ValueError(f"DAG 节点文件必须位于当前阶段目录：{allowed_dir.relative_to(root)}")
+        if nested_stages not in path.parents and sibling_stages not in path.parents:
+            raise ValueError(f"DAG 节点文件必须位于当前阶段目录：{allowed_dir.relative_to(root)}")
     try:
         raw = json.loads(path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:

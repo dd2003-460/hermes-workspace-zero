@@ -1,0 +1,40 @@
+{
+  "depends_on": [
+    "T03"
+  ],
+  "execution_mode": "serial",
+  "id": "03-r1-node-T04",
+  "input_refs": [
+    "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json"
+  ],
+  "instruction": "只执行 DAG 节点 `T04`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+  "node_id": "T04",
+  "orthogonal_key": null,
+  "output_schema": {
+    "best_performance": {
+      "gpu": "string",
+      "reason": "string"
+    },
+    "best_value": {
+      "gpu": "string",
+      "reason": "string"
+    },
+    "caveats": [
+      "string"
+    ],
+    "rankings_70b": "array of {rank, gpu, $/tok, score}",
+    "rankings_7b": "array of {rank, gpu, $/tok, score}"
+  },
+  "parallel_group_id": null,
+  "parent_id": null,
+  "postconditions": [],
+  "preconditions": [],
+  "revision": "r1",
+  "schema_version": 1,
+  "stage_id": "03",
+  "status": "completed",
+  "type": "graph_task",
+  "writes": ["loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json"],
+  "output": "Cost-performance analysis with $/tok rankings for 7B and 70B models",
+  "evidence": ["loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json"]
+}

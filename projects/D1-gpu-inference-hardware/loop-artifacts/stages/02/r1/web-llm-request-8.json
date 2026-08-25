@@ -1,0 +1,4 @@
+{
+  "field": { "concept": "边缘方案(Jetson/Apple Silicon)" },
+  "attribute": "边缘设备LLM推理能力：Jetson Orin、Apple M3/M4的LLM推理性能、显存/统一内存限制"
+}

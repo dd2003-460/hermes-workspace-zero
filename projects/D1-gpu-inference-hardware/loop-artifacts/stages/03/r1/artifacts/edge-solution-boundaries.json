@@ -1,0 +1,94 @@
+{
+  "edge_devices": {
+    "Apple M4 (MacBook Pro/Studio)": {
+      "specs": "Up to 24GB unified LPDDR5X memory, ~120 GB/s bandwidth, 10-core CPU, 20-core GPU; M4 Pro up to 36GB, M4 Max up to 128GB",
+      "max_model_size": "Llama 3.1 8B Q4 (6GB), Llama 3.1 70B Q4 (40GB — requires M4 Max with 128GB), Mistral 7B Q4 (5GB)",
+      "throughput": "35-70 tok/s for 8B models (M4 Pro/Max); ~15 tok/s for 70B Q4 on M4 Max 128GB",
+      "use_cases": [
+        "Personal/local LLM assistant",
+        "Development and testing",
+        "Small team deployment (M4 Max)",
+        "Edge AI inference with low power"
+      ],
+      "limitations": [
+        "Memory bandwidth bottleneck (120-400 GB/s vs 3,000+ GB/s datacenter GPUs)",
+        "70B models only fit on M4 Max with 128GB (expensive: $3,999+)",
+        "No multi-GPU scaling for larger models",
+        "Limited software ecosystem compared to NVIDIA CUDA",
+        "Thermal throttling on laptops under sustained load"
+      ]
+    },
+    "Apple M4 Max": {
+      "specs": "Up to 128GB unified LPDDR5X, 400 GB/s bandwidth, 14-16 core CPU, 40-core GPU",
+      "max_model_size": "Llama 3.1 70B Q4 (40GB), potentially 405B Q4/KV-cache offload (230GB+ requires external storage)",
+      "throughput": "70+ tok/s for 8B models; 15 tok/s for 70B Q4; ~5 tok/s for 405B with KV-cache offload",
+      "use_cases": [
+        "Highest-capability edge LLM inference",
+        "Research and development",
+        "Small-scale production deployment",
+        "Multi-modal AI (vision + language)"
+      ],
+      "limitations": [
+        "Very expensive at max config ($3,999-$8,000+)",
+        "Still 10-100x slower than datacenter GPUs for large models",
+        "70B models consume most of 128GB memory, leaving little headroom",
+        "No NVLink or multi-chip interconnect"
+      ]
+    },
+    "NVIDIA RTX 4090": {
+      "specs": "24GB GDDR6X, 1,008 GB/s bandwidth, 16,384 CUDA cores, 82.6 TFLOPS FP16",
+      "max_model_size": "Llama 3.1 70B Q4 (40GB — doesn't fit; needs 2 GPUs or Q6/Q8), Llama 3.1 8B Q4 (6GB), Llama 3.1 13B Q4 (10GB), Llama 3.1 34B Q4 (20GB)",
+      "throughput": "~120 tok/s for 7B models (computeprices.com realistic); ~5-10 tok/s for 70B Q4 (multi-GPU or doesn't fit)",
+      "use_cases": [
+        "Desktop LLM inference for 7B-13B models",
+        "Development and prototyping",
+        "Small-scale deployment with quantization",
+        "Multi-modal AI (vision + language)"
+      ],
+      "limitations": [
+        "24GB memory limits model size to ~13B Q4 or ~34B Q6",
+        "70B models don't fit on single GPU — needs 2 GPUs or heavy quantization",
+        "No NVLink (limits multi-GPU scaling)",
+        "Consumer GPU — no ECC memory, no datacenter features",
+        "Retail price often $2,000+ (not $1,599 MSRP)"
+      ]
+    },
+    "NVIDIA Jetson Orin Nano 8GB": {
+      "specs": "8GB LPDDR5, 102 GB/s bandwidth, 1024 CUDA cores, low power design",
+      "max_model_size": "Llama 3.1 8B Q4 (6GB — tight fit), Phi-3 Mini 3.8B Q4 (3GB), Gemma 2B Q4 (2GB)",
+      "throughput": "10-28 tok/s for 1B-3B models; ~5 tok/s for 8B Q4",
+      "use_cases": [
+        "Ultra-low-power edge inference",
+        "Robotics and embedded AI",
+        "Small model deployment at edge",
+        "IoT with AI capabilities"
+      ],
+      "limitations": [
+        "Very limited memory (8GB) — only small models",
+        "Low throughput compared to desktop/server GPUs",
+        "Limited to models under 8B parameters",
+        "Not suitable for 70B or large models"
+      ]
+    },
+    "NVIDIA RTX 6000 Ada": {
+      "specs": "48GB GDDR6, 864 GB/s bandwidth, 18,176 CUDA cores, 91.1 TFLOPS FP16",
+      "max_model_size": "Llama 3.1 70B Q6 (45GB — tight fit), Llama 3.1 70B Q4 (40GB), Llama 3.1 405B Q4 (doesn't fit)",
+      "throughput": "~200 tok/s for 7B models; ~20-30 tok/s for 70B Q4",
+      "use_cases": [
+        "Workstation-grade LLM inference",
+        "Small team deployment",
+        "Development and testing",
+        "Multi-modal AI"
+      ],
+      "limitations": [
+        "Expensive ($7,500) for performance level",
+        "48GB still limits 70B to Q4/Q6 quantization",
+        "No NVLink",
+        "GDDR6 vs HBM — lower bandwidth than datacenter GPUs"
+      ]
+    }
+  },
+  "gap_analysis": "Edge devices (Apple M4, RTX 4090, Jetson) are fundamentally limited by memory capacity and bandwidth compared to datacenter GPUs. Key gaps: (1) Model size: Edge devices can't run unquantized 70B+ models; datacenter GPUs (H200 141GB, MI300X 192GB) can run FP16 70B on single chip. (2) Throughput: Edge devices do 10-70 tok/s for 7B models; datacenter GPUs do 130-30,000+ tok/s. (3) Multi-stream: Edge devices serve 1-2 concurrent users; datacenter GPUs serve 32-100+ concurrent users. (4) Flexibility: Datacenter GPUs support multi-GPU scaling via NVLink; edge devices are single-chip. (5) Reliability: Datacenter GPUs have ECC memory, redundant cooling, and enterprise support. The gap is most extreme for 70B+ models where edge devices require heavy quantization (Q4/Q6) that degrades model quality.",
+  "confidence": 0.75,
+  "notes": "Edge benchmarks from stage 02 research (navyaai.com, vendor documentation). Apple M4 benchmarks are qualitative estimates based on unified memory architecture. RTX 4090 benchmarks from computeprices.com. Jetson benchmarks from navyaai.com (single source). The gap analysis is based on architectural principles (memory capacity, bandwidth) which are well-established, but quantitative throughput numbers for edge devices lack independent verification."
+}

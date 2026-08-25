@@ -1,1 +1,0 @@
-/Users/a1-6/Desktop/workspace/agents/quality-checker.md

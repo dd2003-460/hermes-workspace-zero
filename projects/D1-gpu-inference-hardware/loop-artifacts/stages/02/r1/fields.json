@@ -1,0 +1,235 @@
+{
+  "fields": [
+    {
+      "concept": "RTX 5090官方规格和售价",
+      "role": "research_findings",
+      "attribute": "Blackwell消费级旗舰规格与价格",
+      "disposition": "confirmed",
+      "rationale": "从TechPowerUp权威数据库获取完整规格",
+      "evidence_refs": [
+        "https://www.techpowerup.com/gpu-specs/geforce-rtx-5090.c4216",
+        "https://www.google.com/search?q=NVIDIA+RTX+5090+specs+GB202"
+      ],
+      "observed_at": "2026-08-16T00:00Z",
+      "confidence": 0.95,
+      "impact": "material",
+      "reversible": true,
+      "details": {
+        "architecture": "Blackwell (GB202)",
+        "cuda_cores": 21760,
+        "memory": "32GB GDDR7",
+        "memory_bus": "512-bit",
+        "memory_bandwidth": "1792 GB/s",
+        "tdp": "575W",
+        "price_usd": 1999,
+        "price_source": "MSRP"
+      }
+    },
+    {
+      "concept": "AMD MI300X规格和推理性能",
+      "role": "research_findings",
+      "attribute": "AMD数据中心GPU规格与LLM推理基准",
+      "disposition": "confirmed",
+      "rationale": "从Google搜索结果获取详细规格和推理基准",
+      "evidence_refs": [
+        "https://www.google.com/search?q=AMD+MI300X+specs+HBM3+LLM+inference+benchmark",
+        "https://rocm.blogs.amd.com/artificial-intelligence/LLM_Inference/README.html"
+      ],
+      "observed_at": "2026-08-16T00:00Z",
+      "confidence": 0.90,
+      "impact": "material",
+      "reversible": true,
+      "details": {
+        "architecture": "CDNA 3, 304 Compute Units",
+        "memory": "192GB HBM3",
+        "memory_bandwidth_theoretical": "5.3 TB/s",
+        "memory_bandwidth_measured": "4.3-4.5 TB/s (~81% efficiency)",
+        "tdp": "750W",
+        "fp16_bf16": "~1.3 Petaflops",
+        "fp8": "~2.6 Petaflops",
+        "gpu_interconnect": "xGMI/Infinity Fabric mesh topology",
+        "p2p_bandwidth": "448-896 GB/s per node",
+        "llm_inference_70b": "30-40+ tokens/sec (FP16)"
+      }
+    },
+    {
+      "concept": "H200规格和定价",
+      "role": "research_findings",
+      "attribute": "NVIDIA HBM3e高端GPU规格与价格",
+      "disposition": "confirmed",
+      "rationale": "从Google AI Overview获取(来源: together.ai, thundercompute.com)",
+      "evidence_refs": [
+        "https://www.together.ai/gpu/nvidia-h200",
+        "https://www.thundercompute.com/blog/nvidia-h200-pricing",
+        "https://www.google.com/search?q=NVIDIA+H200+specs+HBM3e+memory+bandwidth+price+leasing"
+      ],
+      "observed_at": "2026-08-16T00:00Z",
+      "confidence": 0.90,
+      "impact": "material",
+      "reversible": true,
+      "details": {
+        "architecture": "Blackwell (GH100 chip upgrade)",
+        "memory": "141GB HBM3e with ECC",
+        "memory_bandwidth": "4.8 TB/s (43% faster than H100)",
+        "tensor_perf_fp16_bf16_sparse": "989 TFLOPS",
+        "interconnect": "NVLink 4.0 at 900 GB/s",
+        "form_factors": "SXM5 (700W TDP) or NVL PCIe (600W TDP)",
+        "standalone_gpu_price": "$28,000-40,000 (PCIe: $28-34K, SXM5: $32-40K)",
+        "full_8gpu_server_price": "$320,000-420,000 (avg ~$370K)",
+        "cloud_rental_per_hr": "$3.69-7.91 per GPU",
+        "llm_70b_throughput": "~30,000+ tok/s aggregate with concurrency"
+      }
+    },
+    {
+      "concept": "A100二手市场价格",
+      "role": "research_findings",
+      "attribute": "退役A100 80GB二手成交价",
+      "disposition": "confirmed",
+      "rationale": "从Google搜索结果(eBay/服务器经销商)获取二手市场价格",
+      "evidence_refs": [
+        "https://www.ebay.com/shop/a100-gpu-80gb",
+        "https://www.ebay.co.uk/shop/a100-80gb",
+        "https://www.google.com/search?q=A100+80GB+used+price+eBay+server+dealer+2025+2026"
+      ],
+      "observed_at": "2026-08-16T00:00Z",
+      "confidence": 0.85,
+      "impact": "material",
+      "reversible": true,
+      "details": {
+        "a100_80gb_pcie_single": "$9,500-15,000 (varies by vendor/warranty)",
+        "a100_80gb_sxm4_module": "$9,400-11,000 (needs HGX baseboard/cooling)",
+        "for_parts_not_working": "as low as $6,800",
+        "certified_refurb": "premium pricing",
+        "2x_a100_system": "$45,000-48,000 (AMD EPYC/Intel Xeon, basic RAM)",
+        "8x_a100_system": "$120,000-167,000+ (Gen 4 EPYC, 1-2TB RAM, NVMe)",
+        "dealer_vs_ebay": "Dealers price higher to offset platform fees, offer DOA warranties"
+      }
+    },
+    {
+      "concept": "RTX 4090D中国版规格差异",
+      "role": "research_findings",
+      "attribute": "RTX 4090D与RTX 4090规格对比",
+      "disposition": "confirmed",
+      "rationale": "从Google搜索结果获取规格对比",
+      "evidence_refs": [
+        "https://overclock3d.net/news/gpu-displays/nvidia-launches-their-rtx-4090d-graphics-card-and-confirms-it-specifications/",
+        "https://www.runpod.io/articles/guides/nvidia-rtx-4090",
+        "https://www.google.com/search?q=RTX+4090D+vs+RTX+4090+CUDA+cores+14592+vs+16384"
+      ],
+      "observed_at": "2026-08-16T00:00Z",
+      "confidence": 0.90,
+      "impact": "material",
+      "reversible": true,
+      "details": {
+        "rtx_4090d_cuda_cores": 14592,
+        "rtx_4090_cuda_cores": 16384,
+        "rtx_4090d_tdp": "425W",
+        "rtx_4090_tdp": "450W",
+        "both_memory": "24GB GDDR6X",
+        "both_bandwidth": "~1,008 GB/s",
+        "rtx_4090d_price_msrp": "$1,599",
+        "nvlink_support": "No NVLink (same as regular 4090)",
+        "reason": "US export control compliance (<4800 TPP threshold)",
+        "pruned_percentage": "~11% CUDA cores removed"
+      }
+    },
+    {
+      "concept": "LLM推理性能基准数据",
+      "role": "research_findings",
+      "attribute": "各GPU运行LLM的tokens/s基准",
+      "disposition": "confirmed",
+      "rationale": "从Google搜索结果获取多GPU LLM推理基准对比",
+      "evidence_refs": [
+        "https://github.com/vllm-project/vllm",
+        "https://computeprices.com/blog/best-gpus-for-ai-inference-performance-vs-price",
+        "https://slyd.com/guides/inference-gpu-guide",
+        "https://www.google.com/search?q=LLM+inference+benchmark+tokens+per+second+H100+MI300X+H200+A100+RTX+4090"
+      ],
+      "observed_at": "2026-08-16T00:00Z",
+      "confidence": 0.85,
+      "impact": "material",
+      "reversible": true,
+      "details": {
+        "h200": "141GB HBM3e, 4.8 TB/s, single GPU 70B at high throughput (~30,000+ tok/s aggregate concurrency)",
+        "mi300x": "192GB HBM3, 5.3 TB/s, fits unquantized 70B on single chip, ~30-40+ tok/s (70B FP16)",
+        "h100_80gb": "80GB HBM3 (3.35 TB/s), needs 2 GPUs for unquantized 70B, dominates 7B interactive low-latency",
+        "a100_80gb": "80GB HBM2e (~2.0 TB/s), ~1,200-1,500 tok/s for 7B model, multi-node less efficient for 70B",
+        "rtx_4090": "24GB GDDR6X, ~1,008 GB/s, good for 7B-13B quantized models, limited by memory for larger models",
+        "rtx_5090": "32GB GDDR7, 1792 GB/s, expected significant improvement over 4090 for 13B-34B models",
+        "general_note": "7B models: 5,000-9,000+ tok/s aggregate on high-end datacenter cards. 70B models: memory-bandwidth bound, HBM capacity determines multi-GPU need."
+      }
+    },
+    {
+      "concept": "新兴架构Groq Cerebras SambaNova",
+      "role": "research_findings",
+      "attribute": "非GPU专用推理架构评估",
+      "disposition": "confirmed",
+      "rationale": "从Google搜索结果获取新兴推理架构性能数据",
+      "evidence_refs": [
+        "https://groq.com/platform",
+        "https://sambanova.ai/",
+        "https://www.cerebras.ai/",
+        "https://introl.com/blog/groq-lpu-infrastructure-ultra-low-latency-inference-guide-2025",
+        "https://memu.pro/blog/groq-lpu-fast-inference-agent-memory",
+        "https://www.google.com/search?q=Groq+LPU+Cerebras+WSE-3+SambaNova+DataScale+LLM+inference"
+      ],
+      "observed_at": "2026-08-16T00:00Z",
+      "confidence": 0.80,
+      "impact": "medium",
+      "reversible": true,
+      "details": {
+        "groq_lpu": {
+          "architecture": "Multiple independent ASIC chips, on-chip SRAM only (no external memory)",
+          "llama_3_3_70b": "~294-750 tokens/sec",
+          "llama_8b": "~500-1,000+ tokens/sec",
+          "advantage": "Ultra-low first token latency (<200ms), deterministic predictable latency at low batch"
+        },
+        "cerebras_wse_3": {
+          "architecture": "Wafer-scale engine (plate-sized wafer as single processor, no chip interconnect latency)",
+          "llama_3_1_8b": "~1,800 tokens/sec",
+          "llama_3_1_70b_405b": "~450-2,500 tokens/sec",
+          "gpt_oss_120b": "up to ~3,000 tokens/sec",
+          "advantage": "21+ PB/s on-chip SRAM bandwidth, world-record single-stream token throughput"
+        },
+        "sambanova_datascale": {
+          "note": "ASIC-based datacenter inference, mentioned alongside Groq/Cerebras",
+          "single_stream_speed": "300-3,000+ tokens/sec depending on model size and hardware version"
+        },
+        "comparison_note": "All three significantly outperform traditional GPUs in single-stream token throughput. GPUs still win on multi-stream aggregate throughput and flexibility."
+      }
+    },
+    {
+      "concept": "边缘方案Jetson Apple Silicon",
+      "role": "research_findings",
+      "attribute": "边缘设备LLM推理能力边界",
+      "disposition": "confirmed",
+      "rationale": "从Google搜索结果获取边缘设备LLM推理性能数据",
+      "evidence_refs": [
+        "https://www.navyaai.com/blog/jetson-orin-nano-llm-benchmark",
+        "https://www.google.com/search?q=Jetson+Orin+Apple+M3+M4+LLM+inference+benchmark+tokens+per+second+memory+limit"
+      ],
+      "observed_at": "2026-08-16T00:00Z",
+      "confidence": 0.80,
+      "impact": "medium",
+      "reversible": true,
+      "details": {
+        "jetson_orin_nano_8gb": {
+          "memory": "8GB (102 GB/s bandwidth max)",
+          "model_size": "1B-3B parameters",
+          "speed": "10-28 tokens/sec",
+          "power": "As low as 8W"
+        },
+        "jetson_orin_general": {
+          "memory_range": "8GB-64GB",
+          "note": "Memory bandwidth and capacity strictly limit LLM inference"
+        },
+        "apple_m4_pro_max": {
+          "memory": "24GB-128GB unified memory",
+          "model_size": "14B-70B parameters",
+          "speed": "35-70+ tokens/sec"
+        },
+        "conclusion": "Apple M4 Pro/Max offers best edge LLM inference due to high unified memory capacity. Jetson Orin suitable for small edge models (1B-7B) with strict power constraints."
+      }
+    }
+  ]
+}

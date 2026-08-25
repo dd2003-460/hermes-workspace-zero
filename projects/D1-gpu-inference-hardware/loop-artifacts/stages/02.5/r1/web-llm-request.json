@@ -1,0 +1,5 @@
+{
+  "claim": "GPU推理基准交叉验证：RTX 5090 32GB GDDR7 $1999 MSRP；MI300X 192GB HBM3 30-40 tok/s 70B；H200 141GB HBM3e $28K-40K；A100二手$9500-15000；LLM基准方法论差异10-70x；Groq 1000 tok/s/user；Cerebras 750 tok/s；Apple M4边缘推理",
+  "context": "阶段02调研结果需要交叉验证。请独立验证以上GPU规格和LLM推理性能数据。特别关注：1) RTX 5090实际零售价是否远高于MSRP；2) MI300X LLM推理基准是否有独立验证；3) H200 TFLOPS sparse vs dense差异；4) A100二手价格范围；5) 不同benchmark方法论导致的tokens/s差异。",
+  "providers": ["perplexity-review", "chatgpt-review"]
+}

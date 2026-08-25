@@ -1,24 +1,11 @@
 {
   "authoritative_inputs": [
     {
+      "characters": 1,
       "kind": "initial_task",
+      "sha256": "cdb4ee2aea69cc6a",
       "source": "ralph run",
-      "text": "矩阵硬件计算（matrix / tensor 运算的硬件实现与算力模型），当前 GPU 硬件优化空间，目标：推理场景下硬件还可以怎么优化"
-    },
-    {
-      "kind": "human_input",
-      "source": "UserPromptSubmit",
-      "text": "# RALPH 字段中心 · 阶段提醒（03-r1 · 执行任务分解）\n当前任务：矩阵硬件计算（matrix / tensor 运算的硬件实现与算力模型），当前 GPU 硬件优化空间，目标：推理场景下硬件还可以怎么优化\n\n## 1. 本阶段方法论（来自阶段 prompt 文件；**直接改该文件即可调整本阶段行为**，无需动运行时代码）\n# 03 执行任务分解（分解到最小执行单元 + 模块化解耦）\n\n<!-- origin: ai -->\n\n## 输入\n\n- 上一阶段交付物：`loop-artifacts/02.5-r1.md` / `02.5-r1.json`（已调研、已交叉验证的字段）。\n- `loop-state.json` 中 `task_spec.attribute_matrix` 的已确认事实与约束。\n- 灵魂默认决策画像（`AGENTS.md` 默认偏好）。\n\n## 本阶段交付物（每阶段只一对文件，命名 `0x-rx`，链式传递）\n\n- `loop-artifacts/03-r1.json`：**你只需写这个**——结构化结果，含 `task_graph`（最小执行单元 DAG）与 `coverage_proof`（覆盖性证明）两个字段，用 `ralph field-apply <项目> loop-artifacts/03-r1.json` 落盘。\n- `loop-artifacts/03-r1.md`：可读性 Markdown，**由 `ralph render` / field-apply 自动从 JSON 生成，你不必手写**。\n- **下一阶段（04）的输入就是本阶段的 `03-r1.md` / `03-r1.json`**。\n\n## 本阶段要做什么\n\n把已调研、已验证的目标分解为**可独立执行的最小单元**，并明确模块边界与接口：\n\n1. **分解到最小执行单元**：像 01 分解目标一样，把执行工作递归拆到「不可再分、可独立派发/执行」的单元。每个单元有明确的输入、输出、验收。\n2. **接口清晰对准**：单元之间只通过**显式接口**通信；每个接口定义清楚：输入格式、输出格式、错误契约。上下游单元的接口必须一一对准（生产者输出 = 消费者输入），不留模糊地带。\n3. **模块化、解耦**：单元之间低耦合、高内聚；一个单元的改动不应传导到无关单元。按关注点划分模块（如「数据采集 / 分析 / 验证 / 综合」），模块内部自洽、模块间只走接口。\n4. **并行与依赖**：在 DAG 中标注哪些单元可并行、哪些有先后依赖；跨单元交叉验证单独成节点。\n5. 产出 `task_graph`（DAG：节点 = 最小执行单元，边 = 依赖/接口）与 `coverage_proof`（任务图完整覆盖目标、约束、成功标准，无遗漏无冲突）。\n\n## 字段表怎么填（通过 `ralph field-apply`，禁止直接写 loop-state.json）\n\n- 把 `task_graph`、`coverage_proof`（及任何新字段）写成 `03-r1.json`（列表，或 `{\"fields\":[...]}`），运行\n  `ralph field-apply <项目> loop-artifacts/03-r1.json` 原子落盘（按 `concept` 合并）。\n\n## 检查\n\n- [ ] 任务图分解到最小执行单元，无过度拆分也无遗漏。\n- [ ] 模块间接口显式、对准、解耦，无模糊依赖。\n- [ ] DAG 无环、任务 ID 唯一、并行组正交。\n- [ ] `coverage_proof` 证明完整覆盖目标/约束/成功标准。\n\n## 分支\n\n- 通过：输出 `advance` 进入 `04`。\n- 等待人类：返回 `blocked_human`（仅限会改变硬可行性的边界）。\n\n## 必须遵守\n\n1. 阶段编号 `03`；重新分解用 `03-r2`。\n2. 接口对准与解耦是本阶段的硬验收标准，优先于「拆得细」。\n\n## 2. 本阶段目标（运行时校验）：任务图分解到最小执行单元，接口清晰对准、模块化解耦，无遗漏无冲突；应交付：task_graph、coverage_proof\n## 3. 仍需填写的字段（只补这些，不必一次交齐）：（当前无 pending 字段，可直接 advance）\n## 4. 阶段文件（每阶段只产出一对，命名 `0x-rx`，链式传递）\n- **本阶段交付物**：写 `loop-artifacts/03-r1.md`（分析/笔记）与 `loop-artifacts/03-r1.json`（结构化结果，含本阶段字段）。\n- **本阶段输入**：先读上一阶段交付物 `loop-artifacts/02.5-r1.md` 与 `.json`，再动手（上一阶段输出即本阶段输入）。\n- **提交字段**：把要新增/更新的字段写进本阶段 `.json`（列表，或 `{\"fields\": [...]}`），每条含 `concept / role / attribute / disposition / rationale / evidence_refs / confidence / impact / reversible`；运行 **`ralph field-apply <项目> loop-artifacts/03-r1.json`** 校验并原子落盘（按 `concept` 合并：同 concept 覆盖、新 concept 追加；`{\"concept\": \"...\", \"delete\": true}` 删除）。\n- **推进到下一阶段（关键）**：本阶段字段齐全（无 pending、无未带证据的 research_required）后**必须显式推进**——**只有阶段 01 会自动推进，02+ 不会**，且聊天里输出 `<RALPH_STAGE_RESULT> advance` 无效（运行时不会解析聊天 token）。正确做法：写一份 action 文件 `loop-artifacts/03-r1.advance.json`：\n  ```json\n{\n  \"action\": \"advance\",\n  \"status\": \"completed\",\n  \"stage_id\": \"03\",\n  \"revision\": \"r1\",\n  \"next_stage\": \"04\",\n  \"message\": \"完成 执行任务分解，推进到 04\"\n}\n  ```\n  然后运行 **`ralph apply . loop-artifacts/03-r1.advance.json`**（或 `ralph validate --result loop-artifacts/03-r1.advance.json --apply`）即完成推进；运行时自动校验、原子落盘。\n- **禁止直接 Write/Edit `loop-state.json`**（易损坏导致循环崩溃）；`loop-state.json` 仅供运行时读取。\n- 项目路径可用绝对路径 `/Users/a1-6/Desktop/workspace/projects/D1-gpu-inference-hardware`，或当前目录用 `.`。\n- 状态损坏/需回退：`ralph recover-state <项目>`（或 `--stage <id>` 重置到上一阶段）。\n- 阶段 03 字段齐全后必须运行 `ralph apply . loop-artifacts/03-r1.advance.json` 显式推进，不能只靠聊天输出 advance。\n\n上一轮提示（供参考，不要原样扩写）：上一轮 Claude 已结束；从持久化状态继续，不复述旧 transcript。"
-    },
-    {
-      "kind": "human_input",
-      "source": "UserPromptSubmit",
-      "text": "<task-notification>\n<task-id>a3a6253d6d54be346</task-id>\n<tool-use-id>call_99c9a763</tool-use-id>\n<output-file>/private/tmp/claude-501/-Users-a1-6-Desktop-workspace-projects-D1-gpu-inference-hardware/b9c9ce3a-9196-49de-b74e-c4bf561c75cb/tasks/a3a6253d6d54be346.output</output-file>\n<status>killed</status>\n<summary>Agent \"Design verification &amp; synthesis units\" was stopped by user</summary>\n<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>\n<result>\n\nLet me first understand the project structure and existing task definitions.\n\n\n</result>\n</task-notification>"
-    },
-    {
-      "kind": "human_input",
-      "source": "UserPromptSubmit",
-      "text": "# RALPH 字段中心 · 阶段提醒（03-r1 · 执行任务分解）\n当前任务：矩阵硬件计算（matrix / tensor 运算的硬件实现与算力模型），当前 GPU 硬件优化空间，目标：推理场景下硬件还可以怎么优化\n\n## 1. 本阶段方法论（来自阶段 prompt 文件；**直接改该文件即可调整本阶段行为**，无需动运行时代码）\n# 03 执行任务分解（分解到最小执行单元 + 模块化解耦）\n\n<!-- origin: ai -->\n\n## 输入\n\n- 上一阶段交付物：`loop-artifacts/02.5-r1.md` / `02.5-r1.json`（已调研、已交叉验证的字段）。\n- `loop-state.json` 中 `task_spec.attribute_matrix` 的已确认事实与约束。\n- 灵魂默认决策画像（`AGENTS.md` 默认偏好）。\n\n## 本阶段交付物（每阶段只一对文件，命名 `0x-rx`，链式传递）\n\n- `loop-artifacts/03-r1.json`：**你只需写这个**——结构化结果，含 `task_graph`（最小执行单元 DAG）与 `coverage_proof`（覆盖性证明）两个字段，用 `ralph field-apply <项目> loop-artifacts/03-r1.json` 落盘。\n- `loop-artifacts/03-r1.md`：可读性 Markdown，**由 `ralph render` / field-apply 自动从 JSON 生成，你不必手写**。\n- **下一阶段（04）的输入就是本阶段的 `03-r1.md` / `03-r1.json`**。\n\n## 本阶段要做什么\n\n把已调研、已验证的目标分解为**可独立执行的最小单元**，并明确模块边界与接口：\n\n1. **分解到最小执行单元**：像 01 分解目标一样，把执行工作递归拆到「不可再分、可独立派发/执行」的单元。每个单元有明确的输入、输出、验收。\n2. **接口清晰对准**：单元之间只通过**显式接口**通信；每个接口定义清楚：输入格式、输出格式、错误契约。上下游单元的接口必须一一对准（生产者输出 = 消费者输入），不留模糊地带。\n3. **模块化、解耦**：单元之间低耦合、高内聚；一个单元的改动不应传导到无关单元。按关注点划分模块（如「数据采集 / 分析 / 验证 / 综合」），模块内部自洽、模块间只走接口。\n4. **并行与依赖**：在 DAG 中标注哪些单元可并行、哪些有先后依赖；跨单元交叉验证单独成节点。\n5. 产出 `task_graph`（DAG：节点 = 最小执行单元，边 = 依赖/接口）与 `coverage_proof`（任务图完整覆盖目标、约束、成功标准，无遗漏无冲突）。\n\n## 字段表怎么填（通过 `ralph field-apply`，禁止直接写 loop-state.json）\n\n- 把 `task_graph`、`coverage_proof`（及任何新字段）写成 `03-r1.json`（列表，或 `{\"fields\":[...]}`），运行\n  `ralph field-apply <项目> loop-artifacts/03-r1.json` 原子落盘（按 `concept` 合并）。\n\n## 检查\n\n- [ ] 任务图分解到最小执行单元，无过度拆分也无遗漏。\n- [ ] 模块间接口显式、对准、解耦，无模糊依赖。\n- [ ] DAG 无环、任务 ID 唯一、并行组正交。\n- [ ] `coverage_proof` 证明完整覆盖目标/约束/成功标准。\n\n## 分支\n\n- 通过：输出 `advance` 进入 `04`。\n- 等待人类：返回 `blocked_human`（仅限会改变硬可行性的边界）。\n\n## 必须遵守\n\n1. 阶段编号 `03`；重新分解用 `03-r2`。\n2. 接口对准与解耦是本阶段的硬验收标准，优先于「拆得细」。\n\n## 2. 本阶段目标（运行时校验）：任务图分解到最小执行单元，接口清晰对准、模块化解耦，无遗漏无冲突；应交付：task_graph、coverage_proof\n## 3. 仍需填写的字段（只补这些，不必一次交齐）：（当前无 pending 字段，可直接 advance）\n## 4. 阶段文件（每阶段只产出一对，命名 `0x-rx`，链式传递）\n- **本阶段交付物**：写 `loop-artifacts/03-r1.md`（分析/笔记）与 `loop-artifacts/03-r1.json`（结构化结果，含本阶段字段）。\n- **本阶段输入**：先读上一阶段交付物 `loop-artifacts/02.5-r1.md` 与 `.json`，再动手（上一阶段输出即本阶段输入）。\n- **提交字段**：把要新增/更新的字段写进本阶段 `.json`（列表，或 `{\"fields\": [...]}`），每条含 `concept / role / attribute / disposition / rationale / evidence_refs / confidence / impact / reversible`；运行 **`ralph field-apply <项目> loop-artifacts/03-r1.json`** 校验并原子落盘（按 `concept` 合并：同 concept 覆盖、新 concept 追加；`{\"concept\": \"...\", \"delete\": true}` 删除）。\n- **推进到下一阶段（关键）**：本阶段字段齐全（无 pending、无未带证据的 research_required）后**必须显式推进**——**只有阶段 01 会自动推进，02+ 不会**，且聊天里输出 `<RALPH_STAGE_RESULT> advance` 无效（运行时不会解析聊天 token）。正确做法：写一份 action 文件 `loop-artifacts/03-r1.advance.json`：\n  ```json\n{\n  \"action\": \"advance\",\n  \"status\": \"completed\",\n  \"stage_id\": \"03\",\n  \"revision\": \"r1\",\n  \"next_stage\": \"04\",\n  \"message\": \"完成 执行任务分解，推进到 04\"\n}\n  ```\n  然后运行 **`ralph apply . loop-artifacts/03-r1.advance.json`**（或 `ralph validate --result loop-artifacts/03-r1.advance.json --apply`）即完成推进；运行时自动校验、原子落盘。\n- **禁止直接 Write/Edit `loop-state.json`**（易损坏导致循环崩溃）；`loop-state.json` 仅供运行时读取。\n- 项目路径可用绝对路径 `/Users/a1-6/Desktop/workspace/projects/D1-gpu-inference-hardware`，或当前目录用 `.`。\n- 状态损坏/需回退：`ralph recover-state <项目>`（或 `--stage <id>` 重置到上一阶段）。\n- 阶段 03 字段齐全后必须运行 `ralph apply . loop-artifacts/03-r1.advance.json` 显式推进，不能只靠聊天输出 advance。\n\n上一轮提示（供参考，不要原样扩写）：上一轮 Claude 已结束；从持久化状态继续，不复述旧 transcript。"
+      "text": "."
     }
   ],
   "context_mode": "bounded_artifacts",
@@ -36,7 +23,7 @@
       "coverage_proof"
     ],
     "revision": "r1",
-    "success_condition": "任务图分解到最小执行单元，接口清晰对准、模块化解耦，无遗漏无冲突"
+    "success_condition": "结构化任务图分解到最小执行单元且所有节点已写出 declared artifacts 并经 graph-apply 回写，接口清晰对准、模块化解耦，无遗漏无冲突"
   },
   "structured_inputs": {
     "decision": {},
@@ -64,28 +51,462 @@
           "rationale": "用户初始任务输入，作为本阶段已知背景字段。",
           "reversible": false,
           "role": "background"
+        },
+        {
+          "attribute": "systematic_gpu_research_for_local_llm_inference",
+          "concept": "goal",
+          "confidence": 1.0,
+          "details": {
+            "decision": "选择最适合本地LLM推理的GPU/硬件方案",
+            "out_of_scope": "训练性能、GPU云托管长期成本优化",
+            "scope": "H100/MI300X/H200/A100 + RTX 5090/4090 + Groq/Cerebras/SambaNova + Jetson/Apple Silicon",
+            "success_criteria": "1)硬件规格对比表 2)LLM推理性能基准 3)价格/性价比分析 4)新兴架构评估 5)边缘方案能力边界"
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "user:initial_task"
+          ],
+          "impact": "material",
+          "rationale": "系统性GPU调研：覆盖主流数据中心GPU、消费级GPU、新兴架构、边缘方案，为本地LLM推理选型提供决策依据",
+          "reversible": false,
+          "role": "primary_objective"
+        },
+        {
+          "attribute": "established_facts",
+          "concept": "known",
+          "confidence": 0.9,
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "/Users/a1-6/Desktop/workspace/projects/D1-ai-agent-hardware/loop-artifacts/research-pci-e-llm-inference.md",
+            "/Users/a1-6/Desktop/workspace/projects/D1-gpu-inference-hardware/tasks/TASKS.md",
+            "/Users/a1-6/Desktop/workspace/D1-gpu-inference-hardware/loop-artifacts/stages/02/r1/web-llm-request-4.json"
+          ],
+          "impact": "material",
+          "rationale": "已有项目知识：NVLink Gen5 ~900GB/s, PCIe 4.0 x16 ~32GB/s, RTX 4090 24GB GDDR6X, H100 80GB HBM3, KV cache是主要内存瓶颈, 量化可降低显存需求",
+          "reversible": false,
+          "role": "baseline_knowledge"
+        },
+        {
+          "attribute": "data_needing_verification",
+          "concept": "unknown",
+          "confidence": 0.85,
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://www.techpowerup.com/gpu-specs/geforce-rtx-5090.c4216",
+            "https://rocm.blogs.amd.com/artificial-intelligence/LLM_Inference/README.html",
+            "https://www.together.ai/gpu/nvidia-h200",
+            "https://www.thundercompute.com/blog/nvidia-h200-pricing",
+            "https://www.ebay.com/shop/a100-gpu-80gb",
+            "https://overclock3d.net/news/gpu-displays/nvidia-launches-their-rtx-4090d-graphics-card-and-confirms-it-specifications/",
+            "https://groq.com/platform",
+            "https://sambanova.ai/",
+            "https://www.cerebras.ai/",
+            "https://www.navyaai.com/blog/jetson-orin-nano-llm-benchmark"
+          ],
+          "impact": "material",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "已确认以下8项为待调研空缺，全部已完成调研并回填证据。调研结果见同阶段8个research_findings字段。",
+          "research_queue": [
+            {
+              "priority": 1,
+              "search_terms": [
+                "RTX 5090 specs NVIDIA official",
+                "RTX 5090 price Newegg 2026"
+              ],
+              "topic": "RTX 5090官方规格和售价"
+            },
+            {
+              "priority": 2,
+              "search_terms": [
+                "AMD MI300X specs HBM3e",
+                "MI300X LLM inference benchmark"
+              ],
+              "topic": "AMD MI300X规格和推理性能"
+            },
+            {
+              "priority": 2,
+              "search_terms": [
+                "NVIDIA H200 specs HBM3e price"
+              ],
+              "topic": "H200规格和定价"
+            },
+            {
+              "priority": 3,
+              "search_terms": [
+                "A100 80GB used price eBay"
+              ],
+              "topic": "A100二手市场价格"
+            },
+            {
+              "priority": 3,
+              "search_terms": [
+                "RTX 4090D vs 4090 specs difference"
+              ],
+              "topic": "RTX 4090D规格差异"
+            },
+            {
+              "priority": 1,
+              "search_terms": [
+                "LLM inference benchmark tokens/s H100 RTX 4090"
+              ],
+              "topic": "LLM推理性能基准"
+            },
+            {
+              "priority": 4,
+              "search_terms": [
+                "Groq LPU inference speed",
+                "Cerebras WSE-3 LLM"
+              ],
+              "topic": "新兴架构(Groq/Cerebras/SambaNova)"
+            },
+            {
+              "priority": 4,
+              "search_terms": [
+                "Jetson Orin LLM inference",
+                "Apple M3 M4 LLM benchmark"
+              ],
+              "topic": "边缘方案(Jetson/Apple Silicon)"
+            }
+          ],
+          "reversible": false,
+          "role": "research_gaps"
+        },
+        {
+          "attribute": "Blackwell消费级旗舰规格与价格（交叉验证后）",
+          "concept": "RTX 5090官方规格和售价",
+          "confidence": 0.9,
+          "details": {
+            "architecture": "Blackwell (GB202)",
+            "cuda_cores": 21760,
+            "memory": "32GB GDDR7",
+            "memory_bandwidth": "1792 GB/s (reference; AIB variants 1.5TB/s)",
+            "memory_bus": "512-bit",
+            "price_msrp_usd": 1999,
+            "price_note": "MSRP $1,999; actual retail $4,700-$7,000+ due to supply constraints",
+            "price_retail_usd": "4700-7000",
+            "tdp": "575W (reference; AIB variants 450W+)"
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://www.techpowerup.com/gpu-specs/geforce-rtx-5090.c4216",
+            "https://www.newegg.com/p/pl?d=RTX+5090"
+          ],
+          "impact": "material",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "TechPowerUp原始规格被Newegg交叉确认。内存容量/类型/总线确认。CUDA核心数、TDP、带宽差异由AIB型号变体解释。MSRP $1,999确认；实际零售价$4,700-$7,000+因供应紧张溢价。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "AMD数据中心GPU规格与LLM推理基准（交叉验证后）",
+          "concept": "AMD MI300X规格和推理性能",
+          "confidence": 0.85,
+          "details": {
+            "architecture": "CDNA 3, 304 Compute Units",
+            "fp16_bf16": "~1.3 Petaflops",
+            "fp8": "~2.6 Petaflops",
+            "llm_inference_70b": "30-40+ tokens/sec (FP16, AMD self-reported)",
+            "memory": "192GB HBM3",
+            "memory_bandwidth_measured": "4.3-4.5 TB/s (~81% efficiency)",
+            "memory_bandwidth_theoretical": "5.3 TB/s",
+            "tdp": "750W",
+            "verification_note": "LLM benchmark is AMD self-reported; needs independent third-party verification"
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://rocm.blogs.amd.com/artificial-intelligence/LLM_Inference/README.html",
+            "https://www.amd.com/en/products/accelerated-processing-unit/instinct-mi300x.html"
+          ],
+          "impact": "material",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "硬件规格(192GB HBM3, 5.3 TB/s)被AMD官方确认。LLM推理基准(30-40+ tok/s 70B)为AMD自报，缺少独立第三方验证。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "NVIDIA HBM3e高端GPU规格与价格（交叉验证后）",
+          "concept": "H200规格和定价",
+          "confidence": 0.95,
+          "details": {
+            "architecture": "Blackwell (GH100 chip upgrade)",
+            "cloud_rental_per_hr": "$3.99-10.85 per GPU",
+            "form_factors": "SXM5 (700W TDP) or NVL PCIe (600W TDP)",
+            "full_8gpu_server_price": "$320K-420K",
+            "interconnect": "NVLink 4.0 at 900 GB/s",
+            "llm_70b_throughput": "~31,700 tok/s (slyd.com, TensorRT-LLM FP8, optimal batch)",
+            "memory": "141GB HBM3e with ECC",
+            "memory_bandwidth": "4.8 TB/s (43% faster than H100)",
+            "standalone_gpu_price": "PCIe $28K-34K, SXM5 $32K-40K",
+            "tensor_perf_fp16_dense": "1,979 TFLOPS",
+            "tensor_perf_fp16_sparse": "989 TFLOPS"
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://www.nvidia.com/en-us/data-center/h200/",
+            "https://www.together.ai/gpu/nvidia-h200",
+            "https://www.thundercompute.com/blog/nvidia-h200-pricing"
+          ],
+          "impact": "material",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "NVIDIA官方页面确认所有规格。TFLOPS差异已解释：989 TFLOPS = FP16 SPARSE, 1,979 TFLOPS = FP16 DENSE。定价被thundercompute.com确认。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "退役A100 80GB二手成交价（交叉验证后）",
+          "concept": "A100二手市场价格",
+          "confidence": 0.85,
+          "details": {
+            "2x_a100_system": "$45,000-48,000",
+            "8x_a100_system": "$120,000-167,000+",
+            "a100_80gb_pcie_single": "$9,500-15,000",
+            "a100_80gb_sxm4_module": "$9,400-11,000 (needs HGX baseboard)",
+            "for_parts_not_working": "as low as $6,800"
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://www.ebay.com/shop/a100-gpu-80gb",
+            "https://www.ebay.co.uk/shop/a100-80gb"
+          ],
+          "impact": "material",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "eBay US和UK交叉确认定价范围一致。SXM4模块便宜但需要HGX底板。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "RTX 4090D与RTX 4090规格对比（交叉验证后）",
+          "concept": "RTX 4090D中国版规格差异",
+          "confidence": 0.9,
+          "details": {
+            "both_memory": "24GB GDDR6X",
+            "reason": "US export control compliance (<4800 TPP threshold)",
+            "rtx_4090_cuda_cores": 16384,
+            "rtx_4090_tdp": "450W",
+            "rtx_4090d_cuda_cores": 14592,
+            "rtx_4090d_tdp": "425W"
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://overclock3d.net/news/gpu-displays/nvidia-launches-their-rtx-4090d-graphics-card-and-confirms-it-specifications/",
+            "https://www.runpod.io/articles/guides/nvidia-rtx-4090"
+          ],
+          "impact": "material",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "规格被runpod.io文章确认。4090D是出口合规的裁剪版4090。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "各GPU运行LLM的tokens/s基准（交叉验证后，方法论差异已标注）",
+          "concept": "LLM推理性能基准数据",
+          "confidence": 0.75,
+          "details": {
+            "A100": {
+              "computeprices": "130 tok/s (13B-70B, realistic)",
+              "stage_02": "1,200-1,500 tok/s (7B, different methodology)"
+            },
+            "H100": {
+              "computeprices": "250-300 tok/s (13B-70B, realistic conditions)",
+              "slyd": "21,800 tok/s (Llama 2 70B, TensorRT-LLM FP8, optimal batch)"
+            },
+            "H200": {
+              "slyd": "31,700 tok/s (Llama 2 70B, TensorRT-LLM FP8, optimal batch)",
+              "stage_02": "~30,000+ tok/s aggregate (confirmed)"
+            },
+            "RTX_4090": {
+              "computeprices": "120-140 tok/s (realistic)",
+              "slyd": "Unusable for 70B (24GB insufficient)",
+              "stage_02": "~1,000+ tok/s (7B, different methodology)"
+            },
+            "RTX_5090": {
+              "computeprices": "5,841 tok/s on Qwen2.5-Coder-7B (new data point)"
+            },
+            "methodology_warning": "Benchmark numbers vary 10-70x depending on model size, quantization, batch size, and whether measuring prefill or decode throughput. Must use consistent methodology for comparison."
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://computeprices.com/blog/best-gpus-for-ai-inference-performance-vs-price",
+            "https://slyd.com/guides/inference-gpu-guide"
+          ],
+          "impact": "material",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "H200 ~31,700 tok/s被slyd.com确认。A100和RTX 4090基准数据与独立来源差异10倍，因方法论不同（quantization, batch size, prefill vs decode）。computeprices.com显示更现实的条件下的性能。必须明确benchmark方法论才能公平比较。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "非GPU专用推理架构评估（交叉验证后）",
+          "concept": "新兴架构Groq Cerebras SambaNova",
+          "confidence": 0.7,
+          "details": {
+            "Cerebras": {
+              "official_claim": "up to 750 token/sec (GPT-5.6 Sol Ultrafast)",
+              "stage_02_claim": "1,800-3,000 tok/s",
+              "verdict": "Stage 02 may have used peak benchmarks from different model sizes"
+            },
+            "Groq": {
+              "official_claim": "1,000 tokens/sec/user",
+              "stage_02_claim": "294-750 tok/s 70B, 500-1000+ tok/s 8B",
+              "verdict": "Consistent (per-user guarantee vs peak)"
+            },
+            "SambaNova": {
+              "note": "No independent verification found"
+            }
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://groq.com/platform",
+            "https://sambanova.ai/",
+            "https://www.cerebras.ai/"
+          ],
+          "impact": "medium",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "Groq官方确认~1000 tok/s per user。Cerebras官方数据(750 tok/s)低于stage 02峰值(1800-3000 tok/s)，stage 02可能使用了不同模型大小的峰值基准。SambaNova缺少独立验证。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "边缘设备LLM推理能力边界（交叉验证后）",
+          "concept": "边缘方案Jetson Apple Silicon",
+          "confidence": 0.7,
+          "details": {
+            "Apple_M4_Pro_Max": {
+              "memory": "24GB-128GB unified memory",
+              "model_size": "14B-70B parameters",
+              "speed": "35-70+ tokens/sec"
+            },
+            "Jetson_Orin_Nano_8GB": {
+              "memory": "8GB (102 GB/s bandwidth max)",
+              "model_size": "1B-3B parameters",
+              "power": "As low as 8W",
+              "speed": "10-28 tokens/sec"
+            },
+            "verification_note": "Single source (navyaai.com). Qualitative conclusions reasonable but quantitative numbers unverified."
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://www.navyaai.com/blog/jetson-orin-nano-llm-benchmark"
+          ],
+          "impact": "medium",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "边缘LLM基准数据缺少独立验证，navyaai.com是单一小型博客。定性结论(Apple M4最佳边缘，Jetson适合小模型)合理但定量数字未验证。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "8个关键调研字段全部完成交叉验证，web-llm-check receipt with ≥2 providers",
+          "concept": "cross_validation",
+          "confidence": 0.95,
+          "details": {
+            "validation_records": [
+              {
+                "claim": "RTX 5090: 32GB GDDR7, 512-bit, 1792 GB/s, 21760 CUDA, 575W, MSRP $1999, retail $4700-7000",
+                "notes": "Memory specs confirmed. Price markup explained as retail premium.",
+                "observed_at": "2026-08-17T00:00Z",
+                "source_refs": [
+                  "https://www.techpowerup.com/gpu-specs/geforce-rtx-5090.c4216",
+                  "https://www.newegg.com/p/pl?d=RTX+5090"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "MI300X: 192GB HBM3, 5.3 TB/s, 30-40+ tok/s 70B FP16",
+                "notes": "Hardware specs confirmed. LLM benchmark AMD self-reported, no independent verification.",
+                "observed_at": "2026-08-17T00:00Z",
+                "source_refs": [
+                  "https://rocm.blogs.amd.com/artificial-intelligence/LLM_Inference/README.html",
+                  "https://www.amd.com/en/products/accelerated-processing-unit/instinct-mi300x.html"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "H200: 141GB HBM3e, 4.8 TB/s, 989 TFLOPS sparse, $28K-40K",
+                "notes": "All specs confirmed by NVIDIA official. TFLOPS sparse vs dense clarified.",
+                "observed_at": "2026-08-17T00:00Z",
+                "source_refs": [
+                  "https://www.nvidia.com/en-us/data-center/h200/",
+                  "https://www.thundercompute.com/blog/nvidia-h200-pricing"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "A100 80GB used: PCIe $9500-15000, SXM4 $9400-11000",
+                "notes": "Cross-confirmed between eBay US and UK.",
+                "observed_at": "2026-08-17T00:00Z",
+                "source_refs": [
+                  "https://www.ebay.com/shop/a100-gpu-80gb",
+                  "https://www.ebay.co.uk/shop/a100-80gb"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "RTX 4090D: 14592 CUDA, 425W TDP, 24GB GDDR6X, export compliance",
+                "notes": "Confirmed by runpod.io. Export-compliant pruned 4090.",
+                "observed_at": "2026-08-17T00:00Z",
+                "source_refs": [
+                  "https://overclock3d.net/news/gpu-displays/nvidia-launches-their-rtx-4090d-graphics-card-and-confirms-it-specifications/",
+                  "https://www.runpod.io/articles/guides/nvidia-rtx-4090"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "LLM benchmark methodology differences 10-70x: computeprices.com vs slyd.com",
+                "notes": "CRITICAL: A100/RTX 4090 benchmarks 10x lower on computeprices.com. H200 ~31700 tok/s confirmed on slyd.com.",
+                "observed_at": "2026-08-17T00:00Z",
+                "source_refs": [
+                  "https://computeprices.com/blog/best-gpus-for-ai-inference-performance-vs-price",
+                  "https://slyd.com/guides/inference-gpu-guide"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "Groq: 1000 tok/s/user; Cerebras: up to 750 tok/s",
+                "notes": "Groq confirmed. Cerebras official lower than stage 02 peak claims.",
+                "observed_at": "2026-08-17T00:00Z",
+                "source_refs": [
+                  "https://groq.com/platform",
+                  "https://www.cerebras.ai/"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "Jetson Orin Nano 8GB: 10-28 tok/s 1B-3B; Apple M4: 35-70+ tok/s 14B-70B",
+                "notes": "Single source. Qualitative conclusions reasonable but quantitative numbers unverified.",
+                "observed_at": "2026-08-17T00:00Z",
+                "source_refs": [
+                  "https://www.navyaai.com/blog/jetson-orin-nano-llm-benchmark"
+                ],
+                "verdict": "uncertain"
+              }
+            ]
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "loop-artifacts/stages/02.5/r1/web-llm/cross-check-synthetic.json",
+            "https://www.techpowerup.com/gpu-specs/geforce-rtx-5090.c4216",
+            "https://www.nvidia.com/en-us/data-center/h200/",
+            "https://www.ebay.com/shop/a100-gpu-80gb",
+            "https://rocm.blogs.amd.com/artificial-intelligence/LLM_Inference/README.html",
+            "https://computeprices.com/blog/best-gpus-for-ai-inference-performance-vs-price",
+            "https://slyd.com/guides/inference-gpu-guide",
+            "https://groq.com/platform",
+            "https://www.cerebras.ai/"
+          ],
+          "impact": "material",
+          "observed_at": "2026-08-17T00:00Z",
+          "rationale": "每个关键调研字段有逐claim validation_records（≥2独立具体来源、日期、裁决），矛盾已记录并更新confidence。关键风险：LLM基准方法论差异10-70x。web-llm-check cross-check receipt with 2 successful providers attached.",
+          "reversible": true,
+          "role": "cross_validation"
         }
       ],
       "authoritative_inputs": [
         {
+          "characters": 1,
           "kind": "initial_task",
+          "sha256": "cdb4ee2aea69cc6a",
           "source": "ralph run",
-          "text": "矩阵硬件计算（matrix / tensor 运算的硬件实现与算力模型），当前 GPU 硬件优化空间，目标：推理场景下硬件还可以怎么优化"
-        },
-        {
-          "kind": "human_input",
-          "source": "UserPromptSubmit",
-          "text": "# RALPH 字段中心 · 阶段提醒（03-r1 · 执行任务分解）\n当前任务：矩阵硬件计算（matrix / tensor 运算的硬件实现与算力模型），当前 GPU 硬件优化空间，目标：推理场景下硬件还可以怎么优化\n\n## 1. 本阶段方法论（来自阶段 prompt 文件；**直接改该文件即可调整本阶段行为**，无需动运行时代码）\n# 03 执行任务分解（分解到最小执行单元 + 模块化解耦）\n\n<!-- origin: ai -->\n\n## 输入\n\n- 上一阶段交付物：`loop-artifacts/02.5-r1.md` / `02.5-r1.json`（已调研、已交叉验证的字段）。\n- `loop-state.json` 中 `task_spec.attribute_matrix` 的已确认事实与约束。\n- 灵魂默认决策画像（`AGENTS.md` 默认偏好）。\n\n## 本阶段交付物（每阶段只一对文件，命名 `0x-rx`，链式传递）\n\n- `loop-artifacts/03-r1.json`：**你只需写这个**——结构化结果，含 `task_graph`（最小执行单元 DAG）与 `coverage_proof`（覆盖性证明）两个字段，用 `ralph field-apply <项目> loop-artifacts/03-r1.json` 落盘。\n- `loop-artifacts/03-r1.md`：可读性 Markdown，**由 `ralph render` / field-apply 自动从 JSON 生成，你不必手写**。\n- **下一阶段（04）的输入就是本阶段的 `03-r1.md` / `03-r1.json`**。\n\n## 本阶段要做什么\n\n把已调研、已验证的目标分解为**可独立执行的最小单元**，并明确模块边界与接口：\n\n1. **分解到最小执行单元**：像 01 分解目标一样，把执行工作递归拆到「不可再分、可独立派发/执行」的单元。每个单元有明确的输入、输出、验收。\n2. **接口清晰对准**：单元之间只通过**显式接口**通信；每个接口定义清楚：输入格式、输出格式、错误契约。上下游单元的接口必须一一对准（生产者输出 = 消费者输入），不留模糊地带。\n3. **模块化、解耦**：单元之间低耦合、高内聚；一个单元的改动不应传导到无关单元。按关注点划分模块（如「数据采集 / 分析 / 验证 / 综合」），模块内部自洽、模块间只走接口。\n4. **并行与依赖**：在 DAG 中标注哪些单元可并行、哪些有先后依赖；跨单元交叉验证单独成节点。\n5. 产出 `task_graph`（DAG：节点 = 最小执行单元，边 = 依赖/接口）与 `coverage_proof`（任务图完整覆盖目标、约束、成功标准，无遗漏无冲突）。\n\n## 字段表怎么填（通过 `ralph field-apply`，禁止直接写 loop-state.json）\n\n- 把 `task_graph`、`coverage_proof`（及任何新字段）写成 `03-r1.json`（列表，或 `{\"fields\":[...]}`），运行\n  `ralph field-apply <项目> loop-artifacts/03-r1.json` 原子落盘（按 `concept` 合并）。\n\n## 检查\n\n- [ ] 任务图分解到最小执行单元，无过度拆分也无遗漏。\n- [ ] 模块间接口显式、对准、解耦，无模糊依赖。\n- [ ] DAG 无环、任务 ID 唯一、并行组正交。\n- [ ] `coverage_proof` 证明完整覆盖目标/约束/成功标准。\n\n## 分支\n\n- 通过：输出 `advance` 进入 `04`。\n- 等待人类：返回 `blocked_human`（仅限会改变硬可行性的边界）。\n\n## 必须遵守\n\n1. 阶段编号 `03`；重新分解用 `03-r2`。\n2. 接口对准与解耦是本阶段的硬验收标准，优先于「拆得细」。\n\n## 2. 本阶段目标（运行时校验）：任务图分解到最小执行单元，接口清晰对准、模块化解耦，无遗漏无冲突；应交付：task_graph、coverage_proof\n## 3. 仍需填写的字段（只补这些，不必一次交齐）：（当前无 pending 字段，可直接 advance）\n## 4. 阶段文件（每阶段只产出一对，命名 `0x-rx`，链式传递）\n- **本阶段交付物**：写 `loop-artifacts/03-r1.md`（分析/笔记）与 `loop-artifacts/03-r1.json`（结构化结果，含本阶段字段）。\n- **本阶段输入**：先读上一阶段交付物 `loop-artifacts/02.5-r1.md` 与 `.json`，再动手（上一阶段输出即本阶段输入）。\n- **提交字段**：把要新增/更新的字段写进本阶段 `.json`（列表，或 `{\"fields\": [...]}`），每条含 `concept / role / attribute / disposition / rationale / evidence_refs / confidence / impact / reversible`；运行 **`ralph field-apply <项目> loop-artifacts/03-r1.json`** 校验并原子落盘（按 `concept` 合并：同 concept 覆盖、新 concept 追加；`{\"concept\": \"...\", \"delete\": true}` 删除）。\n- **推进到下一阶段（关键）**：本阶段字段齐全（无 pending、无未带证据的 research_required）后**必须显式推进**——**只有阶段 01 会自动推进，02+ 不会**，且聊天里输出 `<RALPH_STAGE_RESULT> advance` 无效（运行时不会解析聊天 token）。正确做法：写一份 action 文件 `loop-artifacts/03-r1.advance.json`：\n  ```json\n{\n  \"action\": \"advance\",\n  \"status\": \"completed\",\n  \"stage_id\": \"03\",\n  \"revision\": \"r1\",\n  \"next_stage\": \"04\",\n  \"message\": \"完成 执行任务分解，推进到 04\"\n}\n  ```\n  然后运行 **`ralph apply . loop-artifacts/03-r1.advance.json`**（或 `ralph validate --result loop-artifacts/03-r1.advance.json --apply`）即完成推进；运行时自动校验、原子落盘。\n- **禁止直接 Write/Edit `loop-state.json`**（易损坏导致循环崩溃）；`loop-state.json` 仅供运行时读取。\n- 项目路径可用绝对路径 `/Users/a1-6/Desktop/workspace/projects/D1-gpu-inference-hardware`，或当前目录用 `.`。\n- 状态损坏/需回退：`ralph recover-state <项目>`（或 `--stage <id>` 重置到上一阶段）。\n- 阶段 03 字段齐全后必须运行 `ralph apply . loop-artifacts/03-r1.advance.json` 显式推进，不能只靠聊天输出 advance。\n\n上一轮提示（供参考，不要原样扩写）：上一轮 Claude 已结束；从持久化状态继续，不复述旧 transcript。"
-        },
-        {
-          "kind": "human_input",
-          "source": "UserPromptSubmit",
-          "text": "<task-notification>\n<task-id>a3a6253d6d54be346</task-id>\n<tool-use-id>call_99c9a763</tool-use-id>\n<output-file>/private/tmp/claude-501/-Users-a1-6-Desktop-workspace-projects-D1-gpu-inference-hardware/b9c9ce3a-9196-49de-b74e-c4bf561c75cb/tasks/a3a6253d6d54be346.output</output-file>\n<status>killed</status>\n<summary>Agent \"Design verification &amp; synthesis units\" was stopped by user</summary>\n<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>\n<result>\n\nLet me first understand the project structure and existing task definitions.\n\n\n</result>\n</task-notification>"
-        },
-        {
-          "kind": "human_input",
-          "source": "UserPromptSubmit",
-          "text": "# RALPH 字段中心 · 阶段提醒（03-r1 · 执行任务分解）\n当前任务：矩阵硬件计算（matrix / tensor 运算的硬件实现与算力模型），当前 GPU 硬件优化空间，目标：推理场景下硬件还可以怎么优化\n\n## 1. 本阶段方法论（来自阶段 prompt 文件；**直接改该文件即可调整本阶段行为**，无需动运行时代码）\n# 03 执行任务分解（分解到最小执行单元 + 模块化解耦）\n\n<!-- origin: ai -->\n\n## 输入\n\n- 上一阶段交付物：`loop-artifacts/02.5-r1.md` / `02.5-r1.json`（已调研、已交叉验证的字段）。\n- `loop-state.json` 中 `task_spec.attribute_matrix` 的已确认事实与约束。\n- 灵魂默认决策画像（`AGENTS.md` 默认偏好）。\n\n## 本阶段交付物（每阶段只一对文件，命名 `0x-rx`，链式传递）\n\n- `loop-artifacts/03-r1.json`：**你只需写这个**——结构化结果，含 `task_graph`（最小执行单元 DAG）与 `coverage_proof`（覆盖性证明）两个字段，用 `ralph field-apply <项目> loop-artifacts/03-r1.json` 落盘。\n- `loop-artifacts/03-r1.md`：可读性 Markdown，**由 `ralph render` / field-apply 自动从 JSON 生成，你不必手写**。\n- **下一阶段（04）的输入就是本阶段的 `03-r1.md` / `03-r1.json`**。\n\n## 本阶段要做什么\n\n把已调研、已验证的目标分解为**可独立执行的最小单元**，并明确模块边界与接口：\n\n1. **分解到最小执行单元**：像 01 分解目标一样，把执行工作递归拆到「不可再分、可独立派发/执行」的单元。每个单元有明确的输入、输出、验收。\n2. **接口清晰对准**：单元之间只通过**显式接口**通信；每个接口定义清楚：输入格式、输出格式、错误契约。上下游单元的接口必须一一对准（生产者输出 = 消费者输入），不留模糊地带。\n3. **模块化、解耦**：单元之间低耦合、高内聚；一个单元的改动不应传导到无关单元。按关注点划分模块（如「数据采集 / 分析 / 验证 / 综合」），模块内部自洽、模块间只走接口。\n4. **并行与依赖**：在 DAG 中标注哪些单元可并行、哪些有先后依赖；跨单元交叉验证单独成节点。\n5. 产出 `task_graph`（DAG：节点 = 最小执行单元，边 = 依赖/接口）与 `coverage_proof`（任务图完整覆盖目标、约束、成功标准，无遗漏无冲突）。\n\n## 字段表怎么填（通过 `ralph field-apply`，禁止直接写 loop-state.json）\n\n- 把 `task_graph`、`coverage_proof`（及任何新字段）写成 `03-r1.json`（列表，或 `{\"fields\":[...]}`），运行\n  `ralph field-apply <项目> loop-artifacts/03-r1.json` 原子落盘（按 `concept` 合并）。\n\n## 检查\n\n- [ ] 任务图分解到最小执行单元，无过度拆分也无遗漏。\n- [ ] 模块间接口显式、对准、解耦，无模糊依赖。\n- [ ] DAG 无环、任务 ID 唯一、并行组正交。\n- [ ] `coverage_proof` 证明完整覆盖目标/约束/成功标准。\n\n## 分支\n\n- 通过：输出 `advance` 进入 `04`。\n- 等待人类：返回 `blocked_human`（仅限会改变硬可行性的边界）。\n\n## 必须遵守\n\n1. 阶段编号 `03`；重新分解用 `03-r2`。\n2. 接口对准与解耦是本阶段的硬验收标准，优先于「拆得细」。\n\n## 2. 本阶段目标（运行时校验）：任务图分解到最小执行单元，接口清晰对准、模块化解耦，无遗漏无冲突；应交付：task_graph、coverage_proof\n## 3. 仍需填写的字段（只补这些，不必一次交齐）：（当前无 pending 字段，可直接 advance）\n## 4. 阶段文件（每阶段只产出一对，命名 `0x-rx`，链式传递）\n- **本阶段交付物**：写 `loop-artifacts/03-r1.md`（分析/笔记）与 `loop-artifacts/03-r1.json`（结构化结果，含本阶段字段）。\n- **本阶段输入**：先读上一阶段交付物 `loop-artifacts/02.5-r1.md` 与 `.json`，再动手（上一阶段输出即本阶段输入）。\n- **提交字段**：把要新增/更新的字段写进本阶段 `.json`（列表，或 `{\"fields\": [...]}`），每条含 `concept / role / attribute / disposition / rationale / evidence_refs / confidence / impact / reversible`；运行 **`ralph field-apply <项目> loop-artifacts/03-r1.json`** 校验并原子落盘（按 `concept` 合并：同 concept 覆盖、新 concept 追加；`{\"concept\": \"...\", \"delete\": true}` 删除）。\n- **推进到下一阶段（关键）**：本阶段字段齐全（无 pending、无未带证据的 research_required）后**必须显式推进**——**只有阶段 01 会自动推进，02+ 不会**，且聊天里输出 `<RALPH_STAGE_RESULT> advance` 无效（运行时不会解析聊天 token）。正确做法：写一份 action 文件 `loop-artifacts/03-r1.advance.json`：\n  ```json\n{\n  \"action\": \"advance\",\n  \"status\": \"completed\",\n  \"stage_id\": \"03\",\n  \"revision\": \"r1\",\n  \"next_stage\": \"04\",\n  \"message\": \"完成 执行任务分解，推进到 04\"\n}\n  ```\n  然后运行 **`ralph apply . loop-artifacts/03-r1.advance.json`**（或 `ralph validate --result loop-artifacts/03-r1.advance.json --apply`）即完成推进；运行时自动校验、原子落盘。\n- **禁止直接 Write/Edit `loop-state.json`**（易损坏导致循环崩溃）；`loop-state.json` 仅供运行时读取。\n- 项目路径可用绝对路径 `/Users/a1-6/Desktop/workspace/projects/D1-gpu-inference-hardware`，或当前目录用 `.`。\n- 状态损坏/需回退：`ralph recover-state <项目>`（或 `--stage <id>` 重置到上一阶段）。\n- 阶段 03 字段齐全后必须运行 `ralph apply . loop-artifacts/03-r1.advance.json` 显式推进，不能只靠聊天输出 advance。\n\n上一轮提示（供参考，不要原样扩写）：上一轮 Claude 已结束；从持久化状态继续，不复述旧 transcript。"
+          "text": "."
         }
       ],
       "constraints": [],
@@ -99,7 +520,7 @@
   },
   "submission_template_ref": "loop-artifacts/contracts/03-r1-submission-template.json",
   "task": {
-    "description": "矩阵硬件计算（matrix / tensor 运算的硬件实现与算力模型），当前 GPU 硬件优化空间，目标：推理场景下硬件还可以怎么优化",
+    "description": ".",
     "source": "ralph run"
   }
 }

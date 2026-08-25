@@ -1,0 +1,101 @@
+{
+  "fields": [
+    {
+      "concept": "verification_scope",
+      "role": "verification_scope",
+      "attribute": "阶段04验证范围 — 验证stage 03决策框架的准确性、计算正确性、和推荐可靠性",
+      "disposition": "pending",
+      "confidence": 1.0,
+      "rationale": "阶段04是验证与交叉验证阶段，required_output是verification_report。验证范围覆盖：1)硬件对比矩阵数据准确性 2)性价比分析计算正确性 3)决策框架评分方法论 4)关键推荐交叉验证 5)8项remaining_uncertainties处理",
+      "impact": "material",
+      "reversible": true
+    },
+    {
+      "concept": "verification_hardware_matrix",
+      "role": "verification",
+      "attribute": "硬件对比矩阵数据准确性验证 — 抽查15个设备的规格数据与独立来源一致性",
+      "disposition": "pending",
+      "confidence": 0.0,
+      "input_refs": [
+        "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json"
+      ],
+      "rationale": "需要独立验证hardware-comparison-matrix.json中15个设备的规格数据（memory, bandwidth, compute, price, LLM throughput）是否与原始来源一致",
+      "impact": "material",
+      "reversible": true
+    },
+    {
+      "concept": "verification_cost_performance",
+      "role": "verification",
+      "attribute": "性价比分析计算正确性验证 — 验证$/tok计算和排名",
+      "disposition": "pending",
+      "confidence": 0.0,
+      "input_refs": [
+        "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json",
+        "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json"
+      ],
+      "rationale": "需要验证cost-performance-analysis.json中$/tok计算是否正确（price_usd / llm_tok_s），排名是否准确",
+      "impact": "material",
+      "reversible": true
+    },
+    {
+      "concept": "verification_decision_framework",
+      "role": "verification",
+      "attribute": "决策框架评分方法论验证 — 验证8项加权评分标准和GPU评分",
+      "disposition": "pending",
+      "confidence": 0.0,
+      "input_refs": [
+        "loop-artifacts/stages/03/r1/artifacts/decision-framework.json",
+        "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json",
+        "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json"
+      ],
+      "rationale": "需要验证decision-framework.json中8项加权评分标准的权重分配是否合理，GPU评分计算是否正确",
+      "impact": "material",
+      "reversible": true
+    },
+    {
+      "concept": "verification_recommendations",
+      "role": "verification",
+      "attribute": "关键推荐交叉验证 — 验证RTX 5090最佳7B、H200最佳70B多GPU、MI300X最佳70B单GPU推荐",
+      "disposition": "pending",
+      "confidence": 0.0,
+      "input_refs": [
+        "loop-artifacts/stages/03/r1/artifacts/decision-framework.json",
+        "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json"
+      ],
+      "rationale": "需要交叉验证stage 03的核心推荐：RTX 5090最佳7B推理、H200最佳70B多GPU、MI300X最佳70B单GPU",
+      "impact": "material",
+      "reversible": true
+    },
+    {
+      "concept": "verification_uncertainties",
+      "role": "verification",
+      "attribute": "8项remaining_uncertainties处理 — 每项给出缓解措施或置信度调整",
+      "disposition": "pending",
+      "confidence": 0.0,
+      "input_refs": [
+        "loop-artifacts/stages/03/r1/advance.json"
+      ],
+      "rationale": "阶段03的8项remaining_uncertainties需要在阶段04中逐项处理：RTX 5090吞吐量、MI300X定价、ROCm成熟度、M4 Max吞吐量、RTX 5090价格波动、H200 NVLink扩展、Groq/Cerebras定价、SambaNova不透明",
+      "impact": "material",
+      "reversible": true
+    },
+    {
+      "concept": "verification_report",
+      "role": "verification_report",
+      "attribute": "阶段04验证报告 — 汇总所有验证结果，给出overall confidence和recommendation reliability",
+      "disposition": "pending",
+      "confidence": 0.0,
+      "output_format": {
+        "verification_results": "object keyed by verification item",
+        "overall_confidence": "0.0-1.0",
+        "recommendation_reliability": "high/medium/low",
+        "key_findings": ["string"],
+        "remaining_risks": ["string"],
+        "recommendation": "proceed_to_stage_05 / need_more_research / revise_recommendations"
+      },
+      "rationale": "阶段04的required_output。汇总所有验证结果，给出overall confidence和recommendation reliability，决定是否可以进入stage 05",
+      "impact": "material",
+      "reversible": true
+    }
+  ]
+}

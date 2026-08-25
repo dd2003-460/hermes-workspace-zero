@@ -1,13 +1,29 @@
 {
-  "attribute": "中文二手 RTX 3090/4090 价格约 ¥8,000-15,000/¥15,000-25,000（汇率估算）",
+  "attribute": "中文二手市场 RTX 3090/4090 实际成交价格（闲鱼/淘宝/硬件通）",
   "concept": "未知因素 01：中国市场价格",
   "disposition": "research_required",
   "field": {
-    "attribute": "中文二手 RTX 3090/4090 价格约 ¥8,000-15,000/¥15,000-25,000（汇率估算，需验证）",
+    "attribute": "中文二手 RTX 3090/4090 实际成交价格（闲鱼/淘宝/硬件通）",
     "concept": "未知因素 01：中国市场价格",
     "disposition": "research_required",
     "evidence_refs": [],
-    "rationale": "基于美元价格×7.3+关税估算，未验证中文二手市场实际成交价。",
+    "confidence": 0.6,
+    "observed_at": "2026-08-16T00:00:00Z",
+    "rationale": "WebSearch工具在10+次查询中均返回空结果（中文：闲鱼RTX3090/4090/价格/成交/2025/2026，英文：RTX3090/4090/A100 used price second hand）。WebFetch也对ebay/amazon/techpowerup返回503/403/timeout。无法获取实时列表数据。基于训练数据市场知识估算（非可验证证据）：RTX 3090 24GB 中国二手约 ¥3,000-4,000 RMB (~$420-560 USD)，受2022年后加密货币挖矿崩盘影响大量二手涌入；RTX 4090 24GB 中国二手约 ¥6,000-9,000 RMB (~$840-1,260 USD）。此数据为领域知识而非实测证据，置信度降级为0.6，标记为research_required。建议下一阶段通过浏览器（ego-browser）直接访问闲鱼/淘宝/硬件通获取精确报价。",
+    "data": {
+      "RTX_3090_24GB": {
+        "china_used_price_range_RMB": "3000-4000",
+        "china_used_price_range_USD": "420-560",
+        "global_used_price_range_USD": "550-750",
+        "market_notes": "Crypto mining crash after 2022 flooded market with used 3090s. Price dropped from ¥5500+ (2022 peak) to current levels. Most used units are mining/heavy compute loads."
+      },
+      "RTX_4090_24GB": {
+        "china_used_price_range_RMB": "6000-9000",
+        "china_used_price_range_USD": "840-1260",
+        "global_used_price_range_USD": "1100-1500",
+        "market_notes": "Lower mining impact. Price decline driven by RTX 5090 launch anticipation."
+      }
+    },
     "role": "unknown"
   },
   "flow_only": false,

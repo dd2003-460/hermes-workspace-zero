@@ -1,0 +1,79 @@
+{
+  "analysis_type": "Cost-Performance Analysis ($/tok ranking)",
+  "methodology_note": "$/tok = price_usd / llm_tok_s. Lower = better value. This is cost per unit throughput (dollars per token per second). NOT actual operational cost per token — that would require hourly rate, utilization, and electricity. This metric answers: 'How many dollars must I spend to buy 1 tok/s of throughput?'",
+  "critical_caveats": [
+    "Throughput numbers vary 10-70x depending on benchmark methodology (see benchmark-methodology.md). Rankings are valid ONLY within the same methodology.",
+    "RTX 5090 MSRP is $1,999 but retail is $4,700-$7,000. At $5,000 retail, $/tok_7b = $0.86 (still #1 but margin shrinks).",
+    "70B rankings exclude consumer GPUs that can't fit 70B models (RTX 4090/4090D/5090).",
+    "Hosted-only (Groq, Cerebras) have no unit price — excluded from standalone rankings.",
+    "SambaNova SN3000 is an 8-chip rack, not a single accelerator. Direct comparison to single-GPU $/tok is misleading.",
+    "MI300X is a 2-GPU-per-card product. Per-GPU price would be ~$7,500, making $/tok_7b = $12.50 (would rank #3).",
+    "H200 $35,000 is estimated; actual datacenter pricing varies by volume and contract.",
+    "Apple M4/M4 Max throughput estimates have low confidence (single-source data).",
+    "Multi-GPU NVLink scaling is NOT included. A100/H100/H200 with NVLink can achieve significantly higher aggregate throughput."
+  ],
+  "rankings_7b": [
+    {"rank": 1, "gpu": "NVIDIA RTX 5090", "price_usd": 1999, "llm_7b_tok_s": 5841, "$/tok": 0.34, "score_percentile": 100},
+    {"rank": 2, "gpu": "NVIDIA RTX 4090", "price_usd": 1600, "llm_7b_tok_s": 1200, "$/tok": 1.33, "score_percentile": 26},
+    {"rank": 3, "gpu": "NVIDIA RTX 4090D", "price_usd": 1600, "llm_7b_tok_s": 1000, "$/tok": 1.60, "score_percentile": 21},
+    {"rank": 4, "gpu": "Apple M4", "price_usd": 1300, "llm_7b_tok_s": 80, "$/tok": 16.25, "score_percentile": 2},
+    {"rank": 5, "gpu": "Apple M4 Max", "price_usd": 4500, "llm_7b_tok_s": 200, "$/tok": 22.50, "score_percentile": 2},
+    {"rank": 6, "gpu": "AMD MI300X", "price_usd": 15000, "llm_7b_tok_s": 600, "$/tok": 25.00, "score_percentile": 1},
+    {"rank": 7, "gpu": "SambaNova SN3000 (8-chip rack)", "price_usd": 55000, "llm_7b_tok_s": 1500, "$/tok": 36.67, "score_percentile": 1},
+    {"rank": 8, "gpu": "NVIDIA H100 80GB SXM5", "price_usd": 30000, "llm_7b_tok_s": 800, "$/tok": 37.50, "score_percentile": 1},
+    {"rank": 9, "gpu": "NVIDIA A100 80GB SXM4", "price_usd": 10000, "llm_7b_tok_s": 300, "$/tok": 33.33, "score_percentile": 1},
+    {"rank": 10, "gpu": "NVIDIA H100 80GB PCIe", "price_usd": 30000, "llm_7b_tok_s": 600, "$/tok": 50.00, "score_percentile": 1},
+    {"rank": 11, "gpu": "NVIDIA A100 80GB PCIe", "price_usd": 12000, "llm_7b_tok_s": 250, "$/tok": 48.00, "score_percentile": 1},
+    {"rank": 12, "gpu": "NVIDIA H200", "price_usd": 35000, "llm_7b_tok_s": 2500, "$/tok": 14.00, "score_percentile": 2},
+    {"rank": 13, "gpu": "NVIDIA RTX 6000 Ada", "price_usd": 7500, "llm_7b_tok_s": 800, "$/tok": 9.38, "score_percentile": 4},
+    {"rank": 14, "gpu": "NVIDIA RTX 4090 (at $5000 retail)", "price_usd": 5000, "llm_7b_tok_s": 5841, "$/tok": 0.86, "score_percentile": 40}
+  ],
+  "rankings_70b": [
+    {"rank": 1, "gpu": "Apple M4 Max", "price_usd": 4500, "llm_70b_tok_s": 55, "$/tok": 81.82, "score_percentile": 1},
+    {"rank": 2, "gpu": "NVIDIA RTX 6000 Ada", "price_usd": 7500, "llm_70b_tok_s": 80, "$/tok": 93.75, "score_percentile": 1},
+    {"rank": 3, "gpu": "NVIDIA H200", "price_usd": 35000, "llm_70b_tok_s": 317, "$/tok": 110.40, "score_percentile": 1},
+    {"rank": 4, "gpu": "AMD MI300X", "price_usd": 15000, "llm_70b_tok_s": 140, "$/tok": 107.14, "score_percentile": 1},
+    {"rank": 5, "gpu": "NVIDIA A100 80GB SXM4", "price_usd": 10000, "llm_70b_tok_s": 85, "$/tok": 117.65, "score_percentile": 1},
+    {"rank": 6, "gpu": "NVIDIA H100 80GB SXM5", "price_usd": 30000, "llm_70b_tok_s": 210, "$/tok": 142.86, "score_percentile": 1},
+    {"rank": 7, "gpu": "SambaNova SN3000 (8-chip rack)", "price_usd": 55000, "llm_70b_tok_s": 400, "$/tok": 137.50, "score_percentile": 1},
+    {"rank": 8, "gpu": "NVIDIA H100 80GB PCIe", "price_usd": 30000, "llm_70b_tok_s": 180, "$/tok": 166.67, "score_percentile": 1},
+    {"rank": 9, "gpu": "NVIDIA A100 80GB PCIe", "price_usd": 12000, "llm_70b_tok_s": 75, "$/tok": 160.00, "score_percentile": 1},
+    {"rank": 10, "gpu": "Groq LPU (hosted)", "price_usd": null, "llm_70b_tok_s": 500, "$/tok": null, "score_percentile": null}
+  ],
+  "best_value": {
+    "7B": {
+      "gpu": "NVIDIA RTX 5090",
+      "$/tok": 0.34,
+      "reason": "Unbeatable $/tok for 7B models. 32GB GDDR7 memory fits 7B-13B models with room for KV cache. At MSRP $1,999, you get 5,841 tok/s — 4.9x the throughput of RTX 4090 at only 25% more cost. Even at retail $5,000 ($/tok = $0.86), still #1."
+    },
+    "70B": {
+      "gpu": "AMD MI300X (per-GPU: ~$7,500)",
+      "effective_$/tok": "~$53.57 (per-GPU estimate)",
+      "reason": "At $15,000 for 2 GPUs, per-GPU cost is ~$7,500. Per-GPU $/tok_70b = $53.57 — best value for 70B among deployable GPUs. 192GB HBM3 fits 70B FP16 on a single card. If priced at full $15K per card, still competitive at $107.14."
+    }
+  },
+  "best_performance": {
+    "7B": {
+      "gpu": "NVIDIA RTX 5090",
+      "tok_s": 5841,
+      "reason": "Highest absolute 7B throughput at 5,841 tok/s. 32GB GDDR7 with 1,792 GB/s bandwidth. 94.6 FP16 TFLOPS. The GDDR7 memory generation provides a massive bandwidth advantage over RTX 4090 (1,008 GB/s)."
+    },
+    "70B": {
+      "gpu": "NVIDIA H200",
+      "tok_s": 317,
+      "reason": "Highest 70B throughput at 317 tok/s (single unit). 141GB HBM3e fits 70B FP16 comfortably. 4,800 GB/s bandwidth is the highest of any single accelerator. NVLink enables multi-unit scaling to 30,000+ tok/s aggregate."
+    }
+  },
+  "key_insights": [
+    "Consumer GPUs (RTX 5090, 4090) dominate 7B $/tok — the gap to datacenter GPUs is 40-140x. For 7B workloads, consumer GPUs are the clear value choice.",
+    "For 70B workloads, the gap narrows dramatically. Datacenter GPUs (H200, MI300X, A100) are the only options that can fit 70B FP16 on a single chip.",
+    "AMD MI300X offers the best 70B value among datacenter GPUs: 192GB HBM3 fits 70B FP16, $15,000 for 2 GPUs is half the price of H200.",
+    "Apple M4 Max is surprisingly competitive for 70B ($81.82/tok) but low confidence on throughput estimates and limited multi-stream capacity.",
+    "NVIDIA H200 is the performance king for 70B (317 tok/s) but at $110.40/tok, it's 2x more expensive per tok than MI300X.",
+    "RTX 6000 Ada is overpriced for both 7B ($9.38/tok) and 70B ($93.75/tok) — you pay a workstation premium.",
+    "The 'best' choice depends entirely on model size: RTX 5090 for 7B, MI300X or H200 for 70B. There is no single winner across model sizes.",
+    "Emerging architectures (Groq, Cerebras) are hosted-only and cannot be directly compared on $/tok without pricing data. Their value proposition is latency predictability, not raw throughput."
+  ],
+  "confidence": 0.70,
+  "notes": "Rankings based on hardware-comparison-matrix.json data. $/tok metric is cost per unit throughput (lower = better). Throughput numbers have acknowledged 10-70x variance depending on benchmark methodology — rankings are valid within the same methodology. MI300X per-GPU pricing is estimated (product sold as 2-GPU card). SambaNova SN3000 is an 8-chip rack — direct $/tok comparison to single accelerators is misleading. Groq and Cerebras excluded from standalone rankings (hosted-only, no unit price)."
+}

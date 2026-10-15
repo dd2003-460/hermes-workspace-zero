@@ -1,6 +1,6 @@
 # Projects — 工作区项目索引
 
-**最后更新**: 2026-06-23（loop状态管理改造）
+**最后更新**: 2026-10-15（新增 decomp [DC.1]：通用任务分解 prompt 总目标 home）
 
 > **活跃项目入口**: [ACTIVE.md](ACTIVE.md) — 自动聚合的 loop 状态面板（由 `scripts/aggregate-active.sh` 生成）
 > 各项目固定路径: `<project>/loop-state.json`
@@ -33,6 +33,7 @@
 | `D1-ralph-field-centric/` | [DRF.1] | **待启动**：RALPH 字段中心化重构规划（放宽主 agent 限制、字段级流动、按字段派发调研 subagent，评估弱模型稳定性/质量） |
 | `D1-gpu-inference-hardware/` | [DGH.1] | GPU 推理硬件优化空间研究（矩阵/tensor 硬件计算；推理场景硬件还能怎么优化） |
 | `D1-gpu-kv-cache/` | [DGK.1] | **由 DGH.1 衍生**：KV Cache 硬件优化——片上 SRAM 缓存 / 专用 KV 存储 / PagedAttention 硬件化 |
+| `decomp/` | [DC.1] | **总目标**：通用任务分解 prompt（总目标与总计划见其 README）；7 个相关 GPU/分解项目归档于 `archive/`（映射表见 `archive/README.md`）；RALPH loop 驱动，台账 = `tasks/state.md`；远端 = dd2003-460/decomp-bench |
 
 ### 写作 / 社会系统
 

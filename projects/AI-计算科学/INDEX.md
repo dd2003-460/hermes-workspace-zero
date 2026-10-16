@@ -14,7 +14,6 @@
 | `D1-goal-investigation/` | 目标发现与探索 |
 | `D1-memory/` | 记忆系统理论 |
 | `D1-persona-align/` | Persona 对齐机制（8 原则 + 6 维度 + 3 行为约束） |
-| `D1-financial-market-analysis/` | 时间序列金融市场研究（无未来数据、信息泄露与资金博弈验证） |
 | `D1-gpu-inference-hardware/` | GPU 推理硬件优化空间研究（矩阵/tensor 硬件计算） |
 | `D1-gpu-research-2026/` | GPU 本地推理研究（2026，含 web-llm 交叉验证） |
 | `D1-hintfree-decomposition/` | 无提示词目标分解（hint-free goal decomposition）实验 |

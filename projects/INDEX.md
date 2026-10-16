@@ -37,6 +37,12 @@
 | `AI-计算科学/D1-hintfree-decomposition/` | [DHF.1] | 无提示词目标分解（hint-free goal decomposition）实验 |
 | `decomp/` | [DC.1] | **总目标**：通用任务分解 prompt（总目标与总计划见其 README）；7 个相关 GPU/分解项目归档于 `archive/`（映射表见 `archive/README.md`）；RALPH loop 驱动，台账 = `tasks/state.md`；远端 = dd2003-460/decomp-bench |
 
+### 金融
+
+| 项目 | 索引号 | 描述 |
+|------|--------|------|
+| `金融/D1-financial-market-analysis/` | [DFA.1] | 时间序列金融市场研究（无未来数据、信息泄露与资金博弈验证） |
+
 ### 写作 / 社会系统
 
 | 项目 | 索引号 | 描述 |

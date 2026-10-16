@@ -1,10 +1,11 @@
 #!/bin/bash
 # aggregate-active.sh — 从所有 loop-state.json 聚合生成 projects/INDEX.md 的 ACTIVE 表
 # 用法: bash scripts/aggregate-active.sh [projects_root]
-# 默认 projects_root = 脚本所在目录的 projects/
+# 默认 projects_root = 工作区根目录的 projects/
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECTS_DIR="${1:-$SCRIPT_DIR/projects}"
+WORKSPACE_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+PROJECTS_DIR="${1:-$WORKSPACE_ROOT/projects}"
 OUTPUT_FILE="$PROJECTS_DIR/ACTIVE.md"
 
 if [ ! -d "$PROJECTS_DIR" ]; then
@@ -13,7 +14,8 @@ if [ ! -d "$PROJECTS_DIR" ]; then
 fi
 
 # Collect all loop-state.json files
-STATE_FILES=$(find "$PROJECTS_DIR" -name "loop-state.json" 2>/dev/null)
+# 排除历史副本: */archive/* (decomp/archive) 和 *-backup/* (项目内 cycle1-backup 等)
+STATE_FILES=$(find "$PROJECTS_DIR" -not -path "*/archive/*" -not -path "*-backup/*" -name "loop-state.json" 2>/dev/null)
 
 if [ -z "$STATE_FILES" ]; then
     echo "No loop-state.json found under $PROJECTS_DIR"

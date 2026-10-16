@@ -82,6 +82,7 @@ try {
   if (!config || typeof config.url !== "string" || !config.url.startsWith("https://")) throw new Error("missing HTTPS url");
   const persistentProfile = typeof config.profile_dir === "string" && config.profile_dir.trim();
   const launchOptions = { headless: Boolean(config.headless) };
+  if (typeof config.channel === "string" && config.channel.trim()) launchOptions.channel = config.channel.trim();
   const browser = persistentProfile ? null : await chromium.launch(launchOptions);
   const context = persistentProfile
     ? await chromium.launchPersistentContext(config.profile_dir, { ...launchOptions, locale: "zh-CN" })

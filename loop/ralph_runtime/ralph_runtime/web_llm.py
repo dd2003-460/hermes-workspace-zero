@@ -447,6 +447,9 @@ def _ask_browser_provider(provider: Mapping[str, str], claim: str, context: str,
     profile_dir = browser_profile_dir()
     if profile_dir:
         payload["profile_dir"] = profile_dir
+    channel = os.environ.get("RALPH_WEB_LLM_BROWSER_CHANNEL", "").strip()
+    if channel:
+        payload["channel"] = channel
     try:
         completed = subprocess.run(
             ["node", str(runner)],

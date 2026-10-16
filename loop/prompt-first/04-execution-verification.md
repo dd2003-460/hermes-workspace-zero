@@ -28,94 +28,69 @@
 
 如果执行前提或事实有问题，repair_stage 写对应的 02 或 03；否则写 04。
 
-## 操作示例
+## 操作示例（数学领域, 仅方法示范, 无任务信息）
 
-### 示例 1：GPU 测试 — 执行记录
+### 示例 1：数值核验执行记录
 
 **阶段 03 计划：**
 ```
-步骤 1：搭建测试环境
-- 动作：准备 4 台测试机器
-- 验收方式：`nvidia-smi` 正常输出
+步骤 1：环境精度确认
+- 动作：确认 mpmath 可用
+- 验收方式：dps 输出正常
 ```
 
 **实际执行记录：**
 ```
 步骤 1 执行：
-- 命令：`docker run --gpus all -it nvidia/cuda:12.1-base nvidia-smi`
-- 输出：
-  +-----------------------------------------------------------------------------+
-  | NVIDIA-SMI 535.104.05   Driver Version: 535.104.05   CUDA Version: 12.1   |
-  |-------------------------------+----------------------+----------------------+
-  | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-  | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-  |===============================+======================+======================|
-  |   0  NVIDIA A100-SXM...  On   | 00000000:00:04.0 Off |                    0 |
-  | N/A   32C    P0    43W / 400W |      0MiB / 40960MiB |      0%      Default |
-  +-------------------------------+----------------------+----------------------+
+- 命令：`python -c "import mpmath as mp; print(mp.mp.dps)"`
+- 输出：15
 - 结果：✅ 通过
 - 文件：无修改
-- 观察：A100 SXM4 40GB，驱动 535.104.05，CUDA 12.1
+- 观察：mpmath 可用, 默认 15 位
 
 步骤 2 执行：
-- 命令：`pip install torch vllm`
+- 命令：`python -c "import mpmath as mp; mp.mp.dps=50; print(mp.zeta(2)); print(mp.pi**2/6)"`
 - 输出：
-  Collecting torch
-    Downloading torch-2.1.0-cp310-cp310-linux_x86_64.whl (700.8 MB)
-  Collecting vllm
-    Downloading vllm-0.2.0-cp310-cp310-linux_x86_64.whl (1.2 GB)
-  Installing collected packages: torch, vllm
-  Successfully installed torch-2.1.0 vllm-0.2.0
+  1.644934066848226264071911774834817036373194211365
+  1.644934066848226264071911774834817036373194211365
 - 结果：✅ 通过
 - 文件：无修改
-- 观察：安装耗时约 15 分钟
+- 观察：两值 50 位一致, 差 < 1e-50
 
 步骤 3 执行：
-- 命令：`python -c "import torch; print(torch.cuda.is_available())"`
-- 输出：True
-- 结果：✅ 通过
+- 命令：`python -c "import mpmath as mp; mp.mp.dps=30; print(mp.zeta(1))"`
+- 输出：1.000000000000000000000000000000
+- 结果：✅ 通过（属边界）
 - 文件：无修改
-- 观察：CUDA 可用
-
-步骤 4 执行：
-- 命令：`python benchmarks/benchmark_serving.py --model meta-llama/Llama-2-7b --tokenizer meta-llama/Llama-2-7b --num-prompts 100`
-- 输出：
-  Throughput: 123.45 tokens/sec
-  Latency (p50): 12.3 ms
-  Latency (p99): 45.6 ms
-  Memory usage: 18.5 GB / 40 GB
-- 结果：✅ 通过
-- 文件：benchmark_results/a100_sxm4_40gb.json
-- 观察：性能符合预期
+- 观察：s=1 harmonic 极缓慢 → 属边界, 条件 s>1 必要
 ```
 
-### 示例 2：GPU 测试 — 失败处理
+### 示例 2：数值核验 — 失败处理
 
 **阶段 03 计划：**
 ```
-步骤 5：运行 Llama-3-8B 测试
-- 动作：加载模型并运行推理
-- 验收方式：模型加载成功，推理输出正常
+步骤 4：验证 Goldbach 到 N=10^7
+- 动作：运行验证脚本
+- 验收方式：脚本完成, 输出结论
 ```
 
 **实际执行记录：**
 ```
-步骤 5 执行：
-- 命令：`python -m vllm.entrypoints.api_server --model meta-llama/Llama-3-8B --tensor-parallel-size 1`
+步骤 4 执行：
+- 命令：`python verify_goldbach.py --n 10000000`
 - 输出：
-  ERROR: Cannot load model meta-llama/Llama-3-8B into graph due to insufficient memory.
-  Requested 22 GB, available 18.5 GB.
+  ERROR: 超时（>120s）, 已完成约 3×10^6
 - 结果：❌ 失败
-- 原因：Llama-3-8B 需要 22 GB 显存，A100 SXM4 40GB 扣除系统占用后仅剩 18.5 GB
-- 影响：无法在 A100 SXM4 40GB 上运行 Llama-3-8B
+- 原因：算法复杂度 O(N√N), 未完成全 N
+- 影响：无法完成全 N 核验
 - 下一步：
-  a) 使用量化模型（AWQ/INT8）
-  b) 切换到 A100 SXM4 80GB
-  c) 使用更小的模型（Llama-3-70B 量化版）
-- 重试 1：`python -m vllm.entrypoints.api_server --model TechxNinja/Llama-3-8B-AWQ --tensor-parallel-size 1`
-- 输出：成功加载，推理正常
-- 结果：✅ 通过（使用量化模型）
-- 观察：量化后显存占用降至 6 GB，性能损失约 5%
+  a) 换算法（FFT / 筛加速）
+  b) 降低 N 标注未完成
+  c) 属边界不伪装完成
+- 重试 1：`python verify_goldbach.py --n 1000000`
+- 输出：完成, 0 反例
+- 结果：✅ 通过（N=10^6, 标注属边界未全 N）
+- 观察：属边界不伪装全 N 完成
 ```
 
 ## 通用原则

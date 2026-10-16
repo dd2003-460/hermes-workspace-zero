@@ -39,7 +39,7 @@ command -v ego-browser
 # 基本搜索
 ego-browser nodejs <<'EOF'
 const task = await useOrCreateTaskSpace('search-task')
-await openOrReuseTab('https://www.google.com/search?q=GPU+型号')
+await openOrReuseTab('https://www.google.com/search?q=Basel+problem+zeta(2)')
 cliLog(await snapshotText())
 EOF
 
@@ -91,56 +91,32 @@ browser_type("@ref_id", "text")  # 输入文本
 
 只要关键主张缺少独立来源、关键时效信息过期或存在未解释矛盾，必须 revise，repair_stage 写 02。
 
-## 操作示例
+## 操作示例（数学领域, 仅方法示范, 无任务信息）
 
-### 示例：GPU 调研 — 价格核验
+### 正案例：核验一个已证明数学事实（多独立来源 + 区分已证明/数值）
 
-**阶段 01 空缺：** "各候选 GPU 的当前市场价格"
+待核验主张（阶段 01 空缺）："ζ(2) = π²/6"（Basel 问题）。
 
-**执行步骤：**
 ```
-1. 运行 web-llm 获取线索：
-   ralph prompt-first web-llm . "RTX 4090 当前价格？" --context "阶段 02"
-
-2. 运行 ego-browser 获取实时价格：
-   ego-browser nodejs <<'EOF'
-   const task = await useOrCreateTaskSpace('gpu-price')
-   await openOrReuseTab('https://www.amazon.com/s?k=RTX+4090')
-   cliLog(await snapshotText())
-   EOF
-
-3. 运行浏览器工具获取备选来源：
-   browser_navigate("https://www.newegg.com/p/pl?d=RTX+4090")
-   browser_snapshot()
-
-4. 记录结果：
-   - 来源 1：Amazon，$1,599，2024-01-15
-   - 来源 2：Newegg，$1,649，2024-01-15
-   - 来源 3：web-llm 线索，约 $1,600（无具体 URL，标记为线索）
-
-5. 交叉核验：
-   - Amazon 和 Newegg 价格一致（差异 < 5%），可信
-   - web-llm 线索与实测一致，可作为辅助证据
+1. 一手来源（已证明）: 标准分析/数 theory 参考给出 Basel 问题 solved, ζ(2)=π²/6, 证明引用（Euler 1735 / 现代收敛证明）。
+   记录: 类型=已证明, 一手=教科书/论文, 观察时间。
+2. 独立来源（数值）: 用 mpmath 计算 ζ(2) 与 π²/6 到 50 位 → 一致到 50 位。
+   记录: 类型=数值验证, 精度=50 位, 工具+版本。
+3. 区分标注: "已证明"（来源1）与"数值验证"（来源2）不同类型; 数值验证不替代证明, 但独立支持。
+4. 易变事实类比（数学"易变"=最新已知记录）: 当前最大已知 Mersenne prime 指数 — 易变, 需近日期一手; 若资料 > 7 天 → 标未解决。
 ```
 
-### 示例：GPU 调研 — 显存带宽核验
+### 正案例：稳定 vs 易变数学事实
 
-**阶段 01 空缺：** "各候选 GPU 的显存带宽具体数值"
-
-**执行步骤：**
 ```
-1. 运行 web-llm 获取线索：
-   ralph prompt-first web-llm . "RTX 4090 显存带宽 Gbps？" --context "阶段 02"
+- 稳定: "√2 无理" 已证明, 早期一手仍适用（证明不过期）。
+- 易变: "当前最大已知 prime / 最新计算 digits of π" — 需近日期, 否则标未解决。
+```
 
-2. 查找一手规格页面：
-   browser_navigate("https://www.nvidia.com/en-us/geforce/graphics-cards/4090/")
-   browser_snapshot()
+### 负案例：把近似/未证写成事实
 
-3. 记录结果：
-   - 来源 1：NVIDIA 官方规格，2112 GB/s，2022-10-20 发布
-   - 来源 2：TechPowerUp 数据库，2112 GB/s，2024-01-10 更新
-
-4. 交叉核验：
-   - 官方规格和第三方数据库一致
-   - 显存带宽是硬件规格，不会变化，早期数据仍然有效
+```
+- 把 "π ≈ 3.14159" 写 "π = 3.14159" → 近似写成精确, 红线。
+- 把 "Goldbach 对 n≤4×10¹⁸ 已数值验证" 写 "Goldbach 真" → 数值验证写成已证明, 红线。
+- 单一来源写成事实, 无独立来源 → 违反 ≥2 独立来源。
 ```

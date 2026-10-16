@@ -1,0 +1,41 @@
+{
+  "attribute": "关键推荐交叉验证 — 验证RTX 5090最佳7B、H200最佳70B多GPU、MI300X最佳70B单GPU推荐",
+  "concept": "verification_recommendations",
+  "disposition": "pending",
+  "field": {
+    "attribute": "关键推荐交叉验证 — 验证RTX 5090最佳7B、H200最佳70B多GPU、MI300X最佳70B单GPU推荐",
+    "concept": "verification_recommendations",
+    "disposition": "confirmed",
+    "evidence_refs": [
+      "loop-artifacts/stages/04/r1/evidence/computation-verification-r1.md",
+      "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+      "https://www.nvidia.com/en-us/data-center/h200/",
+      "https://en.wikipedia.org/wiki/AMD_Instinct"
+    ],
+    "rationale": "3 项核心推荐交叉验证结果: (1) 'RTX 5090 最佳 7B' — 成立: $/tok_7b=$0.34 为 22 值最低 (L1 重算 0 偏差), MSRP $1999 + 32GB GDDR7 经 NVIDIA 产品页确认 (2026-09-09); 零售溢价 $5k 时 $0.86 仍 #1; 弱点: 5841 tok/s 单源基准。 (2) 'H200 最佳 70B 多GPU' — 成立: 141GB HBM3e @4.8TB/s + NVLink 经 NVIDIA 数据页确认, 官方 Llama2 70B 推理 1.9X H100 (与矩阵 210→316 tok/s 量级一致); $35k 维持估计值; 多GPU扩展未计入矩阵 $/tok (stage03 caveat #9)。 (3) 'MI300X 最佳 70B 单GPU' — 部分成立: 192GB HBM3 单卡经 Wikipedia/AMD_Instinct 确认 (唯一可单卡容纳 70B FP16 ~140GB + KV 的消费/工作站外选项), 但 $15k 价格仍无来源 (AMD 官网协议错误, Wikipedia 无价格), 且 stage03 caveat 指出其为双 chiplet 卡, per-GPU 口径下 7B 排名会变化。 稳健性警示: 因 L3 框架 bug (权重和=0.90, 9/11 total 不可复现), 重算下 H200(65.75)>5090(62.5), 'best_overall=5090' 不稳健; 3 项分工作负载推荐本身均成立。",
+    "role": "verification",
+    "confidence": 0.75,
+    "observed_at": "2026-09-09T16:15:00+08:00"
+  },
+  "flow_only": false,
+  "id": "04-r1-field-verification_recommendations-1821f49e51",
+  "input_refs": [
+    "loop-artifacts/stages/04/r1/fields.json"
+  ],
+  "instruction": "只处理字段 `verification_recommendations`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/04/r1/tasks/04-r1-field-verification_recommendations-1821f49e51.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+  "output_schema": {
+    "attribute": "string",
+    "concept": "verification_recommendations",
+    "confidence": "number 0..1",
+    "disposition": "confirmed|inferred|assumed_default|research_required",
+    "evidence_refs": "array[string]",
+    "rationale": "string",
+    "role": "string"
+  },
+  "revision": "r1",
+  "role": "verification",
+  "schema_version": 1,
+  "stage_id": "04",
+  "status": "ready",
+  "type": "field_task"
+}

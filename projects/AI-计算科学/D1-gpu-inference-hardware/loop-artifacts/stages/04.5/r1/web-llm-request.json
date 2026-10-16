@@ -1,0 +1,5 @@
+{
+  "claim": "GPU硬件矩阵交叉验证（04.5-r1）：1) RTX 6000 Ada 显存带宽=960 GB/s（官方datasheet）；2) A100 SXM4 FP16 Tensor=312 TFLOPS（19.5为FP64 Tensor）、PCIe版FP16 Tensor=156、带宽2039/1935 GB/s、PCIe版无NVLink；3) Cerebras WSE-3=4万亿晶体管/90万AI核心/5nm；4) H100 PCIe 80GB 显存带宽=2040 GB/s（现仅单源，请给出第二来源）；5) RTX 5090 实际零售价（street price）范围；6) AMD MI300X 单卡价格（~$15k 是否有独立来源）；7) Apple M4 Max 内存带宽 546 GB/s（Apple芯片页已下线）；8) Groq LPU 20 TB/s + 96GB SRAM 规格是否有官方来源。",
+  "context": "D1-gpu-inference-hardware 项目 stage 04.5 交叉验证。官方 datasheet 已确认 1-3 项；4-8 项缺少双源，需要独立 LLM 判断其可信度并给出可引用的来源。请逐项回答：确认/否定/不确定 + 来源 URL。LLM 回复是对抗审查信号，不是权威事实源。",
+  "providers": ["perplexity-review", "chatgpt-review", "gemini-review"]
+}

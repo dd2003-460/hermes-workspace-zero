@@ -1,0 +1,37 @@
+{
+  "claim": "GPU硬件矩阵交叉验证（04.5-r1）：1) RTX 6000 Ada 显存带宽=960 GB/s（官方datasheet）；2) A100 SXM4 FP16 Tensor=312 TFLOPS（19.5为FP64 Tensor）、PCIe版FP16 Tensor=156、带宽2039/1935 GB/s、PCIe版无NVLink；3) Cerebras WSE-3=4万亿晶体管/90万AI核心/5nm；4) H100 PCIe 80GB 显存带宽=2040 GB/s（现仅单源，请给出第二来源）；5) RTX 5090 实际零售价（street price）范围；6) AMD MI300X 单卡价格（~$15k 是否有独立来源）；7) Apple M4 Max 内存带宽 546 GB/s（Apple芯片页已下线）；8) Groq LPU 20 TB/s + 96GB SRAM 规格是否有官方来源。",
+  "claim_sha256": "09a5f82306c1dcea687152405a85a7a2d1f73c24ba7102665bc004cafe33e6b2",
+  "context_sha256": "952dc6858b8b738feed7581c769fb2cabf35adb6f8cac1979a6b17e91e019935",
+  "created_at": "2026-09-23T04:37:43.911144+00:00",
+  "kind": "ralph_web_llm_cross_check",
+  "note": "LLM replies are adversarial review signals, not authoritative factual sources.",
+  "request_ref": "loop-artifacts/stages/04.5/r1/web-llm-request.json",
+  "responses": [
+    {
+      "endpoint_host": "www.perplexity.ai",
+      "error": "Perplexity prompt box is unavailable; login or UI changed",
+      "model": "perplexity web UI",
+      "provider_id": "perplexity-review",
+      "status": "error",
+      "transport": "browser_playwright"
+    },
+    {
+      "endpoint_host": "chatgpt.com",
+      "error": "ChatGPT prompt box is unavailable; sign in manually in the visible browser first",
+      "model": "chatgpt web UI",
+      "provider_id": "chatgpt-review",
+      "status": "error",
+      "transport": "browser_playwright"
+    },
+    {
+      "endpoint_host": "gemini.google.com",
+      "error": "Gemini prompt box is unavailable; sign in manually in the visible browser first",
+      "model": "gemini web UI",
+      "provider_id": "gemini-review",
+      "status": "error",
+      "transport": "browser_playwright"
+    }
+  ],
+  "schema_version": 1,
+  "successful_provider_ids": []
+}

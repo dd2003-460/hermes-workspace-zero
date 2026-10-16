@@ -1,0 +1,35 @@
+{
+  "attribute": "决策框架评分方法论验证 — 验证8项加权评分标准和GPU评分",
+  "concept": "verification_decision_framework",
+  "disposition": "pending",
+  "field": {
+    "attribute": "决策框架评分方法论验证 — 验证8项加权评分标准和GPU评分",
+    "concept": "verification_decision_framework",
+    "disposition": "confirmed",
+    "evidence_refs": [],
+    "rationale": "8 项权重之和=0.90≠1.0; 11 个 GPU 中 9 个 recorded total 无法由 breakdown×weights 复现 (RTX5090 记录82/重算62.5, H200 78/65.75, MI300X 72/60.5 等)。重算下 H200(65.75)>RTX5090(62.5), best_overall=RTX5090 推荐在框架自身算术下翻转。'5090 最佳7B' 不受影响 (0.34 仍为最低 $/tok_7b)。修复项: 权重归一化+重算 totals+重排 rankings+重导推荐。",
+    "role": "verification",
+    "confidence": 0.95
+  },
+  "flow_only": false,
+  "id": "04-r1-field-verification_decision_framework-3f67e635a4",
+  "input_refs": [
+    "loop-artifacts/stages/04/r1/fields.json"
+  ],
+  "instruction": "只处理字段 `verification_decision_framework`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/04/r1/tasks/04-r1-field-verification_decision_framework-3f67e635a4.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+  "output_schema": {
+    "attribute": "string",
+    "concept": "verification_decision_framework",
+    "confidence": "number 0..1",
+    "disposition": "confirmed|inferred|assumed_default|research_required",
+    "evidence_refs": "array[string]",
+    "rationale": "string",
+    "role": "string"
+  },
+  "revision": "r1",
+  "role": "verification",
+  "schema_version": 1,
+  "stage_id": "04",
+  "status": "ready",
+  "type": "field_task"
+}

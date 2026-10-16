@@ -9,13 +9,52 @@
     "explore",
     "dispatch",
     "join",
-    "repair_prompt"
+    "repair_prompt",
+    "clarify"
   ],
-  "history": [],
+  "clarification_history": [],
+  "current_artifact": "loop-artifacts/stages/02.5/r1/state.json",
+  "exploration_history": [],
+  "field_tasks": [],
+  "graph_tasks": [],
+  "history": [
+    {
+      "action": "advance",
+      "internal_state": "stage_02",
+      "revision": "r1",
+      "stage_id": "01"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_02_5",
+      "revision": "r1",
+      "stage_id": "02"
+    }
+  ],
   "iteration": 41,
-  "last_action": null,
-  "last_event_id": null,
-  "last_result": null,
+  "last_action": "advance",
+  "last_event_id": "9b06f5e8-f74f-457d-b4f9-06f48589ebf9",
+  "last_exploration": null,
+  "last_result": {
+    "action": "advance",
+    "artifact_refs": [],
+    "evidence": [
+      "loop-artifacts/stages/02/r1/02-r1-stage-artifact.md",
+      "loop-artifacts/stages/02/r1/02-r1-review.md",
+      "loop-artifacts/stages/02/r1/fields.json",
+      "loop-artifacts/stages/02/r1/fields.md",
+      "loop-artifacts/stages/02/r1/web-llm/receipt-chatgpt-u01.md",
+      "loop-artifacts/stages/02/r1/web-llm/receipt-perplexity-u01.md",
+      "loop-artifacts/stages/02/r1/web-llm/receipt-perplexity-u03.md",
+      "loop-artifacts/stages/02/r1/web-llm/receipt-chatgpt-u02u05.md"
+    ],
+    "message": "阶段02 未知信息调研 pass: 独立 Reviewer G1-G6 全部 PASS (真实-web 硬门禁 satisfied: 4 receipts 2 independent services ChatGPT+Perplexity; U01/U02/U03/U05 每项 >=2 独立来源; U04 诚实 OPEN/pending-browser 未伪造; research_findings field persisted ok:true total:5; 5-section artifact)。非阻塞残余(for 02.5): G2/G6 4 HTTPS evidence_refs author-mapped 须一手确认, 2307.04330 vs memory 2310.18022 Chakravarti 冲突须修正; G1 3/4 screenshot pending (browser user-killed); U04 须用户批准 ego-browser 续派发; 数值谱(U01 finite-n/U03 Kerr scan)仅空缺确认,计算属03。推进 02->02.5 交叉验证。",
+    "next_stage": "02.5",
+    "revision": "r1",
+    "rollback_to": null,
+    "stage_id": "02",
+    "status": "passed"
+  },
   "legacy": {
     "blocker": null,
     "conclusion": "simple reflective BC → 主 QNM 不变（结论正确），但需换靶点到晚期回声。I-5 结论需补 Teukolsky+AIM 框架。iter41: 开始Teukolsky框架重建。",
@@ -50,25 +89,27 @@
     "candidates": [],
     "ready": []
   },
-  "schema_version": 2,
+  "run_history": [],
+  "schema_version": 4,
   "stage": {
-    "failure_condition": "关键目标或约束缺失",
-    "id": "01",
-    "input_description": "用户目标、范围和约束",
-    "name": "目标与约束",
-    "on_failure": "01",
+    "failure_condition": "核验不足或矛盾未处置",
+    "id": "02.5",
+    "input_description": "02 的调研结果与字段；逐字段派 subagent 去问多种网页 LLM + 权威数据，检查矛盾",
+    "name": "调研后交叉验证",
+    "on_failure": "02",
     "on_human_block": "exploration",
-    "on_success": "02",
+    "on_success": "03",
     "required_outputs": [
-      "goal_summary",
-      "constraints"
+      "cross_validation"
     ],
     "revision": "r1",
-    "success_condition": "目标和约束结构化"
+    "success_condition": "每个关键调研字段有逐 claim validation_records（≥2 独立具体来源、日期、裁决），矛盾已记录并更新 confidence"
   },
   "status": "running",
   "task": {
     "description": "研究本地 GPU",
     "source": "ralph run"
-  }
+  },
+  "task_intake": null,
+  "task_intake_history": []
 }

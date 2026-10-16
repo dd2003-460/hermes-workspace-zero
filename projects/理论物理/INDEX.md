@@ -17,6 +17,7 @@
 | `D1-adsl-spin-connection/` | 3D AdS-Lorentz 引力 & 规范理论（AdSL algebra、Chern-Simons、挠率黑洞、pole-skipping、标量/Dirac 探测，GitHub: AkashiKari/adsl-gravity-sandbox） |
 | `cosmos-thesis-review/` | 宇宙学论文综述 |
 | `2026春复习/` | 2026 年春季课程复习（规范场论、宇宙学） |
+| `quantum-ec/` | 量子纠错（七阶段方法：预言落纸 + 跑模型复算验证） |
 
 ---
 

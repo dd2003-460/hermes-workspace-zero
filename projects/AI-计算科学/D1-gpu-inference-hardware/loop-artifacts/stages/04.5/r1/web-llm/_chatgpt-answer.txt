@@ -1,0 +1,534 @@
+我按你要求的口径做了一次独立网页交叉核验：优先官方资料，其次用独立厂商/论文/价格追踪作为第二源；对“看起来对但实际是不同规格/不同代际”的数字单独拆开。
+
+先给结论：
+
+#	Claim	判定	核验结果
+1	RTX 6000 Ada = 960 GB/s	确认	NVIDIA 官方资料明确写 960 GB/s
+2	A100 SXM4 FP16 Tensor 312 TFLOPS；PCIe 156；带宽 2039/1935；PCIe 无 NVLink	部分确认 / 需修正表述	数值基本确认，但 312/156 是 dense，若采用 NVIDIA 页面带稀疏值则是 624/312；PCIe 并非“绝对无 NVLink”，官方注明可用双卡 NVLink Bridge
+3	Cerebras WSE-3 = 4T transistor / 900K AI cores / 5nm	确认	Cerebras 官方直接确认
+4	H100 PCIe = 2040 GB/s	确认	第二独立来源找到了；但 NVIDIA 官方规格通常写约 2.0 TB/s，因此 2040 更适合作为具体资料表数值，而不是把它写成唯一官方精确值
+5	RTX 5090 street price $4700–7000	部分确认	$4,700 有较强独立价格证据；$7,000 在部分高端/地区/第三方交易中出现，但不能把 $4,700–7,000 当成统一“典型街价区间”
+6	MI300X ≈ $15k	确认“约 $15k 有独立来源”，但不是 AMD 官方 MSRP	有 Citi/行业研究转述、三星证券、当前硬件供应商等多源支持；AMD 自己不公开固定单卡价格
+7	M4 Max = 546 GB/s	确认	Apple 官方新闻稿直接写 maximum 546 GB/s；网页下线不影响官方历史资料的存在
+8	Groq LPU = 20 TB/s + 96GB SRAM	否定	这组规格与官方 GroqChip 资料不符；官方是 230 MB SRAM + up to 80 TB/s on-die bandwidth。20 TB/s/96GB 不应写入矩阵
+1. RTX 6000 Ada：960 GB/s
+
+判定：确认。
+
+NVIDIA 官方产品资料明确列出：
+
+48 GB
+
+960 GB/s memory bandwidth
+
+RTX 6000 Ada Generation
+
+NVIDIA
+
+NVIDIA RTX 6000 / L40 产品资料 PDF
+
+所以你附件里把 864 → 960 GB/s 的修正是正确的。
+
+结论：保留 960 GB/s。
+
+2. A100 SXM4 / PCIe
+
+判定：数值确认，但“PCIe 无 NVLink”这个表述需要改。
+
+NVIDIA 当前 A100 官方规格页给出了：
+
+	A100 80GB PCIe	A100 80GB SXM
+FP16 Tensor Core	312 TFLOPS	624 TFLOPS*
+FP64 Tensor Core	19.5 TFLOPS	—
+显存带宽	1,935 GB/s	2,039 GB/s
+TDP	300W	400W
+
+其中星号说明 Tensor 数值是 sparsity 条件下的峰值。因此如果你矩阵的列定义是 dense FP16 Tensor，应该使用：
+
+PCIe：156 TFLOPS
+
+SXM：312 TFLOPS
+
+这恰好解释了你原始数据里的问题：19.5 TFLOPS 是 FP64 Tensor，不是 FP16 Tensor。 
+NVIDIA
+
+但有一个重要的小坑：
+
+你附件写的是：
+
+A100 PCIe …… NVLink 移除（仅 SXM 支持）
+
+这句话太绝对。
+
+NVIDIA 官方页面实际上写明：
+
+PCIe GPUs via NVLink Bridge for up to two GPUs
+
+也就是说，A100 PCIe 本身不是 SXM 那种 NVLink 600 GB/s 互连，但 PCIe A100 可以通过 NVLink Bridge 连接两张卡。 
+NVIDIA
+
+所以建议你的矩阵改成：
+
+A100 PCIe：PCIe Gen4 主机互连；支持最多 2 卡 NVLink Bridge，但不具备 SXM/HGX 的 600 GB/s NVLink fabric。
+
+NVIDIA A100 官方规格页
+
+结论：
+
+156 / 312 dense FP16：✅
+
+1935 / 2039 GB/s：✅
+
+“PCIe 完全无 NVLink”：❌ 应修正。
+
+3. Cerebras WSE-3
+
+判定：确认，而且这是目前你这组数据里证据最干净的之一。
+
+Cerebras 自己的 2024 年 WSE-3 发布资料明确写：
+
+4 trillion transistors
+
+900,000 AI optimized compute cores
+
+5nm
+
+44 GB on-chip SRAM
+
+125 PFLOPS peak AI performance
+
+Cerebras
++1
+
+而且 Cerebras 当前产品页仍然保留 WSE-3 的数据：
+
+4 trillion transistors / 900,000 AI-optimized cores
+
+Cerebras
+
+所以这项已经不需要 Wikipedia 作为主要证据。
+
+Cerebras WSE-3 官方产品页
+
+结论：完全确认。
+
+顺带提醒：2026 年 Cerebras 已经出现 WSE-3 Turbo / CS-4，所以你的矩阵如果是比较“WSE-3”而不是“当前 Cerebras 产品”，一定要在名称里明确写 WSE-3 / CS-3，否则容易把后来的 WSE-3T 数据混进来。当前 WSE-3T 已经是 250 PFLOPS、43.2 PB/s。
+Cerebras
++1
+
+4. H100 PCIe 80GB = 2040 GB/s
+
+判定：确认，已经找到第二独立来源。
+
+你缺的第二来源可以用 2026 年 ICPE 2026 学术论文。
+
+论文的 GPU specification table 明确列：
+
+NVIDIA H100 PCIe — 80GB HBM2e — 2040 GB/s
+
+ICPE 2026
+
+这不是 NVIDIA 自己的网页，而是独立学术论文，所以非常适合你这个“第二来源”要求。
+
+另外还有一篇 2025 年的学术论文表格，把 H100 PCIe 的 bandwidth 写成 2.0 TB/s。
+D-nb
+
+这里其实暴露了一个值得在矩阵里处理的小问题：
+
+2040 GB/s ≈ 2.04 TB/s，而不同资料会四舍五入成 2.0 TB/s。
+
+所以我建议你的 canonical value 仍然：
+
+H100 PCIe：2040 GB/s
+
+同时 source note 写：
+
+Independent literature may report rounded value of 2.0 TB/s.
+
+ICPE 2026论文（含 GPU specification table）
+
+结论：开放项可以关闭。
+
+5. RTX 5090 street price：$4700–7000
+
+判定：部分确认；建议不要把 $4700–7000 写成一个严格的“典型街价范围”。
+
+这里我认为你原矩阵最需要改的是价格口径。
+
+截至 2026-09-16，证据已经明显显示 RTX 5090 远离 $1,999 MSRP：
+
+当前价格追踪站给出的 2026-09-15 street price：$5,000。
+videocardprices.com
+
+GPU Poet 的 2026 年 9 月数据：当前 listings 起价约 $5,585，过去一段时间最低平均约 $4,683。
+GPUPoet
+
+PC Gamer 2026-09 报道：RTX 5090 当前约 $5,700。
+PC Gamer
+
+Tom's Hardware 今天的报道则显示，库存短缺导致部分第三方卖家已经挂到 $6,500–$9,500，但同时指出这类第三方价格可能包含不可靠卖家，因此不能拿它当“正常市场价”。
+Tom's Hardware
+
+另外，8 月份的独立市场追踪给出：
+
+美国 RTX 5090 median ≈ $4,700
+
+TopCPU
++1
+
+而 StockX 的历史成交数据则出现过：
+
+最近 3 个月 $4,001–$6,999
+
+StockX
+
+所以：
+
+$4,700–7,000 有没有证据？
+
+有，但不能解释为“正常零售价稳定范围”。
+
+更严谨的写法应该是：
+
+RTX 5090 street price：约 $4.7k–$7k+，但典型美国当前市场价格约 $5k–$6k；极端第三方 listing 可明显高于 $7k。
+
+如果你的 cost-performance 矩阵需要一个单点价格，我反而建议继续用：
+
+$5,000
+
+因为它目前有价格追踪数据支持，而且比拿 $4,700–7,000 的中点 $5,850 更接近当前观察到的主流价格。
+videocardprices.com
+
+结论：
+
+$4700：✅ 有充分独立证据
+
+$7000：✅ 有历史/高端成交证据
+
+$4700–7000 = typical street price：⚠️ 证据不足
+
+$5000 作为矩阵 point estimate：✅ 有当前价格追踪支持
+
+6. MI300X ≈ $15k
+
+判定：确认“独立来源支持约 $15k”，但不能标成 AMD 官方 MSRP。
+
+这个开放项现在可以关闭。
+
+一个很有价值的独立来源是 Tom's Hardware，它报道 Citi 对 MI300X 的估算：
+
+Microsoft 等大客户：约 $10,000
+
+其他客户：约 $15,000
+
+AMD 本身不公开固定价格
+
+不同客户/采购量价格不同
+
+Tom's Hardware
+
+Tom's Hardware：MI300X $10k–$15k pricing report
+
+还有一个非常有用的独立金融研究来源：
+
+Samsung Securities 的 2024 AI 行业报告直接列：
+
+MI300X average selling price = $15,000
+
+并明确标注资料来源为各公司资料/行业数据。
+三星证券
+
+Samsung Securities AI industry report PDF
+
+现在甚至还有 2026 年的数据中心 GPU供应商给出：
+
+MI300X OAM：$10,000–$15,000
+
+但这是供应商 indicative pricing，不应与正式 OEM quote 等同。
+Moyan Technology
+
+因此你的矩阵应该写：
+
+MI300X estimated street/ASP: ~$15k — non-official, independently reported estimate
+
+而不是：
+
+MSRP = $15,000 ❌
+
+结论：开放项可以关闭，但 source type 必须标成 estimate / reported ASP。
+
+7. Apple M4 Max = 546 GB/s
+
+判定：确认。
+
+这个其实比“Apple 芯片页已下线”更好处理，因为 Apple 自己的新闻稿还在。
+
+Apple 在发布 M4 Max 时明确写：
+
+up to 128GB unified memory
+up to 546GB/s memory bandwidth
+
+Apple
+
+Apple 官方 M4 Pro / M4 Max 发布稿
+
+所以：
+
+M4 Max 546 GB/s
+
+完全可以继续保留。
+
+但要注意 “M4 Max”是芯片 SKU，而不是所有 M4 Max 产品都必然对应同一个具体配置/带宽描述；Apple 的表述本身就是 up to 546 GB/s。
+
+因此矩阵建议：
+
+Memory bandwidth: up to 546 GB/s
+
+而不是简单写：
+
+546 GB/s
+
+结论：确认。开放项关闭。
+
+8. Groq LPU：20 TB/s + 96GB SRAM
+
+判定：否定。这个 claim 应该从矩阵中删除。
+
+这里是这轮核验中最明确的一个反证。
+
+Groq 自己的官方 Product Brief：
+
+230 MB SRAM per chip
+Up to 80 TB/s on-die memory bandwidth
+
+Groq
+
+GroqChip Processor Product Brief v1.7（官方 PDF）
+
+而 Argonne National Laboratory 的 Groq workshop 材料也给出：
+
+230 MB SRAM
+
+80 TB/s bandwidth
+
+750 TOP/s INT8
+
+188 TFLOP/s FP16
+
+阿贡领导计算设施
+
+所以这里不是“缺第二来源”，而是：
+
+原 claim 本身就错了。
+
+正确应该是：
+
+Groq LPU / GroqChip 1：230 MB SRAM，up to 80 TB/s on-die memory bandwidth
+
+而不是：
+
+96 GB SRAM / 20 TB/s
+
+这两个数字很可能来自其他层级/其他产品/不同厂商资料混淆。
+
+尤其要注意，230 MB ≠ 230 GB，这是三个数量级的区别。
+
+最后：从反方审查，你们当前结论最脆弱在哪里？
+
+这个部分我觉得比单纯把 8 个数字核完更重要。
+
+第一脆弱点：RTX 5090 的“$0.34/tok / $0.86/tok”不是硬件事实，而是价格 × benchmark 的复合结论
+
+你现在：
+
+$1,999 / 5841 tok/s ≈ $0.34/tok
+$5,000 / 5841 tok/s ≈ $0.86/tok
+
+这个算术本身没问题。
+
+但它对 两个变量同时敏感：
+
+5090 实际采购价格
+
+5841 tok/s 的 benchmark workload
+
+而你的附件 D 已经承认：
+
+Silo AI / computeprices 使用 INT4/INT8；prefill/decode 口径差异 10–70×。
+
+所以真正危险的不是 $4,700 还是 $5,000。
+
+而是：
+
+5841 tok/s 是否与 H200 / MI300X 的 tok/s 在同一个 workload、batch、sequence length、quantization、runtime、decode/prefill definition 下可比？
+
+如果不是，$ / tok 排名可以发生巨大变化。
+
+换句话说：
+
+5090 的“最佳”目前最大的证据风险不是硬件 spec，而是 benchmark comparability。
+
+第二脆弱点：70B 单卡 MI300X 的“140 tok/s”比 $15k 更值得审查
+
+你现在的结论：
+
+MI300X 192GB → 70B ≈ 140 tok/s → 单卡最佳
+
+这里 $15k 即使变成 $10k 或 $20k，未必会彻底改变结论。
+
+但如果：
+
+140 tok/s 的 benchmark workload 与 H200 / 5090 的 benchmark 口径不一致
+
+那么这个结论就可能直接失效。
+
+尤其 MI300X 的 192GB 是非常强的容量优势，但：
+
+“能单卡放下 70B” ≠ “单卡 70B inference throughput 一定是最佳”。
+
+因此建议把这个结论拆成两个独立 claim：
+
+Capacity claim: MI300X 192GB 可以满足 70B 单卡部署 → 高置信度。
+
+Throughput claim: MI300X 70B ≈140 tok/s → 必须按完全相同 benchmark protocol 重新验证。
+
+这是比 $15k 更关键的审查点。
+
+第三脆弱点：H200 的“70B 多卡最佳”也不能只靠 4800 GB/s 推导
+
+H200：
+
+141GB HBM3e
+4.8 TB/s
+
+这些硬件规格本身没什么问题。
+
+但是：
+
+memory bandwidth 高 ≠ LLM inference throughput 自动最高。
+
+70B 多卡情况下还涉及：
+
+tensor parallelism
+
+NVLink / NVSwitch
+
+communication overhead
+
+batch size
+
+KV cache
+
+quantization
+
+context length
+
+framework
+
+kernel implementation
+
+prefill/decode
+
+所以如果 H200 的 317 tok/s 来自一个与其他卡不同的 deployment configuration，它可能把“硬件优势”和“软件/系统配置优势”混在一起。
+
+第四脆弱点：你的 best_overall=5090 已经被自己的审计结果动摇
+
+附件 B 自己已经发现：
+
+weighted framework = 0.90 ≠ 1.0
+9/11 cards not reproducible
+consistent recalculation → H200 65.75 > 5090 62.5
+
+这其实意味着：
+
+“5090 best overall”不应该继续作为阶段 04 的稳定结论。
+
+不是因为 5090 硬件不好，而是因为决策函数本身没有通过内部一致性检查。
+
+所以如果我是做 red-team review，我会把：
+
+best_overall = RTX 5090
+
+降级成：
+
+UNRESOLVED / framework-sensitive
+
+而不是把它和硬件规格一样放在“最终结论”里。
+
+我认为真正可能“翻转”结论的数字
+
+按影响链来看：
+
+会明显影响 best_overall
+
+① RTX 5090 的可比 7B throughput 5841 tok/s
+
+比 $4,700 vs $5,000 更重要。
+
+如果这个数字下降一半，$ / tok 直接翻倍；而价格只从 $5,000 → $5,700，只增加 14%。
+
+会影响 70B 单卡选择
+
+② MI300X 的 140 tok/s
+
+这是最值得重新跑/重新核验的数字。
+
+如果 140 tok/s 是严格同口径 benchmark，它很有价值；如果它是不同 batch / decode / prompt configuration 下的数字，则不能用于直接排序。
+
+会影响 70B 多卡选择
+
+③ H200 的 317 tok/s
+
+尤其要确认：
+
+317 tok/s 是多少张 H200？
+
+以及：
+
+batch / TP / context / quantization / decode definition 是什么？
+
+否则“70B 多卡最佳”实际上是一个系统 benchmark 结论，不是 H200 datasheet 结论。
+
+不太可能单独翻转排名的数字
+
+④ MI300X $15k
+
+它当然重要，但价格从：
+
+$15k → $12k
+
+$15k → $18k
+
+通常不会像 throughput 口径错误那样产生数量级变化。
+
+所以 $15k 是需要标注不确定性的输入变量，但不是目前最危险的变量。
+
+最终建议你把 Stage 04.5 更新成这样
+
+已关闭：
+
+ RTX 6000 Ada 960 GB/s
+
+ A100 156/312 dense FP16 Tensor + 1935/2039 GB/s
+
+ Cerebras WSE-3 4T / 900K / 5nm
+
+ H100 PCIe 2040 GB/s 第二来源
+
+ MI300X ~$15k 独立来源
+
+ M4 Max up to 546 GB/s
+
+需要修正：
+
+[!] A100 PCIe “无 NVLink” → 改为“可通过 NVLink Bridge 双卡互连，但不具备 SXM/HGX NVLink fabric”
+
+[!] RTX 5090 $4700–7000 → 改成“当前典型约 $5k–$6k；历史/特殊 listing 可达 $7k+”，如果矩阵单点继续用 $5,000
+
+[!] Groq 20 TB/s + 96GB → 删除，改为 230MB SRAM + up to 80TB/s
+
+真正需要进入 Stage 05 的 research_required：
+
+统一 benchmark protocol 后重新验证 5090 5841 tok/s、MI300X 140 tok/s、H200 317 tok/s。
+
+这三个 throughput 数字，比现在剩下的硬件 datasheet 缺口更可能改变最终选型。

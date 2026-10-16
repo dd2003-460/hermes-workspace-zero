@@ -1,0 +1,41 @@
+{
+  "attribute": "8项remaining_uncertainties处理 — 每项给出缓解措施或置信度调整",
+  "concept": "verification_uncertainties",
+  "disposition": "pending",
+  "field": {
+    "attribute": "8项remaining_uncertainties处理 — 每项给出缓解措施或置信度调整",
+    "concept": "verification_uncertainties",
+    "confidence": 0.8,
+    "disposition": "confirmed",
+    "evidence_refs": [
+      "loop-artifacts/stages/04/r1/evidence/computation-verification-r1.md",
+      "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+      "https://www.nvidia.com/en-us/data-center/h200/",
+      "https://en.wikipedia.org/wiki/AMD_Instinct"
+    ],
+    "observed_at": "2026-09-09T16:15:00+08:00",
+    "rationale": "stage03 的 8 项 remaining_uncertainties 逐项处理 (2026-09-09): [已复核/部分解决 3 项] (a) RTX 5090 价格波动 — MSRP $1999 经 NVIDIA 官方页今日确认, 零售 $4700-7000 未独立复核; (b) H200 规格 — 141GB HBM3e @4.8TB/s 经 NVIDIA 官方页今日确认, 价格仍估计; (c) MI300X 规格 — 192GB HBM3 单卡经 Wikipedia 今日确认。 [仍开放 5 项] (d) MI300X $15k 定价 — 无来源 (AMD 官网 ERR_HTTP2_PROTOCOL_ERROR, Wikipedia 无价格) → research_required; (e) RTX 5090 5841 tok/s@7B — 单源, 方法论相关 (10-70x 方差), 保留 flag; (f) Apple M4/M4 Max 吞吐 (80/200 tok/s) — 单源低置信 (stage03 已注明), 保留 flag; (g) ROCm 生态成熟度 — 定性判断, CUDA 仍主导 (框架评分 ROCm=60 为假设); (h) Groq/Cerebras/SambaNova — 托管无单价; Groq ~1000 tok/s/user 与 Cerebras 750 tok/s 为 stage03 T06 独立来源确认, SambaNova 厂商单源 (置信 0.55)。 结论: 不确定性清单本身经验证成立, 5 项开放项转入 stage 05 跟踪。",
+    "role": "verification"
+  },
+  "flow_only": false,
+  "id": "04-r1-field-verification_uncertainties-5811232cc1",
+  "input_refs": [
+    "loop-artifacts/stages/04/r1/fields.json"
+  ],
+  "instruction": "只处理字段 `verification_uncertainties`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/04/r1/tasks/04-r1-field-verification_uncertainties-5811232cc1.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+  "output_schema": {
+    "attribute": "string",
+    "concept": "verification_uncertainties",
+    "confidence": "number 0..1",
+    "disposition": "confirmed|inferred|assumed_default|research_required",
+    "evidence_refs": "array[string]",
+    "rationale": "string",
+    "role": "string"
+  },
+  "revision": "r1",
+  "role": "verification",
+  "schema_version": 1,
+  "stage_id": "04",
+  "status": "ready",
+  "type": "field_task"
+}

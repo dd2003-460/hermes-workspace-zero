@@ -1,6 +1,6 @@
 # Projects — 工作区项目索引
 
-**最后更新**: 2026-10-15（新增 decomp [DC.1]：通用任务分解 prompt 总目标 home）
+**最后更新**: 2026-10-16（结构整理：删除 4 个分解测试桩项目；顶层 D1-* 归入领域目录；写作-社会系统 提升为顶层领域）
 
 > **活跃项目入口**: [ACTIVE.md](ACTIVE.md) — 自动聚合的 loop 状态面板（由 `scripts/aggregate-active.sh` 生成）
 > 各项目固定路径: `<project>/loop-state.json`
@@ -19,6 +19,7 @@
 | `理论物理/D1-goal-investigation/` | [DGI.1] | **loop it 14**：Agent goal 机制 + loop状态管理研究 |
 | `理论物理/cosmos-thesis-review/` | [CTR.1] | 宇宙学论文综述 |
 | `理论物理/2026春复习/` | [CR.1] | 2026 年春季复习材料 |
+| `理论物理/quantum-ec/` | [QEC.1] | 量子纠错（七阶段方法：预言落纸 + 跑模型复算验证） |
 
 ### AI / 计算科学
 
@@ -31,8 +32,9 @@
 || `AI-计算科学/D1-continuous-agent/` | [CA.1] | Agent 持续循环机制 |
 || `AI-计算科学/D1-browser-auto/` | [DBA.1] | **待启动**：本地 AI 驱动 Playwright 操控浏览器与网页大模型对话 |
 | `D1-ralph-field-centric/` | [DRF.1] | **待启动**：RALPH 字段中心化重构规划（放宽主 agent 限制、字段级流动、按字段派发调研 subagent，评估弱模型稳定性/质量） |
-| `D1-gpu-inference-hardware/` | [DGH.1] | GPU 推理硬件优化空间研究（矩阵/tensor 硬件计算；推理场景硬件还能怎么优化） |
-| `D1-gpu-kv-cache/` | [DGK.1] | **由 DGH.1 衍生**：KV Cache 硬件优化——片上 SRAM 缓存 / 专用 KV 存储 / PagedAttention 硬件化 |
+| `AI-计算科学/D1-gpu-inference-hardware/` | [DGH.1] | GPU 推理硬件优化空间研究（矩阵/tensor 硬件计算；推理场景硬件还能怎么优化） |
+| `AI-计算科学/D1-gpu-research-2026/` | [DGR.1] | GPU 本地推理研究（2026，含 web-llm 交叉验证） |
+| `AI-计算科学/D1-hintfree-decomposition/` | [DHF.1] | 无提示词目标分解（hint-free goal decomposition）实验 |
 | `decomp/` | [DC.1] | **总目标**：通用任务分解 prompt（总目标与总计划见其 README）；7 个相关 GPU/分解项目归档于 `archive/`（映射表见 `archive/README.md`）；RALPH loop 驱动，台账 = `tasks/state.md`；远端 = dd2003-460/decomp-bench |
 
 ### 写作 / 社会系统
@@ -42,6 +44,7 @@
 | `写作-社会系统/D1-aging-economics/` | [DAE.1] | 老龄化对区域经济影响实证研究 |
 | `写作-社会系统/D1-writing/` | [DW.1] | 写作工作 |
 | `写作-社会系统/D1-writing/motivation_society/` | [DMS.1] | 《动机社会》中文书稿(ctex+xelatex)——RALPH 接管:干净编译 + 按 part1_core_logic 风格修缮后续 AI 生成章节；Stop 钩子强制分解+进度条 |
+| `写作-社会系统/author-voice-mining/` | [AVM.1] | 作者声音挖掘（写作风格 data + scripts + outputs） |
 
 ---
 

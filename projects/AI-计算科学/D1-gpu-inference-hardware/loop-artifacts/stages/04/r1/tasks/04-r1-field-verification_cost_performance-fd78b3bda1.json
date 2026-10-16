@@ -1,0 +1,43 @@
+{
+  "apply_count": 1,
+  "attribute": "性价比分析计算正确性验证 — 验证$/tok计算和排名",
+  "concept": "verification_cost_performance",
+  "disposition": "research_required",
+  "field": {
+    "attribute": "性价比分析计算正确性验证 — 验证$/tok计算和排名",
+    "concept": "verification_cost_performance",
+    "confidence": 0.85,
+    "disposition": "confirmed",
+    "evidence_refs": [
+      "loop-artifacts/stages/04/r1/evidence/computation-verification-r1.md",
+      "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+      "https://www.nvidia.com/en-us/data-center/h200/"
+    ],
+    "observed_at": "2026-09-09T16:05:00+08:00",
+    "rationale": "L1 本地重算: 22/22 $/tok 通过 (price/tok_s, 0 偏差)。L2 排名: rankings_7b 6 处顺序违规 (6000Ada 记录#13应#4, H200 #12→#5, M4 #4→#6, M4Max #5→#7, MI300X #6→#8, SN3000 #7→#10), score_percentile 不自洽 → 需修复。关键价格/吞吐外部复核 (2026-09-09): RTX 5090 MSRP $1999 + 32GB GDDR7 经 NVIDIA 产品页确认 (其 $/tok_7b=$0.34 基于 MSRP; 零售溢价场景 $0.86 仍 #1, stage03 caveat 已注明); H200 141GB HBM3e @4.8TB/s 经 NVIDIA 数据页确认, $35000 维持估计值。",
+    "role": "verification"
+  },
+  "flow_only": false,
+  "id": "04-r1-field-verification_cost_performance-fd78b3bda1",
+  "input_refs": [
+    "loop-artifacts/stages/04/r1/fields.json"
+  ],
+  "instruction": "只处理字段 `verification_cost_performance`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/04/r1/tasks/04-r1-field-verification_cost_performance-fd78b3bda1.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+  "last_applied_at": "2026-09-09T09:21:53.003204+00:00",
+  "output_schema": {
+    "attribute": "string",
+    "concept": "verification_cost_performance",
+    "confidence": "number 0..1",
+    "disposition": "confirmed|inferred|assumed_default|research_required",
+    "evidence_refs": "array[string]",
+    "rationale": "string",
+    "role": "string"
+  },
+  "revision": "r1",
+  "role": "verification",
+  "schema_version": 1,
+  "stage_id": "04",
+  "status": "ready",
+  "type": "field_task",
+  "updated_at": "2026-09-09T09:21:53.005544+00:00"
+}

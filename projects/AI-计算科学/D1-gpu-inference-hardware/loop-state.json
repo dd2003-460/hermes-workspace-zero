@@ -1,0 +1,1035 @@
+{
+  "active_tasks": {},
+  "allowed_actions": [
+    "advance",
+    "rollback",
+    "blocked_human",
+    "skip_blocked",
+    "candidate",
+    "explore",
+    "dispatch",
+    "join",
+    "clarify",
+    "repair_prompt"
+  ],
+  "clarification_history": [],
+  "current_artifact": "loop-artifacts/stages/04.5/r1/state.json",
+  "execution_summary": {
+    "artifact_refs": [],
+    "completed_task_ids": [],
+    "unresolved_claims": []
+  },
+  "exploration_history": [],
+  "field_tasks": [],
+  "graph_tasks": [
+    {
+      "depends_on": [],
+      "execution_mode": "serial",
+      "id": "04-r1-node-T01",
+      "input_refs": [],
+      "instruction": "只执行 DAG 节点 `T01`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "T01",
+      "orthogonal_key": null,
+      "output_schema": {},
+      "parallel_group_id": null,
+      "parent_id": null,
+      "path": "loop-artifacts/stages/04/r1/tasks/04-r1-node-T01.json",
+      "postconditions": [],
+      "preconditions": [],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "04",
+      "status": "completed",
+      "type": "graph_task",
+      "writes": []
+    },
+    {
+      "depends_on": [],
+      "execution_mode": "serial",
+      "id": "04-r1-node-T02",
+      "input_refs": [],
+      "instruction": "只执行 DAG 节点 `T02`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "T02",
+      "orthogonal_key": null,
+      "output_schema": {},
+      "parallel_group_id": null,
+      "parent_id": null,
+      "path": "loop-artifacts/stages/04/r1/tasks/04-r1-node-T02.json",
+      "postconditions": [],
+      "preconditions": [],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "04",
+      "status": "completed",
+      "type": "graph_task",
+      "writes": []
+    },
+    {
+      "depends_on": [],
+      "execution_mode": "serial",
+      "id": "04-r1-node-T03",
+      "input_refs": [],
+      "instruction": "只执行 DAG 节点 `T03`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "T03",
+      "orthogonal_key": null,
+      "output_schema": {},
+      "parallel_group_id": null,
+      "parent_id": null,
+      "path": "loop-artifacts/stages/04/r1/tasks/04-r1-node-T03.json",
+      "postconditions": [],
+      "preconditions": [],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "04",
+      "status": "completed",
+      "type": "graph_task",
+      "writes": []
+    },
+    {
+      "depends_on": [
+        "T03"
+      ],
+      "execution_mode": "serial",
+      "id": "04-r1-node-T04",
+      "input_refs": [
+        "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json"
+      ],
+      "instruction": "只执行 DAG 节点 `T04`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "T04",
+      "orthogonal_key": null,
+      "output_schema": {
+        "best_performance": {
+          "gpu": "string",
+          "reason": "string"
+        },
+        "best_value": {
+          "gpu": "string",
+          "reason": "string"
+        },
+        "caveats": [
+          "string"
+        ],
+        "rankings_70b": "array of {rank, gpu, $/tok, score}",
+        "rankings_7b": "array of {rank, gpu, $/tok, score}"
+      },
+      "parallel_group_id": null,
+      "parent_id": null,
+      "path": "loop-artifacts/stages/04/r1/tasks/04-r1-node-T04.json",
+      "postconditions": [],
+      "preconditions": [],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "04",
+      "status": "completed",
+      "type": "graph_task",
+      "writes": []
+    },
+    {
+      "depends_on": [],
+      "execution_mode": "serial",
+      "id": "04-r1-node-T05",
+      "input_refs": [],
+      "instruction": "只执行 DAG 节点 `T05`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "T05",
+      "orthogonal_key": null,
+      "output_schema": {},
+      "parallel_group_id": null,
+      "parent_id": null,
+      "path": "loop-artifacts/stages/04/r1/tasks/04-r1-node-T05.json",
+      "postconditions": [],
+      "preconditions": [],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "04",
+      "status": "completed",
+      "type": "graph_task",
+      "writes": []
+    },
+    {
+      "depends_on": [],
+      "execution_mode": "serial",
+      "id": "04-r1-node-T06",
+      "input_refs": [],
+      "instruction": "只执行 DAG 节点 `T06`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "T06",
+      "orthogonal_key": null,
+      "output_schema": {},
+      "parallel_group_id": null,
+      "parent_id": null,
+      "path": "loop-artifacts/stages/04/r1/tasks/04-r1-node-T06.json",
+      "postconditions": [],
+      "preconditions": [],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "04",
+      "status": "completed",
+      "type": "graph_task",
+      "writes": []
+    },
+    {
+      "depends_on": [
+        "T03",
+        "T04",
+        "T05",
+        "T06"
+      ],
+      "execution_mode": "serial",
+      "id": "04-r1-node-T07",
+      "input_refs": [
+        "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json",
+        "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json",
+        "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json",
+        "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json"
+      ],
+      "instruction": "只执行 DAG 节点 `T07`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "T07",
+      "orthogonal_key": null,
+      "output_schema": {
+        "confidence": "0.0-1.0",
+        "gpu_scores": "object keyed by gpu_name",
+        "recommendation": {
+          "best_edge": "string",
+          "best_overall": "string",
+          "best_performance": "string",
+          "best_value": "string",
+          "rationale": "string"
+        },
+        "remaining_uncertainties": [
+          "string"
+        ],
+        "scoring_criteria": "array of {criterion, weight 0-1}"
+      },
+      "parallel_group_id": null,
+      "parent_id": null,
+      "path": "loop-artifacts/stages/04/r1/tasks/04-r1-node-T07.json",
+      "postconditions": [],
+      "preconditions": [],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "04",
+      "status": "completed",
+      "type": "graph_task",
+      "writes": []
+    },
+    {
+      "depends_on": [
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07"
+      ],
+      "execution_mode": "serial",
+      "id": "04-r1-node-T08",
+      "input_refs": [
+        "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json",
+        "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json",
+        "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json",
+        "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json",
+        "loop-artifacts/stages/03/r1/artifacts/decision-framework.json"
+      ],
+      "instruction": "只执行 DAG 节点 `T08`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "T08",
+      "orthogonal_key": null,
+      "output_schema": {
+        "all_covered": "boolean",
+        "criteria": "array of {criterion, covered_by, status, notes}",
+        "gaps": [
+          "string"
+        ]
+      },
+      "parallel_group_id": null,
+      "parent_id": null,
+      "path": "loop-artifacts/stages/04/r1/tasks/04-r1-node-T08.json",
+      "postconditions": [],
+      "preconditions": [],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "04",
+      "status": "completed",
+      "type": "graph_task",
+      "writes": []
+    }
+  ],
+  "history": [
+    {
+      "action": "advance",
+      "internal_state": "stage_02",
+      "revision": "r1",
+      "stage_id": "01"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_02_5",
+      "revision": "r1",
+      "stage_id": "02"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_03",
+      "revision": "r1",
+      "stage_id": "02.5"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_04",
+      "revision": "r1",
+      "stage_id": "03"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_04_5",
+      "revision": "r1",
+      "stage_id": "04"
+    },
+    {
+      "action": "advance",
+      "internal_state": "exploration",
+      "revision": "r1",
+      "stage_id": "04.5"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_01",
+      "revision": "r1",
+      "stage_id": "exploration"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_02",
+      "revision": "r1",
+      "stage_id": "01"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_02_5",
+      "revision": "r1",
+      "stage_id": "02"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_03",
+      "revision": "r1",
+      "stage_id": "02.5"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_04",
+      "revision": "r1",
+      "stage_id": "03"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_04_5",
+      "revision": "r1",
+      "stage_id": "04"
+    }
+  ],
+  "last_action": "advance",
+  "last_event_id": "107ef74e-b45b-4d84-9187-78f655b68404",
+  "last_exploration": null,
+  "last_result": {
+    "action": "advance",
+    "artifact_refs": [],
+    "evidence": [],
+    "message": "",
+    "next_stage": "04.5",
+    "payload": {
+      "stage_review": "Stage 04 r1 验证完成, 7/7 字段全部 field-apply 入库, 字段门禁通过。L1 $/tok 重算 22/22 通过 (0 偏差)。发现 3 类真实缺陷: (1) 加权框架 bug — 权重和=0.90 (应=1.0), 9/11 GPU total 不可复现, 重算下 H200(65.75)>5090(62.5) best_overall 翻转; (2) rankings_7b 6 处顺序违规 + score_percentile 不自洽; (3) 系统性来源缺口 — 全项目 artifact 0 条 HTTPS 链接, stage 03 source attribution 不可追溯。L4 外部复核 3/15 设备 (RTX 5090 MSRP $1999+32GB GDDR7, H200 141GB HBM3e@4.8TB/s, MI300X 192GB HBM3), 均与矩阵一致, 0 矛盾。Overall confidence 0.72; 分工作负载推荐 3/3 成立 (0.75), best_overall=5090 不稳健 (0.5)。判定: CONDITIONAL GO → 04.5 补来源交叉验证, 05 前必须修复框架权重与排名并复算。",
+      "task_spec": {
+        "attribute_matrix": [
+          {
+            "attribute": "性价比分析计算正确性验证 — 验证$/tok计算和排名",
+            "concept": "verification_cost_performance",
+            "confidence": 0.85,
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "loop-artifacts/stages/04/r1/evidence/computation-verification-r1.md",
+              "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+              "https://www.nvidia.com/en-us/data-center/h200/"
+            ],
+            "observed_at": "2026-09-09T16:05:00+08:00",
+            "rationale": "L1 本地重算: 22/22 $/tok 通过 (price/tok_s, 0 偏差)。L2 排名: rankings_7b 6 处顺序违规 (6000Ada 记录#13应#4, H200 #12→#5, M4 #4→#6, M4Max #5→#7, MI300X #6→#8, SN3000 #7→#10), score_percentile 不自洽 → 需修复。关键价格/吞吐外部复核 (2026-09-09): RTX 5090 MSRP $1999 + 32GB GDDR7 经 NVIDIA 产品页确认 (其 $/tok_7b=$0.34 基于 MSRP; 零售溢价场景 $0.86 仍 #1, stage03 caveat 已注明); H200 141GB HBM3e @4.8TB/s 经 NVIDIA 数据页确认, $35000 维持估计值。",
+            "role": "verification"
+          },
+          {
+            "attribute": "决策框架评分方法论验证 — 验证8项加权评分标准和GPU评分",
+            "concept": "verification_decision_framework",
+            "confidence": 0.95,
+            "disposition": "confirmed",
+            "evidence_refs": [],
+            "observed_at": "2026-09-09T16:25:00+08:00",
+            "rationale": "8 项权重之和=0.90≠1.0; 11 个 GPU 中 9 个 recorded total 无法由 breakdown×weights 复现 (RTX5090 记录82/重算62.5, H200 78/65.75, MI300X 72/60.5 等)。重算下 H200(65.75)>RTX5090(62.5), best_overall=RTX5090 推荐在框架自身算术下翻转。'5090 最佳7B' 不受影响 (0.34 仍为最低 $/tok_7b)。修复项: 权重归一化+重算 totals+重排 rankings+重导推荐。",
+            "role": "verification"
+          },
+          {
+            "attribute": "硬件对比矩阵数据准确性验证 — 抽查15个设备的规格数据与独立来源一致性",
+            "concept": "verification_hardware_matrix",
+            "confidence": 0.8,
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "loop-artifacts/stages/04/r1/evidence/computation-verification-r1.md",
+              "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+              "https://www.nvidia.com/en-us/data-center/h200/"
+            ],
+            "observed_at": "2026-09-09T16:05:00+08:00",
+            "rationale": "复核结论: 矩阵内部自洽 ($/tok 22/22 通过); 15 设备中 2 个完成官方来源复核且一致: RTX 5090 (MSRP $1999 + 32GB GDDR7, NVIDIA 产品页) 和 H200 (141GB HBM3e @4.8TB/s, NVIDIA 数据页)。系统性缺口: 全项目 0 条 HTTPS 来源链接, stage 03 的 'source attribution' 不可追溯; 其余 13 设备的规格/价格/吞吐 (含 7B tok/s 基准值 10-70x 方法论方差) 待补来源 → 列入 uncertainties/research_required。",
+            "role": "verification"
+          },
+          {
+            "attribute": "关键推荐交叉验证 — 验证RTX 5090最佳7B、H200最佳70B多GPU、MI300X最佳70B单GPU推荐",
+            "concept": "verification_recommendations",
+            "confidence": 0.75,
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "loop-artifacts/stages/04/r1/evidence/computation-verification-r1.md",
+              "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+              "https://www.nvidia.com/en-us/data-center/h200/",
+              "https://en.wikipedia.org/wiki/AMD_Instinct"
+            ],
+            "observed_at": "2026-09-09T16:15:00+08:00",
+            "rationale": "3 项核心推荐交叉验证结果: (1) 'RTX 5090 最佳 7B' — 成立: $/tok_7b=$0.34 为 22 值最低 (L1 重算 0 偏差), MSRP $1999 + 32GB GDDR7 经 NVIDIA 产品页确认 (2026-09-09); 零售溢价 $5k 时 $0.86 仍 #1; 弱点: 5841 tok/s 单源基准。 (2) 'H200 最佳 70B 多GPU' — 成立: 141GB HBM3e @4.8TB/s + NVLink 经 NVIDIA 数据页确认, 官方 Llama2 70B 推理 1.9X H100 (与矩阵 210→316 tok/s 量级一致); $35k 维持估计值; 多GPU扩展未计入矩阵 $/tok (stage03 caveat #9)。 (3) 'MI300X 最佳 70B 单GPU' — 部分成立: 192GB HBM3 单卡经 Wikipedia/AMD_Instinct 确认 (唯一可单卡容纳 70B FP16 ~140GB + KV 的消费/工作站外选项), 但 $15k 价格仍无来源 (AMD 官网协议错误, ",
+            "role": "verification"
+          },
+          {
+            "attribute": "阶段04验证报告 — 汇总所有验证结果，给出overall confidence和recommendation reliability",
+            "concept": "verification_report",
+            "confidence": 0.72,
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "loop-artifacts/stages/04/r1/evidence/stage04-verification-report-r1.md",
+              "loop-artifacts/stages/04/r1/evidence/computation-verification-r1.md",
+              "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+              "https://www.nvidia.com/en-us/data-center/h200/",
+              "https://en.wikipedia.org/wiki/AMD_Instinct"
+            ],
+            "observed_at": "2026-09-09T16:20:00+08:00",
+            "rationale": "Overall confidence 0.72, 推荐可靠性: 分工作负载 3/3 成立 (0.75), best_overall=5090 不稳健 (0.5)。Stage 04 发现 3 类真实缺陷: (1) 加权框架权重和=0.90 且 9/11 total 不可复现, 修复后 best_overall 可能翻转为 H200; (2) rankings_7b 6 处顺序违规; (3) 全项目 0 条 HTTPS 来源, stage 03 来源归属不可追溯 (3/15 设备已补官方/二级来源复核, 0 矛盾)。Stage 05 判定: CONDITIONAL GO — 须先修复框架权重+排名并补齐 12 设备来源或降级标注, 详见报告文件 §5 四项前置条件。",
+            "role": "verification_report"
+          },
+          {
+            "attribute": "阶段04验证范围 — 验证stage 03决策框架的准确性、计算正确性、和推荐可靠性",
+            "concept": "verification_scope",
+            "confidence": 0.9,
+            "disposition": "confirmed",
+            "evidence_refs": [],
+            "observed_at": "2026-09-09T16:25:00+08:00",
+            "rationale": "验证范围 = 4 层: L1 $/tok 算术 (22 值, 全过); L2 排名一致性 (发现 6 处顺序违规); L3 决策框架内部一致性 (权重和=0.90 且 9/11 total 不可复现, 均失败); L4 关键推荐独立来源交叉验证 (5090 最佳7B / H200 最佳70B多GPU / MI300X 最佳70B单GPU, 由 hardware_matrix/recommendations/uncertainties 三个字段承接, 待办)。L1-L3 已由 Python 独立重算 (2026-09-09)。",
+            "role": "verification_scope"
+          },
+          {
+            "attribute": "8项remaining_uncertainties处理 — 每项给出缓解措施或置信度调整",
+            "concept": "verification_uncertainties",
+            "confidence": 0.8,
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "loop-artifacts/stages/04/r1/evidence/computation-verification-r1.md",
+              "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+              "https://www.nvidia.com/en-us/data-center/h200/",
+              "https://en.wikipedia.org/wiki/AMD_Instinct"
+            ],
+            "observed_at": "2026-09-09T16:15:00+08:00",
+            "rationale": "stage03 的 8 项 remaining_uncertainties 逐项处理 (2026-09-09): [已复核/部分解决 3 项] (a) RTX 5090 价格波动 — MSRP $1999 经 NVIDIA 官方页今日确认, 零售 $4700-7000 未独立复核; (b) H200 规格 — 141GB HBM3e @4.8TB/s 经 NVIDIA 官方页今日确认, 价格仍估计; (c) MI300X 规格 — 192GB HBM3 单卡经 Wikipedia 今日确认。 [仍开放 5 项] (d) MI300X $15k 定价 — 无来源 (AMD 官网 ERR_HTTP2_PROTOCOL_ERROR, Wikipedia 无价格) → research_required; (e) RTX 5090 5841 tok/s@7B — 单源, 方法论相关 (10-70x 方差), 保留 flag; (f) Apple M4/M4 Max 吞吐 (80/200 tok/s) — 单源低置信 (stage03 已注明), 保留 flag; (g) ROCm 生态成熟度 ",
+            "role": "verification"
+          },
+          {
+            "attribute": "MI300X $15000 定价的独立可复核来源",
+            "concept": "MI300X定价来源",
+            "confidence": 0.4,
+            "disposition": "research_required",
+            "evidence_refs": [
+              "https://en.wikipedia.org/wiki/AMD_Instinct"
+            ],
+            "observed_at": "2026-09-09T16:15:00+08:00",
+            "rationale": "AMD 官网 ERR_HTTP2_PROTOCOL_ERROR, Wikipedia 规格页确认 192GB HBM3 但无价格; 待补来源, 否则从价格类结论剔除。stage 03 caveat: MI300X 为双 chiplet 卡, per-GPU 口径影响 7B $/tok 排名",
+            "role": "verification"
+          },
+          {
+            "attribute": "RTX 5090 零售 $4700-7000 溢价区间的独立零售/价格追踪来源",
+            "concept": "RTX5090零售价格带",
+            "confidence": 0.6,
+            "disposition": "research_required",
+            "evidence_refs": [
+              "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/"
+            ],
+            "observed_at": "2026-09-09T16:05:00+08:00",
+            "rationale": "MSRP $1999 已经 NVIDIA 官方产品页确认 (2026-09-09 访问); 零售溢价区间目前仅 stage 03 单源, 待 ≥2 零售来源, 否则收窄为未量化表述",
+            "role": "verification"
+          }
+        ],
+        "critical_risks": [
+          "框架 bug 未修复 (权重和=0.90, 9/11 total, 6 排名违规) — stage 05 必须先修复+复算, 否则报告排名结论无效; 修复后 best_overall 可能翻转为 H200",
+          "12 设备无 URL 级来源 (stage 03 声称 source attribution 但 artifact 无链接) — 04.5 首要工作量",
+          "web-llm 自动化需人类一次性授权 (ralph web-llm-authorize); 未授权时降级为主会话浏览器交叉验证并留可审计记录",
+          "subagent 不可用 (本地 MLX 27B 300s 内 0 API 调用) — 04.5 主会话串行执行"
+        ],
+        "goal": "对 stage 04 来源缺口做交叉验证: 补齐 12 个未复核设备的独立 HTTPS 来源, 解决 MI300X 定价与 5090 零售溢价无来源问题, 复核旗舰设备 7B tok/s 单源基准",
+        "required_outputs": [
+          "loop-artifacts/stages/04.5/r1/cross-validation-045-r1.json",
+          "更新版 hardware-comparison-matrix (per-device source_refs + low_confidence 标注)"
+        ],
+        "scope": "RTX 4090, 4090D, RTX 6000 Ada, A100 SXM4, A100 PCIe, H100 SXM5, H100 PCIe, Apple M4, M4 Max, SambaNova SN3000, Groq LPU, Cerebras WSE-3, 外加 MI300X 定价, 5090 零售价格带, 旗舰 7B tok/s 基准",
+        "success_criteria": [
+          "1) 上述 12 设备每个 ≥2 独立来源 (厂商页+第三方) 或显式降为 low_confidence 并记录原因",
+          "2) MI300X 定价: 找到具体来源, 否则标记 research_required 并从价格类结论中剔除",
+          "3) RTX 5090 零售溢价 $4700-7000: 至少 2 个零售/价格追踪来源, 否则收窄为 '零售显著溢价 (未量化)'",
+          "4) 旗舰设备 (5090, H200, MI300X) 7B tok/s 基准各 ≥2 独立来源并注明方法论, 其余保留单源 flag",
+          "5) 交叉验证回执写入 loop-artifacts/stages/04.5/r1/, 更新 hardware-comparison-matrix 增加 per-device source_refs"
+        ]
+      }
+    },
+    "revision": "r1",
+    "rollback_to": null,
+    "stage_id": "04",
+    "status": "passed"
+  },
+  "plan": {
+    "completed": [
+      "T01",
+      "T02",
+      "T03",
+      "T04",
+      "T05",
+      "T06",
+      "T07",
+      "T08"
+    ],
+    "critical_input": "LLM benchmark methodology discrepancy 10-70x (must be resolved before comparison)",
+    "dependency_graph": {
+      "T01": [],
+      "T02": [],
+      "T03": [],
+      "T04": [
+        "T03"
+      ],
+      "T05": [],
+      "T06": [],
+      "T07": [
+        "T03",
+        "T04",
+        "T05",
+        "T06"
+      ],
+      "T08": [
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07"
+      ]
+    },
+    "generated_at": "2026-08-17T12:30:00Z",
+    "graph_version": "1.0",
+    "input_state": "stage 02.5 r1 cross-validation complete, 10 research fields validated",
+    "interface_contract": {
+      "T03_to_T04": "T03 output matrix keys must match T04 input gpu_names; bandwidth/price/tok fields required",
+      "T07_inputs": "T03(matrix) + T04(rankings) + T05(edge) + T06(emerging) all required; scoring weights defined in T07",
+      "T08_inputs": "All artifacts must exist; coverage checked against stage 02.5 success_criteria"
+    },
+    "nodes": [
+      {
+        "completed_at": "2026-08-17",
+        "depends_on": [],
+        "estimated_effort": "15min",
+        "evidence": [
+          "loop-artifacts/stages/03/r1/artifacts/sambanova-research.json"
+        ],
+        "id": "T01",
+        "input": "无（独立调研）",
+        "name": "SambaNova SN3000 独立调研",
+        "output": "SambaNova SN3000 independent research — no independent benchmarks found, vendor-only claims, confidence 0.55",
+        "output_format": {
+          "claim": "string",
+          "confidence": "0.0-1.0",
+          "price_usd": "string or null",
+          "source_refs": [
+            "https URL"
+          ],
+          "specs": {
+            "compute": "string",
+            "memory": "string",
+            "throughput": "string"
+          }
+        },
+        "priority": 1,
+        "status": "completed",
+        "task_result": {
+          "artifact_refs": [
+            "loop-artifacts/stages/03/r1/artifacts/sambanova-research.json"
+          ],
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/sambanova-research.json"
+          ],
+          "output": "SambaNova SN3000 independent research — no independent benchmarks found, vendor-only claims, confidence 0.55",
+          "status": "completed"
+        },
+        "type": "research"
+      },
+      {
+        "completed_at": "2026-08-17",
+        "depends_on": [],
+        "estimated_effort": "30min",
+        "evidence": [
+          "loop-artifacts/stages/03/r1/artifacts/benchmark-methodology.md"
+        ],
+        "id": "T02",
+        "input": "stage 02.5 cross-validation.json LLM基准记录",
+        "name": "统一LLM基准方法论文档",
+        "output": "Comprehensive benchmark methodology — 5 test cells, 4 metrics, 6 normalization rules, 8 known limitations",
+        "output_format": {
+          "known_limitations": [
+            "string"
+          ],
+          "methodology": "string (describe comparison framework)",
+          "metrics": [
+            "tokens/s decode",
+            "tokens/s prefill",
+            "$/tok",
+            "ms/tok"
+          ],
+          "normalization_rules": [
+            "string rules for fair comparison"
+          ],
+          "standardized_models": [
+            "model_name + parameter_count + quantization"
+          ]
+        },
+        "priority": 1,
+        "status": "completed",
+        "task_result": {
+          "artifact_refs": [
+            "loop-artifacts/stages/03/r1/artifacts/benchmark-methodology.md"
+          ],
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/benchmark-methodology.md"
+          ],
+          "output": "Comprehensive benchmark methodology — 5 test cells, 4 metrics, 6 normalization rules, 8 known limitations",
+          "status": "completed"
+        },
+        "type": "analysis"
+      },
+      {
+        "completed_at": "2026-08-17",
+        "depends_on": [],
+        "estimated_effort": "30min",
+        "evidence": [
+          "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json"
+        ],
+        "id": "T03",
+        "input": "所有10个research_findings字段的attribute_matrix",
+        "name": "硬件规格对比矩阵",
+        "output": "Hardware comparison matrix covering 15 GPU/accelerator devices with full specs and LLM benchmarks",
+        "output_format": {
+          "matrix": {
+            "gpu_name": {
+              "$/tok_70b": "number (computed or null)",
+              "$/tok_7b": "number (computed)",
+              "bandwidth_gb_s": "number",
+              "compute_fp16_tflops": "number",
+              "form_factor": "string",
+              "llm_70b_tok_s": "number (normalized or null)",
+              "llm_7b_tok_s": "number (normalized)",
+              "memory_gb": "number",
+              "memory_type": "string",
+              "nvlink": "boolean",
+              "nvlink_bandwidth_gb_s": "number or null",
+              "power_watts": "number",
+              "price_usd": "number"
+            }
+          },
+          "notes": "string"
+        },
+        "priority": 1,
+        "status": "completed",
+        "task_result": {
+          "artifact_refs": [
+            "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json"
+          ],
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json"
+          ],
+          "output": "Hardware comparison matrix covering 15 GPU/accelerator devices with full specs and LLM benchmarks",
+          "status": "completed"
+        },
+        "type": "synthesis"
+      },
+      {
+        "completed_at": "2026-08-17",
+        "depends_on": [
+          "T03"
+        ],
+        "estimated_effort": "20min",
+        "evidence": [
+          "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json"
+        ],
+        "id": "T04",
+        "input": "hardware-comparison-matrix.json",
+        "input_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json"
+        ],
+        "name": "性价比分析（$ per tok/s）",
+        "output": "Cost-performance analysis with $/tok rankings for 7B and 70B models",
+        "output_format": {
+          "best_performance": {
+            "gpu": "string",
+            "reason": "string"
+          },
+          "best_value": {
+            "gpu": "string",
+            "reason": "string"
+          },
+          "caveats": [
+            "string"
+          ],
+          "rankings_70b": "array of {rank, gpu, $/tok, score}",
+          "rankings_7b": "array of {rank, gpu, $/tok, score}"
+        },
+        "output_schema": {
+          "best_performance": {
+            "gpu": "string",
+            "reason": "string"
+          },
+          "best_value": {
+            "gpu": "string",
+            "reason": "string"
+          },
+          "caveats": [
+            "string"
+          ],
+          "rankings_70b": "array of {rank, gpu, $/tok, score}",
+          "rankings_7b": "array of {rank, gpu, $/tok, score}"
+        },
+        "priority": 2,
+        "status": "completed",
+        "task_result": {
+          "artifact_refs": [
+            "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json"
+          ],
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json"
+          ],
+          "output": "Cost-performance analysis with $/tok rankings for 7B and 70B models",
+          "status": "completed"
+        },
+        "type": "analysis"
+      },
+      {
+        "completed_at": "2026-08-17",
+        "depends_on": [],
+        "estimated_effort": "20min",
+        "evidence": [
+          "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json"
+        ],
+        "id": "T05",
+        "input": "stage 02.5 边缘方案cross-validation记录",
+        "name": "边缘方案能力边界评估",
+        "output": "Edge solution capability boundaries — 5 devices evaluated, 5 fundamental gaps identified",
+        "output_format": {
+          "confidence": "0.0-1.0",
+          "edge_devices": "object keyed by device name",
+          "gap_analysis": "string (what edge can't do)"
+        },
+        "priority": 3,
+        "status": "completed",
+        "task_result": {
+          "artifact_refs": [
+            "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json"
+          ],
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json"
+          ],
+          "output": "Edge solution capability boundaries — 5 devices evaluated, 5 fundamental gaps identified",
+          "status": "completed"
+        },
+        "type": "research"
+      },
+      {
+        "completed_at": "2026-08-17",
+        "depends_on": [],
+        "estimated_effort": "20min",
+        "evidence": [
+          "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json"
+        ],
+        "id": "T06",
+        "input": "stage 02.5 新兴架构cross-validation记录",
+        "name": "新兴架构独立验证（Groq/Cerebras/SambaNova）",
+        "output": "Emerging architecture verification — Groq LPU (0.80), Cerebras WSE-3 (0.70), SambaNova SN3000 (0.55)",
+        "output_format": {
+          "architecture": "object keyed by architecture name",
+          "confidence": "0.0-1.0",
+          "independent_sources": "array of {source, finding}"
+        },
+        "priority": 3,
+        "status": "completed",
+        "task_result": {
+          "artifact_refs": [
+            "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json"
+          ],
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json"
+          ],
+          "output": "Emerging architecture verification — Groq LPU (0.80), Cerebras WSE-3 (0.70), SambaNova SN3000 (0.55)",
+          "status": "completed"
+        },
+        "type": "research"
+      },
+      {
+        "completed_at": "2026-08-17",
+        "depends_on": [
+          "T03",
+          "T04",
+          "T05",
+          "T06"
+        ],
+        "estimated_effort": "45min",
+        "evidence": [
+          "loop-artifacts/stages/03/r1/artifacts/decision-framework.json"
+        ],
+        "id": "T07",
+        "input": "所有artifacts",
+        "input_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json",
+          "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json",
+          "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json",
+          "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json"
+        ],
+        "name": "综合决策框架",
+        "output": "Decision framework with 8 weighted criteria, per-GPU scoring, decision tree, 7 scenario recommendations",
+        "output_format": {
+          "confidence": "0.0-1.0",
+          "gpu_scores": "object keyed by gpu_name",
+          "recommendation": {
+            "best_edge": "string",
+            "best_overall": "string",
+            "best_performance": "string",
+            "best_value": "string",
+            "rationale": "string"
+          },
+          "remaining_uncertainties": [
+            "string"
+          ],
+          "scoring_criteria": "array of {criterion, weight 0-1}"
+        },
+        "output_schema": {
+          "confidence": "0.0-1.0",
+          "gpu_scores": "object keyed by gpu_name",
+          "recommendation": {
+            "best_edge": "string",
+            "best_overall": "string",
+            "best_performance": "string",
+            "best_value": "string",
+            "rationale": "string"
+          },
+          "remaining_uncertainties": [
+            "string"
+          ],
+          "scoring_criteria": "array of {criterion, weight 0-1}"
+        },
+        "priority": 2,
+        "status": "completed",
+        "task_result": {
+          "artifact_refs": [
+            "loop-artifacts/stages/03/r1/artifacts/decision-framework.json"
+          ],
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/decision-framework.json"
+          ],
+          "output": "Decision framework with 8 weighted criteria, per-GPU scoring, decision tree, 7 scenario recommendations",
+          "status": "completed"
+        },
+        "type": "synthesis"
+      },
+      {
+        "completed_at": "2026-08-17",
+        "depends_on": [
+          "T03",
+          "T04",
+          "T05",
+          "T06",
+          "T07"
+        ],
+        "estimated_effort": "10min",
+        "evidence": [
+          "loop-artifacts/stages/03/r1/artifacts/coverage-proof.json"
+        ],
+        "id": "T08",
+        "input": "所有artifacts + stage 02.5 success_criteria",
+        "input_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json",
+          "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json",
+          "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json",
+          "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json",
+          "loop-artifacts/stages/03/r1/artifacts/decision-framework.json"
+        ],
+        "name": "coverage_proof — 验证所有success_criteria已覆盖",
+        "output": "Coverage proof — all 5 stage 02.5 success_criteria covered, 0 gaps",
+        "output_format": {
+          "all_covered": "boolean",
+          "criteria": "array of {criterion, covered_by, status, notes}",
+          "gaps": [
+            "string"
+          ]
+        },
+        "output_schema": {
+          "all_covered": "boolean",
+          "criteria": "array of {criterion, covered_by, status, notes}",
+          "gaps": [
+            "string"
+          ]
+        },
+        "priority": 1,
+        "status": "completed",
+        "task_result": {
+          "artifact_refs": [
+            "loop-artifacts/stages/03/r1/artifacts/coverage-proof.json"
+          ],
+          "evidence": [
+            "loop-artifacts/stages/03/r1/artifacts/coverage-proof.json"
+          ],
+          "output": "Coverage proof — all 5 stage 02.5 success_criteria covered, 0 gaps",
+          "status": "completed"
+        },
+        "type": "verification"
+      }
+    ],
+    "parallelism": {
+      "level_1_parallel": [
+        "T01",
+        "T02",
+        "T03",
+        "T05",
+        "T06"
+      ],
+      "level_2_parallel": [
+        "T04"
+      ],
+      "level_3_parallel": [
+        "T07"
+      ],
+      "level_4_parallel": [
+        "T08"
+      ]
+    },
+    "ready": [],
+    "task_results": {
+      "T01": {
+        "artifact_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/sambanova-research.json"
+        ],
+        "completed_at": "2026-08-17",
+        "evidence": [
+          "loop-artifacts/stages/03/r1/artifacts/sambanova-research.json"
+        ],
+        "output": "SambaNova SN3000 independent research — no independent benchmarks found, vendor-only claims, confidence 0.55",
+        "status": "completed"
+      },
+      "T02": {
+        "artifact_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/benchmark-methodology.md"
+        ],
+        "completed_at": "2026-08-17",
+        "evidence": [
+          "loop-artifacts/stages/03/r1/artifacts/benchmark-methodology.md"
+        ],
+        "output": "Comprehensive benchmark methodology — 5 test cells, 4 metrics, 6 normalization rules, 8 known limitations",
+        "status": "completed"
+      },
+      "T03": {
+        "artifact_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json"
+        ],
+        "completed_at": "2026-08-17",
+        "evidence": [
+          "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json"
+        ],
+        "output": "Hardware comparison matrix covering 15 GPU/accelerator devices with full specs and LLM benchmarks",
+        "status": "completed"
+      },
+      "T04": {
+        "artifact_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json"
+        ],
+        "completed_at": "2026-08-17",
+        "evidence": [
+          "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json"
+        ],
+        "output": "Cost-performance analysis with $/tok rankings for 7B and 70B models",
+        "status": "completed"
+      },
+      "T05": {
+        "artifact_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json"
+        ],
+        "completed_at": "2026-08-17",
+        "evidence": [
+          "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json"
+        ],
+        "output": "Edge solution capability boundaries — 5 devices evaluated, 5 fundamental gaps identified",
+        "status": "completed"
+      },
+      "T06": {
+        "artifact_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json"
+        ],
+        "completed_at": "2026-08-17",
+        "evidence": [
+          "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json"
+        ],
+        "output": "Emerging architecture verification — Groq LPU (0.80), Cerebras WSE-3 (0.70), SambaNova SN3000 (0.55)",
+        "status": "completed"
+      },
+      "T07": {
+        "artifact_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/decision-framework.json"
+        ],
+        "completed_at": "2026-08-17",
+        "evidence": [
+          "loop-artifacts/stages/03/r1/artifacts/decision-framework.json"
+        ],
+        "output": "Decision framework with 8 weighted criteria, per-GPU scoring, decision tree, 7 scenario recommendations",
+        "status": "completed"
+      },
+      "T08": {
+        "artifact_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/coverage-proof.json"
+        ],
+        "completed_at": "2026-08-17",
+        "evidence": [
+          "loop-artifacts/stages/03/r1/artifacts/coverage-proof.json"
+        ],
+        "output": "Coverage proof — all 5 stage 02.5 success_criteria covered, 0 gaps",
+        "status": "completed"
+      }
+    }
+  },
+  "project_id": "D1-ralph-smoke-matrix",
+  "queue": {
+    "blocked_human": [],
+    "candidates": [],
+    "ready": []
+  },
+  "run_history": [],
+  "schema_version": 4,
+  "stage": {
+    "failure_condition": "核验不足或矛盾未处置",
+    "id": "04.5",
+    "input_description": "04 的 claim ledger 与结论",
+    "name": "产出后交叉验证",
+    "on_failure": "04",
+    "on_human_block": "exploration",
+    "on_success": "exploration",
+    "required_outputs": [
+      "cross_validation_out"
+    ],
+    "revision": "r1",
+    "success_condition": "每条关键 claim 有逐 claim validation_records（≥2 独立具体来源、日期、裁决），矛盾已记录"
+  },
+  "status": "running",
+  "task": {
+    "description": ".",
+    "source": "ralph run"
+  },
+  "task_intake": null,
+  "task_intake_history": [],
+  "verification": {}
+}

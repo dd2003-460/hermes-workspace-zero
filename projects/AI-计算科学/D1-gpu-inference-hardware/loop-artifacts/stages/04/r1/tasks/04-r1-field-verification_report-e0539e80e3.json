@@ -1,0 +1,42 @@
+{
+  "attribute": "阶段04验证报告 — 汇总所有验证结果，给出overall confidence和recommendation reliability",
+  "concept": "verification_report",
+  "disposition": "pending",
+  "field": {
+    "attribute": "阶段04验证报告 — 汇总所有验证结果，给出overall confidence和recommendation reliability",
+    "concept": "verification_report",
+    "disposition": "confirmed",
+    "evidence_refs": [
+      "loop-artifacts/stages/04/r1/evidence/stage04-verification-report-r1.md",
+      "loop-artifacts/stages/04/r1/evidence/computation-verification-r1.md",
+      "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+      "https://www.nvidia.com/en-us/data-center/h200/",
+      "https://en.wikipedia.org/wiki/AMD_Instinct"
+    ],
+    "rationale": "Overall confidence 0.72, 推荐可靠性: 分工作负载 3/3 成立 (0.75), best_overall=5090 不稳健 (0.5)。Stage 04 发现 3 类真实缺陷: (1) 加权框架权重和=0.90 且 9/11 total 不可复现, 修复后 best_overall 可能翻转为 H200; (2) rankings_7b 6 处顺序违规; (3) 全项目 0 条 HTTPS 来源, stage 03 来源归属不可追溯 (3/15 设备已补官方/二级来源复核, 0 矛盾)。Stage 05 判定: CONDITIONAL GO — 须先修复框架权重+排名并补齐 12 设备来源或降级标注, 详见报告文件 §5 四项前置条件。",
+    "role": "verification_report",
+    "confidence": 0.72,
+    "observed_at": "2026-09-09T16:20:00+08:00"
+  },
+  "flow_only": false,
+  "id": "04-r1-field-verification_report-e0539e80e3",
+  "input_refs": [
+    "loop-artifacts/stages/04/r1/fields.json"
+  ],
+  "instruction": "只处理字段 `verification_report`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/04/r1/tasks/04-r1-field-verification_report-e0539e80e3.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+  "output_schema": {
+    "attribute": "string",
+    "concept": "verification_report",
+    "confidence": "number 0..1",
+    "disposition": "confirmed|inferred|assumed_default|research_required",
+    "evidence_refs": "array[string]",
+    "rationale": "string",
+    "role": "string"
+  },
+  "revision": "r1",
+  "role": "verification_report",
+  "schema_version": 1,
+  "stage_id": "04",
+  "status": "ready",
+  "type": "field_task"
+}

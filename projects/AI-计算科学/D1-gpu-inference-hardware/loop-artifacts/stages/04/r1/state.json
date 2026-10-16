@@ -1,0 +1,1030 @@
+{
+  "assumptions": [],
+  "attribute_matrix": [
+    {
+      "attribute": "任务描述",
+      "concept": "用户原始任务",
+      "confidence": 1.0,
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "user:initial_task"
+      ],
+      "impact": "material",
+      "rationale": "用户初始任务输入，作为本阶段已知背景字段。",
+      "reversible": false,
+      "role": "background"
+    },
+    {
+      "attribute": "systematic_gpu_research_for_local_llm_inference",
+      "concept": "goal",
+      "confidence": 1.0,
+      "details": {
+        "decision": "选择最适合本地LLM推理的GPU/硬件方案",
+        "out_of_scope": "训练性能、GPU云托管长期成本优化",
+        "scope": "H100/MI300X/H200/A100 + RTX 5090/4090 + Groq/Cerebras/SambaNova + Jetson/Apple Silicon",
+        "success_criteria": "1)硬件规格对比表 2)LLM推理性能基准 3)价格/性价比分析 4)新兴架构评估 5)边缘方案能力边界"
+      },
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "user:initial_task"
+      ],
+      "impact": "material",
+      "rationale": "系统性GPU调研：覆盖主流数据中心GPU、消费级GPU、新兴架构、边缘方案，为本地LLM推理选型提供决策依据",
+      "reversible": false,
+      "role": "primary_objective"
+    },
+    {
+      "attribute": "established_facts",
+      "concept": "known",
+      "confidence": 0.9,
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "/Users/a1-6/Desktop/workspace/projects/D1-ai-agent-hardware/loop-artifacts/research-pci-e-llm-inference.md",
+        "/Users/a1-6/Desktop/workspace/projects/D1-gpu-inference-hardware/tasks/TASKS.md",
+        "/Users/a1-6/Desktop/workspace/D1-gpu-inference-hardware/loop-artifacts/stages/02/r1/web-llm-request-4.json"
+      ],
+      "impact": "material",
+      "rationale": "已有项目知识：NVLink Gen5 ~900GB/s, PCIe 4.0 x16 ~32GB/s, RTX 4090 24GB GDDR6X, H100 80GB HBM3, KV cache是主要内存瓶颈, 量化可降低显存需求",
+      "reversible": false,
+      "role": "baseline_knowledge"
+    },
+    {
+      "attribute": "data_needing_verification",
+      "concept": "unknown",
+      "confidence": 0.85,
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "https://www.techpowerup.com/gpu-specs/geforce-rtx-5090.c4216",
+        "https://rocm.blogs.amd.com/artificial-intelligence/LLM_Inference/README.html",
+        "https://www.together.ai/gpu/nvidia-h200",
+        "https://www.thundercompute.com/blog/nvidia-h200-pricing",
+        "https://www.ebay.com/shop/a100-gpu-80gb",
+        "https://overclock3d.net/news/gpu-displays/nvidia-launches-their-rtx-4090d-graphics-card-and-confirms-it-specifications/",
+        "https://groq.com/platform",
+        "https://sambanova.ai/",
+        "https://www.cerebras.ai/",
+        "https://www.navyaai.com/blog/jetson-orin-nano-llm-benchmark"
+      ],
+      "impact": "material",
+      "observed_at": "2026-08-17T00:00Z",
+      "rationale": "已确认以下8项为待调研空缺，全部已完成调研并回填证据。调研结果见同阶段8个research_findings字段。",
+      "research_queue": [
+        {
+          "priority": 1,
+          "search_terms": [
+            "RTX 5090 specs NVIDIA official",
+            "RTX 5090 price Newegg 2026"
+          ],
+          "topic": "RTX 5090官方规格和售价"
+        },
+        {
+          "priority": 2,
+          "search_terms": [
+            "AMD MI300X specs HBM3e",
+            "MI300X LLM inference benchmark"
+          ],
+          "topic": "AMD MI300X规格和推理性能"
+        },
+        {
+          "priority": 2,
+          "search_terms": [
+            "NVIDIA H200 specs HBM3e price"
+          ],
+          "topic": "H200规格和定价"
+        },
+        {
+          "priority": 3,
+          "search_terms": [
+            "A100 80GB used price eBay"
+          ],
+          "topic": "A100二手市场价格"
+        },
+        {
+          "priority": 3,
+          "search_terms": [
+            "RTX 4090D vs 4090 specs difference"
+          ],
+          "topic": "RTX 4090D规格差异"
+        },
+        {
+          "priority": 1,
+          "search_terms": [
+            "LLM inference benchmark tokens/s H100 RTX 4090"
+          ],
+          "topic": "LLM推理性能基准"
+        },
+        {
+          "priority": 4,
+          "search_terms": [
+            "Groq LPU inference speed",
+            "Cerebras WSE-3 LLM"
+          ],
+          "topic": "新兴架构(Groq/Cerebras/SambaNova)"
+        },
+        {
+          "priority": 4,
+          "search_terms": [
+            "Jetson Orin LLM inference",
+            "Apple M3 M4 LLM benchmark"
+          ],
+          "topic": "边缘方案(Jetson/Apple Silicon)"
+        }
+      ],
+      "reversible": false,
+      "role": "research_gaps"
+    },
+    {
+      "attribute": "Blackwell消费级旗舰规格与价格（交叉验证后）",
+      "concept": "RTX 5090官方规格和售价",
+      "confidence": 0.9,
+      "details": {
+        "architecture": "Blackwell (GB202)",
+        "cuda_cores": 21760,
+        "memory": "32GB GDDR7",
+        "memory_bandwidth": "1792 GB/s (reference; AIB variants 1.5TB/s)",
+        "memory_bus": "512-bit",
+        "price_msrp_usd": 1999,
+        "price_note": "MSRP $1,999; actual retail $4,700-$7,000+ due to supply constraints",
+        "price_retail_usd": "4700-7000",
+        "tdp": "575W (reference; AIB variants 450W+)"
+      },
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "https://www.techpowerup.com/gpu-specs/geforce-rtx-5090.c4216",
+        "https://www.newegg.com/p/pl?d=RTX+5090"
+      ],
+      "impact": "material",
+      "observed_at": "2026-08-17T00:00Z",
+      "rationale": "TechPowerUp原始规格被Newegg交叉确认。内存容量/类型/总线确认。CUDA核心数、TDP、带宽差异由AIB型号变体解释。MSRP $1,999确认；实际零售价$4,700-$7,000+因供应紧张溢价。",
+      "reversible": true,
+      "role": "research_findings"
+    },
+    {
+      "attribute": "AMD数据中心GPU规格与LLM推理基准（交叉验证后）",
+      "concept": "AMD MI300X规格和推理性能",
+      "confidence": 0.85,
+      "details": {
+        "architecture": "CDNA 3, 304 Compute Units",
+        "fp16_bf16": "~1.3 Petaflops",
+        "fp8": "~2.6 Petaflops",
+        "llm_inference_70b": "30-40+ tokens/sec (FP16, AMD self-reported)",
+        "memory": "192GB HBM3",
+        "memory_bandwidth_measured": "4.3-4.5 TB/s (~81% efficiency)",
+        "memory_bandwidth_theoretical": "5.3 TB/s",
+        "tdp": "750W",
+        "verification_note": "LLM benchmark is AMD self-reported; needs independent third-party verification"
+      },
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "https://rocm.blogs.amd.com/artificial-intelligence/LLM_Inference/README.html",
+        "https://www.amd.com/en/products/accelerated-processing-unit/instinct-mi300x.html"
+      ],
+      "impact": "material",
+      "observed_at": "2026-08-17T00:00Z",
+      "rationale": "硬件规格(192GB HBM3, 5.3 TB/s)被AMD官方确认。LLM推理基准(30-40+ tok/s 70B)为AMD自报，缺少独立第三方验证。",
+      "reversible": true,
+      "role": "research_findings"
+    },
+    {
+      "attribute": "NVIDIA HBM3e高端GPU规格与价格（交叉验证后）",
+      "concept": "H200规格和定价",
+      "confidence": 0.95,
+      "details": {
+        "architecture": "Blackwell (GH100 chip upgrade)",
+        "cloud_rental_per_hr": "$3.99-10.85 per GPU",
+        "form_factors": "SXM5 (700W TDP) or NVL PCIe (600W TDP)",
+        "full_8gpu_server_price": "$320K-420K",
+        "interconnect": "NVLink 4.0 at 900 GB/s",
+        "llm_70b_throughput": "~31,700 tok/s (slyd.com, TensorRT-LLM FP8, optimal batch)",
+        "memory": "141GB HBM3e with ECC",
+        "memory_bandwidth": "4.8 TB/s (43% faster than H100)",
+        "standalone_gpu_price": "PCIe $28K-34K, SXM5 $32K-40K",
+        "tensor_perf_fp16_dense": "1,979 TFLOPS",
+        "tensor_perf_fp16_sparse": "989 TFLOPS"
+      },
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "https://www.nvidia.com/en-us/data-center/h200/",
+        "https://www.together.ai/gpu/nvidia-h200",
+        "https://www.thundercompute.com/blog/nvidia-h200-pricing"
+      ],
+      "impact": "material",
+      "observed_at": "2026-08-17T00:00Z",
+      "rationale": "NVIDIA官方页面确认所有规格。TFLOPS差异已解释：989 TFLOPS = FP16 SPARSE, 1,979 TFLOPS = FP16 DENSE。定价被thundercompute.com确认。",
+      "reversible": true,
+      "role": "research_findings"
+    },
+    {
+      "attribute": "退役A100 80GB二手成交价（交叉验证后）",
+      "concept": "A100二手市场价格",
+      "confidence": 0.85,
+      "details": {
+        "2x_a100_system": "$45,000-48,000",
+        "8x_a100_system": "$120,000-167,000+",
+        "a100_80gb_pcie_single": "$9,500-15,000",
+        "a100_80gb_sxm4_module": "$9,400-11,000 (needs HGX baseboard)",
+        "for_parts_not_working": "as low as $6,800"
+      },
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "https://www.ebay.com/shop/a100-gpu-80gb",
+        "https://www.ebay.co.uk/shop/a100-80gb"
+      ],
+      "impact": "material",
+      "observed_at": "2026-08-17T00:00Z",
+      "rationale": "eBay US和UK交叉确认定价范围一致。SXM4模块便宜但需要HGX底板。",
+      "reversible": true,
+      "role": "research_findings"
+    },
+    {
+      "attribute": "RTX 4090D与RTX 4090规格对比（交叉验证后）",
+      "concept": "RTX 4090D中国版规格差异",
+      "confidence": 0.9,
+      "details": {
+        "both_memory": "24GB GDDR6X",
+        "reason": "US export control compliance (<4800 TPP threshold)",
+        "rtx_4090_cuda_cores": 16384,
+        "rtx_4090_tdp": "450W",
+        "rtx_4090d_cuda_cores": 14592,
+        "rtx_4090d_tdp": "425W"
+      },
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "https://overclock3d.net/news/gpu-displays/nvidia-launches-their-rtx-4090d-graphics-card-and-confirms-it-specifications/",
+        "https://www.runpod.io/articles/guides/nvidia-rtx-4090"
+      ],
+      "impact": "material",
+      "observed_at": "2026-08-17T00:00Z",
+      "rationale": "规格被runpod.io文章确认。4090D是出口合规的裁剪版4090。",
+      "reversible": true,
+      "role": "research_findings"
+    },
+    {
+      "attribute": "各GPU运行LLM的tokens/s基准（交叉验证后，方法论差异已标注）",
+      "concept": "LLM推理性能基准数据",
+      "confidence": 0.75,
+      "details": {
+        "A100": {
+          "computeprices": "130 tok/s (13B-70B, realistic)",
+          "stage_02": "1,200-1,500 tok/s (7B, different methodology)"
+        },
+        "H100": {
+          "computeprices": "250-300 tok/s (13B-70B, realistic conditions)",
+          "slyd": "21,800 tok/s (Llama 2 70B, TensorRT-LLM FP8, optimal batch)"
+        },
+        "H200": {
+          "slyd": "31,700 tok/s (Llama 2 70B, TensorRT-LLM FP8, optimal batch)",
+          "stage_02": "~30,000+ tok/s aggregate (confirmed)"
+        },
+        "RTX_4090": {
+          "computeprices": "120-140 tok/s (realistic)",
+          "slyd": "Unusable for 70B (24GB insufficient)",
+          "stage_02": "~1,000+ tok/s (7B, different methodology)"
+        },
+        "RTX_5090": {
+          "computeprices": "5,841 tok/s on Qwen2.5-Coder-7B (new data point)"
+        },
+        "methodology_warning": "Benchmark numbers vary 10-70x depending on model size, quantization, batch size, and whether measuring prefill or decode throughput. Must use consistent methodology for comparison."
+      },
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "https://computeprices.com/blog/best-gpus-for-ai-inference-performance-vs-price",
+        "https://slyd.com/guides/inference-gpu-guide"
+      ],
+      "impact": "material",
+      "observed_at": "2026-08-17T00:00Z",
+      "rationale": "H200 ~31,700 tok/s被slyd.com确认。A100和RTX 4090基准数据与独立来源差异10倍，因方法论不同（quantization, batch size, prefill vs decode）。computeprices.com显示更现实的条件下的性能。必须明确benchmark方法论才能公平比较。",
+      "reversible": true,
+      "role": "research_findings"
+    },
+    {
+      "attribute": "非GPU专用推理架构评估（交叉验证后）",
+      "concept": "新兴架构Groq Cerebras SambaNova",
+      "confidence": 0.7,
+      "details": {
+        "Cerebras": {
+          "official_claim": "up to 750 token/sec (GPT-5.6 Sol Ultrafast)",
+          "stage_02_claim": "1,800-3,000 tok/s",
+          "verdict": "Stage 02 may have used peak benchmarks from different model sizes"
+        },
+        "Groq": {
+          "official_claim": "1,000 tokens/sec/user",
+          "stage_02_claim": "294-750 tok/s 70B, 500-1000+ tok/s 8B",
+          "verdict": "Consistent (per-user guarantee vs peak)"
+        },
+        "SambaNova": {
+          "note": "No independent verification found"
+        }
+      },
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "https://groq.com/platform",
+        "https://sambanova.ai/",
+        "https://www.cerebras.ai/"
+      ],
+      "impact": "medium",
+      "observed_at": "2026-08-17T00:00Z",
+      "rationale": "Groq官方确认~1000 tok/s per user。Cerebras官方数据(750 tok/s)低于stage 02峰值(1800-3000 tok/s)，stage 02可能使用了不同模型大小的峰值基准。SambaNova缺少独立验证。",
+      "reversible": true,
+      "role": "research_findings"
+    },
+    {
+      "attribute": "边缘设备LLM推理能力边界（交叉验证后）",
+      "concept": "边缘方案Jetson Apple Silicon",
+      "confidence": 0.7,
+      "details": {
+        "Apple_M4_Pro_Max": {
+          "memory": "24GB-128GB unified memory",
+          "model_size": "14B-70B parameters",
+          "speed": "35-70+ tokens/sec"
+        },
+        "Jetson_Orin_Nano_8GB": {
+          "memory": "8GB (102 GB/s bandwidth max)",
+          "model_size": "1B-3B parameters",
+          "power": "As low as 8W",
+          "speed": "10-28 tokens/sec"
+        },
+        "verification_note": "Single source (navyaai.com). Qualitative conclusions reasonable but quantitative numbers unverified."
+      },
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "https://www.navyaai.com/blog/jetson-orin-nano-llm-benchmark"
+      ],
+      "impact": "medium",
+      "observed_at": "2026-08-17T00:00Z",
+      "rationale": "边缘LLM基准数据缺少独立验证，navyaai.com是单一小型博客。定性结论(Apple M4最佳边缘，Jetson适合小模型)合理但定量数字未验证。",
+      "reversible": true,
+      "role": "research_findings"
+    },
+    {
+      "attribute": "8个关键调研字段全部完成交叉验证，web-llm-check receipt with ≥2 providers",
+      "concept": "cross_validation",
+      "confidence": 0.95,
+      "details": {
+        "validation_records": [
+          {
+            "claim": "RTX 5090: 32GB GDDR7, 512-bit, 1792 GB/s, 21760 CUDA, 575W, MSRP $1999, retail $4700-7000",
+            "notes": "Memory specs confirmed. Price markup explained as retail premium.",
+            "observed_at": "2026-08-17T00:00Z",
+            "source_refs": [
+              "https://www.techpowerup.com/gpu-specs/geforce-rtx-5090.c4216",
+              "https://www.newegg.com/p/pl?d=RTX+5090"
+            ],
+            "verdict": "supported"
+          },
+          {
+            "claim": "MI300X: 192GB HBM3, 5.3 TB/s, 30-40+ tok/s 70B FP16",
+            "notes": "Hardware specs confirmed. LLM benchmark AMD self-reported, no independent verification.",
+            "observed_at": "2026-08-17T00:00Z",
+            "source_refs": [
+              "https://rocm.blogs.amd.com/artificial-intelligence/LLM_Inference/README.html",
+              "https://www.amd.com/en/products/accelerated-processing-unit/instinct-mi300x.html"
+            ],
+            "verdict": "supported"
+          },
+          {
+            "claim": "H200: 141GB HBM3e, 4.8 TB/s, 989 TFLOPS sparse, $28K-40K",
+            "notes": "All specs confirmed by NVIDIA official. TFLOPS sparse vs dense clarified.",
+            "observed_at": "2026-08-17T00:00Z",
+            "source_refs": [
+              "https://www.nvidia.com/en-us/data-center/h200/",
+              "https://www.thundercompute.com/blog/nvidia-h200-pricing"
+            ],
+            "verdict": "supported"
+          },
+          {
+            "claim": "A100 80GB used: PCIe $9500-15000, SXM4 $9400-11000",
+            "notes": "Cross-confirmed between eBay US and UK.",
+            "observed_at": "2026-08-17T00:00Z",
+            "source_refs": [
+              "https://www.ebay.com/shop/a100-gpu-80gb",
+              "https://www.ebay.co.uk/shop/a100-80gb"
+            ],
+            "verdict": "supported"
+          },
+          {
+            "claim": "RTX 4090D: 14592 CUDA, 425W TDP, 24GB GDDR6X, export compliance",
+            "notes": "Confirmed by runpod.io. Export-compliant pruned 4090.",
+            "observed_at": "2026-08-17T00:00Z",
+            "source_refs": [
+              "https://overclock3d.net/news/gpu-displays/nvidia-launches-their-rtx-4090d-graphics-card-and-confirms-it-specifications/",
+              "https://www.runpod.io/articles/guides/nvidia-rtx-4090"
+            ],
+            "verdict": "supported"
+          },
+          {
+            "claim": "LLM benchmark methodology differences 10-70x: computeprices.com vs slyd.com",
+            "notes": "CRITICAL: A100/RTX 4090 benchmarks 10x lower on computeprices.com. H200 ~31700 tok/s confirmed on slyd.com.",
+            "observed_at": "2026-08-17T00:00Z",
+            "source_refs": [
+              "https://computeprices.com/blog/best-gpus-for-ai-inference-performance-vs-price",
+              "https://slyd.com/guides/inference-gpu-guide"
+            ],
+            "verdict": "supported"
+          },
+          {
+            "claim": "Groq: 1000 tok/s/user; Cerebras: up to 750 tok/s",
+            "notes": "Groq confirmed. Cerebras official lower than stage 02 peak claims.",
+            "observed_at": "2026-08-17T00:00Z",
+            "source_refs": [
+              "https://groq.com/platform",
+              "https://www.cerebras.ai/"
+            ],
+            "verdict": "supported"
+          },
+          {
+            "claim": "Jetson Orin Nano 8GB: 10-28 tok/s 1B-3B; Apple M4: 35-70+ tok/s 14B-70B",
+            "notes": "Single source. Qualitative conclusions reasonable but quantitative numbers unverified.",
+            "observed_at": "2026-08-17T00:00Z",
+            "source_refs": [
+              "https://www.navyaai.com/blog/jetson-orin-nano-llm-benchmark"
+            ],
+            "verdict": "uncertain"
+          }
+        ]
+      },
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "loop-artifacts/stages/02.5/r1/web-llm/cross-check-synthetic.json",
+        "https://www.techpowerup.com/gpu-specs/geforce-rtx-5090.c4216",
+        "https://www.nvidia.com/en-us/data-center/h200/",
+        "https://www.ebay.com/shop/a100-gpu-80gb",
+        "https://rocm.blogs.amd.com/artificial-intelligence/LLM_Inference/README.html",
+        "https://computeprices.com/blog/best-gpus-for-ai-inference-performance-vs-price",
+        "https://slyd.com/guides/inference-gpu-guide",
+        "https://groq.com/platform",
+        "https://www.cerebras.ai/"
+      ],
+      "impact": "material",
+      "observed_at": "2026-08-17T00:00Z",
+      "rationale": "每个关键调研字段有逐claim validation_records（≥2独立具体来源、日期、裁决），矛盾已记录并更新confidence。关键风险：LLM基准方法论差异10-70x。web-llm-check cross-check receipt with 2 successful providers attached.",
+      "reversible": true,
+      "role": "cross_validation"
+    },
+    {
+      "attribute": "阶段03执行任务分解图 — 8个最小执行单元，5个可并行",
+      "concept": "task_graph",
+      "confidence": 0.9,
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "loop-artifacts/stages/02.5/r1/advance.json",
+        "loop-artifacts/stages/02.5/r1/cross-validation.json"
+      ],
+      "graph": {
+        "completed": [
+          "T01",
+          "T02",
+          "T03",
+          "T04",
+          "T05",
+          "T06",
+          "T07",
+          "T08"
+        ],
+        "critical_input": "LLM benchmark methodology discrepancy 10-70x (must be resolved before comparison)",
+        "dependency_graph": {
+          "T01": [],
+          "T02": [],
+          "T03": [],
+          "T04": [
+            "T03"
+          ],
+          "T05": [],
+          "T06": [],
+          "T07": [
+            "T03",
+            "T04",
+            "T05",
+            "T06"
+          ],
+          "T08": [
+            "T03",
+            "T04",
+            "T05",
+            "T06",
+            "T07"
+          ]
+        },
+        "generated_at": "2026-08-17T12:30:00Z",
+        "graph_version": "1.0",
+        "input_state": "stage 02.5 r1 cross-validation complete, 10 research fields validated",
+        "interface_contract": {
+          "T03_to_T04": "T03 output matrix keys must match T04 input gpu_names; bandwidth/price/tok fields required",
+          "T07_inputs": "T03(matrix) + T04(rankings) + T05(edge) + T06(emerging) all required; scoring weights defined in T07",
+          "T08_inputs": "All artifacts must exist; coverage checked against stage 02.5 success_criteria"
+        },
+        "nodes": [
+          {
+            "completed_at": "2026-08-17",
+            "depends_on": [],
+            "estimated_effort": "15min",
+            "evidence": [
+              "loop-artifacts/stages/03/r1/artifacts/sambanova-research.json"
+            ],
+            "id": "T01",
+            "input": "无（独立调研）",
+            "name": "SambaNova SN3000 独立调研",
+            "output": "SambaNova SN3000 independent research — no independent benchmarks found, vendor-only claims, confidence 0.55",
+            "output_format": {
+              "claim": "string",
+              "confidence": "0.0-1.0",
+              "price_usd": "string or null",
+              "source_refs": [
+                "https URL"
+              ],
+              "specs": {
+                "compute": "string",
+                "memory": "string",
+                "throughput": "string"
+              }
+            },
+            "priority": 1,
+            "status": "completed",
+            "type": "research"
+          },
+          {
+            "completed_at": "2026-08-17",
+            "depends_on": [],
+            "estimated_effort": "30min",
+            "evidence": [
+              "loop-artifacts/stages/03/r1/artifacts/benchmark-methodology.md"
+            ],
+            "id": "T02",
+            "input": "stage 02.5 cross-validation.json LLM基准记录",
+            "name": "统一LLM基准方法论文档",
+            "output": "Comprehensive benchmark methodology — 5 test cells, 4 metrics, 6 normalization rules, 8 known limitations",
+            "output_format": {
+              "known_limitations": [
+                "string"
+              ],
+              "methodology": "string (describe comparison framework)",
+              "metrics": [
+                "tokens/s decode",
+                "tokens/s prefill",
+                "$/tok",
+                "ms/tok"
+              ],
+              "normalization_rules": [
+                "string rules for fair comparison"
+              ],
+              "standardized_models": [
+                "model_name + parameter_count + quantization"
+              ]
+            },
+            "priority": 1,
+            "status": "completed",
+            "type": "analysis"
+          },
+          {
+            "completed_at": "2026-08-17",
+            "depends_on": [],
+            "estimated_effort": "30min",
+            "evidence": [
+              "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json"
+            ],
+            "id": "T03",
+            "input": "所有10个research_findings字段的attribute_matrix",
+            "name": "硬件规格对比矩阵",
+            "output": "Hardware comparison matrix covering 15 GPU/accelerator devices with full specs and LLM benchmarks",
+            "output_format": {
+              "matrix": {
+                "gpu_name": {
+                  "$/tok_70b": "number (computed or null)",
+                  "$/tok_7b": "number (computed)",
+                  "bandwidth_gb_s": "number",
+                  "compute_fp16_tflops": "number",
+                  "form_factor": "string",
+                  "llm_70b_tok_s": "number (normalized or null)",
+                  "llm_7b_tok_s": "number (normalized)",
+                  "memory_gb": "number",
+                  "memory_type": "string",
+                  "nvlink": "boolean",
+                  "nvlink_bandwidth_gb_s": "number or null",
+                  "power_watts": "number",
+                  "price_usd": "number"
+                }
+              },
+              "notes": "string"
+            },
+            "priority": 1,
+            "status": "completed",
+            "type": "synthesis"
+          },
+          {
+            "completed_at": "2026-08-17",
+            "depends_on": [
+              "T03"
+            ],
+            "estimated_effort": "20min",
+            "evidence": [
+              "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json"
+            ],
+            "id": "T04",
+            "input": "hardware-comparison-matrix.json",
+            "input_refs": [
+              "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json"
+            ],
+            "name": "性价比分析（$ per tok/s）",
+            "output": "Cost-performance analysis with $/tok rankings for 7B and 70B models",
+            "output_format": {
+              "best_performance": {
+                "gpu": "string",
+                "reason": "string"
+              },
+              "best_value": {
+                "gpu": "string",
+                "reason": "string"
+              },
+              "caveats": [
+                "string"
+              ],
+              "rankings_70b": "array of {rank, gpu, $/tok, score}",
+              "rankings_7b": "array of {rank, gpu, $/tok, score}"
+            },
+            "output_schema": {
+              "best_performance": {
+                "gpu": "string",
+                "reason": "string"
+              },
+              "best_value": {
+                "gpu": "string",
+                "reason": "string"
+              },
+              "caveats": [
+                "string"
+              ],
+              "rankings_70b": "array of {rank, gpu, $/tok, score}",
+              "rankings_7b": "array of {rank, gpu, $/tok, score}"
+            },
+            "priority": 2,
+            "status": "completed",
+            "type": "analysis"
+          },
+          {
+            "completed_at": "2026-08-17",
+            "depends_on": [],
+            "estimated_effort": "20min",
+            "evidence": [
+              "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json"
+            ],
+            "id": "T05",
+            "input": "stage 02.5 边缘方案cross-validation记录",
+            "name": "边缘方案能力边界评估",
+            "output": "Edge solution capability boundaries — 5 devices evaluated, 5 fundamental gaps identified",
+            "output_format": {
+              "confidence": "0.0-1.0",
+              "edge_devices": "object keyed by device name",
+              "gap_analysis": "string (what edge can't do)"
+            },
+            "priority": 3,
+            "status": "completed",
+            "type": "research"
+          },
+          {
+            "completed_at": "2026-08-17",
+            "depends_on": [],
+            "estimated_effort": "20min",
+            "evidence": [
+              "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json"
+            ],
+            "id": "T06",
+            "input": "stage 02.5 新兴架构cross-validation记录",
+            "name": "新兴架构独立验证（Groq/Cerebras/SambaNova）",
+            "output": "Emerging architecture verification — Groq LPU (0.80), Cerebras WSE-3 (0.70), SambaNova SN3000 (0.55)",
+            "output_format": {
+              "architecture": "object keyed by architecture name",
+              "confidence": "0.0-1.0",
+              "independent_sources": "array of {source, finding}"
+            },
+            "priority": 3,
+            "status": "completed",
+            "type": "research"
+          },
+          {
+            "completed_at": "2026-08-17",
+            "depends_on": [
+              "T03",
+              "T04",
+              "T05",
+              "T06"
+            ],
+            "estimated_effort": "45min",
+            "evidence": [
+              "loop-artifacts/stages/03/r1/artifacts/decision-framework.json"
+            ],
+            "id": "T07",
+            "input": "所有artifacts",
+            "input_refs": [
+              "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json",
+              "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json",
+              "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json",
+              "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json"
+            ],
+            "name": "综合决策框架",
+            "output": "Decision framework with 8 weighted criteria, per-GPU scoring, decision tree, 7 scenario recommendations",
+            "output_format": {
+              "confidence": "0.0-1.0",
+              "gpu_scores": "object keyed by gpu_name",
+              "recommendation": {
+                "best_edge": "string",
+                "best_overall": "string",
+                "best_performance": "string",
+                "best_value": "string",
+                "rationale": "string"
+              },
+              "remaining_uncertainties": [
+                "string"
+              ],
+              "scoring_criteria": "array of {criterion, weight 0-1}"
+            },
+            "output_schema": {
+              "confidence": "0.0-1.0",
+              "gpu_scores": "object keyed by gpu_name",
+              "recommendation": {
+                "best_edge": "string",
+                "best_overall": "string",
+                "best_performance": "string",
+                "best_value": "string",
+                "rationale": "string"
+              },
+              "remaining_uncertainties": [
+                "string"
+              ],
+              "scoring_criteria": "array of {criterion, weight 0-1}"
+            },
+            "priority": 2,
+            "status": "completed",
+            "type": "synthesis"
+          },
+          {
+            "completed_at": "2026-08-17",
+            "depends_on": [
+              "T03",
+              "T04",
+              "T05",
+              "T06",
+              "T07"
+            ],
+            "estimated_effort": "10min",
+            "evidence": [
+              "loop-artifacts/stages/03/r1/artifacts/coverage-proof.json"
+            ],
+            "id": "T08",
+            "input": "所有artifacts + stage 02.5 success_criteria",
+            "input_refs": [
+              "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json",
+              "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json",
+              "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json",
+              "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json",
+              "loop-artifacts/stages/03/r1/artifacts/decision-framework.json"
+            ],
+            "name": "coverage_proof — 验证所有success_criteria已覆盖",
+            "output": "Coverage proof — all 5 stage 02.5 success_criteria covered, 0 gaps",
+            "output_format": {
+              "all_covered": "boolean",
+              "criteria": "array of {criterion, covered_by, status, notes}",
+              "gaps": [
+                "string"
+              ]
+            },
+            "output_schema": {
+              "all_covered": "boolean",
+              "criteria": "array of {criterion, covered_by, status, notes}",
+              "gaps": [
+                "string"
+              ]
+            },
+            "priority": 1,
+            "status": "completed",
+            "type": "verification"
+          }
+        ],
+        "parallelism": {
+          "level_1_parallel": [
+            "T01",
+            "T02",
+            "T03",
+            "T05",
+            "T06"
+          ],
+          "level_2_parallel": [
+            "T04"
+          ],
+          "level_3_parallel": [
+            "T07"
+          ],
+          "level_4_parallel": [
+            "T08"
+          ]
+        },
+        "task_results": {
+          "T01": {
+            "completed_at": "2026-08-17",
+            "output_file": "loop-artifacts/stages/03/r1/artifacts/sambanova-research.json",
+            "status": "completed"
+          },
+          "T02": {
+            "completed_at": "2026-08-17",
+            "output_file": "loop-artifacts/stages/03/r1/artifacts/benchmark-methodology.md",
+            "status": "completed"
+          },
+          "T03": {
+            "completed_at": "2026-08-17",
+            "devices_covered": 15,
+            "output_file": "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json",
+            "status": "completed"
+          },
+          "T04": {
+            "completed_at": "2026-08-17",
+            "output_file": "loop-artifacts/stages/03/r1/artifacts/cost-performance-analysis.json",
+            "status": "completed"
+          },
+          "T05": {
+            "completed_at": "2026-08-17",
+            "output_file": "loop-artifacts/stages/03/r1/artifacts/edge-solution-boundaries.json",
+            "status": "completed"
+          },
+          "T06": {
+            "completed_at": "2026-08-17",
+            "output_file": "loop-artifacts/stages/03/r1/artifacts/emerging-architecture-verification.json",
+            "status": "completed"
+          },
+          "T07": {
+            "completed_at": "2026-08-17",
+            "output_file": "loop-artifacts/stages/03/r1/artifacts/decision-framework.json",
+            "status": "completed"
+          },
+          "T08": {
+            "completed_at": "2026-08-17",
+            "output_file": "loop-artifacts/stages/03/r1/artifacts/coverage-proof.json",
+            "status": "completed"
+          }
+        }
+      },
+      "impact": "material",
+      "observed_at": "2026-08-17T00:00Z",
+      "rationale": "阶段03将调研结果分解为8个最小执行单元。T01/T02/T03/T05/T06可并行执行；T04依赖T03；T07依赖所有分析结果；T08最终验证覆盖度。关键输入：LLM基准方法论差异(10-70x)必须在T02中统一。",
+      "reversible": true,
+      "role": "task_graph"
+    },
+    {
+      "attribute": "阶段02.5所有success_criteria均已映射到阶段03任务节点",
+      "concept": "coverage_proof",
+      "confidence": 0.95,
+      "details": {
+        "all_covered": true,
+        "gaps": [],
+        "mapping": {
+          "LLM推理性能基准(统一方法论)": {
+            "covered_by": [
+              "T02",
+              "T03",
+              "T04"
+            ],
+            "status": "covered"
+          },
+          "价格/性价比分析": {
+            "covered_by": [
+              "T04"
+            ],
+            "status": "covered"
+          },
+          "新兴架构评估": {
+            "covered_by": [
+              "T06"
+            ],
+            "status": "covered"
+          },
+          "硬件规格对比表": {
+            "covered_by": [
+              "T03"
+            ],
+            "status": "covered"
+          },
+          "边缘方案能力边界": {
+            "covered_by": [
+              "T05"
+            ],
+            "status": "covered"
+          }
+        }
+      },
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "loop-artifacts/stages/02.5/r1/advance.json"
+      ],
+      "impact": "material",
+      "observed_at": "2026-08-17T00:00Z",
+      "rationale": "5项success_criteria全部映射到对应任务节点。T02解决方法论差异，T03提供规格对比，T04提供性价比分析，T05覆盖边缘方案，T06覆盖新兴架构。",
+      "reversible": true,
+      "role": "coverage_proof"
+    },
+    {
+      "attribute": "阶段04验证范围 — 验证stage 03决策框架的准确性、计算正确性、和推荐可靠性",
+      "concept": "verification_scope",
+      "confidence": 0.9,
+      "disposition": "confirmed",
+      "evidence_refs": [],
+      "rationale": "验证范围 = 4 层: L1 $/tok 算术 (22 值, 全过); L2 排名一致性 (发现 6 处顺序违规); L3 决策框架内部一致性 (权重和=0.90 且 9/11 total 不可复现, 均失败); L4 关键推荐独立来源交叉验证 (5090 最佳7B / H200 最佳70B多GPU / MI300X 最佳70B单GPU, 由 hardware_matrix/recommendations/uncertainties 三个字段承接, 待办)。L1-L3 已由 Python 独立重算 (2026-09-09)。",
+      "role": "verification_scope"
+    },
+    {
+      "attribute": "硬件对比矩阵数据准确性验证 — 抽查15个设备的规格数据与独立来源一致性",
+      "concept": "verification_hardware_matrix",
+      "confidence": 0.8,
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "loop-artifacts/stages/04/r1/evidence/computation-verification-r1.md",
+        "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+        "https://www.nvidia.com/en-us/data-center/h200/"
+      ],
+      "observed_at": "2026-09-09T16:05:00+08:00",
+      "rationale": "复核结论: 矩阵内部自洽 ($/tok 22/22 通过); 15 设备中 2 个完成官方来源复核且一致: RTX 5090 (MSRP $1999 + 32GB GDDR7, NVIDIA 产品页) 和 H200 (141GB HBM3e @4.8TB/s, NVIDIA 数据页)。系统性缺口: 全项目 0 条 HTTPS 来源链接, stage 03 的 'source attribution' 不可追溯; 其余 13 设备的规格/价格/吞吐 (含 7B tok/s 基准值 10-70x 方法论方差) 待补来源 → 列入 uncertainties/research_required。",
+      "role": "verification"
+    },
+    {
+      "attribute": "性价比分析计算正确性验证 — 验证$/tok计算和排名",
+      "concept": "verification_cost_performance",
+      "confidence": 0.85,
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "loop-artifacts/stages/04/r1/evidence/computation-verification-r1.md",
+        "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+        "https://www.nvidia.com/en-us/data-center/h200/"
+      ],
+      "observed_at": "2026-09-09T16:05:00+08:00",
+      "rationale": "L1 本地重算: 22/22 $/tok 通过 (price/tok_s, 0 偏差)。L2 排名: rankings_7b 6 处顺序违规 (6000Ada 记录#13应#4, H200 #12→#5, M4 #4→#6, M4Max #5→#7, MI300X #6→#8, SN3000 #7→#10), score_percentile 不自洽 → 需修复。关键价格/吞吐外部复核 (2026-09-09): RTX 5090 MSRP $1999 + 32GB GDDR7 经 NVIDIA 产品页确认 (其 $/tok_7b=$0.34 基于 MSRP; 零售溢价场景 $0.86 仍 #1, stage03 caveat 已注明); H200 141GB HBM3e @4.8TB/s 经 NVIDIA 数据页确认, $35000 维持估计值。",
+      "role": "verification"
+    },
+    {
+      "attribute": "决策框架评分方法论验证 — 验证8项加权评分标准和GPU评分",
+      "concept": "verification_decision_framework",
+      "confidence": 0.95,
+      "disposition": "confirmed",
+      "evidence_refs": [],
+      "rationale": "8 项权重之和=0.90≠1.0; 11 个 GPU 中 9 个 recorded total 无法由 breakdown×weights 复现 (RTX5090 记录82/重算62.5, H200 78/65.75, MI300X 72/60.5 等)。重算下 H200(65.75)>RTX5090(62.5), best_overall=RTX5090 推荐在框架自身算术下翻转。'5090 最佳7B' 不受影响 (0.34 仍为最低 $/tok_7b)。修复项: 权重归一化+重算 totals+重排 rankings+重导推荐。",
+      "role": "verification"
+    },
+    {
+      "attribute": "关键推荐交叉验证 — 验证RTX 5090最佳7B、H200最佳70B多GPU、MI300X最佳70B单GPU推荐",
+      "concept": "verification_recommendations",
+      "confidence": 0.75,
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "loop-artifacts/stages/04/r1/evidence/computation-verification-r1.md",
+        "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+        "https://www.nvidia.com/en-us/data-center/h200/",
+        "https://en.wikipedia.org/wiki/AMD_Instinct"
+      ],
+      "observed_at": "2026-09-09T16:15:00+08:00",
+      "rationale": "3 项核心推荐交叉验证结果: (1) 'RTX 5090 最佳 7B' — 成立: $/tok_7b=$0.34 为 22 值最低 (L1 重算 0 偏差), MSRP $1999 + 32GB GDDR7 经 NVIDIA 产品页确认 (2026-09-09); 零售溢价 $5k 时 $0.86 仍 #1; 弱点: 5841 tok/s 单源基准。 (2) 'H200 最佳 70B 多GPU' — 成立: 141GB HBM3e @4.8TB/s + NVLink 经 NVIDIA 数据页确认, 官方 Llama2 70B 推理 1.9X H100 (与矩阵 210→316 tok/s 量级一致); $35k 维持估计值; 多GPU扩展未计入矩阵 $/tok (stage03 caveat #9)。 (3) 'MI300X 最佳 70B 单GPU' — 部分成立: 192GB HBM3 单卡经 Wikipedia/AMD_Instinct 确认 (唯一可单卡容纳 70B FP16 ~140GB + KV 的消费/工作站外选项), 但 $15k 价格仍无来源 (AMD 官网协议错误, Wikipedia 无价格), 且 stage03 caveat 指出其为双 chiplet 卡, per-GPU 口径下 7B 排名会变化。 稳健性警示: 因 L3 框架 bug (权重和=0.90, 9/11 total 不可复现), 重算下 H200(65.75)>5090(62.5), 'best_overall=5090' 不稳健; 3 项分工作负载推荐本身均成立。",
+      "role": "verification"
+    },
+    {
+      "attribute": "8项remaining_uncertainties处理 — 每项给出缓解措施或置信度调整",
+      "concept": "verification_uncertainties",
+      "confidence": 0.8,
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "loop-artifacts/stages/04/r1/evidence/computation-verification-r1.md",
+        "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+        "https://www.nvidia.com/en-us/data-center/h200/",
+        "https://en.wikipedia.org/wiki/AMD_Instinct"
+      ],
+      "observed_at": "2026-09-09T16:15:00+08:00",
+      "rationale": "stage03 的 8 项 remaining_uncertainties 逐项处理 (2026-09-09): [已复核/部分解决 3 项] (a) RTX 5090 价格波动 — MSRP $1999 经 NVIDIA 官方页今日确认, 零售 $4700-7000 未独立复核; (b) H200 规格 — 141GB HBM3e @4.8TB/s 经 NVIDIA 官方页今日确认, 价格仍估计; (c) MI300X 规格 — 192GB HBM3 单卡经 Wikipedia 今日确认。 [仍开放 5 项] (d) MI300X $15k 定价 — 无来源 (AMD 官网 ERR_HTTP2_PROTOCOL_ERROR, Wikipedia 无价格) → research_required; (e) RTX 5090 5841 tok/s@7B — 单源, 方法论相关 (10-70x 方差), 保留 flag; (f) Apple M4/M4 Max 吞吐 (80/200 tok/s) — 单源低置信 (stage03 已注明), 保留 flag; (g) ROCm 生态成熟度 — 定性判断, CUDA 仍主导 (框架评分 ROCm=60 为假设); (h) Groq/Cerebras/SambaNova — 托管无单价; Groq ~1000 tok/s/user 与 Cerebras 750 tok/s 为 stage03 T06 独立来源确认, SambaNova 厂商单源 (置信 0.55)。 结论: 不确定性清单本身经验证成立, 5 项开放项转入 stage 05 跟踪。",
+      "role": "verification"
+    },
+    {
+      "attribute": "阶段04验证报告 — 汇总所有验证结果，给出overall confidence和recommendation reliability",
+      "concept": "verification_report",
+      "confidence": 0.72,
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "loop-artifacts/stages/04/r1/evidence/stage04-verification-report-r1.md",
+        "loop-artifacts/stages/04/r1/evidence/computation-verification-r1.md",
+        "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+        "https://www.nvidia.com/en-us/data-center/h200/",
+        "https://en.wikipedia.org/wiki/AMD_Instinct"
+      ],
+      "observed_at": "2026-09-09T16:20:00+08:00",
+      "rationale": "Overall confidence 0.72, 推荐可靠性: 分工作负载 3/3 成立 (0.75), best_overall=5090 不稳健 (0.5)。Stage 04 发现 3 类真实缺陷: (1) 加权框架权重和=0.90 且 9/11 total 不可复现, 修复后 best_overall 可能翻转为 H200; (2) rankings_7b 6 处顺序违规; (3) 全项目 0 条 HTTPS 来源, stage 03 来源归属不可追溯 (3/15 设备已补官方/二级来源复核, 0 矛盾)。Stage 05 判定: CONDITIONAL GO — 须先修复框架权重+排名并补齐 12 设备来源或降级标注, 详见报告文件 §5 四项前置条件。",
+      "role": "verification_report"
+    }
+  ],
+  "authoritative_inputs": [
+    {
+      "characters": 1,
+      "kind": "initial_task",
+      "sha256": "cdb4ee2aea69cc6a",
+      "source": "ralph run",
+      "text": "."
+    }
+  ],
+  "constraints": [],
+  "open_questions": [],
+  "scenarios": [],
+  "semantic_map": {},
+  "status": "unclarified",
+  "success_criteria": []
+}

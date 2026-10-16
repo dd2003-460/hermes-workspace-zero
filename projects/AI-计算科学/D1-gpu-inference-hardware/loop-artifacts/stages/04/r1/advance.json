@@ -1,0 +1,151 @@
+{
+  "action": "advance",
+  "status": "passed",
+  "stage_id": "04",
+  "revision": "r1",
+  "next_stage": "04.5",
+  "payload": {
+    "stage_review": "Stage 04 r1 验证完成, 7/7 字段全部 field-apply 入库, 字段门禁通过。L1 $/tok 重算 22/22 通过 (0 偏差)。发现 3 类真实缺陷: (1) 加权框架 bug — 权重和=0.90 (应=1.0), 9/11 GPU total 不可复现, 重算下 H200(65.75)>5090(62.5) best_overall 翻转; (2) rankings_7b 6 处顺序违规 + score_percentile 不自洽; (3) 系统性来源缺口 — 全项目 artifact 0 条 HTTPS 链接, stage 03 source attribution 不可追溯。L4 外部复核 3/15 设备 (RTX 5090 MSRP $1999+32GB GDDR7, H200 141GB HBM3e@4.8TB/s, MI300X 192GB HBM3), 均与矩阵一致, 0 矛盾。Overall confidence 0.72; 分工作负载推荐 3/3 成立 (0.75), best_overall=5090 不稳健 (0.5)。判定: CONDITIONAL GO → 04.5 补来源交叉验证, 05 前必须修复框架权重与排名并复算。",
+    "task_spec": {
+      "goal": "对 stage 04 来源缺口做交叉验证: 补齐 12 个未复核设备的独立 HTTPS 来源, 解决 MI300X 定价与 5090 零售溢价无来源问题, 复核旗舰设备 7B tok/s 单源基准",
+      "scope": "RTX 4090, 4090D, RTX 6000 Ada, A100 SXM4, A100 PCIe, H100 SXM5, H100 PCIe, Apple M4, M4 Max, SambaNova SN3000, Groq LPU, Cerebras WSE-3, 外加 MI300X 定价, 5090 零售价格带, 旗舰 7B tok/s 基准",
+      "success_criteria": [
+        "1) 上述 12 设备每个 ≥2 独立来源 (厂商页+第三方) 或显式降为 low_confidence 并记录原因",
+        "2) MI300X 定价: 找到具体来源, 否则标记 research_required 并从价格类结论中剔除",
+        "3) RTX 5090 零售溢价 $4700-7000: 至少 2 个零售/价格追踪来源, 否则收窄为 '零售显著溢价 (未量化)'",
+        "4) 旗舰设备 (5090, H200, MI300X) 7B tok/s 基准各 ≥2 独立来源并注明方法论, 其余保留单源 flag",
+        "5) 交叉验证回执写入 loop-artifacts/stages/04.5/r1/, 更新 hardware-comparison-matrix 增加 per-device source_refs"
+      ],
+      "attribute_matrix": [
+        {
+          "concept": "verification_cost_performance",
+          "role": "verification",
+          "attribute": "性价比分析计算正确性验证 — 验证$/tok计算和排名",
+          "disposition": "confirmed",
+          "confidence": 0.85,
+          "observed_at": "2026-09-09T16:05:00+08:00",
+          "rationale": "L1 本地重算: 22/22 $/tok 通过 (price/tok_s, 0 偏差)。L2 排名: rankings_7b 6 处顺序违规 (6000Ada 记录#13应#4, H200 #12→#5, M4 #4→#6, M4Max #5→#7, MI300X #6→#8, SN3000 #7→#10), score_percentile 不自洽 → 需修复。关键价格/吞吐外部复核 (2026-09-09): RTX 5090 MSRP $1999 + 32GB GDDR7 经 NVIDIA 产品页确认 (其 $/tok_7b=$0.34 基于 MSRP; 零售溢价场景 $0.86 仍 #1, stage03 caveat 已注明); H200 141GB HBM3e @4.8TB/s 经 NVIDIA 数据页确认, $35000 维持估计值。",
+          "evidence_refs": [
+            "loop-artifacts/stages/04/r1/evidence/computation-verification-r1.md",
+            "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+            "https://www.nvidia.com/en-us/data-center/h200/"
+          ]
+        },
+        {
+          "concept": "verification_decision_framework",
+          "role": "verification",
+          "attribute": "决策框架评分方法论验证 — 验证8项加权评分标准和GPU评分",
+          "disposition": "confirmed",
+          "confidence": 0.95,
+          "observed_at": "2026-09-09T16:25:00+08:00",
+          "rationale": "8 项权重之和=0.90≠1.0; 11 个 GPU 中 9 个 recorded total 无法由 breakdown×weights 复现 (RTX5090 记录82/重算62.5, H200 78/65.75, MI300X 72/60.5 等)。重算下 H200(65.75)>RTX5090(62.5), best_overall=RTX5090 推荐在框架自身算术下翻转。'5090 最佳7B' 不受影响 (0.34 仍为最低 $/tok_7b)。修复项: 权重归一化+重算 totals+重排 rankings+重导推荐。",
+          "evidence_refs": []
+        },
+        {
+          "concept": "verification_hardware_matrix",
+          "role": "verification",
+          "attribute": "硬件对比矩阵数据准确性验证 — 抽查15个设备的规格数据与独立来源一致性",
+          "disposition": "confirmed",
+          "confidence": 0.8,
+          "observed_at": "2026-09-09T16:05:00+08:00",
+          "rationale": "复核结论: 矩阵内部自洽 ($/tok 22/22 通过); 15 设备中 2 个完成官方来源复核且一致: RTX 5090 (MSRP $1999 + 32GB GDDR7, NVIDIA 产品页) 和 H200 (141GB HBM3e @4.8TB/s, NVIDIA 数据页)。系统性缺口: 全项目 0 条 HTTPS 来源链接, stage 03 的 'source attribution' 不可追溯; 其余 13 设备的规格/价格/吞吐 (含 7B tok/s 基准值 10-70x 方法论方差) 待补来源 → 列入 uncertainties/research_required。",
+          "evidence_refs": [
+            "loop-artifacts/stages/04/r1/evidence/computation-verification-r1.md",
+            "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+            "https://www.nvidia.com/en-us/data-center/h200/"
+          ]
+        },
+        {
+          "concept": "verification_recommendations",
+          "role": "verification",
+          "attribute": "关键推荐交叉验证 — 验证RTX 5090最佳7B、H200最佳70B多GPU、MI300X最佳70B单GPU推荐",
+          "disposition": "confirmed",
+          "confidence": 0.75,
+          "observed_at": "2026-09-09T16:15:00+08:00",
+          "rationale": "3 项核心推荐交叉验证结果: (1) 'RTX 5090 最佳 7B' — 成立: $/tok_7b=$0.34 为 22 值最低 (L1 重算 0 偏差), MSRP $1999 + 32GB GDDR7 经 NVIDIA 产品页确认 (2026-09-09); 零售溢价 $5k 时 $0.86 仍 #1; 弱点: 5841 tok/s 单源基准。 (2) 'H200 最佳 70B 多GPU' — 成立: 141GB HBM3e @4.8TB/s + NVLink 经 NVIDIA 数据页确认, 官方 Llama2 70B 推理 1.9X H100 (与矩阵 210→316 tok/s 量级一致); $35k 维持估计值; 多GPU扩展未计入矩阵 $/tok (stage03 caveat #9)。 (3) 'MI300X 最佳 70B 单GPU' — 部分成立: 192GB HBM3 单卡经 Wikipedia/AMD_Instinct 确认 (唯一可单卡容纳 70B FP16 ~140GB + KV 的消费/工作站外选项), 但 $15k 价格仍无来源 (AMD 官网协议错误, ",
+          "evidence_refs": [
+            "loop-artifacts/stages/04/r1/evidence/computation-verification-r1.md",
+            "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+            "https://www.nvidia.com/en-us/data-center/h200/",
+            "https://en.wikipedia.org/wiki/AMD_Instinct"
+          ]
+        },
+        {
+          "concept": "verification_report",
+          "role": "verification_report",
+          "attribute": "阶段04验证报告 — 汇总所有验证结果，给出overall confidence和recommendation reliability",
+          "disposition": "confirmed",
+          "confidence": 0.72,
+          "observed_at": "2026-09-09T16:20:00+08:00",
+          "rationale": "Overall confidence 0.72, 推荐可靠性: 分工作负载 3/3 成立 (0.75), best_overall=5090 不稳健 (0.5)。Stage 04 发现 3 类真实缺陷: (1) 加权框架权重和=0.90 且 9/11 total 不可复现, 修复后 best_overall 可能翻转为 H200; (2) rankings_7b 6 处顺序违规; (3) 全项目 0 条 HTTPS 来源, stage 03 来源归属不可追溯 (3/15 设备已补官方/二级来源复核, 0 矛盾)。Stage 05 判定: CONDITIONAL GO — 须先修复框架权重+排名并补齐 12 设备来源或降级标注, 详见报告文件 §5 四项前置条件。",
+          "evidence_refs": [
+            "loop-artifacts/stages/04/r1/evidence/stage04-verification-report-r1.md",
+            "loop-artifacts/stages/04/r1/evidence/computation-verification-r1.md",
+            "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+            "https://www.nvidia.com/en-us/data-center/h200/",
+            "https://en.wikipedia.org/wiki/AMD_Instinct"
+          ]
+        },
+        {
+          "concept": "verification_scope",
+          "role": "verification_scope",
+          "attribute": "阶段04验证范围 — 验证stage 03决策框架的准确性、计算正确性、和推荐可靠性",
+          "disposition": "confirmed",
+          "confidence": 0.9,
+          "observed_at": "2026-09-09T16:25:00+08:00",
+          "rationale": "验证范围 = 4 层: L1 $/tok 算术 (22 值, 全过); L2 排名一致性 (发现 6 处顺序违规); L3 决策框架内部一致性 (权重和=0.90 且 9/11 total 不可复现, 均失败); L4 关键推荐独立来源交叉验证 (5090 最佳7B / H200 最佳70B多GPU / MI300X 最佳70B单GPU, 由 hardware_matrix/recommendations/uncertainties 三个字段承接, 待办)。L1-L3 已由 Python 独立重算 (2026-09-09)。",
+          "evidence_refs": []
+        },
+        {
+          "concept": "verification_uncertainties",
+          "role": "verification",
+          "attribute": "8项remaining_uncertainties处理 — 每项给出缓解措施或置信度调整",
+          "disposition": "confirmed",
+          "confidence": 0.8,
+          "observed_at": "2026-09-09T16:15:00+08:00",
+          "rationale": "stage03 的 8 项 remaining_uncertainties 逐项处理 (2026-09-09): [已复核/部分解决 3 项] (a) RTX 5090 价格波动 — MSRP $1999 经 NVIDIA 官方页今日确认, 零售 $4700-7000 未独立复核; (b) H200 规格 — 141GB HBM3e @4.8TB/s 经 NVIDIA 官方页今日确认, 价格仍估计; (c) MI300X 规格 — 192GB HBM3 单卡经 Wikipedia 今日确认。 [仍开放 5 项] (d) MI300X $15k 定价 — 无来源 (AMD 官网 ERR_HTTP2_PROTOCOL_ERROR, Wikipedia 无价格) → research_required; (e) RTX 5090 5841 tok/s@7B — 单源, 方法论相关 (10-70x 方差), 保留 flag; (f) Apple M4/M4 Max 吞吐 (80/200 tok/s) — 单源低置信 (stage03 已注明), 保留 flag; (g) ROCm 生态成熟度 ",
+          "evidence_refs": [
+            "loop-artifacts/stages/04/r1/evidence/computation-verification-r1.md",
+            "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+            "https://www.nvidia.com/en-us/data-center/h200/",
+            "https://en.wikipedia.org/wiki/AMD_Instinct"
+          ]
+        },
+        {
+          "concept": "MI300X定价来源",
+          "role": "verification",
+          "attribute": "MI300X $15000 定价的独立可复核来源",
+          "disposition": "research_required",
+          "rationale": "AMD 官网 ERR_HTTP2_PROTOCOL_ERROR, Wikipedia 规格页确认 192GB HBM3 但无价格; 待补来源, 否则从价格类结论剔除。stage 03 caveat: MI300X 为双 chiplet 卡, per-GPU 口径影响 7B $/tok 排名",
+          "evidence_refs": [
+            "https://en.wikipedia.org/wiki/AMD_Instinct"
+          ],
+          "confidence": 0.4,
+          "observed_at": "2026-09-09T16:15:00+08:00"
+        },
+        {
+          "concept": "RTX5090零售价格带",
+          "role": "verification",
+          "attribute": "RTX 5090 零售 $4700-7000 溢价区间的独立零售/价格追踪来源",
+          "disposition": "research_required",
+          "rationale": "MSRP $1999 已经 NVIDIA 官方产品页确认 (2026-09-09 访问); 零售溢价区间目前仅 stage 03 单源, 待 ≥2 零售来源, 否则收窄为未量化表述",
+          "evidence_refs": [
+            "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/"
+          ],
+          "confidence": 0.6,
+          "observed_at": "2026-09-09T16:05:00+08:00"
+        }
+      ],
+      "critical_risks": [
+        "框架 bug 未修复 (权重和=0.90, 9/11 total, 6 排名违规) — stage 05 必须先修复+复算, 否则报告排名结论无效; 修复后 best_overall 可能翻转为 H200",
+        "12 设备无 URL 级来源 (stage 03 声称 source attribution 但 artifact 无链接) — 04.5 首要工作量",
+        "web-llm 自动化需人类一次性授权 (ralph web-llm-authorize); 未授权时降级为主会话浏览器交叉验证并留可审计记录",
+        "subagent 不可用 (本地 MLX 27B 300s 内 0 API 调用) — 04.5 主会话串行执行"
+      ],
+      "required_outputs": [
+        "loop-artifacts/stages/04.5/r1/cross-validation-045-r1.json",
+        "更新版 hardware-comparison-matrix (per-device source_refs + low_confidence 标注)"
+      ]
+    }
+  }
+}

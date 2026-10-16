@@ -1,0 +1,51 @@
+{
+  "attribute": "请填写 cross_validation_out 的正交因素分解",
+  "concept": "阶段 01 输出：cross_validation_out",
+  "disposition": "pending",
+  "field": {
+    "attribute": "请填写 cross_validation_out 的正交因素分解",
+    "concept": "阶段 01 输出：cross_validation_out",
+    "confidence": 0.5,
+    "disposition": "research_required",
+    "evidence_refs": [
+      "loop-artifacts/receipts/cross-validation-045-r1.json (observed_at: 2026-09-10)",
+      "loop-artifacts/stages/03/r1/artifacts/hardware-comparison-matrix.json (04.5-r1 patched, observed_at: 2026-09-10)",
+      "loop-artifacts/stages/04.5/r1/web-llm/09a5f82306c1dcea.json (ralph web-llm-check 失败回执两次：0/3 providers 2026-09-10 与 re-run 2026-09-23T03:34Z, successful_provider_ids=[], 需人类 ralph web-llm-authorize 浏览器登录)",
+      "https://www.nvidia.com/en-us/products/workstations/rtx-6000/ (observed_at: 2026-09-10)",
+      "https://resources.nvidia.com/en-us-briefcase-for-datasheets (observed_at: 2026-09-10)",
+      "https://www.nvidia.com/en-us/data-center/a100/ (observed_at: 2026-09-10)",
+      "https://en.wikipedia.org/wiki/Cerebras_Systems (observed_at: 2026-09-10)",
+      "https://www.apple.com/mac-studio/specs/ (observed_at: 2026-09-10)",
+      "loop-artifacts/stages/04.5/r1/web-llm/chatgpt-receipt.json (04.5-r1 第二 executor 回执 1/2：gpt-5.5 Instant xhigh，2026-09-17T13:07:29+08:00，final URL chatgpt.com/c/6aaa79ee-e968-83e8-8f52-709f43ec44c3)",
+      "loop-artifacts/stages/04.5/r1/web-llm/gemini-receipt.json (04.5-r1 第二 executor 回执 2/2：gemini-3.1-pro-preview Thinking High/Grounded Search ON，2026-09-17T23:10:24+08:00，final URL aistudio.google.com/prompts/1tXyPz9SOPALLQM_sxQ4MK60KOKBSQU0l，library 持久化验证，截图不可用=URL+文本证据)",
+      "/Users/a1-6/workspace/project/2026-09-16-gpu-045-chatgpt.txt (ChatGPT 腿规范证据全文 20280B)",
+      "/Users/a1-6/workspace/project/2026-09-16-gpu-045-gemini.txt (Gemini 腿规范证据全文 10101B)",
+      "loop-artifacts/stages/04.5/r1/web-llm/claim-validation.md (8/8 逐项裁决 + D1–D5 分歧登记 + 异议映射表(含用户 2026-09-17 候选池缺口异议))",
+      "loop-artifacts/stages/04.5/r1/web-llm/cross-validation-out.md (最终交接工件 origin:ai 六节)"
+    ],
+    "observed_at": "2026-09-23T11:34:09+08:00",
+    "rationale": "04.5-r1 交叉验证：官方 datasheet 已确认并写回矩阵 6 处修正（RTX 6000 Ada 带宽 864->960 GB/s；A100 SXM4 FP16-Tensor 19.5->312 (19.5 为 FP64 Tensor)、带宽 2000->2039；A100 PCIe FP16-Tensor 15.6->156、带宽 2000->1935、NVLink 移除 SXM-only），二级源确认 Cerebras WSE-3=4T transistors/900K cores/5nm（官方硬件页 404 已退役）。7 项仍待补证据并保持 research_required：H100 PCIe 2040 GB/s（官方 PDF 直链返回 HTML，单源）、RTX 5090 street $4700-7000（单源）、MI300X $15k 定价（amd.com ERR_HTTP2_PROTOCOL_ERROR）、Groq LPU 20TB/s+96GB SRAM（仅营销页，无官方规格）、SambaNova SN3000 规格（无官方规格页）、Apple M4 Max 546 GB/s（apple.com 芯片页 404 退役，Mac Studio 规格页现仅列 M5 Max 460 GB/s）、RTX 4090D $1600 vs CN ~$1835 区域价矛盾。web-llm 门禁：本项目已配置 >=2 个授权网页 LLM，本字段必须引用 ralph web-llm-check 成功回执（>=2 successful_provider_ids）。已执行 ralph web-llm-check（loop-artifacts/stages/04.5/r1/web-llm/09a5f82306c1dcea.json）：perplexity/chatgpt/gemini 3/3 全部 error（prompt box 不可用，需人工在浏览器登录；chatgpt 为 ERR_CONNECTION_CLOSED），successful_provider_ids=[]。按 runtime 规则不写“已询问 LLM”，保留 research_required 并如实记录失败。待人工一次性授权（ralph web-llm-authorize --providers perplexity chatgpt gemini）后重跑 web-llm-check 取得 >=2 成功回执，再 re-apply 升级为 confirmed。 [2026-09-17/18 executor-045-c 两腿 web-LLM 补全] web-llm 门控现为 2/2 成功回执（上一轮 0/3）：(1) ChatGPT 最终 URL https://chatgpt.com/c/6aaa79ee-e968-83e8-8f52-709f43ec44c3，gpt-5.5 Instant (xhigh)，2026-09-17T13:07:29+08:00，规范证据 /Users/a1-6/workspace/project/2026-09-16-gpu-045-chatgpt.txt；(2) Gemini AI Studio https://aistudio.google.com/prompts/1tXyPz9SOPALLQM_sxQ4MK60KOKBSQU0l，gemini-3.1-pro-preview（Thinking High，Grounded Search ON），2026-09-17T23:10:24+08:00，library 持久化已验证，截图不可用（CDP 超时，URL+文本为正式证据），规范证据 /Users/a1-6/workspace/project/2026-09-16-gpu-045-gemini.txt。两腿提交相同文本（web-llm/submission-package.txt 4333B）；两回执 8 项字段对齐且含 adopted/rejected+rejected_reasons 与共同 two_leg_disagreements D1–D5。8 项裁决：#1 RTX 6000 Ada 960 GB/s、#3 Cerebras WSE-3 4T/900K/5nm、#6 MI300X ~$15k（TrendForce/Silicon Analysts 2026-08 $10–15k + Citi + Samsung Securities ASP $15,000，三方一致=估计/ASP 口径非 MSRP）、#7 M4 Max 'up to' 546 GB/s —— 四项两腿确证关闭；#5 5090 street price D3 标签分歧实质一致（典型 ~$5k–6k，US median $4.7k–6.5k，listing 可达 $7k+，极值 >$9k；Gemini 单腿 4090/6000-Ada 反杀信号未仲裁）；#8 Groq D4 两腿按官方口径否定矩阵值（GroqChip Product Brief v1.7：230 MB SRAM + up to 80 TB/s on-die；96GB 疑误挂 AWS Trainium2 96GB HBM）→ 03 标 llm_counter_evidence，**矩阵值 96/20000 不变（frozen 待 05）**；#2 A100 PCIe D1 硬数值矛盾（156 dense FP16 vs 312=FP16/156=TF32 标签冲突）与 #4 H100 PCIe D2（2040 ICPE 2026 vs 2000 官方 brief）→ 本轮不仲裁，03 口径注释+low_confidence 保留 → 05 官方 datasheet 裁决；D5（Gemini 单腿）MI300X 为 OAM form factor、无标准 PCIe 卡、需 8 卡 HGX/OAM 机箱（系统 >$30k）→ 03 form-factor 注释 + 05 research_required。**用户（委托人）2026-09-17 候选池缺口异议**：15 卡矩阵未覆盖 ① V100 SXM2 8 卡 NVLink 多卡服务器（DGX-1 代、二手/退役价）② 魔改/二手卡梯队（P40 24G 魔改、V100 32G 二手、3090/4090 魔改）→ 记录于 claim-validation.md §E + cross-validation-out.md §1第4项/§4.2/§5/§6，路由『回退 02.5（补证据调研）/ 05（扩池决策）』，**本轮复核不扩池、不改写矩阵候选范围；step-6 已先行浏览器直查 V100 8 卡服务器二手价（见 web-llm/step6-direct-checks.md）；Reviewer 若判候选池缺口，revise→02.5 为预期正确结果**。disposition 变更：research_required → inferred（两腿真实回执 2/2 + 03 仅增补口径注释 + 全部未决矛盾如实登记路由），confidence 0.5 → 0.65（上修依据=两腿回执与持久化证据；下调保留=两条硬数值矛盾 D1/D2 未裁、Groq 官方口径未改值、候选池完备性异议、04 L3 best_overall 框架不稳）。**未写『最终通过』**：不满足 confirmed 条件。（上文『待人工一次性授权…再 re-apply 升级为 confirmed』为 0/3 轮时的处置计划，已被本节两腿完成状态取代；ralph field-apply 由 main Agent 执行，执行者不运行 ralph 命令。）\n\n[2026-09-23 ralph-loop 第2轮 主 Agent 重新校准] 依 runtime 门控真实反馈：交叉验证字段必须引用 ralph web-llm-check 成功回执含 >=2 successful_provider_ids。已执行 `ralph web-llm-check . loop-artifacts/stages/04.5/r1/web-llm-request.json`（2026-09-23T03:34:09Z）：perplexity/chatgpt/gemini 3/3 全部 error，successful_provider_ids=[]，回执 09a5f82306c1dcea.json 已覆盖记录本轮失败（两次累计：09-10 与 09-23 各 0/3）。本轮按『最多尝试两次，否则待补』规则停止网页重试。chatgpt-receipt.json/gemini-receipt.json 为 2026-09-17/18 手动浏览器双腿（真实 URL 证据但非 ralph web-llm-check 回执、无 successful_provider_ids），故不满足门控。disposition 诚实降级 inferred→research_required，confidence 0.65→0.5；未写『已询问 LLM』；所有未决数值（D1/D2/D5、Groq 96GB SRAM、5090 street、候选池缺口）保持如实登记。阻塞如实记录：需人类一次性 `ralph web-llm-authorize --providers chatgpt gemini`（或 --global + 持久 profile 登录）后重跑 web-llm-check，取得 >=2 成功回执再才能升级为 confirmed；本轮不伪造、不提前 confirm、不修改已填内容。 [2026-09-23 ralph-global-loop iter2/3, Commander] 曾尝试派发 Ego Lite executor 补网页 LLM 回执，被人类中断（无后续指示）；本任务维持 research_required 不变，等待人类决策：(a) 是否继续派发，或 (b) 先人类执行 ralph web-llm-login + ralph web-llm-authorize --providers chatgpt gemini 再重跑 web-llm-check。Commander 按协议转处理其他项目 ready 任务，不阻塞全局循环。 [2026-09-23 iter3, Commander] 转向 D1-area-quantized-black-hole-QNM 01 阶段（纯离线分解，无浏览器）的 executor 派发亦被人类中断——连续两次派发中断，判定为『当前不要自主派发 subagent』。Commander 停止一切派发，等待人类方向（登录补回执 / 指定任务 / 暂停循环）。无其他文件状态变更。",
+    "role": "cross_validation_out"
+  },
+  "flow_only": false,
+  "id": "04.5-r1-field-01-cross_validation_out-6b42d6e860",
+  "input_refs": [
+    "loop-artifacts/stages/04.5/r1/fields.json"
+  ],
+  "instruction": "只处理字段 `阶段 01 输出：cross_validation_out`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/04.5/r1/tasks/04.5-r1-field-01-cross_validation_out-6b42d6e860.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+  "output_schema": {
+    "attribute": "string",
+    "concept": "阶段 01 输出：cross_validation_out",
+    "confidence": "number 0..1",
+    "disposition": "confirmed|inferred|assumed_default|research_required",
+    "evidence_refs": "array[string]",
+    "rationale": "string",
+    "role": "string"
+  },
+  "revision": "r1",
+  "role": "cross_validation_out",
+  "schema_version": 1,
+  "stage_id": "04.5",
+  "status": "ready",
+  "type": "field_task"
+}

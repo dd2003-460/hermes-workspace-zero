@@ -19,7 +19,7 @@
 | `理论物理/D1-goal-investigation/` | [DGI.1] | **loop it 14**：Agent goal 机制 + loop状态管理研究 |
 | `理论物理/cosmos-thesis-review/` | [CTR.1] | 宇宙学论文综述 |
 | `理论物理/2026春复习/` | [CR.1] | 2026 年春季复习材料 |
-| `理论物理/quantum-ec/` | [QEC.1] | 量子纠错（七阶段方法：预言落纸 + 跑模型复算验证） |
+| `金融/quant-capital-flow/` | [QCF.1] | 中美股票板块资金流预测（气体动理论 × 动态演化博弈，可证伪预言；原 quantum-ec，ec=economic，非量子纠错） |
 
 ### AI / 计算科学
 

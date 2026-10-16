@@ -9,6 +9,7 @@
 | 项目 | 描述 |
 |------|------|
 | `D1-financial-market-analysis/` | 时间序列金融市场研究（无未来数据、信息泄露与资金博弈验证） |
+| `quant-capital-flow/` | 中美股票板块资金流预测（气体动理论 × 动态演化博弈，可证伪预言；原 quantum-ec，ec=economic） |
 
 ---
 

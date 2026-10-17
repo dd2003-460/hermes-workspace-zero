@@ -6,7 +6,8 @@
 ## 基本事实
 - **姓名**：成璐（Cheng Lu）· 时区 Asia/Shanghai · 中国
 - **GitHub**：dd2003-460（仓库全部 public，交互数据即在其中）
-- **身份**：个人独立研究者 / PhD 申请中。核心自我陈述（declaim-research README 原话）：**"Understanding = Compression = Pattern Matching"**
+- **身份**：中科院（CAS）理论物理研究生（源：个人/persona-claude-longterm.md，单源 conf0.7，待成璐口头确认；旧记录"个人独立研究者/PhD 申请中"被替代）。核心自我陈述（declaim-research README 原话）：**"Understanding = Compression = Pattern Matching"**
+- **交叉验证**：Claude 长期导出画像 vs 本项目 persona 的逐条对照见 `../memory/persona-crosscheck-claude.md`（方法论层双源 conf0.9 / 新增事实单源 conf0.7）
 - **工作区**：hermes-workspace-zero（本工作区，即他的 AI 数字分身工作空间）
 
 ## 终极目标（价值函数）

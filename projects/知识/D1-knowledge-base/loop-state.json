@@ -1,0 +1,31 @@
+{
+  "project_id": "D1-knowledge-base",
+  "slot": "KB.1",
+  "stage": {
+    "id": "second-note-verified",
+    "name": "build/second-textbook-note",
+    "revision": "r2"
+  },
+  "loop_phase": "build",
+  "iteration": 2,
+  "status": "active",
+  "current_task": "第二篇教材note=Agent记忆机制(subagent b0cc6940交付, drift-check 100/100首轮达标: 句长36.7/第一人称0.24/所以7但是0/置信度词13/空话0). 12概念×动机/直觉/来源/坑, 来源带arXiv号, 不确定标未验证. 应用层连回成璐md树架构(三层各司其职+lossless+break条件3条). 排队: GPU推理/persona对齐.",
+  "blocker": null,
+  "change_log": [
+    {
+      "time": "2026-10-17",
+      "action": "init",
+      "summary": "项目启动[m00744点7.6]: 建顶层域'知识'+D1-knowledge-base[KB.1]. README定义教材式格式(名词表定义/动机/来源/疑问+成璐视角6字段). memory/interest-directions.md盘点3区(A已深学4域/B工作中3域/C高兴趣未深学4域=教材主目标). 与DPA.1互补: persona=怎么想怎么说, KB=知道什么对什么有兴趣."
+    },
+    {
+      "time": "2026-10-17",
+      "action": "first-note",
+      "summary": "第一篇教材note notes/llm-training-mechanisms.md: 10名词(目标函数/前向反向/梯度下降/权重/预训练vsSFT/RLHF/CoT/伪thinking/verify自校验/修bug=分解解空间)各4项+B成璐视角(伪thinking=架构结构性后果conf0.7; 3idea带conf; 砍3条; 一句话'LLM训练=找复现语料统计结构的最短程序, persona是补丁不是程序'). drift-check v1=90(第一人称0.066<0.2不过)→2-loop织入15处第一人称→85/100硬门槛全过. projects/INDEX.md加知识域行, notes/INDEX.md+tasks/state.md+loop-state.json齐."
+    },
+    {
+      "time": "2026-10-18",
+      "action": "second-note",
+      "summary": "第二篇教材note notes/agent-memory-mechanisms.md(subagent b0cc6940交付): 12概念(context window/KV cache工作记忆/压缩摘要/md记忆树/RAG/MemGPT/Generative Agent/HippoRAG/sleep-time compute/情景vs语义/漂移遗忘/lossy-lossless权衡)×动机/直觉/来源/坑, 来源带arXiv号(Kwon 2309.06180/Packer 2310.08560/Park 2304.03442/Gutiérrez 2405.14831/Lewis 2005.11401), 无统一框架的标「未验证」不编造. drift-check 100/100首轮达标(句长36.7/第一人称0.24/所以7但是0/置信度词13/空话0). 应用层连回成璐md树架构(三层各司其职+lossless+简单可维护)+break条件3条(文件过百/压缩丢细节/state与实际不一致). notes/INDEX.md已加行."
+    }
+  ]
+}

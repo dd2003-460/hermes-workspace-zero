@@ -1,14 +1,14 @@
 {
   "project_id": "D1-persona-align",
   "stage": {
-    "id": "m01140-approval-queue+nonblocking-confirm",
-    "name": "synthesis/centralized-approval-mechanism",
-    "revision": "r13"
+    "id": "m01380-unblock+persona-crosscheck+m01255-kickoff",
+    "name": "execution/post-unblock-recovery",
+    "revision": "r14"
   },
-  "loop_phase": "synthesis",
-  "iteration": 13,
+  "loop_phase": "execution",
+  "iteration": 14,
   "status": "active",
-  "current_task": "m01140修订(r13): 成璐'我发现是我冲突指令妨碍了你...只有不可逆而且不明确偏好的操作需要确认(可以放一个地方集中让我审批,例如工作区顶层index,不要中断你工作,然后跳过这些阻塞,做可逆可回滚的你自己能决定的行动)'. 执行: ①CLAUDE.md RALPH节重写=新机制(可逆自主/不可逆+偏好明确留回滚点执行/不可逆+偏好不明→APPROVALS.md跳过继续/红线需明确指令; CONFIRMED 1/2硬门禁作废, 历史已确认区块只读) ②新建工作区顶层APPROVALS.md集中审批队列(Q1 A/B/C+Q2 D1/D2/D3+Q3 E1/E2/E3, 回一个词拍板, 不中断循环) ③thinking-budget.md L2+CLAUDE.md思考预算节同步改'偏好不明=写APPROVALS.md跳过继续(不中断循环)' ④standing-directive+第5条集中审批不阻塞 ⑤open-questions.md标注拍板已迁移. 红线AGENTS.md仍一字未动. 按永续指令继续: KB.1第二篇note(agent记忆机制)subagent进行中.",
+  "current_task": "m01380解卡后恢复(r14): ①APPROVALS.md引用7处全部改为个人/APPROVALS.md(CLAUDE.md:83/96/97+thinking-budget.md:13/29+open-questions.md:4+standing-directive:8) ②who-i-am.md:9身份→中科院理论物理研究生(单源conf0.7)+新建memory/persona-crosscheck-claude.md(6双源互证conf0.9/9新事实单源conf0.7/0冲突, core-rules 16条零修改) ③next: m01255立项(KB 3篇note传播学/拓扑结构/传播效率 + 写作-社会系统/D2-efficient-propagation-book/项目立项, 3 subagent并行写note). m01140修订(r13,历史): 成璐'我发现是我冲突指令妨碍了你...只有不可逆而且不明确偏好的操作需要确认(可以放一个地方集中让我审批,例如工作区顶层index,不要中断你工作,然后跳过这些阻塞,做可逆可回滚的你自己能决定的行动)'. 执行: ①CLAUDE.md RALPH节重写=新机制(可逆自主/不可逆+偏好明确留回滚点执行/不可逆+偏好不明→APPROVALS.md跳过继续/红线需明确指令; CONFIRMED 1/2硬门禁作废, 历史已确认区块只读) ②新建工作区顶层APPROVALS.md集中审批队列(Q1 A/B/C+Q2 D1/D2/D3+Q3 E1/E2/E3, 回一个词拍板, 不中断循环) ③thinking-budget.md L2+CLAUDE.md思考预算节同步改'偏好不明=写APPROVALS.md跳过继续(不中断循环)' ④standing-directive+第5条集中审批不阻塞 ⑤open-questions.md标注拍板已迁移. 红线AGENTS.md仍一字未动. 按永续指令继续: KB.1第二篇note(agent记忆机制)subagent进行中.",
   "blocker": null,
   "change_log": [
     {
@@ -95,6 +95,11 @@
       "time": "2026-10-18",
       "action": "approval-queue-m01140",
       "summary": "m01140机制修订: CLAUDE.md RALPH节重写(只审'不可逆×偏好不明'; 不可逆+偏好明确=留回滚点直接执行; 偏好不明=顶层APPROVALS.md跳过继续不中断循环; 红线AGENTS.md仍需明确指令; 旧CONFIRMED 1/2硬门禁作废, 历史已确认区块只读); 新建工作区顶层APPROVALS.md集中审批队列(Q1 A/B/C运行时人格 + Q2 D1/D2/D3公理入AGENTS.md + Q3 E1/E2/E3思考预算入AGENTS.md, 回一个词拍板, 已批区记m01140机制本身); thinking-budget.md L2+CLAUDE.md思考预算节同步'偏好不明=写APPROVALS.md跳过继续'; standing-directive+第5条集中审批不阻塞; open-questions.md标注拍板已迁移."
+    },
+    {
+      "time": "2026-10-18",
+      "action": "post-unblock-recovery",
+      "summary": "m01380解卡后恢复(r14): ①APPROVALS.md引用7处全改个人/APPROVALS.md(CLAUDE.md:83/96/97 + thinking-budget.md:13/29 + open-questions.md:4 + standing-directive-m01076.md:8; loop-state:11/97与ACTIVE.md:13的提及=历史changelog不改) ②who-i-am.md:9身份→中科院(CAS)理论物理研究生(源persona-claude-longterm.md单源conf0.7, 替代'个人独立研究者/PhD申请中'), 加交叉验证指针行 ③新建memory/persona-crosscheck-claude.md: Claude长期导出×DPA.1 persona逐条对照=6双源互证项conf0.9(压缩世界观/性价比solo/要求严格评估/执行导向Weinstein外部评估/AI复刻=平均值非上层思维/跨域形式化偏好) + 9单源新事实conf0.7(N1身份/N2女友儿童英语老师/N3文明贡献Shapley+ATE/N4 OpenClaw-Zero架构/N5硬件评估/N6 A股小盘股模因传播框架/N7任意子统计论文/N8损失掩蔽/N9 TCS基础讨论) + 0冲突 → persona从'单源自洽'升级'双源互证(核心conf0.9)+单源扩展(事实conf0.7)'; core-rules 16条零修改; 待办=成璐口头确认N1 ④队列: loop-state r14+aggregate+git commit/push(验连通)+个人/ASYNC.md补git结果 + m01255立项(KB 3篇note传播学/拓扑结构/传播效率 + 写作-社会系统/D2-efficient-propagation-book/项目立项)."
     }
   ]
 }

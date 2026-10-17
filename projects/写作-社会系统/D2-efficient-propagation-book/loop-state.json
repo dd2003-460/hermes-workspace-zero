@@ -7,11 +7,16 @@
     "revision": "r1"
   },
   "loop_phase": "build",
-  "iteration": 1,
+  "iteration": 2,
   "status": "active",
-  "current_task": "项目立项[m01255]: 核心命题KPI=Δ信念/Δ成本(认知解码成本下的信念状态迁移期望流量)+6层骨架(度量/网络/动力学/控制/设计/资产化, conf 0.7)+砍掉3条. 底座=KB.1三篇note(传播学/拓扑/传播效率), subagent已派发(a3fd05b5/c197e1fc/f209f90d). 下一步: 三note落盘过drift-check→骨架升v2→L1度量层第一稿.",
+  "current_task": "L1 度量层第一稿(第1-4章)[依赖#2已满足]. 已完成: KB.1三篇底座note全过drift(0.325/0.266/0.330)+骨架升v2(memory/book-skeleton.md, 6层15章+P1-P8前提表, drift 100/100). 下一步: 派4 subagent并行写第1-4章→各自过drift-check→我审+git. ",
   "blocker": null,
   "change_log": [
+    {
+      "time": "2026-10-18",
+      "action": "skeleton-v2",
+      "summary": "KB.1三篇底座note全过drift-check(propagation-studies-fundamentals 0.325/15.58 / network-topology 0.266 / propagation-efficiency 0.330). 骨架升v2: memory/book-skeleton.md 落盘=核心命题(KPI=Δ信念/Δ成本, 我要量'信了'不是'看到')+P1-P8前提清单(8条, 各带conf+来源, 来自三note关键疑问: 级联从众信念P1/Δ信念代理P2/解码成本≈熵−先验压缩P3/弱连接信息强连接信念P4/SIS阈值γ<3失效P5/小世界快到达不快说服P6/R0拐点P7/top-K静态误差P8)+6层15章(每章标题+一句话, 第一人称判断注入)+砍3条+写作纪律+v3升级条件(L1四章过drift+P2拿第一个数). 首版drift 75/100(第一人称0.087不过)→改写注入第一人称判断→重测100/100(0.283/42.2/0). 同步: git commit 5e04a15立项+ab8361c ASYNC+abfb549传播学note最终版, HTTP/1.1 push成功(绕HTTP2 framing错误), 远端main=abfb549."
+    },
     {
       "time": "2026-10-18",
       "action": "init",

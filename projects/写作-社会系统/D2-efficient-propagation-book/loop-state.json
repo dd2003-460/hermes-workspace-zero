@@ -7,11 +7,17 @@
     "revision": "r1"
   },
   "loop_phase": "build",
-  "iteration": 4,
+  "iteration": 5,
   "status": "active",
-  "current_task": "L1 度量层第一稿完成(4/4章, 全过drift+我全审). 下一步: v3升级条件检查——L1四章drift全过✓, 但P2第一个数需成璐跑30人30天最小实验(人依赖, 排队). P2数到位前可推进: L2第5-6章骨架细化/全书交叉引用清理(第4章'留给第5章'占位). ",
+  "current_task": "L2 网络层第一稿写作中: 第5章(结构定天花板)+第6章(流量卡在哪) subagent 并行 d705ce4a/640d2b22, spec 同 L1; 等回报→我审+drift 独立验证→r6 bookkeeping. v3 升级仍待 P2 第一个数(成璐 30 人 30 天实验, 人依赖排队); 有意识偏离 v3 条件先写 L2, 升级时按实测校准",
   "blocker": null,
   "change_log": [
+    {
+      "time": "2026-10-18",
+      "action": "l2-draft-dispatched",
+      "summary": "任务#5启动: L2 第5-6章 subagent 并行派发(d705ce4a=结构定天花板: 直径小≠说服快, 解码成本逐人付, W-S 1998/BA 1999/P4/P5; 640d2b22=流量卡在哪: 信任加权介数, 裸介数指错桥, Girvan-Newman 2002/渗流pc下界/solo DAG拓扑介数0美元). 有意识偏离 v2→v3 条件('先拿P2数再写L2'): P2=30人30天人依赖实验, 排队等会停摆整个循环, L2 草稿先行, v3 升级时按实测校准章节权重补做. git: L1 四章 commit 已 push(911b12d..47ec719, HTTP/1.1).",
+      "confidence": 0.8
+    },
     {
       "time": "2026-10-18",
       "action": "l1-draft-v1-complete",

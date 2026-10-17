@@ -1,0 +1,21 @@
+{
+  "project_id": "D2-efficient-propagation-book",
+  "slot": "EPB.1",
+  "stage": {
+    "id": "init",
+    "name": "build/project-launch",
+    "revision": "r1"
+  },
+  "loop_phase": "build",
+  "iteration": 1,
+  "status": "active",
+  "current_task": "项目立项[m01255]: 核心命题KPI=Δ信念/Δ成本(认知解码成本下的信念状态迁移期望流量)+6层骨架(度量/网络/动力学/控制/设计/资产化, conf 0.7)+砍掉3条. 底座=KB.1三篇note(传播学/拓扑/传播效率), subagent已派发(a3fd05b5/c197e1fc/f209f90d). 下一步: 三note落盘过drift-check→骨架升v2→L1度量层第一稿.",
+  "blocker": null,
+  "change_log": [
+    {
+      "time": "2026-10-18",
+      "action": "init",
+      "summary": "项目立项[m01255]: 建 写作-社会系统/D2-efficient-propagation-book [EPB.1]. 动机=成璐 m01255 原话'我目前对传播学, 拓扑结构, 传播效率, 感兴趣, 我的最终动机是了解他们然后设计高效传播的书, 或者等等可以转化为我资产的东西'. 骨架6层源自死锁期纯文字推演(conf 0.7): L1度量(KPI=Δ信念/Δ成本+Shapley归因)/L2网络(小世界+无标度+社区+Granovetter阈值)/L3动力学(SIS-SIRS-Bass+思想R0+梗死亡=群体免疫0.7)/L4控制(optimal seeding Kempe 2003+均值场博弈)/L5设计(理解=压缩应用于内容+成璐voice=高效表达样本)/L6资产化(书=种子+课=放大器+社群=R0>1载体0.6+viral vs慢烧=Almgren-Chriss 0.6). 砍3条: 不写营销入门/不追平台算法/不声称完整理论. KB.1三篇底座note派发3 subagent并行."
+    }
+  ]
+}

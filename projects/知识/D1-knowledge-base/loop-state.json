@@ -2,14 +2,14 @@
   "project_id": "D1-knowledge-base",
   "slot": "KB.1",
   "stage": {
-    "id": "second-note-verified",
-    "name": "build/second-textbook-note",
-    "revision": "r2"
+    "id": "m01255-trilogy-delivered",
+    "name": "build/propagation-trilogy",
+    "revision": "r3"
   },
   "loop_phase": "build",
-  "iteration": 2,
+  "iteration": 3,
   "status": "active",
-  "current_task": "第二篇教材note=Agent记忆机制(subagent b0cc6940交付, drift-check 100/100首轮达标: 句长36.7/第一人称0.24/所以7但是0/置信度词13/空话0). 12概念×动机/直觉/来源/坑, 来源带arXiv号, 不确定标未验证. 应用层连回成璐md树架构(三层各司其职+lossless+break条件3条). 排队: GPU推理/persona对齐.",
+  "current_task": "m01255 三篇note交付(传播学/网络拓扑/传播效率): propagation-studies-fundamentals.md(句级第一人称0.435/句长49.1) / network-topology.md(0.266/39.8) / propagation-efficiency.md(0.330/38.2, 认知解码成本=熵−受众先验可压缩量焊公理A0; 3关键疑问: Δ信念代理有效性conf0.6/解码成本定量估法0.5/R0(解码成本)拐点+边权0.5). 硬门槛全过. D2(EPB.1)同步立项完成, tasks #1完成→骨架v2待启动. 排队: GPU推理/persona对齐.",
   "blocker": null,
   "change_log": [
     {
@@ -26,6 +26,11 @@
       "time": "2026-10-18",
       "action": "second-note",
       "summary": "第二篇教材note notes/agent-memory-mechanisms.md(subagent b0cc6940交付): 12概念(context window/KV cache工作记忆/压缩摘要/md记忆树/RAG/MemGPT/Generative Agent/HippoRAG/sleep-time compute/情景vs语义/漂移遗忘/lossy-lossless权衡)×动机/直觉/来源/坑, 来源带arXiv号(Kwon 2309.06180/Packer 2310.08560/Park 2304.03442/Gutiérrez 2405.14831/Lewis 2005.11401), 无统一框架的标「未验证」不编造. drift-check 100/100首轮达标(句长36.7/第一人称0.24/所以7但是0/置信度词13/空话0). 应用层连回成璐md树架构(三层各司其职+lossless+简单可维护)+break条件3条(文件过百/压缩丢细节/state与实际不一致). notes/INDEX.md已加行."
+    },
+    {
+      "time": "2026-10-18",
+      "action": "trilogy-notes",
+      "summary": "m01255三篇教材note(subagents a3fd05b5/c197e1fc/f209f90d): propagation-studies-fundamentals.md(92句, 句级第一人称0.435) / network-topology.md(124句, 0.266) / propagation-efficiency.md(109句, 0.330, 认知解码成本显式写成熵−受众先验可压缩量焊公理A0). 三篇硬门槛全过(第一人称≥0.2/句长<55/禁词0). f209f90d三条关键疑问入档: ①Δ信念是内隐变量, 代理测量可能失真=全书KPI存亡问题(conf0.6) ②解码成本差值怎么估, 信息熵只给下界(conf0.5) ③R0(解码成本)单调函数拐点/IC·LT边权接解码成本, 单调性未验证(conf0.5). notes/INDEX.md加3行+排队区更新. 供 D2-efficient-propagation-book(EPB.1)书底座."
     }
   ]
 }

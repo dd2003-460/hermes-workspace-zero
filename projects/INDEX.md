@@ -51,6 +51,13 @@
 | `写作-社会系统/D1-writing/` | [DW.1] | 写作工作 |
 | `写作-社会系统/D1-writing/motivation_society/` | [DMS.1] | 《动机社会》中文书稿(ctex+xelatex)——RALPH 接管:干净编译 + 按 part1_core_logic 风格修缮后续 AI 生成章节；Stop 钩子强制分解+进度条 |
 | `写作-社会系统/author-voice-mining/` | [AVM.1] | 作者声音挖掘（写作风格 data + scripts + outputs） |
+| `写作-社会系统/D2-efficient-propagation-book/` | [EPB.1] | 《高效传播》书 + 资产转化（KPI=Δ信念/Δ成本；骨架 conf 0.7；底座=KB.1 三篇 note） |
+
+### 知识
+
+| 项目 | 索引号 | 描述 |
+|------|--------|------|
+| `知识/D1-knowledge-base/` | [KB.1] | 高兴趣未深学领域的教材式笔记（名词表+成璐视角；格式见其 README；兴趣方向见 memory/interest-directions.md） |
 
 ---
 

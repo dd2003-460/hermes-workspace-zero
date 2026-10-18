@@ -1,0 +1,17 @@
+RESULT (self-contained): The plane x+y+z=75 with x−yz < y−zx < z−xy. Differences: B−A=(y−x)(1+z), C−B=(z−y)(1+x), so region = {(y−x)(1+z)<0 and (z−y)(1+x)<0}. Boundary lines in (x,y) [z=75−x−y]: y=x, x+y=76, x+2y=75, x=−1 — 4 lines in general position → 3 bounded cells; only the triangle with xy-vertices (25,25),(38,38),(77,−1) satisfies both inequalities (the other two bounded cells fail). 3D vertices: (25,25,25),(38,38,−1),(77,−1,−1). xy-projected area (shoelace) = 507; plane normal (1,1,1) has |n|=√3, n_z=1, so true area = 507·√3. Thus a=507, b=3, a+b=510. FINAL: 510
+
+The result has been sent to the parent. Now I'll provide the final answer with the requested format.
+
+## Solution Summary
+
+**Setup:** On the plane $x+y+z=75$, define $A=x-yz,\ B=y-zx,\ C=z-xy$. Then:
+$$B-A=(y-x)(1+z),\quad C-B=(z-y)(1+x)$$
+so $A<B<C$ iff $(y-x)(1+z)<0$ and $(z-y)(1+x)<0$.
+
+**Boundary lines** in $(x,y)$ (with $z=75-x-y$): $y=x$, $x+y=76$, $x+2y=75$, $x=-1$ — four lines in general position, giving exactly 3 bounded cells. Testing each, only the triangle with vertices $(25,25), (38,38), (77,-1)$ satisfies both inequalities — **this is the finite region**.
+
+**Area:** Its 3D vertices are $(25,25,25), (38,38,-1), (77,-1,-1)$. The shoelace area of the $xy$-projection is $507$; since the plane's normal is $(1,1,1)$ with $n_z=1$, the true area is $507\sqrt{3}$.
+
+So $a=507$, $b=3$ (squarefree), and $a+b = 510$.
+
+FINAL: 510

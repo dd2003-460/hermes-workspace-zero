@@ -7,11 +7,17 @@
     "revision": "r1"
   },
   "loop_phase": "build",
-  "iteration": 7,
+  "iteration": 8,
   "status": "active",
-  "current_task": "L3 进行中: 第7章✓100/100(我审过) + 第8章(436af1cd)第9章(b99165be)running. thinking-budget A/B 终判落盘(m01196④: H1/H2均不过→失败分支, 改机制提案=自检步骤第二轮). 下一步: ①收ch8/ch9回报 ②L4控制层(第10章Kempe 2003) ③v3 升级仍待 P2 第一个数(成璐 30 人 30 天实验, 人依赖排队)",
+  "current_task": "L3 完成(第7-9章全100/100, 我全审过; ch8 引用我线上核验=PSV 2001 PRL 86,3200 arXiv:cond-mat/0010317, 骨架原记错). 下一步: ①L4 第10章(最优播种 Kempe 2003)派发 ②第11章(控制不是触达最多) ③v3 升级仍待 P2 第一个数(成璐 30 人 30 天实验, 人依赖排队). thinking-budget A/B 终判已落盘(m01196④, 改机制提案=自检步骤, 未启动)",
   "blocker": null,
   "change_log": [
+    {
+      "time": "2026-10-18",
+      "action": "l3-complete-ch8-citation-verified-ch10-dispatched",
+      "summary": "L3 完成(3/3 全100/100 我审过). 第8章08-阈值与相变.md(1024字9粗体块): 人头→证据单位reframe(证据=转发者自己话复述, 与第2章级联判据同尺子conf0.6, 权重由解码成本定接P3/HK)+Granovetter1978原样+Bass1969信念域q主导conf0.7+SIS失效(λc=⟨k⟩/⟨k²⟩ γ<3→0)+到达无阈值说服有成本+相变=渗流类比边权=解码成本conf0.55全章最弱(类比非推导, 我决策: 不现在推, v3工作)+solo 0美元双阈值对拍+预测=证据阈值对后续扩散预测力显著高于人头阈值(p>0.05无差异则收回reframe, conf0.5). 我线上核验引用: arXiv API 标题检索 → Pastor-Satorras & Vespignani 'Epidemic spreading in scale-free networks' Phys. Rev. Lett. 86, 3200 (2001) arXiv:cond-mat/0010317(摘要原文'absence of an epidemic threshold'); subagent PSV 2001归因正确, 骨架原记'Bolz 1990/May 1990'是错记, 已改精确引用, 改后drift仍100/100. 第9章09-梗为什么会死.md(1252字8粗体块): 群体免疫+免疫定量定义(不再转发/只复读原句/复述零增量, 占2判免疫)+R0_eff=R0(C)×(1-免疫比例)<1梗死(借结构不借机制gap conf0.5)+免疫针对格式不针对观点→换压缩格式重发+免疫衰减周期复活(conf0.4全章最弱纯直觉)+solo 0美元原样vs换格式重发曲线+预测=换格式7天转发≥原样1.5倍(≤1.2倍则免疫在观点上, 推翻); 引用Anderson&May 1991+细野1981标未验证(subagent无网). 教训: ①subagent web_search/web_fetch均不可用(本session), 引用核验只能Lead做 ②我记忆的arXiv ID(cond-mat/0010175)是错的(=Svistkov&Ilinykh 2000材料扩散), arXiv API标题检索才是可靠路径 ③arXiv API须直接https(http跨域重定向不自动跟随). git: 本地main ff到11961a1, github:443网络断, 5次push重试全失败(外部, 待网络恢复). 下一步: L4第10章派发(最优播种Kempe 2003, 接第4章'归因是上游播种是下游').",
+      "confidence": 0.9
+    },
     {
       "time": "2026-10-18",
       "action": "l3-ch7-complete-ch89-dispatched-tb-ab-final",

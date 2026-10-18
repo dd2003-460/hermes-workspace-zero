@@ -1,6 +1,6 @@
 # ACTIVE — 活跃项目面板
 
-**自动生成**: 2026-10-18 08:51 — 由 scripts/aggregate-active.sh 聚合
+**自动生成**: 2026-10-18 09:24 — 由 scripts/aggregate-active.sh 聚合
 
 ## 焦点项目
 
@@ -10,7 +10,7 @@
 | D1-financial-market-analysis | `金融/D1-financial-market-analysis/` | 03 | r1 | running | 执行任务分解 |
 | D1-area-quantized-black-hole-QNM | `理论物理/D1-area-quantized-black-hole-QNM/` | 02.5 | r1 | running | 调研后交叉验证 |
 | D1-goal-investigation | `理论物理/D1-goal-investigation/` | 1-loop/decision | 21 | completed | D1 研究目标完成，项目归档 |
-| D2-efficient-propagation-book | `写作-社会系统/D2-efficient-propagation-book/` | init | r1 | active | L3 进行中: 第7章✓100/100(我审过) + 第8章(436af1cd)第9章(b99165be)running. thinking-budget A/B 终判落盘(m01196④: H1/H2均不过→失败分支, 改机制提案=自检步骤第二轮). 下一步: ①收ch8/ch9回报 ②L4控制层(第10章Kempe 2003) ③v3 升级仍待 P2 第一个数(成璐 30 人 30 天实验, 人依赖排队) |
+| D2-efficient-propagation-book | `写作-社会系统/D2-efficient-propagation-book/` | init | r1 | active | L3 完成(第7-9章全100/100, 我全审过; ch8 引用我线上核验=PSV 2001 PRL 86,3200 arXiv:cond-mat/0010317, 骨架原记错). 下一步: ①L4 第10章(最优播种 Kempe 2003)派发 ②第11章(控制不是触达最多) ③v3 升级仍待 P2 第一个数(成璐 30 人 30 天实验, 人依赖排队). thinking-budget A/B 终判已落盘(m01196④, 改机制提案=自检步骤, 未启动) |
 | D1-persona-align | `AI-计算科学/D1-persona-align/` | m01380-unblock+persona-crosscheck+m01255-kickoff | r14 | active | m01380解卡后恢复(r14): ①APPROVALS.md引用7处全部改为个人/APPROVALS.md(CLAUDE.md:83/96/97+thinking-budget.md:13/29+open-questions.md:4+standing-directive:8) ②who-i-am.md:9身份→中科院理论物理研究生(单源conf0.7)+新建memory/persona-crosscheck-claude.md(6双源互证conf0.9/9新事实单源conf0.7/0冲突, core-rules 16条零修改) ③next: m01255立项(KB 3篇note传播学/拓扑结构/传播效率 + 写作-社会系统/D2-efficient-propagation-book/项目立项, 3 subagent并行写note). m01140修订(r13,历史): 成璐'我发现是我冲突指令妨碍了你...只有不可逆而且不明确偏好的操作需要确认(可以放一个地方集中让我审批,例如工作区顶层index,不要中断你工作,然后跳过这些阻塞,做可逆可回滚的你自己能决定的行动)'. 执行: ①CLAUDE.md RALPH节重写=新机制(可逆自主/不可逆+偏好明确留回滚点执行/不可逆+偏好不明→APPROVALS.md跳过继续/红线需明确指令; CONFIRMED 1/2硬门禁作废, 历史已确认区块只读) ②新建工作区顶层APPROVALS.md集中审批队列(Q1 A/B/C+Q2 D1/D2/D3+Q3 E1/E2/E3, 回一个词拍板, 不中断循环) ③thinking-budget.md L2+CLAUDE.md思考预算节同步改'偏好不明=写APPROVALS.md跳过继续(不中断循环)' ④standing-directive+第5条集中审批不阻塞 ⑤open-questions.md标注拍板已迁移. 红线AGENTS.md仍一字未动. 按永续指令继续: KB.1第二篇note(agent记忆机制)subagent进行中. |
 | D1-knowledge-base | `知识/D1-knowledge-base/` | m01255-trilogy-delivered | r3 | active | m01255 三篇note交付(传播学/网络拓扑/传播效率): propagation-studies-fundamentals.md(句级第一人称0.435/句长49.1) / network-topology.md(0.266/39.8) / propagation-efficiency.md(0.330/38.2, 认知解码成本=熵−受众先验可压缩量焊公理A0; 3关键疑问: Δ信念代理有效性conf0.6/解码成本定量估法0.5/R0(解码成本)拐点+边权0.5). 硬门槛全过. D2(EPB.1)同步立项完成, tasks #1完成→骨架v2待启动. 排队: GPU推理/persona对齐. |
 | D1-grav-waves | `理论物理/D1-grav-waves/` | IDLE | 21 | complete | 无 — 项目已完成 ⚠️ arXiv 提交需作者手动上传 — 不可自动绕过 |

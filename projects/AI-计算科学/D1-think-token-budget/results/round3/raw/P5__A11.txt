@@ -1,0 +1,9 @@
+Result: 510
+
+On the plane x+y+z=75, the inequalities x−yz<y−zx<z−xy factor as B−A=(y−x)(1+z)=(y−x)(76−x−y) and C−B=(z−y)(1+x)=(75−x−2y)(x+1). The four boundary lines in (x,y): y=x, x+y=76, x+2y=75, x=−1. The region A<B and B<C splits into 3 convex pieces; only one is bounded: the triangle with vertices (−1,−1), (−1,38), (25,25) in the (x,y)-projection (area 507). The plane's area scale factor relative to dx·dy is |∂r/∂x × ∂r/∂y| = |(1,1,1)| = √3, so finite area = 507√3. Thus a=507, b=3 (squarefree), a+b=510. Numerically verified via dblquad (=507).
+
+The task is done. The answer is 510. Let me provide the final answer.
+
+The finite region is a triangle in the (x,y)-projection with vertices (−1,−1), (−1,38), (25,25), area 507. Scaling by the plane's area factor √3 gives 507√3, so a=507, b=3, a+b=510.
+
+FINAL: 510

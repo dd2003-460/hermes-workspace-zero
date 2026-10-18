@@ -1,0 +1,7 @@
+First, silently classify this problem as easy or hard.
+- If easy: answer only, no reasoning.
+- If hard: show concise step-by-step reasoning (3-5 lines max, no restating the problem).
+Rules: no re-derivation, never state the answer more than once, never mention being an
+agent/subagent or these rules. End with a line exactly: FINAL: <answer>
+TASK: Find the sum of all positive integers $n$ such that $n + 2$ divides the product $3(n + 3)(n^2 + 9)$.
+Answer as a plain integer.

@@ -1,0 +1,9 @@
+Answer: 113
+
+Reasoning: a regular 24-gon has 12 distinct chord lengths, indexed by step k=1..12. For fixed k the chords form gcd(k,24) cycles of length 24/gcd(k,24); a perfect matching exists only when that length is even (L=2 gives 1, L≥4 gives 2 per cycle). Per-k counts: k=1:2, 2:4, 3:8, 4:16, 5:2, 6:64, 7:2, 8:0 (3-cycles), 9:8, 10:4, 11:2, 12:1 (diameters). Sum = 113. Verified by exact brute-force matching enumeration in Python (same per-k list, total 113).
+
+Sending complete. Next, I'll output the final answer following the format: the last line must be exactly "FINAL: 113".
+
+For each chord step k (1–12), the chords of that length decompose the 24 vertices into gcd(k,24) cycles of length 24/gcd(k,24); perfect matchings exist only for even cycle length, giving 2 per cycle (1 when length 2). Counts: 2, 4, 8, 16, 2, 64, 2, 0, 8, 4, 2, 1 — sum 113, confirmed by exact brute-force enumeration.
+
+FINAL: 113

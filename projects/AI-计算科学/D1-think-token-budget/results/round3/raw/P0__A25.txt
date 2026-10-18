@@ -1,0 +1,24 @@
+Problem: regular 24-gon, count ways to draw 12 equal-length segments so each vertex is an endpoint of exactly one (i.e. a perfect matching whose chords all have the same length).
+
+Solution: chord length is strictly determined by circular distance d ∈ {1..12} (2R·sin(dπ/24), strictly increasing on that range), so all 12 segments must share one distance d. For each d, the distance-d graph on Z/24Z (edges i~i+d) is a 2-regular graph = gcd(24,d) disjoint cycles of length 24/gcd(24,d). Perfect matchings exist iff cycle length is even; an even cycle (L≥4) has exactly 2 perfect matchings (the two alternating edge sets), and L=2 has 1. Per-d counts: d=1:2, d=2:4, d=3:8, d=4:16, d=5:2, d=6:64, d=7:2, d=8:0 (3-cycles), d=9:8, d=10:4, d=11:2, d=12:1 (forced diameters). Sum = 113.
+
+Verified three ways: (1) closed-form component-DP, (2) independent per-cycle edge-case DP, (3) full brute-force recursive counting on the n=6 analog, which matched its formula prediction exactly ({d=1:2, d=3:1}, total 3). Note: an early DP draft double-counted the L=2 case (2^12=4096 for d=12 instead of 1) — fixed; correct total is 113.
+
+FINAL: 113
+
+The message was sent to the parent. Now let's give the final answer with the required FINAL line.
+**Reasoning:**
+
+1. **Equal length ⟹ equal circular distance.** In a regular 24-gon, a chord's length is 2R·sin(dπ/24) where d ∈ {1,…,12} is the circular distance between its endpoints. This is strictly increasing on that range, so all 12 equal segments must share one distance d, and the problem is: count perfect matchings of the 24 vertices using only distance-d chords, summed over d.
+
+2. **Structure of the distance-d graph.** The graph on Z/24Z with edges {i, i+d} is 2-regular, splitting into g=gcd(24,d) disjoint cycles, each of length L = 24/g.
+
+3. **Matchings per cycle.** A cycle has a perfect matching iff L is even. For L ≥ 4 even: exactly 2 (the two alternating edge sets). For L = 2 (a single edge, the d=12 case): exactly 1.
+
+4. **Count per d:** d=1:2, d=2:4, d=3:8, d=4:16, d=5:2, d=6:64, d=7:2, d=8:0 (odd cycles), d=9:8, d=10:4, d=11:2, d=12:1 (forced diameters).
+
+5. **Total:** 2+4+8+16+2+64+2+0+8+4+2+1 = 113.
+
+**Verification:** three independent computations agree — the closed-form, a direct per-cycle DP, and a full brute-force recursive count on the n=6 analog (which matched its own formula prediction exactly: per-d {1:2, 3:1}, total 3).
+
+FINAL: 113

@@ -1,0 +1,11 @@
+P5__A16 subagent=96c05250-0961-4cd5-bd20-53dbe7a113a7
+task: find the sum of all positive integers n such that n+2 divides 3(n+3)(n^2+9)
+key=49
+
+[sent]
+The sum of all positive integers n such that n+2 divides 3(n+3)(n²+9) is 49. (With d=n+2, the product is ≡ 39 mod d, so d | 39; d ∈ {3,13,39} giving n ∈ {1,11,37}, sum = 49.)
+
+[closing]
+Done.
+
+49

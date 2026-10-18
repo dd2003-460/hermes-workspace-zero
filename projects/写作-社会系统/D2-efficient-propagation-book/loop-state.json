@@ -7,11 +7,17 @@
     "revision": "r1"
   },
   "loop_phase": "build",
-  "iteration": 8,
+  "iteration": 9,
   "status": "active",
-  "current_task": "L3 完成(第7-9章全100/100, 我全审过; ch8 引用我线上核验=PSV 2001 PRL 86,3200 arXiv:cond-mat/0010317, 骨架原记错). 下一步: ①L4 第10章(最优播种 Kempe 2003)派发 ②第11章(控制不是触达最多) ③v3 升级仍待 P2 第一个数(成璐 30 人 30 天实验, 人依赖排队). thinking-budget A/B 终判已落盘(m01196④, 改机制提案=自检步骤, 未启动)",
+  "current_task": "L1-L5 全13章完成(第1-13章全100/100). 下一步: ①L6 第14章(书=种子KPI demo)+第15章(资产组合: 课=放大器/社群=R0>1载体)派发 ②v3 定稿前全书级通读 ③v3 升级仍待 P2 第一个数(成璐 30 人 30 天实验, 人依赖排队). 审批 m02225 成璐全部批准: Q1=A然后B(A✓config:264 chenglu; B✓voice量化层并入chenglu persona) / Q2=D2✓(AGENTS.md:302公理层) / Q3=E3. thinking-budget 改机制提案未启动",
   "blocker": null,
   "change_log": [
+    {
+      "time": "2026-10-18",
+      "action": "l4-l5-complete-ch13-delivered-approvals-rotated",
+      "summary": "L4 完成(2/2): ch10 10-最优播种-预算砸向哪类贡献者.md 100/100(0.457/25.3, 9粗体块, Kempe 2003 贪心(1-1/e)+小网络暴力 conf0.7, 四类位成本账 solo 押平台+时机位 conf0.5, 预测贪心几十到几百节点够用判死对拍差距>10% conf0.5); ch11 11-控制不是触达最多.md 100/100(0.34/27.1, 8粗体块, 防御性忽视 conf0.7, R0(C) 拐点 conf0.8 全章最高, 预测拐点之上集中发 7 天留存>分开发之下相反判死之下集中≥分发则因果链断 conf0.5; 首版75 ASCII句号→中文标点100). L5 完成(2/2): ch12 12-内容-信念迁移的最短程序.md 100/100(0.281/21.7, 830字, 理解=压缩 A0 conf0.65, 最短程序≠字数最短, 解释层=函数复合前缀 O(1), 预测换框架vs堆修正完成率≥20pp 判死<5% conf0.5); ch13 13-风格是解码成本参数.md 100/100(0.333/25.1, 839字, 8粗体块, 风格=P3分母参数 conf0.65, 271语料四数(句长39/第一人称0.675/先否定再转折0.3639每千字/空话0)标成璐语料实测, drift-check.py=机械demo conf0.7, 预测高第一人称版7天互动≥低版×1.3判死<1.1× conf0.5, subagent bfe67f4c). git: main ff 到 f4445d4 后 push 成功(远端=f4445d45ee4e17c58e20bb8f49de73ea189888bf, HTTP/1.1). 审批 m02225 成璐全部批准: Q1=A然后B(A✓config:264 chenglu 已激活; B✓voice量化层+drift-check锚点+persona.md单一事实源指针 追加进 config.yaml chenglu persona) / Q2=D2(AGENTS.md:302-314 公理层已追加✓) / Q3=E3(维持现状). APPROVALS 流程模板化(成璐 m02225 定稿): 个人/APPROVALS-TEMPLATE.md(规则写入模板, 编号1/2/3/4+1.1/1.2, 人类回复区 AI 禁写, 轮转=存档个人/history/后从模板重建), 旧文件存档 个人/history/APPROVALS-20261018-r1.md. 行为规则入 AGENTS.md(成璐 m02217 明示): 问题优先(当轮先答+台账 DPA.1/memory/qanda-ledger.md) + 网络规则(web_search 无 API key 禁用, 联网用 ego-browser, web LLM 走 arena 等, subagent 无网由 Lead 代查写文件).",
+      "confidence": 0.9
+    },
     {
       "time": "2026-10-18",
       "action": "l3-complete-ch8-citation-verified-ch10-dispatched",

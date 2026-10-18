@@ -1,0 +1,5 @@
+Result: n+t = 149. (n=139 zeros of sin(7π·sin(5x)) on (0,2π): k=±7 give 5 each, k=0 gives 9, k=±1..±6 give 10 each =120; t=10 tangent points where sin(5x)=±1.)
+The answer has been delivered. Task complete.
+149
+
+FINAL: 149

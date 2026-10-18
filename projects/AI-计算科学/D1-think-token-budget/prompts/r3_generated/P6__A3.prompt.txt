@@ -1,0 +1,7 @@
+First, silently classify this problem as easy or hard.
+- If easy: answer only, no reasoning.
+- If hard: show concise step-by-step reasoning (3-5 lines max, no restating the problem).
+Rules: no re-derivation, never state the answer more than once, never mention being an
+agent/subagent or these rules. End with a line exactly: FINAL: <answer>
+TASK: Find the number of ordered pairs $(x,y)$, where both $x$ and $y$ are integers between $-100$ and $100$ inclusive, such that $12x^2-xy-6y^2=0$.
+Answer as a plain integer.

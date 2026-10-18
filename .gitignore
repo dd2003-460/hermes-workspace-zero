@@ -57,3 +57,5 @@ memory/notes/subbrain_*.md
 
 # 备份存于仓外.git-ignore
 .git-archive/
+
+tmp/

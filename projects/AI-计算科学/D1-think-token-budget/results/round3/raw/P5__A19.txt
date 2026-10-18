@@ -1,0 +1,14 @@
+FINAL: 336
+
+Work: In triangle ABC (A=84°, B=60°, C=36°), D,E,F are side midpoints so the circumcircle of DEF is the nine-point circle. G, H, J (second intersections with BD, AE, AF i.e. sides BC, CA, AB) are exactly the feet of the altitudes from A, B, C.
+
+The six points' central angles on the nine-point circle (in order G,D,E,H,J,F) give the six consecutive minor arcs:
+arc GD = 48°, arc DE = 72°, arc EH = 96°, arc HJ = 24°, arc JF = 48°, arc FG = 72° (sum 360°).
+
+Therefore arc DE + 2·arc HJ + 3·arc FG = 72 + 2·24 + 3·72 = 72 + 48 + 216 = 336.
+
+Verified two independent ways: (1) direct coordinate computation with B=(0,0), C=(sin84°,0); (2) clean unit-circumcircle parametrization (A at 0°, B at 72°, C at 240°, orthocenter H=A+B+C, nine-point center (O+H)/2). Both give the same arc set {48,72,96,24,48,72}.
+
+The result was sent. Next, I'll give the final answer.
+
+FINAL: 336

@@ -1,0 +1,11 @@
+Geometry problem (triangle ABC with angles 84/60/36, D/E/F midpoints, nine-point circle of DEF meets BD,AE,AF at G,H,J; find arc(DE)+2·arc(HJ)+3·arc(FG) in degrees):
+
+ANSWER: 336
+
+Reasoning summary: The circumcircle of DEF is the nine-point circle (radius R/2). G,H,J are the feet of the altitudes from A,B,C respectively (since BD=BC, AE=AC, AF=AB). Cyclic order is E,H,J,F,G,D. Arcs: arc DE = 2C = 72°; arc FG = 72° (FG = AB/2 since F is the midpoint of hypotenuse AB of right triangle AGB); arc HJ = 24° (HJ = a·cosA, giving θ/2 = 180°−2A = 12°). So 72 + 2(24) + 3(72) = 72+48+216 = 336.
+
+The answer has been sent. The result is 336. I'll end with my final line.
+
+**FINAL: 336**
+
+The circumcircle of the medial triangle is the nine-point circle; $G,H,J$ are the altitude feet from $A,B,C$. With arc $DE=72^\circ$, arc $HJ=24^\circ$, arc $FG=72^\circ$: $72+2(24)+3(72)=336$. Result sent to the parent agent.

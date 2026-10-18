@@ -1,0 +1,9 @@
+Result for the 24-gon equal-length matching problem: 113.
+
+Method: the 12 segments must all have the same chord length, i.e., same step k for k=1..12 in Z_24. For each k, the step-k graph decomposes into gcd(24,k) cycles of length 24/gcd(24,k); each even cycle of length ≥4 contributes exactly 2 perfect matchings (a single edge, i.e. the diameter case k=12, contributes 1; odd cycles contribute 0). Per-k counts: k=1:2, k=2:4, k=3:8, k=4:16, k=5:2, k=6:64, k=7:2, k=8:0, k=9:8, k=10:4, k=11:2, k=12:1. Sum = 113. Verified by exhaustive DP over subsets of vertices for each k (with set-based adjacency to avoid the k=12 double-edge artifact).
+
+FINAL: 113
+
+The message was sent. Now, as per the user's request, I should provide the final answer in my own reply: "Answer only. No reasoning, no working, no explanation. End with a line exactly: FINAL: <answer>".
+
+FINAL: 113

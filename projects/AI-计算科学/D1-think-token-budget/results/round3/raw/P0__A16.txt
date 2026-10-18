@@ -1,0 +1,11 @@
+P0__A16 subagent=75246e5a-e8e1-4ea1-ae80-3aba0ae6c633
+task: find the sum of all positive integers n such that n+2 divides 3(n+3)(n^2+9)
+key=49
+
+[sent]
+Result for "sum of all positive integers n such that n+2 divides 3(n+3)(n^2+9)": Let d=n+2; need d | 3(d+1)(d^2-4d+13). Mod d this is ≡ 3·1·13 = 39, so d | 39. With n≥1 ⇒ d≥3, so d∈{3,13,39} ⇒ n∈{1,11,37}. Verified each divides exactly (120/3=40, 5460/13=420, 165360/39=4240). Sum = 1+11+37 = 49. Confirmed computationally (brute force to 5000 gives exactly [1,11,37]). FINAL: 49
+
+[closing]
+Done. Let me give the final answer with the required format.
+
+**FINAL: 49**

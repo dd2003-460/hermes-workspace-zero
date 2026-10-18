@@ -1,0 +1,12 @@
+Result: N = 2304, so N − 2025 = 279. Reasoning: divisibility by 11 forces odd-position digit sum = even-position digit sum = 18 (total 36; ±22 offset impossible). Exactly 8 four-digit subsets of {1..8} sum to 18, and a parity argument shows each contains exactly 2 even digits. Per subset: 4! arrangements in odd positions × (2×3!) arrangements in even positions with last digit even. N = 8 × 24 × 12 = 2304. Verified by brute force over all 40320 permutations (Python, n % 22 == 0). FINAL: 279
+
+Task complete. Answer: 279.
+
+**FINAL: 279**
+
+The result has been sent to the parent agent. Summary of the solution:
+
+1. **Mod 11 constraint:** digit sum = 36 (even), so odd/even position sums must both equal 18.
+2. **8 valid subsets** of 4 digits summing to 18, each containing exactly 2 even digits (proven by parity elimination for k = 0, 1, 3, 4 even digits).
+3. **N = 8 × 24 × 12 = 2304**, confirmed by brute force over all 40320 permutations.
+4. **2304 − 2025 = 279**.

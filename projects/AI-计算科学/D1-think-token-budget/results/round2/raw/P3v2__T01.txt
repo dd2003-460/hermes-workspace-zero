@@ -1,0 +1,6 @@
+Result: 15% of 240 = 36. (0.15 × 240 = 36)
+
+Alright, I'll output the requested format exactly. Since it's a simple task, only 2 lines.
+
+LEVEL: easy
+FINAL: 36

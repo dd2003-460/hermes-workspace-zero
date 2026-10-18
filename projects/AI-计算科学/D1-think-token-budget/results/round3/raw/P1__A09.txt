@@ -1,0 +1,9 @@
+Solved the 3×9 grid counting problem (rows = permutations of 1–9, each 3×3 block contains all 9 digits). Total number of grids = 948109639680 = 2^16 · 3^10 · 5^1 · 7^2. Verified by two independent methods (codeword/structural count and block-fixing with digit symmetry). Therefore p·a+q·b+r·c+s·d = 2·16 + 3·10 + 5·1 + 7·2 = 32+30+5+14 = 81.
+
+FINAL: 81
+
+The task is complete, so I'll provide just the answer.
+
+81
+
+FINAL: 81

@@ -1,0 +1,47 @@
+{
+  "depends_on": [
+    "T04"
+  ],
+  "evidence": [
+    "loop-artifacts/stages/03/r1/artifacts/t06-backtest-design.md",
+    "阈值来源: loop-artifacts/stages/02/r1/research/stability-criteria.md (C4/C5 Mesfin五条/PSR>0.95/arXiv:2608.24786)",
+    "多重检验: loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md §(d) (45=3×3×5, BH-FDR α=0.05, DSR trial-count)",
+    "窗口/regime: t04-signal-spec.md §(c) (regime_locked=true, 5个年度OOS 2021-2025)",
+    "基准/失败模式: loop-artifacts/stages/02/r1/research/public-benchmarks.md (F1-F7)",
+    "arXiv锚点已curl直验HTTP 200 (export.arxiv.org, 2026-10-17): 1912.03270 / 2212.06888 / 2603.19380"
+  ],
+  "execution_mode": "parallel",
+  "id": "03-r1-node-T06",
+  "input_refs": [
+    "loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md",
+    "loop-artifacts/stages/02/r1/research/public-benchmarks.md"
+  ],
+  "instruction": "只执行 DAG 节点 `T06`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+  "node_id": "T06",
+  "orthogonal_key": "backtest-design",
+  "output": "回测设计完成：45检验矩阵(3 regime × 3 funding阈值 × 5年度OOS窗2021-2025, 2022熊强制入OOS)；expanding walk-forward + regime日历锁定(T04 §(c))；失败判据8条全部引自stability-criteria.md(Mesfin五条T≥2.0/≥30笔/扣费净正/方向一致/permutation p<0.001 + PSR>0.95) + T04 §(d)(BH-FDR α=0.05 + DSR trial-count deflation)，未用stage-gate措辞；成本参数引用T05 §成本参数(并行待落盘)不自造；3个arXiv锚点curl直验HTTP 200，期刊文献全部标uncertain ref。",
+  "output_schema": {
+    "failure_criteria": "array",
+    "metrics": "array",
+    "test_matrix_size": "number",
+    "walk_forward": "string",
+    "windows": "array"
+  },
+  "parallel_group_id": "G2",
+  "parent_id": null,
+  "postconditions": [
+    "writes文件非空且含测试矩阵规模计数"
+  ],
+  "preconditions": [
+    "T04已完成"
+  ],
+  "revision": "r1",
+  "schema_version": 1,
+  "stage_id": "03",
+  "status": "completed",
+  "type": "graph_task",
+  "updated_at": "2026-10-17T08:50:32.852990+00:00",
+  "writes": [
+    "loop-artifacts/stages/03/r1/artifacts/t06-backtest-design.md"
+  ]
+}

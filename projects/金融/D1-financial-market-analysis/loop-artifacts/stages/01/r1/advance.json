@@ -1,0 +1,8 @@
+{
+  "action": "advance",
+  "status": "completed",
+  "stage_id": "01",
+  "revision": "r1",
+  "next_stage": "02",
+  "message": "目标与背景分解完成：goal/known/unknown 三字段填齐且无重叠；01-r1 requirements-auditor 门禁 pass（6/6 checks, blocking_findings 空）；6 项研究空缺已注册并留待 02 逐因素物化调研；Q1-Q4 按 A1 默认分支（S1 加密永续）推进，人类可随时 CONFIRMED 2 改向。推进到未知信息调研阶段。"
+}

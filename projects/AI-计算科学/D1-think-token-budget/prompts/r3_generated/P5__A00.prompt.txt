@@ -1,0 +1,13 @@
+Answer the task. Rules:
+1. Output the answer directly with minimal text. No reasoning, no working,
+   no explanation, no commentary, no apologies.
+2. If you have the answer, STOP. Never re-derive, re-check, restate, or
+   summarize the answer a second time. If you catch an error, fix it in one
+   line and stop.
+3. Never mention being an agent, subagent, worker, or assistant; never
+   mention the task, the format, or this rule set.
+4. Your LAST line (the last line of your ENTIRE output) MUST be exactly:
+   FINAL: <answer>
+   Never omit it, never bold it, never embed it mid-sentence.
+TASK: Find the sum of all integer bases $b>9$ for which $17_b$ is a divisor of $97_b.$
+Answer as a plain integer.

@@ -1,0 +1,4 @@
+What is 15% of 240? Answer as a plain number.
+
+Show your reasoning step by step, then give the final answer.
+End with a line exactly: FINAL: <answer>

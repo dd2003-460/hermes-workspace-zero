@@ -1,0 +1,86 @@
+{
+  "attribute": "验证并记录：候选资产类别的公开行情数据历史深度与退市标的覆盖（幸存者偏差规避）",
+  "concept": "研究未知因素：候选资产类别的公开行情数据历史深度与退市标的覆盖（幸存者偏差规避）",
+  "disposition": "research_required",
+  "field": {
+    "attribute": "验证并记录：候选资产类别的公开行情数据历史深度与退市标的覆盖（幸存者偏差规避）",
+    "concept": "研究未知因素：候选资产类别的公开行情数据历史深度与退市标的覆盖（幸存者偏差规避）",
+    "disposition": "research_required",
+    "confidence": 0.55,
+    "evidence_refs": [
+      "https://docs.coinglass.com/reference/getting-started-with-your-api",
+      "https://www.alphavantage.co/documentation/",
+      "https://data.binance.vision/",
+      "https://github.com/binance/binance-public-data"
+    ],
+    "rationale": "加密永续：Coinglass API v4 文档确认提供 Funding Rate History(OHLC)、Price History(OHLC)、Open Interest 历史及显式 Delisted Pairs 接口，Binance 官方免费公共数据门户(data.binance.vision)与 GitHub 官方仓库均确认可访问，交易所原始逐日文件天然含历史退市对，5年OOS窗口(约2021-2026)加密端免费数据充足且可规避幸存者偏差；Binance 永续/funding 具体起始日期未从已抓页面确认(先验2019-08/09)。美股：Alpha Vantage 官方文档确认日线覆盖 25+ 年(自 2000-01)，但免费档仅 outputsize=compact(最近100根)、full 需付费，5年日线回测在免费档不可行；退市覆盖仅确认存在 Listing/Delisting Status 工具接口，其免费档可用性未验证；Stooq(stooq.com/db/)本次访问 403 未获数据。中国A股：Baostock 官网(www.baostock.com)可访问但为 JS 壳页，历史起点(先验1990)与退市股覆盖未获有效文本证据；AkShare/Tushare 本次未验证，免费退市覆盖暂不可确认。综合：5年窗口下加密类免费源可直接采用(首选且可规避幸存者偏差)；美股需另落实免费全历史源(Stooq 待验证)；A股需先落实免费退市覆盖，否则回退交易所原始文件或付费 CSMAR/Wind。待补证据：Binance 永续/funding 起始日期、Bybit/OKX 数据起点、Stooq 历史深度与退市覆盖、Baostock/AkShare 历史起点与退市股覆盖、AV Listing/Delisting 接口免费档可用性。\n[observed_at补录: 子代理a829e197调研落盘时刻, 研究文件观察时间2026-10-17(CST)]",
+    "role": "research_findings",
+    "details": {
+      "crypto_perps": {
+        "binance": {
+          "public_data_portal": "https://data.binance.vision/ (免费, 交易所官方, 页面确认存在; 目录结构/起始日期未抓到, 待补)",
+          "github_repo": "https://github.com/binance/binance-public-data (确认可访问, README正文被截断未抓)",
+          "earliest_start": "未验证(先验 USDT-M 2019-08/09, 待补)"
+        },
+        "bybit_okx": "数据起点未验证",
+        "coinglass": {
+          "docs_url": "https://docs.coinglass.com/reference/getting-started-with-your-api",
+          "api_version": "v4.0",
+          "endpoints_verified": [
+            "Funding Rate History (OHLC)",
+            "Price History (OHLC)",
+            "Open Interest History (OHLC)",
+            "Delisted Pairs",
+            "Long-Short Ratio",
+            "Liquidation History"
+          ],
+          "depth_years": "文档未明确可回看年限, 待补",
+          "delisted_coverage": "有显式 Delisted Pairs 接口 → 可识别已退市交易对, 缓解幸存者偏差"
+        },
+        "survivorship_bias_note": "交易所原始逐日文件(Binance public data)天然含历史在上市/退市对; 聚合商仅返回当前上市列表的接口有幸存者偏差, Coinglass 以 Delisted Pairs 接口缓解"
+      },
+      "us_stocks": {
+        "alphavantage_free": {
+          "docs_url": "https://www.alphavantage.co/documentation/",
+          "depth": "25+ 年 (日内接口 month 参数明确自 2000-01)",
+          "free_tier_limitation": "免费档 TIME_SERIES_DAILY 仅 outputsize=compact(最近100根), outputsize=full 需 premium → 5年日线(~1260根)在免费档不可行",
+          "delisting_endpoint": "存在 Listing/Delisting Status 工具接口(TOC 确认), 免费档可用性未验证"
+        },
+        "stooq": "https://stooq.com/db/ 本次 HTTP 403, 历史深度与退市覆盖未验证",
+        "yahoo_finance": "本次未验证(先验: 含部分已退市代码历史, 需实测, 不作为证据)"
+      },
+      "china_a_stocks": {
+        "baostock": "官网 www.baostock.com 可访问(HTTP 200)但为 JS 壳页, 无有效文本; 历史起点(先验1990)与退市股覆盖未获证据",
+        "akshare_tushare": "未验证",
+        "paid_alternatives": "CSMAR/Wind 付费; 免费退市覆盖待落实, 备选交易所原始逐日文件"
+      },
+      "five_year_window_impact": {
+        "crypto": "免费源可直接支撑 5年 OOS 且可规避幸存者偏差(首选)",
+        "us": "AV 免费档不足(仅100根), 需 Stooq 等免费全历史源验证后方可支撑",
+        "a_share": "免费退市覆盖未证实, 需补证据或改用交易所原始文件/付费源"
+      }
+    },
+    "observed_at": "2026-10-16T17:39:00Z"
+  },
+  "flow_only": false,
+  "id": "02-r1-field-field-bf9c402578",
+  "input_refs": [
+    "loop-artifacts/stages/02/r1/fields.json"
+  ],
+  "instruction": "只处理字段 `研究未知因素：候选资产类别的公开行情数据历史深度与退市标的覆盖（幸存者偏差规避）`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/02/r1/tasks/02-r1-field-field-bf9c402578.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+  "output_schema": {
+    "attribute": "string",
+    "concept": "研究未知因素：候选资产类别的公开行情数据历史深度与退市标的覆盖（幸存者偏差规避）",
+    "confidence": "number 0..1",
+    "disposition": "confirmed|inferred|assumed_default|research_required",
+    "evidence_refs": "array[string]",
+    "rationale": "string",
+    "role": "string"
+  },
+  "revision": "r1",
+  "role": "research_findings",
+  "schema_version": 1,
+  "stage_id": "02",
+  "status": "ready",
+  "type": "field_task"
+}

@@ -1,0 +1,5 @@
+Result: 185 ways. (Complement: C(12,3)=220 total minus C(7,3)=35 all-blue = 185 with at least one red.)
+
+Done. The answer is 185, sent to parent.
+
+Done.

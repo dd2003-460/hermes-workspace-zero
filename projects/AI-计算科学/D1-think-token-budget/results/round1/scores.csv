@@ -1,0 +1,9 @@
+cond,task,cat,diff,correct,fmt,chars,toks_est
+P0,T01,arith,easy,True,True,182,46
+P0,T09,combinatorics,hard,True,True,754,188
+P1,T01,arith,easy,True,True,108,27
+P1,T09,combinatorics,hard,True,True,74,18
+P2,T01,arith,easy,True,True,74,18
+P2,T09,combinatorics,hard,True,True,249,62
+P3,T01,arith,easy,True,False,74,18
+P3,T09,combinatorics,hard,True,False,1207,302

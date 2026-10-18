@@ -19,66 +19,34 @@
 | 工具 | 适用场景 | 调用方式 |
 |------|----------|----------|
 | `ralph prompt-first web-llm` | 快速核验事实、获取线索 | `ralph prompt-first web-llm . "问题" --context "阶段 02"` |
-| `ego-browser` | 需要登录状态、反爬绕过、动态渲染页面 | `ego-browser nodejs <<'EOF' ... EOF` |
-| 浏览器工具（Hermes） | 需要视觉验证、复杂交互 | `browser_navigate` + `browser_snapshot` |
+| `ego-browser` | 需要登录状态、反爬绕过、动态渲染页面、网页 LLM 交叉验证 | `ego-browser nodejs <<'EOF' ... EOF` |
 | `curl`/`wget` | 直接获取 API 或静态页面 | 终端命令 |
 
-### ego-browser Skill 索引
+### ego-browser 用法（单通道，驱动用户已登录的 ego-lite）
 
-**何时使用 ego-browser：**
-- 需要用户登录状态的网站（如 Amazon、京东）
-- 有反爬机制的网站（需要 Cookie/Session 维持）
-- 动态渲染的页面（SPA、React/Vue 应用）
-- 需要视觉验证的场景（截图确认）
+网页 LLM 交叉验证、登录态页面、动态渲染页面**一律走 ego-browser**，不用任何无头/非持久浏览器。全局规则与站点清单见 `AGENTS.md` §网页 LLM 交叉验证流程。
 
-**基本用法：**
 ```bash
-# 检查 ego-browser 是否可用
-command -v ego-browser
-
-# 基本搜索
 ego-browser nodejs <<'EOF'
-const task = await useOrCreateTaskSpace('search-task')
-await openOrReuseTab('https://www.google.com/search?q=Basel+problem+zeta(2)')
-cliLog(await snapshotText())
-EOF
-
-# 完成 task space
-ego-browser nodejs <<'EOF'
-const task = await useOrCreateTaskSpace('search-task')
-await completeTaskSpace(task.id, { keep: false })
-EOF
-
-# 视觉工作流（截图分析）
-ego-browser nodejs <<'EOF'
-const task = await useOrCreateTaskSpace('visual-task')
-await openOrReuseTab('https://example.com')
-const screenshot = await captureScreenshot()
-// 使用 vision 工具分析截图
+const task = await taskSpace('my-task')        // 同名 space 可复用
+const p1 = task.page('p1')
+await p1.goto('https://example.com')
+const s = await p1.snapshot()                  // 定位: @N ref / loc=css: / loc=role: / text= / xpath=
+// await p1.fill('text=输入框', '内容')
+// await p1.click('@3')
+// await p1.waitForFunction(() => document.body.innerText.includes('完成'), { timeout: 60000 })
+const reply = await p1.snapshot()
+console.log(reply)
+await task.finish({ keep: [] })                // 结束前必须 finish，否则留僵尸进程
 EOF
 ```
 
 **关键注意事项：**
-- `@N` refs 只在最近的 `snapshotText()` 调用中有效
-- `js()` 返回的是评估结果，不是 JSON 字符串
-- `cliLog()` 是 heredoc 中唯一的输出机制
-- 每次 heredoc 执行后 Node.js 运行时退出，状态不保留
-- 必须调用 `completeTaskSpace()` 关闭 task space
-
-### 浏览器工具（Hermes 内置）
-
-**何时使用 Hermes 浏览器工具：**
-- 需要与网页交互（点击、填写表单）
-- 需要 JavaScript 执行环境
-- 需要控制台输出调试
-
-**基本用法：**
-```
-browser_navigate("https://example.com")
-browser_snapshot()  # 获取页面结构
-browser_click("@ref_id")  # 点击元素
-browser_type("@ref_id", "text")  # 输入文本
-```
+- 选择器：快照 ref `@N`、`loc=css:`、`loc=role:`、`text=`、`xpath=`
+- 等待：`waitForURL` / `waitForSelector` / `waitForFunction` / `waitForTimeout`
+- 每次 heredoc 是独立 Node 运行时，跨次状态不保留；靠同名 `taskSpace` 复用浏览器会话
+- 结束前必须 `task.finish({ keep: [] })`
+- 不要用 Playwright 方法，不要另开浏览器实例
 
 ## Reviewer 质检标准
 

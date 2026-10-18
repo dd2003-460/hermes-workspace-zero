@@ -1,0 +1,89 @@
+{
+  "fields": [
+    {
+      "concept": "goal",
+      "role": "primary_objective",
+      "attribute": "financial_market_data_research_prototype_and_ralph_trial_run",
+      "disposition": "confirmed",
+      "rationale": "双目标：(1)建立金融市场数据分析与预测研究原型——基于严格当时可得数据原则，构建可复现的信号回测流水线，用走步滚动样本外检验跨市场状态评估信号稳定性，交付可复现回测流水线+走步OOS报告+预注册稳定性判据+claim ledger；(2)完成 RALPH 六阶段契约门禁+并行 subagent 执行流程的试运行验证。目标范围显式覆盖全部已知约束（见 details.includes_known）与全部待研究因素（见 details.includes_unknown）。",
+      "evidence_refs": [
+        "loop-state.json",
+        "loop-artifacts/contracts/task-spec.json",
+        "loop-artifacts/contracts/01-r1-stage-input-package.json"
+      ],
+      "confidence": 1.0,
+      "impact": "material",
+      "reversible": false,
+      "details": {
+        "objective": "建立金融市场数据分析与预测研究原型：基于严格当时可得数据原则（point-in-time），构建可复现的信号回测流水线，采用走步滚动样本外检验跨市场状态评估信号稳定性；同时完成 RALPH 六阶段契约门禁与并行 subagent 执行流程的试运行。",
+        "includes_known": [
+          "回测严格只使用当时可得数据（point-in-time）",
+          "滚动/走步样本外验证 + 明确训练/验证/测试时间边界",
+          "必须设基准模型、交易成本与不确定性量化",
+          "「稳定一段时间」须在回测前预注册为可量化判据",
+          "绝不承诺盈利；研究用途不构成投资建议",
+          "关键结论交叉验证走 claim ledger 机制（web LLM）",
+          "数据限免费/开源、跨平台、单人可维护（性价比优先）"
+        ],
+        "includes_unknown": [
+          "候选资产类别的公开行情数据历史深度与退市标的覆盖（幸存者偏差规避）",
+          "可得数据跨度能否覆盖牛市、熊市与震荡市状态",
+          "稳定性检验判据的时间窗口数量与通过阈值的具体定义",
+          "资金费率/OI 等替代交易信号的发布时刻与更新频率（交易时点是否已发布）",
+          "金融数据的修订与迟报机制（样本是否混入未来信息）",
+          "同类时间戳信号回测的公开研究基准与常见失败模式"
+        ]
+      }
+    },
+    {
+      "concept": "known",
+      "role": "baseline_knowledge",
+      "attribute": "confirmed_constraints_and_default_preferences",
+      "disposition": "confirmed",
+      "rationale": "任务文本逐条确认的约束（point-in-time/走步OOS/时间边界/基准/成本/不确定性/预注册稳定性/不承诺盈利/claim ledger/研究用途声明）+ AGENTS.md 默认决策画像（免费开源优先、跨平台、单人可维护、GitHub、异步远程）。全部为任务输入直接确定，无推断成分。",
+      "evidence_refs": [
+        "loop-artifacts/contracts/task-spec.json",
+        "/Users/a1-6/Desktop/workspace/AGENTS.md"
+      ],
+      "confidence": 1.0,
+      "impact": "material",
+      "reversible": false
+    },
+    {
+      "concept": "unknown",
+      "role": "research_gaps",
+      "attribute": "候选资产类别的公开行情数据历史深度与退市标的覆盖（幸存者偏差规避）；可得数据跨度能否覆盖牛市、熊市与震荡市状态；稳定性检验判据的时间窗口数量与通过阈值的具体定义；资金费率/OI 等替代交易信号的发布时刻与更新频率（交易时点是否已发布）；金融数据的修订与迟报机制（样本是否混入未来信息）；同类时间戳信号回测的公开研究基准与常见失败模式",
+      "disposition": "research_required",
+      "rationale": "六项研究空缺已在 task-spec 的 attribute_matrix(needs_research) 与 open_questions 中注册；本阶段不研究，留待 02 按分号拆分逐因素调研（02 物化规则：每因素一个 research 字段任务）。其中资产类别分支（S1 加密永续为默认）与稳定性判据细节属决策改变项，按 A1 默认分支推进、人类可随时 CONFIRMED 2 改向。",
+      "evidence_refs": [
+        "loop-artifacts/contracts/task-spec.json",
+        "loop-artifacts/contracts/01-r1-stage-input-package.json"
+      ],
+      "confidence": 0.6,
+      "impact": "material",
+      "reversible": true,
+      "research_queue": [
+        {
+          "priority": 1,
+          "topic": "Binance 永续 klines/funding/OI 历史深度 + akshare 退市股覆盖 + yfinance restatement 机制",
+          "search_terms": ["binance funding rate history length", "akshare 退市股票 数据", "yfinance restatement adjustment"]
+        },
+        {
+          "priority": 1,
+          "topic": "回测跨度覆盖牛熊震荡三状态的数据可得性",
+          "search_terms": ["crypto 5 year bull bear regime data", "A股 牛熊 区间 数据 可得性"]
+        },
+        {
+          "priority": 2,
+          "topic": "资金费率/OI 发布时间戳与更新频率",
+          "search_terms": ["binance funding rate schedule 8h", "open interest update frequency api"]
+        },
+        {
+          "priority": 2,
+          "topic": "同类时间戳信号回测公开基准与失败模式",
+          "search_terms": ["point-in-time backtest survivorship bias paper", "funding rate strategy backtest results"]
+        }
+      ]
+    }
+  ]
+}

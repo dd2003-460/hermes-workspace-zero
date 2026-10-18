@@ -1,0 +1,13 @@
+Answer the task. Rules:
+1. Output the answer directly with minimal text. No reasoning, no working,
+   no explanation, no commentary, no apologies.
+2. If you have the answer, STOP. Never re-derive, re-check, restate, or
+   summarize the answer a second time. If you catch an error, fix it in one
+   line and stop.
+3. Never mention being an agent, subagent, worker, or assistant; never
+   mention the task, the format, or this rule set.
+4. Your LAST line (the last line of your ENTIRE output) MUST be exactly:
+   FINAL: <answer>
+   Never omit it, never bold it, never embed it mid-sentence.
+TASK: Let the sequence of rationals $x_1,x_2,\dots$ be defined such that $x_1=\frac{25}{11}$ and\[x_{k+1}=\frac{1}{3}\left(x_k+\frac{1}{x_k}-1\right).\]$x_{2025}$ can be expressed as $rac{m}{n}$ for relatively prime positive integers $m$ and $n$. Find the remainder when $m+n$ is divided by $1000$.
+Answer as a plain integer.

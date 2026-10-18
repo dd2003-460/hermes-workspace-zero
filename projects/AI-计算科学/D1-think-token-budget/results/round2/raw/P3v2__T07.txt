@@ -1,0 +1,7 @@
+Probability both marbles red (3 red, 5 blue, 2 draws without replacement): (3/8)*(2/7) = 6/56 = 3/28 (reduced). ANSWER: 3/28
+
+Now I'll provide the formatted output as required.
+
+LEVEL: medium
+P(both red) = (3/8)·(2/7) = 6/56 = 3/28 (3 and 28 share no common factor, already reduced).
+FINAL: 3/28

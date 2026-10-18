@@ -1,0 +1,6 @@
+Result: 360 has 24 positive integer divisors. 360 = 2^3 × 3^2 × 5^1, so (3+1)(2+1)(1+1) = 24.
+
+Since I'm a sub-agent, my reply will be shown to the user. I should output the requested format, i.e., the two lines for easy level.
+
+LEVEL: easy
+FINAL: 24

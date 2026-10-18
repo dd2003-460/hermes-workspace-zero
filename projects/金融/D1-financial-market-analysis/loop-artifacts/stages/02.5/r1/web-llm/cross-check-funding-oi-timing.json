@@ -1,0 +1,36 @@
+{
+  "kind": "ralph_web_llm_cross_check",
+  "schema_version": 1,
+  "field_concept": "研究未知因素：资金费率/OI 等替代交易信号的发布时刻与更新频率（交易时点是否已发布）",
+  "claim": "【Claim 3 - funding rate/OI 的PIT时点语义】\n1) 回测在时刻t只能使用已结算的funding rate(结算时间戳<=t), 当前周期预测值不可混用; 结算间隔默认8小时但可逐symbol不同;\n2) OI bar 需 bar_start+bar_duration<=t 且加延迟缓冲(极端行情下交易所快照有延迟, Bybit官方文档有警示);\n3) Binance免费API的OI历史数据只有最近30天(官方SDK文档原文 \"Only the data of the latest 30 days is available\"); 因此5年免费OI历史只能从Bybit获取(至symbol上线日);\n4) 时间戳单位必须归一化: Coinglass用秒, 交易所API用毫秒。",
+  "submitted_at": "2026-10-17T13:00:00+08:00",
+  "observed_at": "2026-10-17T13:10:00+08:00",
+  "timezone": "Asia/Shanghai",
+  "transport": "ego-browser 0.5.1.13 (ego-lite persistent logged-in session; taskSpace web-llm-02.5-20261017)",
+  "responses": [
+    {
+      "provider_id": "deepseek",
+      "endpoint_host": "chat.deepseek.com",
+      "status": "success",
+      "conversation_url": "https://chat.deepseek.com/a/chat/s/338ebad0-e49f-4c4c-ac7c-af0407bc515f",
+      "verdict": "部分正确",
+      "key_points": "点1/2对(PIT语义, t_available=max(bar_end,published,received)+δ, 只用已结算fundingRate); 点3前半(Binance免费OI仅30天)对, 后半\"只能Bybit\"被驳(Bybit亦有窗口/频率限制且不一定回上线日, 其他源存在); 点4单位\"Coinglass秒/交易所毫秒\"过度概括→逐字段核验。",
+      "raw_ref": "loop-artifacts/stages/02.5/r1/web-llm-raw/deepseek-raw.txt"
+    },
+    {
+      "provider_id": "chatgpt",
+      "endpoint_host": "chatgpt.com",
+      "status": "success",
+      "conversation_url": "https://chatgpt.com/c/6ad302ee-3b50-83ee-a25d-944d1333987a",
+      "verdict": "部分正确",
+      "key_points": "PIT语义确认; 免费5年OI\"只能Bybit\"表述错误→Bybit同样有窗口限制; 单位归一化必须逐源逐字段。",
+      "raw_ref": "loop-artifacts/stages/02.5/r1/web-llm-raw/chatgpt-raw.txt"
+    }
+  ],
+  "successful_provider_ids": [
+    "deepseek",
+    "chatgpt"
+  ],
+  "contradictions_recorded": true,
+  "contradiction_notes": "\"仅Bybit可得5年免费OI\"被两站独立驳回→OI三选项决策点(放弃/短窗口/$29mo)路由03; PIT核心语义双方确认。"
+}

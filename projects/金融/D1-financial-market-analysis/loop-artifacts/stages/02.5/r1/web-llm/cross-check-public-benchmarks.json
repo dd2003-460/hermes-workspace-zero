@@ -1,0 +1,36 @@
+{
+  "kind": "ralph_web_llm_cross_check",
+  "schema_version": 1,
+  "field_concept": "研究未知因素：同类时间戳信号回测的公开研究基准与常见失败模式",
+  "claim": "【Claim 4 - 公开基准/研究缺口】\n1) 截至2026-10, 未找到以funding rate作为市场状态/择时信号主标的的已发表回测研究; 最接近的两项: arXiv:1912.03270(2019, funding rate可预测性实证+GARCH) 和 arXiv:2212.06888(永续期约定价含交易成本的定价边界, He/Manela/Ross/von Wachter);\n2) 回测失败模式经典文献(Bailey & López de Prado 2013/2014 Deflated Sharpe; Harvey-Liu-Zhu 2016 t>3.0; White 2000 reality check; Hamilton 1989 regime switching; Lo-Mamaysky-Wang 2000; McLean-Pontiff 2016; Hou-Xue-Zhang 2015; López de Prado 2018)全部在期刊/书籍中, 无arXiv全文;\n3) 加密资产端的幸存者偏差量化和清算级联量化是公开缺口(唯一已核验的幸存者偏差量化研究是股票指数场景, arXiv:2603.19380, 4.94个百分点/23.3%的影响)。",
+  "submitted_at": "2026-10-17T13:00:00+08:00",
+  "observed_at": "2026-10-17T13:10:00+08:00",
+  "timezone": "Asia/Shanghai",
+  "transport": "ego-browser 0.5.1.13 (ego-lite persistent logged-in session; taskSpace web-llm-02.5-20261017)",
+  "responses": [
+    {
+      "provider_id": "deepseek",
+      "endpoint_host": "chat.deepseek.com",
+      "status": "success",
+      "conversation_url": "https://chat.deepseek.com/a/chat/s/338ebad0-e49f-4c4c-ac7c-af0407bc515f",
+      "verdict": "部分正确",
+      "key_points": "负检索声明无法核验且过强; funding rate信号存在从业者/working paper; \"全部无arXiv全文\"以偏概全; 2603.19380无法核验(疑LLM知识截止)。",
+      "raw_ref": "loop-artifacts/stages/02.5/r1/web-llm-raw/deepseek-raw.txt"
+    },
+    {
+      "provider_id": "chatgpt",
+      "endpoint_host": "chatgpt.com",
+      "status": "success",
+      "conversation_url": "https://chatgpt.com/c/6ad302ee-3b50-83ee-a25d-944d1333987a",
+      "verdict": "部分正确",
+      "key_points": "方向有价值但\"未找到\"≠\"不存在\"; 绝对表述(\"无公开研究\"\"全部无arXiv全文\"\"唯一已核验\")均缺充分依据; 缺口定义须改为可核验negative search协议。",
+      "raw_ref": "loop-artifacts/stages/02.5/r1/web-llm-raw/chatgpt-raw.txt"
+    }
+  ],
+  "successful_provider_ids": [
+    "deepseek",
+    "chatgpt"
+  ],
+  "contradictions_recorded": true,
+  "contradiction_notes": "缺口真实性双方确认; \"不存在\"→\"公开检索未找到(2026-10, 双LLM+直验)\"; 2603.19380(4.94pp/23.3%)我方export.arxiv.org直验成立, LLM知识截止, 矛盾以直验解决; 03须建可操作negative search协议。"
+}

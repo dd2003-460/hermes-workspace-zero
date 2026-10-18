@@ -1,0 +1,56 @@
+{
+  "attribute": "验证并记录：同类时间戳信号回测的公开研究基准与常见失败模式",
+  "concept": "研究未知因素：同类时间戳信号回测的公开研究基准与常见失败模式",
+  "disposition": "research_required",
+  "field": {
+    "attribute": "验证并记录：同类时间戳信号回测的公开研究基准与常见失败模式",
+    "concept": "研究未知因素：同类时间戳信号回测的公开研究基准与常见失败模式",
+    "confidence": 0.68,
+    "disposition": "confirmed",
+    "evidence_refs": [
+      "https://arxiv.org/abs/1912.03270",
+      "https://arxiv.org/abs/2212.06888",
+      "https://arxiv.org/abs/2506.08573",
+      "https://arxiv.org/abs/2310.14973",
+      "https://arxiv.org/abs/2501.09404",
+      "https://arxiv.org/abs/1809.05961",
+      "https://arxiv.org/abs/1904.00890",
+      "https://arxiv.org/abs/2112.15321",
+      "https://arxiv.org/abs/2307.06400",
+      "https://arxiv.org/abs/2209.05559",
+      "https://arxiv.org/abs/2609.20554",
+      "https://arxiv.org/abs/2607.04958",
+      "https://arxiv.org/abs/2603.19380",
+      "https://arxiv.org/abs/2601.10812",
+      "https://arxiv.org/abs/2605.05089",
+      "https://arxiv.org/abs/2602.11708",
+      "https://arxiv.org/abs/1905.05023",
+      "https://arxiv.org/abs/2209.13623",
+      "https://arxiv.org/abs/2309.06711"
+    ],
+    "rationale": "阶段 02 字段调研完成（观察日期 2026-10-17，web_search 不可用，主通道 = arXiv HTML 搜索 + curl 直取 abs 页）。Q1 公开基准与 Q2 失败模式均取得公开一手来源：前 13 个 evidence_refs 的 arXiv abs 页已直接抓取验证（全部 HTTP 200，5 要素完整记录）；后 6 个为列表级引用（ID/标题/日期来自 arXiv 官方搜索页，abs 未抓取）。完整记录: research/public-benchmarks.md。核心结论: (1) 'funding rate 作为市场状态/择时信号的已发表回测'未找到——本项目属填补缺口，对标基线需自建朴素基准（buy&hold/动量/趋势）+ 引用 arXiv:1912.03270（funding 可预测性实证）、arXiv:2212.06888（永续定价/基差理论）、arXiv:1904.00890（crypto 动量）等公开锚；(2) 失败模式均有已验证出处：look-ahead（arXiv:2607.04958、2609.20554）、幸存者偏差量化（arXiv:2603.19380：高估年化 4.94pp/23.3%）、过拟合/数据窥探（crypto 专属 arXiv:2209.05559）、制度切换（arXiv:2112.15321、2307.06400）、成本边界（arXiv:2212.06888 含成本定价边界框架）；(3) 待补证据（confidence 未更高的原因）: 期刊经典文献（Bailey 2013/2014、Harvey-Liu-Zhu 2016 JF、White 2000、Hamilton 1989、Jegadeesh-Titman 1993、Lo-Mamaysky-Wang 2000、Koijen et al. 2018 JFE、McLean-Pontiff 2016、Hou-Xue-Zhang 2015、López de Prado 2018 书）均为未核验领域知识——ssrn.com 沙箱不可达（curl 000）无法 URL 核验，待 02.5 交叉验证补；crypto 端幸存者/清算级联量化文献为公开缺口；Binance USDT-M 费率未核验（developers.binance.com 不可达）。另: 记忆中 Bailey 2013 的 arXiv ID 1308.3655 经验证是错误 ID（实为粒子物理论文），未引用。",
+    "role": "research_findings",
+    "observed_at": "2026-10-16T19:09:00Z"
+  },
+  "flow_only": false,
+  "id": "02-r1-field-field-8ece8db60a",
+  "input_refs": [
+    "loop-artifacts/stages/02/r1/fields.json"
+  ],
+  "instruction": "只处理字段 `研究未知因素：同类时间戳信号回测的公开研究基准与常见失败模式`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/02/r1/tasks/02-r1-field-field-8ece8db60a.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+  "output_schema": {
+    "attribute": "string",
+    "concept": "研究未知因素：同类时间戳信号回测的公开研究基准与常见失败模式",
+    "confidence": "number 0..1",
+    "disposition": "confirmed|inferred|assumed_default|research_required",
+    "evidence_refs": "array[string]",
+    "rationale": "string",
+    "role": "string"
+  },
+  "revision": "r1",
+  "role": "research_findings",
+  "schema_version": 1,
+  "stage_id": "02",
+  "status": "ready",
+  "type": "field_task"
+}

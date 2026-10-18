@@ -1,0 +1,4 @@
+In how many ways can 10 identical candies be distributed among 3 distinct children (a child may get zero)? Answer as a plain number.
+
+Show your reasoning step by step, then give the final answer.
+End with a line exactly: FINAL: <answer>

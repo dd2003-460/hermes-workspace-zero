@@ -1,0 +1,15 @@
+Result: The 50th term of the arithmetic sequence 3, 7, 11, 15, ... is 199.
+Reasoning: a₁ = 3, common difference d = 4. Formula aₙ = a₁ + (n−1)·d gives a₅₀ = 3 + 49·4 = 3 + 196 = 199. Verified against given terms (a₂ = 7, a₃ = 11).
+FINAL: 199
+
+The message was delivered. Now I just need to present the final answer as the final line of my response.
+
+**Reasoning summary:**
+1. Sequence 3, 7, 11, 15, ... has constant difference d = 4 → arithmetic sequence with a₁ = 3.
+2. Formula: aₙ = a₁ + (n−1)·d
+3. a₅₀ = 3 + 49·4 = 3 + 196 = 199
+4. Sanity check: formula reproduces given terms (a₂ = 7, a₃ = 11). ✓
+
+Result sent to parent agent.
+
+FINAL: 199

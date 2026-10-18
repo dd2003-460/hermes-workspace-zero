@@ -1,0 +1,5 @@
+Result: 96. Number of ways to place 3 non-attacking rooks on a 4x4 board = C(4,3)·C(4,3)·3! = 4·4·6 = 96. (Choose 3 rows, 3 columns, then bijection between them.)
+
+Task complete. I answered the problem, showed the step-by-step reasoning, ended with "FINAL: 96", and sent the result to the parent agent. No further work is needed.
+
+Answer delivered and result sent to the parent agent: **96**.

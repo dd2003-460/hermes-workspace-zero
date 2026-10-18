@@ -1,0 +1,5 @@
+Result: 70. Bases b>9 where 17_b divides 97_b: b+7 | 9b+7 ⟹ b+7 | 56, giving b ∈ {21, 49}; sum = 70.
+
+I've already provided the answer and sent the message to the parent. Done.
+
+FINAL: 70

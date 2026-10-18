@@ -1,0 +1,4 @@
+How many positive integer divisors does 360 have? Answer as a plain number.
+
+Show your reasoning step by step, then give the final answer.
+End with a line exactly: FINAL: <answer>

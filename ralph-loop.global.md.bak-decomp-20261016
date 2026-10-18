@@ -1,0 +1,10 @@
+---
+active: true
+iteration: 1
+session_id: f86dc71a-42d9-47e0-b863-b8931f32ffb2
+max_iterations: 0
+completion_promise: null
+started_at: "2026-10-15T08:02:55Z"
+---
+
+decomp 总目标循环。工作目录: /Users/a1-6/Desktop/workspace/projects/decomp。每轮固定流程: ① 读 README.md 的「总目标与总计划（2026-10-15）」节 + tasks/state.md（台账，最新在上）确认当前阶段与下一步

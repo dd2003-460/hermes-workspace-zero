@@ -1,0 +1,10 @@
+Result: sum of three consecutive odd integers = 111, largest = 39 (3n = 111 → n = 37 → largest 39).
+
+LEVEL: medium
+FINAL: 39
+
+The task is complete. Let me give the final output in the required format.
+
+LEVEL: medium
+Three consecutive odd integers (n-2, n, n+2) sum to 3n = 111, so n = 37 and the largest is n+2 = 39.
+FINAL: 39

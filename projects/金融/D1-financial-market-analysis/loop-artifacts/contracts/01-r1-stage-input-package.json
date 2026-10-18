@@ -8,27 +8,12 @@
     {
       "kind": "human_input",
       "source": "UserPromptSubmit",
-      "text": "RALPH 流程试运行：建立一个金融市场数据分析与预测研究原型。先严格读取 loop-state.json、当前阶段契约和任务卡，只做当前阶段，不能跳步。核心目标：研究信息泄露、数据发布时间/修订、幸存者偏差、选择偏差、滚动窗口与特征泄露；同时研究资金博弈、拥挤度、仓位、流动性、资金费率或公开可获得的同类时间戳信号。任何模型与回测都必须仅使用当时可得数据，采用滚动/走步样本外验证、明确训练/验证/测试时间边界、基准模型、交易成本和不确定性；把“稳定一段时间”定义为预先注册的连续样本外窗口指标，绝不承诺盈利或保证预测成功。先主动补全资产类别、频率、持有期、数据源与评价指标；若缺失，列出场景分支和可追溯假设，不使用未来数据。后续阶段在允许时使用网页检索与可用网页 LLM 做独立交叉校验；只发送非敏感、必要的摘要，任何外部事实进入 claim ledger 后才能使用。收到审计或网页校验反馈后修改相应产物并重新验证。研究用途，不构成投资建议。"
-    },
-    {
-      "kind": "human_input",
-      "source": "UserPromptSubmit",
       "text": "读取 loop-state.json、loop-artifacts/contracts/task-spec.json 与当前阶段契约，从当前阶段继续。严格按 RALPH 阶段、批准任务卡和 Hook 反馈执行：先完成当前阶段所需的子代理派发与审计；不得跳步、不得绕过验证、不得改业务文件。网页 LLM 校验只在阶段允许后执行，并把反馈写成可审计证据。"
     },
     {
       "kind": "human_input",
       "source": "UserPromptSubmit",
       "text": "只执行当前 01-r1，不写业务文件、不输出阶段结果。先用 Read 读取 loop-state.json 与 loop-artifacts/contracts/01-r1-stage-contract.md；随后必须调用 Agent，并让 Agent prompt 的第一行严格为：RALPH_TASK_CARD=loop-artifacts/task-cards/01-r1-requirements-auditor.md。子代理只按该任务卡审计。等待其完成后，报告审计结果；不要跳到 02，也不要虚构完成。"
-    },
-    {
-      "kind": "human_input",
-      "source": "UserPromptSubmit",
-      "text": "现在立即调用 Agent；不要再读取、不要解释。Agent prompt 第一行必须严格为 RALPH_TASK_CARD=loop-artifacts/task-cards/01-r1-requirements-auditor.md，并只执行该卡。"
-    },
-    {
-      "kind": "human_input",
-      "source": "UserPromptSubmit",
-      "text": "RALPH 流程试运行：建立一个金融市场数据分析与预测研究原型。先严格读取 loop-state.json、当前阶段契约和任务卡，只做当前阶段，不能跳步。核心目标：研究信息泄露、数据发布时间/修订、幸存者偏差、选择偏差、滚动窗口与特征泄露；同时研究资金博弈、拥挤度、仓位、流动性、资金费率或公开可获得的同类时间戳信号。任何模型与回测都必须仅使用当时可得数据，采用滚动/走步样本外验证、明确训练/验证/测试时间边界、基准模型、交易成本和不确定性；把“稳定一段时间”定义为预先注册的连续样本外窗口指标，绝不承诺盈利或保证预测成功。先主动补全资产类别、频率、持有期、数据源与评价指标；若缺失，列出场景分支和可追溯假设，不使用未来数据。后续阶段在允许时使用网页检索与可用网页 LLM 做独立交叉校验；只发送非敏感、必要的摘要，任何外部事实进入 claim ledger 后才能使用。收到审计或网页校验反馈后修改相应产物并重新验证。研究用途，不构成投资建议。"
     }
   ],
   "context_mode": "bounded_artifacts",
@@ -66,52 +51,96 @@
       "revision": "r1"
     },
     "task_spec": {
-      "assumptions": [],
-      "attribute_matrix": [],
-      "authoritative_inputs": [
-        {
-          "kind": "initial_task",
-          "source": "ralph run",
-          "text": "RALPH 流程试运行：建立一个金融市场数据分析与预测研究原型。先严格读取 loop-state.json、当前阶段契约和任务卡，只做当前阶段，不能跳步。核心目标：研究信息泄露、数据发布时间/修订、幸存者偏差、选择偏差、滚动窗口与特征泄露；同时研究资金博弈、拥挤度、仓位、流动性、资金费率或公开可获得的同类时间戳信号。任何模型与回测都必须仅使用当时可得数据，采用滚动/走步样本外验证、明确训练/验证/测试时间边界、基准模型、交易成本和不确定性；把“稳定一段时间”定义为预先注册的连续样本外窗口指标，绝不承诺盈利或保证预测成功。先主动补全资产类别、频率、持有期、数据源与评价指标；若缺失，列出场景分支和可追溯假设，不使用未来数据。后续阶段在允许时使用网页检索与可用网页 LLM 做独立交叉校验；只发送非敏感、必要的摘要，任何外部事实进入 claim ledger 后才能使用。收到审计或网页校验反馈后修改相应产物并重新验证。研究用途，不构成投资建议。"
-        },
-        {
-          "kind": "human_input",
-          "source": "UserPromptSubmit",
-          "text": "RALPH 流程试运行：建立一个金融市场数据分析与预测研究原型。先严格读取 loop-state.json、当前阶段契约和任务卡，只做当前阶段，不能跳步。核心目标：研究信息泄露、数据发布时间/修订、幸存者偏差、选择偏差、滚动窗口与特征泄露；同时研究资金博弈、拥挤度、仓位、流动性、资金费率或公开可获得的同类时间戳信号。任何模型与回测都必须仅使用当时可得数据，采用滚动/走步样本外验证、明确训练/验证/测试时间边界、基准模型、交易成本和不确定性；把“稳定一段时间”定义为预先注册的连续样本外窗口指标，绝不承诺盈利或保证预测成功。先主动补全资产类别、频率、持有期、数据源与评价指标；若缺失，列出场景分支和可追溯假设，不使用未来数据。后续阶段在允许时使用网页检索与可用网页 LLM 做独立交叉校验；只发送非敏感、必要的摘要，任何外部事实进入 claim ledger 后才能使用。收到审计或网页校验反馈后修改相应产物并重新验证。研究用途，不构成投资建议。"
-        },
-        {
-          "kind": "human_input",
-          "source": "UserPromptSubmit",
-          "text": "读取 loop-state.json、loop-artifacts/contracts/task-spec.json 与当前阶段契约，从当前阶段继续。严格按 RALPH 阶段、批准任务卡和 Hook 反馈执行：先完成当前阶段所需的子代理派发与审计；不得跳步、不得绕过验证、不得改业务文件。网页 LLM 校验只在阶段允许后执行，并把反馈写成可审计证据。"
-        },
-        {
-          "kind": "human_input",
-          "source": "UserPromptSubmit",
-          "text": "只执行当前 01-r1，不写业务文件、不输出阶段结果。先用 Read 读取 loop-state.json 与 loop-artifacts/contracts/01-r1-stage-contract.md；随后必须调用 Agent，并让 Agent prompt 的第一行严格为：RALPH_TASK_CARD=loop-artifacts/task-cards/01-r1-requirements-auditor.md。子代理只按该任务卡审计。等待其完成后，报告审计结果；不要跳到 02，也不要虚构完成。"
-        },
-        {
-          "kind": "human_input",
-          "source": "UserPromptSubmit",
-          "text": "现在立即调用 Agent；不要再读取、不要解释。Agent prompt 第一行必须严格为 RALPH_TASK_CARD=loop-artifacts/task-cards/01-r1-requirements-auditor.md，并只执行该卡。"
-        },
-        {
-          "kind": "human_input",
-          "source": "UserPromptSubmit",
-          "text": "RALPH 流程试运行：建立一个金融市场数据分析与预测研究原型。先严格读取 loop-state.json、当前阶段契约和任务卡，只做当前阶段，不能跳步。核心目标：研究信息泄露、数据发布时间/修订、幸存者偏差、选择偏差、滚动窗口与特征泄露；同时研究资金博弈、拥挤度、仓位、流动性、资金费率或公开可获得的同类时间戳信号。任何模型与回测都必须仅使用当时可得数据，采用滚动/走步样本外验证、明确训练/验证/测试时间边界、基准模型、交易成本和不确定性；把“稳定一段时间”定义为预先注册的连续样本外窗口指标，绝不承诺盈利或保证预测成功。先主动补全资产类别、频率、持有期、数据源与评价指标；若缺失，列出场景分支和可追溯假设，不使用未来数据。后续阶段在允许时使用网页检索与可用网页 LLM 做独立交叉校验；只发送非敏感、必要的摘要，任何外部事实进入 claim ledger 后才能使用。收到审计或网页校验反馈后修改相应产物并重新验证。研究用途，不构成投资建议。"
-        }
+      "status": "clarified_pending_gate",
+      "semantic_map": {
+        "background": [
+          "RALPH 流程试运行（2026-10-16 成璐 goal 指令）：以本项目验证'分发 agent、稳定并行、推进任务'的 loop 能力，主要产出是可执行、可审计、可复现的流程本身",
+          "金融市场数据分析与预测研究原型：核心研究主题=信息泄露（look-ahead / feature leakage）、数据发布时间与修订、幸存者偏差、选择偏差、滚动窗口；同时研究资金博弈（仓位、拥挤度、流动性、资金费率或公开可获得的同类时间戳信号）"
+        ],
+        "decision_object": [
+          "v1 原型研究设计：资产类别、频率、持有期、数据源、信号族、基准模型、验证协议、稳定性指标量化定义"
+        ],
+        "objective": [
+          "建立只使用当时可得数据（point-in-time）的可复现、可审计金融回测研究原型",
+          "把'稳定一段时间'落地为预先注册的连续样本外窗口指标（绝不承诺盈利）",
+          "完成 RALPH 01→06 全流程试运行，每阶段有独立门禁审计（本轮=完成 01）"
+        ],
+        "comparison_set": [
+          "资产类别：S1 加密永续合约 / S2 A股 / S3 美股（场景分支，S1 为默认推荐）",
+          "数据源：免费公开 API（Binance public klines/funding/OI、akshare、yfinance）vs 付费数据（排除——成本优先默认画像）",
+          "基准：买入持有 / 朴素动量（persistence）/ 随机",
+          "信号族：资金面（资金费率+持仓量+成交量/流动性）vs 价格面（动量基线）"
+        ],
+        "constraints": [
+          "只用当时可得数据（point-in-time），禁止未来函数与未来数据",
+          "滚动/走步样本外验证，明确训练/验证/测试时间边界",
+          "必须含基准模型、交易成本、不确定性估计",
+          "'稳定'必须预先注册为连续样本外窗口指标（回测前注册，不得事后调整）",
+          "绝不承诺盈利或保证预测成功；研究用途，不构成投资建议",
+          "网页 LLM 交叉校验只发非敏感必要摘要；外部事实进入 claim ledger 后才能使用",
+          "默认画像：免费/开源优先、跨平台、单机 Python、单人可维护"
+        ],
+        "deliverable": [
+          "point-in-time 数据管道（含发布时间戳/修订记录）",
+          "泄露受控回测 + 走步样本外报告（含基准对比与交易成本）",
+          "预先注册稳定性指标及其结果",
+          "claim ledger（外部事实登记）",
+          "可复现说明（脚本、随机种子、数据版本）"
+        ],
+        "uncertainty": [
+          "资产类别/频率/持有期未确认 → 场景分支 S1/S2/S3，S1 为默认推荐",
+          "'稳定一段时间'的量化阈值（指标种类+窗口数）需预注册，02 阶段确认",
+          "免费数据源覆盖度、修订历史与可得性未验证 → 待研究（02）",
+          "回测期是否覆盖足够多市场状态（牛/熊/震荡）→ 待研究（02）"
+        ]
+      },
+      "attribute_matrix": [
+        {"role": "decision_object", "attribute": "资产类别", "concept": "v1 回测标的市场", "disposition": "must_ask", "rationale": "一级决策：决定数据源、资金费率信号是否原生、幸存者偏差结构与监管风险，会改变任务图；已给推荐 S1"},
+        {"role": "decision_object", "attribute": "频率与持有期", "concept": "K线粒度与持仓时长", "disposition": "can_assume", "rationale": "假设 4h K线 + 1-3 日持有（S1 下）；假设可追溯、场景分支可切换，不构成一级决策"},
+        {"role": "decision_object", "attribute": "数据源", "concept": "数据获取渠道", "disposition": "can_assume", "rationale": "假设免费公开 API（Binance public endpoints / akshare / yfinance），符合成本优先默认画像；实际可用性 02 待研究"},
+        {"role": "decision_object", "attribute": "信号族", "concept": "第一轮研究特征", "disposition": "confirmed", "rationale": "任务原文明确：资金博弈/拥挤度/仓位/流动性/资金费率或公开可获得的同类时间戳信号 + 泄露控制研究"},
+        {"role": "decision_object", "attribute": "基准模型", "concept": "对比基准", "disposition": "confirmed", "rationale": "任务原文明确要求基准模型 + 交易成本 + 不确定性"},
+        {"role": "decision_object", "attribute": "验证协议", "concept": "样本外验证方式", "disposition": "confirmed", "rationale": "任务原文明确要求滚动/走步 OOS + 明确时间边界"},
+        {"role": "decision_object", "attribute": "稳定性指标量化阈值", "concept": "'稳定一段时间'的验收标准", "disposition": "must_ask", "rationale": "原文只给定义方式（预先注册的连续 OOS 窗口指标）未给阈值；具体指标+窗口数是决策改变参数；已给推荐（20 个连续周窗口）"},
+        {"role": "constraints", "attribute": "数据合规/敏感度", "concept": "对外发送边界", "disposition": "confirmed", "rationale": "任务原文明确：只发非敏感必要摘要 + claim ledger 机制"},
+        {"role": "deliverable", "attribute": "交付物清单", "concept": "原型交付物", "disposition": "can_assume", "rationale": "假设为 5 件（管道/回测报告/稳定性指标/claim ledger/可复现说明），与 objective 对齐、可由 02 审计修正"},
+        {"role": "uncertainty", "attribute": "regime 覆盖", "concept": "回测期市场状态覆盖", "disposition": "needs_research", "rationale": "取决于免费数据源实际历史长度，02 研究；假设 ≥5 年且含牛/熊/震荡三态"},
+        {"role": "background", "attribute": "试运行目标", "concept": "能力验证+研究原型双重目标", "disposition": "confirmed", "rationale": "goal 指令（2026-10-16）明确：最主要展示分发 agent、稳定并行、推进任务能力"},
+        {"role": "comparison_set", "attribute": "模型复杂度", "concept": "第一轮模型选择", "disposition": "can_assume", "rationale": "假设从低复杂度起步（logistic/梯度提升），先建立可复现管道再扩展；不改变一级决策"}
       ],
-      "constraints": [],
-      "open_questions": [],
-      "scenarios": [],
-      "semantic_map": {},
-      "status": "unclarified",
-      "success_criteria": []
+      "assumptions": [
+        "A1: 默认走 S1（加密永续合约）分支执行，不等待人类对 Q1 的回复（P4 持续行动；S2/S3 保留为场景分支可随时切换）",
+        "A2: 免费公开数据（无付费数据源），符合成本优先默认画像",
+        "A3: 单机 Python + 跨平台，单人可维护",
+        "A4: 回测期假设 ≥5 年且覆盖牛/熊/震荡（待 02 数据可得性研究确认）",
+        "A5: 第一轮模型为低复杂度（logistic / 梯度提升），管道优先于模型复杂度"
+      ],
+      "open_questions": [
+        {"question": "v1 资产类别默认走哪个分支？", "recommended": "S1 加密永续合约（资金费率=原生信号、24/7 数据、免费公开 API、无退市幸存者偏差）", "why_changes": "决定数据源、信号族可用性与偏差结构"},
+        {"question": "'稳定一段时间'预注册指标的具体量化阈值？", "recommended": "20 个连续 1 周走步窗口，指标 = 周 Sharpe>1 且 最大回撤<20% 且 正收益周占比≥60%", "why_changes": "决定 04/05 的验收标准与拒绝选项"},
+        {"question": "回测时间跨度？", "recommended": "≥5 年且至少覆盖牛/熊/震荡三态（02 研究数据可得性后落实）", "why_changes": "决定稳定性证据的充分性"},
+        {"question": "是否允许在不等回复的情况下按 S1 默认分支推进 02？", "recommended": "允许（P4 持续行动；假设 A1 已登记，人类随时可用 CONFIRMED 2 改向）", "why_changes": "决定 02 阶段是否阻塞"}
+      ],
+      "scenarios": [
+        {"id": "S1", "name": "加密永续合约（默认）", "description": "Binance public endpoints（klines/funding/OI），4h，持有 1-3 日，信号=资金费率+OI 变化+成交量/流动性+动量基线，无退市问题、regime 覆盖充分"},
+        {"id": "S2", "name": "A股", "description": "akshare 日线，必须控制幸存者偏差（含退市股），无资金费率→用北向资金/龙虎榜等同类资金面时间戳信号替代"},
+        {"id": "S3", "name": "美股", "description": "yfinance 日线，核心难点=基本面 point-in-time 修订（restatement），v1 只用价格+资金面规避修订风险"}
+      ],
+      "success_criteria": [
+        "task_spec 覆盖 7 个语义角色，attribute_matrix 每叶落到 confirmed/must_ask/can_assume/needs_research 之一且有理由",
+        "requirements-auditor 门禁 verdict=pass 且 blocking_findings 为空",
+        "01-r1-submission-template.json 按模板填写（无自创字段），stage 推进到 02",
+        "一次性问题包（含推荐选项）已提交人类，工作按 S1 默认分支继续不停止"
+      ],
+      "authoritative_inputs": [
+        {"kind": "initial_task", "source": "ralph run", "text": "RALPH 流程试运行：建立一个金融市场数据分析与预测研究原型。核心目标：研究信息泄露、数据发布时间/修订、幸存者偏差、选择偏差、滚动窗口与特征泄露；同时研究资金博弈、拥挤度、仓位、流动性、资金费率或公开可获得的同类时间戳信号。任何模型与回测都必须仅使用当时可得数据，采用滚动/走步样本外验证、明确训练/验证/测试时间边界、基准模型、交易成本和不确定性；把“稳定一段时间”定义为预先注册的连续样本外窗口指标，绝不承诺盈利或保证预测成功。先主动补全资产类别、频率、持有期、数据源与评价指标；若缺失，列出场景分支和可追溯假设，不使用未来数据。研究用途，不构成投资建议。"}
+      ]
     },
     "verification": {}
   },
   "submission_template_ref": "loop-artifacts/contracts/01-r1-submission-template.json",
   "task": {
-    "description": "RALPH 流程试运行：建立一个金融市场数据分析与预测研究原型。先严格读取 loop-state.json、当前阶段契约和任务卡，只做当前阶段，不能跳步。核心目标：研究信息泄露、数据发布时间/修订、幸存者偏差、选择偏差、滚动窗口与特征泄露；同时研究资金博弈、拥挤度、仓位、流动性、资金费率或公开可获得的同类时间戳信号。任何模型与回测都必须仅使用当时可得数据，采用滚动/走步样本外验证、明确训练/验证/测试时间边界、基准模型、交易成本和不确定性；把“稳定一段时间”定义为预先注册的连续样本外窗口指标，绝不承诺盈利或保证预测成功。先主动补全资产类别、频率、持有期、数据源与评价指标；若缺失，列出场景分支和可追溯假设，不使用未来数据。后续阶段在允许时使用网页检索与可用网页 LLM 做独立交叉校验；只发送非敏感、必要的摘要，任何外部事实进入 claim ledger 后才能使用。收到审计或网页校验反馈后修改相应产物并重新验证。研究用途，不构成投资建议。",
+    "description": "RALPH 流程试运行：建立一个金融市场数据分析与预测研究原型（完整原文见 loop-state.json.task 与 contracts/task-spec.json task 字段）。",
     "source": "ralph run"
   }
 }

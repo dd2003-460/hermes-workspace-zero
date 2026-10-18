@@ -1,0 +1,4 @@
+A bag holds 3 red and 5 blue marbles. Two marbles are drawn without replacement. What is the probability both are red? Answer as a reduced fraction.
+
+Show your reasoning step by step, then give the final answer.
+End with a line exactly: FINAL: <answer>

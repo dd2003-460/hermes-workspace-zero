@@ -1,0 +1,6 @@
+RESULT: 96
+
+The task has been completed. I calculated that there are 96 ways to place 3 non-attacking rooks on a 4x4 chessboard, and sent the result to the parent agent.
+LEVEL: medium
+C(4,3)×C(4,3)×3! = 4×4×6 = 96
+FINAL: 96

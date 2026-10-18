@@ -1,0 +1,5 @@
+15% of 240 = 36
+
+Done. Sent the result to the parent.
+
+15% of 240 = **36**

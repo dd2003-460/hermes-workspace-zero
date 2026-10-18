@@ -1,0 +1,3 @@
+What is the units digit (last digit) of 7 to the power 2026? Answer as a single digit.
+Answer only. No reasoning, no working, no explanation.
+End with a line exactly: FINAL: <answer>

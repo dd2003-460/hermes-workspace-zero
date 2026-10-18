@@ -1,0 +1,3 @@
+A train travels 300 km at a constant 75 km/h. How many hours does the trip take? Answer as a plain number.
+Answer only. No reasoning, no working, no explanation.
+End with a line exactly: FINAL: <answer>

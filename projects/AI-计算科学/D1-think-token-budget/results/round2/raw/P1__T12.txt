@@ -1,0 +1,5 @@
+FINAL: 39
+
+The message has been sent. The answer is 39 (35+37+39 = 111, all consecutive odd numbers, the largest being 39).
+
+39

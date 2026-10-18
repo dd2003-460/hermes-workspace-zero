@@ -1,6 +1,0 @@
-{
-  "field": {
-    "concept": "未知因素 02：AMD MI300X 本地推理性能"
-  },
-  "attribute": "AMD MI300X 在本地 LLM 推理中的实际性能（ROCm 兼容性、吞吐、显存带宽利用率）"
-}

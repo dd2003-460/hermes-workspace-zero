@@ -1,0 +1,3 @@
+What is 15% of 240? Answer as a plain number.
+Answer only. No reasoning, no working, no explanation.
+End with a line exactly: FINAL: <answer>

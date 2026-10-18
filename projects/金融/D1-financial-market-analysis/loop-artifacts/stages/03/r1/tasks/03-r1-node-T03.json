@@ -1,0 +1,45 @@
+{
+  "depends_on": [],
+  "evidence": [
+    "loop-artifacts/stages/03/r1/artifacts/t03-negative-search-protocol.md",
+    "https://arxiv.org/abs/2608.25348",
+    "https://arxiv.org/abs/2506.08573",
+    "https://arxiv.org/abs/2601.10812",
+    "https://arxiv.org/abs/2212.06888",
+    "https://export.arxiv.org/api/query?search_query=all:%22funding+rate%22+AND+all:%22backtest%22&max_results=10"
+  ],
+  "execution_mode": "parallel",
+  "id": "03-r1-node-T03",
+  "input_refs": [
+    "loop-artifacts/stages/02/r1/research/public-benchmarks.md"
+  ],
+  "instruction": "只执行 DAG 节点 `T03`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+  "node_id": "T03",
+  "orthogonal_key": "negative-search",
+  "output": "T03 负检索协议完成。6 组检索词 × 双通道(arXiv export API 严格短语 + arXiv HTML 宽松词) 交叉验证，主机日期 2026-10-17。两通道一致无一条以加密货币永续 funding rate 为主择时/市场状态信号的已发表回测：API 严格短语 Q1/Q2/Q4/Q5=0 命中，Q3=10 条全为理论/定价/机制/综述，Q6=2 条(最优清算控制 funding 仅作成本项 + 美联储利率误同名)。最接近邻接: 2608.25348(BTC 永续 PIT 审计负结果,非 funding 择时)、2506.08573(funding 设计)、2601.10812(最优清算)。gap_confidence=0.75（arXiv 内强成立；残留风险=付费金融期刊+SSRN 不可搜+术语歧义+funding rate/Fed funds 同名词污染）。[v2 补派 2026-10-17 独立复跑: 6 组 arXiv export API 全部真实 HTTP 200(Q1/Q2/Q4/Q6=0, Q3=6, Q5=1), 命中逐条判读均非反例, 结论与 v1 一致=缺口成立; 2608.25348 经 id_list 核验为真实文献(负结果研究, 非 funding 择时回测, 未虚构); v2 验证已追加至 artifact §5。]",
+  "output_schema": {
+    "databases": "array",
+    "date": "ISO date",
+    "gap_confidence": "0.0-1.0",
+    "limitations": "array",
+    "queries": "array of strings",
+    "results": "array of {query, top_hit, why_not_counterexample}"
+  },
+  "parallel_group_id": "G1",
+  "parent_id": null,
+  "postconditions": [
+    "writes文件非空且含≥5组检索词与逐条结果"
+  ],
+  "preconditions": [
+    "export.arxiv.org可达"
+  ],
+  "revision": "r1",
+  "schema_version": 1,
+  "stage_id": "03",
+  "status": "completed",
+  "type": "graph_task",
+  "updated_at": "2026-10-17T07:19:22.722600+00:00",
+  "writes": [
+    "loop-artifacts/stages/03/r1/artifacts/t03-negative-search-protocol.md"
+  ]
+}

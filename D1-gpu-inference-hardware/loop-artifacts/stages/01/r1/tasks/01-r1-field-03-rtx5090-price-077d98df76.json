@@ -1,7 +1,0 @@
-{
-  "id": "01-r1-field-03-rtx5090-price-077d98df76",
-  "attribute": "RTX 5090 实际零售价（NewEgg/Amazon/中国代购）及现货情况，2026 年最新价格",
-  "concept": "未知因素 03：RTX 5090 实际售价与现货",
-  "role": "unknown",
-  "instruction": "只处理字段 `未知因素 03：RTX 5090 实际售价与现货`。验证 RTX 5090 实际零售价（NewEgg/Amazon/中国代购）及现货情况。使用 WebSearch 搜索最新价格。最多尝试两次网页工具。填写后运行 ralph field-apply 合并。"
-}

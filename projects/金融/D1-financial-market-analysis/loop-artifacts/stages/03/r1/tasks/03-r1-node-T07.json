@@ -1,0 +1,38 @@
+{
+  "depends_on": [
+    "T04"
+  ],
+  "evidence": "artifact=loop-artifacts/stages/03/r1/artifacts/t07-benchmark-selection.md (完整7节设计文档: §1分层/§2 2603.19380修正/§3 5基线/§4三同协议/§5 12 uncertain ref/§6 04接口/§7置信度0.80)。分层表摘要: 19/19 A层(原A 13维持: 1912.03270 funding锚/2212.06888/2506.08573/2310.14973/1809.05961/2501.09404/1904.00890 momentum截面/2112.15321/2307.06400/2607.04958 PIT/2609.20554/2603.19380股票幸存者/2209.05559; 原B 6全升级A: 2601.10812/2605.05089/2602.11708 trend锚/1905.05023/2209.13623/2309.06711)。uncertain ref 12条(§5): Harvey-Liu-Zhu 2016 JF / Bailey Pseudo-Math AMS 2014(⚠️arXiv 1308.3655是错的=粒子物理中微子论文勿引) / Bailey DSR JCF 2014 / Bailey PBO / López de Prado AFML 2018 / White 2000 / Hamilton 1989 / Jegadeesh-Titman 1993 / Lo-Mamaysky-Wang 2000 / Koijen Carry JFE 2018 / McLean-Pontiff 2016+Hou-Xue-Zhang 2015 / Wilder 1978 RSI。T05 §4成本已确认存在(spot 0.1000%/futures 0.0500%/maker 0.0200% uncertain, 滑点base 0.01%/stress 0.02% taker)。postcondition满足: artifact非空且含基线清单。",
+  "execution_mode": "parallel",
+  "id": "03-r1-node-T07",
+  "input_refs": [
+    "loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md",
+    "loop-artifacts/stages/02/r1/research/public-benchmarks.md"
+  ],
+  "instruction": "只执行 DAG 节点 `T07`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+  "node_id": "T07",
+  "orthogonal_key": "benchmark-selection",
+  "output": "T07 基线选择完成：19/19 arXiv URL 逐条 curl 直验全部 A 层（原 13 A 维持 + 原 6 B 全部升级 A，HTTP 200+标题匹配，2026-10-17）；2603.19380 定性为股票指数(NIFTY Smallcap 250)非 crypto，4.94pp/23.3% 不得挪用为 crypto 证据。pre-registered 基线 5 条：buy-and-hold / momentum-12-1(L=252,S=21) / RSI-14 / trend-MA(50/200) / funding 朴素规则(分位25/75，最关键同信号对照)。公平对比协议三同：同 T04 §(c) 锁定窗口(5年度OOS 2021-2025, 2020扩展训练, 2022熊市强制OOS) + 同 T05 §4 成本(接口引用不另定义) + 同 T04 §(d) 45检验家族且基线计入 trial count(45+75 cell=120起，保守防 under-deflation)。12 条期刊/书文献独立成节全标 uncertain ref(含 arXiv 1308.3655 误引警报)。confidence=0.80。",
+  "output_schema": {
+    "anchors": "array of {arxiv_id,verified,role}",
+    "baselines": "array of {name,parameters,rationale}",
+    "comparison_protocol": "string"
+  },
+  "parallel_group_id": "G2",
+  "parent_id": null,
+  "postconditions": [
+    "writes文件非空且含基线清单"
+  ],
+  "preconditions": [
+    "T04已完成"
+  ],
+  "revision": "r1",
+  "schema_version": 1,
+  "stage_id": "03",
+  "status": "completed",
+  "type": "graph_task",
+  "updated_at": "2026-10-17T10:33:29.683201+00:00",
+  "writes": [
+    "loop-artifacts/stages/03/r1/artifacts/t07-benchmark-selection.md"
+  ]
+}

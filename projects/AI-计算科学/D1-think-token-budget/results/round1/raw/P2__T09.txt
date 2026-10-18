@@ -1,0 +1,5 @@
+Result: 96. Number of ways to place 3 non-attacking rooks on a 4x4 board = C(4,3)*C(4,3)*3! = 4*4*6 = 96. Cross-check via ordered placement 16*9*4=576, /3! = 96.
+
+The message has been delivered. Now I need to output the final answer line.
+
+FINAL: 96

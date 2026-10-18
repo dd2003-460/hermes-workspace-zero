@@ -1,0 +1,6 @@
+Task result (10 identical candies, 3 distinct children, zero allowed): LEVEL: easy; FINAL: 66 (stars and bars: C(12,2) = 66).
+
+The task is complete. Now I just need to output the required format.
+
+LEVEL: easy
+FINAL: 66

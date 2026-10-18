@@ -1,0 +1,4 @@
+In how many ways can you place 3 non-attacking rooks on a 4x4 chessboard (no two share a row or a column)? Answer as a plain number.
+
+Show your reasoning step by step, then give the final answer.
+End with a line exactly: FINAL: <answer>

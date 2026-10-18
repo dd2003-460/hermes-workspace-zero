@@ -1,0 +1,4 @@
+The sum of three consecutive odd integers is 111. What is the largest of the three? Answer as a plain number.
+
+Show your reasoning step by step, then give the final answer.
+End with a line exactly: FINAL: <answer>

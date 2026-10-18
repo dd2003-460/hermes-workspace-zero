@@ -1,0 +1,149 @@
+{
+  "field_task": "02-r1-field-field-2d1cbf21dc",
+  "field_concept": "研究未知因素：数据修订与迟报（point-in-time 数据可用性）",
+  "validation_date_utc": "2026-10-17T02:29:00Z/2026-10-17T03:00:00Z",
+  "validation_records": [
+    {
+      "claim_ref": "C1",
+      "claim": "data.binance.vision 官方承认归档文件可被事后修订（README CHECKSUM 节: 'Archived files may be updated at a later date'）",
+      "verdict": "confirm",
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/binance/binance-public-data/master/README.md",
+          "publisher": "Binance (binance-public-data repo README)",
+          "observed_at": "2026-10-17T02:29:57Z",
+          "quote": "Archived files may be updated at a later date as a result of recently discovered issues. Below is an exhaustive list of updates performed to the archive, containing the file path for reference, and CHECKSUMs of the replaced file and the replacement file:"
+        },
+        {
+          "url": "https://api.github.com/repos/binance/binance-public-data/contents/updates",
+          "publisher": "Binance (binance-public-data repo, updates/ folder via GitHub API)",
+          "observed_at": "2026-10-17T02:38:00Z",
+          "quote": "updates/ 文件夹含 3 个修订文件（2022-04-21_aggregate_trade_updates.zip / 2022-08-08_kline_updates.zip / 2022-10-04_aggregate_trade_updates.csv）——修订实际发生过"
+        }
+      ],
+      "note": "双源均为 Binance 官方但为不同产物（README 政策声明 vs 实际修订文件），满足官方仓库 README + 官方文档双源要求。"
+    },
+    {
+      "claim_ref": "C2",
+      "claim": "已记录修订 2 例: 2022-08-08_kline_updates（'Fixed inconsistent data'）+ 2022-04-21_aggregate_trade_updates（spot aggTrades 审计补回，重复记录标 invalid p=0/q=0/f=-1/l=-1）",
+      "verdict": "confirm",
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/binance/binance-public-data/master/README.md",
+          "publisher": "Binance (README Updates 表)",
+          "observed_at": "2026-10-17T02:29:57Z",
+          "quote": "2022-08-08 | updates/2022-08-08_kline_updates.zip | Fixed inconsistent data  /  2022-04-21 | updates/2022-04-21_aggregate_trade_updates.zip | Align to the Spot aggregate trade data change"
+        },
+        {
+          "url": "https://api.github.com/repos/binance/binance-public-data/contents/updates",
+          "publisher": "Binance (updates/ 文件夹, GitHub API)",
+          "observed_at": "2026-10-17T02:38:00Z",
+          "quote": "两文件确认存在（33,962 B / 6,653,240 B），另含第 3 个 2022-10-04_aggregate_trade_updates.csv（28,558 B）"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/binance/binance-spot-api-docs/master/CHANGELOG.md",
+          "publisher": "Binance (binance-spot-api-docs CHANGELOG)",
+          "observed_at": "2026-10-17T02:33:00Z",
+          "quote": "CHANGELOG 可达（'Last Updated: 2026-09-18'）；2022-04-12 审计条目（p='0'/q='0'/f=-1/l=-1）位于文件深处，web_fetch 在其前截断；README 对 CHANGELOG#2022-04-12 的显式锚点链接独立印证该条目存在"
+        }
+      ],
+      "note": "REFINEMENT（非矛盾）: updates/ 实际有第 3 个修订文件 2022-10-04_aggregate_trade_updates.csv（spot aggTrades），晚于 2022-08 且未被 README 'exhaustive' 表列出 → 实际记录修订=3 例（非 2），README 表滞后；3 例全为 spot，最晚 2022-10-04，仍零 futures。p=0/q=0 字段值经 README 锚点链接印证，未逐字节重验（curl 沙箱被拦，CHANGELOG 深处内容 web_fetch 截断）。"
+    },
+    {
+      "claim_ref": "C3",
+      "claim": "日线 T+1 迟报（'new daily data becoming available the next day'）；月线=当月第一个周一发布；API 末根 K 线未定版（收盘才冻结）",
+      "verdict": "partial",
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/binance/binance-public-data/master/README.md",
+          "publisher": "Binance (README)",
+          "observed_at": "2026-10-17T02:29:57Z",
+          "quote": "All symbols are supported, with new `daily` data becoming available the next day and new `monthly` data at the first monday of the month."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/binance/binance-spot-api-docs/master/rest-api.md",
+          "publisher": "Binance (binance-spot-api-docs rest-api.md, Kline 节)",
+          "observed_at": "2026-10-17T02:59:00Z",
+          "quote": "web_fetch 超时（文件过大，30s 未返回）——末根 K 线未定版措辞未能本次重读；调研原文已注明文档无显式 last-kline-not-finalized 措辞，结论由 open-time 唯一标识 + 返回最近 klines 推出（推断）"
+        }
+      ],
+      "note": "前两项（日线 T+1、月线首周一）经 README 单一权威源 confirm；不确定 'the first monday of the month' 指哪月、'the next day' 确切 UTC 时刻。末根 K 线 unresolved（rest-api.md 超时 + 本属推断 + fapi 沙箱不可达无法线上实测），留待 03 阶段。"
+    },
+    {
+      "claim_ref": "C4",
+      "claim": "Coinglass change log（最新条目 2026-04-13）只有 New endpoints 无修订条目 → Coinglass 修订行为未解决",
+      "verdict": "unresolved",
+      "sources": [
+        {
+          "url": "https://docs.coinglass.com/reference/change-log",
+          "publisher": "Coinglass (API v4 文档 Change Log, readme.io)",
+          "observed_at": "2026-10-17T02:58:00Z",
+          "quote": "HTTP 200，'📝 Change Log' 位于 'COINGLASS API V4' 下；web_fetch 返回完整左侧导航但在到达按日期的 change-log 条目之前被截断"
+        },
+        {
+          "url": "https://docs.coinglass.com/",
+          "publisher": "Coinglass (API 文档主站)",
+          "observed_at": "2026-10-17T02:58:00Z",
+          "quote": "确认提供 OI/funding 历史端点（Open Interest History、Funding Rate History、Long-Short Ratio、Liquidation 等）"
+        }
+      ],
+      "note": "页面可达性确认（HTTP 200），但'最新条目 2026-04-13、仅 New endpoints、无 revision/correction 条目'未能本次独立重读（导航过长致 web_fetch 截断）；以调研原 ego-browser 读数为据。主张本身即'未解决'，verdict=unresolved 与主张一致。"
+    },
+    {
+      "claim_ref": "C5",
+      "claim": "A股沪深300 有'拟生效样本'（PIT 隐患, csindex.com.cn）；美股 S&P500 提供'按当时生效方法学'回溯历史（PIT 友好, spglobal.com/spdji）",
+      "verdict": "unresolved",
+      "sources": [
+        {
+          "url": "https://www.csindex.com.cn/#/indices/family/detail?indexCode=000300",
+          "publisher": "中证指数有限公司 (CSI300 000300 详情页)",
+          "observed_at": "2026-10-17T02:59:30Z",
+          "quote": "HTTP 200 但空 body——纯 JS SPA 壳页，无服务端文本；'拟生效样本'需浏览器渲染，web_fetch 不可读"
+        },
+        {
+          "url": "https://www.spglobal.com/spdji/en/indices/equity/sp-500/",
+          "publisher": "S&P Dow Jones Indices (S&P 500)",
+          "observed_at": "2026-10-17T02:59:00Z",
+          "quote": "HTTP 403 'Security Controls Triggered'——反爬拦截 web_fetch，页面文本不可读"
+        }
+      ],
+      "note": "两 URL 可达性已确认（200 空壳 / 403），但内容经 web_fetch 不可读（JS SPA / 403 反爬）；以调研原 ego-browser 读数（CSI300 '拟生效样本'；S&P500 'based on the index methodology in effect on the Launch Date'）为据。属 A股/美股横向对照，调研已注明非本项目核心加密主张，不阻断核心结论。"
+    },
+    {
+      "claim_ref": "C6",
+      "claim": "核心待证: 检查 data.binance.vision futures 目录是否存在任何 *_updates / 修订类文件或 README 中 futures 相关修订说明",
+      "verdict": "confirm",
+      "sources": [
+        {
+          "url": "https://api.github.com/repos/binance/binance-public-data/contents/updates",
+          "publisher": "Binance (权威修订清单 updates/ 文件夹)",
+          "observed_at": "2026-10-17T02:38:00Z",
+          "quote": "updates/ 共 3 文件，全部 spot（2022-04-21 aggTrades / 2022-08-08 klines / 2022-10-04 aggTrades），零 futures 条目，无子目录"
+        },
+        {
+          "url": "https://data.binance.vision/data/futures/cm/monthly/klines/BTCUSD_PERP/1d/BTCUSD_PERP-1d-2022-01.zip",
+          "publisher": "Binance (data.binance.vision 直探)",
+          "observed_at": "2026-10-17T02:50:00Z",
+          "quote": "HTTP 200 binary/octet-stream（futures klines 树真实存在）"
+        },
+        {
+          "url": "https://data.binance.vision/data/futures/um/daily/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2022-01.zip",
+          "publisher": "Binance (data.binance.vision 直探)",
+          "observed_at": "2026-10-17T02:52:00Z",
+          "quote": "404 NoSuchKey（同 2024-01/2025-01 及 openInterest/2022-01 全 404）——futures funding/OI 非标准归档路径"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/binance/binance-public-data/master/README.md",
+          "publisher": "Binance (README FUTURES 章节)",
+          "observed_at": "2026-10-17T02:29:57Z",
+          "quote": "FUTURES 章节仅文档 AggTrades / Klines / Trades，未提及 fundingRate 或 openInterest"
+        }
+      ],
+      "note": "confirm（futures 无修订痕迹）。权威 updates/ 修订清单对 futures 零条目 → 无证据表明任何 futures 归档文件被修订，直接解决'决定风险中→低'的关键待证项。附加范围发现: futures funding/OI 大概率根本不在免费归档内（README 未载 + shell 脚本仅 klines + 直探全 404）→ S1 futures funding/OI 更可能来自 Binance futures 实时 API 或 Coinglass，而非本归档。目录不可枚举限制: data.binance.vision 根 / S3 list 查询只返回空 HTML 壳，trailing-slash 子目录全 404，只能对具体文件 key 做存在性探测（详见 md 的 C6 检查清单 10 条）。"
+    }
+  ],
+  "confidence_after": 0.85,
+  "confidence_rationale": "核心发现（Binance 归档可修订但罕见/离散/可审计、已记录者全 spot、futures 无任何记录修订、futures funding/OI 大概率不在免费归档）由权威 updates/ 清单 + 直探 + README 三重印证坐实，且新发现第 3 例 spot 修订（2022-10-04）与'funding/OI 大概率不归档'范围结论——正是字段点名的'决定中→低'关键待证项；迟报（日线 T+1/月线首周一）亦确认。未上调至 >=0.9 因 C4(Coinglass 修订披露)、C3 末根 K 线、C5(A股/美股内容)本次仍 unresolved（次要/横向，不阻断核心）。",
+  "revision_risk_assessment": "低 + 一句理由: 权威 updates/ 修订清单 3 例全为 spot（2022-04/08/10）、零 futures，且 futures funding/OI 大概率不在免费归档内（README 与脚本均未载、直探全 404）→ 归档路径下 S1 futures funding/OI 修订风险实测为低；仅当改用 Coinglass（修订行为公开无记录）时回升至中。",
+  "contradictions": []
+}

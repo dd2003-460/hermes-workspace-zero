@@ -1,0 +1,3 @@
+How many positive integer divisors does 360 have? Answer as a plain number.
+Answer only. No reasoning, no working, no explanation.
+End with a line exactly: FINAL: <answer>

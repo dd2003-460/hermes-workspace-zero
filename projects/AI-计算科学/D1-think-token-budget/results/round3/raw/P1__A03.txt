@@ -1,0 +1,7 @@
+Answer to the problem (count ordered integer pairs (x,y) in [-100,100] with 12x²-xy-6y²=0): 117. Verified by brute-force enumeration in Python (count = 117). Answer: 117. FINAL: 117
+
+Complete. The answer was sent to the parent. Now I should just output the answer as instructed ("Answer only. No explanation.").
+
+117
+
+FINAL: 117

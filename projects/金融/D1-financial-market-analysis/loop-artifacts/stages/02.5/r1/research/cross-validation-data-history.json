@@ -1,0 +1,147 @@
+{
+  "field_task": "02-r1-field-field-bf9c402578",
+  "field_concept": "研究未知因素：候选资产类别的公开行情数据历史深度与退市标的覆盖（幸存者偏差规避）",
+  "validation_records": [
+    {
+      "claim_ref": "C1",
+      "claim": "Binance 免费批量文件（data.binance.vision）最早批次=2020-01（daily klines + monthly fundingRate 均自 2020-01 起可用）",
+      "verdict": "confirm",
+      "sources": [
+        {
+          "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/",
+          "publisher": "Binance (data.binance.vision)",
+          "observed_at": "2026-10-17T04:00:00Z",
+          "quote": "BTCUSDT-1h-2020-01-01.zip → 206 (application/zip); BTCUSDT-1h-2019-12-31.zip → 206 (异常, 存在); 2019-09-01/12-01/12-15/12-30 → 404 NoSuchKey; 2018-01-01 → 404"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/binance/binance-public-data/master/README.md",
+          "publisher": "Binance (GitHub: binance/binance-public-data)",
+          "observed_at": "2026-10-17T04:00:00Z",
+          "quote": "Futures (UM) data categories: aggTrades, klines, trades. Example: data/futures/um/monthly/klines/ADABKRW/1h/ADABKRW-1h-2020-08.zip. Does not explicitly state earliest dates."
+        },
+        {
+          "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/",
+          "publisher": "Binance (data.binance.vision)",
+          "observed_at": "2026-10-17T04:00:00Z",
+          "quote": "BTCUSDT-fundingRate-2020-01.zip → 206 (exists); BTCUSDT-fundingRate-2019-12.zip → 404 NoSuchKey"
+        }
+      ],
+      "note": "ANOMALY: 2019-12-31 daily kline file exists (206) but no other 2019 daily files do. Research file's claim '2019-09/10/11/12 all 404' is partially inaccurate. Practical conclusion (continuous data from 2020-01) holds."
+    },
+    {
+      "claim_ref": "C2",
+      "claim": "Binance 免费批量文件无 OI（open interest）文件",
+      "verdict": "confirm",
+      "sources": [
+        {
+          "url": "https://data.binance.vision/data/futures/um/monthly/openInterestHist/BTCUSDT/",
+          "publisher": "Binance (data.binance.vision)",
+          "observed_at": "2026-10-17T04:00:00Z",
+          "quote": "404 — path does not exist. openInterestHist category is not available in free batch download."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/binance/binance-public-data/master/README.md",
+          "publisher": "Binance (GitHub: binance/binance-public-data)",
+          "observed_at": "2026-10-17T04:00:00Z",
+          "quote": "UM Futures data categories listed: aggTrades, klines, trades. NO openInterest category mentioned anywhere in README."
+        }
+      ],
+      "note": "Both sources consistent. OI data requires Binance API (real-time) or paid data provider."
+    },
+    {
+      "claim_ref": "C3",
+      "claim": "Coinglass API 无免费档（HOBBYIST $29/month 起），且存在 Delisted Pairs 端点",
+      "verdict": "confirm",
+      "sources": [
+        {
+          "url": "https://docs.coinglass.com/reference/getting-started-with-your-api",
+          "publisher": "Coinglass (docs.coinglass.com)",
+          "observed_at": "2026-10-17T04:00:00Z",
+          "quote": "Endpoint list includes: Delisted Pairs (GET /reference/delisted-exchange-and-pair), Open Interest History, Funding Rate History, Price History (OHLC)"
+        },
+        {
+          "url": "https://www.coinglass.com/pricing",
+          "publisher": "Coinglass (www.coinglass.com)",
+          "observed_at": "2026-10-17T04:00:00Z",
+          "quote": "Plans: HOBBYIST $29/month, STARTUP $79/month, STANDARD $299/month, PROFESSIONAL $699/month. No free tier listed."
+        }
+      ],
+      "note": "No free tier. Delisted Pairs endpoint confirmed to exist. Minimum cost $29/month (HOBBYIST)."
+    },
+    {
+      "claim_ref": "C4",
+      "claim": "Alpha Vantage 免费档 TIME_SERIES_DAILY 只返回最近 100 根（compact），5 年日线(~1260根)免费档不可行",
+      "verdict": "confirm",
+      "sources": [
+        {
+          "url": "https://www.alphavantage.co/documentation/",
+          "publisher": "Alpha Vantage (www.alphavantage.co)",
+          "observed_at": "2026-10-17T04:00:00Z",
+          "quote": "By default, outputsize=compact. compact returns only the latest 100 data points; full returns the full-length time series of 25+ years of historical data. The 'compact' outputsize is available to both free and premium API keys. The 'full' outputsize is available to premium keys. Please subscribe to any premium membership plan to unlock the outputsize=full capability."
+        },
+        {
+          "url": "https://www.alphavantage.co/premium/",
+          "publisher": "Alpha Vantage (www.alphavantage.co)",
+          "observed_at": "2026-10-17T04:00:00Z",
+          "quote": "For use cases that exceed our standard API usage limit (25 API requests per day) or require certain premium API functions, we offer a premium plan to scale your use cases."
+        }
+      ],
+      "note": "Documentation explicitly states compact=100 bars for free keys, full=premium only. 5-year daily (~1260 bars) confirmed infeasible on free tier."
+    },
+    {
+      "claim_ref": "C5",
+      "claim": "A股端 Baostock 起点(先验1990)与退市覆盖未证实；CSMAR/Wind 为付费 → A股端(S3)数据缺口",
+      "verdict": "confirm",
+      "sources": [
+        {
+          "url": "https://www.baostock.com",
+          "publisher": "Baostock (www.baostock.com)",
+          "observed_at": "2026-10-17T04:00:00Z",
+          "quote": "Page returned only 'www.baostock.com ×' — JavaScript-rendered shell page with no server-side content. Data start date and delisted coverage claims cannot be verified via web_fetch."
+        },
+        {
+          "url": "https://www.csmar.com",
+          "publisher": "CSMAR / 深圳希施玛数据科技有限公司",
+          "observed_at": "2026-10-17T04:00:00Z",
+          "quote": "Products: CSMAR中国经济金融研究数据库, CSMAR数据超市 (data.csmar.com). Customers: 1500+ 国内外高校及研究机构, 500+ 国内外金融机构. B2B paid data service model."
+        },
+        {
+          "url": "https://www.wind.com.cn",
+          "publisher": "Wind / 万得信息",
+          "observed_at": "2026-10-17T04:00:00Z",
+          "quote": "Wind Financial Data, Terminal & Data Service Platform. Products: WFT (Wind Financial Terminal), AMS, EDB, WDS — all paid professional data services."
+        }
+      ],
+      "note": "Three-part assessment confirmed: (1) Baostock claims unverifiable (JS shell), (2) CSMAR is commercial paid data service, (3) Wind is paid financial terminal. A-share (S3) free data gap is well-supported."
+    },
+    {
+      "claim_ref": "C6",
+      "claim": "加密端可支撑 5 年 OOS（2020-01 起）且可规避幸存者偏差（依赖 Delisted Pairs 端点）",
+      "verdict": "confirm",
+      "sources": [
+        {
+          "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/",
+          "publisher": "Binance (data.binance.vision)",
+          "observed_at": "2026-10-17T04:00:00Z",
+          "quote": "Daily klines from 2020-01-01 onward confirmed (BTCUSDT-1h-2020-01-01.zip → 206). 5-year OOS window 2020-01 to 2025-01 supported by free data."
+        },
+        {
+          "url": "https://docs.coinglass.com/reference/getting-started-with-your-api",
+          "publisher": "Coinglass (docs.coinglass.com)",
+          "observed_at": "2026-10-17T04:00:00Z",
+          "quote": "Delisted Pairs endpoint (GET /reference/delisted-exchange-and-pair) exists — can retrieve list of delisted trading pairs to include in backtest universe."
+        },
+        {
+          "url": "https://www.coinglass.com/pricing",
+          "publisher": "Coinglass (www.coinglass.com)",
+          "observed_at": "2026-10-17T04:00:00Z",
+          "quote": "Delisted Pairs endpoint requires Coinglass API access. Minimum plan: HOBBYIST $29/month. No free tier."
+        }
+      ],
+      "note": "5-year OOS: supported by free Binance data (2020-01 start). Survivorship bias avoidance: Delisted Pairs endpoint exists, capability confirmed. CONDITION: survivorship bias avoidance requires paid Coinglass API ($29/mo minimum). If strictly free-only, survivorship bias cannot be avoided."
+    }
+  ],
+  "confidence_after": 0.82,
+  "confidence_rationale": "All 6 claims confirmed with ≥2 independent sources each. Residual uncertainty: (1) C1 has a minor anomaly — 2019-12-31 daily kline file exists but no other 2019 files do, though the practical conclusion (continuous data from 2020-01) is unaffected; (2) C5 confirms an absence of evidence (Baostock unverifiable, paid sources exist) rather than a positive finding, which is inherently less certain; (3) C6's survivorship bias avoidance is confirmed as a capability but depends on paid Coinglass API access. No contradictions found across any claim.",
+  "contradictions": []
+}

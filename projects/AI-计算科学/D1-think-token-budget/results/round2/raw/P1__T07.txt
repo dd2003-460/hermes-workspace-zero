@@ -1,0 +1,7 @@
+Result: The probability both marbles are red is 3/28.
+
+Calculation: (3/8) × (2/7) = 6/56 = 3/28 (reduced fraction).
+
+The message has been delivered. I'm done with the task.
+
+Done. Answer sent to parent: **3/28**.

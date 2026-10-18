@@ -1,0 +1,78 @@
+{
+  "depends_on": [
+    "T04"
+  ],
+  "evidence": "artifact: loop-artifacts/stages/03/r1/artifacts/t05-data-pipeline-design.md (8 必备节全部成文 + 探针附录 + output_schema 映射). 关键源实测 (host 2026-10-17): S1 data.binance.vision (funding 2020-01 206 存在 / 2019-12 404; klines 2020-01-01 206 / 2019-12-01 404; 站点不暴露目录列举; 可达); S2 Yahoo query1+query2 ^GSPC range=full 均 403 (返 JS 壳非 JSON, 不可复核, 锚点改走新浪 hq.sinajs.cn 200 可达, gb_ixic 2026-10-17); S3 腾讯 ifzq sh000300,day,,,2000,qfq 200 bars=2000 first=2018-07-17 last=2026-10-16 (count=4000/8000 param error, cap~2000; 指数须 qfq); 费率页 www.binance.com/en/fee/trade curl rc=28 timeout + web_fetch non-public IP (不可达→uncertain+last-known 2026-10-17); binance-public-data README (CHECKSUM 节 mutable/SPOT 2025+ µs/updates 清单实测 2 文件均 spot). 引用依据: t04-signal-spec.md §(a)C三条件表+§(b)B1-B6, data-history-depth.md, data-revision-latency.md, t02b-api-reachability-precheck.md (live API rc=35/28 不可达基线).",
+  "execution_mode": "parallel",
+  "id": "03-r1-node-T05",
+  "input_refs": [
+    "loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md",
+    "loop-artifacts/stages/02/r1/research/data-history-depth.md",
+    "loop-artifacts/stages/02/r1/research/data-revision-latency.md"
+  ],
+  "instruction": "只执行 DAG 节点 `T05`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+  "node_id": "T05",
+  "orthogonal_key": "data-pipeline",
+  "output": {
+    "cache_strategy": "SHA256 manifest (cache/manifest.json, 每文件 {file_path,sha256,downloaded_at,source_url,checksum_file}) + 每 Binance zip 旁 .CHECKSUM sibling (校验: shasum -a 256 -c / sha256sum -c); 下载即留痕, 文件 immutable-on-disk; 重拉走 fresh 临时路径重算 SHA, 变化 → revision_event (flag+记录变更文件+标记受影响回测 needs_rerun, 永不静默, 原缓存保留可回溯); 无官方 CHECKSUM 的源 (S3 ifzq JSON) 04 自算 sha256 入 manifest。",
+    "pit_rules": [
+      "B1 normalize_ts: 全源→UTC ms int64; Binance/Bybit 原生 ms 直用; Coinglass 秒×1000; Binance SPOT 2025-01+ µs÷1000 (README 明文, 反向陷阱); Binance FUTURES 2025+ README 未明示 → 04 逐文件量级核验 (13位=ms/16位=µs)",
+      "B2 latest_settled_funding: settled-only (settled 与 predicted 分字段物理隔离, predicted 不入集), ts_norm<=t_ms 取最近一条否则 None, 不假设 8h 固定网格 (间隔逐 symbol 可变)",
+      "B3 latest_oi: bar_start+duration_ms+delay_buffer_ms<=t_ms 取上一根已确认 bar, 当前未确认 bar 禁用; delay_buffer 04 实测参数化; 仅 OI_ENABLED 时执行 (本环境 A 路径关闭)",
+      "B4 LAG_RULES 全部参数化 04 实测: funding_settled(ts+LAG_SETTLE_PUB_MS) / bulk_daily(ts+1_day+LAG_T1_MS, T+1) / bulk_monthly(ts+LAG_FIRST_MONDAY_MS, 当月第一周一) / kline_unconfirmed(未定版末根禁用); 可用时刻=标称ts+发布lag+延迟缓冲, 不得假设 ts=可用时刻",
+      "B6 PIT 违规检查清单 8 条 (04 启动前逐条 assert): 无 ts_norm>t 进 signal_at / 无 predicted 混入 / 无 8h 固定网格 / Coinglass 已×1000 / OI 无未确认 bar / bulk 已 T+1 对齐 / 无未定版末根 / 延迟缓冲为 04 实测值; 任一违反回测无效"
+    ],
+    "sources": [
+      {
+        "dataset": "fundingRate",
+        "format": "monthly zip (futures/um/monthly/fundingRate/{SYM}/{SYM}-fundingRate-{YYYY-MM}.zip)",
+        "range": "2020-01→2026-09 (实存 206 monthly; 本节点 2020-01 206 / 2019-12 404 复验)",
+        "unit_rule": "futures 原生 UTC ms; ⚠2025+ µs 量级陷阱 04 逐文件核验 (README 仅明说 spot); 本环境可达 (200/206)",
+        "venue": "data.binance.vision"
+      },
+      {
+        "dataset": "klines 1h",
+        "format": "daily zip (futures/um/daily/klines/{SYM}/{INT}/{SYM}-{INT}-{YYYY-MM-DD}.zip)",
+        "range": "2020-01-01→ (daily zip; 本节点 2020-01-01 206 / 2019-12-01 404 复验)",
+        "unit_rule": "futures 原生 UTC ms; 未定版末根禁用 (B4 kline_unconfirmed); 本环境可达 (200/206)",
+        "venue": "data.binance.vision"
+      },
+      {
+        "dataset": "^GSPC 1d (S2 锚点)",
+        "format": "JSON (本环境 403 返 <title>Yahoo</title> JS/consent 壳, 非 JSON)",
+        "range": "last-known 1950→ (本环境 query1+query2 均 403 不可复核, 标 not first-verified)",
+        "unit_rule": "epoch ms UTC; 锚点值统一取 02.5 交叉验证判定 (2022-10-13 c3669.91 新浪正确, Yahoo 原始 3577.0 标'判定有差异未采用'; 三熊底 2002-10-09 c776.8 / 2008-03-10 c1273.4 / 2022-10-13 c3669.91), 常量表硬编码不运行时拉取; 锚点可复核源=新浪 hq.sinajs.cn (本环境 200 可达, 需 Referer)",
+        "venue": "Yahoo (query1/query2) + 新浪锚点"
+      },
+      {
+        "dataset": "sh000300 1d (沪深300, S3)",
+        "format": "JSON day bars (endpoint /appstock/app/fqkline/get?param=sh000300,day,,,N,qfq; 指数须带 qfq 才返数据)",
+        "range": "API-observable 2018-07-17→2026-10-16 (count=2000 MAX WORKING; count=4000/8000 param error → 单次 cap≈2000 bars; 完整历史 2005-04-08 last-known 非单次可观测)",
+        "unit_rule": "date string 'YYYY-MM-DD' 本地 CST 日线指数 (非 ms, 04 归一口径: 交易日 00:00 或收盘 UTC); 000300 须用生效日当时成分 (拟生效样本→幸存者/前视); qfq 前复权历史 bar 会因调整变化",
+        "venue": "腾讯 ifzq (web.ifzq.gtimg.cn)"
+      }
+    ]
+  },
+  "output_schema": {
+    "cache_strategy": "string",
+    "pit_rules": "array",
+    "sources": "array of {venue,dataset,range,format,unit_rule}"
+  },
+  "parallel_group_id": "G2",
+  "parent_id": null,
+  "postconditions": [
+    "writes文件非空且含全部数据源与PIT规则"
+  ],
+  "preconditions": [
+    "T04已完成"
+  ],
+  "revision": "r1",
+  "schema_version": 1,
+  "stage_id": "03",
+  "status": "completed",
+  "type": "graph_task",
+  "updated_at": "2026-10-17T09:42:12.159384+00:00",
+  "writes": [
+    "loop-artifacts/stages/03/r1/artifacts/t05-data-pipeline-design.md"
+  ]
+}

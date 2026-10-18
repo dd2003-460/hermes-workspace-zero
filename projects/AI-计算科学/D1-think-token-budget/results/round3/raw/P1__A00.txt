@@ -1,0 +1,5 @@
+FINAL: 70
+
+Final response only. Ensure exact line "FINAL: 70".
+
+FINAL: 70

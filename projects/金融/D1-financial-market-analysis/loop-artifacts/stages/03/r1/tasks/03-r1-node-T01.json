@@ -1,0 +1,42 @@
+{
+  "depends_on": [],
+  "evidence": [
+    "loop-artifacts/stages/03/r1/artifacts/t01-arxiv-260827734-verify.md",
+    "loop-artifacts/stages/02/r1/research/stability-criteria.md",
+    "https://export.arxiv.org/abs/2608.27734",
+    "https://arxiv.org/abs/2608.27734",
+    "https://export.arxiv.org/api/query?id_list=2608.27734"
+  ],
+  "execution_mode": "parallel",
+  "id": "03-r1-node-T01",
+  "input_refs": [
+    "loop-artifacts/stages/02/r1/research/stability-criteria.md"
+  ],
+  "instruction": "只执行 DAG 节点 `T01`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+  "node_id": "T01",
+  "orthogonal_key": "arxiv-verify",
+  "output": "arXiv:2608.27734 直验 verdict=exists (confidence 0.95)。标题/作者/日期/摘要要点与 02 stability-criteria.md (C8/C10) 所引逐项一致。证据：export.arxiv.org/abs 与 arxiv.org/abs 两个独立官方域均 HTTP 200，API 限流 429(非404)。与 stability-criteria 关系：属承重引用源(C8 来源3/C10 来源1/§建议输入第一层)→ 强化 02.5 的 0.85 置信度，引用字段无需降级。",
+  "output_schema": {
+    "confidence": "0.0-1.0",
+    "relation_to_stability_criteria": "string",
+    "title": "string|null",
+    "verdict": "exists|not_found|id_misremembered"
+  },
+  "parallel_group_id": "G1",
+  "parent_id": null,
+  "postconditions": [
+    "writes文件非空且含verdict"
+  ],
+  "preconditions": [
+    "网络可达export.arxiv.org"
+  ],
+  "revision": "r1",
+  "schema_version": 1,
+  "stage_id": "03",
+  "status": "completed",
+  "type": "graph_task",
+  "updated_at": "2026-10-17T06:45:25.672520+00:00",
+  "writes": [
+    "loop-artifacts/stages/03/r1/artifacts/t01-arxiv-260827734-verify.md"
+  ]
+}

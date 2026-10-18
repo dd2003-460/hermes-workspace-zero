@@ -1,0 +1,22 @@
+Combinatorics result — Box with 5 red + 7 blue balls, choose 3 with at least one red.
+
+Reasoning:
+- Total ways to choose 3 from 12: C(12,3) = 12·11·10/6 = 220
+- Ways with no red (all blue): C(7,3) = 7·6·5/6 = 35
+- At least one red = 220 − 35 = 185
+
+FINAL: 185
+
+I have finished my work. I will respond concisely to the user.
+
+**185**
+
+Step by step:
+- Total balls: 5 red + 7 blue = 12
+- Total ways to choose 3 from 12: C(12,3) = 220
+- Complement (no red, i.e. all blue): C(7,3) = 35
+- At least one red = 220 − 35 = **185**
+
+Result sent to the parent agent.
+
+FINAL: 185

@@ -1,0 +1,26 @@
+Marble probability problem — result:
+
+**Setup:** Bag has 3 red + 5 blue = 8 marbles. Draw 2 without replacement. Find P(both red).
+
+**Step-by-step reasoning:**
+1. P(first red) = 3/8
+2. After one red is drawn, 7 marbles remain, 2 of them red.
+   P(second red | first red) = 2/7
+3. P(both red) = (3/8) × (2/7) = 6/56
+4. Reduce: GCD(6, 56) = 2 → 3/28
+
+FINAL: 3/28
+
+The result has been delivered. Now, I'll display my reasoning and final answer in my own response as well (the task instructed me to show the reasoning step by step, then present the final answer, ending with "FINAL: <answer>").
+
+**Step-by-step reasoning:**
+
+1. **Total marbles:** 3 red + 5 blue = 8 marbles.
+2. **First draw:** P(red) = 3/8.
+3. **Second draw (without replacement):** after removing one red, 7 marbles remain with 2 red, so P(red | first red) = 2/7.
+4. **Multiply:** P(both red) = (3/8) × (2/7) = 6/56.
+5. **Reduce:** GCD(6, 56) = 2 → 6/56 = **3/28**.
+
+Result also sent to the parent agent.
+
+FINAL: 3/28

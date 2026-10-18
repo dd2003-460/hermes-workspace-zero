@@ -1,0 +1,9 @@
+Result for "number of ordered integer pairs (x,y) with x,y in [-100,100] such that 12x^2-xy-6y^2=0": **117**.
+
+Derivation: 12x^2-xy-6y^2 = (3x+2y)(4x-3y)=0. Case 3x+2y=0 → (2k,-3k), k in [-33,33] → 67 pairs. Case 4x-3y=0 → (3m,4m), m in [-25,25] → 51 pairs. Overlap is only (0,0). Total = 67+51-1 = 117. Verified by brute-force enumeration over all 201^2 pairs. FINAL: 117
+
+The task is complete. The result has already been sent to the parent. I'll wrap up with a final answer.
+
+Done. The answer is **117**, derived by factoring $12x^2-xy-6y^2=(3x+2y)(4x-3y)=0$, counting the two solution families within range (67 + 51), subtracting the one overlap $(0,0)$, and verifying by brute-force enumeration. Result sent to the parent agent.
+
+FINAL: 117

@@ -1,0 +1,6 @@
+LEVEL: easy
+FINAL: 4
+
+I've already answered the question and sent it to the parent, so I'm wrapping up here.
+
+RESULT: A 300 km trip at a constant 75 km/h takes 4 hours (300 ÷ 75 = 4). Level: easy. Answer: 4.

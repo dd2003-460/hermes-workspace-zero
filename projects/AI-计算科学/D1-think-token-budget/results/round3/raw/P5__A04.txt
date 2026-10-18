@@ -1,0 +1,5 @@
+279
+
+The task asks for the final answer on the last line. I've already sent the result. I just need to output the final line.
+
+FINAL: 279

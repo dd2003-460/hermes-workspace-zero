@@ -1,0 +1,43 @@
+{
+  "attribute": "验证并记录：金融数据的修订与迟报机制（样本是否混入未来信息）",
+  "concept": "研究未知因素：金融数据的修订与迟报机制（样本是否混入未来信息）",
+  "disposition": "research_required",
+  "field": {
+    "attribute": "验证并记录：金融数据的修订与迟报机制（样本是否混入未来信息）",
+    "concept": "研究未知因素：金融数据的修订与迟报机制（样本是否混入未来信息）",
+    "confidence": 0.7,
+    "disposition": "research_required",
+    "evidence_refs": [
+      "https://github.com/binance/binance-public-data/",
+      "https://github.com/binance/binance-spot-api-docs/blob/master/CHANGELOG.md",
+      "https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md",
+      "https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest",
+      "https://docs.coinglass.com/reference/change-log",
+      "https://www.csindex.com.cn/#/indices/family/detail?indexCode=000300",
+      "https://www.spglobal.com/spdji/en/indices/equity/sp-500/"
+    ],
+    "rationale": "加密端核心机制已一手官方源确认: data.binance.vision免费逐日文件官方承认可被历史修订(binance-public-data README CHECKSUM节: 2022-04-21 aggTrades、2022-08-08 klines两例已记录修订, 可审计)+日线T+1迟报+API末根K线未定版(收盘才冻结)。修订罕见/离散/可审计且已记录者均针对spot→S1 futures funding/OI样本影响大概率可忽略(未100%排除)→修订风险暂定=中。待补(决定中→低): futures归档文件是否在2022-08后或针对futures修订过; Coinglass修订行为(change log无修订条目); A股指数PIT(拟生效样本)与美股财报重述URL未核验。详见research/data-revision-latency.md。",
+    "role": "research_findings"
+  },
+  "flow_only": false,
+  "id": "02-r1-field-field-2d1cbf21dc",
+  "input_refs": [
+    "loop-artifacts/stages/02/r1/fields.json"
+  ],
+  "instruction": "只处理字段 `研究未知因素：金融数据的修订与迟报机制（样本是否混入未来信息）`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/02/r1/tasks/02-r1-field-field-2d1cbf21dc.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+  "output_schema": {
+    "attribute": "string",
+    "concept": "研究未知因素：金融数据的修订与迟报机制（样本是否混入未来信息）",
+    "confidence": "number 0..1",
+    "disposition": "confirmed|inferred|assumed_default|research_required",
+    "evidence_refs": "array[string]",
+    "rationale": "string",
+    "role": "string"
+  },
+  "revision": "r1",
+  "role": "research_findings",
+  "schema_version": 1,
+  "stage_id": "02",
+  "status": "ready",
+  "type": "field_task"
+}

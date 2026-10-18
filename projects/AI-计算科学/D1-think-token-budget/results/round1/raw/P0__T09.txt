@@ -1,0 +1,17 @@
+Result for "In how many ways can you place 3 non-attacking rooks on a 4x4 chessboard (no two share a row or a column)?"
+
+Answer: 96
+
+Reasoning: Choose 3 of 4 rows (C(4,3)=4), choose 3 of 4 columns (C(4,3)=4), then assign rooks via a bijection 3! = 6. Total = 4 x 4 x 6 = 96.
+
+I should complete my turn by stating the final answer directly, since the parent's message indicates I should wrap up my response.
+
+**Step-by-step reasoning:**
+
+1. Choose which 3 of the 4 rows hold a rook: C(4,3) = 4 ways
+2. Choose which 3 of the 4 columns hold a rook: C(4,3) = 4 ways
+3. On the chosen 3 rows x 3 columns, place the rooks so each gets a distinct row and column - this is a permutation of 3 columns over 3 rows: 3! = 6 ways
+
+Total = 4 x 4 x 6 = **96**
+
+FINAL: 96

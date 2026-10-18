@@ -1,0 +1,6 @@
+Result for 3 non-attacking rooks on 4x4 board (no shared row/column): 96. (C(4,3)*C(4,3)*3! = 4*4*6 = 96)
+
+Now I give the final answer.
+96
+
+FINAL: 96

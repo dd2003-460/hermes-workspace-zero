@@ -1,0 +1,313 @@
+开启新对话
+置顶
+ADHD减肥方案评估
+树结构优化动机
+步骤数不能量化直觉
+散热器解热能力估算
+寿命因果可控因素框架
+QSA架构与KVCache分析
+Qwen量化性能对比
+5090与Pro6000性能差异
+今天
+核验四条事实性claim
+昨天
+dsh实例限制解决
+减少Qwen思考输出
+V100并发卡顿与配置
+V100长上下文调优
+7 天内
+波动反射合振动方程
+硬盘故障日志关联
+Tailscale登录与排查
+Mac远程连接vLLM API
+Ubuntu安装WorkBuddy
+断电后按电源键异常
+Ubuntu重装U盘指南
+AppImage安装运行方法
+AA连接Linux与救助
+代理协议错误解决
+服务器测试结果分析
+E5 2686功耗管理
+512G固态只显示150G
+ADHD机制与诊断
+新对话
+30 天内
+Strata方案解析
+平价首饰替代方案
+矩阵乘法复杂度突破
+希捷西数硬盘选购指南
+Strata并发限制分析
+Muse与OpenClaw区别
+解析ORF手征讨论
+SSH免费有限制
+手机卡顿重启原因分析
+远程控制项目对比
+皮肤问题咨询
+Strata项目调研
+Jev置信度准确性分析
+AMD EPYC频率对比
+Dell C4140与1cat对比
+美术鉴赏课提问建议
+X99TF无内置网卡
+配分函数保信息变换
+骨盆大小与生育，寿命研究权衡
+长寿基因检测与机制
+摩卡泡沫绿色原因
+AI Max 395算力解析
+8173与8269对标AMD
+咖啡茶与盐酸托莫西汀的作用机制
+SR势能与Rindler坐标
+FP64单元面积与保留原因
+个人服务器出售token
+TPU GPU算力对比
+夜神模拟器文件与MAA解答
+工具与训练互补
+TP互联带宽瓶颈分析
+5090散热器解热效率对比
+Atria Dawn Preview性能解析
+三模型量化性能对比
+55岁母亲体检建议
+胆结石机制与饮食
+黑武士包辨别方法
+参数和推理效率实验
+鲸鱼娘回应爱意
+四卡V100配置优化
+八卡V100效率与价格
+2026-09
+对公转账骗局需警惕
+vLLM与SGLang缓存区别
+50-60岁胃肠镜筛查建议
+OpenAI纳维-斯托克斯声明
+减肥饮食与外卖热量
+导师拉群如何回复
+教师节晚发邮件建议
+并发与单流吞吐解析
+转行师范生实习行业
+HPE-DGX V100 NVLink性能
+教师节送礼建议
+EPYC 9684X L3缓存优势
+5代EPYC大缓存CPU
+V100算力接近4090原因
+AI部署方案对比
+浙大口腔发票查找理赔
+Above4G开启方法
+免费Agent网站推荐
+loop in loopies含义
+剧本杀三本对比
+场论公理化版本辨析
+央视数据非学术论文
+彩礼离婚率研究核实
+发烧感冒与免疫力关系
+M5 Ultra订购与性能解析
+GPU ECC错误严重需换卡
+M5 Ultra购买与性能疑问
+龙虾永生真相
+左胸骨旁痛需就医
+Witten与代数几何
+性器官颜色医学评估
+V100算力60T真实性
+D·declaim（囯內）
+核验四条事实性claim
+请逐条核验以下4条事实性claim(回测数据可用性/方法论调研结论), 每条给出: 判定(正确/部分正确/错误) + 理由 + 你掌握的相关事实。请基于你的知识直接回答, 不需要搜索。
+
+【Claim 1 - 加密资产数据窗口】
+Binance USDT-M 永续合约的免费批量归档数据(data.binance.vision, 逐日K线 + monthly fundingRate 文件)起始于2020-01(2019年各月文件返回404)。因此免费funding rate数据能覆盖的完整加密牛市只有2020-2021一段; 5年回测窗口2020-01至2025-01+可覆盖2020-21牛、2022熊、2023震荡、2024-25牛。A股日线数据2004年起(AkShare), 美股日线1993年起(Yahoo Finance)。
+
+【Claim 2 - 回测稳定性判据】
+2020-2025样本(6年, 含牛熊震荡)下, 公开实践主流的窗口划分是3-5个互不重叠的年度OOS窗口+expanding window; 没有普适的通过阈值。文献中最严格的显式判据集合: 每窗口OOS净收益t>=2.0 + 样本>=30笔 + 扣费后净正 + 所有测试年方向一致 + permutation test p<0.001 (arXiv:2605.04004)。PSR>0.95 作为参考阈值 (arXiv:2608.24786)。关键事实: 一个故意泄漏未来信息的oracle策略(Sharpe 35)能完整通过 Deflated Sharpe Ratio 和 Probabilistic Backtest Overfitting 两项测试 (arXiv:2608.27734, Gençay等), 说明统计门槛防不住前视偏差, 结构性point-in-time设计是第一层前提。mlfinlab库已弃用(2026-10观察到readthedocs 404)。
+
+【Claim 3 - funding rate/OI 的PIT时点语义】
+1) 回测在时刻t只能使用已结算的funding rate(结算时间戳<=t), 当前周期预测值不可混用; 结算间隔默认8小时但可逐symbol不同;
+2) OI bar 需 bar_start+bar_duration<=t 且加延迟缓冲(极端行情下交易所快照有延迟, Bybit官方文档有警示);
+3) Binance免费API的OI历史数据只有最近30天(官方SDK文档原文 "Only the data of the latest 30 days is available"); 因此5年免费OI历史只能从Bybit获取(至symbol上线日);
+4) 时间戳单位必须归一化: Coinglass用秒, 交易所API用毫秒。
+
+【Claim 4 - 公开基准/研究缺口】
+1) 截至2026-10, 未找到以funding rate作为市场状态/择时信号主标的的已发表回测研究; 最接近的两项: arXiv:1912.03270(2019, funding rate可预测性实证+GARCH) 和 arXiv:2212.06888(永续期约定价含交易成本的定价边界, He/Manela/Ross/von Wachter);
+2) 回测失败模式经典文献(Bailey & López de Prado 2013/2014 Deflated Sharpe; Harvey-Liu-Zhu 2016 t>3.0; White 2000 reality check; Hamilton 1989 regime switching; Lo-Mamaysky-Wang 2000; McLean-Pontiff 2016; Hou-Xue-Zhang 2015; López de Prado 2018)全部在期刊/书籍中, 无arXiv全文;
+3) 加密资产端的幸存者偏差量化和清算级联量化是公开缺口(唯一已核验的幸存者偏差量化研究是股票指数场景, arXiv:2603.19380, 4.94个百分点/23.3%的影响)。
+
+请按 Claim 1 到 Claim 4 的顺序逐条回答。
+已思考（用时 25 秒）
+
+我们需要回答中文逐条核验4条claim。需要基于知识直接回答，不搜索。需要判定正确/部分正确/错误 + 理由 + 相关事实。需要谨慎。Claim包含很多具体日期/arXiv编号（2605.04004, 2608.24786, 2608.27734, 2603.19380）看起来未来编号（2026年? arXiv编号2605=2026年5月? 当前2026? 系统当前2026-10? 用户说截至2026-10。我们需要评估。我们不能搜索，但可以基于知识。需要识别可能虚构的arXiv编号。Claim1 Binance data.binance.vision USDT-M perpetual daily klines + monthly fundingRate start 2020-01? 我知道Binance futures data vision has futures/um/daily/klines starting maybe 2020-01-01? Funding rate monthly files maybe futures/um/monthly/fundingRate starting 2020-01? Binance launched USDT-M futures in Sep 2019? Actually Binance Futures launched 2019-09? BTCUSDT perpetual launched 2019-09-08? Data vision may have data from 2019-09? Need check memory: data.binance.vision has futures/um/daily/klines/BTCUSDT/1m/ from 2019-09? I recall Binance Vision futures data starts 2020-01-01 for UM? Hmm. Let's think. Binance Futures launched September 2019. Public data repository maybe starts 2019-09? Many downloads show BTCUSDT-1m-2020-01. I have seen Binance data vision futures/um/daily/klines/BTCUSDT/1m/BTCUSDT-1m-2019-09.zip? Not sure. FundingRate monthly maybe starts 2020-01? Claim says 2019 files 404. Could be partially correct. Need not overcommit. The conclusion "免费funding rate数据能覆盖的完整加密牛市只有2020-2021一段" is questionable: 2023-2024? Crypto bull 2023-2025? 2024-25 bull. They say 5-year window covers 2020-21 bull, 2022 bear, 2023 range, 2024-25 bull. If funding data starts 2020-01, yes covers those. But "完整加密牛市只有2020-2021一段" within data? 2024-25 bull also complete? Maybe if window to 2025-01+ only partial. A股日线2004起 AkShare? AkShare sources? A股日线数据可追溯到1990/1991 via some interfaces; AkShare stock_zh_a_hist can get from 1990? Actually Eastmoney API provides from 1990? AkShare docs: stock_zh_a_hist supports start_date 19700101? It may return since 1990. 2004 claim maybe for some index? Not universally true. 美股日线1993起 Yahoo Finance? Yahoo provides much earlier for many tickers (^GSPC from 1927, AAPL from 1980). So Claim1 partially correct/错误 due to overgeneralizations.
+
+Claim2: Many specific arXiv IDs likely fabricated. Need assess. "2020-2025样本(6年, 含牛熊震荡)" actually 2020-2025 inclusive 6 years. "公开实践主流的窗口划分是3-5个互不重叠的年度OOS窗口+expanding window; 没有普适的通过阈值" plausible but not a fact. "文献中最严格的显式判据集合: 每窗口OOS净收益t>=2.0 + 样本>=30笔 + 扣费后净正 + 所有测试年方向一致 + permutation test p<0.001 (arXiv:2605.04004)." This arXiv ID future/unverifiable likely not real. "PSR>0.95 作为参考阈值 (arXiv:2608.24786)" also future. "关键事实: 一个故意泄漏未来信息的oracle策略(Sharpe 35)能完整通过 Deflated Sharpe Ratio 和 Probabilistic Backtest Overfitting 两项测试 (arXiv:2608.27734, Gençay等)" This sounds like a known paper? There is "The Probability of Backtest Overfitting" by Bailey et al. DSR can fail under selection? An oracle strategy with future leakage can pass? Maybe a paper "Backtest overfitting in the machine learning era" etc. But arXiv 2608.27734 impossible? Since 2608=Aug 2026; current 2026-10 so could exist, but I don't know. As model knowledge cutoff 2024, cannot verify. Need answer based on knowledge. We should say cannot confirm; many IDs beyond knowledge/possibly fabricated. The broader point: statistical thresholds don't prevent lookahead; PIT design first layer—correct. mlfinlab deprecated? I know mlfinlab by Hudson & Thames was open-source then moved? In 2023? The library may be deprecated/archived; readthedocs 404 possible. But specific 2026 observation not verifiable. Claim2 partial correct: conceptual stability criteria and limitations correct; specific "文献中最严格" and arXiv citations unsupported/likely wrong. Need mention DSR/PSO don't detect leakage if leakage present in all trials? Actually DSR adjusts for number of trials and non-normal returns; if strategy uses future info, its returns are inflated; DSR may still reject if Sharpe high enough? DSR tests whether observed Sharpe exceeds expected max under null; a Sharpe 35 with enough trials could pass? PBO measures overfitting via CSCV; a leaked strategy may be consistently good across subsets, so PBO low. So plausible. But exact paper not known.
+
+Claim3: funding rate PIT semantics. 1 correct: at t use settled funding only; current predicted not mix; intervals default 8h but can vary by symbol (Binance funding intervals can be 1h/2h/4h/8h; Bybit? yes). 2 OI bar PIT with delay buffer; Bybit docs warn? plausible; OI snapshots delayed? Need partial. 3 Binance free API OI history only latest 30 days; official SDK docs phrase "Only the data of the latest 30 days is available" for futures data endpoints? Binance futures "Open Interest Statistics" endpoint has period and limit, data available for last 30 days. Yes. But "因此5年免费OI历史只能从Bybit获取(至symbol上线日)" questionable: Binance Vision may have OI? I don't think data.binance.vision has OI historical. Bybit has open interest history? Bybit API open interest maybe last 7 days? Actually Bybit v5 market/open-interest supports interval and limit, historical maybe up to? Bybit docs: "Query historical open interest" maybe available since? It may not provide full history to symbol launch. Other sources: Coinglass paid, CryptoDataDownload, Amberdata, Kaiko. Free OI 5-year not only Bybit; Bybit may have limited history. So likely false/partial. 4 Coinglass uses seconds? Coinglass API timestamps in ms? Need check: Coinglass API returns timestamps in milliseconds? I recall Coinglass v2 API uses Unix timestamp in milliseconds? Many crypto APIs use ms; Coinglass maybe uses seconds? Hmm. Claim says Coinglass用秒, 交易所API用毫秒. I think Coinglass API timestamps are in milliseconds? Let's recall Coinglass API docs: endpoints return "time" maybe 1645660800000? Coinglass liquidation charts? Their API "startTime" "endTime" in milliseconds? I have seen Coinglass API uses milliseconds for timestamps. But not sure. Binance uses ms. So Claim3 mostly correct on PIT, but #3 and #4 overreach.
+
+Claim4: 1) "截至2026-10, 未找到以funding rate作为市场状态/择时信号主标的的已发表回测研究; 最接近两项: arXiv:1912.03270 (2019, funding rate可预测性实证+GARCH) and arXiv:2212.06888 (永续期约定价含交易成本定价边界, He/Manela/Ross/von Wachter)" Need check arXiv:1912.03270? I know paper "Fundamental analysis of cryptocurrency funding rates"? Let's recall. arXiv 1912.03270 maybe "The predictability of funding rates in cryptocurrency perpetual futures"?? Could be. arXiv 2212.06888 maybe "Perpetual Futures Pricing" by Damien Ackerer, Julien Hugonnier, Urban Jermann? Actually "Perpetual Futures Pricing" by Damien Ackerer, Julien Hugonnier, Urban Jermann (2022?) arXiv? He/Manela/Ross/von Wachter wrote "Fundamentals of perpetual futures" (2022?) Maybe arXiv 2212.06888? I recall paper "Fundamentals of Perpetual Futures" by Songrun He, Asaf Manela, Omri Ross, Victor von Wachter. Yes likely arXiv 2212.06888. Funding rate as timing signal: there are many studies/practitioner research on funding rate as sentiment/contrarian signal, but "已发表回测研究" maybe not formal. Claim "未找到" is a negative search claim cannot verify; likely too strong. 2) "回测失败模式经典文献...全部在期刊/书籍中, 无arXiv全文" This is false: many have arXiv versions? Bailey & López de Prado Deflated Sharpe has arXiv? "The Deflated Sharpe Ratio: Correcting for Selection Bias, Backtest Overfitting and Non-Normality" maybe SSRN, not arXiv. Harvey-Liu-Zhu "…and the Cross-Section of Expected Returns" has arXiv? Maybe not. White 2000 reality check not arXiv. Hamilton 1989 not. Lo-Mamaysky-Wang maybe not. McLean-Pontiff maybe SSRN. Hou-Xue-Zhang maybe SSRN. López de Prado book no. But "全部无arXiv全文" too absolute; some may have arXiv or working paper versions. Also Bailey & López de Prado 2014 "The Probability of Backtest Overfitting" has arXiv? I think maybe arXiv:1502.02166? Wait "Pseudo-mathematics and financial charlatanism" arXiv? There are arXiv papers by Bailey/Lopez de Prado. "The Probability of Backtest Overfitting" maybe Journal of Computational Finance 2016, SSRN. Not sure. Claim partial. 3) Survivorship bias and liquidation cascades quantification are gaps; only verified survivorship bias quantification stock index arXiv:2603.19380 4.94pp/23.3% impact. This future arXiv likely fabricated. There are crypto survivorship bias studies. Liquidation cascades quantified many papers. So Claim4 likely partial/error.
+
+Need produce final with each claim. Need be clear: cannot verify future arXiv IDs; likely hallucinated. Since user asks based on knowledge no search. We should not pretend. We can state "我的知识截止2024，无法核验2026 arXiv编号；这些编号格式对应未来月份，且不在我的知识中，不能作为事实依据". Need maybe mention arXiv IDs 2605 etc are after cutoff and suspicious. The current date 2026-10 but model knowledge not. Need answer in Chinese.
+
+Need structure: Claim1: 判定 部分正确. Reason: core data availability roughly but exact start and coverage overgeneralized; A股/美股 statements too absolute. Relevant facts: Binance Futures launched Sep 2019; data.binance.vision UM data often from 2020-01 for many symbols but some 2019? I need be precise. Let's decide. Should I say "Binance USDT-M perpetual data.binance.vision 的逐日K线和monthly fundingRate起始并非统一2020-01；取决于symbol和数据类型；BTCUSDT等最早可到2019-09/2019年，很多alt从上线日开始；2019各月全部404不成立." Is that true? I need not be exact. Hmm. I recall data.binance.vision futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2020-01.zip? Maybe no 2019. Let's search memory: Binance Vision directory "futures/um/monthly/fundingRate/BTCUSDT/" includes files from 2020-01? I have used it; yes fundingRate monthly starts 2020-01. Klines daily maybe starts 2020-01-01. But Binance futures started 2019-09, why no data? Maybe data vision started 2020-01. For BTCUSDT, first funding rate file maybe 2020-01. So Claim's start 2020-01 may be correct for fundingRate. But "2019年各月文件返回404" true if repo starts 2020. I shouldn't contradict without certainty. However "免费funding rate数据能覆盖的完整加密牛市只有2020-2021一段" false because 2023-2025 bull also in data (if extends to 2025). They themselves say 2024-25牛. Maybe "完整" means data ends 2025-01+ so not complete 2024-25. But 2020-21 complete. 2023-2024? Hmm.
+
+A股日线2004起(AkShare): AkShare stock_zh_a_hist default start 19700101 but Eastmoney returns since IPO; some APIs have 2004 limit? For index data maybe 2004. Claim too broad. 美股Yahoo 1993起: Yahoo has data before 1993 for many. So Claim1 partial.
+
+Need mention "5年回测窗口2020-01至2025-01+可覆盖..." Yes if data starts 2020-01, covers 5 years. But "完整牛市 only 2020-2021" questionable.
+
+Claim2: We'll say 部分正确/大部分不可核验. The general methodological points correct: 3-5 annual OOS + expanding is common; no universal threshold; PIT critical; DSR/PBO cannot guarantee no lookahead. But the "最严格显式判据集合" and exact thresholds tied to arXiv:2605.04004 / 2608.24786 / 2608.27734 are not in my knowledge and IDs are future; cannot accept. "oracle Sharpe 35 passes DSR/PBO" plausible but unverified. mlfinlab deprecated? Known: mlfinlab open-source package was archived? Hudson & Thames moved to paid? In 2023? I can say likely true that project no longer actively maintained/readthedocs may be down, but exact 2026-10 observation unverified.
+
+Claim3: 判定 部分正确. 1 correct. 2 mostly correct as engineering practice; Bybit warning not verify. 3 first half correct (Binance API OI history last 30 days), second half false: not "only Bybit"; Bybit free history also limited and not necessarily to symbol launch; other vendors/paid sources. 4 timestamp units: exchange APIs generally ms; Coinglass I think often ms or sec? Need be careful. Say "不能一概而论；Coinglass不同API版本字段可能是秒或毫秒，交易所有ms也有s（如部分现货/衍生品接口）；必须按字段文档归一化." Is that correct? Coinglass API maybe uses seconds? Hmm. I can phrase "把Coinglass固定为秒、交易所固定为毫秒是过度概括；必须逐接口核验." That's safe.
+
+Claim4: 判定 部分正确/多处错误. Negative search claim unverifiable and likely too strong; funding rate as signal has practitioner/working papers. arXiv 1912.03270 and 2212.06888? 2212.06888 likely He et al. "Fundamentals of Perpetual Futures"; 1912.03270 maybe not sure. "全部无arXiv全文" false/too absolute; some have arXiv/SSRN/working paper. Survivorship/liquidation gaps not absolute; many crypto studies. Future arXiv 2603.19380 cannot verify likely fabricated. Need mention "已发表" vs "公开" ambiguity.
+
+Need maybe include a "总体结论" table. Desired oververbosity 5, so moderate. We need answer per claim. We can include "知识截止说明". Since user says no search, okay.
+
+Need be careful: "arXiv:2605.04004" is not a valid arXiv ID? arXiv IDs: YYMM.NNNNN. 2605 = May 2026. Current 2026-10, possible. But my knowledge cutoff 2024, so cannot know. I can say "超出我可核验范围；若作为事实引用，需要你提供原文；我不能确认其存在." But user wants based on knowledge. Need not call fabricated definitively, but "不可核验/高度可疑".
+
+Need answer in Chinese. Let's draft:
+
+开头: 说明：我无法搜索；我的知识截止早于2026，因此对2026年arXiv编号只能标为不可核验，不把它们当事实。判定基于一般事实和方法论。
+
+Claim1:
+
+判定：部分正确。
+
+理由：Binance Vision 的 UM 数据通常从2020年前后开始，fundingRate monthly 对多数symbol确实从2020-01起，很多2019文件404；但"起始于2020-01"不是所有symbol/所有数据类型统一，alt从上线日；"免费funding能覆盖的完整牛市只有2020-2021"不成立/过度：若数据到2025，2023-2025也可覆盖（至少部分），且2024-25牛是否完整取决于截止。A股AkShare 2004起、美股Yahoo 1993起都过度概括：AkShare多接口可更早/因标的而异；Yahoo很多美股/指数远早于1993。
+
+相关事实: Binance Futures 2019-09上线；data.binance.vision 是官方公开归档；funding interval可非8h；A股历史接口取决于数据源；Yahoo ^GSPC 1927等.
+
+Need maybe not say "通常从2020前后" but okay.
+
+Claim2:
+
+判定：部分正确（概念正确，具体文献/阈值不可核验且表述过强）。
+
+理由: 3-5年度OOS+expanding common; no universal threshold; PIT first; DSR/PBO don't detect lookahead if leakage consistent. But "文献中最严格显式判据集合" and exact arXiv IDs/thresholds not known; arXiv 2605/2608 after knowledge; cannot confirm. "oracle Sharpe 35 passes DSR/PBO" plausible but not established fact. mlfinlab deprecation likely.
+
+相关事实: DSR adjusts multiple testing/non-normality; PBO via CSCV; neither substitutes PIT. t>=2, n>=30 etc are heuristics not universal. Permutation p<0.001 very strict and sample-dependent.
+
+Claim3:
+
+判定：部分正确（1、2基本正确；3后半、4过度）。
+
+理由: funding settled only; interval vary. OI bar availability with delay buffer good. Binance OI history 30 days correct. But "只能从Bybit获取5年免费OI" false: Bybit API历史有限，其他免费/付费源；不一定到symbol上线。Timestamp unit not uniform; must per endpoint.
+
+相关事实: Binance /futures/data/openInterestHist limit last 30 days; Bybit v5 open-interest interval/limit; Coinglass fields vary.
+
+Claim4:
+
+判定：部分正确/多处错误。
+
+理由: Negative "未找到" cannot be事实; funding rate as sentiment/timing has public studies and practitioner backtests; the two arXiv may be close but not exhaustive. "全部无arXiv全文" false/too absolute; many have SSRN/arXiv/working versions. Survivorship/liquidation gaps not absolute; many papers quantify liquidations; future arXiv 2603.19380不可核验.
+
+相关事实: He/Manela/Ross/von Wachter "Fundamentals of Perpetual Futures" likely arXiv 2212.06888; Bailey/Lopez de Prado DSR/PBO; Harvey Liu Zhu t>3; White reality check; Hamilton regime switching; McLean-Pontiff; Hou-Xue-Zhang. Some may have working paper/SSRN not arXiv, but not "全部无arXiv".
+
+Need maybe mention "arXiv:1912.03270" I cannot confirm; maybe title? Could say "我不掌握该编号对应论文，不能确认其内容". Good.
+
+Need final with table? We'll produce concise but enough.
+
+Need ensure "逐条回答" order. We can include bullet list.
+
+Potential issue: Claim1 "Binance USDT-M perpetual free bulk archive data (daily Kline + monthly fundingRate) starts 2020-01 (2019 files 404)." If this is actually true, our partial correct still okay due other parts. Need not be wrong. Maybe say "这一条关于Binance起始的局部说法大体可信，但需要按symbol/type核验". Good.
+
+Need answer "判定(正确/部分正确/错误)" each. Use "部分正确" all? Claim4 maybe "部分正确（含明显错误）". Claim2 "部分正确". Claim3 "部分正确". That is okay.
+
+Need maybe include "相关事实" bullet. We need not be too long. Desired oververbosity 5. Let's compose final.
+
+Need mention "我的知识截止2024，不能核验2026 arXiv". But user maybe expects. Good.
+
+Let's final in Chinese.
+
+说明：我不能搜索；我的知识截止早于2026年，因此对 arXiv:2605.04004、2608.24786、2608.27734、2603.19380 这类2026年编号无法核验，不能把它们当作已确认事实。以下判定基于我掌握的一般事实和方法论。
+
+Claim 1 — 加密资产数据窗口
+
+判定：部分正确。
+
+理由：
+
+“Binance USDT-M 永续的 data.binance.vision 免费归档中，monthly fundingRate 多数 symbol 从 2020-01 左右开始、2019 年文件多为404”这一局部说法大体可信，但不应表述为所有 symbol/所有数据类型统一从 2020-01 开始。Binance Futures 本身2019年上线，不同 symbol 上线日不同；K线、fundingRate、不同合约类型起始日需逐个目录核验。
+
+“免费 funding rate 能覆盖的完整加密牛市只有2020-2021一段”过度且不准确。如果数据窗口到2025-01+，至少能覆盖2023-2025的一部分；2024-25牛是否“完整”取决于截止日。不能因为2020-21是一段完整牛，就说不存在其他可覆盖的牛市段。
+
+“A股日线2004年起(AkShare)”过度概括。AkShare 是接口聚合库，不同接口/数据源/标的历史起点不同；很多A股个股和指数可早于2004，也有接口受数据源限制。
+
+“美股日线1993年起(Yahoo Finance)”也过度概括。Yahoo Finance 对很多指数和个股提供远早于1993的数据，例如 ^GSPC 可追溯到1927年左右，AAPL 可到1980年代；1993不是统一起点。
+
+相关事实：
+
+data.binance.vision 是 Binance 官方公开归档；funding interval 默认8小时但可因 symbol 不同为1h/2h/4h/8h等。
+
+历史数据起点必须按 symbol + data type + market type 核验，不能用单一日期概括全部。
+
+Claim 2 — 回测稳定性判据
+
+判定：部分正确。概念方向大体正确，但具体“最严格判据集合”和 arXiv 引用不可核验，表述过强。
+
+理由：
+
+“2020-2025 样本下常见做法是3-5个不重叠年度OOS窗口 + expanding window；没有普适通过阈值”这一方法论描述基本合理，但属于实践惯例，不是统一“主流标准”。
+
+“每窗口 OOS 净收益 t>=2.0 + 样本>=30笔 + 扣费后净正 + 所有测试年方向一致 + permutation test p<0.001”作为“文献中最严格的显式判据集合”不能确认；这些阈值是启发式组合，不同资产/频率/策略差异很大。t>=2、n>=30 不是普适统计充分条件。
+
+arXiv:2605.04004、arXiv:2608.24786、arXiv:2608.27734 均超出我可核验知识范围；不能确认其存在或内容。把它们作为事实引用需要原文。
+
+“故意泄漏未来信息的 oracle 策略能通过 Deflated Sharpe Ratio 和 PBO”在逻辑上很可能成立：DSR 和 PBO 主要处理多重检验/选择偏差和回测过拟合，不专门检测前视偏差；如果泄漏在所有样本/试验中一致存在，策略可能表现出稳定高 Sharpe 且 PBO 很低。但“Sharpe 35 的具体论文结论”我不能确认。
+
+“结构性 point-in-time 设计是第一层前提”正确。
+
+mlfinlab 已弃用/维护停滞、readthedocs 可能404，这一方向大体可信，但“2026-10观察到”无法核验。
+
+相关事实：
+
+DSR 校正多重试验和非正态收益；PBO 用 CSCV 估计回测过拟合概率；二者都不能替代 PIT 数据设计。
+
+统计门槛只能控制部分选择偏差，防不住未来函数、幸存者偏差、时间戳错位等结构性问题。
+
+Claim 3 — funding rate/OI 的 PIT 时点语义
+
+判定：部分正确。第1、2点基本正确；第3点后半和第4点过度概括。
+
+理由：
+
+正确/基本正确：回测在 t 时刻只能使用结算时间戳 <= t 的 funding rate；当前周期预测值不能混入已实现收益计算；默认8小时但可逐 symbol 不同，Binance 等确实有1h/2h/4h/8h等间隔。
+
+基本正确：OI bar 应满足 bar_start + bar_duration <= t，并加延迟缓冲；极端行情下快照延迟是常见工程问题。Bybit 官方是否有该原文警示我不能确认，但作为实践规则合理。
+
+前半正确，后半错误/过强：Binance 免费 API 的 OI 历史通常只有最近30天，官方措辞类似 “Only the data of the latest 30 days is available”。但“因此5年免费OI历史只能从Bybit获取(至symbol上线日)”不成立：Bybit 免费 API 的 OI 历史也有窗口/频率限制，不一定能到 symbol 上线日；还有其他免费/付费数据源、交易所归档、第三方数据商。不能推出“只能从Bybit”。
+
+过度概括：时间戳单位必须归一化，这是对的；但“Coinglass用秒、交易所API用毫秒”不能一概而论。不同 API 版本、字段、交易所接口可能用秒或毫秒，必须逐接口按文档核验。Binance 多数期货接口用毫秒，但不代表所有交易所所有接口统一毫秒。
+
+相关事实：
+
+Binance Futures openInterestHist 类接口限制最近30天；funding rate 有结算时点语义。
+
+Bybit v5 的 open interest 接口也有 interval/limit 限制，历史深度不是无限到上线日。
+
+PIT 工程上应统一到 UTC、统一单位、按 available_time 而非 event_time 使用数据。
+
+Claim 4 — 公开基准/研究缺口
+
+判定：部分正确，但含明显过强/不可核验表述。
+
+理由：
+
+“截至2026-10未找到以 funding rate 作为市场状态/择时信号主标的的已发表回测研究”是否定性搜索结论，无法作为事实确认，而且很可能过强。公开文献和 practitioner 研究中有不少用 funding rate 作为情绪/拥挤度/套利信号的工作；是否“已发表”取决于定义。arXiv:1912.03270 我不掌握其确切内容，不能确认是“funding rate可预测性+GARCH”；arXiv:2212.06888 很可能对应 He/Manela/Ross/von Wachter 的永续期约定价论文，但“最接近的两项”不是穷尽。
+
+“回测失败模式经典文献全部在期刊/书籍中，无arXiv全文”过于绝对。Bailey & López de Prado 的 DSR/PBO、Harvey-Liu-Zhu、White reality check、Hamilton regime switching、Lo-Mamaysky-Wang、McLean-Pontiff、Hou-Xue-Zhang、López de Prado 2018 等确实主要是期刊/书/SSRN/工作论文，但其中一些有 arXiv 或工作论文版本；不能断言“全部无arXiv全文”。更准确说法是：经典引用通常以期刊/书/SSRN为准，arXiv不是主要载体。
+
+“加密资产端幸存者偏差量化和清算级联量化是公开缺口”过于绝对。加密幸存者偏差和清算级联已有不少学术/行业量化研究；是否仍有缺口取决于具体市场、频率和定义。arXiv:2603.19380 超出我可核验范围，不能确认其“4.94个百分点/23.3%影响”的结论；该编号不应作为已核验事实。
+
+相关事实：
+
+DSR：Bailey & López de Prado；PBO：Bailey, Borwein, López de Prado, Zhu。
+
+Harvey, Liu, Zhu 2016 提出 t>3.0 一类更严格门槛；White 2000 reality check；Hamilton 1989 regime switching；McLean & Pontiff 2016 发表后衰减；Hou-Xue-Zhang 2015 因子复制。
+
+加密 funding rate 作为信号的研究存在，但“主标的为市场状态/择时”的严格已发表回测是否空白，需要系统检索才能下结论。
+
+汇总
+Claim	判定	核心问题
+1	部分正确	Binance起始日局部可信，但“只有2020-21完整牛”、A股2004、美股1993均过度概括
+2	部分正确	方法论方向对；具体“最严格判据”和2026 arXiv不可核验；PIT优先正确
+3	部分正确	funding/OI的PIT原则基本对；Binance OI 30天对；但“只能Bybit”和时间戳单位固定说法过强
+4	部分正确/多处过强	否定性搜索结论不可确认；“全部无arXiv”过绝对；2026 arXiv不可核验
+
+总体：Claim 1、3 的工程直觉有价值但需按 symbol/接口核验；Claim 2 的“PIT优先于统计门槛”是正确核心；Claim 4 不宜作为已核验事实，尤其涉及2026年 arXiv 编号和“未找到/唯一”的绝对表述。
+
+本回答由 AI 生成，内容仅供参考，请仔细甄别
+深度思考
+智能搜索
+内容由 AI 生成，请仔细甄别

@@ -1,0 +1,36 @@
+{
+  "kind": "ralph_web_llm_cross_check",
+  "schema_version": 1,
+  "field_concept": "研究未知因素：可得数据跨度能否覆盖牛市",
+  "claim": "【Claim 1 - 加密资产数据窗口】\nBinance USDT-M 永续合约的免费批量归档数据(data.binance.vision, 逐日K线 + monthly fundingRate 文件)起始于2020-01(2019年各月文件返回404)。因此免费funding rate数据能覆盖的完整加密牛市只有2020-2021一段; 5年回测窗口2020-01至2025-01+可覆盖2020-21牛、2022熊、2023震荡、2024-25牛。A股日线数据2004年起(AkShare), 美股日线1993年起(Yahoo Finance)。",
+  "submitted_at": "2026-10-17T13:00:00+08:00",
+  "observed_at": "2026-10-17T13:10:00+08:00",
+  "timezone": "Asia/Shanghai",
+  "transport": "ego-browser 0.5.1.13 (ego-lite persistent logged-in session; taskSpace web-llm-02.5-20261017)",
+  "responses": [
+    {
+      "provider_id": "deepseek",
+      "endpoint_host": "chat.deepseek.com",
+      "status": "success",
+      "conversation_url": "https://chat.deepseek.com/a/chat/s/338ebad0-e49f-4c4c-ac7c-af0407bc515f",
+      "verdict": "部分正确",
+      "key_points": "Binance UM数据通常2020年前后起步, fundingRate月度多数symbol 2020-01起但逐symbol不同; \"只有2020-21完整牛\"过强; A股2004/美股1993起点过度概括(Yahoo ^GSPC实际1927, AkShare多接口可更早)。",
+      "raw_ref": "loop-artifacts/stages/02.5/r1/web-llm-raw/deepseek-raw.txt"
+    },
+    {
+      "provider_id": "chatgpt",
+      "endpoint_host": "chatgpt.com",
+      "status": "success",
+      "conversation_url": "https://chatgpt.com/c/6ad302ee-3b50-83ee-a25d-944d1333987a",
+      "verdict": "部分正确",
+      "key_points": "2020-01至2025-01约5年非6年; 窗口方向正确, 核心结论成立。",
+      "raw_ref": "loop-artifacts/stages/02.5/r1/web-llm-raw/chatgpt-raw.txt"
+    }
+  ],
+  "successful_provider_ids": [
+    "deepseek",
+    "chatgpt"
+  ],
+  "contradictions_recorded": true,
+  "contradiction_notes": "周期表述5年vs6年; 起点年份概括过强(Yahoo ^GSPC 1927)→已修正表述, 核心窗口(2020-01→2025-01+覆盖2020-21牛/2022熊/2023震荡/24-25牛)双方确认。"
+}

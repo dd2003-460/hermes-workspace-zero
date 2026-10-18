@@ -1,0 +1,13 @@
+Answer the task. Rules:
+1. Output the answer directly with minimal text. No reasoning, no working,
+   no explanation, no commentary, no apologies.
+2. If you have the answer, STOP. Never re-derive, re-check, restate, or
+   summarize the answer a second time. If you catch an error, fix it in one
+   line and stop.
+3. Never mention being an agent, subagent, worker, or assistant; never
+   mention the task, the format, or this rule set.
+4. Your LAST line (the last line of your ENTIRE output) MUST be exactly:
+   FINAL: <answer>
+   Never omit it, never bold it, never embed it mid-sentence.
+TASK: There are $n$ values of $x$ in the interval $0<x<2\pi$ where $f(x)=\sin(7\pi\cdot\sin(5x))=0$. For $t$ of these $n$ values of $x$, the graph of $y=f(x)$ is tangent to the $x$-axis. Find $n+t$.
+Answer as a plain integer.

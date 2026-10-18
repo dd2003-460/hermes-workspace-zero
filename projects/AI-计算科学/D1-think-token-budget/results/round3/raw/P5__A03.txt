@@ -1,0 +1,14 @@
+Result: The number of ordered pairs (x,y) with x,y ∈ [-100,100] integers satisfying 12x² - xy - 6y² = 0 is 117.
+
+Factorization: 12x² - xy - 6y² = (3x+2y)(4x-3y) = 0.
+
+Two families:
+- x = -2k, y = 3k: |k| ≤ 33 → 67 pairs
+- x = 3k, y = 4k: |k| ≤ 25 → 51 pairs
+- Overlap: only (0,0)
+
+Total = 67 + 51 − 1 = 117.
+
+The task is complete. I found the answer is 117 and sent it to the parent agent. Let me output the final answer.
+
+FINAL: 117

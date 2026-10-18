@@ -1,0 +1,4 @@
+A box has 5 red and 7 blue balls. How many ways are there to choose 3 balls such that at least one is red? Answer as a plain number.
+
+Show your reasoning step by step, then give the final answer.
+End with a line exactly: FINAL: <answer>

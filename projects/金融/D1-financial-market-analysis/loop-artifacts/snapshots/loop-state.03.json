@@ -1,0 +1,933 @@
+{
+  "active_tasks": {},
+  "allowed_actions": [
+    "advance",
+    "rollback",
+    "blocked_human",
+    "skip_blocked",
+    "candidate",
+    "explore",
+    "dispatch",
+    "join",
+    "repair_prompt",
+    "clarify"
+  ],
+  "clarification_history": [],
+  "current_artifact": "loop-artifacts/stages/03/r1/state.json",
+  "exploration_history": [],
+  "field_tasks": [
+    {
+      "attribute": "T08节点完成后填写:节点→产物映射+gap列表+结论",
+      "concept": "coverage_proof",
+      "disposition": "pending",
+      "flow_only": false,
+      "id": "03-r1-field-coverage_proof-3d1075181e",
+      "input_refs": [
+        "loop-artifacts/stages/03/r1/fields.json"
+      ],
+      "instruction": "只处理字段 `coverage_proof`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/03/r1/tasks/03-r1-field-coverage_proof-3d1075181e.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+      "output_schema": {
+        "attribute": "string",
+        "concept": "coverage_proof",
+        "confidence": "number 0..1",
+        "disposition": "confirmed|inferred|assumed_default|research_required",
+        "evidence_refs": "array[string]",
+        "rationale": "string",
+        "role": "string"
+      },
+      "path": "loop-artifacts/stages/03/r1/tasks/03-r1-field-coverage_proof-3d1075181e.json",
+      "revision": "r1",
+      "role": "coverage_proof",
+      "schema_version": 1,
+      "stage_id": "03",
+      "status": "ready",
+      "type": "field_task"
+    }
+  ],
+  "graph_tasks": [
+    {
+      "depends_on": [],
+      "evidence": [
+        "loop-artifacts/stages/03/r1/artifacts/t01-arxiv-260827734-verify.md",
+        "loop-artifacts/stages/02/r1/research/stability-criteria.md",
+        "https://export.arxiv.org/abs/2608.27734",
+        "https://arxiv.org/abs/2608.27734",
+        "https://export.arxiv.org/api/query?id_list=2608.27734"
+      ],
+      "execution_mode": "parallel",
+      "id": "03-r1-node-T01",
+      "input_refs": [
+        "loop-artifacts/stages/02/r1/research/stability-criteria.md"
+      ],
+      "instruction": "只执行 DAG 节点 `T01`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "T01",
+      "orthogonal_key": "arxiv-verify",
+      "output": "arXiv:2608.27734 直验 verdict=exists (confidence 0.95)。标题/作者/日期/摘要要点与 02 stability-criteria.md (C8/C10) 所引逐项一致。证据：export.arxiv.org/abs 与 arxiv.org/abs 两个独立官方域均 HTTP 200，API 限流 429(非404)。与 stability-criteria 关系：属承重引用源(C8 来源3/C10 来源1/§建议输入第一层)→ 强化 02.5 的 0.85 置信度，引用字段无需降级。",
+      "output_schema": {
+        "confidence": "0.0-1.0",
+        "relation_to_stability_criteria": "string",
+        "title": "string|null",
+        "verdict": "exists|not_found|id_misremembered"
+      },
+      "parallel_group_id": "G1",
+      "parent_id": null,
+      "path": "loop-artifacts/stages/03/r1/tasks/03-r1-node-T01.json",
+      "postconditions": [
+        "writes文件非空且含verdict"
+      ],
+      "preconditions": [
+        "网络可达export.arxiv.org"
+      ],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "03",
+      "status": "completed",
+      "type": "graph_task",
+      "updated_at": "2026-10-17T06:45:25.672520+00:00",
+      "writes": [
+        "loop-artifacts/stages/03/r1/artifacts/t01-arxiv-260827734-verify.md"
+      ]
+    },
+    {
+      "depends_on": [],
+      "evidence": [
+        "loop-artifacts/stages/02/r1/research/funding-rate-oi-timing.md",
+        "loop-artifacts/stages/02/r1/research/data-revision-latency.md",
+        "loop-artifacts/stages/03/r1/artifacts/t02-oi-source-decision.md"
+      ],
+      "execution_mode": "parallel",
+      "id": "03-r1-node-T02",
+      "input_refs": [
+        "loop-artifacts/stages/02/r1/research/funding-rate-oi-timing.md",
+        "loop-artifacts/stages/02/r1/research/data-revision-latency.md"
+      ],
+      "instruction": "只执行 DAG 节点 `T02`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "T02",
+      "orthogonal_key": "oi-source",
+      "output": "推荐 B（免费OI：Bybit至上线日为主深度源 + Binance 30d交叉验证）作为04默认OI路径；A（仅funding）为Bybit API不可达时的降级后备；C（Coinglass $29/mo）为条件触发分支。\n触发C需04回测同时满足：①walk-forward OOS Sharpe增量ΔS≥+0.20（95%bootstrap CI下界>0）②免费OI有效bar覆盖率<95%或Bybit延迟警示触发率>5% ③实际月费≤$30。\nPIT落地：时间戳归一UTC毫秒；funding用settled(fundingRateTimestamp≤t)；OI bar用bar_start+duration+延迟缓冲≤t（参数化）；openInterest归档404→OI只能live API取数，Bybit API不可达则降级A。\nconfidence=0.70。",
+      "output_schema": {
+        "confidence": "0.0-1.0",
+        "options": "array of {id,name,pros,cons}",
+        "recommended": "A|B|C",
+        "trigger_condition": "string"
+      },
+      "parallel_group_id": "G1",
+      "parent_id": null,
+      "path": "loop-artifacts/stages/03/r1/tasks/03-r1-node-T02.json",
+      "postconditions": [
+        "writes文件非空且含推荐选项与触发条件"
+      ],
+      "preconditions": [
+        "02研究文件可读"
+      ],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "03",
+      "status": "completed",
+      "type": "graph_task",
+      "updated_at": "2026-10-17T06:45:54.677025+00:00",
+      "writes": [
+        "loop-artifacts/stages/03/r1/artifacts/t02-oi-source-decision.md"
+      ]
+    },
+    {
+      "depends_on": [],
+      "evidence": [
+        "loop-artifacts/stages/03/r1/artifacts/t03-negative-search-protocol.md",
+        "https://arxiv.org/abs/2608.25348",
+        "https://arxiv.org/abs/2506.08573",
+        "https://arxiv.org/abs/2601.10812",
+        "https://arxiv.org/abs/2212.06888",
+        "https://export.arxiv.org/api/query?search_query=all:%22funding+rate%22+AND+all:%22backtest%22&max_results=10"
+      ],
+      "execution_mode": "parallel",
+      "id": "03-r1-node-T03",
+      "input_refs": [
+        "loop-artifacts/stages/02/r1/research/public-benchmarks.md"
+      ],
+      "instruction": "只执行 DAG 节点 `T03`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "T03",
+      "orthogonal_key": "negative-search",
+      "output": "T03 负检索协议完成。6 组检索词 × 双通道(arXiv export API 严格短语 + arXiv HTML 宽松词) 交叉验证，主机日期 2026-10-17。两通道一致无一条以加密货币永续 funding rate 为主择时/市场状态信号的已发表回测：API 严格短语 Q1/Q2/Q4/Q5=0 命中，Q3=10 条全为理论/定价/机制/综述，Q6=2 条(最优清算控制 funding 仅作成本项 + 美联储利率误同名)。最接近邻接: 2608.25348(BTC 永续 PIT 审计负结果,非 funding 择时)、2506.08573(funding 设计)、2601.10812(最优清算)。gap_confidence=0.75（arXiv 内强成立；残留风险=付费金融期刊+SSRN 不可搜+术语歧义+funding rate/Fed funds 同名词污染）。[v2 补派 2026-10-17 独立复跑: 6 组 arXiv export API 全部真实 HTTP 200(Q1/Q2/Q4/Q6=0, Q3=6, Q5=1), 命中逐条判读均非反例, 结论与 v1 一致=缺口成立; 2608.25348 经 id_list 核验为真实文献(负结果研究, 非 funding 择时回测, 未虚构); v2 验证已追加至 artifact §5。]",
+      "output_schema": {
+        "databases": "array",
+        "date": "ISO date",
+        "gap_confidence": "0.0-1.0",
+        "limitations": "array",
+        "queries": "array of strings",
+        "results": "array of {query, top_hit, why_not_counterexample}"
+      },
+      "parallel_group_id": "G1",
+      "parent_id": null,
+      "path": "loop-artifacts/stages/03/r1/tasks/03-r1-node-T03.json",
+      "postconditions": [
+        "writes文件非空且含≥5组检索词与逐条结果"
+      ],
+      "preconditions": [
+        "export.arxiv.org可达"
+      ],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "03",
+      "status": "completed",
+      "type": "graph_task",
+      "updated_at": "2026-10-17T07:19:22.722600+00:00",
+      "writes": [
+        "loop-artifacts/stages/03/r1/artifacts/t03-negative-search-protocol.md"
+      ]
+    },
+    {
+      "depends_on": [
+        "T01",
+        "T02",
+        "T03"
+      ],
+      "evidence": [
+        "loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md",
+        "loop-artifacts/stages/03/r1/artifacts/t01-arxiv-260827734-verify.md",
+        "loop-artifacts/stages/03/r1/artifacts/t02-oi-source-decision.md",
+        "loop-artifacts/stages/03/r1/artifacts/t03-negative-search-protocol.md"
+      ],
+      "execution_mode": "serial",
+      "id": "03-r1-node-T04",
+      "input_refs": [
+        "loop-artifacts/stages/03/r1/artifacts/t01-arxiv-260827734-verify.md",
+        "loop-artifacts/stages/03/r1/artifacts/t02-oi-source-decision.md",
+        "loop-artifacts/stages/03/r1/artifacts/t03-negative-search-protocol.md"
+      ],
+      "instruction": "只执行 DAG 节点 `T04`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "T04",
+      "orthogonal_key": null,
+      "output": "L1: T04信号架构定稿spec合成完成，6节齐全(a-f)，t04-signal-spec.md 272行非空，# origin: ai头，(b)节达伪代码级。\nL2: (a)funding确认主信号+T02 OI决策B默认/A降级/C条件触发(ΔS≥+0.20且CI下界>0+覆盖率<95%+≤$30/mo)全文引用；(b)PIT伪代码:UTC毫秒归一(Coinglass×1000)+funding只用settled且ts_norm≤t−发布lag+8h间隔逐symbol可变禁硬编码网格+OI bar bar_start+duration+延迟缓冲≤t+8条违规自检清单；(c)regime日历锁定bull2020-21/bear2022/range2023/bull2024-25(02候选集)禁止样本内拟合；(d)45检验(3regime×3阈值×5窗口)选BH-FDR弃Bonferroni+DSR trial-count deflation。\nL3: (e)贡献=严格条件形式化验证+regime条件化(非发现funding有效)，gap_confidence=0.75严格限定arXiv范围并披露SSRN/付费库未覆盖，最接近邻接=arXiv:2608.25348+arXiv:2608.27734(T01核验0.95)；(f)局限继承T03§3五条+T02 Bybit API可达性未实证(0.70压因,04前需curl预检)+单交易所幸存者偏差。合成confidence=0.72，regime_locked=true。",
+      "output_schema": {
+        "confidence": "0.0-1.0",
+        "pit_rule": "string",
+        "regime_locked": "boolean",
+        "sections": "6节齐全(a-f)"
+      },
+      "parallel_group_id": null,
+      "parent_id": null,
+      "path": "loop-artifacts/stages/03/r1/tasks/03-r1-node-T04.json",
+      "postconditions": [
+        "writes文件非空且6节齐全"
+      ],
+      "preconditions": [
+        "T01/T02/T03已完成"
+      ],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "03",
+      "status": "completed",
+      "type": "graph_task",
+      "updated_at": "2026-10-17T08:02:20.311880+00:00",
+      "writes": [
+        "loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md"
+      ]
+    },
+    {
+      "depends_on": [
+        "T04"
+      ],
+      "evidence": "artifact: loop-artifacts/stages/03/r1/artifacts/t05-data-pipeline-design.md (8 必备节全部成文 + 探针附录 + output_schema 映射). 关键源实测 (host 2026-10-17): S1 data.binance.vision (funding 2020-01 206 存在 / 2019-12 404; klines 2020-01-01 206 / 2019-12-01 404; 站点不暴露目录列举; 可达); S2 Yahoo query1+query2 ^GSPC range=full 均 403 (返 JS 壳非 JSON, 不可复核, 锚点改走新浪 hq.sinajs.cn 200 可达, gb_ixic 2026-10-17); S3 腾讯 ifzq sh000300,day,,,2000,qfq 200 bars=2000 first=2018-07-17 last=2026-10-16 (count=4000/8000 param error, cap~2000; 指数须 qfq); 费率页 www.binance.com/en/fee/trade curl rc=28 timeout + web_fetch non-public IP (不可达→uncertain+last-known 2026-10-17); binance-public-data README (CHECKSUM 节 mutable/SPOT 2025+ µs/updates 清单实测 2 文件均 spot). 引用依据: t04-signal-spec.md §(a)C三条件表+§(b)B1-B6, data-history-depth.md, data-revision-latency.md, t02b-api-reachability-precheck.md (live API rc=35/28 不可达基线).",
+      "execution_mode": "parallel",
+      "id": "03-r1-node-T05",
+      "input_refs": [
+        "loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md",
+        "loop-artifacts/stages/02/r1/research/data-history-depth.md",
+        "loop-artifacts/stages/02/r1/research/data-revision-latency.md"
+      ],
+      "instruction": "只执行 DAG 节点 `T05`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "T05",
+      "orthogonal_key": "data-pipeline",
+      "output": {
+        "cache_strategy": "SHA256 manifest (cache/manifest.json, 每文件 {file_path,sha256,downloaded_at,source_url,checksum_file}) + 每 Binance zip 旁 .CHECKSUM sibling (校验: shasum -a 256 -c / sha256sum -c); 下载即留痕, 文件 immutable-on-disk; 重拉走 fresh 临时路径重算 SHA, 变化 → revision_event (flag+记录变更文件+标记受影响回测 needs_rerun, 永不静默, 原缓存保留可回溯); 无官方 CHECKSUM 的源 (S3 ifzq JSON) 04 自算 sha256 入 manifest。",
+        "pit_rules": [
+          "B1 normalize_ts: 全源→UTC ms int64; Binance/Bybit 原生 ms 直用; Coinglass 秒×1000; Binance SPOT 2025-01+ µs÷1000 (README 明文, 反向陷阱); Binance FUTURES 2025+ README 未明示 → 04 逐文件量级核验 (13位=ms/16位=µs)",
+          "B2 latest_settled_funding: settled-only (settled 与 predicted 分字段物理隔离, predicted 不入集), ts_norm<=t_ms 取最近一条否则 None, 不假设 8h 固定网格 (间隔逐 symbol 可变)",
+          "B3 latest_oi: bar_start+duration_ms+delay_buffer_ms<=t_ms 取上一根已确认 bar, 当前未确认 bar 禁用; delay_buffer 04 实测参数化; 仅 OI_ENABLED 时执行 (本环境 A 路径关闭)",
+          "B4 LAG_RULES 全部参数化 04 实测: funding_settled(ts+LAG_SETTLE_PUB_MS) / bulk_daily(ts+1_day+LAG_T1_MS, T+1) / bulk_monthly(ts+LAG_FIRST_MONDAY_MS, 当月第一周一) / kline_unconfirmed(未定版末根禁用); 可用时刻=标称ts+发布lag+延迟缓冲, 不得假设 ts=可用时刻",
+          "B6 PIT 违规检查清单 8 条 (04 启动前逐条 assert): 无 ts_norm>t 进 signal_at / 无 predicted 混入 / 无 8h 固定网格 / Coinglass 已×1000 / OI 无未确认 bar / bulk 已 T+1 对齐 / 无未定版末根 / 延迟缓冲为 04 实测值; 任一违反回测无效"
+        ],
+        "sources": [
+          {
+            "dataset": "fundingRate",
+            "format": "monthly zip (futures/um/monthly/fundingRate/{SYM}/{SYM}-fundingRate-{YYYY-MM}.zip)",
+            "range": "2020-01→2026-09 (实存 206 monthly; 本节点 2020-01 206 / 2019-12 404 复验)",
+            "unit_rule": "futures 原生 UTC ms; ⚠2025+ µs 量级陷阱 04 逐文件核验 (README 仅明说 spot); 本环境可达 (200/206)",
+            "venue": "data.binance.vision"
+          },
+          {
+            "dataset": "klines 1h",
+            "format": "daily zip (futures/um/daily/klines/{SYM}/{INT}/{SYM}-{INT}-{YYYY-MM-DD}.zip)",
+            "range": "2020-01-01→ (daily zip; 本节点 2020-01-01 206 / 2019-12-01 404 复验)",
+            "unit_rule": "futures 原生 UTC ms; 未定版末根禁用 (B4 kline_unconfirmed); 本环境可达 (200/206)",
+            "venue": "data.binance.vision"
+          },
+          {
+            "dataset": "^GSPC 1d (S2 锚点)",
+            "format": "JSON (本环境 403 返 <title>Yahoo</title> JS/consent 壳, 非 JSON)",
+            "range": "last-known 1950→ (本环境 query1+query2 均 403 不可复核, 标 not first-verified)",
+            "unit_rule": "epoch ms UTC; 锚点值统一取 02.5 交叉验证判定 (2022-10-13 c3669.91 新浪正确, Yahoo 原始 3577.0 标'判定有差异未采用'; 三熊底 2002-10-09 c776.8 / 2008-03-10 c1273.4 / 2022-10-13 c3669.91), 常量表硬编码不运行时拉取; 锚点可复核源=新浪 hq.sinajs.cn (本环境 200 可达, 需 Referer)",
+            "venue": "Yahoo (query1/query2) + 新浪锚点"
+          },
+          {
+            "dataset": "sh000300 1d (沪深300, S3)",
+            "format": "JSON day bars (endpoint /appstock/app/fqkline/get?param=sh000300,day,,,N,qfq; 指数须带 qfq 才返数据)",
+            "range": "API-observable 2018-07-17→2026-10-16 (count=2000 MAX WORKING; count=4000/8000 param error → 单次 cap≈2000 bars; 完整历史 2005-04-08 last-known 非单次可观测)",
+            "unit_rule": "date string 'YYYY-MM-DD' 本地 CST 日线指数 (非 ms, 04 归一口径: 交易日 00:00 或收盘 UTC); 000300 须用生效日当时成分 (拟生效样本→幸存者/前视); qfq 前复权历史 bar 会因调整变化",
+            "venue": "腾讯 ifzq (web.ifzq.gtimg.cn)"
+          }
+        ]
+      },
+      "output_schema": {
+        "cache_strategy": "string",
+        "pit_rules": "array",
+        "sources": "array of {venue,dataset,range,format,unit_rule}"
+      },
+      "parallel_group_id": "G2",
+      "parent_id": null,
+      "path": "loop-artifacts/stages/03/r1/tasks/03-r1-node-T05.json",
+      "postconditions": [
+        "writes文件非空且含全部数据源与PIT规则"
+      ],
+      "preconditions": [
+        "T04已完成"
+      ],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "03",
+      "status": "completed",
+      "type": "graph_task",
+      "updated_at": "2026-10-17T09:42:12.159384+00:00",
+      "writes": [
+        "loop-artifacts/stages/03/r1/artifacts/t05-data-pipeline-design.md"
+      ]
+    },
+    {
+      "depends_on": [
+        "T04"
+      ],
+      "evidence": [
+        "loop-artifacts/stages/03/r1/artifacts/t06-backtest-design.md",
+        "阈值来源: loop-artifacts/stages/02/r1/research/stability-criteria.md (C4/C5 Mesfin五条/PSR>0.95/arXiv:2608.24786)",
+        "多重检验: loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md §(d) (45=3×3×5, BH-FDR α=0.05, DSR trial-count)",
+        "窗口/regime: t04-signal-spec.md §(c) (regime_locked=true, 5个年度OOS 2021-2025)",
+        "基准/失败模式: loop-artifacts/stages/02/r1/research/public-benchmarks.md (F1-F7)",
+        "arXiv锚点已curl直验HTTP 200 (export.arxiv.org, 2026-10-17): 1912.03270 / 2212.06888 / 2603.19380"
+      ],
+      "execution_mode": "parallel",
+      "id": "03-r1-node-T06",
+      "input_refs": [
+        "loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md",
+        "loop-artifacts/stages/02/r1/research/public-benchmarks.md"
+      ],
+      "instruction": "只执行 DAG 节点 `T06`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "T06",
+      "orthogonal_key": "backtest-design",
+      "output": "回测设计完成：45检验矩阵(3 regime × 3 funding阈值 × 5年度OOS窗2021-2025, 2022熊强制入OOS)；expanding walk-forward + regime日历锁定(T04 §(c))；失败判据8条全部引自stability-criteria.md(Mesfin五条T≥2.0/≥30笔/扣费净正/方向一致/permutation p<0.001 + PSR>0.95) + T04 §(d)(BH-FDR α=0.05 + DSR trial-count deflation)，未用stage-gate措辞；成本参数引用T05 §成本参数(并行待落盘)不自造；3个arXiv锚点curl直验HTTP 200，期刊文献全部标uncertain ref。",
+      "output_schema": {
+        "failure_criteria": "array",
+        "metrics": "array",
+        "test_matrix_size": "number",
+        "walk_forward": "string",
+        "windows": "array"
+      },
+      "parallel_group_id": "G2",
+      "parent_id": null,
+      "path": "loop-artifacts/stages/03/r1/tasks/03-r1-node-T06.json",
+      "postconditions": [
+        "writes文件非空且含测试矩阵规模计数"
+      ],
+      "preconditions": [
+        "T04已完成"
+      ],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "03",
+      "status": "completed",
+      "type": "graph_task",
+      "updated_at": "2026-10-17T08:50:32.852990+00:00",
+      "writes": [
+        "loop-artifacts/stages/03/r1/artifacts/t06-backtest-design.md"
+      ]
+    },
+    {
+      "depends_on": [
+        "T04"
+      ],
+      "evidence": "artifact=loop-artifacts/stages/03/r1/artifacts/t07-benchmark-selection.md (完整7节设计文档: §1分层/§2 2603.19380修正/§3 5基线/§4三同协议/§5 12 uncertain ref/§6 04接口/§7置信度0.80)。分层表摘要: 19/19 A层(原A 13维持: 1912.03270 funding锚/2212.06888/2506.08573/2310.14973/1809.05961/2501.09404/1904.00890 momentum截面/2112.15321/2307.06400/2607.04958 PIT/2609.20554/2603.19380股票幸存者/2209.05559; 原B 6全升级A: 2601.10812/2605.05089/2602.11708 trend锚/1905.05023/2209.13623/2309.06711)。uncertain ref 12条(§5): Harvey-Liu-Zhu 2016 JF / Bailey Pseudo-Math AMS 2014(⚠️arXiv 1308.3655是错的=粒子物理中微子论文勿引) / Bailey DSR JCF 2014 / Bailey PBO / López de Prado AFML 2018 / White 2000 / Hamilton 1989 / Jegadeesh-Titman 1993 / Lo-Mamaysky-Wang 2000 / Koijen Carry JFE 2018 / McLean-Pontiff 2016+Hou-Xue-Zhang 2015 / Wilder 1978 RSI。T05 §4成本已确认存在(spot 0.1000%/futures 0.0500%/maker 0.0200% uncertain, 滑点base 0.01%/stress 0.02% taker)。postcondition满足: artifact非空且含基线清单。",
+      "execution_mode": "parallel",
+      "id": "03-r1-node-T07",
+      "input_refs": [
+        "loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md",
+        "loop-artifacts/stages/02/r1/research/public-benchmarks.md"
+      ],
+      "instruction": "只执行 DAG 节点 `T07`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "T07",
+      "orthogonal_key": "benchmark-selection",
+      "output": "T07 基线选择完成：19/19 arXiv URL 逐条 curl 直验全部 A 层（原 13 A 维持 + 原 6 B 全部升级 A，HTTP 200+标题匹配，2026-10-17）；2603.19380 定性为股票指数(NIFTY Smallcap 250)非 crypto，4.94pp/23.3% 不得挪用为 crypto 证据。pre-registered 基线 5 条：buy-and-hold / momentum-12-1(L=252,S=21) / RSI-14 / trend-MA(50/200) / funding 朴素规则(分位25/75，最关键同信号对照)。公平对比协议三同：同 T04 §(c) 锁定窗口(5年度OOS 2021-2025, 2020扩展训练, 2022熊市强制OOS) + 同 T05 §4 成本(接口引用不另定义) + 同 T04 §(d) 45检验家族且基线计入 trial count(45+75 cell=120起，保守防 under-deflation)。12 条期刊/书文献独立成节全标 uncertain ref(含 arXiv 1308.3655 误引警报)。confidence=0.80。",
+      "output_schema": {
+        "anchors": "array of {arxiv_id,verified,role}",
+        "baselines": "array of {name,parameters,rationale}",
+        "comparison_protocol": "string"
+      },
+      "parallel_group_id": "G2",
+      "parent_id": null,
+      "path": "loop-artifacts/stages/03/r1/tasks/03-r1-node-T07.json",
+      "postconditions": [
+        "writes文件非空且含基线清单"
+      ],
+      "preconditions": [
+        "T04已完成"
+      ],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "03",
+      "status": "completed",
+      "type": "graph_task",
+      "updated_at": "2026-10-17T10:33:29.683201+00:00",
+      "writes": [
+        "loop-artifacts/stages/03/r1/artifacts/t07-benchmark-selection.md"
+      ]
+    },
+    {
+      "depends_on": [
+        "T05",
+        "T06",
+        "T07"
+      ],
+      "evidence": "loop-artifacts/stages/03/r1/artifacts/t08-coverage-proof.md",
+      "execution_mode": "serial",
+      "id": "03-r1-node-T08",
+      "input_refs": [
+        "loop-artifacts/stages/03/r1/artifacts/t05-data-pipeline-design.md",
+        "loop-artifacts/stages/03/r1/artifacts/t06-backtest-design.md",
+        "loop-artifacts/stages/03/r1/artifacts/t07-benchmark-selection.md",
+        "loop-artifacts/stages/02.5/r1/advance.json"
+      ],
+      "instruction": "只执行 DAG 节点 `T08`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "T08",
+      "orthogonal_key": null,
+      "output": "coverage_proof 汇总(T01-T08 G2 join): 7 个 declared artifact 全部在盘且字节核验通过@2026-10-17, 0 缺失; 跨 artifact 一致性 6 项核验 = 5✅ + 1❌(T06§8 基线清单 drift vs T07 终版, drift 非 conflict, 04 以 T07 为准); T05 审读 3 flags(F1 µs/F2 updates 2vs3/F3 S2 阻塞) 全部核验 = 未忽略/MEDIUM 不变/引用一致; conclusion: 10 gaps(全为 03→04 开放项/drift/provenance, 无硬冲突), coverage proof PASS with 10 gaps for 04, confidence 0.80.",
+      "output_schema": {
+        "conclusion": "0 gaps|N gaps",
+        "confidence": "0.0-1.0",
+        "gaps": "array",
+        "node_artifact_map": "array of {node_id,artifact,exists}"
+      },
+      "parallel_group_id": null,
+      "parent_id": null,
+      "path": "loop-artifacts/stages/03/r1/tasks/03-r1-node-T08.json",
+      "postconditions": [
+        "writes文件非空且含映射表与gap列表"
+      ],
+      "preconditions": [
+        "T05/T06/T07已完成"
+      ],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "03",
+      "status": "completed",
+      "type": "graph_task",
+      "writes": [
+        "loop-artifacts/stages/03/r1/artifacts/t08-coverage-proof.md"
+      ]
+    }
+  ],
+  "history": [
+    {
+      "action": "advance",
+      "internal_state": "stage_02",
+      "revision": "r1",
+      "stage_id": "01"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_02_5",
+      "revision": "r1",
+      "stage_id": "02"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_03",
+      "revision": "r1",
+      "stage_id": "02.5"
+    }
+  ],
+  "last_action": "advance",
+  "last_event_id": "8f03ff97-5d33-47c1-a7e9-d8d206767111",
+  "last_exploration": null,
+  "last_result": {
+    "action": "advance",
+    "artifact_refs": [],
+    "evidence": [],
+    "message": "",
+    "next_stage": "03",
+    "payload": {
+      "cross_validation": {
+        "contradictions_recorded": 3,
+        "direct_rechecks": [
+          "loop-artifacts/stages/02.5/r1/research/cross-validation-data-history.json",
+          "loop-artifacts/stages/02.5/r1/research/cross-validation-bear-range.json",
+          "loop-artifacts/stages/02.5/r1/research/cross-validation-data-revision.json"
+        ],
+        "open_decision_points_for_03": [
+          "OI三选项: 放弃OI信号 / 短窗口OI(Binance 30天+其他源) / Coinglass付费$29mo",
+          "negative search协议: 检索词/数据库/日期/复现步骤(缺口声明的可核验化)",
+          "2026 arXiv:2608.27734编号直验",
+          "Coinglass $29/mo是否启用(幸存者偏差规避)"
+        ],
+        "receipts": [
+          "loop-artifacts/stages/02.5/r1/web-llm/cross-check-bull-coverage.json",
+          "loop-artifacts/stages/02.5/r1/web-llm/cross-check-stability-criteria.json",
+          "loop-artifacts/stages/02.5/r1/web-llm/cross-check-funding-oi-timing.json",
+          "loop-artifacts/stages/02.5/r1/web-llm/cross-check-public-benchmarks.json"
+        ],
+        "validated_fields": 7
+      },
+      "stage_review": "02.5交叉验证通过: 7字段confidence定案(0.82/0.80/0.85/0.85/0.80/0.85/0.72); 无字段被推翻, 无阻塞矛盾; 进入03任务分解, 须将4个03决策点纳入task graph。"
+    },
+    "revision": "r1",
+    "rollback_to": null,
+    "stage_id": "02.5",
+    "status": "passed"
+  },
+  "plan": {
+    "completed": [
+      "T01",
+      "T02",
+      "T03",
+      "T04",
+      "T05",
+      "T06",
+      "T07",
+      "T08"
+    ],
+    "joins": [
+      {
+        "depends_on": [
+          "T01",
+          "T02",
+          "T03"
+        ],
+        "id": "T04"
+      },
+      {
+        "depends_on": [
+          "T05",
+          "T06",
+          "T07"
+        ],
+        "id": "T08"
+      }
+    ],
+    "nodes": [
+      {
+        "depends_on": [],
+        "execution_mode": "parallel",
+        "id": "T01",
+        "input_refs": [
+          "loop-artifacts/stages/02/r1/research/stability-criteria.md"
+        ],
+        "objective": "直验arXiv:2608.27734编号:用curl访问export.arxiv.org(比arxiv.org稳)的abs页面与arXiv API(export.arxiv.org/api/query?id_list=2608.27734),记录:标题/作者/摘要要点/提交日期;结论verdict=exists|not_found|id_misremembered;若exists,说明其与02 stability-criteria候选判据集的关系(是否属于该判据集、是否强化或削弱02.5的0.85置信度判断)。副脑判断该编号LLM不可核验,此节点是一手验证。若不存在,如实记录并指出02.5引用它的字段需要降级处理。",
+        "orthogonal_key": "arxiv-verify",
+        "output_schema": {
+          "confidence": "0.0-1.0",
+          "relation_to_stability_criteria": "string",
+          "title": "string|null",
+          "verdict": "exists|not_found|id_misremembered"
+        },
+        "parallel_group_id": "G1",
+        "postconditions": [
+          "writes文件非空且含verdict"
+        ],
+        "preconditions": [
+          "网络可达export.arxiv.org"
+        ],
+        "role": "research-worker",
+        "title": "arXiv:2608.27734 编号直验",
+        "writes": [
+          "loop-artifacts/stages/03/r1/artifacts/t01-arxiv-260827734-verify.md"
+        ]
+      },
+      {
+        "depends_on": [],
+        "execution_mode": "parallel",
+        "id": "T02",
+        "input_refs": [
+          "loop-artifacts/stages/02/r1/research/funding-rate-oi-timing.md",
+          "loop-artifacts/stages/02/r1/research/data-revision-latency.md"
+        ],
+        "objective": "对OI(持仓量)数据源做三选项终决:A=放弃OI信号(仅funding rate主信号);B=短窗口OI(Binance免费30天+Bybit免费至symbol上线日);C=Coinglass付费$29/mo(唯一5年免费级历史源,可规避部分幸存者偏差)。评估维度:对研究问题(regime识别/择时)的信号贡献、PIT风险(Binance免费OI仅30天;Bybit有窗口限制;Coinglass单位=秒需归一)、成本(成璐默认画像:免费/开源优先,≤几美元/月可考虑)、可复现性。产出:每选项pros/cons、推荐选项+理由、条件触发规则(副脑建议:Coinglass作为条件分支触发项——仅当04回测证明OI增量贡献超过阈值时才付费启用)。事实依据=02 #5 funding-rate-oi-timing与#6 data-revision-latency研究文件+Lead直探实证(openInterest归档404真不存在)。不得虚构新事实,所有外部事实须来自02研究文件或本节点新检索并附来源。",
+        "orthogonal_key": "oi-source",
+        "output_schema": {
+          "confidence": "0.0-1.0",
+          "options": "array of {id,name,pros,cons}",
+          "recommended": "A|B|C",
+          "trigger_condition": "string"
+        },
+        "parallel_group_id": "G1",
+        "postconditions": [
+          "writes文件非空且含推荐选项与触发条件"
+        ],
+        "preconditions": [
+          "02研究文件可读"
+        ],
+        "role": "research-worker",
+        "title": "OI数据源三选项终决",
+        "writes": [
+          "loop-artifacts/stages/03/r1/artifacts/t02-oi-source-decision.md"
+        ]
+      },
+      {
+        "depends_on": [],
+        "execution_mode": "parallel",
+        "id": "T03",
+        "input_refs": [
+          "loop-artifacts/stages/02/r1/research/public-benchmarks.md"
+        ],
+        "objective": "把02 #7的缺口声明'公开检索未找到以funding rate为主择时信号/市场状态信号的已发表回测'固化为可复现协议并执行核心检索:①检索词≥5组(如'funding rate backtest','funding rate market regime','perpetual funding signal timing','funding rate momentum crypto','perpetual futures funding rate trading strategy');②数据库=arXiv API(可用curl https://export.arxiv.org/api/query?search_query=...)、SSRN(沙箱不可达,列为局限)、Google Scholar(无API,列为局限);③记录检索日期(主机日期=2026-10-17)与逐条结果(top hit+为何不是反例);④已知局限显式列出。注意:子代理沙箱web_search无API key,只用curl+web_fetch;export.arxiv.org比arxiv.org稳。结论:gap_confidence(缺口成立置信度)与残留风险。",
+        "orthogonal_key": "negative-search",
+        "output_schema": {
+          "databases": "array",
+          "date": "ISO date",
+          "gap_confidence": "0.0-1.0",
+          "limitations": "array",
+          "queries": "array of strings",
+          "results": "array of {query, top_hit, why_not_counterexample}"
+        },
+        "parallel_group_id": "G1",
+        "postconditions": [
+          "writes文件非空且含≥5组检索词与逐条结果"
+        ],
+        "preconditions": [
+          "export.arxiv.org可达"
+        ],
+        "role": "research-worker",
+        "title": "negative search协议固化+执行",
+        "writes": [
+          "loop-artifacts/stages/03/r1/artifacts/t03-negative-search-protocol.md"
+        ]
+      },
+      {
+        "depends_on": [
+          "T01",
+          "T02",
+          "T03"
+        ],
+        "execution_mode": "serial",
+        "id": "T04",
+        "input_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/t01-arxiv-260827734-verify.md",
+          "loop-artifacts/stages/03/r1/artifacts/t02-oi-source-decision.md",
+          "loop-artifacts/stages/03/r1/artifacts/t03-negative-search-protocol.md"
+        ],
+        "objective": "合成T01/T02/T03产物为一页信号架构定稿spec,必须包含6节:(a)信号清单:funding rate确认为主信号+T02的OI决策与条件触发规则;(b)PIT时间戳严格规则:funding只用已结算值(fundingRateTimestamp≤t,8h间隔逐symbol可变)、数据可用lag与决策时刻对齐规则、OI bar的bar_start+duration≤t+延迟缓冲、UTC毫秒归一(Coinglass=秒)——副脑判定PIT前视偏差是审稿人第一攻击点,此节是全文最关键;(c)regime定义与转移规则:bull/bear/range判据来自02 stability-criteria候选集+T01验证结果,backtest前锁定,禁止样本内拟合;(d)多重检验修正计划:测试矩阵规模(regime×阈值×窗口)×Bonferroni/FDR选择+理由;(e)贡献定位:严格条件下形式化验证+regime条件化,不是'发现funding rate有效'(从业者常识);(f)局限性声明:单交易所(Binance为主venue)幸存者偏差、数据边界。输入=T01/T02/T03三个artifacts文件。",
+        "output_schema": {
+          "confidence": "0.0-1.0",
+          "pit_rule": "string",
+          "regime_locked": "boolean",
+          "sections": "6节齐全(a-f)"
+        },
+        "postconditions": [
+          "writes文件非空且6节齐全"
+        ],
+        "preconditions": [
+          "T01/T02/T03已完成"
+        ],
+        "role": "synthesis-worker",
+        "title": "信号架构定稿spec(join)",
+        "writes": [
+          "loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md"
+        ]
+      },
+      {
+        "depends_on": [
+          "T04"
+        ],
+        "execution_mode": "parallel",
+        "id": "T05",
+        "input_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md",
+          "loop-artifacts/stages/02/r1/research/data-history-depth.md",
+          "loop-artifacts/stages/02/r1/research/data-revision-latency.md"
+        ],
+        "objective": "写PIT合规的数据ingest spec(设计文档,不是实现):①Binance data.binance.vision免费源:逐日klines(2020-01起)+monthly fundingRate(2020-01→2026-09实存206文件,当月未归档)+spot-only(无futures);②单位归一:UTC毫秒必做;③结算lag规则:T04(b)节逐条落实为伪代码级规则;④OI短窗口处理(T02决策的落地:30天滚动/Bybit补充);⑤S2美股=Yahoo ^GSPC(三熊底锚点:2002-10-09 c776.8/2008-03-10 c1273.4/2022-10-13 c3577.0,注意2022-10-13新浪3669.91判为正确值)、S3 A股=腾讯ifzq;⑥缓存策略与完整性校验(SHA256清单);⑦修订风险低(02.5 #6:updates/清单3文件全spot零futures)。",
+        "orthogonal_key": "data-pipeline",
+        "output_schema": {
+          "cache_strategy": "string",
+          "pit_rules": "array",
+          "sources": "array of {venue,dataset,range,format,unit_rule}"
+        },
+        "parallel_group_id": "G2",
+        "postconditions": [
+          "writes文件非空且含全部数据源与PIT规则"
+        ],
+        "preconditions": [
+          "T04已完成"
+        ],
+        "role": "synthesis-worker",
+        "title": "数据管线设计(PIT合规)",
+        "writes": [
+          "loop-artifacts/stages/03/r1/artifacts/t05-data-pipeline-design.md"
+        ]
+      },
+      {
+        "depends_on": [
+          "T04"
+        ],
+        "execution_mode": "parallel",
+        "id": "T06",
+        "input_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md",
+          "loop-artifacts/stages/02/r1/research/public-benchmarks.md"
+        ],
+        "objective": "写regime条件化回测协议:①窗口定义:S1加密=2020-01→2025-01(5年含2020-21牛+2022熊+2023震荡+24-25牛,A4满足)+S2美股+S3 A股;②测试矩阵:regime×阈值×窗口组合规模计数(为多重检验修正提供基数);③指标:DSR/HQ(Bailey 2013/2014)+turnover+regime条件化收益;④walk-forward方案(滚动重估周期);⑤失败判据(与03 failure_condition对齐:分解不完整/接口未对齐/耦合不清);⑥多重检验修正按T04(d)执行;⑦未核验文献(Bailey/Harvey-Lo/White等经典失败模式文献在期刊/书)标注uncertain不得作为已核验引用。",
+        "orthogonal_key": "backtest-design",
+        "output_schema": {
+          "failure_criteria": "array",
+          "metrics": "array",
+          "test_matrix_size": "number",
+          "walk_forward": "string",
+          "windows": "array"
+        },
+        "parallel_group_id": "G2",
+        "postconditions": [
+          "writes文件非空且含测试矩阵规模计数"
+        ],
+        "preconditions": [
+          "T04已完成"
+        ],
+        "role": "synthesis-worker",
+        "title": "回测实验设计(regime条件化)",
+        "writes": [
+          "loop-artifacts/stages/03/r1/artifacts/t06-backtest-design.md"
+        ]
+      },
+      {
+        "depends_on": [
+          "T04"
+        ],
+        "execution_mode": "parallel",
+        "id": "T07",
+        "input_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md",
+          "loop-artifacts/stages/02/r1/research/public-benchmarks.md"
+        ],
+        "objective": "从02 #7 public-benchmarks(19个arXiv URL已核验)选定对比基线与发表锚点:①已核验锚点:arXiv:1912.03270、arXiv:2212.06888、arXiv:2603.19380(股票幸存者偏差4.94pp/23.3%,唯一已核验的crypto端相关量化);②基线清单:buy-and-hold/动量/RSI等,每个基线给出参数与理由;③公平对比标准(同窗口同数据同成本假设);④未核验经典文献(Hamilton 1989 regime-switching、López de Prado 2018等)保留为candidate引用并标uncertain;⑤对比协议:我们报告什么表/图、对方数字从哪里取。不得新增未核验的外部事实。",
+        "orthogonal_key": "benchmark-selection",
+        "output_schema": {
+          "anchors": "array of {arxiv_id,verified,role}",
+          "baselines": "array of {name,parameters,rationale}",
+          "comparison_protocol": "string"
+        },
+        "parallel_group_id": "G2",
+        "postconditions": [
+          "writes文件非空且含基线清单"
+        ],
+        "preconditions": [
+          "T04已完成"
+        ],
+        "role": "synthesis-worker",
+        "title": "基准与基线选择",
+        "writes": [
+          "loop-artifacts/stages/03/r1/artifacts/t07-benchmark-selection.md"
+        ]
+      },
+      {
+        "depends_on": [
+          "T05",
+          "T06",
+          "T07"
+        ],
+        "execution_mode": "serial",
+        "id": "T08",
+        "input_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/t05-data-pipeline-design.md",
+          "loop-artifacts/stages/03/r1/artifacts/t06-backtest-design.md",
+          "loop-artifacts/stages/03/r1/artifacts/t07-benchmark-selection.md",
+          "loop-artifacts/stages/02.5/r1/advance.json"
+        ],
+        "objective": "验证02.5全部success_criteria与03成功条件被本DAG覆盖:①节点→产物映射表(T01-T08每个节点的writes文件实际存在且非空,用ls -la核实,不信通知);②gap列表:逐条对照03 success_condition('结构化任务图分解到最小执行单元且所有节点已写出declared artifacts并经graph-apply回写,接口清晰对准模块化解耦无遗漏无冲突')与02.5 success_criteria,列出已覆盖/未覆盖;③unresolved claims必须保留为candidate(不得提升为结论);④结论=0 gaps或N gaps+处置建议。副脑质询记录(cac4db0b)的4点中未被T01-T07吸收的残留(如双LLM非独立→stability-criteria 0.85偏高)也要列入gap或显式说明为何不需要处置。",
+        "output_schema": {
+          "conclusion": "0 gaps|N gaps",
+          "confidence": "0.0-1.0",
+          "gaps": "array",
+          "node_artifact_map": "array of {node_id,artifact,exists}"
+        },
+        "postconditions": [
+          "writes文件非空且含映射表与gap列表"
+        ],
+        "preconditions": [
+          "T05/T06/T07已完成"
+        ],
+        "role": "verification-worker",
+        "title": "coverage_proof验证(join)",
+        "writes": [
+          "loop-artifacts/stages/03/r1/artifacts/t08-coverage-proof.md"
+        ]
+      }
+    ],
+    "ready": [],
+    "revision": "r1",
+    "task_results": {
+      "T01": {
+        "artifact_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/t01-arxiv-260827734-verify.md"
+        ],
+        "evidence": [
+          "loop-artifacts/stages/03/r1/artifacts/t01-arxiv-260827734-verify.md",
+          "loop-artifacts/stages/02/r1/research/stability-criteria.md",
+          "https://export.arxiv.org/abs/2608.27734",
+          "https://arxiv.org/abs/2608.27734",
+          "https://export.arxiv.org/api/query?id_list=2608.27734"
+        ],
+        "output": "arXiv:2608.27734 直验 verdict=exists (confidence 0.95)。标题/作者/日期/摘要要点与 02 stability-criteria.md (C8/C10) 所引逐项一致。证据：export.arxiv.org/abs 与 arxiv.org/abs 两个独立官方域均 HTTP 200，API 限流 429(非404)。与 stability-criteria 关系：属承重引用源(C8 来源3/C10 来源1/§建议输入第一层)→ 强化 02.5 的 0.85 置信度，引用字段无需降级。",
+        "updated_at": "2026-10-17T06:45:25.668508+00:00"
+      },
+      "T02": {
+        "artifact_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/t02-oi-source-decision.md"
+        ],
+        "evidence": [
+          "loop-artifacts/stages/02/r1/research/funding-rate-oi-timing.md",
+          "loop-artifacts/stages/02/r1/research/data-revision-latency.md",
+          "loop-artifacts/stages/03/r1/artifacts/t02-oi-source-decision.md"
+        ],
+        "output": "推荐 B（免费OI：Bybit至上线日为主深度源 + Binance 30d交叉验证）作为04默认OI路径；A（仅funding）为Bybit API不可达时的降级后备；C（Coinglass $29/mo）为条件触发分支。\n触发C需04回测同时满足：①walk-forward OOS Sharpe增量ΔS≥+0.20（95%bootstrap CI下界>0）②免费OI有效bar覆盖率<95%或Bybit延迟警示触发率>5% ③实际月费≤$30。\nPIT落地：时间戳归一UTC毫秒；funding用settled(fundingRateTimestamp≤t)；OI bar用bar_start+duration+延迟缓冲≤t（参数化）；openInterest归档404→OI只能live API取数，Bybit API不可达则降级A。\nconfidence=0.70。",
+        "updated_at": "2026-10-17T06:45:54.672977+00:00"
+      },
+      "T03": {
+        "artifact_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/t03-negative-search-protocol.md"
+        ],
+        "evidence": [
+          "loop-artifacts/stages/03/r1/artifacts/t03-negative-search-protocol.md"
+        ],
+        "output": "T03 负检索协议完成。6 组检索词 × 双通道(arXiv export API 严格短语 + arXiv HTML 宽松词) 交叉验证，主机日期 2026-10-17。两通道一致无一条以加密货币永续 funding rate 为主择时/市场状态信号的已发表回测：API 严格短语 Q1/Q2/Q4/Q5=0 命中，Q3=10 条全为理论/定价/机制/综述，Q6=2 条(最优清算控制 funding 仅作成本项 + 美联储利率误同名)。最接近邻接: 2608.25348(BTC 永续 PIT 审计负结果,非 funding 择时)、2506.08573(funding 设计)、2601.10812(最优清算)。gap_confidence=0.75（arXiv 内强成立；残留风险=付费金融期刊+SSRN 不可搜+术语歧义+funding rate/Fed funds 同名词污染）。",
+        "updated_at": "2026-10-17T07:19:22.718385+00:00"
+      },
+      "T04": {
+        "artifact_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md"
+        ],
+        "evidence": [
+          "loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md",
+          "loop-artifacts/stages/03/r1/artifacts/t01-arxiv-260827734-verify.md",
+          "loop-artifacts/stages/03/r1/artifacts/t02-oi-source-decision.md",
+          "loop-artifacts/stages/03/r1/artifacts/t03-negative-search-protocol.md"
+        ],
+        "output": "L1: T04信号架构定稿spec合成完成，6节齐全(a-f)，t04-signal-spec.md 272行非空，# origin: ai头，(b)节达伪代码级。\nL2: (a)funding确认主信号+T02 OI决策B默认/A降级/C条件触发(ΔS≥+0.20且CI下界>0+覆盖率<95%+≤$30/mo)全文引用；(b)PIT伪代码:UTC毫秒归一(Coinglass×1000)+funding只用settled且ts_norm≤t−发布lag+8h间隔逐symbol可变禁硬编码网格+OI bar bar_start+duration+延迟缓冲≤t+8条违规自检清单；(c)regime日历锁定bull2020-21/bear2022/range2023/bull2024-25(02候选集)禁止样本内拟合；(d)45检验(3regime×3阈值×5窗口)选BH-FDR弃Bonferroni+DSR trial-count deflation。\nL3: (e)贡献=严格条件形式化验证+regime条件化(非发现funding有效)，gap_confidence=0.75严格限定arXiv范围并披露SSRN/付费库未覆盖，最接近邻接=arXiv:2608.25348+arXiv:2608.27734(T01核验0.95)；(f)局限继承T03§3五条+T02 Bybit API可达性未实证(0.70压因,04前需curl预检)+单交易所幸存者偏差。合成confidence=0.72，regime_locked=true。",
+        "updated_at": "2026-10-17T08:02:20.307108+00:00"
+      },
+      "T05": {
+        "artifact_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/t05-data-pipeline-design.md"
+        ],
+        "evidence": "artifact: loop-artifacts/stages/03/r1/artifacts/t05-data-pipeline-design.md (8 必备节全部成文 + 探针附录 + output_schema 映射). 关键源实测 (host 2026-10-17): S1 data.binance.vision (funding 2020-01 206 存在 / 2019-12 404; klines 2020-01-01 206 / 2019-12-01 404; 站点不暴露目录列举; 可达); S2 Yahoo query1+query2 ^GSPC range=full 均 403 (返 JS 壳非 JSON, 不可复核, 锚点改走新浪 hq.sinajs.cn 200 可达, gb_ixic 2026-10-17); S3 腾讯 ifzq sh000300,day,,,2000,qfq 200 bars=2000 first=2018-07-17 last=2026-10-16 (count=4000/8000 param error, cap~2000; 指数须 qfq); 费率页 www.binance.com/en/fee/trade curl rc=28 timeout + web_fetch non-public IP (不可达→uncertain+last-known 2026-10-17); binance-public-data README (CHECKSUM 节 mutable/SPOT 2025+ µs/updates 清单实测 2 文件均 spot). 引用依据: t04-signal-spec.md §(a)C三条件表+§(b)B1-B6, data-history-depth.md, data-revision-latency.md, t02b-api-reachability-precheck.md (live API rc=35/28 不可达基线).",
+        "output": {
+          "cache_strategy": "SHA256 manifest (cache/manifest.json, 每文件 {file_path,sha256,downloaded_at,source_url,checksum_file}) + 每 Binance zip 旁 .CHECKSUM sibling (校验: shasum -a 256 -c / sha256sum -c); 下载即留痕, 文件 immutable-on-disk; 重拉走 fresh 临时路径重算 SHA, 变化 → revision_event (flag+记录变更文件+标记受影响回测 needs_rerun, 永不静默, 原缓存保留可回溯); 无官方 CHECKSUM 的源 (S3 ifzq JSON) 04 自算 sha256 入 manifest。",
+          "pit_rules": [
+            "B1 normalize_ts: 全源→UTC ms int64; Binance/Bybit 原生 ms 直用; Coinglass 秒×1000; Binance SPOT 2025-01+ µs÷1000 (README 明文, 反向陷阱); Binance FUTURES 2025+ README 未明示 → 04 逐文件量级核验 (13位=ms/16位=µs)",
+            "B2 latest_settled_funding: settled-only (settled 与 predicted 分字段物理隔离, predicted 不入集), ts_norm<=t_ms 取最近一条否则 None, 不假设 8h 固定网格 (间隔逐 symbol 可变)",
+            "B3 latest_oi: bar_start+duration_ms+delay_buffer_ms<=t_ms 取上一根已确认 bar, 当前未确认 bar 禁用; delay_buffer 04 实测参数化; 仅 OI_ENABLED 时执行 (本环境 A 路径关闭)",
+            "B4 LAG_RULES 全部参数化 04 实测: funding_settled(ts+LAG_SETTLE_PUB_MS) / bulk_daily(ts+1_day+LAG_T1_MS, T+1) / bulk_monthly(ts+LAG_FIRST_MONDAY_MS, 当月第一周一) / kline_unconfirmed(未定版末根禁用); 可用时刻=标称ts+发布lag+延迟缓冲, 不得假设 ts=可用时刻",
+            "B6 PIT 违规检查清单 8 条 (04 启动前逐条 assert): 无 ts_norm>t 进 signal_at / 无 predicted 混入 / 无 8h 固定网格 / Coinglass 已×1000 / OI 无未确认 bar / bulk 已 T+1 对齐 / 无未定版末根 / 延迟缓冲为 04 实测值; 任一违反回测无效"
+          ],
+          "sources": [
+            {
+              "dataset": "fundingRate",
+              "format": "monthly zip (futures/um/monthly/fundingRate/{SYM}/{SYM}-fundingRate-{YYYY-MM}.zip)",
+              "range": "2020-01→2026-09 (实存 206 monthly; 本节点 2020-01 206 / 2019-12 404 复验)",
+              "unit_rule": "futures 原生 UTC ms; ⚠2025+ µs 量级陷阱 04 逐文件核验 (README 仅明说 spot); 本环境可达 (200/206)",
+              "venue": "data.binance.vision"
+            },
+            {
+              "dataset": "klines 1h",
+              "format": "daily zip (futures/um/daily/klines/{SYM}/{INT}/{SYM}-{INT}-{YYYY-MM-DD}.zip)",
+              "range": "2020-01-01→ (daily zip; 本节点 2020-01-01 206 / 2019-12-01 404 复验)",
+              "unit_rule": "futures 原生 UTC ms; 未定版末根禁用 (B4 kline_unconfirmed); 本环境可达 (200/206)",
+              "venue": "data.binance.vision"
+            },
+            {
+              "dataset": "^GSPC 1d (S2 锚点)",
+              "format": "JSON (本环境 403 返 <title>Yahoo</title> JS/consent 壳, 非 JSON)",
+              "range": "last-known 1950→ (本环境 query1+query2 均 403 不可复核, 标 not first-verified)",
+              "unit_rule": "epoch ms UTC; 锚点值统一取 02.5 交叉验证判定 (2022-10-13 c3669.91 新浪正确, Yahoo 原始 3577.0 标'判定有差异未采用'; 三熊底 2002-10-09 c776.8 / 2008-03-10 c1273.4 / 2022-10-13 c3669.91), 常量表硬编码不运行时拉取; 锚点可复核源=新浪 hq.sinajs.cn (本环境 200 可达, 需 Referer)",
+              "venue": "Yahoo (query1/query2) + 新浪锚点"
+            },
+            {
+              "dataset": "sh000300 1d (沪深300, S3)",
+              "format": "JSON day bars (endpoint /appstock/app/fqkline/get?param=sh000300,day,,,N,qfq; 指数须带 qfq 才返数据)",
+              "range": "API-observable 2018-07-17→2026-10-16 (count=2000 MAX WORKING; count=4000/8000 param error → 单次 cap≈2000 bars; 完整历史 2005-04-08 last-known 非单次可观测)",
+              "unit_rule": "date string 'YYYY-MM-DD' 本地 CST 日线指数 (非 ms, 04 归一口径: 交易日 00:00 或收盘 UTC); 000300 须用生效日当时成分 (拟生效样本→幸存者/前视); qfq 前复权历史 bar 会因调整变化",
+              "venue": "腾讯 ifzq (web.ifzq.gtimg.cn)"
+            }
+          ]
+        },
+        "updated_at": "2026-10-17T09:42:12.155065+00:00"
+      },
+      "T06": {
+        "artifact_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/t06-backtest-design.md"
+        ],
+        "evidence": [
+          "loop-artifacts/stages/03/r1/artifacts/t06-backtest-design.md",
+          "阈值来源: loop-artifacts/stages/02/r1/research/stability-criteria.md (C4/C5 Mesfin五条/PSR>0.95/arXiv:2608.24786)",
+          "多重检验: loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md §(d) (45=3×3×5, BH-FDR α=0.05, DSR trial-count)",
+          "窗口/regime: t04-signal-spec.md §(c) (regime_locked=true, 5个年度OOS 2021-2025)",
+          "基准/失败模式: loop-artifacts/stages/02/r1/research/public-benchmarks.md (F1-F7)",
+          "arXiv锚点已curl直验HTTP 200 (export.arxiv.org, 2026-10-17): 1912.03270 / 2212.06888 / 2603.19380"
+        ],
+        "output": "回测设计完成：45检验矩阵(3 regime × 3 funding阈值 × 5年度OOS窗2021-2025, 2022熊强制入OOS)；expanding walk-forward + regime日历锁定(T04 §(c))；失败判据8条全部引自stability-criteria.md(Mesfin五条T≥2.0/≥30笔/扣费净正/方向一致/permutation p<0.001 + PSR>0.95) + T04 §(d)(BH-FDR α=0.05 + DSR trial-count deflation)，未用stage-gate措辞；成本参数引用T05 §成本参数(并行待落盘)不自造；3个arXiv锚点curl直验HTTP 200，期刊文献全部标uncertain ref。",
+        "updated_at": "2026-10-17T08:50:32.848723+00:00"
+      },
+      "T07": {
+        "artifact_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/t07-benchmark-selection.md"
+        ],
+        "evidence": "artifact=loop-artifacts/stages/03/r1/artifacts/t07-benchmark-selection.md (完整7节设计文档: §1分层/§2 2603.19380修正/§3 5基线/§4三同协议/§5 12 uncertain ref/§6 04接口/§7置信度0.80)。分层表摘要: 19/19 A层(原A 13维持: 1912.03270 funding锚/2212.06888/2506.08573/2310.14973/1809.05961/2501.09404/1904.00890 momentum截面/2112.15321/2307.06400/2607.04958 PIT/2609.20554/2603.19380股票幸存者/2209.05559; 原B 6全升级A: 2601.10812/2605.05089/2602.11708 trend锚/1905.05023/2209.13623/2309.06711)。uncertain ref 12条(§5): Harvey-Liu-Zhu 2016 JF / Bailey Pseudo-Math AMS 2014(⚠️arXiv 1308.3655是错的=粒子物理中微子论文勿引) / Bailey DSR JCF 2014 / Bailey PBO / López de Prado AFML 2018 / White 2000 / Hamilton 1989 / Jegadeesh-Titman 1993 / Lo-Mamaysky-Wang 2000 / Koijen Carry JFE 2018 / McLean-Pontiff 2016+Hou-Xue-Zhang 2015 / Wilder 1978 RSI。T05 §4成本已确认存在(spot 0.1000%/futures 0.0500%/maker 0.0200% uncertain, 滑点base 0.01%/stress 0.02% taker)。postcondition满足: artifact非空且含基线清单。",
+        "output": "T07 基线选择完成：19/19 arXiv URL 逐条 curl 直验全部 A 层（原 13 A 维持 + 原 6 B 全部升级 A，HTTP 200+标题匹配，2026-10-17）；2603.19380 定性为股票指数(NIFTY Smallcap 250)非 crypto，4.94pp/23.3% 不得挪用为 crypto 证据。pre-registered 基线 5 条：buy-and-hold / momentum-12-1(L=252,S=21) / RSI-14 / trend-MA(50/200) / funding 朴素规则(分位25/75，最关键同信号对照)。公平对比协议三同：同 T04 §(c) 锁定窗口(5年度OOS 2021-2025, 2020扩展训练, 2022熊市强制OOS) + 同 T05 §4 成本(接口引用不另定义) + 同 T04 §(d) 45检验家族且基线计入 trial count(45+75 cell=120起，保守防 under-deflation)。12 条期刊/书文献独立成节全标 uncertain ref(含 arXiv 1308.3655 误引警报)。confidence=0.80。",
+        "updated_at": "2026-10-17T10:33:29.678649+00:00"
+      },
+      "T08": {
+        "artifact_refs": [
+          "loop-artifacts/stages/03/r1/artifacts/t08-coverage-proof.md"
+        ],
+        "evidence": "loop-artifacts/stages/03/r1/artifacts/t08-coverage-proof.md",
+        "output": "coverage_proof 汇总(T01-T08 G2 join): 7 个 declared artifact 全部在盘且字节核验通过@2026-10-17, 0 缺失; 跨 artifact 一致性 6 项核验 = 5✅ + 1❌(T06§8 基线清单 drift vs T07 终版, drift 非 conflict, 04 以 T07 为准); T05 审读 3 flags(F1 µs/F2 updates 2vs3/F3 S2 阻塞) 全部核验 = 未忽略/MEDIUM 不变/引用一致; conclusion: 10 gaps(全为 03→04 开放项/drift/provenance, 无硬冲突), coverage proof PASS with 10 gaps for 04, confidence 0.80.",
+        "updated_at": "2026-10-17T12:29:48.383416+00:00"
+      }
+    }
+  },
+  "project_id": "D1-financial-market-analysis",
+  "queue": {
+    "blocked_human": [],
+    "candidates": [],
+    "ready": []
+  },
+  "run_history": [],
+  "schema_version": 4,
+  "stage": {
+    "failure_condition": "分解不完整、接口未对齐或耦合不清",
+    "id": "03",
+    "input_description": "已调研、已交叉验证的字段；把任务分解到最小执行单元，模块间接口清晰对准、解耦",
+    "name": "执行任务分解",
+    "on_failure": "02.5",
+    "on_human_block": "exploration",
+    "on_success": "04",
+    "required_outputs": [
+      "task_graph",
+      "coverage_proof"
+    ],
+    "revision": "r1",
+    "success_condition": "结构化任务图分解到最小执行单元且所有节点已写出 declared artifacts 并经 graph-apply 回写，接口清晰对准、模块化解耦，无遗漏无冲突"
+  },
+  "status": "running",
+  "task": {
+    "description": "RALPH 流程试运行：建立一个金融市场数据分析与预测研究原型。先严格读取 loop-state.json、当前阶段契约和任务卡，只做当前阶段，不能跳步。核心目标：研究信息泄露、数据发布时间/修订、幸存者偏差、选择偏差、滚动窗口与特征泄露；同时研究资金博弈、拥挤度、仓位、流动性、资金费率或公开可获得的同类时间戳信号。任何模型与回测都必须仅使用当时可得数据，采用滚动/走步样本外验证、明确训练/验证/测试时间边界、基准模型、交易成本和不确定性；把“稳定一段时间”定义为预先注册的连续样本外窗口指标，绝不承诺盈利或保证预测成功。先主动补全资产类别、频率、持有期、数据源与评价指标；若缺失，列出场景分支和可追溯假设，不使用未来数据。后续阶段在允许时使用网页检索与可用网页 LLM 做独立交叉校验；只发送非敏感、必要的摘要，任何外部事实进入 claim ledger 后才能使用。收到审计或网页校验反馈后修改相应产物并重新验证。研究用途，不构成投资建议。",
+    "source": "ralph run"
+  },
+  "task_intake": null,
+  "task_intake_history": []
+}

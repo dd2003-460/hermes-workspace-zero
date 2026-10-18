@@ -1,0 +1,10 @@
+FINAL: 267
+
+The answer is 267. Let me verify:
+- Divisible by 3: 1000/3 = 333.33, so 333 numbers
+- Divisible by both 3 and 5 (i.e., 15): 1000/15 = 66.67, so 66 numbers
+- Divisible by 3 but not 5: 333 - 66 = 267
+
+The message has been sent to the parent agent. Now I'll present the final answer to the user as requested.
+
+FINAL: 267

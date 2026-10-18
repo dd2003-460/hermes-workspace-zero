@@ -1,0 +1,4 @@
+What is the units digit (last digit) of 7 to the power 2026? Answer as a single digit.
+
+Show your reasoning step by step, then give the final answer.
+End with a line exactly: FINAL: <answer>

@@ -1,0 +1,53 @@
+{
+  "attribute": "验证并记录：稳定性检验判据的时间窗口数量与通过阈值的具体定义",
+  "concept": "研究未知因素：稳定性检验判据的时间窗口数量与通过阈值的具体定义",
+  "disposition": "research_required",
+  "field": {
+    "attribute": "验证并记录：稳定性检验判据的时间窗口数量与通过阈值的具体定义",
+    "concept": "研究未知因素：稳定性检验判据的时间窗口数量与通过阈值的具体定义",
+    "confidence": 0.8,
+    "disposition": "confirmed",
+    "evidence_refs": [
+      "https://arxiv.org/abs/1902.07855",
+      "https://arxiv.org/abs/1905.05023",
+      "https://arxiv.org/abs/1910.05555",
+      "https://arxiv.org/abs/2008.09481",
+      "https://arxiv.org/abs/2209.05559",
+      "https://arxiv.org/abs/2407.17645",
+      "https://arxiv.org/abs/2512.15720",
+      "https://arxiv.org/abs/2601.08896",
+      "https://arxiv.org/abs/2602.00080",
+      "https://arxiv.org/abs/2604.15531",
+      "https://arxiv.org/abs/2605.04004",
+      "https://arxiv.org/abs/2605.17724",
+      "https://arxiv.org/abs/2608.23808",
+      "https://arxiv.org/abs/2608.24786",
+      "https://arxiv.org/abs/2608.27734",
+      "https://arxiv.org/abs/2609.29530",
+      "https://arxiv.org/abs/2610.07701"
+    ],
+    "rationale": "16条arXiv来源HTTP 200实抓核验。窗口划分: 公开实践主流=3-5个互不重叠年度OOS窗口+expanding walk-forward(2605.04004三测试年/2608.24786四窗口+OOT/2602.00080 15年9splits); 月级窗口文献零出现; 理论守恒律α+β≤1+Λ(2609.29530)约束窗口数。通过阈值: 无普适标准; 最严格显式集合=每窗口OOS净收益T≥2.0+≥30笔+扣费净正+全测试年方向一致+permutation p<0.001(2605.04004五条原文); 替代=GT-Score四项复合; MDD跨窗口一致性无公开标准值(未解决,03设计)。验证栈: 结构性PIT是前提(2608.27734: Sharpe 35泄漏oracle完整通过DSR+PBO)→DSR/PBO/PSR按试验数deflate→标签重叠用CPCV/purged k-fold+embargo。校准警告: MinervaScore真实数据无前瞻力(ρ=0.013); 绝对收益门槛误杀真信号(2610.07701)。DSR/PBO原始定义(Bailey/López de Prado)本环境不可达,标未核验领域知识。详见research/stability-criteria.md(17.2KB)。",
+    "role": "research_findings"
+  },
+  "flow_only": false,
+  "id": "02-r1-field-field-13b4f1a40f",
+  "input_refs": [
+    "loop-artifacts/stages/02/r1/fields.json"
+  ],
+  "instruction": "只处理字段 `研究未知因素：稳定性检验判据的时间窗口数量与通过阈值的具体定义`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/02/r1/tasks/02-r1-field-field-13b4f1a40f.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+  "output_schema": {
+    "attribute": "string",
+    "concept": "研究未知因素：稳定性检验判据的时间窗口数量与通过阈值的具体定义",
+    "confidence": "number 0..1",
+    "disposition": "confirmed|inferred|assumed_default|research_required",
+    "evidence_refs": "array[string]",
+    "rationale": "string",
+    "role": "string"
+  },
+  "revision": "r1",
+  "role": "research_findings",
+  "schema_version": 1,
+  "stage_id": "02",
+  "status": "ready",
+  "type": "field_task"
+}

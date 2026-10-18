@@ -1,0 +1,83 @@
+{
+  "active_tasks": {},
+  "allowed_actions": [
+    "advance",
+    "rollback",
+    "blocked_human",
+    "skip_blocked",
+    "candidate",
+    "explore",
+    "dispatch",
+    "join",
+    "repair_prompt",
+    "clarify"
+  ],
+  "clarification_history": [],
+  "current_artifact": "loop-artifacts/stages/02.5/r1/state.json",
+  "exploration_history": [],
+  "field_tasks": [],
+  "graph_tasks": [],
+  "history": [
+    {
+      "action": "advance",
+      "internal_state": "stage_02",
+      "revision": "r1",
+      "stage_id": "01"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_02_5",
+      "revision": "r1",
+      "stage_id": "02"
+    }
+  ],
+  "last_action": "advance",
+  "last_event_id": "2e070ca3-eee8-48df-88f6-7484597e3281",
+  "last_exploration": null,
+  "last_result": {
+    "action": "advance",
+    "artifact_refs": [],
+    "evidence": [],
+    "message": "7/7 研究字段全部调研完成并 field-apply（remaining.complete=true，无未带证据的调研字段）。7 份研究工件落盘 research/：data-history-depth / bull-coverage / bear-range-coverage / stability-criteria / funding-rate-oi-timing / data-revision-latency / public-benchmarks。主代理独立复核：Binance 逐日文件与 fundingRate 节点 HTTP 直探（2020-01 起点、四大市场节点 206）、Yahoo ^GSPC 三大熊市日线 200、arXiv URL 抽查 4/19 全过。web-llm 交叉检查回执 3 provider 全失败（Chromium profile 被占用，ProcessSingleton 锁），按 02 规则记录失败不重试；未核验项（期刊经典文献 11 项、S3 A股、Coinglass 定价等）已列入 research-index 证据缺口，移交 02.5 交叉验证。",
+    "next_stage": "02.5",
+    "revision": "r1",
+    "rollback_to": null,
+    "stage_id": "02",
+    "status": "completed"
+  },
+  "plan": {
+    "joins": [],
+    "nodes": [],
+    "parallel_groups": [],
+    "revision": "r1"
+  },
+  "project_id": "D1-financial-market-analysis",
+  "queue": {
+    "blocked_human": [],
+    "candidates": [],
+    "ready": []
+  },
+  "run_history": [],
+  "schema_version": 4,
+  "stage": {
+    "failure_condition": "核验不足或矛盾未处置",
+    "id": "02.5",
+    "input_description": "02 的调研结果与字段；逐字段派 subagent 去问多种网页 LLM + 权威数据，检查矛盾",
+    "name": "调研后交叉验证",
+    "on_failure": "02",
+    "on_human_block": "exploration",
+    "on_success": "03",
+    "required_outputs": [
+      "cross_validation"
+    ],
+    "revision": "r1",
+    "success_condition": "每个关键调研字段有逐 claim validation_records（≥2 独立具体来源、日期、裁决），矛盾已记录并更新 confidence"
+  },
+  "status": "running",
+  "task": {
+    "description": "RALPH 流程试运行：建立一个金融市场数据分析与预测研究原型。先严格读取 loop-state.json、当前阶段契约和任务卡，只做当前阶段，不能跳步。核心目标：研究信息泄露、数据发布时间/修订、幸存者偏差、选择偏差、滚动窗口与特征泄露；同时研究资金博弈、拥挤度、仓位、流动性、资金费率或公开可获得的同类时间戳信号。任何模型与回测都必须仅使用当时可得数据，采用滚动/走步样本外验证、明确训练/验证/测试时间边界、基准模型、交易成本和不确定性；把“稳定一段时间”定义为预先注册的连续样本外窗口指标，绝不承诺盈利或保证预测成功。先主动补全资产类别、频率、持有期、数据源与评价指标；若缺失，列出场景分支和可追溯假设，不使用未来数据。后续阶段在允许时使用网页检索与可用网页 LLM 做独立交叉校验；只发送非敏感、必要的摘要，任何外部事实进入 claim ledger 后才能使用。收到审计或网页校验反馈后修改相应产物并重新验证。研究用途，不构成投资建议。",
+    "source": "ralph run"
+  },
+  "task_intake": null,
+  "task_intake_history": []
+}

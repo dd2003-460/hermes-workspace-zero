@@ -1,0 +1,94 @@
+{
+  "field_task": "02-r1-field-field-e1e76b2921",
+  "field_concept": "研究未知因素：牛市、熊市与震荡市状态（市场状态覆盖）",
+  "validation_records": [
+    {
+      "claim_ref": "C1",
+      "claim": "S1 加密：Binance USDT-M 免费数据（2020-01 起）完整覆盖 2022 熊 + 2019/2023 震荡，2018 熊仅尾部 → '≥5年含牛熊震荡'窗口(2020-01→2025-01)在加密端成立",
+      "verdict": "confirm",
+      "sources": [
+        {
+          "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2019-12-31.zip",
+          "publisher": "Binance 官方数据门户 data.binance.vision（一手直探）",
+          "observed_at": "2026-10-17T03:44Z",
+          "quote": "HTTP 206（Range 0-0 请求成功）；同路径 2018-12-31.zip 及 2019-12-30 等 12 个更早日期均 404 → 实际数据起点 = 2019-12-31（完整单日 1387 bytes，前序已核验非残片）"
+        },
+        {
+          "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2022-11-21.zip",
+          "publisher": "Binance 官方数据门户 data.binance.vision（一手直探）",
+          "observed_at": "2026-10-17T03:44Z",
+          "quote": "HTTP 206；同批重探 2020-03-12（崩盘底）/2023-10-01（震荡）/2025-01-02（窗口末）均 206；前序另核验 2020-01-01/2023-01-02/2023-07-03/2024-06-03 均 206"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/binance/binance-public-data/master/README.md",
+          "publisher": "Binance 官方 GitHub 文档库（binance/binance-public-data）",
+          "observed_at": "2026-10-17T03:44Z",
+          "quote": "The website Binance Data Collection (https://data.binance.vision/) offers easy access for anyone to download Binance's public market data, which is aggregated into daily or monthly files. All symbols are supported, with new daily data becoming available the next day…; FUTURES 节: USD-M Futures / COIN-M Futures，Klines from /fapi/v1/klines API endpoint"
+        },
+        {
+          "url": "https://data.binance.vision/",
+          "publisher": "Binance 数据门户首页",
+          "observed_at": "2026-10-17T03:43Z",
+          "quote": "HTTP 200，页面标题 'Binance Data Collection — Market Data'，含 Market Data 目录与 Terms of Use 链接"
+        }
+      ],
+      "note": "数据一手直探（本 worker 2026-10-17T03:44Z 重探 + 主代理前序直探）确认：起点 = 2019-12-31（206 完整单日），2018 年全段 404；2020-03-12/2022-11-21/2023-10-01/2025-01-02 等关键节点全 206。修正两处措辞（均使事实更优或更精确）：①'2020-01 起' → 实际起点 2019-12-31；②'2019 震荡'实际仅覆盖 2019-12-31 单日，2023 震荡则完整覆盖。窗口 2020-01→2025-01（5年）含 2020-21 牛 + 2022 熊 + 2023 震荡，A4 判据在加密端成立。局限（如实记录）：两来源均为 Binance 发布方（数据文件 + 官方文档仓库），本沙箱未找到独立第三方文档（www.binance.com DNS 不可达、AKShare 加密货币页无 Binance 历史接口、binance-spot-api-docs README 无 data.binance.vision 引用）；但数据本身为一手直探（状态码+字节数），证据强度不受 publisher 重复影响。"
+    },
+    {
+      "claim_ref": "C2",
+      "claim": "S2 美股：免费日线源（Yahoo Finance chart API 或 Stooq）覆盖 2000-02/2008/2022 三大熊市；需确认 Yahoo 日线历史精确起点（先验: 1993 或更早）",
+      "verdict": "confirm",
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=1d",
+          "publisher": "Yahoo Finance chart API（主代理一手探测；本沙箱 403 大陆屏蔽，不可独立复探）",
+          "observed_at": "主代理一手（精确时间戳未记录，见 loop-artifacts/stages/02/r1/research/bear-range-coverage.md）",
+          "quote": "三个熊底节点全部 HTTP 200：2002-10-09 close 776.8 / 2008-03-10 close 1273.4 / 2022-10-13 close 3577.0；历史起点不晚于 2002-10；2000-01-03 窗口探测返回 400（疑查询格式错误而非 no-data）"
+        },
+        {
+          "url": "https://stock.finance.sina.com.cn/usstock/api/json_v2.php/US_MinKService.getDailyK?symbol=.INX",
+          "publisher": "新浪财经美股日线 API（.INX = S&P 500；本 worker 一手直探）",
+          "observed_at": "2026-10-17T02:50Z",
+          "quote": "HTTP 200，全量 5737 bars：首 bar 2004-01-02 o=1111.92 c=1108.48；2008-03-10 o=1293.16 h=1295.01 l=1272.66 c=1273.37（与 Yahoo 1273.4 吻合）；2009-03-09 l=672.88 c=676.53（2008 熊底）；2022-10-13 o=3520.37 h=3685.41 l=3491.58 c=3669.91；末 bar 2026-10-16 c=7659.44"
+        },
+        {
+          "url": "https://fred.stlouisfed.org/series/SP500",
+          "publisher": "FRED（圣路易斯联储）官方 S&P 数据系列页（死路记录，非支持来源）",
+          "observed_at": "2026-10-17T02:40Z",
+          "quote": "FRED and its associated services will include 10 years of daily history for Standard & Poors and Dow Jones Averages series; Frequency: Daily, Close; Source: S&P Dow Jones Indices LLC。CSV 直探实测仅返回 2016-10-17 起（cosd/coed 参数被忽略）"
+        }
+      ],
+      "note": "两个独立发布方的免费日线源确认：Yahoo（主代理一手，覆盖 2000-02/2008/2022 三熊底）+ 新浪 .INX（本 worker 一手，起点 2004-01-02，覆盖 2008/2022，2008-03-10 两源值吻合 1273.37≈1273.4）。Stooq 本沙箱不可达（JS challenge/403）未纳入；FRED 日线官方仅保留 10 年，对 C2 为死路（仅证明免费官方 S&P 日线源存在的弱旁证）。保留 1：2000-02 熊底为单源（仅 Yahoo）。保留 2：Yahoo 精确日线起点（先验 1993 或更早）未验证——400 响应疑为查询格式错误，本沙箱 403 无法复测；非阻塞：A4 在 2000-02 或 2004-01 起点下均成立。非阻塞矛盾记录：2022-10-13 两源值差 2.6%（详见 contradictions），后续节点校验以新浪 3669.91 为准。"
+    },
+    {
+      "claim_ref": "C3",
+      "claim": "S3 A股：找一个免费 A股日线源（AkShare 文档/腾讯 qt.gtimg.cn/新浪/网易 等），验证 2015-06 顶/2018-10 底/2022-04 底节点可取数，从而覆盖 2008/2015/2018/2022 熊+2016-17 震荡",
+      "verdict": "confirm",
+      "sources": [
+        {
+          "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,day,START,END,640,qfq",
+          "publisher": "腾讯财经 ifzq K线 API（上证指数 sh000001 日K；本 worker 一手实际取数）",
+          "observed_at": "2026-10-17T02:46Z",
+          "quote": "HTTP 200 JSON：2015-06-12 o=5143.34 c=5166.35 h=5178.19 l=5103.40（预期~5178顶，精确）；2018-10-19 c=2550.47 l=2449.20（预期~2449，精确）；2022-04-27 c=2958.28 l=2863.65（预期~2863，精确）；2008-10-28 l=1664.93（2008熊底）；2016-01-27 l=2638.30（预期2016-01-28~2638，差1天）；2017-12-29 c=3307.17 h=3308.22（预期~3300）"
+        },
+        {
+          "url": "https://akshare.akfamily.xyz/data/index/index.html",
+          "publisher": "AKShare 1.19.1 官方文档（指数数据页）",
+          "observed_at": "2026-10-17T02:45Z",
+          "quote": "确认免费 A股指数日线接口：stock_zh_index_daily（新浪，'单次返回指定 symbol 的所有历史行情数据'，示例数据自 2005-01-04 起）、stock_zh_index_daily_tx（腾讯，'支持自定义时间范围'，底层即来源 1 的 web.ifzq.gtimg.cn 端点）、stock_zh_index_daily_em（东财）、index_us_stock_sina（新浪美股）"
+        }
+      ],
+      "note": "2 来源达成（实际取数 + 文档，任务允许口径）。腾讯源 6 关键节点全部在 ±2% 容忍内，其中 3 节点与预期值精确吻合；2008 熊底（1664.93）与 2016-17 震荡（2638.30/3307.17）均可取 → 2008/2015/2018/2022 熊 + 2016-17 震荡覆盖成立。已排除候选（如实记录）：网易 163 K线 API 已死（HTTP 000/空）；新浪 CN datalen 上限 1023（最旧 bar 2022-07-26，深度不够覆盖 2015/2018 节点）；Yahoo 000300.SS 返回 400（不支持）。"
+    }
+  ],
+  "confidence_after": 0.85,
+  "confidence_rationale": "三条 claim 全部 confirm 且各满足 ≥2 来源口径（C3 = 腾讯实际取数 + AKShare 文档；C2 = Yahoo 主代理一手 + 新浪 .INX 本 worker 一手，两独立发布方；C1 = data.binance.vision 数据一手直探 + binance-public-data 官方文档库），关键节点值全部实测落地。由 0.7 ↑ 至 0.85。未给 ≥0.9 的残留不确定性：① Yahoo 精确日线起点年份未验证（先验 1993 或更早；2000-01 探测 400 疑为格式错误，本沙箱 403 不可复测）；② 2000-02 美股熊底单源（仅 Yahoo）；③ C1 两来源同发布方（Binance），无独立第三方文档佐证数据起点；④ C2 存在一处 2.6% 跨源值差异（非阻塞）。",
+  "contradictions": [
+    {
+      "claim_ref": "C2",
+      "type": "cross_source_value_discrepancy",
+      "blocking": false,
+      "detail": "S&P 500 2022-10-13 收盘价：Yahoo（主代理记录）3577.0 vs 新浪 .INX（本 worker 一手直探）3669.91，差 2.6%（超 ±2% 节点容忍）。判断：新浪 bar 为真实 2022-10-13 交易日（当日为 +3.5% 反弹日，3669.91 与公开 S&P 收盘一致）；主代理 Yahoo 值疑为窗口首 bar 日期偏移。不影响 C2 覆盖性结论（非阻塞）；后续若用该节点做节点校验，应以 3669.91 为准。"
+    }
+  ]
+}

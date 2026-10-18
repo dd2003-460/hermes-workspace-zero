@@ -1,0 +1,18 @@
+Problem: Find the sum of all integer bases b>9 for which 17_b divides 97_b.
+
+Solution: 17_b = b+7, 97_b = 9b+7. Since 9b+7 = 9(b+7) − 56, we need (b+7) | 56. With b>9, b+7 > 16; divisors of 56 exceeding 16 are 28 and 56, giving b = 21 and b = 49. Verified computationally (brute force to 100000): only b ∈ {21, 49} work. Checks: 21+7=28, 9·21+7=196=28·7 ✓; 49+7=56, 9·49+7=448=56·8 ✓.
+
+FINAL: 70
+
+Done. I'll present the final answer in my response.
+
+**Reasoning:**
+
+1. In base $b$: $17_b = b + 7$ and $97_b = 9b + 7$.
+2. We need $(b+7) \mid (9b+7)$. Rewriting: $9b + 7 = 9(b+7) - 56$.
+3. So $(b+7) \mid 56$. Since $b > 9$, we have $b + 7 > 16$.
+4. Divisors of 56 are $1, 2, 4, 7, 8, 14, 28, 56$; those greater than 16 are $28$ and $56$.
+5. $b + 7 = 28 \Rightarrow b = 21$; $\quad b + 7 = 56 \Rightarrow b = 49$.
+6. Verification (brute force): only $b \in \{21, 49\}$ satisfy the condition. Sum $= 21 + 49 = 70$.
+
+FINAL: 70

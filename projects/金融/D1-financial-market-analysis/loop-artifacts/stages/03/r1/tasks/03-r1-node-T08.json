@@ -1,0 +1,43 @@
+{
+  "depends_on": [
+    "T05",
+    "T06",
+    "T07"
+  ],
+  "evidence": "loop-artifacts/stages/03/r1/artifacts/t08-coverage-proof.md",
+  "execution_mode": "serial",
+  "id": "03-r1-node-T08",
+  "input_refs": [
+    "loop-artifacts/stages/03/r1/artifacts/t05-data-pipeline-design.md",
+    "loop-artifacts/stages/03/r1/artifacts/t06-backtest-design.md",
+    "loop-artifacts/stages/03/r1/artifacts/t07-benchmark-selection.md",
+    "loop-artifacts/stages/02.5/r1/advance.json"
+  ],
+  "instruction": "只执行 DAG 节点 `T08`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+  "node_id": "T08",
+  "orthogonal_key": null,
+  "output": "coverage_proof 汇总(T01-T08 G2 join): 7 个 declared artifact 全部在盘且字节核验通过@2026-10-17, 0 缺失; 跨 artifact 一致性 6 项核验 = 5✅ + 1❌(T06§8 基线清单 drift vs T07 终版, drift 非 conflict, 04 以 T07 为准); T05 审读 3 flags(F1 µs/F2 updates 2vs3/F3 S2 阻塞) 全部核验 = 未忽略/MEDIUM 不变/引用一致; conclusion: 10 gaps(全为 03→04 开放项/drift/provenance, 无硬冲突), coverage proof PASS with 10 gaps for 04, confidence 0.80.",
+  "output_schema": {
+    "conclusion": "0 gaps|N gaps",
+    "confidence": "0.0-1.0",
+    "gaps": "array",
+    "node_artifact_map": "array of {node_id,artifact,exists}"
+  },
+  "parallel_group_id": null,
+  "parent_id": null,
+  "postconditions": [
+    "writes文件非空且含映射表与gap列表"
+  ],
+  "preconditions": [
+    "T05/T06/T07已完成"
+  ],
+  "revision": "r1",
+  "schema_version": 1,
+  "stage_id": "03",
+  "status": "completed",
+  "type": "graph_task",
+  "updated_at": "2026-10-17T12:29:48.388081+00:00",
+  "writes": [
+    "loop-artifacts/stages/03/r1/artifacts/t08-coverage-proof.md"
+  ]
+}

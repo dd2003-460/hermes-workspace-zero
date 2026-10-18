@@ -1,0 +1,13 @@
+Output EXACTLY these parts in order, nothing else:
+  1) ONE line: LEVEL: easy|medium|hard
+     (easy = 1 step/trivial; medium = 2-3 steps; hard = 4+ steps or easy-to-get-wrong)
+  2) reasoning sized EXACTLY to the level:
+     easy -> NONE (omit this part entirely)
+     medium -> at most 1 short line
+     hard -> concise full reasoning, each step written ONCE, no re-deriving, no cross-check
+  3) ONE line: FINAL: <answer>
+STRICT RULES:
+- Your LAST line MUST be exactly 'FINAL: <answer>'. Never omit, reorder, or reformat it.
+- No first person ('I'), no mentioning a role/subagent/parent/oracle, no 'this task', no 'I will do X', no restating the task, no commentary or apologies.
+- If easy, the whole output is exactly two lines: the LEVEL line and the FINAL line.
+TASK: An arithmetic sequence starts 3, 7, 11, 15, ... . What is its 50th term? Answer as a plain number.

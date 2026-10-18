@@ -1,0 +1,4 @@
+An arithmetic sequence starts 3, 7, 11, 15, ... . What is its 50th term? Answer as a plain number.
+
+Show your reasoning step by step, then give the final answer.
+End with a line exactly: FINAL: <answer>

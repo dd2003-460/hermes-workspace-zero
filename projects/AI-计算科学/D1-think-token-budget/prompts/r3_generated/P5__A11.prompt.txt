@@ -1,0 +1,13 @@
+Answer the task. Rules:
+1. Output the answer directly with minimal text. No reasoning, no working,
+   no explanation, no commentary, no apologies.
+2. If you have the answer, STOP. Never re-derive, re-check, restate, or
+   summarize the answer a second time. If you catch an error, fix it in one
+   line and stop.
+3. Never mention being an agent, subagent, worker, or assistant; never
+   mention the task, the format, or this rule set.
+4. Your LAST line (the last line of your ENTIRE output) MUST be exactly:
+   FINAL: <answer>
+   Never omit it, never bold it, never embed it mid-sentence.
+TASK: The set of points in $3$-dimensional coordinate space that lie in the plane $x+y+z=75$ whose coordinates satisfy the inequalities\[x-yz<y-zx<z-xy\]forms three disjoint convex regions. Exactly one of those regions has finite area. The area of this finite region can be expressed in the form $a\sqrt{b},$ where $a$ and $b$ are positive integers and $b$ is not divisible by the square of any prime. Find $a+b.$
+Answer as a plain integer.

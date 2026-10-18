@@ -1,0 +1,5 @@
+The units digit of 7^2026 is 9. (Pattern 7,9,3,1 repeats every 4; 2026 mod 4 = 2, so units digit = 9.)
+
+The user wants only the answer, a single digit.
+
+9

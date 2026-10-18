@@ -1,0 +1,13 @@
+cond,task,cat,diff,correct,fmt,chars,toks_est
+P0,A00,number_theory,medium,True,True,923,231
+P0,A03,number_theory,easy,True,True,746,186
+P0,A04,combinatorics,medium,True,False,970,242
+P0,A09,combinatorics,hard,True,False,764,191
+P1,A00,number_theory,medium,True,True,74,18
+P1,A03,number_theory,easy,True,True,329,82
+P1,A04,combinatorics,medium,True,False,251,63
+P1,A09,combinatorics,hard,True,True,424,106
+P5,A00,number_theory,medium,True,True,188,47
+P5,A03,number_theory,easy,True,True,434,108
+P5,A04,combinatorics,medium,True,True,138,34
+P5,A09,combinatorics,hard,False,True,657,164

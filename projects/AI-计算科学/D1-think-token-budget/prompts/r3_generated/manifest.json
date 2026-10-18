@@ -1,0 +1,242 @@
+[
+  {
+    "cond": "P0",
+    "task": "A00",
+    "file": "P0__A00.prompt.txt",
+    "chars": 211,
+    "expected": "70",
+    "diff": "medium"
+  },
+  {
+    "cond": "P0",
+    "task": "A03",
+    "file": "P0__A03.prompt.txt",
+    "chars": 273,
+    "expected": "117",
+    "diff": "easy"
+  },
+  {
+    "cond": "P0",
+    "task": "A04",
+    "file": "P0__A04.prompt.txt",
+    "chars": 362,
+    "expected": "279",
+    "diff": "medium"
+  },
+  {
+    "cond": "P0",
+    "task": "A09",
+    "file": "P0__A09.prompt.txt",
+    "chars": 1440,
+    "expected": "81",
+    "diff": "hard"
+  },
+  {
+    "cond": "P0",
+    "task": "A11",
+    "file": "P0__A11.prompt.txt",
+    "chars": 538,
+    "expected": "510",
+    "diff": "hard"
+  },
+  {
+    "cond": "P0",
+    "task": "A16",
+    "file": "P0__A16.prompt.txt",
+    "chars": 231,
+    "expected": "49",
+    "diff": "medium"
+  },
+  {
+    "cond": "P0",
+    "task": "A19",
+    "file": "P0__A19.prompt.txt",
+    "chars": 1429,
+    "expected": "336",
+    "diff": "hard"
+  },
+  {
+    "cond": "P0",
+    "task": "A23",
+    "file": "P0__A23.prompt.txt",
+    "chars": 323,
+    "expected": "149",
+    "diff": "medium"
+  },
+  {
+    "cond": "P0",
+    "task": "A25",
+    "file": "P0__A25.prompt.txt",
+    "chars": 326,
+    "expected": "113",
+    "diff": "hard"
+  },
+  {
+    "cond": "P0",
+    "task": "A27",
+    "file": "P0__A27.prompt.txt",
+    "chars": 424,
+    "expected": "248",
+    "diff": "medium"
+  },
+  {
+    "cond": "P1",
+    "task": "A00",
+    "file": "P1__A00.prompt.txt",
+    "chars": 203,
+    "expected": "70",
+    "diff": "medium"
+  },
+  {
+    "cond": "P1",
+    "task": "A03",
+    "file": "P1__A03.prompt.txt",
+    "chars": 265,
+    "expected": "117",
+    "diff": "easy"
+  },
+  {
+    "cond": "P1",
+    "task": "A04",
+    "file": "P1__A04.prompt.txt",
+    "chars": 354,
+    "expected": "279",
+    "diff": "medium"
+  },
+  {
+    "cond": "P1",
+    "task": "A09",
+    "file": "P1__A09.prompt.txt",
+    "chars": 1432,
+    "expected": "81",
+    "diff": "hard"
+  },
+  {
+    "cond": "P1",
+    "task": "A11",
+    "file": "P1__A11.prompt.txt",
+    "chars": 530,
+    "expected": "510",
+    "diff": "hard"
+  },
+  {
+    "cond": "P1",
+    "task": "A16",
+    "file": "P1__A16.prompt.txt",
+    "chars": 223,
+    "expected": "49",
+    "diff": "medium"
+  },
+  {
+    "cond": "P1",
+    "task": "A19",
+    "file": "P1__A19.prompt.txt",
+    "chars": 1421,
+    "expected": "336",
+    "diff": "hard"
+  },
+  {
+    "cond": "P1",
+    "task": "A23",
+    "file": "P1__A23.prompt.txt",
+    "chars": 315,
+    "expected": "149",
+    "diff": "medium"
+  },
+  {
+    "cond": "P1",
+    "task": "A25",
+    "file": "P1__A25.prompt.txt",
+    "chars": 318,
+    "expected": "113",
+    "diff": "hard"
+  },
+  {
+    "cond": "P1",
+    "task": "A27",
+    "file": "P1__A27.prompt.txt",
+    "chars": 416,
+    "expected": "248",
+    "diff": "medium"
+  },
+  {
+    "cond": "P5",
+    "task": "A00",
+    "file": "P5__A00.prompt.txt",
+    "chars": 702,
+    "expected": "70",
+    "diff": "medium"
+  },
+  {
+    "cond": "P5",
+    "task": "A03",
+    "file": "P5__A03.prompt.txt",
+    "chars": 764,
+    "expected": "117",
+    "diff": "easy"
+  },
+  {
+    "cond": "P5",
+    "task": "A04",
+    "file": "P5__A04.prompt.txt",
+    "chars": 853,
+    "expected": "279",
+    "diff": "medium"
+  },
+  {
+    "cond": "P5",
+    "task": "A09",
+    "file": "P5__A09.prompt.txt",
+    "chars": 1931,
+    "expected": "81",
+    "diff": "hard"
+  },
+  {
+    "cond": "P5",
+    "task": "A11",
+    "file": "P5__A11.prompt.txt",
+    "chars": 1029,
+    "expected": "510",
+    "diff": "hard"
+  },
+  {
+    "cond": "P5",
+    "task": "A16",
+    "file": "P5__A16.prompt.txt",
+    "chars": 722,
+    "expected": "49",
+    "diff": "medium"
+  },
+  {
+    "cond": "P5",
+    "task": "A19",
+    "file": "P5__A19.prompt.txt",
+    "chars": 1920,
+    "expected": "336",
+    "diff": "hard"
+  },
+  {
+    "cond": "P5",
+    "task": "A23",
+    "file": "P5__A23.prompt.txt",
+    "chars": 814,
+    "expected": "149",
+    "diff": "medium"
+  },
+  {
+    "cond": "P5",
+    "task": "A25",
+    "file": "P5__A25.prompt.txt",
+    "chars": 817,
+    "expected": "113",
+    "diff": "hard"
+  },
+  {
+    "cond": "P5",
+    "task": "A27",
+    "file": "P5__A27.prompt.txt",
+    "chars": 915,
+    "expected": "248",
+    "diff": "medium"
+  }
+]

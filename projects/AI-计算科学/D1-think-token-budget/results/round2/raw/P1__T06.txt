@@ -1,0 +1,9 @@
+199
+
+FINAL: 199
+
+The result has been sent. The 50th term of the arithmetic sequence 3, 7, 11, 15, ... with first term a=3 and common difference d=4 is a + (n-1)d = 3 + 49×4 = 3 + 196 = 199.
+
+199
+
+FINAL: 199

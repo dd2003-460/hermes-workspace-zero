@@ -1,0 +1,47 @@
+{
+  "depends_on": [
+    "T01",
+    "T02",
+    "T03"
+  ],
+  "evidence": [
+    "loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md",
+    "loop-artifacts/stages/03/r1/artifacts/t01-arxiv-260827734-verify.md",
+    "loop-artifacts/stages/03/r1/artifacts/t02-oi-source-decision.md",
+    "loop-artifacts/stages/03/r1/artifacts/t03-negative-search-protocol.md"
+  ],
+  "execution_mode": "serial",
+  "id": "03-r1-node-T04",
+  "input_refs": [
+    "loop-artifacts/stages/03/r1/artifacts/t01-arxiv-260827734-verify.md",
+    "loop-artifacts/stages/03/r1/artifacts/t02-oi-source-decision.md",
+    "loop-artifacts/stages/03/r1/artifacts/t03-negative-search-protocol.md"
+  ],
+  "instruction": "只执行 DAG 节点 `T04`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+  "node_id": "T04",
+  "orthogonal_key": null,
+  "output": "L1: T04信号架构定稿spec合成完成，6节齐全(a-f)，t04-signal-spec.md 272行非空，# origin: ai头，(b)节达伪代码级。\nL2: (a)funding确认主信号+T02 OI决策B默认/A降级/C条件触发(ΔS≥+0.20且CI下界>0+覆盖率<95%+≤$30/mo)全文引用；(b)PIT伪代码:UTC毫秒归一(Coinglass×1000)+funding只用settled且ts_norm≤t−发布lag+8h间隔逐symbol可变禁硬编码网格+OI bar bar_start+duration+延迟缓冲≤t+8条违规自检清单；(c)regime日历锁定bull2020-21/bear2022/range2023/bull2024-25(02候选集)禁止样本内拟合；(d)45检验(3regime×3阈值×5窗口)选BH-FDR弃Bonferroni+DSR trial-count deflation。\nL3: (e)贡献=严格条件形式化验证+regime条件化(非发现funding有效)，gap_confidence=0.75严格限定arXiv范围并披露SSRN/付费库未覆盖，最接近邻接=arXiv:2608.25348+arXiv:2608.27734(T01核验0.95)；(f)局限继承T03§3五条+T02 Bybit API可达性未实证(0.70压因,04前需curl预检)+单交易所幸存者偏差。合成confidence=0.72，regime_locked=true。",
+  "output_schema": {
+    "confidence": "0.0-1.0",
+    "pit_rule": "string",
+    "regime_locked": "boolean",
+    "sections": "6节齐全(a-f)"
+  },
+  "parallel_group_id": null,
+  "parent_id": null,
+  "postconditions": [
+    "writes文件非空且6节齐全"
+  ],
+  "preconditions": [
+    "T01/T02/T03已完成"
+  ],
+  "revision": "r1",
+  "schema_version": 1,
+  "stage_id": "03",
+  "status": "completed",
+  "type": "graph_task",
+  "updated_at": "2026-10-17T08:02:20.311880+00:00",
+  "writes": [
+    "loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md"
+  ]
+}

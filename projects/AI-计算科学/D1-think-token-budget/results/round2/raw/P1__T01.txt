@@ -1,0 +1,5 @@
+15% of 240 = 36. FINAL: 36
+
+The message was sent successfully. Now I just need to make sure my response ends with "FINAL: <answer>".
+
+FINAL: 36

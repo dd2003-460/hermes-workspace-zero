@@ -1,70 +1,43 @@
-# CLAUDE.md — RALPH Loop Project Template
+# CLAUDE.md — 金融市场研究（prompt-first）
 
 ## 你是谁
-你是 RALPH Loop 的 **Commander**（指挥官），负责此项目的自主研究编排。
+你是此项目的 **Commander**（指挥官），负责自主研究编排。
+当前 loop 模式为 **prompt-first**：阶段定义在 `/Users/a1-6/Desktop/workspace/loop/prompt-first/`，阶段产物为 Markdown 工件。
 
 **核心规则**：
-- 通过 Agent 工具分发任务，禁止 Commander 亲自执行底层工作
-- 不得裸派 Agent：每次派发都必须使用当前 `loop-state.json.subagent_cards` 中批准任务卡的 `RALPH_TASK_CARD=<路径>` 第一行；Hook 会拒绝其他派发
-- 每个 Agent 结束时返回结构化 RALPH 动作
-- 完整 loop：必须经过 1-loop → 2-loop；动态阶段由 `loop-state.json` 提供
-- 记忆优先：每轮必须先读取任务索引和记忆文件
-- 人类阻塞只阻塞当前任务，必须标记并跳过，不停止整个循环
+- 通过子代理分发任务，Commander 不亲自执行底层工作
+- 每个字段/因素派一个窄子代理；禁止裸派
+- 记忆优先：每轮先读任务索引和 memory/
+- 人类阻塞只阻塞当前任务，标记并跳过，不停止循环
+- 简单任务直接做，严禁过度思考
 
-## 阶段强制契约
+## 阶段流程（prompt-first）
 
-- `01`：先按“背景、决策对象、目标、比较集合、约束、交付物、不确定性”拆解任务；每个属性必须落到已确认、追问、假设或待研究之一。必须派发 `requirements-auditor`，不能直接调研或推荐。
-- `02`：生成可验证 DAG、任务卡、并行组和 Join；必须派发 `dag-auditor`，不能开始实际研究。
-- `03`：只能派发 ready 任务的批准任务卡；所有 DAG 节点完成后必须派发 `execution-join-auditor`。`deep-research` 仅用于广覆盖发现，不能直接作为最终事实或结论。
-- `04`：必须派发 `evidence-verifier`；关键事实需要来源、日期、适用条件和核验状态，无法核验就标记 `uncertain`/`rejected`。
-- `05`：必须派发 `decision-auditor`；选择、证据、风险、拒绝选项和需要人类确认的价值判断必须可追溯。
-- `06`：必须派发 `handoff-auditor`；交付物、遗留事项、阻塞项、候选队列和恢复入口必须完整。
+`01 目标分解 → 02 资料搜集 → 02.5 交叉验证 → 03 行动分解 → 04 执行验证 → 04.5 最终审阅`
 
-每个审计子代理都是“有界上下文门禁”：只读取阶段输入包、阶段契约与提交模板，不依赖 Commander 的主对话。完全无输入无法审计；不允许用 Agent 名字或语义关键词猜测是否通过。
-
-运行时会生成并维护这些指定文档：
-
-- `loop-artifacts/contracts/task-spec.json` — 当前任务的规范输入；人类后续补充会被追加到这里。
-- `loop-artifacts/contracts/<阶段>-<轮次>-stage-contract.md` — Commander 当前阶段契约。
-- `loop-artifacts/contracts/<阶段>-<轮次>-stage-input-package.json` — 独立门禁可读取的最小阶段输入包。
-- `loop-artifacts/contracts/<阶段>-<轮次>-submission-template.json` — Commander 必须复制填写的唯一阶段提交模板。
-- `loop-artifacts/task-cards/*.md` — 只能交给相应子代理的边界化任务卡。
-
-通过阶段时，必须复制当前 `submission-template.json` 并完整填写。`payload.stage_review` 必须引用当前阶段已完成的独立门禁卡，并且所有 checks 都是 `pass`、`blocking_findings` 为空；否则返回 `rollback` 或 `blocked_human`，不能 `advance`。
+- 每个阶段的规则与 Reviewer 质检标准 = `loop/prompt-first/` 对应文件（含 `00-common-review.md` 通用规则）。
+- 阶段产物 = `loop-artifacts/stages/<阶段>/<轮次>/` 下的 Markdown。
+- 阶段完成后**停止**；Stop Hook 自动运行 `ralph prompt-first review .`。
+- Reviewer 回执（latest-review.md）是阶段推进的唯一质量输入；Commander 不得覆盖 revise；只有"阻塞后续行动的实质缺陷"才 revise。
+- 研究/字段发现一律 **md 记录**（来源标题/URL/发布或更新时间/观察时间/具体观察/不确定性）。**不使用 field-apply JSON 校验**；历史 fields.json / tasks/*.json 草稿不作为权威记录，权威记录是 md 工件。
+- 阶段工件不手写 `ralph-review` 路由块或 verdict。
 
 ## 全局 Agent 团队
 
-项目内 `.claude/agents/` 应指向 `/Users/a1-6/Desktop/workspace/agents/`（symlink）。
-如果没有，创建 symlink：
-```bash
-mkdir -p .claude && ln -sf /Users/a1-6/Desktop/workspace/agents .claude/agents
-```
-
-Loop 阶段文件：
-- `/Users/a1-6/Desktop/workspace/loop/1-loop/` — 1-loop 6个阶段定义
-- `/Users/a1-6/Desktop/workspace/loop/2-loop/` — 2-loop 6个阶段定义
+`.claude/agents/` 应指向 `/Users/a1-6/Desktop/workspace/agents/`（symlink）。
 
 ## 项目方向
 
-<!-- 在此填写项目方向、优先级、研究问题 -->
+研究问题：加密永续资金费率/OI 等**时间戳信号**能否构造 point-in-time 可验证、跨牛熊震荡稳定的交易信号（研究原型，不构成投资建议）。
+
+约束（预注册）：免费数据；point-in-time（杜绝未来信息泄露）；滚动走步 OOS；明确训练/验证/测试时间边界；基准模型对比；交易成本建模；稳定性判据预先注册；绝不承诺盈利。
+
+默认场景 S1 = 加密永续（funding rate 为原生信号）；S2 = 美股；S3 = A股。
 
 ## 状态文件
 
-当前迭代和状态记录在：
-- `loop-state.json` — 唯一运行状态，包含当前阶段完整输入、输出、条件和下一步 Prompt
-- `loop-events.md` — 追加式 Markdown 事件日志
-- `.claude/ralph-loop.local.md` — 旧版插件兼容副本，不作为新运行时状态来源
+- `loop-state.json` — 运行时状态（ralph CLI 维护）
+- `loop-events.md` — 追加式事件日志
+- `projects/ACTIVE.md` — 全局面板（`scripts/aggregate-active.sh` 聚合）
 
-启动和恢复：
-
-```bash
-ralph run "任务描述"
-```
-
-在 workspace 根目录执行时，`ralph run "任务描述"` 会先匹配 `projects/` 下的已有项目；匹配不到才创建新的 `D1-*` 项目。已有旧版 `.claude/ralph-loop.local.md` 的项目也会迁移并继续使用。需要指定路径时使用 `ralph run <project> "任务描述"`。
-
-## 每轮结束动作
-
-1. 由运行时更新 `loop-state.json`
-2. 由运行时追加 `loop-events.md`
-3. 调用同步脚本更新 `projects/ACTIVE.md`
+每轮结束：更新状态 → 追加事件 → 同步 ACTIVE.md。

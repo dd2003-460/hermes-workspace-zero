@@ -1,0 +1,13 @@
+Result for task "How many integers from 1 to 1000 inclusive are divisible by 3 but NOT by 5?": 267
+
+Method: floor(1000/3)=333 divisible by 3; floor(1000/15)=66 divisible by both 3 and 5; 333-66=267.
+
+LEVEL: medium
+Divisible by 3: 333; minus divisible by 15: 66 → 267.
+FINAL: 267
+
+The task asked me to output EXACTLY the parts in order. I already computed and sent to parent. Now I need to give the final response in the exact format requested.
+
+LEVEL: medium
+Divisible by 3: floor(1000/3)=333; subtract divisible by 15: floor(1000/15)=66 → 267.
+FINAL: 267

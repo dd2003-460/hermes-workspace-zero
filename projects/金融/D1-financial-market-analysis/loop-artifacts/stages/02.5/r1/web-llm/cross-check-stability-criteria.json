@@ -1,0 +1,36 @@
+{
+  "kind": "ralph_web_llm_cross_check",
+  "schema_version": 1,
+  "field_concept": "研究未知因素：稳定性检验判据的时间窗口数量与通过阈值的具体定义",
+  "claim": "【Claim 2 - 回测稳定性判据】\n2020-2025样本(6年, 含牛熊震荡)下, 公开实践主流的窗口划分是3-5个互不重叠的年度OOS窗口+expanding window; 没有普适的通过阈值。文献中最严格的显式判据集合: 每窗口OOS净收益t>=2.0 + 样本>=30笔 + 扣费后净正 + 所有测试年方向一致 + permutation test p<0.001 (arXiv:2605.04004)。PSR>0.95 作为参考阈值 (arXiv:2608.24786)。关键事实: 一个故意泄漏未来信息的oracle策略(Sharpe 35)能完整通过 Deflated Sharpe Ratio 和 Probabilistic Backtest Overfitting 两项测试 (arXiv:2608.27734, Gençay等), 说明统计门槛防不住前视偏差, 结构性point-in-time设计是第一层前提。mlfinlab库已弃用(2026-10观察到readthedocs 404)。",
+  "submitted_at": "2026-10-17T13:00:00+08:00",
+  "observed_at": "2026-10-17T13:10:00+08:00",
+  "timezone": "Asia/Shanghai",
+  "transport": "ego-browser 0.5.1.13 (ego-lite persistent logged-in session; taskSpace web-llm-02.5-20261017)",
+  "responses": [
+    {
+      "provider_id": "deepseek",
+      "endpoint_host": "chat.deepseek.com",
+      "status": "success",
+      "conversation_url": "https://chat.deepseek.com/a/chat/s/338ebad0-e49f-4c4c-ac7c-af0407bc515f",
+      "verdict": "部分正确",
+      "key_points": "方法论方向对(多年度OOS+expanding常见, 无普适阈值, PIT前提); 具体\"最严格判据集合\"与2026 arXiv编号(2608.27734)LLM不可核验, 表述过强; DSR/PBO无法防前视核心事实成立。",
+      "raw_ref": "loop-artifacts/stages/02.5/r1/web-llm-raw/deepseek-raw.txt"
+    },
+    {
+      "provider_id": "chatgpt",
+      "endpoint_host": "chatgpt.com",
+      "status": "success",
+      "conversation_url": "https://chatgpt.com/c/6ad302ee-3b50-83ee-a25d-944d1333987a",
+      "verdict": "部分正确",
+      "key_points": "四道独立门(多窗口/三概念分离: OOS≠PIT≠稳定性); PIT是第一层前提; 统计阈值只控制部分选择偏差。",
+      "raw_ref": "loop-artifacts/stages/02.5/r1/web-llm-raw/chatgpt-raw.txt"
+    }
+  ],
+  "successful_provider_ids": [
+    "deepseek",
+    "chatgpt"
+  ],
+  "contradictions_recorded": true,
+  "contradiction_notes": "\"最严格显式判据集合\"表述过强→软化为\"候选判据集合(2026文献, arXiv编号待03直验)\"; 方法论核心双方确认。"
+}

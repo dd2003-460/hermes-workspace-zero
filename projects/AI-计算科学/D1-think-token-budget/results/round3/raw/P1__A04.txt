@@ -1,0 +1,5 @@
+Answer to the divisible-by-22 eight-digit permutation problem: N = 2304 (count of permutations of digits 1-8 divisible by 22), so N - 2025 = 279. Verified by brute-force over all 40320 permutations. FINAL: 279
+
+The task is complete. Answer: 279.
+
+279

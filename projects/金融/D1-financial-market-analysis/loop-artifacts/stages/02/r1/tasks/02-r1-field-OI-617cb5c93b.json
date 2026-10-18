@@ -1,0 +1,44 @@
+{
+  "attribute": "验证并记录：资金费率/OI 等替代交易信号的发布时刻与更新频率（交易时点是否已发布）",
+  "concept": "研究未知因素：资金费率/OI 等替代交易信号的发布时刻与更新频率（交易时点是否已发布）",
+  "disposition": "research_required",
+  "field": {
+    "attribute": "验证并记录：资金费率/OI 等替代交易信号的发布时刻与更新频率（交易时点是否已发布）",
+    "concept": "研究未知因素：资金费率/OI 等替代交易信号的发布时刻与更新频率（交易时点是否已发布）",
+    "confidence": 0.75,
+    "disposition": "confirmed",
+    "evidence_refs": [
+      "https://bybit-exchange.github.io/docs/v5/market/history-fund-rate",
+      "https://bybit-exchange.github.io/docs/v5/market/open-interest",
+      "https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-History",
+      "https://github.com/binance/binance-futures-connector-python",
+      "https://pypi.org/project/binance-futures-connector/4.2.0/",
+      "https://pypi.org/project/pybit/5.17.0/",
+      "https://pypi.org/project/python-okx/0.4.4/"
+    ],
+    "rationale": "核心PIT语义经官方文档+官方SDK双渠道确认: t时刻可用集=已结算费率(fundingRateTimestamp≤t, Bybit官方原文latest=last settled)+bar_end≤t的OI bar(Bybit官方警示极端行情数据延迟, 回测须加缓冲)。Binance免费OI历史(openInterestHist)仅30天(binance-futures-connector 4.2.0原文Only the data of the latest 30 days is available.)→5年OI回测免费源仅Bybit(官方可查询上限为symbol上线时间); Coinglass OI/Funding历史单请求≤90天且付费。单位: Binance/Bybit/OKX毫秒, Coinglass秒→归一UTC ms为管道必做项。未解决: Binance文档字段语义/OKX OI深度/Coinglass定价档位/4h-1h funding对清单(本环境Binance/OKX文档站与交易所API不可达, 需可直连环境实测)。详见research/funding-rate-oi-timing.md。",
+    "role": "research_findings",
+    "observed_at": "2026-10-16T17:10:00Z"
+  },
+  "flow_only": false,
+  "id": "02-r1-field-OI-617cb5c93b",
+  "input_refs": [
+    "loop-artifacts/stages/02/r1/fields.json"
+  ],
+  "instruction": "只处理字段 `研究未知因素：资金费率/OI 等替代交易信号的发布时刻与更新频率（交易时点是否已发布）`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/02/r1/tasks/02-r1-field-OI-617cb5c93b.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+  "output_schema": {
+    "attribute": "string",
+    "concept": "研究未知因素：资金费率/OI 等替代交易信号的发布时刻与更新频率（交易时点是否已发布）",
+    "confidence": "number 0..1",
+    "disposition": "confirmed|inferred|assumed_default|research_required",
+    "evidence_refs": "array[string]",
+    "rationale": "string",
+    "role": "string"
+  },
+  "revision": "r1",
+  "role": "research_findings",
+  "schema_version": 1,
+  "stage_id": "02",
+  "status": "ready",
+  "type": "field_task"
+}

@@ -1,0 +1,349 @@
+{
+  "authoritative_inputs": [
+    "loop-artifacts/stages/01/r1/state.json"
+  ],
+  "context_mode": "bounded_artifacts",
+  "current_stage_cards": [],
+  "purpose": "供独立阶段门禁审计；不包含 Commander 主对话或隐藏推理。",
+  "stage": {
+    "failure_condition": "分解不完整、接口未对齐或耦合不清",
+    "id": "03",
+    "input_description": "已调研、已交叉验证的字段；把任务分解到最小执行单元，模块间接口清晰对准、解耦",
+    "name": "执行任务分解",
+    "on_failure": "02.5",
+    "on_success": "04",
+    "required_outputs": [
+      "task_graph",
+      "coverage_proof"
+    ],
+    "revision": "r1",
+    "success_condition": "结构化任务图分解到最小执行单元且所有节点已写出 declared artifacts 并经 graph-apply 回写，接口清晰对准、模块化解耦，无遗漏无冲突"
+  },
+  "structured_inputs": {
+    "decision": {},
+    "handoff": {},
+    "last_exploration": null,
+    "plan": {
+      "joins": [],
+      "nodes": [],
+      "parallel_groups": [],
+      "revision": "r1"
+    },
+    "queue": {
+      "blocked_human": [],
+      "candidates": [],
+      "ready": []
+    },
+    "task_intake": null,
+    "task_spec": {
+      "attribute_matrix": [
+        {
+          "attribute": "验证并记录：候选资产类别的公开行情数据历史深度与退市标的覆盖（幸存者偏差规避）",
+          "concept": "研究未知因素：候选资产类别的公开行情数据历史深度与退市标的覆盖（幸存者偏差规避）",
+          "confidence": 0.82,
+          "details": {
+            "recheck_method": "02.5 direct HTTP re-probe (curl -r 0-0)",
+            "residuals": [
+              "2019-12-31 kline孤立存在(2020-01起批量归档前的单日异常)",
+              "Coinglass HOBBYIST $29/mo付费档为幸存者偏差规避唯一路径(C6附条件)"
+            ],
+            "verdicts": "C1-C6 confirm (6/6)"
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://docs.coinglass.com/reference/getting-started-with-your-api",
+            "https://www.alphavantage.co/documentation/",
+            "https://data.binance.vision/",
+            "https://github.com/binance/binance-public-data"
+          ],
+          "impact": "high",
+          "observed_at": "2026-10-17T13:10:00+08:00",
+          "rationale": "02.5直验C1-C6全confirm: Binance免费fundingRate月度2020-01起(2019各月404), OI文件不存在(404), 当月未归档; 修订风险低; 幸存者偏差规避附条件=Coinglass付费档(C6, $29/mo)。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "验证并记录：可得数据跨度能否覆盖牛市",
+          "concept": "研究未知因素：可得数据跨度能否覆盖牛市",
+          "confidence": 0.8,
+          "details": {
+            "recheck_method": "02.5 dual-LLM web-llm cross-check (DeepSeek+ChatGPT, ego-browser)",
+            "residuals": [
+              "\"免费funding覆盖的完整牛市唯一性\"表述已软化",
+              "A股/美股免费起点年份逐源核验延至03数据层"
+            ]
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://akshare.akfamily.xyz/data/index/index.html",
+            "https://akshare.akfamily.xyz/data/dc/dc.html"
+          ],
+          "impact": "high",
+          "observed_at": "2026-10-17T13:10:00+08:00",
+          "rationale": "02.5双LLM交叉确认核心窗口(2020-01→2025-01+覆盖2020-21牛/2022熊/2023震荡/24-25牛); 修正: 周期约5年非6年, \"只有2020-21完整牛\"软化为\"2020-21为免费funding唯一完整大牛\", A股2004/美股1993起点表述过度概括(Yahoo ^GSPC实际1927)。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "验证并记录：熊市与震荡市状态",
+          "concept": "研究未知因素：熊市与震荡市状态",
+          "confidence": 0.85,
+          "details": {
+            "recheck_method": "02.5 direct HTTP re-probe + dual-source cross-check",
+            "residuals": [
+              "C1两源同Binance发布方(独立性打折)",
+              "2000-02熊底单源未二验"
+            ]
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2020-03-12.zip",
+            "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=1d"
+          ],
+          "impact": "high",
+          "observed_at": "2026-10-17T13:10:00+08:00",
+          "rationale": "02.5直验3/3 confirm: S1起点=2019-12-31(2018全段404), 2022熊+2023震荡覆盖成立; 矛盾1项(2022-10-13 Yahoo 3577.0 vs 新浪3669.91)判新浪正确采用3669.91; 0.85不给0.9因C1两源同Binance发布方。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "验证并记录：稳定性检验判据的时间窗口数量与通过阈值的具体定义",
+          "concept": "研究未知因素：稳定性检验判据的时间窗口数量与通过阈值的具体定义",
+          "confidence": 0.85,
+          "details": {
+            "recheck_method": "02.5 dual-LLM web-llm cross-check",
+            "residuals": [
+              "2026 arXiv:2608.27734编号待03直验(LLM知识截止不可核验)"
+            ]
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://arxiv.org/abs/1902.07855",
+            "https://arxiv.org/abs/1905.05023",
+            "https://arxiv.org/abs/1910.05555",
+            "https://arxiv.org/abs/2008.09481",
+            "https://arxiv.org/abs/2209.05559",
+            "https://arxiv.org/abs/2407.17645",
+            "https://arxiv.org/abs/2512.15720",
+            "https://arxiv.org/abs/2601.08896"
+          ],
+          "impact": "high",
+          "observed_at": "2026-10-17T13:10:00+08:00",
+          "rationale": "02.5双LLM交叉确认方法论核心(3-5个不重叠年度OOS窗口+expanding, 无普适阈值, PIT第一层前提, DSR/PBO无法防前视); \"最严格显式判据集合\"软化为候选集合(2026 arXiv:2608.27734编号LLM不可核验, 03直验)。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "验证并记录：资金费率/OI 等替代交易信号的发布时刻与更新频率（交易时点是否已发布）",
+          "concept": "研究未知因素：资金费率/OI 等替代交易信号的发布时刻与更新频率（交易时点是否已发布）",
+          "confidence": 0.8,
+          "details": {
+            "recheck_method": "02.5 dual-LLM web-llm cross-check",
+            "residuals": [
+              "OI三选项决策点(放弃/短窗口/$29mo)待03拍板",
+              "各源时间戳单位逐字段核验表待03建立"
+            ]
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://bybit-exchange.github.io/docs/v5/market/history-fund-rate",
+            "https://bybit-exchange.github.io/docs/v5/market/open-interest",
+            "https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-History",
+            "https://github.com/binance/binance-futures-connector-python",
+            "https://pypi.org/project/binance-futures-connector/4.2.0/",
+            "https://pypi.org/project/pybit/5.17.0/",
+            "https://pypi.org/project/python-okx/0.4.4/"
+          ],
+          "impact": "high",
+          "observed_at": "2026-10-17T13:10:00+08:00",
+          "rationale": "02.5双LLM交叉确认PIT语义(t_available=max(bar_end,published,received)+δ, funding只用已结算值8h默认逐symbol可变, OI bar需bar_start+duration<=t+延迟缓冲, 单位逐字段归一); 驳回\"仅Bybit可得5年免费OI\"→OI三选项决策点路由03。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "验证并记录：金融数据的修订与迟报机制（样本是否混入未来信息）",
+          "concept": "研究未知因素：金融数据的修订与迟报机制（样本是否混入未来信息）",
+          "confidence": 0.85,
+          "details": {
+            "recheck_method": "02.5 direct HTTP re-probe",
+            "residuals": [
+              "C4 Coinglass changelog无futures修订条目(无法完全排除)",
+              "C5 CSI300历史成分\"计划生效\"语义PIT隐患"
+            ]
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://github.com/binance/binance-public-data/",
+            "https://github.com/binance/binance-spot-api-docs/blob/master/CHANGELOG.md",
+            "https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md",
+            "https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest",
+            "https://docs.coinglass.com/reference/change-log",
+            "https://www.csindex.com.cn/#/indices/family/detail?indexCode=000300",
+            "https://www.spglobal.com/spdji/en/indices/equity/sp-500/"
+          ],
+          "impact": "high",
+          "observed_at": "2026-10-17T13:10:00+08:00",
+          "rationale": "02.5直验C1/C2/C3/C6 confirm(官方updates/清单3文件全spot零futures→futures归档无记录修订, 风险中→低; 修订实为3例spot: 2022-04-21/2022-08-08/2022-10-04; 迟报=日线T+1/月线首周一); C4/C5 unresolved记录(Coinglass changelog无futures修订条目, CSI300\"计划生效样本\"PIT隐患)。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "验证并记录：同类时间戳信号回测的公开研究基准与常见失败模式",
+          "concept": "研究未知因素：同类时间戳信号回测的公开研究基准与常见失败模式",
+          "confidence": 0.72,
+          "details": {
+            "recheck_method": "02.5 dual-LLM web-llm cross-check + export.arxiv.org direct verify",
+            "residuals": [
+              "negative search协议(检索词/库/日期/复现步骤)待03建立",
+              "SSRN/working paper全文不可达(沙箱), 列表级结论"
+            ]
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://arxiv.org/abs/1912.03270",
+            "https://arxiv.org/abs/2212.06888",
+            "https://arxiv.org/abs/2506.08573",
+            "https://arxiv.org/abs/2310.14973",
+            "https://arxiv.org/abs/2501.09404",
+            "https://arxiv.org/abs/1809.05961",
+            "https://arxiv.org/abs/1904.00890",
+            "https://arxiv.org/abs/2112.15321"
+          ],
+          "impact": "high",
+          "observed_at": "2026-10-17T13:10:00+08:00",
+          "rationale": "02.5双LLM交叉确认研究缺口真实(截至2026-10公开检索未找到以funding rate作主择时信号的已发表回测), 表述修正\"不存在\"→\"公开检索未找到\"; \"全部无arXiv全文\"被驳; 2603.19380(4.94pp/23.3%)export.arxiv.org直验成立; 03须建可操作negative search协议。",
+          "reversible": true,
+          "role": "research_findings"
+        },
+        {
+          "attribute": "02.5交叉验证: 7个研究字段全部完成交叉验证(3字段直验HTTP re-probe + 4字段双LLM web-llm交叉核对)",
+          "concept": "cross_validation",
+          "confidence": 0.85,
+          "details": {
+            "contradictions": 3,
+            "corrections_applied": 4,
+            "method": "3字段直验(curl -r 0-0 HTTP re-probe, 02.5 research/) + 4字段双站点LLM交叉(ego-browser 0.5.1.13 ego-lite已登录会话, DeepSeek+ChatGPT各一轮批量4claim)",
+            "sub_claim_refuted": "仅Bybit可得5年免费OI(双LLM独立驳回, OI决策点路由03)"
+          },
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "loop-artifacts/stages/02.5/r1/web-llm/cross-check-bull-coverage.json",
+            "loop-artifacts/stages/02.5/r1/web-llm/cross-check-stability-criteria.json",
+            "loop-artifacts/stages/02.5/r1/web-llm/cross-check-funding-oi-timing.json",
+            "loop-artifacts/stages/02.5/r1/web-llm/cross-check-public-benchmarks.json",
+            "loop-artifacts/stages/02.5/r1/research/cross-validation-data-history.json",
+            "loop-artifacts/stages/02.5/r1/research/cross-validation-bear-range.json",
+            "loop-artifacts/stages/02.5/r1/research/cross-validation-data-revision.json"
+          ],
+          "impact": "high",
+          "observed_at": "2026-10-17T13:10:00+08:00",
+          "rationale": "3字段(data-history/bear-range/data-revision)经02.5 direct HTTP re-probe逐claim confirm(6/6, 3/3, C1C2C3C6 confirm+C4C5 unresolved); 4字段(bull-coverage/stability-criteria/funding-oi-timing/public-benchmarks)经DeepSeek+ChatGPT双站LLM交叉核对, 判定均\"部分正确\", 核心结论全部confirm, 3处表述修正+1处子主张驳回已吸收。",
+          "reversible": true,
+          "role": "cross_validation",
+          "validation_records": [
+            {
+              "claim": "Binance免费批量归档data.binance.vision的fundingRate月度文件起点2020-01(2019各月404), 无openInterest文件(404), 当月未归档; Coinglass无免费档",
+              "claim_ref": "研究未知因素：候选资产类别的公开行情数据历史深度与退市标的覆盖（幸存者偏差规避）",
+              "notes": "C1-C6全confirm(6/6)。附条件: 幸存者偏差规避需Coinglass付费档$29/mo(C6); 2019-12-31单日孤立kline异常已记录。",
+              "observed_at": "2026-10-17T13:10:00+08:00",
+              "source_refs": [
+                "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/",
+                "https://docs.coinglass.com/reference/getting-started-with-your-api"
+              ],
+              "updated_confidence": 0.82,
+              "verdict": "supported"
+            },
+            {
+              "claim": "免费数据窗口2020-01→2025-01+覆盖2020-21牛、2022熊、2023震荡、2024-25牛, 满足\"至少5年含牛熊震荡\"",
+              "claim_ref": "研究未知因素：可得数据跨度能否覆盖牛市",
+              "notes": "双LLM确认核心窗口。修正: 周期约5年非6年; \"只有2020-21完整牛\"软化为\"免费funding唯一完整大牛\"; A股2004/美股1993起点过度概括(Yahoo ^GSPC实际1927)。",
+              "observed_at": "2026-10-17T13:10:00+08:00",
+              "source_refs": [
+                "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/",
+                "https://chat.deepseek.com/a/chat/s/338ebad0-e49f-4c4c-ac7c-af0407bc515f",
+                "https://chatgpt.com/c/6ad302ee-3b50-83ee-a25d-944d1333987a"
+              ],
+              "updated_confidence": 0.8,
+              "verdict": "supported"
+            },
+            {
+              "claim": "S1 2022熊+2023震荡覆盖成立(S1起点=2019-12-31, 2018全段404); S2美股免费日线1993+; S3 A股免费日线2004+",
+              "claim_ref": "研究未知因素：熊市与震荡市状态",
+              "notes": "3/3 confirm。矛盾1项: 2022-10-13熊底Yahoo 3577.0 vs 新浪3669.91→判新浪正确采用3669.91; 0.85不给0.9因C1两源同Binance发布方。",
+              "observed_at": "2026-10-17T13:10:00+08:00",
+              "source_refs": [
+                "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=1d",
+                "https://stock.finance.sina.com.cn/usstock/api/json_v2.php/US_MinKService.getDailyK?symbol=.INX",
+                "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,day,,,10,qfq"
+              ],
+              "updated_confidence": 0.85,
+              "verdict": "supported"
+            },
+            {
+              "claim": "稳定性判据: 3-5个不重叠年度OOS窗口+expanding, 无普适阈值; DSR/PBO无法防前视, PIT是第一层前提",
+              "claim_ref": "研究未知因素：稳定性检验判据的时间窗口数量与通过阈值的具体定义",
+              "notes": "双LLM确认方法论核心。\"最严格显式判据集合\"软化为候选集合; 2026 arXiv:2608.27734编号LLM不可核验, 03直验。",
+              "observed_at": "2026-10-17T13:10:00+08:00",
+              "source_refs": [
+                "https://arxiv.org/abs/2608.27734",
+                "https://chat.deepseek.com/a/chat/s/338ebad0-e49f-4c4c-ac7c-af0407bc515f",
+                "https://chatgpt.com/c/6ad302ee-3b50-83ee-a25d-944d1333987a"
+              ],
+              "updated_confidence": 0.85,
+              "verdict": "supported"
+            },
+            {
+              "claim": "funding PIT: t_available=max(bar_end,published,received)+δ, 只用已结算fundingRate(8h默认逐symbol可变); OI bar需bar_start+duration<=t+延迟缓冲; 时间戳单位逐字段归一",
+              "claim_ref": "研究未知因素：资金费率/OI 等替代交易信号的发布时刻与更新频率（交易时点是否已发布）",
+              "notes": "双LLM确认PIT语义。驳回: \"仅Bybit可得5年免费OI\"不成立(Bybit亦有窗口限制且不一定回上线日, 其他源存在)→OI三选项决策点路由03; 单位概括\"Coinglass秒/交易所毫秒\"改逐字段核验。",
+              "observed_at": "2026-10-17T13:10:00+08:00",
+              "source_refs": [
+                "https://bybit-exchange.github.io/docs/v5/derivatives/history/open-interest",
+                "https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-History",
+                "https://chat.deepseek.com/a/chat/s/338ebad0-e49f-4c4c-ac7c-af0407bc515f"
+              ],
+              "updated_confidence": 0.8,
+              "verdict": "supported"
+            },
+            {
+              "claim": "futures归档无*_updates修订记录(官方updates/清单3文件全spot); 修订实为3例spot(2022-04-21/2022-08-08/2022-10-04); 迟报=日线T+1/月线首周一",
+              "claim_ref": "研究未知因素：金融数据的修订与迟报机制（样本是否混入未来信息）",
+              "notes": "C1/C2/C3/C6 confirm→修订风险中→低。C4/C5 unresolved记录: Coinglass changelog无futures修订条目(无法完全排除); CSI300历史成分\"计划生效\"PIT隐患。",
+              "observed_at": "2026-10-17T13:10:00+08:00",
+              "source_refs": [
+                "https://api.github.com/repos/binance/binance-public-data/contents/updates",
+                "https://data.binance.vision/",
+                "https://raw.githubusercontent.com/binance/binance-public-data/master/README.md"
+              ],
+              "updated_confidence": 0.85,
+              "verdict": "supported"
+            },
+            {
+              "claim": "截至2026-10, 公开检索未找到以funding rate作市场状态/择时信号主标的的已发表回测(缺口); 经典失败模式文献清单(DSR/PBO/multiple testing/survivorship)",
+              "claim_ref": "研究未知因素：同类时间戳信号回测的公开研究基准与常见失败模式",
+              "notes": "双LLM确认缺口真实。\"不存在\"→\"公开检索未找到\"; \"全部无arXiv全文\"被驳(部分在SSRN/working paper); 2603.19380(4.94pp/23.3%)export.arxiv.org直验成立(LLM知识截止, 矛盾以直验解决); 03须建可操作negative search协议。",
+              "observed_at": "2026-10-17T13:10:00+08:00",
+              "source_refs": [
+                "https://arxiv.org/abs/1912.03270",
+                "https://arxiv.org/abs/2212.06888",
+                "https://chatgpt.com/c/6ad302ee-3b50-83ee-a25d-944d1333987a"
+              ],
+              "updated_confidence": 0.72,
+              "verdict": "supported"
+            }
+          ]
+        }
+      ],
+      "authoritative_inputs": [
+        "loop-artifacts/stages/01/r1/state.json"
+      ],
+      "status": "research_pending"
+    },
+    "verification": {}
+  },
+  "submission_template_ref": "loop-artifacts/contracts/03-r1-submission-template.json",
+  "task": {
+    "description": "RALPH 流程试运行：建立一个金融市场数据分析与预测研究原型。先严格读取 loop-state.json、当前阶段契约和任务卡，只做当前阶段，不能跳步。核心目标：研究信息泄露、数据发布时间/修订、幸存者偏差、选择偏差、滚动窗口与特征泄露；同时研究资金博弈、拥挤度、仓位、流动性、资金费率或公开可获得的同类时间戳信号。任何模型与回测都必须仅使用当时可得数据，采用滚动/走步样本外验证、明确训练/验证/测试时间边界、基准模型、交易成本和不确定性；把“稳定一段时间”定义为预先注册的连续样本外窗口指标，绝不承诺盈利或保证预测成功。先主动补全资产类别、频率、持有期、数据源与评价指标；若缺失，列出场景分支和可追溯假设，不使用未来数据。后续阶段在允许时使用网页检索与可用网页 LLM 做独立交叉校验；只发送非敏感、必要的摘要，任何外部事实进入 claim ledger 后才能使用。收到审计或网页校验反馈后修改相应产物并重新验证。研究用途，不构成投资建议。",
+    "source": "ralph run"
+  }
+}

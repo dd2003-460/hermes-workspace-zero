@@ -1,0 +1,10 @@
+Answer: 267. Reasoning: multiples of 3 in 1..1000 = floor(1000/3)=333; multiples of 15 = floor(1000/15)=66; 333−66=267.
+
+The result was sent to the parent. Next, provide the final answer to the user.
+
+**Reasoning:**
+1. Multiples of 3 from 1 to 1000: ⌊1000/3⌋ = 333
+2. Multiples of both 3 and 5 (i.e., of 15): ⌊1000/15⌋ = 66
+3. Divisible by 3 but not by 5: 333 − 66 = 267
+
+FINAL: 267

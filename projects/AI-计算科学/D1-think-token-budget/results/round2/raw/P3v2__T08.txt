@@ -1,0 +1,7 @@
+Task complete. "How many 4-digit positive integers are divisible by 11?" Answer: 819. (Multiples of 11 from 91*11=1001 to 909*11=9999, inclusive: 909-91+1 = 819.)
+
+I need to output the exact format requested.
+
+LEVEL: medium
+Smallest 4-digit multiple of 11 is 1001 (91×11); largest is 9999 (909×11); count = 909−91+1 = 819.
+FINAL: 819

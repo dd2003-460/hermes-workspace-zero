@@ -42,9 +42,10 @@
 | T2 | 写 ch15 资产组合 | 同 T1（素材相同，章节不同） | — | subagent | drafts/15-资产组合-种子放大器与R0大于1的载体.md | 同 T1 | 同 T1 | **✅ 完成** 2026-10-19（1249 字/0.475/31.2/9 块, gate 标引用设计 conf0.6） |
 | T3 | verify T1/T2 | ls drafts/ + drift-check.py 重跑（绝对路径） | T1,T2 | Lead(bash) | state.md #9 行更新 | 2 文件存在且 drift=100 | 文件缺失/漂移 → 重派 | **✅ 完成** 2026-10-19（Lead 独立复跑双 100/100） |
 | T4 | 全书级通读（v3 前唯一 autoreview） | drafts/ 15 章 + book-skeleton.md | T1,T2 | Lead | tasks/v3-readthrough-notes.md（修改清单：交叉引用 3 处 + 一致性项） | 清单落盘，含每章一句判断 | 清单空 = 通读未发生 | **✅ 完成** 2026-10-19（A1-A4 落空+B1-B2 错误=6 处修复全验证, P1-P8 一致, ch12 回指 Lead 补） |
-| T5 | bookkeeping + git | state.md / loop-state.json / aggregate-active.sh | T3,T4 | Lead | 同前 + commit + push（必须 `-c http.version=HTTP/1.1`） | 远端 main = 本地 HEAD | push 失败重试（HTTP/1.1） |
+| T5 | bookkeeping + git | state.md / loop-state.json / aggregate-active.sh | T3,T4 | Lead | 同前 + commit + push（必须 `-c http.version=HTTP/1.1`） | 远端 main = 本地 HEAD | push 失败重试（HTTP/1.1） | **✅ 完成** 2026-10-20（commit 34231b49, push 成功 5e04a154..34231b49） |
 
 **T6（不派，单列）**：P2 实验执行 — 阻塞于空缺 1（渠道拍板）。可执行部分=实验方案文档，待 T1 交付后从 ch14 抽出即可，不单派。
+**T7（✅ 已完成，T6 前置文档）**：P2 实验方案文档 + v3 定稿 checklist — 从 ch14 抽出实验设计（p2-experiment-plan.md）+ 定稿动作单（v3-finalization-checklist.md），成璐拍板渠道后直接执行 T6。
 
 ## 执行顺序
 

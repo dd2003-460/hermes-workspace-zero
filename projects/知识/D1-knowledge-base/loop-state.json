@@ -7,9 +7,9 @@
     "revision": "r3"
   },
   "loop_phase": "build",
-  "iteration": 3,
+  "iteration": 4,
   "status": "active",
-  "current_task": "m01255 三篇note交付(传播学/网络拓扑/传播效率): propagation-studies-fundamentals.md(句级第一人称0.435/句长49.1) / network-topology.md(0.266/39.8) / propagation-efficiency.md(0.330/38.2, 认知解码成本=熵−受众先验可压缩量焊公理A0; 3关键疑问: Δ信念代理有效性conf0.6/解码成本定量估法0.5/R0(解码成本)拐点+边权0.5). 硬门槛全过. D2(EPB.1)同步立项完成, tasks #1完成→骨架v2待启动. 排队: GPU推理/persona对齐.",
+  "current_task": "KB.1 第4篇教材note notes/llm-persona-alignment.md(subagent 6efd2dc0交付): 8概念(persona对齐=条件生成非权重修改/公理比规则有效=LENS+METHOD vs VOICE/voice profile量化271语料/三层模型公理+voice+领域/drift-check.py测量工具/三版复刻检验V1-V3方法论/边界未解4条/可证伪预测带判死)×是什么/为什么/边界+conf, 引用DPA.1文件路径+三版检验数据. drift-check 100/100(1514汉字/句级第一人称0.203/均句51.6). notes/INDEX.md加行+排队区#4标记完成. 与DPA.1互补: persona=怎么想怎么说, KB=知道什么对什么有兴趣.",
   "blocker": null,
   "change_log": [
     {
@@ -31,6 +31,11 @@
       "time": "2026-10-18",
       "action": "trilogy-notes",
       "summary": "m01255三篇教材note(subagents a3fd05b5/c197e1fc/f209f90d): propagation-studies-fundamentals.md(92句, 句级第一人称0.435) / network-topology.md(124句, 0.266) / propagation-efficiency.md(109句, 0.330, 认知解码成本显式写成熵−受众先验可压缩量焊公理A0). 三篇硬门槛全过(第一人称≥0.2/句长<55/禁词0). f209f90d三条关键疑问入档: ①Δ信念是内隐变量, 代理测量可能失真=全书KPI存亡问题(conf0.6) ②解码成本差值怎么估, 信息熵只给下界(conf0.5) ③R0(解码成本)单调函数拐点/IC·LT边权接解码成本, 单调性未验证(conf0.5). notes/INDEX.md加3行+排队区更新. 供 D2-efficient-propagation-book(EPB.1)书底座."
+    },
+    {
+      "time": "2026-10-20",
+      "action": "persona-note",
+      "summary": "KB.1第4篇教材note notes/llm-persona-alignment.md(subagent 6efd2dc0交付): 8概念(persona对齐=条件生成非权重修改/公理比规则有效=LENS+METHOD vs VOICE/voice profile量化271语料/三层模型公理+voice+领域/drift-check.py测量工具/三版复刻检验V1-V3方法论/边界未解4条/可证伪预测带判死)×是什么/为什么/边界+conf, 引用DPA.1文件路径+三版检验数据. drift-check 100/100(1514汉字/句级第一人称0.203/均句51.6). notes/INDEX.md加行+排队区#4标记完成. 与DPA.1互补: persona=怎么想怎么说, KB=知道什么对什么有兴趣."
     }
   ]
 }

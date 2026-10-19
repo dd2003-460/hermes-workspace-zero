@@ -7,11 +7,17 @@
     "revision": "r1"
   },
   "loop_phase": "build",
-  "iteration": 9,
+  "iteration": 10,
   "status": "active",
-  "current_task": "L1-L5 全13章完成(第1-13章全100/100). 下一步: ①L6 第14章(书=种子KPI demo)+第15章(资产组合: 课=放大器/社群=R0>1载体)派发 ②v3 定稿前全书级通读 ③v3 升级仍待 P2 第一个数(成璐 30 人 30 天实验, 人依赖排队). 审批 m02225 成璐全部批准: Q1=A然后B(A✓config:264 chenglu; B✓voice量化层并入chenglu persona) / Q2=D2✓(AGENTS.md:302公理层) / Q3=E3. thinking-budget 改机制提案未启动",
-  "blocker": null,
+  "current_task": "L1-L6 全15章第一稿完成(第1-15章全100/100, 我全审过). v3 定稿前全书通读完成(6处交叉引用修复+ch12回指补, notes落盘). v3 正式定稿仍待 P2 第一个数(成璐 30 人 30 天实验, 渠道待成璐拍板, ch14 已含完整实验设计). 审批 m02225 成璐全部批准: Q1=A然后B(A✓config:264 chenglu; B✓voice量化层并入chenglu persona) / Q2=D2✓(AGENTS.md公理层) / Q3=E3. thinking-budget A/B 由并行 session 接管(D1-think-token-budget round3: H1部分达成-15.7%/H2达成, verdict已记录)",
+  "blocker": "v3 正式定稿待 P2 实验第一个数（30 人 30 天 ≥40% 信念迁移, solo 0 美元设计已在 ch14; 渠道待成璐拍板）",
   "change_log": [
+    {
+      "time": "2026-10-19",
+      "action": "l6-complete-ch14-ch15-readthrough-t5",
+      "summary": "L6 完成(2/2 全100/100 我全审过): ch14 14-书是种子-KPI怎么量在自己身上.md(1265字/0.359/32.4/8块: 本书=KPI demo / 信念变化率gate 40分设计值conf0.6 / 聚合原型=3月信念留存率(第3次均值/后测均值)兑现ch2:65 / P2最小数据量30人30天0美元兑现ch10:24+ch12:24执行(Lead补回指半句) / 代理失真=自报打分无对照组显式标边界 / 可证伪预测=30人读完率≥60%且3月留存≥50%者≤20人, 判死: 读完率<50%或留存<30%, conf0.4全章最低; subagent 6f413637 隔离合规); ch15 15-资产组合-种子放大器与R0大于1的载体.md(1249字/0.475/31.2/9块: 三线gate=书P2第一个数/课提问率15%+4周留存≥60%判死<40%课线死/社群20真实案例 / 不并行solo串行 / Almgren-Chriss执行曲线 / 组合KPI同分子 / gate标'引用设计未验证conf0.6' / P7最低置信0.5). v3 定稿前全书通读完成(tasks/v3-readthrough-notes.md): A1-A4 交叉引用落空+B1-B2 引用错误=6 处修复全执行并验证(grep 新句各1处/旧引用0残留/drift 复跑6文件02/03/04/07/08/10 全无漂移信号=100); P1-P8 全章引用与骨架一致(通过); ch15 验证(与 ch13:22 衔接成立); ch12:24 承诺(最短程序30天变第一版)ch14 未回指→Lead 补半句+drift 复跑100. A/B(m01196④)归属: 并行 session 接管(D1-think-token-budget, worktree agent-a9467263 活跃, round3 6条件×3trial: H1 部分达成 26799→22593 -15.7%<20%阈值, H2 达成, verdict 已写未提交; 本 session DPA.1 A/B round1-2 发现底座污染, 两线不合并, 不碰). T5 bookkeeping: state.md #9 完成, loop-state iter10, decomposition.md T1-T4 回填✅, commit+push(必须 -c http.version=HTTP/1.1).",
+      "confidence": 0.95
+    },
     {
       "time": "2026-10-18",
       "action": "l4-l5-complete-ch13-delivered-approvals-rotated",

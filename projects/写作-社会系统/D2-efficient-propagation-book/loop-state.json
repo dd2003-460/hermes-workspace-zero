@@ -7,11 +7,17 @@
     "revision": "r1"
   },
   "loop_phase": "build",
-  "iteration": 10,
+  "iteration": 11,
   "status": "active",
-  "current_task": "L1-L6 全15章第一稿完成(第1-15章全100/100, 我全审过). v3 定稿前全书通读完成(6处交叉引用修复+ch12回指补, notes落盘). v3 正式定稿仍待 P2 第一个数(成璐 30 人 30 天实验, 渠道待成璐拍板, ch14 已含完整实验设计). 审批 m02225 成璐全部批准: Q1=A然后B(A✓config:264 chenglu; B✓voice量化层并入chenglu persona) / Q2=D2✓(AGENTS.md公理层) / Q3=E3. thinking-budget A/B 由并行 session 接管(D1-think-token-budget round3: H1部分达成-15.7%/H2达成, verdict已记录)",
-  "blocker": "v3 正式定稿待 P2 实验第一个数（30 人 30 天 ≥40% 信念迁移, solo 0 美元设计已在 ch14; 渠道待成璐拍板）",
+  "current_task": "L1-L6 全15章第一稿完成(第1-15章全100/100, 我全审过). v3 定稿前全书通读完成(6处交叉引用修复+ch12回指补, notes落盘). 提前做文档完成(commit 9c0c00cf: p2-experiment-plan.md + v3-finalization-checklist.md + assetization-path.md v2 + decomposition.md T7). 全书 15 章 drift-check 终检通过(全100/100, round 16). v3 正式定稿仍待 P2 第一个数(成璐 30 人 30 天实验, 渠道待成璐拍板). 审批 m02225 成璐全部批准: Q1=A然后B / Q2=D2✓ / Q3=E3. thinking-budget A/B 由并行 session 接管(round3 verdict已记录)",
+  "blocker": "v3 正式定稿待 P2 实验第一个数（30 人 30 天 ≥40% 信念迁移, solo 0 美元设计已在 ch14+p2-experiment-plan.md; 渠道待成璐拍板）",
   "change_log": [
+    {
+      "time": "2026-10-20",
+      "action": "pre-docs-and-final-drift-check",
+      "summary": "提前做文档(commit 9c0c00cf, 本地已 commit, push 待网络恢复): ①p2-experiment-plan.md(从 ch14 抽出 P2 实验方案: 30人30天0美元solo最小版本, 测量指标+gate+执行步骤+判死条件+边界, 成璐拍板渠道后直接执行) ②v3-finalization-checklist.md(v3 定稿 checklist: 前置=P2 三个 gate 数字, 定稿动作=全书一致性终检+gate 数字回填+版本升级+git 收口, P2 第一个数到达后按单执行) ③assetization-path.md v1→v2(时间线更新: 15章已完成; gate 数字与 ch14/15 对齐: 课线提问率≥15%+4周留存≥60%判死<40%; 社群线20真实案例; 实验方案+checklist 指针) ④decomposition.md T5✅+T7(P2方案+v3checklist)新增. 全书 15 章 drift-check 终检通过(round 16): ch1-15 全 100/100 无漂移信号(独立于交付时 verify, 是 v3 定稿前最终一致性确认). KB.1↔书15章交叉引用一致性验证通过(round 15): 10个关键论文引用(Bass1969/Rogers1962/Watts-Strogatz1998/Barabasi-Alt1999/Granovetter1973/1978/PSV2001/Kempe2003/Almgren-Chriss2000/Kolmogorov1965)全在 KB.1 三篇 note 有对应名词条目. push 重试失败(github.com 连接超时/空回复, 网络问题非 git 配置, commit 9c0c00cf 在本地待推). 教训: push 挂起时 kill+重试; 网络不通时空转, 转做其他可自主推进活.",
+      "confidence": 0.95
+    },
     {
       "time": "2026-10-19",
       "action": "l6-complete-ch14-ch15-readthrough-t5",

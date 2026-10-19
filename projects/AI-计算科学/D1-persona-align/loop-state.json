@@ -1,14 +1,14 @@
 {
   "project_id": "D1-persona-align",
   "stage": {
-    "id": "m01380-unblock+persona-crosscheck+m01255-kickoff",
-    "name": "execution/post-unblock-recovery",
-    "revision": "r14"
+    "id": "m01255-persona-voice-alignment",
+    "name": "execution/voice-alignment-experiments",
+    "revision": "r22"
   },
   "loop_phase": "execution",
-  "iteration": 14,
+  "iteration": 31,
   "status": "active",
-  "current_task": "m01380解卡后恢复(r14): ①APPROVALS.md引用7处全部改为个人/APPROVALS.md(CLAUDE.md:83/96/97+thinking-budget.md:13/29+open-questions.md:4+standing-directive:8) ②who-i-am.md:9身份→中科院理论物理研究生(单源conf0.7)+新建memory/persona-crosscheck-claude.md(6双源互证conf0.9/9新事实单源conf0.7/0冲突, core-rules 16条零修改) ③next: m01255立项(KB 3篇note传播学/拓扑结构/传播效率 + 写作-社会系统/D2-efficient-propagation-book/项目立项, 3 subagent并行写note). m01140修订(r13,历史): 成璐'我发现是我冲突指令妨碍了你...只有不可逆而且不明确偏好的操作需要确认(可以放一个地方集中让我审批,例如工作区顶层index,不要中断你工作,然后跳过这些阻塞,做可逆可回滚的你自己能决定的行动)'. 执行: ①CLAUDE.md RALPH节重写=新机制(可逆自主/不可逆+偏好明确留回滚点执行/不可逆+偏好不明→APPROVALS.md跳过继续/红线需明确指令; CONFIRMED 1/2硬门禁作废, 历史已确认区块只读) ②新建工作区顶层APPROVALS.md集中审批队列(Q1 A/B/C+Q2 D1/D2/D3+Q3 E1/E2/E3, 回一个词拍板, 不中断循环) ③thinking-budget.md L2+CLAUDE.md思考预算节同步改'偏好不明=写APPROVALS.md跳过继续(不中断循环)' ④standing-directive+第5条集中审批不阻塞 ⑤open-questions.md标注拍板已迁移. 红线AGENTS.md仍一字未动. 按永续指令继续: KB.1第二篇note(agent记忆机制)subagent进行中.",
+  "current_task": "m01255 persona/voice对齐(r31): T44重推测试完成(3次独立subagent, qwen3.8-27b-w8a16). 8条hold规则: R2 3/3, R3/R7 2/3→confirmed(边界); R1/R8/R11/R14/R16 0/3→hold. 模式: P1被读成验证侧非瘦身侧, P4被读成记录侧非节奏侧. 反向测试: 6公轴全必要无冗余. 修订v2.1: P1加表达/枚举压缩短语(删一句丢信息才留/排除式先于枚举/分层读), P4加盲点不可自观察短语(独立第二观察源/每轮至少一个), 无增删公轴. persona-axioms.md升v2.1(§0/§1/§5更新). 原始输出loop-artifacts/retro-test/try1-3.md. 下一步: T45最终交付(可含P1/P4修订后复测).",
   "blocker": null,
   "change_log": [
     {
@@ -100,6 +100,76 @@
       "time": "2026-10-18",
       "action": "post-unblock-recovery",
       "summary": "m01380解卡后恢复(r14): ①APPROVALS.md引用7处全改个人/APPROVALS.md(CLAUDE.md:83/96/97 + thinking-budget.md:13/29 + open-questions.md:4 + standing-directive-m01076.md:8; loop-state:11/97与ACTIVE.md:13的提及=历史changelog不改) ②who-i-am.md:9身份→中科院(CAS)理论物理研究生(源persona-claude-longterm.md单源conf0.7, 替代'个人独立研究者/PhD申请中'), 加交叉验证指针行 ③新建memory/persona-crosscheck-claude.md: Claude长期导出×DPA.1 persona逐条对照=6双源互证项conf0.9(压缩世界观/性价比solo/要求严格评估/执行导向Weinstein外部评估/AI复刻=平均值非上层思维/跨域形式化偏好) + 9单源新事实conf0.7(N1身份/N2女友儿童英语老师/N3文明贡献Shapley+ATE/N4 OpenClaw-Zero架构/N5硬件评估/N6 A股小盘股模因传播框架/N7任意子统计论文/N8损失掩蔽/N9 TCS基础讨论) + 0冲突 → persona从'单源自洽'升级'双源互证(核心conf0.9)+单源扩展(事实conf0.7)'; core-rules 16条零修改; 待办=成璐口头确认N1 ④队列: loop-state r14+aggregate+git commit/push(验连通)+个人/ASYNC.md补git结果 + m01255立项(KB 3篇note传播学/拓扑结构/传播效率 + 写作-社会系统/D2-efficient-propagation-book/项目立项)."
+    },
+    {
+      "time": "2026-10-19",
+      "action": "voice-alignment-experiments",
+      "summary": "m01255 persona/voice对齐实验(r15): 成璐反馈persona/voice都不能对齐其风格思维. ①02前沿调研5方案2路线: 去AI味(clearmode 4轴43规则MIT零依赖/Voice DNA 3指纹/Humanizer-zh学术27星) + 风格克隆(perfectly-replicate 7+1维/wechat-style-distiller). ②02.5交叉验证: ego-browser(0.5.1.13) ChatGPT(contenteditable DIV,click+paste+Enter)+DeepSeek(textarea,fill直接成功) 3问: Q1不是…而是AI味vs人味(荷载论断非频率,两站一致conf0.85) Q2描述vs量化(三层A50%+B30%+C20%,B峰值超调=分布误写逐句命令) Q3去AI味路线(词表/四轴/Voice DNA,落地4层+中文系统提示词6节+消融设计). ③T1 GITHUB-RESEARCH.md 70L. ④T2 skills/voice-anti-ai-zh/SKILL.md 144L(引导式优先排除式,词表=审查触发器非绝对禁词,不是…而是只入三票制). ⑤实验1 C三层prompt盲生成S2(1549字,第一人称0.42/句长33.4/所以4但是0/AI味词0). ⑥实验2 4层消融(A词表3225字/B四轴3738字/C三指纹+D组合进行中). 04.5反方复核待做. P9(MDL表达约束)再验证: C三层用软目标分布(非逐句命令)应比A(16规则spec)更贴GT."
+    },
+    {
+      "time": "2026-10-19",
+      "action": "voice-alignment-experiments-complete",
+      "summary": "r16: 实验1+实验2全部完成. 实验1: C三层盲生成S2(1549字,句长27.8,第一人称19,所以4/但是0,闭环×3). 实验2: 4-way消融(A词表/B四轴/C三指纹/D组合). 消融结论: ①词表收益≈0(只删1个其实) ②结构层是主战场(句长std 21-24) ③D组合最优(改动最小+自然度最高) ④C三层>A(16规则spec), P9再验证(MDL表达约束成立). 04.5反方复核: n=1/评分粗糙/去AI味≠风格对齐/闭环×3是prompt bug. 下一步: 修prompt+扩展场景+7维度评分+盲测. memory/replication-test-result-r15.md."
+    },
+    {
+      "time": "2026-10-19",
+      "action": "t7-t8-t9-complete",
+      "summary": "r17: T7扩展S1/S3场景(C三层闭环=0,AI味词=0,句长avg25.8/31.5). T9盲测: 盲猜未命中GT(猜A-old), A-old比GT更像真人(自然度9/具体9/第一人称10/节奏9), C三层垫底(第一人称感3,暴露AI自称). 核心发现: ①GT是聊天碎片非写作风格 ②A-old voice特征(我猜/反问链)比GT更容易被识别为人 ③C三层核心bug=角色错位(把自己当AI回复用户而非成璐回复用户). 下一步: 修prompt角色锚定+重新盲测."
+    },
+    {
+      "time": "2026-10-19",
+      "action": "t10-t11-t12-complete",
+      "summary": "r18: T10修prompt角色锚定(你是成璐本人非AI,禁AI自我指涉). T11 S1/S2/S3 v2盲生成: S1 1061字/我9↑/AI味0/闭环0, S2 1656字/我21/所以6/闭环3(技术语境)/AI自称3(场景需要), S3 1394字/我17↑/AI味0/闭环0. T12盲测v2: 盲猜命中GT(文本X), 5维度X(9/7/9/7/7)>Z(7/8/8/8/8)>Y(6/8/5/7/8). 核心发现: ①角色锚定修复后盲测从未命中→命中GT ②A-old比C三层v2更被认可为AI扮成璐 ③GT是真人碎片(粗口/跑题/编号混乱)非写作风格. next: 04.5反方复核+综合结论."
+    },
+    {
+      "time": "2026-10-19",
+      "action": "t13-t14-t15-complete",
+      "summary": "r19: T13聊天格式prompt(无段落/编号混乱/跑题/粗口/括号吐槽/无句号/界面残留). T14 S2聊天格式盲生成(549字, 格式基本符合, 问号0偏少). T15盲测v3: 盲猜命中GT, W(聊天格式)自然6/具体9/第一人称8/节奏7/密度9, 比A-old(7/8/8/8/8)更像成璐. 核心发现: ①聊天格式能模仿表面(粗口/Show more/编号) ②无法模仿无意识性(X编号无意识混乱vs W有意识规整) ③真人raw的不体面是无意识的, AI模仿是设计过的 = AI根本局限. next: 04.5反方复核+最终综合结论."
+    },
+    {
+      "time": "2026-10-19",
+      "action": "t16-t17-complete-final-conclusion",
+      "summary": "r20: T16公理层决策测试设计(3决策任务:技术选型/时间分配/风险判断, 5维评分:压缩律/代价律/置信律/观察律/性价比). T17公理层3决策生成(17923507): 技术选型Obsidian conf0.85(砍C0月/砍B性能差/选A免费本地)/时间分配先B修bug3天→A论文4天 C不排 conf0.75(B是A前置)/风险判断发但标n3局限 conf0.7(领域急需无独立证据→低conf). vs GT(QNM决策)对比: GT唯一可行路径决策已完成闭环断言, 公理层有conf没闭环. 最终结论: 人格三层=价值函数(A0-A3可复现)+决策模式(部分可复现, 缺决策已完成闭环)+无意识性(不可复现, AI根本局限). 最接近方案: 公理层(价值函数)+C三层(语言风格)+聊天格式(表面格式), 仍缺无意识性+闭环断言."
+    },
+    {
+      "time": "2026-10-19",
+      "action": "t18-complete-final-revision",
+      "summary": "r21: T18分析GT决策闭环断言. 核心修正: 唯一可行路径/决策已完成是文件派生非persona派生(replication-test-result-v2.md:51). persona纯驱动7条: ①结构性根因 ②对照排除法 ③性价比/solo硬动机(最强信号) ④置信度诚实 ⑤诊断先行/怀疑基准 ⑥短第一人称因果密敢断言 ⑦敢下判断但标conf不装闭合. 不是persona: 具体方法值(AIM/a0.90)=项目记忆, 教科书方法=AI基础, 闭环断言=文件派生. 修正后人格分层: 价值函数(✅公理层)+决策模式7规则(✅公理层+C三层)+语言风格(✅C三层)+聊天格式(⚠️可模仿但设计过)+无意识性(❌AI根本局限)+具体方法值(❌需项目记忆)+闭环断言(❌文件派生). 最接近方案: 公理层+C三层+聊天格式+项目记忆, 仍缺无意识性."
+    },
+    {
+      "time": "2026-10-19",
+      "action": "final-report-written",
+      "summary": "r22: 最终报告写入memory/persona-alignment-final-report.md. 整合r15-r21所有实验发现: ①人格分层修正版(价值函数✅公理层/决策模式7规则✅公理层+C三层/语言风格✅C三层/聊天格式⚠️可模仿/无意识性❌AI根本局限/具体方法值❌需项目记忆/闭环断言❌文件派生) ②persona纯驱动7条(结构性根因/对照排除/性价比/置信诚实/诊断先行/敢断言/不装闭合) ③去AI味消融结论(词表≈0/四轴有效/三指纹有效/D组合最优, 结构层主战场非词表) ④最接近方案=公理层+C三层+聊天格式+项目记忆(仍缺无意识性). 用户要求找到工作区内关于对齐我人格的代理的工作记录已满足."
+    },
+    {
+      "time": "2026-10-19",
+      "action": "t19-t21-opro-v5-research",
+      "summary": "r24: T19 OPRO r1完成(memory/opro-optimation-r1.md, C三层v2=40%→v3≈65-70%). T20 调研'是否需要开思考'(Perplexity, memory/research-thinking-vs-style-m00813.md): 不需要, prompt精度>推理深度, 思考让文本更structured=更AI. T21 OPRO-v5 prompt写完(tasks/experiments/opro-v5-prompt.md): v3基础+3处修复(①跨域比喻硬规则+5组对照 ②内容种子去比喻化 ③用户自描述4条认知行为: 跳跃/识别问题/质疑自己/不用比喻). 语料验证: 同一词成璐=本域字面义(逼=倒逼/卡死=卡死进程/刺=直方图尖刺), AI=跨域比喻(物理动词→抽象对象). OPRO-v3 prompt自身被比喻污染(行29/30/34)→模型忠实复现. next: T22 OPRO-v5盲生成(subagent d8edaf8b)+T23盲测."
+    },
+    {
+      "time": "2026-10-19",
+      "action": "t22-t25-opro-v5-v6-completion",
+      "summary": "r25: T22 OPRO-v5盲生成(subagent d8edaf8b): 813字/84片段/avg9.7/我41/所以0但是0/AI味词0/物理动词比喻0/操作预期类比1/AI自称0/数字14. T23盲测(4文本2轴7维): 轴A(↓) W(v3)=11 X(GT)=1 Y(v5)=4 Z(A-old)=5; 轴B(↑) W=41 X=36 Y=34 Z=31. 最像成璐=X(GT). v3过度表演(A11/B41), v5过度收敛(A4/B34). 用户m01000: 生成式规则替代排除式. OPRO-v6(537字/我10) + OPRO-v7(646字/我8/74fragments). 副脑质询: '不用比喻'绝对化→修复为禁物理动词跨域比喻+保留操作预期类比."
+    },
+    {
+      "time": "2026-10-19",
+      "action": "t30-t33-distill-opro-v8",
+      "summary": "r27: T28调研蒸馏仓库(3 repos: perfectly-replicate 7★/clonar-escrita 2★/clone-chat 7★, 前2个clone). T29语料(corpus_input.txt 86条/89K字). T30 perfectly-replicate蒸馏完成(output_perfectly_replicate.md 286行, 7+1维度, 86条语料, 5组矛盾保留, 16条禁用清单, 合成prompt含7铁律+风格参考卡). 核心发现: ①英文术语裸用 ②公式符号行内嵌入(𝓜(m,Z)) ③自造复合词(Jensen型陷阱) ④X不是Y是Z≥5次 ⑤先结论后推导≥4次 ⑥自我修正不找补 ⑦情感峰值=纯散文(MSG36: 你不怕不存在。你怕的是方向中断。) ⑧物理隐喻=论证工具. T32 OPRO-v8 prompt(中断行为: 括号插话/自我暴露/没说完就跳/编号松散, 纯场景式零规则). T33 v8盲生成(757字/我13/0比喻/括号插话0失败/编号比v7整齐/105fragments avg7.2). delivery-report-r25.md: GT=75/80 vs v7=55/80(71%), 4差距(括号插话/自我暴露/跳跃感/没说完就跳). v8诊断: 3个修复全部失败(括号插话0/编号整齐/自我暴露0). 核心问题: 模型不会'中断'因为生成是连续的, 中断需要模型主动打断自己. next: v8.1(用'你打字的时候经常被打断'替代'你经常一句话说到一半突然跳走'+更多GT场景+盲测)."
+    },
+    {
+      "time": "2026-10-19",
+      "action": "t35-t38-v81-blindtest-injector",
+      "summary": "r29: T35 OPRO-v8.1盲生成完成(604字/我26/括号5/跳号0→1→1.1→1.2→2.2→2.5→3/AI味0/物理动词0/AI自称0). 核心改动: '你打字的时候经常被打断'(被动中断)+few-shot GT原文. v8括号0→v8.1括号5(修复成功). T37后处理脚本完成(interruption_injector.py 292行, 纯标准库, 括号0.4/千字+跳号1.0/千字+截断0.5/千字, 7条预设池, 参数--input/--seed/--dry-run/--frequency-scale). 测试: GT S2(594字)→0注入(文本太短round=0), OPRO-v3(754字, 5x scale)→括号2/跳号0/截断0. 修复split_sentences()增加NUM_SEP_RE编号边界. T38盲测v6完成(t23-blind-test-v6-result.md): Y(OPRO-v8.1)轴B=34最高/B1=9/B5=8/B4=8, A=4. W(v3)轴B=30/A=7(物理动词6). X(GT)轴B=27/A=2(提问为主). Z(A-old)轴B=32/A=3. 最像成璐=Y(OPRO-v8.1). T36 GT分层采样全部完成(GT-01~10, 5场景×2条: 技术讨论/情感自我暴露/决策性价比/跑题碎片/多轮对话, 合计~15.4KB). 5盲区: 多轮对话/不同AI差异化/时间上下文/非AI对话/评分者偏差. T39最终交付报告已写(memory/delivery-report-r29.md). 下一步: 交付给用户."
+    },
+    {
+      "time": "2026-10-19",
+      "action": "r30-axiom-tree-scene-guide",
+      "summary": "r30: 用户m01611要求: ①公理压缩实验(写公理+推导规则+重推测试, 5条实验定义'够用') ②树结构按需加载(根SKILL.md十几行公理+分支文件+索引) ③情景引导prompt实验(自言自语/吐槽/内心思考, 限制式vs情景式). T40-T42: subagent 776dd2db写公理文件(persona-axioms.md)+分支文件(skills/01-thinking.md/02-engineering.md/03-writing.md)+根SKILL.md. T43: subagent 79348bd2设计3组prompt(限制式OPRO-v8.1/情景引导A纯场景/情景引导B场景+few-shot)+盲生成+2轴7维评分. T44-T45: 重推测试执行+公理修订+最终交付. 核心假设: 情景引导(描述状态不写规则)比限制式(排除词表)更能自然引发自言自语/吐槽/内心思考."
+    },
+    {
+      "time": "2026-10-19",
+      "action": "t44-retro-test",
+      "summary": "T44重推测试完成: 3次独立subagent(qwen3.8-27b-w8a16, 仅给6公轴不给答案, §4测试prompt). 8条hold规则结果: R2(每步标conf) 3/3 confirmed; R3(撞数据墙转实证) 2/3 + R7(持续行动) 2/3 → confirmed(边界, 下轮抽测); R1(Delete test)/R8(派质询者)/R11(先明确砍掉)/R14(分层读+对比表)/R16(每轮派sub) 0/3 → hold. 模式分析: 3次输出系统性缺口=瘦身方向+节奏方向; P1被一致读成验证侧(可验证判据/复现)而非瘦身侧(删句/排除式/分层读)→R1/R11/R14同因; P4被一致读成记录侧(留重验路径)而非来源侧/节奏侧(独立第二观察源/每轮)→R8/R16同因; 推回成功特征=公轴表述本身含操作词. 反向测试(删除实验, 规则→公轴映射+实测): 删P1断R1/R11/R14, 删P2断R7, 删P3断R2/R3, 删P4断R8/R16+R9/R10/R13支撑, 删P5断3次实测的复述确认规则, 删P6断3次实测的表达检查规则+R10半源 → 6条全必要无冗余. 公轴修订v2→v2.1(无增删, 只加操作化短语): P1+表达/枚举同样过压缩(删一句丢信息才留/排除式先于枚举式/读别人已知→骨架→逐行分层); P4+盲点不可自观察(测量需独立第二观察源, 每轮至少一个). 理由: 5条0/3全是表述太抽象推不动(公轴缺信息)非新维度(不升格P7, 保最小性). persona-axioms.md升v2.1(§0公轴/§1状态/§5判定记录表+反向测试+修订). 原始输出存档loop-artifacts/retro-test/try1-3.md. caveat: 被测=当前模型族, '够用'是相对该模型的操作化定义; 换强模型推回率可能升高. 下一步: T45最终交付(可含P1/P4修订后复测验证). "
     }
   ]
 }

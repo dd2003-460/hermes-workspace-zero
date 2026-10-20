@@ -1,0 +1,274 @@
+++ b/analysis/hermes-workspace-zero-audit-2026-10-20.md
+# hermes-workspace-zero — 结构与项目状态审计
+
+**被审计仓库**：`github.com/dd2003-460/hermes-workspace-zero`
+**审计日期**：2026-10-20
+**审计对象**：`main` @ `4f3f285`（2026-10-18T04:54Z）+ `codex/ralph-field-runtime` @ `1641115`（2026-10-19T23:12Z）
+**方法**：完整浅克隆 + 全量 `loop-state.json` 解析 + 索引/路径交叉核验 + `run_all.py` 实跑复验 + GitHub API 分支比对
+
+**置信度刻度**：高 = 0.85–0.95（直接观测/可复算）｜中 = 0.6–0.8（多信号推断）｜低 = <0.6（推断/需人工确认）
+
+> 注：本次会话的 GitHub connector 返回 `unsupported`，故改用已授权的 `gh` CLI 直连 API + 克隆。数据来源与结论不受影响，但**无法**读取 Issues/PR 之外的 connector-only 视图（该仓库本身 0 issue / 0 PR）。
+
+---
+
+## 0. 一句话结论
+
+仓库的**研究内容质量高、状态文件治理失效**：真正的最新进展（9 个 commit / 300 个文件）全部滞留在未合并的 `codex/ralph-field-runtime` 分支上，而 `main` 上的 `ACTIVE.md`、`TASKS.md`、多个 `loop-state.json` 停留在 10-18 甚至 6 月；另有 **12 个无 `.gitmodules` 的 gitlink**（克隆后全是空目录）、**6,200 个 `node_modules` 文件入库**、以及至少 **5 处状态机与产物直接矛盾**。
+
+置信度 **0.92**（结构事实为直接观测；"应如何修"部分为建议，置信度单列）。
+
+---
+
+## 1. 仓库快照
+
+| 指标 | 值 | 来源 |
+|---|---|---|
+| 跟踪文件数 | 8,601 | `git ls-files` |
+| 仓库体积 | 65.5 MB（diskUsage 65507 KB） | GitHub API |
+| `node_modules/` 入库文件 | **6,200（72%）** | `git ls-files` |
+| `projects/` 下文件 | 2,092（main）/ 2,906（codex 分支） | 树 API |
+| 领域目录 | 6：`AI-计算科学` `理论物理` `写作-社会系统` `知识` `金融` + 根级 `decomp` `open-science` | `find` |
+| 项目目录 | 26 | `find projects/*/*/` |
+| `loop-state.json` | 10（含 1 个 `cycle1-backup` 副本）→ 活 9 | `find` |
+| 可被聚合器识别 | **8**（`D1-think-token-budget` 缺 `project_id` 被跳过） | `scripts/aggregate-active.sh` |
+| 分支 | 2：`main`、`codex/ralph-field-runtime` | API |
+| Issue / PR | 0 / 0 | API |
+| gitlink（无 `.gitmodules`） | **12** | `git ls-files -s \| awk '$1=="160000"'` |
+| 最大单文件 | `loop-events.md` **2.87 MB**、3 个 arXiv tgz 各 ~2 MB、`node_modules` bundle 3.3 MB | `git ls-tree -l` |
+
+---
+
+## 2. 最高优先级发现（P0）
+
+### P0-A｜`main` 落后工作分支 9 个 commit / 300 个文件【置信度 0.95】
+
+`compare/main...codex/ralph-field-runtime` = **ahead 9 / behind 0**（可 fast-forward）。滞留在分支上的内容包括：
+
+| 项目 | 分支上新增/修改的内容 | 证据 |
+|---|---|---|
+| `金融/D1-financial-market-analysis` | **273 个文件**：04/r1 回测全链（`backtest_results.json`、`backtest_trades.parquet` 6576 行、`scripts/run_backtest.py`、`pit_selfcheck.json`）+ 05/r1 跨市场预注册 | `loop-artifacts/stages/04/r1/*`、`05/r1/t06-s2s3-preregistration.md` |
+| `写作-社会系统/D2-efficient-propagation-book` | 第 **14、15 章**（L6 完成，15/15 章齐）+ `p2-experiment-plan.md` + `v3-finalization-checklist.md` + `v3-readthrough-notes.md` + `decomposition.md` | commit `34231b4`、`9c0c00c` |
+| `知识/D1-knowledge-base` | 第 6 篇 note `notes/llm-persona-alignment.md` | commit `1641115` |
+| `AI-计算科学/D1-persona-align` | r14 → **r31**，T44 重推测试、`persona-axioms.md` v2.1、`loop-artifacts/retro-test/try1-3.md` | commit `a4286fb` |
+| `AI-计算科学/D1-think-token-budget` | it5 → **it9**，R3 收官、`tasks/decomposition.md` | commit `c2a0f16` |
+| 治理文件 | `AGENTS.md`（m02332/m02353 重写：研究优先 7 关 + 规划纪律）、`CLAUDE.md` | commit `b4be492` |
+
+**后果**：任何按 `main` 阅读仓库的人（包括下一个 agent）看到的都是 10-18 的旧世界——`projects/ACTIVE.md` 因此声称 D2 只完成到 L3、KB 只交付三篇、persona 停在 r14。
+
+**动作**：
+```bash
+git checkout main && git merge --ff-only codex/ralph-field-runtime
+# 或走 PR：gh pr create --base main --head codex/ralph-field-runtime --title "merge ralph runtime work"
+```
+（本会话不代你合并；分支领先且无冲突迹象，`--ff-only` 可行性置信度 0.9。）
+
+---
+
+### P0-B｜状态机与产物直接矛盾（5 处）【置信度 0.9】
+
+| # | 位置 | 矛盾 | 影响 |
+|---|---|---|---|
+| B1 | `projects/金融/D1-financial-market-analysis/loop-state.json`（**两个分支都是**） | `stage.id = "03"`，但磁盘上已有 `stages/04/r1/`（341 文件）与 `stages/05/r1/` 产物，且 **04/r1 无 `state.json` / `advance.json`** | 面板显示"执行任务分解"，实际回测已跑完并得到负结果 |
+| B2 | `projects/金融/D1-financial-market-analysis/tasks/TASKS.md` | F1–F5 全部 `📋 就绪 / ⏳ 待办`，而 04 阶段已产出 T01–T08 全套 artifact + 负结果报告 | 任务板彻底失效 |
+| B3 | `projects/理论物理/D1-area-quantized-black-hole-QNM/loop-state.json` | `task.description = "研究本地 GPU"`（GPU 项目的任务串串味），而项目是 QNM；`stage=02.5`，`legacy.iteration=41` 却说 P1-1 Teukolsky 已在执行 | 阶段与迭代互相打架 |
+| B4 | 同上 + `tasks/TASKS.md` | TASKS.md 里 P1–P4 全部 `⬜ 待启动`，但 P1 的验收标准却已勾 ✅；INDEX.md 写"状态：调研阶段" | 三重口径不一致 |
+| B5 | `projects/AI-计算科学/D1-gpu-inference-hardware/loop-state.json` | `project_id = "D1-ralph-smoke-matrix"`（路径名却是 `D1-gpu-inference-hardware`），`task.description = "."`，`queue.blocked_human = []` 而 `tasks/TASKS.md` 明明有 `T-webllm-login-blocker`（blocked_human, P1） | 面板项目名错误 + 阻塞项不可见 |
+
+**动作**（B1/B2 最值钱）：
+- 用运行时的正规入口推进，不要手改 JSON：`ralph apply projects/金融/D1-financial-market-analysis <advance.json>`（README `loop/ralph_runtime/README.md:147-152`）。需先补 `loop-artifacts/stages/04/r1/advance.json`（当前只有产物，没有状态回写）。
+- `tasks/TASKS.md` F1–F5 改写成"已完成 + 产物链接"，并把 **S1 FAIL 8/8** 写成显式结论（负结果本身就是交付物）。
+- B5：把 `project_id` 改成 `D1-gpu-inference-hardware`，`task.description` 写真实任务，并把 web-llm 阻塞写进 `queue.blocked_human`。
+
+---
+
+### P0-C｜12 个 gitlink、0 个 `.gitmodules`【置信度 0.95，影响面最大】
+
+克隆后这些目录**全空**，但索引把它们当正常项目描述：
+
+```
+.claude/worktrees/agent-ab402847303ff80fd     ← agent worktree 泄漏入库
+openscience
+projects/AI-计算科学/D1-academic                       （BayesFrame/JCR 论文真身）
+projects/decomp                                        （decomp-bench 台账）
+projects/open-science
+projects/写作-社会系统/D1-writing/motivation_society     （《动机社会》全书）
+projects/写作-社会系统/author-voice-mining               （voice 语言层"真源"）
+projects/理论物理/2026春复习/2026规范场论
+projects/理论物理/2026春复习/宇宙学
+projects/理论物理/D1-adsl-spin-connection               （AdSL 引力 sandbox）
+projects/理论物理/bh-mass- spectrum
+projects/金融/quant-capital-flow                        （quantum-ec 总目标项目）
+```
+
+`projects/INDEX.md` 仍在描述其中 6 个（`D1-academic/`、`author-voice-mining/`、`quant-capital-flow/`、`decomp/`、`D1-adsl-spin-connection/`）。`D1-persona-align/loop-state.json` 的 changelog 更把 `author-voice-mining` 称作"语言层真源"——即**关键依赖在仓库里不存在**。
+
+**动作（二选一，勿维持现状）**：
+1. 建 `.gitmodules` 写清 11 个嵌套仓 URL（需逐个确认远端可访问），`git submodule update --init`；或
+2. 若非必要：`git rm --cached <path>` + 把内容作为普通目录 vendor 进来，或从索引里删掉并在 `projects/INDEX.md` 标注"外部仓"。
+3. 无论哪种，立即 `git rm --cached .claude/worktrees/agent-ab402847303ff80fd`。
+
+---
+
+### P0-D｜`.gitignore` 有 4 处失效/错误【置信度 0.9】
+
+| 规则 | 问题 |
+|---|---|
+| 无 `node_modules/` | 6,200 文件入库（72% 的文件数）→ `git rm -r --cached node_modules` + 加规则 |
+| `/projects/理论物理/写作-社会系统/D1-writing/motivation_society/` | **路径不存在**（写作项目已上提到 `projects/写作-社会系统/`）。正确路径是 `projects/写作-社会系统/D1-writing/motivation_society/`，而它现在已经是 gitlink——两条规则互相打脸 |
+| `/projects/理论物理/D1-area-quantized-black-hole-QNM/` | 该目录**已被跟踪 177 个文件**，ignore 对已跟踪文件无效；新文件却会被静默忽略 → P0 项目处于"半隐身"状态 |
+| `*.pdf` | 全仓 0 个 pdf（被忽略），但 `*.tgz` 未忽略 → `D1-grav-waves/papers/2026-GW-BacQFT/` 里留了 v11/v12/v13 三个 2 MB 提交包 |
+
+另：`projects/AI-计算科学/D1-gpu-inference-hardware/loop-events.md` 单文件 **2.87 MB**，应轮转/归档（索引类日志 >1 MB 已不可读）。
+
+---
+
+## 3. 项目清单：状态、完成度、下一步
+
+> 完成度是**估算**（依据：阶段序号、产物清点、`TASKS.md` 勾选、显式声明）。**带 †** = 仅在 `codex` 分支成立。
+> 优先级按 `AGENTS.md:0.5`：P1 实际问题 > P2 完成度低优先（<50%）> P3 可理解性 > P4 持续行动。
+
+| 项目 | 阶段/状态（证据） | 完成度（置信度） | 主要问题 | 下一步（具体） |
+|---|---|---|---|---|
+| `金融/D1-financial-market-analysis` | loop-state 03；实际 04 已跑、05 已预注册† | 70%（0.75） | 状态机未回写；**S1 信号 FAIL 8/8** | ①回写 04/05 状态 ②改写 `tasks/TASKS.md` ③05 换数据源（见 P1-2） |
+| `AI-计算科学/D1-gpu-inference-hardware` | 04.5 running，human block | 85%（0.8） | web-llm 三 provider 未登录，04.5 门禁无法闭合；`project_id` 错 | 见 P1-3（人类一次性登录） |
+| `AI-计算科学/D1-gpu-research-2026` | r47（notes/4-r46-status 为最新，INDEX 已写 r47） | **95%**（0.85） | **无 `loop-state.json`** → 最活跃项目之一却从不出现在 ACTIVE.md；r47 只有 INDEX 记录、无 `4-r47-status.md` | ①补 loop-state ②跑 `python3 tasks/run_all.py` 留回执（我已跑：ALL SUITES GREEN ✓）③补 r47 status |
+| `写作-社会系统/D2-efficient-propagation-book` | 15/15 章†，v3 待定稿 | 草稿 95% / 定稿 0%（0.8） | 定稿被 P2 实验卡住（30 人 30 天，渠道待拍板） | ①按 `tasks/p2-experiment-plan.md` 启动 ②`tasks/v3-finalization-checklist.md` 逐项过 |
+| `AI-计算科学/D1-persona-align` | r31†，T44 完成 | 80%（0.7） | 无 `INDEX.md`（违反 `AGENTS.md:12` 标准结构）；T45 未交付 | 建 INDEX.md + 做 T45 最终交付（P1/P4 修订后复测） |
+| `知识/D1-knowledge-base` | 6 篇 note† | 75%（0.75） | `tasks/state.md` 仍写"第二篇待办"（main）；排队项 GPU 推理未做 | 写 GPU 推理 note（素材：`D1-gpu-research-2026/tasks/04-Hstar-decision-tree.md`） |
+| `AI-计算科学/D1-think-token-budget` | it9†，R3 交付 | 75%（0.7） | `loop-state.json` 无 `project_id` → 被聚合器跳过；无 README 之外的阶段机 | ①补 `project_id` ②serving 层 `thinking_token_budget` A/B（候选下一步已写明） |
+| `理论物理/D1-anyon-hawking` | arXiv 就绪 v4 | 90%（0.8） | 阻塞：作者确认 + MITM SSL | 人类动作（见 P1-6），不自动绕过 |
+| `理论物理/D1-grav-waves` | complete，iter21 | 100%（0.9） | 阻塞：arXiv 需作者手动上传；`STATUS.md` 已 DEPRECATED 但仍含旧页数（10 页 vs 全局 TASKS 51 页 vs INDEX 19 页） | 删/归档 `STATUS.md`；作者上传 |
+| `理论物理/D1-area-quantized-black-hole-QNM` | 02.5 running，iter41 | **25%**（0.7） | 论文 v1 被审稿人判方法论缺陷；P1–P4 全未启动；`task.description` 错；INDEX 说"调研阶段" | ①修 loop-state 元数据 ②U04 ego-browser 授权 ③P1 Teukolsky 重建（`leaver_schwarzschild.py` + `teukolsky_rw_limit.md`） |
+| `AI-计算科学/D1-hintfree-decomposition` | 04/r9，**NOT DONE** | 交付物在、验收 0%（0.75） | 作者自述 0/2 clean、5 处非原子节点、F4 提前合并、无 loop-state | ①补 loop-state ②按 `notes/9-r9-overall-status.md §7` 续跑 D#2/E#2/C#2/F#1；③`check_feed.sh` 已三态验证，务必沿用 |
+| `写作-社会系统/D1-aging-economics` | Phase 0–8 全 ✅ | 流水线 100%，可发表性 **低**（0.7） | **数据是合成的**（TASKS: "合成数据生成 744 obs"）却按实证论文撰写；TASKS 里 8 个 `results/*.tex|png` 路径不存在 | 明确标注 synthetic/placebo 定位，或换真数据；修 TASKS 路径 |
+| `AI-计算科学/D1-continuous-agent` | "初始阶段" | **15%**（0.7） | 仅 2 篇 note；TASKS.md 还是自动模板 | 低优先；若要动，先定研究问题 |
+| `AI-计算科学/D1-memory` | 归档完成 | 95%（0.8） | 2 个清理 TODO（空目录、22 个 `.DS_Store`） | 5 分钟清完 |
+| `AI-计算科学/D1-academic-AI` | iteration 370+（2026-06） | 80% 内容 / 0% 可复现（0.6） | INDEX 引用 4 个不存在路径（见 §4） | 修 INDEX 或补文件 |
+| `AI-计算科学/D1-goal-investigation` | 已完成（无 loop-state） | 100%（0.7） | **与 `理论物理/D1-goal-investigation` 同 ID 双份** | 合并：保留 `理论物理` 那份（有 completed 状态），AI 侧内容并入或删除 |
+| `理论物理/D1-goal-investigation` | completed，conf 0.9 | 100%（0.85） | 同上 | 同上 |
+| `理论物理/cosmos-thesis-review` | 评审报告完成 | 100%（0.75） | 无 loop-state；仅 4 文件 | 无需动作 |
+| `理论物理/bh-mass- spectrum` | 无索引/无状态 | 未知（0.3） | 目录名含空格；是 gitlink；无 INDEX.md | 重命名为 `bh-mass-spectrum` 并补 INDEX |
+| `理论物理/时钟与引力波响应` | 128 文件，无索引/无状态 | 未知（0.4） | 无 INDEX.md；`.gitignore` 里有一条针对**旧名** `_旧_归档_20260818` 的规则 | 补 INDEX.md 或归档 |
+| `写作-社会系统/D1-writing` | "维护阶段" | 60%（0.5） | `motivation_society/` 是空 gitlink；TASKS.md 是模板文案 | 见 P0-C |
+| `AI-计算科学/D1-academic`、`author-voice-mining`、`金融/quant-capital-flow`、`理论物理/D1-adsl-spin-connection`、`decomp`、`open-science`、`2026春复习/{宇宙学,2026规范场论}` | 空 gitlink | **0%**（0.95，因为克隆里确实 0 文件） | 见 P0-C | 见 P0-C |
+| `理论物理/2026春复习` | INDEX + 总索引，2 文件 | 10%（0.7） | 两门课的 gitlink 空 | 见 P0-C |
+
+**低完成度（<50%）且值得按 P2 启动的**：`D1-area-quantized-black-hole-QNM`(25%)、`D1-hintfree-decomposition`(验收 0%)、`D1-continuous-agent`(15%)、以及 8 个空 gitlink(0%)。
+其中只有 **area-QNM** 同时满足 P1（实际问题 / 已过一轮同行评审），因此它应该是下一轮唯一"新开局"项目；`hintfree` 属于方法论工具，按 P2 但优先级让位于"把 04 的 0/2 收干净"。
+
+---
+
+## 4. 索引与交叉引用：断链清单【置信度 0.9】
+
+### 4.1 `projects/INDEX.md` 指向不存在的位置
+| 引用 | 实际 |
+|---|---|
+| `AI-计算科学/D1-browser-auto/` | 不存在（INDEX.md 自己也承认，但没删行） |
+| `D1-ralph-field-centric/` | 不存在（可能对应 `codex/ralph-field-runtime` 的工作，未落地） |
+| `archive/`、`archive/README.md` | 不存在（decomp 归档映射表） |
+| `tasks/state.md` | 不存在 |
+
+### 4.2 项目内 INDEX 指向不存在的文件
+- `AI-计算科学/D1-academic-AI/INDEX.md`：`bayesian-frame/`（BayesFrame 核心实现）、`UNIFIED-FRAMEWORK.md`（定理 1–10）、`arxiv-ready/DISTCAT-arxiv-submission-v3.tar.gz`（"arXiv 就绪"的实体包）、`tasks/D1-academic-AI-tasks.md` —— **4 处全缺**。也就是说"arXiv 就绪"这一状态在仓库里没有可验证载体。
+- `AI-计算科学/D1-academic-AI/tasks/INDEX.md` → `tasks/single_loop_state.json`：缺。
+- `理论物理/D1-area-quantized-black-hole-QNM/loop/INDEX.md` → `1-loop/03|04|05-*.md`、`.claude/ralph-loop.local.md`、`projects/D1-ai-agent-hardware/loop/`：全缺（最后一个路径还是旧顶层布局）。
+- `理论物理/D1-grav-waves/loop/INDEX.md` → `paper-archive/main-paper-v17.tex`、`archive-iter1-*`、`2-loop-prompts/`：缺。
+- `写作-社会系统/D1-aging-economics/TASKS.md` → `results/{baseline_regression,did_analysis,robustness_check}.tex`、`results/{descriptive_statistics,heterogeneity_analysis}.md`、`results/{baseline_regression,did_parallel_trend}.png`、`raw-data/cleaned_panel_2000_2023.csv`：**8 处全缺**（盘上只有 `synthetic_panel_2000_2023.csv` + 5 个 csv/png）。这一条同时是科学诚信信号：文档说"清洗后的真实面板"，盘上是 `synthetic_` 前缀。
+- `AI-计算科学/D1-think-token-budget/README.md` → `memory/findings.md`：缺。
+- `AI-计算科学/D1-goal-investigation/tasks/TASKS.md` → `notes/01-…`、`researches/0{1,3,4,5,6,7}-…`：缺（该副本内容已被 `理论物理` 副本取代，进一步印证重复项目应合并）。
+- 顶层 `INDEX.md` 的 `[loop-2.md](loop-2.md)`：**唯一一个真 markdown 断链**（`loop/` 下没有此文件）。
+
+### 4.3 缺 `INDEX.md` 的项目（违反 `AGENTS.md:12` "INDEX.md + memory/ + tasks/" 标准结构）
+`D1-gpu-inference-hardware`（有 CLAUDE.md + tasks/TASKS.md）、`D1-persona-align`（有 README.md）、`D1-think-token-budget`（有 README.md）、`D1-financial-market-analysis`（有 CLAUDE.md + tasks/TASKS.md）、`bh-mass- spectrum`、`时钟与引力波响应`。
+
+### 4.4 索引自身的元数据过期
+- 顶层 `INDEX.md` 的"结构现状与待解错置"节仍在说"5 个 `D1-*` 散在顶层"、"`projects/INDEX.md` 提到 `计算科学/`、`写作-社会系统/`" —— 这些**已经修好了**；而真正未修的（空 gitlink、INDEX 缺失）它没提。该节应重写，否则下一个 agent 会去修不存在的问题。
+- `TASKS.md`（全局）"最后更新 2026-07-14"，仍索引 `D1-loop-prompt-engineering`、`D1-loop-spec-decomposition`（目录不存在，文中已自注"待清理"）、`D1-academic-AI`（无路径）；且与 `ACTIVE.md` 对 grav-waves 页数口径不一（51 页 / 19 页 / STATUS.md 10 页）。
+- `README.md` 声称"只保留稳定子集：AGENTS.md / MEMORY.md / LOOP.md" —— `LOOP.md` 不存在，且仓库实际有 8,601 个文件。这段是纯误导，删。
+
+---
+
+## 5. 优先级行动计划
+
+### P0 — 状态治理（半天内可做完，全部可逆）
+
+| # | 动作 | 具体文件 / 命令 | 置信度 |
+|---|---|---|---|
+| 1 | 合并工作分支 | `git merge --ff-only codex/ralph-field-runtime` → push；合并后再读 ACTIVE.md | 0.9 |
+| 2 | 金融状态回写 | 补 `projects/金融/D1-financial-market-analysis/loop-artifacts/stages/04/r1/advance.json` → `ralph apply`；重写 `tasks/TASKS.md` F1–F5 | 0.85 |
+| 3 | 重建面板 | 给 `D1-think-token-budget/loop-state.json` 加 `"project_id"`；给 `D1-gpu-research-2026`、`D1-hintfree-decomposition`、`D1-academic-AI`、`D1-anyon-hawking`、`D1-aging-economics`、`D1-writing` 建 loop-state；`bash scripts/aggregate-active.sh` | 0.9 |
+| 4 | 统一状态词表 | `complete` vs `completed` vs `active` vs `in_progress` vs `running` 五种并存；规定 4 值：`active / blocked / complete / archived` | 0.8 |
+| 5 | 修聚合器排序 | `aggregate-active.sh` 用 `stage.revision`（恒为 `r1`）当迭代数 → 排序失真；应优先 `.iteration`，缺失回退 `stage.revision` 并标注 | 0.9 |
+| 6 | gitlink 处置 | 12 个 gitlink 建 `.gitmodules` 或转普通目录；`git rm --cached .claude/worktrees/...` | 0.9 |
+| 7 | 仓库瘦身 | `git rm -r --cached node_modules` + `.gitignore` 加 `node_modules/`；修 motivation_society 错误路径；`*.tgz` 加规则（grav-waves 3×2MB） | 0.9 |
+| 8 | 日志轮转 | `D1-gpu-inference-hardware/loop-events.md`（2.87 MB）归档为 `loop-events-2026H1.md` | 0.85 |
+
+### P1 — 研究推进（按"实际问题"优先）
+
+| # | 项目 | 下一步 | 依据 |
+|---|---|---|---|
+| 1 | **`D1-gpu-inference-hardware`**（卡在 04.5） | 人类一次性执行：`ralph web-llm-login .` → 登录 chatgpt.com / aistudio / perplexity → `ralph web-llm-authorize . --providers perplexity chatgpt gemini` → `ralph web-llm-check` → `ralph field-apply`。**不执行就只有降级路径**：把 30 claims 里 23 条 uncertain 标为"未交叉验证"，以 conf≤0.6 关闭 04.5（禁止伪造 receipt——`tasks/TASKS.md` 已明令） | `tasks/TASKS.md` T-webllm-login-blocker |
+| 2 | **`D1-financial-market-analysis`**（负结果 → 05） | 05 预注册里写"Yahoo Finance（需确认 API 可达性）"，**但 03 阶段 T05 已实测 Yahoo `query1/query2` 均 403**（`loop-state.json` evidence）。改为：S3 走腾讯 `ifzq`（实测 200，单次上限 ~2000 bars）+ 新浪 `hq.sinajs.cn` 锚点；S2 需换源（Stooq/FRED/本地 CSV）或显式标 blocked。另：05 文档头写"04 执行前写死"属笔误（它是 04 之后写的），改措辞以免被当成 PIT 违规 | `stages/04/r1/t06-signal-backtest-report.md §5`、`stages/05/r1/t06-s2s3-preregistration.md` |
+| 3 | **`D2-efficient-propagation-book`** | 唯一硬阻塞是 P2 实验（30 人 30 天）。渠道需人类拍板 → 写进 `个人/APPROVALS.md`（现有机制就是为此设计的），然后按 `tasks/p2-experiment-plan.md` 执行；同时用 `tasks/v3-finalization-checklist.md` 把 15 章定稿推到"等数据即可发" | `loop-state.json.blocker` |
+| 4 | **`D1-area-quantized-black-hole-QNM`**（<50% + P1 实际问题） | ① 修 `loop-state.json` 的 `task.description`（现在是"研究本地 GPU"）② 在 `个人/APPROVALS.md` 请求 U04 ego-browser 派发授权 ③ 按 `legacy.next_phase_action` 重建 Teukolsky：以 `leaver_schwarzschild.py` 为基线 + `teukolsky_rw_limit.md`，先过 Berti Table III 的 (2,2)(2,1)(3,3)(3,2)(4,4)(4,3)（验收：误差<1e-6） | `tasks/TASKS.md` P1 段 + `loop-state.json.legacy` |
+| 5 | **`D1-hintfree-decomposition`** | 0/2 clean 不是任务失败而是 infra 失败（API 507 / session 结束）。按 `notes/9-r9-overall-status.md §7` 的顺序续跑：fresh F（读 pinned）→ D#2 → E#2 → C#2，每域必须含第 7 步 browser leg；单 factor revise 只修 F4 的 re-parent；`check_feed.sh` 已证明"选择性触发"，继续当门禁 | `notes/9-r9-overall-status.md` |
+| 6 | **`D1-anyon-hawking` / `D1-grav-waves`** | 均为人类阻塞（作者确认 + arXiv 上传 + MITM SSL）。写进 `个人/APPROVALS.md` 作为"待人类动作"清单，避免每轮 agent 重新发现 | 两个项目 TASKS/INDEX |
+| 7 | **`D1-persona-align`** | T45 最终交付（P1/P4 修订后复测 8 条 hold 规则）；补 `INDEX.md` | `loop-state.json`（分支 r31） |
+| 8 | **`D1-think-token-budget`** | serving 层 `thinking_token_budget` A/B（同题集，测 thinking token 而非可见字符）——这是它自己写明的下一步，也是唯一能把 prompt 层结论落到工程上的动作 | `loop-state.json.current_task` |
+| 9 | **`知识/D1-knowledge-base`** | 补第 7 篇：GPU 推理硬件。素材现成且已过三重验证：`D1-gpu-research-2026/tasks/04-Hstar-decision-tree.md` + `resolve_hstar.py`；drift-check 硬门槛（第一人称≥0.2 / 句长<55 / 空话 0） | `notes/INDEX.md` 排队区 #2 |
+
+### P2 — 一致性清理（低风险，可批量）
+
+1. `AI-计算科学/D1-academic-AI/INDEX.md`：删/补 4 条无效引用；`tasks/TASKS.md` 停在 2026-06-13（iteration 39）与 INDEX 的 "iteration 45-64" 不符 → 统一。
+2. 全局 `TASKS.md`：删除 2 个不存在的项目行，改为"只保留高层摘要 + 指向 projects/INDEX.md"；或直接退役该文件（`AGENTS.md:157-163` 已把导航权交给 `projects/ACTIVE.md`）。
+3. 顶层 `INDEX.md`："结构现状与待解错置"整节重写；修 `loop-2.md` 断链。
+4. `README.md`：删除"仅保留 AGENTS/MEMORY/LOOP"的过时描述。
+5. `D1-aging-economics`：把 synthetic 事实写进 `INDEX.md` 与论文摘要级说明；修 8 条 TASKS 路径。
+6. `D1-grav-waves/STATUS.md`：已标 DEPRECATED 却仍在仓里、且页数自相矛盾 → 移到 `memory/` 或删除。
+7. 双份 `D1-goal-investigation` 合并；双份 `TASKS.md`（`D1-aging-economics/TASKS.md` 与 `tasks/TASKS.md`）保留一份。
+8. `bh-mass- spectrum` 目录名含空格（破坏所有 `find`/脚本处理，本次审计里就导致 `awk` 解析出错）→ 改名 `bh-mass-spectrum`。
+9. `D1-continuous-agent`、`D1-writing`、`D1-memory` 的 TASKS.md 仍是"自动创建模板"文案 → 要么写真实研究问题，要么标 `archived`。
+
+---
+
+## 6. 阻塞与依赖图（当前真实状态）
+
+```
+人类动作（不可自动绕过）
+├─ web-llm 三 provider 登录 ──► D1-gpu-inference-hardware 04.5 门禁（唯一硬门禁）
+├─ 作者确认 + arXiv 上传 ────► D1-grav-waves(已完成) / D1-anyon-hawking(就绪)
+├─ MITM SSL ─────────────────► arXiv 提交链（scripts/arxiv_submit.sh）
+├─ P2 实验渠道拍板 ──────────► D2 书 v3 定稿（15 章已齐）
+└─ U04 ego-browser 授权 ────► area-QNM 02.5 交叉验证
+
+工程阻塞（可自动修）
+├─ codex 分支未合并 ────────► 所有面板/状态失真（最高杠杆）
+├─ 12 个空 gitlink ─────────► 6 个项目内容"不存在"（含 author-voice 真源）
+├─ 金融 04/05 无 advance ───► 状态机停在 03
+└─ 聚合器跳过无 project_id ─► 2 个活跃项目隐身
+```
+
+---
+
+## 7. 值得肯定的部分（避免只报坏消息）
+
+- **RALPH 的产物纪律确实在生效**：`D1-gpu-research-2026/tasks/` 里 `roofline_verify.py` / `test_hstar_rule.py` / `resolve_hstar.py` 三套自检我**实跑**过——`ALL SUITES GREEN ✓`（exit 0），且从 r11 到 r47 每一轮都记录了"反向 canary 证明检查会咬人"，这是很罕见的自检质量。
+- **金融的负结果写得比多数正结果都干净**：预注册在跑之前冻结、45 格矩阵诚实标注 30 格平仓、BH-FDR 0/45、DSR z=−4.87、并明确写"2022 的正收益是 regime beta 不是 alpha"。这是可复现研究该有的样子。
+- **状态机本身设计合理**（`schema_version 4`、字段/图任务、`ralph apply` 唯一推进口），问题只在于**没被一致执行**——所以修复成本远低于重写。
+
+---
+
+## 8. 置信度与局限
+
+| 结论类别 | 置信度 | 说明 |
+|---|---|---|
+| 仓库结构计数（文件数、gitlink、node_modules、体积） | 0.95 | 直接命令输出 |
+| 分支落后 9 commit / 300 文件 | 0.95 | GitHub compare API |
+| 断链清单 | 0.9 | 脚本遍历 + 人工抽查；可能漏掉仅在正文散文里提到、未加反引号的引用 |
+| 状态机 vs 产物矛盾（B1–B5） | 0.9 | 两侧均为文件原文 |
+| 完成度百分比 | 0.6–0.8 | 估算，非机器可读字段；仓库**没有**任何 `completion` 字段（已全文检索） |
+| "下一步应做什么" | 0.7–0.85 | 多数直接来自各项目自述的 `next`/`current_task`；少数（如 05 换数据源）是我的推断 |
+| 我**没有**验证的 | — | ① 各嵌套仓远端是否仍可访问 ② 46 个 `subagent` 实验的外部有效性 ③ 论文的物理正确性（超出本任务范围） |
+
+**方法学说明**：本审计把 `codex/ralph-field-runtime` 视为"真实当前状态"，因为它的提交时间（10-19 23:12）晚于 `main`（10-18 04:54），且 `behind_by = 0`。若该分支是被刻意放弃的实验，则 §2 P0-A 的结论应下调为"需先确认分支意图"——这一点只有仓库所有者能拍板（置信度 0.9 认为它是主线工作，依据是 9 条 commit message 全是项目推进而非实验性重构）。

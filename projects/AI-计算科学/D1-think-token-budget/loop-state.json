@@ -1,5 +1,6 @@
 {
   "project": "D1-think-token-budget",
+  "project_id": "D1-think-token-budget",
   "index": "DTB.1",
   "domain": "AI-计算科学",
   "objective": "减少无效思考/实现自适应思考预算，降低 decode token 而不损质量（AIME 风格 hard 题验证）",

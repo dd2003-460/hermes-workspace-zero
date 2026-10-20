@@ -1,0 +1,8 @@
+{
+  "action": "advance",
+  "status": "completed",
+  "stage_id": "04",
+  "revision": "r1",
+  "next_stage": "05",
+  "message": "T06 S1 资金费率信号回测完成: 3 信号(T1 sign/T2 空头拥挤/T3 多头拥挤) × 2192 天 BTCUSDT 1d, 45 格检验矩阵(3 regime × 3 threshold × 5 window), BH-FDR 0/45 通过, DSR z=-4.87(pooled Sharpe T1=-1.031), final_verdict=FAIL(F1-F8 全灭). 预注册冻结(run 前), 无 in-sample 调参, PIT B6 8/8 PASS. 产物: backtest_results.json + backtest_trades.parquet(6576行) + pit_selfcheck.json + t06-signal-backtest-report.md. 结论: 资金费率单信号在 BTC 市场无统计显著超额收益, 进入 05 阶段跨市场预注册验证."
+}

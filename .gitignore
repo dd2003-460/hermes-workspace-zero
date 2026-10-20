@@ -45,6 +45,16 @@ memory/notes/subbrain_*.md
 *.tmp
 *~
 
+# Node modules (6200 files, 72% of repo — never track)
+node_modules/
+**/node_modules/
+
+# Large binary caches (Binance klines, funding data)
+cache/
+**/cache/
+*.parquet
+*.zip
+
 # ---- nested独立仓库:不纳入外层仓(2026-08-25) ----
 /projects/AI-计算科学/D1-academic/
 /projects/open-science/
@@ -54,6 +64,15 @@ memory/notes/subbrain_*.md
 /projects/理论物理/D1-area-quantized-black-hole-QNM/
 /projects/理论物理/写作-社会系统/D1-writing/motivation_society/
 /projects/理论物理/时钟与引力波响应_旧_归档_20260818/
+/projects/写作-社会系统/author-voice-mining/
+/projects/金融/quant-capital-flow/
+/projects/decomp/
+/openscience/
+.claude/worktrees/
+/projects/理论物理/bh-mass- spectrum/
+/projects/AI-计算科学/D1-persona-align/research/distill-style-repos/clonar-escrita/
+/projects/AI-计算科学/D1-persona-align/research/distill-style-repos/perfectly-replicate-writing-skills/
+/projects/写作-社会系统/D1-writing/motivation_society/
 
 # 备份存于仓外.git-ignore
 .git-archive/

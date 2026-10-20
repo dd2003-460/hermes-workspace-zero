@@ -1,0 +1,8 @@
+{
+  "action": "advance",
+  "status": "completed",
+  "stage_id": "05",
+  "revision": "r1",
+  "next_stage": null,
+  "message": "T06 S2/S3 跨市场预注册完成: t06-s2s3-preregistration.md 冻结了跨市场(ETH/SOL/黄金/纳指)信号验证的设计、数据源、阈值和判定标准. 数据源: Yahoo Finance API (stage 02 已测 403, 需替代) / Binance vision bulk archive (已验证可达). 状态: 预注册冻结, 等待执行阶段选择替代数据源并运行跨市场回测."
+}

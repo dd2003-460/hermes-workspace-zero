@@ -2,14 +2,14 @@
   "project_id": "D1-knowledge-base",
   "slot": "KB.1",
   "stage": {
-    "id": "m01255-trilogy-delivered",
-    "name": "build/propagation-trilogy",
-    "revision": "r3"
+    "id": "kb-note-5-gpu",
+    "name": "build/gpu-inference-hardware",
+    "revision": "r1"
   },
   "loop_phase": "build",
-  "iteration": 4,
+  "iteration": 5,
   "status": "active",
-  "current_task": "KB.1 第4篇教材note notes/llm-persona-alignment.md(subagent 6efd2dc0交付): 8概念(persona对齐=条件生成非权重修改/公理比规则有效=LENS+METHOD vs VOICE/voice profile量化271语料/三层模型公理+voice+领域/drift-check.py测量工具/三版复刻检验V1-V3方法论/边界未解4条/可证伪预测带判死)×是什么/为什么/边界+conf, 引用DPA.1文件路径+三版检验数据. drift-check 100/100(1514汉字/句级第一人称0.203/均句51.6). notes/INDEX.md加行+排队区#4标记完成. 与DPA.1互补: persona=怎么想怎么说, KB=知道什么对什么有兴趣.",
+  "current_task": "KB.1 第5篇教材note notes/gpu-inference-hardware.md(Lead直写, 素材=author-voice-mining corpus四篇GPU/推理对话档案: 本地GPU选型流程2018行/AI硬件推理性能报告844行/算力对比误区解析610行/KV切块复用方案819行): 8概念(decode内存带宽瓶颈/TP分片KV每卡1/4/TCO框架4×V100陷阱+真便宜/组合比型号重要PRO6000+5090实测/线性注意力GDN改内存公式48GB跑226K/KV复用四路径mlx-lm/边界未解3条/可证伪预测PRO5000¥/tok<PRO6000×60%带判死)×是什么/为什么/边界+conf. drift-check 90→100(拆长句后: 70句/3625汉字/句级第一人称0.229/均句51.8/空话0). 核心判断: 选型真问题=负载×型号×精度×backend组合的¥/tok最低, 型号只解释一半性能.",
   "blocker": null,
   "change_log": [
     {
@@ -36,6 +36,11 @@
       "time": "2026-10-20",
       "action": "persona-note",
       "summary": "KB.1第4篇教材note notes/llm-persona-alignment.md(subagent 6efd2dc0交付): 8概念(persona对齐=条件生成非权重修改/公理比规则有效=LENS+METHOD vs VOICE/voice profile量化271语料/三层模型公理+voice+领域/drift-check.py测量工具/三版复刻检验V1-V3方法论/边界未解4条/可证伪预测带判死)×是什么/为什么/边界+conf, 引用DPA.1文件路径+三版检验数据. drift-check 100/100(1514汉字/句级第一人称0.203/均句51.6). notes/INDEX.md加行+排队区#4标记完成. 与DPA.1互补: persona=怎么想怎么说, KB=知道什么对什么有兴趣."
+    },
+    {
+      "time": "2026-10-20",
+      "action": "gpu-note",
+      "summary": "KB.1第5篇教材note notes/gpu-inference-hardware.md(Lead直写, 素材=corpus四篇GPU/推理对话档案): 8概念(decode带宽瓶颈/TP分片KV每卡1/4/TCO4×V100/组合比型号重要/线性注意力改内存公式/KV复用四路径/边界未解3条/可证伪预测PRO5000¥/tok<PRO6000×60%带判死). drift-check 90→100(拆长句: 70句/3625汉字/第一人称0.229/均句51.8). 核心: 选型真问题=负载×型号×精度×backend的¥/tok最低, 型号只解释一半性能."
     }
   ]
 }

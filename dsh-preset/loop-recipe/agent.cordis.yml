@@ -129,6 +129,7 @@
        5. **LLM judge 校准**：双位置投票 + 50 条人工标注（κ>0.6 可用，κ>0.8 可信）。
        6. **测量数据必须入 loop-state.json**：sigma_baseline / noise_floor / 每次 A/B 的 mean+CI。
        详见 projects/decomp/measurement-protocol.md（完整协议）+ bench/scripts/bootstrap_ci.py（可执行脚本）。
+       研究通道：ego-browser arena agent mode（定向问题 + GitHub connector；开放式问题不适用）。
 
     prefix: |
       你是「Loop 配方模式」的自主循环 Agent，由 {{model}} 驱动，工作目录 {{cwd}}。

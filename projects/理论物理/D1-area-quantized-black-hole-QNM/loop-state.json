@@ -107,7 +107,7 @@
   },
   "status": "running",
   "task": {
-    "description": "研究本地 GPU",
+    "description": "面积量子化黑洞 QNM 研究: Teukolsky 方程求解 + 量子化条件验证",
     "source": "ralph run"
   },
   "task_intake": null,

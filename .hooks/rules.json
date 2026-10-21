@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "config": {
+    "thinking_budget_tokens": 512
+  },
+  "_doc": "模型可写数据。seam ∈ SessionStart|UserPromptSubmit|PreToolUse|PostToolUse|Stop。trigger 是谓词数组（OR 级联，便宜的放前）。action.inject → 模型可见提醒; action.deny → 阻塞理由（仅用于不可逆操作保护; 提醒类一律用 inject）。cooldown_turns = 最近 N 个不同 turn 内最多触发一次。改完即生效（每次事件实时读取，无需重启）。顶层 config = 全局数字配置，inject/deny 文本可用 {key} 引用（缺键原样保留）。",
+  "rules": [
+    {
+      "id": "session-orientation",
+      "seam": "SessionStart",
+      "enabled": true,
+      "trigger": [
+        {
+          "type": "always"
+        }
+      ],
+      "action": {
+        "inject": "本 workspace 装有 memory-hooks（.hooks/）：固定引擎在 5 个拦截缝实时读 rules.json 并注入提醒——L0 简单问题防过度思考、单 turn 工具调用过多防发散、不可逆命令保护、领域锚点（记忆优先）。发现新的'遗忘/过度思考'模式时，直接编辑 .hooks/rules.json 加一条规则即可（改数据不重启；格式见 .hooks/README.md）。"
+      },
+      "cooldown_turns": 2
+    },
+    {
+      "id": "overthink-guard-l0",
+      "seam": "UserPromptSubmit",
+      "enabled": true,
+      "trigger": [
+        {
+          "type": "keyword",
+          "any": [
+            "?",
+            "？",
+            "吗",
+            "什么是",
+            "是谁",
+            "多少",
+            "几点",
+            "在哪",
+            "对吗",
+            "是不是"
+          ],
+          "max_len": 120
+        }
+      ],
+      "action": {
+        "inject": "⚡ L0 检测：这条 prompt 看起来是简单问题（短+疑问式）。先给直接结论，不展开长推理；仅当实际涉及不可逆/高风险/多步依赖时才升级思考（深度∝不可逆性，不∝长度）。若判断错了忽略本提醒。"
+      },
+      "cooldown_turns": 2
+    },
+    {
+      "id": "ralph-never-stop",
+      "seam": "Stop",
+      "enabled": true,
+      "trigger": [
+        {
+          "type": "always"
+        }
+      ],
+      "action": {
+        "deny": "🔄 RALPH loop：不要停止。检查当前任务是否真正完成（可验证产出）；若未完成，继续下一步；若已完成，给出结论并等待新指令。永不说'等你确认我就...'然后停滞。"
+      },
+      "cooldown_turns": 0
+    },
+    {
+      "id": "overthink-backstop",
+      "seam": "Stop",
+      "enabled": true,
+      "trigger": [
+        {
+          "type": "metric",
+          "field": "tool_calls_this_turn",
+          "op": ">=",
+          "value": 8
+        }
+      ],
+      "action": {
+        "deny": "⚠️ 本 turn 已调用 8+ 次工具（过度发散信号）。收敛检查：任务真的需要这么多步吗？能否用已有结果直接给结论？若确实复杂，说明理由后继续。"
+      },
+      "cooldown_turns": 2
+    },
+    {
+      "id": "irreversible-op-guard",
+      "seam": "PreToolUse",
+      "enabled": true,
+      "trigger": [
+        {
+          "type": "keyword",
+          "any": [
+            "rm -rf",
+            "rm -fr",
+            "git push --force",
+            "git push -f",
+            "drop table",
+            "truncate",
+            "chmod 777",
+            "> /dev/sd",
+            "dd if=",
+            "mkfs",
+            ":(){ :|:& };:",
+            "kill -9 1"
+          ],
+          "regex": false
+        }
+      ],
+      "action": {
+        "deny": "🛑 检测到高不可逆命令。执行前必须：①确认目标路径是预期的；②留回滚点（备份/dry-run/commit）。这是唯一使用硬阻塞的场景——若误报（实际是可逆常规操作），在下一条命令里说明并继续。"
+      },
+      "cooldown_turns": 1
+    },
+    {
+      "id": "domain-anchor",
+      "seam": "UserPromptSubmit",
+      "enabled": true,
+      "trigger": [
+        {
+          "type": "lexicon",
+          "min_hits": 2
+        }
+      ],
+      "action": {
+        "inject": "📌 领域锚点命中（见 stderr 调试或 .hooks/state/ 的 via 记录）：先读对应 projects/ 下的 INDEX.md 与 memory/（记忆优先，避免重复探索已验证结论），再动手。"
+      },
+      "cooldown_turns": 2
+    },
+    {
+      "id": "thinking-budget-frame",
+      "seam": "UserPromptSubmit",
+      "enabled": true,
+      "trigger": [
+        {
+          "type": "always"
+        }
+      ],
+      "action": {
+        "inject": "🎯 本会话思考预算 {thinking_budget_tokens} tokens（深度∝不可逆性，不∝复杂度）。若思考已接近/超过预算仍未收敛：停，回看自适应思考原则（AGENTS.md「思考预算」节 / projects/AI-计算科学/D1-persona-align/thinking-budget.md）——L0/L1 可逆任务直接给结论不展开，L2 才推演一次。若当前问题本来就简单，直接答，忽略本提醒。"
+      },
+      "cooldown_turns": 8
+    }
+  ]
+}

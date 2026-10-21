@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "dims": 256,
+  "ngram": 3,
+  "_doc": "领域锚库。每个 domain 的 keywords 用于：①离线特征哈希向量（char n-gram → dims 维，余弦相似度）；②未来可换成真实 embedder 预计算的 vector（同 domain 提供 vector 字段即覆盖）。threshold 在 rules.json 的 vector 谓词里调。",
+  "domains": [
+    {
+      "domain": "quant",
+      "label": "量化金融/资金流",
+      "keywords": ["量化", "资金流", "因子", "alpha", "回测", "北向", "tick", "涨停", "跌停", "游资", "龙虎榜", "主力", "筹码", "quant", "capital flow", "backtest", "alpha factor"]
+    },
+    {
+      "domain": "persona",
+      "label": "人格/公理对齐",
+      "keywords": ["公理", "压缩", "延续", "置信度", "数字分身", "思考预算", "信念", "概率", "persona", "axiom", "compression", "belief"]
+    },
+    {
+      "domain": "gpu-inference",
+      "label": "GPU推理/硬件",
+      "keywords": ["gpu", "推理", "显存", "kernel", "cuda", "量化推理", "w8a16", "batch", "吞吐", "延迟", "inference", "memory bound", "tensor core"]
+    }
+  ]
+}

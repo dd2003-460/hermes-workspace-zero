@@ -40,3 +40,31 @@ GitHub 上「蒸馏出个人 / 让 AI 成为你」这条线已经收敛到一个
 | 身份整合 | ⚠️ AGENTS.md 是全局 SOUL，但不是"薄索引+技能"结构，也没有重锚机制 | **新建** persona.md（8 层整合 + 漂移重锚） |
 
 > 红线遵守：AGENTS.md 非临时内容**禁止修改**。本包是 AGENTS.md 的**补充与操作化**，不替换。
+
+## r15 补充: 去AI味方案对比 (2026-10-19)
+
+> 来源: 1-loop 02 调研（r15 轮），3 个去AI味方案的要点与关系。为 T2 任务 voice-anti-ai-zh.md 提供框架依据。
+
+### 3 方案对比
+
+| 方案 | 层级 | 规则数 | 优势 | 风险 | 定位 |
+|---|---|---|---|---|---|
+| **clearmode** (eugeniughelbur/clearmode, 英文, MIT, 零依赖) | 总框架/编辑验收 | 4轴 + 43规则 (P1-12/H1-16/S1-10/D1-5) | 最完整: 4轴权重(Plain30/Human30/Structured25/Dense15) + 单JSON编译所有target(skill/AGENTS.md/Cursor/Vale/system prompt) + 量化scoring(start100, error2.0x/warn1.0x/review0.4x, 每250词归一, gate_default=80) | 纯英文, 中文AI味指纹不同("值得注意的是/综上所述" vs delve/leverage) | ★最匹配。借框架结构, 词表另建中文 |
+| **Voice DNA** (shaswatco/anti-ai-writing-style, 英文, npx安装) | 核心风格诊断层 | 3结构性指纹 + banned words 90+ | 针对性强: ①Metronome Rhythm(句长均匀15-20词) ②Puffery&Significance Inflation(testament/realm/tapestry) ③Negative Parallelisms("This isn't just X; it's Y"=单一最大统计指纹) | 规则少, 覆盖面窄, 英文 | 诊断层: 与clearmode四轴不冲突, 互补 |
+| **Humanizer-zh-academic** (Smith-2758, 27星, 中文学术) | 交互式skill | 5规则类别(学术卖弄/机械句法/空洞总结/高危排版/AI检测逻辑) | 唯一中文方案: 先确认严肃度+角色再改写, 借鉴 op7418/Humanizer-zh + Wikipedia "Signs of AI writing" | 核心 SKILL.md 未深读(需后续补), 定位学术写作 | 压回真实学生写作(朴实严谨自然, 不空泛不装腔) |
+
+### 关键洞察
+
+1. **英文方案需中文化** — 中文AI味指纹与英文不同: 英文是 delve/leverage/testament, 中文是"值得注意的是/综上所述/不难发现/赋能/抓手"。借框架结构(4轴权重+分层规则), 词表必须另建中文。
+2. **分层不冲突** — clearmode 4轴 = 总框架/编辑验收层; Voice DNA 3指纹 = 诊断层(规则少针对性强); 词表 = 后处理检查器。三者是分层关系, 不是竞争。
+3. **clearmode 核心规则速记** — H6 No negative parallelism (ERROR, "it's not just X; it's Y"=单一最强AI指纹) / H13 Vary sentence length (打破metronome) / H11 Name the source or drop the claim / D1 Delete test (无数字/名/机制/后果=填充) / D3 No throat-clearing opener (ERROR, 首句别浪费setup) / H12 No assistant voice (ERROR)
+4. **clearmode 词表规模** — slop_words~100 (delve/realm/harness/unlock/tapestry/paradigm/cutting-edge/revolutionize/leverage/synergy/game-changer/testament/foster/showcase/holistic/burgeoning/ubiquitous...) / slop_phrases~70 (in today's fast-paced/at the end of the day/sheds light on/dive deep/here's the thing...) / banned_openers (Furthermore/Moreover/Additionally/Notably/Importantly/Certainly/Undoubtedly...)
+5. **clearmode profiles** — general(句25/段4/grade9) / technical(28/5/11) / social(20/2/8) / agent(20/6/9)
+
+### 与本项目关系 (T2 voice-anti-ai-zh.md)
+
+- 借鉴 **clearmode 4轴结构** (Plain/Human/Structured/Dense 权重框架) + **Voice DNA 3指纹** (Metronome/Puffery/Negative Parallelisms 诊断层)。
+- **词表换成中文**: 不用 clearmode 的 slop_words, 另建中文AI味词表("值得注意的是/综上所述/不难发现/赋能/抓手/闭环/对齐/拉齐/沉淀..."等)。
+- **成璐语料"不是…而是"96次 = 高负载纠偏**: 不列入禁表(语料高频, 禁了会扭曲语体), 列入审查表, 用三票制判别(是否真冗余/是否有对比信息量/是否可换更短表达)。
+- Humanizer-zh-academic 的交互模式(先确认严肃度+角色)可借鉴为 T2 的可选入口。
+

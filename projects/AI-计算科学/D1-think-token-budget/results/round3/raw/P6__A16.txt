@@ -1,0 +1,7 @@
+Result: 49
+
+Find all positive integers n with n+2 | 3(n+3)(n²+9). Let d = n+2; then n+3=d+1, n²+9=d²−4d+13. Mod d: (d+1)≡1, (d²−4d+13)≡13, so 3(d+1)(d²−4d+13) ≡ 39 (mod d). Hence d | 39, i.e. n+2 ∈ {1,3,13,39}. With n≥1 we need n+2≥3, giving n = 1, 11, 37. Sum = 49.
+
+Message delivered. Task complete. I should finish here.
+
+Done. Answer: **49** (n = 1, 11, 37), result sent to parent agent.

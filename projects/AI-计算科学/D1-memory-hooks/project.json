@@ -1,0 +1,16 @@
+{
+  "id": "D1-memory-hooks",
+  "name": "memory-hooks 智能提醒引擎",
+  "domain": "AI-计算科学",
+  "created": "2026-10-18",
+  "status": "active",
+  "paths": {
+    "engine": "/Users/a1-6/Desktop/workspace/.hooks/engine.py",
+    "rules": "/Users/a1-6/Desktop/workspace/.hooks/rules.json",
+    "anchors": "/Users/a1-6/Desktop/workspace/.hooks/anchors.json",
+    "bridge_config": "/Users/a1-6/Desktop/workspace/.codex/hooks.json",
+    "profile_patch": "/Users/a1-6/Library/Application Support/dsh-desktop/harness/profiles/web/cordis.patch.yml",
+    "plugin_pkg": "@deepseek-ai/dsh-hooks-codex"
+  },
+  "notes": "5 缝 hook 引擎（SessionStart/UserPromptSubmit/PreToolUse/PostToolUse/Stop）。engine.py 固定解释器，rules.json 模型可写数据（改即生效）。经 dsh-hooks-codex 桥接入 DSH 5 缝。"
+}

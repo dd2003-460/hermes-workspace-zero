@@ -176,5 +176,7 @@
       "action": "r31-final-delivery",
       "summary": "r31 T45最终交付: 公轴v2.1(persona-axioms.md, 6条P1-P6+16规则+10参数+重推测试记录) + 树结构(SKILL.md根+01-thinking+02-engineering+03-writing, 418行) + 情景引导实验(scene-guide-A纯场景最自然/Scene-B轴B最高但conf过拟合/v8.1括号规则驱动) + 交付报告(memory/delivery-report-r30.md). 核心发现: ①情景引导(描述状态不写规则)比限制式(排除词表)更能自然引发自言自语/吐槽/内心思考 ②6条公轴够用但P1/P4原表述太抽象需操作化短语 ③被动中断描述>主动跳跃描述(v8.1修复成功, v8三修复全失败)."
     }
-  ]
+  ],
+  "last_action": "2026-10-21 结构整理: 新建 INDEX.md(项目结构纯索引, 红线0补全); 内容零改动(T45最终交付仍为下一步)",
+  "updated_at": "2026-10-21T20:48:00+08:00"
 }

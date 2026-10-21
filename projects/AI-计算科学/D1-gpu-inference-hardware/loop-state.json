@@ -1002,9 +1002,11 @@
       }
     }
   },
-  "project_id": "D1-ralph-smoke-matrix",
+  "project_id": "D1-gpu-inference-hardware",
   "queue": {
-    "blocked_human": [],
+    "blocked_human": [
+      "T-webllm-login-blocker: web-llm 三 provider (Gemini/ChatGPT/GLM) 需人工登录授权"
+    ],
     "candidates": [],
     "ready": []
   },
@@ -1026,7 +1028,7 @@
   },
   "status": "running",
   "task": {
-    "description": ".",
+    "description": "本地 GPU 推理硬件选型: 27B 模型推理性能基准 + TCO 分析",
     "source": "ralph run"
   },
   "task_intake": null,

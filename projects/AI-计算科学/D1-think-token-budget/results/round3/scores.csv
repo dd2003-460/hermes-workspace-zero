@@ -17,6 +17,7 @@ P1,A16,number_theory,medium,True,True,354,88
 P1,A19,geometry,hard,True,True,149,37
 P1,A23,trigonometry,medium,True,True,221,55
 P1,A25,geometry,hard,True,True,871,218
+P1,A27,sequences,medium,True,True,717,179
 P5,A00,number_theory,medium,True,True,188,47
 P5,A03,number_theory,easy,True,True,434,108
 P5,A04,combinatorics,medium,True,True,138,34
@@ -26,3 +27,6 @@ P5,A16,number_theory,medium,True,False,347,87
 P5,A19,geometry,hard,True,True,883,221
 P5,A23,trigonometry,medium,True,True,308,77
 P5,A25,geometry,hard,True,True,916,229
+P5,A27,sequences,medium,True,True,682,170
+P6,A03,number_theory,easy,True,True,851,213
+P6,A16,number_theory,medium,False,False,392,98

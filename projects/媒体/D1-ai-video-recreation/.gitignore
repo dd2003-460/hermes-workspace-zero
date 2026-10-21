@@ -1,8 +1,10 @@
 # 渲染帧目录 (可重新生成, 文件量大)
 outputs/frames_*/
-outputs/check_*/
 outputs/test_card/
 outputs/refs/
+
+# 检查截图 (可重新抽帧生成)
+outputs/checks/
 
 # Python venv (Piper TTS)
 .ttsenv/
@@ -18,8 +20,8 @@ voices/*.onnx
 node_modules/
 outputs/node_modules/
 
-# 历史版本视频 (保留最新交付 v1.1 + goodnight, 历史版本可重新渲染)
-outputs/full_v0.*.mp4
-outputs/full_v0.5_r*.mp4
-outputs/out_v0.*.mp4
-outputs/sample_*.mp4
+# 历史版本视频 (保留最新交付, 历史版本可重新渲染)
+outputs/videos/full_v0.*.mp4
+outputs/videos/full_v0.5_r*.mp4
+outputs/videos/out_*.mp4
+outputs/videos/sample_*.mp4

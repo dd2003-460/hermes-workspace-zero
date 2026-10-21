@@ -1,0 +1,17 @@
+Result: 117
+
+Reasoning: 12x²−xy−6y² = (4x−3y)(3x+2y) = 0, so either x=3y/4 or x=−2y/3.
+Case x=3y/4: y=4k, x=3k, constraints give k∈[−25,25] → 51 pairs.
+Case x=−2y/3: y=3m, x=−2m, constraints give m∈[−33,33] → 67 pairs.
+Lines meet only at (0,0), counted twice, so subtract 1.
+Total = 51 + 67 − 1 = 117. Verified by brute force over all 201×201 pairs → 117.
+
+Done. Now give the final answer per the task format.
+The equation factors as $12x^2-xy-6y^2=(4x-3y)(3x+2y)=0$, so either $x=\frac{3y}{4}$ or $x=-\frac{2y}{3}$.
+
+- $x=\frac{3y}{4}$: need $y=4k$ so $x=3k$; bounds give $k\in[-25,25]$, i.e. 51 pairs.
+- $x=-\frac{2y}{3}$: need $y=3m$ so $x=-2m$; bounds give $m\in[-33,33]$, i.e. 67 pairs.
+
+The two lines meet only at $(0,0)$, which both cases count, so subtract 1. Total $=51+67-1=117$ (verified by brute force over all $201^2$ pairs).
+
+FINAL: 117

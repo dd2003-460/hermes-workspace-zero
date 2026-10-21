@@ -78,3 +78,4 @@ cache/
 .git-archive/
 
 tmp/
+node_modules/.npmcache/

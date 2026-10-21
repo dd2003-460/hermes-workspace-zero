@@ -1,15 +1,16 @@
 {
-  "project": "D1-ai-video-recreation",
-  "updated_at": "2026-10-21T20:45:00+08:00",
-  "phase": "04.5-final-review",
-  "last_action": "v1.2 三问题修复+渲染验证: ①像素字细化(txt阈值110→150+全场景font降档) ②右下角CARD完整(cardX 80→120不裁) ③字幕阶梯节奏(140ms/字+180ms顿挫) ④check_overlap 8/8 no overlaps ⑤渲染5189帧154.3s+ffmpeg合流→full_v1.2.mp4 1280x720@60fps 86.481s 2.4MB ⑥七帧目检通过(S1-S6+CARD, 像素字变细, 无重叠, CARD完整) | 2026-10-21 结构整理: 新建 媒体/INDEX.md + memory/INDEX.md + 项目 INDEX 补全; projects/INDEX.md 媒体域落表; 删除 3 个空目录(outputs/frames, frames_full_v12, check_r1); node_modules(1.0G)/frames_* 已被 gitignore, 磁盘大头可后续按需清理",
-  "last_result": "success (fix-image-limit 闭环: baseURL 指回 8787 + override 修活节点 + 端到端双图 200 验证; 见 memory/fix-image-limit.md)",
-  "blocker": null,
-  "next": "Step E: arena 自审核 (ego-browser LMArena, 审核不达标继续迭代)",
-  "next_step": "arena 自审核",
-  "deliverable": "outputs/full_v1.2.mp4",
-  "previous_deliverables": [
-    "outputs/full_v1.1.mp4 (主视频 86.481s 2.45MB)",
-    "outputs/goodnight_v1.0.mp4 (晚安小视频 30s 765KB)"
-  ]
+ "project": "D1-ai-video-recreation",
+ "updated_at": "2026-10-21T22:05:00+08:00",
+ "phase": "04.5-final-review",
+ "last_action": "tidy-20261021: 项目结构整理 (红线0 结构补丁: INDEX/outputs明细/.gitignore 检查, 不删探索过程) | 此前: v1.3 像素分辨率升级+布局修复+渲染+推送: ①BW 320→640 BH 180→360 SCALE 4→2 (像素块 8-12px→4-6px 清晰度提高2/3) ②@napi-rs/canvas ③全坐标/字体/线宽×2 ④布局修",
+ "last_result": "success (v1.3 渲染+验证+推送完成)",
+ "blocker": null,
+ "next": "arena 自审核 (ego-browser LMArena, 审核不达标继续迭代)",
+ "next_step": "arena 自审核",
+ "deliverable": "outputs/full_v1.3.mp4",
+ "previous_deliverables": [
+  "outputs/full_v1.2.mp4 (主视频 86.481s 2.4MB)",
+  "outputs/full_v1.1.mp4 (主视频 86.481s 2.45MB)",
+  "outputs/goodnight_v1.0.mp4 (晚安小视频 30s 765KB)"
+ ]
 }

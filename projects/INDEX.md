@@ -35,7 +35,7 @@
 | `AI-计算科学/D1-gpu-inference-hardware/` | [DGH.1] | GPU 推理硬件优化空间研究（矩阵/tensor 硬件计算；推理场景硬件还能怎么优化） |
 | `AI-计算科学/D1-gpu-research-2026/` | [DGR.1] | GPU 本地推理研究（2026，含 web-llm 交叉验证） |
 | `AI-计算科学/D1-hintfree-decomposition/` | [DHF.1] | 无提示词目标分解（hint-free goal decomposition）实验 |
-| `decomp/` | [DC.1] | **总目标**：通用任务分解 prompt（总目标与总计划见其 README）；7 个相关 GPU/分解项目归档于 `archive/`（映射表见 `archive/README.md`）；RALPH loop 驱动，台账 = `tasks/state.md`；远端 = dd2003-460/decomp-bench |
+| `decomp/` | [DC.1] | **总目标**：通用任务分解 prompt（总目标与总计划见其 README；结构索引见 `decomp/INDEX.md`）；7 个相关 GPU/分解项目归档于 `archive/`（映射表见 `archive/README.md`）；RALPH loop 驱动，台账 = `tasks/state.md`；远端 = dd2003-460/decomp-bench |
 
 ### 金融
 

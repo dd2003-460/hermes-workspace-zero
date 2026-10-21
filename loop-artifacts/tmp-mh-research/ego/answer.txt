@@ -1,0 +1,60 @@
+Checked the repo first: bh-mass-spectrum is a pure astrophysics pipeline (TNG ingestion → BH mass function), with no agent-harness code in it — so this is a research answer only, no code changes made.
+
+1) Open-source implementations for detecting/interrupting long reasoning
+
+Almost all real implementations live at the stream layer, not the agent-hook layer, because that's the only place reasoning text is visible token by token.
+
+iamyb/llm-proxy-loop-detector (MIT, Python) — sits in front of llama.cpp/llama-swap/vLLM, watches only delta.reasoning_content, and cuts the SSE stream mid-flight with a protocol-valid finish_reason:"stop" + [DONE]. Detection = char-level n-gram uniqueness ratio in a sliding window (default: warmup 4000 chars, window 3000, 18-grams, ratio < 0.5 = loop). https://github.com/iamyb/llm-proxy-loop-detector
+loop-guard (Rust, llama-server) — the most interesting design for your "same problem, 2+ rounds" case: segments reasoning at the model's own restart markers ("wait", "actually", "hold on"), then compares each step to all earlier steps via bag-of-words cosine similarity. On a hit it cancels the request, splices in a forced closing </think> + a nudge naming what's being repeated, and continues generation on llama-server's /completion with the same id_slot (KV cache reused). Argues explicitly that fixed token budgets and timeouts cannot distinguish "legitimately hard" from "stuck". (Repo returned 404 on the API at time of check; description captured from its README via search.)
+KeepRoLLMing (AGPL, Python, active) — OpenAI-compatible proxy with reasoning_loop_stopper, model_tool_loop_stopper, model_nudge (continues responses ending in "Let me check:"), plus context repacking. https://github.com/danielebruneo/KeepRoLLMing
+agentbrake (MIT) — in-process circuit breaker: SHA-256 over JSON-sorted (tool_name, args); 3 identical calls → AgentBrakeInterrupt, before the tool runs. Catches tool loops, not prose overthinking. https://github.com/BOSSMETALIQUE/agentbrake
+think-loop-detector — OpenCode plugin (min/max pattern length + repeat count 3); now archived, but a clean reference for a host-plugin implementation. https://github.com/shikunx/think-loop-detector
+Engine-level: vLLM thinking_token_budget (see §3); llama.cpp --reasoning-budget (see §3); SGLang via custom_logit_processor. OpenAI/Anthropic SDKs themselves have no built-in loop guard.
+Paper baseline: s1 "budget forcing" — append the end-of-thinking delimiter at the cap, or suppress it and append "Wait" to extend. That's the canonical force/steer primitive everyone reuses. https://arxiv.org/abs/2501.19393
+2) Can Claude Code hooks do "length over threshold → inject reminder mid-turn"?
+
+Partly — only at tool-call boundaries, and never on reasoning length.
+
+What works:
+
+PostToolUse → hookSpecificOutput.additionalContext is wrapped as a system reminder and inserted next to the tool result, read by Claude on the next model request — i.e. genuinely mid-turn, not end-of-turn. https://code.claude.com/docs/en/hooks
+Stop can return decision:"block" / additionalContext to continue the turn — but that is "do more work", the opposite of what you want.
+MessageDisplay fires while text streams — but it's display-only: displayContent changes only what's rendered; "the transcript and what Claude sees keep the original text", and it cannot block.
+
+Documented limits that kill the naive version:
+
+No hook fires during generation. PreToolUse/PostToolUse only fire around tool calls. A pure reasoning-only turn (exactly the overthinking case) emits zero hook events until Stop.
+Hook input carries no token/usage counts, and no reasoning text. The transcript file "is written asynchronously and may lag" the in-memory conversation; for the final assistant text you must use last_assistant_message on Stop/SubagentStop — i.e. after the fact.
+Hooks cannot rewrite the conversation: they can append, block, or cause side effects, not modify/replace messages. There is no PreResponse/PostResponse hook on assistant text — open FR: https://github.com/anthropics/claude-code/issues/66749, https://github.com/anthropics/claude-code/issues/84751
+Stop continuation is capped at 8 consecutive continuations (CLAUDE_CODE_STOP_HOOK_BLOCK_CAP); stop_hook_active must be honored or you loop.
+Injected strings (additionalContext, systemMessage, stdout) are capped at 10,000 chars.
+PreToolUse.additionalContext exists in the docs but has a history of being received-but-not-injected: https://github.com/anthropics/claude-code/issues/19432, https://github.com/anthropics/claude-code/issues/15345
+
+Practical consequence: hooks are good at the semantic half of your problem — hash tool_name+args and tool_response in PostToolUse; if 2 consecutive rounds return equivalent output with no new facts, inject "no new information since round N — act or ask". That needs no token counts at all. Hooks are bad at the length half.
+
+3) Proxy/middleware that counts reasoning tokens per turn and can abort/steer
+Layer	Counts reasoning tokens	Abort mid-stream	Steer (inject reminder)	Notes
+llama.cpp	yes (--reasoning-budget N)	yes (forces close tag)	yes — --reasoning-budget-message, plus PR #25961 adds --reasoning-budget-soft-ratio/-message + intro message	Per-request thinking_budget_tokens on /v1/chat/completions. Hard cut without a message tanks quality (Qwen3-9B HumanEval 94% → 78%); the message fixes it. https://github.com/ggml-org/llama.cpp/pull/25961
+vLLM	yes (SamplingParams.thinking_token_budget)	yes	partially (forces reasoning_end_str via 1e9 logit mask)	Needs --reasoning-parser; logic in ThinkingBudgetStateHolder (PR #34668). Known broken under spec-decode (#58485, #54906) and can inject into tool-call JSON (#44676). Content-based loop breaking proposed in #52673 / PR #52677. https://docs.vllm.ai/en/latest/features/reasoning_outputs/
+LiteLLM proxy	yes, via custom CustomLogger	yes	yes-ish	async_pre_call_hook (rewrite request) + async_post_call_streaming_iterator_hook (per-chunk inspect, filter, response.aclose() early close). Caveats: proxy had reasoning_tokens=0 in usage (#31759, fixed by #32199) and streaming-hook dispatch bugs (#9639). https://docs.litellm.ai/docs/proxy/call_hooks
+OpenRouter	only in the final SSE chunk (usage.completion_tokens_details.reasoning_tokens)	no server-side	no	reasoning.max_tokens / effort is a pre-request cap only; reasoning counts against max_tokens, so a small cap yields finish_reason:"length" + empty content. https://openrouter.ai/docs/guides/best-practices/reasoning-tokens
+Custom SSE proxy in front of Claude Code	yes (thinking_delta events)	yes	no	ANTHROPIC_BASE_URL is a supported redirect; there's a whole family of claude-code-proxy projects to fork. But Anthropic thinking blocks are signed — you can't splice a "wrap up" string into one. You can only cut the stream.
+
+Rule of thumb: steering inside reasoning is only possible on local engines (you own the token stream). On hosted Anthropic/OpenRouter traffic a proxy can cap or abort, not edit the thinking.
+
+4) Most practical for a solo dev, free/local-first
+
+Ranked, all offline, no paid API:
+
+llama.cpp --reasoning-budget + --reasoning-budget-message — one flag, zero code, and the message flag is exactly "mid-thought reminder". Start at 6–8k tokens with a message like "\n</think>\nReasoning budget exceeded. State your current best answer or make the tool call now.\n". Add PR #25961's soft-ratio message if you build from source.
+A ~150-line SSE tap proxy (fork iamyb/llm-proxy-loop-detector) doing two things a budget can't: (a) hash reasoning n-grams to cut repetition early regardless of length, (b) count turns per "problem fingerprint" and escalate warn → cut.
+Claude-Code-side hook for the semantic half only — PostToolUse hook that hashes tool args/results and injects additionalContext ("round 3, no new information") into the tool result. Free, no proxy, 40 lines of Python, and it's the only mechanism that works on a hosted model.
+vLLM thinking_token_budget only if you're already serving vLLM and can pin a version without spec-decode; LiteLLM only if you want one control plane across local + hosted (accept the reasoning-token accounting bugs); OpenRouter is not a control point for this.
+
+Recommendation (3 lines):
+
+If you're local-first on llama.cpp, do it at the engine: --reasoning-budget 8000 --reasoning-budget-message "\n</think>\nBudget spent — answer now.\n" gets you 90% of the value in one flag.
+Add a thin SSE proxy (fork llm-proxy-loop-detector or loop-guard) that scores repetition across reasoning steps, not just length — that is what actually encodes "same problem, 2+ rounds, no new facts", and it can cut or nudge mid-stream.
+On Claude Code itself, don't expect mid-turn length detection: hooks expose no token counts and never fire during a reasoning-only turn. Use a PostToolUse no-new-facts injection for cross-round detection, and treat hooks as a boundary-level nudge, never a hard budget — a real budget must sit above ANTHROPIC_BASE_URL or in the local engine.
+
+Want me to write the v0 proxy + the PostToolUse hook as runnable code? If so, tell me which backend you're actually driving (llama.cpp / vLLM / OpenRouter / real Anthropic) — the design forks sharply at that point.

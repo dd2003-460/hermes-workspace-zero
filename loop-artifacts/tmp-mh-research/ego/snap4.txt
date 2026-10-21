@@ -1,0 +1,1922 @@
+[p1 "Arena | Benchmark & Compare the Best AI Models" | space "memory-hook-plugin"(33): 1 managed, 0 untracked — p1* "Arena | Benchmark & Compare the Best AI Models"]
+root
+  container "Notifications alt+T" [ref=105]
+  container
+    container
+      button "Toggle Sidebar" [ref=53, loc=css:button[aria-label="Toggle Sidebar"]]
+      container
+        unordered_list
+          list_item
+            button "Arena menu" [ref=54, loc=css:button[aria-label="Arena menu"]]
+              svg_root
+              svg_root
+        button [ref=55]
+          svg_root
+      unordered_list
+        list_item
+          anchor [ref=56, loc=href:/agent, url=https://arena.ai/agent]
+            svg_root
+            text "New Chat"
+        list_item
+          anchor [ref=57, loc=href:/leaderboard, url=https://arena.ai/leaderboard]
+            svg_root
+            text "Leaderboard"
+            svg_root
+        list_item
+          anchor [ref=58, loc=href:/history/search, url=https://arena.ai/history/search]
+            svg_root
+            text "Search"
+      container [ref=59]
+        container
+          text "Today"
+          unordered_list
+            list_item
+              anchor [ref=106, loc=href:/agent/01a15ef9-b60c-74c1-a19e-9f12d9763544, url=https://arena.ai/agent/01a15ef9-b60c-74c1-a19e-9f12d9763544]
+                container "Coding session"
+                  svg_root
+                text "You are helping an engineer who runs a local AI-agent harness (Claude-Code-like, with hook system: S…"
+              button "More options" [ref=107]
+                svg_root
+            list_item
+              anchor [ref=60, loc=href:/agent/01a15e62-512b-7bee-8502-9cc0a5668d45, url=https://arena.ai/agent/01a15e62-512b-7bee-8502-9cc0a5668d45]
+                container "Coding session"
+                  svg_root
+                text "克隆这个 GitHub 仓库并读取 SOP 文件： git clone https://github.com/dd2003-460/d1-video-recreation.git cd d1-…"
+              button "More options" [ref=61]
+                svg_root
+            list_item
+              anchor [ref=62, loc=href:/agent/01a1599d-c79b-7b50-9f06-142b20d4dec9, url=https://arena.ai/agent/01a1599d-c79b-7b50-9f06-142b20d4dec9]
+                container "Coding session"
+                  svg_root
+                text "CRITICAL REVIEW: 86s pixel video v0.8. Clawd+fatfish. 6 scenes. piano+strings+SFX. Be harsh: 1)TOP3 …"
+              button "More options" [ref=63]
+                svg_root
+            list_item
+              anchor [ref=64, loc=href:/agent/01a1099d-93c1-748e-9345-7d367508ed37, url=https://arena.ai/agent/01a1099d-93c1-748e-9345-7d367508ed37]
+                container "Pull request merged"
+                  svg_root
+                text "## 先做这一件事（最高优先级） 验证推送通道：你的第一个动作就是 git add -A &amp;&amp; git commit -m "chore: verify push channel…"
+              button "More options" [ref=65]
+                svg_root
+            list_item
+              anchor [ref=66, loc=href:/agent/01a15cdb-8150-7caa-9737-eb8a104ad46f, url=https://arena.ai/agent/01a15cdb-8150-7caa-9737-eb8a104ad46f]
+                container "Coding session"
+                  svg_root
+                text "## 背景 TNG 数据官方说明书已到手：字段与单位全部确认；1.2 的 TNG 适配器已放开重子字段（2026-10-16 郭老师定案）；官方读取示例已注释归档到 1.2_Simul..."
+              button "More options" [ref=67]
+                svg_root
+            list_item
+              anchor [ref=68, loc=href:/agent/01a15dbe-fb05-7cac-bd16-9b1daca57d1e, url=https://arena.ai/agent/01a15dbe-fb05-7cac-bd16-9b1daca57d1e]
+                container "Coding session"
+                  svg_root
+                text "I need you to review a pixel-art video I made. Here's what I want you to evaluate: 1. STYLE ALI…"
+              button "More options" [ref=69]
+                svg_root
+            list_item
+              anchor [ref=70, loc=href:/agent/01a12e88-3f6c-7f6a-826d-c201d41d7428, url=https://arena.ai/agent/01a12e88-3f6c-7f6a-826d-c201d41d7428]
+                container "Coding session"
+                  svg_root
+                text "新项目立项调研。仓库已挂载 dd2003-460/love-vs-survival @ main。 先按顺序读： 1. notes/1-idea/1.1-raw-idea.md —— 用户原始…"
+              button "More options" [ref=71]
+                svg_root
+            list_item
+              anchor [ref=72, loc=href:/agent/01a15953-1f2c-724b-a1e9-95110266cb34, url=https://arena.ai/agent/01a15953-1f2c-724b-a1e9-95110266cb34]
+                container "Coding session"
+                  svg_root
+                text "任务：广泛调研「vLLM 长 prompt prefill 期间 decode 吞吐暴跌/饿死」的社区同类案例与解决办法，把报告写进本仓库 docs/community-research.md。 …"
+              button "More options" [ref=73]
+                svg_root
+            list_item
+              anchor [ref=74, loc=href:/agent/01a15981-4b5e-7bad-b9c7-9ace3ddf8c49, url=https://arena.ai/agent/01a15981-4b5e-7bad-b9c7-9ace3ddf8c49]
+                container "Coding session"
+                  svg_root
+                text "GitHub 上 LLM agent memory 相关的 benchmark / 测试仓库有哪些？请按 star 数列出前 8 个，每个给出：完整仓库路径（owner/repo）、star 数、一句…"
+              button "More options" [ref=75]
+                svg_root
+            list_item
+              anchor [ref=76, loc=href:/agent/01a15a38-3c0c-7ce9-88b9-b9ebbc2a5f84, url=https://arena.ai/agent/01a15a38-3c0c-7ce9-88b9-b9ebbc2a5f84]
+                container "Coding session"
+                  svg_root
+                text "请按仓库内任务书执行：开题报告/tasks/06-校对论文tex_计算与语言.md（已在 master 上，先完整读完再动手；它是唯一的指令来源，优先级高于本消息）。 ..."
+              button "More options" [ref=77]
+                svg_root
+            list_item
+              anchor [ref=78, loc=href:/agent/01a15a47-0e8c-70ce-afde-31f789442103, url=https://arena.ai/agent/01a15a47-0e8c-70ce-afde-31f789442103]
+                container "Coding session"
+                  svg_root
+                text "请对下面的记忆实验做反方复核：按我的标准评审，给出 ≤5 条最尖锐质疑 + 每条修复方案。 # origin: ai # Arena 评审材料 — 记忆方案 A/B/C 三条件对比（2..."
+              button "More options" [ref=79]
+                svg_root
+        container
+          text "Yesterday"
+          unordered_list
+            list_item
+              anchor [ref=80, loc=href:/agent/01a15968-444b-7229-ba87-87217863ab56, url=https://arena.ai/agent/01a15968-444b-7229-ba87-87217863ab56]
+                container "Coding session"
+                  svg_root
+                text "请按仓库内任务书执行：开题报告/tasks/07-按要求重做开题报告幻灯片.md（已推 master，先完整读它，再读它指向的 开题报告/slide/要求.md，两份都是最高�..."
+              button "More options" [ref=81]
+                svg_root
+            list_item
+              anchor [ref=108, loc=href:/agent/01a15931-25a8-74e8-b94e-7701409428b1, url=https://arena.ai/agent/01a15931-25a8-74e8-b94e-7701409428b1]
+                container "Coding session"
+                  svg_root
+                text "Research task: I need to generate an 86-second emotional string/orchestral BGM for a pixel-art video…"
+              button "More options" [ref=109]
+                svg_root
+            list_item
+              anchor [ref=110, loc=href:/agent/01a1592a-56ab-7dc7-ba3c-feab93171b93, url=https://arena.ai/agent/01a1592a-56ab-7dc7-ba3c-feab93171b93]
+                svg_root
+                text "请用 GitHub 连接器打开仓库 citrolabs/ego-lite（https://github.com/citrolabs/ego-lite）。 任务：检查该仓库的 issue 提交入口，确…"
+              button "More options" [ref=111]
+                svg_root
+            list_item
+              anchor [ref=112, loc=href:/agent/01a1449b-f18e-7f4f-a863-d3dbe396b38e, url=https://arena.ai/agent/01a1449b-f18e-7f4f-a863-d3dbe396b38e]
+                svg_root
+                text "任务：在 bh-mass-spectrum 仓库执行 docs/任务C_遗迹MF与创新点.md 定义的"任务C"（该文档已推 main，先完整读它，含数据路径/口径决策/验收判据/创新点对照�..."
+              button "More options" [ref=113]
+                svg_root
+            list_item
+              anchor [ref=114, loc=href:/agent/01a15421-fbdd-7875-89a9-bfb1de2828fc, url=https://arena.ai/agent/01a15421-fbdd-7875-89a9-bfb1de2828fc]
+                svg_root
+                text "请按仓库内任务书执行：开题报告/tasks/04-litreview-slides.md 任务：把背景综述版幻灯片 slides_bg.tex 与配套逐字稿 notes_bg_逐字稿.md 按任…"
+              button "More options" [ref=115]
+                svg_root
+            list_item
+              anchor [ref=116, loc=href:/agent/01a15432-fc2c-734d-9947-8c809e492ba9, url=https://arena.ai/agent/01a15432-fc2c-734d-9947-8c809e492ba9]
+                svg_root
+                text "请按仓库内任务书执行：开题报告/tasks/05-factual-fixes.md 任务：对 slides_bg.tex 与 notes_bg_逐字稿.md 做事实性勘误（作者中文名、β 数值、…"
+              button "More options" [ref=117]
+                svg_root
+            list_item
+              anchor [ref=118, loc=href:/agent/01a15901-05e5-7de9-be4c-c115c5fafd98, url=https://arena.ai/agent/01a15901-05e5-7de9-be4c-c115c5fafd98]
+                svg_root
+                text "Based on my previous research (session "I need you to research and find pixel art references for the…"
+              button "More options" [ref=119]
+                svg_root
+            list_item
+              anchor [ref=120, loc=href:/agent/01a158ec-fabd-754f-bb56-a3c48b5a79e5, url=https://arena.ai/agent/01a158ec-fabd-754f-bb56-a3c48b5a79e5]
+                svg_root
+                text "Analyze the GitHub repository at [https://github.com/dd2003-460/hermes-workspace-zero](https://githu…"
+              button "More options" [ref=121]
+                svg_root
+            list_item
+              anchor [ref=122, loc=href:/agent/01a158eb-a03f-7e83-99dc-19833edae583, url=https://arena.ai/agent/01a158eb-a03f-7e83-99dc-19833edae583]
+                svg_root
+                text "You are a research assistant for a prompt optimization project."
+              button "More options" [ref=123]
+                svg_root
+        svg_root
+      container
+        unordered_list
+          button [ref=82]
+            image
+            text "xyifeng81@gmail.com"
+        container
+          anchor [ref=83, loc=href:/terms-of-use, url=https://arena.ai/terms-of-use]
+            text "Terms of Use"
+          anchor [ref=84, loc=href:/privacy-policy, url=https://arena.ai/privacy-policy]
+            text "Privacy Policy"
+          button [ref=85]
+            text "Cookies"
+    container
+      container
+        container
+          button "You are helping an engineer who runs a local AI-agent harness (Claude-Code-like, with hook system: S…" [ref=124]
+            text "You are helping an engineer who runs a local AI-agent harness (Claude-Code-like, with hook system: S…"
+            svg_root
+          button "Collapse workspace sidebar" [ref=125]
+            svg_root
+        container
+          container
+            log [ref=126]
+              container [ref=127]
+                paragraph
+                  text "You are helping an engineer who runs a local AI-agent harness (Claude-Code-like, with hook system: SessionStart/UserPromptSubmit/PreToolUse/PostToolUse/Stop). He wants to automatically detect when the..."
+                button [ref=128]
+                  svg_root
+                  svg_root
+              container [ref=129]
+                paragraph
+                  text "I'll start by getting oriented in the repo, then research each question."
+                button "Expand" [ref=130]
+                  svg_root
+                  text "used"
+                  text "Bash"
+                  svg_root
+                  text "152ms"
+                  svg_root
+                container
+                  svg_root
+                  text "Searched for "Claude Code hooks PreToolUse PostToolUse Stop output length threshold inject reminder mid-turn""
+                  svg_root
+                button [ref=131]
+                  svg_root
+                  paragraph
+                    text "Thought for 1 second"
+                container
+                  paragraph
+                    text "The repo is unrelated (astrophysics). This is a research question. Let me do more searches: open-source implementations for detecting long reasoning chains, proxy/middleware counting reasoning tokens,..."
+                  paragraph
+                    text "Note the search results reference docs from 2026 — hooks docs have PostToolBatch, http hooks etc. Let me fetch the official hooks reference to get precise documented limitations, and search for OSS ..."
+                paragraph
+                  text "Repo"
+                  text "is"
+                  text "an"
+                  text "astrophysics"
+                  text "pipeline"
+                  text "(not"
+                  text "related"
+                  text "to"
+                  text "the"
+                  text "question),"
+                  text "so"
+                  text "this"
+                  text "is"
+                  text "pure"
+                  text "research."
+                  text "Let"
+                  text "me"
+                  text "dig"
+                  text "into"
+                  text "the"
+                  text "specifics."
+                button [ref=132]
+                  svg_root
+                  svg_root
+                  text "Searched the web"
+                button [ref=133]
+                  svg_root
+                  paragraph
+                    text "Thought for 1 second"
+                container
+                  paragraph
+                    text "Excellent — lots of relevant hits. Let me now search specifically for: LiteLLM reasoning token counting / abort stream, vLLM thinking_token_budget (PR #34668), s1 budget forcing, OpenRouter reasonin..."
+                  paragraph
+                    text "Let me do parallel searches."
+                paragraph
+                  text "Rich material. Let me verify the proxy-layer specifics (vLLM, LiteLLM, OpenRouter) and the documented hook limitations."
+                button [ref=134]
+                  svg_root
+                  svg_root
+                  text "Searched the web"
+                button [ref=135]
+                  svg_root
+                  paragraph
+                    text "Thought for 4 seconds"
+                container
+                  paragraph
+                    text "Now let me verify a couple of things:"
+                  ordered_list
+                    list_item
+                      text "Claude Code hook documented limitations — specifically: hooks can't see the stream mid-generation; PreToolUse/PostToolUse only fire on tool calls; no output-length hook; transcript lag; Stop gets la..."
+                    list_item
+                      text "Check the hooks reference for MessageDisplay and Stop details, plus additionalContext limits (2000 char cap? 10k cap?)."
+                    list_item
+                      text "Also worth checking: claude-code issue #15345 (PreToolUse additionalContext), and whether there's an "output token count" field in hook input. Let me fetch relevant chunks of the hooks doc — chunk w..."
+                  paragraph
+                    text "Let me also look at OpenRouter — does it support aborting streams / reasoning token limits? And check some OSS implementations:"
+                    text "llm-proxy-loop-detector"
+                    text ","
+                    text "loop-guard"
+                    text ","
+                    text "think-loop-detector"
+                    text ","
+                    text "KeepRoLLMing"
+                    text ", llama.cpp"
+                    text "--reasoning-budget"
+                    text ","
+                    text "s1 budget forcing"
+                    text ". Also maybe "agentbrake", "genkitx-misc smartMaxTurns"."
+                  paragraph
+                    text "Also need: Claude Code hooks don't get token counts at all? Let me check the common input fields."
+                  paragraph
+                    text "Let me fetch hooks doc chunks around "common input fields" and "Stop" sections. I'll try chunk indices. Maybe better to fetch the hooks-guide? Let's fetch chunk 2 and 3 which likely cover input schema..."
+                  paragraph
+                    text "Actually, a faster approach: fetch the llms.txt? No. Let me just fetch chunks and grep."
+                  paragraph
+                    text "I can't grep a fetched page directly, but I can fetch chunk by chunk. 38 chunks total. Common input fields probably early (chunk 2-4). Let me fetch chunks 2 and 3 in parallel, and also search for Open..."
+                paragraph
+                  text "Let me confirm the exact hook input fields/limitations and check OpenRouter + local engine options."
+                button [ref=136]
+                  svg_root
+                  svg_root
+                  text "Searched the web"
+                button [ref=137]
+                  svg_root
+                  paragraph
+                    text "Thought for 1 second"
+                container
+                  paragraph
+                    text "I need the hook "common input fields" and the MessageDisplay / Stop sections to document limitations precisely. Let me fetch a chunk likely covering common input fields (chunk 3) and one covering Mess..."
+                  paragraph
+                    text "Also need OpenRouter specifics: does OpenRouter count reasoning tokens and allow steering? Let me search."
+                  paragraph
+                    text "Also need to check whether PreToolUse/PostToolUse give token usage — I believe not. And transcript_path availability."
+                  paragraph
+                    text "Let me fetch chunk 3 and search OpenRouter reasoning tokens abort stream."
+                button [ref=138]
+                  svg_root
+                  svg_root
+                  text "Searched the web"
+                button [ref=139]
+                  svg_root
+                  paragraph
+                    text "Thought for 1 second"
+                container
+                  paragraph
+                    text "I still need the exact "Common input fields" and "MessageDisplay" limitation for Claude Code. Let me search within hooks doc chunks. Common input fields likely chunk 5-7. MessageDisplay is probably la..."
+                  paragraph
+                    text "Actually the search result 12 earlier gave good detail: transcript written asynchronously and may lag; Stop receives last_assistant_message; MessageDisplay is display-only event that runs while assist..."
+                  paragraph
+                    text "Let me do one search for MessageDisplay to confirm what it can do."
+                button [ref=140]
+                  svg_root
+                  svg_root
+                  text "Searched the web"
+                button [ref=141]
+                  svg_root
+                  paragraph
+                    text "Thought for 2 seconds"
+                container
+                  paragraph
+                    text "Good. I have plenty. Let me verify a few OSS repos exist and get details, especially:"
+                  unordered_list
+                    list_item
+                      text "iamyb/llm-proxy-loop-detector"
+                    list_item
+                      text "MatheusSchneiderr/loop-guard"
+                    list_item
+                      text "shikunx/think-loop-detector (OpenCode plugin)"
+                    list_item
+                      text "danielebruneo/KeepRoLLMing"
+                    list_item
+                      text "vLLM PR #34668 / issue #52673"
+                    list_item
+                      text "s1 budget forcing (Muennighoff et al. 2025, "s1: Simple test-time scaling") — the "budget forcing" trick with "Wait" appended."
+                    list_item
+                      text "Maybe OpenHands/microagents? Not needed."
+                  paragraph
+                    text "Let me quickly check the GitHub repos to confirm stars/currency and whether they support Anthropic/Claude Code. Let me fetch one or two via API (allowed api.github.com)."
+                  paragraph
+                    text "Also worth checking: claude-code-router / claude-code-proxy projects that let you intercept Anthropic API traffic from Claude Code — that's the practical route for someone using Claude Code with a l..."
+                  paragraph
+                    text "Let me do GitHub API lookups for repos."
+                button "Expand" [ref=142]
+                  svg_root
+                  text "used"
+                  text "Bash"
+                  svg_root
+                  text "1.9s"
+                  svg_root
+                container
+                  svg_root
+                  text "Searched for "claude-code-proxy ANTHROPIC_BASE_URL local proxy intercept anthropic messages API open source""
+                  svg_root
+                button [ref=162]
+                  svg_root
+                  paragraph
+                    text "Thought for 2 seconds"
+                container
+                  paragraph
+                    text "I have enough. Let me also verify the "s1 budget forcing" and "thinking budget forcing" paper reference, plus maybe Anthropic docs on thinking budget (budget_tokens) and adaptive thinking/effort as an..."
+                  paragraph
+                    text "Also I want a reference for"
+                    text "s1: Simple test-time scaling"
+                    text "budget forcing ("Wait"). And maybe "Chain of Draft"/"overthinking" surveys. Let's do a quick GitHub search and a paper search in one batch."
+                button "Expand" [ref=163]
+                  svg_root
+                  text "used"
+                  text "Bash"
+                  svg_root
+                  text "1.2s"
+                  svg_root
+                container
+                  svg_root
+                  text "Searched for "s1 simple test-time scaling budget forcing "Wait" append token limit arxiv 2501.19393""
+                  svg_root
+                button [ref=164]
+                  svg_root
+                  paragraph
+                    text "Thought for 11 seconds"
+                container
+                  paragraph
+                    text "I have plenty. Now, I should decide whether the deliverable should be a written answer in chat or a file. The user said "Research and answer concisely (bullets, with repo/URL refs where known)... End ..."
+                  paragraph
+                    text "Let me double check a couple of factual claims before writing:"
+                  ordered_list
+                    list_item
+                      text "Claude Code hooks: can PreToolUse/PostToolUse/Stop achieve "output length over threshold -> inject reminder mid-turn"?"
+                  unordered_list
+                    list_item
+                      text "Hooks fire at boundaries: PreToolUse/PostToolUse around tool calls (i.e., between model calls, so effectively mid-turn at model-call granularity), UserPromptSubmit, Stop at end of turn."
+                    list_item
+                      text "They never see the streaming assistant text mid-generation; the only streaming hook is MessageDisplay which is display-only (can't block, can't inject; replacement doesn't affect transcript or model)."
+                    list_item
+                      text "So: you CAN inject a reminder mid-turn at a tool boundary via PostToolUse additionalContext (appears next to tool result, read on next model request) — that's the practical "mid-turn" lever. But you..."
+                    list_item
+                      text "Note: extended thinking blocks may not even appear in the transcript? Uncertain — I shouldn't claim. The docs say "the transcript file is written asynchronously and may lag... Hooks that need the fi..."
+                    list_item
+                      text "Stop with decision:block forces continuation, with a documented 8-consecutive-continuation cap (CLAUDE_CODE_STOP_HOOK_BLOCK_CAP); stop_hook_active flag; additionalContext on Stop keeps turn going (i.e..."
+                    list_item
+                      text "Length caps: additionalContext/systemMessage/initialUserMessage/plain stdout capped at 10,000 chars."
+                    list_item
+                      text "PreToolUse doesn't support additionalContext (per docs table? The docs chunk says "PreToolUse, PostToolUse, PostToolUseFailure, and PostToolBatch: next to the tool result" — that implies PreToolUse ..."
+                    list_item
+                      text "Hooks cannot modify the conversation ("cannot directly modify, delete, or replace messages in the ongoing conversation") per issue #84751 citing docs. And no PreResponse/PostResponse hook on assistant..."
+                    list_item
+                      text "Hooks also only run at tool boundaries → pure-reasoning turns with no tool calls (the exact overthinking case) get zero hook events until Stop. That's the killer limitation. Important: thinking-only..."
+                    list_item
+                      text "Compaction/context: subagent hooks etc. not important."
+                  ordered_list
+                    list_item
+                      text "Proxy approach."
+                  unordered_list
+                    list_item
+                      text "LiteLLM: has custom callbacks (CustomLogger with async_pre_call_hook, async_post_call_streaming_iterator_hook) — I know these exist. Can I claim? LiteLLM custom callbacks docs:"
+                      text "async_post_call_streaming_iterator_hook"
+                      text "is a real hook that lets you inspect/modify/stop streaming chunks. I'm fairly confident. Let me verify quickly with a search to avoid error. Also LiteLLM proxy has known bugs on reasoning_tokens in us..."
+                    list_item
+                      text "vLLM: thinking_token_budget in SamplingParams, enforced in ThinkingBudgetStateHolder (PR #34668), forces reasoning_end_str via logit mask; requires --reasoning-parser; per-request; caveats under spec ..."
+                    list_item
+                      text "llama.cpp: --reasoning-budget N + --reasoning-budget-message, per-request"
+                      text "thinking_budget_tokens"
+                      text ", and PR #25961 adds intro/soft-warning messages (best "steer" semantics). Quality hit if hard cutoff without message (HumanEval 94→78)."
+                    list_item
+                      text "OpenRouter: only"
+                      text "reasoning.max_tokens"
+                      text "/"
+                      text "effort"
+                      text "(pre-request cap), no mid-stream steering; usage.reasoning_tokens only in final chunk; reasoning counts against max_tokens. So OpenRouter = coarse pre-set cap, no abort/steer. Can't abort server-side,..."
+                    list_item
+                      text "Custom proxy: llm-proxy-loop-detector (SSE watch delta.reasoning_content, cut with finish_reason stop), KeepRoLLMing (reasoning_loop_stopper), loop-guard (segment at "wait/actually/hmm", cosine sim, c..."
+                    list_item
+                      text "For Claude Code specifically: ANTHROPIC_BASE_URL proxy (claude-code-proxy family, LiteLLM pass-through, or claude-code-router). This is the only way to see Anthropic SSE thinking deltas and inject/cut..."
+                  paragraph
+                    text "Note on Anthropic API itself: thinking.budget_tokens caps thinking per request (pre-set), no mid-stream injection; but SDK streams thinking deltas so a client/proxy can abort. Also "effort" levels (lo..."
+                  ordered_list
+                    list_item
+                      paragraph
+                        text ""Same problem reconsidered 2+ rounds without new facts" — this is semantic: detect via step segmentation + similarity (loop-guard), n-gram uniqueness (llm-proxy-loop-detector), or tool-call hashing ..."
+                    list_item
+                      paragraph
+                        text "Practical for solo dev, free/local-first:"
+                  unordered_list
+                    list_item
+                      text "Cheapest: if using local OpenAI-compatible backend → llama.cpp reasoning budget flags (one line, zero code) + a tiny SSE proxy for repetition detection."
+                    list_item
+                      text "If using Claude Code with Anthropic: hooks can't do it; use an ANTHROPIC_BASE_URL proxy, or ~30-line asyncio SSE tap that counts thinking deltas and injects a "conclude now" text by aborting + continu..."
+                      text "message_stop"
+                      text "with stop_reason end_turn, but then assistant text would be truncated mid-thinking — and thinking blocks are opaque/redacted... Injecting text into an Anthropic thinking stream isn't possible (signa..."
+                      text "next"
+                      text "request's system prompt to include the reminder — but the next request only happens after the tool call, which is exactly the turn boundary."
+                  paragraph
+                    text "That's an important technical nuance: on Anthropic's API, budget_tokens is set per request, so mid-turn steering is basically only "abort" (client-side) or "pre-set cap". Anthropic doesn't support con..."
+                  paragraph
+                    text "Actually, safer framing: "On the Anthropic API the only per-request knob is thinking budget/effort; you can't splice text into a signed thinking block, so a proxy can only abort or cap. Local engines ..."
+                  paragraph
+                    text "Let me quickly verify LiteLLM streaming iterator hook name to be accurate."
+                container
+                  svg_root
+                  text "Searched for "LiteLLM "async_post_call_streaming_iterator_hook" CustomLogger modify streaming chunks""
+                  svg_root
+                button [ref=165]
+                  svg_root
+                  paragraph
+                    text "Thought for 5 seconds"
+                container
+                  paragraph
+                    text "Good, confirmed. LiteLLM has"
+                    text "async_post_call_streaming_iterator_hook"
+                    text "(can filter/block chunks, even early-close the stream via"
+                    text "response.aclose()"
+                    text "per PR #42027) and"
+                    text "async_pre_call_hook"
+                    text ". Caveats: known reasoning_tokens=0 bugs (#31759/#32199) and stream-hook bugs historically (#9639 fixed by #17626)."
+                  paragraph
+                    text "One more thing worth checking: does Claude Code even stream thinking deltas over the wire in a way a proxy can count? Anthropic API extended thinking uses"
+                    text "thinking_delta"
+                    text "events — yes. Fine."
+                  paragraph
+                    text "Also, "output length over threshold → inject reminder mid-turn": in Claude Code, PostToolUse additionalContext appears next to tool result and Claude reads it on next request — that IS mid-turn in..."
+                  paragraph
+                    text "Now write the answer: concise bullets with refs, 4 sections + 3-line recommendation. Keep it tight but substantive. Use file paths? No repo paths relevant — the repo is a physics project; I should n..."
+                  paragraph
+                    text "Let me also note a concrete minimal design the user can build (free/local-first): a ~100-line Python ASGI proxy in front of llama.cpp/vLLM or in front of Anthropic, with: turn token counter from SSE d..."
+                  paragraph
+                    text "The "2+ rounds without new facts" detection: PostToolUse can hash tool_name+args and tool_response; identical/near-identical results across 2 rounds → inject "no new information; either act or ask"...."
+                  paragraph
+                    text "Structure:"
+                  ordered_list
+                    list_item
+                      text "OSS implementations (proxy-layer detectors)"
+                    list_item
+                      text "Claude Code hooks: what's possible / documented limits"
+                    list_item
+                      text "Proxy/middleware: LiteLLM, OpenRouter, vLLM, llama.cpp, custom, and Claude Code via ANTHROPIC_BASE_URL"
+                    list_item
+                      text "Practical pick for solo dev 3-line rec."
+                  paragraph
+                    text "Include URLs. Keep bullets. Aim ~700-900 words. Use citations as markdown links (the web_search instruction about"
+                    text "id"
+                    text "[blocked]"
+                    text "applies to search results; I'll use plain named links which is fine and clearer — actually instruction says "When citing results, use the result's numeric id and url in this exact format:"
+                    text "id"
+                    text "[blocked]"
+                    text "". That's for search tool results. I'll use descriptive links; that's more useful here. Hmm, the instruction is explicit. But mixing would be odd given many sources. I'll use short descriptive links �..."
+                  paragraph
+                    text "Write it."
+                paragraph
+                  text "Checked"
+                  text "the"
+                  text "repo"
+                  text "first:"
+                  text "bh-mass-spectrum"
+                  text "is"
+                  text "a"
+                  text "pure"
+                  text "astrophysics"
+                  text "pipeline"
+                  text "(TNG"
+                  text "ingestion"
+                  text "→"
+                  text "BH"
+                  text "mass"
+                  text "function),"
+                  text "with"
+                  text "no"
+                  text "agent-harness"
+                  text "code"
+                  text "in"
+                  text "it"
+                  text "—"
+                  text "so"
+                  text "this"
+                  text "is"
+                  text "a"
+                  text "research"
+                  text "answer"
+                  text "only,"
+                  text "no"
+                  text "code"
+                  text "changes"
+                  text "made."
+                heading
+                  text "1)"
+                  text "Open-source"
+                  text "implementations"
+                  text "for"
+                  text "detecting/interrupting"
+                  text "long"
+                  text "reasoning"
+                paragraph
+                  text "Almost"
+                  text "all"
+                  text "real"
+                  text "implementations"
+                  text "live"
+                  text "at"
+                  text "the"
+                  text "stream"
+                  text "layer"
+                  text ","
+                  text "not"
+                  text "the"
+                  text "agent-hook"
+                  text "layer,"
+                  text "because"
+                  text "that's"
+                  text "the"
+                  text "only"
+                  text "place"
+                  text "reasoning"
+                  text "text"
+                  text "is"
+                  text "visible"
+                  text "token"
+                  text "by"
+                  text "token."
+                unordered_list
+                  list_item
+                    text "iamyb/llm-proxy-loop-detector"
+                    text "(MIT,"
+                    text "Python)"
+                    text "—"
+                    text "sits"
+                    text "in"
+                    text "front"
+                    text "of"
+                    text "llama.cpp/llama-swap/vLLM,"
+                    text "watches"
+                    text "only"
+                    text "delta.reasoning_content"
+                    text ","
+                    text "and"
+                    text "cuts"
+                    text "the"
+                    text "SSE"
+                    text "stream"
+                    text "mid-flight"
+                    text "with"
+                    text "a"
+                    text "protocol-valid"
+                    text "finish_reason:"stop""
+                    text "+"
+                    text "[DONE]"
+                    text "."
+                    text "Detection"
+                    text "="
+                    text "char-level"
+                    text "n-gram"
+                    text "uniqueness"
+                    text "ratio"
+                    text "in"
+                    text "a"
+                    text "sliding"
+                    text "window"
+                    text "(default:"
+                    text "warmup"
+                    text "4000"
+                    text "chars,"
+                    text "window"
+                    text "3000,"
+                    text "18-grams,"
+                    text "ratio"
+                    text "<"
+                    text "0.5"
+                    text "="
+                    text "loop)."
+                    anchor [ref=166, loc=href:https://github.com/iamyb/llm-proxy-loop-detector, url=https://github.com/iamyb/llm-proxy-loop-detector]
+                      text "https://github.com/iamyb/llm-proxy-loop-detector"
+                  list_item
+                    text "loop-guard"
+                    text "(Rust,"
+                    text "llama-server)"
+                    text "—"
+                    text "the"
+                    text "most"
+                    text "interesting"
+                    text "design"
+                    text "for"
+                    text "your"
+                    text ""same"
+                    text "problem,"
+                    text "2+"
+                    text "rounds""
+                    text "case:"
+                    text "segments"
+                    text "reasoning"
+                    text "at"
+                    text "the"
+                    text "model's"
+                    text "own"
+                    text "restart"
+                    text "markers"
+                    text "("wait","
+                    text ""actually","
+                    text ""hold"
+                    text "on"),"
+                    text "then"
+                    text "compares"
+                    text "each"
+                    text "step"
+                    text "to"
+                    text "all"
+                    text "earlier"
+                    text "steps"
+                    text "via"
+                    text "bag-of-words"
+                    text "cosine"
+                    text "similarity."
+                    text "On"
+                    text "a"
+                    text "hit"
+                    text "it"
+                    text "cancels"
+                    text "the"
+                    text "request,"
+                    text "splices"
+                    text "in"
+                    text "a"
+                    text "forced"
+                    text "closing"
+                    text "</think>"
+                    text "+"
+                    text "a"
+                    text "nudge"
+                    text "naming"
+                    text "what's"
+                    text "being"
+                    text "repeated,"
+                    text "and"
+                    text "continues"
+                    text "generation"
+                    text "on"
+                    text "llama-server's"
+                    text "/completion"
+                    text "with"
+                    text "the"
+                    text "same"
+                    text "id_slot"
+                    text "(KV"
+                    text "cache"
+                    text "reused)."
+                    text "Argues"
+                    text "explicitly"
+                    text "that"
+                    text "fixed"
+                    text "token"
+                    text "budgets"
+                    text "and"
+                    text "timeouts"
+                    text "cannot"
+                    text "distinguish"
+                    text ""legitimately"
+                    text "hard""
+                    text "from"
+                    text ""stuck"."
+                    text "(Repo"
+                    text "returned"
+                    text "404"
+                    text "on"
+                    text "the"
+                    text "API"
+                    text "at"
+                    text "time"
+                    text "of"
+                    text "check;"
+                    text "description"
+                    text "captured"
+                    text "from"
+                    text "its"
+                    text "README"
+                    text "via"
+                    text "search.)"
+                  list_item
+                    text "KeepRoLLMing"
+                    text "(AGPL,"
+                    text "Python,"
+                    text "active)"
+                    text "—"
+                    text "OpenAI-compatible"
+                    text "proxy"
+                    text "with"
+                    text "reasoning_loop_stopper"
+                    text ","
+                    text "model_tool_loop_stopper"
+                    text ","
+                    text "model_nudge"
+                    text "(continues"
+                    text "responses"
+                    text "ending"
+                    text "in"
+                    text ""Let"
+                    text "me"
+                    text "check:"),"
+                    text "plus"
+                    text "context"
+                    text "repacking."
+                    anchor [ref=167, loc=href:https://github.com/danielebruneo/KeepRoLLMing, url=https://github.com/danielebruneo/KeepRoLLMing]
+                      text "https://github.com/danielebruneo/KeepRoLLMing"
+                  list_item
+                    text "agentbrake"
+                    text "(MIT)"
+                    text "—"
+                    text "in-process"
+                    text "circuit"
+                    text "breaker:"
+                    text "SHA-256"
+                    text "over"
+                    text "JSON-sorted"
+                    text "(tool_name, args)"
+                    text ";"
+                    text "3"
+                    text "identical"
+                    text "calls"
+                    text "→"
+                    text "AgentBrakeInterrupt"
+                    text ","
+                    text "before"
+                    text "the"
+                    text "tool"
+                    text "runs."
+                    text "Catches"
+                    text "tool"
+                    text "loops,"
+                    text "not"
+                    text "prose"
+                    text "overthinking."
+                    anchor [ref=168, loc=href:https://github.com/BOSSMETALIQUE/agentbrake, url=https://github.com/BOSSMETALIQUE/agentbrake]
+                      text "https://github.com/BOSSMETALIQUE/agentbrake"
+                  list_item
+                    text "think-loop-detector"
+                    text "—"
+                    text "OpenCode"
+                    text "plugin"
+                    text "(min/max"
+                    text "pattern"
+                    text "length"
+                    text "+"
+                    text "repeat"
+                    text "count"
+                    text "3);"
+                    text "now"
+                    text "archived,"
+                    text "but"
+                    text "a"
+                    text "clean"
+                    text "reference"
+                    text "for"
+                    text "a"
+                    text "host-plugin"
+                    text "implementation."
+                    anchor [ref=169, loc=href:https://github.com/shikunx/think-loop-detector, url=https://github.com/shikunx/think-loop-detector]
+                      text "https://github.com/shikunx/think-loop-detector"
+                  list_item
+                    text "Engine-level"
+                    text ":"
+                    text "vLLM"
+                    text "thinking_token_budget"
+                    text "(see"
+                    text "§3);"
+                    text "llama.cpp"
+                    text "--reasoning-budget"
+                    text "(see"
+                    text "§3);"
+                    text "SGLang"
+                    text "via"
+                    text "custom_logit_processor"
+                    text "."
+                    text "OpenAI/Anthropic"
+                    text "SDKs"
+                    text "themselves"
+                    text "have"
+                    text "no"
+                    text "built-in"
+                    text "loop"
+                    text "guard."
+                  list_item
+                    text "Paper"
+                    text "baseline"
+                    text ":"
+                    text "s1"
+                    text ""budget"
+                    text "forcing""
+                    text "—"
+                    text "append"
+                    text "the"
+                    text "end-of-thinking"
+                    text "delimiter"
+                    text "at"
+                    text "the"
+                    text "cap,"
+                    text "or"
+                    text "suppress"
+                    text "it"
+                    text "and"
+                    text "append"
+                    text ""Wait""
+                    text "to"
+                    text "extend."
+                    text "That's"
+                    text "the"
+                    text "canonical"
+                    text "force/steer"
+                    text "primitive"
+                    text "everyone"
+                    text "reuses."
+                    anchor [ref=170, loc=href:https://arxiv.org/abs/2501.19393, url=https://arxiv.org/abs/2501.19393]
+                      text "https://arxiv.org/abs/2501.19393"
+                heading
+                  text "2)"
+                  text "Can"
+                  text "Claude"
+                  text "Code"
+                  text "hooks"
+                  text "do"
+                  text ""length"
+                  text "over"
+                  text "threshold"
+                  text "→"
+                  text "inject"
+                  text "reminder"
+                  text "mid-turn"?"
+                paragraph
+                  text "Partly"
+                  text "—"
+                  text "only"
+                  text "at"
+                  text "tool-call"
+                  text "boundaries,"
+                  text "and"
+                  text "never"
+                  text "on"
+                  text "reasoning"
+                  text "length."
+                paragraph
+                  text "What"
+                  text "works:"
+                unordered_list
+                  list_item
+                    text "PostToolUse"
+                    text "→"
+                    text "hookSpecificOutput.additionalContext"
+                    text "is"
+                    text "wrapped"
+                    text "as"
+                    text "a"
+                    text "system"
+                    text "reminder"
+                    text "and"
+                    text "inserted"
+                    text "next"
+                    text "to"
+                    text "the"
+                    text "tool"
+                    text "result"
+                    text ","
+                    text "read"
+                    text "by"
+                    text "Claude"
+                    text "on"
+                    text "the"
+                    text "next"
+                    text "model"
+                    text "request"
+                    text "—"
+                    text "i.e."
+                    text "genuinely"
+                    text "mid-turn,"
+                    text "not"
+                    text "end-of-turn."
+                    anchor [ref=171, loc=href:https://code.claude.com/docs/en/hooks, url=https://code.claude.com/docs/en/hooks]
+                      text "https://code.claude.com/docs/en/hooks"
+                  list_item
+                    text "Stop"
+                    text "can"
+                    text "return"
+                    text "decision:"block""
+                    text "/"
+                    text "additionalContext"
+                    text "to"
+                    text "continue"
+                    text "the"
+                    text "turn"
+                    text "—"
+                    text "but"
+                    text "that"
+                    text "is"
+                    text ""do"
+                    text "more"
+                    text "work","
+                    text "the"
+                    text "opposite"
+                    text "of"
+                    text "what"
+                    text "you"
+                    text "want."
+                  list_item
+                    text "MessageDisplay"
+                    text "fires"
+                    text "while"
+                    text "text"
+                    text "streams"
+                    text "—"
+                    text "but"
+                    text "it's"
+                    text "display-only"
+                    text ":"
+                    text "displayContent"
+                    text "changes"
+                    text "only"
+                    text "what's"
+                    text "rendered;"
+                    text ""the"
+                    text "transcript"
+                    text "and"
+                    text "what"
+                    text "Claude"
+                    text "sees"
+                    text "keep"
+                    text "the"
+                    text "original"
+                    text "text","
+                    text "and"
+                    text "it"
+                    text "cannot"
+                    text "block."
+                paragraph
+                  text "Documented"
+                  text "limits"
+                  text "that"
+                  text "kill"
+                  text "the"
+                  text "naive"
+                  text "version:"
+                unordered_list
+                  list_item
+                    text "No"
+                    text "hook"
+                    text "fires"
+                    text "during"
+                    text "generation."
+                    text "PreToolUse/PostToolUse"
+                    text "only"
+                    text "fire"
+                    text "around"
+                    text "tool"
+                    text "calls."
+                    text "A"
+                    text "pure"
+                    text "reasoning-only"
+                    text "turn"
+                    text "(exactly"
+                    text "the"
+                    text "overthinking"
+                    text "case)"
+                    text "emits"
+                    text "zero"
+                    text "hook"
+                    text "events"
+                    text "until"
+                    text "Stop"
+                    text "."
+                  list_item
+                    text "Hook"
+                    text "input"
+                    text "carries"
+                    text "no"
+                    text "token/usage"
+                    text "counts"
+                    text ","
+                    text "and"
+                    text "no"
+                    text "reasoning"
+                    text "text."
+                    text "The"
+                    text "transcript"
+                    text "file"
+                    text ""is"
+                    text "written"
+                    text "asynchronously"
+                    text "and"
+                    text "may"
+                    text "lag""
+                    text "the"
+                    text "in-memory"
+                    text "conversation;"
+                    text "for"
+                    text "the"
+                    text "final"
+                    text "assistant"
+                    text "text"
+                    text "you"
+                    text "must"
+                    text "use"
+                    text "last_assistant_message"
+                    text "on"
+                    text "Stop"
+                    text "/"
+                    text "SubagentStop"
+                    text "—"
+                    text "i.e."
+                    text "after"
+                    text "the"
+                    text "fact."
+                  list_item
+                    text "Hooks"
+                    text "cannot"
+                    text "rewrite"
+                    text "the"
+                    text "conversation"
+                    text ":"
+                    text "they"
+                    text "can"
+                    text "append,"
+                    text "block,"
+                    text "or"
+                    text "cause"
+                    text "side"
+                    text "effects,"
+                    text "not"
+                    text "modify/replace"
+                    text "messages."
+                    text "There"
+                    text "is"
+                    text "no"
+                    text "PreResponse/PostResponse"
+                    text "hook"
+                    text "on"
+                    text "assistant"
+                    text "text"
+                    text "—"
+                    text "open"
+                    text "FR:"
+                    anchor [ref=172, loc=href:https://github.com/anthropics/claude-code/issues/66749, url=https://github.com/anthropics/claude-code/issues/66749]
+                      text "https://github.com/anthropics/claude-code/issues/66749"
+                    text ","
+                    anchor [ref=173, loc=href:https://github.com/anthropics/claude-code/issues/84751, url=https://github.com/anthropics/claude-code/issues/84751]
+                      text "https://github.com/anthropics/claude-code/issues/84751"
+                  list_item
+                    text "Stop"
+                    text "continuation"
+                    text "is"
+                    text "capped"
+                    text "at"
+                    text "8"
+                    text "consecutive"
+                    text "continuations"
+                    text "("
+                    text "CLAUDE_CODE_STOP_HOOK_BLOCK_CAP"
+                    text ");"
+                    text "stop_hook_active"
+                    text "must"
+                    text "be"
+                    text "honored"
+                    text "or"
+                    text "you"
+                    text "loop."
+                  list_item
+                    text "Injected"
+                    text "strings"
+                    text "("
+                    text "additionalContext"
+                    text ","
+                    text "systemMessage"
+                    text ","
+                    text "stdout)"
+                    text "are"
+                    text "capped"
+                    text "at"
+                    text "10,000"
+                    text "chars"
+                    text "."
+                  list_item
+                    text "PreToolUse.additionalContext"
+                    text "exists"
+                    text "in"
+                    text "the"
+                    text "docs"
+                    text "but"
+                    text "has"
+                    text "a"
+                    text "history"
+                    text "of"
+                    text "being"
+                    text "received-but-not-injected:"
+                    anchor [ref=174, loc=href:https://github.com/anthropics/claude-code/issues/19432, url=https://github.com/anthropics/claude-code/issues/19432]
+                      text "https://github.com/anthropics/claude-code/issues/19432"
+                    text ","
+                    anchor [ref=175, loc=href:https://github.com/anthropics/claude-code/issues/15345, url=https://github.com/anthropics/claude-code/issues/15345]
+                      text "https://github.com/anthropics/claude-code/issues/15345"
+                paragraph
+                  text "Practical"
+                  text "consequence:"
+                  text "hooks"
+                  text "are"
+                  text "good"
+                  text "at"
+                  text "the"
+                  text "semantic"
+                  text "half"
+                  text "of"
+                  text "your"
+                  text "problem"
+                  text "—"
+                  text "hash"
+                  text "tool_name+args"
+                  text "and"
+                  text "tool_response"
+                  text "in"
+                  text "PostToolUse"
+                  text ";"
+                  text "if"
+                  text "2"
+                  text "consecutive"
+                  text "rounds"
+                  text "return"
+                  text "equivalent"
+                  text "output"
+                  text "with"
+                  text "no"
+                  text "new"
+                  text "facts,"
+                  text "inject"
+                  text ""no"
+                  text "new"
+                  text "information"
+                  text "since"
+                  text "round"
+                  text "N"
+                  text "—"
+                  text "act"
+                  text "or"
+                  text "ask"."
+                  text "That"
+                  text "needs"
+                  text "no"
+                  text "token"
+                  text "counts"
+                  text "at"
+                  text "all."
+                  text "Hooks"
+                  text "are"
+                  text "bad"
+                  text "at"
+                  text "the"
+                  text "length"
+                  text "half."
+                heading
+                  text "3)"
+                  text "Proxy/middleware"
+                  text "that"
+                  text "counts"
+                  text "reasoning"
+                  text "tokens"
+                  text "per"
+                  text "turn"
+                  text "and"
+                  text "can"
+                  text "abort/steer"
+                container [ref=176]
+                  table
+                    table_row
+                      table_cell
+                        text "Layer"
+                      table_cell
+                        text "Counts"
+                        text "reasoning"
+                        text "tokens"
+                      table_cell
+                        text "Abort"
+                        text "mid-stream"
+                      table_cell
+                        text "Steer"
+                        text "(inject"
+                        text "reminder)"
+                      table_cell
+                        text "Notes"
+                    table_row
+                      table_cell
+                        text "llama.cpp"
+                      table_cell
+                        text "yes"
+                        text "("
+                        text "--reasoning-budget N"
+                        text ")"
+                      table_cell
+                        text "yes"
+                        text "(forces"
+                        text "close"
+                        text "tag)"
+                      table_cell
+                        text "yes"
+                        text "—"
+                        text "--reasoning-budget-message"
+                        text ","
+                        text "plus"
+                        text "PR"
+                        text "#25961"
+                        text "adds"
+                        text "--reasoning-budget-soft-ratio/-message"
+                        text "+"
+                        text "intro"
+                        text "message"
+                      table_cell
+                        text "Per-request"
+                        text "thinking_budget_tokens"
+                        text "on"
+                        text "/v1/chat/completions"
+                        text "."
+                        text "Hard"
+                        text "cut"
+                        text "without"
+                        text "a"
+                        text "message"
+                        text "tanks"
+                        text "quality"
+                        text "(Qwen3-9B"
+                        text "HumanEval"
+                        text "94%"
+                        text "→"
+                        text "78%);"
+                        text "the"
+                        text "message"
+                        text "fixes"
+                        text "it."
+                        anchor [ref=177, loc=href:https://github.com/ggml-org/llama.cpp/pull/25961, url=https://github.com/ggml-org/llama.cpp/pull/25961]
+                          text "https://github.com/ggml-org/llama.cpp/pull/25961"
+                    table_row
+                      table_cell
+                        text "vLLM"
+                      table_cell
+                        text "yes"
+                        text "("
+                        text "SamplingParams.thinking_token_budget"
+                        text ")"
+                      table_cell
+                        text "yes"
+                      table_cell
+                        text "partially"
+                        text "(forces"
+                        text "reasoning_end_str"
+                        text "via"
+                        text "1e9"
+                        text "logit"
+                        text "mask)"
+                      table_cell
+                        text "Needs"
+                        text "--reasoning-parser"
+                        text ";"
+                        text "logic"
+                        text "in"
+                        text "ThinkingBudgetStateHolder"
+                        text "(PR"
+                        text "#34668)."
+                        text "Known"
+                        text "broken"
+                        text "under"
+                        text "spec-decode"
+                        text "(#58485,"
+                        text "#54906)"
+                        text "and"
+                        text "can"
+                        text "inject"
+                        text "into"
+                        text "tool-call"
+                        text "JSON"
+                        text "(#44676)."
+                        text "Content-based"
+                        text "loop"
+                        text "breaking"
+                        text "proposed"
+                        text "in"
+                        text "#52673"
+                        text "/"
+                        text "PR"
+                        text "#52677."
+                        anchor [ref=178, loc=href:https://docs.vllm.ai/en/latest/features/reasoning_outputs/, url=https://docs.vllm.ai/en/latest/features/reasoning_outputs/]
+                          text "https://docs.vllm.ai/en/latest/features/reasoning_outputs/"
+                    table_row
+                      table_cell
+                        text "LiteLLM"
+                        text "proxy"
+                      table_cell
+                        text "yes,"
+                        text "via"
+                        text "custom"
+                        text "CustomLogger"
+                      table_cell
+                        text "yes"
+                      table_cell
+                        text "yes-ish"
+                      table_cell
+                        text "async_pre_call_hook"
+                        text "(rewrite"
+                        text "request)"
+                        text "+"
+                        text "async_post_call_streaming_iterator_hook"
+                        text "(per-chunk"
+                        text "inspect,"
+                        text "filter,"
+                        text "response.aclose()"
+                        text "early"
+                        text "close)."
+                        text "Caveats:"
+                        text "proxy"
+                        text "had"
+                        text "reasoning_tokens=0"
+                        text "in"
+                        text "usage"
+                        text "(#31759,"
+                        text "fixed"
+                        text "by"
+                        text "#32199)"
+                        text "and"
+                        text "streaming-hook"
+                        text "dispatch"
+                        text "bugs"
+                        text "(#9639)."
+                        anchor [ref=179, loc=href:https://docs.litellm.ai/docs/proxy/call_hooks, url=https://docs.litellm.ai/docs/proxy/call_hooks]
+                          text "https://docs.litellm.ai/docs/proxy/call_hooks"
+                    table_row
+                      table_cell
+                        text "OpenRouter"
+                      table_cell
+                        text "only"
+                        text "in"
+                        text "the"
+                        text "final"
+                        text "SSE"
+                        text "chunk"
+                        text "("
+                        text "usage.completion_tokens_details.reasoning_tokens"
+                        text ")"
+                      table_cell
+                        text "no"
+                        text "server-side"
+                      table_cell
+                        text "no"
+                      table_cell
+                        text "reasoning.max_tokens"
+                        text "/"
+                        text "effort"
+                        text "is"
+                        text "a"
+                        text "pre-request"
+                        text "cap"
+                        text "only;"
+                        text "reasoning"
+                        text "counts"
+                        text "against"
+                        text "max_tokens"
+                        text ","
+                        text "so"
+                        text "a"
+                        text "small"
+                        text "cap"
+                        text "yields"
+                        text "finish_reason:"length""
+                        text "+"
+                        text "empty"
+                        text "content."
+                        anchor [ref=180, loc=href:https://openrouter.ai/docs/guides/best-practices/reasoning-tokens, url=https://openrouter.ai/docs/guides/best-practices/reasoning-tokens]
+                          text "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens"
+                    table_row
+                      table_cell
+                        text "Custom"
+                        text "SSE"
+                        text "proxy"
+                        text "in"
+                        text "front"
+                        text "of"
+                        text "Claude"
+                        text "Code"
+                      table_cell
+                        text "yes"
+                        text "("
+                        text "thinking_delta"
+                        text "events)"
+                      table_cell
+                        text "yes"
+                      table_cell
+                        text "no"
+                      table_cell
+                        text "ANTHROPIC_BASE_URL"
+                        text "is"
+                        text "a"
+                        text "supported"
+                        text "redirect;"
+                        text "there's"
+                        text "a"
+                        text "whole"
+                        text "family"
+                        text "of"
+                        text "claude-code-proxy"
+                        text "projects"
+                        text "to"
+                        text "fork."
+                        text "But"
+                        text "Anthropic"
+                        text "thinking"
+                        text "blocks"
+                        text "are"
+                        text "signed"
+                        text "—"
+                        text "you"
+                        text "can't"
+                        text "splice"
+                        text "a"
+                        text ""wrap"
+                        text "up""
+                        text "string"
+                        text "into"
+                        text "one."
+                        text "You"
+                        text "can"
+                        text "only"
+                        text "cut"
+                        text "the"
+                        text "stream."
+                paragraph
+                  text "Rule"
+                  text "of"
+                  text "thumb:"
+                  text "steering"
+                  text "inside"
+                  text "reasoning"
+                  text "is"
+                  text "only"
+                  text "possible"
+                  text "on"
+                  text "local"
+                  text "engines"
+                  text "(you"
+                  text "own"
+                  text "the"
+                  text "token"
+                  text "stream)."
+                  text "On"
+                  text "hosted"
+                  text "Anthropic/OpenRouter"
+                  text "traffic"
+                  text "a"
+                  text "proxy"
+                  text "can"
+                  text "cap"
+                  text "or"
+                  text "abort,"
+                  text "not"
+                  text "edit"
+                  text "the"
+                  text "thinking."
+                heading
+                  text "4)"
+                  text "Most"
+                  text "practical"
+                  text "for"
+                  text "a"
+                  text "solo"
+                  text "dev,"
+                  text "free/local-first"
+                paragraph
+                  text "Ranked,"
+                  text "all"
+                  text "offline,"
+                  text "no"
+                  text "paid"
+                  text "API:"
+                ordered_list
+                  list_item
+                    text "llama.cpp"
+                    text "--reasoning-budget"
+                    text "+"
+                    text "--reasoning-budget-message"
+                    text "—"
+                    text "one"
+                    text "flag,"
+                    text "zero"
+                    text "code,"
+                    text "and"
+                    text "the"
+                    text "message"
+                    text "flag"
+                    text "is"
+                    text "exactly"
+                    text ""mid-thought"
+                    text "reminder"."
+                    text "Start"
+                    text "at"
+                    text "6–8k"
+                    text "tokens"
+                    text "with"
+                    text "a"
+                    text "message"
+                    text "like"
+                    text ""\n</think>\nReasoning budget exceeded. State your current best answer or make the tool call now.\n""
+                    text "."
+                    text "Add"
+                    text "PR"
+                    text "#25961's"
+                    text "soft-ratio"
+                    text "message"
+                    text "if"
+                    text "you"
+                    text "build"
+                    text "from"
+                    text "source."
+                  list_item
+                    text "A"
+                    text "~150-line"
+                    text "SSE"
+                    text "tap"
+                    text "proxy"
+                    text "(fork"
+                    text "iamyb/llm-proxy-loop-detector"
+                    text ")"
+                    text "doing"
+                    text "two"
+                    text "things"
+                    text "a"
+                    text "budget"
+                    text "can't:"
+                    text "(a)"
+                    text "hash"
+                    text "reasoning"
+                    text "n-grams"
+                    text "to"
+                    text "cut"
+                    text "repetition"
+                    text "early"
+                    text "regardless"
+                    text "of"
+                    text "length,"
+                    text "(b)"
+                    text "count"
+                    text "turns"
+                    text "per"
+                    text ""problem"
+                    text "fingerprint""
+                    text "and"
+                    text "escalate"
+                    text "warn"
+                    text "→"
+                    text "cut."
+                  list_item
+                    text "Claude-Code-side"
+                    text "hook"
+                    text "for"
+                    text "the"
+                    text "semantic"
+                    text "half"
+                    text "only"
+                    text "—"
+                    text "PostToolUse"
+                    text "hook"
+                    text "that"
+                    text "hashes"
+                    text "tool"
+                    text "args/results"
+                    text "and"
+                    text "injects"
+                    text "additionalContext"
+                    text "("round"
+                    text "3,"
+                    text "no"
+                    text "new"
+                    text "information")"
+                    text "into"
+                    text "the"
+                    text "tool"
+                    text "result."
+                    text "Free,"
+                    text "no"
+                    text "proxy,"
+                    text "40"
+                    text "lines"
+                    text "of"
+                    text "Python,"
+                    text "and"
+                    text "it's"
+                    text "the"
+                    text "only"
+                    text "mechanism"
+                    text "that"
+                    text "works"
+                    text "on"
+                    text "a"
+                    text "hosted"
+                    text "model."
+                  list_item
+                    text "vLLM"
+                    text "thinking_token_budget"
+                    text "only"
+                    text "if"
+                    text "you're"
+                    text "already"
+                    text "serving"
+                    text "vLLM"
+                    text "and"
+                    text "can"
+                    text "pin"
+                    text "a"
+                    text "version"
+                    text "without"
+                    text "spec-decode;"
+                    text "LiteLLM"
+                    text "only"
+                    text "if"
+                    text "you"
+                    text "want"
+                    text "one"
+                    text "control"
+                    text "plane"
+                    text "across"
+                    text "local"
+                    text "+"
+                    text "hosted"
+                    text "(accept"
+                    text "the"
+                    text "reasoning-token"
+                    text "accounting"
+                    text "bugs);"
+                    text "OpenRouter"
+                    text "is"
+                    text "not"
+                    text "a"
+                    text "control"
+                    text "point"
+                    text "for"
+                    text "this."
+                paragraph
+                  text "Recommendation"
+                  text "(3"
+                  text "lines):"
+                ordered_list
+                  list_item
+                    text "If"
+                    text "you're"
+                    text "local-first"
+                    text "on"
+                    text "llama.cpp,"
+                    text "do"
+                    text "it"
+                    text "at"
+                    text "the"
+                    text "engine:"
+                    text "--reasoning-budget 8000 --reasoning-budget-message "\n</think>\nBudget spent — answer now.\n""
+                    text "gets"
+                    text "you"
+                    text "90%"
+                    text "of"
+                    text "the"
+                    text "value"
+                    text "in"
+                    text "one"
+                    text "flag."
+                  list_item
+                    text "Add"
+                    text "a"
+                    text "thin"
+                    text "SSE"
+                    text "proxy"
+                    text "(fork"
+                    text "llm-proxy-loop-detector"
+                    text "or"
+                    text "loop-guard"
+                    text ")"
+                    text "that"
+                    text "scores"
+                    text "repetition"
+                    text "across"
+                    text "reasoning"
+                    text "steps"
+                    text ","
+                    text "not"
+                    text "just"
+                    text "length"
+                    text "—"
+                    text "that"
+                    text "is"
+                    text "what"
+                    text "actually"
+                    text "encodes"
+                    text ""same"
+                    text "problem,"
+                    text "2+"
+                    text "rounds,"
+                    text "no"
+                    text "new"
+                    text "facts","
+                    text "and"
+                    text "it"
+                    text "can"
+                    text "cut"
+                    text "or"
+                    text "nudge"
+                    text "mid-stream."
+                  list_item
+                    text "On"
+                    text "Claude"
+                    text "Code"
+                    text "itself,"
+                    text "don't"
+                    text "expect"
+                    text "mid-turn"
+                    text "length"
+                    text "detection:"
+                    text "hooks"
+                    text "expose"
+                    text "no"
+                    text "token"
+                    text "counts"
+                    text "and"
+                    text "never"
+                    text "fire"
+                    text "during"
+                    text "a"
+                    text "reasoning-only"
+                    text "turn."
+                    text "Use"
+                    text "a"
+                    text "PostToolUse"
+                    text "no-new-facts"
+                    text "injection"
+                    text "for"
+                    text "cross-round"
+                    text "detection,"
+                    text "and"
+                    text "treat"
+                    text "hooks"
+                    text "as"
+                    text "a"
+                    text "boundary-level"
+                    text "nudge,"
+                    text "never"
+                    text "a"
+                    text "hard"
+                    text "budget"
+                    text "—"
+                    text "a"
+                    text "real"
+                    text "budget"
+                    text "must"
+                    text "sit"
+                    text "above"
+                    text "ANTHROPIC_BASE_URL"
+                    text "or"
+                    text "in"
+                    text "the"
+                    text "local"
+                    text "engine."
+                paragraph
+                  text "Want"
+                  text "me"
+                  text "to"
+                  text "write"
+                  text "the"
+                  text "v0"
+                  text "proxy"
+                  text "+"
+                  text "the"
+                  text "PostToolUse"
+                  text "hook"
+                  text "as"
+                  text "runnable"
+                  text "code?"
+                  text "If"
+                  text "so,"
+                  text "tell"
+                  text "me"
+                  text "which"
+                  text "backend"
+                  text "you're"
+                  text "actually"
+                  text "driving"
+                  text "(llama.cpp"
+                  text "/"
+                  text "vLLM"
+                  text "/"
+                  text "OpenRouter"
+                  text "/"
+                  text "real"
+                  text "Anthropic)"
+                  text "—"
+                  text "the"
+                  text "design"
+                  text "forks"
+                  text "sharply"
+                  text "at"
+                  text "that"
+                  text "point."
+                button "Copy" [ref=181, loc=css:button[aria-label="Copy"]]
+                  svg_root
+                container "1m 39s | 3 minutes ago. Response ended 2026年10月21日星期三 23:01" [ref=182]
+                  text "1m 39s | 3 minutes ago"
+                  text "23:01"
+            button "Scroll to bottom" [ref=143, loc=css:button[aria-label="Scroll to bottom"]]
+              svg_root
+          container [ref=183]
+            container
+              text "此任务成功了吗？"
+              container
+                text "Esc"
+                button "Close review panel" [ref=184, loc=css:button[aria-label="Close review panel"]]
+                  svg_root
+            container
+              button [ref=185]
+                container
+                  svg_root
+                  svg_root
+                text "是"
+              button [ref=186]
+                container
+                  svg_root
+                  svg_root
+                text "否"
+              button [ref=187]
+                svg_root
+                text "继续工作"
+      container
+        container
+          tablist "Workspace card views" [ref=156, loc=role:tablist[name="Workspace card views"]]
+            tab [ref=157]
+              text "Diff"
+            tab [ref=158]
+              text "Checks"
+          tabpanel [ref=159]
+            button [ref=160]
+              svg_root
+              text "View all changes"
+              svg_root
+        container
+          container
+            text "Connectors"
+            button "View all connectors" [ref=161, loc=css:button[aria-label="View all connectors"]]
+              svg_root
+          unordered_list
+            list_item
+              svg_root
+              text "GitHub"
+  alert
+    text "Arena | Benchmark & Compare the Best AI Models"

@@ -1,0 +1,199 @@
+[p1 "Agent Mode | Autonomous AI Agents for Real-World Tasks" | space "memory-hook-plugin"(33): 1 managed, 0 untracked — p1* "Agent Mode | Autonomous AI Agents for Real-World Tasks"]
+root
+  container
+    container
+      button "Toggle Sidebar" [ref=53, loc=css:button[aria-label="Toggle Sidebar"]]
+      container
+        unordered_list
+          list_item
+            button "Arena menu" [ref=54, loc=css:button[aria-label="Arena menu"]]
+              svg_root
+              svg_root
+        button [ref=55]
+          svg_root
+      unordered_list
+        list_item
+          anchor [ref=56, loc=href:/agent, url=https://arena.ai/agent]
+            svg_root
+            text "New Chat"
+        list_item
+          anchor [ref=57, loc=href:/leaderboard, url=https://arena.ai/leaderboard]
+            svg_root
+            text "Leaderboard"
+            svg_root
+        list_item
+          anchor [ref=58, loc=href:/history/search, url=https://arena.ai/history/search]
+            svg_root
+            text "Search"
+      container [ref=59]
+        container
+          text "Today"
+          unordered_list
+            list_item
+              anchor [ref=60, loc=href:/agent/01a15e62-512b-7bee-8502-9cc0a5668d45, url=https://arena.ai/agent/01a15e62-512b-7bee-8502-9cc0a5668d45]
+                container "Coding session"
+                  svg_root
+                text "克隆这个 GitHub 仓库并读取 SOP 文件： git clone https://github.com/dd2003-460/d1-video-recreation.git cd d1-…"
+              button "More options" [ref=61]
+                svg_root
+            list_item
+              anchor [ref=62, loc=href:/agent/01a1599d-c79b-7b50-9f06-142b20d4dec9, url=https://arena.ai/agent/01a1599d-c79b-7b50-9f06-142b20d4dec9]
+                container "Coding session"
+                  svg_root
+                text "CRITICAL REVIEW: 86s pixel video v0.8. Clawd+fatfish. 6 scenes. piano+strings+SFX. Be harsh: 1)TOP3 …"
+              button "More options" [ref=63]
+                svg_root
+            list_item
+              anchor [ref=64, loc=href:/agent/01a1099d-93c1-748e-9345-7d367508ed37, url=https://arena.ai/agent/01a1099d-93c1-748e-9345-7d367508ed37]
+                container "Pull request merged"
+                  svg_root
+                text "## 先做这一件事（最高优先级） 验证推送通道：你的第一个动作就是 git add -A &amp;&amp; git commit -m "chore: verify push channel…"
+              button "More options" [ref=65]
+                svg_root
+            list_item
+              anchor [ref=66, loc=href:/agent/01a15cdb-8150-7caa-9737-eb8a104ad46f, url=https://arena.ai/agent/01a15cdb-8150-7caa-9737-eb8a104ad46f]
+                container "Coding session"
+                  svg_root
+                text "## 背景 TNG 数据官方说明书已到手：字段与单位全部确认；1.2 的 TNG 适配器已放开重子字段（2026-10-16 郭老师定案）；官方读取示例已注释归档到 1.2_Simul..."
+              button "More options" [ref=67]
+                svg_root
+            list_item
+              anchor [ref=68, loc=href:/agent/01a15dbe-fb05-7cac-bd16-9b1daca57d1e, url=https://arena.ai/agent/01a15dbe-fb05-7cac-bd16-9b1daca57d1e]
+                container "Coding session"
+                  svg_root
+                text "I need you to review a pixel-art video I made. Here's what I want you to evaluate: 1. STYLE ALI…"
+              button "More options" [ref=69]
+                svg_root
+            list_item
+              anchor [ref=70, loc=href:/agent/01a12e88-3f6c-7f6a-826d-c201d41d7428, url=https://arena.ai/agent/01a12e88-3f6c-7f6a-826d-c201d41d7428]
+                container "Coding session"
+                  svg_root
+                text "新项目立项调研。仓库已挂载 dd2003-460/love-vs-survival @ main。 先按顺序读： 1. notes/1-idea/1.1-raw-idea.md —— 用户原始…"
+              button "More options" [ref=71]
+                svg_root
+            list_item
+              anchor [ref=72, loc=href:/agent/01a15953-1f2c-724b-a1e9-95110266cb34, url=https://arena.ai/agent/01a15953-1f2c-724b-a1e9-95110266cb34]
+                container "Coding session"
+                  svg_root
+                text "任务：广泛调研「vLLM 长 prompt prefill 期间 decode 吞吐暴跌/饿死」的社区同类案例与解决办法，把报告写进本仓库 docs/community-research.md。 …"
+              button "More options" [ref=73]
+                svg_root
+            list_item
+              anchor [ref=74, loc=href:/agent/01a15981-4b5e-7bad-b9c7-9ace3ddf8c49, url=https://arena.ai/agent/01a15981-4b5e-7bad-b9c7-9ace3ddf8c49]
+                container "Coding session"
+                  svg_root
+                text "GitHub 上 LLM agent memory 相关的 benchmark / 测试仓库有哪些？请按 star 数列出前 8 个，每个给出：完整仓库路径（owner/repo）、star 数、一句…"
+              button "More options" [ref=75]
+                svg_root
+            list_item
+              anchor [ref=76, loc=href:/agent/01a15a38-3c0c-7ce9-88b9-b9ebbc2a5f84, url=https://arena.ai/agent/01a15a38-3c0c-7ce9-88b9-b9ebbc2a5f84]
+                container "Coding session"
+                  svg_root
+                text "请按仓库内任务书执行：开题报告/tasks/06-校对论文tex_计算与语言.md（已在 master 上，先完整读完再动手；它是唯一的指令来源，优先级高于本消息）。 ..."
+              button "More options" [ref=77]
+                svg_root
+            list_item
+              anchor [ref=78, loc=href:/agent/01a15a47-0e8c-70ce-afde-31f789442103, url=https://arena.ai/agent/01a15a47-0e8c-70ce-afde-31f789442103]
+                container "Coding session"
+                  svg_root
+                text "请对下面的记忆实验做反方复核：按我的标准评审，给出 ≤5 条最尖锐质疑 + 每条修复方案。 # origin: ai # Arena 评审材料 — 记忆方案 A/B/C 三条件对比（2..."
+              button "More options" [ref=79]
+                svg_root
+        container
+          text "Yesterday"
+          unordered_list
+            list_item
+              anchor [ref=80, loc=href:/agent/01a15968-444b-7229-ba87-87217863ab56, url=https://arena.ai/agent/01a15968-444b-7229-ba87-87217863ab56]
+                container "Coding session"
+                  svg_root
+                text "请按仓库内任务书执行：开题报告/tasks/07-按要求重做开题报告幻灯片.md（已推 master，先完整读它，再读它指向的 开题报告/slide/要求.md，两份都是最高�..."
+              button "More options" [ref=81]
+                svg_root
+      container
+        unordered_list
+          button [ref=82]
+            image
+            text "xyifeng81@gmail.com"
+        container
+          anchor [ref=83, loc=href:/terms-of-use, url=https://arena.ai/terms-of-use]
+            text "Terms of Use"
+          anchor [ref=84, loc=href:/privacy-policy, url=https://arena.ai/privacy-policy]
+            text "Privacy Policy"
+          button [ref=85]
+            text "Cookies"
+    container
+      button "Collapse workspace sidebar" [ref=86, loc=css:button[aria-label="Collapse workspace sidebar"]]
+        svg_root
+      container
+        heading
+          text "What would you like to do?"
+        container
+          container
+            container
+              container
+                button [ref=87]
+                  container
+                    svg_root
+                    text "dd2003-460/bh-mass-spectrum"
+                  svg_root
+                button [ref=88]
+                  container
+                    svg_root
+                    text "main"
+                  svg_root
+              container
+                button "GitHub settings" [ref=89, loc=css:button[aria-label="GitHub settings"]]
+                  svg_root
+                button "Turn off GitHub" [ref=90, loc=css:button[aria-label="Turn off GitHub"]]
+                  svg_root
+            container
+              paragraph
+                text "GitHub has an outage that may affect your use of some features."
+                anchor [ref=91, loc=href:https://www.githubstatus.com/, url=https://www.githubstatus.com/]
+                  text "View status"
+              button "Dismiss GitHub outage notice" [ref=92, loc=css:button[aria-label="Dismiss GitHub outage notice"]]
+                svg_root
+          group "Connectors"
+            button "GitHub" [ref=93]
+              svg_root
+              text "GitHub"
+              svg_root
+            button "Drive" [ref=94]
+              svg_root
+              text "Drive"
+            button "Docs" [ref=95]
+              svg_root
+              text "Docs"
+            button "Notion" [ref=96]
+              svg_root
+              text "Notion"
+            button "Gmail" [ref=97]
+              svg_root
+              text "Gmail"
+            container
+              button "Linear" [ref=98]
+                svg_root
+                text "Linear"
+              button "Cal" [ref=99]
+                svg_root
+                text "Cal"
+        container
+          container [ref=100]
+            paragraph
+              text "Ask anything…"
+          container
+            container
+              button "Add files and connections" [ref=101, loc=css:button[aria-label="Add files and connections"]]
+                container
+                  svg_root
+                  svg_root
+              comboboxgrouping [ref=102]
+                svg_root
+                paragraph
+                  text "Agent"
+                svg_root
+            container
+              button [ref=103]
+                svg_root
+              button "Send message" [ref=104, loc=css:button[aria-label="Send message"]]
+                svg_root

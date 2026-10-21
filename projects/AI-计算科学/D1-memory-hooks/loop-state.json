@@ -1,0 +1,12 @@
+{
+  "project": "D1-memory-hooks",
+  "updated_at": "2026-10-21T23:15:00+08:00",
+  "phase": "research",
+  "last_action": "调研「AI 思考过长主动提醒」插件方案（Lead 派发 m00397）：读完现有 5 缝 hook 引擎 + asar 只读解包 DSH 扩展点 + LMArena agent mode 外包调研（ego-browser，2026-10-21T23:01 完成）→ 产出 memory/plugin-approach-research.md。结论：现有 5 缝无 turn 内 thinking 观测点，长度半边原理上不可做；推荐 ① PostToolUse no-new-facts hook（~40 行，语义半边，conf 高）+ ② 长度半边按后端二选一（llama.cpp --reasoning-budget+message / vLLM thinking_token_budget / SSE tap proxy）；先决条件 = dsh-hooks-codex 桥未安装（profile 缺 dep，方案 A install_bundle 待拍板）",
+  "next": "Lead 统一 git commit/push；用户拍板：① 插件安装面（install_bundle）② 是否按推荐 ① 写 rules.json 新规则 + PostToolUse fingerprint 谓词 ③ 目标后端选型（本地 vllm vs hosted）",
+  "open_questions": [
+    "dsh-hooks-codex 安装面：plugin_manager install_bundle（L2 app 级）需用户拍板",
+    "方案 ② 长度半边的后端选型：本地 vllm（thinking_token_budget+SSE tap）vs hosted（只能 cap/abort）",
+    "DSH 原生插件路线（ctx.on agent/assistant-stream）3 个风险是否值得先 PoC"
+  ]
+}

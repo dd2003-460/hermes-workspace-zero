@@ -23,3 +23,10 @@
 - 迭代/编号方案（`runs/ablation-L1/C0..C9`、`stages/01..04.5`、`bench/prompts/variants/{V}/`）：数量不受 3-7 限制
 - 归档目录（`archive/`）：不再按扇出检查
 - 领域级 INDEX（`projects/<域>/INDEX.md`）：只列项目，不要求扇出
+
+## 新增 SOP 规则（2026-10-21 · m00350 批准）
+不新建 `projects/SOP/` 目录（避免第二套存放地 + 扇出爆炸）。SOP 只放三个天然家：
+- **操作型 SOP** → `.claude/skills/<name>/SKILL.md`
+- **流程型 SOP** → `loop/`（prompt-first 或 archived 归档）
+- **脚本型 SOP** → `scripts/`
+项目/领域 INDEX.md 加一行「SOP 索引」指针（准确 skill 名 + 路径）即可；某领域 SOP 多到 >5 个且需领域级导航时，才在该领域下挂 `sop/` 子目录。

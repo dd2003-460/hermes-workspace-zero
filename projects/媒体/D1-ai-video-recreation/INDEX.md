@@ -7,3 +7,12 @@
 - `tasks/` — 分解与任务状态
 - `memory/` — 探索记录（调研、风格分析、差距审计）
 - `outputs/` — 产出（脚本、素材、成片）
+
+## SOP 索引（2026-10-21）
+
+| SOP | 落点 |
+|------|------|
+| 渲染管线 | Remotion 工程根 = `outputs/src/`（Root.tsx/Video.tsx/remotion.config.ts），渲染脚本 `outputs/scripts/render_*.js`，音频 `outputs/scripts/gen_*.py` + `build_audio_piper.py`；里程碑记录 `memory/milestone-full-*.md` |
+| loop 核验/调研外包 | skill `arena-outsource`（`.claude/skills/arena-outsource/SKILL.md`） |
+| 网页 LLM 交叉验证 | skill `ego-verify`（`.claude/skills/ego-verify/SKILL.md`） |
+| 项目结构体检 | `scripts/project-tidy/` |

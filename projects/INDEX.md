@@ -35,7 +35,7 @@
 | `AI-计算科学/D1-gpu-inference-hardware/` | [DGH.1] | GPU 推理硬件优化空间研究（矩阵/tensor 硬件计算；推理场景硬件还能怎么优化） |
 | `AI-计算科学/D1-gpu-research-2026/` | [DGR.1] | GPU 本地推理研究（2026，含 web-llm 交叉验证） |
 | `AI-计算科学/D1-hintfree-decomposition/` | [DHF.1] | 无提示词目标分解（hint-free goal decomposition）实验 |
-| `decomp/` | [DC.1] | **总目标**：通用任务分解 prompt（总目标与总计划见其 README；结构索引见 `decomp/INDEX.md`）；7 个相关 GPU/分解项目归档于 `archive/`（映射表见 `archive/README.md`）；RALPH loop 驱动，台账 = `tasks/state.md`；P1 5/7 + T4 消融 run1 进行中；远端 = dd2003-460/decomp-bench |
+| `decomp/` | [DC.1] | **总目标**：通用任务分解 prompt（总目标与总计划见其 README；结构索引见 `decomp/INDEX.md`）；归档于 `archive/`（含 7 个相关项目 + 记忆线 memory-baseline，映射表见 `archive/README.md`）；RALPH loop 驱动，台账 = `tasks/state.md`；T4 消融 run1 进行中；远端 = dd2003-460/decomp-bench |
 
 ### 金融
 
@@ -57,7 +57,7 @@
 
 | 项目 | 索引号 | 描述 |
 |------|--------|------|
-| `媒体/D1-ai-video-recreation/` | [AVR.1] | AI 独白短片风格复刻（Remotion+edge-tts 管线；当前交付 full_v1.2.mp4；结构见 `媒体/INDEX.md`） |
+| `媒体/D1-ai-video-recreation/` | [AVR.1] | AI 独白短片风格复刻（Remotion+edge-tts 管线；当前交付 full_v1.3.mp4，86.48s 720p60；下一步 Step E arena 自审核；SOP 索引见项目 INDEX） |
 
 ### 知识
 

@@ -1,16 +1,16 @@
 {
- "project": "D1-ai-video-recreation",
- "updated_at": "2026-10-21T22:30:00+08:00",
- "phase": "05-execution-verification",
- "last_action": "v1.3.1 人工审核完成: 从 outputs/full_v1.3.mp4 提取 6 关键帧 (S1 5s/S2 20s/S3 38s/S4 55s/S5 70s/S6 82s), 逐帧审查: S1 终端布局正确+像素清晰 4-6px, S2 Clawd 无天线+消息框正确, S3 代码编辑器布局清晰, S4 空行累积正确, S5 等待循环正确, S6 无窗口框+全屏冷色+金色文字正确+冷色字幕条。6/6 通过",
- "last_result": "success (v1.3.1 人工审核 6/6 通过)",
- "blocker": null,
- "next": "人工审核 v1.3.1 帧 (ego-browser 打开 arena 或本地播放) + arena 二次自审核确认",
- "next_step": "v1.3.1 人工审核 + arena 二次自审核",
- "deliverable": "outputs/full_v1.3.mp4",
- "previous_deliverables": [
-  "outputs/full_v1.2.mp4 (主视频 86.481s 2.4MB)",
-  "outputs/full_v1.1.mp4 (主视频 86.481s 2.45MB)",
-  "outputs/goodnight_v1.0.mp4 (晚安小视频 30s 765KB)"
- ]
+  "project": "D1-ai-video-recreation",
+  "updated_at": "2026-10-21T22:30:00+08:00",
+  "phase": "05-execution-verification",
+  "last_action": "v1.3.1 人工审核完成: 从 outputs/full_v1.3.mp4 提取 6 关键帧 (S1 5s/S2 20s/S3 38s/S4 55s/S5 70s/S6 82s), 逐帧审查: S1 终端布局正确+像素清晰 4-6px, S2 Clawd 无天线+消息框正确, S3 代码编辑器布局清晰, S4 空行累积正确, S5 等待循环正确, S6 无窗口框+全屏冷色+金色文字正确+冷色字幕条。6/6 通过\n\n## tidy-20261021 (2026-10-21 22:30)\n- AGENTS.md 瘦身 326→228 行 + 红线0 结构补丁 + 红线1 修订(外包优先)\n- INDEX.md SOP 指针补齐 + project-tidy SOP 规则新增\n- open-science 删除(2.9G untracked) + decomp 记忆线归档\n- 详见 git log",
+  "last_result": "success (v1.3.1 人工审核 6/6 通过)",
+  "blocker": null,
+  "next": "人工审核 v1.3.1 帧 (ego-browser 打开 arena 或本地播放) + arena 二次自审核确认",
+  "next_step": "v1.3.1 人工审核 + arena 二次自审核",
+  "deliverable": "outputs/full_v1.3.mp4",
+  "previous_deliverables": [
+    "outputs/full_v1.2.mp4 (主视频 86.481s 2.4MB)",
+    "outputs/full_v1.1.mp4 (主视频 86.481s 2.45MB)",
+    "outputs/goodnight_v1.0.mp4 (晚安小视频 30s 765KB)"
+  ]
 }

@@ -187,8 +187,13 @@
       "time": "2026-10-22",
       "action": "goal-r1-system-optimization",
       "summary": "12h系统优化goal启动: ①C9-plain定性(3.5KB白话完整方法论非裸句) ②arena SOP修订(拆分优先+失败降级5条) ③APPROVALS条目2(细粒度拆分写入位置2.1/2.2/2.3) ④goal-fb61fede建(48轮) ⑤decomposition.md追加分解树S1-S4 ⑥S1已派fork"
+    },
+    {
+      "time": "2026-10-22",
+      "action": "persona-sop-three-lines",
+      "summary": "m00001 成璐指令: persona 按领域分线整理 + 验证过不好的全部归档. 交付: ①persona-sop.md(项目根总入口): 线1模仿思考=公理层+persona.md, clonar定位'形式克隆非思考克隆'(落地TODO: WhatsApp txt走pipeline 或 jsonl走MAP/REDUCE自跑) ②线2为我解答=KB教材格式+路由(查interest-directions.md判A/B/C域: 熟悉域用成璐术语不解释基础, 陌生域1-loop调研+名词表4项)+粗细分层L1概括/L2通俗/L3术语子note(可递归挂INDEX) ③线3真人聊天=待定(阻塞: 缺真实聊天语料+分人风格标注; 启动条件=IM导出+场合标注) ④线4横切语言层(author-voice+voice-anti-ai-zh+OPRO-v8.1+interruption_injector+drift-check). 归档: tasks/archive/(8个失败prompt git mv + README失败原因表+5条路线级结论: 词表≈0/逐句命令超调/被动描述>主动/角色锚定前提/场景>规则). KB README加路由+粗细分层节. INDEX.md加persona-sop.md行."
     }
   ],
-  "last_action": "[2026-10-22T11:45+08:00] goal-fb61fede r9-11 S5 prompt 级优化完成: SKILL.md 88 行(任务卡 3 原则); prompt-optimization-r1.md 落盘; commit+push 待执行",
-  "updated_at": "2026-10-22T10:58:41.116604+08:00"
+  "last_action": "[2026-10-22T13:21+08:00] m00001 persona 三条线 SOP 交付: persona-sop.md(4 线总入口) + tasks/archive/(8 失败 prompt 归档) + KB README 路由/粗细分层; qanda-ledger 记账",
+  "updated_at": "2026-10-22T13:21:05+08:00"
 }

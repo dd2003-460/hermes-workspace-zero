@@ -24,4 +24,5 @@
 
 - m01076(b)：KB「感兴趣-没学好/学好」分类，等成璐完整说
 - P2 第一个数：30人30天≥40% 迁移实验，需要真实发布渠道（成璐的账号），v3 正式定稿的前置
+| 2026-10-22 | m00001 | ①persona 目前有主要使用的方案吗（不同领域的回复/书写 SOP）②能否按三条线整理（1.模仿思考用 clonar 2.为我解答按知识库现状：熟悉域用我的术语/陌生域调研业内做法+不同粗细解释 3.和真人聊天待定）③之前验证过不好的（机械 prompt/不像的/AI 味/用力过猛的）全部归档 | ①有但散在项目里：总入口 persona.md（8 层）+ 公理层 persona-axioms.md（4-way 盲测=均值成璐）+ 语言层 author-voice SKILL（271 语料）+ OPRO-v8.1（盲测最像成璐 Y=34）+ 知识线 KB 教材格式（7 篇 note）②可以，已落 persona-sop.md 四条线（线 1 公理+clonar 补形式 / 线 2 KB 路由+L1 概括/L2 通俗/L3 术语子 note 粗细分层 / 线 3 待定等聊天语料 / 线 4 语言层横切）③已归档 tasks/archive/（8 个失败 prompt+失败原因表：排除词表≈无效/主动跳跃描述无效/逐句命令超调/角色未锚定/AI 自称） | 已答（已执行，persona-sop.md+archive/ 落盘） |
 | 2026-10-19 | m00002(续) | 400 "At most 1 image(s) may be provided in one prompt" 怎么解决 | 根因：DSH 把连续 read_image 结果合入同一条 user 消息→一条 prompt 带 N 张 data:image 图→上游 8787 桥只允许 1 张→400。修复：~/.claude-vllm-proxy/proxy.mjs 注入 applyImageBudget（全局只留最早 1 张，其余换 text 占位）+ const→let 修 bug。launchd 监督，kill 即重启加载。验证：单元 6 case 全过 + 真实流量 IMG_BUDGET dropped=1/2 多次无回归。回滚点 fix-20261019/proxy.mjs.bak-20261019-165457。详见 projects/媒体/D1-ai-video-recreation/memory/fix-image-limit.md | 已答（修复落地+验证） |

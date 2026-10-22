@@ -1,15 +1,9 @@
 {
-  "project_id": "D1-grav-waves",
-  "loop_phase": "IDLE",
-  "iteration": 21,
-  "status": "complete",
-  "current_task": "无 — 项目已完成",
-  "last_action": "iter20 BP-A 最终编译验证 + iter21 状态文件清理",
-  "last_outcome": "v17 终稿 19页 0 errors, refs stable. 项目归档完成。所有状态文件一致。",
-  "last_insight": "2-Cat 分类框架已完整覆盖 EMRI 命题与文献, 桥梁论文项目可关闭。",
-  "last_updated": "2026-07-15",
-  "paper_version": "v17",
-  "paper_status": "final — archived",
-  "blocker": "arXiv 提交需作者手动上传 — 不可自动绕过",
-  "next_phase_action": "IDLE — 等待新指令"
+  "iteration": 0,
+  "loop_phase": "DEPRECATED",
+  "current_task": {
+    "title": "DEPRECATED — 用户指示 2026-10-22: 理论物理只保留 ORF + bh-spectrum",
+    "status": "deprecated"
+  },
+  "status": "deprecated"
 }

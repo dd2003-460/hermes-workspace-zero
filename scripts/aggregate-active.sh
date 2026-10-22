@@ -41,7 +41,16 @@ fi
         phase=$(jq -r '.stage.id // .loop_phase // "unknown"' "$state_file" 2>/dev/null)
         iter=$(jq -r '.stage.revision // .iteration // 0' "$state_file" 2>/dev/null)
         status=$(jq -r '.status // "unknown"' "$state_file" 2>/dev/null)
-        task=$(jq -r '.current_task // .stage.name // .stage.id // "—" | if . == "null" then "—" else . end' "$state_file" 2>/dev/null)
+        # 过滤 deprecated 项目
+        [ "$status" = "deprecated" ] && continue
+        task=$(jq -r '
+          if (.current_task | type) == "object" then (.current_task.title // "—")
+          elif (.current_task | type) == "string" and .current_task != "" then .current_task
+          else (.stage.name // .stage.id // "—")
+          end
+        ' "$state_file" 2>/dev/null)
+        task="${task//$'\n'/ }"
+        task=$(echo "$task" | head -c 120)
         blocker=$(jq -r '.blocker // (.queue.blocked_human[0].message // "null")' "$state_file" 2>/dev/null)
 
         # Relative path from projects/
@@ -53,7 +62,7 @@ fi
         fi
 
         echo "| $project_id | \`$rel_path/\` | $phase | $iter | $status | $task$blocker_str |"
-    done | sort -t'|' -k4 -rn
+    done | LC_ALL=C sort -t'|' -k4 -rn
 
     echo ""
     echo "---"

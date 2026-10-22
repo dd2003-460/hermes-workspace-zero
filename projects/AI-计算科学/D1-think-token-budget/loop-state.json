@@ -57,5 +57,7 @@
       "date": "2026-10-18",
       "action": "R3 收官: A27 收波(P1=717T/T, P5=682T/T, P0=88错+raw丢失[subagent 输出上限, 仅通知尾部]); P6 4任务: A03=851T/T, A16=49对但无FINAL行(scorer 取尾数37=artifact), A09/A27 跑满上限无答案。Scorer 命名 bug 修: P6__A3.txt 未补零被静默跳过→改名 P6__A03.txt 重跑(P6 n=2)。终表: P0 9/10·50%·1088.6(n=9); P1 10/10·90%·414.5=前沿; P5 9/10·90%·537.4; P6 2/4·1/4·621.5(n=2)。发现: 更严格≠更好(P5 更长更错); prompt 级自适应失败(P6 hard 分支无界); 冗长基线在 hardest 题既最长又错。round3-findings.md 定稿(前沿表+8发现+两层推荐+免责); tasks/decomposition.md 新建(规划纪律 m02353); 副脑质询 subagent 派发(63b67b83); 最终答复交付用户(m01118: prompt 层 P1 + serving 层 thinking_token_budget)"
     }
-  ]
+  ],
+  "last_action": "[tidy-2026-10-22] 体检: 补 INDEX.md; complete状态; 4项工作区变更",
+  "updated_at": "2026-10-22T09:03:25.005007+08:00"
 }

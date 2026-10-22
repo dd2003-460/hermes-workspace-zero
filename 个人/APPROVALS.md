@@ -21,6 +21,15 @@
     - **1.2** 改用 DSH 用户级 hooks 配置入口（不依赖该插件，零 app 改动；需先确认官方配置 key）
     - **1.3** 撤销 cordis.patch.yml 的 hooks-codex insert 段（放弃桥接方案，engine.py 保留手动用法）
     回一个编号即可。验证判据：重启后 `.hooks/state/` 出现 `s18-*.jsonl`。
+    人类回复：
+
+2. **subagent 细粒度拆分规范写入位置**（2026-10-21 成璐 m00656 指令：调研类大任务优先拆子领域，1 subagent 领 1 子领域走 arena；短任务多并行优于单长任务）
+    背景：本会话 3 个 teammate 长任务（20–90min）挂 2 次 + 1 次 arena 回复未落页；`acp_cache` 实测 provider 不回报 cache tokens（245 req / 11.72M input unmeasured）→ fork 上下文是否命中缓存本侧无法验证，细粒度拆分当前收益=鲁棒性+并行，非已验证的缓存省钱。
+    - **2.1** 只写 arena-outsource skill（SOP 层，首版已落盘：拆分优先+失败协议；不动红线文件；subagent 派发时自带）（推荐）
+    - **2.2** 追加进 AGENTS.md「工作纪律」（红线文件，需成璐明确指令才改）
+    - **2.3** 2.1 + 新建 `agents/arena-researcher.md` 专职规格（拆分纪律+失败协议+交付格式）
+    回一个编号即可。
+    人类回复：
 
 ## 已批
 

@@ -41,6 +41,12 @@
 
 ## 2. SOP 索引（AI 记住外包细节）
 
+### 2.0 Arena Loop 链路 SOP（★ 首选通道 · 全程 loop）
+- **路径**：`agents/arena-loop-pipeline.md`
+- **硬规则**：arena 外包 = 必须首选；无论 arena 执行还是回退本地，loop 6 阶段（01→04.5）全程必需，回退只降执行通道不降流程
+- **6 步链路**：AI 启动 → 注入 agents 原则 → 读 arena SOP → 复制 loop 到仓库 + push → 发任务书 → arena 执行
+- **3 个断点**：A=loop 未 commit/push（arena 拉到旧版）；B=任务书未 commit/push（arena 读不到）；C=任务书没强制段（agent 不知道要读 loop）
+
 ### 2.1 Arena 外包 SOP
 - **路径**：`agents/arena-outsource.md`（81 行，7 节）
 - **核心**：选仓库 → 连接（GitHub App 授权）→ 发任务书 → 执行 + 评分 + push → 失败降级
@@ -71,7 +77,8 @@
 - 一次定一个 goal（干完了再找下一个）
 
 【SOP 索引】
-- Arena 外包：agents/arena-outsource.md（如需 LLM 执行）
+- ★ Arena Loop 链路（首选）：agents/arena-loop-pipeline.md（6 步 + 3 断点 + 任务书强制段）
+- Arena 外包细节：agents/arena-outsource.md（仓库映射 + 失败降级）
 - Loop 流程：agents/loop-executor.md（理论研究任务）
 - 其他：<按需>
 

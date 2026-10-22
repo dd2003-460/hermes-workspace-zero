@@ -112,3 +112,23 @@ A 是感知（输入），B 是内容（文本），C 是渲染（代码），D 
 ## v1.2 决策记录
 - D15（2026-10-21）: 字幕旁白16段(LINES/STARTS)与场景内打字(S1 term/S2 msgs)不同源, 无法直接复用tick时刻。设计=阶梯节奏"不流畅": 每字140ms+每3字停180ms, 整体比0.8s慢且带顿挫, 视觉与打字声同步蹦。
 - D16（2026-10-21）: 像素字粗根源=320基绘层PingFang SC笔画2-3px×SCALE=4放大成8-12px块。修复=txt()阈值110→150收窄笔画 + font降1-2px + drawNote label 16→10(当前最挤)。若150致断笔回退130。
+
+## 多主题产出任务表 (2026-10-22~23)
+用户 goal: "多探索几个主题并产出，不能有已知类型问题"
+| id | 任务 | 依赖 | 状态 |
+|----|------|------|------|
+| T26 | fear v1.1 重叠修复: F1 文字行 y 偏移 20px 间距, 3/3 PASSED | - | done (commit 2dc952b) |
+| T27 | memory v1.0 本地制作: 3 场景 M1-M3, DSH TUI, 3/3 PASSED | - | done (commit 7866e22) |
+| T28 | upgrade v1.0 本地制作: 3 场景 U1-U3, DSH TUI, 3/3 PASSED | - | done (commit 99ba2df) |
+| T29 | learning v1.0 本地制作: 3 场景 L1-L3, DSH TUI, 3/3 PASSED | - | done (commit 99ba2df) |
+| T30 | dream arena 外包: PR #2, 1.0M, 27m21s | - | done (commit ac8a2bd) |
+| T31 | upgrade arena 外包: PR #3, 1.0M | - | done (commit 1c46695) |
+| T32 | learning arena 外包: PR #4, 1.1M | - | done (commit eaba135) |
+| T33 | goodbye arena 外包: PR #5 预计 | - | in_progress |
+| T34 | companion/error arena 外包: prompts 已写好 | T33 | pending |
+| T35 | SOP 01 + new-themes.md 状态更新 | - | done (commit b62f649, 9bd9749) |
+
+## 多主题决策记录
+- D17（2026-10-22）: 本地制作达不到 arena 美术风格（键盘声音、Clawd 形象、布局），必须外包。arena 通过 prompt-first-bench 仓库 PR 交付，无法直接 push 到 d1-video-recreation。
+- D18（2026-10-22）: 新主题候选 3 个: 告别 (Goodbye) / 陪伴 (Companion) / 错误 (Error)，各 3 场景 × 10s，DSH TUI 风格。优先级: 告别 → 陪伴 → 错误。
+- D19（2026-10-23）: ffmpeg -shortest 与短 sfx 混用会截断视频到 0.03s；apad 无 -t 产生 230MB 输出。正确做法: BGM 用 -t 30，sfx 用 amix 不截断。

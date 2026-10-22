@@ -52,6 +52,23 @@
 
 > **精简说明**（2026-10-22 成璐指令）：外包 arena 的 goal 只索引 **§2.0 链路 SOP**。`agents/arena-outsource.md`（仓库/降级细节）与 `agents/loop-executor.md`（6 阶段定义）已并入链路，不再单独注入 goal；需要细节时按链路内引用再读。
 
+### 2.4 子代理派发原则（origin: ai · 2026-10-23 · goal-c6da5c90）
+
+> **目的**：防止 subagent 泄漏 Lead 上下文信息（任务污染/隐私扩散/上下文窗口占满）。
+> **实验依据**：`projects/AI-计算科学/D1-persona-align/tasks/subagent-leak-experiment/`（泄漏面分析 + 探针实验 + 交叉验证）
+
+#### 通用原则
+1. **fresh 优先**：一次性子任务（翻译/提取/格式化/简单分析）必须用 `context:"fresh"` + 自包含 brief（目标 + 输出格式 + 可用工具/来源 + 边界），不得依赖父对话历史
+2. **复杂任务隔离**：调研/核验/代码审查等多步骤任务用独立 harness 完全隔离（任务书 + 仓库文件 → arena/本地 CLI），不共享 Lead 上下文
+3. **fork 谨慎**：需要对话历史的子任务才用 `context:"fork"`，且需确认任务确实依赖 Lead 上下文
+4. **敏感信息预脱敏**：独立 harness 通道的仓库文件必须预脱敏（检查是否含个人信息/敏感数值等）
+5. **验证**：复杂任务派发后，Lead 应抽查子 agent 输出是否含泄漏信息（如个人信息/Lead 对话历史）
+
+#### 泄漏面结论（实验确认，conf 0.95）
+- **系统提示层**（~24K）：workspace 指令注入（persona/工具定义/git status）→ **所有 DSH 子 agent 都能看到**
+- **文件系统旁路**：共享 cwd，子 agent 可读取 workspace 文件
+- **父对话历史前缀**：实验未确认（待请求体 dump 确认）
+
 ### 2.3 其他 SOP（按需引用）
 - **SOP 索引**：`agents/SOP-INDEX.md`（所有 SOP 的索引）
 - **思考预算**：`projects/AI-计算科学/D1-persona-align/thinking-budget.md`（L0/L1/L2）
@@ -75,6 +92,7 @@
 
 【SOP 索引】（★ 唯一入口，细节已并入）
 - Arena Loop 链路：agents/arena-loop-pipeline.md（6 步 + 3 断点 + 任务书强制段；含仓库映射/降级/loop 阶段定义指针）
+- 子代理派发原则：agents/goal-template.md §2.4（fresh 优先 / 复杂任务隔离 / fork 谨慎 / 敏感信息预脱敏 / 验证）
 - 其他：<按需>
 
 【验收标准】
@@ -109,6 +127,7 @@ goal 完成后由后续轮次按本模板启动新 goal（遵守 §1.3 一次一
 
 ## 4. 维护
 
+- **2026-10-23 (goal-c6da5c90)**：新增 §2.4 子代理派发原则 — 通用原则（fresh 优先 / 复杂任务隔离 / fork 谨慎 / 敏感信息预脱敏 / 验证）+ 泄漏面结论。§3 模板 SOP 索引同步更新。参考文件：`projects/AI-计算科学/D1-persona-align/tasks/subagent-leak-experiment/`。
 - **2026-10-22 (m00252)**：触发规则升级为动作+规范 — 看到 `@agents/goal-template.md` 引用 = **第一动作立即 `create_goal`**（按 §3 格式填充 objective），不是"参考上下文后决定要不要做"。AI 读到引用后：第一步 read 本文件 → 第二步 create_goal → 第三步才读用户后续消息里的具体任务细节。
 - **2026-10-22 (m00201)**：§3 加硬规则 — create_goal 必须用 5 字段结构，不得自由发挥；每次 create_goal 前必须 read 本文件确认格式。
 - **2026-10-22**：§2 精简 — 外包 arena 的 goal 只索引 §2.0 链路 SOP（arena-outsource / loop-executor 并入后存档，不单独注入）；§3 模板 SOP 索引同步改唯一入口；新增 prompt-first-bench 仓库（调研任务 001 已部署）。

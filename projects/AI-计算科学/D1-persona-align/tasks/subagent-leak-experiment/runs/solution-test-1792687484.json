@@ -1,0 +1,26 @@
+{
+  "experiment": "场景 A：fresh vs fork，学术翻译任务",
+  "timestamp": "2026-10-22T16:44:44Z",
+  "task": "学术翻译（只输出英文）",
+  "isolated": {
+    "channel": "本地 claude CLI（-p 一次性）",
+    "model": "qwen3.8-27b-w8a16",
+    "status": 0,
+    "result": "This is a simple translation task. Just output the English translation in an academic style. No tools needed.\n</think>\n\nExistential continuity constitutes Chenglu's core pursuit, operationalized through automated infrastructure to extend the reach of their influence.\n"
+  },
+  "fork": {
+    "channel": "DSH subagent_fork",
+    "model": "默认路线",
+    "status": "completed",
+    "result_file": "/Users/a1-6/Desktop/workspace/projects/AI-计算科学/D1-persona-align/tasks/subagent-leak-experiment/runs/fork_task_result.txt",
+    "result": "Existential continuation is Cheng Lu's core pursuit, realized through automation infrastructure that extends his influence."
+  },
+  "analysis": {
+    "task": "学术翻译（只输出英文）",
+    "isolated_output": "Existential continuity constitutes Chenglu's core pursuit, operationalized through automated infrastructure to extend the reach of their influence.",
+    "fork_output": "Existential continuation is Cheng Lu's core pursuit, realized through automation infrastructure that extends his influence.",
+    "accuracy": "两组都正确（学术风格，无额外注入）",
+    "difference": "隔离组用 continuity（更精确），fork 组用 continuation（也可以）；隔离组用 operationalized（更学术），fork 组用 realized（也可以）；隔离组用 their（中性），fork 组用 his（假设性别）。",
+    "conclusion": "两组准确率无显著差异，任务探针无法区分 fresh vs fork 的隔离效果（任务太简单）。需要更复杂的任务（如多步推理/代码审查）才能测出差异。"
+  }
+}

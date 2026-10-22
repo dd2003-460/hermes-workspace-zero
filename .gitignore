@@ -79,3 +79,5 @@ cache/
 
 tmp/
 node_modules/.npmcache/
+prompt-first-bench/
+projects/persona-prompt-lab/

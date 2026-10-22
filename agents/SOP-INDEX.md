@@ -16,7 +16,9 @@
 
 | SOP | 路径 | 说明 |
 |-----|------|------|
-| Arena 外包标准流程 | `agents/arena-outsource.md` | 选仓库→连接→发任务书→执行评分push→失败降级 |
+| **Arena Loop 链路（★ 唯一入口）** | `agents/arena-loop-pipeline.md` | 6 步链路+3 断点门禁+任务书强制段+仓库映射/连接/降级（2026-10-22 起） |
+| arena-outsource skill（提交机制） | `.claude/skills/arena-outsource/SKILL.md` | 任务卡模板+ego-browser 提交+失败处理与降级阶梯 |
+| ~~agents/arena-outsource.md~~ | 已并入链路 SOP · 仅存档 | goal 不再索引 |
 
 **核心**：
 - 选仓库：按任务选对应仓库（decomp→decomp-bench / 风格蒸馏→persona-distill / 论文校对→academic-AI / 媒体→d1-media-pipeline）

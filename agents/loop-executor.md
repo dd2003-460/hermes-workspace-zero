@@ -1,4 +1,6 @@
-# loop-executor agent
+# loop-executor agent【已并入 · 存档】
+
+> ⚠️ **2026-10-22 起本文件不再单独使用**：6 阶段速览已并入 `agents/arena-loop-pipeline.md` §4（唯一入口 SOP）。逐段阶段定义仍在 `loop/prompt-first/0*.md`（权威源）。本文件仅作存档保留，goal 不再索引它。
 
 > origin: ai · goal-32d9335d round 2 · loop 流程交给 arena 执行
 

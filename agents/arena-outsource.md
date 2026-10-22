@@ -1,4 +1,7 @@
-# Arena 外包标准流程（SOP）
+# Arena 外包标准流程（SOP）【已并入 · 存档】
+
+> ⚠️ **2026-10-22 起本文件不再单独使用**：全部内容已并入 `agents/arena-loop-pipeline.md`（唯一入口 SOP）。本文件仅作存档保留，goal 不再索引它。
+> **仓库映射更新**（以 arena-loop-pipeline.md §3.1 为准）：prompt-first 流程调研 → `dd2003-460/prompt-first-bench`（**已建 · 已 push** 2026-10-22，含 loop/ + sop/ + rubric/ + tasks/001）。
 
 > origin: ai · 2026-10-22 · 成璐指令"arena=免费劳动力，直接连仓库执行"
 > 适用：所有需要 LLM 执行 + 评分 + push 的任务（decomp T4、风格蒸馏、论文校对等）

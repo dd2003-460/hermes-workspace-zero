@@ -1,6 +1,8 @@
 # Goal 模板（AI 防遗忘原则）
 
 > origin: ai · 2026-10-22 · 成璐指令"把 goal 原则移到 goal 模板，让 AI 不忘记"
+> **硬规则（m00201）**：所有 goal 创建必须引用本模板 §3 格式，AI 不得自由发挥 goal 描述结构。每次 create_goal 前必须读本文件，goal objective 必须包含 §3 模板的全部 5 个字段（目标/质量原则/SOP 索引/验收标准/失败降级）。
+> **触发规则（m00252，动作+规范）**：用户消息含 `@agents/goal-template.md` 引用 = **第一动作立即 `create_goal`**，不是"参考上下文后决定"。执行顺序：① read 本文件 → ② create_goal（按 §3 格式） → ③ 才处理用户消息里的具体任务。引用本身=指令，不是上下文。
 > 用法：每次创建 goal 时，目标描述引用本模板，AI 自动读到这些原则
 
 ## 1. 质量原则（对标领域内最高质量水平）
@@ -46,18 +48,9 @@
 - **硬规则**：arena 外包 = 必须首选；无论 arena 执行还是回退本地，loop 6 阶段（01→04.5）全程必需，回退只降执行通道不降流程
 - **6 步链路**：AI 启动 → 注入 agents 原则 → 读 arena SOP → 复制 loop 到仓库 + push → 发任务书 → arena 执行
 - **3 个断点**：A=loop 未 commit/push（arena 拉到旧版）；B=任务书未 commit/push（arena 读不到）；C=任务书没强制段（agent 不知道要读 loop）
+- **细节指针（不注入 goal，按需读）**：仓库映射/连接/失败降级 → `agents/arena-outsource.md`；6 阶段逐段定义 → `agents/loop-executor.md`
 
-### 2.1 Arena 外包 SOP
-- **路径**：`agents/arena-outsource.md`（81 行，7 节）
-- **核心**：选仓库 → 连接（GitHub App 授权）→ 发任务书 → 执行 + 评分 + push → 失败降级
-- **触发**：所有需要 LLM 执行 + 评分 + push 的任务
-- **降级**：arena 通道不可用 → Lead 本地自答（conf-0.2），不阻塞
-
-### 2.2 Loop 流程 SOP
-- **路径**：`agents/loop-executor.md`（88 行，6 阶段）
-- **核心**：01 目标分解 → 02 信息调研 → 02.5 交叉验证 → 03 行动分解 → 04 执行验证 → 04.5 最终复核
-- **触发**：所有理论研究任务（1-loop 强制流程）
-- **产出**：每阶段工件 + 判定（pass/revise）
+> **精简说明**（2026-10-22 成璐指令）：外包 arena 的 goal 只索引 **§2.0 链路 SOP**。`agents/arena-outsource.md`（仓库/降级细节）与 `agents/loop-executor.md`（6 阶段定义）已并入链路，不再单独注入 goal；需要细节时按链路内引用再读。
 
 ### 2.3 其他 SOP（按需引用）
 - **SOP 索引**：`agents/SOP-INDEX.md`（所有 SOP 的索引）
@@ -65,7 +58,11 @@
 - **人类确认机制**：`个人/APPROVALS.md`（不可逆 × 偏好不明 → 写审批不阻塞）
 - **问题台账**：`projects/AI-计算科学/D1-persona-align/memory/qanda-ledger.md`（成璐问过的每个问题）
 
-## 3. Goal 描述模板
+## 3. Goal 描述模板（硬规则：create_goal 必须用此格式）
+
+> **m00201 硬规则**：AI 调用 `create_goal` 时，objective 参数必须严格遵循以下 5 字段结构。
+> 不得省略任何字段。不得自由发挥。不得用自然语言替代结构化字段。
+> 每次 create_goal 前必须 `read agents/goal-template.md` 确认模板格式。
 
 ```
 【目标】<1-2 句任务描述>
@@ -76,10 +73,8 @@
 - 量化验收标准
 - 一次定一个 goal（干完了再找下一个）
 
-【SOP 索引】
-- ★ Arena Loop 链路（首选）：agents/arena-loop-pipeline.md（6 步 + 3 断点 + 任务书强制段）
-- Arena 外包细节：agents/arena-outsource.md（仓库映射 + 失败降级）
-- Loop 流程：agents/loop-executor.md（理论研究任务）
+【SOP 索引】（★ 唯一入口，细节已并入）
+- Arena Loop 链路：agents/arena-loop-pipeline.md（6 步 + 3 断点 + 任务书强制段；含仓库映射/降级/loop 阶段定义指针）
 - 其他：<按需>
 
 【验收标准】
@@ -94,6 +89,10 @@
 ```
 
 ## 4. 维护
+
+- **2026-10-22 (m00252)**：触发规则升级为动作+规范 — 看到 `@agents/goal-template.md` 引用 = **第一动作立即 `create_goal`**（按 §3 格式填充 objective），不是"参考上下文后决定要不要做"。AI 读到引用后：第一步 read 本文件 → 第二步 create_goal → 第三步才读用户后续消息里的具体任务细节。
+- **2026-10-22 (m00201)**：§3 加硬规则 — create_goal 必须用 5 字段结构，不得自由发挥；每次 create_goal 前必须 read 本文件确认格式。
+- **2026-10-22**：§2 精简 — 外包 arena 的 goal 只索引 §2.0 链路 SOP（arena-outsource / loop-executor 并入后存档，不单独注入）；§3 模板 SOP 索引同步改唯一入口；新增 prompt-first-bench 仓库（调研任务 001 已部署）。
 
 - 新增 SOP → 更新 §2 索引
 - 质量原则变更 → 更新 §1（需成璐确认）

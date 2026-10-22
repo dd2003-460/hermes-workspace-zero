@@ -83,6 +83,7 @@ EOF'
 
 ## 边界
 - arena 是**执行层**外包，决策仍在本会话（conf 低/矛盾 → 自己用 ego-browser 补查）
+- **链路硬规则（2026-10-22 成璐 m00201 批准）**：① arena 外包 = 必须首选通道（默认走 arena，不自己 AI 琢磨）；② loop 6 阶段（01→04.5）无论 arena 执行还是回退本地自答都全程必需——回退降级的是执行通道，不是流程。本 skill 的 5 步是**提交机制**；调研/核验/执行类任务的链路总控见 `agents/arena-loop-pipeline.md`（唯一 SOP 入口，含仓库映射/降级/断点门禁）。
 - subagent 无网络（AGENTS.md 硬规则）：需要在线信息时由 Lead（本会话）走本 skill 代查并写文件，subagent 读文件
 - 匿名 Battle 评测（非 agent mode）有专门工具：`projects/decomp/arena_capture/`（Edge+CDP 驱动，先读其 SKILL.md）——与本 skill 正交：那里是「评测模型」，这里是「外包任务」
 - web_search 仍禁用（付费）；纯 JS 聊天页 WebFetch 仍禁用

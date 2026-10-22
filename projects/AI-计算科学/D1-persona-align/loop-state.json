@@ -6,11 +6,16 @@
     "revision": "r22"
   },
   "loop_phase": "execution",
-  "iteration": 31,
+  "iteration": 34,
   "status": "active",
   "current_task": "m01255 persona/voice对齐(r31): T40-T44全部完成. 公轴v2.1(6条P1-P6, P1/P4加操作化短语). 重推测试: R2/R3/R7 confirmed, R1/R8/R11/R14/R16 hold(0/3, 表述抽象). 反向测试: 6公轴全必要. 树结构: SKILL.md根(40L)+01-thinking(61L)+02-engineering(73L)+03-writing(87L). 情景引导实验: Scene-A纯场景最自然(括号插话自涌现), Scene-B轴B最高但conf过拟合, v8.1括号规则驱动. 交付报告: memory/delivery-report-r30.md. 下一步: T45最终交付给用户.",
   "blocker": null,
   "change_log": [
+    {
+      "time": "2026-10-22",
+      "action": "goal-r3-s4-complete",
+      "summary": "goal-fb61fede r3 完成 S4: S2(arena-robustness-r1.md, 8失败模式F1-F8)+S3(decomposition-orthogonality-r1.md, 三问检查法+正交性判据)落盘确认. S4 Lead 汇总: bottleneck-report-r1.md(瓶颈全景+SOP覆盖矩阵 8/8 覆盖). SKILL.md 修订 4 处(77行): ①#1 三档超时(30s/1min/3min) ②新增 #6-#9(格式校验/登录态/串行提交/落盘硬约束) ③拆分优先 3a(arena 拆 2 subagent)+3b(时长阈值) ④任务卡模板+[正交性自检]+[落盘约束]."
+    },
     {
       "time": "2026-10-17",
       "action": "build",
@@ -175,8 +180,13 @@
       "time": "2026-10-19",
       "action": "r31-final-delivery",
       "summary": "r31 T45最终交付: 公轴v2.1(persona-axioms.md, 6条P1-P6+16规则+10参数+重推测试记录) + 树结构(SKILL.md根+01-thinking+02-engineering+03-writing, 418行) + 情景引导实验(scene-guide-A纯场景最自然/Scene-B轴B最高但conf过拟合/v8.1括号规则驱动) + 交付报告(memory/delivery-report-r30.md). 核心发现: ①情景引导(描述状态不写规则)比限制式(排除词表)更能自然引发自言自语/吐槽/内心思考 ②6条公轴够用但P1/P4原表述太抽象需操作化短语 ③被动中断描述>主动跳跃描述(v8.1修复成功, v8三修复全失败)."
+    },
+    {
+      "time": "2026-10-22",
+      "action": "goal-r1-system-optimization",
+      "summary": "12h系统优化goal启动: ①C9-plain定性(3.5KB白话完整方法论非裸句) ②arena SOP修订(拆分优先+失败降级5条) ③APPROVALS条目2(细粒度拆分写入位置2.1/2.2/2.3) ④goal-fb61fede建(48轮) ⑤decomposition.md追加分解树S1-S4 ⑥S1已派fork"
     }
   ],
-  "last_action": "[tidy-2026-10-22] 体检: 项目根16条目WARN; memory/INDEX.md缺; 结构完整 | prev: 2026-10-21 human-vs-ai调研完成: LMArena agent mode 会话01a15f07 联网",
-  "updated_at": "2026-10-22T09:03:25.007716+08:00"
+  "last_action": "[goal-r1 2026-10-22] 12h系统优化goal-fb61fede启动: 分解树S1-S4落盘decomposition.md, S1本地证据盘点已派(aee16101), S2/S3等S1落盘后并行派arena",
+  "updated_at": "2026-10-22T10:58:41.116604+08:00"
 }

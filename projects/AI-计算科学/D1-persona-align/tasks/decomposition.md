@@ -119,3 +119,44 @@ goal: persona/voice 对齐 (r15)
 - [x] 任务表有依赖+并行标注
 - [x] 执行级原子化 (每任务可独立验证)
 - [ ] 02.5 交叉验证完成 (ChatGPT+DeepSeek ≥2 站, 回执已写)
+
+## 系统优化 12h 长跑分解树（2026-10-22 m00840 · goal-fb61fede）
+
+### 分解树
+
+```
+系统瓶颈优化（12h）
+├── S1 本地证据盘点（fork, 无网络）
+│   └── 3次subagent挂+1次arena空等 的根因清单 + SOP覆盖矩阵
+├── S2 arena通道鲁棒性（arena调研）
+│   └── arena agent mode 失败模式全集 + 成熟SOP先例
+└── S3 任务分解正交完备（arena调研）
+    └── "3-7正交子领域"标准校验 + 分解树完备性检查方法
+```
+
+### 正交性核对
+
+- S1=本地证据（过去发生了什么）
+- S2=外部先例（别人怎么做的）
+- S3=方法论标准（该怎么做）
+- 三者正交：时间轴（过去/外部/规范）无重叠
+
+### 空缺清单
+
+- [ ] S4 上下文管理（fork缓存不可验证→压缩时机/粒度）— 等S1落盘后评估是否值得单列
+- [ ] S5 prompt级优化（系统prompt/agent spec）— 等S2/S3落盘后合并
+
+### 任务表
+
+| # | 任务 | 类型 | 依赖 | 状态 |
+|---|------|------|------|------|
+| S1 | 本地证据盘点：3次挂+1次空等根因+SOP覆盖矩阵→memory/bottleneck-evidence-r1.md | 本地fork | 无 | in_progress |
+| S2 | arena调研：arena agent mode失败模式+成熟SOP→research/arena-robustness.md | arena | S1 | pending |
+| S3 | arena调研：分解树正交完备标准+业界实践→research/decomposition-orthogonality.md | arena | S1 | pending |
+| S4 | Lead汇总：S1-S3→bottleneck-report-r1.md + SOP修订 | 整合 | S2+S3 | pending |
+
+### 派发策略
+
+- S1 先派（fork，读本地文件，无网络需求）
+- S2+S3 并行派（subagent，arena通道，等S1落盘确认方向）
+- S4 由Lead执行

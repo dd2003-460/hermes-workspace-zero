@@ -21,21 +21,25 @@
 
 **自主探索循环（标准链路，每次 goal 必须走通）**：
 ```
-找到目标（P-1 自身优化优先）
-  → 找 arena agent mode 通道
-  → 连接对应 GitHub repo（有则连，无则先建再连；务必验证连接正确：git ls-remote + arena 会话内可达）
+[0] 创建/持 goal：顶层 → create_goal（按 §3 五字段）；subagent 环境 → goal 全文落盘任务目录 + 报 Lead 顶层创建
+  → 找到目标（P-1 自身优化优先）
+  → 找 arena agent mode 通道（ego-browser 打开 arena.ai/agent，验证已登录 + GitHub 绑定仓库）
+  → 连接对应 GitHub repo（有则连，无则先 gh repo create 再连；验证：git ls-remote 返回 hash + arena 会话内可达）
+  → 中转模式动作序列（pfb 等中转仓库）：pull → rsync loop/prompt-first → cp sop → 写 tasks/<id>.md（含 §强制段）→ commit+push → ls-remote 验证 → arena 新会话 @repo 读任务书
   → 让 arena 走 loop 流程（01→04.5，断点 A/B/C 门禁）
-  → 根据 arena 调研结果/建议：交叉验证（≥2 LLM）+ 推理矛盾和漏洞
-  → 拿漏洞继续让 arena 推理/确认/改进方案（迭代，直到 conf ≥ 0.7）
-  → 在 0.9 比例的指标数量和总加权分数上，优化到高于开源相关方案的 bench
-  → 发布仓库（commit + push + 验证 HEAD）
-  → 寻找新目标（在 DSH 里创建新 goal，输入完整规则/要求/流程，避免自己忘记）
+  → 根据 arena 调研结果/建议：交叉验证（≥2 LLM，ego-browser 通道）+ 推理矛盾和漏洞
+  → 拿漏洞继续让 arena 推理/确认/改进方案（一轮迭代 = 一次带漏洞清单的任务书重发（arena）或一次本地双源复核（降级）；每轮更新 review.md 的 conf 值；直到 conf ≥ 0.7）
+  → 在 0.9 比例的指标数量和总加权分数上，优化到高于开源相关方案的 bench（bench 落点固定：loop-artifacts/stages/04.5/bench.md，指标表+权重+baseline 锚点；下轮 goal 直接引用不重定）
+  → 发布仓库（commit + push + ls-remote 验证 HEAD 更新）
+  → 寻找新目标（在 DSH 里创建新 goal，objective 含完整链路规则，避免自己忘记）
 ```
 
 **硬规则**：
 - 每次 goal 的【验收标准】必须量化到可机器检查（指标数量 + 加权分数阈值），禁用"完整/充分"。
+- **验收降级条款**：arena/网络不可用时，baseline 锚点 = pfb 自有 rubric 既有分数，外部对比标 unverified（不虚构）；回执仍必须落盘（web-llm/*.json 或降级说明文件）。
 - 找新目标时，新 goal 的 objective 必须包含完整链路规则（本 §3.0 全节），不得只写一句"继续优化"。
 - 同一问题想 2 轮无新事实 → 换工具（ego-browser / subagent），不空转。
+- **非顶层环境**：create_goal 不可用 → goal 全文落盘 `<任务目录>/new-goal-<日期>.md` + 报 Lead 顶层执行，不阻塞后续步骤。
 
 具体目标：留空根据目前情况填写（优先级：P-1 自身优化 > P-2 外部项目）  
 具体阶段：什么项目，进行到什么阶段，根据实际情况填写，做完一个就要更新到下一个阶段

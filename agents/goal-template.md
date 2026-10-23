@@ -70,6 +70,9 @@
 - **goal 完成后必须 commit + push**（留痕，不丢失）
 - **新仓库必须遵循 SOP**（选仓库→连接→任务书→执行→push）
 - **goal 不能无限创建**（防止失控，每次完成后再创建新的）
+- **无 goal = 停摆（硬规则，2026-10-23 事故后新增）**：goal-round-driver 只在 active+armed goal 存在时自动续轮（`dsh-src/pkgs/dsh-goal-round-driver__lib__index.js:125`）——goal 被 complete/clear 后驱动停摆，会话死等用户。因此 goal 被 complete/clear 后，agent 必须在**同一回合内** create 下一个 goal（按 §3.3 探索准则）或明确 blocked+记录原因。**禁止**"goal 完成→本轮结束"的收尾写法。
+- **create_goal 后必须 get_goal 验证落库值**：runtime 会静默钳制 `max_goal_rounds` 上限（2026-10-23 实测传 10000 落库 256，**无报错**）。create 后立即 `get_goal` 核对 `maxGoalRounds`；被钳制 → 在 objective 的【验收标准】写明"轮次上限=落库值 N"，不得默认用户要求已生效。
+- **goal 创建后不得无故 clear**：clear 仅限用户明确要求或 objective 作废；误 clear → 立即按原 objective 重建（2026-10-23 20:49 事故：goal-0a1e3577 创建 90s 后被 agent 自己 clear，会话停摆）。
 
 ### 1.4 防遗忘机制
 
@@ -112,6 +115,14 @@
 4. **每集门禁**：提取后必须跑对应 check（如 check_overlap）全 PASSED 才标 done；失败 → 修 prompt 重发，不降级
 5. **风格锚**：全系列共用同一风格基准文件（如 SOP 05），每集 prompt 引用；新增集前先看最近 1 集产出对照
 6. **进度回写**：每完成 1 集更新 episodes.md 状态 + docs/status-table.md，两者一致
+
+### 2.6 模型输出防复读（origin: ai · 2026-10-23 事故后新增）
+
+> **事故**：2026-10-23 20:49 turn 82，qwen3.8 小模型把原始用户消息包进 `<goal_round>...Round: 5/256</goal_round>` 格式复读输出——学到 runtime 注入的指令格式并当成自己的输出模板。
+
+- **判据**：assistant 输出中出现 `<goal_round>`、`Objective:`、`Round: N/M` 等 runtime 注入格式 = 复读事故，该步无效，必须立即换动作（实际工具调用），不得复读指令文本。
+- **goal_round 消息处理**：收到 `<goal_round>` 注入 = 继续推进 objective 的信号，直接做下一个原子步骤（get_goal→todo→state 三读后执行），不复述其内容。
+- **小模型（≤27B）特别注意**：goal 自动续轮注入 + 用户消息同屏时，优先执行工具调用，输出文本 ≤2 行。
 
 ### 2.4 子代理派发原则（origin: ai · 2026-10-23 · goal-c6da5c90）
 
@@ -163,6 +174,7 @@ goal 完成后由后续轮次按本模板启动新 goal（遵守 §1.3 一次一
 
 ## 4. 维护
 
+- **2026-10-23 (排查"做一点就停"事故)**：§1.3 新增 3 条硬规则 — ①无 goal=停摆：goal complete/clear 后必须同回合 create 新 goal 或 blocked（driver 机制导致无 goal 死等用户，12h 停摆实证）；②create_goal 后必须 get_goal 验证 maxGoalRounds 落库值（10000→256 静默钳制无报错）；③不得无故 clear 刚创建的 goal（90s 误 clear 实证）。
 - **2026-10-23 (m00001 成璐指令)**：新增 §3.0 自主探索原则 — 循环内核（找目标→找通道→连仓库→走 loop→交叉验证→迭代改进→发布→找新目标）+ 优先级排序（P-1 自身优化：token 效率/harness/prompt > P-2 外部项目 > P-3 新目标探索）+ 标准链路 9 步 + 硬规则（验收量化/新 goal 必须含完整链路规则/2 轮无新事实换工具）。
 - **2026-10-23 (goal-c6da5c90)**：新增 §2.4 子代理派发原则 — 通用原则（fresh 优先 / 复杂任务隔离 / fork 谨慎 / 敏感信息预脱敏 / 验证）+ 泄漏面结论。§3 模板 SOP 索引同步更新。参考文件：`projects/AI-计算科学/D1-persona-align/tasks/subagent-leak-experiment/`。
 - **2026-10-22 (m00252)**：触发规则升级为动作+规范 — 看到 `@agents/goal-template.md` 引用 = **第一动作立即 `create_goal`**（按 §3 格式填充 objective），不是"参考上下文后决定要不要做"。AI 读到引用后：第一步 read 本文件 → 第二步 create_goal → 第三步才读用户后续消息里的具体任务细节。

@@ -57,7 +57,7 @@ goal: persona/voice 对齐 (r15)
 | GITHUB-RESEARCH.md 更新 | 已完成 | 70L(追加28行, 5方案2路线) |
 | C三层prompt修bug(闭环→先验证据后验) | 已完成 | r16修复 |
 | 扩展S1/S3/S4场景验证 | 空缺 | 下一轮 |
-| scenario-score.py完整7维度 | 空缺 | 下一轮 |
+| scenario-score.py完整12维度 | done | 2026-10-23 r6 |
 | 盲测(猜哪个是成璐) | 空缺 | 下一轮 |
 
 ## 任务表 (04 执行只执行表内条目)
@@ -71,10 +71,10 @@ goal: persona/voice 对齐 (r15)
 | T5 | 场景检验 4-way 扩展 (加 C三层 对照组) | 验证 | 不可并行 | T3 | done(S2场景) |
 | T6 | 04.5 反方复核 + 回写 loop-state r16 | 复核 | 不可并行 | T1-T5 | done |
 | T7 | 扩展S1/S3/S4场景验证C三层prompt | 验证 | 可并行×3 | T6 | done(S1/S3, 无S4) |
-| T8 | scenario-score.py完整7维度对比 | 验证 | 可并行 | T7 | done(快速6维度, 7维度待下轮) |
+| T8 | scenario-score.py完整12维度对比 | 验证 | 可并行 | T7 | done(12维度, 2026-10-23 r6) |
 | T9 | 盲测(混入C三层输出+A-old输出+GT, subagent猜哪个是成璐) | 验证 | 不可并行 | T8 | done(盲猜未命中GT, A-old比GT更像真人) |
-| T10 | 修C三层prompt角色锚定(你是成璐本人非AI) | 风格复刻 | 不可并行 | T9 | pending |
-| T11 | 重新S1/S2/S3盲生成(修后prompt) | 验证 | 可并行×3 | T10 | pending |
+| T10 | 修C三层prompt角色锚定(你是成璐本人非AI) | 风格复刻 | 不可并行 | T9 | done(已有角色锚定, 不需要修改) |
+| T11 | 重新S1/S2/S3盲生成(修后prompt) | 验证 | 可并行×3 | T10 | done(2026-10-17, persona文件已生成) |
 | T12 | 重新盲测(修后prompt vs A-old vs GT) | 验证 | 不可并行 | T11 | done(盲猜命中GT, A-old=AI扮成璐) |
 | T13 | 设计聊天格式模仿prompt(碎片化/跑题/粗口/编号混乱) | 实验 | 独立 | 04.5 r18 | done |
 | T14 | 用聊天格式prompt生成S2回复+对比GT | 实验 | 不可并行 | T13 | done(549字, 格式符合, 问号0偏少) |
@@ -98,11 +98,11 @@ goal: persona/voice 对齐 (r15)
 | T32 | OPRO-v8 prompt(中断行为: 括号插话/自我暴露/没说完就跳) | 优化 | 独立 | T26 | done(tasks/experiments/opro-v8-prompt.md) |
 | T33 | OPRO-v8 盲生成 S2 | 验证 | 不可并行 | T32 | done(757字/我13/0比喻/括号插话0失败/105fragments avg7.2) |
 | T34 | 交付报告: 蒸馏+OPRO-v8+盲测对比 | 交付 | 不可并行 | T33 | done(memory/delivery-report-r25.md) |
-| T35 | OPRO-v8.1 prompt(few-shot GT原文+模式切换描述) | 优化 | 独立 | T36 | pending |
-| T36 | 扩大GT数据: 分层采样5场景×(单条+多轮)=10条GT ~5-10K字 | 数据 | 独立 | T29 | in_progress(subagent) |
-| T37 | 后处理中断注入脚本(括号插话/编号跳跃/截断, 频率从GT统计) | 工具 | 独立 | T36 | in_progress(subagent t37-postprocess) |
-| T38 | 盲测v6(5文本含多轮GT, 2轴7维+多轮维度) | 验证 | 不可并行 | T35+T37 | pending |
-| T39 | 最终交付报告(盲测文本+维度+相似度+repo对比+副脑质询) | 交付 | 不可并行 | T38 | pending |
+| T35 | OPRO-v8.1 prompt(few-shot GT原文+模式切换描述) | 优化 | 独立 | T36 | done(tasks/experiments/opro-v8.1-prompt.md) |
+| T36 | 扩大GT数据: 分层采样5场景×(单条+多轮)=10条GT ~5-10K字 | 数据 | 独立 | T29 | done(t36-gt-samples.json, 7378字) |
+| T37 | 后处理中断注入脚本(括号插话/编号跳跃/截断, 频率从GT统计) | 工具 | 独立 | T36 | done(t37-postprocess-interrupt.py) |
+| T38 | 盲测v6(5文本含多轮GT, 2轴7维+多轮维度) | 验证 | 不可并行 | T35+T37 | done(t23-blind-test-v6-result.md, Y=v8.1最像GT) |
+| T39 | 最终交付报告(盲测文本+维度+相似度+repo对比+副脑质询) | 交付 | 不可并行 | T38 | done(t39-final-delivery.md) |
 
 ## 派发策略
 
@@ -150,10 +150,10 @@ goal: persona/voice 对齐 (r15)
 
 | # | 任务 | 类型 | 依赖 | 状态 |
 |---|------|------|------|------|
-| S1 | 本地证据盘点：3次挂+1次空等根因+SOP覆盖矩阵→memory/bottleneck-evidence-r1.md | 本地fork | 无 | in_progress |
-| S2 | arena调研：arena agent mode失败模式+成熟SOP→research/arena-robustness.md | arena | S1 | pending |
-| S3 | arena调研：分解树正交完备标准+业界实践→research/decomposition-orthogonality.md | arena | S1 | pending |
-| S4 | Lead汇总：S1-S3→bottleneck-report-r1.md + SOP修订 | 整合 | S2+S3 | pending |
+| S1 | 本地证据盘点：3次挂+1次空等根因+SOP覆盖矩阵→memory/bottleneck-evidence-r1.md | 本地fork | 无 | completed_2026-10-22 |
+| S2 | arena调研：arena agent mode失败模式+成熟SOP→research/arena-robustness.md | arena | S1 | completed_2026-10-22 |
+| S3 | arena调研：分解树正交完备标准+业界实践→research/decomposition-orthogonality.md | arena | S1 | completed_2026-10-22 |
+| S4 | Lead汇总：S1-S3→bottleneck-report-r1.md + SOP修订 | 整合 | S2+S3 | completed_2026-10-22（8/8 覆盖，SKILL.md 修订 77 行） |
 
 ### 派发策略
 

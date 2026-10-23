@@ -71,6 +71,13 @@ def features(text):
         'numbered_k': round((len(re.findall(r'(?:^|\n)\s*\d+[\.\、]', text)) + len(re.findall(r'\d+\.\d+', text)))/(total/1000), 1) if total else 0,
         'cut': sum(text.count(w) for w in ['砍','不用讨论','先不']),
         'cut_k': round(sum(text.count(w) for w in ['砍','不用讨论','先不'])/(total/1000), 1) if total else 0,
+        # 7手法补全：生活类比数 / 加粗密度 / 硬数字数
+        'analogy': len(re.findall(r'比如|像是|就像|打个比方|好比|类似于|相当于|类比|像[^。\n]{0,20}一样', text)),
+        'analogy_k': round(len(re.findall(r'比如|像是|就像|打个比方|好比|类似于|相当于|类比|像[^。\n]{0,20}一样', text))/(total/1000), 1) if total else 0,
+        'bold': len(re.findall(r'\*\*[^*]+\*\*', text)),
+        'bold_k': round(len(re.findall(r'\*\*[^*]+\*\*', text))/(total/1000), 1) if total else 0,
+        'hardnum': len(re.findall(r'\d+(?:\.\d+)?(?:%|万|亿|元|GB|MB|TB|ms|s|tok|K|M|G|b|B|卡|张|台|个|条|次|轮|分|秒|小时|天|月|年|倍|x|×)', text)) + len(re.findall(r'(?:¥|￥)\s?\d+', text)),
+        'hardnum_k': round((len(re.findall(r'\d+(?:\.\d+)?(?:%|万|亿|元|GB|MB|TB|ms|s|tok|K|M|G|b|B|卡|张|台|个|条|次|轮|分|秒|小时|天|月|年|倍|x|×)', text)) + len(re.findall(r'(?:¥|￥)\s?\d+', text)))/(total/1000), 1) if total else 0,
     }
     return f
 
@@ -96,24 +103,29 @@ def cosine(a, b, dims):
 def main():
     ws = sys.argv[1] if len(sys.argv) > 1 else '.'
     raw = os.path.join(ws, 'projects/AI-计算科学/D1-persona-align/tasks/scenario-raw')
+    # GT 文件在 S1/S2/S3 子目录内（2026-10-23 修复：原 /tmp/scen/ 路径已失效）
     scenes = {
-        'S1-消费决策-硬件': '/tmp/scen/S1-消费决策-硬件_gt.txt',
-        'S2-量化估算-元评估': '/tmp/scen/S2-量化估算-元评估_gt.txt',
-        'S3-ML训练机制-CoT': '/tmp/scen/S3-ML训练机制-CoT_gt.txt',
+        'S1-消费决策-硬件': os.path.join(raw, 'S1', 'S1-消费决策-硬件_gt.txt'),
+        'S2-量化估算-元评估': os.path.join(raw, 'S2', 'S2-量化估算-元评估_gt.txt'),
+        'S3-ML训练机制-CoT': os.path.join(raw, 'S3', 'S3-ML训练机制-CoT_gt.txt'),
     }
-    DIMS = ['avg_sent_len','first_person','question_rate','suoyi_ratio','conf_k','bushi_ershi_kchar','empty_k','numbered_k','cut_k']
+    DIMS = ['avg_sent_len','first_person','question_rate','suoyi_ratio','conf_k','bushi_ershi_kchar','empty_k','numbered_k','cut_k','analogy_k','bold_k','hardnum_k']
     results = {}
     for scene, gt_path in scenes.items():
         gt = load_gt(gt_path)
         gtf = features(gt)
         outs = {}
-        for fn in sorted(os.listdir(raw)):
-            if fn.startswith(scene) and '_persona-' in fn:
-                outs['A'] = features(load_raw(os.path.join(raw, fn)))
-            elif fn.startswith(scene) and '_axiom-' in fn:
-                outs['AX'] = features(load_raw(os.path.join(raw, fn)))
-            elif fn.startswith(scene) and '_generic-' in fn:
-                outs['B'] = features(load_raw(os.path.join(raw, fn)))
+        # 扫描 S1/S2/S3 子目录（2026-10-23 修复：输出文件在子目录内）
+        subdir = scene.split('-')[0]  # S1/S2/S3
+        subdir_path = os.path.join(raw, subdir)
+        if os.path.isdir(subdir_path):
+            for fn in sorted(os.listdir(subdir_path)):
+                if fn.startswith(scene) and '_persona-' in fn:
+                    outs['A'] = features(load_raw(os.path.join(subdir_path, fn)))
+                elif fn.startswith(scene) and '_axiom-' in fn:
+                    outs['AX'] = features(load_raw(os.path.join(subdir_path, fn)))
+                elif fn.startswith(scene) and '_generic-' in fn:
+                    outs['B'] = features(load_raw(os.path.join(subdir_path, fn)))
         # 归一化: 以本场景 GT 为参照尺度做 cosine 前先整体 max 归一化(9文本)
         results[scene] = {'GT': gtf, **outs,
                           'cos_A_GT': None, 'cos_AX_GT': None, 'cos_B_GT': None,
@@ -139,7 +151,7 @@ def main():
     for s, r in results.items():
         print(f"\n===== {s} =====")
         print(f"{'指标':<18}{'GT':>10}{'A persona':>12}{'AX 公理':>12}{'B generic':>12}")
-        for d in ['chars','n_sents','avg_sent_len','first_person','question_rate','所以_k','但是_k','suoyi_ratio','conf_words','conf_k','bushi_ershi_kchar','empty_talk','numbered','numbered_k','cut','cut_k']:
+        for d in ['chars','n_sents','avg_sent_len','first_person','question_rate','所以_k','但是_k','suoyi_ratio','conf_words','conf_k','bushi_ershi_kchar','empty_talk','numbered','numbered_k','cut','cut_k','analogy_k','bold_k','hardnum_k']:
             print(f"{d:<18}{r['GT'][d]:>10}{r['A'][d]:>12}{r['AX'][d]:>12}{r['B'][d]:>12}")
         print(f"{'余弦 vs GT':<18}{'':>10}{r['cos_A_GT']:>12}{r['cos_AX_GT']:>12}{r['cos_B_GT']:>12}")
         print(f"{'drift 成璐度':<18}{'':>10}{r['drift_A']:>12.0f}{r['drift_AX']:>12.0f}{r['drift_B']:>12.0f}  (GT参照 {r['drift_GT']:.0f})")

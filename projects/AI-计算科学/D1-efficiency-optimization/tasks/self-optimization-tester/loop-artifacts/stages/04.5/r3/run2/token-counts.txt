@@ -1,0 +1,54 @@
+
+== RULE LOAD (loop/prompt-first/*.md + sop/arena-loop-pipeline.md) ==
+loop/prompt-first/00-common-review.md	4766B	o200k=1238	cl100k=1704
+loop/prompt-first/01-goal-decomposition.md	7644B	o200k=2219	cl100k=2999
+loop/prompt-first/02-information-research.md	5610B	o200k=1633	cl100k=2063
+loop/prompt-first/02.5-cross-check.md	2574B	o200k=818	cl100k=1066
+loop/prompt-first/03-action-decomposition.md	3714B	o200k=1263	cl100k=1600
+loop/prompt-first/04-execution-verification.md	3988B	o200k=1262	cl100k=1560
+loop/prompt-first/04.5-final-review.md	3458B	o200k=1112	cl100k=1419
+sop/arena-loop-pipeline.md	8104B	o200k=2541	cl100k=2956
+TOTAL	39858B	o200k=12086	cl100k=15367
+
+== BRIEFS ==
+tasks/003-self-optimization-tester.md	1538B	o200k=473	cl100k=566
+bench/r3/run2/task-brief.md	1602B	o200k=527	cl100k=612
+bench/self-opt-tester/new-goal-20261023.md	2966B	o200k=890	cl100k=1081
+TOTAL	6106B	o200k=1890	cl100k=2259
+
+== V0 RUN OUTPUTS (bare prompt) ==
+bench/runs/round3-research-pilot/qwen3.6-plus/bc00-v0-run1.md	1888B	o200k=500	cl100k=555
+bench/runs/round3-research-pilot/qwen3.6-plus/gaia01-v0-run1.md	1488B	o200k=395	cl100k=447
+bench/runs/round3-research-pilot/qwen3.6-plus/hle02-v0-run1.md	2767B	o200k=854	cl100k=909
+TOTAL	6143B	o200k=1749	cl100k=1911
+
+== V4 RUN OUTPUTS (full 1-loop) ==
+bench/runs/round3-research-pilot/qwen3.6-plus/bc00-v4-run1.md	10882B	o200k=3281	cl100k=4164
+bench/runs/round3-research-pilot/qwen3.6-plus/gaia01-v4-run1.md	11413B	o200k=3361	cl100k=4366
+bench/runs/round3-research-pilot/qwen3.6-plus/hle02-v4-run1.md	13976B	o200k=4614	cl100k=5529
+TOTAL	36271B	o200k=11256	cl100k=14059
+
+V4/V0 output-token ratio (o200k): 6.44x  (1749 -> 11256)
+
+== V4 SENT-PROMPT EMBEDDED RULE CARD ==
+bc00-v4-run1.md	sent-prompt=1011 o200k tokens
+gaia01-v4-run1.md	sent-prompt=997 o200k tokens
+hle02-v4-run1.md	sent-prompt=1324 o200k tokens
+
+== R1 LOOP ARTIFACTS (stages 01-04.5) ==
+bench/self-opt-tester/loop-artifacts/stages/01/01-goal-decomposition.md	1495B	o200k=480	cl100k=565
+bench/self-opt-tester/loop-artifacts/stages/02/02-research.md	1743B	o200k=531	cl100k=638
+bench/self-opt-tester/loop-artifacts/stages/02.5/02.5-crosscheck.md	1565B	o200k=517	cl100k=617
+bench/self-opt-tester/loop-artifacts/stages/03/03-actions.md	1131B	o200k=390	cl100k=448
+bench/self-opt-tester/loop-artifacts/stages/04/execution-log.md	1257B	o200k=406	cl100k=462
+bench/self-opt-tester/loop-artifacts/stages/04.5/bench.md	2622B	o200k=1008	cl100k=1148
+bench/self-opt-tester/loop-artifacts/stages/04.5/review.md	2062B	o200k=652	cl100k=816
+TOTAL	11875B	o200k=3984	cl100k=4694
+
+== R2 CROSS-CHECK RECEIPTS (web-llm) ==
+bench/self-opt-tester/r2/web-llm/chatgpt-6adb65df.json	5037B	o200k=1518	cl100k=1896
+bench/self-opt-tester/r2/web-llm/cross-check-r2.json	1793B	o200k=626	cl100k=696
+bench/self-opt-tester/r2/web-llm/deepseek-dde6aef6.json	4177B	o200k=1253	cl100k=1565
+TOTAL	11007B	o200k=3397	cl100k=4157
+
+DONE exit 0

@@ -1,0 +1,23 @@
+{
+  "run": 1,
+  "goal": "goal-0bc2d9c2-53d7-420b-8a1f-9d2b93ac429c",
+  "phase": "completed",
+  "executed_at": "2026-10-24T00:26:00+08:00",
+  "steps": [
+    {"id": 0, "name": "hold-goal", "status": "ok", "anchor": "create_goal 返回值 id=goal-0bc2d9c2 rev1"},
+    {"id": 1, "name": "find-target", "status": "ok", "anchor": "goal objective 目标行（bench 校准）"},
+    {"id": 2, "name": "planning-discipline", "status": "ok", "anchor": "tasks/decomposition.md R3 节 edit 回执 1 replacement"},
+    {"id": 3, "name": "repo-connect", "status": "ok", "anchor": "git ls-remote pfb HEAD = e0d6ddbe0662a95a71f3d2ad9cb086bbf5e61eca, exit=0"},
+    {"id": 4, "name": "dispatch-run3", "status": "ok", "anchor": "subagent bd8e9193-a819-443a-af7c-24ea654db692 启动"},
+    {"id": 5, "name": "token-ledger", "status": "ok", "anchor": "r3/run1/token-ledger.json (bili stats: input 5108882 / output 37259 / cacheSamples=0)"},
+    {"id": 6, "name": "bench-row", "status": "ok", "anchor": "execution-log.md bench-row 节（6 指标自估）"}
+  ],
+  "anchors_count": 7,
+  "gate_passed": 7,
+  "failed_steps": [],
+  "degraded": [
+    "cacheSamples=0：provider 未上报 cache token，M1 绝对口径命中维度不可测",
+    "run1 专属 token 增量未切分（累计值含 r1/r2 历史）→ R3.5 处理",
+    "run1 未重新生成 01-04 阶段工件（引用 r1，防复读）"
+  ]
+}

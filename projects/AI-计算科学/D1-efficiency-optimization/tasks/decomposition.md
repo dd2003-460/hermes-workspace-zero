@@ -56,3 +56,38 @@
 - E1（量化）→ E2/E3/E4（优化）→ E5（汇总）：单向依赖，无循环 ✓
 - E2（prompt）vs E3（流程）：正交（不同优化维度）✓
 - E4（指标）独立于 E2/E3（度量 vs 优化）✓
+
+## R3 追加：bench 校准（2026-10-24 · goal-0bc2d9c2）
+
+> 背景：r1/r2 的 92.7 是 n=1 内部过程综合分（conf 0.8），双源交叉验证指认 3 缺陷（权重未校准/M1×M5 相关/缺终态效度）。R3 目标 = 校准过的度量。
+
+### 分解树
+
+```
+R3 bench 校准
+├── R3.1 run1 本地链路（带 M7 gate 锚点 + token 账本）      [无依赖]
+├── R3.2 run2 arena 通道链路（ego-browser + pfb 中转）       [无依赖，与 R3.1 并行]
+├── R3.3 run3 独立复跑（任务书变体，防复读）                 [无依赖，与 R3.1/R3.2 并行]
+├── R3.4 M1-M6 两两相关矩阵 + 权重校准（|r(M1,M5)|>0.7 调整） [依赖 R3.1-3 的 bench 分]
+├── R3.5 token 绝对口径（bili 账本 + 外部 ≥1 数据点对比）     [依赖 R3.1-3 的 token 记录]
+└── R3.6 bench.md 更新（mean±std + M7 gate + 校准权重）+ push pfb + 第 4 轮 goal 落盘 [依赖 R3.4/3.5]
+```
+
+### 空缺清单
+
+- [x] run 数：n=1 → 补 3（R3.1-3）
+- [x] 权重推导：无 → 相关矩阵实测（R3.4）
+- [x] 终态效度：无 → M7 gate（R3.1-3 每步挂锚点）
+- [x] token 绝对值：无 → bili 账本（R3.5）
+- [ ] 外部可比分：维度缺位（r2 实锤）→ 本轮只补"绝对口径外部数据点对比"，不虚构基准分
+
+### 任务表（派发只执行表内条目）
+
+| ID | 任务 | 执行者 | 依赖 | 验收锚点（M7 gate） |
+|----|------|--------|------|---------------------|
+| R3.1 | run1 本地完整链路：loop-state.json（run1）+ 每步锚点（测试退出码/fs diff）+ acp_cache 账本快照 + bench 分行 | Lead 本地 | 无 | 文件存在 + git hash |
+| R3.2 | run2 arena 通道：ego-browser arena.ai/agent 发任务书 → pfb 中转（pull→push→ls-remote）→ arena 回执 → bench 分行 | Lead（ego-browser） | 无 | ls-remote HEAD + arena 会话 URL |
+| R3.3 | run3 任务书变体复跑：任务书换 1 个新指标题（防复读），本地链路 | subagent（fresh） | 无 | 文件存在 + 与 run1 工件 diff 非空 |
+| R3.4 | 相关矩阵 + 权重校准：3 run 数据 → 两两 Pearson r → 权重推导落盘 | Lead | R3.1-3 | bench.md 权重表带推导 |
+| R3.5 | token 绝对口径：acp_cache 账本（3 run 输入/输出/缓存）+ 外部 ≥1 数据点（arXiv/GitHub 开源 agent 实测） | Lead | R3.1-3 | bench.md 绝对值表 + 来源 URL |
+| R3.6 | 汇总：bench.md r3（mean±std）+ push pfb + ls-remote + 第 4 轮 goal 落盘 | Lead | R3.4/3.5 | ls-remote 回执 + 落盘文件 |

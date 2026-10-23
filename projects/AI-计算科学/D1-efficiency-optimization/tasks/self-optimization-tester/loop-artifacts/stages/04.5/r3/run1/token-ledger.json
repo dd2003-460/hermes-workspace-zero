@@ -1,0 +1,19 @@
+{
+  "source": "bili /__bili/stats (http://127.0.0.1:18787)",
+  "observed_at": "2026-10-24T00:25:23+08:00",
+  "session": "session-1c44f689-099a-4d83-b5c5-ac8251fef7f1",
+  "input_tokens_cumulative": 5108882,
+  "cached_tokens_cumulative": 0,
+  "cache_samples": 0,
+  "output_tokens_cumulative": 37259,
+  "requests_cumulative": 116,
+  "context_tokens": 53364,
+  "context_window": 83976,
+  "model": "qwen3.8-27b-w8a16",
+  "cache_hit_note": "provider 未上报 cache token（cacheSamples=0），hit rate 不可测——这本身是 M1 绝对口径的一个数据缺口，如实记录",
+  "per_turn_deltas": [
+    {"at": "2026-10-23T21:55", "input": "56817 tok (acp_status BILLED INPUT)", "note": "m00083 附近 turn 开始"},
+    {"at": "2026-10-24T00:25", "input_cumulative": 5108882, "output_cumulative": 37259}
+  ],
+  "run1_scope_note": "run1 = 本会话（Lead 本地链路，2026-10-23 21:20 起 §3.0 全链路执行）；input 累计含 r1/r2 历史，run1 专属增量需按 requests 时间戳切分（待 R3.5 做）"
+}

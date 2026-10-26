@@ -1,7 +1,6 @@
-# goal-template.md 补充段：硬规则自动加载（待合并）
+# goal-template.md 补充段：硬规则自动加载（✅ 已合并 2026-10-26）
 
-> 注意：session-1c44f689 正在改 `goal-template.md`，此文件为待合并补丁，
-> 避免并行编辑冲突。确认无冲突后，将下面正文并入 goal-template.md 的执行纪律节。
+> 已合并进 `agents/goal-template.md` §3 质量原则。本文件保留设计说明供参考。
 
 ---
 

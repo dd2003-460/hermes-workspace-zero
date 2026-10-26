@@ -46,6 +46,7 @@
 | 风格蒸馏 | `dd2003-460/persona-distill`（假设） | 任务书在 `tasks/` |
 | 论文校对 | `dd2003-460/academic-AI`（假设） | 任务书在 `tasks/` |
 | 媒体 pipeline | `dd2003-460/d1-media-pipeline`（假设） | 任务书在 `tasks/` |
+| AI 视频复刻（像素剧/对标 B 站合集） | `dd2003-460/d1-video-recreation`（2026-10-26 确认，实际在用） | 任务卡在 `arena-prompts/batchN/`，SOP 在仓库 `sop/` |
 
 **原则**：每个项目有自己的仓库，arena 连接对应仓库，读仓库内的任务书执行。不跨仓库混用。
 

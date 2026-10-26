@@ -21,7 +21,7 @@
 | ~~agents/arena-outsource.md~~ | 已并入链路 SOP · 仅存档 | goal 不再索引 |
 
 **核心**：
-- 选仓库：按任务选对应仓库（decomp→decomp-bench / 风格蒸馏→persona-distill / 论文校对→academic-AI / 媒体→d1-media-pipeline）
+- 选仓库：按任务选对应仓库（decomp→decomp-bench / 风格蒸馏→persona-distill / 论文校对→academic-AI / 媒体 pipeline→d1-media-pipeline / AI 视频复刻→d1-video-recreation，2026-10-26 修正：媒体映射原写 d1-media-pipeline（假设），视频复刻实际仓库为 d1-video-recreation）
 - 连接：GitHub App 授权（all repositories，一次授权所有私有仓库）
 - 失败降级：arena 通道不可用 → Lead 本地自答（conf-0.2），不阻塞
 

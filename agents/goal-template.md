@@ -114,14 +114,14 @@
 - **判定顺序（硬顺序，不可跳步）**：① 单会话停摆 → 重开 arena 会话重发任务卡 → ② 重开仍失败（升级到通道级）→ 降级本地执行 → ③ 本地也受阻 → 写 `个人/APPROVALS.md` 跳过继续做其他可执行工作。循环永不因阻塞而停。
 - **反例（2026-10-25 E24 事故）**：arena 单会话停摆 47min → agent 直接判「降级本地渲染」——**误判**。单会话停摆是可绕过问题（重开会话即绕过），正确动作 = 重开会话重发任务卡。降级被滥用 = 用「降级」逃避「重开」，等于把首选通道降级成了次选。
 
-### 2.4 Arena 仓库选择规则（origin: ai · 2026-10-23 · m03427）
+### 2.4 Arena 仓库选择规则（origin: ai · 2026-10-23 · m03427 · 2026-10-26 修正）
 
-> **现状（已验证 3 次）**：arena.ai/agent 的 GitHub 连接是**账号级 OAuth 绑定**，UI 无仓库切换入口（Connections dialog 只有 Disconnect；sidebar 仓库名是 GitHub anchor；"GitHub settings" 展开的是文件树）。当前绑定 `dd2003-460/prompt-first-bench`。
+> **现状（2026-10-26 用户实证修正）**：arena.ai/agent **新会话可以直接切换/选择仓库**（用户实证：新开会话 easily 切到 d1-video-recreation，会话 01a17723）。旧认知"UI 无仓库切换入口、账号级绑定 pfb"**已作废**——那只是旧会话的绑定状态，不是平台限制。
 
-- **标准流程（无授权时）**：arena 在 prompt-first-bench 产出 → 合并 PR → 本地 `git worktree` 提取 → 提交到目标仓库（如 d1-video-recreation）→ pfb main 保持干净（不残留目标项目文件）。
-- **免提取流程（有授权时）**：GitHub → Settings → Applications → 给 Arena OAuth app 勾选目标仓库 → 新 arena 会话可直接 push 目标仓库。goal 含 arena 外包时必须先检查授权状态并写入 objective。
-- **goal 硬规则**：objective 的【SOP 索引】字段必须写明目标仓库 + 当前提取模式（直接 push / 经 pfb 中转）。
-- **断点 D（新增）**：提取后未清 pfb → 视频/项目文件残留在 prompt-first-bench（2026-10-23 已发生，用户指出 m03114）。
+- **★ 选对仓库是第一原则**：按任务类型选对应仓库（映射表见 `agents/arena-loop-pipeline.md` §3.1），**开新 arena 会话时直接选目标仓库**，不走 pfb 中转。AI 视频复刻任务 → 直连 `dd2003-460/d1-video-recreation`。
+- **pfb 中转仅用于历史遗留**：batch-11 及之前已走 pfb 分支的产出仍需提取清扫；新任务一律直连目标仓库。
+- **goal 硬规则**：objective 的【SOP 索引】字段必须写明目标仓库 + 连接模式（直连目标仓库 / 经 pfb 中转【仅限历史遗留】）。
+- **断点 D（保留）**：经 pfb 中转的提取后未清 pfb → 文件残留在 prompt-first-bench（2026-10-23 已发生，用户指出 m03114）；直连模式下无此断点。
 
 ### 2.5 系列化内容生产模式（origin: ai · 2026-10-23 · m03427）
 

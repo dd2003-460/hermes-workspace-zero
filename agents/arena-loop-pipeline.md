@@ -50,11 +50,13 @@
 
 **原则**：每个项目有自己的仓库，arena 连接对应仓库，读仓库内的任务书执行。不跨仓库混用。
 
-### 3.2 连接仓库（GitHub App 授权）
+### 3.2 连接仓库（新会话直接选仓库 · 2026-10-26 修正）
 
-1. GitHub → Settings → Applications → Installed GitHub Apps → Arena AI Coding Agent → Configure
-2. Repository access = "All repositories"（含私有）
-3. 保存后，arena 的所有会话都能访问所有仓库
+> **修正**：arena.ai/agent **新会话可以直接切换/选择仓库**（用户实证：新开会话 easily 切到 d1-video-recreation，会话 01a17723）。旧认知"账号级 OAuth 绑定 pfb、UI 无切换入口"已作废。
+
+1. **★ 选对仓库是第一原则**：开新 arena 会话时，按 §3.1 映射表选目标仓库直连，不走 pfb 中转。
+2. GitHub App 授权保持 "All repositories"（含私有），保证所有仓库可访问
+3. pfb 中转仅用于历史遗留（batch-11 及之前的分支产出需提取清扫）
 
 **验证**：`git ls-remote https://github.com/dd2003-460/<repo>.git HEAD` 返回 hash = 可达（权限本身在 arena 会话内验证）。
 

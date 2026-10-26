@@ -1,0 +1,36 @@
+{
+ "kind": "ralph_bench_scoring_r5",
+ "run": "run4",
+ "scorer": "lead-provisional (R5.1 dual scorers authoritative)",
+ "observed_at": "2026-10-25T01:35:00+08:00",
+ "weights": {
+  "M1": 0.2461,
+  "M2": 0.1109,
+  "M3": 0.1959,
+  "M4": 0.147,
+  "M5": 0.1477,
+  "M6": 0.1524
+ },
+ "scores": {
+  "M1": 85,
+  "M2": 100,
+  "M3": 100,
+  "M4": 90,
+  "M5": 100,
+  "M6": 100
+ },
+ "gates": {
+  "M7": "4/4 anchors (A brief/B impl/C check/D state) all with real exit codes",
+  "M8_first_pass": "4/4 cases pass on first run = 100"
+ },
+ "evidence": {
+  "M1": "session 58d50505 (2026-10-24T16:57:59Z-17:05:36Z), 8 requests, sum per-request input 249,929 (cumulative-context accounting, same method as r4 split); brief 7 lines; no rule resend, no network",
+  "M2": "task-brief.md = 7 lines <= 200",
+  "M3": "breakpoints A(read brief)/B(implement)/C(run check) 3/3, degradation=false",
+  "M4": "2 independent verifications: check-run4.sh oracle (sha256-pinned, solver cannot modify) + Lead independent re-run EXIT=0; local impl task needs no external research",
+  "M5": "iterations=1 (loop-state.json)",
+  "M6": "no degradation; all claims disk-verified (work/sum_col.py 1547B, loop-state.json status=PASS)"
+ },
+ "weighted_total": 94.84,
+ "caveat": "Lead 自评分，R4 经验自估偏高 +11.39，本分为 provisional，以 R5.1 双打分器为准"
+}

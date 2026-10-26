@@ -1,12 +1,18 @@
 {
   "project": "D1-memory-hooks",
-  "updated_at": "2026-10-22T09:03:25.004755+08:00",
+  "updated_at": "2026-10-25T14:30:00+08:00",
   "phase": "research",
-  "last_action": "[tidy-2026-10-22] 体检: 补 INDEX.md+tasks/; 调研完成待拍板; 4项工作区变更 | prev: 调研「AI 思考过长主动提醒」插件方案（Lead 派发 m00397）：读完现有 5 缝 hook 引擎 + asar ",
-  "next": "Lead 统一 git commit/push；用户拍板：① 插件安装面（install_bundle）② 是否按推荐 ① 写 rules.json 新规则 + PostToolUse fingerprint 谓词 ③ 目标后端选型（本地 vllm vs hosted）",
+  "last_action": "preset/hook 机制调研完成（Lead 直查 asar 解包 25 文件）：落盘 memory/2026-10-25-preset-hooks-research.md — preset 三层概念(agent-preset/persona/压缩组)+扩展点全景+双桥对照+两用例裁决",
+  "next": "用户拍板：① 用例A 先试 compaction-basic modelPolicies 调参（零代码）还是直接写 compaction-recipe 后端 ② 用例B 是否写 rule-reminder 插件（N 步间隔+文案来源） ③ 安装面（install_bundle L2 vs profile 手动）",
   "open_questions": [
-    "dsh-hooks-codex 安装面：plugin_manager install_bundle（L2 app 级）需用户拍板",
-    "方案 ② 长度半边的后端选型：本地 vllm（thinking_token_budget+SSE tap）vs hosted（只能 cap/abort）",
-    "DSH 原生插件路线（ctx.on agent/assistant-stream）3 个风险是否值得先 PoC"
+    "compaction 后端替换的摘要模型选型（复用主模型 vs 路由便宜模型，需配置 summarizationProvider/Model）",
+    "rule-reminder 计数粒度：pre-step 次数（≈LLM 调用数）vs turn 轮次",
+    "两插件安装面：plugin_manager install_bundle（L2 app 级）需用户拍板"
+  ],
+  "key_findings": [
+    "DSH 无 PreCompact/PostCompact 扩展点（两桥明列不支持）→ 用例A 不能做 hook，应做 CompactionEngine 薄后端",
+    "agent/pre-step 是 waterfall 每步 LLM 请求前锚点 → 用例B 适合 Cordis 原生插件（ctx.on，~40行），hook 桥反而更绕",
+    "hook 桥仅复用 Claude Code/Codex 现成配置有价值；本场景无现成配置 → 跳过桥",
+    "静态规则进 persona（cache 友好但永久占 token）；动态注入进 pre-step（每步重发成本，文案须短）"
   ]
 }

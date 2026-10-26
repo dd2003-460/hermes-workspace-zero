@@ -1,41 +1,69 @@
 {
   "project": "D1-efficiency-optimization",
   "task": "self-optimization-tester",
-  "loop": "1-loop + 03.5/04.5",
+  "loop": "1-loop + 03.5/04.5 (自主优化自身: token 效率 / harness / prompt)",
   "phase": "done",
   "stage": "completed",
   "status": "completed",
-  "updated_at": "2026-10-23T21:25+08:00",
-  "chain_steps": {
-    "1_find_target": "done",
-    "2_find_arena_channel": "degraded (no ego-browser in subagent, conf-0.2)",
-    "3_connect_repo": "done (ls-remote verified)",
-    "4_run_loop_01_04_5": "done (degraded channel, artifacts complete)",
-    "5_cross_validate": "degraded-partial (local dual-source; external LLM unreachable)",
-    "6_vuln_iteration": "done (V1-V5, conf 0.75)",
-    "7_bench": "done (M1-M6, weighted 89.2 vs pfb V0 anchor 40, +123%; external baseline unverified)",
-    "8_publish": "done (push 52f7f5b, ls-remote verified)",
-    "9_new_goal": "degraded (create_goal unavailable in subagent; rule text saved for Lead)"
+  "updated_at": "2026-10-24T16:45+08:00",
+  "round": "R4 (goal-9c250b87)",
+  "round_history": {
+    "R1_test_agent (2026-10-23, commit dcaaf88a / 42152985)": {
+      "channel": "subagent 无 ego-browser, 全链路降级本地自答 conf-0.2",
+      "chain_steps": {
+        "1_find_target": "done",
+        "2_find_arena_channel": "degraded (no ego-browser in subagent, conf-0.2)",
+        "3_connect_repo": "done (ls-remote verified)",
+        "4_run_loop_01_04_5": "done (degraded channel, artifacts complete)",
+        "5_cross_validate": "degraded-partial (local dual-source; external LLM unreachable)",
+        "6_vuln_iteration": "done (V1-V5, conf 0.75)",
+        "7_bench": "done (M1-M6, weighted 89.2 vs pfb V0 anchor 40, +123%; external baseline unverified)",
+        "8_publish": "done (push 52f7f5b, ls-remote verified)",
+        "9_new_goal": "degraded (create_goal unavailable in subagent; rule text saved for Lead)"
+      },
+      "degraded": [
+        "create_goal 工具: subagent 环境不可用 (requires direct human turn on top-level agent)",
+        "report_step 工具: 无 plan 编排, 改用 loop-state.json 记录",
+        "arena 通道: 无 ego-browser 会话控制权, 全链路降级本地自答 conf-0.2"
+      ]
+    },
+    "R2 (goal-7f13fc7f, 真实回执+外部baseline)": {
+      "result": "DeepSeek+ChatGPT 双源回执 (r2/web-llm/ 2 JSON); 外部 baseline 维度缺位实锤; bench r2 总加权 92.7, 6/6 指标≥85; push pfb @e0d6ddb; goal complete"
+    },
+    "R3 (goal-0bc2d9c2, 严格口径 n≥3)": {
+      "result": "3-run 加权 91.17/89.20/83.15, mean±std 87.84±3.53 conf 0.9; M7 gate 21/21=100%; token 绝对口径 (内部 bili 累计 input 5,108,882, cacheSamples=0 不可测); 相关矩阵 PARTIAL (n=2 Pearson 恒±1 无效); push pfb @3798b21; goal complete"
+    },
+    "R4 (goal-9c250b87, 独立校准)": {
+      "result": "独立打分器 (DeepSeek 盲打 18 分 + 9 项 |Δ|>15 裁决) 实证自估偏差 +11.39 点 (91.17→独立终版 76.45±7.29); 权重校准 n=3 相关矩阵 8 对 |r|>0.7, 两冗余簇 (M1×M5 省token↔少迭代 r=0.993, M3×M4×M6 链路成功↔验证多↔降级少 r≈0.95-1.0), 新权重 M1 0.2461/M2 0.1109/M3 0.1959/M4 0.1470/M5 0.1477/M6 0.1524 (n=3 退化, 相对权重近不变, 调权重算留 n≥5); token 按 request 切分 run 级 (run1=10 req 500,972 in, run2=19 req 1,127,157 in Lead 侧+arena 侧 external unverified 规则负载 12,086 o200k/会话每轮重发, run3=20 req 621,696 in, output 不可测 bili 无 per-request output 行, cache=0, 压缩净省不可测无基线); bench.md r4 独立校准版落盘; 验收 5 条全 PASS"
+    }
   },
-  "completed": [
-    "step1: 01-goal-decomposition.md",
-    "A2: 断点A loop+sop push 8d7487e + ls-remote verified",
-    "step2-3: tasks/003 任务书 24 行 + 断点B/C 证据",
-    "loop 02/02.5/03/04/04.5 全部落盘 (降级通道 conf-0.2)",
-    "bench.md: 6 指标加权 89.2 vs V0 锚 40 (+123% ≥10% 达标; 外部 baseline unverified)",
-    "review.md: 漏洞 V1-V5",
-    "发布: pfb bench/self-opt-tester/ commit 52f7f5b, ls-remote HEAD 一致",
-    "loop-report.md: 8 步复盘 + 6 卡点 + §3.0 改进建议 5 条",
-    "new-goal-20261023.md: 下一轮 goal 全文（§3.0 全节），待 Lead create_goal"
-  ],
+  "r4_acceptance": {
+    "1_independent_scorer": "PASS (DeepSeek 盲打 18 分, 9 项 |Δ|>15 逐项裁决, 自估偏差 +11.39 实证; 回执 r4/independent-scoring-deepseek.json + r4/adjudication-step2.json)",
+    "2_weight_calibration": "PASS (n=3 Pearson 15 对, 8 对 |r|>0.7, goal 公式 w×(1-|r|/2) 归一; n=3 退化如实标注; 实质产出=两冗余簇证据; 数据 r4/bench-r4.json)",
+    "3_token_split": "PASS (bili.log per-request input × session 前缀 × 时间窗切分; run 级 input 精确; output/cache/压缩净省不可测如实标注; 数据 r4/token-split.json)",
+    "4_bench_md_r4": "PASS (stages/04.5/bench.md 独立校准版, 76.45±7.29, 含新权重/独立分对照/相关矩阵/token 切分/r3→r4 变化/验收判定/6 缺陷)",
+    "5_publish_r5_goal": "PASS (push pfb @e37dae1, ls-remote 一致; R5 goal 落盘 loop-artifacts/new-goal-r5-20261025.md)"
+  },
+  "r4_scores": {
+    "run1": "M1 55 / M2 100 / M3 90 / M4 70 / M5 95 / M6 100",
+    "run2": "M1 25 / M2 100 / M3 86.7 / M4 45 / M5 90 / M6 95",
+    "run3": "M1 75 / M2 95 / M3 85 / M4 35 / M5 100 / M6 95",
+    "weighted_mean_std_old_weights": "76.45±7.29",
+    "weighted_mean_std_new_weights": "76.82±7.17",
+    "r3_self_estimate": "87.84±3.53",
+    "self_estimate_bias": "+11.39 (实证: R2 预警『自报 conf 同时是测量对象和测量工具』由假设变实测; 最大高估源 M4 50.0 vs 自估 86.7, run2 M1 85→25)"
+  },
   "degraded": [
-    "create_goal 工具: subagent 环境不可用 (requires direct human turn on top-level agent)",
-    "report_step 工具: 无 plan 编排, 改用 loop-state.json 记录",
-    "arena 通道: 无 ego-browser 会话控制权, 全链路降级本地自答 conf-0.2"
+    "R4 权重校准: n=3 相关矩阵退化 (6 指标全 max|r|>0.7, 归一后相对权重近不变), 调权实质留 n≥5",
+    "token 绝对口径: output token 不可测 (bili 无 per-request output 行), 压缩净省不可测 (无反事实基线), run2 arena 侧 unverified (外部无账本)",
+    "独立打分器仅 1 个 (DeepSeek), 打分者间一致性 Fleiss'κ 未测 → R5"
   ],
   "artifacts": {
     "task_dir": "projects/AI-计算科学/D1-efficiency-optimization/tasks/self-optimization-tester/",
-    "pfb_published": "bench/self-opt-tester/ @ commit 52f7f5b"
+    "r4_dir": "loop-artifacts/stages/04.5/r4/ (independent-scoring-deepseek.json, adjudication-step2.json, bench-r4.json, token-split.json)",
+    "bench_md": "loop-artifacts/stages/04.5/bench.md (r4 独立校准版)",
+    "pfb_published": "bench/self-opt-tester/ @ commit e37dae1 (r4: bench.md + r4/*.json)",
+    "r5_goal": "loop-artifacts/new-goal-r5-20261025.md"
   },
-  "next": "Lead: 1) create_goal(new-goal-20261023.md 内容) 2) 按 loop-report.md 5 条建议修订 goal-template §3.0 3) ego-browser 通道补外部 baseline"
+  "next": "Lead: create_goal(R5) 按 new-goal-r5-20261025.md — R5 候选: n≥5 run 有效调权 / M4『独立源』操作化定义 / output+压缩净省可测 (provider 侧 cache 上报) / 第二独立打分器 Fleiss'κ / 终态效度任务设计 / run2 arena 侧补账本"
 }

@@ -91,3 +91,34 @@ R3 bench 校准
 | R3.4 | 相关矩阵 + 权重校准：3 run 数据 → 两两 Pearson r → 权重推导落盘 | Lead | R3.1-3 | bench.md 权重表带推导 |
 | R3.5 | token 绝对口径：acp_cache 账本（3 run 输入/输出/缓存）+ 外部 ≥1 数据点（arXiv/GitHub 开源 agent 实测） | Lead | R3.1-3 | bench.md 绝对值表 + 来源 URL |
 | R3.6 | 汇总：bench.md r3（mean±std）+ push pfb + ls-remote + 第 4 轮 goal 落盘 | Lead | R3.4/3.5 | ls-remote 回执 + 落盘文件 |
+
+---
+
+## R5 追加节（2026-10-25，goal-4746e6ba）
+
+**目标**：bench 从「自估/单打分器/n=3」升级到「双打分器信度 + n≥5 权重复校 + token 测量边界 + 终态效度首测」。
+
+### 分解树（正交）
+
+- R5.1 第二打分器信度（ChatGPT ≠ DeepSeek，重打 r4 终版 3 run + run4/5）
+- R5.2 样本量：run4（本地 teammate，终态效度任务）+ run5（arena 通道，9 步链路）→ n≥5
+- R5.3 token 测量边界（✅ 已完成：r5/token-boundary.json）
+- R5.4 终态效度首测（run4 过程分 vs 终态成败，n=1 定性）
+- R5.5 bench.md r5 重写 + push pfb + ls-remote + R6 goal 落盘
+
+### 空缺清单
+
+- [ ] 双打分器一致率/κ：无 → R5.1（|Δ|≤15 占比；κ 若 n 足够）
+- [ ] n≥5 权重：n=3 退化 → R5.2（run4+run5 分数入矩阵，|r|>0.7 → 原权重×(1-|r|/2) 归一化）
+- [ ] 终态效度：无 → R5.4（判定标准事先写死 + 脚本验证）
+- [ ] token 边界：✅ r5/token-boundary.json（可测/不可测/待测三档带 conf）
+
+### 任务表（派发只执行表内条目）
+
+| ID | 任务 | 执行者 | 依赖 | 验收锚点（M7 gate） |
+|----|------|--------|------|---------------------|
+| R5.2a | run4 本地终态效度：任务书 ≤25 行（解析 CSV 求列和，3 个固定测试用例），执行者跑测试脚本验证；判定脚本与 sha256 事先落盘防改判 | teammate（本地，无外部网络需求） | 无 | 测试退出码 0/非 0 + 判定脚本 sha256 未变 + loop-state（run4）落盘 |
+| R5.2b | run5 arena 通道：Lead 用 ego-browser 向 arena 发 9 步链路任务书（防复读：新指标题）→ 回执 → bench 分行 | Lead（ego-browser，subagent 无网络故 Lead 代查） | 无 | arena 会话 URL + 回执文本落盘 + token 静态估算引用 |
+| R5.1 | 第二打分器：ego ChatGPT 重打 r4 终版 3 run + run4/run5 的 M1-M6，回执 JSON 落 web-llm/ | Lead（ego-browser） | R5.2a/b | 回执 JSON 存在（kind=ralph_web_llm_cross_check, subtype=second_scorer_r5）+ per-metric |Δ| |
+| R5.4 | 终态效度对照：run4 过程分（M1-M6 加权）vs 终态成败（脚本退出码），标注首测 n=1 定性 | Lead | R5.2a | 对照表落盘 r5/terminal-validity.md |
+| R5.5 | 汇总：bench.md r5 + push pfb + ls-remote + R6 goal 落盘 | Lead | R5.1/2a/2b/4 | ls-remote 回执 + 落盘文件 |

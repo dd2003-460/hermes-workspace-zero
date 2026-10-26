@@ -1,6 +1,6 @@
 # Projects — 工作区项目索引
 
-**最后更新**: 2026-10-21（媒体 提升为顶层领域并补 INDEX.md；decomp 结构索引已就位；2026-10-16: 删除 4 个分解测试桩项目、顶层 D1-* 归入领域目录）
+**最后更新**: 2026-10-25（补 bh-mass-spectrum/时钟与引力波响应/缺失项目条目；删除不存在的 D1-browser-auto、D1-ralph-field-centric 遗留行；GPU 两项目归入 archive/gpu-to-decomp；2026-10-21: 媒体提升为顶层领域并补 INDEX.md）
 
 > **活跃项目入口**: [ACTIVE.md](ACTIVE.md) — 自动聚合的 loop 状态面板（由 `scripts/aggregate-active.sh` 生成）
 > 各项目固定路径: `<project>/loop-state.json`
@@ -19,6 +19,9 @@
 | `理论物理/D1-goal-investigation/` | [DGI.1] | **loop it 14**：Agent goal 机制 + loop状态管理研究 |
 | `理论物理/cosmos-thesis-review/` | [CTR.1] | 宇宙学论文综述 |
 | `理论物理/2026春复习/` | [CR.1] | 2026 年春季复习材料 |
+| `理论物理/bh-mass-spectrum/` | [BMS.1] | CosmoBH 黑洞质量谱流水线（内层独立 git 仓；2026-10-25 由 `bh-mass- spectrum` 改名去空格） |
+| `理论物理/时钟与引力波响应/` | [CW.1] | 时钟与引力波响应（remote orf；2026-10-25 由 Downloads 新仓替换） |
+| `理论物理/时钟与引力波响应_旧_归档_20260818/` | [CWO.1] | 时钟与引力波响应旧版归档（2026-10-25 替换前备份） |
 | `金融/quant-capital-flow/` | [QCF.1] | 中美股票板块资金流预测（气体动理论 × 动态演化博弈，可证伪预言；原 quantum-ec，ec=economic，非量子纠错） |
 
 ### AI / 计算科学
@@ -29,12 +32,16 @@
 | `AI-计算科学/D1-academic-AI/` | [DAI.1] | **arXiv 就绪**：DistCat 2-Cat 统一框架、Chimera 动力学 |
 | `AI-计算科学/D1-academic/` | [DA.1] | 广义学术工作（BayesFrame、方法论工具、学术协作） |
 | `AI-计算科学/D1-memory/` | [DM.1] | 记忆系统 |
-|| `AI-计算科学/D1-continuous-agent/` | [CA.1] | Agent 持续循环机制 |
-|| `AI-计算科学/D1-browser-auto/` | [DBA.1] | **待启动**：本地 AI 驱动 Playwright 操控浏览器与网页大模型对话 |
-| `D1-ralph-field-centric/` | [DRF.1] | **待启动**：RALPH 字段中心化重构规划（放宽主 agent 限制、字段级流动、按字段派发调研 subagent，评估弱模型稳定性/质量） |
-| `AI-计算科学/D1-gpu-inference-hardware/` | [DGH.1] | GPU 推理硬件优化空间研究（矩阵/tensor 硬件计算；推理场景硬件还能怎么优化） |
-| `AI-计算科学/D1-gpu-research-2026/` | [DGR.1] | GPU 本地推理研究（2026，含 web-llm 交叉验证） |
+| `AI-计算科学/D1-continuous-agent/` | [CA.1] | Agent 持续循环机制 |
 | `AI-计算科学/D1-hintfree-decomposition/` | [DHF.1] | 无提示词目标分解（hint-free goal decomposition）实验 |
+| `AI-计算科学/D1-efficiency-optimization/` | [DEO.1] | 效率优化（任务分解成本、benchmark） |
+| `AI-计算科学/D1-memory-hooks/` | [DMH.1] | 记忆钩子系统（loop hooks） |
+| `AI-计算科学/D1-think-token-budget/` | [DTB.1] | 思考 token 预算控制 |
+| `AI-计算科学/archive/gpu-to-decomp/` | [DGPU.1] | GPU 调研归档（D1-gpu-research-2026 + D1-gpu-inference-hardware + 硬件调研报告；实际属 decomp 工作，2026-10-25 归档） |
+| `persona-prompt-lab/` | [PPL.1] | persona 提示词优化实验（bench/memory/research/tasks） |
+| `research-prompt/` | [RP.1] | 研究 prompt 实验 |
+| ~~`D1-browser-auto/`~~ | [DBA.1] | 已删除（索引遗留条目，目录不存在） |
+| ~~`D1-ralph-field-centric/`~~ | [DRF.1] | 已删除（索引遗留条目，目录不存在） |
 | `decomp/` | [DC.1] | **总目标**：通用任务分解 prompt（总目标与总计划见其 README；结构索引见 `decomp/INDEX.md`）；归档于 `archive/`（含 7 个相关项目 + 记忆线 memory-baseline，映射表见 `archive/README.md`）；RALPH loop 驱动，台账 = `tasks/state.md`；T4 消融 run1 进行中；远端 = dd2003-460/decomp-bench |
 
 ### 金融

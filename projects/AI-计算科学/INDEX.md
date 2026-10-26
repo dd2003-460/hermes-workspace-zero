@@ -14,9 +14,11 @@
 | `D1-goal-investigation/` | 目标发现与探索 |
 | `D1-memory/` | 记忆系统理论 |
 | `D1-persona-align/` | Persona 对齐机制（8 原则 + 6 维度 + 3 行为约束） |
-| `D1-gpu-inference-hardware/` | GPU 推理硬件优化空间研究（矩阵/tensor 硬件计算） |
-| `D1-gpu-research-2026/` | GPU 本地推理研究（2026，含 web-llm 交叉验证） |
 | `D1-hintfree-decomposition/` | 无提示词目标分解（hint-free goal decomposition）实验 |
+| `D1-efficiency-optimization/` | 效率优化（任务分解成本、benchmark） |
+| `D1-memory-hooks/` | 记忆钩子系统（loop hooks） |
+| `D1-think-token-budget/` | 思考 token 预算控制 |
+| `archive/gpu-to-decomp/` | GPU 调研归档（D1-gpu-research-2026 + D1-gpu-inference-hardware + 硬件调研报告；实际属 decomp 工作，2026-10-25 归档至 decomp/archive/） |
 
 ---
 

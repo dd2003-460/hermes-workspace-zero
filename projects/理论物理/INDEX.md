@@ -17,6 +17,10 @@
 | `D1-adsl-spin-connection/` | 3D AdS-Lorentz 引力 & 规范理论（AdSL algebra、Chern-Simons、挠率黑洞、pole-skipping、标量/Dirac 探测，GitHub: AkashiKari/adsl-gravity-sandbox） |
 | `cosmos-thesis-review/` | 宇宙学论文综述 |
 | `2026春复习/` | 2026 年春季课程复习（规范场论、宇宙学） |
+| `时钟与引力波响应/` | 时钟与引力波响应（ORF 研究，独立仓，Sourcetree: orf） |
+| `时钟与引力波响应_旧_归档_20260818/` | 时钟旧版归档（2026-08-18 归档，独立仓） |
+| `bh-mass-spectrum/` | 黑洞质量谱（CosmoBH 流水线，独立仓） |
+| `D1-goal-investigation/` | 目标发现与探索（与 AI-计算科学/D1-goal-investigation 同域，此处为理论物理视角） |
 
 ---
 

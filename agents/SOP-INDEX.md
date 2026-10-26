@@ -38,7 +38,8 @@
 
 | SOP | 路径 | 说明 |
 |-----|------|------|
-| Goal 模板 | `agents/goal-template.md` | 质量原则 + SOP 索引 + goal 描述模板 |
+| Goal 模板（定位器） | `agents/goal-template.md` | 五字段模板 + 阶段流程指针 + SOP 索引（2026-10-26 瘦身重写） |
+| 结构化输出派发 | `agents/structured-dispatch.md` | 决策型子任务结构化返回（从 goal-template §2.4.1 外移） |
 
 **核心**：
 - 质量原则：对标顶级刊物、充分调研、先复刻再创新、严格检验标准

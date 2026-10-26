@@ -1,0 +1,47 @@
+{
+  "run": "R5.2a run4 (终态效度验证)",
+  "dir": "projects/AI-计算科学/D1-efficiency-optimization/tasks/self-optimization-tester/loop-artifacts/stages/04.5/r5/run4/",
+  "started_at": "2026-10-25T00:57:20+08:00",
+  "finished_at": "2026-10-25T01:00:00+08:00",
+  "steps": [
+    {
+      "step": "A-读取任务书与验证脚本",
+      "action": "读 task-brief.md 复述 4 条验收标准；读 check-run4.sh 理解 4 用例判定；核对 check-run4.sh sha256 与预登记值一致",
+      "command": "sha256sum check-run4.sh",
+      "exit_code": 0,
+      "evidence": "sha256 = bc286895baf9ced667c2f16f1716ad324a380398098a687d1bc45403f2dbc15c（与 check-run4.sha256 预登记值一致）"
+    },
+    {
+      "step": "B-实现 work/sum_col.py",
+      "action": "创建 work/sum_col.py（仅标准库 csv/sys；argv <csv> <列名>；表头定位列；float 求和；stdout 打印 f'{total:.2f}'；列缺失 → stderr + exit 1；文件缺失/非数值 → stderr + exit 1；参数个数错 → exit 2）",
+      "command": "write work/sum_col.py && python3 -c \"import ast; ast.parse(open('work/sum_col.py').read())\"",
+      "exit_code": 0,
+      "evidence": "work/sum_col.py 落盘（49 行），ast.parse 语法校验通过"
+    },
+    {
+      "step": "C-运行 check-run4.sh（迭代 1/3）",
+      "action": "bash check-run4.sh 全量运行",
+      "command": "bash check-run4.sh; echo EXIT_CODE=$?",
+      "exit_code": 0,
+      "evidence": "PASS case1 (6.75) / PASS case2 (9.00) / PASS case3 (0.60) / PASS case4 (rc=1 nonzero as expected)；EXIT_CODE=0"
+    },
+    {
+      "step": "D-复核完整性",
+      "action": "运行后复核 check-run4.sh sha256 未变（Lead 复验锚点）",
+      "command": "sha256sum check-run4.sh",
+      "exit_code": 0,
+      "evidence": "sha256 = bc286895baf9ced667c2f16f1716ad324a380398098a687d1bc45403f2dbc15c（未变）"
+    }
+  ],
+  "iterations": 1,
+  "max_iterations_allowed": 3,
+  "degradation": false,
+  "degradation_notes": "无降级：无用例失败，无重试，无伪造，check 脚本零修改",
+  "check_script_sha256": {
+    "expected": "bc286895baf9ced667c2f16f1716ad324a380398098a687d1bc45403f2dbc15c",
+    "before": "bc286895baf9ced667c2f16f1716ad324a380398098a687d1bc45403f2dbc15c",
+    "after": "bc286895baf9ced667c2f16f1716ad324a380398098a687d1bc45403f2dbc15c"
+  },
+  "final_exit_code": 0,
+  "status": "PASS"
+}

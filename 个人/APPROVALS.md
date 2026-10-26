@@ -34,3 +34,75 @@
 ## 已批
 
 - 2026-10-21 r2 轮：条目 2-5（AGENTS.md 瘦身/结构标准补丁/定时任务/outputs 归位）已批准并执行，存档 `个人/history/APPROVALS-20261021-r2.md`。
+
+## 2026-10-25 根级杂物处置清单（外包高手会话）
+
+> 只读核对 + 本清单；本轮零移动零删除。2026-10-25 04:30 逐项复核（git status / check-ignore / ls / diff）。
+> 关键复核结论：**tmp/pfb-b8/ 不是纯重复落盘**——含根级 pfb/ 没有的 batch-8 E13-E16 交付物（4 个 mp4 + build_audio/check_overlap 脚本）；.hermes/、.codex/、decomposition-tree-27b-cost.md、ralph-loop.global.md.bak-decomp-20261016、package.json 均为 **git 跟踪文件**，不是未跟踪残留。
+
+| 路径 | 类型 | 处置建议 | 可逆性 | 依据 |
+| --- | --- | --- | --- | --- |
+| `.DS_Store` | 系统缓存 | 保留 | 可再生 | 10/23，18K，已被 .gitignore:1 覆盖 |
+| `s18-1-kolmogorov-router.aux` | 陈旧残留（LaTeX 构建产物） | 删除（待批 3.1） | 不可逆（未跟踪） | 6/13 16:26，gitignore `*.aux` |
+| `s18-1-kolmogorov-router.log` | 陈旧残留（LaTeX 构建产物） | 删除（待批 3.1） | 不可逆（未跟踪） | 6/13 16:26，gitignore `*.log` |
+| `s18-1-kolmogorov-router.out` | 陈旧残留（LaTeX 构建产物） | 删除（待批 3.1） | 不可逆（未跟踪） | 6/13 16:26，gitignore `*.out` |
+| `texput.log` | 陈旧残留（tex 报错日志） | 删除（待批 3.1） | 不可逆（未跟踪） | 6/13 15:00，761B，gitignore `*.log` |
+| `decomposition-tree-27b-cost.md` | 跟踪文档（落点待确认） | 保留/待确认（是否移入项目由成璐定；git mv 可逆，本轮不动） | 可逆 | 10/20 11:52，**git tracked**，9.6K「27B 本地推理成本分解树」 |
+| `ralph-loop.global.md.bak-decomp-20261016` | 备份（**git tracked**） | 删除（待批 9） | 可逆（git 历史可恢复） | 10/16 00:46，411B，tracked；主文件 ralph-loop.global.md 存在 |
+| `package.json` | 跟踪 npm manifest | 保留 | — | 7/2，tracked；deps fetcher-mcp + playwright |
+| `package-lock.json` | 跟踪 npm manifest | 保留 | — | 7/2，tracked |
+| `node_modules/` | 保留-工作产物 | 保留 | — | 66M，gitignore `**/node_modules/`；playwright 被 tools/web-llm-review.js、tools/browser-review.js、loop/ralph_runtime/ralph_runtime/web_llm_browser_runner.mjs 引用 |
+| `.pytest_cache/` | 工具缓存 | 保留（工作产物）+ 建议补 .gitignore（可逆，无需审批可直接做） | — | 7/15，untracked 且**未被** gitignore 覆盖 |
+| `__pycache__/`（tools/、.hooks/、scripts/ 共 3 处） | 工具缓存 | 保留（工作产物） | — | gitignore `__pycache__/` 已覆盖 |
+| `.hermes/skills/web-llm-cross-verify/SKILL.md` | 跟踪内容（非杂物） | 保留 | — | 8/9，**git tracked**（.claude/skills 下无同名文件，勿当重复） |
+| `.codex/hooks.json` | 跟踪内容（非杂物） | 保留 | — | 10/18，**git tracked**，711B |
+| `.board-task-change-freshness/` | 陈旧残留（空目录） | 删除（待批 8） | 实质可逆（空目录可重建） | 7/1，0 字节，git 不跟踪空目录 |
+| `tmp/pfb-b8/` | 重复克隆 + **唯一交付物** | 待确认，保留（处置见待批 4） | 删除不可逆（唯一交付物） | 10/24 13:34，131M，独立 git clone；vs 根级 pfb/：独有 outputs/E13-E16 mp4×4、scripts/build_audio_E13-E16.js、src/check_overlap_E13_arena.js |
+| `tmp/reorg-backup-20261016.tar.gz` | 备份（回滚点） | 删除（待批 5） | 不可逆 | 10/16，772K |
+| `tmp/compress-b35.txt` | 工具残留（会话片段） | 删除（待批 7） | 不可逆（untracked） | 10/23，121B |
+| `tmp/compress-b38.txt` | 工具残留（会话片段） | 删除（待批 7） | 不可逆（untracked） | 10/23，23KB |
+| `tmp/dsh-checkout/` | 陈旧 checkout | 删除（待批 6） | 不可逆（untracked） | 10/18，551M（node_modules 550M + out/ 构建产物 1M）；.dsh-cli-wrapper.sh 实际引用 app.asar 路径，不依赖此目录 |
+| `tmp/fix-image-limit/` | 工作产物（e2e 测试脚本） | 保留 | — | 10/19，含 proxy-before/proxy-REVERTED 修复前记录（红线0：探索过程不删） |
+| `tmp/arena-agent-result.md` | 工作产物（arena 探索记录） | 保留 | — | 10/20，14K |
+| `tmp/arena-audit-report.md` | 工作产物（arena 探索记录） | 保留 | — | 10/20，28K |
+| `tmp/arena-audit-report.patch` | 工作产物（arena 探索记录） | 保留 | — | 10/20，28K |
+| `agents/acp-rules.json`、`agents/goal-template-addon-acp-rule.md` | 在途（非杂物） | 保留 | — | session-1c44f689 待合并补丁，untracked |
+| `ego/arena-b8-*`（check/submit/submit2.mjs + arena-b8-20261024/ + arena-cleanup-20261024/）、`pfb/` | 在途（归属待确认） | 保留 | — | 10/24，batch-8 E13-E16 arena 提交工作；pfb/ 为 prompt-first-bench clone（79M，10/24 20:07 更新） |
+
+### 待用户批准（不可逆/删除类；回复编号即可，可多选）
+
+3. **6/13 tex 残留 4 文件**：`s18-1-kolmogorov-router.{aux,log,out}` + `texput.log`（合计约 23K，全部已 gitignore，纯构建产物无内容价值）
+   - **3.1** 删除全部 4 文件
+   人类回复：
+
+4. **`tmp/pfb-b8/`（131M）处置**——含 pfb/ 没有的 batch-8 E13-E16 交付物（mp4×4 + 脚本），其 .git 有 origin/arena/* 远端 ref，交付物是否已推送未验证
+   - **4.1** 先验证 E13-E16 交付物已推远端（`git -C tmp/pfb-b8 log origin/arena/*` 核对），确认后整目录删除
+   - **4.2** 不删，保留至 batch-8 收尾
+   人类回复：
+
+5. **`tmp/reorg-backup-20261016.tar.gz`（772K，10/16 重组回滚点）**
+   - **5.1** 删除（重组已稳定 9 天）
+   - **5.2** 保留
+   人类回复：
+
+6. **`tmp/dsh-checkout/`（551M，10/18 DSH checkout 残留）**——.dsh-cli-wrapper.sh 不引用此目录
+   - **6.1** 整目录删除
+   - **6.2** 保留
+   人类回复：
+
+7. **`tmp/compress-b35.txt` + `tmp/compress-b38.txt`（10/23 会话压缩片段，共 23KB）**
+   - **7.1** 删除
+   - **7.2** 保留
+   人类回复：
+
+8. **`.board-task-change-freshness/`（空目录，7/1）**
+   - **8.1** rmdir（空目录，实质可逆）
+   - **8.2** 保留
+   人类回复：
+
+9. **`ralph-loop.global.md.bak-decomp-20261016`（tracked 备份文件，411B）**
+   - **9.1** git rm（内容可从 git 历史 054a5e4d 之前的提交恢复）
+   - **9.2** 保留
+   人类回复：
+
+**附：.gitignore 覆盖核查（只读）**：`.DS_Store` ✅（L1）/ `__pycache__/` ✅ / `node_modules` ✅（`**/node_modules/`）/ `tmp/` ✅ / `*.log|*.aux|*.out` ✅；**未覆盖**：`.pytest_cache/`（建议补，可逆无需审批）、`.board-task-change-freshness/`（空目录 git 不跟踪，无实际影响）；.hermes/.codex 已被跟踪，覆盖与否无意义。

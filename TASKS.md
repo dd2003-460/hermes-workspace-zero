@@ -1,4 +1,32 @@
-**最后更新**: 2026-07-14（D1-grav-waves RALPH Restart — P2-3/P2-4/P3 全部完成，51页PDF编译通过）
+**最后更新**: 2026-10-25（workspace 整理 + 时钟与引力波响应仓库替换 + GPU 归档）
+
+---
+
+## 🆕 2026-10-25 workspace 整理 + 仓库替换（成璐直接指令）
+
+### 任务卡
+| 路 | 任务 | 模型 | 状态 | 结果 |
+|----|------|------|------|------|
+| C | 替换 时钟与引力波响应 仓库 + Sourcetree 同步 + 远端 orf | flash | ✅ 完成 | remote=orf.git HEAD 156edba; .gitignore L73 排除; Sourcetree 需手动 Remove"手征引力波orf"+Add 新路径 |
+| A | 按 SPEC 整理 workspace + projects 结构 + 个人/ 按 D1 结论设置 | v4-pro | ✅ 完成 | 29 个 README 新建; projects/INDEX.md 修死链+补缺; 散落文件归位; 个人/ 仅删 .DS_Store |
+| B | GPU 目录归档到 decomp 语义 | (A 顺手) | ✅ 完成 | 3 项→AI-计算科学/archive/gpu-to-decomp/; decomp/archive/ 已有旧副本(10-15) |
+
+### 红线
+- 不删除探索过程文件（AGENTS.md 红线 0）
+- AGENTS.md / CLAUDE.md 禁改
+- 不 git push
+- 每路不可逆操作前留 /tmp/ 备份
+- 不碰 D1-persona-align/ 内部
+- 嵌套 git 仓只动外层 README/INDEX，不改内部
+
+### 调研结论
+详见会话压缩块 b1/b2/b3。关键：时钟与引力波响应当前非独立仓（无 .git）；替换源是独立仓 origin=-orf.git HEAD 156edba；个人/ 已基本符合 D1 结论；GPU 目录=D1-gpu-inference-hardware+D1-gpu-research-2026+硬件调研md。
+
+### 执行结果（2026-10-25 完成）
+- **C 路**：备份 /tmp/clock-gw-backup-20261025-121707（136M）→旧删新复制→remote=orf→.gitignore L73→Sourcetree browser.plist "时钟与引力波响应"已是新位置，"手征引力波orf"指 Downloads 源需手动 Remove+Add
+- **A 路**：LaTeX 垃圾→tmp/，decomposition-tree→decomp/memory/；29 个 README（4 横切+9 领域+16 项目）；INDEX.md 修 2 死链+补 8 缺失；pfb/d1-video-recreation README 加仓标注；备份 /tmp/tidy-backup-20261025-1310/
+- **B 路（A 顺手）**：GPU 3 项→archive/gpu-to-decomp/（带 README+回滚说明）；发现 decomp/archive/ 已有 10-15 旧副本（独立 inode，git 跟踪）→双重副本
+- **Sourcetree 手动项**：Remove "手征引力波orf" → Add /Users/a1-6/Desktop/workspace/projects/理论物理/时钟与引力波响应/
 
 ---
 

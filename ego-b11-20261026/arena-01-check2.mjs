@@ -1,0 +1,11 @@
+const task = await taskSpace("b11-style-parse-check2-20261026");
+const p1 = task.page("p1");
+await p1.goto("https://arena.ai/agent/01a174cb-aec2-7c5a-aa23-2c857b64d339");
+await p1.waitForSelector(".ProseMirror", { state: "visible", timeout: 30000 }).catch(() => {});
+await new Promise((r) => setTimeout(r, 12000));
+const txt = await p1.evaluate(() => document.body.innerText);
+console.log("URL=" + p1.url());
+console.log("LOGIN_CHECK=" + /Log In|Sign In/.test(txt));
+console.log("=== TAIL 1000 ===");
+console.log(txt.slice(-1000));
+await task.finish({ keep: [] });

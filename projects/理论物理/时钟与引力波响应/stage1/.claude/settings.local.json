@@ -1,8 +1,0 @@
-{
-  "env": {
-    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "Qwen3.8-27B-MLX-5bit",
-    "ANTHROPIC_DEFAULT_OPUS_MODEL": "Qwen3.8-27B-MLX-5bit",
-    "ANTHROPIC_DEFAULT_SONNET_MODEL": "Qwen3.8-27B-MLX-5bit",
-    "ANTHROPIC_MODEL": "Qwen3.8-27B-MLX-5bit"
-  }
-}

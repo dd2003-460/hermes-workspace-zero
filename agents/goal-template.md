@@ -45,6 +45,8 @@
 - create_goal 后必须 get_goal 验证落库值（runtime 会静默钳制 max_goal_rounds）。
 - 同一问题想 2 轮无新事实 → 换工具（ego-browser/subagent），不空转。
 
+**硬规则自动加载（acp_rule）**：建 goal 后第一个动作，读 `agents/acp-rules.json`，对 `rules` 数组中每条文本在一条消息内并行调用 `acp_rule` 工具录入（一轮完成）。工具不存在则跳过并说明。规则维护只改 JSON 一处，改后 `acp_rule {clear:true}` 重录。禁止对话里临时发明硬规则。
+
 ## §4 验收标准（量化）
 
 - 每个 goal 有明确成功指标（分数/准确率/完成度/引用数）。

@@ -31,7 +31,7 @@
 |-----|------|------|
 | loop-executor agent | `agents/loop-executor.md` | 6 阶段执行流程（01→04.5） |
 | 1-loop 阶段定义 | `loop/prompt-first/` | 01-goal-decomposition → 04.5-final-review（操作流程+判定标准） |
-| 1-loop 操作示例 | `loop/prompt-first/examples/` | 各阶段数学领域方法示范（2026-10-26 外移，按需读取） |
+| 1-loop 操作示例 | `loop/prompt-first/examples/` | 各阶段方法示范+正负案例（2026-10-26 外移，按需读取） |
 
 **核心**：所有理论研究任务必须经过 1-loop（目标分解→信息调研→交叉验证→行动分解→执行验证→最终复核）。
 

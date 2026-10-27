@@ -1,7 +1,7 @@
 # Goal 模板（定位器）
 
-> origin: ai · 2026-10-26 瘦身重写 · 成璐指令"定位器式：五字段模板+阶段顺序+SOP 指针"
-> **触发规则**：用户消息含 `@agents/goal-template.md` = 第一动作立即 `create_goal`，不是"参考上下文后决定"。
+> origin: ai · 2026-10-27 二次瘦身 · 76→60 行
+> **触发规则**：用户消息含 `@agents/goal-template.md` = 第一动作立即 `create_goal`。
 > 执行顺序：① read 本文件 → ② create_goal（按 §1 格式）→ ③ 才处理用户消息里的具体任务。
 
 ## §1 Goal 描述格式（create_goal 必须用此五字段）
@@ -27,13 +27,7 @@
 | 04 执行验证 | `loop/prompt-first/04-execution-verification.md` | execution-log.md |
 | 04.5 反方复核 | `loop/prompt-first/04.5-final-review.md` | review.md |
 
-**执行通道**（按 `agents/arena-loop-pipeline.md`）：
-1. 复制 loop/ + SOP 到目标仓库 + push（断点 A 门禁)
-2. 发任务书（含强制段）+ push（断点 B/C 门禁）
-3. arena 在仓库内走完整 01→04.5，产出落盘 `loop-artifacts/stages/<N>/`
-4. Lead 验收产出 + commit + push
-
-**降级**：arena 通道不可用 → 本地走完整 loop（conf-0.2），只降通道不降流程。
+执行通道 + 3 断点门禁细节见 `agents/arena-loop-pipeline.md`。降级：arena 不可用→本地走完整 loop（conf-0.2），只降通道不降流程。
 
 ## §3 质量原则（硬规则）
 
@@ -44,8 +38,7 @@
 - 无 goal = 停摆：complete/clear 后同一回合内 create 下一个或明确 blocked。
 - create_goal 后必须 get_goal 验证落库值（runtime 会静默钳制 max_goal_rounds）。
 - 同一问题想 2 轮无新事实 → 换工具（ego-browser/subagent），不空转。
-
-**硬规则自动加载（acp_rule）**：建 goal 后第一个动作，读 `agents/acp-rules.json`，对 `rules` 数组中每条文本在一条消息内并行调用 `acp_rule` 工具录入（一轮完成）。工具不存在则跳过并说明。规则维护只改 JSON 一处，改后 `acp_rule {clear:true}` 重录。禁止对话里临时发明硬规则。
+- acp_rule 加载：建 goal 后读 `agents/acp-rules.json`，对 rules 数组并行调用 `acp_rule` 录入（一轮完成）；工具不存在则跳过。
 
 ## §4 验收标准（量化）
 
@@ -69,8 +62,5 @@
 |-----|------|--------|
 | Arena Loop 链路（★首选） | `agents/arena-loop-pipeline.md` | 外包 arena 时 |
 | 结构化输出派发 | `agents/structured-dispatch.md` | 派发决策型子任务时 |
-| SOP 总索引 | `agents/SOP-INDEX.md` | 找其他 SOP 时 |
-| 思考预算 | `projects/AI-计算科学/D1-persona-align/thinking-budget.md` | L0/L1/L2 判定 |
-| 人类确认机制 | `个人/APPROVALS.md` | 不可逆×偏好不明 |
-| 问题台账 | `projects/AI-计算科学/D1-persona-align/memory/qanda-ledger.md` | 回答成璐问题时 |
 | acp-rules 硬规则 | `agents/acp-rules.json` | 建 goal 后第一动作录入 |
+| SOP 总索引 | `agents/SOP-INDEX.md` | 找其他 SOP 时 |

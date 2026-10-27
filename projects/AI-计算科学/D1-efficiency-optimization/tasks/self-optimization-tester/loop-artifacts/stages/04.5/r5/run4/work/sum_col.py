@@ -22,10 +22,7 @@ def main(argv):
                 print(f"error: empty csv file: {path}", file=sys.stderr)
                 return 1
             if col not in header:
-                print(
-                    f"error: column {col!r} not found (available: {', '.join(header)})",
-                    file=sys.stderr,
-                )
+                print(f"error: column {col!r} not found (available: {', '.join(header)})", file=sys.stderr)
                 return 1
             idx = header.index(col)
             total = 0.0

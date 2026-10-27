@@ -1,0 +1,7 @@
+id,item,amount
+1,apple,3.50
+2,banana,2.00
+3,cherry,5.75
+# comment line should
+4,date,1.25
+5,egg,4.00

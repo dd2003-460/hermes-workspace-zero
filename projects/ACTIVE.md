@@ -1,16 +1,16 @@
 # ACTIVE — 活跃项目面板
 
-**自动生成**: 2026-10-25 04:07 — 由 scripts/aggregate-active.sh 聚合
+**自动生成**: 2026-10-28 23:05 — 由 scripts/aggregate-active.sh 聚合
 
 ## 焦点项目
 
 | 项目 | 相对路径 | 阶段 | 迭代 | 状态 | 当前任务 |
 |------|----------|------|------|------|----------|
+| D1-efficiency-optimization | `AI-计算科学/D1-efficiency-optimization/` | 04.5-final-review | 5 | active | R5 bench 双打分器+n≥5：run4 本地完成(94.84 provisional)，run5 arena 任务书已发待回执；R5.1 ChatGPT  |
 | D1-financial-market-analysis | `金融/D1-financial-market-analysis/` | 03 | r1 | running | 执行任务分解 |
-| D1-efficiency-optimization | `AI-计算科学/D1-efficiency-optimization/` | 01-goal-decomposition | 1 | active | 01 目标分解：识别效率瓶颈 + prompt 优化方向 |
-| 时钟与引力波响应 | `理论物理/时钟与引力波响应/` | active | 1 | active | 空间光晶格钟网络探测引力波（ORF 计算） |
+| D1-longevity-orthogonal | `健康长寿/D1-longevity-orthogonal/` | 01 | r1 | running | 目标与背景分解 |
 | quant-capital-flow | `金融/quant-capital-flow/` | unknown | 1 | in_progress | toy model v15 联合优化完成（十五连败确认框架不够），转其他研究方向 |
-| bh-mass-spectrum | `理论物理/bh-mass- spectrum/` | active | 1 | active | 黑洞质量谱 |
+| bh-mass-spectrum | `理论物理/bh-mass-spectrum/` | active | 1 | active | 黑洞质量谱 |
 | D2-efficient-propagation-book | `写作-社会系统/D2-efficient-propagation-book/` | init | r1 | active | L1-L6 全15章第一稿完成(第1-15章全100/100, 我全审过). v3 定稿前全书通读完成(6处交叉引用修复 ⚠️ v3 正式定稿待 P2 实验第一个数（30 人 30 天 ≥40% 信念迁移, solo 0 美元设计已在 ch14+p2-experiment-plan.md; 渠道待成璐拍板） |
 | D1-think-token-budget | `AI-计算科学/D1-think-token-budget/` | implementation | 10 | complete | T1-T4 全完成: R3 前沿映射交付 (P1=prompt 级前沿, 414.5ch/104tok 2.63x 短于 P0); 下一步候选: serving � |
 | D1-persona-align | `AI-计算科学/D1-persona-align/` |  |  | active | goal-fb61fede r11 完成 S5 prompt 级优化: SKILL.md 修订 1 处(任务卡模板+3 原则, 88 行). prompt-optimizati |

@@ -13,6 +13,8 @@
 
 ## 通道：ego-browser（唯一，AGENTS.md 硬规则）
 
+**故障处置**（2026-10-29 r32 补丁，成璐指令）：登录态几个月不失效，遇到"疑似掉线/401/重定向到登录页"**先检查工具和网络，别放弃、别直接找用户**：① `curl -I https://arena.ai` 确认网络通 ② ego-browser 重新 goto 目标页看是否只是会话页面过期 ③ 查 ego-lite 进程是否活着（`ps aux | grep -i ego`）④ 仍失败才记录具体报错找用户。把"要用户重新扫码"当第一反应是错的。
+
 ```bash
 ego-browser nodejs <<'EOF'
 const task = await taskSpace('arena-outsource-<stage>-<date>')   // 同任务复用同名 space

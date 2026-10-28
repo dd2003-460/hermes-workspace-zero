@@ -1,14 +1,14 @@
 # ACTIVE — 活跃项目面板
 
-**自动生成**: 2026-10-28 23:05 — 由 scripts/aggregate-active.sh 聚合
+**自动生成**: 2026-10-29 02:47 — 由 scripts/aggregate-active.sh 聚合
 
 ## 焦点项目
 
 | 项目 | 相对路径 | 阶段 | 迭代 | 状态 | 当前任务 |
 |------|----------|------|------|------|----------|
-| D1-efficiency-optimization | `AI-计算科学/D1-efficiency-optimization/` | 04.5-final-review | 5 | active | R5 bench 双打分器+n≥5：run4 本地完成(94.84 provisional)，run5 arena 任务书已发待回执；R5.1 ChatGPT  |
 | D1-financial-market-analysis | `金融/D1-financial-market-analysis/` | 03 | r1 | running | 执行任务分解 |
 | D1-longevity-orthogonal | `健康长寿/D1-longevity-orthogonal/` | 01 | r1 | running | 目标与背景分解 |
+| D1-efficiency-optimization | `AI-计算科学/D1-efficiency-optimization/` | 01-goal-decomposition | 1 | active | 01 目标分解：识别效率瓶颈 + prompt 优化方向 |
 | quant-capital-flow | `金融/quant-capital-flow/` | unknown | 1 | in_progress | toy model v15 联合优化完成（十五连败确认框架不够），转其他研究方向 |
 | bh-mass-spectrum | `理论物理/bh-mass-spectrum/` | active | 1 | active | 黑洞质量谱 |
 | D2-efficient-propagation-book | `写作-社会系统/D2-efficient-propagation-book/` | init | r1 | active | L1-L6 全15章第一稿完成(第1-15章全100/100, 我全审过). v3 定稿前全书通读完成(6处交叉引用修复 ⚠️ v3 正式定稿待 P2 实验第一个数（30 人 30 天 ≥40% 信念迁移, solo 0 美元设计已在 ch14+p2-experiment-plan.md; 渠道待成璐拍板） |

@@ -38,7 +38,8 @@ EOF'
 
 ## SOP（5 步）
 
-1. **写任务卡**（给 arena 的 prompt，必须自包含）：
+0. **任务书 push 仓库**（2026-10-28 r26 补丁，成璐指令）：arena 会话绑定 GitHub 仓库时，任务书先 commit+push 到该仓 `tasks/<T-id>.md`，派发 prompt 只写「读 tasks/<T-id>.md 按其中步骤执行」——不贴 clone 命令、不在聊天里复制任务内容。prompt-first 类任务额外加一句「严格按仓库内 loop/prompt-first/ 的阶段 prompt 执行」（防 agent 用默认流程绕过修订规则）。仓库未绑定时才退回自包含任务卡。
+1. **写任务卡**（给 arena 的 prompt，必须自包含；仅用于无仓库绑定的场景）：
    - 目标（一句话）+ 约束（语言/格式/长度）
    - 明确交付物格式（如「3 条来源+conf 的 JSON」「分解树 markdown」）
    - 要求标 conf，要求给来源 URL

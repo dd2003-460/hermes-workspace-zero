@@ -37,7 +37,7 @@
 
 ## 全局 Agent 团队
 
-项目内 `.claude/agents/` 应指向 `/Users/a1-6/Desktop/workspace/agents/`（symlink）。
+项目内 `.claude/sop/` 应指向 `/Users/a1-6/Desktop/workspace/sop/`（symlink）。
 如果没有，创建 symlink：
 ```bash
 mkdir -p .claude && ln -sf /Users/a1-6/Desktop/workspace/agents .claude/agents

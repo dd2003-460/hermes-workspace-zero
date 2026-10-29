@@ -37,7 +37,7 @@ API 细节以 `ego-browser` skill 加载后的说明为准（当前 0.5.1.13：`
 | Perplexity | `https://perplexity.ai` | |
 | LMArena | `https://arena.ai/agent` | **agent mode 可直接代干活**，可选项最多 |
 
-## 回执与门禁（ralph 02.5 / 04.5）
+## 回执与门禁（02.5 / 04.5）
 
 每个验证问题写一份回执 JSON 到阶段目录 `web-llm/*.json`，最低满足：
 - `kind: "ralph_web_llm_cross_check"`
@@ -45,11 +45,11 @@ API 细节以 `ego-browser` skill 加载后的说明为准（当前 0.5.1.13：`
 - `successful_provider_ids[]`：≥2
 - `observed_at`：ISO 8601 带时区（如 `2026-10-17T00:25:00+08:00`；勿裸写本地日期）
 
-字段 `evidence_refs` 引用成功回执路径；提交顺序：`fields.json` → `ralph field-apply` → `advance.json` → `ralph apply`。
+字段 `evidence_refs` 引用成功回执路径；回执过门禁后，按项目收口路径更新阶段状态文件（无 CLI 依赖，旧的字段提交流程已废弃）。
 **既证先例**：`projects/AI-计算科学/D1-gpu-inference-hardware/loop-artifacts/stages/04.5/r1/web-llm/`（手写回执过门禁；完整结构含 `adopted` / `rejected` / `rejected_reasons` / `two_leg_disagreements`）。
 
 ## 流程索引
 
 - 1-loop 02.5: `loop/archived-20261016/1-loop/loop-legacy/02.5-交叉验证.md`（prompt-first 现行版: `loop/prompt-first/02.5-cross-check.md`）
 - 1-loop 04.5: `loop/archived-20261016/1-loop/loop-legacy/04.5-交叉验证.md`（prompt-first 现行版: `loop/prompt-first/04.5-final-review.md`）
-- Agent 准则: `agents/gatherer.md` §LLM 网页版交流通用准则
+- Agent 准则: `sop/archived-20261016/gatherer.md` §LLM 网页版交流通用准则

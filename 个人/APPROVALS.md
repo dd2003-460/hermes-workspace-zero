@@ -27,7 +27,7 @@
     背景：本会话 3 个 teammate 长任务（20–90min）挂 2 次 + 1 次 arena 回复未落页；`acp_cache` 实测 provider 不回报 cache tokens（245 req / 11.72M input unmeasured）→ fork 上下文是否命中缓存本侧无法验证，细粒度拆分当前收益=鲁棒性+并行，非已验证的缓存省钱。
     - **2.1** 只写 arena-outsource skill（SOP 层，首版已落盘：拆分优先+失败协议；不动红线文件；subagent 派发时自带）（推荐）
     - **2.2** 追加进 AGENTS.md「工作纪律」（红线文件，需成璐明确指令才改）
-    - **2.3** 2.1 + 新建 `agents/arena-researcher.md` 专职规格（拆分纪律+失败协议+交付格式）
+    - **2.3** 2.1 + 新建 `sop/arena-researcher.md` 专职规格（拆分纪律+失败协议+交付格式）
     回一个编号即可。
     人类回复：
 
@@ -66,7 +66,7 @@
 | `tmp/arena-agent-result.md` | 工作产物（arena 探索记录） | 保留 | — | 10/20，14K |
 | `tmp/arena-audit-report.md` | 工作产物（arena 探索记录） | 保留 | — | 10/20，28K |
 | `tmp/arena-audit-report.patch` | 工作产物（arena 探索记录） | 保留 | — | 10/20，28K |
-| `agents/acp-rules.json`、`agents/goal-template-addon-acp-rule.md` | 在途（非杂物） | 保留 | — | session-1c44f689 待合并补丁，untracked |
+| `sop/acp-rules.json`、`sop/goal-template-addon-acp-rule.md` | 在途（非杂物） | 保留 | — | session-1c44f689 待合并补丁，untracked |
 | `ego/arena-b8-*`（check/submit/submit2.mjs + arena-b8-20261024/ + arena-cleanup-20261024/）、`pfb/` | 在途（归属待确认） | 保留 | — | 10/24，batch-8 E13-E16 arena 提交工作；pfb/ 为 prompt-first-bench clone（79M，10/24 20:07 更新） |
 
 ### 待用户批准（不可逆/删除类；回复编号即可，可多选）

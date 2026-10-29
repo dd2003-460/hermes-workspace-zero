@@ -14,5 +14,5 @@ ego-lite / ego-browser 与 LMArena（arena.ai/agent）通道相关脚本及批�
 ## 调用说明
 
 - `node ego/arena-b8-submit.mjs` 等脚本直接运行；依赖 ego-browser 登录态，不可在无头浏览器下运行
-- 通道验证流程见 `.claude/skills/ego-verify/SKILL.md` 与 `agents/arena-loop-pipeline.md`
+- 通道验证流程见 `.claude/skills/ego-verify/SKILL.md` 与 `sop/arena-loop-pipeline.md`
 - 子目录功能见各自文件（批次目录为一次性产物，不展开）

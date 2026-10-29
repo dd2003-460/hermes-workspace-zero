@@ -72,7 +72,7 @@
 - 自动备份: 每2小时推GitHub
 
 ### 朋友系统规划
-- Friend template: D1/agents/friend_template.md
+- Friend template: D1/sop/friend_template.md
 - One (001): 量化研究员
 - Two (002): 学术助理  
 - Three (003): 探索者

@@ -8,7 +8,7 @@
 ## 五字段（goal-template §3）
 1. 【目标】M1-M6 跨 run 方差 + M7 gate 实现（Verification Traceability Rate 作为硬门槛）
 2. 【质量原则】充分调研（已有 r2 双源回执，引用 web-llm/cross-check-r2.json 不重查）；先复刻再创新
-3. 【SOP 索引】agents/arena-loop-pipeline.md + stages/04.5/bench.md（指标固定落点，引用不重定）
+3. 【SOP 索引】sop/arena-loop-pipeline.md + stages/04.5/bench.md（指标固定落点，引用不重定）
 4. 【验收标准】
    - n≥3 run，M1-M6 各指标 std 报告；总加权分均值 conf≥0.9
    - M7 gate 进 loop 工件：每步声称成功必须挂 ≥1 个不可伪造锚点（测试返回值/ls-remote 回执/fs diff），无锚点=该步不得声称成功

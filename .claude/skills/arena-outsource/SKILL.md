@@ -186,16 +186,16 @@ git ls-remote https://github.com/dd2003-460/<repo>.git 'refs/heads/<branch>'
 
 **架构事实（r89 更新 · 对齐 Claude ralph-loop）**：stop_hook（pre_verify）= ralph-loop 的 Stop hook，语义一一对应：
 
-| ralph-loop | 本系统 stop_hook |
+| ralph-loop | 本系统 stop_hook（r90：比 ralph 更严） |
 |---|---|
 | 每回合停止前过门（Stop hook 无条件 fire） | pre_verify 每回合 fire（r88 去掉框架侧"改过文件才触发"限制） |
 | 有 active loop → `decision:block` + 喂 prompt 回去 | 有未完成 stage-gate goal → `action:continue` + 阶段简报+播报 |
 | `<promise>` 真为真才放行 | goal completed 才放行（stage_advance 走完 06-find-next-goal 后 status=completed） |
 | max_iterations 到点放行 | 无（max_verify_nudges=999999，不限轮数） |
-| HALT/用户喊停放行 | HALT 文件 / user_said_stop 放行 |
-| 无 active loop → 直接放行（靠外部 /cancel） | 无活 → 放行（靠 cron keepalive 唤醒扫 projects 找活） |
+| HALT/用户喊停放行 | HALT 文件 / user_said_stop 放行（**仅有的两条真停路径**） |
+| 无 active loop → 直接放行（靠外部 /cancel） | **无活 → 也 continue「扫 projects 找新目标立项」**（成璐 r90：找新目标本身就是工作，不许空转停下） |
 
-ralph-loop 的"同一条 prompt 反复喂回"在这里对应"CONTINUE_MSG + 阶段简报"——不重复喂固定 prompt（那是单任务循环），而是按当前状态动态生成下一步指令（多目标、跨项目）。这是有意的差异：ralph 是单任务自指循环，我们是多目标调度器，停止门只管"有没有活"，不管"干哪个"。
+ralph-loop 的"同一条 prompt 反复喂回"在这里对应"CONTINUE_MSG + 阶段简报"——不重复喂固定 prompt（那是单任务循环），而是按当前状态动态生成下一步指令（多目标、跨项目）。两个有意差异：① ralph 是单任务自指循环，我们是多目标调度器，停止门只管"有没有活"，不管"干哪个"；② ralph 无 active loop 时放行等外部 /cancel，我们无活也 continue 找新目标（r90，成璐指令：这是必须的）——比 ralph 更严，真停只有 HALT/用户喊停。
 
 cron keepalive（loop-keepalive-30m）是第二道防线（跨会话唤醒+失败自愈，r87）。两道都活着才算"永动"。
 

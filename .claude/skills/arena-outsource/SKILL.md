@@ -130,3 +130,17 @@ git ls-remote https://github.com/dd2003-460/<repo>.git 'refs/heads/<branch>'
 ```
 
 两条命令的输出都要在派发前的同一轮里跑过。台账里没有该仓库的会话 → 开新会话选对仓库并登记台账；有 → 打开该会话 snapshot 验 "repository and branch" 区块再发。跳过这两步直接派发 = 流程违规。
+
+## 派发前检查清单（硬门禁 · 每轮派发必过）
+
+**触发条件**：本轮要往 arena 发任务消息时，先逐条过以下清单，全部通过才许点发送。任何一条不过 = 停，先修再发。
+
+| # | 检查项 | 怎么验 | 不过怎么办 |
+|---|--------|--------|-----------|
+| 1 | 台账有该仓库的会话 | `grep -A5 '会话台账' sop/arena-loop-pipeline.md` | 没有 → 开新会话选对仓库，登记台账 |
+| 2 | 目标分支远端存在 | `git ls-remote https://github.com/dd2003-460/<repo>.git refs/heads/<branch>` 返回 sha | 不存在 → 先 push 任务书分支 |
+| 3 | 会话绑定正确 | ego-browser 打开会话，snapshot 找 "Coding session repository and branch" 区块，仓库名+分支与任务一致 | 不一致 → 停用该会话，按台账换或新建 |
+| 4 | prompt 带仓库声明 | 派发文本开头含「本任务只涉及 <repo>/<branch>，忽略历史中其他仓库的消息」 | 补上再发 |
+| 5 | 回执指纹要求已写进任务书 | 任务书末尾有「完成后回执必须含 repo URL + branch + commit_sha」 | 补进任务书再派 |
+
+**为什么是清单不是文档**：r64-r69 连错仓库的根因是"知道规矩但派发时没执行"。清单把规矩变成逐条打勾的动作，跳过任何一条都算违规。

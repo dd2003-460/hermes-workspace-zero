@@ -184,7 +184,7 @@ git ls-remote https://github.com/dd2003-460/<repo>.git 'refs/heads/<branch>'
 
 ## 永动保障（2026-10-29 r87 · 成璐指令：必须永远不停止）
 
-**架构事实**：stop_hook（pre_verify）只在"本回合改过文件 + 自然停止"时触发续推；纯聊天回合（没改文件）不触发，靠 cron keepalive（loop-keepalive-30m）兜底唤醒。两条链路都必须活着才算"永动"。
+**架构事实（r88 更新）**：stop_hook（pre_verify）现在**每个回合停止前都过停止门**（r88 去掉了框架侧"改过 write_file/patch 才触发"的前置条件）——有未完成 stage-gate goal → 强制 continue；无活 → 放行。cron keepalive（loop-keepalive-30m）仍是第二道防线（跨会话唤醒+失败自愈）。两条链路都活着才算"永动"。
 
 **r87 事故复盘**：2026-10-29 15:28 keepalive 失败——模型服务器拒收（'too large'，会话 ~53k token 但服务器实际窗口更小或并发占满），连续多轮 HTTP 400 / too large 交替，期间系统静默停摆近 1 小时。根因：keepalive 复用同一会话，上下文只增不减，膨胀到服务器拒收后没有自愈路径。
 

@@ -90,3 +90,12 @@ EOF'
 - subagent 无网络（AGENTS.md 硬规则）：需要在线信息时由 Lead（本会话）走本 skill 代查并写文件，subagent 读文件
 - 匿名 Battle 评测（非 agent mode）有专门工具：`projects/decomp/arena_capture/`（Edge+CDP 驱动，先读其 SKILL.md）——与本 skill 正交：那里是「评测模型」，这里是「外包任务」
 - web_search 仍禁用（付费）；纯 JS 聊天页 WebFetch 仍禁用
+
+## 仓库绑定门禁（2026-10-29 r79 补丁 · 成璐指令）
+
+**教训**：r64-r69 复用旧 arena 会话派发 rubric-v3/deepresearch 任务，该会话历史里混着 market-alpha 的 T3 任务消息，用户误判"所有工作都在 market 下面"。实际产出全在 prompt-first-bench（已逐条核验 remote/分支），但**派发前没有验证绑定**，是流程缺口不是结果错误。
+
+硬规则：
+1. **每次派发前必验绑定**：ego-browser 打开目标会话 → snapshot 读 "Coding session repository and branch" 区块 → 确认仓库名 + 分支与任务书所在仓一致，不一致就停（新开会话选对仓库，不复用错绑定的会话）。
+2. **长会话历史污染**：一个 agent 会话跑过多项目任务后，对话历史会串（旧项目的仓库名/路径出现在上下文里），模型可能按旧上下文行动。跨项目任务必须开新会话，或派发时显式声明「本任务只涉及 <repo> 仓库，忽略历史中其他仓库的消息」。
+3. **回执带仓库指纹**：arena 执行类任务的回执 JSON 必须含 `repo`（remote URL）+ `branch` + `commit_sha`，Lead 落盘前用 `git ls-remote` 核对 sha 存在——回执没指纹 = 未验证，不通过门禁。

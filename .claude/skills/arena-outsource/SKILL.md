@@ -145,3 +145,12 @@ git ls-remote https://github.com/dd2003-460/<repo>.git 'refs/heads/<branch>'
 
 **为什么是清单不是文档**：r64-r69 连错仓库的根因是"知道规矩但派发时没执行"。清单把规矩变成逐条打勾的动作，跳过任何一条都算违规。
 
+
+## 分支切换门禁（2026-10-29 r84 · 成璐指令）
+
+**教训**：r79-r83 反复让 arena "checkout exp/rubric-v3-ablation"，它每次都拒绝——因为 arena 会话绑定的是自己的工作分支（如 arena/78602cd5-prompt-first-bench），agent 认为"分支不符就不执行"。根因：**任务书 push 到了 exp 分支，但 arena 会话 checkout 的是 arena 分支，两边对不上。**
+
+硬规则：
+1. **任务书必须 push 到 arena 会话当前 checkout 的分支**（通常是 `arena/<id>-<repo>`），不是另开一个 exp/research 分支。派发前用 `git ls-remote origin <arena-branch>` 确认任务书文件在该分支上。
+2. **如果任务书在别的分支**：要么把任务书 merge/cherry-pick 到 arena 分支再派，要么让 arena 先 `git fetch && git checkout <task-branch>` 并明确告知"这是本任务要求的分支切换，不是违规"。
+3. **回执指纹**：arena 完成后 push 到的分支 = 它当时 checkout 的分支。Lead 核验时用 `git ls-remote origin <那个分支>` 找新 commit，不是去 exp 分支找。

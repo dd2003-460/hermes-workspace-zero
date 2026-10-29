@@ -16,8 +16,8 @@
 
 | SOP | 路径 | 说明 |
 |-----|------|------|
-| **Arena Loop 链路（★ 唯一入口）** | `sop/arena-loop-pipeline.md` | 6 步链路+3 断点门禁+任务书强制段+仓库映射/连接/降级（2026-10-22 起） |
-| arena-outsource skill（提交机制） | `.claude/skills/arena-outsource/SKILL.md` | 任务卡模板+ego-browser 提交+失败处理与降级阶梯 |
+| **Arena Loop 链路（★ 唯一入口）** | `sop/arena-loop-pipeline.md` | 6 步链路+3 断点门禁+任务书强制段+仓库映射/连接/降级+**会话台账（一仓一会话）**（2026-10-22 起） |
+| arena-outsource skill（提交机制） | `.claude/skills/arena-outsource/SKILL.md` | 任务卡模板+ego-browser 提交+失败处理与降级阶梯+**派发前三步门禁（查台账→验绑定→显式声明，r81 固化）** |
 | ~~sop/arena-outsource.md~~ | 已并入链路 SOP · 仅存档 | goal 不再索引 |
 
 **核心**：

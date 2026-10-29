@@ -66,7 +66,7 @@
 | `tmp/arena-agent-result.md` | 工作产物（arena 探索记录） | 保留 | — | 10/20，14K |
 | `tmp/arena-audit-report.md` | 工作产物（arena 探索记录） | 保留 | — | 10/20，28K |
 | `tmp/arena-audit-report.patch` | 工作产物（arena 探索记录） | 保留 | — | 10/20，28K |
-| `sop/acp-rules.json`、`sop/goal-template-addon-acp-rule.md` | 在途（非杂物） | 保留 | — | session-1c44f689 待合并补丁，untracked |
+| `sop/acp-rules.json`、`sop/goal-template-addon-acp-rule.md` | 已收口（addon 2026-10-29 确认合并后删除） | 保留记录 | — | acp-rules.json 仍活；addon 文件已删（r58） |
 | `ego/arena-b8-*`（check/submit/submit2.mjs + arena-b8-20261024/ + arena-cleanup-20261024/）、`pfb/` | 在途（归属待确认） | 保留 | — | 10/24，batch-8 E13-E16 arena 提交工作；pfb/ 为 prompt-first-bench clone（79M，10/24 20:07 更新） |
 
 ### 待用户批准（不可逆/删除类；回复编号即可，可多选）

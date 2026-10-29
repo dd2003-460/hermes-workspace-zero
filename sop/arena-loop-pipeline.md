@@ -53,6 +53,7 @@
 | 仓库 | 当前 arena 会话 | 备注 |
 |------|----------------|------|
 | prompt-first-bench | `arena.ai/agent/01a185f5-522b-72b2-a713-200878602cd5`（taskSpace: arena-deepresearch-bench-20261029） | rubric-v3/deepresearch 系列；历史混有 market-alpha T3 消息，派发时显式声明只涉及 pfb |
+| prompt-first-bench（消融实验产出） | 同上会话 | 2026-10-29：O3 权重消融完成，commit d5c8a51 @ arena/78602cd5-prompt-first-bench，已 merge 回 rubric-v3 分支并 push |
 
 **原则**：每个项目有自己的仓库，arena 连接对应仓库，读仓库内的任务书执行。不跨仓库混用。
 

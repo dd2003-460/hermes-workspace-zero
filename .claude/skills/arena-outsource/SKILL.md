@@ -172,3 +172,12 @@ git ls-remote https://github.com/dd2003-460/<repo>.git 'refs/heads/<branch>'
 1. **任务书必须 push 到 arena 会话当前 checkout 的分支**（通常是 `arena/<id>-<repo>`），不是另开一个 exp/research 分支。派发前用 `git ls-remote origin <arena-branch>` 确认任务书文件在该分支上。
 2. **如果任务书在别的分支**：要么把任务书 merge/cherry-pick 到 arena 分支再派，要么让 arena 先 `git fetch && git checkout <task-branch>` 并明确告知"这是本任务要求的分支切换，不是违规"。
 3. **回执指纹**：arena 完成后 push 到的分支 = 它当时 checkout 的分支。Lead 核验时用 `git ls-remote origin <那个分支>` 找新 commit，不是去 exp 分支找。
+
+## 会话清理（2026-10-29 r85 · 成璐指令）
+
+**原则：已完成任务的 arena 会话定期清理，只保留当前活跃的。**
+
+1. **清理时机**：每完成一个项目阶段（如 rubric-v3 消融实验结束），把该阶段用完的旧会话删掉。
+2. **怎么删**：ego-browser 打开 arena.ai/agent 列表 → 每个会话右侧 "More options" 按钮 → Delete。批量删时逐个点，不写脚本（arena 无批量删除 API）。
+3. **保留规则**：台账里登记的"当前活跃会话"不删；同一仓库只留最新的一个。
+4. **台账同步**：删完会话后更新 `sop/arena-loop-pipeline.md` §3.1 会话台账，把已删的标记为"已清理 <日期>"或移除。

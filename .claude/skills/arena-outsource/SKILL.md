@@ -184,7 +184,20 @@ git ls-remote https://github.com/dd2003-460/<repo>.git 'refs/heads/<branch>'
 
 ## 永动保障（2026-10-29 r87 · 成璐指令：必须永远不停止）
 
-**架构事实（r88 更新）**：stop_hook（pre_verify）现在**每个回合停止前都过停止门**（r88 去掉了框架侧"改过 write_file/patch 才触发"的前置条件）——有未完成 stage-gate goal → 强制 continue；无活 → 放行。cron keepalive（loop-keepalive-30m）仍是第二道防线（跨会话唤醒+失败自愈）。两条链路都活着才算"永动"。
+**架构事实（r89 更新 · 对齐 Claude ralph-loop）**：stop_hook（pre_verify）= ralph-loop 的 Stop hook，语义一一对应：
+
+| ralph-loop | 本系统 stop_hook |
+|---|---|
+| 每回合停止前过门（Stop hook 无条件 fire） | pre_verify 每回合 fire（r88 去掉框架侧"改过文件才触发"限制） |
+| 有 active loop → `decision:block` + 喂 prompt 回去 | 有未完成 stage-gate goal → `action:continue` + 阶段简报+播报 |
+| `<promise>` 真为真才放行 | goal completed 才放行（stage_advance 走完 06-find-next-goal 后 status=completed） |
+| max_iterations 到点放行 | 无（max_verify_nudges=999999，不限轮数） |
+| HALT/用户喊停放行 | HALT 文件 / user_said_stop 放行 |
+| 无 active loop → 直接放行（靠外部 /cancel） | 无活 → 放行（靠 cron keepalive 唤醒扫 projects 找活） |
+
+ralph-loop 的"同一条 prompt 反复喂回"在这里对应"CONTINUE_MSG + 阶段简报"——不重复喂固定 prompt（那是单任务循环），而是按当前状态动态生成下一步指令（多目标、跨项目）。这是有意的差异：ralph 是单任务自指循环，我们是多目标调度器，停止门只管"有没有活"，不管"干哪个"。
+
+cron keepalive（loop-keepalive-30m）是第二道防线（跨会话唤醒+失败自愈，r87）。两道都活着才算"永动"。
 
 **r87 事故复盘**：2026-10-29 15:28 keepalive 失败——模型服务器拒收（'too large'，会话 ~53k token 但服务器实际窗口更小或并发占满），连续多轮 HTTP 400 / too large 交替，期间系统静默停摆近 1 小时。根因：keepalive 复用同一会话，上下文只增不减，膨胀到服务器拒收后没有自愈路径。
 

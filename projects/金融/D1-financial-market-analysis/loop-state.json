@@ -920,7 +920,7 @@
       "task_graph",
       "coverage_proof"
     ],
-    "revision": "r1",
+    "revision": "r2",
     "success_condition": "结构化任务图分解到最小执行单元且所有节点已写出 declared artifacts 并经 graph-apply 回写，接口清晰对准、模块化解耦，无遗漏无冲突"
   },
   "status": "running",
@@ -930,5 +930,6 @@
   },
   "task_intake": null,
   "task_intake_history": [],
-  "updated_at": "2026-10-22T09:03:25.006350+08:00"
+  "updated_at": "2026-10-29T17:49:57+08:00",
+  "current_task": "F6 跨市场验证完成 (05 r2): ETH/SOL 双市场 FAIL — 资金费率单信号三市场(BTC/ETH/SOL)负结果闭合; SOL bull×T1×2021 单格 t=3.17/p=0.0015 记录为 post-hoc 观察不升级; 下一步 F7 多信号组合"
 }

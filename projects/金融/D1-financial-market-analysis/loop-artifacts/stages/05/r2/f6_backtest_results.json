@@ -1,0 +1,1600 @@
+{
+  "meta": {
+    "generated_at": "2026-10-29T09:48:42.883004+00:00",
+    "seed": 20261020,
+    "n_perm": 2000,
+    "markets": [
+      "ETHUSDT",
+      "SOLUSDT"
+    ],
+    "deviation_B1": "S2 US data sources dead (Yahoo/Stooq/ifzq); S2->ETHUSDT, S3->SOLUSDT per TASKS F6 candidate",
+    "sol_listing": "SOLUSDT first bar 2020-09-14 (exchange listing); SOL windows 2021-2025 unaffected",
+    "checksums": {
+      "cache": {
+        "ok": 136,
+        "bad": 0,
+        "checksum_missing": 0
+      },
+      "funding": {
+        "ok": 136,
+        "bad": 0,
+        "checksum_missing": 0
+      }
+    }
+  },
+  "per_market": {
+    "ETHUSDT": {
+      "data_range": {
+        "klines_first": 1577836800000,
+        "klines_last": 1767139200000,
+        "funding_rows": 6576,
+        "funding_first": 1577836800000,
+        "funding_last": 1767196800001
+      },
+      "per_window": {
+        "2021": {
+          "T1": {
+            "days": 365,
+            "trades": 20,
+            "net_excess_sum": 1.869966,
+            "annualized_excess": 1.291045,
+            "t_stat": 1.7656,
+            "perm_p": 0.077961,
+            "psr": 0.9609,
+            "dsr": 0.3832,
+            "direction": "long-biased"
+          },
+          "T2": {
+            "days": 365,
+            "trades": 16,
+            "net_excess_sum": -0.147744,
+            "annualized_excess": -0.102004,
+            "t_stat": -0.7283,
+            "perm_p": 0.484258,
+            "psr": 0.2383,
+            "dsr": 0.0028,
+            "direction": "short-biased"
+          },
+          "T3": {
+            "days": 365,
+            "trades": 71,
+            "net_excess_sum": -0.814724,
+            "annualized_excess": -0.562495,
+            "t_stat": -1.118,
+            "perm_p": 0.267866,
+            "psr": 0.1348,
+            "dsr": 0.0008,
+            "direction": "short-biased"
+          }
+        },
+        "2022": {
+          "T1": {
+            "days": 365,
+            "trades": 142,
+            "net_excess_sum": -1.290294,
+            "annualized_excess": -0.890833,
+            "t_stat": -1.9053,
+            "perm_p": 0.055472,
+            "psr": 0.029,
+            "dsr": 0.0,
+            "direction": "long-biased"
+          },
+          "T2": {
+            "days": 365,
+            "trades": 54,
+            "net_excess_sum": -0.445787,
+            "annualized_excess": -0.307776,
+            "t_stat": -1.3443,
+            "perm_p": 0.181409,
+            "psr": 0.0815,
+            "dsr": 0.0003,
+            "direction": "short-biased"
+          },
+          "T3": {
+            "days": 365,
+            "trades": 0,
+            "net_excess_sum": 0.0,
+            "annualized_excess": 0.0,
+            "t_stat": 0.0,
+            "perm_p": 1.0,
+            "psr": 0.0,
+            "dsr": 0.0,
+            "direction": "short-biased"
+          }
+        },
+        "2023": {
+          "T1": {
+            "days": 365,
+            "trades": 50,
+            "net_excess_sum": 0.60601,
+            "annualized_excess": 0.418396,
+            "t_stat": 1.3469,
+            "perm_p": 0.193403,
+            "psr": 0.9128,
+            "dsr": 0.2419,
+            "direction": "long-biased"
+          },
+          "T2": {
+            "days": 365,
+            "trades": 4,
+            "net_excess_sum": 0.002844,
+            "annualized_excess": 0.001963,
+            "t_stat": 0.2555,
+            "perm_p": 1.0,
+            "psr": 0.6037,
+            "dsr": 0.0363,
+            "direction": "short-biased"
+          },
+          "T3": {
+            "days": 365,
+            "trades": 13,
+            "net_excess_sum": -0.01384,
+            "annualized_excess": -0.009556,
+            "t_stat": -0.1508,
+            "perm_p": 0.898051,
+            "psr": 0.4393,
+            "dsr": 0.0135,
+            "direction": "short-biased"
+          }
+        },
+        "2024": {
+          "T1": {
+            "days": 366,
+            "trades": 20,
+            "net_excess_sum": 0.357567,
+            "annualized_excess": 0.246193,
+            "t_stat": 0.5736,
+            "perm_p": 0.573213,
+            "psr": 0.7177,
+            "dsr": 0.0691,
+            "direction": "long-biased"
+          },
+          "T2": {
+            "days": 366,
+            "trades": 0,
+            "net_excess_sum": 0.0,
+            "annualized_excess": 0.0,
+            "t_stat": 0.0,
+            "perm_p": 1.0,
+            "psr": 0.0,
+            "dsr": 0.0,
+            "direction": "short-biased"
+          },
+          "T3": {
+            "days": 366,
+            "trades": 29,
+            "net_excess_sum": -0.165806,
+            "annualized_excess": -0.114161,
+            "t_stat": -0.6281,
+            "perm_p": 0.549225,
+            "psr": 0.2621,
+            "dsr": 0.0035,
+            "direction": "short-biased"
+          }
+        },
+        "2025": {
+          "T1": {
+            "days": 365,
+            "trades": 96,
+            "net_excess_sum": -0.182383,
+            "annualized_excess": -0.125919,
+            "t_stat": -0.2823,
+            "perm_p": 0.754123,
+            "psr": 0.3889,
+            "dsr": 0.0096,
+            "direction": "long-biased"
+          },
+          "T2": {
+            "days": 365,
+            "trades": 2,
+            "net_excess_sum": -0.022163,
+            "annualized_excess": -0.015302,
+            "t_stat": -1.0275,
+            "perm_p": 0.514743,
+            "psr": 0.1175,
+            "dsr": 0.0006,
+            "direction": "short-biased"
+          },
+          "T3": {
+            "days": 365,
+            "trades": 0,
+            "net_excess_sum": 0.0,
+            "annualized_excess": 0.0,
+            "t_stat": 0.0,
+            "perm_p": 1.0,
+            "psr": 0.0,
+            "dsr": 0.0,
+            "direction": "short-biased"
+          }
+        }
+      },
+      "matrix_45": [
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "threshold": "T1",
+          "window": "2021",
+          "status": "tested",
+          "t": 1.765,
+          "p": 0.077961,
+          "trades": 21,
+          "net_excess_sum": 1.869366
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "threshold": "T2",
+          "window": "2021",
+          "status": "tested",
+          "t": -0.7283,
+          "p": 0.484258,
+          "trades": 16,
+          "net_excess_sum": -0.147744
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "threshold": "T3",
+          "window": "2021",
+          "status": "tested",
+          "t": -1.1188,
+          "p": 0.267866,
+          "trades": 72,
+          "net_excess_sum": -0.815324
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "threshold": "T1",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "threshold": "T2",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "threshold": "T3",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "threshold": "T1",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "threshold": "T2",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "threshold": "T3",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "threshold": "T1",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "threshold": "T2",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "threshold": "T3",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "threshold": "T1",
+          "window": "2022",
+          "status": "tested",
+          "t": -1.9062,
+          "p": 0.055472,
+          "trades": 143,
+          "net_excess_sum": -1.290894
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "threshold": "T2",
+          "window": "2022",
+          "status": "tested",
+          "t": -1.3443,
+          "p": 0.181409,
+          "trades": 54,
+          "net_excess_sum": -0.445787
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "threshold": "T3",
+          "window": "2022",
+          "status": "tested",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "threshold": "T1",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "threshold": "T2",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "threshold": "T3",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "threshold": "T1",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "threshold": "T2",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "threshold": "T3",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "threshold": "T1",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "threshold": "T2",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "threshold": "T3",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "threshold": "T1",
+          "window": "2023",
+          "status": "tested",
+          "t": 1.3456,
+          "p": 0.193903,
+          "trades": 51,
+          "net_excess_sum": 0.60541
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "threshold": "T2",
+          "window": "2023",
+          "status": "tested",
+          "t": 0.2555,
+          "p": 1.0,
+          "trades": 4,
+          "net_excess_sum": 0.002844
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "threshold": "T3",
+          "window": "2023",
+          "status": "tested",
+          "t": -0.1508,
+          "p": 0.898051,
+          "trades": 13,
+          "net_excess_sum": -0.01384
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "threshold": "T1",
+          "window": "2024",
+          "status": "tested",
+          "t": 0.5727,
+          "p": 0.573713,
+          "trades": 21,
+          "net_excess_sum": 0.356967
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "threshold": "T2",
+          "window": "2024",
+          "status": "tested",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "threshold": "T3",
+          "window": "2024",
+          "status": "tested",
+          "t": -0.6302,
+          "p": 0.547726,
+          "trades": 30,
+          "net_excess_sum": -0.166406
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "threshold": "T1",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "threshold": "T2",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "threshold": "T3",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "threshold": "T1",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "threshold": "T2",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "threshold": "T3",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "threshold": "T1",
+          "window": "2025",
+          "status": "tested",
+          "t": -0.2823,
+          "p": 0.754123,
+          "trades": 96,
+          "net_excess_sum": -0.182383
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "threshold": "T2",
+          "window": "2025",
+          "status": "tested",
+          "t": -1.0275,
+          "p": 0.514743,
+          "trades": 2,
+          "net_excess_sum": -0.022163
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "threshold": "T3",
+          "window": "2025",
+          "status": "tested",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "threshold": "T1",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "threshold": "T2",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "threshold": "T3",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "threshold": "T1",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "threshold": "T2",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "threshold": "T3",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        }
+      ],
+      "gates": {
+        "F1_t_ge_2": {
+          "pass": false,
+          "fail_cells": [
+            "bullxT1x2021",
+            "bullxT2x2021",
+            "bullxT3x2021",
+            "bearxT1x2022",
+            "bearxT2x2022",
+            "bearxT3x2022",
+            "rangexT1x2023",
+            "rangexT2x2023",
+            "rangexT3x2023",
+            "bullxT1x2024",
+            "bullxT2x2024",
+            "bullxT3x2024",
+            "bullxT1x2025",
+            "bullxT2x2025",
+            "bullxT3x2025"
+          ]
+        },
+        "F2_trades_ge_30": {
+          "pass": false,
+          "fail_cells": [
+            "bullxT1x2021(trades=21)",
+            "bullxT2x2021(trades=16)",
+            "bearxT3x2022(trades=0)",
+            "rangexT2x2023(trades=4)",
+            "rangexT3x2023(trades=13)",
+            "bullxT1x2024(trades=21)",
+            "bullxT2x2024(trades=0)",
+            "bullxT2x2025(trades=2)",
+            "bullxT3x2025(trades=0)"
+          ]
+        },
+        "F3_net_positive": {
+          "pass": false,
+          "fail_cells": [
+            "bullxT2x2021(net=-0.147744)",
+            "bullxT3x2021(net=-0.815324)",
+            "bearxT1x2022(net=-1.290894)",
+            "bearxT2x2022(net=-0.445787)",
+            "bearxT3x2022(net=0.000000)",
+            "rangexT3x2023(net=-0.013840)",
+            "bullxT2x2024(net=0.000000)",
+            "bullxT3x2024(net=-0.166406)",
+            "bullxT1x2025(net=-0.182383)",
+            "bullxT2x2025(net=-0.022163)",
+            "bullxT3x2025(net=0.000000)"
+          ]
+        },
+        "F4_direction_consistency": {
+          "pass": true,
+          "detail": {
+            "T1": {
+              "consistent_windows": "5/5",
+              "dominant": "long-biased",
+              "pass": true
+            },
+            "T2": {
+              "consistent_windows": "5/5",
+              "dominant": "short-biased",
+              "pass": true
+            },
+            "T3": {
+              "consistent_windows": "5/5",
+              "dominant": "short-biased",
+              "pass": true
+            }
+          }
+        },
+        "F5_perm_p_lt_0001": {
+          "pass": false,
+          "n_below": 0
+        },
+        "F6_psr_gt_095": {
+          "pass": true,
+          "detail": {
+            "2021": 0.9609,
+            "2022": 0.029,
+            "2023": 0.9128,
+            "2024": 0.7177,
+            "2025": 0.3889
+          }
+        },
+        "F7_bh_fdr": {
+          "pass": false,
+          "n_rejected": 0
+        },
+        "F8_dsr_positive": {
+          "pass": true,
+          "detail": {
+            "2021": 0.3832,
+            "2022": 0.0,
+            "2023": 0.2419,
+            "2024": 0.0691,
+            "2025": 0.0096
+          }
+        }
+      },
+      "overall_pass": false
+    },
+    "SOLUSDT": {
+      "data_range": {
+        "klines_first": 1600041600000,
+        "klines_last": 1767139200000,
+        "funding_rows": 5881,
+        "funding_first": 1600012800004,
+        "funding_last": 1767196800001
+      },
+      "per_window": {
+        "2021": {
+          "T1": {
+            "days": 365,
+            "trades": 17,
+            "net_excess_sum": 4.783863,
+            "annualized_excess": 3.302831,
+            "t_stat": 3.1654,
+            "perm_p": 0.001499,
+            "psr": 0.9992,
+            "dsr": 0.8664,
+            "direction": "long-biased"
+          },
+          "T2": {
+            "days": 365,
+            "trades": 13,
+            "net_excess_sum": -1.026687,
+            "annualized_excess": -0.708836,
+            "t_stat": -1.6266,
+            "perm_p": 0.084958,
+            "psr": 0.0376,
+            "dsr": 0.0001,
+            "direction": "short-biased"
+          },
+          "T3": {
+            "days": 365,
+            "trades": 64,
+            "net_excess_sum": -3.211902,
+            "annualized_excess": -2.217532,
+            "t_stat": -3.2276,
+            "perm_p": 0.0005,
+            "psr": 0.0007,
+            "dsr": 0.0,
+            "direction": "short-biased"
+          }
+        },
+        "2022": {
+          "T1": {
+            "days": 360,
+            "trades": 105,
+            "net_excess_sum": -1.727895,
+            "annualized_excess": -1.209527,
+            "t_stat": -2.3872,
+            "perm_p": 0.017991,
+            "psr": 0.0075,
+            "dsr": 0.0,
+            "direction": "long-biased"
+          },
+          "T2": {
+            "days": 360,
+            "trades": 77,
+            "net_excess_sum": -0.414939,
+            "annualized_excess": -0.290457,
+            "t_stat": -0.4414,
+            "perm_p": 0.669165,
+            "psr": 0.3302,
+            "dsr": 0.0062,
+            "direction": "short-biased"
+          },
+          "T3": {
+            "days": 360,
+            "trades": 0,
+            "net_excess_sum": 0.0,
+            "annualized_excess": 0.0,
+            "t_stat": 0.0,
+            "perm_p": 1.0,
+            "psr": 0.0,
+            "dsr": 0.0,
+            "direction": "short-biased"
+          }
+        },
+        "2023": {
+          "T1": {
+            "days": 365,
+            "trades": 79,
+            "net_excess_sum": 1.481932,
+            "annualized_excess": 1.023142,
+            "t_stat": 1.8276,
+            "perm_p": 0.066467,
+            "psr": 0.9697,
+            "dsr": 0.4279,
+            "direction": "long-biased"
+          },
+          "T2": {
+            "days": 365,
+            "trades": 53,
+            "net_excess_sum": -1.113215,
+            "annualized_excess": -0.768576,
+            "t_stat": -2.3353,
+            "perm_p": 0.007496,
+            "psr": 0.0052,
+            "dsr": 0.0,
+            "direction": "short-biased"
+          },
+          "T3": {
+            "days": 365,
+            "trades": 15,
+            "net_excess_sum": -0.352955,
+            "annualized_excess": -0.243684,
+            "t_stat": -1.2586,
+            "perm_p": 0.228886,
+            "psr": 0.0911,
+            "dsr": 0.0003,
+            "direction": "short-biased"
+          }
+        },
+        "2024": {
+          "T1": {
+            "days": 366,
+            "trades": 46,
+            "net_excess_sum": 0.757183,
+            "annualized_excess": 0.521339,
+            "t_stat": 0.9639,
+            "perm_p": 0.33933,
+            "psr": 0.8331,
+            "dsr": 0.1375,
+            "direction": "long-biased"
+          },
+          "T2": {
+            "days": 366,
+            "trades": 4,
+            "net_excess_sum": -0.112987,
+            "annualized_excess": -0.077794,
+            "t_stat": -1.3721,
+            "perm_p": 0.304348,
+            "psr": 0.0565,
+            "dsr": 0.0001,
+            "direction": "short-biased"
+          },
+          "T3": {
+            "days": 366,
+            "trades": 27,
+            "net_excess_sum": -0.059316,
+            "annualized_excess": -0.040841,
+            "t_stat": -0.1536,
+            "perm_p": 0.876062,
+            "psr": 0.439,
+            "dsr": 0.0135,
+            "direction": "short-biased"
+          }
+        },
+        "2025": {
+          "T1": {
+            "days": 365,
+            "trades": 149,
+            "net_excess_sum": 0.206637,
+            "annualized_excess": 0.142664,
+            "t_stat": 0.3162,
+            "perm_p": 0.762119,
+            "psr": 0.6247,
+            "dsr": 0.0409,
+            "direction": "long-biased"
+          },
+          "T2": {
+            "days": 365,
+            "trades": 54,
+            "net_excess_sum": -0.392307,
+            "annualized_excess": -0.270853,
+            "t_stat": -1.4757,
+            "perm_p": 0.145927,
+            "psr": 0.058,
+            "dsr": 0.0001,
+            "direction": "short-biased"
+          },
+          "T3": {
+            "days": 365,
+            "trades": 0,
+            "net_excess_sum": 0.0,
+            "annualized_excess": 0.0,
+            "t_stat": 0.0,
+            "perm_p": 1.0,
+            "psr": 0.0,
+            "dsr": 0.0,
+            "direction": "short-biased"
+          }
+        }
+      },
+      "matrix_45": [
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "threshold": "T1",
+          "window": "2021",
+          "status": "tested",
+          "t": 3.1654,
+          "p": 0.001499,
+          "trades": 17,
+          "net_excess_sum": 4.783863
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "threshold": "T2",
+          "window": "2021",
+          "status": "tested",
+          "t": -1.627,
+          "p": 0.084958,
+          "trades": 14,
+          "net_excess_sum": -1.027287
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "threshold": "T3",
+          "window": "2021",
+          "status": "tested",
+          "t": -3.2276,
+          "p": 0.0005,
+          "trades": 64,
+          "net_excess_sum": -3.211902
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "threshold": "T1",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "threshold": "T2",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "threshold": "T3",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "threshold": "T1",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "threshold": "T2",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "threshold": "T3",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "threshold": "T1",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "threshold": "T2",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "threshold": "T3",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "threshold": "T1",
+          "window": "2022",
+          "status": "tested",
+          "t": -2.3882,
+          "p": 0.017991,
+          "trades": 106,
+          "net_excess_sum": -1.728495
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "threshold": "T2",
+          "window": "2022",
+          "status": "tested",
+          "t": -0.4414,
+          "p": 0.669165,
+          "trades": 77,
+          "net_excess_sum": -0.414939
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "threshold": "T3",
+          "window": "2022",
+          "status": "tested",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "threshold": "T1",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "threshold": "T2",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "threshold": "T3",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "threshold": "T1",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "threshold": "T2",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "threshold": "T3",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "threshold": "T1",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "threshold": "T2",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "threshold": "T3",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "threshold": "T1",
+          "window": "2023",
+          "status": "tested",
+          "t": 1.8276,
+          "p": 0.066467,
+          "trades": 79,
+          "net_excess_sum": 1.481932
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "threshold": "T2",
+          "window": "2023",
+          "status": "tested",
+          "t": -2.3365,
+          "p": 0.007496,
+          "trades": 54,
+          "net_excess_sum": -1.113815
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "threshold": "T3",
+          "window": "2023",
+          "status": "tested",
+          "t": -1.2586,
+          "p": 0.228886,
+          "trades": 15,
+          "net_excess_sum": -0.352955
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "threshold": "T1",
+          "window": "2024",
+          "status": "tested",
+          "t": 0.9632,
+          "p": 0.33933,
+          "trades": 47,
+          "net_excess_sum": 0.756583
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "threshold": "T2",
+          "window": "2024",
+          "status": "tested",
+          "t": -1.3721,
+          "p": 0.304348,
+          "trades": 4,
+          "net_excess_sum": -0.112987
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "threshold": "T3",
+          "window": "2024",
+          "status": "tested",
+          "t": -0.1551,
+          "p": 0.875062,
+          "trades": 28,
+          "net_excess_sum": -0.059916
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "threshold": "T1",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "threshold": "T2",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "threshold": "T3",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "threshold": "T1",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "threshold": "T2",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "threshold": "T3",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "threshold": "T1",
+          "window": "2025",
+          "status": "tested",
+          "t": 0.3162,
+          "p": 0.762119,
+          "trades": 149,
+          "net_excess_sum": 0.206637
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "threshold": "T2",
+          "window": "2025",
+          "status": "tested",
+          "t": -1.4757,
+          "p": 0.145927,
+          "trades": 54,
+          "net_excess_sum": -0.392307
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "threshold": "T3",
+          "window": "2025",
+          "status": "tested",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "threshold": "T1",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "threshold": "T2",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "threshold": "T3",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "threshold": "T1",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "threshold": "T2",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "threshold": "T3",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        }
+      ],
+      "gates": {
+        "F1_t_ge_2": {
+          "pass": false,
+          "fail_cells": [
+            "bullxT2x2021",
+            "bullxT3x2021",
+            "bearxT1x2022",
+            "bearxT2x2022",
+            "bearxT3x2022",
+            "rangexT1x2023",
+            "rangexT2x2023",
+            "rangexT3x2023",
+            "bullxT1x2024",
+            "bullxT2x2024",
+            "bullxT3x2024",
+            "bullxT1x2025",
+            "bullxT2x2025",
+            "bullxT3x2025"
+          ]
+        },
+        "F2_trades_ge_30": {
+          "pass": false,
+          "fail_cells": [
+            "bullxT1x2021(trades=17)",
+            "bullxT2x2021(trades=14)",
+            "bearxT3x2022(trades=0)",
+            "rangexT3x2023(trades=15)",
+            "bullxT2x2024(trades=4)",
+            "bullxT3x2024(trades=28)",
+            "bullxT3x2025(trades=0)"
+          ]
+        },
+        "F3_net_positive": {
+          "pass": false,
+          "fail_cells": [
+            "bullxT2x2021(net=-1.027287)",
+            "bullxT3x2021(net=-3.211902)",
+            "bearxT1x2022(net=-1.728495)",
+            "bearxT2x2022(net=-0.414939)",
+            "bearxT3x2022(net=0.000000)",
+            "rangexT2x2023(net=-1.113815)",
+            "rangexT3x2023(net=-0.352955)",
+            "bullxT2x2024(net=-0.112987)",
+            "bullxT3x2024(net=-0.059916)",
+            "bullxT2x2025(net=-0.392307)",
+            "bullxT3x2025(net=0.000000)"
+          ]
+        },
+        "F4_direction_consistency": {
+          "pass": true,
+          "detail": {
+            "T1": {
+              "consistent_windows": "5/5",
+              "dominant": "long-biased",
+              "pass": true
+            },
+            "T2": {
+              "consistent_windows": "5/5",
+              "dominant": "short-biased",
+              "pass": true
+            },
+            "T3": {
+              "consistent_windows": "5/5",
+              "dominant": "short-biased",
+              "pass": true
+            }
+          }
+        },
+        "F5_perm_p_lt_0001": {
+          "pass": true,
+          "n_below": 1
+        },
+        "F6_psr_gt_095": {
+          "pass": true,
+          "detail": {
+            "2021": 0.9992,
+            "2022": 0.0075,
+            "2023": 0.9697,
+            "2024": 0.8331,
+            "2025": 0.6247
+          }
+        },
+        "F7_bh_fdr": {
+          "pass": true,
+          "n_rejected": 3
+        },
+        "F8_dsr_positive": {
+          "pass": true,
+          "detail": {
+            "2021": 0.8664,
+            "2022": 0.0,
+            "2023": 0.4279,
+            "2024": 0.1375,
+            "2025": 0.0409
+          }
+        }
+      },
+      "overall_pass": false
+    }
+  },
+  "verdict": {
+    "all_markets_pass": false,
+    "per_market_pass": {
+      "ETHUSDT": false,
+      "SOLUSDT": false
+    },
+    "note": "S1 BTC already FAIL 8/8 (04r1); this is the cross-market generalization test under B1 degradation (ETH/SOL)"
+  }
+}

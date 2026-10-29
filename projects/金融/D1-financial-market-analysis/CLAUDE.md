@@ -24,7 +24,7 @@
 
 ## 全局 Agent 团队
 
-`.claude/agents/` 应指向 `/Users/a1-6/Desktop/workspace/agents/`（symlink）。
+`.claude/sop/` 应指向 `/Users/a1-6/Desktop/workspace/sop/`（symlink）。
 
 ## 项目方向
 

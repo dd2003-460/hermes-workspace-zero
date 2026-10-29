@@ -145,15 +145,3 @@ git ls-remote https://github.com/dd2003-460/<repo>.git 'refs/heads/<branch>'
 
 **为什么是清单不是文档**：r64-r69 连错仓库的根因是"知道规矩但派发时没执行"。清单把规矩变成逐条打勾的动作，跳过任何一条都算违规。
 
-## 行动 hook（2026-10-29 r83 · 成璐指令）
-
-**派发 arena 任务前，Lead 必须在当轮先执行以下动作（不是靠自觉读文档）：**
-
-```bash
-# 1. 查会话台账（仓库 → 会话 ID 对照）
-grep -A5 '会话台账' sop/arena-loop-pipeline.md | head -15
-# 2. 确认目标仓库远端可达 + 任务书分支存在
-git ls-remote https://github.com/dd2003-460/<repo>.git 'refs/heads/<branch>'
-```
-
-两条命令的输出都要在派发前的同一轮里跑过。台账里没有该仓库的会话 → 开新会话选对仓库并登记台账；有 → 打开该会话 snapshot 验 "repository and branch" 区块再发。跳过这两步直接派发 = 流程违规。

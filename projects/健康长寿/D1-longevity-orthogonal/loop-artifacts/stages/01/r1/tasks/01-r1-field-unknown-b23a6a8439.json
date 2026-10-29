@@ -1,0 +1,91 @@
+{
+  "apply_count": 1,
+  "attribute": "data_access_and_coverage_gaps",
+  "concept": "unknown",
+  "disposition": "research_required",
+  "field": {
+    "attribute": "data_access_and_coverage_gaps",
+    "concept": "unknown",
+    "confidence": 0.8,
+    "disposition": "research_required",
+    "evidence_refs": [],
+    "impact": "material",
+    "observed_at": "2026-10-28T19:30:00Z",
+    "rationale": "用户已决（2026-10-28 decision_log）：先无数据凭据跑可覆盖子集。由此产生以下待研究空缺（全部为阶段02 研究入口，未验证内容不伪装成默认值）：(1) 4 个 A 级暴露 id 全部挂在数据平台上，免凭据时能否取数；(2) 减重替代暴露 GIANT 官网公开包的可得性与合法下载路径；(3) 免凭据下可组的合法 暴露×结局 配对覆盖表（公开队列端点 × 开放暴露）；(4) 他汀代理暴露的样本量缓存值与论文发现阶段值不一致，开跑前须核对；(5) 预注册主结局与公开队列对应结局的映射关系；(6) TwoSampleMR 对公开队列端点的免凭据下载行为。任一覆盖缺口 ⇒ 对应暴露/结局标 blocked 记入 execution-log，不补造。",
+    "research_queue": [
+      {
+        "priority": 1,
+        "search_terms": [
+          "GIANT consortium BMI gwas download",
+          "Locke 2015 body mass index genetic analysis s3 data"
+        ],
+        "topic": "GIANT 官网（Locke 2015 BMI）免凭据公开下载路径与数据格式"
+      },
+      {
+        "priority": 1,
+        "search_terms": [
+          "FinnGen R13 summary statistics download",
+          "FinnGen I9_IHD cases 88476"
+        ],
+        "topic": "FinnGen R13 公开端点免凭据摘要统计下载（含 I9_IHD 等主结局映射）"
+      },
+      {
+        "priority": 1,
+        "search_terms": [
+          "Biobank Japan summary statistics download public",
+          "Biobank Japan R10 gwas download"
+        ],
+        "topic": "Biobank Japan 公开端点免凭据下载（bbj-a-107 等）"
+      },
+      {
+        "priority": 2,
+        "search_terms": [
+          "TwoSampleMR get_sumstats FinnGen token",
+          "TwoSampleMR biobank japan data_id"
+        ],
+        "topic": "TwoSampleMR 对 FinnGen/BBJ 端点的免凭据 get_sumstats 行为"
+      },
+      {
+        "priority": 2,
+        "search_terms": [
+          "Willer 2013 lipid gwas sample size 94595 discovery",
+          "GCST002220 sample size"
+        ],
+        "topic": "ieu-a-300（Willer 2013 LDL）样本量 173,082 vs 94,595 差异核实"
+      },
+      {
+        "priority": 3,
+        "search_terms": [
+          "Mendelian randomization open summary statistics BMI cardiovascular",
+          "FinnGen coronary artery disease I2D CAD gwas"
+        ],
+        "topic": "免凭据覆盖表汇总：可组 暴露×结局 合法 MR 对清单 + 每对独立来源>=3 核验"
+      }
+    ],
+    "reversible": false,
+    "role": "research_gaps"
+  },
+  "flow_only": false,
+  "id": "01-r1-field-unknown-b23a6a8439",
+  "input_refs": [
+    "loop-artifacts/stages/01/r1/fields.json"
+  ],
+  "instruction": "只处理字段 `unknown`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/01/r1/tasks/01-r1-field-unknown-b23a6a8439.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+  "last_applied_at": "2026-10-28T16:15:26.400150+00:00",
+  "output_schema": {
+    "attribute": "string",
+    "concept": "unknown",
+    "confidence": "number 0..1",
+    "disposition": "confirmed|inferred|assumed_default|research_required",
+    "evidence_refs": "array[string]",
+    "rationale": "string",
+    "role": "string"
+  },
+  "revision": "r1",
+  "role": "research_gaps",
+  "schema_version": 1,
+  "stage_id": "01",
+  "status": "ready",
+  "type": "field_task",
+  "updated_at": "2026-10-28T16:15:26.400830+00:00"
+}

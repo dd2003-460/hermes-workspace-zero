@@ -1,0 +1,49 @@
+{
+  "apply_count": 1,
+  "attribute": "请填写 goal 的正交因素分解",
+  "concept": "阶段 01 输出：goal",
+  "disposition": "pending",
+  "field": {
+    "attribute": "stage2_mr_execution_longevity_orthogonal",
+    "concept": "goal",
+    "confidence": 1.0,
+    "details": {
+      "decision": "阶段2 MR 实际执行（本 goal 覆盖预注册 Step 0-4；Step 5 L2 MVMR 属下一 goal）",
+      "out_of_scope": "Step 5 L2 MVMR 主分析、东亚轨对照分析、F15 抑郁（nsnp=10000 截断版本轮 blocked）、阶段1 重做",
+      "scope": "环境锁定 → 阳性对照 → 负对照 → 条件F → L1 单变量 MR（4 可跑 A 级暴露）→ 完整性自检 → 提交推送",
+      "success_criteria": "①session_info.txt 含 R版本+包版本/commit+运行日期 ②Step1 阳性对照2/2 β>0且p<0.05 ③Step2 负对照全部|z|<1.96 ④Step3 双变量条件F>=10（F08 用 ieu-a-835）⑤L1 点估计+95%CI+p 每暴露≥3独立来源 ⑥verify_integrity exit=0 且 push 成功"
+    },
+    "disposition": "confirmed",
+    "evidence_refs": [
+      "/Users/a1-6/Desktop/workspace/projects/健康长寿/D1-longevity-orthogonal/loop-state.json",
+      "repo/docs/20_方法/阶段2分析计划.md"
+    ],
+    "impact": "material",
+    "rationale": "把寿命正交贡献排序研究推进到阶段2实际执行：锁定 R>=4.2 + TwoSampleMR/MVMR 环境，按预注册计划（repo/docs/20_方法/阶段2分析计划.md）依次通过三道硬门禁（Step1 阳性对照2/2、Step2 负对照全部不显著、Step3 条件F>=10），产出可跑 A 级暴露的 L1 单变量 MR 点估计+95%CI，repo 内 verify_integrity.py exit=0 并 commit+push 到 GitHub main。全程走 1-loop 六阶段，整条链路默认外包 arena，只降通道不降流程。",
+    "reversible": false,
+    "role": "primary_objective"
+  },
+  "flow_only": false,
+  "id": "01-r1-field-01-goal-352d11288f",
+  "input_refs": [
+    "loop-artifacts/stages/01/r1/fields.json"
+  ],
+  "instruction": "只处理字段 `阶段 01 输出：goal`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/01/r1/tasks/01-r1-field-01-goal-352d11288f.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+  "last_applied_at": "2026-10-28T16:15:26.037630+00:00",
+  "output_schema": {
+    "attribute": "string",
+    "concept": "阶段 01 输出：goal",
+    "confidence": "number 0..1",
+    "disposition": "confirmed|inferred|assumed_default|research_required",
+    "evidence_refs": "array[string]",
+    "rationale": "string",
+    "role": "string"
+  },
+  "revision": "r1",
+  "role": "goal",
+  "schema_version": 1,
+  "stage_id": "01",
+  "status": "ready",
+  "type": "field_task",
+  "updated_at": "2026-10-28T16:15:26.038328+00:00"
+}

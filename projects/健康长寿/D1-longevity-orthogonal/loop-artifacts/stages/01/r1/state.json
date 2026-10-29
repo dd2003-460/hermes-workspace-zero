@@ -1,0 +1,112 @@
+{
+  "assumptions": [],
+  "attribute_matrix": [
+    {
+      "attribute": "stage2_mr_execution_longevity_orthogonal",
+      "concept": "goal",
+      "confidence": 1.0,
+      "details": {
+        "decision": "阶段2 MR 实际执行（本 goal 覆盖预注册 Step 0-4；Step 5 L2 MVMR 属下一 goal）",
+        "out_of_scope": "Step 5 L2 MVMR 主分析、东亚轨对照分析、F15 抑郁（nsnp=10000 截断版本轮 blocked）、阶段1 重做",
+        "scope": "环境锁定 → 阳性对照 → 负对照 → 条件F → L1 单变量 MR（4 可跑 A 级暴露）→ 完整性自检 → 提交推送",
+        "success_criteria": "①session_info.txt 含 R版本+包版本/commit+运行日期 ②Step1 阳性对照2/2 β>0且p<0.05 ③Step2 负对照全部|z|<1.96 ④Step3 双变量条件F>=10（F08 用 ieu-a-835）⑤L1 点估计+95%CI+p 每暴露≥3独立来源 ⑥verify_integrity exit=0 且 push 成功"
+      },
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "/Users/a1-6/Desktop/workspace/projects/健康长寿/D1-longevity-orthogonal/loop-state.json",
+        "repo/docs/20_方法/阶段2分析计划.md"
+      ],
+      "impact": "material",
+      "rationale": "把寿命正交贡献排序研究推进到阶段2实际执行：锁定 R>=4.2 + TwoSampleMR/MVMR 环境，按预注册计划（repo/docs/20_方法/阶段2分析计划.md）依次通过三道硬门禁（Step1 阳性对照2/2、Step2 负对照全部不显著、Step3 条件F>=10），产出可跑 A 级暴露的 L1 单变量 MR 点估计+95%CI，repo 内 verify_integrity.py exit=0 并 commit+push 到 GitHub main。全程走 1-loop 六阶段，整条链路默认外包 arena，只降通道不降流程。",
+      "reversible": false,
+      "role": "primary_objective"
+    },
+    {
+      "attribute": "established_repo_facts",
+      "concept": "known",
+      "confidence": 0.95,
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "repo/README.md",
+        "repo/docs/20_方法/阶段2分析计划.md",
+        "repo/data/derived/stage2_config.R",
+        "repo/data/derived/cache_crossvalidation.csv",
+        "repo/scripts/stage2_mr.R"
+      ],
+      "impact": "material",
+      "rationale": "2026-10-28 一手核实（repo 克隆 + 文件直读）：阶段1（IV 可得性实测）2026-10-21 并入 main 已完成；阶段2 从未运行（无 R 环境 + 无数据凭据），仓库目前不含任何本项目自算的因果估计（README 明示）。预注册稿已锁死停止规则/主结局/负对照阈值，改动必须记修订记录。可执行版 scripts/stage2_mr.R 从未运行，gate_fail 为硬门禁，首用先 --dry-run。阶段2 A 级暴露 5 个（stage2_config.R 自动生成）：F01 ukb-b-20261 / F03 ieu-b-38 / F04 ieu-a-300 / F08 ieu-b-40 / F15 ieu-a-1187(blocked)；F01/F03/F08 同含 UKB → MVMR 门禁触发，预注册「正确动作」= F08 换 ieu-a-835（Locke 2015 GIANT，无 UKB，F08 降 B 级）。主结局 7 个（含 ieu-a-7 / ebi-a-GCST005843 优先 006908 / ieu-a-1102 / ieu-a-966 / ieu-b-2 等）；负对照 3 个（发色/左利手/初潮，各有 valid_for 范围）。T2D ncontrol 用更正值 593,952（cache_crossvalidation.csv）。本机 R 未装（which R 空），brew 可用。",
+      "reversible": false,
+      "role": "baseline_knowledge"
+    },
+    {
+      "attribute": "data_access_and_coverage_gaps",
+      "concept": "unknown",
+      "confidence": 0.8,
+      "disposition": "research_required",
+      "evidence_refs": [],
+      "impact": "material",
+      "observed_at": "2026-10-28T19:30:00Z",
+      "rationale": "用户已决（2026-10-28 decision_log）：先无数据凭据跑可覆盖子集。由此产生以下待研究空缺（全部为阶段02 研究入口，未验证内容不伪装成默认值）：(1) 4 个 A 级暴露 id 全部挂在数据平台上，免凭据时能否取数；(2) 减重替代暴露 GIANT 官网公开包的可得性与合法下载路径；(3) 免凭据下可组的合法 暴露×结局 配对覆盖表（公开队列端点 × 开放暴露）；(4) 他汀代理暴露的样本量缓存值与论文发现阶段值不一致，开跑前须核对；(5) 预注册主结局与公开队列对应结局的映射关系；(6) TwoSampleMR 对公开队列端点的免凭据下载行为。任一覆盖缺口 ⇒ 对应暴露/结局标 blocked 记入 execution-log，不补造。",
+      "research_queue": [
+        {
+          "priority": 1,
+          "search_terms": [
+            "GIANT consortium BMI gwas download",
+            "Locke 2015 body mass index genetic analysis s3 data"
+          ],
+          "topic": "GIANT 官网（Locke 2015 BMI）免凭据公开下载路径与数据格式"
+        },
+        {
+          "priority": 1,
+          "search_terms": [
+            "FinnGen R13 summary statistics download",
+            "FinnGen I9_IHD cases 88476"
+          ],
+          "topic": "FinnGen R13 公开端点免凭据摘要统计下载（含 I9_IHD 等主结局映射）"
+        },
+        {
+          "priority": 1,
+          "search_terms": [
+            "Biobank Japan summary statistics download public",
+            "Biobank Japan R10 gwas download"
+          ],
+          "topic": "Biobank Japan 公开端点免凭据下载（bbj-a-107 等）"
+        },
+        {
+          "priority": 2,
+          "search_terms": [
+            "TwoSampleMR get_sumstats FinnGen token",
+            "TwoSampleMR biobank japan data_id"
+          ],
+          "topic": "TwoSampleMR 对 FinnGen/BBJ 端点的免凭据 get_sumstats 行为"
+        },
+        {
+          "priority": 2,
+          "search_terms": [
+            "Willer 2013 lipid gwas sample size 94595 discovery",
+            "GCST002220 sample size"
+          ],
+          "topic": "ieu-a-300（Willer 2013 LDL）样本量 173,082 vs 94,595 差异核实"
+        },
+        {
+          "priority": 3,
+          "search_terms": [
+            "Mendelian randomization open summary statistics BMI cardiovascular",
+            "FinnGen coronary artery disease I2D CAD gwas"
+          ],
+          "topic": "免凭据覆盖表汇总：可组 暴露×结局 合法 MR 对清单 + 每对独立来源>=3 核验"
+        }
+      ],
+      "reversible": false,
+      "role": "research_gaps"
+    }
+  ],
+  "authoritative_inputs": [],
+  "constraints": [],
+  "open_questions": [],
+  "scenarios": [],
+  "semantic_map": {},
+  "status": "unclarified",
+  "success_criteria": [],
+  "note": "stage01 closed via prompt-first artifact 01-goal-decomposition.md, 2026-10-29, field-apply deprecated (m00553)"
+}

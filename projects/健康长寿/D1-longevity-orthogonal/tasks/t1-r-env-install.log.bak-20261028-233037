@@ -1,0 +1,170 @@
+++ date
++ echo '=== T1 R env install start 2026年10月28日 星期三 19时27分16秒 CST ==='
+=== T1 R env install start 2026年10月28日 星期三 19时27分16秒 CST ===
++ brew install r
+==> Auto-updating Homebrew...
+Adjust how often this is run with `$HOMEBREW_AUTO_UPDATE_SECS` or disable with
+`$HOMEBREW_NO_AUTO_UPDATE=1`. Hide these hints with `$HOMEBREW_NO_ENV_HINTS=1` (see `man brew`).
+==> Downloading https://ghcr.io/v2/homebrew/core/portable-ruby/blobs/sha256:43ff285a82f48c84a06d0676a3800815a19d290d32e44182ddd7a6e95478e18e
+#=#=#                                                                          ##O#-#                                                                         ##O=#  #                                                                       #=#=-#  #                                                                      -#O#- #   #                                                                                                                                               0.3%                                                                           1.3%##                                                                         3.2%####                                                                       6.2%#########                                                                 12.9%####################                                                      29.0%#################################                                         46.3%###############################################                           65.7%######################################################################## 100.0%
+==> Pouring portable-ruby-4.0.9.arm64_big_sur.bottle.tar.gz
+==> Auto-updated Homebrew!
+Updated 2 taps (homebrew/core and homebrew/cask).
+==> New Formulae
+annotsv: Annotation and ranking of structural variations
+ascelerate: Command-line tool for the App Store Connect API
+cellpose: Generalist algorithm for cell and nucleus segmentation
+dep-scan: Security and risk audit tool for project dependencies and container images
+erpc: Fault-tolerant RPC proxy with re-org-aware permanent caching
+filmcraft-cli: Headless FilmCraft CLI and MCP server to edit, render and export video projects
+gitea-cli: Official command-line tool for Gitea
+gitea-importer: CLI to migrate repositories from GitHub, GitLab and Gitea into Gitea
+icu4c@79: C/C++ and Java libraries for Unicode and globalization
+kontext: Identity, credentials, and governance for AI agents
+ng-log: C++ library for application-level logging
+openssh-sk-provider: Standalone FIDO2 SecurityKeyProvider (sk-libfido2) for the system OpenSSH
+roborev: Background code review with AI agents
+slivar: Filter and annotate genetic variants with expressions, for trios and cohorts
+spidermonkey@140: JavaScript-C Engine
+worldmonitor: Command-line client for the World Monitor global intelligence API
+xfr: Modern network bandwidth testing with TUI
+zvec-grep: Agent-friendly hybrid workspace search across code and non-code content
+
+You have 75 outdated formulae installed.
+
+==> Downloading bottle manifests
+✔︎ Bottle Manifest r (4.6.1_2)
+==> Would install 1 formula:
+r 4.6.1_2
+==> Would install 6 dependencies for r:
+json-c    0.19
+isl       0.28
+libmpc    1.4.1
+gcc       16.2.0
+libomp    23.1.4
+openblas  0.3.34
+==> Would upgrade 13 dependencies for r:
+brotli        1.2.0   -> 1.2.1
+libpng        1.6.58  -> 1.6.59
+freetype      2.14.3  -> 2.15.0
+libunistring  1.4.2   -> 1.5
+fontconfig    2.18.1  -> 2.18.3
+pcre2         10.48   -> 10.49
+glib          2.88.1  -> 2.90.1
+xorgproto     2025.1  -> 2026.1
+libx11        1.8.13  -> 1.8.14
+libxrender    0.9.12  -> 0.9.13
+cairo         1.18.4  -> 1.18.6
+jpeg-turbo    3.1.4.1 -> 3.2.0
+tcl-tk        9.0.3   -> 9.1.0
+==> Fetching downloads for: r
+✔︎ Bottle Manifest brotli (1.2.1)
+✔︎ Bottle Manifest libpng (1.6.59)
+✔︎ Bottle Manifest freetype (2.15.0)
+✔︎ Bottle Manifest json-c (0.19)
+✔︎ Bottle Manifest libunistring (1.5)
+✔︎ Bottle Manifest fontconfig (2.18.3)
+✔︎ Bottle Manifest pcre2 (10.49)
+✔︎ Bottle Manifest glib (2.90.1)
+✔︎ Bottle Manifest xorgproto (2026.1)
+✔︎ Bottle Manifest libx11 (1.8.14)
+✔︎ Bottle Manifest libxrender (0.9.13)
+✔︎ Bottle Manifest cairo (1.18.6)
+✔︎ Bottle Manifest isl (0.28)
+✔︎ Bottle Manifest libmpc (1.4.1)
+✔︎ Bottle Manifest gcc (16.2.0)
+✔︎ Bottle Manifest jpeg-turbo (3.2.0)
+✔︎ Bottle Manifest libomp (23.1.4)
+✔︎ Bottle Manifest openblas (0.3.34)
+✔︎ Bottle Manifest tcl-tk (9.1.0)
+✔︎ Bottle fontconfig (2.18.3)
+✔︎ Bottle json-c (0.19)
+✔︎ Bottle libpng (1.6.59)
+✔︎ Bottle brotli (1.2.1)
+✔︎ Bottle libunistring (1.5)
+✔︎ Bottle xorgproto (2026.1)
+✔︎ Bottle pcre2 (10.49)
+✔︎ Bottle libxrender (0.9.13)
+✔︎ Bottle libmpc (1.4.1)
+✔︎ Bottle freetype (2.15.0)
+✔︎ Bottle isl (0.28)
+✔︎ Bottle libx11 (1.8.14)
+✔︎ Bottle libomp (23.1.4)
+✔︎ Bottle glib (2.90.1)
+✔︎ Bottle jpeg-turbo (3.2.0)
+✔︎ Bottle cairo (1.18.6)
+✔︎ Bottle tcl-tk (9.1.0)
+✔︎ Bottle r (4.6.1_2)
+✔︎ Bottle openblas (0.3.34)
+✔︎ Bottle gcc (16.2.0)
+==> Installing dependencies for r: brotli, libpng, freetype, json-c, libunistring, fontconfig, pcre2, glib, xorgproto, libx11, libxrender, cairo, isl, libmpc, gcc, jpeg-turbo, libomp, openblas and tcl-tk
+==> Upgrading r dependency: brotli (1.2.0 -> 1.2.1)
+==> Pouring brotli--1.2.1.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/brotli/1.2.1: 33 files, 1.9MB
+==> Upgrading r dependency: libpng (1.6.58 -> 1.6.59)
+==> Pouring libpng--1.6.59.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/libpng/1.6.59: 28 files, 1.4MB
+==> Upgrading r dependency: freetype (2.14.3 -> 2.15.0)
+==> Pouring freetype--2.15.0.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/freetype/2.15.0: 68 files, 2.9MB
+==> Installing r dependency: json-c (0.19)
+==> Pouring json-c--0.19.arm64_tahoe.bottle.1.tar.gz
+🍺  /opt/homebrew/Cellar/json-c/0.19: 34 files, 362.1KB
+==> Upgrading r dependency: libunistring (1.4.2 -> 1.5)
+==> Pouring libunistring--1.5.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/libunistring/1.5: 59 files, 5.8MB
+==> Upgrading r dependency: fontconfig (2.18.1 -> 2.18.3)
+==> Pouring fontconfig--2.18.3.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/fontconfig/2.18.3: 102 files, 1.9MB
+==> Upgrading r dependency: pcre2 (10.48 -> 10.49)
+==> Pouring pcre2--10.49.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/pcre2/10.49: 245 files, 7.3MB
+==> Upgrading r dependency: glib (2.88.1 -> 2.90.1)
+==> Pouring glib--2.90.1.arm64_tahoe.bottle.1.tar.gz
+🍺  /opt/homebrew/Cellar/glib/2.90.1: 502 files, 40.1MB
+==> Upgrading r dependency: xorgproto (2025.1 -> 2026.1)
+==> Pouring xorgproto--2026.1.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/xorgproto/2026.1: 268 files, 4.1MB
+==> Upgrading r dependency: libx11 (1.8.13 -> 1.8.14)
+==> Pouring libx11--1.8.14.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/libx11/1.8.14: 1,028 files, 7MB
+==> Upgrading r dependency: libxrender (0.9.12 -> 0.9.13)
+==> Pouring libxrender--0.9.13.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/libxrender/0.9.13: 13 files, 215.8KB
+==> Upgrading r dependency: cairo (1.18.4 -> 1.18.6)
+==> Pouring cairo--1.18.6.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/cairo/1.18.6: 58 files, 4.6MB
+==> Installing r dependency: isl (0.28)
+==> Pouring isl--0.28.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/isl/0.28: 80 files, 8MB
+==> Installing r dependency: libmpc (1.4.1)
+==> Pouring libmpc--1.4.1.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/libmpc/1.4.1: 14 files, 523.6KB
+==> Installing r dependency: gcc (16.2.0)
+==> Pouring gcc--16.2.0.arm64_tahoe.bottle.1.tar.gz
+🍺  /opt/homebrew/Cellar/gcc/16.2.0: 1,705 files, 500.6MB
+==> Upgrading r dependency: jpeg-turbo (3.1.4.1 -> 3.2.0)
+==> Pouring jpeg-turbo--3.2.0.arm64_tahoe.bottle.1.tar.gz
+🍺  /opt/homebrew/Cellar/jpeg-turbo/3.2.0: 47 files, 4.1MB
+==> Installing r dependency: libomp (23.1.4)
+==> Pouring libomp--23.1.4.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/libomp/23.1.4: 11 files, 1.8MB
+==> Installing r dependency: openblas (0.3.34)
+==> Pouring openblas--0.3.34.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/openblas/0.3.34: 30 files, 40.4MB
+==> Upgrading r dependency: tcl-tk (9.0.3 -> 9.1.0)
+==> Pouring tcl-tk--9.1.0.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/tcl-tk/9.1.0: 3,168 files, 38.9MB
+==> Installing r
+==> Pouring r--4.6.1_2.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/r/4.6.1_2: 2,525 files, 77.9MB
++ R --version
++ head -1
+R version 4.6.1 (2026-06-24) -- "Happy Hop"
++ Rscript -e 'install.packages("remotes", repos="https://cloud.r-project.org", quiet=TRUE)'
++ Rscript -e 'remotes::install_github("MRCIEU/TwoSampleMR", quiet=TRUE)'
+Running `R CMD build`...
+Running `R CMD build`...
+Installing 64 packages: cli, Rcpp, rlang, R6, otel, magrittr, lifecycle, later, fastmap, glue, vctrs, digest, base64enc, lazyeval, jsonlite, htmltools, utf8, pkgconfig, pillar, withr, tidyselect, tibble, generics, stringi, cpp11, stringr, purrr, dplyr, rappdirs, fs, sass, mime, memoise, cachem, tinytex, jquerylib, fontawesome, bslib, xfun, highr, evaluate, yaml, rmarkdown, knitr, sys, askpass, openssl, curl, viridisLite, RColorBrewer, labeling, farver, scales, S7, isoband, gtable, promises, data.table, crosstalk, tidyr, htmlwidgets, httr, ggplot2, plotly
+Running `R CMD build`...
+Installing 69 packages: rlang, lifecycle, glue, cli, withr, vctrs, utf8, pkgconfig, pillar, magrittr, stringi, tidyselect, tibble, R6, generics, xfun, yaml, highr, evaluate, fastmap, digest, base64enc, htmltools, rappdirs, fs, sass, mime, memoise, jsonlite, jquerylib, cachem, sys, askpass, openssl, curl, Rcpp, iterators, viridisLite, RColorBrewer, labeling, farver, cpp11, scales, S7, isoband, gtable, stringr, purrr, dplyr, tinytex, knitr, fontawesome, bslib, GPArotation, mnormt, httr, RcppEigen, shape, foreach, ggplot2, tidyr, rmarkdown, psych, pbapply, ieugwasr, gridExtra, glmnet, data.table, cowplot

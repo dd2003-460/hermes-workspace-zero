@@ -181,3 +181,15 @@ git ls-remote https://github.com/dd2003-460/<repo>.git 'refs/heads/<branch>'
 2. **怎么删**：ego-browser 打开 arena.ai/agent 列表 → 每个会话右侧 "More options" 按钮 → Delete。批量删时逐个点，不写脚本（arena 无批量删除 API）。
 3. **保留规则**：台账里登记的"当前活跃会话"不删；同一仓库只留最新的一个。
 4. **台账同步**：删完会话后更新 `sop/arena-loop-pipeline.md` §3.1 会话台账，把已删的标记为"已清理 <日期>"或移除。
+
+## 永动保障（2026-10-29 r87 · 成璐指令：必须永远不停止）
+
+**架构事实**：stop_hook（pre_verify）只在"本回合改过文件 + 自然停止"时触发续推；纯聊天回合（没改文件）不触发，靠 cron keepalive（loop-keepalive-30m）兜底唤醒。两条链路都必须活着才算"永动"。
+
+**r87 事故复盘**：2026-10-29 15:28 keepalive 失败——模型服务器拒收（'too large'，会话 ~53k token 但服务器实际窗口更小或并发占满），连续多轮 HTTP 400 / too large 交替，期间系统静默停摆近 1 小时。根因：keepalive 复用同一会话，上下文只增不减，膨胀到服务器拒收后没有自愈路径。
+
+硬规则：
+1. **keepalive prompt 含失败自愈协议**（已写入 jobs.json）：唤醒先查 executions.db 最近 3 次状态；'too large'/'HTTP 400' → 声明失败原因后用最小上下文继续（只读 CONTINUE_MSG.md + git log -3 + 阶段 JSON，不重放历史）；连续 3 次同类失败 → 写 APPROVALS.md 建议重置会话，继续可逆工作不停止。
+2. **每轮结束前更新 CONTINUE_MSG.md 的「下一步」段**——这是跨唤醒的记忆锚点，丢了它下次唤醒就是盲的。
+3. **派发 arena 任务 = 把长耗时工作移出主循环**：主会话只做派单+核验回执，不等 arena 跑完。这样主会话上下文增长慢，keepalive 不容易撞墙。
+4. **监控**：每天至少一次查 `sqlite3 ~/.hermes/cron/executions.db "select status, count(*) from executions where job_id='8d0311e989fc' and created_at > datetime('now','-1 day') group by status;"`，failed 占比 >50% 就要处理（重置 keepalive 会话或换模型）。

@@ -3,7 +3,7 @@
 
 ## 本文件夹主要功能
 
-全局 Agent 规格与标准操作流程（SOP）集合：`SOP-INDEX.md`（所有 SOP 的总索引，先查这里）、`goal-template.md` / `goal-template-addon-acp-rule.md`（goal 模板）、`arena-loop-pipeline.md` / `arena-outsource.md`（arena 外包 SOP）、`ego-browser-index.md`（ego-browser 用法）、`loop-executor.md`（loop 执行器规格）、`task-manager.md`（任务管理器）、`sub-brain.md`（副脑规格）、`qwen-thinking-loop-fix.md`（qwen 思考循环修复记录）、`acp-rules.json`（ACP 规则）、`archived-20261016/`（归档）。
+全局 SOP 集合（2026-10-29 清理：旧 agent 规格已删，归档在 `archive/`、`archived-20261016/`）：`SOP-INDEX.md`（总索引，先查这里）、`goal-template.md`（goal 模板，五字段+阶段指针）、`arena-loop-pipeline.md`（arena 外包链路，唯一入口）、`research-task-template.md`（调研任务模板）、`structured-dispatch.md`（结构化输出派发）、`ego-browser-index.md`（ego-browser 用法）、`acp-rules.json`（ACP 硬规则下发入口）。
 
 ## 接口
 

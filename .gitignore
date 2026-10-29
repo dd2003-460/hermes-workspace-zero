@@ -90,3 +90,4 @@ node_modules/.npmcache/
 prompt-first-bench/
 projects/persona-prompt-lab/
 .pytest_cache/
+/tools/stage-gate/

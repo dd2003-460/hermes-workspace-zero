@@ -48,6 +48,12 @@
 | 媒体 pipeline | `dd2003-460/d1-media-pipeline`（假设） | 任务书在 `tasks/` |
 | AI 视频复刻（像素剧/对标 B 站合集） | `dd2003-460/d1-video-recreation`（2026-10-26 确认，实际在用） | 任务卡在 `arena-prompts/batchN/`，SOP 在仓库 `sop/` |
 
+**会话台账（一仓一会话 · r80）**：派发前先查此表复用已有会话，跨仓库才开新会话；开新会话后更新本表。
+
+| 仓库 | 当前 arena 会话 | 备注 |
+|------|----------------|------|
+| prompt-first-bench | `arena.ai/agent/01a185f5-522b-72b2-a713-200878602cd5`（taskSpace: arena-deepresearch-bench-20261029） | rubric-v3/deepresearch 系列；历史混有 market-alpha T3 消息，派发时显式声明只涉及 pfb |
+
 **原则**：每个项目有自己的仓库，arena 连接对应仓库，读仓库内的任务书执行。不跨仓库混用。
 
 ### 3.2 连接仓库（新会话直接选仓库 · 2026-10-26 修正）

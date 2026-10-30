@@ -51,6 +51,7 @@
 
 | SOP | 路径 | 说明 |
 |-----|------|------|
+| **验证与结论引用（★ 实验/评分产出必读）** | `sop/verification-sop.md` | 7 条规则：实跑证据验收 / 异族 judge / 功效分析 / 口径限定语 / 负结果登记 / 机判边界 / 混淆变量检查（2026-10-31，从 pfb AUDIT + decomp arena 复核提炼） |
 | **find-goal（无活跃 goal 时立项）** | `sop/find-goal-sop.md` | 扫未推送工作防撞车 → P1/P2 选任务 → goal-template 立项 → step_notify 留痕（2026-10-30） |
 | 思考预算 | `projects/AI-计算科学/D1-persona-align/thinking-budget.md` | L0/L1/L2 分级 + 终止指令 |
 | 人类确认机制 | `个人/APPROVALS.md` | 不可逆 × 偏好不明 → 写审批不阻塞 |

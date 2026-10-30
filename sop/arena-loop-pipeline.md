@@ -123,7 +123,36 @@ git -C /tmp/<repo> push && git ls-remote https://github.com/dd2003-460/<repo>.gi
 5. 失败降级：按 §3.3（loop 不豁免）
 ```
 
-## 6. 维护
+## Battle 投票 = 免费的多模型打分器
+
+R5.2-third-scorer / RV3G4-kappa-gate-execution 类"需要不同模型家族独立打分"的阻塞项，可用 battle 通道解：
+
+1. ego-browser 打开 lmarena.ai（已登录态），新建 chat
+2. 把同一份盲打材料（如 packet v2 三 run 评分任务书）发给 battle
+3. 两个匿名模型各自独立作答（上下文天然隔离，互不可见）
+4. **必须投票**（选 A 好/B 好/平局均可）→ 页面揭晓双方真实模型名
+5. 记录：模型名 + 完整回答文本 → 落盘 `bench/rubric-v3/scorers/<date>-battle-<id>.json`
+6. 每轮新会话（不污染上下文）；N 轮得 N×2 个模型家族的独立分数
+7. 收齐 ≥3 个不同家族后算 Fleiss'κ（消费 assert-kappa-receipt.py schema）
+
+### 硬约束
+
+- 投票是揭晓模型名的唯一途径，不投票 = 白跑
+- 记录时必须存原始回答全文（不是摘要），后续复算要用
+- 同一份材料发多次 = 多个独立样本，但同一模型家族只取一次（防重复计数）
+- 自动化限制：battle 页面的发送/投票按钮用 ego-browser JS 事件派发（同 GPT 侧套路）；若菜单/按钮触发失败，降级为半手动（我准备好材料，成璐点两下）
+
+## 结果核验
+
+- agent mode：不信汇报信 git（fetch 显式 refspec → log → show 文件 → 独立复算数字）
+- battle mode：核对揭晓的模型名与记录一致；回答文本 sha256 入库；分数复算和原文对账
+
+## 7. 维护补充（2026-10-30）
+
+- 新增 battle 通道实操细节（ego-browser 选择器、投票按钮定位、揭晓页解析）→ 补进本文件 §Battle 节 + skill `arena-outsource` references
+- 每次 battle 打分轮次 → 台账登记（日期/模型对/材料 hash/落盘路径）
+
+## 8. 维护
 
 - 新增仓库 → 更新 §3.1 映射表
 - 新增链路断点（实际断裂案例）→ 更新 §1 表格 + 记 qanda-ledger

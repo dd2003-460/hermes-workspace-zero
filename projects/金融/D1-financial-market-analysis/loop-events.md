@@ -3368,3 +3368,13 @@ RALPH_EVENT -->
 - `stages/05/r3/f7-preregistration.md`（F7 funding+basis 组合, human+ai 冻结）与 `stages/05/r4/f8-preregistration.md`（F8 IV skew 新路线）入库
 - F8 预注册要点：Deribit DVOL/25d skew/PCR 三信号 OR 逻辑，P1 corr(skew_chg, next_ret)<-0.05 / P2 skew_z≤-1.5 后 5d 超额>0.5% / P3 全 8 gate；45 格矩阵同 F6/F7 协议；fallback=CBOE BVIX+funding skew proxy；全 FAIL → 时间戳路线收束转宏观或负结果报告
 - 工作区未提交残留：build_f7_data.py 修改、TASKS.md、ACTIVE.md（外层）——下轮处理
+
+---
+
+## 2026-11-01 ~03:30 +0800 — F8 DVOL 单因子最终报告落盘 (commit 13ba5119)
+
+- 产物: `stages/05/r4/f8_report.md` — CLOSED (negative result)
+- 判定: P1/P2/P3/walk-forward 四项全 FAIL, DVOL 方向性择时与稳定仓位管理信号均不成立
+- 唯一残留价值: 高 DVOL → 后续波动 1.45x (风险管理提示, 非 alpha), 且跨期不稳定 (2022 反号)
+- 路线收束: 时间戳微观结构三腿 (F6 funding 0/135, F7 funding+basis 无增量, F8 DVOL 无效) 全部走不通
+- 下一步候选: C 宏观/跨资产 regime 增强 | D 项目收束整理 S1/F6/F7/F8 负结果研究原型报告

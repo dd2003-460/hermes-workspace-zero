@@ -1,0 +1,26 @@
+# T4 第 1 轮 — 四类事件信号定义（只做第 1 轮，完成后停下汇报）
+
+【执行前必读】
+1. 本任务必须走 1-loop：先读 sop/arena-loop-pipeline.md + loop/prompt-first/00-common-review.md + 01..04.5（仓库内）。
+2. 每阶段产出落盘 loop-artifacts/stages/<N>/，阶段判定 pass 才进下一阶段。
+3. 完成后 commit + push（含全部 loop-artifacts/）。
+4. 通道故障（403/沙箱）→ 报告 Lead，不得静默跳过 loop。
+
+## 上下文
+- tasks/T4-supply-chain.md — 任务书（本轮交付物定义见「第 1 轮」节）
+- supply-chain-forecast/README.md — 硬约束（12 月尺度 meme 层主导 / 输出必须标持有期 / 3 年精度 ±20-30% 输出分布非点 / 资金流不守恒）
+- backtest-sop.md — 四层护栏（红线 1：预测 T 期只能用「发布戳 < T 起点」的数据）
+- gpu-price-prediction/ — 既有分群体供需情景方法（可参考）
+- transformer-sector-valuation/ — 既有估值分析（可参考）
+
+## 本轮交付物：loop-artifacts/stages/02/t4-event-signals.md
+招标 / 核准 / 出口 / 产能 四类事件信号的定义，按任务书第 1 轮要求逐条给出：
+1. 每类事件的字段口径：信号名 / 字段 / 数据来源 / 频率 / 发布通道
+2. cninfo POST 通道检索方式：POST /new/hisAnnouncement/query（免登录）；注意检索只匹配标题，社保/QFII 等机构类信息须逐 PDF 解析——注明四类事件各自属于「标题可检索」还是「须逐 PDF 解析」
+3. 发布戳以披露日为准（披露日 ≠ 生效日/事件日），逐类标注红线 1 约束的适用方式
+
+## 纪律
+- 首动作：git add -A && git commit -m "chore: verify push channel" && git push，push 失败立刻在回复写一行 PUSH_FAILED: <原文错误> 再继续
+- 每完成一个子任务立即 commit + push，不要攒
+- 无法核验的事实标 candidate，禁止编造断言
+- 本轮只做第 1 轮（事件信号定义），方法构造与预注册不在本轮；完成后停下汇报改动清单，不要开始第 2 轮

@@ -1,0 +1,5 @@
+【续推 T4 第 1 轮 · 02.5=pass 裁定】
+首动作：git fetch origin main && git show origin/main:loop-artifacts/decisions/20261029-t4-r1-025-rulings.md，通读后按以下执行（你的分支不动，不 rebase，不改 main 的 decisions/台账）：
+1. 02.5 判定=pass，三项裁定：§1 六项残余缺口全部维持 candidate/执行前门禁（出口类 PDF 直读失败只能作「待核验线索」引用，不得当已核数据）；§2 五时戳字段按你 crosscheck §3 口径冻结（日粒度 00:00 不回填不发明亚日精度），null≠真实零，事件阶段逐事件标注不得累计混算；§3 分支卫生=后续合并回 main 时以 main 为准，你的分支不得再改动 main 的 decisions/台账文件。
+2. 按序执行：03 行动分解 → 04 执行日志 → 04.5 反方复核（ralph 缺位如实记录，Lead 裁定文件 20261029-t4-r1-025-rulings.md 为 02.5 复核记录）→ commit 全部 loop-artifacts/ → push。
+3. 完成停下汇报（各阶段文件路径+push 状态），不开始第 2 轮。PUSH_FAILED 立即上报原始错误，不 rebase 不强推。

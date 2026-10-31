@@ -1,0 +1,5 @@
+【续推 T3 第 3 轮 · 02.5=pass 裁定】
+首动作：git fetch origin main && git show origin/main:loop-artifacts/decisions/20261029-t3-r3-025-rulings.md，通读后按以下执行（你的分支不动，不 rebase，不改 main 的 decisions/台账）：
+1. 02.5 判定=pass，四项裁定并入 F7：§1 多重校正=Holm α=0.05 为确认性家族门禁 + BH α=0.05 并行报告不冒称保证，置换须预注册论证交换性，Holm 不能修正无效 p；§2 P5 采用方案(a)：拟合对象统一 K=½mr²，连续 MaxEnt 对照 h(K)=1+ln⟨K⟩=1+ln(T_E/2)（我上份裁定写 1+ln T_E 系笔误，属数学订正不计 trial），主判据=MaxEnt 拟合残差，离散熵若报须固定单位+固定分箱+同分箱基准；§3 P4 判读三分：δ=0.20，β 目标区间 [−1.867,−1.133]，CI 全在内=通过/全在外=证伪/跨界=不可判定，功效<0.80 的窗标「不可检验」；§4 S1 历史可得性=pass 但 TRADE_DATE≠发布戳，PIT 维持设计级，null 不填零。
+2. 按序执行：03 行动分解 → 冻结 F1-F7 落 tasks/kinetic-capital-flow/preregistration-m1-t2.md（§1–§4 逐条并入对应字段）→ 自检 B1-B6 → commit + 文件尾冻结声明段（时间+commit hash+修改须 Lead 书面同意）→ push。
+3. 完成停下汇报（冻结文件路径+自检结果+push 状态），不启动回测，不开始后续轮次。PUSH_FAILED 立即上报原始错误，不 rebase 不强推。

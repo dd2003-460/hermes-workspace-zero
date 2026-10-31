@@ -1,0 +1,23 @@
+【Lead 裁定 02=pass（以 Lead 补证为准），继续推进】
+main 已推进到新 commit（b970074），先执行：
+git fetch origin
+git show origin/main:loop-artifacts/decisions/20261029-t4-r1-rulings.md
+git show origin/main:loop-artifacts/stages/02/t4-r1-cninfo-lead-measurement.md
+（两个文件都在 main 上，用 git show 读，不要 rebase 分支）
+
+核心裁定要点（若读不到文件以此为准）：
+1. cninfo 通道结论以 Lead 实测为准：主通道=fulltext 全文匹配（你草稿里「只匹配标题」的假定被推翻——fulltext 招标 118 条/预中标 70 条，title 通道 0 条不可用，须弃用 title 改 fulltext 为主）
+2. 数据字典 time_precision 字段改为 day/subday 逐条判定，日粒度 00:00 是数据本身特性，不回填不发明亚日精度
+3. 分页按 hasMore+totalpages 走
+4. 你草稿里 arena 沙箱 curl 35 失败不构成通道不可用证据——Lead 本机实测通道可达（免登录 POST 成功）
+5. 残余缺口（核准/出口/产能实例、QFII 样例、fulltext 匹配对象是正文还是摘要等）：02.5 逐条闭合，闭不上如实标 candidate
+6. 未覆盖清单 6 项维持 candidate 不编造
+
+下一步（按序）：
+按裁定更新 t4-event-signals.md 主交付物（四类事件逐类字段口径/来源/频率/通道，以 fulltext 主通道为准，红线 1 披露日逐类）
+02.5 交叉核验（arena 无第二 LLM 通道，缺位如实写入）
+03 行动分解
+04 执行日志
+04.5 反方复核
+然后停下汇报，不开始第 2 轮
+push 失败写 PUSH_FAILED 上报；台账/decisions 属 Lead 领地不要改

@@ -1,0 +1,40 @@
+# T3 第 3 轮 — D23-A 预注册冻结（只做第 3 轮，完成后停下汇报）
+
+【执行前必读】
+1. 本任务必须走 1-loop：先读 sop/arena-loop-pipeline.md + loop/prompt-first/00-common-review.md + 01..04.5（仓库内）。
+2. 每阶段产出落盘 loop-artifacts/stages/<N>/，阶段判定 pass 才进下一阶段。
+3. 完成后 commit + push（含全部 loop-artifacts/）。
+4. 通道故障（403/沙箱）→ 报告 Lead，不得静默跳过 loop。
+
+## 上下文（前两轮已完成，先读这些再动手）
+- loop-artifacts/decisions/20261029-t3-r2-rulings.md — Lead 对 R2 的裁定（P5 代理降级/温度表接受/断点拆窗/历史可得性最优先），§5 前置清单必须逐条销项
+- loop-artifacts/decisions/20261029-t3-r1-rulings.md — R1 裁定（Q1 分轨/涨跌停主案保留/温度定义表要求）
+- loop-artifacts/stages/02/t3-data-sources.md — R2 主交付物（S1-S8 复核/对齐表/温度表/涨跌停方案）
+- loop-artifacts/stages/04.5/t3-r2-review.md — R2 交接（交接待补项）
+- tasks/T3-kinetic-flow.md — 任务书第 3 轮交付物定义
+- preregistration-template.md — 预注册模板（F1-F7 七字段）
+- references/D23-kinetic-theory-market-modeling.md — D23 原文
+
+## 本轮交付物：tasks/kinetic-capital-flow/preregistration-m1-t2.md
+复制 preregistration-template.md，F1-F7 全部填完 + 冻结前自检清单逐条过：
+- F1 阈值：五命题（P1 主/次、P3、P4、P5 代理）各自证伪判据数值，引用 R1/R2 已圆整的先验值，新增值须标先验圆整理由
+- F2 方向映射：各命题通过/失败方向写死
+- F3 OOS 窗口：walk-forward expanding 默认；A 股危机日历实例化（backtest-sop R6 是加密日历不适用，须另建 A 股版：2020 疫情/2021 紧缩/2022 封控/2024 微盘股等，逐窗标注）；S1 跨 2024-08-16 断点窗口强制拆分规则写入
+- F4 成本：统计命题无交易成本，如实写 N/A；P5 代理口径同样无交易
+- F5 trial count：R1+R2 已产生全部试验逐项列出（含 P5 代理、P1 主/次、温度定义选择），新增本预注册本身计 1
+- F6 执行机制：PIT 分离 + 未定版末根禁用 + S1 口径断点表（7 次变更史+2024-08-16）
+- F7 统计参数：permutation B=2000 固定 seed / BH-FDR α=0.05 单侧 / PSR>0.95 / DSR deflation / 涨跌停主案保留+对照剔除 / 温度定义表 T_E/T_V/T_eff/g 四行+三条一致性约束 / g 候选（横截面收益离散度倒数 vs 平均成对相关）二选一写死，不得回测后再选
+
+## 冻结前必须先完成三项前置（rulings §4，做完再填 F 字段）
+1. S1 2017-2024 日频历史可得性实测：交易所一手公告 URL 补齐（R2 遗留 conf 0.90 项）+ 用 fetch_page 实拉一条 2017-2024 区间样本验证；拿不到就如实写「P1/P3 日频窗口从 2026-10 起累积，预计检验完成时点=……」，禁止短窗强检
+2. 危机日历 A 股版实例化（见 F3）
+3. g 候选二选一决策（见 F7，给出选择理由）
+
+## 冻结动作
+自检清单全过 → commit → 在文件尾部写「冻结声明」段（冻结时间/冻结 commit hash/修改须 Lead 书面同意）。冻结后改口径=改 trial count，禁止静默修改。
+
+## 纪律
+- 首动作：git add -A && git commit -m "chore: verify push channel" && git push，push 失败立刻写一行 PUSH_FAILED: <原文错误> 再继续
+- 每完成一个子任务立即 commit + push，不要攒
+- 无法核验的事实标 candidate，禁止编造断言
+- 本轮只做第 3 轮（预注册冻结），回测执行不在本轮；完成后停下汇报改动清单，不要开始回测

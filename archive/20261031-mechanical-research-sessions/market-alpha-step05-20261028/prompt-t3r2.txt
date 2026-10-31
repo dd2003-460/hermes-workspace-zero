@@ -1,0 +1,30 @@
+# T3 第 2 轮 — 数据源可用性复核（只做第 2 轮，完成后停下汇报）
+
+【执行前必读】
+1. 本任务必须走 1-loop：先读 sop/arena-loop-pipeline.md + loop/prompt-first/00-common-review.md + 01..04.5（仓库内）。
+2. 每阶段产出落盘 loop-artifacts/stages/<N>/，阶段判定 pass 才进下一阶段。
+3. 完成后 commit + push（含全部 loop-artifacts/）。
+4. 通道故障（403/沙箱）→ 报告 Lead，不得静默跳过 loop。
+
+## 上下文（第 1 轮已完成，先读这些再动手）
+- loop-artifacts/stages/04.5/t3-review.md — 第 1 轮交接（三项裁决请求 + 两项点名风险）
+- loop-artifacts/decisions/20261029-t3-r1-rulings.md — Lead 裁定（Q1 分轨/Q2 原文入仓/Q3 P2 降级探索性/涨跌停保留为主案/温度定义表），必须遵守
+- references/D23-kinetic-theory-market-modeling.md — D23 原文（284 行，Lead 已放入仓）
+- tasks/T3-kinetic-flow.md — 任务书第 2 轮交付物定义
+- kinetic-capital-flow/README.md — 数据源 S1-S8 与发布戳红线 1
+
+## 本轮交付物：loop-artifacts/stages/02/t3-data-sources.md
+内容要求（逐条）：
+1. S1-S8 逐源复核表：口径 / 频率 / 历史纵深 / 发布戳（红线 1：预测 T 期只能用发布戳 < T 起点的数据）/ 与 t3-propositions.md 各命题的适配性
+2. 先行确认两项（04.5 点名）：S1 资金流向纵深具体数值 + 北向资金口径变更史；S4（东财主力口径）121 交易日的确值
+3. 原文-操作化对齐表（rulings Q2）：D23 原文五命题 ↔ t3-propositions.md 操作化版本，逐条标一致/偏离/新增，偏离给理由
+4. P2 涨落耗散可检验性评估（rulings Q3 已降级为探索性：若评估结论为「当前数据不可检验」，如实写出并说明理由，不硬凑）
+5. 温度定义表（rulings X1）：每个使用「温度 T」的命题给出操作化定义（量纲 + 估计量），同一命题内不得混用两义
+6. 涨跌停删失数据处理方案（rulings §4：主案=保留删失样本，对照=剔除重跑；写明两版各如何执行，供第 3 轮冻结）
+
+## 纪律
+- 首动作：git add -A && git commit -m "chore: verify push channel" && git push，验证推送通道；push 失败立刻在回复写一行 PUSH_FAILED: <原文错误> 再继续
+- 每完成一个子任务立即 commit + push，不要攒
+- 无法核验的事实标 candidate，禁止编造断言
+- 沙箱无 LaTeX 是预期，不要找 TeX 镜像
+- 本轮只做第 2 轮，完成后停下汇报改动清单，不要开始第 3 轮

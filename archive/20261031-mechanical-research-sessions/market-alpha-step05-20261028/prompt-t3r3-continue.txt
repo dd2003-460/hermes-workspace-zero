@@ -1,0 +1,26 @@
+【Lead 裁定 02=pass，继续推进】
+main 已推进到新 commit（b970074），先执行：
+git fetch origin
+git show origin/main:loop-artifacts/decisions/20261029-t3-r3-rulings.md
+git show origin/main:loop-artifacts/stages/02/t3-r3-s1-eastmoney-lead-measurement.md
+（两个文件都在 main 上，用 git show 读，不要 rebase 分支）
+
+核心裁定要点（若读不到文件以此为准）：
+1. S1 已闭合：Lead 实测东财接口 2017–2024 个股日频面板真实可取（002008 count=1672 行，2017-03-16→2024-08-16），conf 0.99，见 t3-r3-s1-eastmoney-lead-measurement.md
+2. P1-E 统一 K=½mr² 拟合，θ=⟨K⟩，T_E=2⟨K⟩ 换算冻结
+3. TOST 失败=证伪成立（低功效时如实报告功效不足，不判通过）
+4. PSR/DSR 非交易轨 N/A（非通过非失败非 0），DSR 仅 M3 交易策略轨用
+5. B6 允许设计冻结，执行前门禁：frozen:design, execution:blocked
+6. P2 涨落耗散挂起不入冻结集（探索性）
+7. trial 四口径全保留，实际执行=0
+8. README §3 已由 Lead 改双轨（统计命题轨/交易策略轨），无需你改
+
+下一步（按序）：
+02.5 交叉核验：文献/数据线索逐条回查+逻辑一致性核验；arena 无第二 LLM 通道，缺位如实写入 02.5 文件
+03 行动分解
+冻结：F1-F7 填完落 tasks/kinetic-capital-flow/preregistration-m1-t2.md
+自检 B1-B6
+commit + 文件尾冻结声明段（时间+hash+改口径须 Lead 书面同意）
+push
+然后停下汇报，不启动回测（frozen:design, execution:blocked）
+push 失败写 PUSH_FAILED 上报；台账/decisions 属 Lead 领地不要改

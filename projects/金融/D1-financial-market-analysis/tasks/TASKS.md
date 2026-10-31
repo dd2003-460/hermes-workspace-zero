@@ -19,7 +19,7 @@
 | ID | 任务 | 状态 | 优先级 | 依赖 | 说明 |
 |---|---|---|---|---|---|
 | F6 | 05 跨市场验证 (ETH/SOL) | ✅ 完成 (负结果) | P1 | F5 | `stages/05/r2/f6-crossmarket-report.md`: ETH FAIL / SOL FAIL, 单信号三市场闭合; SOL bull×T1×2021 t=3.17 post-hoc 观察不升级 |
-| F7 | 多信号组合 (资金费率 + 其他) | ⏳ 待办 | P2 | F6 | 候选: 现货-期货基差, 期权 skew, 链上指标 |
+| F7 | 多信号组合 (资金费率 + 基差) | ✅ 完成 (负结果) | P2 | F6 | `stages/05/r3/f7-report.md`: BTC/ETH/SOL 全 FAIL (P3), ρ(funding,basis)=−0.30~−0.39 信息冗余 → P2 "无增量" 分支; SOL bull×T1×B10×2021 t=3.27 post-hoc 不升级 |
 | F8 | 策略层 (仓位管理 + 执行) | ⏳ 待办 | P2 | F6,F7 | 仅在 F6/F7 有显著信号后启动 |
 
 ## 阻塞

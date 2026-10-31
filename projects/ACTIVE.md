@@ -1,12 +1,12 @@
 # ACTIVE — 活跃项目面板
 
-**自动生成**: 2026-10-29 23:52 — 由 scripts/aggregate-active.sh 聚合
+**自动生成**: 2026-11-01 03:14 — 由 scripts/aggregate-active.sh 聚合
 
 ## 焦点项目
 
 | 项目 | 相对路径 | 阶段 | 迭代 | 状态 | 当前任务 |
 |------|----------|------|------|------|----------|
-| D1-financial-market-analysis | `金融/D1-financial-market-analysis/` | 03 | r2 | running | F6 跨市场验证完成 (05 r2): ETH/SOL 双市场 FAIL — 资金费率单信号三市场(BTC/ETH/SOL)负结果闭合; |
+| D1-financial-market-analysis | `金融/D1-financial-market-analysis/` | 04.5 | r1 | running | F7 多信号组合完成 (05 r3): funding+basis 三市场 FAIL — |ρ|≥0.3 信息冗余无增量; SOL bull×T1×B10× |
 | D1-longevity-orthogonal | `健康长寿/D1-longevity-orthogonal/` | 01 | r1 | running | T4a 覆盖表完成: 无 token 路线 9 个合法 MR pair (BMI×6 + LDL×3), Step1/2 可跑, Step3 条件F 阻塞在 Ope |
 | D1-efficiency-optimization | `AI-计算科学/D1-efficiency-optimization/` | 01-goal-decomposition | 1 | active | R5 run5 完成 (M8 新指标题, 防复读): receipt.md + m8-proposal.md + scoring-r5.json (weighted 84.75) @ r5/run5/;  |
 | quant-capital-flow | `金融/quant-capital-flow/` | unknown | 1 | in_progress | toy model v15 联合优化完成（十五连败确认框架不够），转其他研究方向 |

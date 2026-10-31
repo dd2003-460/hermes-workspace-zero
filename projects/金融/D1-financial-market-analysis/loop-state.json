@@ -14,7 +14,7 @@
   ],
   "clarification_history": [],
   "current_artifact": "loop-artifacts/stages/04.5/r1/state.json",
-  "current_task": "F6 跨市场验证完成 (05 r2): ETH/SOL 双市场 FAIL — 资金费率单信号三市场(BTC/ETH/SOL)负结果闭合; SOL bull×T1×2021 单格 t=3.17/p=0.0015 记录为 post-hoc 观察不升级; 下一步 F7 多信号组合",
+  "current_task": "F7 多信号组合完成 (05 r3): funding+basis 三市场 FAIL — |ρ|≥0.3 信息冗余无增量; SOL bull×T1×B10×2021 t=3.27/p=0.0025 记录为 post-hoc 不升级; 下一步候选: 正交信号源(链上/期权skew)/非线性组合/接受负结果收束",
   "exploration_history": [],
   "field_tasks": [],
   "graph_tasks": [
@@ -719,5 +719,5 @@
   },
   "task_intake": null,
   "task_intake_history": [],
-  "updated_at": "2026-10-29T17:49:57+08:00"
+  "updated_at": "2026-11-01T03:03:21.881732+08:00"
 }

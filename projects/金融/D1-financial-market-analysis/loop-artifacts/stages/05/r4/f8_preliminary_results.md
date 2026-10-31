@@ -36,3 +36,18 @@ B2 阻塞更新: F8 预注册的 P1/P2/P3 全部 FAIL, 按预注册失败降级�
 - 选项 B: DVOL 降级为 sizing filter, 配合 funding 信号做组合 (但 funding 已闭合负结果)
 - 选项 C: 时间戳微观结构路线彻底闭合, 转宏观/跨资产
 - 选项 D: 项目收束, 整理 S1/F6/F7/F8 负结果为研究原型报告
+
+## 补充: 10d horizon + sizing 模拟 (2026-11-01)
+
+### HIGH DVOL z>=+1.5 SHORT 10d
+- n=104, avg=-0.013%, t=-0.020, win_rate(short)=46.2%
+- 完全不显著。高波动后 BTC 没有下跌倾向。
+
+### Sizing 模拟 (z>=1.5 → 0.7x position)
+- Sized total: +281.73% vs Buy-hold: +265.27% (overlap period)
+- 多赚 ~16pp 是 beta 衰减效应, 不是 alpha, 无统计意义
+
+### 最终判定
+**DVOL 单因子 REJECTED。** 方向信号全 horizon 无效, 仓位管理信号无超额。
+期权维度路线需要 IV skew (25Δ spread) 而非 DVOL 水平。
+Deribit live API 无法获取历史 skew, 需找 S3 archive 或放弃此路线。

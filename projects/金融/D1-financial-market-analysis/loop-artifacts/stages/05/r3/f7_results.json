@@ -1,0 +1,2596 @@
+{
+  "meta": {
+    "generated_at": "2026-10-31T19:49:07.727759+00:00",
+    "seed": 20261031,
+    "n_perm": 2000,
+    "n_trials": 60,
+    "markets": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT"
+    ],
+    "prereg": "stages/05/r3/f7-preregistration.md (frozen 2026-10-31)",
+    "deviation_D1": "vision bulk spot dead (404 since ~2024-01) + fapi IP ban -> OKX spot daily API (free, no key)",
+    "deviation_D2": "perp klines + funding reuse F6 r2 local cache (official CHECKSUM verified)",
+    "deviation_D3": "BTC perp klines/funding live in 04/r1 S1 cache (consolidated CSV/parquet from official vision zips); r2 cache only holds ETH/SOL",
+    "basis_definition": "(spot_close - perp_close)/spot_close, daily raw spread, PIT uses day t-1 value",
+    "combo_rule": "same-dir 1x / single 0.5x / none 0 / opposite 0 (frozen text silent, audited)",
+    "checksums": {
+      "cache": {
+        "ok": 136,
+        "bad": 0,
+        "checksum_missing": 0
+      },
+      "funding": {
+        "ok": 136,
+        "bad": 0,
+        "checksum_missing": 0
+      }
+    }
+  },
+  "per_market": {
+    "BTCUSDT": {
+      "data_range": {
+        "perp_first": 1577836800000,
+        "perp_last": 1767139200000,
+        "spot_first": 1577836800000,
+        "spot_last": 1793404800000,
+        "merged_days": 2192,
+        "funding_rows": 7395
+      },
+      "matrix_60": [
+        {
+          "market": "BTCUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2021",
+          "status": "tested",
+          "t": 0.2213,
+          "p": 0.821089,
+          "trades": 113,
+          "net_excess_sum": 0.134865
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2021",
+          "status": "tested",
+          "t": 0.4535,
+          "p": 0.624188,
+          "trades": 82,
+          "net_excess_sum": 0.221661
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2021",
+          "status": "tested",
+          "t": -0.5106,
+          "p": 0.614193,
+          "trades": 114,
+          "net_excess_sum": -0.168852
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2021",
+          "status": "tested",
+          "t": -0.3982,
+          "p": 0.695652,
+          "trades": 76,
+          "net_excess_sum": -0.080856
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2022",
+          "status": "tested",
+          "t": -2.7844,
+          "p": 0.006997,
+          "trades": 188,
+          "net_excess_sum": -0.662165
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2022",
+          "status": "tested",
+          "t": -1.4728,
+          "p": 0.141429,
+          "trades": 108,
+          "net_excess_sum": -0.419791
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2022",
+          "status": "tested",
+          "t": -1.4088,
+          "p": 0.158921,
+          "trades": 144,
+          "net_excess_sum": -0.345102
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2022",
+          "status": "tested",
+          "t": -0.8339,
+          "p": 0.624188,
+          "trades": 21,
+          "net_excess_sum": -0.094328
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2023",
+          "status": "tested",
+          "t": 0.8924,
+          "p": 0.381309,
+          "trades": 148,
+          "net_excess_sum": 0.168132
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2023",
+          "status": "tested",
+          "t": 1.4234,
+          "p": 0.163918,
+          "trades": 55,
+          "net_excess_sum": 0.288392
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2023",
+          "status": "tested",
+          "t": -1.0309,
+          "p": 0.275362,
+          "trades": 145,
+          "net_excess_sum": -0.13106
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2023",
+          "status": "tested",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2024",
+          "status": "tested",
+          "t": 1.1033,
+          "p": 0.265367,
+          "trades": 117,
+          "net_excess_sum": 0.404608
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2024",
+          "status": "tested",
+          "t": 1.4804,
+          "p": 0.13943,
+          "trades": 42,
+          "net_excess_sum": 0.389281
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2024",
+          "status": "tested",
+          "t": 0.1322,
+          "p": 0.883558,
+          "trades": 114,
+          "net_excess_sum": 0.02458
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2024",
+          "status": "tested",
+          "t": 0.3876,
+          "p": 1.0,
+          "trades": 8,
+          "net_excess_sum": 0.016453
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2025",
+          "status": "tested",
+          "t": 0.3354,
+          "p": 0.738131,
+          "trades": 161,
+          "net_excess_sum": 0.056059
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2025",
+          "status": "tested",
+          "t": 0.1822,
+          "p": 0.857571,
+          "trades": 53,
+          "net_excess_sum": 0.034655
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2025",
+          "status": "tested",
+          "t": 0.23,
+          "p": 0.81959,
+          "trades": 141,
+          "net_excess_sum": 0.02804
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2025",
+          "status": "tested",
+          "t": 1.3012,
+          "p": 0.481259,
+          "trades": 4,
+          "net_excess_sum": 0.013236
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "BTCUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        }
+      ],
+      "gates": {
+        "F1_t_ge_2": {
+          "pass": false,
+          "fail_cells": [
+            "bullxT1xB05x2021",
+            "bullxT1xB10x2021",
+            "bullxT2xB05x2021",
+            "bullxT2xB10x2021",
+            "bearxT1xB05x2022",
+            "bearxT1xB10x2022",
+            "bearxT2xB05x2022",
+            "bearxT2xB10x2022",
+            "rangexT1xB05x2023",
+            "rangexT1xB10x2023",
+            "rangexT2xB05x2023",
+            "rangexT2xB10x2023",
+            "bullxT1xB05x2024",
+            "bullxT1xB10x2024",
+            "bullxT2xB05x2024",
+            "bullxT2xB10x2024",
+            "bullxT1xB05x2025",
+            "bullxT1xB10x2025",
+            "bullxT2xB05x2025",
+            "bullxT2xB10x2025"
+          ]
+        },
+        "F2_trades_ge_30": {
+          "pass": false,
+          "fail_cells": [
+            "bearxT2xB10x2022(trades=21)",
+            "rangexT2xB10x2023(trades=0)",
+            "bullxT2xB10x2024(trades=8)",
+            "bullxT2xB10x2025(trades=4)"
+          ]
+        },
+        "F3_net_positive": {
+          "pass": false,
+          "fail_cells": [
+            "bullxT2xB05x2021(net=-0.168852)",
+            "bullxT2xB10x2021(net=-0.080856)",
+            "bearxT1xB05x2022(net=-0.662165)",
+            "bearxT1xB10x2022(net=-0.419791)",
+            "bearxT2xB05x2022(net=-0.345102)",
+            "bearxT2xB10x2022(net=-0.094328)",
+            "rangexT2xB05x2023(net=-0.131060)",
+            "rangexT2xB10x2023(net=0.000000)"
+          ]
+        },
+        "F4_direction_consistency": {
+          "pass": false,
+          "detail": {
+            "T1xB05": {
+              "consistent_windows": "5/5",
+              "dominant": "long-biased",
+              "pass": true
+            },
+            "T1xB10": {
+              "consistent_windows": "5/5",
+              "dominant": "long-biased",
+              "pass": true
+            },
+            "T2xB05": {
+              "consistent_windows": "3/5",
+              "dominant": "short-biased",
+              "pass": true
+            },
+            "T2xB10": {
+              "consistent_windows": "2/4",
+              "dominant": "long-biased",
+              "pass": false
+            }
+          }
+        },
+        "F5_perm_p_lt_0001": {
+          "pass": false,
+          "n_below": 0
+        },
+        "F6_psr_gt_095": {
+          "pass": false,
+          "psr_primary_T1xB05": 0.5592
+        },
+        "F7_bh_fdr": {
+          "pass": false,
+          "n_rejected": 0
+        },
+        "F8_dsr_positive": {
+          "pass": true,
+          "dsr_primary_T1xB05": 0.0215
+        }
+      },
+      "overall_pass": false,
+      "primary_variant_T1xB05": {
+        "net_excess_base": 0.147901,
+        "net_excess_stress": 0.101651,
+        "trades": 858,
+        "opposite_days": 421
+      }
+    },
+    "ETHUSDT": {
+      "data_range": {
+        "perp_first": 1577836800000,
+        "perp_last": 1767139200000,
+        "spot_first": 1577836800000,
+        "spot_last": 1793404800000,
+        "merged_days": 2192,
+        "funding_rows": 6576
+      },
+      "matrix_60": [
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2021",
+          "status": "tested",
+          "t": 1.2956,
+          "p": 0.2009,
+          "trades": 125,
+          "net_excess_sum": 1.102525
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2021",
+          "status": "tested",
+          "t": 1.3127,
+          "p": 0.184408,
+          "trades": 86,
+          "net_excess_sum": 0.879469
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2021",
+          "status": "tested",
+          "t": 0.2223,
+          "p": 0.818591,
+          "trades": 125,
+          "net_excess_sum": 0.09337
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2021",
+          "status": "tested",
+          "t": -0.493,
+          "p": 0.635182,
+          "trades": 84,
+          "net_excess_sum": -0.129086
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2022",
+          "status": "tested",
+          "t": -1.6308,
+          "p": 0.082959,
+          "trades": 204,
+          "net_excess_sum": -0.581844
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2022",
+          "status": "tested",
+          "t": -2.0249,
+          "p": 0.041979,
+          "trades": 149,
+          "net_excess_sum": -0.739614
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2022",
+          "status": "tested",
+          "t": -0.4169,
+          "p": 0.677161,
+          "trades": 172,
+          "net_excess_sum": -0.173091
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2022",
+          "status": "tested",
+          "t": -1.1255,
+          "p": 0.287356,
+          "trades": 60,
+          "net_excess_sum": -0.317661
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2023",
+          "status": "tested",
+          "t": 0.8804,
+          "p": 0.367316,
+          "trades": 147,
+          "net_excess_sum": 0.208308
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2023",
+          "status": "tested",
+          "t": 1.3456,
+          "p": 0.173413,
+          "trades": 51,
+          "net_excess_sum": 0.302705
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2023",
+          "status": "tested",
+          "t": -0.7962,
+          "p": 0.432284,
+          "trades": 145,
+          "net_excess_sum": -0.103775
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2023",
+          "status": "tested",
+          "t": 0.2555,
+          "p": 1.0,
+          "trades": 4,
+          "net_excess_sum": 0.001422
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2024",
+          "status": "tested",
+          "t": 0.6479,
+          "p": 0.51974,
+          "trades": 107,
+          "net_excess_sum": 0.270141
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2024",
+          "status": "tested",
+          "t": 0.4717,
+          "p": 0.653173,
+          "trades": 33,
+          "net_excess_sum": 0.149324
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2024",
+          "status": "tested",
+          "t": 0.3852,
+          "p": 0.704648,
+          "trades": 107,
+          "net_excess_sum": 0.086258
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2024",
+          "status": "tested",
+          "t": -0.9187,
+          "p": 0.368316,
+          "trades": 12,
+          "net_excess_sum": -0.02916
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2025",
+          "status": "tested",
+          "t": -1.1508,
+          "p": 0.237881,
+          "trades": 189,
+          "net_excess_sum": -0.321994
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2025",
+          "status": "tested",
+          "t": -0.2823,
+          "p": 0.777611,
+          "trades": 96,
+          "net_excess_sum": -0.091192
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2025",
+          "status": "tested",
+          "t": -1.1255,
+          "p": 0.262869,
+          "trades": 170,
+          "net_excess_sum": -0.260484
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2025",
+          "status": "tested",
+          "t": -1.0275,
+          "p": 0.494753,
+          "trades": 2,
+          "net_excess_sum": -0.011082
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "ETHUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        }
+      ],
+      "gates": {
+        "F1_t_ge_2": {
+          "pass": false,
+          "fail_cells": [
+            "bullxT1xB05x2021",
+            "bullxT1xB10x2021",
+            "bullxT2xB05x2021",
+            "bullxT2xB10x2021",
+            "bearxT1xB05x2022",
+            "bearxT1xB10x2022",
+            "bearxT2xB05x2022",
+            "bearxT2xB10x2022",
+            "rangexT1xB05x2023",
+            "rangexT1xB10x2023",
+            "rangexT2xB05x2023",
+            "rangexT2xB10x2023",
+            "bullxT1xB05x2024",
+            "bullxT1xB10x2024",
+            "bullxT2xB05x2024",
+            "bullxT2xB10x2024",
+            "bullxT1xB05x2025",
+            "bullxT1xB10x2025",
+            "bullxT2xB05x2025",
+            "bullxT2xB10x2025"
+          ]
+        },
+        "F2_trades_ge_30": {
+          "pass": false,
+          "fail_cells": [
+            "rangexT2xB10x2023(trades=4)",
+            "bullxT2xB10x2024(trades=12)",
+            "bullxT2xB10x2025(trades=2)"
+          ]
+        },
+        "F3_net_positive": {
+          "pass": false,
+          "fail_cells": [
+            "bullxT2xB10x2021(net=-0.129086)",
+            "bearxT1xB05x2022(net=-0.581844)",
+            "bearxT1xB10x2022(net=-0.739614)",
+            "bearxT2xB05x2022(net=-0.173091)",
+            "bearxT2xB10x2022(net=-0.317661)",
+            "rangexT2xB05x2023(net=-0.103775)",
+            "bullxT2xB10x2024(net=-0.029160)",
+            "bullxT1xB05x2025(net=-0.321994)",
+            "bullxT1xB10x2025(net=-0.091192)",
+            "bullxT2xB05x2025(net=-0.260484)",
+            "bullxT2xB10x2025(net=-0.011082)"
+          ]
+        },
+        "F4_direction_consistency": {
+          "pass": true,
+          "detail": {
+            "T1xB05": {
+              "consistent_windows": "5/5",
+              "dominant": "long-biased",
+              "pass": true
+            },
+            "T1xB10": {
+              "consistent_windows": "5/5",
+              "dominant": "long-biased",
+              "pass": true
+            },
+            "T2xB05": {
+              "consistent_windows": "3/5",
+              "dominant": "short-biased",
+              "pass": true
+            },
+            "T2xB10": {
+              "consistent_windows": "3/5",
+              "dominant": "short-biased",
+              "pass": true
+            }
+          }
+        },
+        "F5_perm_p_lt_0001": {
+          "pass": false,
+          "n_below": 0
+        },
+        "F6_psr_gt_095": {
+          "pass": false,
+          "psr_primary_T1xB05": 0.8249
+        },
+        "F7_bh_fdr": {
+          "pass": false,
+          "n_rejected": 0
+        },
+        "F8_dsr_positive": {
+          "pass": true,
+          "dsr_primary_T1xB05": 0.1077
+        }
+      },
+      "overall_pass": false,
+      "primary_variant_T1xB05": {
+        "net_excess_base": 1.24674,
+        "net_excess_stress": 1.19834,
+        "trades": 898,
+        "opposite_days": 418
+      }
+    },
+    "SOLUSDT": {
+      "data_range": {
+        "perp_first": 1600041600000,
+        "perp_last": 1767139200000,
+        "spot_first": 1601510400000,
+        "spot_last": 1793404800000,
+        "merged_days": 1913,
+        "funding_rows": 5881
+      },
+      "matrix_60": [
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2021",
+          "status": "tested",
+          "t": 3.2848,
+          "p": 0.001999,
+          "trades": 149,
+          "net_excess_sum": 4.134295
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2021",
+          "status": "tested",
+          "t": 3.3464,
+          "p": 0.001999,
+          "trades": 115,
+          "net_excess_sum": 3.684607
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2021",
+          "status": "tested",
+          "t": 1.4499,
+          "p": 0.161919,
+          "trades": 146,
+          "net_excess_sum": 1.22872
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2021",
+          "status": "tested",
+          "t": 1.0226,
+          "p": 0.338831,
+          "trades": 111,
+          "net_excess_sum": 0.779032
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2021",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2022",
+          "status": "tested",
+          "t": -0.32,
+          "p": 0.761119,
+          "trades": 184,
+          "net_excess_sum": -0.178414
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2022",
+          "status": "tested",
+          "t": -1.1415,
+          "p": 0.270365,
+          "trades": 163,
+          "net_excess_sum": -0.591753
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2022",
+          "status": "tested",
+          "t": 0.4894,
+          "p": 0.628686,
+          "trades": 173,
+          "net_excess_sum": 0.473564
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2022",
+          "status": "tested",
+          "t": 0.0742,
+          "p": 0.94003,
+          "trades": 134,
+          "net_excess_sum": 0.063225
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2022",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2023",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2023",
+          "status": "tested",
+          "t": 0.4576,
+          "p": 0.66017,
+          "trades": 190,
+          "net_excess_sum": 0.268901
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2023",
+          "status": "tested",
+          "t": 1.0058,
+          "p": 0.31934,
+          "trades": 134,
+          "net_excess_sum": 0.453296
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2023",
+          "status": "tested",
+          "t": -2.1013,
+          "p": 0.034483,
+          "trades": 179,
+          "net_excess_sum": -1.033172
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2023",
+          "status": "tested",
+          "t": -2.4083,
+          "p": 0.011494,
+          "trades": 110,
+          "net_excess_sum": -0.845177
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2024",
+          "status": "tested",
+          "t": 0.9449,
+          "p": 0.341829,
+          "trades": 148,
+          "net_excess_sum": 0.495345
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2024",
+          "status": "tested",
+          "t": 0.6594,
+          "p": 0.516242,
+          "trades": 75,
+          "net_excess_sum": 0.286494
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2024",
+          "status": "tested",
+          "t": 0.2136,
+          "p": 0.830085,
+          "trades": 129,
+          "net_excess_sum": 0.05696
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2024",
+          "status": "tested",
+          "t": -1.2544,
+          "p": 0.218891,
+          "trades": 30,
+          "net_excess_sum": -0.147691
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2024",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2025",
+          "status": "tested",
+          "t": 1.5946,
+          "p": 0.127436,
+          "trades": 201,
+          "net_excess_sum": 0.568101
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2025",
+          "status": "tested",
+          "t": 0.2018,
+          "p": 0.843578,
+          "trades": 151,
+          "net_excess_sum": 0.066809
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2025",
+          "status": "tested",
+          "t": 0.6432,
+          "p": 0.517741,
+          "trades": 164,
+          "net_excess_sum": 0.25483
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bull",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2025",
+          "status": "tested",
+          "t": -1.3923,
+          "p": 0.149425,
+          "trades": 55,
+          "net_excess_sum": -0.232663
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "bear",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B05",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "funding_th": "T1",
+          "basis_th": "B10",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B05",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        },
+        {
+          "market": "SOLUSDT",
+          "regime": "range",
+          "funding_th": "T2",
+          "basis_th": "B10",
+          "window": "2025",
+          "status": "regime_mismatch_flat",
+          "t": 0.0,
+          "p": 1.0,
+          "trades": 0,
+          "net_excess_sum": 0.0
+        }
+      ],
+      "gates": {
+        "F1_t_ge_2": {
+          "pass": false,
+          "fail_cells": [
+            "bullxT2xB05x2021",
+            "bullxT2xB10x2021",
+            "bearxT1xB05x2022",
+            "bearxT1xB10x2022",
+            "bearxT2xB05x2022",
+            "bearxT2xB10x2022",
+            "rangexT1xB05x2023",
+            "rangexT1xB10x2023",
+            "rangexT2xB05x2023",
+            "rangexT2xB10x2023",
+            "bullxT1xB05x2024",
+            "bullxT1xB10x2024",
+            "bullxT2xB05x2024",
+            "bullxT2xB10x2024",
+            "bullxT1xB05x2025",
+            "bullxT1xB10x2025",
+            "bullxT2xB05x2025",
+            "bullxT2xB10x2025"
+          ]
+        },
+        "F2_trades_ge_30": {
+          "pass": true,
+          "fail_cells": []
+        },
+        "F3_net_positive": {
+          "pass": false,
+          "fail_cells": [
+            "bearxT1xB05x2022(net=-0.178414)",
+            "bearxT1xB10x2022(net=-0.591753)",
+            "rangexT2xB05x2023(net=-1.033172)",
+            "rangexT2xB10x2023(net=-0.845177)",
+            "bullxT2xB10x2024(net=-0.147691)",
+            "bullxT2xB10x2025(net=-0.232663)"
+          ]
+        },
+        "F4_direction_consistency": {
+          "pass": true,
+          "detail": {
+            "T1xB05": {
+              "consistent_windows": "4/5",
+              "dominant": "long-biased",
+              "pass": true
+            },
+            "T1xB10": {
+              "consistent_windows": "5/5",
+              "dominant": "long-biased",
+              "pass": true
+            },
+            "T2xB05": {
+              "consistent_windows": "3/5",
+              "dominant": "short-biased",
+              "pass": true
+            },
+            "T2xB10": {
+              "consistent_windows": "3/5",
+              "dominant": "short-biased",
+              "pass": true
+            }
+          }
+        },
+        "F5_perm_p_lt_0001": {
+          "pass": false,
+          "n_below": 0
+        },
+        "F6_psr_gt_095": {
+          "pass": true,
+          "psr_primary_T1xB05": 0.9967
+        },
+        "F7_bh_fdr": {
+          "pass": true,
+          "n_rejected": 2
+        },
+        "F8_dsr_positive": {
+          "pass": true,
+          "dsr_primary_T1xB05": 0.7063
+        }
+      },
+      "overall_pass": false,
+      "primary_variant_T1xB05": {
+        "net_excess_base": 4.705273,
+        "net_excess_stress": 4.653823,
+        "trades": 913,
+        "opposite_days": 389
+      }
+    }
+  },
+  "reconciliation_P1_P2": {
+    "BTCUSDT": {
+      "rho": -0.3519,
+      "branch": "P2",
+      "expectation": "combo t improvement < 10% -> no incremental info",
+      "combo_best_cell": {
+        "market": "BTCUSDT",
+        "regime": "bull",
+        "funding_th": "T1",
+        "basis_th": "B10",
+        "window": "2024",
+        "status": "tested",
+        "t": 1.4804,
+        "p": 0.13943,
+        "trades": 42,
+        "net_excess_sum": 0.389281
+      },
+      "single_best": {
+        "key": "T1x2024",
+        "t": 1.1047402464165585,
+        "window": "2024"
+      },
+      "delta_t": 0.3757,
+      "prediction_holds": false
+    },
+    "ETHUSDT": {
+      "rho": -0.3923,
+      "branch": "P2",
+      "expectation": "combo t improvement < 10% -> no incremental info",
+      "combo_best_cell": {
+        "market": "ETHUSDT",
+        "regime": "range",
+        "funding_th": "T1",
+        "basis_th": "B10",
+        "window": "2023",
+        "status": "tested",
+        "t": 1.3456,
+        "p": 0.173413,
+        "trades": 51,
+        "net_excess_sum": 0.302705
+      },
+      "single_best": {
+        "key": "T1x2021",
+        "t": 1.2962969574858836,
+        "window": "2021"
+      },
+      "delta_t": 0.0493,
+      "prediction_holds": true
+    },
+    "SOLUSDT": {
+      "rho": -0.3053,
+      "branch": "P2",
+      "expectation": "combo t improvement < 10% -> no incremental info",
+      "combo_best_cell": {
+        "market": "SOLUSDT",
+        "regime": "bull",
+        "funding_th": "T1",
+        "basis_th": "B10",
+        "window": "2021",
+        "status": "tested",
+        "t": 3.3464,
+        "p": 0.001999,
+        "trades": 115,
+        "net_excess_sum": 3.684607
+      },
+      "single_best": {
+        "key": "T1x2021",
+        "t": 3.284762180551509,
+        "window": "2021"
+      },
+      "delta_t": 0.0616,
+      "prediction_holds": true
+    }
+  },
+  "verdict": {
+    "all_markets_pass": false,
+    "per_market_pass": {
+      "BTCUSDT": false,
+      "ETHUSDT": false,
+      "SOLUSDT": false
+    },
+    "note": "P3: success requires ALL 8 gates per market; partial pass = negative result recorded"
+  }
+}

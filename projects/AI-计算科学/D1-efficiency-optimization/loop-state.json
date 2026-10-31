@@ -4,8 +4,8 @@
   "loop_phase": "01-goal-decomposition",
   "status": "active",
   "priority": "HIGHEST",
-  "current_task": "R5 run5 arena 回执已提取落盘 (receipt.md + m8-proposal.md @ r5/run5/, 源 arena/78602cd5 commit 193b906); M8 自评 100/10 验收点, M3/M8 共线 n=1 不可估→建议 shadow metric; 下一步: R5.1 第二打分器 (ChatGPT) 独立评分",
+  "current_task": "R5 run5 完成 (M8 新指标题, 防复读): receipt.md + m8-proposal.md + scoring-r5.json (weighted 84.75) @ r5/run5/; bench.md n=4 mean 78.81±7.07 push pfb arena/78602cd5 (8892a94); M8 shadow metric 单列 (n=1 不可估 r, 建议 ≥5 run 后按 |r|>0.7 规则决定并入权重); 下一步: R5.1 ChatGPT 独立打分 run1-run5 → Fleiss κ 一致性 → bench.md r5 定稿",
   "created": "2026-10-22",
   "rationale": "用户 2026-10-22 指示：效率提高（prompt 改善性能和速度 + 识别瓶颈）优先级放最高",
-  "updated_at": "2026-10-29T19:00:11+08:00"
+  "updated_at": "2026-10-29T23:52:25.875437+08:00"
 }

@@ -34,7 +34,7 @@
 
 ## 四、agents 更新
 
-- `agents/loop-executor.md`：6 阶段执行流程（01→04.5）+ 约束 + 给 Lead 的建议
+- `sop/loop-executor.md`：6 阶段执行流程（01→04.5）+ 约束 + 给 Lead 的建议
 
 ## 五、流程改进
 
@@ -64,7 +64,7 @@
 2. **P1 未修**：不派 arena subagent，直接走降级（ego 直抓 → 自答 conf-0.2）
 3. **派发前**：查 `knowledge/domain-graph.md`，确认项目依赖 + 阻塞
 4. **收到指令**：查 `knowledge/decision-preferences.md`，确认决策偏好
-5. **loop 流程**：用 `agents/loop-executor.md`，6 阶段执行 + 每阶段落盘
+5. **loop 流程**：用 `sop/loop-executor.md`，6 阶段执行 + 每阶段落盘
 
 ## 七、下一步
 

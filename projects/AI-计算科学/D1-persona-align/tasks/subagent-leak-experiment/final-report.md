@@ -1,20 +1,20 @@
 # 子代理上下文泄漏面调研与解决方案 — 最终报告
 
 > origin: ai · 2026-10-23 · goal-c6da5c90 完成报告
-> 用户请求（m00002）：① 为什么不并行派发和研究；② subagent 在 DSH 有上一级 agent 上下文会不会泄漏任务信息，怎么解决；③ 设定目标调研和完整解决；④ 不违反 agents 安全规则的情况下允许用任何手段；⑤ 把这些意图整合进 agents/goal-template.md。
+> 用户请求（m00002）：① 为什么不并行派发和研究；② subagent 在 DSH 有上一级 agent 上下文会不会泄漏任务信息，怎么解决；③ 设定目标调研和完整解决；④ 不违反 agents 安全规则的情况下允许用任何手段；⑤ 把这些意图整合进 sop/goal-template.md。
 
 ## 执行摘要
 
 **核心发现**：DSH subagent 的泄漏面 = 系统提示层（~24K，含 AGENTS.md 成璐 persona 全文）+ git status 快照 + 文件系统旁路。父对话历史前缀实验未确认（与文档描述矛盾，待请求体 dump 确认）。
 
-**解决方案**：4 方案矩阵（S1 fresh 模式 / S2 最小化系统提示 / S4 arena 隔离 / S5 本地 CLI），按场景选择。已整合进 `agents/goal-template.md` §2.4。
+**解决方案**：4 方案矩阵（S1 fresh 模式 / S2 最小化系统提示 / S4 arena 隔离 / S5 本地 CLI），按场景选择。已整合进 `sop/goal-template.md` §2.4。
 
 **交付物**：
 1. 泄漏面分析（修正版）：`leak-surface-analysis.md`（201 行，含 LMArena + DeepSeek 双通道交叉验证）
 2. 实验结果：`experiment-results.md`（修正版探针 + 隔离组/fork 组对比）
 3. 解决方案：`solutions.md`（4 方案矩阵 + 实施优先级）
 4. 最终报告：本文件
-5. SOP 更新：`agents/goal-template.md` §2.4（子代理上下文隔离 SOP）
+5. SOP 更新：`sop/goal-template.md` §2.4（子代理上下文隔离 SOP）
 
 ## 验收标准核对
 
@@ -75,7 +75,7 @@
 | `runs/results-1792687163.json` | 隔离组泄漏探针结果（修正版） |
 | `runs/solution-test-1792687484.json` | 解决方案对照实验结果 |
 | `runs/fork_task_result.txt` | fork 组任务探针结果 |
-| `agents/goal-template.md` §2.4 | 子代理上下文隔离 SOP（新增） |
+| `sop/goal-template.md` §2.4 | 子代理上下文隔离 SOP（新增） |
 
 ## 时间线
 

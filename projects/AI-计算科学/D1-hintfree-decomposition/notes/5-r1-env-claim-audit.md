@@ -4,7 +4,7 @@
 
 - `ego-browser --version` → `ego-browser 0.5.1.13 / chromium 152.0.7977.54 / node v24.18.1` ✓ 浏览器本环境**有**
 - 已历史真实调用成功（stage 02）：`web-llm/chatgpt-02-r2.md`、`web-llm/perplexity-02-r2.md`里把 method 行写 `fill + press Enter + evaluate` ⇒ 网页操作已 worked
-- skill doc 存在并可读：`~/.agents/skills/ego-browser/SKILL.md`（Ego Lite = 给 AI 控制 Chromium 的浏览器）
+- skill doc 存在并可读：`~/.sop/skills/ego-browser/SKILL.md`（Ego Lite = 给 AI 控制 Chromium 的浏览器）
 
 ## 那句"本环境无浏览器"唯一出处
 

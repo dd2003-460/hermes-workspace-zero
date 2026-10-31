@@ -1,9 +1,7 @@
 # RALPH Loop 使用手册（面向成璐）
 
-> 这份文档只讲"怎么用"，不重复 runtime 内部实现。
-> 想看状态机 / Prompt / DAG / Hook 的关系，读 `ralph_runtime/README.md`；
-> 想看字段门禁设计，读 `ralph-dynamic-fields-design.md`；
-> 想看错误码对照，读 `ralph-feedback-prompts.md`。
+> 这份文档只讲"怎么用"，不重复内部实现。
+> 现行主流程 = `prompt-first/` 六阶段 Markdown 流程（01 → 04.5）。
 
 ---
 
@@ -15,7 +13,6 @@
 - **本地 35B 字段中心闭环**：正常跑用 `ralph loop`（进程退出后自动开新上下文继续）。
 
 Workspace 根：`/Users/a1-6/Desktop/workspace`
-Runtime 入口命令：`ralph`（已装在全局 venv，改 `loop/ralph_runtime/` 后即时生效）。
 
 ---
 

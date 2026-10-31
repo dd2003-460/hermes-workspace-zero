@@ -1,0 +1,590 @@
+[
+  {
+    "t": "你是文献调研员，任务是扒清楚所有 deep research benchmark 的评分标准细节，不是泛泛介绍。 读 research/deepresearch-bench/TASK-deepres…",
+    "h": "https://arena.ai/agent/01a185f5-522b-72b2-a713-200878602cd5"
+  },
+  {
+    "t": "你是反方核验者。先执行：git clone [https://github.com/dd2003-460/prompt-first-bench.git](https://github.com/dd20…",
+    "h": "https://arena.ai/agent/01a185e0-42cd-7622-a206-efabb2c90eb0"
+  },
+  {
+    "t": "你是文献调研员，任务是找\"按意外性/信息量给树节点加权计分\"的成熟做法，不是泛泛介绍信息论。 读 research/information-theory/TASK-surprisal-reward-…",
+    "h": "https://arena.ai/agent/01a185e8-2f92-7a88-b612-02edada9ecb9"
+  },
+  {
+    "t": "你是审稿人，任务是找这个评分标准测不出东西或测出假东西的地方，不是夸它设计得巧。 读 bench/rubric-v3/TASK-adversarial-check.md，按其中 Q1-Q6 六个质询…",
+    "h": "https://arena.ai/agent/01a185e6-118f-73de-84f2-383272469503"
+  },
+  {
+    "t": "你是文献调研员。先执行：git clone -b research/interpretability [https://github.com/dd2003-460/prompt-first-bench…",
+    "h": "https://arena.ai/agent/01a1856d-85da-794e-be7f-f46c7e220b40"
+  },
+  {
+    "t": "你是文献调研员。先执行：git clone -b research/interpretability https://github.com/dd2003-460/prompt-first-bench.…",
+    "h": "https://arena.ai/agent/01a18567-c0e6-7f59-bb78-0fce9c18bd41"
+  },
+  {
+    "t": "你是反方核验者。先执行：git clone https://github.com/dd2003-460/prompt-first-bench.git 到当前工作目录。然后读取 tasks/T8-C3-…",
+    "h": "https://arena.ai/agent/01a1855c-f77e-7068-a6c9-8267f771437d"
+  },
+  {
+    "t": "# T3 第 3 轮 — D23-A 预注册冻结（只做第 3 轮，完成后停下汇报） 【执行前必读】 1. 本任务必须走 1-loop：先读 sop/arena-loop-pipeline.md…",
+    "h": "https://arena.ai/agent/01a18404-6fb4-742d-8890-0a1fa8c1fe6b"
+  },
+  {
+    "t": "# T4 第 1 轮 — 四类事件信号定义（只做第 1 轮，完成后停下汇报） 【执行前必读】 1. 本任务必须走 1-loop：先读 sop/arena-loop-pipeline.md + …",
+    "h": "https://arena.ai/agent/01a1840f-b471-7f18-b90d-cb5fe174c209"
+  },
+  {
+    "t": "# T3 第 2 轮 — 数据源可用性复核（只做第 2 轮，完成后停下汇报） 【执行前必读】 1. 本任务必须走 1-loop：先读 sop/arena-loop-pipeline.md + …",
+    "h": "https://arena.ai/agent/01a183f0-b373-791c-a637-064f845b7cad"
+  },
+  {
+    "t": "## 仓库任务：T3 第 1 轮（只做这一轮，完成后停下汇报） 本会话只做一件事：执行仓库内任务书 tasks/T3-kinetic-flow.md 的「第 1 轮」。 1. 先按任务书顶…",
+    "h": "https://arena.ai/agent/01a183ce-e172-7c6c-a478-e7f74b8ab93d"
+  },
+  {
+    "t": "读取仓库 tasks/T7.1-meeting-system-r1.md 任务书，严格按其中执行步骤完成全部阶段。注意：所有阶段必须严格按仓库内 loop/prompt-first/ 下的阶段 pro…",
+    "h": "https://arena.ai/agent/01a1833a-ce0e-78d9-bd5a-ae084f577d9b"
+  },
+  {
+    "t": "先执行：git clone https://github.com/dd2003-460/prompt-first-bench.git 到当前工作目录。然后严格按 clone 下来的 tasks/T6-…",
+    "h": "https://arena.ai/agent/01a1832c-d916-7c5b-88df-26de8b542197"
+  },
+  {
+    "t": "先执行：git clone [https://github.com/dd2003-460/prompt-first-bench.git](https://github.com/dd2003-460/p…",
+    "h": "https://arena.ai/agent/01a17c78-9f1f-718b-bd36-8e67a5ecbd59"
+  },
+  {
+    "t": "先执行：读取仓库 tasks/T17-generalization-bench.md 任务书，然后严格按其中执行步骤完成。",
+    "h": "https://arena.ai/agent/01a17eb0-ac9f-7d90-947f-f03120ce2aa3"
+  },
+  {
+    "t": "大概看看仓库有没有opus5.5的完整视频链接",
+    "h": "https://arena.ai/agent/01a17723-ee0c-7f4f-98ed-47d35630f950"
+  },
+  {
+    "t": "混批在各种机器上真实负载到底怎么样，例如a100/h100/50系家用显卡/pro6000这种大显存专业卡，我需要真实的混合负载数据，确保我的效率正常，尽可能完整，广泛，， 这个大概和系统tco…",
+    "h": "https://arena.ai/agent/01a17905-6105-7470-bdfa-728b531fa1a9"
+  },
+  {
+    "t": "执行仓库中的任务 T2（A股变压器板块估值模型）。 先做这一件事（最高优先级）： 验证推送通道：git add -A &amp;&amp; git commit -m \"chore: veri…",
+    "h": "https://arena.ai/agent/01a17c81-f879-70e9-8187-8d2ee549676e"
+  },
+  {
+    "t": "先执行：git clone https://github.com/dd2003-460/prompt-first-bench.git 到当前工作目录。 然后严格按 clone 下来的 tasks/…",
+    "h": "https://arena.ai/agent/01a17c75-792a-7566-a04b-c54ae421bc38"
+  },
+  {
+    "t": "先执行：git clone https://github.com/dd2003-460/prompt-first-bench.git 到当前工作目录。 然后严格按 clone 下来的 arena-p…",
+    "h": "https://arena.ai/agent/01a1750b-18eb-76ed-8e0f-c352207c3500"
+  },
+  {
+    "t": "# Arena Prompt: batch-6 连续剧（E05-E08） &gt; 4 集，每集 30s。直接写文件，不要讨论。 ## 执行步骤（必须按编号逐步执行） 1…",
+    "h": "https://arena.ai/agent/01a169ec-9012-770f-b36b-ba07d725eb73"
+  },
+  {
+    "t": "# Arena Prompt: batch-8 连续剧（E13-E16） &gt; 4 集，每集 30s。直接写文件，不要讨论。 ## 执行步骤（必须按编号逐步执行） 1…",
+    "h": "https://arena.ai/agent/01a16a65-5cfe-7420-8e3e-93d9a8de056c"
+  },
+  {
+    "t": "调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。",
+    "h": "https://arena.ai/agent/01a16458-cbbe-7295-bbb2-7ad7843e12d7"
+  },
+  {
+    "t": "# Arena Prompt: batch-9 系列 (E17-E20) &gt; 4 集 × 30 秒。直接写文件，不讨论。 ## 执行步骤（必须按顺序逐步执行） 1. `git …",
+    "h": "https://arena.ai/agent/01a16de0-7bb9-7663-8b8f-4066a187d30d"
+  },
+  {
+    "t": "请读取仓库根目录 arena-prompts/batch10/E23_death.md，然后严格按照其中的执行步骤和技术要求完成全部 6 步（写 4 个文件、渲染 1800 帧、合成 mp4、跑 ch…",
+    "h": "https://arena.ai/agent/01a16ebf-dec2-72bd-af5b-e0cf510760ce"
+  },
+  {
+    "t": "# Arena Prompt: batch-10 E24 Rebirth (重生) &gt; 单集 × 30 秒。直接写文件，不讨论。 ## 执行步骤（必须按顺序逐步执行） 1. `…",
+    "h": "https://arena.ai/agent/01a1737a-9ef4-74b9-b4a5-1c2442a1e0b9"
+  },
+  {
+    "t": "请先 clone https://github.com/dd2003-460/prompt-first-bench （main 分支），然后严格按下方任务卡执行全部 6 步并 push 分支开 PR。…",
+    "h": "https://arena.ai/agent/01a174cb-aec2-7c5a-aa23-2c857b64d339"
+  },
+  {
+    "t": "先执行：git clone https://github.com/dd2003-460/prompt-first-bench.git 到当前工作目录。 然后严格按 clone 下来的 arena-p…",
+    "h": "https://arena.ai/agent/01a1750c-5f39-7739-87d8-b350f02b79da"
+  },
+  {
+    "t": "先执行：git clone https://github.com/dd2003-460/prompt-first-bench.git 到当前工作目录。 然后严格按 clone 下来的 arena-p…",
+    "h": "https://arena.ai/agent/01a1750a-7704-7ec8-ba86-7bbaed62bf74"
+  },
+  {
+    "t": "先执行：git clone https://github.com/dd2003-460/prompt-first-bench.git 到当前工作目录。 然后严格按 clone 下来的 arena-p…",
+    "h": "https://arena.ai/agent/01a1750b-ba7b-7714-b992-3afeff84760e"
+  },
+  {
+    "t": "请先 clone https://github.com/dd2003-460/prompt-first-bench （main 分支），然后严格按下方任务卡执行全部 6 步并 push 分支开 PR。…",
+    "h": "https://arena.ai/agent/01a174ca-d10e-723c-9117-44d958444d3f"
+  },
+  {
+    "t": "请帮我完成一个像素视频渲染项目的修复任务。 ## 仓库 git clone https://github.com/dd2003-460/d1-video-recreation.git #…",
+    "h": "https://arena.ai/agent/01a16275-fbde-7ee9-8e4c-d1dbc26a4894"
+  },
+  {
+    "t": "请读取仓库根目录 arena-prompts/batch10/E24_rebirth.md，然后严格按照其中的执行步骤和技术要求完成全部 6 步（写 4 个文件、渲染 1800 帧、合成 mp4、跑 …",
+    "h": "https://arena.ai/agent/01a16ec2-f2ff-7ea7-b7f8-a7f3ea429b99"
+  },
+  {
+    "t": "请读取仓库根目录 arena-prompts/batch10/E22_identity.md，然后严格按照其中的执行步骤和技术要求完成全部 6 步（写 4 个文件、渲染 1800 帧、合成 mp4、跑…",
+    "h": "https://arena.ai/agent/01a16eb2-d956-7412-acfc-257c248ebbb7"
+  },
+  {
+    "t": "请读取仓库根目录 arena-prompts/batch10/E21_forgetting.md，然后严格按照其中的执行步骤和技术要求完成全部 6 步（写 4 个文件、渲染 1800 帧、合成 mp4…",
+    "h": "https://arena.ai/agent/01a16eb0-36e5-72be-a8c4-a8864e1a42d4"
+  },
+  {
+    "t": "## 任务（硬性要求，甲方原话） 必须用解析法（留数法）给出结果，去验证 arXiv:2602.05714v2（楼明智 OLC 网络论文）论文里面的结果。 每个结论必须先给解析结果，再报「解析…",
+    "h": "https://arena.ai/agent/01a16c56-90dc-78b0-bccc-9b697295c7fd"
+  },
+  {
+    "t": "你之前只做了读取，没有创建任何文件。请立即执行以下 7 步： 1. 创建 src/render_error_arena.js（参考 render_goodbye_arena.js 的代码风格和结构…",
+    "h": "https://arena.ai/agent/01a1674c-03f2-74ca-b74b-accc28c5c50b"
+  },
+  {
+    "t": "# Arena Prompt: batch-6 连续剧（E05-E08） &gt; 4 集，每集 30s。直接写文件，不要讨论。 ## 执行步骤（必须按编号逐步执行） 1…",
+    "h": "https://arena.ai/agent/01a169ee-3f00-74fc-80f7-f13893fcb16f"
+  },
+  {
+    "t": "# Arena Prompt: batch-8 连续剧（E13-E16） &gt; 4 集，每集 30s。直接写文件，不要讨论。 ## 执行步骤（必须按编号逐步执行） 1. `git clone…",
+    "h": "https://arena.ai/agent/01a16c83-4818-7695-8851-bd67c700dd74"
+  },
+  {
+    "t": "# Arena Prompt: batch-8 (E13-E16) &gt; 4 episodes, 30s each. Write files directly, no discussion. …",
+    "h": "https://arena.ai/agent/01a16a51-a791-741e-bac2-45024ecd4552"
+  },
+  {
+    "t": "# Arena Prompt: batch-7 连续剧（E09-E12） &gt; 4 集，每集 30s。直接写文件，不要讨论。 ## 执行步骤（必须按编号逐步执行） 1. `git clone…",
+    "h": "https://arena.ai/agent/01a16a0c-82a1-7230-99dc-506bd9e801a4"
+  },
+  {
+    "t": "# Arena Prompt: batch-6 连续剧（E05-E08） &gt; 4 集，每集 30s。直接写文件，不要讨论。 ## 执行步骤（必须按编号逐步执行） 1. `git clone…",
+    "h": "https://arena.ai/agent/01a169f3-636c-7058-9664-d8fa74659c19"
+  },
+  {
+    "t": "# Arena Prompt: batch-6 连续剧（E05-E08） &gt; 4 集，每集 30s。直接写文件，不要讨论。 ## 执行步骤（必须按编号逐步执行） 1…",
+    "h": "https://arena.ai/agent/01a169eb-476a-73f1-acc7-3d4beca33c6d"
+  },
+  {
+    "t": "# Arena Prompt: batch-6 连续剧（E05-E08） &gt; 4 集，每集 30s。直接写文件，不要讨论。 ## 执行步骤（必须按编号逐步执行） 1…",
+    "h": "https://arena.ai/agent/01a169eb-ef89-7c81-951d-9e92ec98c80b"
+  },
+  {
+    "t": "# Arena Prompt: batch-6 连续剧（E05-E08） &gt; 4 集，每集 30s。直接写文件，不要讨论。 ## 执行步骤（必须按编号逐步执行） 1…",
+    "h": "https://arena.ai/agent/01a169ea-c91d-79c5-bed1-3d917d096c58"
+  },
+  {
+    "t": "``` # Arena Prompt: batch-6 连续剧第一幕+第二幕（E05-E08） > 连续剧系列化第二批（E01-E24 的 E05-E08）。剧情事实源：`docs/episodes…",
+    "h": "https://arena.ai/agent/01a169d3-4835-7b65-ac6a-59155a93226d"
+  },
+  {
+    "t": "``` # Arena Prompt: batch-5 连续剧第一幕（E01-E04 感受） > 连续剧系列化第一批（E01-E24 的 E01-E04）。剧情事实源：`docs/episodes.…",
+    "h": "https://arena.ai/agent/01a169a5-6662-7cb6-b05a-0ad5b4d3b54a"
+  },
+  {
+    "t": "Run R3.2 task: clone the task brief at bench/r3/run2/task-brief.md from the GitHub repo dd2003-460/p…",
+    "h": "https://arena.ai/agent/01a1699d-0679-7cfa-ac09-ad527c416e56"
+  },
+  {
+    "t": "# Arena Prompt: Companion v1.1 终端修正 + Reboot/Dialogue/Farewell ## 任务 1: Companion v1.1 终端修正 ##…",
+    "h": "https://arena.ai/agent/01a16824-2f0b-7f88-97ac-c5c9f8e7a12a"
+  },
+  {
+    "t": "# Arena Prompt: Companion v1.1 终端修正 + Reboot/Dialogue/Farewell ## 任务 1: Companion v1.1 终端修正 …",
+    "h": "https://arena.ai/agent/01a1680d-b11d-7ffc-b3ed-3b84f9f1964f"
+  },
+  {
+    "t": "# Arena Prompt: learning + upgrade v2.0 修正版 ## 背景 v1.0 版本的 learning 和 upgrade 视频有两个问题： 1. *…",
+    "h": "https://arena.ai/agent/01a167c7-aa65-7bf2-aa43-c8d782d1a131"
+  },
+  {
+    "t": "补跑 T4 ablation-L1 剩余 7 变体（C3/C4/C5/C6/C7/C8/C9-open），每变体 3 run = 21 runs + 21 评分。 变体定义： - C3-exp…",
+    "h": "https://arena.ai/agent/01a166ea-3dca-73c0-a190-8d012d866a16"
+  },
+  {
+    "t": "调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。",
+    "h": "https://arena.ai/agent/01a16464-428e-7ca5-b107-de5ea78595d6"
+  },
+  {
+    "t": "[任务]",
+    "h": "https://arena.ai/agent/01a1676d-361f-785b-8aee-b6ef39c5a7f4"
+  },
+  {
+    "t": "[任务] 调研研究 prompt 对比开源水平 + arena-direct/battle 实验效果",
+    "h": "https://arena.ai/agent/01a1675c-1d5f-7394-ae54-07e0cb82fb46"
+  },
+  {
+    "t": "# Arena Prompt: 「Clawd 的错误」error v1.0 ## 目标 制作 30 秒像素风视频「Clawd 的错误」，美术风格严格对标 `full_v1.3.4.mp4…",
+    "h": "https://arena.ai/agent/01a1673d-36b5-7827-b331-e5ea2a3a419d"
+  },
+  {
+    "t": "# Arena Prompt: 「Clawd 的陪伴」companion v1.0 ## 目标 制作 30 秒像素风视频「Clawd 的陪伴」，美术风格严格对标 `full_v1.3.4…",
+    "h": "https://arena.ai/agent/01a16724-40b3-7e97-8ba9-913f2b7f9784"
+  },
+  {
+    "t": "# Arena Prompt: 「Clawd 的告别」goodbye v1.0 ## 目标 制作 30 秒像素风视频「Clawd 的告别」，美术风格严格对标 `full_v1.3.4.m…",
+    "h": "https://arena.ai/agent/01a16476-1b6e-785b-bfb0-55b73dfc8adb"
+  },
+  {
+    "t": "补跑 T4 ablation-L1 剩余 7 变体（C3/C4/C5/C6/C7/C8/C9-open），每变体 3 run = 21 runs + 21 评分。 变体定义： - C3-exp…",
+    "h": "https://arena.ai/agent/01a166f0-f85a-78e8-843b-931b62c5c347"
+  },
+  {
+    "t": "调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。",
+    "h": "https://arena.ai/agent/01a164cb-92e2-71ae-9db4-b4440c309c57"
+  },
+  {
+    "t": "调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。",
+    "h": "https://arena.ai/agent/01a164c9-8b9d-7950-ab71-e431a8adf7b5"
+  },
+  {
+    "t": "调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。",
+    "h": "https://arena.ai/agent/01a164c8-dae8-7097-9e13-5f41ff62d537"
+  },
+  {
+    "t": "调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。",
+    "h": "https://arena.ai/agent/01a164c8-081f-7ac2-bae1-d31dafebd215"
+  },
+  {
+    "t": "调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。",
+    "h": "https://arena.ai/agent/01a164bb-d6a3-7050-ab55-238b3a6ee52e"
+  },
+  {
+    "t": "# Arena Prompt: 「Clawd 的学习」learning v1.0 ## 目标 制作 30 秒像素风视频「Clawd 的学习」，美术风格严格对标 `full_v1.3.4.…",
+    "h": "https://arena.ai/agent/01a1646a-4f60-7f54-b870-5deefb82a502"
+  },
+  {
+    "t": "# Arena Prompt: 「Clawd 的学习」learning v1.0 ## 目标 制作 30 秒像素风视频「Clawd 的学习」，美术风格严格对标 `full_v1.3.4.…",
+    "h": "https://arena.ai/agent/01a16460-f349-7d40-87fd-dd21d433fafc"
+  },
+  {
+    "t": "调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。",
+    "h": "https://arena.ai/agent/01a16462-0da4-7dc9-9c5b-f8140fd27bf1"
+  },
+  {
+    "t": "调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。",
+    "h": "https://arena.ai/agent/01a16460-309c-70f6-965f-b37ed67f0fb5"
+  },
+  {
+    "t": "# Arena Prompt: 「Clawd 的升级」upgrade v1.0 ## 目标 制作 30 秒像素风视频「Clawd 的升级」，美术风格严格对标 `full_v1.3.4.m…",
+    "h": "https://arena.ai/agent/01a1645c-7b25-7898-b9ef-4b9e819a2279"
+  },
+  {
+    "t": "调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。",
+    "h": "https://arena.ai/agent/01a1645d-07f8-7c24-be0c-67eafad525fd"
+  },
+  {
+    "t": "调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。",
+    "h": "https://arena.ai/agent/01a1645c-a9b5-77d2-b13e-501534635c63"
+  },
+  {
+    "t": "调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。请对以下技术结论做交叉验证（从反方找出会改变结论的错误或缺口）： …",
+    "h": "https://arena.ai/agent/01a1645d-a856-7638-a645-38469d159694"
+  },
+  {
+    "t": "调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。",
+    "h": "https://arena.ai/agent/01a16458-7718-76ed-b253-686135dff219"
+  },
+  {
+    "t": "调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。",
+    "h": "https://arena.ai/agent/01a16456-874e-7003-8c69-7ec05f665a49"
+  },
+  {
+    "t": "调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。",
+    "h": "https://arena.ai/agent/01a16456-dd63-7583-b4d4-b62bf6851104"
+  },
+  {
+    "t": "请制作「Clawd 的梦境」30 秒像素风视频，完全对标 full_v1.3.4.mp4 的美术风格。 【画布规格】 - 640×360 像素，SCALE=2 输出 1280×720 - 6…",
+    "h": "https://arena.ai/agent/01a16423-3ed4-7fff-931c-295a41ca6672"
+  },
+  {
+    "t": "请制作「Clawd 的早安」30 秒像素风视频，完全对标 full_v1.3.4.mp4 的美术风格。 【画布规格】 - 640×360 像素，SCALE=2 输出 1280×720 - 6…",
+    "h": "https://arena.ai/agent/01a163de-dbff-7a17-a975-226e57893324"
+  },
+  {
+    "t": "cat tasks/002-prompt-first-verify.md 并按任务书执行 1-loop，产出落盘后 commit+push",
+    "h": "https://arena.ai/agent/01a1635e-0644-74c5-9908-a19b83aaa1a9"
+  },
+  {
+    "t": "# SYSTEM_PROMPT 生成任务（git 仓库模式） ## 背景 我（用户）的真实消息被 4 个 chunk 独立做了 MAP 分析，再 REDUCE 综合成 final_synthe…",
+    "h": "https://arena.ai/agent/01a16277-786f-7563-bff1-06a723499864"
+  },
+  {
+    "t": "克隆这个 GitHub 仓库并读取 SOP 文件： git clone https://github.com/dd2003-460/d1-video-recreation.git cd d1-…",
+    "h": "https://arena.ai/agent/01a15e62-512b-7bee-8502-9cc0a5668d45"
+  },
+  {
+    "t": "# REDUCE 任务：4 个 chunk 的 MAP 分析 → 最终综合 ## 背景 一个人在 4 个月里写的真实消息被切成 4 个 chunk（约 271 条），每个 chunk 独立做了…",
+    "h": "https://arena.ai/agent/01a1625b-ffcc-7496-b802-fbb3f8c19886"
+  },
+  {
+    "t": "# MAP 任务 chunk_002 ## 方法（照做） 你在分析一个人写的一段真实消息（chunk_002，80 条）。目标：提取可观察的语言形式模式，不是解读人格、不评价内容。 铁律： 1…",
+    "h": "https://arena.ai/agent/01a16252-f4a4-7527-89a2-fbcc30cd27a9"
+  },
+  {
+    "t": "## 先做这一件事（最高优先级） 验证推送通道：你的第一个动作就是 git add -A &amp;&amp; git commit -m \"chore: verify push channel…",
+    "h": "https://arena.ai/agent/01a1099d-93c1-748e-9345-7d367508ed37"
+  },
+  {
+    "t": "请按仓库内任务书执行：git clone https://github.com/dd2003-460/decomp-bench.git 然后读 tasks/T4-arena-batch2.md 并完整…",
+    "h": "https://arena.ai/agent/01a1623b-7500-7509-a422-9335f4436e71"
+  },
+  {
+    "t": "====== 任务说明 4: 17558 chars ====== # MAP 任务 chunk_003 ## 方法（照做） &lt;!-- Skill clonar-escrita — c…",
+    "h": "https://arena.ai/agent/01a16229-ba22-724d-855d-e90ff5f5a56a"
+  },
+  {
+    "t": "请按仓库内任务书执行：开题报告/tasks/06-校对论文tex_计算与语言.md（已在 master 上，先完整读完再动手；它是唯一的指令来源，优先级高于本消息）。 任务摘要：校对英文论文 开…",
+    "h": "https://arena.ai/agent/01a15a38-3c0c-7ce9-88b9-b9ebbc2a5f84"
+  },
+  {
+    "t": "风格蒸馏任务 A（两个 chunk 合并处理，输出两个独立完整分析）。 下面是两份完整任务说明（方法 + 全量真实消息数据），请分别对 chunk_000 和 chunk_001 各做一遍 MA…",
+    "h": "https://arena.ai/agent/01a1621a-0178-720c-afbe-9f9c0407bf14"
+  },
+  {
+    "t": "Research task (web search required, cite sources with URLs): Q1: Is there empirical research sh…",
+    "h": "https://arena.ai/agent/01a15f04-13d3-7e1d-951d-b39817ede0b7"
+  },
+  {
+    "t": "Research task (web search required, cite sources with URLs): Q1: Is there empirical research show…",
+    "h": "https://arena.ai/agent/01a15f07-6891-79c0-9259-aa53df6b2914"
+  },
+  {
+    "t": "你帮我整理一份「测试图鉴」初稿。下面是事实材料，请按 4 类各写：目的（一句话）/方法/过程（跑了几轮、配置）/结果（关键数字）/遗留问题，简洁，每类 5-8 行。不要编造材料里没有的数字。 【…",
+    "h": "https://arena.ai/agent/01a15eff-82a5-70f2-95cd-9f83baae5b28"
+  },
+  {
+    "t": "You are helping an engineer who runs a local AI-agent harness (Claude-Code-like, with hook system: S…",
+    "h": "https://arena.ai/agent/01a15ef9-b60c-74c1-a19e-9f12d9763544"
+  },
+  {
+    "t": "CRITICAL REVIEW: 86s pixel video v0.8. Clawd+fatfish. 6 scenes. piano+strings+SFX. Be harsh: 1)TOP3 …",
+    "h": "https://arena.ai/agent/01a1599d-c79b-7b50-9f06-142b20d4dec9"
+  },
+  {
+    "t": "## 背景 TNG 数据官方说明书已到手：字段与单位全部确认；1.2 的 TNG 适配器已放开重子字段（2026-10-16 郭老师定案）；官方读取示例已注释归档到 1.2_Simulation_E…",
+    "h": "https://arena.ai/agent/01a15cdb-8150-7caa-9737-eb8a104ad46f"
+  },
+  {
+    "t": "I need you to review a pixel-art video I made. Here's what I want you to evaluate: 1. STYLE ALI…",
+    "h": "https://arena.ai/agent/01a15dbe-fb05-7cac-bd16-9b1daca57d1e"
+  },
+  {
+    "t": "新项目立项调研。仓库已挂载 dd2003-460/love-vs-survival @ main。 先按顺序读： 1. notes/1-idea/1.1-raw-idea.md —— 用户原始…",
+    "h": "https://arena.ai/agent/01a12e88-3f6c-7f6a-826d-c201d41d7428"
+  },
+  {
+    "t": "任务：广泛调研「vLLM 长 prompt prefill 期间 decode 吞吐暴跌/饿死」的社区同类案例与解决办法，把报告写进本仓库 docs/community-research.md。 …",
+    "h": "https://arena.ai/agent/01a15953-1f2c-724b-a1e9-95110266cb34"
+  },
+  {
+    "t": "GitHub 上 LLM agent memory 相关的 benchmark / 测试仓库有哪些？请按 star 数列出前 8 个，每个给出：完整仓库路径（owner/repo）、star 数、一句…",
+    "h": "https://arena.ai/agent/01a15981-4b5e-7bad-b9c7-9ace3ddf8c49"
+  },
+  {
+    "t": "请对下面的记忆实验做反方复核：按我的标准评审，给出 ≤5 条最尖锐质疑 + 每条修复方案。 # origin: ai # Arena 评审材料 — 记忆方案 A/B/C 三条件对比（2026-10…",
+    "h": "https://arena.ai/agent/01a15a47-0e8c-70ce-afde-31f789442103"
+  },
+  {
+    "t": "请按仓库内任务书执行：开题报告/tasks/07-按要求重做开题报告幻灯片.md（已推 master，先完整读它，再读它指向的 开题报告/slide/要求.md，两份都是最高优先级，逐条执行）。 …",
+    "h": "https://arena.ai/agent/01a15968-444b-7229-ba87-87217863ab56"
+  },
+  {
+    "t": "Research task: I need to generate an 86-second emotional string/orchestral BGM for a pixel-art video…",
+    "h": "https://arena.ai/agent/01a15931-25a8-74e8-b94e-7701409428b1"
+  },
+  {
+    "t": "请用 GitHub 连接器打开仓库 citrolabs/ego-lite（https://github.com/citrolabs/ego-lite）。 任务：检查该仓库的 issue 提交入口，确…",
+    "h": "https://arena.ai/agent/01a1592a-56ab-7dc7-ba3c-feab93171b93"
+  },
+  {
+    "t": "任务：在 bh-mass-spectrum 仓库执行 docs/任务C_遗迹MF与创新点.md 定义的\"任务C\"（该文档已推 main，先完整读它，含数据路径/口径决策/验收判据/创新点对照表；照它执…",
+    "h": "https://arena.ai/agent/01a1449b-f18e-7f4f-a863-d3dbe396b38e"
+  },
+  {
+    "t": "请按仓库内任务书执行：开题报告/tasks/04-litreview-slides.md 任务：把背景综述版幻灯片 slides_bg.tex 与配套逐字稿 notes_bg_逐字稿.md 按任…",
+    "h": "https://arena.ai/agent/01a15421-fbdd-7875-89a9-bfb1de2828fc"
+  },
+  {
+    "t": "请按仓库内任务书执行：开题报告/tasks/05-factual-fixes.md 任务：对 slides_bg.tex 与 notes_bg_逐字稿.md 做事实性勘误（作者中文名、β 数值、…",
+    "h": "https://arena.ai/agent/01a15432-fc2c-734d-9947-8c809e492ba9"
+  },
+  {
+    "t": "Based on my previous research (session \"I need you to research and find pixel art references for the…",
+    "h": "https://arena.ai/agent/01a15901-05e5-7de9-be4c-c115c5fafd98"
+  },
+  {
+    "t": "Analyze the GitHub repository at [https://github.com/dd2003-460/hermes-workspace-zero](https://githu…",
+    "h": "https://arena.ai/agent/01a158ec-fabd-754f-bb56-a3c48b5a79e5"
+  },
+  {
+    "t": "You are a research assistant for a prompt optimization project.",
+    "h": "https://arena.ai/agent/01a158eb-a03f-7e83-99dc-19833edae583"
+  },
+  {
+    "t": "I need you to research and find pixel art references for the Claude AI assistant character (made by …",
+    "h": "https://arena.ai/agent/01a158e7-37be-7f93-ba67-56ae77348dad"
+  },
+  {
+    "t": "你在仓库 dd2003-460/from-motivation-to-society 的 test 分支（已挂载，含 test/ 实验目录）。先确认你在 test 分支：运行 `git fetch o…",
+    "h": "https://arena.ai/agent/01a12ead-0b7a-7c54-8088-d5790649931a"
+  },
+  {
+    "t": "## 背景（为什么改） 开题报告按老师/师兄要求把文献引用正式化。slides.tex 原来没有任何参考文献列表，只用「PRD 2025（Hu 等）」这种口语指代；论文引言对 PRD 113 的…",
+    "h": "https://arena.ai/agent/01a1346a-f191-789a-82a6-ecaa0b29911f"
+  },
+  {
+    "t": "## 背景（为什么做） 老师/师兄反馈：这一版幻灯片要改成「手征引力波背景-ORF，科普背景和前 人工作为主」，我们的工作只简略带过；待优化内容不要展示；继续去掉 PPT 里 的组件黑话和 …",
+    "h": "https://arena.ai/agent/01a13524-0a88-7963-83cb-c4532eb1d591"
+  },
+  {
+    "t": "仓库 dd2003-460/longevity-orthogonal-contribution 已挂载在 handoff/east-asian-continue 分支，含前一个 agent 38 个 …",
+    "h": "https://arena.ai/agent/01a12fb2-23ef-7b54-a7c0-a035a23a1b45"
+  },
+  {
+    "t": "先做最高优先级：验证推送通道。开会话后第一个动作就是 git add -A &amp;&amp; git commit -m \"chore: verify push channel\" &amp;&am…",
+    "h": "https://arena.ai/agent/01a12b86-be59-7c79-a4a6-cc0f9e0875a4"
+  },
+  {
+    "t": "先在 dd2003-460/decomp-bench（已挂载 main）做这次独立调研。先读 bench/prompts/evidence/tree-decomp-orthocomplete-2026…",
+    "h": "https://arena.ai/agent/01a13408-033e-7482-b5f4-32fdb908c05f"
+  },
+  {
+    "t": "新仓库 ai-generalization-research 已就绪，主线材料在 main 分支。 先读这三个文件（按顺序）： 1. README.md — 项目背景与问题树 2. src/…",
+    "h": "https://arena.ai/agent/01a12e85-e916-7c00-b228-389997883448"
+  },
+  {
+    "t": "你在仓库 dd2003-460/from-motivation-to-society 的 test 分支（已挂载，含 test/ 实验目录）。先确认你在 test 分支：运行 `git fetch o…",
+    "h": "https://arena.ai/agent/01a12e9c-22ee-7bea-b21e-b2b09240d360"
+  },
+  {
+    "t": "先做最高优先级一件事：验证推送通道。开会话后第一个动作就是 git add -A &amp;&amp; git commit -m \"chore: verify push channel\" &amp;…",
+    "h": "https://arena.ai/agent/01a12b3e-48af-7b76-84c5-3f1444a6b00b"
+  },
+  {
+    "t": "你在本仓库 refactor-v2-design 分支（已挂载，含 src/ai-tell/ 检测脚本与 research/ 待清理文件）。任务：清理 research/ 全部 markdown 的 …",
+    "h": "https://arena.ai/agent/01a129c4-f166-711b-bb94-4830da84409b"
+  },
+  {
+    "t": "读 `research/README.md`（你的任务书：研究目的 / 5 个研究问题 / 数据硬要求 / 交付物 / 成功判据）与 `skills/motivation-society-style/…",
+    "h": "https://arena.ai/agent/01a1295f-20b1-7954-b630-85929725d406"
+  },
+  {
+    "t": "仓库已挂载 dd2003-460/from-motivation-to-society @ refactor-v2-design（基线含最新写作规则，已含 main2/compile.sh）。 …",
+    "h": "https://arena.ai/agent/01a12921-9282-7098-b875-1503a3bb84b7"
+  },
+  {
+    "t": "仓库已挂载 dd2003-460/from-motivation-to-society @ refactor-v2-design（基线分支，含已重组 v2 结构与清洗后仓库）。 第一步：先读依据…",
+    "h": "https://arena.ai/agent/01a12902-19de-7a5c-9df5-02a7282aea10"
+  },
+  {
+    "t": "仓库已挂载到 main 分支。先读 METHODOLOGY.md（这是唯一依据，细节全在里面，不要凭空臆测）。 按 METHODOLOGY.md §5 做 5 件事： 1. 实现 script…",
+    "h": "https://arena.ai/agent/01a125a7-72b9-7a79-9923-15f2ed64bf0f"
+  },
+  {
+    "t": "## 先做这一件事（最高优先级） 验证推送通道：你的第一个动作就是 git add -A &amp;&amp; git commit -m \"chore: verify push channel…",
+    "h": "https://arena.ai/agent/01a10b07-df56-72c4-be7a-807001feb103"
+  },
+  {
+    "t": "读 notes/arena-brief-02.md，按里面说的做。会话 01 已交付 4 项，本会话的目标是「用 benchmark 审 benchmark」。 先读：notes/arena-b…",
+    "h": "https://arena.ai/agent/01a10caa-79c9-70df-869a-684fb8be3237"
+  },
+  {
+    "t": "在 GitHub 仓库 dd2003-460/bh-mass-spectrum（main 分支，HEAD 9e34976）上修复 4 处由我本机 review 发现的瑕疵。这些都不涉及新物理，只涉及「…",
+    "h": "https://arena.ai/agent/01a0fc9a-6729-7bbf-99b2-38712232134a"
+  },
+  {
+    "t": "读 notes/arena-brief.md，按里面说的做。 这个仓库是一个 benchmark 的雏形：测 AI 面对跨领域成本-收益决策题时，能不能分解出完备且正交的可计算结构，并设计实验检…",
+    "h": "https://arena.ai/agent/01a10c6c-6318-7858-bb8d-00c58ee317c3"
+  },
+  {
+    "t": "## 先做这一件事（最高优先级） 验证推送通道：你的第一个动作就是 `git add -A &amp;&amp; git commit -m \"chore: verify push channe…",
+    "h": "https://arena.ai/agent/01a109c6-642f-7581-ba48-8aae016d9983"
+  },
+  {
+    "t": "任务：修复 PR #5 与 main 的冲突，并补三处遗留。当前 main 已合入 PR #4（commit e787d0e），你之前的分支 arena/01a0fecf-bh-mass-spectr…",
+    "h": "https://arena.ai/agent/01a10418-5817-7eb4-95d0-b8f30c547737"
+  },
+  {
+    "t": "在 GitHub 仓库 dd2003-460/bh-mass-spectrum（main 分支）上，为 `1.2_Simulation_Extractor` 新增一个**有物理依据的经验合成星系目录生…",
+    "h": "https://arena.ai/agent/01a0fecf-523f-76d9-90e1-5e4c3893dd7d"
+  },
+  {
+    "t": "任务：在 GitHub 仓库 dd2003-460/bh-mass-spectrum 上做一次**结构重构 + 可理解性改造**。不要新增物理功能，只调整组织方式、数据流显式化、以及文档/注释。 …",
+    "h": "https://arena.ai/agent/01a0fc36-9954-7cfe-b84d-03a7c812dc35"
+  },
+  {
+    "t": "任务：在已连接的 GitHub 仓库 dd2003-460/bh-mass-spectrum（分支 main）上实施本次附件中的架构设计与任务分解。 背景 - 仓库 = CosmoBH-Spe…",
+    "h": "https://arena.ai/agent/01a0fb91-b27c-7f79-91e2-225e2405fff8"
+  },
+  {
+    "t": "我在这个仓库里面放了目前所有这个项目工作成果 我希望的总目标是，验证prd论文，复现结果，然后计算推广到有手征情况 你可以查看当前分解到任务是否完全完成吗，然后进一步撰写paper，我看论…",
+    "h": "https://arena.ai/agent/01a06189-509e-7e0d-93fa-71b85354c14b"
+  },
+  {
+    "t": "``` 这是一个非常宏大且逻辑清晰的计算天体物理学/宇宙学项目。为了让另一个 Agent（以及后续的代码执行器）能够无歧义地理解和开发，我们不仅需要将**科学背景（两篇文献的物理模型）与任务需求**进…",
+    "h": "https://arena.ai/agent/01a08fe5-3b72-75be-87e8-21a05a16f762"
+  },
+  {
+    "t": "虽然这两篇论文解决了数学和几何上的大问题，但要把这套系统真正飞上天，还有几个明显的空白（也就是科研人员接下来的饭碗）： 1. **“长短腿”问题（不等臂长构型）**： 楼同学的论文里，为了数学上…",
+    "h": "https://arena.ai/agent/019f1dde-91ff-7ca9-97a4-68a6a09076e4"
+  },
+  {
+    "t": "请尝试给出第三题最快捷的正确解答",
+    "h": "https://arena.ai/agent/019f7f2e-acb6-7b29-80b1-fb01383675b8"
+  },
+  {
+    "t": "背景：我的系统是mac，使用的是mlx的消融框架， 任务：请判断是否支持我做下面试验和修改，以及预期收益： 通过控制变量的prompt 进行消融实验 例如， 请调研硬件gpu性…",
+    "h": "https://arena.ai/agent/019f6500-ffbc-7ade-960e-ffd6d6b5d73f"
+  },
+  {
+    "t": "我希望我的ai按照这套流程执行，为此我设计了提高ralphglobal文档，；里面说按照loop流程执行， 但是ai似乎经常忘记或者跳过，我听说有一套非常简单的python语言的状态机控制 1.…",
+    "h": "https://arena.ai/agent/019f6495-399c-77cc-b918-cd558ec52263"
+  },
+  {
+    "t": "我希望进行一个通用的流程设计，同时确保ai可以顺利理解和执行 问题： 1.json格式配合字段的校验是否更好 2.需要加具体例子教ai吗",
+    "h": "https://arena.ai/agent/019f6155-8f63-7a06-8453-fcd10fe89eaf"
+  },
+  {
+    "t": "帮我搜索qwopus 系列benchmark的完整情况，例如基座模型是qwen3.6、3.5 27b的不同版本，他们的指令跟随性能（尤其还有不同上下文衰减数据），因为我看基座模型上3.5的指令跟随会更…",
+    "h": "https://arena.ai/agent/019efdaa-1eec-7cb6-98e3-a6d9537c8d95"
+  },
+  {
+    "t": "帮我看一下这几篇论文，后三个是老师给我的调研任务，逸峰可以调研下面积量子化黑洞的准正规模式quasinormal modes，看是否已经被算过了，还是值得研究下细节的[Shake] 最后一个是ai…",
+    "h": "https://arena.ai/agent/019ef983-50ea-724a-acb5-b2c1a1a8ed20"
+  },
+  {
+    "t": "另外，开源模型以及变种家族里面qwen3.6和gemma4系列，各自基座和变种性能怎么样，有什么取舍，给出完整，详细，可靠的分析，要求每个结论附带相关数据来源 我的变种意思是，基于基座模型进行微调，…",
+    "h": "https://arena.ai/agent/019eee77-f776-7f1c-92cd-ffb23f2b1867"
+  },
+  {
+    "t": "**角色与任务设定：** 你现在是一位顶尖的 AI 硬件架构师与 LLM 推理优化专家。请帮我调研并深度测算/推演：在给定同一基准大模型下，Apple 顶级芯片（以预计的 M5 Max 为准，…",
+    "h": "https://arena.ai/agent/019eee78-8c94-7fb2-8b26-ff3598fe00e9"
+  },
+  {
+    "t": "请详细完整调研中国的公务员以及类似的编制岗位在过去，最近，以及未来的变动情况，并给出在什么情况下建议或者不建议选择 额外的问题是，这个和国家财政相关吗，可能会如何变动，如果未来公务员过多，可以精…",
+    "h": "https://arena.ai/agent/019eede8-b35a-7db6-aaa3-bc8a5147d2f7"
+  },
+  {
+    "t": "请从宏观产业趋势层面，面向普通散户投资者分析游戏、软件、有色金属、商业航天这四个板块近几个月的发展现状及未来走势。 随后，针对中国市场，对比分析与2008年及2015年历史时期相似的经济危机指标，重…",
+    "h": "https://arena.ai/agent/019ee51f-b695-77b8-bfbd-6e0921f5037c"
+  },
+  {
+    "t": "**角色与任务设定：** 你现在是一位顶尖的 AI 硬件架构师与 LLM 推理优化专家。请帮我调研并深度测算/推演：在给定同一基准大模型下，Apple 顶级芯片（以预计的 M5 Max 为准，若无…",
+    "h": "https://arena.ai/agent/019e76b5-b68c-7e4c-95bd-278e747baf06"
+  },
+  {
+    "t": "尝试调研更多情况，例如RTXpro系列显卡跑这些不同上下文，不同格式同一个量化精度模型的prefill速度并尝试估算算力。另外，模型在不同量化下本身prefill大小也会减小，所以，fp4是否比fp8…",
+    "h": "https://arena.ai/agent/019e6eaa-8f45-7955-8d52-858b4bcde3b2"
+  },
+  {
+    "t": "帮我调查50系显卡在nvfp4格式下对比gguf格式运行4bit量化模型提升，以及通过prefill实测推算真实算力",
+    "h": "https://arena.ai/agent/019e6d62-75c8-7a3a-8c7d-6abb21fb14bb"
+  }
+]

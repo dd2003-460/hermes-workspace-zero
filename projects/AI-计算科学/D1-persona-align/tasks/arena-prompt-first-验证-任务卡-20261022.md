@@ -1,7 +1,7 @@
 # origin: ai · 2026-10-22 · 目标 2026-10-22T18:54（成璐 goal：prompt-first 提升验证调研任务卡）
 
 > 渠道：LMArena agent mode（arena-outsource SOP · `.claude/skills/arena-outsource/SKILL.md`）。
-> 目标仓库：`dd2003-460/prompt-first-bench`，任务书 push 到 `tasks/002-prompt-first-verify.md`（仓库不存在/未连接 → 走降级阶梯，见 `agents/arena-loop-pipeline.md` §3.3，loop 不豁免）。
+> 目标仓库：`dd2003-460/prompt-first-bench`，任务书 push 到 `tasks/002-prompt-first-verify.md`（仓库不存在/未连接 → 走降级阶梯，见 `sop/arena-loop-pipeline.md` §3.3，loop 不豁免）。
 > 执行前必读：`sop/arena-loop-pipeline.md` + `loop/prompt-first/00..04.5`（仓库内）。
 
 ```

@@ -108,7 +108,7 @@ jq -n \
 ### 入口文件
 
 ```
-skills/autonomous-ai-agents/ralph-loop/scripts/ralph
+skills/autonomous-ai-sop/ralph-loop/scripts/ralph
 ```
 
 ### 核心逻辑

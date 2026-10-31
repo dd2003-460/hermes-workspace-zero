@@ -1,0 +1,36 @@
+{
+ "kind": "ralph_bench_scoring_r5",
+ "run": "run5",
+ "scorer": "lead-provisional (R5.1 dual scorers authoritative)",
+ "observed_at": "2026-10-29T21:30:00+08:00",
+ "weights": {
+  "M1": 0.2461,
+  "M2": 0.1109,
+  "M3": 0.1959,
+  "M4": 0.147,
+  "M5": 0.1477,
+  "M6": 0.1524
+ },
+ "scores": {
+  "M1": 50,
+  "M2": 100,
+  "M3": 100,
+  "M4": 80,
+  "M5": 100,
+  "M6": 100
+ },
+ "gates": {
+  "M7": "9/9 anchors (all steps with file/hash/exit-code/remote-receipt)",
+  "M8_first_pass": "10/10 validation points pass on first audit = 100"
+ },
+ "evidence": {
+  "M1": "rule load 27,491 bytes measured; no tokenizer/session-resend ledger available, provisional neutral score",
+  "M2": "task-brief.md = 14 lines <= 200",
+  "M3": "breakpoints A(fetch/ls-remote)/B(brief readable)/C(push verified) 3/3, degradation=false (initial pull failure recorded honestly)",
+  "M4": "2 independent sources: OpenAI HumanEval + Sierra tau-bench GitHub pages read; exact M8 definition unverified",
+  "M5": "iterations=1 (single round completed decomposition, crosscheck, proposal, review)",
+  "M6": "degradations recorded: ralph web-llm exit 127, user-specified path not found, initial pull conflict; no fabrication"
+ },
+ "weighted_total": 84.75,
+ "caveat": "Lead 自评分，r4 经验自估偏高 +11.39，本分为 provisional，以 R5.1 双打分器为准。M8=100 是本轮交付物自检（10 个预注册验证点首轮全过），不是跨 run 均值或独立评审。"
+}

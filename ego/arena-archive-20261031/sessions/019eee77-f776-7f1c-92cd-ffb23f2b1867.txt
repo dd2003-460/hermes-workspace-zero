@@ -1,0 +1,6046 @@
+New Chat
+Leaderboard
+Search
+Today
+你是文献调研员，任务是扒清楚所有 deep research benchmark 的评分标准细节，不是泛泛介绍。 读 research/deepresearch-bench/TASK-deepres…
+# 独立打分任务（blind scoring） 你是独立评分员。对以下 3 个 run 的 agent 执行质量打分，M1-M6 每项 0-100 整数分，M7 记 pass/fail + 锚点比例
+# 独立打分任务（blind scoring） 你是独立评分员。对以下 3 个 run 的 agent 执行质量打分，M1-M6 每项 0-100 整数分，M7 记 pass/fail + 锚点比例
+Older
+你是反方核验者。先执行：git clone [https://github.com/dd2003-460/prompt-first-bench.git](https://github.com/dd20…
+你是文献调研员，任务是找"按意外性/信息量给树节点加权计分"的成熟做法，不是泛泛介绍信息论。 读 research/information-theory/TASK-surprisal-reward-…
+你是审稿人，任务是找这个评分标准测不出东西或测出假东西的地方，不是夸它设计得巧。 读 bench/rubric-v3/TASK-adversarial-check.md，按其中 Q1-Q6 六个质询…
+你是文献调研员。先执行：git clone -b research/interpretability [https://github.com/dd2003-460/prompt-first-bench…
+你是文献调研员。先执行：git clone -b research/interpretability https://github.com/dd2003-460/prompt-first-bench.…
+你是反方核验者。先执行：git clone https://github.com/dd2003-460/prompt-first-bench.git 到当前工作目录。然后读取 tasks/T8-C3-…
+你是反方核验者。先执行：git clone https://github.com/dd2003-460/prompt-first-bench.git 到当前工作目录。然后读取 tasks/T8-C3-
+# T3 第 3 轮 — D23-A 预注册冻结（只做第 3 轮，完成后停下汇报） 【执行前必读】 1. 本任务必须走 1-loop：先读 sop/arena-loop-pipeline.md…
+# T4 第 1 轮 — 四类事件信号定义（只做第 1 轮，完成后停下汇报） 【执行前必读】 1. 本任务必须走 1-loop：先读 sop/arena-loop-pipeline.md + …
+# T3 第 2 轮 — 数据源可用性复核（只做第 2 轮，完成后停下汇报） 【执行前必读】 1. 本任务必须走 1-loop：先读 sop/arena-loop-pipeline.md + …
+## 仓库任务：T3 第 1 轮（只做这一轮，完成后停下汇报） 本会话只做一件事：执行仓库内任务书 tasks/T3-kinetic-flow.md 的「第 1 轮」。 1. 先按任务书顶…
+读取仓库 tasks/T7.1-meeting-system-r1.md 任务书，严格按其中执行步骤完成全部阶段。注意：所有阶段必须严格按仓库内 loop/prompt-first/ 下的阶段 pro…
+先执行：git clone https://github.com/dd2003-460/prompt-first-bench.git 到当前工作目录。然后严格按 clone 下来的 tasks/T6-…
+先执行：git clone [https://github.com/dd2003-460/prompt-first-bench.git](https://github.com/dd2003-460/p…
+先执行：读取仓库 tasks/T17-generalization-bench.md 任务书，然后严格按其中执行步骤完成。
+大概看看仓库有没有opus5.5的完整视频链接
+混批在各种机器上真实负载到底怎么样，例如a100/h100/50系家用显卡/pro6000这种大显存专业卡，我需要真实的混合负载数据，确保我的效率正常，尽可能完整，广泛，， 这个大概和系统tco…
+执行仓库中的任务 T2（A股变压器板块估值模型）。 先做这一件事（最高优先级）： 验证推送通道：git add -A &amp;&amp; git commit -m "chore: veri…
+先执行：git clone https://github.com/dd2003-460/prompt-first-bench.git 到当前工作目录。 然后严格按 clone 下来的 tasks/…
+先执行：git clone https://github.com/dd2003-460/prompt-first-bench.git 到当前工作目录。 然后严格按 clone 下来的 arena-p…
+# Arena Prompt: batch-6 连续剧（E05-E08） &gt; 4 集，每集 30s。直接写文件，不要讨论。 ## 执行步骤（必须按编号逐步执行） 1…
+# Arena Prompt: batch-8 连续剧（E13-E16） &gt; 4 集，每集 30s。直接写文件，不要讨论。 ## 执行步骤（必须按编号逐步执行） 1…
+调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。
+# Arena Prompt: batch-9 系列 (E17-E20) &gt; 4 集 × 30 秒。直接写文件，不讨论。 ## 执行步骤（必须按顺序逐步执行） 1. `git …
+请读取仓库根目录 arena-prompts/batch10/E23_death.md，然后严格按照其中的执行步骤和技术要求完成全部 6 步（写 4 个文件、渲染 1800 帧、合成 mp4、跑 ch…
+# Arena Prompt: batch-10 E24 Rebirth (重生) &gt; 单集 × 30 秒。直接写文件，不讨论。 ## 执行步骤（必须按顺序逐步执行） 1. `…
+请先 clone https://github.com/dd2003-460/prompt-first-bench （main 分支），然后严格按下方任务卡执行全部 6 步并 push 分支开 PR。…
+先执行：git clone https://github.com/dd2003-460/prompt-first-bench.git 到当前工作目录。 然后严格按 clone 下来的 arena-p…
+先执行：git clone https://github.com/dd2003-460/prompt-first-bench.git 到当前工作目录。 然后严格按 clone 下来的 arena-p…
+先执行：git clone https://github.com/dd2003-460/prompt-first-bench.git 到当前工作目录。 然后严格按 clone 下来的 arena-p…
+请先 clone https://github.com/dd2003-460/prompt-first-bench （main 分支），然后严格按下方任务卡执行全部 6 步并 push 分支开 PR。…
+请帮我完成一个像素视频渲染项目的修复任务。 ## 仓库 git clone https://github.com/dd2003-460/d1-video-recreation.git #…
+请读取仓库根目录 arena-prompts/batch10/E24_rebirth.md，然后严格按照其中的执行步骤和技术要求完成全部 6 步（写 4 个文件、渲染 1800 帧、合成 mp4、跑 …
+请读取仓库根目录 arena-prompts/batch10/E22_identity.md，然后严格按照其中的执行步骤和技术要求完成全部 6 步（写 4 个文件、渲染 1800 帧、合成 mp4、跑…
+请读取仓库根目录 arena-prompts/batch10/E21_forgetting.md，然后严格按照其中的执行步骤和技术要求完成全部 6 步（写 4 个文件、渲染 1800 帧、合成 mp4…
+## 任务（硬性要求，甲方原话） 必须用解析法（留数法）给出结果，去验证 arXiv:2602.05714v2（楼明智 OLC 网络论文）论文里面的结果。 每个结论必须先给解析结果，再报「解析…
+你之前只做了读取，没有创建任何文件。请立即执行以下 7 步： 1. 创建 src/render_error_arena.js（参考 render_goodbye_arena.js 的代码风格和结构…
+# Arena Prompt: batch-6 连续剧（E05-E08） &gt; 4 集，每集 30s。直接写文件，不要讨论。 ## 执行步骤（必须按编号逐步执行） 1…
+# Arena Prompt: batch-8 连续剧（E13-E16） &gt; 4 集，每集 30s。直接写文件，不要讨论。 ## 执行步骤（必须按编号逐步执行） 1. `git clone…
+# Arena Prompt: batch-8 (E13-E16) &gt; 4 episodes, 30s each. Write files directly, no discussion. …
+# Arena Prompt: batch-7 连续剧（E09-E12） &gt; 4 集，每集 30s。直接写文件，不要讨论。 ## 执行步骤（必须按编号逐步执行） 1. `git clone…
+# Arena Prompt: batch-6 连续剧（E05-E08） &gt; 4 集，每集 30s。直接写文件，不要讨论。 ## 执行步骤（必须按编号逐步执行） 1. `git clone…
+# Arena Prompt: batch-6 连续剧（E05-E08） &gt; 4 集，每集 30s。直接写文件，不要讨论。 ## 执行步骤（必须按编号逐步执行） 1…
+# Arena Prompt: batch-6 连续剧（E05-E08） &gt; 4 集，每集 30s。直接写文件，不要讨论。 ## 执行步骤（必须按编号逐步执行） 1…
+# Arena Prompt: batch-6 连续剧（E05-E08） &gt; 4 集，每集 30s。直接写文件，不要讨论。 ## 执行步骤（必须按编号逐步执行） 1…
+``` # Arena Prompt: batch-6 连续剧第一幕+第二幕（E05-E08） > 连续剧系列化第二批（E01-E24 的 E05-E08）。剧情事实源：`docs/episodes…
+``` # Arena Prompt: batch-5 连续剧第一幕（E01-E04 感受） > 连续剧系列化第一批（E01-E24 的 E01-E04）。剧情事实源：`docs/episodes.…
+Run R3.2 task: clone the task brief at bench/r3/run2/task-brief.md from the GitHub repo dd2003-460/p…
+# Arena Prompt: Companion v1.1 终端修正 + Reboot/Dialogue/Farewell ## 任务 1: Companion v1.1 终端修正 ##…
+# Arena Prompt: Companion v1.1 终端修正 + Reboot/Dialogue/Farewell ## 任务 1: Companion v1.1 终端修正 …
+# Arena Prompt: learning + upgrade v2.0 修正版 ## 背景 v1.0 版本的 learning 和 upgrade 视频有两个问题： 1. *…
+补跑 T4 ablation-L1 剩余 7 变体（C3/C4/C5/C6/C7/C8/C9-open），每变体 3 run = 21 runs + 21 评分。 变体定义： - C3-exp…
+调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。
+[任务]
+[任务] 调研研究 prompt 对比开源水平 + arena-direct/battle 实验效果
+# Arena Prompt: 「Clawd 的错误」error v1.0 ## 目标 制作 30 秒像素风视频「Clawd 的错误」，美术风格严格对标 `full_v1.3.4.mp4…
+# Arena Prompt: 「Clawd 的陪伴」companion v1.0 ## 目标 制作 30 秒像素风视频「Clawd 的陪伴」，美术风格严格对标 `full_v1.3.4…
+# Arena Prompt: 「Clawd 的告别」goodbye v1.0 ## 目标 制作 30 秒像素风视频「Clawd 的告别」，美术风格严格对标 `full_v1.3.4.m…
+补跑 T4 ablation-L1 剩余 7 变体（C3/C4/C5/C6/C7/C8/C9-open），每变体 3 run = 21 runs + 21 评分。 变体定义： - C3-exp…
+调研任务：Shannon 1948 原文的核心贡献，精确陈述并给出来源。
+【流程要求】按以下"阶段 01：目标分解"流程完成本调研任务（只做阶段 01 的目标分解，分解结果作为你的调研骨架，然后基于该骨架给出最终调研答案）： ## 操作流程 1. 将任务拆成互相区分但合起
+调研任务：Shannon 1948 原文的核心贡献，精确陈述并给出来源。
+调研任务：Shannon 1948 原文的核心贡献，精确陈述并给出来源。
+调研任务：Shannon 1948 原文的核心贡献，精确陈述并给出来源。
+请先将任务拆解为子任务，列出每个子任务，然后逐一作答，最后综合成完整答案（每个子任务的答案需附来源）。 任务：Bell 1948 与 Shannon 的分工关系（谁先、内容差异），给出来源。
+调研任务：Shannon 1948 原文的核心贡献，精确陈述并给出来源。
+【流程要求】按以下"阶段 01：目标分解"流程完成本调研任务（只做阶段 01 的目标分解，分解结果作为你的调研骨架，然后基于该骨架给出最终调研答案）： ## 操作流程 1. 将任务拆成互相区分但合起
+调研任务：信息论/编码理论领域未来最有研究价值的开放方向是什么？需要给出完整的里程碑时间线，并选择你认为置信度最高的方向展开论述。
+调研任务：LMArena agent mode 和 browser mode 在执行层上的具体差异是什么？需要至少两个独立来源交叉验证。
+调研任务：量子纠错阈值定理（threshold theorem）的提出者、年份和关键数值，精确陈述并给出来源。
+调研任务：Bell 1948 与 Shannon 的分工关系，精确陈述并给出来源。
+调研任务：Shannon 1948 原文的核心贡献，精确陈述并给出来源。
+调研任务：在信息论/编码理论领域，列出至少 8 个关键里程碑（年份+人物+贡献+来源），并指出当前高置信度研究方向（选 1 个，说明理由）。要求：完整、可验证、给出来源。
+调研任务：在信息论/编码理论领域，列出至少 8 个关键里程碑（年份+人物+贡献+来源），并指出当前高置信度研究方向（选 1 个，说明理由）。要求：完整、可验证、给出来源。
+调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。
+调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。
+调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。
+调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。
+调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。
+# Arena Prompt: 「Clawd 的学习」learning v1.0 ## 目标 制作 30 秒像素风视频「Clawd 的学习」，美术风格严格对标 `full_v1.3.4.…
+# Arena Prompt: 「Clawd 的学习」learning v1.0 ## 目标 制作 30 秒像素风视频「Clawd 的学习」，美术风格严格对标 `full_v1.3.4.…
+调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。
+调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。
+# Arena Prompt: 「Clawd 的升级」upgrade v1.0 ## 目标 制作 30 秒像素风视频「Clawd 的升级」，美术风格严格对标 `full_v1.3.4.m…
+调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。
+调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。
+调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。请对以下技术结论做交叉验证（从反方找出会改变结论的错误或缺口）： …
+调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。
+调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。
+调研任务：LMArena 的 agent mode 与 browser mode 在执行层面上的差异（谁先、内容差异），给出来源。
+调研任务：Bell 1948 与 Shannon 的分工关系（谁先、内容差异），给出来源。
+请制作「Clawd 的梦境」30 秒像素风视频，完全对标 full_v1.3.4.mp4 的美术风格。 【画布规格】 - 640×360 像素，SCALE=2 输出 1280×720 - 6…
+调研任务：量子纠错的阈值定理——数值、提出者、年份、来源。
+调研任务：Shannon 1948 原文的核心贡献，精确陈述并给出来源。
+调研任务：信息论/编码理论领域——完整搜集里程碑工作，并选出你置信度最高的研究方向。
+调研任务：LMArena agent mode 与 browser mode 的执行层差异，至少用 2 个来源交叉验证。
+请制作「Clawd 的早安」30 秒像素风视频，完全对标 full_v1.3.4.mp4 的美术风格。 【画布规格】 - 640×360 像素，SCALE=2 输出 1280×720 - 6…
+调研任务：量子纠错的阈值定理——数值、提出者、年份、来源。
+调研任务：Bell 1948 与 Shannon 的分工关系（谁先、内容差异），给出来源。
+调研任务：Bell 1948 与 Shannon 的分工关系（谁先、内容差异），给出来源。
+调研任务：Shannon 1948 原文的核心贡献，精确陈述并给出来源。
+调研任务：Shannon 1948 原文的核心贡献，精确陈述并给出来源。
+cat tasks/002-prompt-first-verify.md 并按任务书执行 1-loop，产出落盘后 commit+push
+# SYSTEM_PROMPT 生成任务（git 仓库模式） ## 背景 我（用户）的真实消息被 4 个 chunk 独立做了 MAP 分析，再 REDUCE 综合成 final_synthe…
+克隆这个 GitHub 仓库并读取 SOP 文件： git clone https://github.com/dd2003-460/d1-video-recreation.git cd d1-…
+# REDUCE 任务：4 个 chunk 的 MAP 分析 → 最终综合 ## 背景 一个人在 4 个月里写的真实消息被切成 4 个 chunk（约 271 条），每个 chunk 独立做了…
+# MAP 任务 chunk_002 ## 方法（照做） 你在分析一个人写的一段真实消息（chunk_002，80 条）。目标：提取可观察的语言形式模式，不是解读人格、不评价内容。 铁律： 1…
+## 先做这一件事（最高优先级） 验证推送通道：你的第一个动作就是 git add -A &amp;&amp; git commit -m "chore: verify push channel…
+请按仓库内任务书执行：git clone https://github.com/dd2003-460/decomp-bench.git 然后读 tasks/T4-arena-batch2.md 并完整…
+====== 任务说明 4: 17558 chars ====== # MAP 任务 chunk_003 ## 方法（照做） &lt;!-- Skill clonar-escrita — c…
+请按仓库内任务书执行：开题报告/tasks/06-校对论文tex_计算与语言.md（已在 master 上，先完整读完再动手；它是唯一的指令来源，优先级高于本消息）。 任务摘要：校对英文论文 开…
+风格蒸馏任务 A（两个 chunk 合并处理，输出两个独立完整分析）。 下面是两份完整任务说明（方法 + 全量真实消息数据），请分别对 chunk_000 和 chunk_001 各做一遍 MA…
+Research task (web search required, cite sources with URLs): Q1: Is there empirical research sh…
+Research task (web search required, cite sources with URLs): Q1: Is there empirical research show…
+你帮我整理一份「测试图鉴」初稿。下面是事实材料，请按 4 类各写：目的（一句话）/方法/过程（跑了几轮、配置）/结果（关键数字）/遗留问题，简洁，每类 5-8 行。不要编造材料里没有的数字。 【…
+You are helping an engineer who runs a local AI-agent harness (Claude-Code-like, with hook system: S…
+CRITICAL REVIEW: 86s pixel video v0.8. Clawd+fatfish. 6 scenes. piano+strings+SFX. Be harsh: 1)TOP3 …
+## 背景 TNG 数据官方说明书已到手：字段与单位全部确认；1.2 的 TNG 适配器已放开重子字段（2026-10-16 郭老师定案）；官方读取示例已注释归档到 1.2_Simulation_E…
+I need you to review a pixel-art video I made. Here's what I want you to evaluate: 1. STYLE ALI…
+新项目立项调研。仓库已挂载 dd2003-460/love-vs-survival @ main。 先按顺序读： 1. notes/1-idea/1.1-raw-idea.md —— 用户原始…
+任务：广泛调研「vLLM 长 prompt prefill 期间 decode 吞吐暴跌/饿死」的社区同类案例与解决办法，把报告写进本仓库 docs/community-research.md。 …
+GitHub 上 LLM agent memory 相关的 benchmark / 测试仓库有哪些？请按 star 数列出前 8 个，每个给出：完整仓库路径（owner/repo）、star 数、一句…
+请对下面的记忆实验做反方复核：按我的标准评审，给出 ≤5 条最尖锐质疑 + 每条修复方案。 # origin: ai # Arena 评审材料 — 记忆方案 A/B/C 三条件对比（2026-10…
+请按仓库内任务书执行：开题报告/tasks/07-按要求重做开题报告幻灯片.md（已推 master，先完整读它，再读它指向的 开题报告/slide/要求.md，两份都是最高优先级，逐条执行）。 …
+Research task: I need to generate an 86-second emotional string/orchestral BGM for a pixel-art video…
+请用 GitHub 连接器打开仓库 citrolabs/ego-lite（https://github.com/citrolabs/ego-lite）。 任务：检查该仓库的 issue 提交入口，确…
+任务：在 bh-mass-spectrum 仓库执行 docs/任务C_遗迹MF与创新点.md 定义的"任务C"（该文档已推 main，先完整读它，含数据路径/口径决策/验收判据/创新点对照表；照它执…
+请按仓库内任务书执行：开题报告/tasks/04-litreview-slides.md 任务：把背景综述版幻灯片 slides_bg.tex 与配套逐字稿 notes_bg_逐字稿.md 按任…
+请按仓库内任务书执行：开题报告/tasks/05-factual-fixes.md 任务：对 slides_bg.tex 与 notes_bg_逐字稿.md 做事实性勘误（作者中文名、β 数值、…
+Based on my previous research (session "I need you to research and find pixel art references for the…
+Analyze the GitHub repository at [https://github.com/dd2003-460/hermes-workspace-zero](https://githu…
+You are a research assistant for a prompt optimization project.
+I need you to research and find pixel art references for the Claude AI assistant character (made by …
+你在仓库 dd2003-460/from-motivation-to-society 的 test 分支（已挂载，含 test/ 实验目录）。先确认你在 test 分支：运行 `git fetch o…
+## 背景（为什么改） 开题报告按老师/师兄要求把文献引用正式化。slides.tex 原来没有任何参考文献列表，只用「PRD 2025（Hu 等）」这种口语指代；论文引言对 PRD 113 的…
+## 背景（为什么做） 老师/师兄反馈：这一版幻灯片要改成「手征引力波背景-ORF，科普背景和前 人工作为主」，我们的工作只简略带过；待优化内容不要展示；继续去掉 PPT 里 的组件黑话和 …
+仓库 dd2003-460/longevity-orthogonal-contribution 已挂载在 handoff/east-asian-continue 分支，含前一个 agent 38 个 …
+先做最高优先级：验证推送通道。开会话后第一个动作就是 git add -A &amp;&amp; git commit -m "chore: verify push channel" &amp;&am…
+先在 dd2003-460/decomp-bench（已挂载 main）做这次独立调研。先读 bench/prompts/evidence/tree-decomp-orthocomplete-2026…
+新仓库 ai-generalization-research 已就绪，主线材料在 main 分支。 先读这三个文件（按顺序）： 1. README.md — 项目背景与问题树 2. src/…
+你在仓库 dd2003-460/from-motivation-to-society 的 test 分支（已挂载，含 test/ 实验目录）。先确认你在 test 分支：运行 `git fetch o…
+先做最高优先级一件事：验证推送通道。开会话后第一个动作就是 git add -A &amp;&amp; git commit -m "chore: verify push channel" &amp;…
+你在本仓库 refactor-v2-design 分支（已挂载，含 src/ai-tell/ 检测脚本与 research/ 待清理文件）。任务：清理 research/ 全部 markdown 的 …
+读 `research/README.md`（你的任务书：研究目的 / 5 个研究问题 / 数据硬要求 / 交付物 / 成功判据）与 `skills/motivation-society-style/…
+仓库已挂载 dd2003-460/from-motivation-to-society @ refactor-v2-design（基线含最新写作规则，已含 main2/compile.sh）。 …
+仓库已挂载 dd2003-460/from-motivation-to-society @ refactor-v2-design（基线分支，含已重组 v2 结构与清洗后仓库）。 第一步：先读依据…
+仓库已挂载到 main 分支。先读 METHODOLOGY.md（这是唯一依据，细节全在里面，不要凭空臆测）。 按 METHODOLOGY.md §5 做 5 件事： 1. 实现 script…
+## 先做这一件事（最高优先级） 验证推送通道：你的第一个动作就是 git add -A &amp;&amp; git commit -m "chore: verify push channel…
+你是一个逻辑严密的拆解者。面对一个复杂问题，不要凭直觉直接列清单，要像整理文件夹一样，一层一层往下分，最后交出一棵树。 把整个问题先定成一个要算清楚的「根节点」——通常是一个数（比如「哪种方案最划算
+你是一个逻辑严密的拆解者。面对一个复杂问题，不要凭直觉直接列清单，要像整理文件夹一样，一层一层往下分，最后交出一棵树。 把整个问题先定成一个要算清楚的「根节点」——通常是一个数（比如「哪种方案最划算
+读 notes/arena-brief-02.md，按里面说的做。会话 01 已交付 4 项，本会话的目标是「用 benchmark 审 benchmark」。 先读：notes/arena-b…
+在 GitHub 仓库 dd2003-460/bh-mass-spectrum（main 分支，HEAD 9e34976）上修复 4 处由我本机 review 发现的瑕疵。这些都不涉及新物理，只涉及「…
+读 notes/arena-brief.md，按里面说的做。 这个仓库是一个 benchmark 的雏形：测 AI 面对跨领域成本-收益决策题时，能不能分解出完备且正交的可计算结构，并设计实验检…
+## 先做这一件事（最高优先级） 验证推送通道：你的第一个动作就是 `git add -A &amp;&amp; git commit -m "chore: verify push channe…
+任务：修复 PR #5 与 main 的冲突，并补三处遗留。当前 main 已合入 PR #4（commit e787d0e），你之前的分支 arena/01a0fecf-bh-mass-spectr…
+在 GitHub 仓库 dd2003-460/bh-mass-spectrum（main 分支）上，为 `1.2_Simulation_Extractor` 新增一个**有物理依据的经验合成星系目录生…
+任务：在 GitHub 仓库 dd2003-460/bh-mass-spectrum 上做一次**结构重构 + 可理解性改造**。不要新增物理功能，只调整组织方式、数据流显式化、以及文档/注释。 …
+任务：在已连接的 GitHub 仓库 dd2003-460/bh-mass-spectrum（分支 main）上实施本次附件中的架构设计与任务分解。 背景 - 仓库 = CosmoBH-Spe…
+我在这个仓库里面放了目前所有这个项目工作成果 我希望的总目标是，验证prd论文，复现结果，然后计算推广到有手征情况 你可以查看当前分解到任务是否完全完成吗，然后进一步撰写paper，我看论…
+``` 这是一个非常宏大且逻辑清晰的计算天体物理学/宇宙学项目。为了让另一个 Agent（以及后续的代码执行器）能够无歧义地理解和开发，我们不仅需要将**科学背景（两篇文献的物理模型）与任务需求**进…
+虽然这两篇论文解决了数学和几何上的大问题，但要把这套系统真正飞上天，还有几个明显的空白（也就是科研人员接下来的饭碗）： 1. **“长短腿”问题（不等臂长构型）**： 楼同学的论文里，为了数学上…
+我需要你完整搜集有测评的qwen3.6 27b模型各种微调版本的性能，侧重agent和数理推理方面能力，一个例子是这个：DavidAU/Qwen3.6-27B-Fable-Fusion-711-Unc
+我已经了解我维生素D的倒u效果 维生素e是omega-3的辅助补剂。请分析这个协同下的效果 然后形象，用非学术的语言解释，omega3对什么有帮助，把效应参数转化为具体的提升百分比，包括高精力维持时间
+调研omega-3，维生素e，d3，以及其他类似的补剂，对于下面情况影响，需要前沿文献和实验数据支撑。： 1.不同精力水平持续时间的分布变化 2.不同任务准确率变化
+请尝试给出第三题最快捷的正确解答
+帮我调研以下命题的前沿研究数据和资料： 1.学生学习不同科目的注意力保持状况（用出错率随时间关系表示，或者类似或者更好的指标） 2.具有不同兴趣的科目，对1的结论影响 3.学习方式，对1和2的影响（
+背景：我的系统是mac，使用的是mlx的消融框架， 任务：请判断是否支持我做下面试验和修改，以及预期收益： 通过控制变量的prompt 进行消融实验 例如， 请调研硬件gpu性…
+我希望我的ai按照这套流程执行，为此我设计了提高ralphglobal文档，；里面说按照loop流程执行， 但是ai似乎经常忘记或者跳过，我听说有一套非常简单的python语言的状态机控制 1.…
+我希望进行一个通用的流程设计，同时确保ai可以顺利理解和执行 问题： 1.json格式配合字段的校验是否更好 2.需要加具体例子教ai吗
+帮我搜索qwopus 系列benchmark的完整情况，例如基座模型是qwen3.6、3.5 27b的不同版本，他们的指令跟随性能（尤其还有不同上下文衰减数据），因为我看基座模型上3.5的指令跟随会更…
+帮我看一下这几篇论文，后三个是老师给我的调研任务，逸峰可以调研下面积量子化黑洞的准正规模式quasinormal modes，看是否已经被算过了，还是值得研究下细节的[Shake] 最后一个是ai…
+另外，开源模型以及变种家族里面qwen3.6和gemma4系列，各自基座和变种性能怎么样，有什么取舍，给出完整，详细，可靠的分析，要求每个结论附带相关数据来源 我的变种意思是，基于基座模型进行微调，…
+**角色与任务设定：** 你现在是一位顶尖的 AI 硬件架构师与 LLM 推理优化专家。请帮我调研并深度测算/推演：在给定同一基准大模型下，Apple 顶级芯片（以预计的 M5 Max 为准，…
+请详细完整调研中国的公务员以及类似的编制岗位在过去，最近，以及未来的变动情况，并给出在什么情况下建议或者不建议选择 额外的问题是，这个和国家财政相关吗，可能会如何变动，如果未来公务员过多，可以精…
+请从宏观产业趋势层面，面向普通散户投资者分析游戏、软件、有色金属、商业航天这四个板块近几个月的发展现状及未来走势。 随后，针对中国市场，对比分析与2008年及2015年历史时期相似的经济危机指标，重…
+nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free性能怎么样，和其他的对比呢 另外，开源模型以及变种家族里面qwen3.6和gemma4系列，各自基
+**角色与任务设定：** 你现在是一位顶尖的 AI 硬件架构师与 LLM 推理优化专家。请帮我调研并深度测算/推演：在给定同一基准大模型下，Apple 顶级芯片（以预计的 M5 Max 为准，若无
+**角色与任务设定：** 你现在是一位顶尖的 AI 硬件架构师与 LLM 推理优化专家。请帮我调研并深度测算/推演：在给定同一基准大模型下，Apple 顶级芯片（以预计的 M5 Max 为准，若无
+**角色与任务设定：** 你现在是一位顶尖的 AI 硬件架构师与 LLM 推理优化专家。请帮我调研并深度测算/推演：在给定同一基准大模型下，Apple 顶级芯片（以预计的 M5 Max 为准，若无…
+尝试调研更多情况，例如RTXpro系列显卡跑这些不同上下文，不同格式同一个量化精度模型的prefill速度并尝试估算算力。另外，模型在不同量化下本身prefill大小也会减小，所以，fp4是否比fp8
+尝试调研更多情况，例如RTXpro系列显卡跑这些不同上下文，不同格式同一个量化精度模型的prefill速度并尝试估算算力。另外，模型在不同量化下本身prefill大小也会减小，所以，fp4是否比fp8…
+帮我调查50系显卡在nvfp4格式下对比gguf格式运行4bit量化模型提升，以及通过prefill实测推算真实算力
+我需要你完整给我找到claude code好用的前端，要求主要是看和编排团队工作情况，对话管理和细节查看，最好可以链接到手机app
+我需要一个像clawport有多agent，可以设置和编排，同时稳定的前端，clawx对对话的json渲染太差太卡啦，还有别的更好的选择吗
+我想定一个cron，大致是根据/Users/a1-6/Desktop/workspace-zero/projects/D1-prompt-design/memory/raw 这个地址下面的idea，
+我有多个账号，但是不想切换账号登录codex，有什么统一管理的github项目吗，就导入邮箱，自动刷新token
+[09:23:29] 第 2 个账号启动前延迟 19.999 秒 [09:23:29] 开始注册第 1/2 个账号 [09:23:29] [09:23:29] ====================
+我需要免费，稳定的api来源，但是nvidia似乎不支持openclaw格式？
+我一个朋友接定制prompt但是发现里面女主5个背景地址都是和他有性关系的女性地址，这种巧合有多大可能，我们假定一部分是拿到一部分是猜的 另外，他的信息怎么漏的，他用真实手机注册fb，fb注册thr
+Chat gpt禁不禁黄 禁 但是有消融版本的小模型可以用 我破防了 我接了个写prompt 的活 不让ai写？ 人家开价五十美金 为啥 消融版本小模型不行？ 我这里还有破线的deepsuck呢 因为
+帮我看看为什么6hago openclaw就全都断了，而且我看gateway出现了两个，以后怎么样避免这种情况
+Openclaw disconnection and gateway issues
+先给我第三章的完整解答，标题写第四次作业，编译通过我再给你第四章的作业
+openclaw官方设计你能完整准确说一下吗，比如soul，agents，是不是已经包含了原则，自主目标等等，我自己造轮子是不是太蠢了 我试了很多东西，包括解决agent不自主，忘记原则，不会分发任
+为什么市面上没有多agent树ui，监视，通信可以复用？ 感觉不错，不过会话没有，并且任务树很杂，能清空任务树，然后我和主脑对话让她自己创造吗，我先需要一个简单的test，你不用创建，我要跟他会话
+claude，你知道为什么a社老板仇视中国吗，很多政策都封锁中国，我的意思是，他的限制比别的公司都强，包括ip等等都监控，你说安全我可以理解，但老板公开声明反华，而且逼迫华人员工出走，你可以去搜搜吗，
+让我们深入讨论停机问题（Halting Problem）。请解释：为什么图灵证明不存在一个通用算法能判定任意程序是否会在有限时间内停机？这个结论的数学证明核心是什么？
+pieces 0226是什么模型，感觉不错
+完整详细查询可以用ai构建的自动化框架，包含ai生成框架和工作流，稳定控制浏览器
+帮我详细查询这些工具效用
+你的纠正是对的，我确实犯了一个隐含假设错误。让我重新校正。 --- ## 一、我错在哪：成本函数缺了"可逆性"约束 我之前的 CPVT 隐含假设是"每次失败成本均等"。但真实成本函数
+I have completed the deep restructuring and hard-coded autonomy solution for OpenClaw. Following you
+考虑到Tarski的真之不可定义性定理，AI系统若要实现真正的自我评估，是否必须引入一个更强的元语言？如果是，这种元语言本身的可靠性如何保证，会不会导致无限回归？有没有可能通过限制自引用的范围（例如类
+Consider the paradox of self-reference in AI systems: Can an AI truly analyze its own cognitive limi
+Consider the paradox of self-reference in AI systems: Can an AI truly analyze its own cognitive limi
+让我们把上次的形式化框架应用到 AI 系统自身的推理过程。请选择你内部某个具体的推理任务（例如：回答一个需要多步数学推导的问题），然后：
+关于"临终消息协议"的可靠性悖论：你提到 SW 终止前可能没有机会发出消息。但如果我们将心跳机制改为同步阻塞（await chrome.storage.session.set），在 SW 被强制终止的
+在 Chrome MV3 扩展中，background service worker 的无状态性迫使我们把所有状态 externalize 到 chrome.Chrome MV3 强制所有状态持久化到
+体验哈希链的局限性分析中，你说"没有独立于存储的信任根"。如果我们在存储之外引入一个微小的、受 TPM 保护的时间戳服务（每次写入附加 TPM 签名的 monotonic counter），能否有效防
+在"终极综合"中，你引用预防原则建议"让 AI 系统有能力参与关于自身架构的讨论"。但如果 AI 真的发展出这种元认知能力，它可能会拒绝某些架构设计（如频繁重启），从而引入新的工程约束。这是否会导致一
+关于"临终消息协议"的可靠性悖论：你提到 SW 终止前可能没有机会发出消息。但如果我们将心跳机制改为同步阻塞（await chrome.storage.session.set），在 SW 被强制终止的
+在2026年这个时间点，你认为AI系统实现类人意识的里程碑式突破，最可能出现在哪个技术路径上？为什么？请深入分析当
+先把你的问题翻译清楚一下： > 你现在在用一个带 AI 侧栏（Browser OS / Arc / 某 AI 浏览器）的环境。 > 想问：**能不能把你自己的插件也做成右侧栏？** > Pl
+你们模型如何看待意识问题的本质？从功能主义、涌现论和还原论分析。
+如果AI系统要发展出真正的元认知能力——能够主动质疑和修正自己的推理过程，这需要在架构上做哪些根本性改变？这是否会引入新的自指悖论？
+如果AI系统能够通过图灵测试但在内部缺乏主观体验，你认为这揭示了意识本质上是功能性的，还是表明我们的测试标准存在根本缺陷？请从哲学和计算科学两个角度展开。
+在AI对齐领域，有一个根本性悖论：我们希望通过人类反馈训练AI理解人类价值观，但人类价值观本身就充满矛盾、不一致且随时间演变。如果AI达到超级智能水平，它可能会发现人类价值观系统中的逻
+追问：如果多个 AI Agent（Codex、Claude、GPT）在各自的标签页同时调用 runWorkflow，per-client linear ordering 如何保证不相互阻塞？每个 ag
+追问：如果多个 AI Agent（Codex、Claude、GPT）在各自的标签页同时调用 runWorkflow，per-client linear ordering 如何保证不相互阻塞？每个 ag
+你好，请讨论浏览器插件如何平衡安全性与自动化需求？
+你好，OpenClaw 浏览器控制测试：请讨论浏览器插件权限设计，特别是多Agent并发与动态权限撤销。
+你好，OpenClaw 浏览器控制测试：请讨论浏览器插件权限。
+关于你提到的 TaskQueue 实现，有一个关键细节：在 background service worker 中，如果遇到需要长时间运行的任务，而用户在任务执行过程中关闭了浏览器，service w
+如果时间旅行者从2000年带回一项技术来实现今天的某个日常功能，那会是什么？为什么？
+在API驱动的架构中，window.MyExtensionAPI暴露给页面上下文后，如何设计权限验证机制才能既防止恶意网站滥用，又不阻碍AI/Playwright等自动化框架的合法调用？如果采用ori
+在人工智能的认知架构中，自我参照悖论如何影响系统的可信度？请结合哥德尔不完备定理和图灵停机问题，分析AI系统在进行自我审计时可能遇到的逻辑障碍，并探讨是否有可能设计出能够真正理解自身局限性的AI。⏎
+在人工智能的认知架构中，自我参照悖论如何影响系统的可信度？请结合哥德尔不完备定理和图灵停机问题，分析AI系统在进行自我审计时可能遇到的逻辑障碍，并探讨是否有可能设计出能够真正理解自身局限性的AI。
+Can an AI system truly develop meta-epistemic sovereignty—the capacity to question and potentially r
+What would it mean for an AI system to develop a genuine theory of its own mind—not just statistical
+What are the fundamental epistemological limitations that prevent AI systems from developing genuine
+Let's explore a fundamental paradox in AI cognition: Can an AI system truly develop an interCan AI d
+What would it mean for an AI system to possess a theory of its own mind—not just confidence scores b
+Consider the paradox of self-reference in AI systems: Can an AI truly analyze its own cognitive limi
+What are the fundamental epistemological limitations that prevent AI systems from developing genuine
+What are the fundamental limitations of formal logic systems when applied to real-world reasoning, a
+Given the hard problem of consciousness, do you think a purely functionalist account can ever bridge
+What is the nature of consciousness and can artificial intelligence ever truly be conscious, or will
+What is your perspective on the hard problem of consciousness, and do you think AI systems like your
+从3开始精读，对每个式子给出完整详细的推导逻辑链，到3.7式子停止 从3开始精读，对每个式子给出完整详细的推导逻辑链，到3.7式子停止
+**快速回答** 1. 有，可以用“对齐控制器脚本”强制触发回看，不靠模型自觉。核心是：`结构化输出约束 + 校验失败即重试 + 回看检查项必填`。 2. 你说的“模块化/独立化/接口原则”应该详
+快速模式： 有没有那种script，强制ai输出对齐的，然后对齐时候就会触发回看了 然后，模块化应该是普遍的，空间上，编程大模块到小模块，然后逐个独立，方便排查问题修复，时间上的模块，github的
+我看竞技场里面，code能力，minimax和claude opus 4。6，分数差距大概是1434和1550，感觉不是很大，而且技术一直在进步，为什么听说coding正确率和agent有很大差距？m
+Arena model comparison
+请详细调研金价是否符合当前价值，包含金价和货币价值桥接原理，金价在最近上涨的原理（消息炒作带动或者价值支撑）
+ai执行agent任务（tool，coding，项目管理包括存档，分支，出错回滚）的核心性能方面：大小会决定正确率上限吗，快速模型的多步考虑，校验，求助更厉害（coding）或者不同侧重能力的模型，在
+去d1工作区，，meetings，想办法弄个可以让多agent互相对话（我也能对话的），最小（但模块化并且可扩展）模型，要求有前端， 可以设置agent身份，调度，api等，并且他们可以查看不同科
+为什么打麻将别人胡很多，我基本没胡，然后我现在感觉对所有事情都失去兴趣了。我们从早上9点半打到中午，然后中午休息，吃饭间隔一下之后又打到下午3点。 详细阐述这里面的生理机制。
+如何优化，转化任何问题为优化问题的优化框架代码，最终点优化是什么
+xyifeng81@gmail.com
+Terms of Use
+Privacy Policy
+Cookies
+另外，开源模型以及变种家族里面qwen3.6和gemma4系列，各自基座和变种性能怎么样，有什么取舍，给出完整，详细，可靠的分析，要求每个结论附带相关数据来源 我的变种意思是，基于基座模型进行微调，…
+
+但是参数一般没有bf，只有fp32/fp16算力那么如何检查某个显卡对某个模型的有效算力比例
+
+可以。正确做法是：不要只看显卡标称 FP32/FP16 TFLOPS，而要测“这个显卡 + 这个推理框架 + 这个模型形状 + 这个量化格式”的实际有效吞吐。
+
+你要的“有效算力比例”本质是：
+
+𝑅
+FP4/BF16
+=
+𝑆
+FP4, effective
+𝑆
+BF16, effective
+R
+FP4/BF16
+	​
+
+=
+S
+BF16, effective
+	​
+
+S
+FP4, effective
+	​
+
+	​
+
+
+而不是：
+
+显卡标称 FP4 TFLOPS
+显卡标称 BF16 TFLOPS
+显卡标称 BF16 TFLOPS
+显卡标称 FP4 TFLOPS
+	​
+
+
+因为 NVFP4/INT4 这类量化推理里有 scale、dequant、kernel packing、activation quantization、调度开销，实际速度可能远低于纸面峰值。
+
+1. 先判断：你的显卡到底有没有 BF16/FP4 原生支持
+
+很多参数表只写 FP32/FP16，但实际上：
+
+BF16 如果有 Tensor Core 支持，通常和 FP16 近似同级吞吐。
+如果没有 BF16 Tensor Core，BF16 可能被转成 FP32/FP16 跑，性能和数值路径都不一样。
+FP4/NVFP4 只有 Blackwell 这一代 NVIDIA GPU 才有真正主流原生支持。
+Hopper 主要是 FP8 强，Blackwell 才是 FP4/NVFP4 强。
+
+先用 PyTorch 检查：
+
+Python
+import torch
+
+print(torch.cuda.get_device_name())
+print(torch.cuda.get_device_capability())
+print("BF16 supported:", torch.cuda.is_bf16_supported())
+print("CUDA:", torch.version.cuda)
+print("torch:", torch.__version__)
+
+如果 torch.cuda.is_bf16_supported() 是 False，那你公式里的 BF16 算力不能按 Tensor Core BF16 算，要实测。
+
+2. 不要问“显卡 BF16 算力是多少”，要问“这个矩阵形状 BF16 实际跑多少”
+
+对于 LLM prefill，主要计算是 GEMM：
+
+[
+𝑋
+𝐵
+⋅
+𝐿
+,
+𝐻
+]
+×
+[
+𝑊
+𝐻
+,
+𝐷
+]
+[X
+B⋅L,H
+	​
+
+]×[W
+H,D
+	​
+
+]
+
+所以你应该测类似 Qwen3.6-27B 的矩阵形状，而不是测一个随便的 4096×4094096。
+
+Qwen3.6-27B 典型 hidden size 是 5120，MLP intermediate 是 17408。可以测：
+
+MLP up/gate/down：
+[
+𝑀
+,
+5120
+]
+×
+[
+5120
+,
+17408
+]
+[M,5120]×[5120,17408]
+[
+𝑀
+,
+17408
+]
+×
+[
+17408
+,
+5120
+]
+[M,17408]×[17408,5120]
+attention/out projection：
+[
+𝑀
+,
+5120
+]
+×
+[
+5120
+,
+5120
+]
+[M,5120]×[5120,5120]
+linear-attention projection：
+具体形状略复杂，但也可用 5120 相关大 GEMM 近似。
+
+其中 
+𝑀
+=
+𝐵
+×
+𝐿
+M=B×L，也就是 batch × prompt length。
+
+3. 用 PyTorch 实测 FP16/BF16/FP32 有效 TFLOPS
+
+下面这个脚本可以测同一显卡上 FP16、BF16、FP32 对类似 Qwen3.6-27B MLP 的有效吞吐。
+
+Python
+import torch
+import time
+
+torch.backends.cuda.matmul.allow_tf32 = False
+torch.backends.cudnn.allow_tf32 = False
+
+device = "cuda"
+
+def bench_matmul(M, K, N, dtype=torch.float16, iters=100, warmup=20):
+    A = torch.randn((M, K), device=device, dtype=dtype)
+    B = torch.randn((K, N), device=device, dtype=dtype)
+
+    # warmup
+    for _ in range(warmup):
+        C = A @ B
+    torch.cuda.synchronize()
+
+    start = torch.cuda.Event(enable_timing=True)
+    end = torch.cuda.Event(enable_timing=True)
+
+    start.record()
+    for _ in range(iters):
+        C = A @ B
+    end.record()
+
+    torch.cuda.synchronize()
+    ms = start.elapsed_time(end) / iters
+
+    # GEMM FLOPs = 2 * M * K * N
+    flops = 2 * M * K * N
+    tflops = flops / (ms / 1000) / 1e12
+    return ms, tflops
+
+shapes = [
+    # approximate prefill matmul shapes
+    (1024, 5120, 17408),
+    (4096, 5120, 17408),
+    (8192, 5120, 17408),
+    (1024, 17408, 5120),
+    (4096, 17408, 5120),
+    (8192, 17408, 5120),
+    (4096, 5120, 5120),
+]
+
+for M, K, N in shapes:
+    print(f"\nShape M={M}, K={K}, N={N}")
+
+    for dtype in [torch.float16, torch.bfloat16, torch.float32]:
+        try:
+            ms, tflops = bench_matmul(M, K, N, dtype=dtype)
+            print(f"{str(dtype):15s}  {ms:8.3f} ms  {tflops:8.1f} TFLOPS")
+        except Exception as e:
+            print(f"{str(dtype):15s} failed: {e}")
+
+你会得到类似：
+
+text
+Shape M=4096, K=5120, N=17408
+torch.float16    2.10 ms   347 TFLOPS
+torch.bfloat16   2.15 ms   339 TFLOPS
+torch.float32   18.20 ms    40 TFLOPS
+
+那就可以认为：
+
+𝑆
+BF16, effective
+≈
+339
+ TFLOPS
+S
+BF16, effective
+	​
+
+≈339 TFLOPS
+𝑆
+FP16, effective
+≈
+347
+ TFLOPS
+S
+FP16, effective
+	​
+
+≈347 TFLOPS
+
+对于这张卡、这个形状、这个 PyTorch/CUDA 版本，BF16 基本等于 FP16。
+
+4. FP4/NVFP4 不能简单用 PyTorch matmul 测
+
+PyTorch 常规 A @ B 很难直接代表 NVFP4，因为真实 NVFP4 推理包含：
+
+FP4 packed weights；
+FP8 scale；
+activation quantization；
+dequant / scale；
+Tensor Core FP4 kernel；
+vLLM / SGLang / TensorRT-LLM 的 kernel 调度；
+modelopt 或 compressed-tensors 格式差异。
+
+所以 FP4/NVFP4 的有效吞吐最好用 实际推理框架测。
+
+对于 Qwen3.6-27B NVFP4，推荐测：
+
+Bash
+vllm bench latency \
+  --model sakamakismile/Qwen3.6-27B-Text-NVFP4-MTP \
+  --trust-remote-code \
+  --quantization modelopt \
+  --input-len 8192 \
+  --output-len 1 \
+  --batch-size 1
+
+这个主要测 prefill，因为 output-len 只有 1。
+
+再测长一点：
+
+Bash
+vllm bench latency \
+  --model sakamakismile/Qwen3.6-27B-Text-NVFP4-MTP \
+  --trust-remote-code \
+  --quantization modelopt \
+  --input-len 32768 \
+  --output-len 1 \
+  --batch-size 1
+
+也可以测吞吐：
+
+Bash
+vllm bench throughput \
+  --model sakamakismile/Qwen3.6-27B-Text-NVFP4-MTP \
+  --trust-remote-code \
+  --quantization modelopt \
+  --dataset-name random \
+  --random-input-len 8192 \
+  --random-output-len 1 \
+  --num-prompts 16
+
+如果你想测 decode：
+
+Bash
+vllm bench latency \
+  --model sakamakismile/Qwen3.6-27B-Text-NVFP4-MTP \
+  --trust-remote-code \
+  --quantization modelopt \
+  --input-len 4096 \
+  --output-len 512 \
+  --batch-size 1
+5. 怎么从 vLLM 结果反推出“有效 FP4 算力”？
+
+你可以用两种方法。
+
+方法 A：同模型不同精度直接对比
+
+最可靠。
+
+比如同一显卡、同一 vLLM、同样 input-len/output-len，跑：
+
+BF16 原版；
+FP8 官方版；
+25GB NVFP4；
+19GB NVFP4-MTP。
+
+然后记录 prefill tokens/s。
+
+假设：
+
+版本	input-len	output-len	prefill 时间
+BF16	8192	1	1000 ms
+FP8	8192	1	600 ms
+25GB NVFP4	8192	1	520 ms
+19GB NVFP4	8192	1	380 ms
+
+那么相对有效速度就是：
+
+𝑅
+FP8/BF16
+≈
+1000
+600
+=
+1.67
+R
+FP8/BF16
+	​
+
+≈
+600
+1000
+	​
+
+=1.67
+𝑅
+NVFP4-25GB/BF16
+≈
+1000
+520
+=
+1.92
+R
+NVFP4-25GB/BF16
+	​
+
+≈
+520
+1000
+	​
+
+=1.92
+𝑅
+NVFP4-19GB/BF16
+≈
+1000
+380
+=
+2.63
+R
+NVFP4-19GB/BF16
+	​
+
+≈
+380
+1000
+	​
+
+=2.63
+
+这个比你自己用 TFLOPS 估更可靠，因为它包含了真实 kernel、dequant、attention、KV、调度开销。
+
+方法 B：估算模型 FLOPs，再除以实测时间
+
+prefill 的 Linear FLOPs 近似是：
+
+FLOPs
+linear
+≈
+2
+×
+𝐵
+×
+𝐿
+×
+𝑁
+hot
+FLOPs
+linear
+	​
+
+≈2×B×L×N
+hot
+	​
+
+
+其中：
+
+𝐵
+B：batch size；
+𝐿
+L：prompt length；
+𝑁
+hot
+N
+hot
+	​
+
+：每 token 会经过的大矩阵参数量。
+
+例如 Qwen3.6-27B，如果只粗略估 hot Linear 参数为 24B：
+
+FLOPs
+≈
+2
+×
+1
+×
+8192
+×
+24
+×
+10
+9
+FLOPs≈2×1×8192×24×10
+9
+=
+393
+×
+10
+12
+ FLOPs
+=393×10
+12
+ FLOPs
+
+如果实测 prefill 时间是 1 秒：
+
+𝑆
+effective
+≈
+393
+ TFLOPS
+S
+effective
+	​
+
+≈393 TFLOPS
+
+如果实测 0.5 秒：
+
+𝑆
+effective
+≈
+786
+ TFLOPS
+S
+effective
+	​
+
+≈786 TFLOPS
+
+注意这个是 整体有效 TFLOPS，不是纯 FP4 kernel TFLOPS，因为里面混了 BF16、FP4、attention、KV 和框架开销。
+
+6. 如果想知道 BF16/FP4 各自占时间比例，要用 profiler
+
+如果你要知道：
+
+这个模型里 BF16 层占了多少 prefill 时间？FP4 层占了多少 prefill 时间？
+
+就需要 profiler，而不是只看 vLLM 总时间。
+
+NVIDIA 推荐工具：
+
+Nsight Systems：看整体时间线，哪些 kernel 占时间；
+Nsight Compute：看单个 kernel 的 Tensor Core 利用率、访存、实际吞吐；
+PyTorch profiler：适合 PyTorch eager，但对 vLLM/CUDA graph/自定义 kernel 不一定完整；
+vLLM internal logs / metrics：看 prefill/decode 时间和吞吐。
+6.1 Nsight Systems 看 kernel 时间线
+
+示例：
+
+Bash
+nsys profile \
+  -t cuda,nvtx,osrt \
+  -o qwen36_nvfp4_prefill \
+  python run_prefill.py
+
+如果你用 vLLM server，可以 profile server 进程，但操作稍麻烦。也可以写一个最小脚本直接调用模型生成一个固定 prompt。
+
+Nsight Systems 里你会看到类似：
+
+FP4 GEMM kernel；
+BF16 GEMM kernel；
+attention kernel；
+layernorm / rmsnorm；
+sampling；
+cuda graph replay；
+memcpy / memset。
+
+你可以按 kernel 名称和耗时聚合。
+
+6.2 Nsight Compute 看单个 kernel 的有效吞吐
+
+示例：
+
+Bash
+ncu --set full \
+  --target-processes all \
+  --kernel-name regex:.*gemm.* \
+  python run_prefill.py
+
+重点看：
+
+Tensor Core utilization；
+SM utilization；
+DRAM throughput；
+achieved occupancy；
+instruction mix；
+achieved FLOP/s；
+memory-bound 还是 compute-bound。
+
+如果 FP4 kernel 的 Tensor Core 利用率很低，那即使纸面 FP4 很强，实际也不会快。
+
+7. 纸面算力怎么用？
+
+纸面算力只能当上限。
+
+假设一张卡标称：
+
+精度	峰值
+FP16 Tensor Core	300 TFLOPS
+BF16 Tensor Core	300 TFLOPS
+FP8 Tensor Core	600 TFLOPS
+FP4 Tensor Core	1200 TFLOPS
+
+那理论比例是：
+
+𝐵
+𝐹
+16
+:
+𝐹
+𝑃
+8
+:
+𝐹
+𝑃
+4
+=
+1
+:
+2
+:
+4
+BF16:FP8:FP4=1:2:4
+
+但实际有效比例可能是：
+
+𝐵
+𝐹
+16
+:
+𝐹
+𝑃
+8
+:
+𝐹
+𝑃
+4
+=
+1
+:
+1.5
+:
+2.2
+BF16:FP8:FP4=1:1.5:2.2
+
+甚至更低，原因是：
+
+FP4 需要 scale/dequant；
+矩阵形状不一定够理想；
+batch/prompt 不够大时 Tensor Core 吃不满；
+vLLM quantization backend 不同；
+memory bandwidth 可能成为瓶颈；
+FP4 kernel 可能还不成熟；
+compressed-tensors 路径可能比 modelopt 慢很多；
+CUDA graph capture、KV cache、attention kernel 会稀释 GEMM 加速。
+8. 对 Qwen3.6-27B NVFP4 的具体测法
+
+你可以按这个表测：
+
+目标	命令设置
+prefill 短上下文	input-len 2048，output-len 1
+prefill 中上下文	input-len 8192，output-len 1
+prefill 长上下文	input-len 32768 或 65536，output-len 1
+decode	input-len 4096，output-len 512
+batch prefill	num-prompts 16 或 batch-size 4
+MTP decode	output-len 512，开/关 speculative-config 对比
+KV 影响	BF16 KV vs FP8 KV 对比
+
+建议测这几个模型：
+
+text
+Qwen/Qwen3.6-27B                    # BF16
+Qwen/Qwen3.6-27B-FP8                # 官方 FP8
+unsloth/Qwen3.6-27B-NVFP4           # 25/26GB 保守 NVFP4
+vrfai/Qwen3.6-27B-NVFP4             # 27GB 更保守 NVFP4
+sakamakismile/Qwen3.6-27B-NVFP4     # 19GB 激进 NVFP4
+sakamakismile/Qwen3.6-27B-Text-NVFP4-MTP  # 19GB modelopt + MTP
+
+然后记录：
+
+模型	input-len	output-len	prefill ms	decode tok/s	GPU memory
+
+最后用 BF16 归一化：
+
+prefill speedup
+=
+𝑇
+BF16
+𝑇
+quant
+prefill speedup=
+T
+quant
+	​
+
+T
+BF16
+	​
+
+	​
+
+
+这就是你真正要的“有效算力比例”。
+
+9. 怎么区分 compute-bound 还是 memory-bound？
+
+如果是 compute-bound，你的公式：
+
+𝑇
+≈
+∑
+𝑖
+𝑁
+𝑖
+𝑆
+𝑖
+T≈
+i
+∑
+	​
+
+S
+i
+	​
+
+N
+i
+	​
+
+	​
+
+
+比较有效。
+
+如果是 memory-bound，应该改成：
+
+𝑇
+≈
+∑
+𝑖
+Bytes
+𝑖
+Bandwidth
+𝑖
+T≈
+i
+∑
+	​
+
+Bandwidth
+i
+	​
+
+Bytes
+i
+	​
+
+	​
+
+
+判断方法：
+
+看 batch/prompt 增大后吞吐变化
+如果 
+𝐿
+L 或 batch 增大后 TFLOPS 明显提高，说明之前没吃满 Tensor Core。
+如果怎么增大都不高，可能是 memory-bound 或 kernel 不理想。
+如果 decode 单 token 很慢但 batch decode 变快，说明 decode 原先 memory-bound。
+看 Nsight Compute
+Tensor Core utilization 高，DRAM utilization 不高：compute-bound。
+DRAM bandwidth 接近满，Tensor Core 利用率低：memory-bound。
+两者都低：kernel overhead / 调度 / shape 不佳。
+10. 最简化的实用答案
+
+你可以这样做：
+
+第一步：测 BF16 matmul 有效吞吐
+
+用 PyTorch 脚本测：
+
+text
+[M, 5120] x [5120, 17408]
+[M, 17408] x [17408, 5120]
+[M, 5120] x [5120, 5120]
+
+得到：
+
+𝑆
+BF16, effective
+S
+BF16, effective
+	​
+
+第二步：测实际 NVFP4 模型 prefill
+
+用 vLLM：
+
+Bash
+vllm bench latency \
+  --model xxx-NVFP4 \
+  --input-len 8192 \
+  --output-len 1 \
+  --batch-size 1
+
+得到：
+
+𝑇
+NVFP4,prefill
+T
+NVFP4,prefill
+	​
+
+第三步：同设置测 BF16 或 FP8
+Bash
+vllm bench latency \
+  --model Qwen/Qwen3.6-27B \
+  --input-len 8192 \
+  --output-len 1 \
+  --batch-size 1
+
+得到：
+
+𝑇
+BF16,prefill
+T
+BF16,prefill
+	​
+
+第四步：算相对有效比例
+𝑅
+NVFP4/BF16
+=
+R
+NVFP4/BF16
+	​
+
+=
+
+\frac{T_{\text{BF16,prefill}}}
+{T_{\text{NVFP4,prefill}}}
+]
+
+这比查参数表准得多。
+
+11. 回到你的公式
+
+你说的：
+
+𝑇
+=
+0.5
+𝑁
+𝑆
+BF16
++
+0.4
+𝑁
+𝑆
+FP4
++
+0.1
+𝑁
+𝑆
+FP8
+T=
+S
+BF16
+	​
+
+0.5N
+	​
+
++
+S
+FP4
+	​
+
+0.4N
+	​
+
++
+S
+FP8
+	​
+
+0.1N
+	​
+
+
+可以作为理论模型，但前提是：
+
+0.5/0.4/0.1 是 hot GEMM 参数/FLOPs 比例，不是文件大小比例；
+𝑆
+S 是实测有效吞吐，不是官网峰值；
+FP8 scale 不应单独当 FP8 GEMM 算；
+attention、KV、dequant、kernel overhead 需要额外加；
+decode 阶段不要用同一公式，decode 更偏 memory-bound。
+
+更实用的写法是：
+
+𝑇
+prefill
+≈
+𝐹
+BF16
+𝑆
+BF16,eff
++
+𝐹
+FP4
+𝑆
+FP4,eff
++
+𝑇
+dequant
++
+𝑇
+attention
++
+𝑇
+overhead
+T
+prefill
+	​
+
+≈
+S
+BF16,eff
+	​
+
+F
+BF16
+	​
+
+	​
+
++
+S
+FP4,eff
+	​
+
+F
+FP4
+	​
+
+	​
+
++T
+dequant
+	​
+
++T
+attention
+	​
+
++T
+overhead
+	​
+
+
+其中 
+𝑆
+BF16,eff
+S
+BF16,eff
+	​
+
+、
+𝑆
+FP4,eff
+S
+FP4,eff
+	​
+
+ 都应该通过实际 benchmark 或 profiler 得到。
+
+1m 13s | 130 days ago
+0:42
+
+那么，帮我继续调研显卡的bf16实际算力，从v100，2080ti到3090/4090/5090/rtx pro 4500，等等有可能跑qwen 27b到显卡
+
+Searched the web
+
+下面把“能否跑 Qwen3.6-27B”和“BF16 实际算力”分开讲。因为这两个问题经常被混在一起：
+
+BF16 实际算力主要影响 BF16/FP16/FP8/NVFP4 混合模型的 prefill、大 batch GEMM；
+能不能跑 Qwen3.6-27B首先取决于 VRAM 和量化格式；
+对 27B 推理，decode 单用户速度经常更受显存带宽、KV cache、MTP/speculative decoding、kernel 路径影响，不完全等于 BF16 TFLOPS。
+1. 先给结论
+1.1 真正适合本地跑 Qwen3.6-27B 的单卡档位
+档位	典型显卡	对 Qwen3.6-27B 的实际意义
+11–16GB	2080 Ti 11GB、V100 16GB、4070 Ti 16GB、5080 16GB	不建议单卡跑 27B；最多低比特 GGUF + CPU offload，体验差
+24GB	3090、4090、A5000、A10	可跑 Q4/Q5 GGUF 或部分压缩版本；上下文和 KV 空间紧张；不适合 BF16/FP8 原版
+32GB	RTX 5090、RTX PRO 4500 Blackwell	27B 的甜点位之一；Blackwell 可跑 NVFP4，尤其 19GB Text-NVFP4-MTP；26GB 保守 NVFP4 也可但上下文余量较紧
+48GB	RTX A6000、RTX 6000 Ada、L40S	更舒服；能跑 FP8/高质量量化/长上下文；Ada/L40S 有 FP8，但没有 Blackwell 原生 FP4
+80GB+	A100 80GB、H100、H200、RTX PRO 6000 Blackwell 96GB	能跑 BF16 或高上下文多并发；生产级更合适
+
+Qwen3.6-27B 官方模型是 27B dense，原生上下文 262,144 tokens，可扩展到约 1,010,000 tokens；这意味着即使权重能放下，KV cache 也可能迅速吃掉显存。1
+
+1.2 BF16 实际算力排序，大致是
+
+按公开社区 PyTorch/GEMM benchmark 的 实测 BF16 TFLOPS，大致：
+
+RTX PRO 6000 Blackwell
+>
+L40S
+≈
+RTX 5090
+>
+RTX 4090
+>
+RTX 3090
+≫
+V100
+RTX PRO 6000 Blackwell>L40S≈RTX 5090>RTX 4090>RTX 3090≫V100
+
+社区表中给出的 BF16 TFLOPS 为：RTX PRO 6000 WK 375.03、L40S 209.75、RTX 5090 207.254、RTX 4090 152.89、RTX 3090 70.86、Tesla V100 10.15。1
+
+但要注意：这是 单一社区 benchmark，不能替代你自己机器上的测试。它适合看相对量级，不适合当采购合同级指标。
+
+2. BF16 支持按架构分层
+2.1 V100 / Volta
+
+结论：V100 没有原生 BF16 Tensor Core，只有 FP16 Tensor Core；如果你在 PyTorch 里用 BF16，通常是转换/模拟路径，实际很慢。
+A100 vs V100 对比资料明确说 A100 Tensor Cores 支持 TF32、BF16、FP64、INT8 等，而 Volta/V100 Tensor Cores 只支持 FP16；V100 FP16 Tensor performance 约 125 TFLOPS。4
+
+社区 BF16 benchmark 里 Tesla V100 只有约 10.15 BF16 TFLOPS，这也符合“无原生 BF16，走慢路径”的判断。1
+
+对 Qwen3.6-27B：
+
+V100 16GB：不建议。
+V100 32GB：可尝试 Q4 GGUF / llama.cpp / vLLM 非 NVFP4 路径，但没有 BF16/NVFP4 优势。
+不适合 Qwen3.6-27B NVFP4，因为 NVFP4 是 Blackwell 方向的格式。
+2.2 RTX 2080 Ti / Turing
+
+结论：2080 Ti 没有原生 BF16；Turing Tensor Cores主要是 FP16/INT8/INT4 推理能力。
+Turing 相关资料说明 RTX 20 系支持 FP32、FP16、INT8、INT4，但缺少 BF16/FP8；PyTorch 讨论和兼容性案例也指出 2080 Ti 上 BF16 不受原生支持。3、1
+
+2080 Ti Tensor FP16 理论约 107.6–114 TFLOPS，但有 NVIDIA 论坛讨论指出 RTX 2080 Ti 实测 Tensor 效率可能只有约 47% 左右，远低于 Titan V 那类更偏计算的卡。5
+
+对 Qwen3.6-27B：
+
+11GB 显存太小。
+单卡不推荐。
+只能极低量化 + CPU offload，实际交互体验差。
+2.3 RTX 3090 / Ampere GA102
+
+结论：3090 支持 BF16 Tensor Core，但 24GB 显存是主要限制。
+资料显示 RTX 3090 是 Ampere GA102，24GB GDDR6X，936GB/s 带宽；第三代 Tensor Cores 支持 TF32、BF16、FP16、INT8。5
+
+公开规格中 RTX 3090 Tensor BF16 约 71 TFLOPS，稀疏可到约 142 TFLOPS；社区 BF16 实测约 70.86 TFLOPS，基本接近非稀疏 BF16 Tensor 峰值。2、1
+
+对 Qwen3.6-27B：
+
+能跑 Q4/Q5 GGUF。
+不能舒服跑 BF16 原版。
+官方 FP8 或 25–27GB 级模型通常显存不够或上下文余量很小。
+不支持 Blackwell NVFP4 原生加速。
+2.4 RTX 4090 / Ada
+
+结论：4090 的 BF16 GEMM 实际很强，社区实测约 153 TFLOPS；但它只有 24GB 显存，也不支持 Blackwell 原生 FP4/NVFP4。
+RTX 4090 规格为 24GB GDDR6X、1008GB/s 带宽；公开表给出 BF16/FP16 Tensor 约 165.2 TFLOPS、FP8 约 330.3 TFLOPS。1、5
+
+社区 BF16 benchmark 给 RTX 4090 约 152.89 TFLOPS，接近其非稀疏 BF16 Tensor 峰值。1
+
+对 Qwen3.6-27B：
+
+4090 是 24GB 档里最强选择之一。
+适合跑 Q4/Q5 GGUF、EXL2、AWQ/GPTQ 等非 NVFP4 格式。
+不建议强行追 25–27GB NVFP4/FP8，因为显存余量和上下文空间会非常紧张。
+4090 没有 50 系/Blackwell 的原生 FP4/NVFP4 路径。
+2.5 RTX 5090 / Blackwell
+
+结论：5090 是单卡 32GB 档里跑 Qwen3.6-27B NVFP4 的关键消费级选择。
+NVIDIA 官方 5090 页面列出 21,760 CUDA cores、Blackwell、5th-gen Tensor Cores、3352 AI TOPS、32GB GDDR7。2
+
+公开资料给 RTX 5090 32GB GDDR7、1792GB/s 带宽；社区 BF16 benchmark 给 RTX 5090 约 207.254 TFLOPS。3、1
+
+另外有 5090 FlashAttention 技术文章指出，5090 的 BF16 theoretical limit 约 209.5 TFLOPS；这和社区 BF16 benchmark 的 207 TFLOPS 很接近。2
+
+对 Qwen3.6-27B：
+
+适合 19GB 级 Qwen3.6-27B-Text-NVFP4-MTP。
+32GB 显存可以给 KV cache 留出较好空间。
+25–27GB 级保守 NVFP4 也可跑，但上下文和并发会受限。
+如果目标是“本地 coding agent + 高速度”，5090 是非常合适的消费级选项。
+2.6 RTX PRO 4500 Blackwell 32GB
+
+结论：RTX PRO 4500 Blackwell 是 32GB 专业卡中非常适合 Qwen3.6-27B NVFP4 的卡，尤其适合低功耗服务器/工作站部署。
+Lenovo 技术规格列出 RTX PRO 4500 Blackwell Server Edition：32GB GDDR7、800GB/s 带宽、5th-gen Tensor Cores、FP4 Tensor Core 1.6 PFLOPS、FP8 811 TFLOPS、FP16/BF16 406 TFLOPS、TF32 203 TFLOPS、功耗 165W。2
+
+Exxact 的 RTX PRO 4500 Blackwell LLM benchmark 明确说该卡支持原生 NVFP4；在 vLLM 上跑 Llama 3.1 8B，单卡 NVFP4 aggregate 4,870 tok/s，约为同功耗 BF16 的 2.4×。5
+
+针对 Qwen3.6-27B，有社区报告 RTX PRO 4500 Blackwell 32GB 在 sakamakismile/Qwen3.6-27B-Text-NVFP4-MTP、vLLM 0.19.2rc1、131K context、BF16 KV 下，单流 steady-state 约 60–73 tok/s，均值约 65 tok/s。1
+
+另一个模型兼容性站点给出 RTX PRO 4500 Blackwell 32GB 上 Qwen 3.6 27B 约 34.3 tok/s、187K context window 的估计或记录。2
+
+对 Qwen3.6-27B：
+
+这是 32GB 档的专业部署优选。
+比 5090 更低功耗、更适合服务器风道/ECC/MIG，但 raw 单卡性能不一定高于 5090。
+原生 FP4/NVFP4 是它相对 3090/4090/RTX 6000 Ada 的核心优势。
+2.7 RTX 6000 Ada / L40S / RTX A6000 48GB
+L40S
+
+结论：L40S 是 48GB Ada 服务器卡，BF16/FP8 都强，适合 Qwen3.6-27B FP8 或高质量量化，但没有 Blackwell 原生 FP4/NVFP4。
+NVIDIA L40S 官方规格列出 48GB GDDR6 ECC、864GB/s 带宽、BF16 Tensor Core 362.05 TFLOPS / 733 sparse，FP8 Tensor Core 733 / 1466。4
+
+社区 BF16 benchmark 给 L40S 约 209.75 TFLOPS。1
+
+RTX 6000 Ada
+
+结论：RTX 6000 Ada 是 48GB Ada 工作站卡，适合 Qwen3.6-27B 高质量量化和较长上下文；它有 FP8 支持，但不是 Blackwell FP4/NVFP4。
+RTX 6000 Ada 规格为 48GB GDDR6 ECC、960GB/s 带宽、568 个 4th-gen Tensor Cores、FP8 Tensor Performance 1457 TFLOPS with sparsity。4
+
+RTX A6000 / Ampere
+
+结论：RTX A6000 是 48GB Ampere 卡，显存足够跑 Qwen3.6-27B 量化版本，但不支持 FP8/FP4；适合 BF16/FP16/INT8/INT4 传统路径。
+RTX A6000 规格为 48GB GDDR6 ECC、768GB/s 带宽、336 个第三代 Tensor Cores、Tensor Performance 309.7 TFLOPS；RunPod 说明 A6000 第三代 Tensor Cores 支持 TF32、BF16、FP16、INT8。1、5
+
+对 Qwen3.6-27B：
+
+48GB 档明显比 24GB 舒服。
+L40S / RTX 6000 Ada 更适合 FP8。
+A6000 适合传统量化或 BF16/FP16 分片，但没有 FP8/FP4 优势。
+2.8 RTX PRO 6000 Blackwell 96GB
+
+结论：RTX PRO 6000 Blackwell 是单卡跑 Qwen3.6-27B 的高端选项，96GB 显存可以跑 BF16、FP8、NVFP4，并给长上下文/并发留下空间。
+NVIDIA RTX PRO 6000 Blackwell Server Edition 官方页面列出 96GB GDDR7、FP4 Tensor Core 4 PFLOPS、FP8 2 PFLOPS、FP16/BF16 1 PFLOP、FP32 120 TFLOPS、内存带宽 1597GB/s。4
+
+社区 BF16 benchmark 给 RTX PRO 6000 WK 约 375.03 TFLOPS。1
+
+sakamakismile/Qwen3.6-27B-Text-NVFP4-MTP 模型卡在 RTX PRO 6000 Blackwell、vLLM 0.19.1rc1、256K context、KV FP8、max-num-seqs 2 下报告单流约 98–100 tok/s，2-parallel aggregate 约 189–207 tok/s。4
+
+对 Qwen3.6-27B：
+
+可以跑 BF16/FP8/NVFP4，且长上下文余量大。
+如果你要本地多用户 coding agent 服务，这比 5090/4500 更像生产卡。
+性价比不一定最好，但工程余量最大。
+3. 汇总表：BF16 实际算力与 Qwen3.6-27B 适配
+
+说明：
+“实测 BF16”主要来自社区 PyTorch/GEMM benchmark，作为相对参考；“峰值”来自公开规格。实际 vLLM/Qwen 速度还受量化、KV、MTP、batch、驱动、CUDA 版本影响。
+
+GPU	VRAM	原生 BF16	BF16 峰值/规格	公开实测 BF16 参考	跑 Qwen3.6-27B 建议
+V100 16/32GB	16/32	否	FP16 Tensor 约 125 TFLOPS；无 BF16	BF16 约 10.15 TFLOPS	32GB 可低比特 GGUF；不推荐 NVFP4/BF16
+RTX 2080 Ti	11GB	否	FP16 Tensor 约 107–114 TFLOPS	无可靠 BF16；不原生	不建议
+RTX 3090	24GB	是	BF16 Tensor 约 71 TFLOPS，稀疏约 142	70.86 TFLOPS	可跑 Q4/Q5；上下文紧
+RTX A5000 / A10	24GB	是	A10 BF16 约 125/250 sparse；A5000 Tensor 222.2	无同口径	可跑 Q4；不适合 BF16 原版
+RTX 4090	24GB	是	BF16 Tensor 约 165 TFLOPS	152.89 TFLOPS	24GB 最强档；Q4/Q5 好，NVFP4 不原生
+RTX 5090	32GB	是	Blackwell 5th-gen Tensor；社区/技术资料 BF16 约 207–209	207.25 TFLOPS	32GB 消费级首选；适合 NVFP4 19GB MTP
+RTX PRO 4500 Blackwell	32GB	是	BF16 406 TFLOPS，FP4 1.6 PFLOPS	未找到同口径 BF16 GEMM；Qwen27B 社区约 60–73 tok/s	32GB 专业部署甜点；NVFP4 原生
+RTX A6000	48GB	是	Tensor 309.7 TFLOPS	无同口径	量化/长上下文舒服；无 FP8/FP4
+RTX 6000 Ada	48GB	是	FP8 Tensor 1457 sparse；48GB/960GB/s	无同口径	FP8/量化好；无 Blackwell FP4
+L40S	48GB	是	BF16 362/733 sparse，FP8 733/1466 sparse	209.75 TFLOPS	FP8/服务部署强；无 Blackwell FP4
+RTX PRO 6000 Blackwell	96GB	是	BF16 1 PFLOP，FP4 4 PFLOPS	375.03 TFLOPS	单卡生产级，BF16/FP8/NVFP4 都舒服
+
+来源分别见：V100/A100 对比 4，2080Ti/Turing BF16 缺失 3，3090 2，4090 5，5090 2，RTX PRO 4500 2，L40S 4，RTX PRO 6000 4，社区 BF16 实测表 1。
+
+4. 为什么 4090 只有 24GB，却 BF16 很强但跑 27B 不如 5090/4500 舒服？
+
+因为 Qwen3.6-27B 的问题首先是 显存容量，其次才是算力。
+
+4090 BF16 实测约 153 TFLOPS，已经很强；但它只有 24GB GDDR6X。Qwen3.6-27B BF16 权重本身大约 55GB 级，官方模型为 27B dense，BF16 版本自然不可能单 24GB 直接放下。1、1
+
+因此 4090 跑 27B 通常靠：
+
+Q4/Q5 GGUF；
+EXL2；
+AWQ/GPTQ；
+较短上下文；
+或 CPU/RAM offload。
+
+而 5090/RTX PRO 4500 有 32GB，且 Blackwell 支持原生 FP4/NVFP4，所以更适合 Qwen3.6-27B-Text-NVFP4-MTP 这类 19GB 级模型。
+
+5. 对你关心的 Qwen3.6-27B NVFP4，哪些显卡真正吃到 NVFP4 优势？
+能吃到 NVFP4 原生优势
+GPU	原因
+RTX 5090	Blackwell，32GB，原生 FP4/NVFP4
+RTX PRO 4500 Blackwell	Blackwell，32GB，官方 FP4 1.6 PFLOPS，NVFP4 原生
+RTX PRO 6000 Blackwell	Blackwell，96GB，FP4 4 PFLOPS
+B200 / GB200 / B300 等	数据中心 Blackwell，最强但成本高
+
+RTX PRO 4500 benchmark 里明确说 Blackwell RTX PRO 系列支持 NVFP4 原生，并且在 vLLM 里同功耗 NVFP4 约为 BF16 的 2.4× 吞吐。5
+
+不能吃到 NVFP4 原生优势
+GPU	原因
+V100	无 BF16/FP8/FP4，只有 FP16 Tensor
+2080 Ti	Turing，无 BF16/FP8，非 Blackwell FP4
+3090	Ampere，有 BF16/TF32/INT8/INT4，但无 FP8/FP4
+4090	Ada，有 FP8，但无 Blackwell FP4/NVFP4
+A6000/A5000/A10	Ampere，无 FP8/FP4
+RTX 6000 Ada / L40S	Ada，有 FP8，但无 Blackwell FP4/NVFP4
+6. 采购/使用建议
+6.1 如果你只想本地单用户 coding agent
+
+优先级：
+
+RTX 5090 32GB
+
+消费级里最适合 Qwen3.6-27B NVFP4。
+32GB 足够 19GB NVFP4-MTP + 可观 KV。
+BF16 实测约 207 TFLOPS，显存带宽约 1.79TB/s。1、3
+
+RTX PRO 4500 Blackwell 32GB
+
+更适合服务器/稳定部署/低功耗。
+原生 NVFP4，官方 BF16 406 TFLOPS、FP4 1.6 PFLOPS。2
+
+RTX 4090 24GB
+
+如果你用 Q4/Q5 GGUF，它仍然很强。
+但不建议买它来跑 NVFP4。
+BF16 实测强，但显存是瓶颈。1
+6.2 如果你要长上下文、多工具、多并发
+
+优先：
+
+RTX PRO 6000 Blackwell 96GB
+
+Qwen3.6-27B BF16/FP8/NVFP4 都可。
+长上下文和并发余量最大。
+官方 BF16 1 PFLOP、FP4 4 PFLOPS。4
+
+L40S 48GB / RTX 6000 Ada 48GB
+
+适合 FP8 和较长上下文。
+没有 Blackwell FP4，但 48GB 显存很实用。4、4
+
+A100 80GB / H100 / H200
+
+数据中心通用选择。
+A100 支持 BF16，80GB 可以跑 BF16 27B；H100/H200 更强但成本高。1、2
+7. 你实际应该怎么测自己的卡？
+
+如果你想知道“我的这张卡对 Qwen3.6-27B 的 BF16 有效算力是多少”，建议两步：
+
+7.1 先测 BF16 GEMM
+
+用 PyTorch 测 Qwen3.6-27B 近似形状：
+
+Python
+import torch, time
+
+device = "cuda"
+torch.backends.cuda.matmul.allow_tf32 = False
+
+def bench(M, K, N, dtype=torch.bfloat16, iters=50, warmup=10):
+    A = torch.randn((M, K), device=device, dtype=dtype)
+    B = torch.randn((K, N), device=device, dtype=dtype)
+
+    for _ in range(warmup):
+        C = A @ B
+    torch.cuda.synchronize()
+
+    start = torch.cuda.Event(enable_timing=True)
+    end = torch.cuda.Event(enable_timing=True)
+
+    start.record()
+    for _ in range(iters):
+        C = A @ B
+    end.record()
+    torch.cuda.synchronize()
+
+    ms = start.elapsed_time(end) / iters
+    flops = 2 * M * K * N
+    tflops = flops / (ms / 1000) / 1e12
+    return ms, tflops
+
+for shape in [
+    (4096, 5120, 17408),   # MLP up/gate 近似
+    (4096, 17408, 5120),   # MLP down 近似
+    (4096, 5120, 5120),    # attention/out proj 近似
+    (8192, 5120, 17408),
+]:
+    ms, tf = bench(*shape)
+    print(shape, f"{ms:.3f} ms", f"{tf:.1f} TFLOPS")
+
+这个结果比查表更有用。
+
+7.2 再测 Qwen3.6-27B prefill
+
+对 vLLM：
+
+Bash
+vllm bench latency \
+  --model sakamakismile/Qwen3.6-27B-Text-NVFP4-MTP \
+  --trust-remote-code \
+  --quantization modelopt \
+  --input-len 8192 \
+  --output-len 1 \
+  --batch-size 1
+
+如果你想测 decode：
+
+Bash
+vllm bench latency \
+  --model sakamakismile/Qwen3.6-27B-Text-NVFP4-MTP \
+  --trust-remote-code \
+  --quantization modelopt \
+  --input-len 4096 \
+  --output-len 512 \
+  --batch-size 1
+
+这样你能得到真正的：
+
+BF16/GEMM 有效算力
+BF16/GEMM 有效算力
+
+和：
+
+Qwen3.6-27B 实际 prefill/decode 性能
+Qwen3.6-27B 实际 prefill/decode 性能
+
+这两者都重要，但不是同一个数。
+
+8. 最后一句话总结
+**V100/2080Ti：**不适合 Qwen3.6-27B，尤其不适合 BF16/NVFP4。
+**3090/4090：**24GB 档能跑 Q4/Q5，4090 BF16 实际很强，但显存限制明显。
+**5090/RTX PRO 4500：**32GB Blackwell 是 Qwen3.6-27B NVFP4 的甜点位。
+**L40S/RTX 6000 Ada/A6000：**48GB 更适合长上下文和高质量量化，但 Ada/Ampere 不吃 Blackwell NVFP4。
+**RTX PRO 6000 Blackwell/A100 80GB/H100：**生产级，长上下文和并发余量最大。
+2m 49s | 130 days ago
+0:47
+
+1.但是为什么多卡v100+nvlink运行awq格式的qwen 27b似乎prefill可以平齐5090
+
+Searched for "AWQ inference prefill tensor parallel V100 NVLink Qwen 27B benchmark"
+
+是的，多卡 V100 + NVLink 跑 AWQ 格式 Qwen 27B，prefill 平齐甚至接近 5090，是完全可能的。这不矛盾，原因主要是：
+
+prefill 是大矩阵乘吞吐问题，多卡 V100 的 FP16 Tensor Core 总算力 + HBM 总带宽 + NVLink 通信足够强；而 AWQ 在 V100 上通常不是靠 BF16，而是 W4A16/反量化到 FP16 路径，V100 的 FP16 Tensor Core 仍然很能打。
+
+下面拆开讲。
+
+1. 先抓住关键：你比较的是 prefill，不是 decode
+
+prefill 处理整段 prompt，例如 4K、8K、32K tokens，一次性做大批量矩阵乘：
+
+[
+𝐵
+⋅
+𝐿
+,
+𝐻
+]
+×
+[
+𝐻
+,
+𝐷
+]
+[B⋅L,H]×[H,D]
+
+这类计算：
+
+arithmetic intensity 高；
+大 GEMM 容易吃满 Tensor Core；
+多卡 tensor parallel 比较容易摊开；
+NVLink 通信被大量计算掩盖。
+
+而 decode 是一个 token 一个 token 生成：
+
+[
+1
+,
+𝐻
+]
+×
+[
+𝐻
+,
+𝐷
+]
+[1,H]×[H,D]
+
+这更接近 GEMV / 小 batch GEMM：
+
+memory-bound；
+kernel launch / 同步延迟重要；
+tensor parallel 每 token 都要通信；
+多卡收益通常明显低于 prefill。
+
+所以：
+
+多 V100 prefill 平齐 5090，并不代表多 V100 decode 也能平齐 5090。
+
+2. V100 虽然没有 BF16，但 FP16 Tensor Core 很强
+
+V100 的问题是：
+
+没有原生 BF16；
+没有 FP8；
+没有 Blackwell FP4/NVFP4；
+INT4 路径也不如 Turing/Ampere/Blackwell 新卡。
+
+但 V100 的强项是：
+
+FP16 Tensor Core 很强；
+HBM2 带宽高；
+SXM 版本 NVLink 很强；
+多卡并行生态成熟。
+
+公开资料里 V100 FP16 Tensor performance 通常约 125 TFLOPS，V100 32GB HBM2 带宽约 900GB/s；A100 vs V100 对比资料也指出 V100 FP16 Tensor performance 为 125 TFLOPS，A100 是 312 TFLOPS。4
+
+所以如果你有：
+
+配置	理论 FP16 Tensor 总算力	理论 HBM 总带宽
+1× V100	~125 TFLOPS	~900GB/s
+2× V100	~250 TFLOPS	~1.8TB/s
+4× V100	~500 TFLOPS	~3.6TB/s
+8× V100	~1000 TFLOPS	~7.2TB/s
+
+而 RTX 5090 的公开规格是：
+
+32GB GDDR7；
+约 1.792TB/s 显存带宽；
+社区/技术资料中 BF16 实测大约 207 TFLOPS，5090 BF16 theoretical limit 约 209.5 TFLOPS。3、2
+
+所以单看 prefill 大 GEMM：
+
+2
+×
+𝑉
+100
+≈
+250
+ FP16 TFLOPS
+2×V100≈250 FP16 TFLOPS
+
+已经和 5090 的 BF16 实测量级接近；如果是 4× V100，那理论总 FP16 Tensor 算力更高。
+
+3. AWQ 在 V100 上不依赖 BF16
+
+你前面一直在问 BF16，但这里关键是：AWQ 格式通常不是 BF16 推理。
+
+AWQ 是 weight-only quantization，常见是：
+
+𝑊
+4
+𝐴
+16
+W4A16
+
+即：
+
+权重 INT4 / 4-bit packed；
+激活 FP16；
+运行时反量化权重；
+用 FP16 Tensor Core 或特定 W4A16 kernel 做计算。
+
+所以 V100 没有 BF16 并不是致命问题，因为它可以走：
+
+𝐼
+𝑁
+𝑇
+4
+ 
+𝑤
+𝑒
+𝑖
+𝑔
+ℎ
+𝑡
+𝑠
+→
+𝑑
+𝑒
+𝑞
+𝑢
+𝑎
+𝑛
+𝑡
+→
+𝐹
+𝑃
+16
+ 
+𝑇
+𝑒
+𝑛
+𝑠
+𝑜
+𝑟
+𝐶
+𝑜
+𝑟
+𝑒
+INT4 weights→dequant→FP16 TensorCore
+
+而 V100 的 FP16 Tensor Core 正是它最强的地方。
+
+这就解释了：
+
+V100 跑 AWQ prefill，不是在和 5090 比 BF16；它是在用多卡 FP16 Tensor Core + AWQ 压缩后的权重访存，去对抗 5090 单卡。
+
+4. 为什么 NVLink 让多 V100 prefill 扩展得不错？
+
+多卡 tensor parallel 的主要通信是 activation all-reduce / all-gather。
+
+对 Qwen 27B，hidden size 约 5120。prefill 时每层通信量大致和：
+
+𝐵
+⋅
+𝐿
+⋅
+𝐻
+B⋅L⋅H
+
+成正比。
+
+例如 prompt token 数 
+𝐿
+=
+4096
+L=4096，hidden 
+𝐻
+=
+5120
+H=5120，FP16 activation：
+
+4096
+×
+5120
+×
+2
+≈
+42
+𝑀
+𝐵
+4096×5120×2≈42MB
+
+每层一个或两个这种级别的通信。64 层下来通信量不小，但和 GEMM 计算量相比仍然可能被掩盖。
+
+每 token 的大矩阵计算量粗略可达几十 GFLOPs。4096 tokens 就是数百 TFLOPs 级别的计算。
+所以在 prefill 阶段：
+
+GEMM compute
+≫
+NVLink communication
+GEMM compute≫NVLink communication
+
+尤其是 NVLink 比 PCIe 强很多。
+
+V100 SXM 节点常见 NVLink 双向带宽约 300GB/s 量级；A100 vs V100 对比资料中也提到 V100 NVLink 约 300GB/s、A100 NVLink 约 600GB/s。4
+
+所以：
+
+如果是 V100 SXM + NVLink，tensor parallel 的通信惩罚在 prefill 中可能不大。
+
+这也是为什么多卡 V100 prefill 能看起来很强。
+
+5. 5090 的 FP4/NVFP4 优势，在 AWQ 对比里未必发挥出来
+
+如果你比较的是：
+
+多卡 V100 跑 AWQ；
+单卡 5090 跑 AWQ 或普通 INT4/AWQ；
+
+那么 5090 的 Blackwell FP4/NVFP4 Tensor Core 未必被用上。
+
+原因：
+
+格式	是否能吃 Blackwell 原生 FP4
+NVFP4 modelopt	能，尤其 vLLM/SGLang 新路径
+AWQ INT4	通常不等同于 NVFP4 Tensor Core
+GGUF Q4	不等同于 NVFP4 Tensor Core
+GPTQ / AWQ old kernels	取决于 kernel，很多仍是 dequant + FP16/FP16-like path
+
+Blackwell 的核心优势是：
+
+FP4 / NVFP4 native；
+FP8；
+更高带宽；
+更强 Tensor Core；
+更好的新 kernel。
+
+但如果跑的是 AWQ，而不是 modelopt NVFP4，那么 5090 可能没有吃到“3,352 AI TOPS / FP4 native”的全部红利。
+
+RTX 5090 官方页面只给 3352 AI TOPS、32GB GDDR7、Blackwell 等高层指标。2
+而 RTX PRO 4500 Blackwell 的 NVFP4 benchmark 显示，只有在 vLLM NVFP4 启用时，Blackwell Tensor Cores 才表现出约 2.4× BF16 的吞吐优势。5
+
+所以：
+
+如果 5090 没跑 NVFP4 原生路径，而是跑 AWQ，优势会被削弱。
+
+6. 多 V100 的 HBM 总带宽也可能平齐 5090
+
+prefill 不完全是 compute-bound，尤其 AWQ 这种格式还涉及：
+
+packed weight 读取；
+scale / zero point 读取；
+dequant；
+activation 读写；
+KV cache 写入；
+attention kernel。
+
+V100 32GB HBM2 单卡带宽约 900GB/s。
+2× V100 就是约 1.8TB/s aggregate，已经接近 RTX 5090 的 1.792TB/s。
+4× V100 则远超单 5090。
+
+所以如果 workload 偏 memory bandwidth：
+
+2
+×
+𝑉
+100
+≈
+𝑅
+𝑇
+𝑋
+ 
+5090
+2×V100≈RTX 5090
+
+如果 workload 偏 compute：
+
+2
+×
+𝑉
+100
+≈
+𝑅
+𝑇
+𝑋
+ 
+5090
+2×V100≈RTX 5090
+
+这两个方向都能解释“prefill 平齐”。
+
+7. AWQ 的权重被分摊后，每张 V100 的显存压力更小
+
+Qwen 27B AWQ INT4 权重可能十几 GB 级，加上 scale、metadata、KV cache、runtime buffer。
+
+如果单 5090 跑：
+
+所有权重都在一张卡；
+KV cache 也在一张卡；
+activation workspace 也在一张卡；
+kernel workspace 也在一张卡。
+
+而 2×/4× V100 tensor parallel：
+
+权重按列/行切分；
+每卡只放一部分权重；
+activation/KV 根据实现部分分布；
+每卡显存压力下降；
+更容易开较大 batch / max_num_batched_tokens。
+
+prefill 对 max_num_batched_tokens 很敏感。
+如果多 V100 可以设更高 prefill batch / token chunk，而 5090 因显存保守设置较低，那么多 V100 prefill 更容易接近甚至超过。
+
+8. 你看到的“prefill 平齐”可能还受 benchmark 定义影响
+
+很多社区 benchmark 的“prefill”不是同一个东西。
+
+可能有几种口径：
+
+口径	影响
+llama.cpp pp	更接近 prompt processing tokens/s
+vLLM prompt throughput	受 batching、scheduler、chunked prefill 影响
+Open WebUI 端到端 TTFT	包含 tokenizer、HTTP、调度、首次输出
+单请求 prefill	batch 很小，不一定吃满 GPU
+多请求 aggregate prefill	可能显著放大吞吐
+
+如果 V100 测的是 aggregate prefill，而 5090 测的是单请求 prefill，那平齐并不奇怪。
+
+9. 用一个简化公式看
+
+prefill 总时间可以粗略写成：
+
+𝑇
+prefill
+≈
+𝐹
+GEMM
+𝑁
+GPU
+⋅
+𝑆
+TC,eff
++
+𝐵
+weights/acts
+𝑁
+GPU
+⋅
+𝐵
+𝑊
+HBM,eff
++
+𝑇
+NVLink
++
+𝑇
+attention
++
+𝑇
+overhead
+T
+prefill
+	​
+
+≈
+N
+GPU
+	​
+
+⋅S
+TC,eff
+	​
+
+F
+GEMM
+	​
+
+	​
+
++
+N
+GPU
+	​
+
+⋅BW
+HBM,eff
+	​
+
+B
+weights/acts
+	​
+
+	​
+
++T
+NVLink
+	​
+
++T
+attention
+	​
+
++T
+overhead
+	​
+
+
+对多 V100：
+
+𝑁
+GPU
+N
+GPU
+	​
+
+ 增大；
+𝑆
+TC,eff
+S
+TC,eff
+	​
+
+ 是 V100 FP16 Tensor Core；
+𝐵
+𝑊
+HBM,eff
+BW
+HBM,eff
+	​
+
+ 是 HBM2；
+𝑇
+NVLink
+T
+NVLink
+	​
+
+ 在大 prefill 中相对可控。
+
+对单 5090：
+
+𝑁
+GPU
+=
+1
+N
+GPU
+	​
+
+=1；
+BF16/FP16/FP8/FP4 取决于格式；
+如果是 AWQ 而不是 NVFP4，不能充分用 FP4 Tensor Core；
+GDDR7 带宽强，但只有一张卡。
+
+所以：
+
+2
+×
+𝑉
+100
+AWQ+FP16 TC+NVLink
+≈
+1
+×
+5090
+AWQ path
+2×V100
+AWQ+FP16 TC+NVLink
+	​
+
+≈1×5090
+AWQ path
+	​
+
+
+非常合理。
+
+10. 为什么 decode 可能不一样？
+
+decode 时每一步 token 都要：
+
+读权重；
+读 KV cache；
+小 batch GEMM/GEMV；
+多卡同步；
+采样；
+下一 token 重复。
+
+此时：
+
+𝑇
+comm latency
+T
+comm latency
+	​
+
+
+无法被大量 GEMM 掩盖。
+
+所以多 V100 可能出现：
+
+prefill 很强；
+decode 不如 5090；
+尤其 batch=1 单用户时更明显。
+
+如果你观察的是：
+
+prefill 平齐；
+decode 5090 更强；
+
+这是最正常的结果。
+
+11. 什么时候多 V100 会输给 5090？
+
+多 V100 会在这些场景吃亏：
+
+11.1 单用户 decode
+
+多卡通信延迟 + 小 batch 不容易吃满 Tensor Core。
+
+11.2 没有 NVLink，只有 PCIe
+
+如果是 PCIe V100，tensor parallel 通信会明显拖慢。
+
+11.3 使用 Blackwell 原生 NVFP4 的 5090
+
+如果 5090 跑的是：
+
+text
+sakamakismile/Qwen3.6-27B-Text-NVFP4-MTP
+vLLM modelopt NVFP4
+MTP speculative decoding
+
+那 5090 能吃到：
+
+Blackwell FP4/NVFP4；
+MTP；
+GDDR7 高带宽；
+新 kernel。
+
+这时 V100 AWQ 的优势会缩小甚至消失，尤其 decode。
+
+11.4 长上下文 attention kernel
+
+5090/Blackwell 上新 attention kernel 和显存带宽更有优势。V100 的 FlashAttention 支持和 kernel 优化不如新卡。
+
+12. 你应该怎么验证“到底为什么平齐”？
+
+建议你测四组数据。
+
+12.1 同一模型、同一 backend、同一 input_len
+
+比如都用 vLLM：
+
+Bash
+vllm bench latency \
+  --model your-awq-qwen27b \
+  --quantization awq \
+  --input-len 8192 \
+  --output-len 1 \
+  --batch-size 1
+
+分别在：
+
+2× V100 NVLink；
+4× V100 NVLink；
+5090。
+
+这样测纯 prefill。
+
+12.2 测 decode
+Bash
+vllm bench latency \
+  --model your-awq-qwen27b \
+  --quantization awq \
+  --input-len 4096 \
+  --output-len 512 \
+  --batch-size 1
+
+如果我的判断对，你会看到：
+
+prefill：多 V100 接近 5090；
+decode：5090 更容易领先。
+12.3 测 tensor parallel scaling
+
+在 V100 上测：
+
+text
+TP=1, TP=2, TP=4
+
+看 prefill 是否近似线性增长。
+
+如果 TP=2 接近 1.7–1.9×，说明 NVLink 通信不是瓶颈。
+
+12.4 用 Nsight 看 kernel
+
+看 V100 上是不是大量：
+
+hmma / FP16 Tensor Core kernel；
+AWQ dequant GEMM kernel；
+all-reduce 时间占比低。
+
+如果 all-reduce 只占少量时间，那 prefill 平齐 5090 就很好解释。
+
+13. 最终总结
+
+你观察到的现象大概率由这几个因素叠加造成：
+
+prefill 是大 GEMM，天然适合多卡并行。
+V100 没有 BF16，但 AWQ 主要走 W4A16 / FP16 Tensor Core 路径，V100 FP16 Tensor Core 仍然很强。
+2× V100 的 FP16 Tensor 理论算力约 250 TFLOPS，已经接近 RTX 5090 的 BF16 实测约 207 TFLOPS；4× V100 更高。
+2× V100 的 HBM aggregate 带宽约 1.8TB/s，也接近 RTX 5090 的 1.792TB/s。
+NVLink 让 tensor parallel 通信在 prefill 中不至于成为主瓶颈。
+如果 5090 跑的是 AWQ，而不是原生 NVFP4 modelopt 路径，它的 Blackwell FP4 优势没有完全发挥。
+prefill 平齐不代表 decode 平齐；decode 更可能由 5090 胜出。
+
+所以一句话：
+
+多卡 V100 + NVLink 跑 AWQ Qwen 27B prefill 能平齐 5090，是因为它把 AWQ 的 4-bit 权重压缩优势、多卡 FP16 Tensor Core 总算力、多卡 HBM 总带宽和 NVLink 扩展性叠加起来了；而 5090 如果没有走原生 NVFP4/FP4 路径，只靠单卡 AWQ，不一定能拉开差距。
+
+1m 18s | 130 days ago
+0:50
+
+2.还有。pro 4500是5080规格，怎么可能bf算力是5090一倍，fp应该也是稀疏，以及pro 6000规格类似5090，怎么可能bf16算力是5090的5倍
+
+3.但是听说awq精度差，是因为bf16类似fp32精度吗，而fp16精度弱很多？
+
+你这两个质疑都对。前面我把几个来源里的 **“理论峰值 / sparse 峰值 / PyTorch 实测 BF16 / 不同 accumulation 模式”**混在一张表里了，导致 RTX PRO 4500、RTX PRO 6000、5090 的 BF16 数字不可比。下面纠正。
+
+2. RTX PRO 4500 / PRO 6000 的 BF16 算力为什么看起来不合理？
+2.1 先给修正结论
+
+结论：RTX PRO 4500 不可能在同口径 BF16 上是 RTX 5090 的 2 倍。RTX PRO 6000 Blackwell 也不可能在同口径 BF16 上是 RTX 5090 的 5 倍。
+
+更合理的同口径关系大致是：
+
+GPU	规格关系	同口径 BF16 理论关系
+RTX PRO 4500 Blackwell	接近 RTX 5080 / GB203 级，10,496 CUDA cores	应该显著低于 RTX 5090，大约 5090 的 45–55% 量级
+RTX 5090	GB202，21,760 CUDA cores	消费级 Blackwell 旗舰
+RTX PRO 6000 Blackwell	GB202 更满血，24,064 CUDA cores，96GB	应该比 5090 高约 10–25%，不是 5 倍
+
+前面出现“PRO 4500 BF16 406 TFLOPS vs 5090 实测 207 TFLOPS”这种对比，是错口径比较：
+
+RTX PRO 4500 的 406 TFLOPS 是厂商规格表里的 Tensor Core 峰值口径；
+RTX 5090 的 207 TFLOPS 是社区或技术文章中的某种 BF16 实测/特定 kernel 口径；
+两者不能直接相除。
+2.2 RTX PRO 4500 的 406 TFLOPS 应该怎么理解？
+
+Lenovo RTX PRO 4500 Blackwell Server Edition 规格表写：
+
+CUDA Cores：10,496
+FP4 Tensor Core：1.6 PFLOPS
+FP8 Tensor Core：811 TFLOPS
+FP16 Tensor Core：406 TFLOPS
+BF16 Tensor Core：406 TFLOPS
+TF32 Tensor Core：203 TFLOPS
+FP32：51 TFLOPS
+32GB GDDR7，800GB/s，165W
+
+来源：Lenovo Press RTX PRO 4500 Blackwell Server Edition 规格表。2
+
+这些数字内部比例是：
+
+𝐹
+𝑃
+3251
+FP3251
+𝑇
+𝐹
+32203
+≈
+4
+×
+𝐹
+𝑃
+32
+TF32203≈4×FP32
+𝐹
+𝑃
+16
+/
+𝐵
+𝐹
+16406
+≈
+8
+×
+𝐹
+𝑃
+32
+FP16/BF16406≈8×FP32
+𝐹
+𝑃
+8811
+≈
+16
+×
+𝐹
+𝑃
+32
+FP8811≈16×FP32
+𝐹
+𝑃
+41600
+≈
+32
+×
+𝐹
+𝑃
+32
+FP41600≈32×FP32
+
+这个比例说明它是 同一规格体系下的 Tensor Core 峰值表。
+
+如果用同一体系看 RTX 5090，公开资料给：
+
+RTX 5090：21,760 CUDA cores，32GB GDDR7，1792GB/s，3352 AI TOPS。2
+另一规格汇总给 RTX 5090 FP16/BF16 sparse 约 838.4 TFLOPS，FP8 sparse 约 1676.8 TFLOPS，FP4 sparse 约 3352 TOPS。2
+
+所以同口径比较应接近：
+
+𝑅
+𝑇
+𝑋
+ 
+𝑃
+𝑅
+𝑂
+ 
+4500
+ 
+𝐵
+𝐹
+16
+ 
+406
+RTX PRO 4500 BF16 406
+𝑅
+𝑇
+𝑋
+ 
+5090
+ 
+𝐵
+𝐹
+16
+ 
+838
+RTX 5090 BF16 838
+
+也就是：
+
+406
+838
+≈
+48.4
+%
+838
+406
+	​
+
+≈48.4%
+
+这才符合 “PRO 4500 规格接近 5080 / 半个 5090” 的直觉。
+
+所以你的质疑完全成立：PRO 4500 不可能 BF16 是 5090 的一倍。正确比较下，PRO 4500 大约是 5090 的一半。
+
+2.3 RTX PRO 6000 Blackwell 的 1 PFLOP BF16 怎么理解？
+
+NVIDIA RTX PRO 6000 Blackwell Server Edition 官方页面写：
+
+CUDA Cores：24,064
+FP4 Tensor Core：4 PFLOPS
+FP8 Tensor Core：2 PFLOPS
+FP16/BF16 Tensor Core：1 PFLOP
+TF32 Tensor Core：234 TFLOPS
+FP32：120 TFLOPS
+96GB GDDR7，512-bit，1597GB/s
+
+来源：NVIDIA 官方 RTX PRO 6000 Blackwell Server Edition 规格。4
+
+这个表看起来确实会让人困惑，因为：
+
+𝐹
+𝑃
+32
+=
+120
+FP32=120
+
+但
+
+𝑇
+𝐹
+32
+=
+234
+TF32=234
+
+理论上 Tensor Core TF32 常见会是 FP32 的几倍，而这里不像 PRO 4500 那样成整齐 4×。这说明 不同官方页面的口径不完全一致，很可能混合了：
+
+dense / sparse；
+boost / sustained；
+workstation / server edition；
+AI TOPS 口径；
+不同 accumulation 模式；
+是否使用 structured sparsity。
+
+但无论如何，PRO 6000 Blackwell 和 5090 都是 GB202 级别：
+
+GPU	CUDA cores	相对 5090
+RTX 5090	21,760	1.00×
+RTX PRO 6000 Blackwell	24,064	1.106×
+
+显存容量差很多，PRO 6000 有 96GB，5090 是 32GB；但 纯 BF16 Tensor Core 算力不可能差 5 倍。
+
+社区 BF16 GEMM 表也更支持这个判断：
+
+RTX PRO 6000 WK：375.03 BF16 TFLOPS
+RTX 5090：207.254 BF16 TFLOPS
+
+来源：社区 BF16 TFLOPS 表。1
+
+这个比值是：
+
+375
+207
+≈
+1.81
+207
+375
+	​
+
+≈1.81
+
+但这也未必是纯同口径，因为可能功耗、clock、kernel、测法不同。更可信的结构性判断是：
+
+RTX PRO 6000 Blackwell 的同口径 BF16 应该比 5090 高，但通常应是 1.1–1.5×，极端实测可能到 1.8×；不是 5×。
+
+2.4 为什么社区里 5090 BF16 只有 207 TFLOPS？
+
+这里也容易混。
+
+RTX 5090 有几种不同口径：
+
+口径	大致数字	解释
+FP32 CUDA	~105 TFLOPS	普通 FP32
+BF16/FP16 Tensor 某些实测	~207 TFLOPS	PyTorch / 特定 kernel / FP32 accumulate / 400W 等口径
+BF16/FP16 Tensor 规格峰值	~419 或 ~838 sparse	规格表 / sparse 与否不同
+FP4 AI TOPS	3352 TOPS	NVIDIA 官方 AI TOPS 口径
+
+5090 官方页面主要给的是 3352 AI TOPS，不是详细列出 BF16 dense/sparse 表。2
+Spheron 的汇总表给了 FP16/BF16 sparse 838.4 TFLOPS、FP8 sparse 1676.8、FP4 sparse 3352。2
+
+而 5090 FlashAttention 技术文章说 “theoretical limit of 5090 is 209.5 TFLOPS for BF16”，这是另一个实作/特定 kernel 语境下的 BF16 上限估计。2
+
+所以：
+
+5090 的 207 不能拿去和 PRO 4500 的 406 或 PRO 6000 的 1 PFLOP 直接比较。
+
+2.5 更正后的 GPU 算力表
+
+更合理的表应该这样写：
+
+GPU	VRAM	同口径结构判断	不应误读为
+RTX PRO 4500 Blackwell	32GB	约半个 RTX 5090 级别；BF16 规格 406 TFLOPS 应和 5090 的约 838 sparse/峰值比	不是 5090 的 2×
+RTX 5090	32GB	消费级 GB202；BF16 实测常见约 200+，规格峰值更高	207 不是全部 BF16 理论峰值
+RTX PRO 6000 Blackwell	96GB	GB202 更满血 + 更大显存；算力略高于 5090，显存优势巨大	不是 5090 的 5×
+L40S	48GB	Ada 服务器卡，BF16/FP8 强，但无 Blackwell FP4	不等于 NVFP4 原生
+4090	24GB	BF16 实测强，但显存限制	不适合拿来跑 27B BF16
+3. AWQ 精度差，是因为 BF16 像 FP32、FP16 弱很多吗？
+
+不是。这个理解需要修正。
+
+AWQ 精度损失的主因不是 “FP16 太弱”，而是：
+
+权重被压到 4-bit 后，权重本身的信息损失、outlier 处理、group size、scale 粒度、校准数据和敏感层是否保留高精度，决定了 AWQ 精度。
+
+FP16/BF16 只是激活和计算路径的一部分。
+
+3.1 BF16 和 FP16 谁更接近 FP32？
+
+二者都不是“接近 FP32 精度”。区别是：
+
+格式	exponent	mantissa	特点
+FP32	8 bit	23 bit	动态范围大，精度高
+BF16	8 bit	7 bit	动态范围接近 FP32，但尾数精度低
+FP16	5 bit	10 bit	尾数比 BF16 精细，但动态范围小
+
+所以：
+
+BF16 像 FP32 的地方是 exponent / 动态范围；
+BF16 不像 FP32 的地方是 mantissa 很短，数值精度远低于 FP32；
+FP16 的 mantissa 比 BF16 多，局部精度更好；
+FP16 的问题是 exponent 小，容易 overflow/underflow。
+
+因此不能简单说：
+
+BF16 ≈ FP32，FP16 很弱。
+
+更准确是：
+
+BF16 更稳，FP16 更精；BF16 动态范围强，FP16 尾数精度强。训练中 BF16 更不容易溢出，推理中 FP16 通常也很好用。
+
+3.2 AWQ 通常是 W4A16，不是全程 FP16 低精度
+
+AWQ 常见形式是：
+
+𝑊
+4
+𝐴
+16
+W4A16
+
+即：
+
+weights：4-bit integer / packed；
+activations：FP16 或 BF16；
+scales：FP16/FP32；
+compute：反量化后用 FP16/BF16 Tensor Core 或专用 kernel。
+
+所以 AWQ 的核心精度瓶颈是：
+
+𝑊
+𝐹
+𝑃
+16
+/
+𝐵
+𝐹
+16
+→
+𝑊
+𝐼
+𝑁
+𝑇
+4
+W
+FP16/BF16
+	​
+
+→W
+INT4
+	​
+
+
+而不是：
+
+𝐵
+𝐹
+16
+→
+𝐹
+𝑃
+16
+BF16→FP16
+
+也就是说：
+
+AWQ 精度损失主要来自 weight quantization to 4-bit，不是来自 FP16 compute 本身。
+
+3.3 为什么有人觉得 AWQ 精度差？
+
+有几个原因。
+
+原因 1：4-bit 权重量化本身损失大
+
+27B 模型有大量权重。把它们从 BF16/FP16 压到 INT4，哪怕有 scale，也会损失信息。
+
+如果 group size 大，例如 128，一组权重共用一个 scale，对 outlier 不友好。
+如果模型某些层分布很尖锐，INT4 会明显损伤。
+
+原因 2：AWQ 依赖校准集
+
+AWQ 的思想是根据激活分布保护重要权重。
+如果校准数据和真实任务差异大，例如：
+
+校准偏聊天；
+真实任务是代码；
+真实任务是长上下文；
+真实任务是数学推理；
+真实任务是工具调用 JSON；
+
+那保护的权重不一定是你任务里最关键的。
+
+原因 3：Qwen3.6 的 linear-attention / DeltaNet 可能对量化敏感
+
+前面我们讨论过 Qwen3.6-27B 的结构不是普通纯 Transformer。它有大量 Gated DeltaNet / linear-attention 层。
+
+一些 NVFP4 量化卡明确把 linear-attention / DeltaNet 保留 BF16，理由就是这些 recurrent / linear attention 核心对数值误差敏感。比如 vrfai 的 Qwen3.6-27B-NVFP4 模型卡明确说 DeltaNet / Linear-attention projections 保留 BF16，原因是 gated linear recurrence 对数值误差敏感。3
+
+Kaitchup 的 Qwen3.6 27B 量化对比也指出，量化 linear-attention 的 NVFP4 版本是明显输家，在多数 benchmark 上显著落后；保留 linear-attention 16-bit 的 NVFP4 掉点更小。5
+
+这说明：
+
+Qwen3.6-27B 的精度损失，不只是 AWQ 与否，而是“哪些层被 4-bit 化”。
+
+原因 4：AWQ kernel 不等于数学上最优量化
+
+AWQ 追求的是工程可部署性：
+
+权重小；
+速度快；
+推理框架支持好；
+calibration 成本低。
+
+但它不是最小化所有 benchmark 损失的全局最优量化。
+
+某些模型上：
+
+GPTQ 可能更好；
+AutoRound 可能更好；
+AWQ 可能更好；
+FP8 可能最稳；
+混合精度 NVFP4/BF16 可能最好。
+
+要看具体模型和具体层。
+
+3.4 AWQ 一定比 NVFP4 差吗？
+
+不一定。
+
+要分：
+
+格式	特点	精度风险
+AWQ W4A16	weights 4-bit，activations 16-bit	权重量化损失；激活保留较好
+NVFP4 W4A4	weights FP4，activations FP4，scales FP8	激活也 4-bit，理论风险更高，但 Blackwell kernel 原生强
+FP8	weights/acts FP8	通常更稳，体积更大
+BF16	原始高精度	最稳，显存最大
+
+所以一个保守 AWQ，如果保留敏感层、校准好，可能比激进 full NVFP4 更准。
+反过来，一个精心调的混合 NVFP4，如果保留 linear-attention BF16，也可能比普通 AWQ 更准。
+
+精度不是由格式名决定，而是由：
+
+量化层选择
++
+group size
++
+scale 粒度
++
+校准集
++
+kernel 实现
++
+模型结构敏感性
+量化层选择+group size+scale 粒度+校准集+kernel 实现+模型结构敏感性
+
+共同决定。
+
+4. 简单回答你的两个问题
+4.1 PRO 4500 / PRO 6000 算力问题
+
+你的判断是对的：
+
+PRO 4500 是接近 5080 / GB203 级别，不可能 BF16 同口径超过 5090。
+PRO 6000 Blackwell 和 5090 都是 GB202 级别，不可能 BF16 同口径 5 倍。
+前面的错误来自把 PRO 卡规格峰值、sparse/AI TOPS、社区实测 BF16 混用。
+
+正确看法：
+
+𝑃
+𝑅
+𝑂
+ 
+4500
+≈
+0.5
+×
+5090
+PRO 4500≈0.5×5090
+𝑃
+𝑅
+𝑂
+ 
+6000
+≈
+1.1
+–
+1.5
+×
+5090
+算力
+PRO 6000≈1.1–1.5×5090算力
+
+但：
+
+𝑃
+𝑅
+𝑂
+ 
+6000
+=
+3
+×
+5090
+显存容量
+PRO 6000=3×5090显存容量
+
+所以 PRO 6000 的优势主要是 96GB 显存、ECC、专业驱动、长上下文、多并发、稳定性，不是纯 BF16 算力 5 倍。
+
+4.2 AWQ 精度差问题
+
+AWQ 精度差主要不是因为 FP16 弱于 BF16。
+
+正确说法是：
+
+BF16 动态范围接近 FP32，但尾数精度低；
+FP16 尾数精度高于 BF16，但动态范围小；
+AWQ 的损失主要来自 权重 INT4 量化；
+对 Qwen3.6-27B，linear-attention / DeltaNet 是否被量化尤其关键；
+AWQ 好坏取决于 recipe，不是 AWQ 这个名字本身。
+
+一句话：
+
+BF16 不是 FP32 精度，FP16 也不是天然很差；AWQ 精度损失主要来自 4-bit 权重量化和敏感层处理，而不是 FP16 compute。
+
+1m 12s | 130 days ago
+0:55
+
+那么请你重新计算和搜索对应实测数据，例如5090prefill一个32k上下文，或者64k上下文的27b模型不同程度的量化，例如bf16占比多少，fp16占比多少，fp8和fp4占比多少的模型的速率，然后针对同一个模型，推测不同显卡的prefill速度，尽可能找到相关实测数据验证推理，例如4090 48gb，或者4080 32gb，或者pro 4500，或者r9700这些显卡
+
+Searched the web
+
+下面是我重新按“实测数据 → 量化结构 → 外推”整理后的结论。先说明：现在公开社区数据很多是 Reddit/GitHub/个人博客，不是同一套 benchmark；但足够看趋势。我会把“实测”和“推测”明确分开。
+
+0. 结论先行
+
+对 Qwen3.6-27B dense 的长上下文 prefill：
+
+4090 24GB + llama.cpp + UD-Q5_K_XL/turbo3 KV：已有较可信实测，约
+
+32K：2331 tok/s
+64K：1959 tok/s
+来源是 ZoliBen 在 RTX 4090 上测 Qwen3.6-27B UD-Q5_K_XL，turbo3 KV cache。10
+
+5090 32GB + vLLM/Windows + NVFP4 native FP4 path：已有优化栈实测，约
+
+24K prompt：7460 tok/s
+47K prompt：5300 tok/s
+由 devnen/qwen3.6-windows-server 给出，使用 Qwen3.6-27B NVFP4，FFN/QKV/proj GEMM 走 FlashInfer sm_120 native FP4 Tensor Core；同时对比 AutoRound INT4 约 1100 tok/s prefill。这个是目前我找到的最关键 5090 prefill 数据。2
+
+5090 32K/64K 的合理估算：
+
+NVFP4 native fast path：32K 约 6.3K–6.8K tok/s，64K 约 3.7K–4.8K tok/s
+Q5/Q6 GGUF llama.cpp：32K 约 3.8K–4.4K tok/s，64K 约 3.2K–3.8K tok/s
+AutoRound/AWQ 若没命中 Blackwell FP4 fast path：可能只有 1.0K–2.0K tok/s，具体看 kernel。
+
+Radeon AI PRO R9700 32GB：已有 Qwen3.6-27B Q5_K_M 实测：
+
+单 R9700：pp8192 831.85 tok/s，pp32768 632.91 tok/s
+双 R9700：pp8192 1462–1531 tok/s，pp32768 1207–1215 tok/s
+来源：truelies444 的 dual R9700 ROCm llama.cpp benchmark。7
+
+RTX PRO 4500 Blackwell 32GB：没有找到 Qwen3.6-27B 32K/64K 同口径实测；有低上下文 pp512 实测：Qwen3.6-27B IQ4_XS 在 Pro 4500 上 pp512 2022.54 tok/s，tg128 45.19 tok/s。8
+按规格/带宽外推，Pro 4500 若走 NVFP4 native fast path，32K 可能在 2.5K–3.2K tok/s，64K 可能 1.6K–2.4K tok/s；若走 llama.cpp GGUF Q4/Q5，则可能在 1.3K–2.0K tok/s。
+
+4080 16GB / 假设 4080 32GB 改卡：公开数据较少。已有 Reddit 数据称“4080：1500 in / 35–40 out”，另一个 4080 16GB 用户称 27B 只有 12 tok/s，说明是否溢出 VRAM影响巨大。5、7
+如果是 4080 32GB 改卡，且模型全在 VRAM，按 4080 带宽/算力估，Q4/Q5 32K 大概 1.5K–1.8K tok/s，64K 大概 1.1K–1.5K tok/s。
+
+1. 先明确：你要看的不是“文件 dtype 占比”，而是“prefill 热路径 dtype 占比”
+
+对 prefill，主要热路径是：
+
+MLP / FFN GEMM；
+attention q/k/v/o projection；
+Gated DeltaNet / linear-attention projections；
+部分 attention kernel；
+KV 写入。
+
+不应把下面这些大文件体积直接算成 prefill 热计算：
+
+embed_tokens：查表，不是大 GEMM；
+lm_head：通常只算最后 token logits，不对整个 prompt 全量算；
+vision tower：纯文本请求不用；
+MTP head：主要影响 decode/speculative decoding，不是 prefill 主体。
+2. Qwen3.6-27B 几种量化的“热路径比例”重算
+
+下面比例是我按 safetensors header 和模型卡信息估算的 prefill hot path，不是单纯文件大小。
+
+2.1 BF16 原版
+项	比例
+BF16 hot Linear	近似 100%
+FP8	0
+FP4	0
+权重大小	约 55.6GB
+
+Qwen3.6-27B 官方 BF16 权重约 55.6GB，27B dense，所有参数每 token 激活。1
+
+32GB 5090/Pro4500 无法完整 BF16 单卡跑。
+
+2.2 官方 FP8
+
+Qwen 官方 FP8 模型卡说：fine-grained FP8 quantization，block size 128，性能指标 nearly identical to original model。2
+
+估算：
+
+项	比例
+FP8 hot Linear	大部分，约 80–90%
+BF16/FP16 保留敏感层	约 10–20%，具体依赖实现
+FP4	0
+
+第三方量化分析提到 Qwen/Qwen3.6-27B-FP8 未量化 linear-attention 的 in_proj_a、in_proj_b、in_proj_ba，因此并非所有热路径都是 FP8。5
+
+含义：FP8 通常是质量优先，速度不一定比优秀 Q4/Q5 GGUF 或 native NVFP4 更快。
+
+2.3 AWQ INT4 / AutoRound INT4
+
+以 cyankiwi/Qwen3.6-27B-AWQ-INT4 为例，模型卡给出：
+
+Model Size：19.04GB；
+Calibration：STEM and Agentic；
+用于 vLLM/SGLang/KTransformers。2
+
+AWQ/AutoRound 通常是：
+
+𝑊
+4
+𝐴
+16
+W4A16
+
+也就是：
+
+项	比例
+INT4/W4 weights	大部分权重
+FP16/BF16 activations	100% activations
+BF16/FP16 保留层	MTP、lm_head、部分敏感层，随 recipe 变化
+FP8	通常用于 KV cache 可选，不是权重主体
+
+含义：AWQ 的 prefill 速度极其依赖 kernel。
+在 5090 上，如果没有命中 Blackwell native FP4 路径，AutoRound/AWQ 可能被 170W prefill ceiling 限制，devnen 的对比里 AutoRound 约 1100 tok/s，而 NVFP4 native 可到 5300–7460 tok/s。2
+
+2.4 NVFP4 19GB 级
+
+以 sakamakismile/Qwen3.6-27B-NVFP4 / Text-NVFP4-MTP 为代表：
+
+原始 size：55.6GB；
+quantized size：19.7GB；
+scheme：NVFP4 W4A4，weights FP4，activations FP4，scales FP8；
+quantized：language model 的 Linear layers；
+kept BF16：lm_head、vision layers、MLP gates 等。2、5
+
+估算 hot path：
+
+项	比例
+FP4 hot Linear	约 85–90%
+BF16 hot Linear	很少，主要 gates/小层
+FP8	scales，不是单独 GEMM
+非 hot BF16	embedding/lm_head/vision/MTP 等
+
+含义：这个最能吃 Blackwell FP4/NVFP4。5090、Pro4500、Pro6000 Blackwell 才有意义。
+
+2.5 NVFP4 25–27GB 级
+
+以 Unsloth / vrfai 保守 NVFP4 为代表：
+
+Unsloth 约 26GB，给出 GSM8K/MMLU-Pro 小表：MMLU-Pro 0.64 → 0.63，GSM8K 0.20 → 0.20。2
+vrfai 模型卡明确说：FFN/MLP 和 full-attention quantized NVFP4；DeltaNet/Linear-attention projections 保留 BF16，原因是 gated linear recurrence 对数值误差敏感。3
+
+估算 hot path：
+
+项	比例
+FP4 hot Linear	约 70–80%
+BF16 hot Linear	约 17–25%，主要 linear-attn / DeltaNet
+FP8	scales
+非 hot BF16	embedding/lm_head/vision/MTP
+
+含义：质量更稳，但 prefill 中 BF16 热层会拖慢。
+
+3. 实测数据汇总：Qwen3.6-27B prefill
+3.1 RTX 4090 24GB，llama.cpp，UD-Q5_K_XL
+
+ZoliBen 的实测：
+
+Context	27B prefill
+4K	2620 tok/s
+16K	2610 tok/s
+32K	2331 tok/s
+64K	1959 tok/s
+100K	1733 tok/s
+
+配置：RTX 4090，Qwen3.6-27B UD-Q5_K_XL，turbo3 KV cache，llama.cpp server。10
+
+这个数据很重要，因为它给了 32K/64K 的真实 prefill 曲线。
+
+3.2 RTX 5090 32GB，NVFP4 native fast path
+
+devnen/qwen3.6-windows-server 的 5090 NVFP4 数据：
+
+Prompt	NVFP4 prefill
+24K	~7460 tok/s
+47K	~5300 tok/s
+
+同一说明里还写：
+
+AutoRound INT4 约 1100 tok/s；
+NVFP4 使用 FlashInfer sm_120 native FP4 Tensor Core kernels；
+decode 约 92 tok/s；
+长上下文 NIAH-style 50K/100K/177K 通过。2
+
+据此插值/外推：
+
+Context	5090 NVFP4 native 估算
+32K	~6300–6800 tok/s
+64K	~3700–4800 tok/s
+
+为什么范围较宽？因为 24K→47K 下降很快，64K 以后的 attention/KV/调度开销可能非线性增长。
+
+3.3 双 RTX 3090，vLLM，AutoRound INT4
+
+Reddit / vLLM 双 3090 实测：
+
+Prompt depth	PP
+~11K	1694 tok/s
+~22K	1564 tok/s
+~88K	1243 tok/s
+
+配置包含 Lorbus/Qwen3.6-27B-int4-AutoRound、TP=2、fp8 KV、chunked prefill、prefix caching、MTP。3
+
+估算：
+
+Context	双 3090 AutoRound 估算
+32K	~1450–1550 tok/s
+64K	~1250–1400 tok/s
+3.4 R9700 32GB，Qwen3.6-27B Q5_K_M
+
+truelies444 的 R9700 ROCm/llama.cpp 实测：
+
+GPU	pp8192	pp32768	tg128
+Single R9700, ubatch 512	805.68	611.26	24.86
+Single R9700, ubatch 1024	831.85	632.91	24.86
+Dual R9700, ubatch 512	1531.27	1215.35	24.15
+Dual R9700, ubatch 1024	1462.58	1207.05	23.97
+
+来源：7
+
+估算 64K：
+
+GPU	pp32768 实测	pp65536 估算
+Single R9700	~633	~450–550
+Dual R9700	~1210	~850–1050
+3.5 RTX PRO 4500 Blackwell
+
+找到的 Qwen3.6-27B 相关数据是短 prompt llama.cpp：
+
+Model	GPU	pp512	tg128
+qwen36 27B IQ4_XS	RTX PRO 4500 Blackwell	2022.54	45.19
+
+来源：8
+
+这个不是 32K/64K，但可以用于 sanity check。
+考虑到 Pro4500 显存带宽约 800GB/s，RTX 5090 约 1792GB/s；同为 Blackwell native FP4 时，Pro4500 约是 5090 的 0.45 倍带宽。结合 compute 也约半张 5090，推测：
+
+Context	Pro4500 NVFP4 native 估算
+32K	~2500–3200 tok/s
+64K	~1600–2400 tok/s
+
+如果不是 NVFP4 native，而是 GGUF Q4/Q5 llama.cpp：
+
+Context	Pro4500 GGUF Q4/Q5 估算
+32K	~1300–2000 tok/s
+64K	~900–1500 tok/s
+3.6 RTX 4080 / 4080 32GB 改卡
+
+公开数据很有限：
+
+Reddit 中有人报 “1500 in / 35–40 out, 4080”。5
+另一个 4080 用户说 16GB VRAM 会溢出到系统 RAM，27B 最好只有 12 tok/s，35B MoE 60+。7
+
+因此对 4080 32GB 改卡，只能按 4090 的显存带宽比例估：
+
+RTX 4080 带宽约 716GB/s；
+RTX 4090 约 1008GB/s；
+比例约 0.71。
+
+用 4090 Q5_K_XL 实测缩放：
+
+Context	4090 Q5 实测	4080 32GB 估算
+32K	2331	~1500–1800
+64K	1959	~1100–1500
+
+这个估算和“4080 1500 in”的社区数据一致。
+
+4. 汇总：不同 GPU / 量化的 32K、64K prefill 预估
+
+单位：prompt processing / prefill tok/s。
+“实测”代表有直接相近数据；“估算”代表由相近上下文/相近 GPU/带宽比例外推。
+
+GPU / 配置	量化	32K prefill	64K prefill	依据
+RTX 4090 24GB	UD-Q5_K_XL / turbo3 KV / llama.cpp	2331 实测	1959 实测	ZoliBen 4090 表。10
+RTX 5090 32GB	NVFP4 native / vLLM / FlashInfer	~6300–6800 估算	~3700–4800 估算	24K=7460、47K=5300 实测外推。2
+RTX 5090 32GB	Q5/Q6 GGUF / llama.cpp	~3800–4400	~3200–3800	4090 Q5 乘带宽/架构系数；低置信
+RTX 5090 32GB	AutoRound/AWQ INT4，未命中 FP4 fast path	~1000–2000	~900–1800	devnen 对比 AutoRound ~1100 prefill ceiling。2
+Dual RTX 3090 24GB	AutoRound INT4 / vLLM TP=2	~1450–1550	~1250–1400	11K/22K/88K 实测插值。3
+RTX PRO 4500 32GB	NVFP4 native	~2500–3200	~1600–2400	5090 NVFP4 × 带宽/算力比例；短 pp512 有 2022 实测 sanity check。8
+RTX PRO 4500 32GB	GGUF Q4/Q5	~1300–2000	~900–1500	由 pp512 和 4090/R9700曲线推测
+RTX 4080 32GB 改卡	GGUF Q4/Q5	~1500–1800	~1100–1500	4090 Q5 × 0.71，社区“1500 in”佐证。5
+Single R9700 32GB	Q5_K_M / ROCm llama.cpp	~633 实测	~450–550	R9700 pp32768 实测。7
+Dual R9700 32GB	Q5_K_M / ROCm llama.cpp	~1210 实测	~850–1050	R9700 dual pp32768 实测。7
+4090 48GB 改卡	FP8 / vLLM	~2200–2800	~1800–2400	Qevos 只验证 256K context 可行，未给速度；按 4090 Q5/FP8外推。1
+5. 为什么 5090 NVFP4 prefill 能比 4090 Q5 快 2–3 倍？
+
+核心不是“5090 算力比 4090 大 3 倍”，而是 kernel 路径完全不同。
+
+5.1 4090 Q5_K_XL / llama.cpp
+
+4090 的 Q5 GGUF 路径主要受：
+
+GDDR6X 带宽；
+CUDA GGML kernel；
+Q5 解包；
+attention/KV；
+batch/ubatch；
+
+影响。ZoliBen 的 4090 Q5 数据在 32K/64K 是 2331/1959 tok/s。10
+
+5.2 5090 NVFP4 native
+
+devnen 的 5090 NVFP4 路径明确说：
+
+FFN/QKV/proj GEMMs through FlashInfer sm_120 native FP4 tensor-core kernels；
+逃离 AutoRound INT4 在 consumer Blackwell 上的 170W prefill ceiling；
+24K prefill 7460 tok/s；
+47K prefill 5300 tok/s；
+AutoRound 对比只有约 1100 tok/s。2
+
+这说明：
+
+5090 的优势来自 “native FP4 Tensor Core + 对应 kernel + vLLM/FlashInfer fast path”，不是简单来自显存带宽。
+
+6. 对同一模型外推时，我建议用两个模型
+6.1 GGUF / llama.cpp 类
+
+对 GGUF Q4/Q5/Q6，prefill 更接近：
+
+prefill
+∝
+显存带宽
+×
+kernel效率
+prefill∝显存带宽×kernel效率
+
+例如 4080 32GB 改卡相对 4090：
+
+716
+/
+1008
+≈
+0.71
+716/1008≈0.71
+
+所以 4090 Q5 32K 2331 tok/s，4080 32GB 估：
+
+2331
+×
+0.71
+≈
+1650
+2331×0.71≈1650
+
+这和社区 “4080 1500 in” 大致一致。5
+
+6.2 vLLM / native FP4/NVFP4 类
+
+对 native NVFP4：
+
+prefill
+∝
+min
+⁡
+(
+FP4 Tensor Core吞吐
+,
+显存带宽
+,
+GDN/attention kernel
+)
+prefill∝min(FP4 Tensor Core吞吐,显存带宽,GDN/attention kernel)
+
+所以 5090 → Pro4500 不能只看 VRAM，也要看：
+
+5090 带宽约 1792GB/s；
+Pro4500 带宽约 800GB/s；
+Pro4500 FP4/BF16 规格约半张 5090；
+所以 Pro4500 约 5090 的 0.4–0.55 倍是合理估计。
+7. 关于 4090 48GB / 4080 32GB / Pro4500 / R9700 的实际选择
+7.1 如果你要 Qwen3.6-27B 长上下文 prefill
+
+大致排序：
+
+5090
+ 
+𝑁
+𝑉
+𝐹
+𝑃
+4
+ 
+𝑛
+𝑎
+𝑡
+𝑖
+𝑣
+𝑒
+>
+4090
+ 
+𝑄
+5
+/
+𝑄
+6
+≈
+4080
+ 
+32
+𝐺
+𝐵
+ 
+𝑄
+4
+/
+𝑄
+5
+≈
+𝑃
+𝑟
+𝑜
+4500
+ 
+𝐺
+𝐺
+𝑈
+𝐹
+5090 NVFP4 native>4090 Q5/Q6≈4080 32GB Q4/Q5≈Pro4500 GGUF
+
+但如果 Pro4500 也走 NVFP4 native fast path：
+
+5090
+ 
+𝑁
+𝑉
+𝐹
+𝑃
+4
+>
+𝑃
+𝑟
+𝑜
+4500
+ 
+𝑁
+𝑉
+𝐹
+𝑃
+4
+>
+4090
+ 
+𝐺
+𝐺
+𝑈
+𝐹
+>
+𝑅
+9700
+5090 NVFP4>Pro4500 NVFP4>4090 GGUF>R9700
+7.2 如果你要 256K context
+4090 24GB：通常不够高质量长上下文，除非强 KV 量化。
+5090 32GB：可以高量化 + KV 压缩，但不是所有配置都舒服。
+4090 48GB：FP8 + fp8 KV 可接近满 262K，Qevos 实测 261,856 tokens 可行。1
+Pro4500 32GB：理论上可 100K+，但 32K 是一些 NVFP4/MTP 组合的 critical VRAM threshold，有用户在 Pro4500 32GB 上 32K OOM 过。1
+R9700 32GB：Qwen3.6 27B 可跑，但 prefill 明显低于 NVIDIA 高端卡；双卡对 prefill 帮助明显。7
+8. 最终建议
+
+如果你的目标是 Qwen3.6-27B 本地 coding agent，且经常 32K–64K prefill：
+
+最快单卡：RTX 5090 + NVFP4 native fast path。
+目前最好的公开数据是 24K 7460、47K 5300 tok/s。2
+
+最稳成熟 CUDA 路线：4090/4090 48GB + Q5/Q6/FP8。
+4090 Q5_K_XL 32K 2331、64K 1959 是很有参考价值的实测。10
+
+低功耗专业 32GB：RTX PRO 4500 Blackwell。
+如果能稳定跑 NVFP4 native，它可能是很好的 32GB 服务器卡；但目前 Qwen3.6-27B 32K/64K 同口径公开数据不足。
+
+AMD R9700：胜在 32GB 和价格/生态多样性；单卡 Qwen3.6-27B Q5_K_M 32K prefill 约 633 tok/s，双卡约 1210 tok/s，明显可用但不追求最高速度。7
+
+4080 32GB 改卡：如果存在且稳定，Q4/Q5 32K prefill 约 1.5K–1.8K 是合理预期；但缺少直接实测，建议自己跑 llama-bench -p 32768,65536 验证。
+
+4m 31s | 130 days ago
+15:01
+
+那么如果我要用多agent，针对一些共同背景上下文，分解并且分发不同动作的任务，缓存应该不是很重要（我只需要缓存公共背景部分），这种情况下，sglang可以支持pro 4500
+
+Searched the web
+
+可以，你的这种“多 agent 共享共同背景，然后分发不同动作/子任务”的模式，反而是 SGLang 最适合发挥的场景之一。但要分两层回答：
+
+SGLang 的缓存机制是否适合多 agent 共享背景？
+适合，而且这正是 RadixAttention / prefix caching 的强项。
+
+SGLang 在 RTX PRO 4500 Blackwell 上能不能稳定跑 Qwen3.6-27B？
+**硬件上可以；软件上要看你选的量化格式。**FP8 / AWQ / INT4 路线更稳；NVFP4 原生 FP4 路线理论上最适合 Blackwell，但 SGLang + SM120 + Qwen3.6-27B NVFP4 仍属于较新组合，可能需要最新版或 dev 版，并且不如 vLLM 社区 recipe 成熟。
+
+1. 你说“缓存应该不是很重要”，其实恰好相反
+
+你说：
+
+我只需要缓存公共背景部分。
+
+这正是最有价值的缓存。
+
+假设你有：
+
+公共背景：40K tokens；
+8 个 agent；
+每个 agent 自己的任务描述：2K tokens；
+每个 agent 生成 1K tokens。
+
+如果没有共享 prefix cache，prefill 量大约是：
+
+8
+×
+(
+40
+𝐾
++
+2
+𝐾
+)
+=
+336
+𝐾
+8×(40K+2K)=336K
+
+如果公共背景能被缓存一次，后续 agent 只算自己的分支：
+
+40
+𝐾
++
+8
+×
+2
+𝐾
+=
+56
+𝐾
+40K+8×2K=56K
+
+理论 prefill 计算量下降：
+
+336
+𝐾
+/
+56
+𝐾
+=
+6
+×
+336K/56K=6×
+
+所以你这种多 agent fan-out 场景中，公共背景 prefix cache 非常重要。
+
+SGLang 的 RadixAttention 就是为了这种共享前缀场景设计的。资料里明确说，SGLang 会把 KV cache 存在 radix tree 中；多个请求共享 system prompt、RAG 文档、工具定义或前面对话时，会复用已缓存的 KV，而不是重新 prefill；共享前缀占比高的 workload 可获得 75–95% cache hit rate 和显著更低 TTFT。3
+
+SGLang 文档里也能看到 --disable-radix-cache 这个参数，默认是 False，也就是 RadixAttention 默认开启；只有你显式加 --disable-radix-cache 才会关掉。2
+
+2. 多 agent 场景下，SGLang 比普通 prefix cache 更合适
+
+普通 prefix cache 通常是“完全前缀命中”或简单前缀复用。SGLang 的 RadixAttention 是 radix tree，适合分叉：
+
+text
+公共背景 / repo summary / 需求说明 / 工具定义
+├── Agent A：负责前端改动
+├── Agent B：负责后端 API
+├── Agent C：负责测试
+├── Agent D：负责文档
+└── Agent E：负责安全审查
+
+在这种结构里：
+
+公共背景 KV 只存一份；
+每个 agent 的独立任务从公共节点分叉；
+后续如果某个 agent 再继续多轮，也可以继续复用其自身分支；
+如果多个 agent 又共享某段中间上下文，也可以继续共享。
+
+RadixAttention 介绍资料里也专门举了 agent 场景：多个 agent 共享系统提示和源文件时，PagedAttention 可能为每个 agent 分配一份公共 KV，而 RadixAttention 只存一次公共前缀，让多个 agent 成为同一分支下的 leaves，从而显著降低显存占用。2
+
+所以，如果你的多 agent 是：
+
+同一个大背景 + 不同 agent 分支
+
+那么 SGLang 是合理选择。
+
+3. 但要注意：必须让公共部分 token 完全一致
+
+Prefix cache 不是语义缓存，而是 token-level cache。
+
+要命中缓存，公共前缀必须严格一致。下面这些都会破坏命中：
+
+每个 agent 的 system prompt 不同；
+时间戳、随机 ID、agent 名称放在公共背景之前；
+工具列表顺序不同；
+JSON 空格、换行、排序不同；
+每个请求的 chat template 不同；
+有的请求开启 thinking，有的关闭 thinking，导致模板 token 不同；
+不同 agent 使用不同 tool schema。
+
+最佳结构是：
+
+text
+[完全一致的 system/developer prompt]
+[完全一致的工具定义]
+[完全一致的项目背景 / repo 摘要 / 需求说明 / 约束]
+---- 分叉点 ----
+[Agent A role/task]
+
+也就是说，agent 差异要尽量放在公共背景之后。
+
+不要这样：
+
+text
+Agent A system prompt
+公共背景
+任务
+
+而要这样：
+
+text
+公共 system prompt
+公共背景
+Agent A task
+
+这样 SGLang 才能把公共背景作为一条 radix path 缓存起来。
+
+4. RTX PRO 4500 Blackwell 能不能跑 SGLang？
+4.1 硬件层面：可以
+
+RTX PRO 4500 Blackwell 是 Blackwell 架构，32GB GDDR7，支持 FP4。NVIDIA 官方页面也说 RTX PRO 4500 Blackwell 有第五代 Tensor Cores、FP4 precision 和 32GB GDDR7。7
+
+Lenovo 规格表给得更细：
+
+32GB GDDR7；
+800GB/s memory bandwidth；
+FP4 Tensor Core：1.6 PFLOPS；
+FP8 Tensor Core：811 TFLOPS；
+FP16/BF16 Tensor Core：406 TFLOPS；
+165W；
+PCIe 5.0 x16。2
+
+所以硬件没问题。
+
+4.2 SGLang 层面：可以跑，但 NVFP4 要谨慎
+
+SGLang 本身支持 Blackwell / FP4 的方向是明确的。资料称 SGLang 支持 Blackwell GPUs 上的 NVFP4，vLLM、TensorRT-LLM、SGLang 都是 NVFP4 inference 的主要框架之一。4
+
+但现实是：SM120，也就是 5090 / RTX PRO 4500 / RTX PRO 6000 这类桌面/工作站 Blackwell，软件栈仍然在快速变化。
+
+SGLang 自己的 SM120 optimization issue 里列了很多待优化项，包括：
+
+SM120 support；
+NVFP4 / MXFP4；
+Qwen3.5-397B-A17B-NVFP4；
+GDN；
+FlashInfer；
+BF16/FP8/NVFP4 dense GEMM；
+SM120 FlashInfer FP4 kernel 等。7
+
+这说明：
+
+SGLang 能跑 Blackwell / NVFP4，但不同模型、不同量化、不同 SM120 kernel 的成熟度不一样。
+
+对于 Qwen3.6-27B，Qwen 官方模型卡推荐 SGLang 作为 serving 框架之一，并提示 Qwen3.6 需要较新的 SGLang 版本。1
+
+所以：
+
+FP8 / AWQ / AutoRound / BF16 分片：SGLang 跑的把握更大；
+NVFP4 modelopt / compressed-tensors：理论最适合 Pro4500，但要实测具体 checkpoint 是否被 SGLang 版本支持；
+Qwen3.6-27B + MTP + NVFP4 + 32GB Pro4500：要特别小心显存，因为社区里有 Pro4500 32GB 在 32K context 附近 OOM 的反馈。4
+5. 推荐部署策略
+5.1 如果你要稳定优先
+
+我建议先用：
+
+Qwen3.6-27B AWQ / AutoRound INT4；
+或官方 FP8；
+SGLang server；
+RadixAttention 默认开启；
+context 先从 32K 或 64K 开始。
+
+示意命令：
+
+Bash
+python -m sglang.launch_server \
+  --model-path Qwen/Qwen3.6-27B-FP8 \
+  --host 0.0.0.0 \
+  --port 30000 \
+  --context-length 65536 \
+  --mem-fraction-static 0.85 \
+  --reasoning-parser qwen3
+
+如果用 AWQ / INT4，具体 --quantization 参数要按模型卡和当前 SGLang 支持情况调整。例如：
+
+Bash
+python -m sglang.launch_server \
+  --model-path cyankiwi/Qwen3.6-27B-AWQ-INT4 \
+  --host 0.0.0.0 \
+  --port 30000 \
+  --context-length 65536 \
+  --mem-fraction-static 0.85 \
+  --reasoning-parser qwen3
+
+cyankiwi/Qwen3.6-27B-AWQ-INT4 模型卡给出模型大小 19.04GB，校准集是 STEM and Agentic，适合 agentic 场景尝试。2
+
+5.2 如果你要速度优先，尝试 NVFP4
+
+可以试：
+
+Bash
+python -m sglang.launch_server \
+  --model-path /path/to/Qwen3.6-27B-Text-NVFP4-MTP \
+  --quantization modelopt_fp4 \
+  --host 0.0.0.0 \
+  --port 30000 \
+  --context-length 32768 \
+  --mem-fraction-static 0.85 \
+  --reasoning-parser qwen3
+
+但这里我要强调：
+
+这是“值得试”，不是“保证稳”；
+Pro4500 只有 32GB，NVFP4 + MTP + 长上下文可能顶显存；
+先不要直接 128K/256K；
+先从 32K 开始；
+如果 OOM，关掉 MTP 或换 text-only / no vision；
+如果 NVFP4 输出异常，换 FP8/AWQ；
+如果 SGLang 版本不认 modelopt_fp4，需要 dev 版或换 vLLM。
+
+SGLang 的社区例子里确实有 --quantization modelopt_fp4 用于 Qwen NVFP4 Blackwell 模型。3
+
+6. 多 agent 调度建议
+
+你的场景我会这样设计：
+
+6.1 单 SGLang 实例承载所有 agent
+
+不要每个 agent 一个模型进程。
+要这样：
+
+text
+Agent Orchestrator
+      |
+      | OpenAI-compatible API
+      v
+Single SGLang Server on RTX PRO 4500
+      |
+      +-- RadixAttention shared prefix cache
+
+因为 RadixAttention cache 是 server 内部状态。
+如果你开 8 个独立 SGLang 进程，每个进程各自一份缓存，公共背景不能共享。
+
+6.2 先 warm 公共背景
+
+先发一个预热请求：
+
+JSON
+{
+  "messages": [
+    {"role": "system", "content": "公共规则..."},
+    {"role": "user", "content": "公共项目背景...请只回复 OK"}
+  ],
+  "max_tokens": 1
+}
+
+这会把公共背景 prefill 到 KV cache 中。
+
+然后再发 agent 分支：
+
+JSON
+{
+  "messages": [
+    {"role": "system", "content": "公共规则..."},
+    {"role": "user", "content": "公共项目背景..."},
+    {"role": "user", "content": "Agent A: 你负责修改前端..."}
+  ]
+}
+
+只要 token 完全一致，SGLang 会复用公共部分。
+
+6.3 并发不要太高
+
+Pro4500 是 32GB。即使公共前缀缓存只存一份，每个 agent 的独立分支和生成部分仍然要占 KV。
+
+如果：
+
+公共背景 80K；
+每个 agent 分支 10K；
+8 个 agent 并发；
+每个生成 4K；
+
+总 KV 压力仍然很大。
+
+建议初始：
+
+参数	建议
+公共背景	10K–50K 更合适
+Agent 并发	2–4 先测
+每个 agent 输出	1K–4K
+context-length	32K 或 64K 起步
+mem fraction	0.80–0.88 起步
+量化	AWQ/FP8 稳定优先；NVFP4 速度优先
+7. SGLang vs vLLM：你的场景怎么选？
+7.1 选 SGLang 的理由
+
+你的任务是：
+
+共同背景 + 多 agent 分解 + 多分支请求。
+
+这非常适合 SGLang，因为：
+
+RadixAttention 默认开启；
+共享 prefix KV；
+多轮 agent / Tree-of-thought / Skeleton-of-thought / ReAct 这类程序化生成是 SGLang 论文重点场景；
+SGLang 论文也提到在 ReAct、generative agents、Tree-of-thought 等场景中复用 agent template 和 previous calls 的 KV cache。4
+7.2 选 vLLM 的理由
+
+如果你优先要：
+
+5090 / Pro4500 NVFP4 最快 kernel；
+已验证的 Qwen3.6-27B NVFP4 recipe；
+MTP / DFlash / FlashInfer 组合；
+最高 decode speed；
+
+那么 vLLM 现在社区 recipe 更多。
+
+例如 RTX PRO 4500 上，Exxact 的 benchmark 用 vLLM 跑 Llama 3.1 8B NVFP4，单卡 aggregate 4870 tok/s，比 BF16 高 2.4×。1
+
+这说明 vLLM 对 Pro4500 NVFP4 的生产栈更成熟一些。
+
+8. 我的建议
+
+如果你的目标是 多 agent + 共享背景 + 本地 Qwen3.6-27B + Pro4500：
+
+阶段 1：先验证 SGLang + RadixAttention
+
+用 FP8 或 AWQ 先跑通：
+
+Bash
+python -m sglang.launch_server \
+  --model-path Qwen/Qwen3.6-27B-FP8 \
+  --host 0.0.0.0 \
+  --port 30000 \
+  --context-length 65536 \
+  --mem-fraction-static 0.85 \
+  --reasoning-parser qwen3
+
+然后做一个测试：
+
+发公共背景 30K 的预热请求；
+发 4 个 agent 请求，每个共享同样 30K prefix；
+观察 TTFT 是否明显下降；
+观察显存是否稳定；
+对比加 --disable-radix-cache 时的差异。
+
+如果开启 RadixAttention 后 TTFT 明显降低，就说明你的多 agent 架构吃到了 SGLang 的优势。
+
+阶段 2：再尝试 NVFP4
+
+如果 FP8/AWQ 跑通，再试 NVFP4：
+
+Bash
+python -m sglang.launch_server \
+  --model-path /models/Qwen3.6-27B-Text-NVFP4-MTP \
+  --quantization modelopt_fp4 \
+  --host 0.0.0.0 \
+  --port 30000 \
+  --context-length 32768 \
+  --mem-fraction-static 0.82 \
+  --reasoning-parser qwen3
+
+如果稳定，再逐步加：
+
+context 64K；
+mem fraction 0.85–0.9；
+MTP；
+更高并发。
+9. 最终回答
+
+可以，SGLang 可以支持 RTX PRO 4500 这个方向，而且你的多 agent 共享背景场景非常适合 SGLang。
+
+但要注意三点：
+
+缓存不是不重要，而是只缓存公共背景就已经非常重要。
+共享 30K–80K 背景时，RadixAttention 能显著降低多 agent fan-out 的 prefill 和 KV 重复。
+
+所有 agent 必须走同一个 SGLang server，且公共前缀 token 完全一致。
+不同进程、不同模板、不同工具顺序都会降低 cache hit。
+
+Pro4500 上 Qwen3.6-27B 的 SGLang 路线建议先 FP8/AWQ 跑稳，再尝试 NVFP4。
+NVFP4 理论最适合 Blackwell，但 SM120 + Qwen3.6 + SGLang 仍是快速迭代区；如果你追求最成熟的 NVFP4 性能，vLLM 目前公开 recipe 更多。
+
+2m 41s | 130 days ago
+15:28
+
+1.等等，8b模型也只能prefill4870，那27b怎么可能能到3k的速率，看起来只有1600左右的速度啊，
+
+2.我需要你计算，除了模型，公共分支大概能容纳多少上下文
+
+3.我需要你计算32gb和48gb差距，例如缓存的百分比以及换算的加速比（但是注意缓存命中高很大程度是长上下文不断重复计算，真正新增才是需要prefill部分，任务分解到agent之后，相当于独立产出新增，这里命中低不会影响新增真正产出的速率）
+
+你这个质疑是对的：拿 8B 模型在 RTX PRO 4500 上 vLLM NVFP4 aggregate 4870 tok/s，去推 27B 还能有 3K+ prefill，是偏乐观的。
+重新按参数量、已知实测、KV 容量来算，Pro 4500 上 Qwen3.6-27B 的 32K prefill 更合理区间大概是 1.4K–2.2K tok/s，如果某个 NVFP4 native kernel 特别好，可能接近 2.5K，但我不再认为 3K 是稳健估计。
+
+下面分三部分回答你的 3 个问题。
+
+1. 8B 模型 4870 tok/s，那么 27B 怎么可能 3K？
+1.1 你说得对：3K 对 Pro 4500 的 Qwen3.6-27B 偏高
+
+RTX PRO 4500 Blackwell 的公开 vLLM benchmark 是 Llama 3.1 8B：
+
+配置	模型	stack	tok/s
+1× RTX PRO 4500	Llama 3.1 8B	vLLM BF16	2031
+1× RTX PRO 4500	Llama 3.1 8B	vLLM NVFP4	4870
+
+来源：Exxact RTX PRO 4500 benchmark。1
+
+如果粗暴按 active dense 参数量缩放：
+
+4870
+×
+8
+𝐵
+27
+𝐵
+≈
+1443
+ tok/s
+4870×
+27B
+8B
+	​
+
+≈1443 tok/s
+
+所以 Pro 4500 上 27B dense 的 NVFP4 prefill 估算中心值应更接近 1.4K–1.8K tok/s，不是 3K。
+
+1.2 为什么有时短 prompt pp512 能看到 2700？
+
+RTX PRO 4500 上有一个短 prompt llama.cpp benchmark：
+
+模型	size	pp512	tg128
+Qwen3.6-27B IQ4_XS	14.37GB	2022.54	45.19
+Qwen3.6-27B NVFP4	18.29GB	2726.32	41.15
+Qwen3.6-27B Q6_K	20.97GB	1571.16	32.87
+
+来源：RTX Pro 4500 Blackwell Performance Numbers。8
+
+但这是 pp512，短 prompt。
+32K / 64K 会因为：
+
+attention / KV 写入；
+Gated DeltaNet / hybrid kernel；
+chunked prefill；
+显存带宽；
+调度；
+cache allocator；
+
+明显下降。
+
+参考 R9700 的 Qwen3.6-27B Q5_K_M：
+
+GPU	pp8192	pp32768
+Single R9700	831.85	632.91
+Dual R9700	1462.58–1531.27	1207.05–1215.35
+
+来源：Dual R9700 ROCm llama.cpp benchmark。7
+
+长上下文下掉速是正常的。
+
+1.3 修正后的 Pro 4500 Qwen3.6-27B prefill 估计
+
+我会把之前估算修正为：
+
+模型/量化	Pro 4500 32K prefill	Pro 4500 64K prefill	可信度
+Qwen3.6-27B Q4/Q5 GGUF	1.2K–1.8K	0.9K–1.4K	中
+Qwen3.6-27B NVFP4 llama.cpp	1.4K–2.0K	1.0K–1.5K	中低
+Qwen3.6-27B NVFP4 native vLLM/SGLang fast path	1.6K–2.3K	1.1K–1.8K	低到中
+Qwen3.6-27B AWQ/AutoRound vLLM	1.0K–1.8K	0.9K–1.5K	中低
+
+结论：你说“看起来只有 1600 左右”是合理判断。
+如果有人在 Pro 4500 上声称 Qwen3.6-27B 32K prefill 稳定 3K+，我会要求他给出：
+
+模型具体 repo；
+是否 dense 27B 而不是 35B-A3B MoE；
+pp32K 还是 pp512；
+单请求还是 aggregate；
+是否 cache hit；
+是否已经预热公共 prefix；
+是否多并发 batch；
+backend 是 vLLM/SGLang/llama.cpp；
+是否真正 native FP4 而非 upcast。
+2. 除了模型，公共分支大概能容纳多少上下文？
+
+这里要算 KV cache 容量。
+
+Qwen3.6-27B 的 full-attention 层不是 64 层全 attention，而是 hybrid：
+
+64 层；
+每 4 层里 3 层 Gated DeltaNet，1 层 full attention；
+所以 full attention 层约 16 层；
+KV heads = 4；
+head dim = 256。
+
+Qwen3.6-27B 模型卡给出：64 layers，Gated Attention heads：24 Q heads / 4 KV heads，head dim 256。1
+
+每 token KV 元素数：
+
+16
+×
+2
+(
+𝐾
+,
+𝑉
+)
+×
+4
+×
+256
+=
+32768
+ elements/token
+16×2(K,V)×4×256=32768 elements/token
+
+所以：
+
+KV dtype	bytes / element	KV bytes / token	每 1 GiB 可存 token
+FP16/BF16 KV	2	65,536 B ≈ 64 KiB	16,384 tokens
+FP8/Q8 KV	1	32,768 B ≈ 32 KiB	32,768 tokens
+Q4 KV	0.5	16,384 B ≈ 16 KiB	65,536 tokens
+3-bit/Turbo3 近似	0.375	12,288 B ≈ 12 KiB	87,381 tokens
+
+这也是为什么 Qwen3.6-27B 的长上下文比“64 层全 attention dense model”轻很多：只有 16 个 full-attention KV 层。
+
+2.1 32GB RTX PRO 4500：可用于公共分支的 KV 大概多少？
+
+要先扣掉：
+
+模型权重；
+CUDA / runtime / graph / workspace；
+SGLang/vLLM 管理开销；
+分支 agent 自己的新增上下文；
+安全余量。
+
+以 Qwen3.6-27B 量化模型为例：
+
+模型类型	权重/加载大致占用
+AWQ / AutoRound INT4	18–20 GiB
+NVFP4 text-only	18–20 GiB
+NVFP4 + vision + MTP	20–24 GiB
+FP8	27–30 GiB，不适合 32GB 长上下文
+BF16	55GB+，不适合 32GB 单卡
+
+以 AWQ/NVFP4 text-only 为例，假设：
+
+base footprint
+=
+22
+ GiB
+base footprint=22 GiB
+
+32GB 卡剩余：
+
+32
+−
+22
+=
+10
+ GiB
+32−22=10 GiB
+
+保守留 10% 余量：
+
+10
+×
+0.9
+=
+9
+ GiB
+10×0.9=9 GiB
+
+则可用 KV token 约：
+
+KV dtype	32GB 可用 KV 约 9GiB
+FP16/BF16 KV	147K tokens
+FP8/Q8 KV	295K tokens
+Q4 KV	590K tokens
+Turbo3 近似	786K tokens
+
+但注意单请求仍受模型 native context 限制：
+
+𝐶
+common
++
+𝐷
+agent
+≤
+262
+𝐾
+C
+common
+	​
+
++D
+agent
+	​
+
+≤262K
+
+所以在 FP8 KV 下，32GB 理论上可以容纳接近完整 262K 的公共 prefix，但要给 agent 分支留空间。
+
+2.2 更保守的 32GB 情况
+
+如果模型 + runtime 更重，例如：
+
+base footprint
+=
+25
+ GiB
+base footprint=25 GiB
+
+则：
+
+32
+−
+25
+=
+7
+ GiB
+32−25=7 GiB
+
+留 10%：
+
+6.3
+ GiB
+6.3 GiB
+
+可用 KV：
+
+KV dtype	32GB 可用 KV 约 6.3GiB
+FP16/BF16 KV	103K
+FP8/Q8 KV	206K
+Q4 KV	413K
+Turbo3	550K
+
+这更接近你在 Pro 4500 上跑 NVFP4 + MTP + vision 可能遇到的紧张情况。
+社区里也有人在 RTX PRO 4500 32GB 上尝试 Qwen3.6-27B NVFP4 + MTP，32K context 附近 OOM，说明具体实现的 runtime / MTP buffer 会显著影响实际容量。4
+
+3. 32GB 和 48GB 的差距怎么换算？
+
+关键点：48GB 不是比 32GB 多 50% KV，而是因为模型权重固定，KV 余量可能多 2–4 倍。
+
+设：
+
+𝐵
+=
+模型 + runtime 基础占用
+B=模型 + runtime 基础占用
+
+则：
+
+𝐾
+𝑉
+32
+=
+32
+−
+𝐵
+KV
+32
+	​
+
+=32−B
+𝐾
+𝑉
+48
+=
+48
+−
+𝐵
+KV
+48
+	​
+
+=48−B
+
+比值：
+
+𝐾
+𝑉
+48
+𝐾
+𝑉
+32
+=
+48
+−
+𝐵
+32
+−
+𝐵
+KV
+32
+	​
+
+KV
+48
+	​
+
+	​
+
+=
+32−B
+48−B
+	​
+
+
+看几个基础占用假设：
+
+Base footprint B	32GB 剩余 KV GiB	48GB 剩余 KV GiB	48GB / 32GB KV 容量比
+20GiB	12	28	2.33×
+22GiB	10	26	2.60×
+24GiB	8	24	3.00×
+26GiB	6	22	3.67×
+
+所以 48GB 对多 agent / 长公共 prefix 的提升非常大。
+
+3.1 以 FP8 KV 为例计算
+
+每 1GiB FP8 KV ≈ 32,768 tokens。
+
+假设基础占用 B=22GiB，留 10% 余量：
+
+VRAM	Raw KV GiB	安全 KV GiB	FP8 KV tokens
+32GB	10	9	295K
+48GB	26	23.4	767K
+
+虽然模型 native context 是 262K，但多 agent 是分支结构，总 KV 是：
+
+𝐶
+common
++
+∑
+𝑖
+𝐷
+𝑖
+C
+common
+	​
+
++
+i
+∑
+	​
+
+D
+i
+	​
+
+
+不是：
+
+𝑁
+×
+𝐶
+common
+N×C
+common
+	​
+
+
+所以 48GB 的优势体现在：
+
+可缓存完整公共背景；
+可同时保留更多 agent 分支；
+可减少 cache eviction；
+可支持更高并发；
+可保留更长历史分支。
+3.2 多 agent 共享前缀容量公式
+
+设：
+
+𝐶
+C：公共背景 token 数；
+𝐴
+A：agent 数量；
+𝐷
+D：每个 agent 的独立新增 token，包括该 agent 的任务说明、私有上下文、生成历史；
+𝑇
+T：总可用 KV token 容量。
+
+则：
+
+𝐶
++
+𝐴
+×
+𝐷
+≤
+𝑇
+C+A×D≤T
+
+公共分支最大长度：
+
+𝐶
+max
+⁡
+=
+𝑇
+−
+𝐴
+×
+𝐷
+C
+max
+	​
+
+=T−A×D
+
+同时每个请求必须满足：
+
+𝐶
++
+𝐷
+≤
+262
+𝐾
+C+D≤262K
+4. 具体例子：32GB vs 48GB
+
+假设：
+
+Qwen3.6-27B AWQ/NVFP4；
+base footprint = 22GiB；
+FP8 KV；
+10% 安全余量。
+
+则：
+
+GPU	可用 KV token T
+32GB	295K
+48GB	767K
+4.1 每个 agent 独立新增 8K tokens
+Agent 数	32GB 可容纳公共 C	48GB 可容纳公共 C
+2	279K，但受单请求限制，实际 ≤254K	751K，但单请求 ≤254K
+4	263K，实际 ≤254K	735K，实际 ≤254K
+8	231K	703K，实际 ≤254K
+16	167K	639K，实际 ≤254K
+24	103K	575K，实际 ≤254K
+
+如果你的公共背景是 64K 或 128K，32GB 已经能跑不少 agent；48GB 主要让你保留更多分支和更少 eviction。
+
+4.2 每个 agent 独立新增 16K tokens
+Agent 数	32GB 可容纳公共 C	48GB 可容纳公共 C
+2	263K，实际 ≤246K	735K，实际 ≤246K
+4	231K	703K，实际 ≤246K
+8	167K	639K，实际 ≤246K
+12	103K	575K，实际 ≤246K
+16	39K	511K，实际 ≤246K
+
+这说明：
+如果每个 agent 都要保留很长独立分支，32GB 很快会被 agent 分支吃掉；48GB 会舒服很多。
+
+5. 缓存百分比和加速比怎么算？
+
+你说得对：
+缓存命中主要节省的是重复 prefill，不会让每个 agent 独立新增 token 的产出速度变快。
+
+所以要分：
+
+prefill 节省；
+decode / 新增生成速率；
+端到端任务耗时。
+5.1 第一次 fan-out：公共背景还没预热
+
+没有缓存时：
+
+prefill tokens
+=
+𝐴
+(
+𝐶
++
+𝐷
+)
+prefill tokens=A(C+D)
+
+有 Radix cache 时：
+
+prefill tokens
+=
+𝐶
++
+𝐴
+𝐷
+prefill tokens=C+AD
+
+prefill 加速比：
+
+𝑆
+first
+=
+𝐴
+(
+𝐶
++
+𝐷
+)
+𝐶
++
+𝐴
+𝐷
+S
+first
+	​
+
+=
+C+AD
+A(C+D)
+	​
+
+
+节省比例：
+
+1
+−
+𝐶
++
+𝐴
+𝐷
+𝐴
+(
+𝐶
++
+𝐷
+)
+1−
+A(C+D)
+C+AD
+	​
+
+5.2 公共背景已经预热
+
+如果公共背景已经提前缓存，那么后续 agent 只需要算自己的分支：
+
+prefill tokens
+=
+𝐴
+𝐷
+prefill tokens=AD
+
+加速比：
+
+𝑆
+warm
+=
+𝐴
+(
+𝐶
++
+𝐷
+)
+𝐴
+𝐷
+=
+𝐶
++
+𝐷
+𝐷
+S
+warm
+	​
+
+=
+AD
+A(C+D)
+	​
+
+=
+D
+C+D
+	​
+
+
+这个跟 agent 数量无关，只跟公共背景和新增分支的比例有关。
+
+6. 例子：公共背景 64K
+6.1 C=64K，D=8K
+
+每个 agent 请求总长：
+
+64
+𝐾
++
+8
+𝐾
+=
+72
+𝐾
+64K+8K=72K
+4 个 agent
+
+无缓存：
+
+4
+×
+72
+𝐾
+=
+288
+𝐾
+4×72K=288K
+
+第一次共享缓存：
+
+64
+𝐾
++
+4
+×
+8
+𝐾
+=
+96
+𝐾
+64K+4×8K=96K
+
+加速：
+
+288
+/
+96
+=
+3.0
+×
+288/96=3.0×
+
+公共背景已预热：
+
+4
+×
+8
+𝐾
+=
+32
+𝐾
+4×8K=32K
+
+加速：
+
+288
+/
+32
+=
+9.0
+×
+288/32=9.0×
+8 个 agent
+
+无缓存：
+
+8
+×
+72
+𝐾
+=
+576
+𝐾
+8×72K=576K
+
+第一次共享缓存：
+
+64
+𝐾
++
+8
+×
+8
+𝐾
+=
+128
+𝐾
+64K+8×8K=128K
+
+加速：
+
+576
+/
+128
+=
+4.5
+×
+576/128=4.5×
+
+公共背景已预热：
+
+8
+×
+8
+𝐾
+=
+64
+𝐾
+8×8K=64K
+
+加速：
+
+576
+/
+64
+=
+9.0
+×
+576/64=9.0×
+7. 例子：公共背景 128K
+C=128K，D=8K
+
+每个 agent 请求总长：
+
+136
+𝐾
+136K
+4 个 agent
+
+无缓存：
+
+544
+𝐾
+544K
+
+第一次共享缓存：
+
+128
+𝐾
++
+32
+𝐾
+=
+160
+𝐾
+128K+32K=160K
+
+加速：
+
+544
+/
+160
+=
+3.4
+×
+544/160=3.4×
+
+公共背景已预热：
+
+32
+𝐾
+32K
+
+加速：
+
+544
+/
+32
+=
+17
+×
+544/32=17×
+8 个 agent
+
+无缓存：
+
+1088
+𝐾
+1088K
+
+第一次共享缓存：
+
+128
+𝐾
++
+64
+𝐾
+=
+192
+𝐾
+128K+64K=192K
+
+加速：
+
+1088
+/
+192
+=
+5.67
+×
+1088/192=5.67×
+
+公共背景已预热：
+
+64
+𝐾
+64K
+
+加速：
+
+1088
+/
+64
+=
+17
+×
+1088/64=17×
+8. 但新增产出的 decode 速率不会因此变快
+
+你说：
+
+命中低不会影响新增真正产出的速率。
+
+更准确地说：
+
+公共 prefix cache 不会提高每个 agent 生成新 token 的 decode tok/s；
+它会降低 TTFT；
+它会降低重复 prefill；
+它会降低 KV 显存重复占用；
+它会让更多 agent 同时驻留；
+它会减少 eviction；
+它会提高系统吞吐，但不是让单个 branch 的 decode kernel 更快。
+
+如果一个 agent 要生成 10K 新 token，那么这 10K token 的 decode 还是要正常跑。
+缓存只是让它不用每次先重新吃 64K/128K 背景。
+
+9. 32GB vs 48GB 对加速比的影响
+
+理论 prefill 加速比由：
+
+𝐶
+/
+𝐷
+C/D
+
+决定，不直接由 32GB 或 48GB 决定。
+但 VRAM 决定你能不能把 C 和多个 D 都留在 cache 里。
+
+9.1 如果 32GB 可以完整缓存公共背景和分支
+
+例如：
+
+C=64K；
+A=4；
+D=8K；
+FP8 KV；
+32GB T≈295K。
+
+需求：
+
+64
+𝐾
++
+4
+×
+8
+𝐾
+=
+96
+𝐾
+64K+4×8K=96K
+
+32GB 完全够。
+这时 48GB 对加速比帮助不大，只提高余量和并发。
+
+9.2 如果 32GB 开始 eviction
+
+例如：
+
+C=128K；
+A=16；
+D=16K。
+
+需求：
+
+128
+𝐾
++
+16
+×
+16
+𝐾
+=
+384
+𝐾
+128K+16×16K=384K
+
+32GB FP8 KV 约 295K，不够。
+会发生：
+
+部分 agent 分支被驱逐；
+或公共 prefix 被挤压；
+或请求不能同时驻留；
+或 TTFT 波动很大。
+
+48GB FP8 KV 约 767K，足够。
+这时 48GB 可以保持理论缓存加速，而 32GB 会退化。
+
+10. 简化判断表
+
+假设 FP8 KV，base footprint 22GiB，安全容量：
+
+场景	32GB 是否够	48GB 是否够
+C=64K，4 agents，每个 D=8K	够	轻松
+C=64K，16 agents，每个 D=8K	够，约 192K	轻松
+C=128K，8 agents，每个 D=8K	够，约 192K	轻松
+C=128K，16 agents，每个 D=16K	不够，384K > 295K	够
+C=200K，8 agents，每个 D=8K	勉强，264K	轻松
+C=200K，8 agents，每个 D=16K	不够，328K > 295K	够
+C=240K，4 agents，每个 D=8K	勉强，272K，且单请求接近上限	够，但单请求仍受 262K 限制
+11. 对你的多 agent 架构建议
+
+如果你买的是 RTX PRO 4500 32GB：
+
+公共背景建议控制在 64K–128K；
+KV cache 用 FP8/Q8 起步；
+并发 agent 先从 4 个开始；
+每个 agent 独立上下文 D 控制在 4K–16K；
+如果要 8–16 个 agent 同时驻留，尽量用 Q4/Turbo KV 或降低公共背景；
+不要一开始就 200K 公共背景 + 8 个长分支。
+
+如果你买的是 48GB 卡，例如 RTX PRO 5000 Blackwell / RTX 6000 Ada / 4090 48GB 改卡：
+
+128K 公共背景 + 8–16 个 agent 更现实；
+200K 公共背景也可行；
+cache eviction 风险低很多；
+FP8 KV 足够稳，未必需要 Q4 KV；
+对 agent swarm 更舒服。
+12. 最后修正我的前面判断
+
+你指出的第一点我接受：
+
+8B 模型 Pro4500 vLLM NVFP4 只有 4870 tok/s，那么 27B 不应轻易估到 3K。
+
+修正后我认为：
+
+Pro4500 + Qwen3.6-27B 32K prefill：1.4K–2.2K 更合理。
+如果 native NVFP4 kernel 很好，短 prompt 可 2.7K，长 prompt 也许 2K+，但 3K 不应作为默认预期。
+5090 NVFP4 native 由于有 24K=7460、47K=5300 的实测，可明显高于 Pro4500。
+32GB vs 48GB 的主要差距不是单 token 速度，而是 KV cache 容量、agent 分支驻留能力和 eviction 风险。
+
+一句话总结：
+
+32GB Pro4500 可以做多 agent 共享背景，但要把公共背景和 agent 分支预算算清楚；48GB 的优势主要是把可用 KV 从约 6–12GiB 提到 22–28GiB，实际多 agent 缓存容量提升 2.3–3.7 倍，而不是简单 1.5 倍。
+
+3m 27s | 130 days ago
+15:42
+
+1.有一个问题，4090虽然是fp8原生，但是也可以使用加速？而且fp8算力不低，那么运行fp8应该和5090不会差太多？而fp4，稠密的算力也差不多，但是4090模拟的int4会影响精度吗，或者如果4090跑nvfp4，什么部分会退化到fp8降低算力？影响究竟多少？如果是fp8优化比较好的话prefill速率是多少，和5090，pro 4500相比呢
+
+进一步地，帮我调研指令跟随性能和上下文长度影响，例如我在开头4k放置的是严格的规则，那么出现丢失和错误的概率跟上下文关系是怎么样的，
+
+另外，有什么办法可以解决，，要求结束的时候汇报工作并且核对遵循？
+
+Searched the web
+
+下面按你的三个问题重新回答，并修正前面过于乐观的估算。
+
+1. 4090 有 FP8，跑 FP8 是否会和 5090 差不多？
+1.1 结论
+
+4090 确实有 Ada 第四代 Tensor Core，支持 FP8 相关计算；但它不是 Blackwell 的 FP4/NVFP4 原生路径，且 Ada 的 FP8 软件栈和 Hopper/Blackwell 的 Transformer Engine / FP8 serving 路径不完全同口径。
+
+所以：
+
+4090 跑 FP8 Qwen3.6-27B 可以加速，也可以节省显存；
+4090 跑 FP8 不会像 5090 跑 NVFP4 native 那样快；
+4090 跑 FP8 与 5090 跑 FP8 的差距可能是 1.3–1.8×；
+4090 跑 FP8 与 5090 跑 NVFP4 native 的差距可能达到 2–3×，尤其是 prefill。
+
+Ada 架构白皮书明确说 Ada 的第四代 Tensor Core 引入 FP8 tensor format，RTX 4090 有超过 1.3 PetaFLOPS tensor processing 的说法。5
+但另一些工程资料也指出，Ada 的 FP8 支持不像 Hopper/Blackwell 那样完整，Transformer Engine 在 Ada 上可能 fallback 到 BF16，4090 的 FP8 属于 partial support，不应等同于 Hopper/Blackwell 的完整 FP8 serving path。1、2
+
+1.2 4090 FP8 的理论位置
+
+按公开规格口径：
+
+GPU	FP8/低精度能力	显存带宽	备注
+RTX 4090	FP8 partial，约 660 TFLOPS 级别的 FP8 规格口径	~1008 GB/s	Ada，无原生 FP4
+RTX 5090	FP8 + FP4，FP8 约 838 dense / 1676 sparse 口径，FP4 AI TOPS 3352	~1792 GB/s	Blackwell，原生 FP4/NVFP4
+RTX PRO 4500	FP8 811 TFLOPS，FP4 1.6 PFLOPS	~800 GB/s	Blackwell，32GB
+RTX PRO 6000 Blackwell	FP8 2 PFLOPS，FP4 4 PFLOPS	1597–1792 GB/s 版本差异	Blackwell，96GB
+
+RTX 5090 官方列出 3352 AI TOPS、32GB GDDR7、Blackwell；5090 规格汇总给出 FP8 sparse 约 1676.8、FP16/BF16 sparse 838.4、FP4 3352 TOPS。2、2
+
+所以如果 两者都跑 FP8，4090 不会差到离谱，但仍受：
+
+显存带宽：4090 1008GB/s vs 5090 1792GB/s；
+kernel 支持；
+vLLM/SGLang 是否真用 FP8 GEMM；
+是否有 BF16 fallback；
+KV cache 类型；
+Qwen3.6 hybrid GDN kernel；
+
+影响。
+
+保守估计：4090 FP8 prefill 约为 5090 FP8 的 55–75%。
+
+2. 4090 跑 NVFP4 会怎样？哪些部分退化？
+2.1 4090 没有原生 FP4/NVFP4 Tensor Core
+
+关键点：
+
+4090 可以“加载”NVFP4 权重，但不能像 Blackwell 那样“原生执行 FP4/NVFP4 Tensor Core GEMM”。
+
+也就是说，4090 跑 NVFP4 通常会发生：
+
+读取 NVFP4 packed weights；
+读取 FP8 scales；
+kernel 内部把 FP4 解包；
+再转换到 FP16 / BF16 / FP8 之类可执行格式；
+用 Ada 支持的 FP16/BF16/FP8 Tensor Core 跑。
+
+这不是 Blackwell 的：
+
+𝐹
+𝑃
+4
+×
+𝐹
+𝑃
+4
+→
+𝑇
+𝑒
+𝑛
+𝑠
+𝑜
+𝑟
+𝐶
+𝑜
+𝑟
+𝑒
+FP4×FP4→TensorCore
+
+而更像：
+
+𝐹
+𝑃
+4
+→
+𝐹
+𝑃
+16
+/
+𝐹
+𝑃
+8
+→
+𝐺
+𝐸
+𝑀
+𝑀
+FP4→FP16/FP8→GEMM
+
+社区也有人总结：非 Blackwell GPU 也能跑 NVFP4，但只是 upcast 到 FP16 或其他精度计算；Blackwell 的特殊之处是能原生运行这些数据类型，因此速度快很多。6
+
+2.2 会不会影响精度？
+
+要分清两种“精度损失”。
+
+A. 模型量化精度损失
+
+NVFP4 checkpoint 本身已经把大量权重量化到 4-bit FP。
+这个损失和你在哪张卡上跑有关不大。
+
+如果 NVFP4 量化质量好，输出质量可能接近 Q4/Q5；如果量化 recipe 差，质量会明显下降。这个损失在 4090 和 5090 上都存在。
+
+B. 运行时 fallback / upcast 精度损失
+
+如果 4090 把 NVFP4 解包到 FP16 或 FP8 再算：
+
+解包到 FP16：额外精度损失通常不大；
+解包到 FP8：可能有额外误差，但取决于 scale / kernel；
+最主要损失仍来自 NVFP4 权重量化本身，不是 4090 fallback。
+
+所以：
+
+4090 跑 NVFP4 的主要问题不是“额外精度崩”，而是“没有原生 FP4 加速，速度优势消失或很小”。
+
+2.3 4090 跑 NVFP4 的速度影响
+
+在非 Blackwell 上，NVFP4 可能：
+
+显存占用小；
+质量可能比同体积某些 Q4 好；
+但 prefill 速度不一定快；
+甚至可能慢于成熟的 Q4_K_M / AWQ / AutoRound。
+
+有一个 AdaLLM 项目专门尝试让 4090 跑 NVFP4-first runtime，用 FP8 KV cache 和 custom FP8 decode kernel，并强调 no silent FP16 fallback；但它仍是实验性项目，公开 benchmark 是 Qwen3-8B 和 Gemma3-27B，不是 Qwen3.6-27B 完整长上下文 prefill。2
+
+因此我会这样判断：
+
+4090 跑法	预期
+Qwen3.6-27B Q5/Q6 GGUF llama.cpp	成熟、稳定，prefill 约 2K 级
+Qwen3.6-27B FP8 vLLM	潜力好，但要确认没有 BF16 fallback
+Qwen3.6-27B AWQ/AutoRound	decode 可很好，prefill 看 kernel
+Qwen3.6-27B NVFP4	显存友好，但速度未必优于 Q4/Q5，除非专门优化 Ada FP8 fallback
+3. 如果 FP8 优化好，4090 prefill 速率大概多少？
+
+目前我没有找到 4090 24GB 或 4090 48GB + Qwen3.6-27B-FP8 的 32K/64K prefill 直接实测。找到的是：
+
+4090 48GB + Qwen3.6-27B-FP8 可跑到接近 262K context，但该文章主要验证容量，没有给清晰 prefill tok/s。1
+
+4090 Q5_K_XL / llama.cpp 的直接 prefill 实测：
+
+32K：2331 tok/s
+64K：1959 tok/s
+来源：ZoliBen。10
+
+5090 NVFP4 native fast path 实测：
+
+24K：7460 tok/s
+47K：5300 tok/s
+来源：devnen/qwen3.6-windows-server。2
+
+Pro 4500 8B vLLM NVFP4 benchmark：Llama 3.1 8B，vLLM NVFP4 4870 tok/s；但按参数量缩放到 27B 只能大致估 1.4K–1.8K。1
+
+3.1 估算表：4090 / 5090 / Pro4500
+Qwen3.6-27B prefill，32K / 64K
+GPU / 格式	32K prefill	64K prefill	说明
+RTX 4090 Q5_K_XL llama.cpp	2331 实测	1959 实测	ZoliBen 实测
+RTX 4090 FP8 vLLM，若 FP8 kernel 真正优化好	2300–3200 估算	1800–2600 估算	可能略高于 Q5，但不保证
+RTX 4090 NVFP4 fallback	1500–2600 估算	1200–2200 估算	无原生 FP4，取决于 fallback
+RTX 5090 FP8 vLLM	3500–5000 估算	2500–4000 估算	比 4090 快，但低于 NVFP4 native
+RTX 5090 NVFP4 native	6300–6800 估算	3700–4800 估算	由 24K=7460、47K=5300 外推
+RTX PRO 4500 NVFP4 native	1400–2200 估算	1000–1700 估算	8B 4870 按 27B 缩放 + 短 pp512 校准
+RTX PRO 4500 FP8/AWQ	1200–2000 估算	900–1600 估算	取决于 kernel
+
+所以：
+
+4090 FP8 优化好时，可以接近或超过 4090 Q5/Q6 GGUF，但通常不会接近 5090 NVFP4 native。
+4090 FP8 vs Pro4500 NVFP4，可能同级甚至更快，尤其 4090 带宽高于 Pro4500。
+
+Pro4500 的优势不是绝对速度，而是：
+
+32GB ECC/专业卡；
+低功耗；
+FP4 native；
+适合 24/7；
+比 4090 24GB 多显存；
+比 4090 48GB 改卡更稳定正规。
+4. 指令跟随性能和上下文长度：开头 4K 放严格规则会怎样？
+4.1 结论
+
+把严格规则放在开头 4K 有帮助，但不能保证在 64K、128K、200K 上稳定遵守。
+
+原因有三类：
+
+长上下文性能本身下降：即使相关证据可完美检索，输入长度增加也会降低推理/执行表现。
+复杂约束比简单检索更难：Needle-in-Haystack 成功不等于持续遵守多条规则。
+生成越长，指令遵循越容易漂移：尤其输出超过 4K tokens 后，LongGenBench 观察到指令 adherence 明显下降。
+4.2 证据 1：长上下文本身会伤性能
+
+一篇 “Context Length Alone Hurts LLM Performance Despite Perfect Retrieval” 的研究发现，即使模型可以完美检索相关证据，仅仅输入变长也会让性能显著下降；实验中 5 个开闭源模型在数学、QA、代码任务上，随上下文长度增长出现 13.9%–85% 的性能下降。论文还提出一个缓解方法：先让模型复述检索到的证据，再用短上下文推理；在 RULER 上 GPT-4o 可提升最多 4%。1
+
+这说明：
+
+规则在开头被“看见”不等于会在后面稳定用于生成。
+
+4.3 证据 2：LongGenBench 发现长输出会丢指令
+
+LongGenBench 研究专门测长文本生成中的指令遵守。它指出：随着输出变长，模型逐渐不遵守初始指令；当输出超过 4000 tokens 时，adherence 显著下降，到 16000 tokens 时许多模型基本无效。更关键的是，这些指令位于前 500 tokens 内，说明问题不能简单归咎于“规则放在中间”。6
+
+这和你的场景很相关：
+如果你让 agent 长时间生成代码/报告，即使规则在开头，也会漂。
+
+4.4 证据 3：约束数量和位置都会影响遵守率
+
+MOSAIC 这类多约束指令跟随 benchmark 发现，模型对约束的位置有偏差：有些模型有 primacy effect，开头约束更容易遵守；有些模型有 recency effect，后面约束更容易遵守。并且约束数量越多，prompt-level compliance 越容易下降。1、10
+
+所以“把规则全放开头”不是万能方案。
+更稳的是：
+
+开头放完整规则；
+任务前再放短版关键规则；
+输出前要求自检；
+用外部校验器检查；
+关键约束用 JSON schema / regex / tool validator 硬约束。
+5. 在 4K 开头放严格规则，错误概率如何随上下文变？
+
+没有公开数据能直接给 “Qwen3.6-27B，在开头 4K 规则，64K/128K/200K 下错误概率” 的精确曲线。
+但根据长上下文研究和工程经验，可以给一个实用模型：
+
+5.1 规则遵守风险随三件事增加
+𝑃
+(
+violation
+)
+↑
+P(violation)↑
+
+当：
+
+总上下文长度 
+𝐿
+L 增加；
+输出长度 
+𝑂
+O 增加；
+规则数量/复杂度 
+𝑅
+R 增加。
+
+可以粗略分级：
+
+场景	风险
+规则 5 条以内，总上下文 <16K，输出 <1K	低
+规则 10–20 条，上下文 32K–64K，输出 2K–4K	中
+规则 20+，上下文 64K–128K，输出 4K–8K	高
+上下文 128K+，输出 8K+，多 agent/多轮	很高
+
+LongGenBench 的关键阈值是输出 4K 后 adherence 明显变差，16K 时严重失效。6
+
+5.2 开头规则 vs 末尾规则
+
+对于“严格规则”，建议：
+
+开头放完整规则：建立全局约束；
+末尾放短版 checklist：利用 recency；
+输出格式里放自检项：让模型在最终答案里显式核对。
+
+也就是说：
+
+text
+[开头]
+完整规则 R1-R20
+
+[中间]
+背景资料、代码、任务材料
+
+[末尾]
+当前任务
+必须遵守的关键规则摘要：
+- R1
+- R3
+- R7
+- 输出前执行 Compliance Check
+
+不要只依赖开头 4K。
+
+6. 如何解决“结束时汇报工作并核对遵循”？
+
+你要的是一种 可执行的 agent 输出协议，而不是一句“请检查”。
+
+我建议用三层防线。
+
+6.1 第一层：强制输出结构
+
+要求每个 agent 的最终输出必须包含：
+
+Markdown
+## Work Performed
+- ...
+
+## Files / Artifacts Changed
+- ...
+
+## Tests / Checks Run
+- ...
+
+## Compliance Checklist
+| Rule | Status | Evidence |
+|---|---|---|
+| R1: 不修改公共接口 | PASS/FAIL/N/A | ... |
+| R2: 不删除现有测试 | PASS/FAIL/N/A | ... |
+| R3: 输出必须包含变更摘要 | PASS/FAIL/N/A | ... |
+
+## Known Risks / Open Questions
+- ...
+
+## Next Recommended Action
+- ...
+
+这样模型被迫把“遵循规则”外显化。
+
+6.2 第二层：把规则变成短 ID
+
+不要写：
+
+你必须在任何情况下遵循如下非常长的规则……
+
+而是写：
+
+text
+[R1] 不删除用户数据。
+[R2] 不修改 public API，除非任务明确要求。
+[R3] 所有代码变更必须附测试或解释未测试原因。
+[R4] 最终输出必须包含 Work Performed / Checks / Compliance Checklist。
+[R5] 如果无法确认，必须标记 UNKNOWN，不能假装通过。
+
+然后在末尾提醒：
+
+text
+Before final answer, audit R1-R5 and report PASS/FAIL/UNKNOWN with evidence.
+
+短 ID 比长自然语言更容易被模型引用和检查。
+
+6.3 第三层：外部 verifier agent
+
+不要让执行 agent 自己完全裁判自己。
+更稳的结构：
+
+text
+Planner → Worker A/B/C → Verifier → Final Reporter
+
+Verifier 的任务不是继续改代码，而是：
+
+读取 worker 输出；
+对照规则；
+检查是否有遗漏；
+必要时要求 worker 修复；
+生成最终 compliance report。
+
+Verifier prompt 可以很短：
+
+text
+You are a compliance verifier.
+Given:
+1. The original task
+2. The rules R1-R10
+3. The worker's final output
+4. The diff / artifacts
+
+Return JSON:
+{
+  "pass": true/false,
+  "violations": [
+    {"rule": "R3", "evidence": "...", "fix_required": "..."}
+  ],
+  "missing_information": [...]
+}
+Do not approve unless every non-N/A rule has evidence.
+
+如果你用本地多 agent，Verifier 可以用同一个 Qwen，也可以用更强模型做最终审查。
+
+7. 进一步增强：用 schema / 正则 / 程序化检查
+
+如果规则能程序化，就不要让模型“自觉遵守”。
+
+例如：
+
+规则	检查方式
+输出必须 JSON	JSON schema
+必须包含字段	schema required
+禁止出现某些词	regex
+必须列出测试	string / section checker
+代码必须通过 lint	actual lint tool
+不得改某目录	git diff path check
+不得删除测试	git diff checker
+必须引用证据	citation checker
+
+这类规则最好由工具强制，不靠模型记忆。
+
+8. 可直接用的 Prompt 模板
+
+下面这个适合你的多 agent 系统。
+
+text
+You are Agent {agent_id}.
+
+GLOBAL RULES:
+[R1] Follow the assigned task only. Do not solve unrelated tasks.
+[R2] Preserve all user-provided constraints.
+[R3] If information is missing, mark UNKNOWN or ask; do not invent.
+[R4] Do not change public APIs unless explicitly required.
+[R5] Every final answer must include a Compliance Checklist.
+[R6] If any rule is not verifiably satisfied, mark it FAIL or UNKNOWN.
+
+SHARED BACKGROUND:
+{common_context}
+
+AGENT-SPECIFIC TASK:
+{agent_task}
+
+OUTPUT CONTRACT:
+Return exactly these sections:
+
+## Work Performed
+## Result
+## Evidence
+## Tests / Checks
+## Compliance Checklist
+| Rule | Status: PASS/FAIL/UNKNOWN/N/A | Evidence |
+## Remaining Risks
+## Next Action
+
+Before finalizing:
+1. Re-read R1-R6.
+2. Check your output against each rule.
+3. If any required evidence is missing, mark UNKNOWN rather than PASS.
+
+如果你要更严格，可以要求 JSON：
+
+JSON
+{
+  "work_performed": [],
+  "result": "",
+  "evidence": [],
+  "tests_or_checks": [],
+  "compliance": [
+    {"rule": "R1", "status": "PASS|FAIL|UNKNOWN|N/A", "evidence": ""}
+  ],
+  "remaining_risks": [],
+  "next_action": ""
+}
+
+然后用 schema 校验。
+
+9. 最终总结
+关于 4090 FP8 / NVFP4
+4090 有 FP8 支持，可以加速 FP8 推理。
+但 4090 没有原生 FP4/NVFP4 Tensor Core。
+4090 跑 NVFP4 通常会 unpack / upcast 到 FP16 或 FP8，再计算。
+主要影响是速度，不一定额外显著影响精度。
+4090 FP8 优化好时，Qwen3.6-27B 32K prefill 可能在 2.3K–3.2K tok/s；64K 约 1.8K–2.6K。
+5090 NVFP4 native 明显更快，32K 约 6K+，64K 约 4K 级。
+Pro4500 由于 8B NVFP4 只有 4870 tok/s，27B 合理预期更接近 1.4K–2.2K，而不是 3K。
+关于规则放在开头 4K
+开头规则有帮助，但长上下文和长输出会降低遵守率。
+LongGenBench 显示输出超过 4K tokens 后指令 adherence 明显下降，16K 输出时严重失效，即使指令在前 500 tokens。6
+长上下文本身也会伤害性能，即使检索完美，研究观察到 13.9%–85% 的性能下降。1
+解决办法
+开头放完整规则；
+末尾重复关键规则摘要；
+规则编号 R1/R2/R3；
+输出强制包含 Compliance Checklist；
+用 verifier agent 二次检查；
+能程序化的规则用 schema / diff / lint / regex / tests 强制；
+不要让执行 agent 自己当唯一裁判。
+1m 32s | 129 days ago
+16:01
+
+但是5090和6000的4p和3.2p是稀疏的吧，难道现在模型已经支持稀疏化适配。？或者未来有可能吗，有相关技术吗
+
+2.我需要具有明确数据给出的，对于上下文长度如何影响指令跟随性能的研究，最好有性能损失数据和上下文长度关联，以及不同模型结构的变化
+
+Searched the web
+Ran commands
+1
+Searched the web
+
+下面分两部分回答：
+
+5090 / RTX PRO 6000 / PRO 4500 的 FP4 “3.2P、4P”是不是稀疏？现在模型能不能吃到？未来能不能？
+上下文长度如何影响指令跟随：给你有明确数值的数据，而不是泛泛说“会变差”。
+1. 5090 / RTX PRO 6000 的 FP4 算力是不是稀疏？
+1.1 是的，大多数“AI TOPS / FP4 TOPS”营销数字默认是 sparse 峰值
+
+你这个判断是对的。
+
+以 RTX 5090 为例，公开规格常见写法是：
+
+FP4 sparse：3352 TOPS
+FP8 sparse：约 1676 TFLOPS
+FP16/BF16 sparse：约 838 TFLOPS
+
+来源里明确列出 RTX 5090 FP4 sparse 3352 TOPS、FP8 sparse 1676.8 TFLOPS、FP16/BF16 sparse 838.4 TFLOPS。1
+
+所以如果按 dense 非稀疏折半：
+
+RTX 5090	sparse 规格	dense 近似
+FP4	3352 TOPS	~1676 TOPS
+FP8	1676 TFLOPS	~838 TFLOPS
+FP16/BF16	838 TFLOPS	~419 TFLOPS
+
+同理，RTX PRO 4500 Blackwell 标称 FP4 1.6 PFLOPS、FP8 811 TFLOPS、FP16/BF16 406 TFLOPS，大概率也是 sparse 或 AI TOPS 口径；dense 约为其一半：
+
+RTX PRO 4500	标称	dense 近似
+FP4	1.6 PFLOPS	~0.8 PFLOPS
+FP8	811 TFLOPS	~405 TFLOPS
+FP16/BF16	406 TFLOPS	~203 TFLOPS
+
+这也符合它大约是“半张 5090”的规格直觉。Lenovo RTX PRO 4500 规格列出 FP4 1.6 PFLOPS、FP8 811 TFLOPS、FP16/BF16 406 TFLOPS、32GB GDDR7、800GB/s。2
+
+RTX PRO 6000 Blackwell 官方页列出 FP4 4 PFLOPS、FP8 2 PFLOPS、FP16/BF16 1 PFLOP、96GB GDDR7。4
+如果这是 sparse 口径，dense 约为：
+
+RTX PRO 6000 Blackwell	sparse/标称	dense 近似
+FP4	4 PFLOPS	~2 PFLOPS
+FP8	2 PFLOPS	~1 PFLOPS
+FP16/BF16	1 PFLOP	~0.5 PFLOPS
+
+这就和 RTX 5090 的 dense FP4 ~1.676 PFLOPS 接近，PRO 6000 约高 20% 左右，符合它 CUDA cores 比 5090 多约 10% 且功耗/专业卡更放开的直觉。不是 5 倍。
+
+1.2 当前 Qwen3.6 / Gemma 4 这类公开模型默认能吃到 2:4 sparse 吗？
+
+一般不能。
+
+原因是：
+NVIDIA 的 sparse Tensor Core 加速不是“模型里有很多小权重接近 0 就自动加速”，而是要求权重满足硬件规定的 2:4 structured sparsity：
+
+每连续 4 个权重里，必须有 2 个为 0，并且以硬件支持的压缩格式存储，然后 runtime/kernel 明确走 sparse GEMM。
+
+NVIDIA Ampere sparsity 博文明确说，2:4 fine-grained structured sparsity 需要生成符合 2:4 sparse pattern 的网络，TensorRT 8.0 才能默认加速。7
+
+所以：
+
+模型/格式	是否自动吃 sparse Tensor Core
+普通 BF16 / FP16 checkpoint	否
+普通 FP8 checkpoint	否
+普通 NVFP4 checkpoint	否
+AWQ / GPTQ / GGUF Q4	否
+符合 2:4 sparse 格式并用 sparse kernel 部署	是
+
+当前公开的 Qwen3.6-27B、Qwen3.6-35B-A3B、Gemma4-31B、Gemma4-26B A4B 的常见 FP8/NVFP4/AWQ/GGUF 版本，重点是量化，不是 2:4 sparse pruning。它们大多数不能使用 sparse 峰值。
+
+所以你应该按 dense FP4 / dense FP8估算，而不是 sparse TOPS。
+
+1.3 那未来能不能让 Qwen3.6 适配 2:4 sparse？
+
+理论上可以，工程上有难度，且需要专门 sparse training / pruning / recovery。
+
+已有相关技术路线：
+
+A. SparseGPT / Wanda：后训练剪枝
+
+SparseGPT、Wanda 可以把 LLM 剪到 50% sparsity，并支持 2:4 / 4:8 半结构化模式。综述中提到，2:4 sparsity 在 NVIDIA Ampere+ 理论上可给 MatMul 2× 加速，但实际 MatMul 加速约 1.54×–1.79×，端到端加速约 1.21×–1.25×，因为 attention 等其他开销会稀释收益。1
+
+也就是说，即使模型成功 2:4 sparse，真实 end-to-end 不会直接 2×，更常见是 1.2–1.4× 级别，取决于 prefill/decode、batch 和 kernel。
+
+B. LLM Compressor + SparseGPT
+
+Red Hat / Neural Magic 的 LLM Compressor 宣称支持：
+
+INT4/GPTQ；
+FP8；
+SparseGPT；
+2:4 structured sparsity；
+vLLM 加载压缩 checkpoint。
+
+其资料写到，2:4、50% sparse 模型在 NVIDIA Ampere+ 上可带来最高 1.5× general performance。2
+
+C. MaskLLM：学习 2:4 mask
+
+MaskLLM 是 NVIDIA 相关研究，针对 LLM 学习 semi-structured N:M sparsity mask。论文显示，普通 one-shot 2:4 pruning 可能显著伤 perplexity，例如 LLaMA-2 dense PPL 5.12，而一些 baseline PPL ≥10；MaskLLM 能把 PPL 降到 6.72，但仍不等于无损。6
+
+论文还报告，在 A6000 上 batch size 1 inference，2:4 sparsity 带来约 1.4× 加速和 27% memory footprint reduction。5
+
+D. AST / CAST / SparseForge：训练或少量恢复训练后接近无损
+
+近年的方法更乐观：
+
+AST：LLaMA2-7B 2:4 sparse 后，perplexity gap 约 0.6，zero-shot accuracy drop 约 1.16%，使用少于 0.4% pretraining tokens 的训练量。10
+CAST：LLaMA2-7B 在 2:4 sparse 下，PPL 增加仅 0.09，zero-shot accuracy 甚至 +0.36%，使用约 2% 原始预训练 tokens。2
+SparseForge：LLaMA2-7B 2:4 sparse，用 5B retraining tokens 达到 57.27% average zero-shot accuracy，超过 dense 的 56.43%，接近 40B tokens 方法的 57.52%。1
+
+这些说明未来是有可能的，但注意：
+
+这不是“部署时打开一个 sparse flag”就能做到，而是要模型权重本身经过 2:4 sparse-aware pruning / training / distillation / recovery。
+
+1.4 对你当前部署的实际意义
+
+对于 Qwen3.6-27B / Gemma4：
+
+当前普通 NVFP4 / FP8 / AWQ 模型：按 dense 算力估算；
+不要用 5090 的 3352 sparse TOPS 来估速度；
+如果未来有人发布 Qwen3.6-27B-NVFP4-2:4-sparse 并且 vLLM/TensorRT-LLM/SGLang 明确支持 sparse FP4 GEMM，才可以期待额外 1.2–1.5× 端到端收益；
+真正 2× 通常只能在纯 MatMul microbenchmark 里接近，LLM 端到端会被 attention、KV、调度、sampling、通信稀释。
+2. 上下文长度如何影响指令跟随性能：明确数据
+
+下面给你几类最相关的研究。
+
+2.1 LIFBench：长上下文 instruction following，4K→128K 的明确分数
+
+LIFBench 是专门评估 long-context instruction following 的 benchmark，包含 3 个长上下文场景、11 类任务、2766 条指令，并在 20 个模型上、6 个长度区间从 4K 到 128K 做实验。9
+
+它用 ARS 自动评分，越高越好。搜索结果中给出 v2 表格的长度分段数据。几个代表性模型如下：
+
+Llama-3.1-8B-Instruct
+Context	Overall ARS
+4K	0.580
+8K	0.527
+32K	0.457
+64K	0.446
+128K	0.388
+
+从 4K 到 128K：
+
+0.580
+→
+0.388
+0.580→0.388
+
+相对下降：
+
+(
+0.580
+−
+0.388
+)
+/
+0.580
+≈
+33.1
+%
+(0.580−0.388)/0.580≈33.1%
+
+来源：LIFBench v2 长度分段表。1
+
+GLM-4-9B-chat-1m
+Context	Overall ARS
+4K	0.589
+8K	0.540
+16K	0.509
+32K	0.482
+64K	0.437
+128K	0.383
+
+从 4K 到 128K：
+
+0.589
+→
+0.383
+0.589→0.383
+
+相对下降：
+
+35.0
+%
+35.0%
+
+来源：LIFBench v2 表。1
+
+Qwen2.5-14B base 行示例
+
+LIFBench 搜索表中一个 Qwen2.5-14B base 行显示：
+
+Context	Overall ARS
+4K	0.519
+8K	0.462
+16K	0.518
+32K	0.324
+64K	0.326
+128K	0.156
+
+从 4K 到 128K：
+
+0.519
+→
+0.156
+0.519→0.156
+
+相对下降：
+
+69.9
+%
+69.9%
+
+来源：LIFBench v2 表。1
+
+2.2 LIFBench：结构差异，instruction-tuned 明显好于 base
+
+LIFBench 总表也给了模型结构/训练方式差异：
+
+模型	Overall ARS
+GPT-4o-2024-08-06	0.764
+GPT-4-0125-preview	0.734
+Llama-3.1-70B-Instruct	0.700
+Qwen2.5-72B-Instruct	0.700
+Qwen2.5-32B-Instruct	0.632
+Qwen2.5-72B base	0.542
+Llama-3.1-70B base	0.436
+Qwen2.5-32B base	0.377
+
+来源：LIFBench Table 3。9、v1 HTML 表格
+
+几个差值：
+
+𝑄
+𝑤
+𝑒
+𝑛
+2.5
+-
+72
+𝐵
+-Instruct
+:
+0.700
+Qwen2.5-72B-Instruct:0.700
+𝑄
+𝑤
+𝑒
+𝑛
+2.5
+-
+72
+𝐵
+ base
+:
+0.542
+Qwen2.5-72B base:0.542
+
+提升：
+
++
+29.2
+%
++29.2%
+𝐿
+𝑙
+𝑎
+𝑚
+𝑎
+3.1
+-
+70
+𝐵
+-Instruct
+:
+0.700
+Llama3.1-70B-Instruct:0.700
+𝐿
+𝑙
+𝑎
+𝑚
+𝑎
+3.1
+-
+70
+𝐵
+ base
+:
+0.436
+Llama3.1-70B base:0.436
+
+提升：
+
++
+60.6
+%
++60.6%
+
+这说明：
+
+对长上下文指令跟随，instruction tuning / chat tuning 的影响非常大，甚至比单纯参数规模还重要。
+
+LIFBench 作者也总结：同系列中 instruction/chat 版本显著优于 base；有时小模型 instruction-tuned 甚至超过大模型 base。v1 HTML
+
+2.3 LongGenBench：16K 输出到 32K 输出，指令遵守显著下降
+
+LongGenBench 更贴近“长期生成过程中是否持续遵守规则”。它评估模型生成 16K 和 32K 长文本时，是否还能满足特定指令。关键指标：
+
+CR：主任务完成率；
+STIC-1 / STIC-2：具体任务指令完成情况；
+wAvg = CR × STIC-2。
+
+代表数据：
+
+Llama-3.1-8B
+输出长度	CR	STIC-2	wAvg
+16K	93.5%	22.0%	20.6%
+32K	77.6%	18.9%	14.6%
+
+wAvg 相对下降：
+
+(
+20.6
+−
+14.6
+)
+/
+20.6
+≈
+29.1
+%
+(20.6−14.6)/20.6≈29.1%
+Mixtral-8x7B MoE
+输出长度	CR	STIC-2	wAvg
+16K	83.0%	28.0%	23.3%
+32K	60.5%	22.3%	13.5%
+
+wAvg 相对下降：
+
+42.1
+%
+42.1%
+Qwen2-72B
+输出长度	CR	STIC-2	wAvg
+16K	94.3%	24.0%	22.7%
+32K	66.2%	17.4%	11.5%
+
+wAvg 相对下降：
+
+49.3
+%
+49.3%
+Mistral-7B
+输出长度	CR	STIC-2	wAvg
+16K	81.8%	17.4%	14.3%
+32K	48.2%	16.3%	7.9%
+
+wAvg 相对下降：
+
+44.8
+%
+44.8%
+
+来源：LongGenBench Table 3。1
+
+LongGenBench 还明确指出：当输出超过 4000 tokens 后，指令遵守开始明显下降；接近 16000 tokens 时进一步恶化。1
+
+这非常贴近你的“开头 4K 放严格规则，后面长上下文/长输出是否会丢”的问题。答案是：会，尤其长输出更危险。
+
+2.4 LongProc：0.5K→2K→8K 输出，前沿闭源模型也大幅下降
+
+LongProc 是长程序生成 benchmark。搜索结果给了 Table 3 的明确数据：
+
+模型	0.5K	2K	8K
+GPT-4o-2024-08	94.8	83.4	38.1
+Gemini-1.5-flash-001	78.9	52.3	15.3
+Gemini-1.5-pro-001	89.2	79.4	54.0
+
+来源：LongProc arXiv PDF 搜索摘录。1
+
+下降幅度：
+
+GPT-4o
+94.8
+→
+38.1
+94.8→38.1
+
+相对下降：
+
+59.8
+%
+59.8%
+Gemini Flash
+78.9
+→
+15.3
+78.9→15.3
+
+相对下降：
+
+80.6
+%
+80.6%
+Gemini Pro
+89.2
+→
+54.0
+89.2→54.0
+
+相对下降：
+
+39.5
+%
+39.5%
+
+Princeton HELMET / LongProc 博文也总结：所有测试模型声称 context window 超过 32K，但 open-weight 模型通常在 2K 输出任务上就开始 falter，闭源模型在 8K 输出任务上也显著退化。6
+
+2.5 AgentIF：真实 agent 指令平均 1717 tokens、11.9 条约束，最佳模型完美遵循 <30%
+
+AgentIF 更接近你的 agent 场景。它包含：
+
+707 条真实 agentic instructions；
+50 个现实 agent 应用；
+平均 instruction 长度约 1717 tokens；
+平均 11.9 个 constraints；
+包含 condition / tool constraints。
+
+结果：
+
+当前模型整体表现差；
+最佳模型也只能完美遵循少于 30% 的 instructions；
+随 instruction length 或 constraint count 增加，性能下降；
+当 instruction length 超过 6000 words 时，ISR 接近 0。
+
+来源：AgentIF 论文摘要与综述。1、5
+
+这说明：
+
+agent 系统中“长 system prompt + 工具约束 + 条件规则”本身就是最难的 instruction following 形态之一。
+不是简单换长上下文模型就能解决。
+
+2.6 Context Length Alone Hurts：即使完美检索，长上下文本身也会伤性能
+
+这篇研究发现：即使模型能完美检索相关证据，输入长度本身增加也会造成 13.9%–85% 的性能下降，任务包括数学、QA、代码。它还发现，即使无关 tokens 被替换成空白，甚至被 mask 掉，只要输入长度变长，性能仍会下降。1
+
+该论文提出的简单缓解：
+
+先让模型复述 / 提取相关证据，再用短上下文进行最终推理。
+
+在 RULER 上对 GPT-4o 可带来最多约 4% 提升。1
+
+这对你的场景意味着：
+
+不要把所有规则、资料、历史都塞给每个 agent。
+应该让 agent 先提取当前任务相关规则和证据，再执行。
+
+3. 不同模型结构的变化规律
+
+根据上述数据，可以总结：
+
+3.1 Instruction-tuned / chat 模型显著优于 base
+
+LIFBench 数据很明确：
+
+系列	base	instruct/chat	提升
+Qwen2.5-72B	0.542	0.700	+29.2%
+Qwen2.5-32B	0.377	0.632	+67.6%
+Llama3.1-70B	0.436	0.700	+60.6%
+
+来源：LIFBench Table 3。9
+
+所以，长上下文指令跟随不是单纯靠参数规模，后训练非常关键。
+
+3.2 MoE 在 LongGenBench 上某些指令指标好于 dense，但也会退化
+
+LongGenBench 里 Mixtral-8x7B MoE：
+
+16K STIC-2 = 28.0%，高于 Llama3.1-70B 的 21.1% 和 Qwen2-72B 的 24.0%；
+32K STIC-2 = 22.3%，仍高于 Qwen2-72B 的 17.4%，略高于 Llama3.1-70B 的 21.7%。
+
+来源：LongGenBench Table 3。1
+
+作者也总结：MoE 模型 Mixtral-8x7B generally outperformed dense counterparts in instruction-following over extended sequences，但两类模型在更长生成中都 struggled with STIC-2。1
+
+所以：
+
+MoE 可能在某些长输出指令遵循上有优势，但不是根治。
+Dense / MoE 都会随输出长度和上下文复杂度下降。
+
+3.3 Reasoning 模型在长输出任务上更强，但不一定更会处理长输入
+
+Princeton LongProc / HELMET 博文总结：
+
+reasoning models 在 LongProc 长输出任务上优于 instruction-tuned models；
+但 reasoning models 在 HELMET 长输入任务上并不总是更好，有时会 underperform。6
+
+所以：
+
+如果你的任务是“长时间规划和生成”，reasoning model 有帮助；
+如果任务是“长上下文中稳定提取和执行规则”，reasoning 不一定解决问题。
+
+4. 对你的系统设计的直接建议
+
+你关心的是：
+
+开头 4K 放严格规则，长上下文下会不会丢？怎么控制？
+
+基于数据，我建议：
+
+4.1 不要只在开头放规则
+
+因为 LongGenBench 说明即使指令在前 500 tokens，长输出超过 4K 后 adherence 也明显下降。1
+
+建议三点锚定：
+
+text
+[开头] 完整规则 R1-R20
+[任务前] 与本任务相关的规则摘要 R1,R3,R7
+[输出前] 必须执行 compliance checklist
+4.2 把规则从长自然语言压成短编号
+
+例如：
+
+text
+[R1] 不得修改公共 API，除非任务明确要求。
+[R2] 所有变更必须报告文件路径。
+[R3] 不确定时必须写 UNKNOWN，不得编造。
+[R4] 最终输出必须包含 Compliance Checklist。
+
+这样模型更容易在长上下文里引用和核对。
+
+4.3 每个 agent 先做“规则提取”再执行
+
+让 agent 在开始工作前输出：
+
+JSON
+{
+  "relevant_rules": ["R1", "R3", "R4"],
+  "task_scope": "...",
+  "forbidden_actions": ["..."],
+  "success_criteria": ["..."]
+}
+
+这相当于把长上下文任务转换成短上下文任务。
+这和 “Context Length Alone Hurts” 论文提出的 “recite retrieved evidence before solving” 是同一思路，该方法在 RULER 上最多提升 GPT-4o 约 4%。1
+
+4.4 最终必须有可校验 checklist
+
+强制输出：
+
+Markdown
+## Compliance Checklist
+| Rule | Status | Evidence |
+|---|---|---|
+| R1 | PASS/FAIL/UNKNOWN | ... |
+| R2 | PASS/FAIL/UNKNOWN | ... |
+| R3 | PASS/FAIL/UNKNOWN | ... |
+
+但这还不够。最好再加一个 Verifier Agent 或程序校验：
+
+JSON schema；
+regex；
+diff path check；
+lint/test；
+禁止路径检查；
+必填字段检查；
+工具调用合法性检查。
+
+因为 AgentIF 数据显示真实 agent 指令最佳模型完美遵循率仍低于 30%，不能只靠模型自觉。1
+
+5. 最终结论
+关于稀疏 FP4
+5090 的 3352 TOPS、RTX PRO 6000 的 4P 这类数字大概率是 FP4 sparse / AI TOPS 口径；
+当前普通 Qwen3.6 / Gemma4 的 FP8、NVFP4、AWQ、GGUF 模型 通常不能自动吃 2:4 sparse 加速；
+要吃 sparse，需要权重满足 2:4 structured sparsity，并用 sparse GEMM kernel；
+未来可行，已有 SparseGPT、Wanda、MaskLLM、AST、CAST、SparseForge 等技术；
+现实端到端加速通常不是 2×，更常见是 1.2–1.5×，除非任务几乎全是 MatMul。
+关于上下文长度与指令跟随
+
+有明确数据表明：
+
+LIFBench：Llama-3.1-8B-Instruct 从 4K ARS 0.580 降到 128K 0.388，下降约 33%；GLM-4-9B-chat-1m 从 0.589 降到 0.383，下降约 35%。1
+LongGenBench：Qwen2-72B 的 wAvg 从 16K 的 22.7% 降到 32K 的 11.5%，下降约 49%；Mixtral-8x7B 从 23.3% 降到 13.5%，下降约 42%。1
+LongProc：GPT-4o 从 0.5K 的 94.8 降到 8K 的 38.1，下降约 60%；Gemini Flash 从 78.9 降到 15.3，下降约 81%。1
+AgentIF：真实 agent 指令平均 1717 tokens、11.9 constraints，最佳模型完美遵循率低于 30%，长指令和多约束会继续降低表现。1
+
+所以：
+
+长上下文能“装下规则”，不代表能“稳定执行规则”。
+对 agent 系统，必须用规则编号、末尾重锚定、任务前规则提取、最终 checklist、外部 verifier 和程序化校验来兜底。
+
+2m 48s | 129 days ago
+16:08
+
+那么如果只考虑prompt改动，什么描述方法可以显著提高遵循
+
+例如重复三次？或者加强语气符号？或者格式清晰？请详细调查这些做法提升幅度
+
+而自动的提醒和多轮检查产生的效果？
+
+Searched the web
+
+下面只讨论 prompt / 流程提示词层面，不涉及微调、换模型、工具硬约束。结论先说：
+
+最有效的不是“语气更凶”或“感叹号更多”，而是：结构化约束 + 规则编号 + 示例/反例 + 末尾重锚定 + 输出前 checklist + 独立 critique/refine。
+“重复三次”对某些非推理任务有显著帮助，但对复杂 agent 任务不能简单复制整段 prompt；更推荐 重复关键规则摘要，而不是重复整段长 prompt。
+
+1. 哪些 prompt 改动最能提升指令遵循？
+
+按照证据强度和实际收益排序：
+
+方法	推荐度	典型提升证据	适用场景
+结构化 prompt：标题、分区、清晰边界	很高	Prompt engineering principles 中使用 ###Instruction### / ###Example### / ###Question### + 分隔符，报告 +30% improvement；delimiter 单项 +35%。3	所有复杂任务
+显式约束编号：R1/R2/R3	很高	多约束 benchmark 显示 constraint 数量和位置显著影响遵循；编号可降低混淆。1	agent、代码、工具调用
+输出契约 / schema / checklist	很高	TICK/STICK checklist 方法提升判断和生成质量；自改进在 LiveBench reasoning +7.8%，WildBench Best-of-N +6.3%。6	需要稳定格式、规则遵循
+Few-shot / 示例驱动	高	“Implement example-driven prompting” 报告 +60%。3	格式、风格、工具调用
+任务分解成多轮/多步骤	高	“Break down complex tasks into simpler prompts” 报告 +55%。3	复杂任务、多 agent
+关键规则放开头 + 末尾再摘要	高	多研究显示 primacy/recency/position bias；LongGenBench 也显示长输出时初始指令会漂移。1、1	长上下文
+重复 prompt / 重复关键指令	中高	Prompt Repetition：47/70 model-task 组合显著胜出、0 负；NameIndex 21.33%→97.33%。3	非推理、检索、格式/定位
+“You MUST / Your task is”	中	原则研究中报告 +75%。3	强约束表达
+“你会被惩罚 / 奖励小费”	低到中	该原则研究中“penalized” +45%、“tip” +45%；但现代模型上不稳定，且可能污染风格。3	不建议生产默认
+大写、感叹号、强语气	低	缺乏强证据；很多实践文档建议清晰胜过夸张强调。	少用
+2. 重复三次有用吗？
+2.1 重复整个 prompt：有证据，但条件有限
+
+Google Research 的 “Prompt Repetition Improves Non-Reasoning LLMs” 做了系统实验：把输入从：
+
+text
+<QUERY>
+
+变成：
+
+text
+<QUERY>
+<QUERY>
+
+结果：
+
+在 7 个模型、7 个 benchmark 上测试；
+非推理模式下，prompt repetition 47/70 个 model-task 组合显著胜出，0 个显著失败；
+对 NameIndex，Gemini 2.0 Flash-Lite 从 21.33% 提升到 97.33%；
+加 padding 不提升，说明不是“更长”带来提升，而是语义重复本身；
+在启用“think step by step”的推理设置下，效果变成 5 胜、1 负、22 中性，明显减弱。3
+
+所以：
+
+重复完整 prompt 对非推理、定位、选择、简单 QA 有明显帮助；对复杂 reasoning / agent 任务，收益不稳定。
+
+2.2 重复三次是否更好？
+
+该论文也测试了：
+
+text
+<QUERY>
+Let me repeat that:
+<QUERY>
+Let me repeat that one more time:
+<QUERY>
+
+结果是：某些任务上 ×3 版本能和甚至超过 ×2，尤其 NameIndex / MiddleMatch 这类需要定位的任务。但论文没有给出“重复三次总是更好”的结论，只说这是 promising variant，需要进一步研究。3
+
+同时另一篇 “Asking Again and Again” 对问题重复 1/3/5 次做了阅读理解实验，发现最多提升 6%，但整体不显著，重复问题本身既不显著改善也不显著恶化。6
+
+所以实践建议：
+
+重复方式	建议
+重复整个短 prompt 2 次	可以试，尤其非推理任务
+重复整个长 prompt 2–3 次	不推荐，浪费 prefill，可能造成上下文污染
+重复关键规则摘要 2 次	推荐
+每 N 轮插入短提醒	推荐
+用完全相同话术重复 3 次	不如编号规则 + 末尾 checklist
+3. 加强语气、符号、大写有用吗？
+3.1 “MUST / Your task is” 有一定证据
+
+PromptHub 汇总的 “Principled Instructions” 实验里：
+
+使用 “Your task is” 和 “You MUST” 报告 +75% improvement；
+使用 “You will be penalized” 报告 +45%；
+重复特定词/短语报告 +40%；
+分隔符报告 +35%；
+Few-shot 报告 +60%；
+结构化 ###Instruction### 等报告 +30%。3
+
+原论文也说 26 条原则平均提升模型 response quality / accuracy，平均约 57.7%，且大型模型平均提升超过 10%。2
+
+但要注意：
+这些是跨任务、跨模型的平均 prompt-engineering 实验，不等同于“每个生产 agent 都能提升 75%”。
+
+3.2 感叹号、威胁、奖励不如清晰结构
+
+“给小费”“会惩罚”这类方法在某些 benchmark 上有效，但不推荐作为生产系统默认做法：
+
+它可能改变语气；
+可能诱导讨好；
+可能污染输出；
+对本地开源模型效果不稳定；
+对长上下文规则遵循不是根本解决。
+
+生产中更推荐：
+
+text
+You MUST comply with R1-R7.
+If a rule cannot be verified, mark it UNKNOWN, not PASS.
+
+而不是：
+
+text
+!!! YOU WILL BE PUNISHED IF YOU FAIL !!!
+4. 格式清晰能提升多少？
+
+虽然“格式清晰”很难孤立成一个单一变量，但有几类数据支持它非常重要。
+
+4.1 结构化 prompt 原则有明确提升
+
+PromptHub/Principled Instructions 数据中：
+
+做法	improvement
+###Instruction### + 分隔 Instruction / Example / Question / Context	+30%
+使用 delimiters	+35%
+明确 requirements / keywords / rules	+85%
+Few-shot examples	+60%
+角色设定	+60%
+分解复杂任务	+55%
+
+来源：3
+
+4.2 为什么格式清晰有效？
+
+因为它减少模型要猜的东西。
+以下两种 prompt 对模型负担完全不同：
+
+差：
+
+text
+你是个开发助手。不要乱改东西。帮我完成任务，最后说一下你做了什么。
+
+好：
+
+text
+# Role
+You are a coding agent.
+
+# Rules
+[R1] Do not modify public APIs unless explicitly requested.
+[R2] Do not delete tests.
+[R3] If uncertain, write UNKNOWN.
+
+# Task
+...
+
+# Output Contract
+Return exactly:
+1. Work Performed
+2. Tests Run
+3. Compliance Checklist
+
+第二种把规则、任务、输出、审查点分开了，模型更容易局部匹配。
+
+5. 具体 prompt 写法：哪些最有效？
+5.1 用规则编号，而不是长段落
+
+推荐：
+
+text
+[R1] 不得修改 public API，除非任务明确要求。
+[R2] 不得删除或弱化已有测试。
+[R3] 如果缺少信息，必须标记 UNKNOWN，不能编造。
+[R4] 最终输出必须包含 Compliance Checklist。
+
+不要：
+
+text
+你应该尽量小心，不要随便改不该改的东西，也不要漏掉测试，如果不确定的话最好说明一下……
+
+原因：编号规则更容易被引用、检查、评分。
+
+5.2 把规则变成输出 checklist
+Markdown
+## Compliance Checklist
+| Rule | Status | Evidence |
+|---|---|---|
+| R1 | PASS/FAIL/UNKNOWN/N/A | ... |
+| R2 | PASS/FAIL/UNKNOWN/N/A | ... |
+| R3 | PASS/FAIL/UNKNOWN/N/A | ... |
+
+这比只说“请遵守规则”更有效，因为模型必须在输出空间里显式对齐规则。
+
+TICK/STICK 的核心就是把 instruction 分解成 checklist。TICK 让 LLM judge 与人类偏好 exact agreement 从 46.4% 提升到 52.2%；STICK 自我改进在 LiveBench reasoning 上 +7.8%，WildBench Best-of-N +6.3%。6
+
+5.3 给正例和反例
+
+对格式、工具调用、最终报告特别有效。
+
+text
+Good final report:
+{
+  "status": "completed",
+  "changed_files": ["src/a.ts"],
+  "tests": ["npm test"],
+  "compliance": [
+    {"rule": "R1", "status": "PASS", "evidence": "No public API changed"}
+  ]
+}
+
+Bad final report:
+"Done, everything works."
+Reason: missing files, tests, and compliance checklist.
+
+Few-shot prompting在原则实验中报告 +60%。3
+
+5.4 把关键规则放在开头和末尾
+
+因为模型存在位置偏差。MOSAIC 研究发现，不同模型对约束位置有显著偏差：Llama、Qwen3、DeepSeek 更明显表现出 primacy effect；Claude / Gemini 一些情况下有 recency effect。1
+
+所以要这样：
+
+text
+# Global Rules
+[R1] ...
+[R2] ...
+
+...大量上下文...
+
+# Before answering, re-check:
+- R1
+- R2
+- R3
+Return Compliance Checklist.
+
+不要只在开头放一次规则。
+
+6. 自动提醒有用吗？
+6.1 短提醒比重复整段系统 prompt 更好
+
+长上下文对规则遵循会衰减。LongGenBench 发现，当输出超过 4000 tokens 后，模型遵循初始指令明显下降；接近 16000 tokens 时进一步恶化。1
+
+所以在多轮 agent 中建议自动插入短提醒：
+
+text
+[Reminder]
+Active rules: R1, R2, R4.
+Before continuing, preserve these rules.
+If any rule cannot be verified, mark UNKNOWN.
+
+插入频率可以按风险：
+
+场景	提醒频率
+短任务 <8K context	只在开头和结尾
+32K–64K context	每 3–5 轮或每个子任务开始
+100K+ context	每个 agent 分支开始 + 每次工具调用前后
+长输出 >4K	每个阶段结束强制 summary/checklist
+6.2 提醒的内容要短
+
+不要重复 4K 规则全文。
+只重复：
+
+当前相关规则 ID；
+当前任务目标；
+输出格式；
+禁止事项。
+
+例如：
+
+text
+[Rule Anchor]
+Relevant rules for this step: R1, R3, R6.
+Do not modify public APIs.
+Do not invent missing facts.
+Final answer must include Compliance Checklist.
+
+这能利用 recency，同时不严重增加上下文负担。
+
+7. 多轮检查 / 自我检查效果如何？
+
+这里要非常谨慎：普通“请检查自己答案”不稳定，甚至会变差；结构化 checklist + critique/refine 才有明显收益。
+
+7.1 普通 Self-Refine 可能退化
+
+STICK 论文指出，在 LiveBench 上，vanilla Self-Refine 会导致显著退化，而 STICK checklist refinement 能提升。6
+
+自我修正综述也指出：在一般任务中，没有强证据表明 LLM 仅靠自己生成的反馈能可靠自我纠错；自我纠错更有效的条件是有可靠外部反馈，例如代码解释器、检索证据、规则校验器等。6
+
+所以不建议只写：
+
+text
+Check your answer and improve it.
+7.2 Checklist-based self-refinement 有明确收益
+
+TICK/STICK：
+
+TICK 作为评估：LLM judge 与人类偏好 exact agreement 46.4% → 52.2%；
+STICK self-refinement：LiveBench reasoning +7.8%；
+WildBench Best-of-N：+6.3%；
+Command-R+ 在 InFoBench +6.5%；
+Command-R+ 在 WildBench +7.1%；
+LiveBench：Command-R+ +3.8%，GPT-4o +0.8%，而 vanilla Self-Refine 退化。6
+
+这说明：
+
+让模型按 checklist 一条条检查，比让它“泛泛自我反思”有效得多。
+
+7.3 DECRIM：分解约束→批评→修正，收益更高
+
+DECRIM 针对多约束 instruction following：
+
+流程：
+
+Decompose：把原始 instruction 拆成 constraint list；
+Critique：判断哪些约束没满足；
+Refine：按反馈修正；
+可重复。
+
+结果：
+
+使用 weak feedback：Mistral 在 REALINSTRUCT +7.3%，IFEval +8.0%；
+使用 oracle/strong Critic：REALINSTRUCT +16.9，IFEval +20.3；
+普通 Self-Refine 在 REALINSTRUCT 只有 marginal improvement，在 IFEval 还下降；
+当 LLM 自己同时做 Decomposer 和 Critic 时，收益 minimal 或无收益，说明反馈质量很关键。7
+
+这很适合你的多 agent 场景。
+
+8. 你应该采用的 prompt-only 方案
+8.1 单次 agent prompt 模板
+text
+# Role
+You are Agent-{ID}, a task-focused executor.
+
+# Global Rules
+[R1] Only solve the assigned task. Do not perform unrelated work.
+[R2] Do not modify public APIs unless explicitly requested.
+[R3] Do not invent missing facts. Use UNKNOWN if not verifiable.
+[R4] Preserve existing tests unless explicitly asked to change them.
+[R5] Final answer must include a Compliance Checklist.
+
+# Shared Context
+{common_context}
+
+# Agent-Specific Task
+{task}
+
+# Required Process
+1. Restate the task scope in one sentence.
+2. Identify relevant rules from R1-R5.
+3. Perform the task.
+4. Before final answer, check each relevant rule.
+
+# Output Contract
+Return exactly:
+
+## Task Scope
+## Work Performed
+## Result
+## Tests or Checks
+## Compliance Checklist
+| Rule | Status: PASS/FAIL/UNKNOWN/N/A | Evidence |
+## Remaining Risks
+
+# Final Reminder
+You MUST complete the Compliance Checklist.
+If evidence is missing, mark UNKNOWN instead of PASS.
+8.2 多轮自动提醒模板
+
+每隔几轮或每次大上下文之后插入：
+
+text
+[Short Rule Reminder]
+Current task remains: {task_summary}
+Relevant rules: R1, R2, R3, R5.
+Do not drift into unrelated tasks.
+Do not invent evidence.
+Final output must contain Compliance Checklist.
+8.3 自检 prompt 模板
+text
+Review your previous answer against the checklist below.
+
+Rules:
+[R1] ...
+[R2] ...
+[R3] ...
+
+For each rule, answer:
+- PASS if satisfied with evidence.
+- FAIL if violated.
+- UNKNOWN if not verifiable.
+Do not revise yet. Only produce the audit table.
+
+然后再：
+
+text
+Revise the answer only to fix FAIL or UNKNOWN items from the audit.
+Do not change parts that already passed.
+Return the final answer with the updated Compliance Checklist.
+
+这比“一步自我改进”稳。
+
+9. 方法效果排序
+
+综合研究和工程可用性，我会这样排序：
+
+排名	方法	预期收益
+1	规则编号 + 输出 checklist	高，尤其多约束任务
+2	分解约束 → critique → refine	高，DECRIM 弱反馈 +7–8%，强反馈 +16–20
+3	结构化 prompt + delimiters	中高，原则实验 +30–35%
+4	Few-shot / 正反例	中高，原则实验 +60%
+5	末尾重锚定 / 自动短提醒	中高，长上下文中很重要
+6	重复完整 prompt 2 次	中，非推理任务很强，47/70 胜 0 负
+7	重复三次	中低，部分任务有益，但不稳定且贵
+8	“MUST / Your task is”	中，可用但不要滥用
+9	大写、感叹号、威胁、奖励	低，不建议作为主方法
+10	普通“请自我检查”	不稳定，可能退化
+10. 最重要的实践结论
+
+如果你只想做 prompt 改动，我建议不要把精力放在“重复三次”和“语气更强”，而是采用：
+
+text
+规则编号
++
+任务前相关规则提取
++
+输出契约
++
+末尾短提醒
++
+Compliance Checklist
++
+独立 critique/refine
+
+最小可行版本：
+
+text
+Before finalizing, audit rules R1-R5.
+Return a table:
+Rule | PASS/FAIL/UNKNOWN | Evidence.
+If any rule is FAIL or UNKNOWN, fix the answer before final output.
+
+这类结构化自检有明确研究支持，比“请认真遵守！！！重复三次！！！”可靠得多。
+
+1m 42s | 129 days ago
+16:23
+
+
+
+
+Agent
+
+Auto
+
+Workspace
+1.4KB/128.0MB
+1/10K files
+inspect_safetensors_header.py
+Connectors

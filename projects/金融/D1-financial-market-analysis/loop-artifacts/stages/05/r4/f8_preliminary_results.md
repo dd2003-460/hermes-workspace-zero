@@ -51,3 +51,30 @@ B2 阻塞更新: F8 预注册的 P1/P2/P3 全部 FAIL, 按预注册失败降级�
 **DVOL 单因子 REJECTED。** 方向信号全 horizon 无效, 仓位管理信号无超额。
 期权维度路线需要 IV skew (25Δ spread) 而非 DVOL 水平。
 Deribit live API 无法获取历史 skew, 需找 S3 archive 或放弃此路线。
+
+## 五分位 + Walk-Forward (2026-11-01)
+
+### DVOL Quintile vs 5d Forward Return (full sample)
+| Q | Range | n | avg_fwd5 | t |
+|---|-------|---|----------|---|
+| Q1 | [0,43.6] | 257 | +0.448% | 1.59 |
+| Q2 | (43.6,51.7] | 270 | +0.918% | 2.37 |
+| Q3 | (51.7,57.4] | 304 | +0.680% | 2.06 |
+| Q4 | (57.4,66.4] | 260 | +0.896% | 2.42 |
+| Q5 | (66.4,inf) | 243 | -0.698% | -1.59 |
+
+U-shape: low and high DVOL diverge, middle all positive. Not monotonic.
+
+### Walk-Forward (Q5 = top 20% per period)
+| Period | thresh | n | avg_fwd5 | t |
+|--------|--------|---|----------|---|
+| 2022-2023 | 82.5 | 52 | -0.436% | -0.487 |
+| 2023-2024 | 57.9 | 69 | +2.314% | 3.341 |
+| 2024-2025 | 59.7 | 128 | +0.885% | 1.689 |
+
+**UNSTABLE**: sign flips in 2022-2023, strength varies 5x across periods.
+Fails pre-registered stability criterion (cross-window consistency >= 3/4).
+
+### Final Verdict for DVOL factor
+REJECTED as directional signal. REJECTED as stable sizing filter.
+The U-shape is likely regime-dependent artifact, not exploitable edge.

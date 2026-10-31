@@ -3339,3 +3339,32 @@ RALPH_EVENT -->
 - loop-artifacts/stages/04.5/r1/tasks/04.5-r1-field-cross_validation_out.json
 - /Users/a1-6/Desktop/workspace/projects/金融/D1-financial-market-analysis/loop-artifacts/stages/04.5/r1/tasks/04.5-r1-field-cross_validation_out.md
 
+
+### 2026-10-31 F7 多信号组合回测执行完毕 (05 r3)
+- 数据: OKX 现货日线(降级D1, vision bulk spot 404 + fapi IP ban) × Binance perp/funding cache (CHECKSUM 272/272 ok)
+- 脚本修复: funding PIT cutoff ts[i]-DAY_MS → ts[i] (与 F6 同构, funding 于 t 日 00:00 UTC 结算即知) + 2 处机械 bug
+- 结果: 三市场 8-gate 全 FAIL (BTC 2/8, ETH 3/8, SOL 5/8 gate 通过); |rho(funding,basis)| = -0.35/-0.39/-0.31 全部 >=0.3 → P1 前提不成立, P2 精神成立 (无可用增量)
+- post-hoc: SOL bull×T1×B10×2021 t=3.27/p=0.0025 与 F6 SOL 单信号 post-hoc 同源, 不升级
+- 产物: stages/05/r3/{f7_results.json, f7_report.md, f7_trades_{BTC,ETH,SOL}USDT.parquet}
+- 下一步候选(需新预注册): A 链上 B 期权IV(Deribit) C 宏观时间戳 D 项目收束成负结果研究原型报告
+
+---
+
+## 2026-11-01 ~02:45 +0800 — F7 多信号组合回测完成 (05 r3)
+
+- 预注册 `f7-preregistration.md`（human+ai, 2026-10-31 冻结）→ 执行 `scripts/run_f7.py`（幂等，~90s）
+- 数据降级 D1-D3：OKX 现货日线 API（vision bulk spot 已下线 + fapi IP ban）；BTC 永续/funding 取自 04/r1 S1 cache（parquet 与 zip 逐行核验一致）
+- **结果：F7 FAIL（3/3 市场，P3 判据）**。60 格/市场无一通过全部 8 gate
+- P1/P2 对账：三市场 |ρ(funding,basis)| = 0.305/0.352/0.392 全部 ≥0.3 → P2"无增量"分支；ETH/SOL Δt≈0 成立，BTC +0.52 无法归因（basis 单信号未单独回测）且主变体 net 为负
+- 机制：funding 与 basis 经济同源（多头拥挤→正 funding+负基差），信息冗余，线性组合无正交增量
+- post-hoc 观察（不升级）：SOL bull×T1×B10×2021 t=3.27/p=0.0025/trades=117——交易数达标但 p 未过 0.001 硬线
+- 产物：`f7_results.json` / `f7-report.md` / `f7_trades_{BTC,ETH,SOL}USDT.parquet`
+- 下一步候选：(a) 真正正交信号源（链上/期权 skew）(b) 非线性组合 (c) 接受负结果收束项目；F8 策略层维持阻塞
+
+---
+
+## 2026-11-01 ~03:10 +0800 — F7/F8 预注册落盘 (commit 82bf807d)
+
+- `stages/05/r3/f7-preregistration.md`（F7 funding+basis 组合, human+ai 冻结）与 `stages/05/r4/f8-preregistration.md`（F8 IV skew 新路线）入库
+- F8 预注册要点：Deribit DVOL/25d skew/PCR 三信号 OR 逻辑，P1 corr(skew_chg, next_ret)<-0.05 / P2 skew_z≤-1.5 后 5d 超额>0.5% / P3 全 8 gate；45 格矩阵同 F6/F7 协议；fallback=CBOE BVIX+funding skew proxy；全 FAIL → 时间戳路线收束转宏观或负结果报告
+- 工作区未提交残留：build_f7_data.py 修改、TASKS.md、ACTIVE.md（外层）——下轮处理

@@ -18,5 +18,10 @@
 - `market-alpha/` — 独立 git 仓，T3/T4 step-05 续推中（最后 commit 2026-10-30），是"最新的"持续工作线之一
 - `d1-video-recreation/` — 独立 git 仓，batch-12（E29-E32）待执行，下一步明确
 - `pfb/` — ralph-loop runner 主战场，stop-hook 活跃 goal 在此
-- `ego/` 剩余 .mjs 顶层脚本（arena-b8-submit/check 等）— 可复用工具，留原位
+- ~~`ego/` 剩余 .mjs 顶层脚本~~ — **2026-10-31 已追加归档**：33 个一次性注入/探查脚本收进 `ego/arena-archive-20261031/mech-scripts/`（含 arena 注入操作教训 README），ego 顶层现只剩 README + archive 目录
 - `.pae/archive/20261031-pae-sessions/` — 上一轮已归档的 8 个 PAE 会话
+
+## 追加归档（2026-10-31 r74）
+
+market-alpha T3-R3/T4-R1 双阻塞解除时产生的 33 个一次性浏览器自动化脚本（probe/inject/check/click 系列 + arena-b8 旧批次脚本），从 ego/ 顶层移入 `ego/arena-archive-20261031/mech-scripts/`。
+唯一保留信息：该目录 README.md 里的 4 条 arena.ai 会话注入操作教训（先点"继续工作"才出编辑器、必须 CDP 真实键盘、长文本多次发送触发 reCAPTCHA、可用模板 inject-t3-final.mjs）。

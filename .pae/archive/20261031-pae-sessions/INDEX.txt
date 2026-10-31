@@ -1,0 +1,8 @@
+session-0fb2e45e-dc18-49ba-be62-8baf5f2e10c5|executing|1.我在arena有一个预测显卡价格的会话，主要是pro系列的专业卡，把tco计
+session-24ea562f-ae7c-4a5b-aa26-82620c167a1c|aborted|【目标】AI 拟人化连续剧系列化：在 d1-video-recreation 仓
+session-86cfb788-d78f-4244-8a7b-a486e692a931|planning|试试看使用这个插件：dsh-video-storyboard  这个可以怎么帮助
+session-92e45af2-9234-4f18-ab7e-7a88830e4748|paused|你好， @/Users/a1-6/Desktop/goal-template.m
+session-a6b18a0a-ba74-4db1-8610-5dca19d0d6b6|executing|我发现我把这个文件让agent读他们还是不喜欢按照流程，包括考虑可能的任务分解，
+session-b3e641ed-f067-410c-9d8c-c9ead9113596|paused|@/Users/a1-6/Desktop/goal-template.md的替身
+session-ba68e1c6-3b12-49cb-8ea9-e6bd66423fd4|completed|① 目标会话现在处于"裸奔"状态（无 goal，不会自己动）。 被误 clear
+session-bf60ae30-efd6-4753-87da-dd2e82611f25|planning|帮我看看我的github仓库prompt-first-bench怎么样了 @ag

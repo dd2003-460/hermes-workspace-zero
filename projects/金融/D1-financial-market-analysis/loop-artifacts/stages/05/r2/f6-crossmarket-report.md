@@ -39,7 +39,7 @@
 
 | Gate | ETH | SOL | 说明 |
 |------|-----|-----|------|
-| F1 t≥2（tested cells） | ❌ | ⚠️ | SOL 仅 bull×T1×2021 一格 t=3.17；其余 tested 格 \|t\|<2 |
+| F1 t≥2（tested cells） | ❌ | ⚠️ | SOL 4 格 \|t\|≥2：bull×T1×2021 t=+3.17、bear×T1×2022 t=−2.39、range×T2×2023 t=−2.34、bull×T3×2021 t=−3.23；ETH 无格达标 |
 | F2 ≥30 trades | ❌ | ❌ | 多格 <30（T1 2021: ETH 20 / SOL 17） |
 | F3 net excess > 0 | ❌ | ❌ | 2022 双市场净超额为负（熊市 T1 做多被砸） |
 | F4 跨窗口方向一致 ≥3/4 | ✅ | ✅ | T1 5/5 long-biased；T2/T3 5/5 short-biased（一致性本身成立，但"一致"≠"有效"） |

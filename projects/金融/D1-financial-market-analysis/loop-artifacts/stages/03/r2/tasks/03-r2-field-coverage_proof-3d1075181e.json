@@ -1,0 +1,318 @@
+{
+ "attribute": "T08节点完成后填写:节点→产物映射+gap列表+结论",
+ "concept": "coverage_proof",
+ "disposition": "pending",
+ "field": {
+  "attribute": "T08节点完成后填写:节点→产物映射+gap列表+结论",
+  "concept": "task_graph",
+  "disposition": "confirmed",
+  "confidence": 0.9,
+  "role": "task_graph",
+  "rationale": "03 阶段 task graph 已分解为 8 个最小执行单元 (T01-T08) 且全部完成 (plan.completed=T01..T08, joins T04/T08 收敛); 下游 04/05 阶段产物证明该分解被执行完毕; gap: 无未覆盖 declared artifact.",
+  "evidence_refs": [
+   "loop-state.json#plan.task_results",
+   "loop-artifacts/stages/04/r1/backtest_results.json",
+   "loop-artifacts/stages/05/r2/f6_backtest_results.json"
+  ],
+  "task_graph": {
+   "nodes": [
+    {
+     "depends_on": [],
+     "execution_mode": "parallel",
+     "id": "T01",
+     "input_refs": [
+      "loop-artifacts/stages/02/r1/research/stability-criteria.md"
+     ],
+     "objective": "直验arXiv:2608.27734编号:用curl访问export.arxiv.org(比arxiv.org稳)的abs页面与arXiv API(export.arxiv.org/api/query?id_list=2608.27734),记录:标题/作者/摘要要点/提交日期;结论verdict=exists|not_found|id_misremembered;若exists,说明其与02 stability-criteria候选判据集的关系(是否属于该判据集、是否强化或削弱02.5的0.85置信度判断)。副脑判断该编号LLM不可核验,此节点是一手验证。若不存在,如实记录并指出02.5引用它的字段需要降级处理。",
+     "orthogonal_key": "arxiv-verify",
+     "output_schema": {
+      "confidence": "0.0-1.0",
+      "relation_to_stability_criteria": "string",
+      "title": "string|null",
+      "verdict": "exists|not_found|id_misremembered"
+     },
+     "parallel_group_id": "G1",
+     "postconditions": [
+      "writes文件非空且含verdict"
+     ],
+     "preconditions": [
+      "网络可达export.arxiv.org"
+     ],
+     "role": "research-worker",
+     "title": "arXiv:2608.27734 编号直验",
+     "writes": [
+      "loop-artifacts/stages/03/r1/artifacts/t01-arxiv-260827734-verify.md"
+     ]
+    },
+    {
+     "depends_on": [],
+     "execution_mode": "parallel",
+     "id": "T02",
+     "input_refs": [
+      "loop-artifacts/stages/02/r1/research/funding-rate-oi-timing.md",
+      "loop-artifacts/stages/02/r1/research/data-revision-latency.md"
+     ],
+     "objective": "对OI(持仓量)数据源做三选项终决:A=放弃OI信号(仅funding rate主信号);B=短窗口OI(Binance免费30天+Bybit免费至symbol上线日);C=Coinglass付费$29/mo(唯一5年免费级历史源,可规避部分幸存者偏差)。评估维度:对研究问题(regime识别/择时)的信号贡献、PIT风险(Binance免费OI仅30天;Bybit有窗口限制;Coinglass单位=秒需归一)、成本(成璐默认画像:免费/开源优先,≤几美元/月可考虑)、可复现性。产出:每选项pros/cons、推荐选项+理由、条件触发规则(副脑建议:Coinglass作为条件分支触发项——仅当04回测证明OI增量贡献超过阈值时才付费启用)。事实依据=02 #5 funding-rate-oi-timing与#6 data-revision-latency研究文件+Lead直探实证(openInterest归档404真不存在)。不得虚构新事实,所有外部事实须来自02研究文件或本节点新检索并附来源。",
+     "orthogonal_key": "oi-source",
+     "output_schema": {
+      "confidence": "0.0-1.0",
+      "options": "array of {id,name,pros,cons}",
+      "recommended": "A|B|C",
+      "trigger_condition": "string"
+     },
+     "parallel_group_id": "G1",
+     "postconditions": [
+      "writes文件非空且含推荐选项与触发条件"
+     ],
+     "preconditions": [
+      "02研究文件可读"
+     ],
+     "role": "research-worker",
+     "title": "OI数据源三选项终决",
+     "writes": [
+      "loop-artifacts/stages/03/r1/artifacts/t02-oi-source-decision.md"
+     ]
+    },
+    {
+     "depends_on": [],
+     "execution_mode": "parallel",
+     "id": "T03",
+     "input_refs": [
+      "loop-artifacts/stages/02/r1/research/public-benchmarks.md"
+     ],
+     "objective": "把02 #7的缺口声明'公开检索未找到以funding rate为主择时信号/市场状态信号的已发表回测'固化为可复现协议并执行核心检索:①检索词≥5组(如'funding rate backtest','funding rate market regime','perpetual funding signal timing','funding rate momentum crypto','perpetual futures funding rate trading strategy');②数据库=arXiv API(可用curl https://export.arxiv.org/api/query?search_query=...)、SSRN(沙箱不可达,列为局限)、Google Scholar(无API,列为局限);③记录检索日期(主机日期=2026-10-17)与逐条结果(top hit+为何不是反例);④已知局限显式列出。注意:子代理沙箱web_search无API key,只用curl+web_fetch;export.arxiv.org比arxiv.org稳。结论:gap_confidence(缺口成立置信度)与残留风险。",
+     "orthogonal_key": "negative-search",
+     "output_schema": {
+      "databases": "array",
+      "date": "ISO date",
+      "gap_confidence": "0.0-1.0",
+      "limitations": "array",
+      "queries": "array of strings",
+      "results": "array of {query, top_hit, why_not_counterexample}"
+     },
+     "parallel_group_id": "G1",
+     "postconditions": [
+      "writes文件非空且含≥5组检索词与逐条结果"
+     ],
+     "preconditions": [
+      "export.arxiv.org可达"
+     ],
+     "role": "research-worker",
+     "title": "negative search协议固化+执行",
+     "writes": [
+      "loop-artifacts/stages/03/r1/artifacts/t03-negative-search-protocol.md"
+     ]
+    },
+    {
+     "depends_on": [
+      "T01",
+      "T02",
+      "T03"
+     ],
+     "execution_mode": "serial",
+     "id": "T04",
+     "input_refs": [
+      "loop-artifacts/stages/03/r1/artifacts/t01-arxiv-260827734-verify.md",
+      "loop-artifacts/stages/03/r1/artifacts/t02-oi-source-decision.md",
+      "loop-artifacts/stages/03/r1/artifacts/t03-negative-search-protocol.md"
+     ],
+     "objective": "合成T01/T02/T03产物为一页信号架构定稿spec,必须包含6节:(a)信号清单:funding rate确认为主信号+T02的OI决策与条件触发规则;(b)PIT时间戳严格规则:funding只用已结算值(fundingRateTimestamp≤t,8h间隔逐symbol可变)、数据可用lag与决策时刻对齐规则、OI bar的bar_start+duration≤t+延迟缓冲、UTC毫秒归一(Coinglass=秒)——副脑判定PIT前视偏差是审稿人第一攻击点,此节是全文最关键;(c)regime定义与转移规则:bull/bear/range判据来自02 stability-criteria候选集+T01验证结果,backtest前锁定,禁止样本内拟合;(d)多重检验修正计划:测试矩阵规模(regime×阈值×窗口)×Bonferroni/FDR选择+理由;(e)贡献定位:严格条件下形式化验证+regime条件化,不是'发现funding rate有效'(从业者常识);(f)局限性声明:单交易所(Binance为主venue)幸存者偏差、数据边界。输入=T01/T02/T03三个artifacts文件。",
+     "output_schema": {
+      "confidence": "0.0-1.0",
+      "pit_rule": "string",
+      "regime_locked": "boolean",
+      "sections": "6节齐全(a-f)"
+     },
+     "postconditions": [
+      "writes文件非空且6节齐全"
+     ],
+     "preconditions": [
+      "T01/T02/T03已完成"
+     ],
+     "role": "synthesis-worker",
+     "title": "信号架构定稿spec(join)",
+     "writes": [
+      "loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md"
+     ]
+    },
+    {
+     "depends_on": [
+      "T04"
+     ],
+     "execution_mode": "parallel",
+     "id": "T05",
+     "input_refs": [
+      "loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md",
+      "loop-artifacts/stages/02/r1/research/data-history-depth.md",
+      "loop-artifacts/stages/02/r1/research/data-revision-latency.md"
+     ],
+     "objective": "写PIT合规的数据ingest spec(设计文档,不是实现):①Binance data.binance.vision免费源:逐日klines(2020-01起)+monthly fundingRate(2020-01→2026-09实存206文件,当月未归档)+spot-only(无futures);②单位归一:UTC毫秒必做;③结算lag规则:T04(b)节逐条落实为伪代码级规则;④OI短窗口处理(T02决策的落地:30天滚动/Bybit补充);⑤S2美股=Yahoo ^GSPC(三熊底锚点:2002-10-09 c776.8/2008-03-10 c1273.4/2022-10-13 c3577.0,注意2022-10-13新浪3669.91判为正确值)、S3 A股=腾讯ifzq;⑥缓存策略与完整性校验(SHA256清单);⑦修订风险低(02.5 #6:updates/清单3文件全spot零futures)。",
+     "orthogonal_key": "data-pipeline",
+     "output_schema": {
+      "cache_strategy": "string",
+      "pit_rules": "array",
+      "sources": "array of {venue,dataset,range,format,unit_rule}"
+     },
+     "parallel_group_id": "G2",
+     "postconditions": [
+      "writes文件非空且含全部数据源与PIT规则"
+     ],
+     "preconditions": [
+      "T04已完成"
+     ],
+     "role": "synthesis-worker",
+     "title": "数据管线设计(PIT合规)",
+     "writes": [
+      "loop-artifacts/stages/03/r1/artifacts/t05-data-pipeline-design.md"
+     ]
+    },
+    {
+     "depends_on": [
+      "T04"
+     ],
+     "execution_mode": "parallel",
+     "id": "T06",
+     "input_refs": [
+      "loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md",
+      "loop-artifacts/stages/02/r1/research/public-benchmarks.md"
+     ],
+     "objective": "写regime条件化回测协议:①窗口定义:S1加密=2020-01→2025-01(5年含2020-21牛+2022熊+2023震荡+24-25牛,A4满足)+S2美股+S3 A股;②测试矩阵:regime×阈值×窗口组合规模计数(为多重检验修正提供基数);③指标:DSR/HQ(Bailey 2013/2014)+turnover+regime条件化收益;④walk-forward方案(滚动重估周期);⑤失败判据(与03 failure_condition对齐:分解不完整/接口未对齐/耦合不清);⑥多重检验修正按T04(d)执行;⑦未核验文献(Bailey/Harvey-Lo/White等经典失败模式文献在期刊/书)标注uncertain不得作为已核验引用。",
+     "orthogonal_key": "backtest-design",
+     "output_schema": {
+      "failure_criteria": "array",
+      "metrics": "array",
+      "test_matrix_size": "number",
+      "walk_forward": "string",
+      "windows": "array"
+     },
+     "parallel_group_id": "G2",
+     "postconditions": [
+      "writes文件非空且含测试矩阵规模计数"
+     ],
+     "preconditions": [
+      "T04已完成"
+     ],
+     "role": "synthesis-worker",
+     "title": "回测实验设计(regime条件化)",
+     "writes": [
+      "loop-artifacts/stages/03/r1/artifacts/t06-backtest-design.md"
+     ]
+    },
+    {
+     "depends_on": [
+      "T04"
+     ],
+     "execution_mode": "parallel",
+     "id": "T07",
+     "input_refs": [
+      "loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md",
+      "loop-artifacts/stages/02/r1/research/public-benchmarks.md"
+     ],
+     "objective": "从02 #7 public-benchmarks(19个arXiv URL已核验)选定对比基线与发表锚点:①已核验锚点:arXiv:1912.03270、arXiv:2212.06888、arXiv:2603.19380(股票幸存者偏差4.94pp/23.3%,唯一已核验的crypto端相关量化);②基线清单:buy-and-hold/动量/RSI等,每个基线给出参数与理由;③公平对比标准(同窗口同数据同成本假设);④未核验经典文献(Hamilton 1989 regime-switching、López de Prado 2018等)保留为candidate引用并标uncertain;⑤对比协议:我们报告什么表/图、对方数字从哪里取。不得新增未核验的外部事实。",
+     "orthogonal_key": "benchmark-selection",
+     "output_schema": {
+      "anchors": "array of {arxiv_id,verified,role}",
+      "baselines": "array of {name,parameters,rationale}",
+      "comparison_protocol": "string"
+     },
+     "parallel_group_id": "G2",
+     "postconditions": [
+      "writes文件非空且含基线清单"
+     ],
+     "preconditions": [
+      "T04已完成"
+     ],
+     "role": "synthesis-worker",
+     "title": "基准与基线选择",
+     "writes": [
+      "loop-artifacts/stages/03/r1/artifacts/t07-benchmark-selection.md"
+     ]
+    },
+    {
+     "depends_on": [
+      "T05",
+      "T06",
+      "T07"
+     ],
+     "execution_mode": "serial",
+     "id": "T08",
+     "input_refs": [
+      "loop-artifacts/stages/03/r1/artifacts/t05-data-pipeline-design.md",
+      "loop-artifacts/stages/03/r1/artifacts/t06-backtest-design.md",
+      "loop-artifacts/stages/03/r1/artifacts/t07-benchmark-selection.md",
+      "loop-artifacts/stages/02.5/r1/advance.json"
+     ],
+     "objective": "验证02.5全部success_criteria与03成功条件被本DAG覆盖:①节点→产物映射表(T01-T08每个节点的writes文件实际存在且非空,用ls -la核实,不信通知);②gap列表:逐条对照03 success_condition('结构化任务图分解到最小执行单元且所有节点已写出declared artifacts并经graph-apply回写,接口清晰对准模块化解耦无遗漏无冲突')与02.5 success_criteria,列出已覆盖/未覆盖;③unresolved claims必须保留为candidate(不得提升为结论);④结论=0 gaps或N gaps+处置建议。副脑质询记录(cac4db0b)的4点中未被T01-T07吸收的残留(如双LLM非独立→stability-criteria 0.85偏高)也要列入gap或显式说明为何不需要处置。",
+     "output_schema": {
+      "conclusion": "0 gaps|N gaps",
+      "confidence": "0.0-1.0",
+      "gaps": "array",
+      "node_artifact_map": "array of {node_id,artifact,exists}"
+     },
+     "postconditions": [
+      "writes文件非空且含映射表与gap列表"
+     ],
+     "preconditions": [
+      "T05/T06/T07已完成"
+     ],
+     "role": "verification-worker",
+     "title": "coverage_proof验证(join)",
+     "writes": [
+      "loop-artifacts/stages/03/r1/artifacts/t08-coverage-proof.md"
+     ]
+    }
+   ],
+   "joins": [
+    {
+     "depends_on": [
+      "T01",
+      "T02",
+      "T03"
+     ],
+     "id": "T04"
+    },
+    {
+     "depends_on": [
+      "T05",
+      "T06",
+      "T07"
+     ],
+     "id": "T08"
+    }
+   ],
+   "completed": [
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05",
+    "T06",
+    "T07",
+    "T08"
+   ],
+   "ready": []
+  }
+ },
+ "flow_only": false,
+ "id": "03-r2-field-coverage_proof-3d1075181e",
+ "input_refs": [
+  "loop-artifacts/stages/03/r1/fields.json",
+  "loop-state.json#plan.task_results.T08"
+ ],
+ "instruction": "只处理字段 `coverage_proof`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/03/r1/tasks/03-r1-field-coverage_proof-3d1075181e.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+ "output_schema": {
+  "attribute": "string",
+  "concept": "coverage_proof",
+  "confidence": "number 0..1",
+  "disposition": "confirmed|inferred|assumed_default|research_required",
+  "evidence_refs": "array[string]",
+  "rationale": "string",
+  "role": "string"
+ },
+ "revision": "r2",
+ "role": "coverage_proof",
+ "schema_version": 1,
+ "stage_id": "03",
+ "status": "ready",
+ "type": "field_task"
+}

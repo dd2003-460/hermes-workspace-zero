@@ -1,0 +1,39 @@
+{
+ "attribute": "04 S1 BTC 回测关键 claim 交叉验证: web-llm 登录失败(3/3), 直接复跑核验替代",
+ "concept": "cross_validation_out",
+ "disposition": "research_required",
+ "field": {
+  "attribute": "04 S1 BTC 回测关键 claim 交叉验证: web-llm 登录失败(3/3), 直接复跑核验替代",
+  "concept": "cross_validation_out",
+  "disposition": "research_required",
+  "confidence": 0.7,
+  "role": "cross_validation_out",
+  "rationale": "web-llm 门禁未满足: ralph web-llm-check @2026-10-31T14:57Z 回执 c48997addb303f67.json — perplexity-review/chatgpt-review/gemini-review 3/3 登录失败, successful_provider_ids=[] (需人工浏览器登录, 一次性 web-llm-authorize). 替代核验(直接复跑): (1) run_f6.py 幂等复跑 ~4s 结果一致; (2) CHECKSUM 136+136 zips sha256 逐文件全过; (3) PIT B6 8/8 PASS (pit_selfcheck.json); (4) 45 格矩阵数值与 backtest_results.json 逐项一致. 待补: web-llm 人工登录后重跑 check 取得 ≥2 成功回执.",
+  "evidence_refs": [
+   "loop-artifacts/stages/04.5/r1/web-llm/c48997addb303f67.json",
+   "loop-artifacts/stages/04/r1/pit_selfcheck.json",
+   "loop-artifacts/stages/04/r1/backtest_results.json",
+   "loop-artifacts/stages/05/r2/f6_backtest_results.json"
+  ]
+ },
+ "flow_only": false,
+ "id": "04.5-r1-field-cross_validation_out",
+ "input_refs": [
+  "loop-artifacts/stages/04/r1/backtest_results.json"
+ ],
+ "output_schema": {
+  "attribute": "string",
+  "concept": "cross_validation_out",
+  "confidence": "number 0..1",
+  "disposition": "confirmed|inferred|assumed_default|research_required",
+  "evidence_refs": "array[string]",
+  "rationale": "string",
+  "role": "string"
+ },
+ "revision": "r1",
+ "role": "cross_validation_out",
+ "schema_version": 1,
+ "stage_id": "04.5",
+ "status": "ready",
+ "type": "field_task"
+}

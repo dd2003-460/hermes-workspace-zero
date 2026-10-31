@@ -1,0 +1,39 @@
+{
+  "depends_on": [
+    "T01",
+    "T02",
+    "T03"
+  ],
+  "execution_mode": "serial",
+  "id": "04.5-r1-node-T04",
+  "input_refs": [
+    "loop-artifacts/stages/03/r1/artifacts/t01-arxiv-260827734-verify.md",
+    "loop-artifacts/stages/03/r1/artifacts/t02-oi-source-decision.md",
+    "loop-artifacts/stages/03/r1/artifacts/t03-negative-search-protocol.md"
+  ],
+  "instruction": "只执行 DAG 节点 `T04`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+  "node_id": "T04",
+  "orthogonal_key": null,
+  "output_schema": {
+    "confidence": "0.0-1.0",
+    "pit_rule": "string",
+    "regime_locked": "boolean",
+    "sections": "6节齐全(a-f)"
+  },
+  "parallel_group_id": null,
+  "parent_id": null,
+  "postconditions": [
+    "writes文件非空且6节齐全"
+  ],
+  "preconditions": [
+    "T01/T02/T03已完成"
+  ],
+  "revision": "r1",
+  "schema_version": 1,
+  "stage_id": "04.5",
+  "status": "completed",
+  "type": "graph_task",
+  "writes": [
+    "loop-artifacts/stages/03/r1/artifacts/t04-signal-spec.md"
+  ]
+}

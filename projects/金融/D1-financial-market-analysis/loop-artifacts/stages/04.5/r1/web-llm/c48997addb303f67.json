@@ -1,0 +1,37 @@
+{
+  "claim": "04 S1 BTC 回测关键 claim 交叉验证: web-llm 登录失败(3/3), 直接复跑核验替代",
+  "claim_sha256": "c48997addb303f67716f99f0d8e265dc04f6dc7d072e2d86644ec2b46d07feb3",
+  "context_sha256": "a0c3a72bc7b8265dd4906ed81b3ad689e3e01958dd8405762e4afa1869cf41b2",
+  "created_at": "2026-10-31T14:57:39.112100+00:00",
+  "kind": "ralph_web_llm_cross_check",
+  "note": "LLM replies are adversarial review signals, not authoritative factual sources.",
+  "request_ref": "loop-artifacts/stages/04.5/r1/tasks/04.5-r1-field-cross_validation_out.json",
+  "responses": [
+    {
+      "endpoint_host": "www.perplexity.ai",
+      "error": "Perplexity prompt box is unavailable; login or UI changed",
+      "model": "perplexity web UI",
+      "provider_id": "perplexity-review",
+      "status": "error",
+      "transport": "browser_playwright"
+    },
+    {
+      "endpoint_host": "chatgpt.com",
+      "error": "ChatGPT prompt box is unavailable; sign in manually in the visible browser first",
+      "model": "chatgpt web UI",
+      "provider_id": "chatgpt-review",
+      "status": "error",
+      "transport": "browser_playwright"
+    },
+    {
+      "endpoint_host": "gemini.google.com",
+      "error": "Gemini prompt box is unavailable; sign in manually in the visible browser first",
+      "model": "gemini web UI",
+      "provider_id": "gemini-review",
+      "status": "error",
+      "transport": "browser_playwright"
+    }
+  ],
+  "schema_version": 1,
+  "successful_provider_ids": []
+}

@@ -1,0 +1,8 @@
+{
+  "action": "advance",
+  "status": "completed",
+  "stage_id": "05",
+  "revision": "r2",
+  "next_stage": null,
+  "message": "F6 跨市场验证完成 (B1 降级: S2→ETHUSDT, S3→SOLUSDT, Binance vision bulk, CHECKSUM 136+136 全过): ETH FAIL / SOL FAIL (8 gate 各 4-5 项不过), 与 S1 BTC 0/45 一致 → 资金费率单信号三市场负结果闭合. 亮点(不升级): SOL bull×T1×2021 t=3.165 p=0.0015 PSR 0.999 DSR 0.866, trades=17<30 + p 未达 0.001 硬线 → post-hoc 观察. caveat: DSR/BH-FDR 按 N=45 单市场口径, 全局应 N=135, 偏乐观方向, 结论只更 FAIL 不翻转. 产物: stages/05/r2/{f6_backtest_results.json, f6_trades_*.parquet, scripts/run_f6.py, f6-crossmarket-report.md}. 下一步 F7 多信号组合."
+}

@@ -3011,3 +3011,331 @@ RALPH_EVENT -->
 - caveat: DSR/BH-FDR 按 N=45 单市场口径(沿用 S1), 全局应 N=135, 偏乐观方向, 结论只更 FAIL 不翻转
 - 产物: stages/05/r2/{f6_backtest_results.json, f6_trades_*.parquet, scripts/run_f6.py, f6-crossmarket-report.md}
 - 复跑: cd stages/05/r2 && /opt/homebrew/bin/python3 scripts/run_f6.py (~4s 幂等)
+## 03-r2 | field_increment_applied
+
+<!-- RALPH_EVENT
+{
+  "artifact_refs": [
+    "loop-artifacts/stages/03/r2/tasks/03-r2-field-coverage_proof-3d1075181e.json",
+    "/Users/a1-6/Desktop/workspace/projects/金融/D1-financial-market-analysis/loop-artifacts/stages/03/r2/tasks/03-r2-field-coverage_proof-3d1075181e.md"
+  ],
+  "event_id": "1ad2949c-b8ac-419b-b73c-6a2aff176ebb",
+  "observation": {
+    "added": 1,
+    "concepts": [
+      "coverage_proof"
+    ],
+    "fields_file": "loop-artifacts/stages/03/r2/tasks/03-r2-field-coverage_proof-3d1075181e.json",
+    "output_excerpt_source": "field_apply_result",
+    "remaining": {
+      "complete": false,
+      "pending": [],
+      "required_outputs": [
+        "task_graph"
+      ],
+      "researching": [],
+      "splittable": []
+    },
+    "removed": 0,
+    "revision": "r2",
+    "stage": "03",
+    "state_changed": true
+  },
+  "output_excerpt": "{\"added\": 1, \"next\": \"继续填写 remaining.required_outputs / pending / researching / splittable\", \"ok\": true, \"remaining\": {\"complete\": false, \"pending\": [], \"required_outputs\": [\"task_graph\"], \"researching\": [], \"splittable\": []}, \"removed\": 0, \"rendered_md\": \"/Users/a1-6/Desktop/workspace/projects/金融/D1-financial-market-analysis/loop-artifacts/stages/03/r2/tasks/03-r2-field-coverage_proof-3d1075181e.md\", \"total\": 1}",
+  "revision": "r2",
+  "stage": "03",
+  "timestamp": "2026-10-31T14:35:50+00:00",
+  "type": "field_increment_applied"
+}
+RALPH_EVENT -->
+
+### Agent 输出摘录
+
+{"added": 1, "next": "继续填写 remaining.required_outputs / pending / researching / splittable", "ok": true, "remaining": {"complete": false, "pending": [], "required_outputs": ["task_graph"], "researching": [], "splittable": []}, "removed": 0, "rendered_md": "/Users/a1-6/Desktop/workspace/projects/金融/D1-financial-market-analysis/loop-artifacts/stages/03/r2/tasks/03-r2-field-coverage_proof-3d1075181e.md", "total": 1}
+
+### 验证结果
+
+{}
+
+### 文件和证据
+
+- loop-artifacts/stages/03/r2/tasks/03-r2-field-coverage_proof-3d1075181e.json
+- /Users/a1-6/Desktop/workspace/projects/金融/D1-financial-market-analysis/loop-artifacts/stages/03/r2/tasks/03-r2-field-coverage_proof-3d1075181e.md
+
+## 03-r2 | field_increment_applied
+
+<!-- RALPH_EVENT
+{
+  "artifact_refs": [
+    "loop-artifacts/stages/03/r2/tasks/03-r2-field-coverage_proof-3d1075181e.json",
+    "/Users/a1-6/Desktop/workspace/projects/金融/D1-financial-market-analysis/loop-artifacts/stages/03/r2/tasks/03-r2-field-coverage_proof-3d1075181e.md"
+  ],
+  "event_id": "53bc52b1-0d17-4280-93ce-622430322e6c",
+  "observation": {
+    "added": 1,
+    "concepts": [
+      "coverage_proof",
+      "task_graph"
+    ],
+    "fields_file": "loop-artifacts/stages/03/r2/tasks/03-r2-field-coverage_proof-3d1075181e.json",
+    "output_excerpt_source": "field_apply_result",
+    "remaining": {
+      "complete": true,
+      "pending": [],
+      "required_outputs": [],
+      "researching": [],
+      "splittable": []
+    },
+    "removed": 0,
+    "revision": "r2",
+    "stage": "03",
+    "state_changed": true
+  },
+  "output_excerpt": "{\"added\": 1, \"next\": \"字段门禁已通过；阶段 02+ 写 advance.json 后运行 ralph apply\", \"ok\": true, \"remaining\": {\"complete\": true, \"pending\": [], \"required_outputs\": [], \"researching\": [], \"splittable\": []}, \"removed\": 0, \"rendered_md\": \"/Users/a1-6/Desktop/workspace/projects/金融/D1-financial-market-analysis/loop-artifacts/stages/03/r2/tasks/03-r2-field-coverage_proof-3d1075181e.md\", \"total\": 2}",
+  "revision": "r2",
+  "stage": "03",
+  "timestamp": "2026-10-31T14:49:29+00:00",
+  "type": "field_increment_applied"
+}
+RALPH_EVENT -->
+
+### Agent 输出摘录
+
+{"added": 1, "next": "字段门禁已通过；阶段 02+ 写 advance.json 后运行 ralph apply", "ok": true, "remaining": {"complete": true, "pending": [], "required_outputs": [], "researching": [], "splittable": []}, "removed": 0, "rendered_md": "/Users/a1-6/Desktop/workspace/projects/金融/D1-financial-market-analysis/loop-artifacts/stages/03/r2/tasks/03-r2-field-coverage_proof-3d1075181e.md", "total": 2}
+
+### 验证结果
+
+{}
+
+### 文件和证据
+
+- loop-artifacts/stages/03/r2/tasks/03-r2-field-coverage_proof-3d1075181e.json
+- /Users/a1-6/Desktop/workspace/projects/金融/D1-financial-market-analysis/loop-artifacts/stages/03/r2/tasks/03-r2-field-coverage_proof-3d1075181e.md
+
+## 03-r2 | stage_advanced
+
+<!-- RALPH_EVENT
+{
+  "action": {
+    "action": "advance",
+    "artifact_refs": [],
+    "evidence": [],
+    "message": "03 阶段 r2 门禁补全: coverage_proof + task_graph 两字段 field-apply 通过 (remaining.complete=true). task graph T01-T08 全部完成, joins T04/T08 收敛; 下游 04/05 产物已存在 (backtest_results.json / f6_backtest_results.json), 推进游标至 04.",
+    "next_stage": "04",
+    "revision": "r2",
+    "rollback_to": null,
+    "stage_id": "03",
+    "status": "completed"
+  },
+  "artifact_refs": [
+    "loop-artifacts/contracts/task-spec.json",
+    "loop-artifacts/contracts/04-r1-stage-input-package.json",
+    "loop-artifacts/contracts/04-r1-submission-template.json",
+    "loop-artifacts/contracts/04-r1-stage-contract.md",
+    "loop-artifacts/stages/03/r2/02bba5ab-b0cc-4dbf-b05b-66f032f80980.agent-output.md"
+  ],
+  "event_id": "02bba5ab-b0cc-4dbf-b05b-66f032f80980",
+  "full_output_ref": "loop-artifacts/stages/03/r2/02bba5ab-b0cc-4dbf-b05b-66f032f80980.agent-output.md",
+  "output_excerpt": "{\n  \"action\": \"advance\",\n  \"status\": \"completed\",\n  \"stage_id\": \"03\",\n  \"revision\": \"r2\",\n  \"next_stage\": \"04\",\n  \"message\": \"03 阶段 r2 门禁补全: coverage_proof + task_graph 两字段 field-apply 通过 (remaining.complete=true). task graph T01-T08 全部完成, joins T04/T08 收敛; 下游 04/05 产物已存在 (backtest_results.json / f6_backtest_results.json), 推进游标至 04.\"\n}",
+  "output_sha256": "67b422b9cb898a2ebd439d2ffa7470b82aba712a265dd32c32c4cccdc92cdd35",
+  "revision": "r2",
+  "stage": "03",
+  "state_after_sha256": "357a1ee2a73eab8cd6b990804de6f8aca6b91ab105bfb03f2b141df1507c7c34",
+  "state_before_sha256": "d12f164c2b190ecd11aa753a7f058b2aac13bc2a31320bdb4e10df4395861977",
+  "timestamp": "2026-10-31T14:54:04+00:00",
+  "type": "stage_advanced",
+  "validation": {
+    "status": "passed"
+  }
+}
+RALPH_EVENT -->
+
+### Agent 输出摘录
+
+{
+  "action": "advance",
+  "status": "completed",
+  "stage_id": "03",
+  "revision": "r2",
+  "next_stage": "04",
+  "message": "03 阶段 r2 门禁补全: coverage_proof + task_graph 两字段 field-apply 通过 (remaining.complete=true). task graph T01-T08 全部完成, joins T04/T08 收敛; 下游 04/05 产物已存在 (backtest_results.json / f6_backtest_results.json), 推进游标至 04."
+}
+
+### 验证结果
+
+{"status": "passed"}
+
+### 文件和证据
+
+- loop-artifacts/contracts/task-spec.json
+- loop-artifacts/contracts/04-r1-stage-input-package.json
+- loop-artifacts/contracts/04-r1-submission-template.json
+- loop-artifacts/contracts/04-r1-stage-contract.md
+- loop-artifacts/stages/03/r2/02bba5ab-b0cc-4dbf-b05b-66f032f80980.agent-output.md
+
+## 04-r1 | field_increment_applied
+
+<!-- RALPH_EVENT
+{
+  "artifact_refs": [
+    "loop-artifacts/stages/04/r1/tasks/04-r1-field-verification_report.json",
+    "/Users/a1-6/Desktop/workspace/projects/金融/D1-financial-market-analysis/loop-artifacts/stages/04/r1/tasks/04-r1-field-verification_report.md"
+  ],
+  "event_id": "6e317a36-26e9-40d2-971f-6612efabf905",
+  "observation": {
+    "added": 1,
+    "concepts": [
+      "coverage_proof",
+      "task_graph",
+      "verification_report"
+    ],
+    "fields_file": "loop-artifacts/stages/04/r1/tasks/04-r1-field-verification_report.json",
+    "output_excerpt_source": "field_apply_result",
+    "remaining": {
+      "complete": true,
+      "pending": [],
+      "required_outputs": [],
+      "researching": [],
+      "splittable": []
+    },
+    "removed": 0,
+    "revision": "r1",
+    "stage": "04",
+    "state_changed": true
+  },
+  "output_excerpt": "{\"added\": 1, \"next\": \"字段门禁已通过；阶段 02+ 写 advance.json 后运行 ralph apply\", \"ok\": true, \"remaining\": {\"complete\": true, \"pending\": [], \"required_outputs\": [], \"researching\": [], \"splittable\": []}, \"removed\": 0, \"rendered_md\": \"/Users/a1-6/Desktop/workspace/projects/金融/D1-financial-market-analysis/loop-artifacts/stages/04/r1/tasks/04-r1-field-verification_report.md\", \"total\": 3}",
+  "revision": "r1",
+  "stage": "04",
+  "timestamp": "2026-10-31T14:54:41+00:00",
+  "type": "field_increment_applied"
+}
+RALPH_EVENT -->
+
+### Agent 输出摘录
+
+{"added": 1, "next": "字段门禁已通过；阶段 02+ 写 advance.json 后运行 ralph apply", "ok": true, "remaining": {"complete": true, "pending": [], "required_outputs": [], "researching": [], "splittable": []}, "removed": 0, "rendered_md": "/Users/a1-6/Desktop/workspace/projects/金融/D1-financial-market-analysis/loop-artifacts/stages/04/r1/tasks/04-r1-field-verification_report.md", "total": 3}
+
+### 验证结果
+
+{}
+
+### 文件和证据
+
+- loop-artifacts/stages/04/r1/tasks/04-r1-field-verification_report.json
+- /Users/a1-6/Desktop/workspace/projects/金融/D1-financial-market-analysis/loop-artifacts/stages/04/r1/tasks/04-r1-field-verification_report.md
+
+## 04-r1 | stage_advanced
+
+<!-- RALPH_EVENT
+{
+  "action": {
+    "action": "advance",
+    "artifact_refs": [],
+    "evidence": [],
+    "message": "04 阶段验证完成 (S1 BTC): T06 S1 资金费率信号回测 — 3 信号(T1 sign/T2 空头拥挤/T3 多头拥挤) × 2192 天 BTCUSDT 1d, 45 格检验矩阵(3 regime × 3 threshold × 5 window), BH-FDR 0/45 通过, DSR z=-4.87(pooled Sharpe T1=-1.031), final_verdict=FAIL(F1-F8 全灭). PIT B6 8/8 PASS, 预注册冻结(run 前). verification_report 字段已 field-apply. 产物: backtest_results.json + backtest_trades.parquet(6576行) + pit_selfcheck.json + t06-signal-backtest-report.md.",
+    "next_stage": "04.5",
+    "revision": "r1",
+    "rollback_to": null,
+    "stage_id": "04",
+    "status": "completed"
+  },
+  "artifact_refs": [
+    "loop-artifacts/contracts/task-spec.json",
+    "loop-artifacts/contracts/04.5-r1-stage-input-package.json",
+    "loop-artifacts/contracts/04.5-r1-submission-template.json",
+    "loop-artifacts/contracts/04.5-r1-stage-contract.md",
+    "loop-artifacts/stages/04/r1/f00be4a9-0e9a-4209-a7b5-fd6533cd7e3f.agent-output.md"
+  ],
+  "event_id": "f00be4a9-0e9a-4209-a7b5-fd6533cd7e3f",
+  "full_output_ref": "loop-artifacts/stages/04/r1/f00be4a9-0e9a-4209-a7b5-fd6533cd7e3f.agent-output.md",
+  "output_excerpt": "{\n  \"action\": \"advance\",\n  \"status\": \"completed\",\n  \"stage_id\": \"04\",\n  \"revision\": \"r1\",\n  \"next_stage\": \"04.5\",\n  \"message\": \"04 阶段验证完成 (S1 BTC): T06 S1 资金费率信号回测 — 3 信号(T1 sign/T2 空头拥挤/T3 多头拥挤) × 2192 天 BTCUSDT 1d, 45 格检验矩阵(3 regime × 3 threshold × 5 window), BH-FDR 0/45 通过, DSR z=-4.87(pooled Sharpe T1=-1.031), final_verdict=FAIL(F1-F8 全灭). PIT B6 8/8 PASS, 预注册冻结(run 前). verification_report 字段已 field-apply. 产物: backtest_results.json + backtest_trades.parquet(6576行) + pit_selfcheck.json + t06-signal-backtest-report.md.\"\n}",
+  "output_sha256": "1d4c95325d681f08ab0302db34bb39ae0bebede611d00d92c7989df26cf8555b",
+  "revision": "r1",
+  "stage": "04",
+  "state_after_sha256": "68033567205743367b4b6f1dcc39e76c2c37746244460d5184f0b172db38ba92",
+  "state_before_sha256": "dbf899540bdf159451a53e48d50050d5da9ca9f87253ad360edfcf6eee82bd13",
+  "timestamp": "2026-10-31T14:56:05+00:00",
+  "type": "stage_advanced",
+  "validation": {
+    "status": "passed"
+  }
+}
+RALPH_EVENT -->
+
+### Agent 输出摘录
+
+{
+  "action": "advance",
+  "status": "completed",
+  "stage_id": "04",
+  "revision": "r1",
+  "next_stage": "04.5",
+  "message": "04 阶段验证完成 (S1 BTC): T06 S1 资金费率信号回测 — 3 信号(T1 sign/T2 空头拥挤/T3 多头拥挤) × 2192 天 BTCUSDT 1d, 45 格检验矩阵(3 regime × 3 threshold × 5 window), BH-FDR 0/45 通过, DSR z=-4.87(pooled Sharpe T1=-1.031), final_verdict=FAIL(F1-F8 全灭). PIT B6 8/8 PASS, 预注册冻结(run 前). verification_report 字段已 field-apply. 产物: backtest_results.json + backtest_trades.parquet(6576行) + pit_selfcheck.json + t06-signal-backtest-report.md."
+}
+
+### 验证结果
+
+{"status": "passed"}
+
+### 文件和证据
+
+- loop-artifacts/contracts/task-spec.json
+- loop-artifacts/contracts/04.5-r1-stage-input-package.json
+- loop-artifacts/contracts/04.5-r1-submission-template.json
+- loop-artifacts/contracts/04.5-r1-stage-contract.md
+- loop-artifacts/stages/04/r1/f00be4a9-0e9a-4209-a7b5-fd6533cd7e3f.agent-output.md
+
+## 04.5-r1 | field_increment_applied
+
+<!-- RALPH_EVENT
+{
+  "artifact_refs": [
+    "loop-artifacts/stages/04.5/r1/tasks/04.5-r1-field-cross_validation_out.json",
+    "/Users/a1-6/Desktop/workspace/projects/金融/D1-financial-market-analysis/loop-artifacts/stages/04.5/r1/tasks/04.5-r1-field-cross_validation_out.md"
+  ],
+  "event_id": "68d55fe3-7292-4ef7-91f7-cb9787125e73",
+  "observation": {
+    "added": 1,
+    "concepts": [
+      "coverage_proof",
+      "task_graph",
+      "verification_report",
+      "cross_validation_out"
+    ],
+    "fields_file": "loop-artifacts/stages/04.5/r1/tasks/04.5-r1-field-cross_validation_out.json",
+    "output_excerpt_source": "field_apply_result",
+    "remaining": {
+      "complete": false,
+      "pending": [],
+      "required_outputs": [],
+      "researching": [],
+      "splittable": [
+        "cross_validation_out"
+      ]
+    },
+    "removed": 0,
+    "revision": "r1",
+    "stage": "04.5",
+    "state_changed": true
+  },
+  "output_excerpt": "{\"added\": 1, \"next\": \"继续填写 remaining.required_outputs / pending / researching / splittable\", \"ok\": true, \"remaining\": {\"complete\": false, \"pending\": [], \"required_outputs\": [], \"researching\": [], \"splittable\": [\"cross_validation_out\"]}, \"removed\": 0, \"rendered_md\": \"/Users/a1-6/Desktop/workspace/projects/金融/D1-financial-market-analysis/loop-artifacts/stages/04.5/r1/tasks/04.5-r1-field-cross_validation_out.md\", \"total\": 4}",
+  "revision": "r1",
+  "stage": "04.5",
+  "timestamp": "2026-10-31T14:57:26+00:00",
+  "type": "field_increment_applied"
+}
+RALPH_EVENT -->
+
+### Agent 输出摘录
+
+{"added": 1, "next": "继续填写 remaining.required_outputs / pending / researching / splittable", "ok": true, "remaining": {"complete": false, "pending": [], "required_outputs": [], "researching": [], "splittable": ["cross_validation_out"]}, "removed": 0, "rendered_md": "/Users/a1-6/Desktop/workspace/projects/金融/D1-financial-market-analysis/loop-artifacts/stages/04.5/r1/tasks/04.5-r1-field-cross_validation_out.md", "total": 4}
+
+### 验证结果
+
+{}
+
+### 文件和证据
+
+- loop-artifacts/stages/04.5/r1/tasks/04.5-r1-field-cross_validation_out.json
+- /Users/a1-6/Desktop/workspace/projects/金融/D1-financial-market-analysis/loop-artifacts/stages/04.5/r1/tasks/04.5-r1-field-cross_validation_out.md
+

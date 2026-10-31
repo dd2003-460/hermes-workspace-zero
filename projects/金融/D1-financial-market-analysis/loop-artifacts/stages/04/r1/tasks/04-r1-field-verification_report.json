@@ -1,0 +1,39 @@
+{
+ "attribute": "S1 BTC 回测验证报告: PIT 自检 + 45 格矩阵 + F1-F8 判据 + 负结果结论",
+ "concept": "verification_report",
+ "disposition": "confirmed",
+ "field": {
+  "attribute": "S1 BTC 回测验证报告: PIT 自检 + 45 格矩阵 + F1-F8 判据 + 负结果结论",
+  "concept": "verification_report",
+  "disposition": "confirmed",
+  "confidence": 0.95,
+  "role": "verification_report",
+  "rationale": "S1 BTC 资金费率信号回测完成并全链路验证: (1) PIT B6 8/8 PASS (pit_selfcheck.json); (2) 45 格检验矩阵(3 regime × 3 threshold × 5 window 2021-2025) BH-FDR 0/45 通过; (3) DSR z=-4.87, pooled Sharpe T1=-1.031; (4) F1-F8 判据全灭 → final_verdict=FAIL. 预注册冻结于 run 前, 无 in-sample 调参. 产物: backtest_results.json + backtest_trades.parquet(6576行) + pit_selfcheck.json + t06-signal-backtest-report.md.",
+  "evidence_refs": [
+   "loop-artifacts/stages/04/r1/backtest_results.json",
+   "loop-artifacts/stages/04/r1/pit_selfcheck.json",
+   "loop-artifacts/stages/04/r1/t06-signal-backtest-report.md",
+   "loop-artifacts/stages/04/r1/backtest_trades.parquet"
+  ]
+ },
+ "flow_only": false,
+ "id": "04-r1-field-verification_report",
+ "input_refs": [
+  "loop-artifacts/stages/04/r1/backtest_results.json"
+ ],
+ "output_schema": {
+  "attribute": "string",
+  "concept": "verification_report",
+  "confidence": "number 0..1",
+  "disposition": "confirmed|inferred|assumed_default|research_required",
+  "evidence_refs": "array[string]",
+  "rationale": "string",
+  "role": "string"
+ },
+ "revision": "r1",
+ "role": "verification_report",
+ "schema_version": 1,
+ "stage_id": "04",
+ "status": "ready",
+ "type": "field_task"
+}

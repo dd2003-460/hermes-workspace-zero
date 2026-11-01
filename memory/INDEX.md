@@ -1,108 +1,39 @@
 # Memory Index
 
-> 最后更新: 2026-05-09
+> 最后更新: 2026-11-02
 
-## Active Projects (5)
+## Active Projects
 
-### 1. aniyon_blackhole
-- **状态**: 进行中 — 需要原创性验证
-- **核心假设**: Horizon = anyon condensate in (2+1)D, fusion channel → Hawking radiation
-- **权重**: 0.3
-- **目录**: `D1-anyon-hawking/`
-- **关键论文**: arXiv:2402.11765 (Dwyer), arXiv:1710.09299 (Abchouyeh), arXiv:2507.23457 (Roman)
-- **待验证**: 三大原创主张 vs 现有文献
+### 1. GW-BacQFT (D1-grav-waves)
+- **状态**: ✅ 完成 — arXiv pack v16 ready，待成璐手动上传
+- **核心**: Source Discrimination in PTA via Extended Functorial QFT
+- **目录**: `projects/理论物理/D1-grav-waves/papers/2026-GW-BacQFT/`
+- **阻塞**: 需登录 arxiv.org/submission 上传
 
-### 2. autonomous_agent_delegation
-- **状态**: 进行中
-- **核心**: Agent 多任务并行系统 — 基于 OpenClaw 架构
-- **权重**: 0.15
-- **关键文件**: `agent_delegation.md`, `agent_delegation_research.md`
-- **里程碑**: 10个agent并行, 5个agent并行
+### 2. 手征 ORF 计算主线 (GW_ORF)
+- **状态**: ✅ 阶段1-4 全部完成
+- **核心**: 引力波背景的手征（圆偏振）ORF 完整计算 + 探测统计量
+- **目录**: `projects/理论物理/时钟与引力波响应/GW_ORF_研究项目/手征ORF计算_主线/`
+- **关键发现**: Γ^V << Γ^I (4-6 orders)，单 X 通道不足以探测手征信号
+- **论文**: `论文_完整组件级_复现与手征推广/` (两篇 MD+PDF 已完成)
 
-### 3. ralph_loop_debugging
-- **状态**: 阻塞
-- **核心**: 1-loop/2-loop 协议的实现和调试
-- **权重**: 0.15
-- **阻塞原因**: 需要更多上下文和测试数据
+### 3. PFB Rubric-v3 Benchmark
+- **状态**: 正式实验完成 (7×3=21 run + 双裁判盲评 + 归因分析)
+- **核心**: AI pipeline 评分标准消融实验
+- **目录**: `pfb/bench/rubric-v3/`
+- **关键结论**: D1 净效应≈0 (sham打掉), D2 边际+5.06 稳健
+- **剩余**: G1b 异族 judge (blocked-on-external), batch2 第二域数据
 
-### 4. web_research
-- **状态**: 进行中
-- **核心**: 通用 web 搜索研究能力
-- **权重**: 0.15
-- **技能**: arxiv, crossref, youtube-content, gif-search
+### 4. Motivation Society (写作)
+- **状态**: ✅ 全部完成 (Part I-V, 14 chapters, 0 gray)
+- **目录**: `projects/写作-社会系统/D1-writing/motivation_society/`
+- **分支**: test @ 9629054
 
-### 5. ai_productization
-- **状态**: 探索阶段
-- **核心**: 将 AI 研究转化为可产品化的工具
-- **权重**: 0.1
-- **方向**: Anyon research assistant, agent delegation system
+### 5. D2 Efficient Propagation Book
+- **状态**: 交叉引用闭环，P2 实验计划就绪 (需 30 天实际执行)
+- **目录**: `projects/写作-社会系统/D2-efficient-propagation-book/`
 
-## Archived (6)
-
-### 1. neural_audio_synthesis
-- **归档原因**: 研究目标变化
-- **关键教训**: MelGAN → WaveGlow 的转换路径可行
-- **状态**: 可重启
-
-### 2. research_workflow_automation
-- **归档原因**: 已有现成工具 (Hermes agent)
-- **关键教训**: 不要重复造轮子 — 工具优先
-
-### 3. code_interpreter_system
-- **归档原因**: 任务完成
-- **状态**: 成功交付
-
-### 4. data_visualization_toolkit
-- **归档原因**: 任务完成
-- **状态**: 成功交付
-
-### 5. ml_model_training
-- **归档原因**: 任务完成
-- **状态**: 成功交付
-
-### 6. openclaw_plugin_architecture
-- **归档原因**: 研究方向转移
-- **关键教训**: OpenClaw 的 plugin 架构是理解 agent 系统的参考，非目标
-
-## Skills (13)
-
-| Skill | 用途 |
-|-------|------|
-| arxiv | arXiv 论文搜索和检索 |
-| crossref | Crossref 元数据搜索 |
-| youtube-content | YouTube 视频转录和摘要 |
-| gif-search | Tenor GIF 搜索 |
-| codebase-inspection | 代码库分析和 LOC 统计 |
-| github-code-review | PR 和 diff 代码审查 |
-| github-pr-workflow | PR 全生命周期管理 |
-| jupyter-live-kernel | 交互式 Jupyter Python 会话 |
-| himalaya | IMAP/SMTP 邮件管理 |
-| nano-pdf | PDF 编辑 |
-| powerpoint | PowerPoint 创建 |
-| thinking-methodology-extraction | 思考方式提取（用户画像） |
-| agent-behavior-analysis | Agent 系统行为建模 |
-
-## Patterns (2)
-
-### 1. 1-loop/2-loop 协议
-- **触发**: 需要系统反思和迭代改进
-- **步骤**:
-  1. 1-loop: 完成核心任务
-  2. 2-loop: 检查、质疑、补盲
-  3. 输出最终结论
-
-### 2. workspace_cleanup
-- **触发**: 文件数量超过 20 或目录超过 10
-- **步骤**:
-  1. 列出所有项目目录
-  2. 标记空目录和过期文件
-  3. 删除空目录
-  4. 归档过期项目
-
-## Resources (3)
-
-| Resource | 路径 | 用途 |
-|----------|------|------|
-| TASKS.md | `TASKS.md` | 任务跟踪 |
-| subbrain | `memory/notes/` | 副脑报告 |
-| agent-docs | `agent_docs/` | Agent 系统文档 |
+## 已归档/阻塞
+- DistCat v5 / BayesFrame v2.0: 等 GW-BacQFT 提交后处理
+- Batch2 第二域数据: blocked-on-external
+- Family-upgrade / kappa-recalibrate: blocked-on-external

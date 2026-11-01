@@ -1,0 +1,1 @@
+{"claim": "04 S1 BTC 回测: funding rate + basis 双信号在 2021 bull T1 B10 窗口 t=3.27/p=0.0025，但跨市场 |ρ|≥0.3 信息冗余无增量，结论为负结果", "context": "加密永续资金费率与基差信号的 point-in-time 回测研究。45 格矩阵(市场×regime×参数)走步 OOS，F1-F8 判据预注册。", "providers": [{"id": "test-api", "endpoint": "https://api.deepseek.com/chat/completions", "model": "deepseek-chat", "api_key_env": "DEEPSEEK_API_KEY"}]}

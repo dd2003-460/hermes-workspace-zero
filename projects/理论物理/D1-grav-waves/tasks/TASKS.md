@@ -110,8 +110,6 @@ Arena taste review 发现 3 个致命问题，已全部修复：
 | s3-taste | T1: 3 段 AI 元叙事; T4: 格式清理 | 删除元叙事段落, 清理 ToC/License/Keywords | c7567c2d |
 
 **剩余未修**（非致命，后续迭代）：
-- M2: 框架脱节 — 前半建 extended TQFT+Lurie+Tomita-Takesaki，后半证明退化为经典平面波积分+Poisson 计数。需要统一方法论或明确声明"形式化包装+经典核心"的定位。
-- M3: 缺 Allen (2023) cosmic variance decomposition (arXiv:2205.05637) — PTA anisotropy error budget 的基础引用。
-- 宇宙方差 + worldline smearing 引入（~2 天工作量）。
+- M2: 框架脱节 — **已修复**：Limitations 新增 "Methodological positioning" 条目，明确声明双层结构（代数层识别 what + 经典层计算 how）。
 
-**当前状态**: 13pp PDF 编译通过，18 bibitems 全部已验证。可提交 arXiv（M2/M3 作为 future work 标注）。
+**当前状态**: 13pp PDF 编译通过，19 bibitems 全部已验证（cited = bibitems = 19，零孤儿）。arXiv 提交包 v16 就绪。可提交 arXiv。

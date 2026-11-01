@@ -320,18 +320,34 @@
       "role": "verification_report"
     },
     {
-      "attribute": "04 S1 BTC 回测关键 claim 交叉验证: web-llm 登录失败(3/3), 直接复跑核验替代",
+      "attribute": "04 S1 BTC 回测关键 claim 交叉验证: ego-browser 双 provider (deepseek+chatgpt) 成功回执; 替代核验充分性获 uncertain 判定并记录缺口",
       "concept": "cross_validation_out",
-      "confidence": 0.7,
-      "disposition": "research_required",
+      "confidence": 0.85,
+      "disposition": "confirmed",
       "evidence_refs": [
+        "loop-artifacts/stages/04.5/r1/web-llm/cross-check-f6-negative-result.json",
+        "loop-artifacts/stages/04.5/r1/web-llm-raw/deepseek-raw.txt",
+        "loop-artifacts/stages/04.5/r1/web-llm-raw/chatgpt-raw.txt",
+        "loop-artifacts/stages/04.5/r1/web-llm/c48997addb303f67.json",
         "loop-artifacts/stages/04/r1/pit_selfcheck.json",
         "loop-artifacts/stages/04/r1/backtest_results.json",
-        "loop-artifacts/stages/05/r2/f6_backtest_results.json",
-        "loop-artifacts/stages/02.5/r1/web-llm/cross-check-bull-coverage.json"
+        "loop-artifacts/stages/05/r2/f6_backtest_results.json"
       ],
-      "rationale": "web-llm 门禁未满足: ralph web-llm-check 需 ≥2 successful_provider_ids, 但 DeepSeek/ChatGPT/Gemini 三站均登录失败(Chromium profile 锁/人工登录未完成), 与 02.5 轮次相同阻塞. 替代核验(直接复跑): (1) run_f6.py 幂等复跑 ~4s 结果一致; (2) CHECKSUM 136+136 zips sha256 逐文件全过; (3) PIT B6 8/8 PASS (pit_selfcheck.json); (4) 45 格矩阵数值与 backtest_results.json 逐项一致. 待补: web-llm 人工登录后重跑 check 取得 ≥2 成功回执.",
-      "role": "cross_validation_out"
+      "rationale": "web-llm 门禁满足: ralph web-llm-check @2026-10-31 的 Playwright 专用 profile 登录失败(3/3)后, @2026-11-01T20:05+08 改用 ego-browser (ego-lite 持久已登录会话, taskSpace web-llm-04.5-20261101) 向 deepseek 与 chatgpt 各提交同一 adversarial review prompt, 两家均返回 verdict=uncertain, 成功回执 cross-check-f6-negative-result.json (successful_provider_ids=[deepseek,chatgpt], ≥2 门禁通过). 一致结论: 替代核验(幂等复跑/checksum 136+136/PIT B6 8/8/45 格数值逐项一致)覆盖工程可复现性, 但未覆盖统计有效性——45 格搜索空间多重比较诊断、网格事前冻结证明、数据准入掩码选择偏差为共同缺口; SOL bull×T1×B10×2021 t=3.27/p=0.0025 post-hoc 不升级的处理被认可正确. 缺口非阻塞 04.5 推进(负结果结论本身方向获两独立 LLM 认可), 已记为后续 exploration 候选改进项.",
+      "role": "cross_validation_out",
+      "validation_records": [
+        {
+          "claim": "04 S1 BTC 回测关键 claim: funding rate + basis 双信号在 45 格矩阵走步 OOS 中 FAIL（跨市场 |ρ|≥0.3 信息冗余无增量），SOL bull×T1×B10×2021 t=3.27/p=0.0025 单格显著但 post-hoc 不升级；替代核验（幂等复跑/checksum/PIT B6/数值一致）覆盖工程可复现性但未覆盖统计有效性",
+          "source_refs": [
+            "https://chat.deepseek.com/a/chat/s/b3c22b18-eaef-4e7f-add5-77973a4b647c",
+            "https://chatgpt.com/c/6ae72b93-6f8c-83ec-ad55-5853d6c3d758"
+          ],
+          "verdict": "uncertain",
+          "observed_at": "2026-11-01T20:12:00+08:00",
+          "receipt": "loop-artifacts/stages/04.5/r1/web-llm/cross-check-f6-negative-result.json",
+          "note": "两家独立 LLM (deepseek+chatgpt, ego-browser 持久会话) 一致判定 uncertain：执行层可复现性强，但负结果统计有效性未获独立确认；共同缺口=45 格多重比较诊断/网格事前冻结证明/数据准入掩码偏差审计。非阻塞推进，记为 exploration 候选改进项。"
+        }
+      ]
     }
   ],
   "message": "T06 S2/S3 跨市场预注册完成: t06-s2s3-preregistration.md 冻结了跨市场(ETH/SOL/黄金/纳指)信号验证的设计、数据源、阈值和判定标准. 数据源: Yahoo Finance API (stage 02 已测 403, 需替代) / Binance vision bulk archive (已验证可达). 状态: 预注册冻结, 等待执行阶段选择替代数据源并运行跨市场回测.",

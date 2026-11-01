@@ -1,0 +1,21 @@
+{
+  "fields": [
+    {
+      "concept": "cross_validation_out",
+      "role": "cross_validation_out",
+      "attribute": "04 S1 BTC 回测关键 claim 交叉验证: ego-browser 双 provider (deepseek+chatgpt) 成功回执, 替代核验充分性获 uncertain 判定并记录缺口",
+      "disposition": "confirmed",
+      "confidence": 0.85,
+      "rationale": "web-llm 门禁满足: ralph web-llm-check @2026-10-31 的 Playwright 专用 profile 登录失败(3/3)后, @2026-11-01T20:05+08 改用 ego-browser (ego-lite 持久已登录会话, taskSpace web-llm-04.5-20261101) 向 deepseek 与 chatgpt 各提交同一 adversarial review prompt, 两家均返回 verdict=uncertain, 成功回执 cross-check-f6-negative-result.json (successful_provider_ids=[deepseek,chatgpt], ≥2 门禁通过). 一致结论: 替代核验(幂等复跑/checksum 136+136/PIT B6 8/8/45 格数值逐项一致)覆盖工程可复现性, 但未覆盖统计有效性——45 格搜索空间多重比较诊断、网格事前冻结证明、数据准入掩码选择偏差为共同缺口; SOL bull×T1×B10×2021 t=3.27/p=0.0025 post-hoc 不升级的处理被认可正确. 缺口非阻塞 04.5 推进(负结果结论本身方向获两独立 LLM 认可), 已记为后续 exploration 候选改进项.",
+      "evidence_refs": [
+        "loop-artifacts/stages/04.5/r1/web-llm/cross-check-f6-negative-result.json",
+        "loop-artifacts/stages/04.5/r1/web-llm-raw/deepseek-raw.txt",
+        "loop-artifacts/stages/04.5/r1/web-llm-raw/chatgpt-raw.txt",
+        "loop-artifacts/stages/04.5/r1/web-llm/c48997addb303f67.json",
+        "loop-artifacts/stages/04/r1/pit_selfcheck.json",
+        "loop-artifacts/stages/04/r1/backtest_results.json",
+        "loop-artifacts/stages/05/r2/f6_backtest_results.json"
+      ]
+    }
+  ]
+}

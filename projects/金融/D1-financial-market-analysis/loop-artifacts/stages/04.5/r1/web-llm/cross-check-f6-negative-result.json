@@ -1,0 +1,39 @@
+{
+  "kind": "ralph_web_llm_cross_check",
+  "schema_version": 1,
+  "field_concept": "cross_validation_out",
+  "claim": "04 S1 BTC 回测关键 claim 交叉验证: web-llm 登录失败(3/3), 直接复跑核验替代",
+  "claim_sha256": "c48997addb303f67716f99f0d8e265dc04f6dc7d072e2d86644ec2b46d07feb3",
+  "context_sha256": "417a8f506af6e6383d354555d3bf81f949c4fe6aeec6720f7aac2b43783d742b",
+  "submitted_at": "2026-11-01T20:05:00+08:00",
+  "observed_at": "2026-11-01T20:12:00+08:00",
+  "timezone": "Asia/Shanghai",
+  "transport": "ego-browser 0.6.0.16 (ego-lite persistent logged-in session; taskSpace web-llm-04.5-20261101)",
+  "responses": [
+    {
+      "provider_id": "deepseek",
+      "endpoint_host": "chat.deepseek.com",
+      "status": "success",
+      "conversation_url": "https://chat.deepseek.com/a/chat/s/b3c22b18-eaef-4e7f-add5-77973a4b647c",
+      "verdict": "uncertain",
+      "key_points": "方法论方向合理（负结果与领域已知 PIT/成本陷阱一致），但替代核验只证明工程可复现性，未诊断 45 格搜索空间的多重比较风险与数据准入掩码的选择偏差；建议补事前冻结证明或敏感性分析。SOL 单格 post-hoc 不升级的处理被认可正确。",
+      "raw_ref": "loop-artifacts/stages/04.5/r1/web-llm-raw/deepseek-raw.txt"
+    },
+    {
+      "provider_id": "chatgpt",
+      "endpoint_host": "chatgpt.com",
+      "status": "success",
+      "conversation_url": "https://chatgpt.com/c/6ae72b93-6f8c-83ec-ad55-5853d6c3d758",
+      "verdict": "uncertain",
+      "key_points": "材料支持执行层可复现性较强，但不足以独立确认核心负结果结论；需核对 PIT 时间戳对齐、走步 OOS 隔离、45 格是否事先定义、t 检验自相关/异方差处理、基准同条件对比。区分了已报告事实与未证实推断。",
+      "raw_ref": "loop-artifacts/stages/04.5/r1/web-llm-raw/chatgpt-raw.txt"
+    }
+  ],
+  "successful_provider_ids": [
+    "deepseek",
+    "chatgpt"
+  ],
+  "contradictions_recorded": true,
+  "contradiction_notes": "两家均判 uncertain 而非 supported：一致指出替代核验（复跑/checksum/PIT/数值一致）覆盖工程可复现性，但未覆盖统计有效性（多重比较、网格事前冻结、数据准入偏差）。无互相矛盾；共同缺口已记录，作为后续 exploration 阶段的候选改进项。",
+  "note": "LLM replies are adversarial review signals, not authoritative factual sources."
+}

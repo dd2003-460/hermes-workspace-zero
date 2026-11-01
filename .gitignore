@@ -92,3 +92,8 @@ projects/persona-prompt-lab/
 .pytest_cache/
 /tools/stage-gate/
 *.!
+
+# Office 临时锁文件
+~$*
+.~lock.*
+*.!

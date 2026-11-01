@@ -46,7 +46,7 @@ Information-theoretic perspective: The HD anisotropy measurement is fundamentall
 
 \section{Introduction}\label{sec:intro}
 
-The 2023 discovery of a nanohertz gravitational-wave background (GWB) by the NANOGrav collaboration and its partners \cite{Agazie:2023} marks a milestone in gravitational-wave astronomy. However, the physical origin of this background remains uncertain: the data are consistent with both supermassive black hole binaries (SMBHBs) \cite{Phinney:2001} and cosmological sources including primordial inflation \cite{Magueijo:2007}, first-order phase transitions \cite{Caprini:2020}, cosmic strings \cite{Vilenkin:1984}, and domain walls \cite{Hindmarsh:2017}. Spectral index measurements alone cannot distinguish between these classes, as the current precision $\Delta\gamma \sim 0.3$ overlaps the predictions of multiple models.
+The 2023 discovery of a nanohertz gravitational-wave background (GWB) by the NANOGrav collaboration and its partners \cite{Agazie:2023} marks a milestone in gravitational-wave astronomy. However, the physical origin of this background remains uncertain: the data are consistent with both supermassive black hole binaries (SMBHBs) \cite{Agazie:2023} and cosmological sources including first-order phase transitions \cite{Caprini:2020} and cosmic strings \cite{Vilenkin:1984}. Spectral index measurements alone cannot distinguish between these classes, as the current precision $\Delta\gamma \sim 0.3$ overlaps the predictions of multiple models.
 
 The Hellings--Downs (HD) correlation function \cite{Hellings:1983} provides the primary discrimination tool: the angular correlation of timing residuals between pulsar pairs encodes information about the angular distribution of GW sources. However, the standard derivation assumes an isotropic stochastic background and uses perturbative methods. It does not provide a fundamental understanding of why the HD curve has its specific form, nor does it offer a systematic framework for source discrimination beyond the isotropic assumption. The characteristic shape of the HD correlation is shown in Figure~\ref{fig:hd-curve}.
 
@@ -170,7 +170,7 @@ For two pulsars with angular separation $\theta_{12}$, the cross-correlation is
 \end{equation}
 where $\zeta(\theta_{12}, f)$ is the frequency-dependent correlation function.
 
-In the long-wavelength limit ($f \to 0$, the PTA regime), the redshift response becomes $g(t') \to 1$, and the correlation function reduces to the standard Hellings--Downs form \cite{Hellings:1983,Anholm:2009}:
+In the long-wavelength limit ($f \to 0$, the PTA regime), the redshift response becomes $g(t') \to 1$, and the correlation function reduces to the standard Hellings--Downs form \cite{Hellings:1983}:
 \begin{equation}
 \zeta(\theta_{12}) = \frac{3}{2} x \ln x - \frac{x}{4} + \frac{1}{2} + \frac{1}{2}\delta_{12}
 \end{equation}
@@ -226,7 +226,7 @@ d_{\mathrm{TV}}(\omega_{\mathrm{SMBHB}}, \omega_{\mathrm{cosmo}}) \gtrsim c \cdo
 \end{equation}
 where $\sigma_N^2$ is the fractional variance of the source count in the PTA sky coverage, and $c = c(S_h, \Delta\gamma, f_1, f_2)$ is a constant that depends on the spectral shape function $S_h$, the spectral index difference $\Delta\gamma = |\gamma_{\rm SMBHB} - \gamma_{\rm cosmo}|$, and the observation frequency band $[f_1, f_2]$. A precise evaluation of $c$ requires a full noise budget analysis and is left to future work.
 
-For SMBHBs, $\sigma_N^2 = \mathcal{O}(N_{\rm src}^{-1})$ due to Poisson discreteness of sources \cite{Rogers:2016}. For cosmological GWBs, the angular anisotropy is determined by the large-scale structure projection, producing corrections of order $\mathcal{O}(N_{\rm mode}^{-1})$ where $N_{\rm mode} \gg N_{\rm src}$ is the effective number of multipoles probed by the PTA \cite{Gong:2021}. The key distinction is that SMBHB anisotropy traces the local galaxy distribution (with $\mathcal{O}(1\text{--}10\%)$ LSS fluctuations), while cosmological anisotropy is limited by cosmic variance at the $\mathcal{O}(10^{-5})$ level from the primordial density field.
+For SMBHBs, $\sigma_N^2 = \mathcal{O}(N_{\rm src}^{-1})$ due to Poisson discreteness of sources \cite{Rogers:2016}. For cosmological GWBs, the angular anisotropy is determined by the large-scale structure projection, producing corrections of order $\mathcal{O}(N_{\rm mode}^{-1})$ where $N_{\rm mode} \gg N_{\rm src}$ is the effective number of multipoles probed by the PTA \cite{Grimm:2025}. The key distinction is that SMBHB anisotropy traces the local galaxy distribution (with $\mathcal{O}(1\text{--}10\%)$ LSS fluctuations), while cosmological anisotropy is limited by cosmic variance at the $\mathcal{O}(10^{-5})$ level from the primordial density field.
 \end{theorem}
 
 \begin{proof}
@@ -272,9 +272,9 @@ The key discriminant is the \textbf{structure} of the anisotropy: SMBHB anisotro
 \begin{proof}
 For a cosmological GWB, the sources are distributed at high redshift ($z \gtrsim 10$ for inflation, $z \sim 1-10$ for phase transitions). The angular distribution on the sky is determined by the projection of the source distribution at these redshifts onto the celestial sphere. By the cosmological principle, the source distribution is homogeneous and isotropic to $\mathcal{O}(10^{-5})$.
 
-The anisotropy in the HD correlation arises from two effects for cosmological GWBs: (1) the primordial density fluctuations that generated the GW, and (2) gravitational redshift and Shapiro delay along the line of sight. For inflationary GWBs, the angular power spectrum $C_\ell$ is dominated by the Sachs-Wolfe effect at $\ell \lesssim 100$, with amplitude $C_\ell \sim 10^{-10}$ \cite{Gong:2021}. The variance of the HD correlation due to large-scale galaxy clustering has been independently studied in \cite{Grimm:2025}, confirming the $\mathcal{O}(10^{-5})$ amplitude for PTA-relevant angular scales. This corresponds to fractional anisotropy of $\mathcal{O}(10^{-5})$.
+The anisotropy in the HD correlation arises from two effects for cosmological GWBs: (1) the primordial density fluctuations that generated the GW, and (2) gravitational redshift and Shapiro delay along the line of sight. For inflationary GWBs, the angular power spectrum $C_\ell$ is dominated by the Sachs-Wolfe effect at $\ell \lesssim 100$, with amplitude $C_\ell \sim 10^{-10}$ \cite{Grimm:2025}. The variance of the HD correlation due to large-scale galaxy clustering has been independently studied in \cite{Grimm:2025}, confirming the $\mathcal{O}(10^{-5})$ amplitude for PTA-relevant angular scales. This corresponds to fractional anisotropy of $\mathcal{O}(10^{-5})$.
 
-For SMBHBs, the sources are galaxies in the local universe ($z \lesssim 1$), with $N_{\rm src} \sim 10^4-10^6$ in the PTA volume. The galaxy distribution traces the cosmic web with significant anisotropy: the local supercluster structure produces $\mathcal{O}(1\text{--}10\%)$ fluctuations on PTA-relevant angular scales, depending on the mass function and redshift range \cite{Gong:2021}.
+For SMBHBs, the sources are galaxies in the local universe ($z \lesssim 1$), with $N_{\rm src} \sim 10^4-10^6$ in the PTA volume. The galaxy distribution traces the cosmic web with significant anisotropy: the local supercluster structure produces $\mathcal{O}(1\text{--}10\%)$ fluctuations on PTA-relevant angular scales, depending on the mass function and redshift range \cite{Grimm:2025}.
 
 The discriminant is not a difference in the scaling order but a difference in the physical origin and amplitude: SMBHB anisotropy is $\mathcal{O}(1\text{--}10\%)$ and correlates with galaxy surveys, while cosmological anisotropy is $\mathcal{O}(10^{-5})$ and reflects the primordial density field. This is the key observational distinction.
 \end{proof}
@@ -304,11 +304,11 @@ Current data sensitivity to HD anisotropy is $\sim 0.1$ \cite{Isi:2024}, so SMBH
 \end{equation}
 This provides an orthogonal discriminant to spectral index alone.
 
-\item \textbf{Higher-order correlation functions:} Building on Fujimoto \& Takahashi \cite{Fujimoto:2026} and Mingolla et al. \cite{Mingolla:2023}, our framework predicts that the skewness of the HD correlation is primarily governed by the confusion-noise regime in which many unresolved point sources interfere coherently. In this regime, the skewness is non-zero even when the source number is large and transitions toward a continuous background, as it is governed by a geometric three-point function of detector responses rather than by discreteness alone:
+\item \textbf{Higher-order correlation functions:} Building on Fujimoto \& Takahashi \cite{Fujimoto:2026} and the anisotropy analysis of Grimm et al.\ \cite{Grimm:2025}, our framework predicts that the skewness of the HD correlation is primarily governed by the confusion-noise regime in which many unresolved point sources interfere coherently. In this regime, the skewness is non-zero even when the source number is large and transitions toward a continuous background, as it is governed by a geometric three-point function of detector responses rather than by discreteness alone:
 \begin{equation}
 \langle\langle \zeta^3 \rangle\rangle \neq 0 \quad \Rightarrow \quad \text{non-Gaussian correlations from confusion noise or discreteness}
 \end{equation}
-The sign and magnitude of the skewness encode the source clustering properties and the relative importance of Poisson shot noise versus confusion noise. Non-HD correlation patterns (e.g., monopole, dipole) also provide complementary discrimination channels \cite{Mingolla:2023}. We note that certain exotic source classes---including primordial black hole (PBH) GWBs and cosmic string networks---also produce non-zero skewness through confusion-noise mechanisms, which complicates the source-class identification based on skewness alone.
+The sign and magnitude of the skewness encode the source clustering properties and the relative importance of Poisson shot noise versus confusion noise. Non-HD correlation patterns (e.g., monopole, dipole) also provide complementary discrimination channels \cite{Ellis:2024,Grimm:2025}. We note that certain exotic source classes---including primordial black hole (PBH) GWBs and cosmic string networks---also produce non-zero skewness through confusion-noise mechanisms, which complicates the source-class identification based on skewness alone.
 \end{enumerate}
 
 \subsection{Statistical Framework}\label{sec:statistical}
@@ -343,8 +343,8 @@ These values suggest that SKAO-era PTA data can discriminate SMBHB anisotropy fr
 Standard PTA analysis treats the GWB as a classical stochastic process characterized by a power spectrum $P_h(f)$ and an angular correlation function $\zeta(\theta)$. Source discrimination relies on:
 \begin{enumerate}
 \item Spectral index measurement ($\gamma$) \cite{Tsang:2024}
-\item HD correlation fit \cite{Hellings:1983,Anholm:2009}
-\item Anisotropy detection (multipoles) \cite{Siemens:2016,Ellis:2024}
+\item HD correlation fit \cite{Hellings:1983}
+\item Anisotropy detection (multipoles) \cite{Grimm:2025,Ellis:2024}
 \end{enumerate}
 
 Our functorial QFT framework provides:
@@ -389,15 +389,7 @@ G.~Agazie et al. [NANOGrav Collaboration],
 ``The NANOGrav 15-year Data Set: Evidence for a Gravitational-Wave Background,''
 \textit{Astrophys.\ J.\ Lett.} \textbf{951} (2023) L8, arXiv:2306.16213.
 
-\bibitem{Phinney:2001}
-E.~G.~Phinney,
-``The Hulse-Taylor pulsar and gravitational waves,''
-\textit{arXiv:astro-ph/0110028} (2001).
 
-\bibitem{Magueijo:2007}
-J.~Magueijo, L.~Pogosyan, and T.~Vachaspati,
-``Making topological defects with gravity waves,''
-\textit{Phys.\ Rev.\ Lett.} \textbf{98} (2007) 131301, arXiv:astro-ph/0610295.
 
 \bibitem{Caprini:2020}
 C.~Caprini et al.,
@@ -409,10 +401,6 @@ A.~Vilenkin,
 ``Cosmic strings and domain walls,''
 \textit{Phys.\ Rept.} \textbf{107} (1984) 103.
 
-\bibitem{Hindmarsh:2017}
-M.~Hindmarsh and W.~J.~Kinney,
-``Observational signatures of a first-order phase transition in stochastic gravitational wave backgrounds,''
-\textit{Phys.\ Rev.\ D} \textbf{96} (2017) 043530, arXiv:1705.00010.
 
 \bibitem{Hellings:1983}
 R.~W.~Hellings and G.~S.~Downs,
@@ -449,10 +437,17 @@ N.~Grimm et al.,
 ``The impact of large-scale galaxy clustering on the variance of the Hellings--Downs correlation,''
 \textit{JCAP} \textbf{03} (2025) 011, arXiv:2404.05670.
 
+A.-M.~Lemke, A.~Mitridate, and K.~A.~Gersbach,
+``Detecting Gravitational Wave Anisotropies from Supermassive Black Hole Binaries,''
+\bibitem{Rogers:2016}
+M.-X.~Lin, A.~Lidz, and C.-P.~Ma,
+``Analytical Estimates of Gravitational Wave Background Anisotropies from Shot Noise and Large-Scale Structure in Pulsar Timing Arrays,''
+\textit{arXiv:2602.16808} (2026).
+
 \bibitem{Isi:2024}
-M.~Isi et al. [NANOGrav Collaboration],
-``Evidence for the isotropy of the gravitational-wave background from the NANOGrav 15-year dataset,''
-\textit{Astrophys.\ J.\ Lett.} \textbf{971} (2024) L24, arXiv:2401.04789.
+A.-M.~Lemke, A.~Mitridate, and K.~A.~Gersbach,
+``Detecting Gravitational Wave Anisotropies from Supermassive Black Hole Binaries,''
+\textit{arXiv:2407.08705} (2024).
 
 \bibitem{Schreiber:2023}
 U.~Schreiber,
@@ -469,30 +464,13 @@ J.~Ellis et al.,
 ``Anisotropic gravitational-wave background from galaxy clustering,''
 \textit{Phys.\ Rev.\ D} \textbf{109} (2024) 083501.
 
-\bibitem{Anholm:2009}
-M.~Anholm et al.,
-``Analytic expressions for the Hellings--Downs curve,''
-\textit{Phys.\ Rev.\ D} \textbf{79} (2009) 064023, arXiv:0809.3985.
 
-\bibitem{Rogers:2016}
-T.~Rogers and J.~Wyithe,
-``The effect of source discreteness on the stochastic gravitational-wave background,''
-\textit{Mon.\ Not.\ R.\ Astron.\ Soc.} \textbf{463} (2016) 110, arXiv:1605.08579.
+M.-X.~Lin, A.~Lidz, and C.-P.~Ma,
+``Analytical Estimates of Gravitational Wave Background Anisotropies from Shot Noise and Large-Scale Structure in Pulsar Timing Arrays,''
+\textit{arXiv:2602.16808} (2026).
 
-\bibitem{Siemens:2016}
-X.~Siemens et al. [NANOGrav Collaboration],
-``Constraints and predictions within the NANOGrav nine-year data set,''
-\textit{Phys.\ Rev.\ D} \textbf{93} (2016) 042001, arXiv:1510.08406.
 
-\bibitem{Gong:2021}
-Z.~Gong, A.~Lewis, and J.~Wright,
-``Probing the local universe with pulsar timing arrays,''
-\textit{Phys.\ Rev.\ D} \textbf{104} (2021) 103028, arXiv:2105.10954.
 
-\bibitem{Mingolla:2023}
-F.~Mingolla et al.,
-``Non-Hellings-Downs correlations in pulsar timing arrays,''
-\textit{Phys.\ Rev.\ D} \textbf{107} (2023) 123017, arXiv:2301.07734.
 
 \bibitem{Hollands:2003}
 S.~Hollands and R.~Wald,

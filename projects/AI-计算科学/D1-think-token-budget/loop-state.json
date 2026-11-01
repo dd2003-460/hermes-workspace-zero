@@ -6,7 +6,7 @@
   "objective": "减少无效思考/实现自适应思考预算，降低 decode token 而不损质量（AIME 风格 hard 题验证）",
   "loop_phase": "implementation",
   "iteration": 10,
-  "current_task": "T1-T4 全完成: R3 前沿映射交付 (P1=prompt 级前沿, 414.5ch/104tok 2.63x 短于 P0); 下一步候选: serving层 thinking_token_budget 实测 A/B",
+  "current_task": "T1-T4 全完成: R3 前沿映射交付 (P1=prompt 级前沿, 414.5ch/104tok 2.63x 短于 P0); 下一步候选: serving层 thinking_token_budget 实测…",
   "status": "complete",
   "blocked": false,
   "safety": "仅 subagent 上测 prompt + 只读 HTTP + 本地 Python；不碰服务端/部署，不碰 AGENTS.md",

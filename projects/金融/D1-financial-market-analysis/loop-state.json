@@ -14,7 +14,7 @@
   ],
   "clarification_history": [],
   "current_artifact": "loop-artifacts/stages/exploration/r1/state.json",
-  "current_task": "F7 多信号组合完成 (05 r3): funding+basis 三市场 FAIL — |ρ|≥0.3 信息冗余无增量; SOL bull×T1×B10×2021 t=3.27/p=0.0025 记录为 post-hoc 不升级; 下一步候选: 正交信号源(链上/期权skew)/非线性组合/接受负结果收束",
+  "current_task": "F7 多信号组合完成 (05 r3): funding+basis 三市场 FAIL — |ρ|≥0.3 信息冗余无增量; SOL bull×T1×B10×2021 t=3.27/p=0.0025 记录为 post-hoc 不升级; 下一步候选:…",
   "exploration_history": [],
   "field_tasks": [],
   "graph_tasks": [

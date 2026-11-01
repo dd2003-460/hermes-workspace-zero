@@ -108,6 +108,14 @@ await p1.click('loc=css:button[aria-label="Send message"]')
 
 其他三条硬约束：① 单批任务 ≤15 cell/条目（防输出截断，75 cell 拆 8 批全过）；② 任务书必须先 push 到 arena 会话 checkout 的分支再提交（本地 commit 它读不到）；③ 每轮回答完必弹 review panel，下条消息前必须关。
 
+## 会话纪律（成璐 2026-11-01 硬约束）
+
+外包允许用各种 AI（arena agent mode、Battle 双裁判、网页 LLM 交叉验证），但**固定会话，不能乱开**：
+- 派发前先查 `sop/arena-loop-pipeline.md` §3.1 台账，复用该仓库的既有 arena 会话。
+- 仅当该仓库无既有会话时才新开，开完立即登记进台账。
+- 同一仓库出现两个活跃 arena 会话 = 违规（上下文分裂 + 任务书版本漂移）。
+- 例外：judge 复核类短任务（≤4 cell）可并入主会话末尾，不另开会话。
+
 ## 边界
 - arena 是**执行层**外包，决策仍在本会话（conf 低/矛盾 → 自己用 ego-browser 补查）
 - **链路硬规则（2026-10-22 成璐 m00201 批准）**：① arena 外包 = 必须首选通道（默认走 arena，不自己 AI 琢磨）；② loop 6 阶段（01→04.5）无论 arena 执行还是回退本地自答都全程必需——回退降级的是执行通道，不是流程。本 skill 的 5 步是**提交机制**；调研/核验/执行类任务的链路总控见 `sop/arena-loop-pipeline.md`（唯一 SOP 入口，含仓库映射/降级/断点门禁）。

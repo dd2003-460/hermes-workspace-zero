@@ -89,6 +89,25 @@ EOF'
     - 拆分判据：子领域能独立成一句话问题 + 输入输出正交（重叠 <30%）+ 单个 ≤30min（超了再拆）。
     - 失败隔离：每个子领域交付物独立落盘，挂一个不影响其余；Lead 汇总时缺失子领域标「未落盘」不阻塞其他结论。
 
+## 输入框实操坑（2026-11-01 rejudge-g1b 实测）
+
+agent mode 的输入框是 **tiptap ProseMirror contenteditable**，ego-browser 的 `fill` 和 `click(text=...)` 全部无效。唯一可用模式：
+
+```js
+// 1. 先关 review panel（不关则编辑器不可达）
+const hasPanel = await p1.evaluate(() => !!document.querySelector('button[aria-label="Close review panel"]'))
+if (hasPanel) { await p1.click('loc=css:button[aria-label="Close review panel"]'); await new Promise(r => setTimeout(r, 1500)) }
+// 2. focus + execCommand 注入文本
+await p1.evaluate((text) => {
+  const el = document.querySelector('div.tiptap.ProseMirror[contenteditable="true"]')
+  el.focus(); document.execCommand('insertText', false, text)
+}, prompt)
+// 3. 验证长度 > 50 再点发送
+await p1.click('loc=css:button[aria-label="Send message"]')
+```
+
+其他三条硬约束：① 单批任务 ≤15 cell/条目（防输出截断，75 cell 拆 8 批全过）；② 任务书必须先 push 到 arena 会话 checkout 的分支再提交（本地 commit 它读不到）；③ 每轮回答完必弹 review panel，下条消息前必须关。
+
 ## 边界
 - arena 是**执行层**外包，决策仍在本会话（conf 低/矛盾 → 自己用 ego-browser 补查）
 - **链路硬规则（2026-10-22 成璐 m00201 批准）**：① arena 外包 = 必须首选通道（默认走 arena，不自己 AI 琢磨）；② loop 6 阶段（01→04.5）无论 arena 执行还是回退本地自答都全程必需——回退降级的是执行通道，不是流程。本 skill 的 5 步是**提交机制**；调研/核验/执行类任务的链路总控见 `sop/arena-loop-pipeline.md`（唯一 SOP 入口，含仓库映射/降级/断点门禁）。

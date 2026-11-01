@@ -14,6 +14,7 @@ stop_hook pre_verify 判定「无活跃 stage-gate goal」，或 loop-keepalive.
    - P1 实际问题优先（能产生可验证结果）
    - P2 完成度低优先（<50% 优先启动）
    - 来源：projects/*/tasks/、各项目 loop-state.json、WORK_QUEUE.md
+   - **新目标方向从 `projects/ACTIVE-candidates.md`（新目标候选索引）选，不新建项目**（成璐 2026-11-02 指示）；条目做完/放弃后更新该表状态列
 3. **按 goal-template 立项**：读 `sop/goal-template.md`，五字段（目标/阶段/SOP索引/验收标准/失败降级）+ create_goal
 4. **开工前留痕**：step_notify 记一条「立项 X，理由 Y」
 

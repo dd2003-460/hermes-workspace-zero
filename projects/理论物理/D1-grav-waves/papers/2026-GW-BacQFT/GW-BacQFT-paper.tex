@@ -1,13 +1,15 @@
 \documentclass[11pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
-\usepackage{geometry}
-\geometry{margin=1in}
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{physics}
-\usepackage{breqn}
 \usepackage{color}
 \usepackage{bm}
+\usepackage{authblk}
+\usepackage{titlesec}
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 
 
 \newtheorem{theorem}{Theorem}[section]
@@ -32,17 +34,12 @@
 \begin{abstract}
 We present a formalism for gravitational-wave (GW) source discrimination in pulsar timing arrays (PTAs) using the framework of extended algebraic quantum field theory. Our approach reformulates the Hellings--Downs (HD) correlation function as a natural transformation between local algebras assigned to detector worldlines by an extended AQFT functor. We show that distinct GW source classes---supermassive black hole binaries (SMBHBs) versus cosmological backgrounds---produce anisotropies of vastly different amplitudes and origins: SMBHB sources generate $\mathcal{O}(1\text{--}10\%)$ anisotropy that directly traces the local galaxy distribution (Poisson shot noise of discrete sources), while cosmological backgrounds exhibit $\mathcal{O}(10^{-5})$ anisotropy set by the primordial density field. We identify a source-discrimination invariant based on the total variation distance between the algebraic states associated with each source class and provide precise predictions for the discrimination power as a function of pulsar count and source population. We demonstrate the applicability of our framework to NANOGrav 15-year data and future IPTA/SKAO observations.
 
-Information-theoretic perspective: The HD anisotropy measurement is fundamentally a signal extraction problem---we attempt to recover the angular distribution of GW sources from timing residual correlations obscured by detector noise and solar system ephemeris errors. The $\mathcal{O}(1\text{--}10\%)$ SMBHB anisotropy is a signal that survives compression (it carries mutual information with the galaxy distribution), while the $\mathcal{O}(10^{-5})$ cosmological anisotropy represents a different information channel---encoded in the primordial field rather than in discrete source locations. This cross-domain mapping (GW detection $\leftrightarrow$ information theory $\leftrightarrow$ category theory) reveals that the discrimination problem shares the same structure as any channel separation task: the source classes produce algebraic states with different entropy production rates, and the total variation distance between these states quantifies the distinguishability, which is equivalent to the channel capacity of the PTA detector network.
 
-\vspace{0.5em}
-\noindent\textbf{License}: This work is licensed under Creative Commons Attribution 4.0 International (CC BY 4.0).
 
-\vspace{0.5em}
-\noindent\textbf{Keywords}: pulsar timing arrays; gravitational waves; algebraic QFT; functorial QFT; Hellings-Downs correlation; source discrimination; SMBHB; anisotropy
 
 \end{abstract}
 
-\tableofcontents
+
 
 \section{Introduction}\label{sec:intro}
 
@@ -58,9 +55,6 @@ In this work, we reformulate GW detection in PTAs using \textbf{extended algebra
 \item We identify a precise theoretical prediction: SMBHB sources produce $\mathcal{O}(1\text{--}10\%)$ HD anisotropy that correlates with the local galaxy distribution, while cosmological backgrounds produce $\mathcal{O}(10^{-5})$ anisotropy set by the primordial density field. The structural difference in the anisotropy pattern (LSS tracing vs. primordial) provides a model-independent discriminant.
 \end{enumerate}
 
-\textbf{Precision-aware methodology:} We use extended AQFT rather than perturbative methods because the HD correlation function's specific form---and its violation by anisotropic sources---is a geometric property of the spacetime functor, not a perturbative artifact. Perturbative derivations are insufficient because they cannot distinguish between the $SO(3)$ rotational symmetry of the HD curve and accidental symmetries of the isotropic approximation. Extended AQFT provides a precision advantage: it encodes the symmetry as a natural transformation, making symmetry violations structurally visible rather than numerically obscure. This is the rate-distortion principle in action: we accept the computational cost of the categorical framework in exchange for a representation where discrimination signals cannot be compressed away.
-
-\textbf{Bayesian prior on source classes:} From a Bayesian standpoint, the prior over GW source classes is determined by our cosmological knowledge: SMBHBs are expected from galaxy merger rates, cosmic strings from symmetry-breaking phase transitions, and primordial backgrounds from inflationary models. Each prior encodes different information about the expected anisotropy pattern. The posterior---updated by the observed HD correlation pattern---determines which source class best explains the data. The discrimination power is not merely a statistical question but an information-theoretic one: does the observed pattern carry enough mutual information with the source class to overcome the prior uncertainty?
 
 \section{Extended Functorial QFT for Gravitational-Wave Detection}\label{sec:framework}
 
@@ -390,7 +384,6 @@ G.~Agazie et al. [NANOGrav Collaboration],
 \textit{Astrophys.\ J.\ Lett.} \textbf{951} (2023) L8, arXiv:2306.16213.
 
 
-
 \bibitem{Caprini:2020}
 C.~Caprini et al.,
 ``Detecting gravitational waves from cosmological phase transitions with LIGO and LISA: two chapters follow a hamburger,''
@@ -468,8 +461,6 @@ J.~Ellis et al.,
 M.-X.~Lin, A.~Lidz, and C.-P.~Ma,
 ``Analytical Estimates of Gravitational Wave Background Anisotropies from Shot Noise and Large-Scale Structure in Pulsar Timing Arrays,''
 \textit{arXiv:2602.16808} (2026).
-
-
 
 
 \bibitem{Hollands:2003}

@@ -53,6 +53,10 @@ F10 R1/R2 预注册回测 FAIL: IV跳升后是动量延续非超调回归, fundi
 矛盾答案记录矛盾点并标注 confidence。
 最终回执: receipts.json 含 {kind: "ralph_web_llm_cross_check", responses[], successful_provider_ids[]≥2, observed_at}
 
+## 回执指纹要求
+
+完成后回执必须含 repo URL (https://github.com/dd2003-460/hermes-workspace-zero) + branch (arena/f10-gas-dynamics-research) + commit_sha。
+
 ## 交付格式
 
 每个子领域一个 md 文件 (A.md/B.md/C.md/D.md), 结构:

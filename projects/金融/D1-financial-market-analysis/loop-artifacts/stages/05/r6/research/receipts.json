@@ -11,7 +11,7 @@
   },
   "repo": "https://github.com/dd2003-460/hermes-workspace-zero",
   "branch": "arena/f10-gas-dynamics-research",
-  "commit_sha": "8479fb50074a9dcb5960b4a8f7c16613e507aa3d",
+  "commit_sha": null,
   "observed_at": "2026-11-01T09:17:36Z",
   "timezone": "UTC",
   "transport": "arena agent mode — web_search + fetch_page 直取出版方/机构页面; 本 runtime 无 ego-browser 登录会话",
@@ -120,6 +120,30 @@
       "verdict": "supported",
       "key_points": "Perez et al.(FC 2021, 独立团队): 3% 价格下跌使 >$10M 可清算, 2020 年 >70% 可清算头寸被立即清算 → 一旦可清算即被同一/次区块夺走, 不存在可交易窗口, 支持\"暴露量可算/时点不可测\"。Ni-Pearson-Poteshman (JFE 78(1):49-87) 另一方向: 日历型(到期日)确有可测的 ≥16.5bps 效应, 但容量小。",
       "observed_at": "2026-11-01T09:17:36Z"
+    },
+    {
+      "claim_ref": "A · 结论 A-C1 第 5 条独立团队线 (gate-fix): 冲击/流动性是\"形状与系数\"可预测、点位与时长不可预测 — 用不区分主体类型的潜在流动性模型即可推出 √Q 律与订单流长记忆",
+      "provider_id": "arxiv_abs",
+      "source_refs": [
+        "https://arxiv.org/abs/1105.1694",
+        "https://doi.org/10.1103/PhysRevX.1.021006"
+      ],
+      "authors_independent_of": "Farmer 组 / Brock-Hommes / Takayasu 组 / Pareschi-Toscani / Jafree-Firoozye (均为不同作者团队)",
+      "verdict": "supported",
+      "key_points": "arXiv 摘要页确认 Tóth, Lempérière, Deremble, de Lataillade, Kockelkoren & Bouchaud (2011) PRX 1:021006: 平均供需剖面 V 形并在现价处消失 → 线性响应失效 → √Q 冲击律 + metaorder 切片导致订单流符号长记忆; 无任何\"单事件位移/持续时间\"预测主张。任务卡原列候选 \"Challet & Bouchaud (trader ecology)\" 未找到联合署名文献, 已如实登记替换, 未虚构出处。",
+      "observed_at": "2026-11-01T10:40:09Z"
+    },
+    {
+      "claim_ref": "D · 结论 D-C1 第 3 条独立团队线 (gate-fix): 被迫流动的\"暴露量/规模\"可事前估算, 但触发时刻不可预测; 可预测性取决于被迫方约束是否公开可观测",
+      "provider_id": "publisher_page",
+      "source_refs": [
+        "https://ideas.repec.org/a/eee/jfinec/v86y2007i2p479-512.html",
+        "https://www.nber.org/papers/w11357"
+      ],
+      "authors_independent_of": "Garcia Seuma 2026 系列 / Perez-Werner-Xu-Livshits / Ni-Pearson-Poteshman",
+      "verdict": "supported",
+      "key_points": "Coval & Stafford (2007, JFE 86(2):479-512) 摘要直核: 用 1980-2003 共同基金流量构造 flow-induced pressure; 被迫卖出折价约 4%(3 个月窗口), 压力回复近 2 年; future flow-driven transactions are predictable → front-run 激励, 逆着受约束基金交易收益高度显著。支持\"规模可算/时刻不可知\", 并给出与加密级联负结论的边界条件(约束公开+慢变量 ⇒ 可预测)。任务卡原列候选 \"Griffin & Shiller 2013 JFE forced selling\" 未检索到, 已如实登记替换。",
+      "observed_at": "2026-11-01T10:40:09Z"
     }
   ],
   "successful_provider_ids": [
@@ -137,7 +161,9 @@
     "④ 收敛速度量级 (conf 0.45): Farmer\"年—十年\" vs Scholl\"长期非有效\" vs McLean-Pontiff 几年内 -58%, 差 1-2 个数量级。",
     "⑤ 钉住效应 (conf 0.50): Ni et al. ≥16.5bps 显著 vs 独立研究质疑杠杆 ETF 再平衡→波动为 spurious; Cheng-Madhavan 的 16.8% 未直核原文。",
     "⑥ 级联前兆 (conf 0.45): Part I \"有稳健总体级前兆\" vs Part II \"severity 无法被任何标量前态量分级\" → 判读为并存(总体可测/单事件不可测), 操作口径取后者。",
-    "⑦ 独立性陷阱: A1/A3 同属 Farmer 团队; D 的两篇 2026 论文同作者 Part I/II → 均已降权为单条证据线, 已在 A.md/D.md 显式标注。"
+    "⑦ 独立性陷阱: A1/A3 同属 Farmer 团队; D 的两篇 2026 论文同作者 Part I/II → 均已降权为单条证据线, 已在 A.md/D.md 显式标注。",
+    "⑧ 被迫流动可预测性 (conf 0.50, 新增): Coval-Stafford 权益样本\"flow-driven 交易可预测 + 折价 4%\" vs 加密永续\"级联时点不可预测\" → 判为被迫方约束是否公开可观测(13F/赎回 vs 不透明杠杆)所致, 非矛盾, 但禁止跨市场迁移结论。",
+    "⑨ 被迫流动时间尺度 (conf 0.50, 新增): 权益 fire sale 压力回复近 2 年 vs 加密级联 88% 强制卖出在 onset 后 30 分钟内 → 差 4-5 个数量级, 判为清算机制/披露频率差异。"
   ],
   "subdomain_gate": {
     "A": {
@@ -146,12 +172,16 @@
         "Brock/Hommes",
         "Takayasu 组",
         "Pareschi/Toscani",
-        "Jafree/Firoozye"
+        "Jafree/Firoozye",
+        "Bouchaud/CFM (Tóth 等 2011)"
       ],
-      "independent_lines": 4,
-      "models_listed": 6,
+      "independent_lines": 5,
+      "models_listed": 7,
       "gate": "pass",
-      "min_required": 5
+      "min_required": 5,
+      "gate_delta": "4/5 → 5/5",
+      "counting_rule": "独立线 = \"结论直接支撑 A-C1 且至少一个可核验 DOI/机构页\" 的不同作者团队数; A1/A3 同属 Farmer 组算 1 线; A5 (Pareschi/Toscani) 只支撑财富分布形状、不支撑 A-C1, 仍不计入 (保守口径, 不虚增)。",
+      "evidence_added": "A7 · Tóth, Lempérière, Deremble, de Lataillade, Kockelkoren & Bouchaud (2011) PRX 1:021006 · https://arxiv.org/abs/1105.1694 · 发表 2011-11 (arXiv v1 2009-01)"
     },
     "B": {
       "independent_teams": [
@@ -189,16 +219,31 @@
         "Perez/Werner/Xu/Livshits",
         "Ni/Pearson/Poteshman",
         "Cheng/Madhavan",
+        "Coval/Stafford",
         "F10-R2 内部预注册回测"
       ],
-      "independent_lines": 2,
-      "table_rows": 7,
+      "independent_lines": 3,
+      "table_rows": 8,
       "gate": "pass",
-      "min_required": 3
+      "min_required": 3,
+      "gate_delta": "2/3 → 3/3",
+      "counting_rule": "独立线 = \"结论直接支撑 D-C1 且至少一个可核验 DOI/出版方页\" 的不同作者团队数; 同作者 Part I/II 算 1 线; Ni-Pearson-Poteshman (仅支撑日历型第 2 行) 与 Cheng-Madhavan (二手转述未直核) 不计入线数。",
+      "evidence_added": "D8 · Coval & Stafford (2007) JFE 86(2):479-512 · https://ideas.repec.org/a/eee/jfinec/v86y2007i2p479-512.html · 发表 2007-11"
     }
   },
   "date_anchor_conflicts": [
     "D 行 4/6 引用的两篇加密永续级联论文为 2026-07 与 2026-08 预印本, 与本会话日期(2026-11-01)相容; 但二者为同一作者的 Part I/II, 且 2608.03616 的第三方机器评审(pith.science)指出其需分钟级估计与\"主动 vs backstop 吸收\"渠道分离 → 结论按 conf 0.55-0.60 处理, 未升级为定论。"
   ],
-  "commit_note": "commit_sha = 落盘 A/B/C/D + 本 receipts.json 的提交 (parent=1d64bae); 本文件在紧随其后的第二个提交中回填该 sha (自引用不可解, 故 commit_sha 指向内容提交, HEAD 为其子提交)"
+  "commit_note": "commit_sha = 落盘 A.md(§2 新增 A7)/D.md(§2 新增 D8)/本 receipts.json 的提交; 该提交之后另有一个回填提交写入真实 sha (自引用不可解 → HEAD 为内容提交的子提交)",
+  "gate_fix": {
+    "taskcard": "projects/金融/D1-financial-market-analysis/loop-artifacts/stages/05/r6/research/gate-fix-taskcard.md",
+    "taskcard_branch": "arena/f10-r3-gate-fix",
+    "executed_at": "2026-11-01T10:40:09Z",
+    "scope": "A 域 4/5→5/5, D 域 2/3→3/3",
+    "candidate_substitutions": [
+      "A: 任务卡候选 \"Challet & Bouchaud trader ecology\" 未检索到联合署名文献 → 改用 Tóth et al. (2011) PRX (Bouchaud/CFM 组), 双路可核验",
+      "D: 任务卡候选 \"Griffin & Shiller (2013, JFE, forced selling)\" 未检索到该文献 → 改用 Coval & Stafford (2007) JFE, 已发表非预印本, 摘要直核"
+    ],
+    "verification": "每条新证据均经 arXiv 摘要页 / RePEc-IDEAS 摘要页 / NBER 页直核, 各带 ≥2 个不同域名 source_refs; 未使用二手转述作为唯一来源"
+  }
 }

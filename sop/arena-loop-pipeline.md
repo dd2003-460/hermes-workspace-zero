@@ -58,6 +58,8 @@
 | —（本地 stop_hook 改造） | — | 2026-10-29 r88-r90：stop_hook 对齐 ralph-loop 停止门——每回合过门+无活也 continue 找新目标，真停仅 HALT/用户喊停。stage-gate commits 600045a→061ec62→60ce4b4 |
 | —（R5.4 终态效度） | — | 2026-10-29：run4 oracle 独立复验 PASS（sha256 一致 + 4/4 EXIT=0），terminal-validity.md 落盘，workspace commit 20f7713c。R5 剩余：R5.1 第二打分器（ego ChatGPT，需登录态）→ R5.2b run5 arena → R5.5 bench.md r5 |
 
+| hermes-workspace-zero（金融 D1-financial-market-analysis） | 新会话 2026-11-01（F10-R3 资金动力学调研），taskSpace: f10-r3-arena-dispatch，绑定分支 arena/f10-gas-dynamics-research | 2026-11-01：F10-R3 任务书派发（4 子领域 A/B/C/D 文献调研），agent 工作分支 arena/bbea6ca3-hermes-workspace-zero；**此会话为该仓库唯一活跃会话**。坑：会话面板显示的 agent 工作分支 ≠ 任务书分支，回执核验去 agent 实际 push 的分支找 |
+
 **原则**：每个项目有自己的仓库，arena 连接对应仓库，读仓库内的任务书执行。不跨仓库混用。
 
 ### 3.2 连接仓库（新会话直接选仓库 · 2026-10-26 修正）

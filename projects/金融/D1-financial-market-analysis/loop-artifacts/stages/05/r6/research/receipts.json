@@ -1,20 +1,18 @@
 {
   "kind": "ralph_web_llm_cross_check",
   "schema_version": 1,
-  "task": "F10-R3 调研任务书执行与门禁缺口补齐 (资金动力学与套利空间涌现 · 文献调研 A/B/C/D · A域 5/5 & D域 3/3)",
+  "task": "F10-R3 调研任务书执行 (资金动力学与套利空间涌现 · 文献调研 A/B/C/D)",
   "taskbook": {
     "path": "projects/金融/D1-financial-market-analysis/loop-artifacts/stages/05/r6/research-taskbook.md",
-    "gate_fix_taskcard": "projects/金融/D1-financial-market-analysis/loop-artifacts/stages/05/r6/research/gate-fix-taskcard.md",
     "sha256": "4a9d68f0767fef97e232b67eb18170685de03f098b613e736c8a248182721b19",
-    "base_commit_sha": "dd7d902a6be820a706e447463fc06ca700066cc9",
-    "sync": "fast-forward to origin/arena/f10-r3-gate-fix tip dd7d902a6be820a706e447463fc06ca700066cc9",
-    "base_branch_note": "基于 arena/f10-r3-gate-fix 任务卡 dd7d902 补齐 A 域第 5 条独立团队证据与 D 域第 3 条独立团队证据"
+    "base_commit_sha": "1d64baec2c018e688701a18b2526e66e7afc227b",
+    "sync": "git fetch origin arena/f10-gas-dynamics-research: 本地 3267604 → 远端 tip 1d64bae (仅 loop-events.md +6 行, 与本次产出无冲突); 本次产出 rebase 到 1d64bae",
+    "base_branch_note": "远端分支在调研期间前移了一个提交(Lead 记 loop-events); 已 rebase, 无文件冲突"
   },
   "repo": "https://github.com/dd2003-460/hermes-workspace-zero",
-  "branch": "arena/f10-r3-gate-fix",
-  "session_branch": "arena/25201d65-hermes-workspace-zero",
-  "commit_sha": "49aa6057058d2501e956f9c07cc6c2ebfdb05334",
-  "observed_at": "2026-11-01T10:40:00Z",
+  "branch": "arena/f10-gas-dynamics-research",
+  "commit_sha": "3e5ebc895972de6a70b007499f2ec6bfd65adaf0",
+  "observed_at": "2026-11-01T09:17:36Z",
   "timezone": "UTC",
   "transport": "arena agent mode — web_search + fetch_page 直取出版方/机构页面; 本 runtime 无 ego-browser 登录会话",
   "degradation": {
@@ -50,19 +48,6 @@
       "verdict": "supported",
       "key_points": "PMC 全文确认 community matrix / 营养级为\"状态依赖\"且效率均衡处三者互惠; PLOS ONE 确认 Sueshige et al. 2018 的 Sharpe 与流动性消费概率 Spearman=0.54, 同为截面/条件描述, 无时间预测。",
       "observed_at": "2026-11-01T09:17:36Z"
-    },
-    {
-      "claim_ref": "A · 结论 A-C1 (第五独立团队线补齐: Challet & Bouchaud 统计物理 trader ecology 与订单簿响应模型)",
-      "provider_id": "arxiv_abs",
-      "source_refs": [
-        "https://arxiv.org/abs/cond-mat/0011042",
-        "https://econpapers.repec.org/paper/arxpapers/cond-mat_2f0011042.htm",
-        "https://arxiv.org/abs/cond-mat/0210710"
-      ],
-      "authors_independent_of": "Farmer 组 / Brock-Hommes 组 / Takayasu 组 / Pareschi-Toscani 组",
-      "verdict": "supported",
-      "key_points": "Challet, Chessa, Marsili & Zhang (2000-11-02 / QF 2001, 1(1):168-176) 将市场建模为 producers/speculators/noise traders 三物种生态, 证明价格向随机游走收敛的 crossover time 由距临界点 |α-α_c| (α=P/N_s) 决定; Potters & Bouchaud (2002-10-31 / Physica A 2003, 324:133-140) 证实限价单寿命随距最优价距离幂律增长、价格响应对交易量呈对数依赖且准永久, 同样只预测统计标度而非单事件偏离点位/时长。",
-      "observed_at": "2026-11-01T10:40:00Z"
     },
     {
       "claim_ref": "B · 结论 B-C1: 收敛时间跨市场差 4-5 个数量级; 由资本到位延迟主导; 存在负反馈稳态但**无**跨市场可校准的 capital-inflow 公式",
@@ -137,18 +122,28 @@
       "observed_at": "2026-11-01T09:17:36Z"
     },
     {
-      "claim_ref": "D · 结论 D-C1 (第三独立团队通道补齐: 已发表机构被迫抛售预测与可交易性边界 — Shive & Yun JFE 2013 + Coval & Stafford JFE 2007 + Dyakov & Verbeek JBF 2013)",
+      "claim_ref": "A · 结论 A-C1 第 5 条独立团队线 (gate-fix): 冲击/流动性是\"形状与系数\"可预测、点位与时长不可预测 — 用不区分主体类型的潜在流动性模型即可推出 √Q 律与订单流长记忆",
+      "provider_id": "arxiv_abs",
+      "source_refs": [
+        "https://arxiv.org/abs/1105.1694",
+        "https://doi.org/10.1103/PhysRevX.1.021006"
+      ],
+      "authors_independent_of": "Farmer 组 / Brock-Hommes / Takayasu 组 / Pareschi-Toscani / Jafree-Firoozye (均为不同作者团队)",
+      "verdict": "supported",
+      "key_points": "arXiv 摘要页确认 Tóth, Lempérière, Deremble, de Lataillade, Kockelkoren & Bouchaud (2011) PRX 1:021006: 平均供需剖面 V 形并在现价处消失 → 线性响应失效 → √Q 冲击律 + metaorder 切片导致订单流符号长记忆; 无任何\"单事件位移/持续时间\"预测主张。任务卡原列候选 \"Challet & Bouchaud (trader ecology)\" 未找到联合署名文献, 已如实登记替换, 未虚构出处。",
+      "observed_at": "2026-11-01T10:40:09Z"
+    },
+    {
+      "claim_ref": "D · 结论 D-C1 第 3 条独立团队线 (gate-fix): 被迫流动的\"暴露量/规模\"可事前估算, 但触发时刻不可预测; 可预测性取决于被迫方约束是否公开可观测",
       "provider_id": "publisher_page",
       "source_refs": [
-        "https://ideas.repec.org/a/eee/jfinec/v107y2013i1p220-237.html",
-        "https://broad.msu.edu/profile/yunhayon/",
-        "https://www.nber.org/papers/w11357",
-        "https://ideas.repec.org/a/eee/jbfina/v37y2013i12p4931-4942.html"
+        "https://ideas.repec.org/a/eee/jfinec/v86y2007i2p479-512.html",
+        "https://www.nber.org/papers/w11357"
       ],
-      "authors_independent_of": "Garcia Seuma 2026 系列 / Perez et al. 2021 / Ni-Pearson-Poteshman 2005",
+      "authors_independent_of": "Garcia Seuma 2026 系列 / Perez-Werner-Xu-Livshits / Ni-Pearson-Poteshman",
       "verdict": "supported",
-      "key_points": "Coval & Stafford (JFE 2007, 86(2):479-512) 证明极端赎回基金被迫减仓 20.1% 产生 -7.9% (t=-3.45) 异常冲击并在 12-24 个月反转; Shive & Yun (JFE 2013, 107(1):220-237) 证实对冲基金针对下季度 1% 成交量被迫流当季抢跑 0.29%-0.45% 成交量、每 +1σ 抢跑获 +0.9% 年化 alpha; Dyakov & Verbeek (JBF 2013, 37(12):4931-4942) 实时样本外检验表明 +0.5%/月抢跑收益仅存在于小盘股, 高流动性大盘股在可检测前已价格修复且窗口从 1 个月缩至 2 周。",
-      "observed_at": "2026-11-01T10:40:00Z"
+      "key_points": "Coval & Stafford (2007, JFE 86(2):479-512) 摘要直核: 用 1980-2003 共同基金流量构造 flow-induced pressure; 被迫卖出折价约 4%(3 个月窗口), 压力回复近 2 年; future flow-driven transactions are predictable → front-run 激励, 逆着受约束基金交易收益高度显著。支持\"规模可算/时刻不可知\", 并给出与加密级联负结论的边界条件(约束公开+慢变量 ⇒ 可预测)。任务卡原列候选 \"Griffin & Shiller 2013 JFE forced selling\" 未检索到, 已如实登记替换。",
+      "observed_at": "2026-11-01T10:40:09Z"
     }
   ],
   "successful_provider_ids": [
@@ -166,22 +161,27 @@
     "④ 收敛速度量级 (conf 0.45): Farmer\"年—十年\" vs Scholl\"长期非有效\" vs McLean-Pontiff 几年内 -58%, 差 1-2 个数量级。",
     "⑤ 钉住效应 (conf 0.50): Ni et al. ≥16.5bps 显著 vs 独立研究质疑杠杆 ETF 再平衡→波动为 spurious; Cheng-Madhavan 的 16.8% 未直核原文。",
     "⑥ 级联前兆 (conf 0.45): Part I \"有稳健总体级前兆\" vs Part II \"severity 无法被任何标量前态量分级\" → 判读为并存(总体可测/单事件不可测), 操作口径取后者。",
-    "⑦ 独立性陷阱与补齐: A1/A3 同属 Farmer 团队(算 1 线), 补入 A7 Challet-Marsili-Zhang & Bouchaud-Potters 统计物理线后达 5/5 独立团队线; D 的两篇 2026 预印本同作者 Part I/II(算 1 线), 补入 D8 Shive-Yun (JFE 2013) + Coval-Stafford (JFE 2007) + Dyakov-Verbeek (JBF 2013) 已发表机构 forced selling 实证线后达 3/3 独立团队线。"
+    "⑦ 独立性陷阱: A1/A3 同属 Farmer 团队; D 的两篇 2026 论文同作者 Part I/II → 均已降权为单条证据线, 已在 A.md/D.md 显式标注。",
+    "⑧ 被迫流动可预测性 (conf 0.50, 新增): Coval-Stafford 权益样本\"flow-driven 交易可预测 + 折价 4%\" vs 加密永续\"级联时点不可预测\" → 判为被迫方约束是否公开可观测(13F/赎回 vs 不透明杠杆)所致, 非矛盾, 但禁止跨市场迁移结论。",
+    "⑨ 被迫流动时间尺度 (conf 0.50, 新增): 权益 fire sale 压力回复近 2 年 vs 加密级联 88% 强制卖出在 onset 后 30 分钟内 → 差 4-5 个数量级, 判为清算机制/披露频率差异。"
   ],
   "subdomain_gate": {
     "A": {
       "independent_teams": [
-        "Farmer (A1/A3 合并计 1 线)",
+        "Farmer",
         "Brock/Hommes",
         "Takayasu 组",
         "Pareschi/Toscani",
-        "Challet/Marsili/Zhang & Bouchaud/Potters 组",
-        "Jafree/Firoozye (ABM-LOB)"
+        "Jafree/Firoozye",
+        "Bouchaud/CFM (Tóth 等 2011)"
       ],
       "independent_lines": 5,
       "models_listed": 7,
       "gate": "pass",
-      "min_required": 5
+      "min_required": 5,
+      "gate_delta": "4/5 → 5/5",
+      "counting_rule": "独立线 = \"结论直接支撑 A-C1 且至少一个可核验 DOI/机构页\" 的不同作者团队数; A1/A3 同属 Farmer 组算 1 线; A5 (Pareschi/Toscani) 只支撑财富分布形状、不支撑 A-C1, 仍不计入 (保守口径, 不虚增)。",
+      "evidence_added": "A7 · Tóth, Lempérière, Deremble, de Lataillade, Kockelkoren & Bouchaud (2011) PRX 1:021006 · https://arxiv.org/abs/1105.1694 · 发表 2011-11 (arXiv v1 2009-01)"
     },
     "B": {
       "independent_teams": [
@@ -216,17 +216,53 @@
     "D": {
       "independent_teams": [
         "Garcia Seuma (2 篇=1 线)",
-        "Perez/Werner/Xu/Livshits + Ni/Pearson/Poteshman + Cheng/Madhavan",
-        "Shive/Yun (JFE 2013) + Coval/Stafford (JFE 2007) + Dyakov/Verbeek (JBF 2013)"
+        "Perez/Werner/Xu/Livshits",
+        "Ni/Pearson/Poteshman",
+        "Cheng/Madhavan",
+        "Coval/Stafford",
+        "F10-R2 内部预注册回测"
       ],
       "independent_lines": 3,
       "table_rows": 8,
       "gate": "pass",
-      "min_required": 3
+      "min_required": 3,
+      "gate_delta": "2/3 → 3/3",
+      "counting_rule": "独立线 = \"结论直接支撑 D-C1 且至少一个可核验 DOI/出版方页\" 的不同作者团队数; 同作者 Part I/II 算 1 线; Ni-Pearson-Poteshman (仅支撑日历型第 2 行) 与 Cheng-Madhavan (二手转述未直核) 不计入线数。",
+      "evidence_added": "D8 · Coval & Stafford (2007) JFE 86(2):479-512 · https://ideas.repec.org/a/eee/jfinec/v86y2007i2p479-512.html · 发表 2007-11"
     }
   },
   "date_anchor_conflicts": [
     "D 行 4/6 引用的两篇加密永续级联论文为 2026-07 与 2026-08 预印本, 与本会话日期(2026-11-01)相容; 但二者为同一作者的 Part I/II, 且 2608.03616 的第三方机器评审(pith.science)指出其需分钟级估计与\"主动 vs backstop 吸收\"渠道分离 → 结论按 conf 0.55-0.60 处理, 未升级为定论。"
   ],
-  "commit_note": "commit_sha = 落盘 A.md / D.md / receipts.json 门禁修复提交; 紧随其后的提交回填该 sha (自引用不可解, 故 commit_sha 指向内容提交, HEAD 为其子提交)"
+  "commit_note": "commit_sha = 落盘 A.md(§2 新增 A7)/D.md(§2 新增行 8 + D8)/gate-fix-taskcard.md/本 receipts.json 的内容提交 (3e5ebc8, parent=3abace8); 本文件的最终 sha 在紧随其后的回填提交中写入 (自引用不可解 → HEAD 为内容提交的子提交)",
+  "gate_fix": {
+    "completed_at": "2026-11-01T23:59:00+08:00",
+    "session": "01a196b0-18dc-7887-b06a-a11ba2a3b9db",
+    "branch": "arena/a2a3b9db-hermes-workspace-zero",
+    "pr": "https://github.com/dd2003-460/hermes-workspace-zero/pull/2",
+    "merged_to_main": "46b3ebe8",
+    "subdomain_gate_final": {
+      "A": {
+        "independent_lines": 5,
+        "min_required": 5,
+        "gate": "pass"
+      },
+      "B": {
+        "independent_lines": 7,
+        "min_required": 3,
+        "gate": "pass"
+      },
+      "C": {
+        "independent_lines": 4,
+        "min_required": 3,
+        "gate": "pass"
+      },
+      "D": {
+        "independent_lines": 3,
+        "min_required": 3,
+        "gate": "pass"
+      }
+    },
+    "candidate_substitutions_note": "A域 Challet&Bouchaud 无联合署名→换 CFM/Bouchaud PRX 2011; D域 Griffin&Shiller 2013 JFE 不存在→换 Coval&Stafford 2007 JFE"
+  }
 }

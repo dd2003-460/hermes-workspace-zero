@@ -3416,3 +3416,11 @@ F10 CLOSED (negative + mechanism finding): R1/R2 按预注册参数全部 FAIL (
 - loop-artifacts/stages/05/r6/f10-r2-preregistration.md (FROZEN v1)
 - loop-artifacts/stages/05/r6/data/{manifest.json,r1_results.json,r2_results.json,trades_r1.parquet(498行),trades_r2.parquet(224行)}
 - loop-artifacts/stages/05/r6/backtest.log
+
+## 2026-11-01 ~21:xx +0800 — F10-R3 调研任务书落盘 (arena/f10-gas-dynamics-research)
+
+F10 R1/R2 FAIL 后转向"预测新套利空间涌现"正面问题。成璐气体动理论设想 → 拆 4 个正交子领域
+(A 异质主体微观结构 / B 套利收敛速度 / C 策略拥挤自我瓦解 / D 被迫流动预测)，
+各派 1 subagent，交叉验证门禁 ≥2 独立来源。
+产出目标: stages/05/r6/research/{A,B,C,D}.md + receipts.json。
+分支 arena/f10-gas-dynamics-research 已推送 origin，状态 PENDING 待 arena agent mode 执行。

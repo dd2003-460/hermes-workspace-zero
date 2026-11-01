@@ -1,0 +1,8 @@
+{
+  "project_id": "bh-mass-spectrum",
+  "iteration": 2,
+  "loop_phase": "active",
+  "status": "active",
+  "current_task": "P1-5 PISN 间隙正式图完成 (fig4: none/S15/S17 BHMF + GWTC-4.0 观测间隙带叠加) @ ae2c4008; GWTC-4.0 观测数字表落盘 literature/notes/。下一步候选：任务 A (P0-1/P0-2 多红移 BHMF+占据率, 数据现成可跑) 或 任务 D 产出确认 (管线重审 note 是否已交付)。卡人项：任务 C 取消与否待成璐确认 (memory/task-c-status-correction.md)。",
+  "updated_at": "2026-11-02T06:25:00+08:00"
+}

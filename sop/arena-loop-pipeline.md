@@ -53,6 +53,7 @@
 | 仓库 | 当前 arena 会话 | 备注 |
 |------|----------------|------|
 | prompt-first-bench | `arena.ai/agent/01a185f5-522b-72b2-a713-200878602cd5`（taskSpace: arena-deepresearch-bench-20261029） | rubric-v3/deepresearch 系列；历史混有 market-alpha T3 消息，派发时显式声明只涉及 pfb |
+| prompt-first-bench（rejudge-g1b judge 外包） | `arena.ai/agent/01a195cb-50ba-7cfa-9bcd-cdf74a614e63`（taskSpace: pfb-rejudge-g1b-20261101） | 2026-11-01：75 cell 盲判 b1-b7 + 分歧复核 recheck 完成，读分支 ralph/rv3g1-semantic-rejudge；输入框是 tiptap ProseMirror（fill 无效，用 execCommand insertText），每批 ≤15 cell，review panel 不关则输入框不可达 |
 | prompt-first-bench（消融实验产出） | 同上会话 | 2026-10-29：O3 权重消融完成，commit d5c8a51 @ arena/78602cd5-prompt-first-bench，已 merge 回 rubric-v3 分支并 push |
 | —（本地 stop_hook 改造） | — | 2026-10-29 r88-r90：stop_hook 对齐 ralph-loop 停止门——每回合过门+无活也 continue 找新目标，真停仅 HALT/用户喊停。stage-gate commits 600045a→061ec62→60ce4b4 |
 | —（R5.4 终态效度） | — | 2026-10-29：run4 oracle 独立复验 PASS（sha256 一致 + 4/4 EXIT=0），terminal-validity.md 落盘，workspace commit 20f7713c。R5 剩余：R5.1 第二打分器（ego ChatGPT，需登录态）→ R5.2b run5 arena → R5.5 bench.md r5 |

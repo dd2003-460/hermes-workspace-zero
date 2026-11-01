@@ -50,7 +50,7 @@ fi
           end
         ' "$state_file" 2>/dev/null)
         task="${task//$'\n'/ }"
-        task=$(echo "$task" | head -c 120)
+        task=$(printf '%s' "$task" | python3 -c "import sys; print(sys.stdin.read()[:120])" 2>/dev/null || printf '%s' "$task" | cut -c1-120)
         blocker=$(jq -r '.blocker // (.queue.blocked_human[0].message // "null")' "$state_file" 2>/dev/null)
 
         # Relative path from projects/
@@ -71,3 +71,9 @@ fi
 } > "$OUTPUT_FILE"
 
 echo "Generated $OUTPUT_FILE with $(echo "$STATE_FILES" | wc -l | tr -d ' ') projects"
+
+# 追加新目标候选索引（成璐 2026-11-02：find-goal 不新建项目，从此表选）
+if [ -f "projects/ACTIVE-candidates.md" ]; then
+  echo "" >> "$OUTPUT_FILE"
+  cat "projects/ACTIVE-candidates.md" >> "$OUTPUT_FILE"
+fi

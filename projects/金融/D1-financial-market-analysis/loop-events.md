@@ -3448,3 +3448,13 @@ Agent 产出 A/B/C/D.md (77/80/77/50 行) + receipts.json @ 8479fb50 (agent 工�
 receipts 自报降级 level 4 (沙箱无 web-llm 登录会话, 改用 ≥2 不同域名+≥2 作者团队直核, successful_provider_ids 记录的是主机类型非 LLM 站点 ID)。
 **待办**: 用户人工登录 web-llm (Perplexity/ChatGPT) 后补跑 check → re-apply advance。
 已 merge 进 arena/f10-gas-dynamics-research @ 11f78192 并 push。
+
+## 2026-11-01 ~18:45 +0800 (UTC 10:45) — F10-R3 门禁缺口修复 (A 4/5→5/5, D 2/3→3/3)
+
+按门禁修复任务卡 `stages/05/r6/research/gate-fix-taskcard.md` 补齐两域独立线缺口 (内容提交 `3e5ebc8`, parent `3abace8`)。
+- **A 域 +A7**: Tóth/Lempérière/Deremble/de Lataillade/Kockelkoren/**Bouchaud** (2011) *Anomalous price impact and the critical nature of liquidity*, **Phys. Rev. X 1:021006** — 团队 Bouchaud/CFM，与 Farmer / Brock-Hommes / Takayasu / Pareschi-Toscani / Jafree-Firoozye 无共同作者；结论=潜在流动性 V 形消失 ⇒ √Q 冲击律 + 订单流长记忆，只给形状不给单事件点位/时长。**A = 5/5 pass**。
+- **D 域 +行8/D8**: **Coval & Stafford (2007)** *Asset fire sales (and purchases) in equity markets*, **JFE 86(2):479-512** — 团队 Coval(HBS)/Stafford(MIT Sloan)，与 Garcia Seuma Part I/II、Perez 等、Ni-Pearson-Poteshman 无共同作者；结论=flow-driven 被迫交易的**规模/方向可事前估**（3 个月折价约 4%，压力回复近 2 年）但**触发时刻不可知**；与加密级联负结论并存，边界条件=被迫方约束是否公开可观测。**D = 3/3 pass**。
+- **候选替换 (两处任务卡候选均检索不到, 如实登记, 未虚构)**: ① "Challet & Bouchaud (trader ecology)" 无联合署名文献（Challet 的订单簿 ABM 合作者是 Stinchcombe）→ 改用可双路核验的 CFM/Bouchaud 组 PRX；② "Griffin & Shiller (2013, JFE, forced selling)" 不存在该文献 → 改用同方向已发表的 Coval & Stafford (2007)。
+- 计数口径写入 `receipts.json` → `subdomain_gate.{A,D}.counting_rule`（保守：A5 动理学 / Ni-Pearson-Poteshman / Cheng-Madhavan 仍**不计入**线数）；新增矛盾⑧（可预测性边界）⑨（时间尺度差 4-5 个数量级）。行数约束 A=80 / D=61（≤80 ✓）。
+- 核验通道: arXiv 摘要页 + PRX DOI / RePEc-IDEAS 摘要页 + NBER 页，各 claim ≥2 个不同域名（沙箱出网仍限 github/npm/pypi，同前 level 4 降级）。
+- 落点: session 分支 `arena/a2a3b9db-hermes-workspace-zero`（本会话绑定分支，未切 `arena/f10-r3-gate-fix`）→ 需 Lead 侧 cherry-pick 或 PR 到 `arena/f10-r3-gate-fix`。

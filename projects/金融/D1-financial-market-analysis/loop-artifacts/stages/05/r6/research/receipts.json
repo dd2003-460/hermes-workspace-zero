@@ -11,7 +11,7 @@
   },
   "repo": "https://github.com/dd2003-460/hermes-workspace-zero",
   "branch": "arena/f10-gas-dynamics-research",
-  "commit_sha": null,
+  "commit_sha": "3e5ebc895972de6a70b007499f2ec6bfd65adaf0",
   "observed_at": "2026-11-01T09:17:36Z",
   "timezone": "UTC",
   "transport": "arena agent mode — web_search + fetch_page 直取出版方/机构页面; 本 runtime 无 ego-browser 登录会话",
@@ -234,7 +234,7 @@
   "date_anchor_conflicts": [
     "D 行 4/6 引用的两篇加密永续级联论文为 2026-07 与 2026-08 预印本, 与本会话日期(2026-11-01)相容; 但二者为同一作者的 Part I/II, 且 2608.03616 的第三方机器评审(pith.science)指出其需分钟级估计与\"主动 vs backstop 吸收\"渠道分离 → 结论按 conf 0.55-0.60 处理, 未升级为定论。"
   ],
-  "commit_note": "commit_sha = 落盘 A.md(§2 新增 A7)/D.md(§2 新增 D8)/本 receipts.json 的提交; 该提交之后另有一个回填提交写入真实 sha (自引用不可解 → HEAD 为内容提交的子提交)",
+  "commit_note": "commit_sha = 落盘 A.md(§2 新增 A7)/D.md(§2 新增行 8 + D8)/gate-fix-taskcard.md/本 receipts.json 的内容提交 (3e5ebc8, parent=3abace8); 本文件的最终 sha 在紧随其后的回填提交中写入 (自引用不可解 → HEAD 为内容提交的子提交)",
   "gate_fix": {
     "taskcard": "projects/金融/D1-financial-market-analysis/loop-artifacts/stages/05/r6/research/gate-fix-taskcard.md",
     "taskcard_branch": "arena/f10-r3-gate-fix",
@@ -244,6 +244,7 @@
       "A: 任务卡候选 \"Challet & Bouchaud trader ecology\" 未检索到联合署名文献 → 改用 Tóth et al. (2011) PRX (Bouchaud/CFM 组), 双路可核验",
       "D: 任务卡候选 \"Griffin & Shiller (2013, JFE, forced selling)\" 未检索到该文献 → 改用 Coval & Stafford (2007) JFE, 已发表非预印本, 摘要直核"
     ],
-    "verification": "每条新证据均经 arXiv 摘要页 / RePEc-IDEAS 摘要页 / NBER 页直核, 各带 ≥2 个不同域名 source_refs; 未使用二手转述作为唯一来源"
+    "verification": "每条新证据均经 arXiv 摘要页 / RePEc-IDEAS 摘要页 / NBER 页直核, 各带 ≥2 个不同域名 source_refs; 未使用二手转述作为唯一来源",
+    "content_commit_sha": "3e5ebc895972de6a70b007499f2ec6bfd65adaf0"
   }
 }

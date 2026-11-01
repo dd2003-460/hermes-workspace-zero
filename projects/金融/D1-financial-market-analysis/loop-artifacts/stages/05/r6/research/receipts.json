@@ -236,15 +236,33 @@
   ],
   "commit_note": "commit_sha = 落盘 A.md(§2 新增 A7)/D.md(§2 新增行 8 + D8)/gate-fix-taskcard.md/本 receipts.json 的内容提交 (3e5ebc8, parent=3abace8); 本文件的最终 sha 在紧随其后的回填提交中写入 (自引用不可解 → HEAD 为内容提交的子提交)",
   "gate_fix": {
-    "taskcard": "projects/金融/D1-financial-market-analysis/loop-artifacts/stages/05/r6/research/gate-fix-taskcard.md",
-    "taskcard_branch": "arena/f10-r3-gate-fix",
-    "executed_at": "2026-11-01T10:40:09Z",
-    "scope": "A 域 4/5→5/5, D 域 2/3→3/3",
-    "candidate_substitutions": [
-      "A: 任务卡候选 \"Challet & Bouchaud trader ecology\" 未检索到联合署名文献 → 改用 Tóth et al. (2011) PRX (Bouchaud/CFM 组), 双路可核验",
-      "D: 任务卡候选 \"Griffin & Shiller (2013, JFE, forced selling)\" 未检索到该文献 → 改用 Coval & Stafford (2007) JFE, 已发表非预印本, 摘要直核"
-    ],
-    "verification": "每条新证据均经 arXiv 摘要页 / RePEc-IDEAS 摘要页 / NBER 页直核, 各带 ≥2 个不同域名 source_refs; 未使用二手转述作为唯一来源",
-    "content_commit_sha": "3e5ebc895972de6a70b007499f2ec6bfd65adaf0"
+    "completed_at": "2026-11-01T23:59:00+08:00",
+    "session": "01a196b0-18dc-7887-b06a-a11ba2a3b9db",
+    "branch": "arena/a2a3b9db-hermes-workspace-zero",
+    "pr": "https://github.com/dd2003-460/hermes-workspace-zero/pull/2",
+    "merged_to_main": "46b3ebe8",
+    "subdomain_gate_final": {
+      "A": {
+        "independent_lines": 5,
+        "min_required": 5,
+        "gate": "pass"
+      },
+      "B": {
+        "independent_lines": 7,
+        "min_required": 3,
+        "gate": "pass"
+      },
+      "C": {
+        "independent_lines": 4,
+        "min_required": 3,
+        "gate": "pass"
+      },
+      "D": {
+        "independent_lines": 3,
+        "min_required": 3,
+        "gate": "pass"
+      }
+    },
+    "candidate_substitutions_note": "A域 Challet&Bouchaud 无联合署名→换 CFM/Bouchaud PRX 2011; D域 Griffin&Shiller 2013 JFE 不存在→换 Coval&Stafford 2007 JFE"
   }
 }

@@ -13,7 +13,7 @@
   "repo": "https://github.com/dd2003-460/hermes-workspace-zero",
   "branch": "arena/f10-r3-gate-fix",
   "session_branch": "arena/25201d65-hermes-workspace-zero",
-  "commit_sha": "PENDING_BACKFILL",
+  "commit_sha": "49aa6057058d2501e956f9c07cc6c2ebfdb05334",
   "observed_at": "2026-11-01T10:40:00Z",
   "timezone": "UTC",
   "transport": "arena agent mode — web_search + fetch_page 直取出版方/机构页面; 本 runtime 无 ego-browser 登录会话",

@@ -98,3 +98,20 @@
 - [ ] 确认 arxiv-submission-metadata.md 内容完整
 - [ ] 通过 arxiv.org/submission 提交至 gr-qc 分类（上传 v4 tarball）
 - [ ] 后续根据审稿反馈迭代修改
+
+## GW-BacQFT Taste Fix (2026-11-02)
+
+Arena taste review 发现 3 个致命问题，已全部修复：
+
+| 阶段 | 问题 | 修复 | Commit |
+|------|------|------|--------|
+| s1-refs | M1: 7 个幻觉文献（arXiv ID 指向错误论文） | 全部清除，替换为已验证 arXiv 论文 | ff7d2974 |
+| s2-math | T2: Thm 3.1 P-scaling 方向反了（P^-1/2→0）; T3: SNR 不一致（140 vs O(1-3)） | d_TV ∝ √P·\|Δσ²\|; 结论解释 systematics 降额 | d39d68e8 |
+| s3-taste | T1: 3 段 AI 元叙事; T4: 格式清理 | 删除元叙事段落, 清理 ToC/License/Keywords | c7567c2d |
+
+**剩余未修**（非致命，后续迭代）：
+- M2: 框架脱节 — 前半建 extended TQFT+Lurie+Tomita-Takesaki，后半证明退化为经典平面波积分+Poisson 计数。需要统一方法论或明确声明"形式化包装+经典核心"的定位。
+- M3: 缺 Allen (2023) cosmic variance decomposition (arXiv:2205.05637) — PTA anisotropy error budget 的基础引用。
+- 宇宙方差 + worldline smearing 引入（~2 天工作量）。
+
+**当前状态**: 13pp PDF 编译通过，18 bibitems 全部已验证。可提交 arXiv（M2/M3 作为 future work 标注）。

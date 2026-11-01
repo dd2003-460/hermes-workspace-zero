@@ -3440,3 +3440,11 @@ A 6 个模型 / B 7 篇实证 + 跨市场收敛量级表 / C 4 个可操作拥�
 按 SKILL 降级阶梯第 4 级 → 改 arXiv 摘要 + 出版方/机构页直核，每 claim 两个不同域名；`receipts.json` 的 `degradation` 字段已如实记录。
 关键负结论: D 类"级联时点不可事前预测"由 2 条独立线支持（Garcia Seuma 2026 系列 + Perez 2021 链上清算）；C 类 ΔOI 作拥挤度代理被双重否定。
 落点: session 分支 `arena/bbea6ca3-hermes-workspace-zero`（父提交 1d64bae）→ PR #1 已开, base=`arena/f10-gas-dynamics-research`, mergeable, 待 Lead 合并。
+
+## 2026-11-01 ~23:xx +0800 — F10-R3 arena 完成核验通过, merge 回任务分支
+
+Agent 产出 A/B/C/D.md (77/80/77/50 行) + receipts.json @ 8479fb50 (agent 工作分支 arena/bbea6ca3-hermes-workspace-zero)。
+核验: 文件存在 ✓; 行数 ≤80 ✓; subdomain_gate A/B/C pass, D 名义 pass 但独立线=2 (Garcia Seuma Part I/II 同人只算一线);
+receipts 自报降级 level 4 (沙箱无 web-llm 登录会话, 改用 ≥2 不同域名+≥2 作者团队直核, successful_provider_ids 记录的是主机类型非 LLM 站点 ID)。
+**待办**: 用户人工登录 web-llm (Perplexity/ChatGPT) 后补跑 check → re-apply advance。
+已 merge 进 arena/f10-gas-dynamics-research @ 11f78192 并 push。

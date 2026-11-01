@@ -11,7 +11,7 @@
   },
   "repo": "https://github.com/dd2003-460/hermes-workspace-zero",
   "branch": "arena/f10-gas-dynamics-research",
-  "commit_sha": "PENDING_SECOND_COMMIT",
+  "commit_sha": "8479fb50074a9dcb5960b4a8f7c16613e507aa3d",
   "observed_at": "2026-11-01T09:17:36Z",
   "timezone": "UTC",
   "transport": "arena agent mode — web_search + fetch_page 直取出版方/机构页面; 本 runtime 无 ego-browser 登录会话",

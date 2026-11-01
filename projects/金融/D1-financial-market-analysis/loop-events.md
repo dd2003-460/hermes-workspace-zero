@@ -3430,3 +3430,13 @@ F10 R1/R2 FAIL 后转向"预测新套利空间涌现"正面问题。成璐气体
 新会话 (arena.ai/agent, hermes-workspace-zero 首次绑定) → 选仓库 dd2003-460/hermes-workspace-zero →
 分支 arena/f10-gas-dynamics-research。门禁 5/5 通过 (台账待登记/远端 sha 32676048/绑定已验/prompt 带仓库声明/任务书含回执指纹)。
 消息已发送，running indicator = true。轮询中。
+
+## 2026-11-01 ~17:2x +0800 (UTC 09:2x) — F10-R3 arena 执行完成 (worker 侧)
+
+4 个子领域全部落盘 `stages/05/r6/research/{A,B,C,D}.md` + `receipts.json`（每个 md ≤80 行，四段结构）。
+A 6 个模型 / B 7 篇实证 + 跨市场收敛量级表 / C 4 个可操作拥挤度指标 / D 7 行被迫流动分类表。
+门禁: 每子领域 ≥2 独立团队; 7 处矛盾点显式标 conf（含"两篇级联论文同作者，只算一条线"这类独立性陷阱）。
+交叉验证降级: 本 runtime 无 ego-browser 会话、无 LLM 站点可登录（沙箱出网仅 github/npm/pypi），
+按 SKILL 降级阶梯第 4 级 → 改 arXiv 摘要 + 出版方/机构页直核，每 claim 两个不同域名；`receipts.json` 的 `degradation` 字段已如实记录。
+关键负结论: D 类"级联时点不可事前预测"由 2 条独立线支持（Garcia Seuma 2026 系列 + Perez 2021 链上清算）；C 类 ΔOI 作拥挤度代理被双重否定。
+落点: session 分支 `arena/bbea6ca3-hermes-workspace-zero`（父提交 1d64bae）→ PR #1 已开, base=`arena/f10-gas-dynamics-research`, mergeable, 待 Lead 合并。

@@ -1,0 +1,16 @@
+== BTCUSDT ==
+  klines 1h: 35064 rows 2022-01-01 00:00:00 → 2025-12-31 23:00:00
+  R1: n_trig=166 n_trades=166 sharpe=-36.70054497271391 t=-10.104259697030729 PASS=False
+  R2: {"symbol": "BTCUSDT", "rule": "R2", "hold_hours": 24, "n_triggers_total": 554, "n_with_oi": 83, "n_no_oi_control": 0, "PASS": false, "pass_group": "main"}
+    [main] n=62 sharpe=-29.539740011034894 t=-4.97027542923638 win=0.12903225806451613
+== ETHUSDT ==
+  klines 1h: 35064 rows 2022-01-01 00:00:00 → 2025-12-31 23:00:00
+  R1: n_trig=166 n_trades=166 sharpe=-28.60547383562264 t=-7.87555434412873 PASS=False
+  R2: {"symbol": "ETHUSDT", "rule": "R2", "hold_hours": 24, "n_triggers_total": 518, "n_with_oi": 93, "n_no_oi_control": 0, "PASS": false, "pass_group": "main"}
+    [main] n=72 sharpe=-29.55603253670343 t=-5.359081068163213 win=0.1388888888888889
+== SOLUSDT ==
+  klines 1h: 34201 rows 2022-01-01 00:00:00 → 2025-12-31 23:00:00
+  R1: n_trig=166 n_trades=166 sharpe=-23.950806060122463 t=-6.594048250908005 PASS=False
+  R2: {"symbol": "SOLUSDT", "rule": "R2", "hold_hours": 24, "n_triggers_total": 507, "n_with_oi": 121, "n_no_oi_control": 0, "PASS": false, "pass_group": "main"}
+    [main] n=90 sharpe=-16.815984673456796 t=-3.408956819534289 win=0.16666666666666666
+results written to /Users/a1-6/Desktop/workspace/projects/金融/D1-financial-market-analysis/loop-artifacts/stages/05/r6/data

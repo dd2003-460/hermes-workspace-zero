@@ -1,0 +1,11 @@
+kline jobs: 144 (3 syms x 48 months)
+  kl progress 48/144
+  kl progress 96/144
+  kl progress 144/144
+[oi] BTCUSDT: 1461 rows, span=2022-01-01..2025-12-31
+[oi] ETHUSDT: 1461 rows, span=2022-01-01..2025-12-31
+[oi] SOLUSDT: 1461 rows, span=2022-01-01..2025-12-31
+SUMMARY BTCUSDT: klines 48/48 ok; fails=[]
+SUMMARY ETHUSDT: klines 48/48 ok; fails=[]
+SUMMARY SOLUSDT: klines 48/48 ok; fails=[]
+manifest written: /Users/a1-6/Desktop/workspace/projects/金融/D1-financial-market-analysis/loop-artifacts/stages/05/r6/data/manifest.json

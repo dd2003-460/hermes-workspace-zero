@@ -21,6 +21,8 @@
 | F6 | 05 跨市场验证 (ETH/SOL) | ✅ 完成 (负结果) | P1 | F5 | `stages/05/r2/f6-crossmarket-report.md`: ETH FAIL / SOL FAIL, 单信号三市场闭合; SOL bull×T1×2021 t=3.17 post-hoc 观察不升级 |
 | F7 | 多信号组合 (资金费率 + 基差) | ✅ 完成 (负结果) | P2 | F6 | `stages/05/r3/f7-report.md`: BTC/ETH/SOL 全 FAIL (P3), ρ(funding,basis)=−0.30~−0.39 信息冗余 → P2 "无增量" 分支; SOL bull×T1×B10×2021 t=3.27 post-hoc 不升级 |
 | F8 | 策略层 (仓位管理 + 执行) | ⏳ 待办 | P2 | F6,F7 | 仅在 F6/F7 有显著信号后启动 |
+| F9 | 跨所/跨币资金费率套利 | ✅ 完成 (条件性正) | P1 | F7 | `stages/05/r5/f9_report.md`: 跨所 FAIL; 同所跨币 2020-21 有效但 2022 后 p95 收敛到 <maker 成本 — "正在关闭的窗口" |
+| F10 | 主体博弈模型: 预测新兴套利空间 (R1 DVOL 真空 / R2 funding+OI 级联) | ✅ 完成 (负结果+机制发现) | P1 | F9 | `stages/05/r6/f10_report.md`: R1/R2 预注册回测全 FAIL; 机制修正: 结构冲击后是**动量延续**非超调回归 (翻转方向胜率 70-87%, post-hoc 不升级); H3 半成立 (事件时点可预测, 方向判断错) |
 
 ## 阻塞
 

@@ -3378,3 +3378,41 @@ RALPH_EVENT -->
 - 唯一残留价值: 高 DVOL → 后续波动 1.45x (风险管理提示, 非 alpha), 且跨期不稳定 (2022 反号)
 - 路线收束: 时间戳微观结构三腿 (F6 funding 0/135, F7 funding+basis 无增量, F8 DVOL 无效) 全部走不通
 - 下一步候选: C 宏观/跨资产 regime 增强 | D 项目收束整理 S1/F6/F7/F8 负结果研究原型报告
+
+## 2026-11-01 | f10_completed
+
+<!-- RALPH_EVENT
+{
+  "artifact_refs": [
+    "loop-artifacts/stages/05/r6/f10_report.md",
+    "loop-artifacts/stages/05/r6/f10-r1-preregistration.md",
+    "loop-artifacts/stages/05/r6/f10-r2-preregistration.md",
+    "loop-artifacts/stages/05/r6/data/r1_results.json",
+    "loop-artifacts/stages/05/r6/data/r2_results.json"
+  ],
+  "event_id": "f10-r6-negative-mechanism",
+  "observation": {
+    "stage": "05",
+    "revision": "r6",
+    "task": "F10 主体博弈模型 — R1 DVOL 流动性真空 + R2 funding+OI 被迫平仓级联, 预注册冻结后 walk-forward 回测 (BTC/ETH/SOL, 2022-01→2025-12, Binance 1h klines + Bybit 1d OI + Deribit DVOL)"
+  },
+  "timestamp": "2026-11-01T17:30:00+08:00",
+  "type": "task_completed"
+}
+RALPH_EVENT -->
+
+### Agent 输出摘录
+
+F10 CLOSED (negative + mechanism finding): R1/R2 按预注册参数全部 FAIL (R1 OOS Sharpe -23.6~-39.1, t=-6.1~-10.2; R2 Sharpe -16.8~-29.6)。机制发现 (post-hoc, 不升级): 结构冲击后价格行为是动量延续而非超调回归 — R1 触发后 60% 出现 >2σ 偏离 (事件时点可预测, H3 前半成立) 但方向顺动量, 翻转后胜率 70-87% 跨年度稳定; R2 止损率 80-84% (2×ATR 对 24h 持有期过窄) 且 gross 仍为负。验收标准 1/2 未达, 参数预注册合规。下一步候选 (均需独立预注册): 顺冲击动量 / 周级拥挤交易 / 事件日历型 / R3 维持 research_required。
+
+### 验证结果
+
+{"r1": "FAIL (OOS Sharpe/t 全负, binom p=1.0)", "r2": "FAIL (Sharpe/t 全负)", "preregistration": "PASS (回测前 FROZEN 落盘)", "pit": "PASS (DVOL 次日开盘入场 / funding 结算后 09:00 入场)"}
+
+### 文件和证据
+
+- loop-artifacts/stages/05/r6/f10_report.md
+- loop-artifacts/stages/05/r6/f10-r1-preregistration.md (FROZEN v2)
+- loop-artifacts/stages/05/r6/f10-r2-preregistration.md (FROZEN v1)
+- loop-artifacts/stages/05/r6/data/{manifest.json,r1_results.json,r2_results.json,trades_r1.parquet(498行),trades_r2.parquet(224行)}
+- loop-artifacts/stages/05/r6/backtest.log

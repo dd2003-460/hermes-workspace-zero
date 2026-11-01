@@ -1,0 +1,745 @@
+{
+  "klines": {
+    "BTCUSDT": [
+      {
+        "ym": "2023-05",
+        "status": "cached",
+        "bytes": 38198
+      },
+      {
+        "ym": "2023-03",
+        "status": "cached",
+        "bytes": 38700
+      },
+      {
+        "ym": "2022-02",
+        "status": "cached",
+        "bytes": 35964
+      },
+      {
+        "ym": "2022-07",
+        "status": "cached",
+        "bytes": 38784
+      },
+      {
+        "ym": "2022-01",
+        "status": "cached",
+        "bytes": 39953
+      },
+      {
+        "ym": "2022-03",
+        "status": "cached",
+        "bytes": 39024
+      },
+      {
+        "ym": "2023-06",
+        "status": "cached",
+        "bytes": 37120
+      },
+      {
+        "ym": "2022-06",
+        "status": "cached",
+        "bytes": 37922
+      },
+      {
+        "ym": "2022-11",
+        "status": "cached",
+        "bytes": 36889
+      },
+      {
+        "ym": "2022-10",
+        "status": "cached",
+        "bytes": 37838
+      },
+      {
+        "ym": "2022-09",
+        "status": "cached",
+        "bytes": 37283
+      },
+      {
+        "ym": "2022-04",
+        "status": "cached",
+        "bytes": 37478
+      },
+      {
+        "ym": "2022-12",
+        "status": "cached",
+        "bytes": 36820
+      },
+      {
+        "ym": "2022-05",
+        "status": "cached",
+        "bytes": 39107
+      },
+      {
+        "ym": "2023-01",
+        "status": "cached",
+        "bytes": 37766
+      },
+      {
+        "ym": "2023-04",
+        "status": "cached",
+        "bytes": 37139
+      },
+      {
+        "ym": "2023-02",
+        "status": "cached",
+        "bytes": 34682
+      },
+      {
+        "ym": "2024-01",
+        "status": "cached",
+        "bytes": 38890
+      },
+      {
+        "ym": "2022-08",
+        "status": "cached",
+        "bytes": 38388
+      },
+      {
+        "ym": "2023-11",
+        "status": "cached",
+        "bytes": 36685
+      },
+      {
+        "ym": "2023-10",
+        "status": "cached",
+        "bytes": 37679
+      },
+      {
+        "ym": "2024-02",
+        "status": "cached",
+        "bytes": 36374
+      },
+      {
+        "ym": "2024-06",
+        "status": "cached",
+        "bytes": 36794
+      },
+      {
+        "ym": "2023-12",
+        "status": "cached",
+        "bytes": 38475
+      },
+      {
+        "ym": "2024-07",
+        "status": "cached",
+        "bytes": 38700
+      },
+      {
+        "ym": "2024-09",
+        "status": "cached",
+        "bytes": 37266
+      },
+      {
+        "ym": "2024-10",
+        "status": "cached",
+        "bytes": 38285
+      },
+      {
+        "ym": "2024-11",
+        "status": "cached",
+        "bytes": 37741
+      },
+      {
+        "ym": "2024-12",
+        "status": "cached",
+        "bytes": 38950
+      },
+      {
+        "ym": "2025-01",
+        "status": "cached",
+        "bytes": 38915
+      },
+      {
+        "ym": "2025-02",
+        "status": "cached",
+        "bytes": 34861
+      },
+      {
+        "ym": "2024-05",
+        "status": "cached",
+        "bytes": 38427
+      },
+      {
+        "ym": "2023-07",
+        "status": "cached",
+        "bytes": 37558
+      },
+      {
+        "ym": "2023-09",
+        "status": "cached",
+        "bytes": 35974
+      },
+      {
+        "ym": "2025-06",
+        "status": "cached",
+        "bytes": 37374
+      },
+      {
+        "ym": "2025-04",
+        "status": "cached",
+        "bytes": 37389
+      },
+      {
+        "ym": "2024-03",
+        "status": "cached",
+        "bytes": 39301
+      },
+      {
+        "ym": "2025-09",
+        "status": "cached",
+        "bytes": 37022
+      },
+      {
+        "ym": "2023-08",
+        "status": "cached",
+        "bytes": 37282
+      },
+      {
+        "ym": "2025-11",
+        "status": "cached",
+        "bytes": 37564
+      },
+      {
+        "ym": "2025-10",
+        "status": "cached",
+        "bytes": 38885
+      },
+      {
+        "ym": "2025-05",
+        "status": "cached",
+        "bytes": 38805
+      },
+      {
+        "ym": "2024-04",
+        "status": "cached",
+        "bytes": 37804
+      },
+      {
+        "ym": "2025-03",
+        "status": "cached",
+        "bytes": 38723
+      },
+      {
+        "ym": "2024-08",
+        "status": "cached",
+        "bytes": 38718
+      },
+      {
+        "ym": "2025-07",
+        "status": "cached",
+        "bytes": 38443
+      },
+      {
+        "ym": "2025-08",
+        "status": "cached",
+        "bytes": 38617
+      },
+      {
+        "ym": "2025-12",
+        "status": "cached",
+        "bytes": 38148
+      }
+    ],
+    "ETHUSDT": [
+      {
+        "ym": "2022-04",
+        "status": "cached",
+        "bytes": 37521
+      },
+      {
+        "ym": "2022-06",
+        "status": "cached",
+        "bytes": 38115
+      },
+      {
+        "ym": "2022-02",
+        "status": "cached",
+        "bytes": 35542
+      },
+      {
+        "ym": "2022-08",
+        "status": "cached",
+        "bytes": 39567
+      },
+      {
+        "ym": "2022-03",
+        "status": "cached",
+        "bytes": 38896
+      },
+      {
+        "ym": "2022-09",
+        "status": "cached",
+        "bytes": 38290
+      },
+      {
+        "ym": "2022-11",
+        "status": "cached",
+        "bytes": 37911
+      },
+      {
+        "ym": "2022-12",
+        "status": "cached",
+        "bytes": 38206
+      },
+      {
+        "ym": "2023-02",
+        "status": "cached",
+        "bytes": 35138
+      },
+      {
+        "ym": "2022-10",
+        "status": "cached",
+        "bytes": 38837
+      },
+      {
+        "ym": "2023-03",
+        "status": "cached",
+        "bytes": 38991
+      },
+      {
+        "ym": "2022-01",
+        "status": "cached",
+        "bytes": 39124
+      },
+      {
+        "ym": "2023-04",
+        "status": "cached",
+        "bytes": 37617
+      },
+      {
+        "ym": "2023-01",
+        "status": "cached",
+        "bytes": 38614
+      },
+      {
+        "ym": "2022-05",
+        "status": "cached",
+        "bytes": 39016
+      },
+      {
+        "ym": "2022-07",
+        "status": "cached",
+        "bytes": 39382
+      },
+      {
+        "ym": "2023-06",
+        "status": "cached",
+        "bytes": 37299
+      },
+      {
+        "ym": "2023-07",
+        "status": "cached",
+        "bytes": 37939
+      },
+      {
+        "ym": "2024-02",
+        "status": "cached",
+        "bytes": 36577
+      },
+      {
+        "ym": "2023-05",
+        "status": "cached",
+        "bytes": 38504
+      },
+      {
+        "ym": "2023-11",
+        "status": "cached",
+        "bytes": 37387
+      },
+      {
+        "ym": "2023-12",
+        "status": "cached",
+        "bytes": 38764
+      },
+      {
+        "ym": "2024-01",
+        "status": "cached",
+        "bytes": 38917
+      },
+      {
+        "ym": "2024-07",
+        "status": "cached",
+        "bytes": 39099
+      },
+      {
+        "ym": "2024-03",
+        "status": "cached",
+        "bytes": 39568
+      },
+      {
+        "ym": "2024-09",
+        "status": "cached",
+        "bytes": 37665
+      },
+      {
+        "ym": "2024-05",
+        "status": "cached",
+        "bytes": 39214
+      },
+      {
+        "ym": "2024-10",
+        "status": "cached",
+        "bytes": 38803
+      },
+      {
+        "ym": "2023-10",
+        "status": "cached",
+        "bytes": 38084
+      },
+      {
+        "ym": "2025-01",
+        "status": "cached",
+        "bytes": 39367
+      },
+      {
+        "ym": "2024-08",
+        "status": "cached",
+        "bytes": 39125
+      },
+      {
+        "ym": "2024-12",
+        "status": "cached",
+        "bytes": 39614
+      },
+      {
+        "ym": "2024-06",
+        "status": "cached",
+        "bytes": 37466
+      },
+      {
+        "ym": "2025-05",
+        "status": "cached",
+        "bytes": 39704
+      },
+      {
+        "ym": "2023-09",
+        "status": "cached",
+        "bytes": 36218
+      },
+      {
+        "ym": "2025-02",
+        "status": "cached",
+        "bytes": 35832
+      },
+      {
+        "ym": "2024-04",
+        "status": "cached",
+        "bytes": 38134
+      },
+      {
+        "ym": "2025-09",
+        "status": "cached",
+        "bytes": 38299
+      },
+      {
+        "ym": "2023-08",
+        "status": "cached",
+        "bytes": 37647
+      },
+      {
+        "ym": "2025-06",
+        "status": "cached",
+        "bytes": 38255
+      },
+      {
+        "ym": "2025-12",
+        "status": "cached",
+        "bytes": 39357
+      },
+      {
+        "ym": "2024-11",
+        "status": "cached",
+        "bytes": 38440
+      },
+      {
+        "ym": "2025-10",
+        "status": "cached",
+        "bytes": 39876
+      },
+      {
+        "ym": "2025-03",
+        "status": "cached",
+        "bytes": 39488
+      },
+      {
+        "ym": "2025-07",
+        "status": "cached",
+        "bytes": 39827
+      },
+      {
+        "ym": "2025-11",
+        "status": "cached",
+        "bytes": 38603
+      },
+      {
+        "ym": "2025-04",
+        "status": "cached",
+        "bytes": 38095
+      },
+      {
+        "ym": "2025-08",
+        "status": "cached",
+        "bytes": 40225
+      }
+    ],
+    "SOLUSDT": [
+      {
+        "ym": "2022-02",
+        "status": "cached",
+        "bytes": 25915
+      },
+      {
+        "ym": "2022-03",
+        "status": "cached",
+        "bytes": 31327
+      },
+      {
+        "ym": "2022-04",
+        "status": "cached",
+        "bytes": 28601
+      },
+      {
+        "ym": "2022-06",
+        "status": "cached",
+        "bytes": 30869
+      },
+      {
+        "ym": "2022-05",
+        "status": "cached",
+        "bytes": 31712
+      },
+      {
+        "ym": "2022-08",
+        "status": "cached",
+        "bytes": 30967
+      },
+      {
+        "ym": "2022-11",
+        "status": "cached",
+        "bytes": 31881
+      },
+      {
+        "ym": "2022-10",
+        "status": "cached",
+        "bytes": 29913
+      },
+      {
+        "ym": "2022-01",
+        "status": "cached",
+        "bytes": 32432
+      },
+      {
+        "ym": "2023-02",
+        "status": "cached",
+        "bytes": 30128
+      },
+      {
+        "ym": "2022-12",
+        "status": "cached",
+        "bytes": 31660
+      },
+      {
+        "ym": "2023-04",
+        "status": "cached",
+        "bytes": 31579
+      },
+      {
+        "ym": "2023-01",
+        "status": "cached",
+        "bytes": 33659
+      },
+      {
+        "ym": "2023-06",
+        "status": "cached",
+        "bytes": 31775
+      },
+      {
+        "ym": "2023-07",
+        "status": "cached",
+        "bytes": 33478
+      },
+      {
+        "ym": "2023-03",
+        "status": "cached",
+        "bytes": 33039
+      },
+      {
+        "ym": "2022-07",
+        "status": "cached",
+        "bytes": 31308
+      },
+      {
+        "ym": "2023-10",
+        "status": "cached",
+        "bytes": 33522
+      },
+      {
+        "ym": "2023-11",
+        "status": "cached",
+        "bytes": 33524
+      },
+      {
+        "ym": "2023-12",
+        "status": "cached",
+        "bytes": 34912
+      },
+      {
+        "ym": "2023-09",
+        "status": "cached",
+        "bytes": 31342
+      },
+      {
+        "ym": "2022-09",
+        "status": "cached",
+        "bytes": 29608
+      },
+      {
+        "ym": "2023-08",
+        "status": "cached",
+        "bytes": 32603
+      },
+      {
+        "ym": "2024-01",
+        "status": "cached",
+        "bytes": 34837
+      },
+      {
+        "ym": "2024-06",
+        "status": "cached",
+        "bytes": 33318
+      },
+      {
+        "ym": "2024-07",
+        "status": "cached",
+        "bytes": 34792
+      },
+      {
+        "ym": "2024-03",
+        "status": "cached",
+        "bytes": 35540
+      },
+      {
+        "ym": "2023-05",
+        "status": "cached",
+        "bytes": 32149
+      },
+      {
+        "ym": "2024-05",
+        "status": "cached",
+        "bytes": 34908
+      },
+      {
+        "ym": "2024-04",
+        "status": "cached",
+        "bytes": 34176
+      },
+      {
+        "ym": "2025-02",
+        "status": "cached",
+        "bytes": 30836
+      },
+      {
+        "ym": "2024-11",
+        "status": "cached",
+        "bytes": 33016
+      },
+      {
+        "ym": "2024-10",
+        "status": "cached",
+        "bytes": 33909
+      },
+      {
+        "ym": "2025-01",
+        "status": "cached",
+        "bytes": 34133
+      },
+      {
+        "ym": "2024-09",
+        "status": "cached",
+        "bytes": 33345
+      },
+      {
+        "ym": "2024-02",
+        "status": "cached",
+        "bytes": 32441
+      },
+      {
+        "ym": "2025-08",
+        "status": "cached",
+        "bytes": 38009
+      },
+      {
+        "ym": "2025-09",
+        "status": "cached",
+        "bytes": 36707
+      },
+      {
+        "ym": "2025-10",
+        "status": "cached",
+        "bytes": 37859
+      },
+      {
+        "ym": "2025-04",
+        "status": "cached",
+        "bytes": 35055
+      },
+      {
+        "ym": "2025-03",
+        "status": "cached",
+        "bytes": 33026
+      },
+      {
+        "ym": "2024-12",
+        "status": "cached",
+        "bytes": 33906
+      },
+      {
+        "ym": "2025-12",
+        "status": "cached",
+        "bytes": 36683
+      },
+      {
+        "ym": "2025-05",
+        "status": "cached",
+        "bytes": 37400
+      },
+      {
+        "ym": "2025-06",
+        "status": "cached",
+        "bytes": 36082
+      },
+      {
+        "ym": "2024-08",
+        "status": "cached",
+        "bytes": 34981
+      },
+      {
+        "ym": "2025-11",
+        "status": "cached",
+        "bytes": 36358
+      },
+      {
+        "ym": "2025-07",
+        "status": "cached",
+        "bytes": 37422
+      }
+    ]
+  },
+  "oi": {
+    "BTCUSDT": {
+      "rows": 1461,
+      "span": "2022-01-01..2025-12-31"
+    },
+    "ETHUSDT": {
+      "rows": 1461,
+      "span": "2022-01-01..2025-12-31"
+    },
+    "SOLUSDT": {
+      "rows": 1461,
+      "span": "2022-01-01..2025-12-31"
+    }
+  },
+  "fetched_at": "2026-11-01T08:35:17Z"
+}

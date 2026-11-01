@@ -1,0 +1,65 @@
+{
+  "BTCUSDT": {
+    "symbol": "BTCUSDT",
+    "rule": "R2",
+    "hold_hours": 24,
+    "n_triggers_total": 554,
+    "n_with_oi": 83,
+    "n_no_oi_control": 0,
+    "main": {
+      "label": "funding+OI",
+      "n_trades": 62,
+      "sharpe": -29.539740011034894,
+      "t_stat": -4.97027542923638,
+      "n": 62,
+      "win_rate": 0.12903225806451613,
+      "binom_p": 1.0,
+      "avg_net_pct": -1.3998215137378858,
+      "total_net_pct": -86.78893385174892
+    },
+    "PASS": false,
+    "pass_group": "main"
+  },
+  "ETHUSDT": {
+    "symbol": "ETHUSDT",
+    "rule": "R2",
+    "hold_hours": 24,
+    "n_triggers_total": 518,
+    "n_with_oi": 93,
+    "n_no_oi_control": 0,
+    "main": {
+      "label": "funding+OI",
+      "n_trades": 72,
+      "sharpe": -29.55603253670343,
+      "t_stat": -5.359081068163213,
+      "n": 72,
+      "win_rate": 0.1388888888888889,
+      "binom_p": 1.0,
+      "avg_net_pct": -1.638598613969466,
+      "total_net_pct": -117.97910020580156
+    },
+    "PASS": false,
+    "pass_group": "main"
+  },
+  "SOLUSDT": {
+    "symbol": "SOLUSDT",
+    "rule": "R2",
+    "hold_hours": 24,
+    "n_triggers_total": 507,
+    "n_with_oi": 121,
+    "n_no_oi_control": 0,
+    "main": {
+      "label": "funding+OI",
+      "n_trades": 90,
+      "sharpe": -16.815984673456796,
+      "t_stat": -3.408956819534289,
+      "n": 90,
+      "win_rate": 0.16666666666666666,
+      "binom_p": 1.0,
+      "avg_net_pct": -1.7428403906197332,
+      "total_net_pct": -156.85563515577599
+    },
+    "PASS": false,
+    "pass_group": "main"
+  }
+}

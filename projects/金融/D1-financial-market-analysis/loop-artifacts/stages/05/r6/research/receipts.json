@@ -1,0 +1,204 @@
+{
+  "kind": "ralph_web_llm_cross_check",
+  "schema_version": 1,
+  "task": "F10-R3 调研任务书执行 (资金动力学与套利空间涌现 · 文献调研 A/B/C/D)",
+  "taskbook": {
+    "path": "projects/金融/D1-financial-market-analysis/loop-artifacts/stages/05/r6/research-taskbook.md",
+    "sha256": "4a9d68f0767fef97e232b67eb18170685de03f098b613e736c8a248182721b19",
+    "base_commit_sha": "1d64baec2c018e688701a18b2526e66e7afc227b",
+    "sync": "git fetch origin arena/f10-gas-dynamics-research: 本地 3267604 → 远端 tip 1d64bae (仅 loop-events.md +6 行, 与本次产出无冲突); 本次产出 rebase 到 1d64bae",
+    "base_branch_note": "远端分支在调研期间前移了一个提交(Lead 记 loop-events); 已 rebase, 无文件冲突"
+  },
+  "repo": "https://github.com/dd2003-460/hermes-workspace-zero",
+  "branch": "arena/f10-gas-dynamics-research",
+  "commit_sha": "8479fb50074a9dcb5960b4a8f7c16613e507aa3d",
+  "observed_at": "2026-11-01T09:17:36Z",
+  "timezone": "UTC",
+  "transport": "arena agent mode — web_search + fetch_page 直取出版方/机构页面; 本 runtime 无 ego-browser 登录会话",
+  "degradation": {
+    "degraded": true,
+    "level": 4,
+    "ladder_ref": ".claude/skills/arena-outsource/SKILL.md · 失败处理与降级 §4 交叉验证降级",
+    "reason": "本沙箱出网仅限 github.com / codeload.github.com / api.github.com / registry.npmjs.org / pypi.org / files.pythonhosted.org; 无 ralph runtime (loop/ralph_runtime 仅有 pyproject, 无 runner), 无 chatgpt.com / chat.deepseek.com 登录会话, 无法执行 web-llm 双站问答。",
+    "substitute": "改用 arXiv 摘要页 + 出版方/机构页面直核, 每个结论强制 ≥2 个不同域名 + ≥2 个不同作者团队",
+    "prior_art_in_repo": "同仓先例: 02.5/r1 A4 门禁也是\"两独立源不可得 → 记局限性不伪造\""
+  },
+  "provider_semantics": "successful_provider_ids 记录的是本次实际完成的独立核验通道(主机类型), 不是 LLM 站点 ID。本 runtime 无可用 LLM 站点, 未伪造任何 LLM 会话 URL。每条 claim 的 responses 均带 2 个不同域名的 source_refs。",
+  "responses": [
+    {
+      "claim_ref": "A · 结论 A-C1: 异质主体模型能预测\"条件与形状\"(利润-资本倒U / √Q 冲击律 / 状态依赖捕食矩阵), 但不能预测偏离的出现位置与持续时间",
+      "provider_id": "publisher_page",
+      "source_refs": [
+        "https://www.doynefarmer.com/market-microstructure",
+        "https://ora.ox.ac.uk/objects/uuid:98f268e7-cfd3-4597-a39c-c38963f06503"
+      ],
+      "authors_independent_of": "Takayasu 组 / Hommes 组",
+      "verdict": "supported",
+      "key_points": "作者主页与牛津 ORA 均确认 Farmer(2002) ICC 11(5):895-953 原文命题: 倒U型利润-资本关系、单主体最优化只削掉约一半 pattern、市场变有效的时间尺度是\"年—十年\"; 无任何\"点位/时长\"预测主张。",
+      "observed_at": "2026-11-01T09:17:36Z"
+    },
+    {
+      "claim_ref": "A · 结论 A-C1 (第二独立通道: 实证侧)",
+      "provider_id": "pmc_fulltext",
+      "source_refs": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC8256038/",
+        "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0208332"
+      ],
+      "authors_independent_of": "Scholl/Calinescu/Farmer 组 (与 Farmer 2002 同源, 已在 A.md 标注只算一条线)",
+      "verdict": "supported",
+      "key_points": "PMC 全文确认 community matrix / 营养级为\"状态依赖\"且效率均衡处三者互惠; PLOS ONE 确认 Sueshige et al. 2018 的 Sharpe 与流动性消费概率 Spearman=0.54, 同为截面/条件描述, 无时间预测。",
+      "observed_at": "2026-11-01T09:17:36Z"
+    },
+    {
+      "claim_ref": "B · 结论 B-C1: 收敛时间跨市场差 4-5 个数量级; 由资本到位延迟主导; 存在负反馈稳态但**无**跨市场可校准的 capital-inflow 公式",
+      "provider_id": "publisher_page",
+      "source_refs": [
+        "https://onlinelibrary.wiley.com/doi/abs/10.1111/jofi.12365",
+        "http://eprints.lse.ac.uk/100409/"
+      ],
+      "authors_independent_of": "Duffie / Gromb-Vayanos",
+      "verdict": "supported",
+      "key_points": "Wiley 摘要: 97 个预测因子 OOS -26% / 发表后 -58% (年尺度); LSE eprints: Makarov-Schoar JFE 135(2):293-319, 跨所偏离持续数小时至数天/数周, 跨国>同国。两者量级差与 B.md 表述一致。",
+      "observed_at": "2026-11-01T09:17:36Z"
+    },
+    {
+      "claim_ref": "B · 结论 B-C1 的\"公式\"部分: 任务书问的 capital inflow vs profit pool 定量关系式",
+      "provider_id": "open_access_repo",
+      "source_refs": [
+        "https://personal.lse.ac.uk/vayanos/Papers/DFCA_JF18.pdf",
+        "https://dspace.mit.edu/entities/publication/e48d406c-5c40-4607-9924-72484366411b"
+      ],
+      "authors_independent_of": "Duffie / Makarov-Schoar",
+      "verdict": "partially_supported",
+      "key_points": "Gromb-Vayanos 全文给出自校正动力学与内生收敛时间 u_n, 但 u_n 与消费率 β 不可从公开数据识别 → \"有公式\"成立, \"可校准的跨市场公式\"不成立。MIT DSpace: Falck-Rej-Thesmar 样本外保留约 50%, 与 -58% 互相印证。",
+      "observed_at": "2026-11-01T09:17:36Z"
+    },
+    {
+      "claim_ref": "C · 结论 C-C1: 收益随拥挤单调衰减可测; \"何时拥挤\"仅弱预测; ΔOI 作拥挤度代理失效",
+      "provider_id": "publisher_page",
+      "source_refs": [
+        "https://www.aqr.com/-/media/AQR/Documents/AQR-Insight-Award/2014/Comomentum.pdf",
+        "https://www.nber.org/papers/w14465"
+      ],
+      "authors_independent_of": "BIS 作者组 / 公开复现作者",
+      "verdict": "supported",
+      "key_points": "AQR 工作论文确认 CoMOM 只对正反馈策略(动量)有效、对短周期反转无效应; NBER w14465 确认 2007 量化地震是协同去杠杆 + 做市资本撤离, 非渐变衰减。",
+      "observed_at": "2026-11-01T09:17:36Z"
+    },
+    {
+      "claim_ref": "C · 结论 C-C1 的加密部分: funding/carry 作为拥挤度代理的方向",
+      "provider_id": "institutional_wp",
+      "source_refs": [
+        "https://www.bis.org/publications/working-paper-1087-crypto-carry",
+        "https://github.com/OctopusTakopi/funding-rate-alpha"
+      ],
+      "authors_independent_of": "Lou-Polk / Khandani-Lo",
+      "verdict": "contradicted",
+      "key_points": "矛盾记录: BIS WP1087 称高 carry 预测未来崩盘(反转方向), 而独立公开复现(6.1M settlements, 三所)称 funding 水平系数为正(延续方向, IC +0.013 t=4.7)且 OI 条件化在日匹配后失效(+7.0bps, t=0.35)。与 F10-R2 的本仓预注册回测(反转失败)一致。判读: 期限与样本期差异, 未解决 → C.md 中标 conf 0.45。",
+      "observed_at": "2026-11-01T09:17:36Z"
+    },
+    {
+      "claim_ref": "D · 结论 D-C1: 爆仓级联时点**不可**事前预测; 唯一稳健项是总体级前兆而非单事件预警",
+      "provider_id": "arxiv_abs",
+      "source_refs": [
+        "https://arxiv.org/abs/2607.27070",
+        "https://arxiv.org/abs/2608.03616"
+      ],
+      "authors_independent_of": "(两篇同为 Garcia Seuma 的 Part I/II → 只算一条独立线, 已在 D.md 显式标注)",
+      "verdict": "supported",
+      "key_points": "Part I: 7 次级联无一变量事件不变, 价格 CSD 仅 5/7, 2 次关税冲击无预警, 唯一稳健项=taker 方差压缩(300 onset placebo, Fisher p≈5e-6)。Part II: λ≈0.1-0.2 深度亚临界, 88% 强制卖出在 onset 后 30 分钟内, 63% 被 backstop 吸走, 分支比的两个可证伪预测在 power≥0.96 下失败。",
+      "observed_at": "2026-11-01T09:17:36Z"
+    },
+    {
+      "claim_ref": "D · 结论 D-C1 (第二独立团队通道: 链上清算)",
+      "provider_id": "open_access_repo",
+      "source_refs": [
+        "https://static.perez.sh/research/2020/defi-liquidations/defi-liquidations.pdf",
+        "https://doi.org/10.1016/j.jfineco.2004.08.005"
+      ],
+      "authors_independent_of": "Garcia Seuma 2026 系列",
+      "verdict": "supported",
+      "key_points": "Perez et al.(FC 2021, 独立团队): 3% 价格下跌使 >$10M 可清算, 2020 年 >70% 可清算头寸被立即清算 → 一旦可清算即被同一/次区块夺走, 不存在可交易窗口, 支持\"暴露量可算/时点不可测\"。Ni-Pearson-Poteshman (JFE 78(1):49-87) 另一方向: 日历型(到期日)确有可测的 ≥16.5bps 效应, 但容量小。",
+      "observed_at": "2026-11-01T09:17:36Z"
+    }
+  ],
+  "successful_provider_ids": [
+    "publisher_page",
+    "pmc_fulltext",
+    "open_access_repo",
+    "institutional_wp",
+    "arxiv_abs"
+  ],
+  "contradictions_recorded": true,
+  "contradiction_notes": [
+    "① 冲击后方向 (conf 0.40): Duffie 的尖峰+部分回复 vs Makarov-Schoar 的升值时跨所偏离同向扩大 vs F10-R1/R2 实测动量延续。",
+    "② 收敛速度时代差异 (conf 0.60): 泡菜溢价 24min 半衰期(2025) vs Makarov-Schoar 数天-数周(2017-2019) → 判为时变(稳定币通道压缩 2-3 个数量级)而非矛盾。",
+    "③ carry 方向 (conf 0.45): BIS 高 carry → 崩盘(反转) vs 独立复现 funding 水平系数为正(延续) vs F10-R2 反转失败。",
+    "④ 收敛速度量级 (conf 0.45): Farmer\"年—十年\" vs Scholl\"长期非有效\" vs McLean-Pontiff 几年内 -58%, 差 1-2 个数量级。",
+    "⑤ 钉住效应 (conf 0.50): Ni et al. ≥16.5bps 显著 vs 独立研究质疑杠杆 ETF 再平衡→波动为 spurious; Cheng-Madhavan 的 16.8% 未直核原文。",
+    "⑥ 级联前兆 (conf 0.45): Part I \"有稳健总体级前兆\" vs Part II \"severity 无法被任何标量前态量分级\" → 判读为并存(总体可测/单事件不可测), 操作口径取后者。",
+    "⑦ 独立性陷阱: A1/A3 同属 Farmer 团队; D 的两篇 2026 论文同作者 Part I/II → 均已降权为单条证据线, 已在 A.md/D.md 显式标注。"
+  ],
+  "subdomain_gate": {
+    "A": {
+      "independent_teams": [
+        "Farmer",
+        "Brock/Hommes",
+        "Takayasu 组",
+        "Pareschi/Toscani",
+        "Jafree/Firoozye"
+      ],
+      "independent_lines": 4,
+      "models_listed": 6,
+      "gate": "pass",
+      "min_required": 5
+    },
+    "B": {
+      "independent_teams": [
+        "Duffie",
+        "Gromb/Vayanos",
+        "Mitchell/Pulvino",
+        "Makarov/Schoar",
+        "2025 VECM 作者组",
+        "McLean/Pontiff",
+        "Falck/Rej/Thesmar"
+      ],
+      "independent_lines": 7,
+      "empirical_papers": 5,
+      "gate": "pass",
+      "min_required": 3
+    },
+    "C": {
+      "independent_teams": [
+        "Lou/Polk",
+        "McLean/Pontiff",
+        "Khandani/Lo",
+        "Stein",
+        "Schmeling/Schrimpf/Todorov (BIS)",
+        "公开复现作者"
+      ],
+      "independent_lines": 4,
+      "operational_indicators": 4,
+      "deprecated_indicators": 1,
+      "gate": "pass",
+      "min_required": 3
+    },
+    "D": {
+      "independent_teams": [
+        "Garcia Seuma (2 篇=1 线)",
+        "Perez/Werner/Xu/Livshits",
+        "Ni/Pearson/Poteshman",
+        "Cheng/Madhavan",
+        "F10-R2 内部预注册回测"
+      ],
+      "independent_lines": 2,
+      "table_rows": 7,
+      "gate": "pass",
+      "min_required": 3
+    }
+  },
+  "date_anchor_conflicts": [
+    "D 行 4/6 引用的两篇加密永续级联论文为 2026-07 与 2026-08 预印本, 与本会话日期(2026-11-01)相容; 但二者为同一作者的 Part I/II, 且 2608.03616 的第三方机器评审(pith.science)指出其需分钟级估计与\"主动 vs backstop 吸收\"渠道分离 → 结论按 conf 0.55-0.60 处理, 未升级为定论。"
+  ],
+  "commit_note": "commit_sha = 落盘 A/B/C/D + 本 receipts.json 的提交 (parent=1d64bae); 本文件在紧随其后的第二个提交中回填该 sha (自引用不可解, 故 commit_sha 指向内容提交, HEAD 为其子提交)"
+}

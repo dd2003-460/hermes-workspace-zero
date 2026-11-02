@@ -140,7 +140,7 @@
  "graph_tasks": [],
  "history": [],
  "iteration": 1,
- "last_action": "MR v3 position-clump 完成并pushed (d62aa57): BMI 67 instruments + LDL 53 instruments, 10Mb greedy window; 核心发现=方向反转(之前no-clump的'增加风险'结论是LD块内相关SNP堆出的伪影); Egger intercepts全>0.1无方向性多效性; WMed被强SNP主导; 最终判定=免费数据约束下检测不到稳健因果效应",
+ "last_action": "MR v3 position-clump 完成并pushed (6ef4f38): BMI 67 + LDL 53 instruments, 方向反转确认(之前no-clump OR=1.17/1.40为LD块相关SNP伪影, v3 Egger OR=0.847/0.807保护性/无效应); gitignore清理中间产物; 判定=免费数据约束下无稳健因果信号",
  "last_event_id": null,
  "last_exploration": null,
  "last_result": null,
@@ -289,7 +289,7 @@
  "task_intake_history": [],
  "current_task": "T5 硬阻塞: FinnGen R13 无 allele 列 + 1000G FTP 404 → strand harmonisation 无法完成。管道代码已就绪 (v2, palindrome-safe + IVW/Egger/WMed), 等 strand 参考到位即可跑",
  "updated_at": "2026-10-29T18:52:12+08:00",
- "last_updated": "2026-11-02T17:30:00+08:00",
+ "last_updated": "2026-11-02T17:45:00+08:00",
  "phase": "阶段2 MR v3 完成 (position-based clumping, 无外部LD参考) — 方向反转: 之前OR=1.17/1.40为相关SNP伪影, v3 OR=0.847/0.807(保护性/无效应), 判定=当前数据约束下无稳健因果信号",
  "next_actions": [
   "获取1000G v3 EUR参考面板后重跑真LD clumping (r²=0.001) 验证v3方向反转是否稳定",

@@ -286,6 +286,6 @@
   },
   "task_intake": null,
   "task_intake_history": [],
-  "current_task": "T5 Step1 阳性对照通过 (BMI->CHD OR=3.0 p=1e-22, LDL->CHD p=9e-7); manual IVW no-clump; 正式跑需补等位基因做 harmonisation",
+  "current_task": "T5: v2 harmonise 管道跑通 (palindrome-safe, IVW+Egger+WMed), 但 FinnGen 无 allele → strand 未校正 → IVW 方向错。需下载 1000G v3 EUR 参考 (~2.4GB) 做 strand harmonisation + clumping",
   "updated_at": "2026-10-29T18:52:12+08:00"
 }

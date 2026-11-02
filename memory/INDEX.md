@@ -62,3 +62,18 @@
 - **T8 Part B 关键发现**: Q1 阶段效应不均但非纯 prompt 效应; Q2 critic 有效条件=可定位可执行反馈; Q3 边际递减有例证非通用规律; Q4 L1→pipeline=待测方向不可直接迁移
 - **阻塞**: T8 Part C + T17 scoring run 需 arena + ninfer 基础设施
 - **目录**: `projects/decomp/`
+
+### 9. BH Mass Spectrum (bh-mass-spectrum)
+- **状态**: 任务 A (P0-1/P0-2) v2 修复完成 @ 6ab6336; 任务 C (遗迹MF+PISN间隙图) subagent 执行中
+- **核心**: TNG 目录黑洞质量函数 + 遗迹推前质量谱 + PISN 间隙带
+- **v2 修复**: 种子 BH 排除 (m_bh>=1e-7) + 占据率分母改全晕群体 + LOGM_H_EDGES 单位修正
+- **验证**: f_occ(z=0, >1e6) @ logM_h>=1.5 = [0.972, 0.999, 1.0] → PASS
+- **GWTC-4.0**: 观测数字表已落盘 (literature/notes/gwtc4-bhmf-numbers.md)
+- **卡人项**: 任务 C 取消与否待成璐确认 (memory/task-c-status-correction.md)
+- **目录**: `projects/理论物理/bh-mass-spectrum/bh-mass-spectrum/`
+
+### 10. Persona Prompt Lab (persona-prompt-lab)
+- **状态**: ✅ P0 完成 @ 7dd795c — 记忆召回 Recall@5=1.000 (BM25 char n-gram) + prompt 优化验收
+- **核心**: persona prompt 实验室 (bench/research/memory/tasks)
+- **遗留**: 测试集扩至 50 条 (差 22) + 向量检索补全 (sentence-transformers)
+- **目录**: `projects/persona-prompt-lab/`

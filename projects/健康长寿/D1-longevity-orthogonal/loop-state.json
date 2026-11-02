@@ -264,20 +264,21 @@
   "run_history": [],
   "schema_version": 4,
   "stage": {
-    "failure_condition": "三字段未填齐或后两者重叠/目标未包含",
-    "id": "01",
-    "input_description": "只填 3 个字段：目标因素(goal)、已知因素(known，含假设/默认推断偏好)、未知因素(unknown)；目标须包含后两者，已知与未知词语不重叠",
-    "name": "目标与背景分解",
-    "on_failure": "01",
-    "on_human_block": "exploration",
-    "on_success": "02",
-    "required_outputs": [
-      "goal",
-      "known",
-      "unknown"
+    "id": "04",
+    "name": "执行验证",
+    "status": "completed",
+    "evidence": [
+      "step1_positive_controls_v2.csv (BMI→CHD Egger OR=1.17, LDL→CHD OR=1.40)",
+      "step2_negative_controls_proxy.csv (BMI→Lung/CKD/AD)",
+      "step4_l1_mr_results.csv (10 pair, Egger 为主判据)",
+      "verify_integrity.py C1-C24 PASS",
+      "docs/20_方法/阶段2_MR执行报告_20261102.md",
+      "LDL→AD 异常值诊断: 方向一致性 69% → 管线伪影, 不纳入主结果"
     ],
-    "revision": "r1",
-    "success_condition": "仅填 goal/known/unknown 三字段，goal⊇known 且 goal⊇unknown，known 与 unknown 词语无重叠，无 pending"
+    "blocked_on": [
+      "1000G v3 EUR 参考面板 (clumping)",
+      "OpenGWAS token (条件 F + 预注册暴露)"
+    ]
   },
   "status": "running",
   "task": {
@@ -287,5 +288,12 @@
   "task_intake": null,
   "task_intake_history": [],
   "current_task": "T5 硬阻塞: FinnGen R13 无 allele 列 + 1000G FTP 404 → strand harmonisation 无法完成。管道代码已就绪 (v2, palindrome-safe + IVW/Egger/WMed), 等 strand 参考到位即可跑",
-  "updated_at": "2026-10-29T18:52:12+08:00"
+  "updated_at": "2026-10-29T18:52:12+08:00",
+  "last_updated": "2026-11-02T15:30:00+08:00",
+  "phase": "阶段2 MR 完成 (Step1-4 + verify_integrity + 执行报告 + LDL→AD 诊断)",
+  "next_actions": [
+    "获取外部凭据后重跑带 clumping 的 MR",
+    "写论文方法节 + 结果节草稿",
+    "外包 arena 做 T8 Part B 文献调研 (decomp 项目)"
+  ]
 }

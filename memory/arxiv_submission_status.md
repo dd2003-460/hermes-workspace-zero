@@ -12,8 +12,8 @@
 
 ### 其他待提交
 1. **GW-ORF 手征 ORF** (gr-qc) - `projects/理论物理/时钟与引力波响应/GW_ORF_研究项目/手征ORF计算_主线/论文_完整组件级_复现与手征推广/` — arXiv tarball 已打好 (2026-11-02)，LaTeX 0 错误，待手动上传
-2. **DistCat v5** (math.CT) - projects/D1-academic-AI/papers/distcat-v5/
-3. **BayesFrame v2.0** (q-bio.NC) - projects/D1-academic-AI/papers/bayesframe-v2/
+2. **DistCat v5** (math.CT) - projects/AI-计算科学/D1-academic-AI/papers/distcat-v5/ (main-v5.tex, 16p PDF ✅)
+3. **BayesFrame v2.0** (q-bio.NC) - 旧路径 projects/D1-academic-AI/papers/bayesframe-v2/ 已不存在（目录重构后未迁移，2026-11-02 核查）— 状态待确认
 
 ## 提交方案
 - GW-BacQFT: 成璐登录 arxiv.org → 上传 v16 tgz → gr-qc

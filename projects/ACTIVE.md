@@ -1,12 +1,12 @@
 # ACTIVE — 活跃项目面板
 
-**自动生成**: 2026-11-03 02:16 — 由 scripts/aggregate-active.sh 聚合
+**自动生成**: 2026-11-03 03:07 — 由 scripts/aggregate-active.sh 聚合
 
 ## 焦点项目
 
 | 项目 | 相对路径 | 阶段 | 迭代 | 状态 | 当前任务 |
 |------|----------|------|------|------|----------|
-| D1-longevity-orthogonal | `健康长寿/D1-longevity-orthogonal/` | 04 | 1 | running | T5 硬阻塞: FinnGen R13 无 allele 列 + 1000G FTP 404 → strand harmonisation 无法完成。管道代码已就绪 (v2, palindrome-safe + IVW/Egger/WMed |
+| D1-longevity-orthogonal | `健康长寿/D1-longevity-orthogonal/` | 04 | 1 | active | T5 硬阻塞: FinnGen R13 无 allele 列 + 1000G FTP 404 → strand harmonisation 无法完成。管道代码已就绪 (v2, palindrome-safe + IVW/Egger/WMed |
 | D1-efficiency-optimization | `AI-计算科学/D1-efficiency-optimization/` | 01-goal-decomposition | 1 | active | R5 run5 完成 (M8 新指标题, 防复读): receipt.md + m8-proposal.md + scoring-r5.json (weighted 84.75) @ r5/run5/; bench.md n=4 mean  |
 | quant-capital-flow | `金融/quant-capital-flow/` | unknown | 1 | in_progress | toy model v15 联合优化完成（十五连败确认框架不够），转其他研究方向 |
 | bh-mass-spectrum | `理论物理/bh-mass-spectrum/` | active | 3 | active | 任务 A (P0-1/P0-2) v2 数据质量修复完成 @ 6ab6336。三个 bug 已修：(1) 种子 BH 污染 — m_bh>=1e-7 排除 ~339 Msun 标记；(2) 占据率 NaN — 分母改为全晕群体；(3) LO |

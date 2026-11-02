@@ -36,7 +36,7 @@
 - **目录**: `projects/写作-社会系统/D2-efficient-propagation-book/`
 
 ### 6. 长寿正交贡献 MR (D1-longevity-orthogonal)
-- **状态**: ✅ 阶段2 MR v3 完成 (position-based clumping, 无外部LD参考) — 方向反转确认
+- **状态**: ✅ 阶段2 MR v3 完成 + paper draft 一致性修复 (9/10 reversed, Thorleifsson) — 方向反转确认
 - **核心**: GIANT/GLGC 暴露 × FinnGen R13 结局的两样本 MR (IVW/Egger/WMed, 10 pair)
 - **关键结果 (v3)**: BMI→CHD Egger OR=0.847; LDL→CHD Egger OR=0.807 (保护性/无效应); 之前 no-clump OR=1.17/1.40 为 LD 块相关 SNP 伪影; 判定=免费数据约束下无稳健因果信号
 - **方法限制**: 10Mb 位置窗口替代真 LD clumping (r²=0.001); BMI 67 + LDL 53 instruments
@@ -73,7 +73,7 @@
 - **目录**: `projects/理论物理/bh-mass-spectrum/bh-mass-spectrum/`
 
 ### 10. Persona Prompt Lab (persona-prompt-lab)
-- **状态**: ✅ P0 完成 @ 7dd795c — 记忆召回 Recall@5=1.000 (BM25 char n-gram) + prompt 优化验收
+- **状态**: ✅ P0 全部关闭 @ 53d478e — testset-v3 (50/50) + BM25 R@5=0.56 + local embedding (MiniLM-L12-v2) R@5=0.58，均未达 80% 线
 - **核心**: persona prompt 实验室 (bench/research/memory/tasks)
-- **遗留**: 测试集扩至 50 条 (差 22) + 向量检索补全 (sentence-transformers)
+- **结论**: 80% 召回瓶颈在测试集语义重叠度，非算法；后续改测试集 > 换 bge-m3，低优先级
 - **目录**: `projects/persona-prompt-lab/`

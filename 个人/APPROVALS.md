@@ -30,3 +30,7 @@
 ## 已批
 
 - 2026-10-31 r3 轮：条目 1-4（hooks-codex 安装面复核 / subagent 拆分规范入 skill / X6 caveat 双注记 / O3 claim 清单审定）由成璐授权 AI 自主裁决并执行，存档 `个人/history/APPROVALS-20261031-r3.md`。
+
+## 待处理（建议项，不阻塞）
+
+- **wx-push.py 连续 3 轮失败**（r268c/r269/r270，2026-11-03）：ret=-1 errcode=None errmsg=invalid request，account 966c94ec47d2@im.bot。模式=bot API token 侧问题（非消息内容），本地无法自愈。建议：检查 weixin bot token 是否过期/被重置，或换用 hermes 原生 weixin 渠道投递（cron delivery 本身走的是 hermes 平台，wx-push 只是额外广播）。播报内容已完整落在最终回复里，不丢信息。

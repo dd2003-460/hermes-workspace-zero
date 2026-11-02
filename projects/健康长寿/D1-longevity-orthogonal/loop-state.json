@@ -286,6 +286,6 @@
   },
   "task_intake": null,
   "task_intake_history": [],
-  "current_task": "T4a 覆盖表完成: 无 token 路线 9 个合法 MR pair (BMI×6 + LDL×3), Step1/2 可跑, Step3 条件F 阻塞在 OpenGWAS JWT; 下一步 T5 下载 FinnGen+GIANT/GLGC summary stats…",
+  "current_task": "T5 Step1 阳性对照通过 (BMI->CHD OR=3.0 p=1e-22, LDL->CHD p=9e-7); manual IVW no-clump; 正式跑需补等位基因做 harmonisation",
   "updated_at": "2026-10-29T18:52:12+08:00"
 }

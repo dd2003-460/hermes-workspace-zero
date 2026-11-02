@@ -1,6 +1,6 @@
 # ACTIVE — 活跃项目面板
 
-**自动生成**: 2026-11-02 13:13 — 由 scripts/aggregate-active.sh 聚合
+**自动生成**: 2026-11-02 14:46 — 由 scripts/aggregate-active.sh 聚合
 
 ## 焦点项目
 
@@ -28,7 +28,7 @@
 |---|------|----------------------|-----------|--------------|------|
 | 1 | 金融·正交信号源 | hermes-workspace-zero (D1-financial-market-analysis) | F7 三市场组合 FAIL（信息冗余），F10 agent-game-model 在探索阶段 | 外包 arena 调研链上资金流/期权 skew 数据可得性 → 定 F8 实验设计 | open |
 | 2 | 写作·动机社会 | from-motivation-to-society | Part I-V 全写完，等 P2 实验第一个数（30人30天≥40%信念迁移），solo 0美元方案已写好 | 起草 P2 实验招募文案 + 渠道对比（待你拍板渠道） | open·半阻塞(渠道) |
-| 3 | 健康·MR 阳性对照 | longevity-orthogonal-contribution | T4a 覆盖表完成（9 pair），管道代码就绪（v2: palindrome-safe + IVW/Egger/WMed），硬阻塞：FinnGen R13 无 allele 列 + 1000G FTP 404 → strand harmonisation 无法完成 | 找 1000G v3 EUR plink 镜像源，或换带 allele 的结局数据集（UK Biobank GWAS） | blocked-strand |
+| 3 | 健康·MR 阳性对照 | longevity-orthogonal-contribution | T5 Step1 阳性对照通过（allele匹配+全局翻转）：BMI→CHD IVW OR=5.24 p=7e-15, LDL→CHD IVW OR=1.19 p=2e-30；Egger/WMed 全部 >1 ✅ | 跑 Step 2 正式 MR 分析（9 个 pair） | open |
 | 4 | 物理·ORF 收尾 | -orf | Stage 4 组件全完成，LaTeX 86→0（2026-11-02），arXiv tarball 已打好（2026-11-02） | arXiv 手动上传（同 GW-BacQFT） | open→upload |
 | 5 | 视频复刻·batch-12 | d1-video-recreation | batch-12 E29-E32 全部完成（4/4 ✅，eccff00），已推 main | 无待办 — 等下一批规划 | done |
 | 6 | 杂乱 idea 池 | conversation-raw-materials / D1-academic-AI raw ideas | 历史对话素材 + AI 研究猜想未消化 | 低优先级：定期蒸馏进对应领域项目，不单独立项 | backlog |

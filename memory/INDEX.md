@@ -26,9 +26,10 @@
 - **剩余**: G1b 异族 judge (blocked-on-external), batch2 第二域数据
 
 ### 4. Motivation Society (写作)
-- **状态**: ✅ 全部完成 (Part I-V, 14 chapters, 0 gray)
+- **状态**: ✅ 全部完成 (Part I-V, 14 chapters, main2.pdf 93pp, 0 errors)
 - **目录**: `projects/写作-社会系统/D1-writing/motivation_society/`
-- **分支**: test @ 9629054
+- **分支**: test @ f894e44 (main2.pdf rebuilt 2026-11-02)
+- **下一步**: 成璐审阅后决定是否合并到 main
 
 ### 5. D2 Efficient Propagation Book
 - **状态**: 交叉引用闭环，P2 实验计划就绪 (需 30 天实际执行)
@@ -55,7 +56,9 @@
 - Family-upgrade / kappa-recalibrate: blocked-on-external
 
 ### 8. Decomp Bench (T7/T8)
-- **状态**: T7 全收口; T8 Part B 文献调研完成 (arena, 7 sources); T8 Part C 待实验设计
+- **状态**: T7 全收口 (T7.3 v2 point=60219, interval_80=[60129,61227]); T8 Part B 文献调研完成 (arena, 7 sources); T8 Part C 待实验设计
 - **核心**: prompt-first 消融研究 — L1 组件级 + pipeline 阶段级
+- **T7.3 v2**: M4 EWMA+weekday 主模型, holdout MAPE 0.511%, 嵌套覆盖率 miss 如实记录 (regime 切换导致区间偏窄)
 - **T8 Part B 关键发现**: Q1 阶段效应不均但非纯 prompt 效应; Q2 critic 有效条件=可定位可执行反馈; Q3 边际递减有例证非通用规律; Q4 L1→pipeline=待测方向不可直接迁移
+- **阻塞**: T8 Part C + T17 scoring run 需 arena + ninfer 基础设施
 - **目录**: `projects/decomp/`

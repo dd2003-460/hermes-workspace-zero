@@ -13,4 +13,12 @@
 
 | 7 | 物理·BH 质量谱 + 实验框架 T8 | bh-mass-spectrum / decomp / pfb | BH 任务C 完成（e2d419b）；T21-RR 调研完成 @ 2482280；**T8 Part C 两轮对抗核验均 FAIL×2+partial×4** → **T8 Part C 探索性收口完成**（decomp @ 1cd3e74，m01140 自主执行可回滚：freeze 段三域负效应方向稳健，确认性实验等异源 judge+M8-fixed+口径冻结+预算四条件）；**rubric v2 全量重放完成 overall_pass=False**（AC1 0.661<0.85，J2 恒高分分不开配置，J1 parse 失败 7run）→ v3 方向已诊断（pfb @ cea07e9）；v2 MR 触发源查明=WorkBuddy App | rubric v3 vs 等异源 judge 未决；WorkBuddy 会话停否未决 | partial-awaiting-decision |
 
+## #8 decomp · T17 泛化 bench（方法论跨域验证）
+
+- **状态**：进行中（r245t-r245v，decomp @ feb7a44）。gold×4 已建好（model-selection/inference-infra/rag-vs-longctx/methodology），本轮跑 3 域 × 2 run。
+- **测什么**：正交拆解+原子化方法论能否在形状完全不同的问题上长出同样可验算的树（硬件题候选是 GPU、叶子是物理量；模型选型题候选是 LLM、叶子是基准分/单价/许可证——根标量同构但树形不同）。
+- **执行**：本地 ninfer :8787 (qwen3.8-27b) 直跑 agent 拆解 + 同族判官按 18 分制 rubric 打分（S1-S5 结构通用 + C1-C4 按域锚定 gold L1）。分数只作域间相对比较，不作绝对质量声明。
+- **验收**：6 份树产出 + scores.json + 与 27B 硬件基准对比的泛化初步结论。
+- **决策点**：无外部依赖，纯本地。完成后若三域均 ≥ 基准线 → 方法论泛化证据 +1。
+
 **优先级建议**（P1 实际问题 > P2 完成度低优先）：#4 ORF 收尾（离产出最近，纯本地活）≈ #3 健康 dry-run（解锁整条 MR 链）> #5 视频（纯执行）> #1 金融（需调研先行）> #2 写作（等你拍板）。

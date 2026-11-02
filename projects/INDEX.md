@@ -20,6 +20,7 @@
 | `理论物理/cosmos-thesis-review/` | [CTR.1] | 宇宙学论文综述 |
 | `理论物理/2026春复习/` | [CR.1] | 2026 年春季复习材料 |
 | `理论物理/bh-mass-spectrum/` | [BMS.1] | CosmoBH 黑洞质量谱流水线（内层独立 git 仓；2026-10-25 由 `bh-mass- spectrum` 改名去空格） |
+| `理论物理/D1-adsl-spin-connection/` | [ASL.1] | 3d AdS-Lorentz gravity + Chern-Simons + torsionful BH + pole-skipping（CAS 验证管线） |
 | `理论物理/时钟与引力波响应/` | [CW.1] | 时钟与引力波响应（remote orf；2026-10-25 由 Downloads 新仓替换） |
 | `理论物理/时钟与引力波响应_旧_归档_20260818/` | [CWO.1] | 时钟与引力波响应旧版归档（2026-10-25 替换前备份） |
 | `金融/quant-capital-flow/` | [QCF.1] | 中美股票板块资金流预测（气体动理论 × 动态演化博弈，可证伪预言；原 quantum-ec，ec=economic，非量子纠错） |
@@ -71,6 +72,12 @@
 | 项目 | 索引号 | 描述 |
 |------|--------|------|
 | `知识/D1-knowledge-base/` | [KB.1] | 高兴趣未深学领域的教材式笔记（名词表+成璐视角；格式见其 README；兴趣方向见 memory/interest-directions.md） |
+
+### 健康长寿
+
+| 项目 | 索引号 | 描述 |
+|------|--------|------|
+| `健康长寿/D1-longevity-orthogonal/` | [LO.1] | 长寿正交贡献 MR 研究（GIANT/GLGC × FinnGen R13；阶段2 L1 完成，blocked on 1000G+OpenGWAS） |
 
 ---
 

@@ -11,6 +11,6 @@
 | 5 | 视频复刻·batch-12 | d1-video-recreation | batch-12 E29-E32 全部完成（4/4 ✅，eccff00），已推 main | 无待办 — 等下一批规划 | done |
 | 6 | 杂乱 idea 池 | conversation-raw-materials / D1-academic-AI raw ideas | 历史对话素材 + AI 研究猜想未消化 | 低优先级：定期蒸馏进对应领域项目，不单独立项 | backlog |
 
-| 7 | 物理·BH 质量谱 + 实验框架 T8 | bh-mass-spectrum / decomp / pfb | BH 任务C 完成（e2d419b）；T21-RR 调研完成 @ 2482280；**T8 Part C 两轮对抗核验均 FAIL×2+partial×4**（r245k/r245m：分母漏洞+cover 口径硬伤，新发现异源评审门槛未过）→ 待 Lead 裁决收口方向；v2 MR 七次 bg 失败已排查收口（无活引用） | 裁决：探索性收口 vs 修 M8-fixed 再报；异源 judge 需非 Qwen key | awaiting-decision |
+| 7 | 物理·BH 质量谱 + 实验框架 T8 | bh-mass-spectrum / decomp / pfb | BH 任务C 完成（e2d419b）；T21-RR 调研完成 @ 2482280；**T8 Part C 两轮对抗核验均 FAIL×2+partial×4** → 探索性收口方案已起草（decomp @ 3732c50）待批准；**rubric v2 全量重放完成 overall_pass=False**（AC1 0.661<0.85，J2 恒高分分不开配置，J1 parse 失败 7run）→ v3 方向已诊断（pfb @ cea07e9）；v2 MR 触发源查明=WorkBuddy App | 批准收口方案；rubric v3 还是等异源 judge | awaiting-decision |
 
 **优先级建议**（P1 实际问题 > P2 完成度低优先）：#4 ORF 收尾（离产出最近，纯本地活）≈ #3 健康 dry-run（解锁整条 MR 链）> #5 视频（纯执行）> #1 金融（需调研先行）> #2 写作（等你拍板）。

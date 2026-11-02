@@ -34,6 +34,13 @@
 - **状态**: 交叉引用闭环，P2 实验计划就绪 (需 30 天实际执行)
 - **目录**: `projects/写作-社会系统/D2-efficient-propagation-book/`
 
+### 6. 长寿正交贡献 MR (D1-longevity-orthogonal)
+- **状态**: ✅ 阶段2 L1 完成 (Step1-4 + verify_integrity + 执行报告 + LDL→AD 诊断)
+- **核心**: GIANT/GLGC 暴露 × FinnGen R13 结局的两样本 MR (IVW/Egger/WMed, 10 pair)
+- **关键结果**: BMI→CHD Egger OR=1.17; LDL→CHD Egger OR=1.40; LDL→AD OR=1.63 = 管线伪影(方向一致性仅69%)
+- **阻塞**: 1000G v3 EUR ref (clumping) + OpenGWAS token (Step3 condition-F)
+- **目录**: `projects/健康长寿/D1-longevity-orthogonal/repo/`
+
 ## 已归档/阻塞
 - DistCat v5 / BayesFrame v2.0: 等 GW-BacQFT 提交后处理
 - Batch2 第二域数据: blocked-on-external

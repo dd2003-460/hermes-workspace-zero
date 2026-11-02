@@ -2,14 +2,14 @@
   "project_id": "D1-knowledge-base",
   "slot": "KB.1",
   "stage": {
-    "id": "kb-note-5-gpu",
-    "name": "build/gpu-inference-hardware",
+    "id": "kb-note-6-vector-db",
+    "name": "build/vector-database-cosine-similarity",
     "revision": "r1"
   },
   "loop_phase": "build",
-  "iteration": 5,
+  "iteration": 6,
   "status": "active",
-  "current_task": "KB.1 第5篇教材note notes/gpu-inference-hardware.md(Lead直写, 素材=author-voice-mining corpus四篇GPU/推理对话档案: 本地GPU选型流程2018行/AI硬件推理性能报告844行/算力对比误区解析610行/KV切块复用方案819行): 8概念(decode内存带宽瓶颈/TP分片KV每卡1/4/TCO框架4×V100陷阱+真便宜/组合比型号重要PRO6000+5090实测/线性注意力GDN改内存公式48GB跑226K/KV复用四路径mlx-lm/边界未解3条/可证伪预测PRO5000¥/tok<PRO6000×60%带判死)×是什么/为什么/边界+conf. drift-check 90→100(拆长句后: 70句/3625汉字/句级第一人称0.229/均句51.8/空话0). 核心判断: 选型真问题=负载×型号×精度×backend组合的¥/tok最低, 型号只解释一半性能.",
+  "current_task": "KB.1 第6篇教材note notes/vector-database-cosine-similarity.md (Lead直写, 素材=decomp T17 rag-vs-longctx gold tree+runs + LoCoMo实验锚): 10概念(embedding语义变几何/余弦去模长比方向/top-k召回因子链/暴力搜索O(N×d)的墙/HNSW小世界多层图/recall地板vs延迟交换/rerank粗筛精排/chunk头号失效模式/本地三方案量级定位/agent记忆里结构化存储关键词扫描优先)×是什么/为什么/边界+conf. drift-check 100/100(109句/均句54.0/第一人称0.2+/空话0). 核心判断: 检索层真相=工程问题伪装成AI问题; LLM时代新变量=模型变强后recall地板可放低(LoCoMo检验中). 两条可证伪预测带判死条件.",
   "blocker": null,
   "change_log": [
     {
@@ -41,6 +41,11 @@
       "time": "2026-10-20",
       "action": "gpu-note",
       "summary": "KB.1第5篇教材note notes/gpu-inference-hardware.md(Lead直写, 素材=corpus四篇GPU/推理对话档案): 8概念(decode带宽瓶颈/TP分片KV每卡1/4/TCO4×V100/组合比型号重要/线性注意力改内存公式/KV复用四路径/边界未解3条/可证伪预测PRO5000¥/tok<PRO6000×60%带判死). drift-check 90→100(拆长句: 70句/3625汉字/第一人称0.229/均句51.8). 核心: 选型真问题=负载×型号×精度×backend的¥/tok最低, 型号只解释一半性能."
+    },
+    {
+      "time": "2026-11-03",
+      "action": "iter6",
+      "summary": "第6篇 vector-database-cosine-similarity.md 落盘, drift-check 100/100, INDEX 登记"
     }
   ]
 }

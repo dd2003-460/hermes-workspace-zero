@@ -11,6 +11,7 @@
 | `propagation-efficiency.md` | 传播效率 | v1 完成(硬门槛全过: 句级第一人称 0.330 / 句长 38.2 / 禁词 0) | KPI=Δ信念/Δ成本, 解码成本=理解=压缩; 信息论焊进传播学的钉 |
 | `llm-persona-alignment.md` | LLM persona 对齐 | v1 完成(drift-check 100/100, 1514 汉字) | persona 对齐 = 条件生成非权重修改; 公理编码 LENS+METHOD, voice 编码 VOICE |
 | `gpu-inference-hardware.md` | GPU 推理硬件 | v1 完成(drift-check 100/100, 70 句/均句 51.8) | decode 是带宽瓶颈; TP 分片 KV 每卡 1/4; 组合比型号重要; 线性架构改内存公式 |
+| `vector-database-cosine-similarity.md` | 向量检索与 agent 记忆基础设施 | v1 完成(drift-check 100/100, 109 句/均句 54.0) | embedding 把语义变几何; HNSW 小世界图索引; recall 地板 vs 延迟的交换; 结构化存储下关键词扫描优先, 非结构化语料才需向量层 |
 
 ## 排队(按 memory/interest-directions.md 的 C 区优先级)
 

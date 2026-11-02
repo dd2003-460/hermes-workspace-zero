@@ -63,6 +63,8 @@
 | dd2003-460/hermes-workspace-zero | 01a196b0 (f10-r3-gate-fix, 2026-11-01) | F10-R3 A/D域门禁补证, 分支 arena/f10-r3-gate-fix; 旧会话 01a19661 已完成 R3 主体 |
 | from-motivation-to-society（动机社会写作） | `arena.ai/agent/01a197a6-b7bb-7c8c-8565-139a0b215928`（taskSpace: motivation-society-ch10-contradiction） | **2026-11-02：Part IV + Part V 全部完成** ✅。ch8 通道生成器 → ch9 模因 → ch10 经济（含幽灵堵车 H6）→ ch11 政治 → ch12 法律 → ch13 预测 → ch14 闭合。7 章 0 gray placeholders，669 行。test 分支 @ 9629054。会话空闲。 |
 
+| dd2003-460/decomp-bench | `arena.ai/agent`（taskSpace: decomp-t8-partb-arena-dispatch, ego-browser space 957）→ agent 工作分支 arena/e31379c5-decomp-bench | **2026-11-02：T8 Part B 文献调研完成** ✅。ego-browser 切换仓库到 decomp-bench → tiptap execCommand insertText 派发 → agent 56行调研(7来源: Reflexion/Self-Refine/Huang ICLR/CRITIC/LLM-as-judge/Wataoka/PIVOT 2026) → push arena/e31379c5-decomp-bench @ ce20b23 → merge main。核心: Q1阶段效应不均但非纯prompt; Q2 critic有效=可定位可执行反馈; Q3边际递减有例证非通用; Q4 L1→pipeline=待测方向。会话空闲。
+
 **原则**：每个项目有自己的仓库，arena 连接对应仓库，读仓库内的任务书执行。不跨仓库混用。
 
 ### 3.2 连接仓库（新会话直接选仓库 · 2026-10-26 修正）

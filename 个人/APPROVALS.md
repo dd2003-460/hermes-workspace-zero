@@ -18,6 +18,9 @@
    - 【AI 执行注记 r182】未等到回复已按 a+b 双修落地并复现验证（修复前 hook 输出 stale-index 分支 → 修复后正确走 no-active-goal 分支）——理由：该告警每轮唤醒都阻断推进，属功能性缺陷而非偏好不明操作；改动一行级、git 可回滚、行为仅影响误报路径。若成璐认为不应代执行，revert 本条对应 commit 即可恢复原状。
    - 人类回复：
 
+2. **PFB 第三 seed 功效 run（~2h ninfer 算力，r238b 登记）**：C3 v3 主分析已收口（receipt-r6-mainanalysis.json @ ee4f2a5），唯一剩余可执行项 = 对 9 configs × D1/D2 各加 seedc 共 18 run + J1/J2 双判 36 调用，n 从 6/cell 提到 9/cell。需 ninfer :8000 批量通道（本地降级也可跑但更慢）。预算放行即派。
+   - 人类回复：
+
 ## 已批
 
 - 2026-10-31 r3 轮：条目 1-4（hooks-codex 安装面复核 / subagent 拆分规范入 skill / X6 caveat 双注记 / O3 claim 清单审定）由成璐授权 AI 自主裁决并执行，存档 `个人/history/APPROVALS-20261031-r3.md`。

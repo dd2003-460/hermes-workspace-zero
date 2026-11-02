@@ -1,6 +1,6 @@
 # Memory Index
 
-> 最后更新: 2026-11-02
+> 最后更新: 2026-11-03 (r259)
 
 ## Active Projects
 
@@ -19,7 +19,7 @@
 - **下一步**: 正式投稿版 LaTeX（可选）；Stage 3 D 混合网络/OLC（优先级最低）
 
 ### 3. PFB Rubric-v3 Benchmark
-- **状态**: 正式实验完成 (7×3=21 run + 双裁判盲评 + 归因分析)
+- **状态**: 正式实验完成 (7×3=21 run + 双裁判盲评 + 归因分析); **rubric v3 冻结** (r249f: AC1 0.956/AC2 PASS/AC3 PASS, AC4 移出验收 overall_pass=True); **pilot-matrix 收口** (9 run 三变体 + judge 双判 κ=0.857 n=162 过门禁, O1 κ=0.506 唯一弱项)
 - **核心**: AI pipeline 评分标准消融实验
 - **目录**: `pfb/bench/rubric-v3/`
 - **关键结论**: D1 净效应≈0 (sham打掉), D2 边际+5.06 稳健
@@ -56,11 +56,11 @@
 - Family-upgrade / kappa-recalibrate: blocked-on-external
 
 ### 8. Decomp Bench (T7/T8)
-- **状态**: T7 全收口 (T7.3 v2 point=60219, interval_80=[60129,61227]); T8 Part B 文献调研完成 (arena, 7 sources); T8 Part C 待实验设计
+- **状态**: T7 全收口 (T7.3 v2 point=60219, interval_80=[60129,61227]); T8 Part B 文献调研完成 (arena, 7 sources); **T8 Part C 探索性收口**（两轮对抗核验 FAIL×2+partial×4 → freeze 段三域负效应方向稳健，确认性实验等四条件）; **T21 收口完成 (r256: flagship-eval S3 按 T21-RR 实测锚定重算 + 主报告 §9.2 发现5 并入)** — GPU 选型主线 T19→T20→T21 闭环
 - **核心**: prompt-first 消融研究 — L1 组件级 + pipeline 阶段级
 - **T7.3 v2**: M4 EWMA+weekday 主模型, holdout MAPE 0.511%, 嵌套覆盖率 miss 如实记录 (regime 切换导致区间偏窄)
 - **T8 Part B 关键发现**: Q1 阶段效应不均但非纯 prompt 效应; Q2 critic 有效条件=可定位可执行反馈; Q3 边际递减有例证非通用规律; Q4 L1→pipeline=待测方向不可直接迁移
-- **阻塞**: T8 Part C + T17 scoring run 需 arena + ninfer 基础设施
+- **阻塞**: T8 Part C 确认性实验等 arena binding 重绑 + ninfer :8000/:8099 恢复（r259 复查仍 down）; 异源 judge (Fleiss κ) 卡 G1b family_check 模型身份披露
 - **目录**: `projects/decomp/`
 
 ### 9. BH Mass Spectrum (bh-mass-spectrum)

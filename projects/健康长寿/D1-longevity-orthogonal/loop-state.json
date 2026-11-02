@@ -286,6 +286,6 @@
   },
   "task_intake": null,
   "task_intake_history": [],
-  "current_task": "T5: v2 harmonise 管道跑通 (palindrome-safe, IVW+Egger+WMed), 但 FinnGen 无 allele → strand 未校正 → IVW 方向错。需下载 1000G v3 EUR 参考 (~2.4GB) 做 strand harmonisation + clumping",
+  "current_task": "T5 硬阻塞: FinnGen R13 无 allele 列 + 1000G FTP 404 → strand harmonisation 无法完成。管道代码已就绪 (v2, palindrome-safe + IVW/Egger/WMed), 等 strand 参考到位即可跑",
   "updated_at": "2026-10-29T18:52:12+08:00"
 }

@@ -166,10 +166,9 @@ def main():
     parser.add_argument('--project', type=str, help='Scan specific project only')
     args = parser.parse_args()
 
-    # Scan all projects
+    # Scan all projects (recursive: 项目按领域分层, D1-* 在子目录里)
     all_papers = []
-    projects = [PROJECTS_DIR / d for d in os.listdir(PROJECTS_DIR)
-                if os.path.isdir(PROJECTS_DIR / d) and d.startswith('D1-')]
+    projects = [p for p in PROJECTS_DIR.rglob('D1-*') if p.is_dir()]
 
     for proj in projects:
         if args.project and proj.name != args.project:

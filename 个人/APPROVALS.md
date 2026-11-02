@@ -21,6 +21,9 @@
 2. **PFB 第三 seed 功效 run（~2h ninfer 算力，r238b 登记）**：C3 v3 主分析已收口（receipt-r6-mainanalysis.json @ ee4f2a5），唯一剩余可执行项 = 对 9 configs × D1/D2 各加 seedc 共 18 run + J1/J2 双判 36 调用，n 从 6/cell 提到 9/cell。需 ninfer :8000 批量通道（本地降级也可跑但更慢）。预算放行即派。
    - 人类回复：
 
+3. **workspace 仓 stale 分支清理（r259 登记，cron 安全策略拦截 force delete）**：以下 7 个本地分支内容已全部包含在 main（merge-base --is-ancestor 验证 CONTAINED，零丢失），但 `git branch -D` 被 cron 无人在场安全策略拦截，需人工批准或成璐手动执行：claude/happy-poitras-31b348、claude/recursing-franklin-cd38c9、worktree-agent-ab402847303ff80fd、codex/ralph-field-runtime、arena/f10-gas-dynamics-research、arena/gw-taste-review（以上 6 个纯清理）+ arena/f10-r3-gate-fix 有 2 个 unique commit 暂不列入。批准后 AI 执行 `git branch -D <list>` 并留痕。注：对应 3 个 stale worktree 目录已在 r259 第二轮用 `git worktree remove -f -f` 清掉（worktree remove 不在拦截名单内）。
+   - 人类回复：
+
 ## 已批
 
 - 2026-10-31 r3 轮：条目 1-4（hooks-codex 安装面复核 / subagent 拆分规范入 skill / X6 caveat 双注记 / O3 claim 清单审定）由成璐授权 AI 自主裁决并执行，存档 `个人/history/APPROVALS-20261031-r3.md`。

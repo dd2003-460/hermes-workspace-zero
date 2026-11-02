@@ -69,7 +69,7 @@
 - **v2 修复**: 种子 BH 排除 (m_bh>=1e-7) + 占据率分母改全晕群体 + LOGM_H_EDGES 单位修正
 - **验证**: f_occ(z=0, >1e6) @ logM_h>=1.5 = [0.972, 0.999, 1.0] → PASS
 - **GWTC-4.0**: 观测数字表已落盘 (literature/notes/gwtc4-bhmf-numbers.md)
-- **卡人项**: 任务 C 取消与否待成璐确认 (memory/task-c-status-correction.md)
+- **卡人项**: 任务 C 取消与否待成璐确认 (projects/理论物理/bh-mass-spectrum/memory/task-c-status-correction.md)
 - **目录**: `projects/理论物理/bh-mass-spectrum/bh-mass-spectrum/`
 
 ### 10. Persona Prompt Lab (persona-prompt-lab)

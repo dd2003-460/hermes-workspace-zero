@@ -61,7 +61,7 @@
 | 提示词要指向正确怀疑对象（适用条件 vs 数字） | decomp prompt 设计指南 | 待写入 |
 
 ### 可复用的方法资产（跨项目）
-1. **assert-* 断言脚本模式**（pfb ablation/scripts/）：schema 校验 + 实跑回归 + SIGNAL/FAIL 分级 + 禁区零漂移复核。这套模式可以直接复制到 decomp 的 bench 验证层（目前 decomp 的验证靠人工 review.md）。
+1. **assert-* 断言脚本模式**（pfb ablation/scripts/）：schema 校验 + 实跑回归 + SIGNAL/FAIL 分级 + 禁区零漂移复核。✅ 已移植 → decomp bench/scripts/assert-gold-coverage.py (2026-11-02, @ f547f8d)。
 2. **对抗核验任务书模板**（pfb TASK-adversarial-check.md + decomp T8-C3-v3-adversarial-check.md）：6 质询结构 + 逐条 PASS/FAIL-with-fixes 回执 JSON。✅ 已合并 → sop/adversarial-check-template.md (2026-11-02)。
 3. **arena battle 盲评通道**（本会话新建）：投票揭示模型名 = 免费多族独立打分器。SOP 已在 ~/.hermes/rules/arena.md，但"battle 投票→提取响应→Fleiss'κ"这条完整链路还没写成可执行脚本。
 4. **限定语条款范式**（AUDIT-report §6）：数值结论强制带双重限定引用（相对 Lead-gold + 同族双 judge）。这个范式适用于任何"分数对外宣称"场景，值得升格为全局写作规则。

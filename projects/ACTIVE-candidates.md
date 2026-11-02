@@ -15,7 +15,7 @@
 
 ## #8 decomp · T17 泛化 bench（方法论跨域验证）
 
-- **状态**：进行中（r245t-r245v，decomp @ feb7a44）。gold×4 已建好（model-selection/inference-infra/rag-vs-longctx/methodology），本轮跑 3 域 × 2 run。
+- **状态**：跑批中（r245t-r245w，decomp @ 8176417；model-selection-a 已产出 ~3 分钟/run，预计 20:55 前后 6 run 齐）。gold×4 已建好（model-selection/inference-infra/rag-vs-longctx/methodology），本轮跑 3 域 × 2 run。
 - **测什么**：正交拆解+原子化方法论能否在形状完全不同的问题上长出同样可验算的树（硬件题候选是 GPU、叶子是物理量；模型选型题候选是 LLM、叶子是基准分/单价/许可证——根标量同构但树形不同）。
 - **执行**：本地 ninfer :8787 (qwen3.8-27b) 直跑 agent 拆解 + 同族判官按 18 分制 rubric 打分（S1-S5 结构通用 + C1-C4 按域锚定 gold L1）。分数只作域间相对比较，不作绝对质量声明。
 - **验收**：6 份树产出 + scores.json + 与 27B 硬件基准对比的泛化初步结论。

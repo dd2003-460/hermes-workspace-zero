@@ -72,6 +72,17 @@
 - W1 权重公式具体参数（绑定当前 gold tree 结构）
 - decomp σ=1.53 基线数值（绑定当前题集，换题作废）
 
+## E. r259 增量结论（2026-11-03，research-prompt + pfb pilot 线）
+
+### research-prompt 七版消融定案（R0→R0.6 + retest-32k）
+1. **多契约叠加引入崩塌概率**：单契约修复有效（R0.1 C3/C4 Δ+0.33），但 R0.4/R0.5 叠到 3+ 契约后崩塌率飙升——prompt 层面已到极限，模型能力是硬约束。
+2. **max_tokens 截断假说被推翻**：retest-32k 对照（16000→32000）显示 R0.3 在 32k 下 18/18/18 σ=0、R0.5 仍 3/3 崩（6/0/0）——崩塌与输出上限无关，归因最终确认为模型指令遵循随机性边界。后续 run 脚本统一 max_tokens=32000 防截断噪声混入（正确做法不变）。
+3. **可复用规则**：跨版本比较必须统一 max_tokens；「随机崩塌」初判前必须先做参数对照实验排除配置交互。
+
+### pfb pilot-matrix 收口（rubric v3 冻结后的异源双判）
+1. **pilot κ=0.857 (n=162, strict 口径) 过门禁**——judge 双判（异源两模型）一致性达标，rubric v3 评分协议可信度确认。
+2. **O1 维度 κ=0.506 是唯一弱项**——深度分「有实质内容」本质是语义判断（呼应 A 区负结果 #14），机判边界诚实登记，后续该维度需人工或多 judge 交叉。
+
 ## D. 存放位置说明
 - pfb 结论主体：`bench/rubric-v3/AUDIT-report.md`（§5 负结果 15 条 + §1 G1-G5 汇总）+ `ablation/ablation-result.md`
 - decomp 结论主体：`reports/decomp-technical-report.md`（可发表级）+ `memory/2026-10-21-arena-adversarial-review.md`（被打脸记录）+ `memory/2026-10-28-methodology-test-log.md`

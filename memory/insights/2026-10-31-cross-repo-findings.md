@@ -58,7 +58,7 @@
 | 同族双 judge 无家族隔离价值 → 多 judge 必须异族 | sop/arena-loop-pipeline.md §3.1 judge 条款 | ✅ 已写入 (2026-11-02) |
 | n=3 统计设计产不出显著性 → 预注册功效分析（Δ=2 需 ~11 对） | decomp measurement-protocol.md | ✅ 已写入 (2026-11-02, decomp @ 9ef0e67) |
 | 引用统计量必须带口径限定（tie-break/聚合口径/judge 族） | sop/goal-template.md §4 | ✅ 已写入 (2026-11-02) |
-| 提示词要指向正确怀疑对象（适用条件 vs 数字） | decomp prompt 设计指南 | 待写入 |
+| 提示词要指向正确怀疑对象（适用条件 vs 数字） | decomp memory/prompt-design-guide.md | ✅ 已写入 (2026-11-02) |
 
 ### 可复用的方法资产（跨项目）
 1. **assert-* 断言脚本模式**（pfb ablation/scripts/）：schema 校验 + 实跑回归 + SIGNAL/FAIL 分级 + 禁区零漂移复核。✅ 已移植 → decomp bench/scripts/assert-gold-coverage.py (2026-11-02, @ f547f8d)。

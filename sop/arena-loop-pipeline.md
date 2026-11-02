@@ -41,7 +41,7 @@
 
 | 任务类型 | 仓库 | 说明 |
 |---------|------|------|
-| decomp T4 消融 | `dd2003-460/decomp-bench` | 任务书在 `tasks/T4-arena-batch*.md` |
+| decomp T4 消融 | `dd2003-460/decomp-bench` | 任务书在 `tasks/T4-arena-batch*.md`。**2026-11-02 r237：GitHub binding 失效（agent 侧 403 "Write access to repository not granted"，T7.2 会话 01a19a08 卡死于此）→ 需成璐在 arena UI 重绑 decomp-bench；T8 Part B 文献调研任务书已就绪 @ main c358b48（tasks/T8-partB-lit-survey-task.md），重绑后直接派发** |
 | prompt-first 流程调研 | `dd2003-460/prompt-first-bench`（2026-10-22 建） | 任务书在 `tasks/` |
 | 风格蒸馏 | `dd2003-460/persona-distill`（假设） | 任务书在 `tasks/` |
 | 论文校对 | `dd2003-460/academic-AI`（假设） | 任务书在 `tasks/` |

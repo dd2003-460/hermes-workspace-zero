@@ -4,8 +4,8 @@
   "loop_phase": "01-goal-decomposition",
   "status": "active",
   "priority": "HIGHEST",
-  "current_task": "R5 run5 完成 (M8 新指标题, 防复读): receipt.md + m8-proposal.md + scoring-r5.json (weighted 84.75) @ r5/run5/; bench.md n=4 mean 78.81±7.07 push pfb arena/78602cd5 (8892a94); M8 shadow metric 单列 (n=1 不可估 r, 建议 ≥5 run 后按 |r|>0.7 规则决定并入权重); 下一步: R5.1 ChatGPT 独立打分 run1-run5 → Fleiss κ 一致性 → bench.md r5…",
+  "current_task": "R5.1 完成: ChatGPT 独立打分 run1-run4 (24分) + Fleiss κ=0.258 (根因=证据包版本不对称, M2/M5 信息差) + n=5 首次有效权重校准 (M1 r=0.85/M3 r=0.735; M5降权0.1477→0.1192) + bench.md r5.1 落盘 (n=5 mean 78.91±13.15, run4 97.63 领跑, run2 垫底差距在 M1 重发放大). 工件: r5/bench-r5.1.json + independent-scoring-chatgpt-r5.1.json. 下一步: r6 补 run5 盲打 + 新权重复算稳定性 + push pfb.",
   "created": "2026-10-22",
   "rationale": "用户 2026-10-22 指示：效率提高（prompt 改善性能和速度 + 识别瓶颈）优先级放最高",
-  "updated_at": "2026-10-29T23:52:25.875437+08:00"
+  "updated_at": "2026-11-03T08:00:00+08:00"
 }

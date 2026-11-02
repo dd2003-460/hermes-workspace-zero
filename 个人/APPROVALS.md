@@ -21,7 +21,10 @@
 2. **PFB 第三 seed 功效 run（~2h ninfer 算力，r238b 登记）**：C3 v3 主分析已收口（receipt-r6-mainanalysis.json @ ee4f2a5），唯一剩余可执行项 = 对 9 configs × D1/D2 各加 seedc 共 18 run + J1/J2 双判 36 调用，n 从 6/cell 提到 9/cell。需 ninfer :8000 批量通道（本地降级也可跑但更慢）。预算放行即派。
    - 人类回复：
 
-3. **workspace 仓 stale 分支清理（r259 登记，cron 安全策略拦截 force delete）**：以下 7 个本地分支内容已全部包含在 main（merge-base --is-ancestor 验证 CONTAINED，零丢失），但 `git branch -D` 被 cron 无人在场安全策略拦截，需人工批准或成璐手动执行：claude/happy-poitras-31b348、claude/recursing-franklin-cd38c9、worktree-agent-ab402847303ff80fd、codex/ralph-field-runtime、arena/f10-gas-dynamics-research、arena/gw-taste-review（以上 6 个纯清理）+ arena/f10-r3-gate-fix 有 2 个 unique commit 暂不列入。批准后 AI 执行 `git branch -D <list>` 并留痕。注：对应 3 个 stale worktree 目录已在 r259 第二轮用 `git worktree remove -f -f` 清掉（worktree remove 不在拦截名单内）。
+3. **stale 分支清理（r259 登记，cron 安全策略拦截 force delete）**：以下本地分支内容已全部包含在 main（merge-base --is-ancestor 验证 CONTAINED，零丢失），但 `git branch -D` 被 cron 无人在场安全策略拦截，需人工批准或成璐手动执行。批准后 AI 执行 `git branch -D <list>` 并留痕。
+   - workspace 仓 6 个：claude/happy-poitras-31b348、claude/recursing-franklin-cd38c9、worktree-agent-ab402847303ff80fd、codex/ralph-field-runtime、arena/f10-gas-dynamics-research、arena/gw-taste-review（对应 3 个 stale worktree 目录已在 r259 第二轮用 `git worktree remove -f -f` 清掉）；arena/f10-r3-gate-fix 有 2 个 unique commit 暂不列入
+   - pfb 仓 54 个（r259f 核查新增）：全部为已收口的 ralph/* 任务分支 + tmp-* / decomp-main / decomp-t8task / v0.1-cache-ratio-removal 等临时分支，均 contained in main；未含 unique commit 的 8 个（decomp-main(202) / decomp-t8task(193) / tmp-b908c05f(193) / tmp-decomp-main(202) / tmp-e31379c5(200) / ralph/g1b-hetero-judge-dispatch(3) / tmp/closurecheck-neg-samples(4) / v0.1-cache-ratio-removal(2)）属独立历史线，先保留待确认
+   - research-prompt 仓 1 个：ralph/prompt-contract-ablation（contained，七版消融已收口于 R0.3）
    - 人类回复：
 
 ## 已批

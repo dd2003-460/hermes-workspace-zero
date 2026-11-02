@@ -41,6 +41,13 @@
 - **阻塞**: 1000G v3 EUR ref (clumping) + OpenGWAS token (Step3 condition-F)
 - **目录**: `projects/健康长寿/D1-longevity-orthogonal/repo/`
 
+### 7. 金融 D1 — Crypto 日频信号探索 (F 系列)
+- **状态**: ✅ CLOSED (负面结果) — 8 个独立假设全量回测完成
+- **核心结论**: 免费公开数据约束下不存在可交易的日频统计套利/择时信号 (conf 0.85)
+- **机制发现**: ① 动量延续 > 超调回归 (胜率 70-87% 翻转后) ② 免费信息高度同源 (ρ=0.3-0.5) ③ 信号以年为单位衰减
+- **收口报告**: `projects/金融/D1-financial-market-analysis/loop-artifacts/stages/exploration/f-series-summary-report.md`
+- **如需继续**: Deribit IV 采集器 (零成本, 3 个月积累) 或 Glassnode free tier (90 天历史)
+
 ## 已归档/阻塞
 - DistCat v5 / BayesFrame v2.0: 等 GW-BacQFT 提交后处理
 - Batch2 第二域数据: blocked-on-external

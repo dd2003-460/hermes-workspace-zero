@@ -6,7 +6,7 @@
 |---|------|----------------------|-----------|--------------|------|
 | 1 | 金融·正交信号源 | hermes-workspace-zero (D1-financial-market-analysis) | F7 三市场组合 FAIL（信息冗余），F10 agent-game-model 在探索阶段 | 外包 arena 调研链上资金流/期权 skew 数据可得性 → 定 F8 实验设计 | open |
 | 2 | 写作·动机社会 | from-motivation-to-society | Part I-V 全写完，等 P2 实验第一个数（30人30天≥40%信念迁移），solo 0美元方案已写好 | 起草 P2 实验招募文案 + 渠道对比（待你拍板渠道） | open·半阻塞(渠道) |
-| 3 | 健康·MR L1 完成 | longevity-orthogonal-contribution | Step1 阳性对照 ✅ + Step2 负对照代理 ✅ + **Step4 L1 正式 MR 完成**（BMI/LDL × 5 FinnGen 结局 = 10 pair，Egger 为主估计）：BMI→CHD Egger OR=1.17, LDL→CHD OR=1.40, BMI→CKD OR=1.28, LDL→AD OR=1.63；LDL→Lung/CKD 方向 <1（保护性，需解读）。结果已推 main (153fb16) | 下一步：写执行报告 + verify_integrity + 解读各 pair 生物学合理性 → 论文素材 | open |
+| 3 | 健康·MR L1 完成 | longevity-orthogonal-contribution | **阶段2 全部本地工作完成** (b7a9a83)：Step1✅ Step2✅ Step4 L1✅ (10 pair, Egger 为主) + verify_integrity C1-C24 PASS + 执行报告 + LDL→AD 管线伪影诊断(方向一致性69%)。BMI→CHD Egger OR=1.17, LDL→CHD OR=1.40, BMI→CKD OR=1.28 | blocked: 1000G v3 EUR ref (clumping, 所有源已死) + OpenGWAS token (Step3 condition-F)。本地 open-data 已穷尽 | blocked-on-credentials |
 | 4 | 物理·ORF 收尾 | -orf | Stage 4 组件全完成，LaTeX 86→0（2026-11-02），arXiv tarball 已打好（2026-11-02） | arXiv 手动上传（同 GW-BacQFT） | open→upload |
 | 5 | 视频复刻·batch-12 | d1-video-recreation | batch-12 E29-E32 全部完成（4/4 ✅，eccff00），已推 main | 无待办 — 等下一批规划 | done |
 | 6 | 杂乱 idea 池 | conversation-raw-materials / D1-academic-AI raw ideas | 历史对话素材 + AI 研究猜想未消化 | 低优先级：定期蒸馏进对应领域项目，不单独立项 | backlog |

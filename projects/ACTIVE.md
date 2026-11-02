@@ -1,12 +1,12 @@
 # ACTIVE — 活跃项目面板
 
-**自动生成**: 2026-11-02 12:01 — 由 scripts/aggregate-active.sh 聚合
+**自动生成**: 2026-11-02 12:28 — 由 scripts/aggregate-active.sh 聚合
 
 ## 焦点项目
 
 | 项目 | 相对路径 | 阶段 | 迭代 | 状态 | 当前任务 |
 |------|----------|------|------|------|----------|
-| D1-longevity-orthogonal | `健康长寿/D1-longevity-orthogonal/` | 01 | r1 | running | T4a 覆盖表完成: 无 token 路线 9 个合法 MR pair (BMI×6 + LDL×3), Step1/2 可跑, Step3 条件F 阻塞在 OpenGWAS JWT; 下一步 T5 下载 FinnGen+GIANT/GLG |
+| D1-longevity-orthogonal | `健康长寿/D1-longevity-orthogonal/` | 01 | r1 | running | T5 Step1 阳性对照通过 (BMI->CHD OR=3.0 p=1e-22, LDL->CHD p=9e-7); manual IVW no-clump; 正式跑需补等位基因做 harmonisation |
 | D1-efficiency-optimization | `AI-计算科学/D1-efficiency-optimization/` | 01-goal-decomposition | 1 | active | R5 run5 完成 (M8 新指标题, 防复读): receipt.md + m8-proposal.md + scoring-r5.json (weighted 84.75) @ r5/run5/; bench.md n=4 mean  |
 | quant-capital-flow | `金融/quant-capital-flow/` | unknown | 1 | in_progress | toy model v15 联合优化完成（十五连败确认框架不够），转其他研究方向 |
 | bh-mass-spectrum | `理论物理/bh-mass-spectrum/` | active | 2 | active | P1-5 PISN 间隙正式图完成 (fig4: none/S15/S17 BHMF + GWTC-4.0 观测间隙带叠加) @ ae2c4008; GWTC-4.0 观测数字表落盘 literature/notes/。下一步候选：任务 A |

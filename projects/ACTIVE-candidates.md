@@ -11,6 +11,6 @@
 | 5 | 视频复刻·batch-12 | d1-video-recreation | batch-12 E29-E32 全部完成（4/4 ✅，eccff00），已推 main | 无待办 — 等下一批规划 | done |
 | 6 | 杂乱 idea 池 | conversation-raw-materials / D1-academic-AI raw ideas | 历史对话素材 + AI 研究猜想未消化 | 低优先级：定期蒸馏进对应领域项目，不单独立项 | backlog |
 
-| 7 | 物理·BH 质量谱 + 实验框架 T8 | bh-mass-spectrum / decomp / pfb | BH 任务C 完成（e2d419b）；**T21-RR 调研完成 @ 2482280**（MI300X 价格 tracker $20.3-26.5k + Millstone 27B 实测锚 + ROCm 独立验证 50-75% 带，flagship-eval S3 从全假设升级为有锚）；T8 Part C 仍 blocked（arena 403 + ninfer）；rubric v2 全量重放后台执行中 | 等重放回执 AC1-AC4；Part C 待 arena binding 修复 | active·后台执行中 |
+| 7 | 物理·BH 质量谱 + 实验框架 T8 | bh-mass-spectrum / decomp / pfb | BH 任务C 完成（e2d419b）；T21-RR 调研完成 @ 2482280；**T8 Part C 对抗核验已派发 arena @ r245i**（decomp-bench 会话，6 条质询清单，预计 10-30 min）；rubric v2 重放仍在跑 | 等 arena 回执 receipt-c3v3-adversarial-r243.md + rubric 重放回执 | active·arena 执行中 |
 
 **优先级建议**（P1 实际问题 > P2 完成度低优先）：#4 ORF 收尾（离产出最近，纯本地活）≈ #3 健康 dry-run（解锁整条 MR 链）> #5 视频（纯执行）> #1 金融（需调研先行）> #2 写作（等你拍板）。

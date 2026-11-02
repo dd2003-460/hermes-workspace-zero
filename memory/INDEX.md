@@ -35,10 +35,11 @@
 - **目录**: `projects/写作-社会系统/D2-efficient-propagation-book/`
 
 ### 6. 长寿正交贡献 MR (D1-longevity-orthogonal)
-- **状态**: ✅ 阶段2 L1 完成 (Step1-4 + verify_integrity + 执行报告 + LDL→AD 诊断)
+- **状态**: ✅ 阶段2 MR v3 完成 (position-based clumping, 无外部LD参考) — 方向反转确认
 - **核心**: GIANT/GLGC 暴露 × FinnGen R13 结局的两样本 MR (IVW/Egger/WMed, 10 pair)
-- **关键结果**: BMI→CHD Egger OR=1.17; LDL→CHD Egger OR=1.40; LDL→AD OR=1.63 = 管线伪影(方向一致性仅69%)
-- **阻塞**: 1000G v3 EUR ref (clumping) + OpenGWAS token (Step3 condition-F)
+- **关键结果 (v3)**: BMI→CHD Egger OR=0.847; LDL→CHD Egger OR=0.807 (保护性/无效应); 之前 no-clump OR=1.17/1.40 为 LD 块相关 SNP 伪影; 判定=免费数据约束下无稳健因果信号
+- **方法限制**: 10Mb 位置窗口替代真 LD clumping (r²=0.001); BMI 67 + LDL 53 instruments
+- **阻塞**: 1000G v3 EUR ref (真 LD clumping 验证) + OpenGWAS token (Step3 condition-F)
 - **目录**: `projects/健康长寿/D1-longevity-orthogonal/repo/`
 
 ### 7. 金融 D1 — Crypto 日频信号探索 (F 系列)
@@ -52,3 +53,9 @@
 - DistCat v5 / BayesFrame v2.0: 等 GW-BacQFT 提交后处理
 - Batch2 第二域数据: blocked-on-external
 - Family-upgrade / kappa-recalibrate: blocked-on-external
+
+### 8. Decomp Bench (T7/T8)
+- **状态**: T7 全收口; T8 Part B 文献调研完成 (arena, 7 sources); T8 Part C 待实验设计
+- **核心**: prompt-first 消融研究 — L1 组件级 + pipeline 阶段级
+- **T8 Part B 关键发现**: Q1 阶段效应不均但非纯 prompt 效应; Q2 critic 有效条件=可定位可执行反馈; Q3 边际递减有例证非通用规律; Q4 L1→pipeline=待测方向不可直接迁移
+- **目录**: `projects/decomp/`

@@ -54,10 +54,10 @@
 ### 可直接进 SOP 的（流程规则级）
 | 结论 | 去向 | 状态 |
 |---|---|---|
-| 纸面协议防护力为零 → 验收项="有没有人真的跑过" | sop/goal-template.md 验收标准节 | 待写入 |
-| 同族双 judge 无家族隔离价值 → 多 judge 必须异族 | sop/arena-loop-pipeline.md judge 选择条款 | 待写入 |
-| n=3 统计设计产不出显著性 → 预注册功效分析（Δ=2 需 ~11 对） | decomp 测量协议 + pfb 统计条款 | 部分已有（σ 基线），功效条款缺失 |
-| 引用统计量必须带口径限定（tie-break/聚合口径/judge 族） | AUDIT-report §6 限定语条款范式 → 通用引用规则 | pfb 内已有，未升格为全局 SOP |
+| 纸面协议防护力为零 → 验收项="有没有人真的跑过" | sop/goal-template.md §4 | ✅ 已写入 (2026-11-02) |
+| 同族双 judge 无家族隔离价值 → 多 judge 必须异族 | sop/arena-loop-pipeline.md §3.1 judge 条款 | ✅ 已写入 (2026-11-02) |
+| n=3 统计设计产不出显著性 → 预注册功效分析（Δ=2 需 ~11 对） | decomp measurement-protocol.md | ✅ 已写入 (2026-11-02, decomp @ 9ef0e67) |
+| 引用统计量必须带口径限定（tie-break/聚合口径/judge 族） | sop/goal-template.md §4 | ✅ 已写入 (2026-11-02) |
 | 提示词要指向正确怀疑对象（适用条件 vs 数字） | decomp prompt 设计指南 | 待写入 |
 
 ### 可复用的方法资产（跨项目）

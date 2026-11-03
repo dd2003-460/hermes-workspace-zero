@@ -1,0 +1,33 @@
+{
+  "assumptions": [],
+  "attribute_matrix": [
+    {
+      "attribute": "任务描述",
+      "concept": "用户原始任务",
+      "confidence": 1.0,
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "user:initial_task"
+      ],
+      "impact": "material",
+      "rationale": "用户初始任务输入，作为本阶段已知背景字段。",
+      "reversible": false,
+      "role": "background"
+    }
+  ],
+  "authoritative_inputs": [
+    {
+      "characters": 71,
+      "kind": "initial_task",
+      "sha256": "7e83548377bcdc71",
+      "source": "ralph run",
+      "text": "T17 benchmark 跑完出分：等 runner 退出后聚合各 cutoff 分数，生成对比表，更新 decomp loop-state"
+    }
+  ],
+  "constraints": [],
+  "open_questions": [],
+  "scenarios": [],
+  "semantic_map": {},
+  "status": "unclarified",
+  "success_criteria": []
+}

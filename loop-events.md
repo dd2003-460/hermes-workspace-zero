@@ -36409,3 +36409,175 @@ RALPH_EVENT -->
 
 - none
 
+## ?-? | pretooluse_observed
+
+<!-- RALPH_EVENT
+{
+  "artifact_refs": [],
+  "event_id": "959b98e5-c635-4d4a-a1e8-d65a23e914c8",
+  "observation": {
+    "agent_id": null,
+    "command": null,
+    "decision": "deny",
+    "mode": "hybrid",
+    "reason": "RALPH_FEEDBACK[FIELD_AGENT_NOT_NEEDED]\n已检测到：当前没有 ready/pending 的 research_required 字段任务。\n立即修正：本轮应由 Commander 直接增量填写结构字段，不需要启动无边界 Agent。\n唯一下一步：写入当前阶段的 fields.json 后运行 `ralph field-apply . <fields.json>`；填写完成后按提示运行 `ralph apply`。\n禁止：没有 research_required 字段时派发未绑定 Agent，或把结构分解交给旧 task-card/auditor 协议。",
+    "role": "commander",
+    "target_path": null,
+    "task_card_id": null,
+    "tool_name": "Agent"
+  },
+  "timestamp": "2026-11-03T16:50:07+00:00",
+  "type": "pretooluse_observed"
+}
+RALPH_EVENT -->
+
+### Agent 输出摘录
+
+
+
+### 验证结果
+
+{}
+
+### 文件和证据
+
+- none
+
+## ?-? | pretooluse_observed
+
+<!-- RALPH_EVENT
+{
+  "artifact_refs": [],
+  "event_id": "fcbc3b37-3450-4074-9ed2-69ca571774a9",
+  "observation": {
+    "agent_id": null,
+    "command": "ralph field-init .",
+    "decision": "allow",
+    "mode": "hybrid",
+    "reason": "controlled ralph runtime command",
+    "role": "commander",
+    "target_path": null,
+    "task_card_id": null,
+    "tool_name": "Bash"
+  },
+  "timestamp": "2026-11-03T16:51:32+00:00",
+  "type": "pretooluse_observed"
+}
+RALPH_EVENT -->
+
+### Agent 输出摘录
+
+
+
+### 验证结果
+
+{}
+
+### 文件和证据
+
+- none
+
+## ?-? | posttooluse_observed
+
+<!-- RALPH_EVENT
+{
+  "artifact_refs": [],
+  "event_id": "147b7756-9935-4346-b0b5-d2a060c2c1ed",
+  "observation": {
+    "agent_id": null,
+    "mode": "hybrid",
+    "task_card_id": null,
+    "task_card_status": null,
+    "tool_name": "Bash",
+    "tool_response": {
+      "stderr": "",
+      "stdout": "{\n  \"created\": false,\n  \"fields_file\": \"/Users/a1-6/Desktop/workspace/loop-artifacts/stages/02/r1/fields.json\",\n  \"next\": \"填写该文件后运行 `ralph field-apply /Users/a1-6/Desktop/workspace /Users/a1-6/Desktop/workspace/loop-artifacts/stages/02/r1/fields.json`\",\n  \"ok\": true,\n  \"stage\": {\n    \"failure_condition\": \"存在未\n[… 中间诊断内容已截断 …]\n研 subagent 直接搜索（关键词不加年份，获取最新结果）\",\n    \"name\": \"未知信息调研\",\n    \"on_failure\": \"02\",\n    \"on_human_block\": \"exploration\",\n    \"on_success\": \"02.5\",\n    \"required_outputs\": [\n      \"research_findings\"\n    ],\n    \"revision\": \"r1\",\n    \"success_condition\": \"所有 research_required 字段已调研带回 evidence_refs，无未带证据的调研字段\"\n  }\n}"
+    }
+  },
+  "timestamp": "2026-11-03T16:51:32+00:00",
+  "type": "posttooluse_observed"
+}
+RALPH_EVENT -->
+
+### Agent 输出摘录
+
+
+
+### 验证结果
+
+{}
+
+### 文件和证据
+
+- none
+
+## ?-? | pretooluse_observed
+
+<!-- RALPH_EVENT
+{
+  "artifact_refs": [],
+  "event_id": "be4ee269-4969-4546-99f2-293bce0b36c2",
+  "observation": {
+    "agent_id": null,
+    "command": null,
+    "decision": "allow",
+    "mode": "hybrid",
+    "reason": "tool allowed in field-centric mode",
+    "role": "commander",
+    "target_path": "/Users/a1-6/Desktop/workspace/loop-artifacts/stages/02/r1/fields.json",
+    "task_card_id": null,
+    "tool_name": "Read"
+  },
+  "timestamp": "2026-11-03T16:53:22+00:00",
+  "type": "pretooluse_observed"
+}
+RALPH_EVENT -->
+
+### Agent 输出摘录
+
+
+
+### 验证结果
+
+{}
+
+### 文件和证据
+
+- none
+
+## ?-? | posttooluse_observed
+
+<!-- RALPH_EVENT
+{
+  "artifact_refs": [],
+  "event_id": "9aa9ccee-621e-48e1-831d-ee3562e80458",
+  "observation": {
+    "agent_id": null,
+    "mode": "hybrid",
+    "task_card_id": null,
+    "task_card_status": null,
+    "tool_name": "Read",
+    "tool_response": {
+      "keys": [
+        "type",
+        "file"
+      ]
+    }
+  },
+  "timestamp": "2026-11-03T16:53:22+00:00",
+  "type": "posttooluse_observed"
+}
+RALPH_EVENT -->
+
+### Agent 输出摘录
+
+
+
+### 验证结果
+
+{}
+
+### 文件和证据
+
+- none
+

@@ -99,3 +99,6 @@ projects/persona-prompt-lab/
 *.!
 ego-b12-*/
 loop-artifacts/tmp-*/
+
+# ego 批次工作目录（一次性产物，b12/b13+）
+ego-b*/

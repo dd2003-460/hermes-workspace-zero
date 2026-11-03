@@ -21,7 +21,7 @@
 - **前置**：runner 16:10 重启后恢复，conv3 q195/604 (98%)。
 - **触发条件**：runner 退出 + 结果目录出现最终汇总文件。
 - **动作**：ralph 聚合各 cutoff 分数 → 对比表 → 更新 decomp loop-state。
-- **状态**：running（ralph loop 监控+聚合中）
+- **状态**：running（T17 594/604, 98.3%, ralph loop stage 02 运行中，1h keepalive 监督）
 
 ### G3: 金融·正交信号源（F8）— 已收口 + 采集器启动
 - **结论（负面结果）**：免费+PIT+2020-2026日线约束下，crypto 日频信号高度冗余，无可验证正交源。TVL ρ=0.43 冗余；期权IV/OI/多空比/链上流全没免费历史。详见 `tasks/decomposition.md`。

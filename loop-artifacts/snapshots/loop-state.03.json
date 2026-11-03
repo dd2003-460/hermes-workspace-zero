@@ -15,36 +15,182 @@
   "clarification_history": [],
   "current_artifact": "loop-artifacts/stages/03/r1/state.json",
   "exploration_history": [],
-  "field_tasks": [
+  "field_tasks": [],
+  "graph_tasks": [
     {
-      "attribute": "请填写 cross_validation 的正交因素分解",
-      "concept": "阶段 01 输出：cross_validation",
-      "disposition": "pending",
-      "flow_only": false,
-      "id": "02.5-r1-field-01-cross_validation-54a7379f66",
-      "input_refs": [
-        "loop-artifacts/stages/02.5/r1/fields.json"
+      "depends_on": [],
+      "evidence": [
+        "metrics_by_cutoff from locomo_results_20261104_001903.json",
+        "620 预测 json 已聚合"
       ],
-      "instruction": "只处理字段 `阶段 01 输出：cross_validation`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/02.5/r1/tasks/02.5-r1-field-01-cross_validation-54a7379f66.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+      "execution_mode": "serial",
+      "id": "03-r1-node-t17-n1-aggregate",
+      "input_refs": [
+        "tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/"
+      ],
+      "instruction": "只执行 DAG 节点 `t17-n1-aggregate`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "t17-n1-aggregate",
+      "orthogonal_key": null,
+      "output": "top_10 分数表落盘：官方口径 overall 45.57% / temporal 38.41%；健康子集 overall 73.22% / temporal 73.13%",
       "output_schema": {
-        "attribute": "string",
-        "concept": "阶段 01 输出：cross_validation",
-        "confidence": "number 0..1",
-        "disposition": "confirmed|inferred|assumed_default|research_required",
-        "evidence_refs": "array[string]",
-        "rationale": "string",
-        "role": "string"
+        "properties": {
+          "table_md": {
+            "type": "string"
+          }
+        },
+        "type": "object"
       },
-      "path": "loop-artifacts/stages/02.5/r1/tasks/02.5-r1-field-01-cross_validation-54a7379f66.json",
+      "parallel_group_id": null,
+      "parent_id": null,
+      "path": "loop-artifacts/stages/03/r1/tasks/03-r1-node-t17-n1-aggregate.json",
+      "postconditions": [
+        "报告含 top_1..top_10 × overall/temporal × 官方口径/健康子集口径 四组分数表"
+      ],
+      "preconditions": [
+        "runner 已退出且预测文件数稳定 ≥604"
+      ],
       "revision": "r1",
-      "role": "cross_validation",
       "schema_version": 1,
-      "stage_id": "02.5",
-      "status": "ready",
-      "type": "field_task"
+      "stage_id": "03",
+      "status": "completed",
+      "type": "graph_task",
+      "updated_at": "2026-11-03T19:46:10.168358+00:00",
+      "writes": [
+        "loop-artifacts/stages/04/r1/t17-cutoff-table.md"
+      ]
+    },
+    {
+      "depends_on": [
+        "t17-n1-aggregate"
+      ],
+      "evidence": [
+        "Perplexity follow-up 确认 610−152−81−26=351 账目闭合"
+      ],
+      "execution_mode": "serial",
+      "id": "03-r1-node-t17-n2-dirty-mark",
+      "input_refs": [
+        "tools/memory-benchmarks/results/locomo/t17-cutoff-table.md",
+        "tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json"
+      ],
+      "instruction": "只执行 DAG 节点 `t17-n2-dirty-mark`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "t17-n2-dirty-mark",
+      "orthogonal_key": null,
+      "output": "conv0(检索全空)/conv1(ingestion残缺)/conv4(生成全空) 标记 excluded-dirty；健康子集=conv2+3(351题) 单列口径",
+      "output_schema": {
+        "properties": {
+          "marked_convs": {
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "parallel_group_id": null,
+      "parent_id": null,
+      "path": "loop-artifacts/stages/03/r1/tasks/03-r1-node-t17-n2-dirty-mark.json",
+      "postconditions": [
+        "conv0(检索全空)/conv1(ingestion残缺)/conv4(生成全空) 在表中显式标 excluded-dirty，健康子集=conv2+3 单列"
+      ],
+      "preconditions": [
+        "N1 分数表已落盘"
+      ],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "03",
+      "status": "completed",
+      "type": "graph_task",
+      "updated_at": "2026-11-03T19:46:10.293135+00:00",
+      "writes": [
+        "loop-artifacts/stages/04/r1/t17-dirty-marking.md"
+      ]
+    },
+    {
+      "depends_on": [
+        "t17-n2-dirty-mark"
+      ],
+      "evidence": [
+        "smoke01 baseline overall 60.0%/temporal 0% (n=2)"
+      ],
+      "execution_mode": "serial",
+      "id": "03-r1-node-t17-n3-compare",
+      "input_refs": [
+        "tools/memory-benchmarks/results/locomo/t17-dirty-marking.md"
+      ],
+      "instruction": "只执行 DAG 节点 `t17-n3-compare`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "t17-n3-compare",
+      "orthogonal_key": null,
+      "output": "对比表落盘：temporal 修复达标（73.13% ≥ 50% 目标线，远超 ±1.5pp 噪声带）；官方口径缺口归因脏数据",
+      "output_schema": {
+        "properties": {
+          "verdict": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "parallel_group_id": null,
+      "parent_id": null,
+      "path": "loop-artifacts/stages/03/r1/tasks/03-r1-node-t17-n3-compare.json",
+      "postconditions": [
+        "full01(官方 vs 健康子集) × smoke01 baseline(overall 60.0%/temporal 0%) 并排对比表落盘，噪声 ±1.5pp 判定 temporal 修复达标(≥50%)"
+      ],
+      "preconditions": [
+        "N2 口径标注完成"
+      ],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "03",
+      "status": "completed",
+      "type": "graph_task",
+      "updated_at": "2026-11-03T19:46:10.420469+00:00",
+      "writes": [
+        "loop-artifacts/stages/04/r1/t17-comparison-table.md"
+      ]
+    },
+    {
+      "depends_on": [
+        "t17-n3-compare"
+      ],
+      "evidence": [
+        "decomp 仓未 checkout，条目同步列为后续动作"
+      ],
+      "execution_mode": "serial",
+      "id": "03-r1-node-t17-n4-writeback",
+      "input_refs": [
+        "tools/memory-benchmarks/results/locomo/t17-comparison-table.md",
+        "loop-artifacts/stages/02.5/r1/cv-field.json"
+      ],
+      "instruction": "只执行 DAG 节点 `t17-n4-writeback`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "t17-n4-writeback",
+      "orthogonal_key": null,
+      "output": "T17 收口回写落盘：done + 关键数字 + 诚实边界(caveats 引 02.5 validation_records)",
+      "output_schema": {
+        "properties": {
+          "updated_entry": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "parallel_group_id": null,
+      "parent_id": null,
+      "path": "loop-artifacts/stages/03/r1/tasks/03-r1-node-t17-n4-writeback.json",
+      "postconditions": [
+        "T17 收口回写文件落盘：状态 done + 关键数字 + 诚实边界(caveats 引 02.5 validation_records)；decomp 仓未在本工作区 checkout，条目同步列为后续动作"
+      ],
+      "preconditions": [
+        "N3 对比表落盘"
+      ],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "03",
+      "status": "completed",
+      "type": "graph_task",
+      "updated_at": "2026-11-03T19:46:10.058618+00:00",
+      "writes": [
+        "loop-artifacts/stages/04/r1/T17-WRITEBACK.md"
+      ]
     }
   ],
-  "graph_tasks": [],
   "history": [
     {
       "action": "advance",
@@ -348,10 +494,166 @@
     "status": "passed"
   },
   "plan": {
-    "joins": [],
-    "nodes": [],
-    "parallel_groups": [],
-    "revision": "r1"
+    "completed": [
+      "t17-n1-aggregate",
+      "t17-n2-dirty-mark",
+      "t17-n3-compare",
+      "t17-n4-writeback"
+    ],
+    "nodes": [
+      {
+        "depends_on": [],
+        "execution_mode": "serial",
+        "id": "t17-n1-aggregate",
+        "input_refs": [
+          "tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/"
+        ],
+        "output_schema": {
+          "properties": {
+            "table_md": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "postconditions": [
+          "报告含 top_1..top_10 × overall/temporal × 官方口径/健康子集口径 四组分数表"
+        ],
+        "preconditions": [
+          "runner 已退出且预测文件数稳定 ≥604"
+        ],
+        "writes": [
+          "loop-artifacts/stages/04/r1/t17-cutoff-table.md"
+        ]
+      },
+      {
+        "depends_on": [
+          "t17-n1-aggregate"
+        ],
+        "execution_mode": "serial",
+        "id": "t17-n2-dirty-mark",
+        "input_refs": [
+          "tools/memory-benchmarks/results/locomo/t17-cutoff-table.md",
+          "tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json"
+        ],
+        "output_schema": {
+          "properties": {
+            "marked_convs": {
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "postconditions": [
+          "conv0(检索全空)/conv1(ingestion残缺)/conv4(生成全空) 在表中显式标 excluded-dirty，健康子集=conv2+3 单列"
+        ],
+        "preconditions": [
+          "N1 分数表已落盘"
+        ],
+        "writes": [
+          "loop-artifacts/stages/04/r1/t17-dirty-marking.md"
+        ]
+      },
+      {
+        "depends_on": [
+          "t17-n2-dirty-mark"
+        ],
+        "execution_mode": "serial",
+        "id": "t17-n3-compare",
+        "input_refs": [
+          "tools/memory-benchmarks/results/locomo/t17-dirty-marking.md"
+        ],
+        "output_schema": {
+          "properties": {
+            "verdict": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "postconditions": [
+          "full01(官方 vs 健康子集) × smoke01 baseline(overall 60.0%/temporal 0%) 并排对比表落盘，噪声 ±1.5pp 判定 temporal 修复达标(≥50%)"
+        ],
+        "preconditions": [
+          "N2 口径标注完成"
+        ],
+        "writes": [
+          "loop-artifacts/stages/04/r1/t17-comparison-table.md"
+        ]
+      },
+      {
+        "depends_on": [
+          "t17-n3-compare"
+        ],
+        "execution_mode": "serial",
+        "id": "t17-n4-writeback",
+        "input_refs": [
+          "tools/memory-benchmarks/results/locomo/t17-comparison-table.md",
+          "loop-artifacts/stages/02.5/r1/cv-field.json"
+        ],
+        "output_schema": {
+          "properties": {
+            "updated_entry": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "postconditions": [
+          "T17 收口回写文件落盘：状态 done + 关键数字 + 诚实边界(caveats 引 02.5 validation_records)；decomp 仓未在本工作区 checkout，条目同步列为后续动作"
+        ],
+        "preconditions": [
+          "N3 对比表落盘"
+        ],
+        "writes": [
+          "loop-artifacts/stages/04/r1/T17-WRITEBACK.md"
+        ]
+      }
+    ],
+    "ready": [],
+    "task_results": {
+      "t17-n1-aggregate": {
+        "artifact_refs": [
+          "loop-artifacts/stages/04/r1/t17-cutoff-table.md"
+        ],
+        "evidence": [
+          "metrics_by_cutoff from locomo_results_20261104_001903.json",
+          "620 预测 json 已聚合"
+        ],
+        "output": "top_10 分数表落盘：官方口径 overall 45.57% / temporal 38.41%；健康子集 overall 73.22% / temporal 73.13%",
+        "updated_at": "2026-11-03T19:46:10.164663+00:00"
+      },
+      "t17-n2-dirty-mark": {
+        "artifact_refs": [
+          "loop-artifacts/stages/04/r1/t17-dirty-marking.md"
+        ],
+        "evidence": [
+          "Perplexity follow-up 确认 610−152−81−26=351 账目闭合"
+        ],
+        "output": "conv0(检索全空)/conv1(ingestion残缺)/conv4(生成全空) 标记 excluded-dirty；健康子集=conv2+3(351题) 单列口径",
+        "updated_at": "2026-11-03T19:46:10.288927+00:00"
+      },
+      "t17-n3-compare": {
+        "artifact_refs": [
+          "loop-artifacts/stages/04/r1/t17-comparison-table.md"
+        ],
+        "evidence": [
+          "smoke01 baseline overall 60.0%/temporal 0% (n=2)"
+        ],
+        "output": "对比表落盘：temporal 修复达标（73.13% ≥ 50% 目标线，远超 ±1.5pp 噪声带）；官方口径缺口归因脏数据",
+        "updated_at": "2026-11-03T19:46:10.416536+00:00"
+      },
+      "t17-n4-writeback": {
+        "artifact_refs": [
+          "loop-artifacts/stages/04/r1/T17-WRITEBACK.md"
+        ],
+        "evidence": [
+          "decomp 仓未 checkout，条目同步列为后续动作"
+        ],
+        "output": "T17 收口回写落盘：done + 关键数字 + 诚实边界(caveats 引 02.5 validation_records)",
+        "updated_at": "2026-11-03T19:46:10.540699+00:00"
+      }
+    }
   },
   "project_id": "workspace",
   "queue": {

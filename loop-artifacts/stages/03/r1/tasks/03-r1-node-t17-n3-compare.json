@@ -1,0 +1,42 @@
+{
+  "depends_on": [
+    "t17-n2-dirty-mark"
+  ],
+  "evidence": [
+    "smoke01 baseline overall 60.0%/temporal 0% (n=2)"
+  ],
+  "execution_mode": "serial",
+  "id": "03-r1-node-t17-n3-compare",
+  "input_refs": [
+    "tools/memory-benchmarks/results/locomo/t17-dirty-marking.md"
+  ],
+  "instruction": "只执行 DAG 节点 `t17-n3-compare`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+  "node_id": "t17-n3-compare",
+  "orthogonal_key": null,
+  "output": "对比表落盘：temporal 修复达标（73.13% ≥ 50% 目标线，远超 ±1.5pp 噪声带）；官方口径缺口归因脏数据",
+  "output_schema": {
+    "properties": {
+      "verdict": {
+        "type": "string"
+      }
+    },
+    "type": "object"
+  },
+  "parallel_group_id": null,
+  "parent_id": null,
+  "postconditions": [
+    "full01(官方 vs 健康子集) × smoke01 baseline(overall 60.0%/temporal 0%) 并排对比表落盘，噪声 ±1.5pp 判定 temporal 修复达标(≥50%)"
+  ],
+  "preconditions": [
+    "N2 口径标注完成"
+  ],
+  "revision": "r1",
+  "schema_version": 1,
+  "stage_id": "03",
+  "status": "completed",
+  "type": "graph_task",
+  "updated_at": "2026-11-03T19:46:10.420469+00:00",
+  "writes": [
+    "loop-artifacts/stages/04/r1/t17-comparison-table.md"
+  ]
+}

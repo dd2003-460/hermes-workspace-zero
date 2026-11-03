@@ -1,0 +1,140 @@
+[
+  {
+    "concept": "阶段 03 产出：task_graph",
+    "role": "task_graph",
+    "disposition": "confirmed",
+    "attribute": "T17 收口执行 DAG：N1 聚合各 cutoff 分数 → N2 脏数据口径标注 → N3 对比表生成 → N4 回写 decomp T17 条目；全部本地可执行，无外部依赖。结构化 DAG 见本字段 task_graph 对象。",
+    "evidence_refs": [
+      "tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/ (620 个预测 json)",
+      "tools/memory-benchmarks/results/locomo/locomo-full01-final-report.md",
+      "loop-artifacts/stages/02.5/r1/cv-field.json"
+    ],
+    "rationale": "02.5 已确认 runner EXITED 且分数已知（官方 top_10 overall 45.57% / temporal 38.41%；健康子集 conv2+3 共 351 题 overall 73.22% / temporal 73.13%），03 只需把聚合-标注-对比-回写拆成最小执行单元。",
+    "observed_at": "2026-11-03T19:44:46.132389+00:00",
+    "task_graph": {
+      "nodes": [
+        {
+          "id": "t17-n1-aggregate",
+          "depends_on": [],
+          "execution_mode": "serial",
+          "input_refs": [
+            "tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/"
+          ],
+          "output_schema": {
+            "type": "object",
+            "properties": {
+              "table_md": {
+                "type": "string"
+              }
+            }
+          },
+          "preconditions": [
+            "runner 已退出且预测文件数稳定 ≥604"
+          ],
+          "postconditions": [
+            "报告含 top_1..top_10 × overall/temporal × 官方口径/健康子集口径 四组分数表"
+          ],
+          "writes": [
+            "tools/memory-benchmarks/results/locomo/t17-cutoff-table.md"
+          ]
+        },
+        {
+          "id": "t17-n2-dirty-mark",
+          "depends_on": [
+            "t17-n1-aggregate"
+          ],
+          "execution_mode": "serial",
+          "input_refs": [
+            "tools/memory-benchmarks/results/locomo/t17-cutoff-table.md",
+            "tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json"
+          ],
+          "output_schema": {
+            "type": "object",
+            "properties": {
+              "marked_convs": {
+                "type": "array"
+              }
+            }
+          },
+          "preconditions": [
+            "N1 分数表已落盘"
+          ],
+          "postconditions": [
+            "conv0(检索全空)/conv1(ingestion残缺)/conv4(生成全空) 在表中显式标 excluded-dirty，健康子集=conv2+3 单列"
+          ],
+          "writes": [
+            "tools/memory-benchmarks/results/locomo/t17-dirty-marking.md"
+          ]
+        },
+        {
+          "id": "t17-n3-compare",
+          "depends_on": [
+            "t17-n2-dirty-mark"
+          ],
+          "execution_mode": "serial",
+          "input_refs": [
+            "tools/memory-benchmarks/results/locomo/t17-dirty-marking.md"
+          ],
+          "output_schema": {
+            "type": "object",
+            "properties": {
+              "verdict": {
+                "type": "string"
+              }
+            }
+          },
+          "preconditions": [
+            "N2 口径标注完成"
+          ],
+          "postconditions": [
+            "full01(官方 vs 健康子集) × smoke01 baseline(overall 60.0%/temporal 0%) 并排对比表落盘，噪声 ±1.5pp 判定 temporal 修复达标(≥50%)"
+          ],
+          "writes": [
+            "tools/memory-benchmarks/results/locomo/t17-comparison-table.md"
+          ]
+        },
+        {
+          "id": "t17-n4-writeback",
+          "depends_on": [
+            "t17-n3-compare"
+          ],
+          "execution_mode": "serial",
+          "input_refs": [
+            "tools/memory-benchmarks/results/locomo/t17-comparison-table.md",
+            "loop-artifacts/stages/02.5/r1/cv-field.json"
+          ],
+          "output_schema": {
+            "type": "object",
+            "properties": {
+              "updated_entry": {
+                "type": "string"
+              }
+            }
+          },
+          "preconditions": [
+            "N3 对比表落盘"
+          ],
+          "postconditions": [
+            "T17 收口回写文件落盘：状态 done + 关键数字 + 诚实边界(caveats 引 02.5 validation_records)；decomp 仓未在本工作区 checkout，条目同步列为后续动作"
+          ],
+          "writes": [
+            "tools/memory-benchmarks/results/locomo/T17-WRITEBACK.md"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "concept": "阶段 03 产出：coverage_proof",
+    "role": "coverage_proof",
+    "disposition": "confirmed",
+    "attribute": "覆盖性证明：G2 验收项逐条映射——聚合各 cutoff 分数→t17-n1-aggregate；生成对比表→t17-n3-compare；更新 decomp loop-state→t17-n4-writeback；脏数据口径透明→t17-n2-dirty-mark。02.5 attribute_matrix 全部 7 字段 confirmed 且 cross_validation 双 provider 门禁通过(commit fbcbec64)。无遗漏节点：T17 后续(对照组实验/异源 judge)属新立项范畴(GOALS.md 待成璐决策)不在本 goal 范围。",
+    "evidence_refs": [
+      "GOALS.md G2 (done 2026-11-04)",
+      "loop-artifacts/stages/02.5/r1/state.json (7 字段 confirmed)",
+      "loop-artifacts/stages/02.5/r1/web-llm/072c2936a9a0f3f9.json"
+    ],
+    "rationale": "required_outputs 第二项；证明 task_graph 四节点覆盖 G2 验收标准与 02.5 结论。",
+    "observed_at": "2026-11-03T19:44:46.132389+00:00"
+  }
+]

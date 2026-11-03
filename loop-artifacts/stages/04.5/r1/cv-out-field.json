@@ -1,0 +1,52 @@
+[
+  {
+    "concept": "阶段 04.5 产出：cross_validation_out",
+    "role": "research_findings",
+    "disposition": "confirmed",
+    "attribute": "T17 关键 claim 逐条交叉核验（承接 02.5 双 provider 门禁，本阶段补充本地复算佐证）",
+    "evidence_refs": [
+      "https://www.perplexity.ai/search (perplexity-review adversarial review 会话)",
+      "https://chatgpt.com/c/6aea35ce-d84c-83ec-8e68-e0d4f7d19b58 (chatgpt-review 会话)",
+      "loop-artifacts/stages/02.5/r1/web-llm/072c2936a9a0f3f9.json"
+    ],
+    "rationale": "04.5 门禁：每条关键 claim 有 ≥2 独立来源的 validation_records。",
+    "observed_at": "2026-11-03T19:47:59.409265+00:00",
+    "validation_records": [
+      {
+        "claim_ref": "temporal 修复达标判定（健康子集 73.13% ≥ 50%）",
+        "claim": "full01 健康子集 conv2+3 temporal top_10 = 73.13%(49/67)，相对 smoke01 的 0% 提升远超 ±1.5pp 噪声带，判定时间锚定修复方向有效",
+        "source_refs": [
+          "https://www.perplexity.ai/search (perplexity-review：确认数字无矛盾，指出缺同题前后对照故只能称阈值达成非因果效应)",
+          "https://chatgpt.com/c/6aea35ce-d84c-83ec-8e68-e0d4f7d19b58 (chatgpt-review：独立复核分数与账目，同意脏数据归因)",
+          "loop-artifacts/stages/04/r1/t17-comparison-table.md (本地复算)"
+        ],
+        "verdict": "supported_with_caveat",
+        "observed_at": "2026-11-03T19:47:59.409265+00:00",
+        "note": "caveat：因果声明不成立，需 matched before/after 协议；已转后续行动项"
+      },
+      {
+        "claim_ref": "官方口径缺口归因脏数据（178 题）",
+        "claim": "官方 top_10 overall 45.57%/temporal 38.41% 被 conv0(检索全空,0/152)/conv1(ingestion残缺,21/81)/conv4(生成全空,0/26) 共 178 题拉低；610−152−81−26=351 账目闭合",
+        "source_refs": [
+          "https://www.perplexity.ai/search (perplexity-review follow-up 轮：确认 conv1 排除原因后账目闭合，初轮 351-vs-432 缺口消解)",
+          "https://chatgpt.com/c/6aea35ce-d84c-83ec-8e68-e0d4f7d19b58 (chatgpt-review：独立验证 152+81+26+351=610)",
+          "loop-artifacts/stages/04/r1/t17-dirty-marking.md (本地标注)"
+        ],
+        "verdict": "supported",
+        "observed_at": "2026-11-03T19:47:59.409265+00:00",
+        "note": "残留 caveat：诊断(retrieval 全空等)需 log + 干净重跑最终确认"
+      },
+      {
+        "claim_ref": "runner EXITED 且文件数稳定",
+        "claim": "T17 full01 runner 已退出，预测文件 620 个(≥604 门槛)且不再增长",
+        "source_refs": [
+          "pgrep -f 'benchmarks.locomo.run' → 无进程 (2026-11-04 r288 实测)",
+          "ls tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/*.json | wc -l → 620 (r288 实测，跨两轮稳定)"
+        ],
+        "verdict": "supported",
+        "observed_at": "2026-11-03T19:47:59.409265+00:00",
+        "note": "本地工程状态，双观测点确认"
+      }
+    ]
+  }
+]

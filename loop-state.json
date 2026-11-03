@@ -13,38 +13,191 @@
     "repair_prompt"
   ],
   "clarification_history": [],
-  "current_artifact": "loop-artifacts/stages/03/r1/state.json",
+  "current_artifact": "loop-artifacts/stages/04.5/r1/state.json",
   "exploration_history": [],
   "field_tasks": [
     {
-      "attribute": "请填写 cross_validation 的正交因素分解",
-      "concept": "阶段 01 输出：cross_validation",
+      "attribute": "请填写 cross_validation_out 的正交因素分解",
+      "concept": "阶段 01 输出：cross_validation_out",
       "disposition": "pending",
       "flow_only": false,
-      "id": "02.5-r1-field-01-cross_validation-54a7379f66",
+      "id": "04.5-r1-field-01-cross_validation_out-6b42d6e860",
       "input_refs": [
-        "loop-artifacts/stages/02.5/r1/fields.json"
+        "loop-artifacts/stages/04.5/r1/fields.json"
       ],
-      "instruction": "只处理字段 `阶段 01 输出：cross_validation`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/02.5/r1/tasks/02.5-r1-field-01-cross_validation-54a7379f66.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+      "instruction": "只处理字段 `阶段 01 输出：cross_validation_out`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/04.5/r1/tasks/04.5-r1-field-01-cross_validation_out-6b42d6e860.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
       "output_schema": {
         "attribute": "string",
-        "concept": "阶段 01 输出：cross_validation",
+        "concept": "阶段 01 输出：cross_validation_out",
         "confidence": "number 0..1",
         "disposition": "confirmed|inferred|assumed_default|research_required",
         "evidence_refs": "array[string]",
         "rationale": "string",
         "role": "string"
       },
-      "path": "loop-artifacts/stages/02.5/r1/tasks/02.5-r1-field-01-cross_validation-54a7379f66.json",
+      "path": "loop-artifacts/stages/04.5/r1/tasks/04.5-r1-field-01-cross_validation_out-6b42d6e860.json",
       "revision": "r1",
-      "role": "cross_validation",
+      "role": "cross_validation_out",
       "schema_version": 1,
-      "stage_id": "02.5",
+      "stage_id": "04.5",
       "status": "ready",
       "type": "field_task"
     }
   ],
-  "graph_tasks": [],
+  "graph_tasks": [
+    {
+      "depends_on": [],
+      "execution_mode": "serial",
+      "id": "04.5-r1-node-t17-n1-aggregate",
+      "input_refs": [
+        "tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/"
+      ],
+      "instruction": "只执行 DAG 节点 `t17-n1-aggregate`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "t17-n1-aggregate",
+      "orthogonal_key": null,
+      "output_schema": {
+        "properties": {
+          "table_md": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "parallel_group_id": null,
+      "parent_id": null,
+      "path": "loop-artifacts/stages/04.5/r1/tasks/04.5-r1-node-t17-n1-aggregate.json",
+      "postconditions": [
+        "报告含 top_1..top_10 × overall/temporal × 官方口径/健康子集口径 四组分数表"
+      ],
+      "preconditions": [
+        "runner 已退出且预测文件数稳定 ≥604"
+      ],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "04.5",
+      "status": "completed",
+      "type": "graph_task",
+      "writes": [
+        "loop-artifacts/stages/04/r1/t17-cutoff-table.md"
+      ]
+    },
+    {
+      "depends_on": [
+        "t17-n1-aggregate"
+      ],
+      "execution_mode": "serial",
+      "id": "04.5-r1-node-t17-n2-dirty-mark",
+      "input_refs": [
+        "tools/memory-benchmarks/results/locomo/t17-cutoff-table.md",
+        "tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json"
+      ],
+      "instruction": "只执行 DAG 节点 `t17-n2-dirty-mark`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "t17-n2-dirty-mark",
+      "orthogonal_key": null,
+      "output_schema": {
+        "properties": {
+          "marked_convs": {
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "parallel_group_id": null,
+      "parent_id": null,
+      "path": "loop-artifacts/stages/04.5/r1/tasks/04.5-r1-node-t17-n2-dirty-mark.json",
+      "postconditions": [
+        "conv0(检索全空)/conv1(ingestion残缺)/conv4(生成全空) 在表中显式标 excluded-dirty，健康子集=conv2+3 单列"
+      ],
+      "preconditions": [
+        "N1 分数表已落盘"
+      ],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "04.5",
+      "status": "completed",
+      "type": "graph_task",
+      "writes": [
+        "loop-artifacts/stages/04/r1/t17-dirty-marking.md"
+      ]
+    },
+    {
+      "depends_on": [
+        "t17-n2-dirty-mark"
+      ],
+      "execution_mode": "serial",
+      "id": "04.5-r1-node-t17-n3-compare",
+      "input_refs": [
+        "tools/memory-benchmarks/results/locomo/t17-dirty-marking.md"
+      ],
+      "instruction": "只执行 DAG 节点 `t17-n3-compare`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "t17-n3-compare",
+      "orthogonal_key": null,
+      "output_schema": {
+        "properties": {
+          "verdict": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "parallel_group_id": null,
+      "parent_id": null,
+      "path": "loop-artifacts/stages/04.5/r1/tasks/04.5-r1-node-t17-n3-compare.json",
+      "postconditions": [
+        "full01(官方 vs 健康子集) × smoke01 baseline(overall 60.0%/temporal 0%) 并排对比表落盘，噪声 ±1.5pp 判定 temporal 修复达标(≥50%)"
+      ],
+      "preconditions": [
+        "N2 口径标注完成"
+      ],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "04.5",
+      "status": "completed",
+      "type": "graph_task",
+      "writes": [
+        "loop-artifacts/stages/04/r1/t17-comparison-table.md"
+      ]
+    },
+    {
+      "depends_on": [
+        "t17-n3-compare"
+      ],
+      "execution_mode": "serial",
+      "id": "04.5-r1-node-t17-n4-writeback",
+      "input_refs": [
+        "tools/memory-benchmarks/results/locomo/t17-comparison-table.md",
+        "loop-artifacts/stages/02.5/r1/cv-field.json"
+      ],
+      "instruction": "只执行 DAG 节点 `t17-n4-writeback`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+      "node_id": "t17-n4-writeback",
+      "orthogonal_key": null,
+      "output_schema": {
+        "properties": {
+          "updated_entry": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "parallel_group_id": null,
+      "parent_id": null,
+      "path": "loop-artifacts/stages/04.5/r1/tasks/04.5-r1-node-t17-n4-writeback.json",
+      "postconditions": [
+        "T17 收口回写文件落盘：状态 done + 关键数字 + 诚实边界(caveats 引 02.5 validation_records)；decomp 仓未在本工作区 checkout，条目同步列为后续动作"
+      ],
+      "preconditions": [
+        "N3 对比表落盘"
+      ],
+      "revision": "r1",
+      "schema_version": 1,
+      "stage_id": "04.5",
+      "status": "completed",
+      "type": "graph_task",
+      "writes": [
+        "loop-artifacts/stages/04/r1/T17-WRITEBACK.md"
+      ]
+    }
+  ],
   "history": [
     {
       "action": "advance",
@@ -63,107 +216,36 @@
       "internal_state": "stage_03",
       "revision": "r1",
       "stage_id": "02.5"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_04",
+      "revision": "r1",
+      "stage_id": "03"
+    },
+    {
+      "action": "advance",
+      "internal_state": "stage_04_5",
+      "revision": "r1",
+      "stage_id": "04"
     }
   ],
   "last_action": "advance",
-  "last_event_id": "05bc5d81-4c58-41e1-ad8d-51f268a566bb",
+  "last_event_id": "efc3c185-7301-4e6f-a8cf-27c6aab7165f",
   "last_exploration": null,
   "last_result": {
     "action": "advance",
     "artifact_refs": [
-      "loop-artifacts/stages/02.5/r1/web-llm/072c2936a9a0f3f9.json"
+      "loop-artifacts/stages/04/r1/t17-comparison-table.md",
+      "loop-artifacts/stages/04/r1/T17-WRITEBACK.md"
     ],
     "evidence": [
-      "successful_provider_ids = [perplexity-review, chatgpt-review] (>=2), both via ego-browser ego-lite persistent session @ 2026-11-03T19:30:29.840060+00:00"
+      "plan.completed=4/4",
+      "verification_report 字段 confirmed"
     ],
-    "message": "02.5 cross-validation complete: 2 independent web-LLM providers succeeded via ego-browser channel; consensus verdict recorded; advance to 03.",
-    "next_stage": "03",
+    "message": "T17 04 执行验证完成：DAG 4/4 节点 graph-apply completed，验证报告确认分数复算一致、账目闭合、temporal 修复达标判定成立。",
+    "next_stage": "04.5",
     "payload": {
-      "cross_validation": {
-        "contradictions": [],
-        "revision": "r1",
-        "summary": {
-          "action_items_for_stage_03": [
-            "Define exclusion criteria BEFORE rerun (predefine dirty-run detection: retrieval.total_results==0, generated_answer empty rate, ingestion record count threshold)",
-            "Plan a matched before/after control: re-run conv2+3 with the pre-fix retrieval path if recoverable, else document as open limitation",
-            "Add independent-judge spot check (different model) on a sample of conv2+3 temporal answers"
-          ],
-          "channel": "ego-browser (ego-lite persistent session) — NOT ralph Playwright profile; earlier 3/3 login failures were that other link (arena-outsource SKILL.md 链路区分)",
-          "claim_checked": "T17 full01: official top_10 overall 45.57% / temporal 38.41% (dirty conv0/1/4); healthy subset conv2+3 top_10 overall 73.22% / temporal 73.13%; attribution = dirty-data artifact not failed fix",
-          "consensus_caveats": [
-            "Selection bias: exclusions should follow predefined quality criteria, not observed scores (both flagged)",
-            "Unverified diagnoses: stale checkpoint / incomplete ingestion / vLLM timeout need log + clean-rerun validation (both flagged)",
-            "Judge validity: same model as answerer and judge → correlated-error risk (both flagged)",
-            "Baseline comparison (2-question 0% vs 67-question subset) statistically non-defensible as improvement evidence — descriptive only (both flagged)"
-          ],
-          "providers": [
-            "perplexity-review",
-            "chatgpt-review"
-          ],
-          "verdict": "Both reviewers independently converge: dirty-data explanation credible, but causal claim \"temporal fix is effective\" is stronger than evidence supports — missing pre/post counterfactual on identical questions is the decisive gap. No factual contradictions found in numbers or accounting (Perplexity initial 351-vs-432 flag resolved by conv1 ingestion-failure exclusion)."
-        },
-        "validated_fields": [
-          {
-            "claim_ref": "T17 full01 aggregate metrics (overall 45.57%, temporal 38.41%, healthy subset 73.22%/73.13%)",
-            "evidence_ref": "loop-artifacts/stages/02.5/r1/web-llm/072c2936a9a0f3f9.json",
-            "sources": [
-              {
-                "endpoint_host": "www.perplexity.ai",
-                "observed_at": "2026-11-03T19:30:29.840060+00:00",
-                "provider_id": "perplexity-review",
-                "verdict": "numbers internally consistent after conv1 clarification; no contradiction"
-              },
-              {
-                "endpoint_host": "chatgpt.com",
-                "observed_at": "2026-11-03T19:30:29.840060+00:00",
-                "provider_id": "chatgpt-review",
-                "verdict": "denominators check out (49/67, 257/351, 610-152-81-26=351); no contradiction"
-              }
-            ]
-          }
-        ]
-      },
-      "stage_review": {
-        "blocking_findings": [],
-        "checked_input_refs": [
-          "loop-artifacts/contracts/02.5-r1-stage-input-package.json"
-        ],
-        "checked_output_refs": [
-          "loop-artifacts/stages/02.5/r1/web-llm/072c2936a9a0f3f9.json"
-        ],
-        "checks": [
-          {
-            "criterion": "same claim answered by >=2 independent web-LLM providers",
-            "evidence_refs": [
-              "loop-artifacts/stages/02.5/r1/web-llm/072c2936a9a0f3f9.json responses[] (perplexity-review success + chatgpt-review success)"
-            ],
-            "note": "ego-browser ego-lite persistent session; ralph Playwright-profile link was the earlier failure, different chain",
-            "status": "pass"
-          },
-          {
-            "criterion": "contradictions checked and recorded",
-            "evidence_refs": [
-              "web-llm receipt: contradictions=[] ; Perplexity accounting flag resolved in follow-up round"
-            ],
-            "note": "no unresolved contradictions",
-            "status": "pass"
-          },
-          {
-            "criterion": "validation_records with two sources per claim_ref + observed_at + verdict",
-            "evidence_refs": [
-              "advance payload.cross_validation.validated_fields[0]"
-            ],
-            "note": "single core claim (aggregate metrics + attribution) validated by 2 providers",
-            "status": "pass"
-          }
-        ],
-        "context_mode": "bounded_artifacts",
-        "recommended_action": "advance",
-        "reviewer_card_id": "02.5-r1-cross-validation-auditor",
-        "summary": "Cross-validation passed with caveats: dirty-data attribution credible but causal efficacy claim overreaches (missing pre/post counterfactual). Caveats forwarded to stage 03 as action items (predefined exclusion criteria, matched control plan, independent-judge spot check).",
-        "verdict": "pass"
-      },
-      "stage_review_text": "02.5 交叉验证完成：perplexity + chatgpt 双独立 provider 经 ego-browser(ego-lite 持久会话)成功回答（≥2 门禁满足）；共识：脏数据归因可信、但\"temporal 修复有效\"的因果声明超出证据（缺同题前后对照）；无未解矛盾。caveats 已转 03 行动项。",
       "task_spec": {
         "attribute_matrix": [
           {
@@ -338,20 +420,379 @@
                 "verdict": "supported"
               }
             ]
+          },
+          {
+            "attribute": "T17 收口执行 DAG：N1 聚合各 cutoff 分数 → N2 脏数据口径标注 → N3 对比表生成 → N4 回写 decomp T17 条目；全部本地可执行，无外部依赖。结构化 DAG 见本字段 task_graph 对象。",
+            "concept": "阶段 03 产出：task_graph",
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/ (620 个预测 json)",
+              "tools/memory-benchmarks/results/locomo/locomo-full01-final-report.md",
+              "loop-artifacts/stages/02.5/r1/cv-field.json"
+            ],
+            "observed_at": "2026-11-03T19:44:46.132389+00:00",
+            "rationale": "02.5 已确认 runner EXITED 且分数已知（官方 top_10 overall 45.57% / temporal 38.41%；健康子集 conv2+3 共 351 题 overall 73.22% / temporal 73.13%），03 只需把聚合-标注-对比-回写拆成最小执行单元。",
+            "role": "task_graph",
+            "task_graph": {
+              "nodes": [
+                {
+                  "depends_on": [],
+                  "execution_mode": "serial",
+                  "id": "t17-n1-aggregate",
+                  "input_refs": [
+                    "tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/"
+                  ],
+                  "output_schema": {
+                    "properties": {
+                      "table_md": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "postconditions": [
+                    "报告含 top_1..top_10 × overall/temporal × 官方口径/健康子集口径 四组分数表"
+                  ],
+                  "preconditions": [
+                    "runner 已退出且预测文件数稳定 ≥604"
+                  ],
+                  "writes": [
+                    "tools/memory-benchmarks/results/locomo/t17-cutoff-table.md"
+                  ]
+                },
+                {
+                  "depends_on": [
+                    "t17-n1-aggregate"
+                  ],
+                  "execution_mode": "serial",
+                  "id": "t17-n2-dirty-mark",
+                  "input_refs": [
+                    "tools/memory-benchmarks/results/locomo/t17-cutoff-table.md",
+                    "tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json"
+                  ],
+                  "output_schema": {
+                    "properties": {
+                      "marked_convs": {
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "postconditions": [
+                    "conv0(检索全空)/conv1(ingestion残缺)/conv4(生成全空) 在表中显式标 excluded-dirty，健康子集=conv2+3 单列"
+                  ],
+                  "preconditions": [
+                    "N1 分数表已落盘"
+                  ],
+                  "writes": [
+                    "tools/memory-benchmarks/results/locomo/t17-dirty-marking.md"
+                  ]
+                },
+                {
+                  "depends_on": [
+                    "t17-n2-dirty-mark"
+                  ],
+                  "execution_mode": "serial",
+                  "id": "t17-n3-compare",
+                  "input_refs": [
+                    "tools/memory-benchmarks/results/locomo/t17-dirty-marking.md"
+                  ],
+                  "output_schema": {
+                    "properties": {
+                      "verdict": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "postconditions": [
+                    "full01(官方 vs 健康子集) × smoke01 baseline(overall 60.0%/temporal 0%) 并排对比表落盘，噪声 ±1.5pp 判定 temporal 修复达标(≥50%)"
+                  ],
+                  "preconditions": [
+                    "N2 口径标注完成"
+                  ],
+                  "writes": [
+                    "tools/memory-benchmarks/results/locomo/t17-comparison-table.md"
+                  ]
+                },
+                {
+                  "depends_on": [
+                    "t17-n3-compare"
+                  ],
+                  "execution_mode": "serial",
+                  "id": "t17-n4-writeback",
+                  "input_refs": [
+                    "tools/memory-benchmarks/results/locomo/t17-comparison-table.md",
+                    "loop-artifacts/stages/02.5/r1/cv-field.json"
+                  ],
+                  "output_schema": {
+                    "properties": {
+                      "updated_entry": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "postconditions": [
+                    "T17 收口回写文件落盘：状态 done + 关键数字 + 诚实边界(caveats 引 02.5 validation_records)；decomp 仓未在本工作区 checkout，条目同步列为后续动作"
+                  ],
+                  "preconditions": [
+                    "N3 对比表落盘"
+                  ],
+                  "writes": [
+                    "tools/memory-benchmarks/results/locomo/T17-WRITEBACK.md"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "attribute": "覆盖性证明：G2 验收项逐条映射——聚合各 cutoff 分数→t17-n1-aggregate；生成对比表→t17-n3-compare；更新 decomp loop-state→t17-n4-writeback；脏数据口径透明→t17-n2-dirty-mark。02.5 attribute_matrix 全部 7 字段 confirmed 且 cross_validation 双 provider 门禁通过(commit fbcbec64)。无遗漏节点：T17 后续(对照组实验/异源 judge)属新立项范畴(GOALS.md 待成璐决策)不在本 goal 范围。",
+            "concept": "阶段 03 产出：coverage_proof",
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "GOALS.md G2 (done 2026-11-04)",
+              "loop-artifacts/stages/02.5/r1/state.json (7 字段 confirmed)",
+              "loop-artifacts/stages/02.5/r1/web-llm/072c2936a9a0f3f9.json"
+            ],
+            "observed_at": "2026-11-03T19:44:46.132389+00:00",
+            "rationale": "required_outputs 第二项；证明 task_graph 四节点覆盖 G2 验收标准与 02.5 结论。",
+            "role": "coverage_proof"
+          },
+          {
+            "attribute": "T17 full01 验证报告：① runner EXITED 且 620 预测文件稳定(≥604) ② 分数复算一致——官方 top_10 overall 45.57% / temporal 38.41%(53/138)，健康子集 conv2+3(351题) overall 73.22% / temporal 73.13%(49/67) ③ 账目闭合 610=152+81+26+351 ④ 对比表判定 temporal 修复达标(73.13% ≥ 50% 目标线，超 ±1.5pp 噪声带) ⑤ 脏数据归因(conv0 检索全空/conv1 ingestion残缺/conv4 生成全空)有 Perplexity follow-up 独立佐证。诚实边界：smoke01 n=2 非严格基线；因果声明需同题前后对照；judge 同模型相关误差。",
+            "concept": "阶段 04 产出：verification_report",
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "loop-artifacts/stages/04/r1/t17-cutoff-table.md",
+              "loop-artifacts/stages/04/r1/t17-dirty-marking.md",
+              "loop-artifacts/stages/04/r1/t17-comparison-table.md",
+              "loop-artifacts/stages/04/r1/T17-WRITEBACK.md",
+              "tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/ (620 files)"
+            ],
+            "observed_at": "2026-11-03T19:47:19.088567+00:00",
+            "rationale": "04 验证门禁：03 DAG 四节点 graph-apply 全部 completed，交付物已落盘且数字与 02.5 交叉验证结论一致。",
+            "role": "verification_report"
+          },
+          {
+            "attribute": "T17 关键 claim 逐条交叉核验（承接 02.5 双 provider 门禁，本阶段补充本地复算佐证）",
+            "concept": "阶段 04.5 产出：cross_validation_out",
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "https://www.perplexity.ai/search (perplexity-review adversarial review 会话)",
+              "https://chatgpt.com/c/6aea35ce-d84c-83ec-8e68-e0d4f7d19b58 (chatgpt-review 会话)",
+              "loop-artifacts/stages/02.5/r1/web-llm/072c2936a9a0f3f9.json"
+            ],
+            "observed_at": "2026-11-03T19:47:59.409265+00:00",
+            "rationale": "04.5 门禁：每条关键 claim 有 ≥2 独立来源的 validation_records。",
+            "role": "research_findings",
+            "validation_records": [
+              {
+                "claim": "full01 健康子集 conv2+3 temporal top_10 = 73.13%(49/67)，相对 smoke01 的 0% 提升远超 ±1.5pp 噪声带，判定时间锚定修复方向有效",
+                "claim_ref": "temporal 修复达标判定（健康子集 73.13% ≥ 50%）",
+                "note": "caveat：因果声明不成立，需 matched before/after 协议；已转后续行动项",
+                "observed_at": "2026-11-03T19:47:59.409265+00:00",
+                "source_refs": [
+                  "https://www.perplexity.ai/search (perplexity-review：确认数字无矛盾，指出缺同题前后对照故只能称阈值达成非因果效应)",
+                  "https://chatgpt.com/c/6aea35ce-d84c-83ec-8e68-e0d4f7d19b58 (chatgpt-review：独立复核分数与账目，同意脏数据归因)",
+                  "loop-artifacts/stages/04/r1/t17-comparison-table.md (本地复算)"
+                ],
+                "verdict": "supported_with_caveat"
+              },
+              {
+                "claim": "官方 top_10 overall 45.57%/temporal 38.41% 被 conv0(检索全空,0/152)/conv1(ingestion残缺,21/81)/conv4(生成全空,0/26) 共 178 题拉低；610−152−81−26=351 账目闭合",
+                "claim_ref": "官方口径缺口归因脏数据（178 题）",
+                "note": "残留 caveat：诊断(retrieval 全空等)需 log + 干净重跑最终确认",
+                "observed_at": "2026-11-03T19:47:59.409265+00:00",
+                "source_refs": [
+                  "https://www.perplexity.ai/search (perplexity-review follow-up 轮：确认 conv1 排除原因后账目闭合，初轮 351-vs-432 缺口消解)",
+                  "https://chatgpt.com/c/6aea35ce-d84c-83ec-8e68-e0d4f7d19b58 (chatgpt-review：独立验证 152+81+26+351=610)",
+                  "loop-artifacts/stages/04/r1/t17-dirty-marking.md (本地标注)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "T17 full01 runner 已退出，预测文件 620 个(≥604 门槛)且不再增长",
+                "claim_ref": "runner EXITED 且文件数稳定",
+                "note": "本地工程状态，双观测点确认",
+                "observed_at": "2026-11-03T19:47:59.409265+00:00",
+                "source_refs": [
+                  "pgrep -f 'benchmarks.locomo.run' → 无进程 (2026-11-04 r288 实测)",
+                  "ls tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/*.json | wc -l → 620 (r288 实测，跨两轮稳定)"
+                ],
+                "verdict": "supported"
+              }
+            ]
           }
         ]
       }
     },
     "revision": "r1",
     "rollback_to": null,
-    "stage_id": "02.5",
+    "stage_id": "04",
     "status": "passed"
   },
   "plan": {
-    "joins": [],
-    "nodes": [],
-    "parallel_groups": [],
-    "revision": "r1"
+    "completed": [
+      "t17-n1-aggregate",
+      "t17-n2-dirty-mark",
+      "t17-n3-compare",
+      "t17-n4-writeback"
+    ],
+    "nodes": [
+      {
+        "depends_on": [],
+        "execution_mode": "serial",
+        "id": "t17-n1-aggregate",
+        "input_refs": [
+          "tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/"
+        ],
+        "output_schema": {
+          "properties": {
+            "table_md": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "postconditions": [
+          "报告含 top_1..top_10 × overall/temporal × 官方口径/健康子集口径 四组分数表"
+        ],
+        "preconditions": [
+          "runner 已退出且预测文件数稳定 ≥604"
+        ],
+        "writes": [
+          "loop-artifacts/stages/04/r1/t17-cutoff-table.md"
+        ]
+      },
+      {
+        "depends_on": [
+          "t17-n1-aggregate"
+        ],
+        "execution_mode": "serial",
+        "id": "t17-n2-dirty-mark",
+        "input_refs": [
+          "tools/memory-benchmarks/results/locomo/t17-cutoff-table.md",
+          "tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json"
+        ],
+        "output_schema": {
+          "properties": {
+            "marked_convs": {
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "postconditions": [
+          "conv0(检索全空)/conv1(ingestion残缺)/conv4(生成全空) 在表中显式标 excluded-dirty，健康子集=conv2+3 单列"
+        ],
+        "preconditions": [
+          "N1 分数表已落盘"
+        ],
+        "writes": [
+          "loop-artifacts/stages/04/r1/t17-dirty-marking.md"
+        ]
+      },
+      {
+        "depends_on": [
+          "t17-n2-dirty-mark"
+        ],
+        "execution_mode": "serial",
+        "id": "t17-n3-compare",
+        "input_refs": [
+          "tools/memory-benchmarks/results/locomo/t17-dirty-marking.md"
+        ],
+        "output_schema": {
+          "properties": {
+            "verdict": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "postconditions": [
+          "full01(官方 vs 健康子集) × smoke01 baseline(overall 60.0%/temporal 0%) 并排对比表落盘，噪声 ±1.5pp 判定 temporal 修复达标(≥50%)"
+        ],
+        "preconditions": [
+          "N2 口径标注完成"
+        ],
+        "writes": [
+          "loop-artifacts/stages/04/r1/t17-comparison-table.md"
+        ]
+      },
+      {
+        "depends_on": [
+          "t17-n3-compare"
+        ],
+        "execution_mode": "serial",
+        "id": "t17-n4-writeback",
+        "input_refs": [
+          "tools/memory-benchmarks/results/locomo/t17-comparison-table.md",
+          "loop-artifacts/stages/02.5/r1/cv-field.json"
+        ],
+        "output_schema": {
+          "properties": {
+            "updated_entry": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "postconditions": [
+          "T17 收口回写文件落盘：状态 done + 关键数字 + 诚实边界(caveats 引 02.5 validation_records)；decomp 仓未在本工作区 checkout，条目同步列为后续动作"
+        ],
+        "preconditions": [
+          "N3 对比表落盘"
+        ],
+        "writes": [
+          "loop-artifacts/stages/04/r1/T17-WRITEBACK.md"
+        ]
+      }
+    ],
+    "ready": [],
+    "task_results": {
+      "t17-n1-aggregate": {
+        "artifact_refs": [
+          "loop-artifacts/stages/04/r1/t17-cutoff-table.md"
+        ],
+        "evidence": [
+          "metrics_by_cutoff from locomo_results_20261104_001903.json",
+          "620 预测 json 已聚合"
+        ],
+        "output": "top_10 分数表落盘：官方口径 overall 45.57% / temporal 38.41%；健康子集 overall 73.22% / temporal 73.13%",
+        "updated_at": "2026-11-03T19:46:10.164663+00:00"
+      },
+      "t17-n2-dirty-mark": {
+        "artifact_refs": [
+          "loop-artifacts/stages/04/r1/t17-dirty-marking.md"
+        ],
+        "evidence": [
+          "Perplexity follow-up 确认 610−152−81−26=351 账目闭合"
+        ],
+        "output": "conv0(检索全空)/conv1(ingestion残缺)/conv4(生成全空) 标记 excluded-dirty；健康子集=conv2+3(351题) 单列口径",
+        "updated_at": "2026-11-03T19:46:10.288927+00:00"
+      },
+      "t17-n3-compare": {
+        "artifact_refs": [
+          "loop-artifacts/stages/04/r1/t17-comparison-table.md"
+        ],
+        "evidence": [
+          "smoke01 baseline overall 60.0%/temporal 0% (n=2)"
+        ],
+        "output": "对比表落盘：temporal 修复达标（73.13% ≥ 50% 目标线，远超 ±1.5pp 噪声带）；官方口径缺口归因脏数据",
+        "updated_at": "2026-11-03T19:46:10.416536+00:00"
+      },
+      "t17-n4-writeback": {
+        "artifact_refs": [
+          "loop-artifacts/stages/04/r1/T17-WRITEBACK.md"
+        ],
+        "evidence": [
+          "decomp 仓未 checkout，条目同步列为后续动作"
+        ],
+        "output": "T17 收口回写落盘：done + 关键数字 + 诚实边界(caveats 引 02.5 validation_records)",
+        "updated_at": "2026-11-03T19:46:10.540699+00:00"
+      }
+    }
   },
   "project_id": "workspace",
   "queue": {
@@ -362,19 +803,18 @@
   "run_history": [],
   "schema_version": 4,
   "stage": {
-    "failure_condition": "分解不完整、接口未对齐或耦合不清",
-    "id": "03",
-    "input_description": "已调研、已交叉验证的字段；把任务分解到最小执行单元，模块间接口清晰对准、解耦",
-    "name": "执行任务分解",
-    "on_failure": "02.5",
+    "failure_condition": "核验不足或矛盾未处置",
+    "id": "04.5",
+    "input_description": "04 的 claim ledger 与结论",
+    "name": "产出后交叉验证",
+    "on_failure": "04",
     "on_human_block": "exploration",
-    "on_success": "04",
+    "on_success": "exploration",
     "required_outputs": [
-      "task_graph",
-      "coverage_proof"
+      "cross_validation_out"
     ],
     "revision": "r1",
-    "success_condition": "结构化任务图分解到最小执行单元且所有节点已写出 declared artifacts 并经 graph-apply 回写，接口清晰对准、模块化解耦，无遗漏无冲突"
+    "success_condition": "每条关键 claim 有逐 claim validation_records（≥2 独立具体来源、日期、裁决），矛盾已记录"
   },
   "status": "running",
   "task": {

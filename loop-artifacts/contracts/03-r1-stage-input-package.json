@@ -28,6 +28,13 @@
       "sha256": "c48873e5a657ebe9",
       "source": "ralph loop",
       "text": "G2: T17 full01 benchmark 跑完 → 出分对比。runner pid 37261 在途 (614/604+ 文件, conv4 尾段)。你的任务：①监控 runner 直到退出（pgrep -f 'benchmarks.locomo.run'）；②runner 退出后聚合各 cutoff 分数，生成 top_10 overall vs smoke01 baseline 对比表（噪声 ±1.5pp），判定 temporal 修复是否达标 ≥50%；③更新 decomp loop-state 并 commit+push。降级预案：若 claude API 再报 tool_reference 400，直接本地用 python 脚本聚合 results/locomo/predicted_locomo-vllm/*.json 出分，不依赖 claude 会话。"
+    },
+    {
+      "characters": 310,
+      "kind": "human_input",
+      "sha256": "965d715335373f5e",
+      "source": "ralph loop",
+      "text": "T17 02.5 交叉验证已完成并 advance 到 03（commit fbcbec64）。现在执行阶段 03 行动分解：按 loop/prompt-first/03-action-decomposition.md 产出 actions.md + role=task_graph 结构化 DAG（required_outputs: task_graph, coverage_proof），字段走 ralph field-apply，完成后写 advance.json 并 ralph apply 推进。背景见 loop-artifacts/stages/03/r1/state.json 与 GOALS.md G2。"
     }
   ],
   "context_mode": "bounded_artifacts",
@@ -189,6 +196,13 @@
           "sha256": "c48873e5a657ebe9",
           "source": "ralph loop",
           "text": "G2: T17 full01 benchmark 跑完 → 出分对比。runner pid 37261 在途 (614/604+ 文件, conv4 尾段)。你的任务：①监控 runner 直到退出（pgrep -f 'benchmarks.locomo.run'）；②runner 退出后聚合各 cutoff 分数，生成 top_10 overall vs smoke01 baseline 对比表（噪声 ±1.5pp），判定 temporal 修复是否达标 ≥50%；③更新 decomp loop-state 并 commit+push。降级预案：若 claude API 再报 tool_reference 400，直接本地用 python 脚本聚合 results/locomo/predicted_locomo-vllm/*.json 出分，不依赖 claude 会话。"
+        },
+        {
+          "characters": 310,
+          "kind": "human_input",
+          "sha256": "965d715335373f5e",
+          "source": "ralph loop",
+          "text": "T17 02.5 交叉验证已完成并 advance 到 03（commit fbcbec64）。现在执行阶段 03 行动分解：按 loop/prompt-first/03-action-decomposition.md 产出 actions.md + role=task_graph 结构化 DAG（required_outputs: task_graph, coverage_proof），字段走 ralph field-apply，完成后写 advance.json 并 ralph apply 推进。背景见 loop-artifacts/stages/03/r1/state.json 与 GOALS.md G2。"
         }
       ],
       "status": "research_pending"

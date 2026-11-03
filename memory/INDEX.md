@@ -94,3 +94,5 @@
 | `memory/notes/ACADEMIC-STATUS.md` | 全局 arXiv 论文索引（178 篇 across 9 项目，自动生成） | 🔄 定期更新 |
 | `memory/research/27b-local-deployment-hardware-2026-10.md` | 27B 本地部署硬件调研 | ✅ 完成 |
 | `memory/archive/dashboards/` | 旧仪表板归档（dashboards-all.jsonl 26 条 + 5 个 2026-05 单文件已移入，r274b） | ✅ 归档 |
+| `memory/archive/` | 统一归档区（r275 归一：DASHBOARD-2026-05-stale + 2026-05-subbrain 报告×19 + ONBOARDING 陈旧件；原 notes/archive/ 已并入） | ✅ 归档 |
+| `memory/notes/cron-adaptive-poll-r185.md` | cron 自适应轮询实现记录（jobs.py 两补丁 + adaptive_poll 标记，r185） | ✅ 完成 |

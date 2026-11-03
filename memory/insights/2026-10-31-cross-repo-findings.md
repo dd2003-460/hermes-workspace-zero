@@ -83,6 +83,17 @@
 1. **pilot κ=0.857 (n=162, strict 口径) 过门禁**——judge 双判（异源两模型）一致性达标，rubric v3 评分协议可信度确认。
 2. **O1 维度 κ=0.506 是唯一弱项**——深度分「有实质内容」本质是语义判断（呼应 A 区负结果 #14），机判边界诚实登记，后续该维度需人工或多 judge 交叉。
 
+## F. r274 增量结论（2026-11-03，decomp T17-full + pfb 决策线）
+
+### T17-full LoCoMo 全量在途快照（中途非最终）
+1. **temporal 提取层修复方向确认**：smoke01 temporal 0/5 → full01 中途 39/114=0.342。直接搜索 fix（May 7 2023 / 2022 类时间锚点）有效但离 ≥50% 目标线尚有距离——等 conv3-9 跑完看全量再下结论。
+2. **中途分类画像**（top_10 cutoff, n=422）：single-hop 0.400 > multi-hop 0.410 ≈ open-domain 0.320；overall 0.382。multi-hop 反超 single-hop 与 smoke01 一致（多跳检索受益于记忆库冗余条目）。
+3. **工程教训（三连环故障链）**：vLLM :8000 对 >1k token prompt 502（短请求正常）→ 切 ninfer :8787；runner LLMClient 不读 OPENAI_BASE_URL env → 被 ClashX 系统代理劫持打 api.openai.com → NO_PROXY + env fallback 双层修；本地模型不支持 response_format=json_object → JSON-mode probe + fence 剥离兜底。**可复用规则：本地 LLM 通道切换必须单测 structured output 兼容性，不能只测文本生成。**
+
+### pfb T8-C3-v3 决策点（blocked-on-human）
+1. **pilot 6/6 消融信号 < 测量噪声**：不投 54-cell 全量是正确止损。两条解锁路径待成璐选：异源 judge 端点（非 Qwen）或升级生成模型。
+2. **r245R 核心发现已入 A 区**：同族 judge leniency 可通过 prompt 工程修复（B-2a 3步流程 AC3 0.417→0.000），不需要异源 judge 解决 AC3——但 Fleiss κ + Part C confirmatory 仍需异源。
+
 ## D. 存放位置说明
 - pfb 结论主体：`bench/rubric-v3/AUDIT-report.md`（§5 负结果 15 条 + §1 G1-G5 汇总）+ `ablation/ablation-result.md`
 - decomp 结论主体：`reports/decomp-technical-report.md`（可发表级）+ `memory/2026-10-21-arena-adversarial-review.md`（被打脸记录）+ `memory/2026-10-28-methodology-test-log.md`

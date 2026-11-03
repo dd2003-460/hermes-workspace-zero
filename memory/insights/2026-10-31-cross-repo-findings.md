@@ -98,3 +98,7 @@
 - pfb 结论主体：`bench/rubric-v3/AUDIT-report.md`（§5 负结果 15 条 + §1 G1-G5 汇总）+ `ablation/ablation-result.md`
 - decomp 结论主体：`reports/decomp-technical-report.md`（可发表级）+ `memory/2026-10-21-arena-adversarial-review.md`（被打脸记录）+ `memory/2026-10-28-methodology-test-log.md`
 - 本文件 = 跨仓索引层，不重复存结论原文，只存"哪条在哪+为什么精彩+能不能复用"
+
+### G. r274e/f 工具链发现（2026-11-03）
+
+**aggregate-active.sh 的 submodule 盲区**：脚本用 `find projects/ -name loop-state.json` 聚合，但根仓库把 `d1-video-recreation` 当 gitlink（mode 160000，非 .gitmodules 声明的正式 submodule）跟踪——`find` 只看到目录名，读不到内部文件。后果：ACTIVE.md 自动区漏掉该项目，手写候选表第 5 行停在 batch-12 过时状态两轮无人发现。修法：① 给 `projects/媒体/D1-ai-video-recreation/loop-state.json` 补标准 schema 字段（project_id/status/loop_phase/iteration/last_updated/last_action），让它进自动区；② 手写区第 5 行手动修到 batch-13。**教训**：跨仓指针同步时，如果目标仓是 gitlink 而非正式 submodule，聚合脚本一律失效，必须靠人工对账或改脚本支持 gitlink 展开。已记入 keepalive 检查清单。

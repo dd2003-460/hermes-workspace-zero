@@ -15,43 +15,12 @@
   "clarification_history": [],
   "current_artifact": "loop-artifacts/stages/exploration/r1/state.json",
   "exploration_history": [],
-  "field_tasks": [
-    {
-      "apply_count": 2,
-      "attribute": "请填写 cross_validation_out 的正交因素分解",
-      "concept": "阶段 01 输出：cross_validation_out",
-      "disposition": "pending",
-      "flow_only": false,
-      "id": "04.5-r1-field-01-cross_validation_out-6b42d6e860",
-      "input_refs": [
-        "loop-artifacts/stages/04.5/r1/fields.json"
-      ],
-      "instruction": "只处理字段 `阶段 01 输出：cross_validation_out`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/04.5/r1/tasks/04.5-r1-field-01-cross_validation_out-6b42d6e860.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
-      "last_applied_at": "2026-11-03T20:19:30.363744+00:00",
-      "output_schema": {
-        "attribute": "string",
-        "concept": "阶段 01 输出：cross_validation_out",
-        "confidence": "number 0..1",
-        "disposition": "confirmed|inferred|assumed_default|research_required",
-        "evidence_refs": "array[string]",
-        "rationale": "string",
-        "role": "string"
-      },
-      "path": "loop-artifacts/stages/04.5/r1/tasks/04.5-r1-field-01-cross_validation_out-6b42d6e860.json",
-      "revision": "r1",
-      "role": "cross_validation_out",
-      "schema_version": 1,
-      "stage_id": "04.5",
-      "status": "ready",
-      "type": "field_task",
-      "updated_at": "2026-11-03T20:19:30.365008+00:00"
-    }
-  ],
+  "field_tasks": [],
   "graph_tasks": [
     {
       "depends_on": [],
       "execution_mode": "serial",
-      "id": "04.5-r1-node-t17-n1-aggregate",
+      "id": "exploration-r1-node-t17-n1-aggregate",
       "input_refs": [
         "tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/"
       ],
@@ -68,7 +37,7 @@
       },
       "parallel_group_id": null,
       "parent_id": null,
-      "path": "loop-artifacts/stages/04.5/r1/tasks/04.5-r1-node-t17-n1-aggregate.json",
+      "path": "loop-artifacts/stages/exploration/r1/tasks/exploration-r1-node-t17-n1-aggregate.json",
       "postconditions": [
         "报告含 top_1..top_10 × overall/temporal × 官方口径/健康子集口径 四组分数表"
       ],
@@ -77,7 +46,7 @@
       ],
       "revision": "r1",
       "schema_version": 1,
-      "stage_id": "04.5",
+      "stage_id": "exploration",
       "status": "completed",
       "type": "graph_task",
       "writes": [
@@ -89,7 +58,7 @@
         "t17-n1-aggregate"
       ],
       "execution_mode": "serial",
-      "id": "04.5-r1-node-t17-n2-dirty-mark",
+      "id": "exploration-r1-node-t17-n2-dirty-mark",
       "input_refs": [
         "tools/memory-benchmarks/results/locomo/t17-cutoff-table.md",
         "tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json"
@@ -107,7 +76,7 @@
       },
       "parallel_group_id": null,
       "parent_id": null,
-      "path": "loop-artifacts/stages/04.5/r1/tasks/04.5-r1-node-t17-n2-dirty-mark.json",
+      "path": "loop-artifacts/stages/exploration/r1/tasks/exploration-r1-node-t17-n2-dirty-mark.json",
       "postconditions": [
         "conv0(检索全空)/conv1(ingestion残缺)/conv4(生成全空) 在表中显式标 excluded-dirty，健康子集=conv2+3 单列"
       ],
@@ -116,7 +85,7 @@
       ],
       "revision": "r1",
       "schema_version": 1,
-      "stage_id": "04.5",
+      "stage_id": "exploration",
       "status": "completed",
       "type": "graph_task",
       "writes": [
@@ -128,7 +97,7 @@
         "t17-n2-dirty-mark"
       ],
       "execution_mode": "serial",
-      "id": "04.5-r1-node-t17-n3-compare",
+      "id": "exploration-r1-node-t17-n3-compare",
       "input_refs": [
         "tools/memory-benchmarks/results/locomo/t17-dirty-marking.md"
       ],
@@ -145,7 +114,7 @@
       },
       "parallel_group_id": null,
       "parent_id": null,
-      "path": "loop-artifacts/stages/04.5/r1/tasks/04.5-r1-node-t17-n3-compare.json",
+      "path": "loop-artifacts/stages/exploration/r1/tasks/exploration-r1-node-t17-n3-compare.json",
       "postconditions": [
         "full01(官方 vs 健康子集) × smoke01 baseline(overall 60.0%/temporal 0%) 并排对比表落盘，噪声 ±1.5pp 判定 temporal 修复达标(≥50%)"
       ],
@@ -154,7 +123,7 @@
       ],
       "revision": "r1",
       "schema_version": 1,
-      "stage_id": "04.5",
+      "stage_id": "exploration",
       "status": "completed",
       "type": "graph_task",
       "writes": [
@@ -166,7 +135,7 @@
         "t17-n3-compare"
       ],
       "execution_mode": "serial",
-      "id": "04.5-r1-node-t17-n4-writeback",
+      "id": "exploration-r1-node-t17-n4-writeback",
       "input_refs": [
         "tools/memory-benchmarks/results/locomo/t17-comparison-table.md",
         "loop-artifacts/stages/02.5/r1/cv-field.json"
@@ -184,7 +153,7 @@
       },
       "parallel_group_id": null,
       "parent_id": null,
-      "path": "loop-artifacts/stages/04.5/r1/tasks/04.5-r1-node-t17-n4-writeback.json",
+      "path": "loop-artifacts/stages/exploration/r1/tasks/exploration-r1-node-t17-n4-writeback.json",
       "postconditions": [
         "T17 收口回写文件落盘：状态 done + 关键数字 + 诚实边界(caveats 引 02.5 validation_records)；decomp 仓未在本工作区 checkout，条目同步列为后续动作"
       ],
@@ -193,7 +162,7 @@
       ],
       "revision": "r1",
       "schema_version": 1,
-      "stage_id": "04.5",
+      "stage_id": "exploration",
       "status": "completed",
       "type": "graph_task",
       "writes": [

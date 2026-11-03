@@ -13,39 +13,15 @@
       "rationale": "用户初始任务输入，作为本阶段已知背景字段。",
       "reversible": false,
       "role": "background"
-    },
-    {
-      "attribute": "等 T17 benchmark runner 退出后，聚合各 cutoff 的分数，生成分数对比表，并更新 decomp/loop-state 记录结果与后续行动。",
-      "concept": "阶段 01 输出：goal",
-      "disposition": "confirmed",
-      "evidence_refs": [],
-      "rationale": "任务描述直接给出（ralph run intake），属本地工程收尾动作，无外部事实需要查证；分解为三个正交因素：runner 退出状态、cutoff 分数聚合与对比表、decomp/loop-state 更新。",
-      "role": "goal"
-    },
-    {
-      "attribute": "任务来源为 ralph run intake；T17 是本地 memory-benchmarks 子模块中的 benchmark；分数按 cutoff 维度聚合；decomp 指 projects/AI-计算科学/D1-persona-align/tasks/decomposition.md。",
-      "concept": "阶段 01 输出：known",
-      "disposition": "assumed_default",
-      "evidence_refs": [],
-      "rationale": "由 loop-state.json 的 task.description/source 与 workspace 既有结构直接推断，属本地工程上下文，无需外部查证；runner 退出状态、实际分数值与对比表格式不在本字段内（留给 unknown）。",
-      "role": "known"
-    },
-    {
-      "attribute": "T17 runner 当前是否已退出；各 cutoff 的实际分数值；对比表的呈现格式与落盘位置；decomposition.md 中 T17 条目的现状。",
-      "concept": "阶段 01 输出：unknown",
-      "disposition": "assumed_default",
-      "evidence_refs": [],
-      "rationale": "均为本地运行时状态，无需外部查证，将在后续阶段（runner 状态检查、分数聚合、文件更新）逐项确认并回填；与 known 字段词语无重叠。",
-      "role": "unknown"
     }
   ],
   "authoritative_inputs": [
     {
-      "characters": 71,
+      "characters": 47,
       "kind": "initial_task",
-      "sha256": "7e83548377bcdc71",
+      "sha256": "9dd5714205ef55a2",
       "source": "ralph run",
-      "text": "T17 benchmark 跑完出分：等 runner 退出后聚合各 cutoff 分数，生成对比表，更新 decomp loop-state"
+      "text": "KB.1 第9篇教材 note：伪 thinking vs 真推理（推理时计算/CoT 机制）"
     }
   ],
   "constraints": [],

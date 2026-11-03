@@ -1,0 +1,31 @@
+[
+  {
+    "concept": "preference_brief",
+    "role": "preference_brief",
+    "attribute": "成璐偏好（GOALS.md 行为准则 + USER.md）：①没事主动找新活+发掘 idea 调研，不发巡检废话；②可逆决策自主做，不频繁问是否继续；③对标顶刊/高 star 先复刻再创新；④整洁规范、过程可见、文件链稳定；⑤调研/核验类走 arena 固定会话，本地自答降级 conf-0.2；⑥一次一个 goal，干完再找下一个。当前无活跃 goal（T17 已收口），按产投比选下一方向。",
+    "disposition": "confirmed",
+    "evidence_refs": [
+      "GOALS.md L9-14 (行为准则)",
+      "projects/ACTIVE-candidates.md (候选池状态表)"
+    ],
+    "confidence": 0.95,
+    "impact": "material",
+    "reversible": true,
+    "rationale": "读 GOALS.md 行为准则节 + ACTIVE-candidates.md 现状列得出，均为工作区既有台账事实。"
+  },
+  {
+    "concept": "candidate_tasks",
+    "role": "candidate_tasks",
+    "attribute": "扫描 GOALS.md 链式目标 + projects/ACTIVE-candidates.md 8 条候选：G1 blocked_human(pfb 等 web-llm ≥2 成功回执)；#2 写作半阻塞(渠道待拍板)；#3 MR 卡 credentials(1000G ref+OpenGWAS token)；#4 ORF 卡 arXiv 手动上传；#5 done；#6 backlog；#7 T8 剩余项全需异源 judge(外部依赖)。纯本地可执行且产投比最高：KB.1 教材第9篇——C 区 #8 AI/ML 训练机制的『伪 thinking vs 真推理』深挖（成璐 S3 场景主动质疑点，前 8 篇未覆盖推理时计算/CoT 机制）。",
+    "disposition": "confirmed",
+    "evidence_refs": [
+      "GOALS.md (G1-G3 状态)",
+      "projects/ACTIVE-candidates.md (候选池 8 条状态)",
+      "projects/知识/D1-knowledge-base/notes/INDEX.md (前 8 篇已完成清单)"
+    ],
+    "confidence": 0.9,
+    "impact": "material",
+    "reversible": true,
+    "rationale": "逐条核对候选池状态列：外部候选全部 blocked-on-human/credentials/arena；唯一纯本地 open 线是 KB.1 C 区剩余方向。第9篇选题取 interest-directions.md C 区 #8 中成璐亲自质疑过且前 8 篇未闭合的子题（伪thinking/推理时计算），与 persona 工作直接相关。"
+  }
+]

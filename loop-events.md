@@ -54075,3 +54075,205 @@ RALPH_EVENT -->
 - loop-artifacts/contracts/exploration-r1-stage-contract.md
 - loop-artifacts/stages/04.5/r1/eb0e61fe-2d2e-4a45-824a-8ee074d32ec2.agent-output.md
 
+## exploration-r1 | field_increment_applied
+
+<!-- RALPH_EVENT
+{
+  "artifact_refs": [
+    "loop-artifacts/stages/exploration/r1/fields.json",
+    "/Users/a1-6/Desktop/workspace/loop-artifacts/stages/exploration/r1/fields.md"
+  ],
+  "event_id": "d2474f0f-76e2-4c53-937c-be1e5d2848a9",
+  "observation": {
+    "added": 2,
+    "concepts": [
+      "研究未知因素：T17 runner 此刻是否已退出",
+      "研究未知因素：各 cutoff 的实际分数值",
+      "研究未知因素：对比表的呈现格式与落盘位置",
+      "研究未知因素：decomposition.md 中 T17 条目的现状。",
+      "research_findings",
+      "研究未知因素：T17 runner 退出状态（EXITED）",
+      "cross_validation",
+      "阶段 03 产出：task_graph",
+      "阶段 03 产出：coverage_proof",
+      "阶段 04 产出：verification_report",
+      "T17 full01 各 cutoff 分数与对比表落盘（含健康子集口径）",
+      "阶段 04.5 产出：cross_validation_out",
+      "cross_validation_out",
+      "preference_brief",
+      "candidate_tasks"
+    ],
+    "fields_file": "loop-artifacts/stages/exploration/r1/fields.json",
+    "output_excerpt_source": "field_apply_result",
+    "remaining": {
+      "complete": true,
+      "pending": [],
+      "required_outputs": [],
+      "researching": [],
+      "splittable": []
+    },
+    "removed": 0,
+    "revision": "r1",
+    "stage": "exploration",
+    "state_changed": true
+  },
+  "output_excerpt": "{\"added\": 2, \"next\": \"字段门禁已通过；阶段 02+ 写 advance.json 后运行 ralph apply\", \"ok\": true, \"remaining\": {\"complete\": true, \"pending\": [], \"required_outputs\": [], \"researching\": [], \"splittable\": []}, \"removed\": 0, \"rendered_md\": \"/Users/a1-6/Desktop/workspace/loop-artifacts/stages/exploration/r1/fields.md\", \"total\": 15}",
+  "revision": "r1",
+  "stage": "exploration",
+  "timestamp": "2026-11-03T20:26:57+00:00",
+  "type": "field_increment_applied"
+}
+RALPH_EVENT -->
+
+### Agent 输出摘录
+
+{"added": 2, "next": "字段门禁已通过；阶段 02+ 写 advance.json 后运行 ralph apply", "ok": true, "remaining": {"complete": true, "pending": [], "required_outputs": [], "researching": [], "splittable": []}, "removed": 0, "rendered_md": "/Users/a1-6/Desktop/workspace/loop-artifacts/stages/exploration/r1/fields.md", "total": 15}
+
+### 验证结果
+
+{}
+
+### 文件和证据
+
+- loop-artifacts/stages/exploration/r1/fields.json
+- /Users/a1-6/Desktop/workspace/loop-artifacts/stages/exploration/r1/fields.md
+
+## exploration-r1 | stage_advanced
+
+<!-- RALPH_EVENT
+{
+  "action": {
+    "action": "advance",
+    "artifact_refs": [
+      "loop-artifacts/stages/exploration/r1/fields.json"
+    ],
+    "evidence": [
+      "GOALS.md G1-G3 状态 (G2 done, G1 waiting pfb, G3 monitoring)",
+      "projects/ACTIVE-candidates.md 8 条候选逐条核对状态列",
+      "projects/知识/D1-knowledge-base/notes/INDEX.md 前 8 篇完成清单"
+    ],
+    "message": "exploration r1：T17 已收口(04.5→exploration)，无活跃 goal。扫描 GOALS.md + ACTIVE-candidates.md：外部候选全 blocked(pfb web-llm/写作渠道/MR credentials/ORF arXiv/T8 异源 judge)。选定下一方向=KB.1 教材第9篇『伪 thinking vs 真推理』(C区#8 深挖，成璐 S3 主动质疑点，纯本地可执行)。进入 01 目标分解。",
+    "next_stage": "01",
+    "payload": {
+      "exploration": {
+        "candidate_tasks": [
+          {
+            "human_approved": true,
+            "priority": "P1",
+            "reason": "C区#8 中成璐亲自质疑过且前 8 篇未闭合的子题；纯本地；与 persona 工作直接相关",
+            "research_summary": "扫描 GOALS.md 链式目标(G1 waiting pfb web-llm回执/G2 T17 done/G3 monitoring) + ACTIVE-candidates.md 8条候选(#2渠道待拍板 #3卡credentials #4卡arXiv手动上传 #5done #6backlog #7需异源judge)：外部线全 blocked。唯一纯本地 open 线=KB.1 教材 C区剩余方向；前8篇已覆盖训练机制/记忆/传播三篇/persona/GPU/向量库/检索vs长上下文/goal-loop控制层，C区#8 中『伪thinking/推理时计算』是成璐 S3 场景主动质疑点且未闭合。",
+            "scope": "notes/pseudo-thinking-vs-real-reasoning.md 单文件教材 note：A段概念块(是什么/为什么/边界+conf)×CoT/scratchpad/伪thinking判定/推理时计算/test-time compute scaling/自校验verify，B段成璐视角判断+可证伪idea，C段可证伪预测带判死条件；drift-check v1≥75 v2=100 收口。产出限 projects/知识/D1-knowledge-base/notes/ 内，INDEX.md 加行。",
+            "status": "candidate",
+            "title": "KB.1 第9篇教材 note：伪 thinking vs 真推理（推理时计算/CoT 机制）"
+          }
+        ],
+        "preference_brief": "自主推进、对标顶刊、一次一个 goal、产投比优先；外部候选全 blocked，选纯本地 KB.1 线",
+        "scanned_sources": [
+          "GOALS.md",
+          "projects/ACTIVE-candidates.md",
+          "projects/知识/D1-knowledge-base/notes/INDEX.md"
+        ],
+        "selected_task": {
+          "human_approved": true,
+          "priority": "P1",
+          "reason": "唯一纯本地 open 线且直接回应成璐 S3 场景质疑",
+          "source": "candidate",
+          "source_path": "projects/知识/D1-knowledge-base/memory/interest-directions.md",
+          "task_id": "kb-note-9-pseudo-thinking-r290",
+          "title": "KB.1 第9篇教材 note：伪 thinking vs 真推理（推理时计算/CoT 机制）"
+        },
+        "selection_mode": "candidate"
+      }
+    },
+    "revision": "r1",
+    "rollback_to": null,
+    "stage_id": "exploration",
+    "status": "passed"
+  },
+  "artifact_refs": [
+    "loop-artifacts/stages/exploration/r1/fields.json",
+    "loop-artifacts/contracts/task-spec.json",
+    "loop-artifacts/contracts/01-r1-stage-input-package.json",
+    "loop-artifacts/contracts/01-r1-submission-template.json",
+    "loop-artifacts/contracts/01-r1-stage-contract.md",
+    "loop-artifacts/stages/exploration/r1/cce6b2f4-9681-4401-8b92-547d24d0fe8e.agent-output.md"
+  ],
+  "event_id": "cce6b2f4-9681-4401-8b92-547d24d0fe8e",
+  "full_output_ref": "loop-artifacts/stages/exploration/r1/cce6b2f4-9681-4401-8b92-547d24d0fe8e.agent-output.md",
+  "output_excerpt": "{\n  \"action\": \"advance\",\n  \"status\": \"passed\",\n  \"stage_id\": \"exploration\",\n  \"revision\": \"r1\",\n  \"next_stage\": \"01\",\n  \"message\": \"exploration r1：T17 已收口(04.5→exploration)，无活跃 goal。扫描 GOALS.md + ACTIVE-candidates.md：外部候选全 blocked(pfb web-llm/写作渠道/MR credentials/ORF arXiv/T8 异源 judge)。选定下一方向=KB.1 教材第9篇『伪 thinking vs 真推理』(C区#8 深挖，成璐 S3 主动质疑点，纯本地可执行)。进入 01 目标分解。\",\n  \"evidence\": [\n    \"GOALS.md G1-G3 状态 (G2 done, G1 waiting pfb, G3 monitoring)\",\n    \"projects/ACTIVE-candidates.md 8 条候选逐条核对状态列\",\n    \"projects/知识/D1-knowledge-base/notes/INDEX.md 前 8 篇完成清单\"\n  ],\n  \"artifact_refs\": [\n    \"loop-artifacts/stages/exploration/r1/fields.json\"\n  ],\n  \"payload\": {\n    \"exploration\": {\n      \"candidate_tasks\": [\n        {\n          \"title\": \"KB.1 第9篇教材 note：伪 thinking vs 真推理（推理时计算/CoT 机制）\",\n          \"reason\": \"C区#8 中成璐亲自质疑过且前 8 篇未闭合的子题；纯本地；与 persona 工作直接相关\",\n          \"priority\": \"P1\",\n          \"research_summary\": \"扫描 GOALS.md 链式目标(G1 waiting pfb web-llm回执/G2 T17 done/G3 monitoring) + ACTIVE-candidates.md 8条候选(#2渠道待拍板 #3卡credentials #4卡arXiv手动上传 #5done #6backlog #7需异源judge)：外部线全 blocked。唯一纯本地 open 线=KB.1 教材 C区剩余方向；前8篇已覆盖训练机制/记忆/传播三篇/persona/GPU/向量库/检索vs长上下文/goal-loop控制层，C区#8 中『伪thinking/推理时计算』是成璐 S3 场景主动质疑点且未闭合。\",\n          \"scope\": \"notes/pseudo-thinking-vs-real-reasoning.md 单文件教材 note：A段概念块(是什么/为什么/边界+conf)×CoT/scratchpad/伪thinking判定/推理时计算/test-time compute scaling/自校验verify，B段成璐视角判断+可证伪idea，C段可证伪预测带判死条件；drift-check v1≥75 v2=100 收口。产出限 projects/知识/D1-knowledge-base/notes/ 内，INDEX.md 加行。\",\n          \"human_approved\": true,\n          \"status\": \"candidate\"\n        }\n      ],\n      \"preference_brief\": \"自主推进、对标顶刊、一次一个 goal、产投比优先；外部候选全 blocked，选纯本地 KB.1 线\",\n      \"scanned_sources\": [\n        \"GOALS.md\",\n        \"projects/ACTIVE-candidates.md\",\n        \"projects/知识/D1-knowledge-base/notes/INDEX.md\"\n      ],\n      \"selected_task\": {\n        \"priority\": \"P1\",\n        \"reason\": \"唯一纯本地 open 线且直接回应成璐 S3 场景质疑\",\n        \"source\": \"candidate\",\n        \"source_path\": \"projects/知识/D1-knowledge-base/memory/interest-directions.md\",\n        \"task_id\": \"kb-note-9-pseudo-thinking-r290\",\n        \"title\": \"KB.1 第9篇教材 note：伪 thinking vs 真推理（推理时计算/CoT 机制）\",\n        \"human_approved\": true\n      },\n      \"selection_mode\": \"candidate\"\n    }\n  }\n}",
+  "output_sha256": "80a3f51eb46ab7956303d89ccda27178521f8e50c40b234f12104c6da45a0e3f",
+  "revision": "r1",
+  "stage": "exploration",
+  "state_after_sha256": "86b88e45e7d0bf8fe07ad2cbe1f295ca3ce93b16929be242fab65a6800d0e0a1",
+  "state_before_sha256": "4402ee4650aa8a48f514a740fb7a60fb010a6d8b71a0b63273204e21ab972322",
+  "timestamp": "2026-11-03T20:28:55+00:00",
+  "type": "stage_advanced",
+  "validation": {
+    "status": "passed"
+  }
+}
+RALPH_EVENT -->
+
+### Agent 输出摘录
+
+{
+  "action": "advance",
+  "status": "passed",
+  "stage_id": "exploration",
+  "revision": "r1",
+  "next_stage": "01",
+  "message": "exploration r1：T17 已收口(04.5→exploration)，无活跃 goal。扫描 GOALS.md + ACTIVE-candidates.md：外部候选全 blocked(pfb web-llm/写作渠道/MR credentials/ORF arXiv/T8 异源 judge)。选定下一方向=KB.1 教材第9篇『伪 thinking vs 真推理』(C区#8 深挖，成璐 S3 主动质疑点，纯本地可执行)。进入 01 目标分解。",
+  "evidence": [
+    "GOALS.md G1-G3 状态 (G2 done, G1 waiting pfb, G3 monitoring)",
+    "projects/ACTIVE-candidates.md 8 条候选逐条核对状态列",
+    "projects/知识/D1-knowledge-base/notes/INDEX.md 前 8 篇完成清单"
+  ],
+  "artifact_refs": [
+    "loop-artifacts/stages/exploration/r1/fields.json"
+  ],
+  "payload": {
+    "exploration": {
+      "candidate_tasks": [
+        {
+          "title": "KB.1 第9篇教材 note：伪 thinking vs 真推理（推理时计算/CoT 机制）",
+          "reason": "C区#8 中成璐亲自质疑过且前 8 篇未闭合的子题；纯本地；与 persona 工作直接相关",
+          "priority": "P1",
+          "research_summary": "扫描 GOALS.md 链式目标(G1 waiting pfb web-llm回执/G2 T17 done/G3 monitoring) + ACTIVE-candidates.md 8条候选(#2渠道待拍板 #3卡credentials #4卡arXiv手动上传 #5done #6backlog #7需异源judge)：外部线全 blocked。唯一纯本地 open 线=KB.1 教材 C区剩余方向；前8篇已覆盖训练机制/记忆/传播三篇/persona/GPU/向量库/检索vs长上下文/goal-loop控制层，C区#8 中『伪thinking/推理时计算』是成璐 S3 场景主动质疑点且未闭合。",
+          "scope": "notes/pseudo-thinking-vs-real-reasoning.md 单文件教材 note：A段概念块(是什么/为什么/边界+conf)×CoT/scratchpad/伪thinking判定/推理时计算/test-time compute scaling/自校验verify，B段成璐视角判断+可证伪idea，C段可证伪预测带判死条件；drift-check v1≥75 v2=100 收口。产出限 projects/知识/D1-knowledge-base/notes/ 内，INDEX.md 加行。",
+          "human_approved": true,
+          "status": "candidate"
+        }
+      ],
+      "preference_brief": "自主推进、对标顶刊、一次一个 goal、产投比优先；外部候选全 blocked，选纯本地 KB.1 线",
+      "scanned_sources": [
+        "GOALS.md",
+        "projects/ACTIVE-candidates.md",
+        "projects/知识/D1-knowledge-base/notes/INDEX.md"
+      ],
+      "selected_task": {
+        "priority": "P1",
+        "reason": "唯一纯本地 open 线且直接回应成璐 S3 场景质疑",
+        "source": "candidate",
+        "source_path": "projects/知识/D1-knowledge-base/memory/interest-directions.md",
+        "task_id": "kb-note-9-pseudo-thinking-r290",
+        "title": "KB.1 第9篇教材 note：伪 thinking vs 真推理（推理时计算/CoT 机制）",
+        "human_approved": true
+      },
+      "selection_mode": "candidate"
+    }
+  }
+}
+
+### 验证结果
+
+{"status": "passed"}
+
+### 文件和证据
+
+- loop-artifacts/stages/exploration/r1/fields.json
+- loop-artifacts/contracts/task-spec.json
+- loop-artifacts/contracts/01-r1-stage-input-package.json
+- loop-artifacts/contracts/01-r1-submission-template.json
+- loop-artifacts/contracts/01-r1-stage-contract.md
+- loop-artifacts/stages/exploration/r1/cce6b2f4-9681-4401-8b92-547d24d0fe8e.agent-output.md
+

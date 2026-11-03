@@ -1,0 +1,18 @@
+[
+  {
+    "concept": "cross_validation",
+    "role": "research_findings",
+    "attribute": "T17 full01 核心 claim（官方 top_10 overall 45.57% / temporal 38.41% 由 conv0/1/4 脏数据拉低；健康子集 conv2+3 top_10 overall 73.22% / temporal 73.13%；归因=脏数据而非修复失效）经 2 个独立网页 LLM provider 交叉核验：perplexity-review + chatgpt-review 均 success（≥2 门禁满足，transport=ego-browser ego-lite 持久会话，非 ralph Playwright profile——后者才是此前 3/3 登录失败的那条链路）。共识裁决：数字与账目内部一致（Perplexity 初轮 351-vs-432 账目缺口追问后由 conv1 ingestion 残缺排除解释消解），无未解矛盾；但两方独立指出同一决定性弱点——缺同题前后对照（pre/post counterfactual），\"temporal 修复有效\"的因果声明超出证据支持（49/67 超 50% 线只证明达标不证明因果）。其余共同 caveat：selection bias（排除标准应预定义）、诊断未验证（需 log+干净重跑）、judge validity（answerer/judge 同模型相关误差）、baseline 2 题 vs 67 题对比统计上不可辩护（仅描述性）。action_items 转 03：①重跑前预定义 dirty-run 判据 ②matched before/after 对照方案 ③异源 judge 抽样复核。",
+    "disposition": "confirmed",
+    "evidence_refs": [
+      "loop-artifacts/stages/02.5/r1/web-llm/072c2936a9a0f3f9.json",
+      "https://www.perplexity.ai/search (perplexity-review 会话：adversarial review 两轮，含 follow-up 澄清 conv1 排除原因)",
+      "https://chatgpt.com/c/6aea35ce-d84c-83ec-8e68-e0d4f7d19b58 (chatgpt-review 会话「评估基准结论」：单轮 adversarial review)",
+      "本机文件 tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json metrics_by_cutoff（被核验对象）"
+    ],
+    "confidence": 0.9,
+    "impact": "material",
+    "reversible": true,
+    "rationale": "双 provider 独立回答齐备且收敛于同一 verdict；对抗追问一轮（Perplexity follow-up 澄清 conv1 排除原因）后账目缺口消解、结论不变。observed_at=2026-11-03T19:31:37.543758+00:00。"
+  }
+]

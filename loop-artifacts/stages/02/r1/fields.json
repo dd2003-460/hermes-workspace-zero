@@ -10,19 +10,20 @@
         "baseline: 本机文件 locomo-smoke-report.md + locomo_results_20261021_044003.json (smoke01 各 cutoff overall 60.0%, temporal 0%)"
       ],
       "rationale": "数值已由绑定 Agent 从官方聚合 JSON 直读并本地重算双重验证齐备（详见 tasks/02-r1-field-cutoff-35319ba392.md 渲染快照）。【判定】vs smoke01 baseline（噪声 ±1.5pp）：overall 各 cutoff 45.57~46.39% 低于基线 13.6~14.4pp → 未达基线；temporal top_10 38.41% vs 0% 大幅改善但未达 ≥50% 达标线 → 按官方口径未达标。【根因】conv0 检索全空 152 题 + conv4 生成全空 26 题共 178 题脏数据污染；有效样本 conv2+3 temporal 73.13% 远超 50% 线，未达标由脏数据造成而非修复失效。Commander 复核轮（observed_at 2026-11-04T02:31+08:00）：官方聚合 metrics_by_cutoff 数值经 python3 json.load 直读比对一致。【disposition 说明】纯本地工程调研，不得伪造 HTTPS 来源，按项目惯例保持 research_required；数值置信度 0.95 不受 disposition 影响。",
-      "role": "research_findings"
+      "role": "local_engineering_state"
     },
     {
       "attribute": "EXITED — runner 已退出（第五轮观测 2026-11-04 00:19 +08:00，PID 37261 pgrep 无匹配），predicted_locomo-vllm/*.json = 620 ≥ 604 稳定达标；官方聚合产物 tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json（4.76MB，含 metadata/metrics_by_cutoff/evaluations）已落盘——完成信号三项全部满足。本字段为纯本地工程状态调研（任务指令禁止 WebSearch/WebFetch），按 sibling 惯例保留 research_required + 空 evidence_refs，不伪造 HTTPS 来源",
-      "concept": "研究未知因素：T17 runner 当前是否已退出",
+      "concept": "研究未知因素：T17 runner 退出状态（EXITED）",
       "disposition": "confirmed",
       "evidence_refs": [
         "本机文件 tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json（官方聚合 run_id=full01, total_questions=610, observed_at 2026-11-04 00:19 +0800）",
         "本机检查 pgrep -f benchmarks.locomo.run → exit 1 (无进程) @ 2026-11-04 02:56 +0800; ls predicted_locomo-vllm/*.json = 620 (610 逐题 + 10 checkpoint)",
         "本机文件 /tmp/locomo-full01-rerun.log 尾部: Total questions processed: 610, Results saved to results/locomo/locomo_results_20261104_001903.json"
       ],
-      "rationale": "Commander 状态刷新（observed_at 2026-11-04T00:25+08:00），依据绑定 Agent ae621eb0a66708989 第五轮本机实测（field-apply ok=true, added=1 已持久化至 tasks/02-r1-field-T17-runner-194b873314.json）：(1) pgrep -f 'benchmarks.locomo.run' 无匹配，exit code 1 → PID 37261 已退出；(2) ls results/locomo/predicted_locomo-vllm/*.json | wc -l = 620 ≥ 604 阈值且稳定（较上一轮 618 +2，最新 conv4_q25/q24 mtime ≈ 2026-11-04 00:19 +08:00，conv4_q23 23:51、conv4_q22 23:38）；(3) 今日新聚合产物 locomo_results_20261104_001903.json（mtime 2026-11-04 00:19 +08:00，4.76MB）已出现，python3 json.load 验证含 metrics_by_cutoff 键。退出时间窗口在 23:50~00:19 之间（无精确记录）。五轮轨迹：23:11 615 → 23:19 615(+0) → 23:32 616(+1) → 23:50 618(+2, RUNNING) → 00:19(+08:00) 620(+2, EXITED + aggregate landed)。logs/locomo_20261103_225713.log 尾部仍停留在 22:57:14 ingestion 行（conv0..4 chunks 419/369/663/629/680），无 'All conversations completed'/'Evaluation finished' 标记——该 log 在逐题生成阶段未写入，不影响退出判定。注：最终官方聚合 total_questions=610（conv0:152/conv1:81/conv2:152/conv3:199/conv4:26），与磁盘 620 文件数差 10 属正常（部分逐题文件未被计入聚合或存在重判覆盖），以官方聚合 JSON 为准。描述性本机路径（非伪造 URL）：tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json、tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/、tools/memory-benchmarks/logs/locomo_20261103_225713.log。",
-      "role": "research_findings"
+      "rationale": "Commander 状态刷新（observed_at 2026-11-04T00:25+08:00），依据绑定 Agent ae621eb0a66708989 第五轮本机实测（field-apply ok=true, added=1 已持久化至 tasks/02-r1-field-T17-runner-194b873314.json）：(1) pgrep -f 'benchmarks.locomo.run' 无匹配，exit code 1 → PID 37261 已退出；(2) ls results/locomo/predicted_locomo-vllm/*.json | wc -l = 620 ≥ 604 阈值且稳定（较上一轮 618 +2，最近文件 conv4_q25/q24 mtime ≈ 2026-11-04 00:19 +08:00，conv4_q23 23:51、conv4_q22 23:38）；(3) 今日新聚合产物 locomo_results_20261104_001903.json（mtime 2026-11-04 00:19 +08:00，4.76MB）已出现，python3 json.load 验证含 metrics_by_cutoff 键。退出时间窗口在 23:50~00:19 之间（无精确记录）。五轮轨迹：23:11 615 → 23:19 615(+0) → 23:32 616(+1) → 23:50 618(+2, RUNNING) → 00:19(+08:00) 620(+2, EXITED + aggregate landed)。logs/locomo_20261103_225713.log 尾部仍停留在 22:57:14 ingestion 行（conv0..4 chunks 419/369/663/629/680），无 'All conversations completed'/'Evaluation finished' 标记——该 log 在逐题生成阶段未写入，不影响退出判定。注：最终官方聚合 total_questions=610（conv0:152/conv1:81/conv2:152/conv3:199/conv4:26），与磁盘 620 文件数差 10 属正常（部分逐题文件未被计入聚合或存在重判覆盖），以官方聚合 JSON 为准。描述性本机路径（非伪造 URL）：tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json、tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/、tools/memory-benchmarks/logs/locomo_20261103_225713.log。",
+      "role": "local_engineering_state",
+      "observed_at": "2026-11-04T02:56+08:00"
     }
   ]
 }

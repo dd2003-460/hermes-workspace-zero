@@ -1,0 +1,36 @@
+{
+  "claim": "T17 full01 LoCoMo benchmark run (run_id=full01, 610 questions, answerer/judge=qwen3.8-27b local vLLM) finished at 2026-11-04 00:19 +0800 with official aggregate metrics_by_cutoff: overall top_10 = 278/610 = 45.57%, temporal(category=2, 138 questions) top_10 = 53/138 = 38.41%; healthy subset conv2+conv3 top_10 overall = 257/351 = 73.22%, temporal = 49/67 = 73.13%. The sub-50% official temporal score is attributed to dirty data (conv0: 152/152 empty retrieval results from stale smoke01 checkpoint mis-resumed; conv4: 26/26 empty generated answers), not to the temporal fix failing.",
+  "claim_sha256": "072c2936a9a0f3f905c14a7a9f2335add8ed6d5d204b3db549dd6fba632b66e9",
+  "context_sha256": "78388aa03cf38f9631d211554b1fef9b5abf2830a516a9f374dad4b8a3ba69bd",
+  "created_at": "2026-11-03T19:32:38.295834+00:00",
+  "kind": "ralph_web_llm_cross_check",
+  "note": "LLM replies are adversarial review signals, not authoritative factual sources. r288: completed via ego-browser (ego-lite persistent session) channel — the earlier ralph Playwright-profile 3/3 login failures were a different link (see .claude/skills/arena-outsource/SKILL.md 链路区分); those failed attempts are preserved in sibling receipt 072c2936a9a0f3f9.json for audit.",
+  "request_ref": "loop-artifacts/stages/02.5/r1/webllm-request.json",
+  "responses": [
+    {
+      "endpoint_host": "www.perplexity.ai",
+      "model": "perplexity web UI (Sonar)",
+      "provider_id": "perplexity-review",
+      "status": "ok",
+      "transport": "ego-browser (ego-lite persistent session)",
+      "observed_at": "2026-11-03T19:32:38.295834+00:00",
+      "summary": "Adversarial review (2 rounds): attribution partially sound; initial accounting gap (351 vs 432) resolved in follow-up after conv1 exclusion explained (ingestion incomplete, ~10 records); remaining weaknesses: selection bias (exclusions should follow predefined criteria), unverified diagnoses (need logs + clean reruns), judge validity (same model answerer/judge), end-to-end reliability. Most important weakness: missing pre-/post-fix counterfactual on identical questions — 49/67 above 50% shows threshold attainment, not causal effect of the fix."
+    },
+    {
+      "endpoint_host": "chatgpt.com",
+      "model": "ChatGPT web (free tier)",
+      "provider_id": "chatgpt-review",
+      "status": "ok",
+      "transport": "ego-browser (ego-lite persistent session)",
+      "observed_at": "2026-11-03T19:32:38.295834+00:00",
+      "summary": "Attribution plausible but not logically established: dirty-run failures explain aggregate collapse, but healthy-subset uplift may reflect difficulty/composition differences rather than the fix. Caveats: post-hoc exclusion risk, data integrity needs log/artifact verification, denominator consistency, comparability across runs, prespecified-threshold interpretation, fix isolation needs controlled before/after run. Baseline comparison (2-question 0% vs 67-question subset) not statistically defensible as improvement evidence — descriptive only. Verdict: dirty-data explanation credible; efficacy claim stronger than evidence supports; clean reproducible full rerun or paired evaluation needed."
+    }
+  ],
+  "schema_version": 1,
+  "successful_provider_ids": [
+    "perplexity-review",
+    "chatgpt-review"
+  ],
+  "failed_provider_ids": [],
+  "observed_at": "2026-11-03T19:32:38.295834+00:00"
+}

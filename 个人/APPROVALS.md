@@ -33,4 +33,4 @@
 
 ## 待处理（建议项，不阻塞）
 
-- **wx-push.py 连续 3 轮失败**（r268c/r269/r270，2026-11-03）：ret=-1 errcode=None errmsg=invalid request，account 966c94ec47d2@im.bot。模式=bot API token 侧问题（非消息内容），本地无法自愈。建议：检查 weixin bot token 是否过期/被重置，或换用 hermes 原生 weixin 渠道投递（cron delivery 本身走的是 hermes 平台，wx-push 只是额外广播）。播报内容已完整落在最终回复里，不丢信息。
+- **wx-push.py 连续失败已自愈**（r268c/r269/r270 三轮 invalid request → r274 起 success:true，bot API token 侧问题自行恢复）。销账：无需换渠道，保留 hermes 原生 weixin 投递 + wx-push 双通道现状。若再连续 ≥3 轮失败则重新登记建议项。

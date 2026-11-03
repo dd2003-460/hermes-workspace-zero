@@ -16,12 +16,10 @@
 - **动作**：stage_init 立项"激发煮东西"——1-loop 信息调研（GitHub/arXiv/网页 LLM 交叉验证）→ 行动分解。范围待成璐补充定义。
 - **状态**：waiting（等 pfb 解锁）
 
-### G2: T17 full01 benchmark 跑完 → 出分对比
-- **执行者**：ralph loop（claude 子进程，16:17 启动）
-- **前置**：runner 16:10 重启后恢复，conv3 q195/604 (98%)。
-- **触发条件**：runner 退出 + 结果目录出现最终汇总文件。
-- **动作**：ralph 聚合各 cutoff 分数 → 对比表 → 更新 decomp loop-state。
-- **状态**：running（2026-11-03 23:00 恢复：runner 曾被 SIGKILL@conv4 q19，已 resume 重启 pid 37261；ralph claude 死于 tool_reference 400，已带降级预案重启。剩 conv4尾+conv5-9 ≈13h）
+### G2: T17 泛化 bench → done
+- **结论**（T17-REPORT.md, 10 runs 全出分）：四域 ms 16.5 / infra 16.5 / rag 16.0 / methodology 18.0。概念迁移成功（C1-C3 跨域稳）；形式纪律需显式注入（S2/S3 不自发）；单 run 噪声 ≥ 域间差 → 域排序不可信；rubric v2 修 C4 判据完成。
+- **诚实边界**：n=2/域、同族判官（自偏好风险）、绝对分受天花板限制。异源 judge 是下一步。
+- **状态**：done（2026-11-04 确认 runner 已结束，报告已落盘）
 
 ### G3: 金融·正交信号源（F8）— 已收口 + 采集器启动
 - **结论（负面结果）**：免费+PIT+2020-2026日线约束下，crypto 日频信号高度冗余，无可验证正交源。TVL ρ=0.43 冗余；期权IV/OI/多空比/链上流全没免费历史。详见 `tasks/decomposition.md`。

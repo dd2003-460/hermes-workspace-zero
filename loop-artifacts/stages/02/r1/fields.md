@@ -2,7 +2,7 @@
 
 > 由 `ralph render` 自动从 `loop-artifacts/stages/02/r1/fields.json` 生成，请勿手改。
 
-> 生成时间：2026-11-04 01:02
+> 生成时间：2026-11-04 02:19
 
 ## 概览
 
@@ -16,7 +16,7 @@
 
 | 要素 (concept) | 属性 | 状态 | 置信度 | 影响 | 可逆 |
 |---|---|---|---|---|---|
-| 研究未知因素：T17 runner 当前是否已退出 | runner 未退出（截至 2026-11-03T08:33Z 本机实测）；新鲜重查待补——本轮观察通道受 runtime 门禁限制，无法由 Commander 直接产生新 ps/log 证据（详见 rationale） | research_required |  |  |  |
+| 研究未知因素：T17 runner 当前是否已退出 | EXITED — runner 已退出（第五轮观测 2026-11-04 00:19 +08:00，PID 37261 pgrep 无匹配），predicted_locomo-vllm/*.json = 620 ≥ 604 稳定达标；官方聚合产物 tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json（4.76MB，含 metadata/metrics_by_cutoff/evaluations）已落盘——完成信号三项全部满足。本字段为纯本地工程状态调研（任务指令禁止 WebSearch/WebFetch），按 sibling 惯例保留 research_required + 空 evidence_refs，不伪造 HTTPS 来源 | research_required |  |  |  |
 | 研究未知因素：各 cutoff 的实际分数值 | EXITED — runner 已退出（第五轮观测 2026-11-04 00:19 +08:00），官方聚合产物 locomo_results_20261104_001903.json 已落盘；final full01 各 cutoff overall/temporal 分数待本轮由绑定 Agent 从该文件读出并刷新 | research_required |  |  |  |
 | 研究未知因素：对比表的呈现格式与落盘位置 | 对比表采用 markdown 表格（沿用既有对照表惯例），落盘到 tools/memory-benchmarks/results/locomo/ 下的诊断/报告 md 文件，并在 decomposition.md T17 条目同步结果 | research_required | 0.80 |  |  |
 | 研究未知因素：decomposition.md 中 T17 条目的现状。 | 验证并记录：decomposition.md 中 T17 条目的现状。 | research_required | 0.90 |  |  |
@@ -25,7 +25,7 @@
 
 ### 研究未知因素：T17 runner 当前是否已退出
 
-最近一次本机实测（observed_at 2026-11-03T16:33+08:00 = 08:33 UTC）：PID 45660（full01 --resume，STARTED 16:00:32）与 PID 53388（--evaluate-only --rejudge conv2,3，STARTED 16:31:28）均在运行，logs/locomo_20261103_160033.log 持续写入、无结束标记。本字段为纯本地工程状态调研，任务指令禁止 WebSearch/WebFetch，证据只能来自本机 ps/日志文件，无法以 HTTPS URL 形式满足 runtime 外部事实门禁（protocol.py _external_evidence_issues），按协议不伪造来源、保留 research_required + 空 evidence_refs。本轮阻塞点记录（2026-11-03 ~09:2x UTC）：Commander Bash 被 COMMANDER_BASH_SCOPE_FIELD 限定为受控 ralph 命令 + 只读 RALPH 工件，无法直接执行 ps/tail 产生新证据；Agent 派发被 FIELD_AGENT_NOT_NEEDED 拒绝（两个 deferred 字段非 ready，且无绑定路径）。因此「runner 是否已退出」的新鲜重查无法在本轮完成；需 supervisor 重新开放字段后由绑定 Agent 执行，或走 APPROVALS #4 裁决（4.3 人工放行路径下由人工检查 runner 退出后收口）。待补证据：一次新鲜的 ps -p 45660,53388 + 日志尾部观察结果。
+Commander 状态刷新（observed_at 2026-11-04T00:25+08:00），依据绑定 Agent ae621eb0a66708989 第五轮本机实测（field-apply ok=true, added=1 已持久化至 tasks/02-r1-field-T17-runner-194b873314.json）：(1) pgrep -f 'benchmarks.locomo.run' 无匹配，exit code 1 → PID 37261 已退出；(2) ls results/locomo/predicted_locomo-vllm/*.json | wc -l = 620 ≥ 604 阈值且稳定（较上一轮 618 +2，最新 conv4_q25/q24 mtime ≈ 2026-11-04 00:19 +08:00，conv4_q23 23:51、conv4_q22 23:38）；(3) 今日新聚合产物 locomo_results_20261104_001903.json（mtime 2026-11-04 00:19 +08:00，4.76MB）已出现，python3 json.load 验证含 metrics_by_cutoff 键。退出时间窗口在 23:50~00:19 之间（无精确记录）。五轮轨迹：23:11 615 → 23:19 615(+0) → 23:32 616(+1) → 23:50 618(+2, RUNNING) → 00:19(+08:00) 620(+2, EXITED + aggregate landed)。logs/locomo_20261103_225713.log 尾部仍停留在 22:57:14 ingestion 行（conv0..4 chunks 419/369/663/629/680），无 'All conversations completed'/'Evaluation finished' 标记——该 log 在逐题生成阶段未写入，不影响退出判定。注：最终官方聚合 total_questions=610（conv0:152/conv1:81/conv2:152/conv3:199/conv4:26），与磁盘 620 文件数差 10 属正常（部分逐题文件未被计入聚合或存在重判覆盖），以官方聚合 JSON 为准。描述性本机路径（非伪造 URL）：tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json、tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/、tools/memory-benchmarks/logs/locomo_20261103_225713.log。
 
 ### 研究未知因素：各 cutoff 的实际分数值
 

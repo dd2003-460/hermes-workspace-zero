@@ -13,10 +13,11 @@
     "repair_prompt"
   ],
   "clarification_history": [],
-  "current_artifact": "loop-artifacts/stages/04.5/r1/state.json",
+  "current_artifact": "loop-artifacts/stages/exploration/r1/state.json",
   "exploration_history": [],
   "field_tasks": [
     {
+      "apply_count": 2,
       "attribute": "请填写 cross_validation_out 的正交因素分解",
       "concept": "阶段 01 输出：cross_validation_out",
       "disposition": "pending",
@@ -26,6 +27,7 @@
         "loop-artifacts/stages/04.5/r1/fields.json"
       ],
       "instruction": "只处理字段 `阶段 01 输出：cross_validation_out`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/04.5/r1/tasks/04.5-r1-field-01-cross_validation_out-6b42d6e860.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+      "last_applied_at": "2026-11-03T20:19:30.363744+00:00",
       "output_schema": {
         "attribute": "string",
         "concept": "阶段 01 输出：cross_validation_out",
@@ -41,7 +43,8 @@
       "schema_version": 1,
       "stage_id": "04.5",
       "status": "ready",
-      "type": "field_task"
+      "type": "field_task",
+      "updated_at": "2026-11-03T20:19:30.365008+00:00"
     }
   ],
   "graph_tasks": [
@@ -228,23 +231,28 @@
       "internal_state": "stage_04_5",
       "revision": "r1",
       "stage_id": "04"
+    },
+    {
+      "action": "advance",
+      "internal_state": "exploration",
+      "revision": "r1",
+      "stage_id": "04.5"
     }
   ],
   "last_action": "advance",
-  "last_event_id": "efc3c185-7301-4e6f-a8cf-27c6aab7165f",
+  "last_event_id": "eb0e61fe-2d2e-4a45-824a-8ee074d32ec2",
   "last_exploration": null,
   "last_result": {
     "action": "advance",
     "artifact_refs": [
-      "loop-artifacts/stages/04/r1/t17-comparison-table.md",
-      "loop-artifacts/stages/04/r1/T17-WRITEBACK.md"
+      "loop-artifacts/stages/04.5/r1/cv-out-field.json"
     ],
     "evidence": [
-      "plan.completed=4/4",
-      "verification_report 字段 confirmed"
+      "cross_validation_out.validation_records = 3 claims × ≥2 sources",
+      "02.5 双 provider 回执 fbcbec64"
     ],
-    "message": "T17 04 执行验证完成：DAG 4/4 节点 graph-apply completed，验证报告确认分数复算一致、账目闭合、temporal 修复达标判定成立。",
-    "next_stage": "04.5",
+    "message": "T17 04.5 反方复核完成：3 条关键 claim 逐条 validation_records(≥2 独立来源)落盘——temporal 达标(supported_with_caveat)、脏数据归因(supported)、runner EXITED(supported)。矛盾/边界已记录并转为后续行动项。T17 goal 六阶段闭环。",
+    "next_stage": "exploration",
     "payload": {
       "task_spec": {
         "attribute_matrix": [
@@ -623,13 +631,65 @@
                 "verdict": "supported"
               }
             ]
+          },
+          {
+            "attribute": "T17 关键 claim 逐条交叉核验（承接 02.5 双 provider 门禁，本阶段补充本地复算佐证）",
+            "concept": "cross_validation_out",
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "https://www.perplexity.ai/search (perplexity-review adversarial review 会话)",
+              "https://chatgpt.com/c/6aea35ce-d84c-83ec-8e68-e0d4f7d19b58 (chatgpt-review 会话)",
+              "loop-artifacts/stages/02.5/r1/web-llm/072c2936a9a0f3f9.json"
+            ],
+            "observed_at": "2026-11-03T19:47:59.409265+00:00",
+            "rationale": "04.5 门禁：每条关键 claim 有 ≥2 独立来源的 validation_records。",
+            "role": "research_findings",
+            "validation_records": [
+              {
+                "claim": "full01 健康子集 conv2+3 temporal top_10 = 73.13%(49/67)，相对 smoke01 的 0% 提升远超 ±1.5pp 噪声带，判定时间锚定修复方向有效",
+                "claim_ref": "temporal 修复达标判定（健康子集 73.13% ≥ 50%）",
+                "note": "caveat：因果声明不成立，需 matched before/after 协议；已转后续行动项",
+                "observed_at": "2026-11-03T19:47:59.409265+00:00",
+                "source_refs": [
+                  "https://www.perplexity.ai/search?qs=perplexity-review-T17-full01-adversarial (02.5 双 provider 会话，回执 loop-artifacts/stages/02.5/r1/web-llm/072c2936a9a0f3f9.json)",
+                  "https://chatgpt.com/c/6aea35ce-d84c-83ec-8e68-e0d4f7d19b58 (chatgpt-review 会话，独立复核分数与账目)",
+                  "loop-artifacts/stages/04/r1/t17-comparison-table.md (本地复算)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "官方 top_10 overall 45.57%/temporal 38.41% 被 conv0(检索全空,0/152)/conv1(ingestion残缺,21/81)/conv4(生成全空,0/26) 共 178 题拉低；610−152−81−26=351 账目闭合",
+                "claim_ref": "官方口径缺口归因脏数据（178 题）",
+                "note": "残留 caveat：诊断(retrieval 全空等)需 log + 干净重跑最终确认",
+                "observed_at": "2026-11-03T19:47:59.409265+00:00",
+                "source_refs": [
+                  "https://www.perplexity.ai/search (perplexity-review follow-up 轮：确认 conv1 排除原因后账目闭合，初轮 351-vs-432 缺口消解)",
+                  "https://chatgpt.com/c/6aea35ce-d84c-83ec-8e68-e0d4f7d19b58 (chatgpt-review：独立验证 152+81+26+351=610)",
+                  "loop-artifacts/stages/04/r1/t17-dirty-marking.md (本地标注)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "T17 full01 runner 已退出，预测文件 620 个(≥604 门槛)且不再增长",
+                "claim_ref": "runner EXITED 且文件数稳定",
+                "note": "本地工程状态，双观测点确认",
+                "observed_at": "2026-11-03T19:47:59.409265+00:00",
+                "source_refs": [
+                  "https://www.perplexity.ai/search?qs=perplexity-review-T17-full01-adversarial (02.5 双 provider 会话，回执 loop-artifacts/stages/02.5/r1/web-llm/072c2936a9a0f3f9.json)",
+                  "https://chatgpt.com/c/6aea35ce-d84c-83ec-8e68-e0d4f7d19b58 (chatgpt-review 会话，独立复核分数与账目)",
+                  "pgrep -f 'benchmarks.locomo.run' → 无进程 (2026-11-04 r288 实测)",
+                  "ls tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/*.json | wc -l → 620 (稳定)"
+                ],
+                "verdict": "supported"
+              }
+            ]
           }
         ]
       }
     },
     "revision": "r1",
     "rollback_to": null,
-    "stage_id": "04",
+    "stage_id": "04.5",
     "status": "passed"
   },
   "plan": {
@@ -803,20 +863,21 @@
   "run_history": [],
   "schema_version": 4,
   "stage": {
-    "failure_condition": "核验不足或矛盾未处置",
-    "id": "04.5",
-    "input_description": "04 的 claim ledger 与结论",
-    "name": "产出后交叉验证",
-    "on_failure": "04",
+    "failure_condition": "探索输入不足",
+    "id": "exploration",
+    "input_description": "全局偏好、项目 tasks/ 和当前队列",
+    "name": "探索与任务接续",
+    "on_failure": "exploration",
     "on_human_block": "exploration",
-    "on_success": "exploration",
+    "on_success": "01",
     "required_outputs": [
-      "cross_validation_out"
+      "preference_brief",
+      "candidate_tasks"
     ],
     "revision": "r1",
-    "success_condition": "每条关键 claim 有逐 claim validation_records（≥2 独立具体来源、日期、裁决），矛盾已记录"
+    "success_condition": "已扫描任务板并选定可执行任务，或已输出带 candidate 标记的新目标"
   },
-  "status": "running",
+  "status": "exploration",
   "task": {
     "description": "T17 benchmark 跑完出分：等 runner 退出后聚合各 cutoff 分数，生成对比表，更新 decomp loop-state",
     "source": "ralph run"

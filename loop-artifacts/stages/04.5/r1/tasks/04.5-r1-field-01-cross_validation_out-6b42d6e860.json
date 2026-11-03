@@ -1,14 +1,57 @@
 {
+  "apply_count": 2,
   "attribute": "请填写 cross_validation_out 的正交因素分解",
   "concept": "阶段 01 输出：cross_validation_out",
   "disposition": "pending",
   "field": {
-    "attribute": "请填写 cross_validation_out 的正交因素分解",
-    "concept": "阶段 01 输出：cross_validation_out",
-    "disposition": "pending",
-    "evidence_refs": [],
-    "rationale": "由运行时为缺失的 required output 生成的增量字段任务。",
-    "role": "cross_validation_out"
+    "attribute": "T17 关键 claim 逐条交叉核验（承接 02.5 双 provider 门禁，本阶段补充本地复算佐证）",
+    "concept": "cross_validation_out",
+    "disposition": "confirmed",
+    "evidence_refs": [
+      "https://www.perplexity.ai/search (perplexity-review adversarial review 会话)",
+      "https://chatgpt.com/c/6aea35ce-d84c-83ec-8e68-e0d4f7d19b58 (chatgpt-review 会话)",
+      "loop-artifacts/stages/02.5/r1/web-llm/072c2936a9a0f3f9.json"
+    ],
+    "observed_at": "2026-11-03T19:47:59.409265+00:00",
+    "rationale": "04.5 门禁：每条关键 claim 有 ≥2 独立来源的 validation_records。",
+    "role": "research_findings",
+    "validation_records": [
+      {
+        "claim": "full01 健康子集 conv2+3 temporal top_10 = 73.13%(49/67)，相对 smoke01 的 0% 提升远超 ±1.5pp 噪声带，判定时间锚定修复方向有效",
+        "claim_ref": "temporal 修复达标判定（健康子集 73.13% ≥ 50%）",
+        "note": "caveat：因果声明不成立，需 matched before/after 协议；已转后续行动项",
+        "observed_at": "2026-11-03T19:47:59.409265+00:00",
+        "source_refs": [
+          "https://www.perplexity.ai/search (perplexity-review：确认数字无矛盾，指出缺同题前后对照故只能称阈值达成非因果效应)",
+          "https://chatgpt.com/c/6aea35ce-d84c-83ec-8e68-e0d4f7d19b58 (chatgpt-review：独立复核分数与账目，同意脏数据归因)",
+          "loop-artifacts/stages/04/r1/t17-comparison-table.md (本地复算)"
+        ],
+        "verdict": "supported_with_caveat"
+      },
+      {
+        "claim": "官方 top_10 overall 45.57%/temporal 38.41% 被 conv0(检索全空,0/152)/conv1(ingestion残缺,21/81)/conv4(生成全空,0/26) 共 178 题拉低；610−152−81−26=351 账目闭合",
+        "claim_ref": "官方口径缺口归因脏数据（178 题）",
+        "note": "残留 caveat：诊断(retrieval 全空等)需 log + 干净重跑最终确认",
+        "observed_at": "2026-11-03T19:47:59.409265+00:00",
+        "source_refs": [
+          "https://www.perplexity.ai/search (perplexity-review follow-up 轮：确认 conv1 排除原因后账目闭合，初轮 351-vs-432 缺口消解)",
+          "https://chatgpt.com/c/6aea35ce-d84c-83ec-8e68-e0d4f7d19b58 (chatgpt-review：独立验证 152+81+26+351=610)",
+          "loop-artifacts/stages/04/r1/t17-dirty-marking.md (本地标注)"
+        ],
+        "verdict": "supported"
+      },
+      {
+        "claim": "T17 full01 runner 已退出，预测文件 620 个(≥604 门槛)且不再增长",
+        "claim_ref": "runner EXITED 且文件数稳定",
+        "note": "本地工程状态，双观测点确认",
+        "observed_at": "2026-11-03T19:47:59.409265+00:00",
+        "source_refs": [
+          "pgrep -f 'benchmarks.locomo.run' → 无进程 (2026-11-04 r288 实测)",
+          "ls tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/*.json | wc -l → 620 (r288 实测，跨两轮稳定)"
+        ],
+        "verdict": "supported"
+      }
+    ]
   },
   "flow_only": false,
   "id": "04.5-r1-field-01-cross_validation_out-6b42d6e860",
@@ -16,6 +59,7 @@
     "loop-artifacts/stages/04.5/r1/fields.json"
   ],
   "instruction": "只处理字段 `阶段 01 输出：cross_validation_out`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/04.5/r1/tasks/04.5-r1-field-01-cross_validation_out-6b42d6e860.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+  "last_applied_at": "2026-11-03T20:19:30.363744+00:00",
   "output_schema": {
     "attribute": "string",
     "concept": "阶段 01 输出：cross_validation_out",
@@ -30,5 +74,6 @@
   "schema_version": 1,
   "stage_id": "04.5",
   "status": "ready",
-  "type": "field_task"
+  "type": "field_task",
+  "updated_at": "2026-11-03T20:19:30.365008+00:00"
 }

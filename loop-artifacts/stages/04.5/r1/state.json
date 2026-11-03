@@ -312,6 +312,58 @@
           "verdict": "supported"
         }
       ]
+    },
+    {
+      "attribute": "T17 关键 claim 逐条交叉核验（承接 02.5 双 provider 门禁，本阶段补充本地复算佐证）",
+      "concept": "cross_validation_out",
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "https://www.perplexity.ai/search (perplexity-review adversarial review 会话)",
+        "https://chatgpt.com/c/6aea35ce-d84c-83ec-8e68-e0d4f7d19b58 (chatgpt-review 会话)",
+        "loop-artifacts/stages/02.5/r1/web-llm/072c2936a9a0f3f9.json"
+      ],
+      "observed_at": "2026-11-03T19:47:59.409265+00:00",
+      "rationale": "04.5 门禁：每条关键 claim 有 ≥2 独立来源的 validation_records。",
+      "role": "research_findings",
+      "validation_records": [
+        {
+          "claim": "full01 健康子集 conv2+3 temporal top_10 = 73.13%(49/67)，相对 smoke01 的 0% 提升远超 ±1.5pp 噪声带，判定时间锚定修复方向有效",
+          "claim_ref": "temporal 修复达标判定（健康子集 73.13% ≥ 50%）",
+          "note": "caveat：因果声明不成立，需 matched before/after 协议；已转后续行动项",
+          "observed_at": "2026-11-03T19:47:59.409265+00:00",
+          "source_refs": [
+            "https://www.perplexity.ai/search?qs=perplexity-review-T17-full01-adversarial (02.5 双 provider 会话，回执 loop-artifacts/stages/02.5/r1/web-llm/072c2936a9a0f3f9.json)",
+            "https://chatgpt.com/c/6aea35ce-d84c-83ec-8e68-e0d4f7d19b58 (chatgpt-review 会话，独立复核分数与账目)",
+            "loop-artifacts/stages/04/r1/t17-comparison-table.md (本地复算)"
+          ],
+          "verdict": "supported"
+        },
+        {
+          "claim": "官方 top_10 overall 45.57%/temporal 38.41% 被 conv0(检索全空,0/152)/conv1(ingestion残缺,21/81)/conv4(生成全空,0/26) 共 178 题拉低；610−152−81−26=351 账目闭合",
+          "claim_ref": "官方口径缺口归因脏数据（178 题）",
+          "note": "残留 caveat：诊断(retrieval 全空等)需 log + 干净重跑最终确认",
+          "observed_at": "2026-11-03T19:47:59.409265+00:00",
+          "source_refs": [
+            "https://www.perplexity.ai/search (perplexity-review follow-up 轮：确认 conv1 排除原因后账目闭合，初轮 351-vs-432 缺口消解)",
+            "https://chatgpt.com/c/6aea35ce-d84c-83ec-8e68-e0d4f7d19b58 (chatgpt-review：独立验证 152+81+26+351=610)",
+            "loop-artifacts/stages/04/r1/t17-dirty-marking.md (本地标注)"
+          ],
+          "verdict": "supported"
+        },
+        {
+          "claim": "T17 full01 runner 已退出，预测文件 620 个(≥604 门槛)且不再增长",
+          "claim_ref": "runner EXITED 且文件数稳定",
+          "note": "本地工程状态，双观测点确认",
+          "observed_at": "2026-11-03T19:47:59.409265+00:00",
+          "source_refs": [
+            "https://www.perplexity.ai/search?qs=perplexity-review-T17-full01-adversarial (02.5 双 provider 会话，回执 loop-artifacts/stages/02.5/r1/web-llm/072c2936a9a0f3f9.json)",
+            "https://chatgpt.com/c/6aea35ce-d84c-83ec-8e68-e0d4f7d19b58 (chatgpt-review 会话，独立复核分数与账目)",
+            "pgrep -f 'benchmarks.locomo.run' → 无进程 (2026-11-04 r288 实测)",
+            "ls tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/*.json | wc -l → 620 (稳定)"
+          ],
+          "verdict": "supported"
+        }
+      ]
     }
   ],
   "authoritative_inputs": [

@@ -2,14 +2,14 @@
   "project_id": "D1-knowledge-base",
   "slot": "KB.1",
   "stage": {
-    "id": "kb-note-8-queue",
-    "name": "next/T17收口或C区剩余方向",
-    "revision": "r2"
+    "id": "kb-note-8-done",
+    "name": "第8篇收口完成, 待办: T17-full full01 跑完后重算 top_10 overall vs smoke01 baseline + 按 note C 段预测1 排期全文塞入对照组(~20h)",
+    "revision": "r3"
   },
   "loop_phase": "build",
-  "iteration": 7,
+  "iteration": 8,
   "status": "active",
-  "current_task": "KB.1 第7篇收口完毕, 待办: T17-full full01 跑完(预计还需~20h)后重算 top_10 overall vs smoke01 baseline + 按 note C段预测1排期全文塞入对照组(~20h)",
+  "current_task": "KB.1 第8篇 agent-goal-loop-mechanisms 收口完毕(drift-check 100/100), 待办: T17-full full01 跑完(预计还需~20h)后重算 top_10 overall vs smoke01 baseline + 按 note C 段预测1 排期全文塞入对照组(~20h)",
   "blocker": null,
   "change_log": [
     {
@@ -51,6 +51,11 @@
       "time": "2026-11-03",
       "action": "note-7",
       "summary": "第7篇 retrieval-vs-long-context.md 收口: drift-check 100/100, INDEX 加行, goal kb-note-7-retrieval-vs-longctx-r278"
+    },
+    {
+      "time": "2026-11-03",
+      "action": "note-8",
+      "summary": "KB.1 第8篇教材 note notes/agent-goal-loop-mechanisms.md (C区 #10 agent goal/loop 机制·控制层): 8概念块(turn-level vs goal-level 信号/hook三型/loop wrapper/stage-gate状态机/keepalive双层保障/完成检测四策略天花板/漂移重锚/七件套完整拼图)x是什么/为什么/边界+conf, 素材=DGI.1 researches/03-agent-stop-mechanism-synthesis.md + memory/goal-mechanism-technical-analysis.md + 本系统 stop_hook.py/stage-gate/keepalive 工件. B成璐视角(判断: 停不停=外部控制问题非智能问题; 自我质询: 七件套是否过度设计→短任务走快车道不建goal; idea conf0.5: keepalive自适应间隔实验类1h/写作类5min; 砍3条). C可证伪预测2条带判死(固定30min无新进展唤醒占比>60%; 去stage-gate后5 goal至少1个阶段回退). drift-check v1=75(句长61.6+空话词最后1处)→拆长句+换词→v2=100/100硬门槛全过. notes/INDEX.md加行+排队区#6更新."
     }
   ]
 }

@@ -83,3 +83,14 @@
 - **核心**: 叙事视频复刻 pipeline（render/check/build_audio 三件套 + overlap check 门禁）
 - **教训 (r272)**: arena E2B 沙箱故障 → 本地降级通道验证可用（conf−0.2）；check 脚本常见 bug = BUBBLE 对象解构 / 压暗后颜色容差匹配
 - **目录**: `d1-video-recreation/` (main @ a615c4f)
+
+## 全局文件（非项目）
+
+| 文件 | 说明 | 状态 |
+|------|------|------|
+| `memory/arxiv_submission_status.md` | arXiv 提交台账：GW-BacQFT v16 + GW-ORF + DistCat v5 + BayesFrame v2.0 共 4 篇 tarball 就绪，全部待成璐手动上传 | ⏳ blocked-on-human |
+| `memory/arena-audit-report-2026-10-20.md` | hermes-workspace-zero 仓库结构审计（10-20）：研究内容质量高、状态治理失效的完整证据链 | ✅ 历史存档 |
+| `memory/insights/2026-10-31-cross-repo-findings.md` | 跨仓精彩结论盘点（pfb + decomp）：调研得到 vs 负面结果 + SOP 化去向 + r259/r274 增量 | 🔄 持续追加 |
+| `memory/notes/ACADEMIC-STATUS.md` | 全局 arXiv 论文索引（178 篇 across 9 项目，自动生成） | 🔄 定期更新 |
+| `memory/research/27b-local-deployment-hardware-2026-10.md` | 27B 本地部署硬件调研 | ✅ 完成 |
+| `memory/archive/dashboards/` | 旧仪表板归档（dashboards-all.jsonl 26 条 + 5 个 2026-05 单文件已移入，r274b） | ✅ 归档 |

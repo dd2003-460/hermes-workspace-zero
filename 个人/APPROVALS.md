@@ -38,3 +38,8 @@
 ## 待处理（建议项，不阻塞）
 
 - **wx-push.py 连续失败已自愈**（r268c/r269/r270 三轮 invalid request → r274 起 success:true，bot API token 侧问题自行恢复）。销账：无需换渠道，保留 hermes 原生 weixin 投递 + wx-push 双通道现状。若再连续 ≥3 轮失败则重新登记建议项。
+## [2026-11-04 r288] wx-push 播报通道故障（iLink bot API）
+- 现象：wx-push.py 发送 T17 02.5 收口播报 → `retry-without-token: ret=-1 errcode=None errmsg=invalid request`（带 context_token 与不带均失败）。r279 记的"连续失败解除"在 ~2h 后复发。
+- 已排查：脚本逻辑正常（account/token/base_url/context-tokens 文件齐全，02:12 有更新）；失败发生在 iLink 服务端返回层，非本地 token 过期可自愈路径（ret=-1 非 -14/-2，fallback 不生效）。
+- 待办：① 查 hermes gateway 微信渠道是否同时掉线（若 gateway 能发则用其代发）② 确认 iLink bot 账号态（可能需要重新扫码登录刷新 token）③ 若成璐侧 bot 会话本身失效需重建。
+- 影响：cron 播报暂不可达，不影响 loop 推进；后续轮次继续尝试 wx-push，成功即销此条。

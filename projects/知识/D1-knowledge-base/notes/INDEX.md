@@ -12,6 +12,7 @@
 | `llm-persona-alignment.md` | LLM persona 对齐 | v1 完成(drift-check 100/100, 1514 汉字) | persona 对齐 = 条件生成非权重修改; 公理编码 LENS+METHOD, voice 编码 VOICE |
 | `gpu-inference-hardware.md` | GPU 推理硬件 | v1 完成(drift-check 100/100, 70 句/均句 51.8) | decode 是带宽瓶颈; TP 分片 KV 每卡 1/4; 组合比型号重要; 线性架构改内存公式 |
 | `vector-database-cosine-similarity.md` | 向量检索与 agent 记忆基础设施 | v1 完成(drift-check 100/100, 109 句/均句 54.0) | embedding 把语义变几何; HNSW 小世界图索引; recall 地板 vs 延迟的交换; 结构化存储下关键词扫描优先, 非结构化语料才需向量层 |
+| `retrieval-vs-long-context.md` | 检索 vs 长上下文（管道选型） | v1 完成(drift-check 100/100, 145 句/均句 42.6) | RAG 赌召回、长上下文赌定位衰减, 两个致命黑盒互为镜像; 选型第一变量是 doc_scale×问答量×更新频率三业务参数; 混合架构是唯一同时满足两条的解 |
 
 ## 排队(按 memory/interest-directions.md 的 C 区优先级)
 
@@ -20,4 +21,4 @@
 3. ~~agent 记忆与持续循环~~ → 已完成(第二篇, 关联 DM.1/CA.1)
 4. ~~LLM persona 对齐~~ → 已完成(第四篇, 关联 DPA.1, 公理层)
 5. ~~传播学 / 网络拓扑 / 传播效率~~ → 已完成(m01255, 2026-10-18, 第三四五篇, 供 D2 书底座)
-6. (待补: C 区剩余兴趣方向, 见 memory/interest-directions.md)
+6. (待补: C 区剩余兴趣方向, 见 memory/interest-directions.md) — 第7篇 retrieval-vs-long-context 已收口(2026-11-03, r278), C 区 #10 agent 记忆基础设施三线闭合(外壳/内脏/存废)

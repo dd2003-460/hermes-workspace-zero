@@ -2,14 +2,14 @@
   "project_id": "D1-knowledge-base",
   "slot": "KB.1",
   "stage": {
-    "id": "kb-note-6-vector-db",
-    "name": "build/vector-database-cosine-similarity",
+    "id": "kb-note-8-queue",
+    "name": "next/C区剩余方向或LoCoMo对照组",
     "revision": "r1"
   },
   "loop_phase": "build",
-  "iteration": 6,
+  "iteration": 7,
   "status": "active",
-  "current_task": "KB.1 第6篇教材note notes/vector-database-cosine-similarity.md (Lead直写, 素材=decomp T17 rag-vs-longctx gold tree+runs + LoCoMo实验锚): 10概念(embedding语义变几何/余弦去模长比方向/top-k召回因子链/暴力搜索O(N×d)的墙/HNSW小世界多层图/recall地板vs延迟交换/rerank粗筛精排/chunk头号失效模式/本地三方案量级定位/agent记忆里结构化存储关键词扫描优先)×是什么/为什么/边界+conf. drift-check 100/100(109句/均句54.0/第一人称0.2+/空话0). 核心判断: 检索层真相=工程问题伪装成AI问题; LLM时代新变量=模型变强后recall地板可放低(LoCoMo检验中). 两条可证伪预测带判死条件.",
+  "current_task": "KB.1 第7篇教材note notes/retrieval-vs-long-context.md (Lead直写, 素材=decomp T17 rag-vs-longctx gold tree+runs a/b + LoCoMo full01在途实验): 10概念(RAG赌召回/长上下文赌定位衰减/needle位置偏差/镜像黑盒B1-B2双向验证/成本分裂建设vs边际/混合架构SHARED耦合/可引用性硬约束/幻觉率不对称/更新频率隐藏变量/agent记忆站队判据)×是什么/为什么/边界+conf. drift-check 100/100(145句/均句42.6/第一人称0.207/空话0). 核心判断: 选型第一变量是doc_scale×问答量×更新频率三业务参数, 两个致命黑盒没量化前'RAG更先进'无决策意义. 两条可证伪预测带判死条件.",
   "blocker": null,
   "change_log": [
     {
@@ -46,6 +46,11 @@
       "time": "2026-11-03",
       "action": "iter6",
       "summary": "第6篇 vector-database-cosine-similarity.md 落盘, drift-check 100/100, INDEX 登记"
+    },
+    {
+      "time": "2026-11-03",
+      "action": "note-7",
+      "summary": "第7篇 retrieval-vs-long-context.md 收口: drift-check 100/100, INDEX 加行, goal kb-note-7-retrieval-vs-longctx-r278"
     }
   ]
 }

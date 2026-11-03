@@ -17,17 +17,20 @@
 - **状态**：waiting（等 pfb 解锁）
 
 ### G2: T17 full01 benchmark 跑完 → 出分对比
-- **前置**：runner (PID 62585) 健康，conv3 Questions ~94% (569/604, q173)。
+- **前置**：runner (PID 62585) 健康，conv3 Questions ~96% (580/604, q184)。
 - **触发条件**：runner 退出 + 结果目录出现最终汇总文件。
 - **动作**：聚合各 cutoff 分数 → 对比表 → 更新 decomp loop-state。
-- **状态**：running（监控中，无需干预）
+- **状态**：running（监控中，预计 ~24min 跑完 conv3）
 
-### G3: 金融·正交信号源（候选 #1，open）★当前最高优先可执行
-- **来源**：ACTIVE-candidates.md #1（hermes-workspace-zero / D1-financial-market-analysis）。
-- **现状**：F7 三市场组合 FAIL（信息冗余），F10 agent-game-model 探索中。
-- **本轮动作**：按 goal-template §1 建 goal → 外包 arena 调研「链上资金流 / 期权 skew 数据可得性」→ 定 F8 实验设计。
-- **验收**：调研产出 ≥3 独立源 + conf≥0.7 + 数据可得性结论 + F8 实验设计草案落盘。
-- **状态**：ready（arena 通道已确认可用：ego-lite 进程活着 + ego-browser CLI 在位）
+### G3: 金融·正交信号源（F8）— 已收口 + 采集器启动
+- **结论（负面结果）**：免费+PIT+2020-2026日线约束下，crypto 日频信号高度冗余，无可验证正交源。TVL ρ=0.43 冗余；期权IV/OI/多空比/链上流全没免费历史。详见 `tasks/decomposition.md`。
+- **本轮动作（已完成 2026-11-03）**：
+  1. ✅ F8 负面结果正式落盘 `tasks/decomposition.md`（权威记录）
+  2. ✅ Deribit IV 采集器 `scripts/deribit_iv_collector.py` 写好并跑通（848合约，ATM IV=45.17）
+  3. ✅ Hermes cron job `iv-collector-daily` 挂好（每日 09:00 UTC+8 采 BTC+ETH）
+- **下一步**：等积累 ≥90 天 IV 数据后做 F8 组合实验设计（F8-4）。当前无需干预，cron 自动跑。
+- **待成璐决策**：是否接受「免费数据下 crypto 日频信号高度冗余」作为 F8 正式结论（负面结果本身有价值），还是等 IV 采集器积累后再做组合实验。
+- **状态**：done（调研+采集器）→ monitoring（等 IV 数据积累）
 
 ## 维护性兜底
 无可执行目标时：扫 workspace git status / 各项目 loop-state.json / memory 蒸馏，保持台账准确。

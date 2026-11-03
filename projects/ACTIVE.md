@@ -1,6 +1,6 @@
 # ACTIVE — 活跃项目面板
 
-**自动生成**: 2026-11-03 12:48 — 由 scripts/aggregate-active.sh 聚合
+**自动生成**: 2026-11-03 12:49 — 由 scripts/aggregate-active.sh 聚合
 
 ## 焦点项目
 
@@ -9,6 +9,7 @@
 | D1-longevity-orthogonal | `健康长寿/D1-longevity-orthogonal/` | 04 | 1 | active | T5 硬阻塞: FinnGen R13 无 allele 列 + 1000G FTP 404 → strand harmonisation 无法完成。管道代码已就绪 (v2, palindrome-safe + IVW/Egger/WMed |
 | D1-efficiency-optimization | `AI-计算科学/D1-efficiency-optimization/` | 01-goal-decomposition | 1 | active | R5.1 完成: ChatGPT 独立打分 run1-run4 (24分) + Fleiss κ=0.258 (根因=证据包版本不对称, M2/M5 信息差) + n=5 首次有效权重校准 (M1 r=0.85/M3 r=0.735; M5 |
 | quant-capital-flow | `金融/quant-capital-flow/` | unknown | 1 | in_progress | toy model v15 联合优化完成（十五连败确认框架不够），转其他研究方向 |
+| d1-video-recreation | `媒体/D1-ai-video-recreation/` | batch-13-closed | 13 | done | 无待办 — batch-13 收官，等下一批规划（需成璐定 E37+ 主题或确认新季方向） |
 | bh-mass-spectrum | `理论物理/bh-mass-spectrum/` | active | 3 | active | 任务 A (P0-1/P0-2) v2 数据质量修复完成 @ 6ab6336。三个 bug 已修：(1) 种子 BH 污染 — m_bh>=1e-7 排除 ~339 Msun 标记；(2) 占据率 NaN — 分母改为全晕群体；(3) LO |
 | D2-efficient-propagation-book | `写作-社会系统/D2-efficient-propagation-book/` | init | r1 | active | L1-L6 全15章第一稿完成(第1-15章全100/100, 我全审过). v3 定稿前全书通读完成(6处交叉引用修复+ch12回指补, notes落盘). 提前做文档完成(commit 9c0c00cf: p2-experiment-p ⚠️ v3 正式定稿待 P2 实验第一个数（30 人 30 天 ≥40% 信念迁移, solo 0 美元设计已在 ch14+p2-experiment-plan.md; 渠道待成璐拍板） |
 | D1-think-token-budget | `AI-计算科学/D1-think-token-budget/` | implementation | 10 | complete | T1-T4 全完成: R3 前沿映射交付 (P1=prompt 级前沿, 414.5ch/104tok 2.63x 短于 P0); 下一步候选: serving层 thinking_token_budget 实测… |
@@ -30,7 +31,7 @@
 | 2 | 写作·动机社会 | from-motivation-to-society | Part I-V 全写完，等 P2 实验第一个数（30人30天≥40%信念迁移），solo 0美元方案已写好 | 起草 P2 实验招募文案 + 渠道对比（待你拍板渠道） | open·半阻塞(渠道) |
 | 3 | 健康·MR L1 完成 | longevity-orthogonal-contribution | **阶段2 全部本地工作完成** (b7a9a83)：Step1✅ Step2✅ Step4 L1✅ (10 pair, Egger 为主) + verify_integrity C1-C24 PASS + 执行报告 + LDL→AD 管线伪影诊断(方向一致性69%)。BMI→CHD Egger OR=1.17, LDL→CHD OR=1.40, BMI→CKD OR=1.28 | blocked: 1000G v3 EUR ref (clumping, 所有源已死) + OpenGWAS token (Step3 condition-F)。本地 open-data 已穷尽 | blocked-on-credentials |
 | 4 | 物理·ORF 收尾 | -orf | Stage 4 组件全完成，LaTeX 86→0（2026-11-02），arXiv tarball 已打好（2026-11-02） | arXiv 手动上传（需登录 arxiv.org/submission，不可自动绕过） | blocked-on-human |
-| 5 | 视频复刻·batch-12 | d1-video-recreation | batch-12 E29-E32 全部完成（4/4 ✅，eccff00），已推 main | 无待办 — 等下一批规划 | done |
+| 5 | 视频复刻·batch-13 | d1-video-recreation | batch-13 E33-E36 全部完成（4/4 ✅，fca6e22），已推 main，累计 45 视频 | 无待办 — 等下一批规划 | done |
 | 6 | 杂乱 idea 池 | conversation-raw-materials / D1-academic-AI raw ideas | 历史对话素材 + AI 研究猜想未消化 | 低优先级：定期蒸馏进对应领域项目，不单独立项 | backlog |
 
 | 7 | 物理·BH 质量谱 + 实验框架 T8 | bh-mass-spectrum / decomp / pfb | BH 任务C 完成（e2d419b）；T21-RR 调研完成 @ 2482280；**T8 Part C 两轮对抗核验均 FAIL×2+partial×4** → **T8 Part C 探索性收口完成**（decomp @ 1cd3e74，m01140 自主执行可回滚：freeze 段三域负效应方向稳健，确认性实验等异源 judge+M8-fixed+口径冻结+预算四条件；报告副本已同步 pfb @ e92a0e4）；**rubric v2 全量重放完成 overall_pass=False**（AC1 0.661<0.85，J2 恒高分分不开配置，J1 parse 失败 7run）→ **v3 对账+脚本完成**（r246: 根因=工件条目编号不统一致双判官自造 id 不对齐 + J1-v2 来源判据一刀切过严；v3=id 锚定注入+J1 来源三级化；**全量重放完成 r247**：AC1=0.979✅ AC2✅ AC3✅ **AC4 FAIL**（B-2del-eo 满分→与 A-full 无区分度，根因=evidence 段被假设性标记污染非 rubric 错）→ **r248 修正**：v3.1 重放暴露真瓶颈不是同族判官天花板而是 **J2-lenient 的 B-1/B-2 边界模糊**（有数字无来源的方案级主张被 J2 误判 pass → AC3 FAIL）。J1 三级判据是对的。下一步：修 J2 或确认工件分布代表性。pfb @ 0dcb46f）；v2 MR 触发源查明=WorkBuddy App | **r249e 闭环**：B-2a 3步流程修复 J2 leniency → AC3 恢复（B-none J2=0.000）；AC4 确认为消融配置 design limitation（B-2del-eo 的 U/Q 研究计划条目使均值反超 A-full，非 rubric bug）。v3-final: AC1✅ AC2✅ AC3✅ AC4❌(design)。pfb @ a42fbf1。剩余：异源 judge（Fleiss κ + T8 Part C confirmatory）+ WorkBuddy 会话停否 | partial-awaiting-decision |

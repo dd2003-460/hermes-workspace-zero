@@ -31,3 +31,14 @@
 | 2026-10-22 | m00001(b) | decomp 的 prompt 对比「只有要求的 prompt」提升多少？对比目前搜索到的开源最强的能提升多少？ | ①vs 白话对照 C9-plain：C0 Mean 15.2 σ0.45(5run,4自答) vs C9-plain 15.3 σ1.53(3run arena)，Δ=0.1 无显著差异→契约价值=方差降低非提分；9 零件 C1-small 10.0 显著低 5.2（下限）；C2-expos 16.0 +0.8 不显著。caveat：C0 4/5 自答 conf0.2；C9-plain 非裸任务。②vs 开源最强：无可比数字——lit-survey 结论=现有 bench 无一测正交/完备/变量归类，指标不可比；自家 arena 最强 inkling 18/opus 16 > C0 15.2，方向=契约非分数杠杆；C4 保值是公共缺口。P4（开源模型同 rubric 实跑）未做 | 已答（①conf0.6 有实测；②conf0.3 待 P4 实测） |
 | 2026-10-22 | m00001 | ①persona 目前有主要使用的方案吗（不同领域的回复/书写 SOP）②能否按三条线整理（1.模仿思考用 clonar 2.为我解答按知识库现状：熟悉域用我的术语/陌生域调研业内做法+不同粗细解释 3.和真人聊天待定）③之前验证过不好的（机械 prompt/不像的/AI 味/用力过猛的）全部归档 | ①有但散在项目里：总入口 persona.md（8 层）+ 公理层 persona-axioms.md（4-way 盲测=均值成璐）+ 语言层 author-voice SKILL（271 语料）+ OPRO-v8.1（盲测最像成璐 Y=34）+ 知识线 KB 教材格式（7 篇 note）②可以，已落 persona-sop.md 四条线（线 1 公理+clonar 补形式 / 线 2 KB 路由+L1 概括/L2 通俗/L3 术语子 note 粗细分层 / 线 3 待定等聊天语料 / 线 4 语言层横切）③已归档 tasks/archive/（8 个失败 prompt+失败原因表：排除词表≈无效/主动跳跃描述无效/逐句命令超调/角色未锚定/AI 自称） | 已答（已执行，persona-sop.md+archive/ 落盘） |
 | 2026-10-19 | m00002(续) | 400 "At most 1 image(s) may be provided in one prompt" 怎么解决 | 根因：DSH 把连续 read_image 结果合入同一条 user 消息→一条 prompt 带 N 张 data:image 图→上游 8787 桥只允许 1 张→400。修复：~/.claude-vllm-proxy/proxy.mjs 注入 applyImageBudget（全局只留最早 1 张，其余换 text 占位）+ const→let 修 bug。launchd 监督，kill 即重启加载。验证：单元 6 case 全过 + 真实流量 IMG_BUDGET dropped=1/2 多次无回归。回滚点 fix-20261019/proxy.mjs.bak-20261019-165457。详见 projects/媒体/D1-ai-video-recreation/memory/fix-image-limit.md | 已答（修复落地+验证） |
+
+## 讨论捕获区（无提问但有产出的高价值对话 · origin: ai）
+
+> 建 2026-11-03（成璐：「能不能识别我们有价值的讨论然后抓到对话数据里面」）。
+> 与上方 Q&A 时间线的区别：这里收的不是"你问我答"，而是"你抛想法→一起推出新结论"的讨论。
+> 判据（机械可检，避免主观漂）：①产出型=轮内生成 artifact（文件/代码/实验结果）②决策型=出现不可逆判断（定为/否决/改用）③洞察型=产生此前没有、且能指导后续工作的因果结论。命中任一即抓；纯闲聊/纯确认不抓。
+
+| 日期 | 主题 | 触发 | 捕获的结论 | 落盘位置 |
+|---|---|---|---|---|
+| 2026-11-03 | autoresearch r1 复盘 + "知道自己不知道"机制 | 成璐指出 logprob 触发器循环论证（他不知道时探针读到的还是自信） | 破法=三道外部闸，不依赖模型自觉：①数字必溯源（正则抓所有数字断言，无来源=待核验，纯文本规则骗不过）②矛盾必对质（新断言 vs 记忆库交叉比对，冲突冻结+独立 subagent 拿原始证据仲裁）③top-k/logprob 熵只做优先级排序不做触发（避循环论证）。核心转变："让他知道他不知道"不是靠模型自觉，是环境规定产出必须满足"带来源+无矛盾"的格式 | projects/decomp/experiments/autoresearch-r1/run/defensive-language-note.md + 本行 |
+| 2026-11-03 | GPT-6 Astra 防御性语言 = 不确定性信号？ | 成璐记忆 astra 防御性措辞留出空白=调研入口 | 论文 arXiv:2610.11355 证实 astra 防御八版最强，但归因=anticipated reviewer（防审稿人）非真不确定，撤回主张 <1/10 真夸大 → 纯抓措辞混大量冗余噪音。工程化=给每个防御标记分级：具体事实型缺口(高价值,触发调研) vs 空泛语气词(忽略)，分级需探针内部信号。组合=astra式"敢标"×探针"分级" | 同上 defensive-language-note.md |

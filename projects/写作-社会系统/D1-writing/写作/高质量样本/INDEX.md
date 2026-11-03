@@ -9,6 +9,7 @@
 - ❌ 纯知识复述、只有结论、太学术化
 
 ## 内容
-- **extracts/** — 精选会话片段（按隐喻主题分类）
+- **extracts/** — 精选会话片段（按隐喻主题分类，写作技巧视角）
   - session_*_metaphors.md — 隐喻类写作样本
+- **research/** — 指针：研究型对话的 canonical 目录在 `projects/AI-计算科学/D1-academic/学术/高质量对话/`（本目录只留 README 说明，不存正文）
 - **README.md** — 质量标准和使用说明

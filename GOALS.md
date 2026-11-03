@@ -17,10 +17,11 @@
 - **状态**：waiting（等 pfb 解锁）
 
 ### G2: T17 full01 benchmark 跑完 → 出分对比
-- **前置**：runner (PID 62585) 健康，conv3 Questions ~96% (580/604, q184)。
+- **执行者**：ralph loop（claude 子进程，16:17 启动）
+- **前置**：runner 16:10 重启后恢复，conv3 q195/604 (98%)。
 - **触发条件**：runner 退出 + 结果目录出现最终汇总文件。
-- **动作**：聚合各 cutoff 分数 → 对比表 → 更新 decomp loop-state。
-- **状态**：running（监控中，预计 ~24min 跑完 conv3）
+- **动作**：ralph 聚合各 cutoff 分数 → 对比表 → 更新 decomp loop-state。
+- **状态**：running（ralph loop 监控+聚合中）
 
 ### G3: 金融·正交信号源（F8）— 已收口 + 采集器启动
 - **结论（负面结果）**：免费+PIT+2020-2026日线约束下，crypto 日频信号高度冗余，无可验证正交源。TVL ρ=0.43 冗余；期权IV/OI/多空比/链上流全没免费历史。详见 `tasks/decomposition.md`。

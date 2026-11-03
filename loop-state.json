@@ -26,9 +26,9 @@
         "ae4ca745609561d9f",
         "afff3982ea4427de2"
       ],
-      "apply_count": 6,
+      "apply_count": 7,
       "apply_count_at_dispatch": 0,
-      "attribute": "RUNNING — 进程仍存活（PID 37261，etime 54:53），预测文件数 618（较上一轮 616 +2，最新 conv4_q23.json @ 23:51）；日志尾部仍停在 22:57:14 ingestion 阶段无结束标记，无今日聚合产物",
+      "attribute": "EXITED — 进程已退出（PID 37261 消失，pgrep 无匹配），预测文件数 620（较上一轮 618 +2，最新 conv4_q25.json）；今日新聚合产物 locomo_results_20261104_001903.json 已出现且含 metrics_by_cutoff，目标完成信号三项全部满足",
       "concept": "研究未知因素：T17 runner 当前是否已退出",
       "dispatch_name": "Fresh T17 runner exit check",
       "disposition": "research_required",
@@ -39,7 +39,7 @@
         "loop-artifacts/stages/02/r1/fields.json"
       ],
       "instruction": "只处理字段 `研究未知因素：T17 runner 当前是否已退出`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/02/r1/tasks/02-r1-field-T17-runner-194b873314.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
-      "last_applied_at": "2026-11-03T16:06:14.928135+00:00",
+      "last_applied_at": "2026-11-03T16:28:41.331055+00:00",
       "last_error": "",
       "output_schema": {
         "attribute": "string",
@@ -55,9 +55,9 @@
       "role": "unknown_factor",
       "schema_version": 1,
       "stage_id": "02",
-      "status": "dispatched",
+      "status": "deferred",
       "type": "field_task",
-      "updated_at": "2026-11-03T16:09:09.902900+00:00",
+      "updated_at": "2026-11-03T16:31:32.854831+00:00",
       "web_attempts": 0,
       "web_failures": 0
     },

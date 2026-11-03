@@ -70,7 +70,7 @@
       "concept": "研究未知因素：各 cutoff 的实际分数值",
       "dispatch_name": "T17 cutoff scores fresh read",
       "disposition": "research_required",
-      "field_read_count": 0,
+      "field_read_count": 1,
       "flow_only": false,
       "id": "02-r1-field-cutoff-35319ba392",
       "input_refs": [
@@ -94,7 +94,7 @@
       "stage_id": "02",
       "status": "dispatched",
       "type": "field_task",
-      "updated_at": "2026-11-03T17:04:02.958403+00:00",
+      "updated_at": "2026-11-03T17:05:16.143480+00:00",
       "web_attempts": 0,
       "web_failures": 0
     },

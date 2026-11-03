@@ -8,9 +8,9 @@
   "dispatch_name": "T17 cutoff scores fresh read",
   "disposition": "research_required",
   "field": {
-    "attribute": "验证并记录：各 cutoff 的实际分数值",
+    "attribute": "final full01 全量分数已读出（官方聚合 locomo_results_20261104_001903.json，run_id=full01，610 题 conv0-4）：overall top_10 278/610=45.57% / top_20 280/610=45.90% / top_50 283/610=46.39% / top_200 281/610=46.07%；temporal(138 题) top_10 53/138=38.41% / top_20 50/138=36.23% / top_50 51/138=36.96% / top_200 52/138=37.68%。vs smoke01 baseline（各 cutoff 均 60.0%、temporal 0%）：overall 各 cutoff 低 13.6~14.4pp，超出 ±1.5pp 噪声带 → overall 未达基线；temporal 38.41% vs 0% 大幅改善但未达 ≥50% 达标线 → temporal 修复未达标。根因（本地重算 per-conv 证实）：conv0 检索全空 152/152 题（0 条记忆，smoke01 残留 checkpoint 被 --resume 误判 complete，与 r280 诊断一致）、conv4 生成答案全部为空 26/26（top_10 非空答案 0 条，疑似 vLLM 生成超时/失败），两 conv 共 178 题污染拉低整体；有效样本 conv2+3 口径 top_10 257/351=73.22%、temporal 49/67=73.13%，说明 temporal 修复在有效样本上已远超 50% 线，未达标判定由脏数据 conv0/conv4 造成而非修复失效",
     "concept": "研究未知因素：各 cutoff 的实际分数值",
-    "confidence": 0.85,
+    "confidence": 0.95,
     "disposition": "research_required",
     "evidence_refs": [
       "本机文件 tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/conv*_q*.json（full01 run，583 题文件 conv0:152/conv1:81/conv2:152/conv3:198，每题含 cutoff_results{top_10,top_20,top_50,top_200}.{judgment,score}；observed_at 2026-11-03T16:45+08:00）— 本地重算：overall top_10 283/583=0.485 / top_20 285/583=0.489 / top_50 288/583=0.494 / top_200 286/583=0.491；按 conv(top_10)：conv0 0/152=0.000、conv1 21/81=0.259、conv2 118/152=0.776、conv3 144/198=0.727；有效样本 conv2+3 top_10 = 262/350=0.749；conv2+3 分 cutoff：top_10 temporal 51/67=0.761 / top_20 0.716 / top_50 0.716 / top_200 0.731",
@@ -23,7 +23,7 @@
     "rationale": "T17 即 tools/memory-benchmarks 子模块的 LoCoMo benchmark（stage 01 known 所称 memory-benchmarks 子模块在本机实际路径为 tools/memory-benchmarks，工作区根下无同名目录）。cutoff 维度 = top-k 检索深度 {top_10, top_20, top_50, top_200}。已确认三组历史分数（见 evidence_refs）。当前 full01 全量 run 尚无聚合结果文件落盘（results/locomo/ 下最新 results JSON 停留在 10/24 smoke；predicted_locomo-vllm/ 有 583 个逐题预测文件覆盖 conv0-3，说明 runner 仍在跑 conv4-9，未产出最终 metrics_by_cutoff）。本字段数值由逐题 cutoff_results 本地重算得出，与 diagnosis 报告的 0.488/0.755 交叉一致（差异源于 conv3 新增 q196-q197 两题及 13-15% 空答案噪声），本机证据链完整可复核；但 (a) runtime 外部事实门禁要求 HTTPS 来源，本地文件无法以 URL 形式满足，按 sibling 任务同款处理降为 research_required；(b) 这是 runner 未退出时的中途快照（predicted_locomo-vllm/ 仅覆盖 conv0-3，conv4-9 未跑完，无最终 metrics_by_cutoff 聚合文件），最终全量分数（含 conv4-9 及排除 conv0/1 的正式口径）需等 runner 退出后以官方聚合脚本复核。待补证据：runner 退出后的官方聚合结果文件（results/locomo/ 新 results JSON）。",
     "role": "research_findings"
   },
-  "field_read_count": 0,
+  "field_read_count": 1,
   "flow_only": false,
   "id": "02-r1-field-cutoff-35319ba392",
   "input_refs": [
@@ -46,7 +46,7 @@
   "stage_id": "02",
   "status": "dispatched",
   "type": "field_task",
-  "updated_at": "2026-11-03T17:04:02.958403+00:00",
+  "updated_at": "2026-11-03T17:05:16.143480+00:00",
   "web_attempts": 0,
   "web_failures": 0
 }

@@ -2,7 +2,7 @@
 
 > 由 `ralph render` 自动从 `loop-artifacts/stages/02/r1/fields.json` 生成，请勿手改。
 
-> 生成时间：2026-11-03 17:24
+> 生成时间：2026-11-03 23:00
 
 ## 概览
 

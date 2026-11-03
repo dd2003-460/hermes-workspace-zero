@@ -17,13 +17,18 @@
   "exploration_history": [],
   "field_tasks": [
     {
-      "agent_id": "aeabb7b3af4090dcb",
+      "agent_id": "afff3982ea4427de2",
       "agent_ids": [
-        "aeabb7b3af4090dcb"
+        "aeabb7b3af4090dcb",
+        "ad20a50cd0dd5574e",
+        "a8abd923f697d94b7",
+        "ae5b8e9e4f7a74d41",
+        "ae4ca745609561d9f",
+        "afff3982ea4427de2"
       ],
-      "apply_count": 1,
+      "apply_count": 6,
       "apply_count_at_dispatch": 0,
-      "attribute": "runner 未退出（观察于 2026-11-03T09:25:20Z）：PID 45660（full01 --resume）存活，正 ingest conversation 4；原 PID 53388 已退出（被 PID 57621 evaluate-only --rejudge conv 2,3 取代），results/locomo/ 尚无新最终聚合产物",
+      "attribute": "RUNNING — 进程仍存活（PID 37261，etime 54:53），预测文件数 618（较上一轮 616 +2，最新 conv4_q23.json @ 23:51）；日志尾部仍停在 22:57:14 ingestion 阶段无结束标记，无今日聚合产物",
       "concept": "研究未知因素：T17 runner 当前是否已退出",
       "dispatch_name": "Fresh T17 runner exit check",
       "disposition": "research_required",
@@ -34,7 +39,7 @@
         "loop-artifacts/stages/02/r1/fields.json"
       ],
       "instruction": "只处理字段 `研究未知因素：T17 runner 当前是否已退出`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/02/r1/tasks/02-r1-field-T17-runner-194b873314.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
-      "last_applied_at": "2026-11-03T09:27:15.728375+00:00",
+      "last_applied_at": "2026-11-03T16:06:14.928135+00:00",
       "last_error": "",
       "output_schema": {
         "attribute": "string",
@@ -47,12 +52,12 @@
       },
       "path": "loop-artifacts/stages/02/r1/tasks/02-r1-field-T17-runner-194b873314.json",
       "revision": "r1",
-      "role": "research_findings",
+      "role": "unknown_factor",
       "schema_version": 1,
       "stage_id": "02",
-      "status": "deferred",
+      "status": "dispatched",
       "type": "field_task",
-      "updated_at": "2026-11-03T09:27:30.955605+00:00",
+      "updated_at": "2026-11-03T16:09:09.902900+00:00",
       "web_attempts": 0,
       "web_failures": 0
     },

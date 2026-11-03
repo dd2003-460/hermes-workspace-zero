@@ -1,0 +1,2 @@
+date,currency,underlying,iv_atm_call,iv_atm_put,skew_atm,num_contracts,source_ts
+2026-11-03,BTC,76853.5,45.1652,45.1652,0.0,848,2026-11-03T07:53:06.467615+00:00

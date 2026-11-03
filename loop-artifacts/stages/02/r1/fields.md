@@ -2,7 +2,7 @@
 
 > 由 `ralph render` 自动从 `loop-artifacts/stages/02/r1/fields.json` 生成，请勿手改。
 
-> 生成时间：2026-11-03 23:00
+> 生成时间：2026-11-04 01:02
 
 ## 概览
 
@@ -17,7 +17,7 @@
 | 要素 (concept) | 属性 | 状态 | 置信度 | 影响 | 可逆 |
 |---|---|---|---|---|---|
 | 研究未知因素：T17 runner 当前是否已退出 | runner 未退出（截至 2026-11-03T08:33Z 本机实测）；新鲜重查待补——本轮观察通道受 runtime 门禁限制，无法由 Commander 直接产生新 ps/log 证据（详见 rationale） | research_required |  |  |  |
-| 研究未知因素：各 cutoff 的实际分数值 | 验证并记录：各 cutoff 的实际分数值 | research_required | 0.85 |  |  |
+| 研究未知因素：各 cutoff 的实际分数值 | EXITED — runner 已退出（第五轮观测 2026-11-04 00:19 +08:00），官方聚合产物 locomo_results_20261104_001903.json 已落盘；final full01 各 cutoff overall/temporal 分数待本轮由绑定 Agent 从该文件读出并刷新 | research_required |  |  |  |
 | 研究未知因素：对比表的呈现格式与落盘位置 | 对比表采用 markdown 表格（沿用既有对照表惯例），落盘到 tools/memory-benchmarks/results/locomo/ 下的诊断/报告 md 文件，并在 decomposition.md T17 条目同步结果 | research_required | 0.80 |  |  |
 | 研究未知因素：decomposition.md 中 T17 条目的现状。 | 验证并记录：decomposition.md 中 T17 条目的现状。 | research_required | 0.90 |  |  |
 
@@ -29,14 +29,7 @@
 
 ### 研究未知因素：各 cutoff 的实际分数值
 
-T17 即 tools/memory-benchmarks 子模块的 LoCoMo benchmark（stage 01 known 所称 memory-benchmarks 子模块在本机实际路径为 tools/memory-benchmarks，工作区根下无同名目录）。cutoff 维度 = top-k 检索深度 {top_10, top_20, top_50, top_200}。已确认三组历史分数（见 evidence_refs）。当前 full01 全量 run 尚无聚合结果文件落盘（results/locomo/ 下最新 results JSON 停留在 10/24 smoke；predicted_locomo-vllm/ 有 583 个逐题预测文件覆盖 conv0-3，说明 runner 仍在跑 conv4-9，未产出最终 metrics_by_cutoff）。本字段数值由逐题 cutoff_results 本地重算得出，与 diagnosis 报告的 0.488/0.755 交叉一致（差异源于 conv3 新增 q196-q197 两题及 13-15% 空答案噪声），本机证据链完整可复核；但 (a) runtime 外部事实门禁要求 HTTPS 来源，本地文件无法以 URL 形式满足，按 sibling 任务同款处理降为 research_required；(b) 这是 runner 未退出时的中途快照（predicted_locomo-vllm/ 仅覆盖 conv0-3，conv4-9 未跑完，无最终 metrics_by_cutoff 聚合文件），最终全量分数（含 conv4-9 及排除 conv0/1 的正式口径）需等 runner 退出后以官方聚合脚本复核。待补证据：runner 退出后的官方聚合结果文件（results/locomo/ 新 results JSON）。
-
-证据：
-- 本机文件 tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/conv*_q*.json（full01 run，583 题文件 conv0:152/conv1:81/conv2:152/conv3:198，每题含 cutoff_results{top_10,top_20,top_50,top_200}.{judgment,score}；observed_at 2026-11-03T16:45+08:00）— 本地重算：overall top_10 283/583=0.485 / top_20 285/583=0.489 / top_50 288/583=0.494 / top_200 286/583=0.491；按 conv(top_10)：conv0 0/152=0.000、conv1 21/81=0.259、conv2 118/152=0.776、conv3 144/198=0.727；有效样本 conv2+3 top_10 = 262/350=0.749；conv2+3 分 cutoff：top_10 temporal 51/67=0.761 / top_20 0.716 / top_50 0.716 / top_200 0.731
-- tools/memory-benchmarks/results/locomo/locomo-full01-diagnosis.md — r280 中途诊断：full01 表面 top_10 overall 0.488(580题) 被 conv0/conv1 污染拉低，有效样本(conv2+3)真实水平 0.755、temporal 0.835；根因 conv0 检索全空(152/152 题 0 条记忆，smoke01 残留 checkpoint 被 --resume 误判 complete)、conv1 记忆残缺(仅 10 条 vs 应有 ~369)；待 runner 退出后收口动作尚未完成
-- tools/memory-benchmarks/results/locomo/locomo-smoke-report.md + locomo_results_20261021_044003.json — smoke01(10/21, 5题)：top_10/20/50/200 均 60.0%，temporal 0/2=0%（修复前基线）
-- tools/memory-benchmarks/results/locomo/locomo-temporal-fix-verified.md + locomo_results_20261024_160459.json — smoke-temporal-quick(10/24, 5题 temporal)：top_10 5/5=100%、top_20/50/200 各 4/5=80%（q6 在更高 cutoff 因 LLM 生成超时返回空答案，非检索错误）
-- 本地检查方式说明：本字段为本地工程状态调研（任务指令明确禁止 WebSearch/WebFetch），证据为本机 tools/memory-benchmarks/results/locomo/ 下逐题预测 JSON 与诊断/报告 md；runtime 外部事实门禁要求 HTTPS 来源，本地文件证据无法以 URL 形式满足该格式，故按 sibling 任务同款处理降为 research_required
+状态刷新（observed_at 2026-11-04T00:25+08:00，Commander 记录）：runner PID 37261 已确认退出（pgrep 无匹配），predicted_locomo-vllm/*.json = 620 ≥ 604 稳定达标，今日新聚合产物 tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json（4.76MB，含 metadata/metrics_by_cutoff/evaluations）已出现——目标完成信号三项全部满足。本字段数值需以该官方聚合文件为准重读：(1) metrics_by_cutoff 各 cutoff（top_10/top_20/top_50/top_200）overall accuracy 分子/分母；(2) temporal 子集 accuracy（若聚合 JSON 缺细分，用 predicted_locomo-vllm/*.json 620 个逐题文件本地重算补全并注明口径）；(3) vs smoke01 baseline（top_10/20/50/200 均 60.0%、temporal 0/2=0%，噪声 ±1.5pp）判定 temporal 修复是否达标 ≥50%。前一轮中途快照（2026-11-03T16:45+08:00，仅 conv0-3 共 583 题）参考值：overall top_10 0.485/top_20 0.489/top_50 0.494/top_200 0.491（conv0/conv1 污染拉低），有效样本 conv2+3 top_10 0.749、temporal top_10 51/67=0.761。说明性路径（非伪造 URL）：tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json、tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/、tools/memory-benchmarks/results/locomo/locomo-full01-diagnosis.md、locomo-smoke-report.md + locomo_results_20261021_044003.json、locomo-temporal-fix-verified.md + locomo_results_20261024_160459.json。按既有惯例：纯本地工程状态，外部事实门禁要求 HTTPS 来源，本机文件证据不伪造 URL，evidence_refs 保留空数组。
 
 ### 研究未知因素：对比表的呈现格式与落盘位置
 

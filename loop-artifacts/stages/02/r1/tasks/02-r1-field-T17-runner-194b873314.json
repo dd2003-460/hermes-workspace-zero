@@ -10,7 +10,7 @@
   ],
   "apply_count": 7,
   "apply_count_at_dispatch": 0,
-  "attribute": "EXITED — 进程已退出（PID 37261 消失，pgrep 无匹配），预测文件数 620（较上一轮 618 +2，最新 conv4_q25.json）；今日新聚合产物 locomo_results_20261104_001903.json 已出现且含 metrics_by_cutoff，目标完成信号三项全部满足",
+  "attribute": "runner 未退出（截至 2026-11-03T08:33Z 本机实测）；新鲜重查待补——本轮观察通道受 runtime 门禁限制，无法由 Commander 直接产生新 ps/log 证据（详见 rationale）",
   "concept": "研究未知因素：T17 runner 当前是否已退出",
   "dispatch_name": "Fresh T17 runner exit check",
   "disposition": "research_required",
@@ -42,7 +42,7 @@
     "role": "string"
   },
   "revision": "r1",
-  "role": "unknown_factor",
+  "role": "research_findings",
   "schema_version": 1,
   "stage_id": "02",
   "status": "deferred",

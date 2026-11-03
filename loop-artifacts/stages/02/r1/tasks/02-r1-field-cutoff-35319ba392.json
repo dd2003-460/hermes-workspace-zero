@@ -1,12 +1,11 @@
 {
-  "agent_id": "a5bd71175c2e1fb3f",
   "agent_ids": [
-    "a5bd71175c2e1fb3f"
+    "ae621eb0a66708989"
   ],
   "apply_count_at_dispatch": 0,
-  "attribute": "验证并记录：各 cutoff 的实际分数值",
+  "attribute": "EXITED — runner 已退出（第五轮观测 2026-11-04 00:19 +08:00），官方聚合产物 locomo_results_20261104_001903.json 已落盘；final full01 各 cutoff overall/temporal 分数待本轮由绑定 Agent 从该文件读出并刷新",
   "concept": "研究未知因素：各 cutoff 的实际分数值",
-  "dispatch_name": "Research T17 cutoff scores",
+  "dispatch_name": "T17 cutoff scores fresh read",
   "disposition": "research_required",
   "field": {
     "attribute": "验证并记录：各 cutoff 的实际分数值",
@@ -24,7 +23,7 @@
     "rationale": "T17 即 tools/memory-benchmarks 子模块的 LoCoMo benchmark（stage 01 known 所称 memory-benchmarks 子模块在本机实际路径为 tools/memory-benchmarks，工作区根下无同名目录）。cutoff 维度 = top-k 检索深度 {top_10, top_20, top_50, top_200}。已确认三组历史分数（见 evidence_refs）。当前 full01 全量 run 尚无聚合结果文件落盘（results/locomo/ 下最新 results JSON 停留在 10/24 smoke；predicted_locomo-vllm/ 有 583 个逐题预测文件覆盖 conv0-3，说明 runner 仍在跑 conv4-9，未产出最终 metrics_by_cutoff）。本字段数值由逐题 cutoff_results 本地重算得出，与 diagnosis 报告的 0.488/0.755 交叉一致（差异源于 conv3 新增 q196-q197 两题及 13-15% 空答案噪声），本机证据链完整可复核；但 (a) runtime 外部事实门禁要求 HTTPS 来源，本地文件无法以 URL 形式满足，按 sibling 任务同款处理降为 research_required；(b) 这是 runner 未退出时的中途快照（predicted_locomo-vllm/ 仅覆盖 conv0-3，conv4-9 未跑完，无最终 metrics_by_cutoff 聚合文件），最终全量分数（含 conv4-9 及排除 conv0/1 的正式口径）需等 runner 退出后以官方聚合脚本复核。待补证据：runner 退出后的官方聚合结果文件（results/locomo/ 新 results JSON）。",
     "role": "research_findings"
   },
-  "field_read_count": 1,
+  "field_read_count": 0,
   "flow_only": false,
   "id": "02-r1-field-cutoff-35319ba392",
   "input_refs": [
@@ -47,7 +46,7 @@
   "stage_id": "02",
   "status": "dispatched",
   "type": "field_task",
-  "updated_at": "2026-11-03T08:33:08.781452+00:00",
+  "updated_at": "2026-11-03T17:04:02.958403+00:00",
   "web_attempts": 0,
   "web_failures": 0
 }

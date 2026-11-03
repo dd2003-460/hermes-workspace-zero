@@ -1,6 +1,14 @@
 {
   "fields": [
     {
+      "attribute": "EXITED — runner 已退出（第五轮观测 2026-11-04 00:19 +08:00），官方聚合产物 locomo_results_20261104_001903.json 已落盘；final full01 各 cutoff overall/temporal 分数待本轮由绑定 Agent 从该文件读出并刷新",
+      "concept": "研究未知因素：各 cutoff 的实际分数值",
+      "disposition": "research_required",
+      "evidence_refs": [],
+      "rationale": "状态刷新（observed_at 2026-11-04T00:25+08:00，Commander 记录）：runner PID 37261 已确认退出（pgrep 无匹配），predicted_locomo-vllm/*.json = 620 ≥ 604 稳定达标，今日新聚合产物 tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json（4.76MB，含 metadata/metrics_by_cutoff/evaluations）已出现——目标完成信号三项全部满足。本字段数值需以该官方聚合文件为准重读：(1) metrics_by_cutoff 各 cutoff（top_10/top_20/top_50/top_200）overall accuracy 分子/分母；(2) temporal 子集 accuracy（若聚合 JSON 缺细分，用 predicted_locomo-vllm/*.json 620 个逐题文件本地重算补全并注明口径）；(3) vs smoke01 baseline（top_10/20/50/200 均 60.0%、temporal 0/2=0%，噪声 ±1.5pp）判定 temporal 修复是否达标 ≥50%。前一轮中途快照（2026-11-03T16:45+08:00，仅 conv0-3 共 583 题）参考值：overall top_10 0.485/top_20 0.489/top_50 0.494/top_200 0.491（conv0/conv1 污染拉低），有效样本 conv2+3 top_10 0.749、temporal top_10 51/67=0.761。说明性路径（非伪造 URL）：tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json、tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/、tools/memory-benchmarks/results/locomo/locomo-full01-diagnosis.md、locomo-smoke-report.md + locomo_results_20261021_044003.json、locomo-temporal-fix-verified.md + locomo_results_20261024_160459.json。按既有惯例：纯本地工程状态，外部事实门禁要求 HTTPS 来源，本机文件证据不伪造 URL，evidence_refs 保留空数组。",
+      "role": "research_findings"
+    },
+    {
       "attribute": "runner 未退出（截至 2026-11-03T08:33Z 本机实测）；新鲜重查待补——本轮观察通道受 runtime 门禁限制，无法由 Commander 直接产生新 ps/log 证据（详见 rationale）",
       "concept": "研究未知因素：T17 runner 当前是否已退出",
       "disposition": "research_required",

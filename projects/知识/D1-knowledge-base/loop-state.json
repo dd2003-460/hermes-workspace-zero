@@ -3,13 +3,13 @@
   "slot": "KB.1",
   "stage": {
     "id": "kb-note-8-queue",
-    "name": "next/C区剩余方向或LoCoMo对照组",
-    "revision": "r1"
+    "name": "next/T17收口或C区剩余方向",
+    "revision": "r2"
   },
   "loop_phase": "build",
   "iteration": 7,
   "status": "active",
-  "current_task": "KB.1 第7篇教材note notes/retrieval-vs-long-context.md (Lead直写, 素材=decomp T17 rag-vs-longctx gold tree+runs a/b + LoCoMo full01在途实验): 10概念(RAG赌召回/长上下文赌定位衰减/needle位置偏差/镜像黑盒B1-B2双向验证/成本分裂建设vs边际/混合架构SHARED耦合/可引用性硬约束/幻觉率不对称/更新频率隐藏变量/agent记忆站队判据)×是什么/为什么/边界+conf. drift-check 100/100(145句/均句42.6/第一人称0.207/空话0). 核心判断: 选型第一变量是doc_scale×问答量×更新频率三业务参数, 两个致命黑盒没量化前'RAG更先进'无决策意义. 两条可证伪预测带判死条件.",
+  "current_task": "KB.1 第7篇收口完毕, 待办: T17-full full01 跑完(预计还需~20h)后重算 top_10 overall vs smoke01 baseline + 按 note C段预测1排期全文塞入对照组(~20h)",
   "blocker": null,
   "change_log": [
     {

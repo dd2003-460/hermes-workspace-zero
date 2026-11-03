@@ -1,0 +1,9 @@
+{
+  "action": "advance",
+  "next_stage": "02.5",
+  "reason": "4 个调研字段全部完成 field-apply：runner 状态（未退出，两进程在跑）、cutoff 分数（mid-run 快照 + 历史基线）、对比表格式与落盘、decomposition T17 条目现状。其中两个纯本地证据字段被 runtime 保留为 research_required/deferred——校验器对 research_findings 角色硬性要求 HTTPS 页面 URL，本机文件路径不满足，Agent 按协议拒绝伪造来源。此为运行时门禁与纯本地任务的结构性冲突，需成璐裁决；本次 advance 触发最终校验以确认拒绝原因。",
+  "revision": "r1",
+  "stage_id": "02",
+  "status": "success"
+}
+}

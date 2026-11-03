@@ -1,0 +1,12 @@
+{
+  "fields": [
+    {
+      "attribute": "runner 未退出（截至 2026-11-03T08:33Z 本机实测）；新鲜重查待补——本轮观察通道受 runtime 门禁限制，无法由 Commander 直接产生新 ps/log 证据（详见 rationale）",
+      "concept": "研究未知因素：T17 runner 当前是否已退出",
+      "disposition": "research_required",
+      "evidence_refs": [],
+      "rationale": "最近一次本机实测（observed_at 2026-11-03T16:33+08:00 = 08:33 UTC）：PID 45660（full01 --resume，STARTED 16:00:32）与 PID 53388（--evaluate-only --rejudge conv2,3，STARTED 16:31:28）均在运行，logs/locomo_20261103_160033.log 持续写入、无结束标记。本字段为纯本地工程状态调研，任务指令禁止 WebSearch/WebFetch，证据只能来自本机 ps/日志文件，无法以 HTTPS URL 形式满足 runtime 外部事实门禁（protocol.py _external_evidence_issues），按协议不伪造来源、保留 research_required + 空 evidence_refs。本轮阻塞点记录（2026-11-03 ~09:2x UTC）：Commander Bash 被 COMMANDER_BASH_SCOPE_FIELD 限定为受控 ralph 命令 + 只读 RALPH 工件，无法直接执行 ps/tail 产生新证据；Agent 派发被 FIELD_AGENT_NOT_NEEDED 拒绝（两个 deferred 字段非 ready，且无绑定路径）。因此「runner 是否已退出」的新鲜重查无法在本轮完成；需 supervisor 重新开放字段后由绑定 Agent 执行，或走 APPROVALS #4 裁决（4.3 人工放行路径下由人工检查 runner 退出后收口）。待补证据：一次新鲜的 ps -p 45660,53388 + 日志尾部观察结果。",
+      "role": "research_findings"
+    }
+  ]
+}

@@ -27,7 +27,11 @@
    - research-prompt 仓 1 个：ralph/prompt-contract-ablation（contained，七版消融已收口于 R0.3）
    - 人类回复：
 
-## 已批
+4. **T17 benchmark loop 阶段 02 证据门禁冲突（2026-11-03 ralph run 登记）**：任务「T17 benchmark 跑完出分」的 RALPH loop 卡在阶段 02（未知信息调研）。4 个调研字段已全部完成 field-apply（runner 状态 / cutoff 分数 / 对比表格式与落盘 / decomposition T17 条目），但 runtime 校验器（loop/ralph_runtime/ralph_runtime/protocol.py `_external_evidence_issues`）对 role=research_findings 且 disposition=confirmed/inferred 的字段硬性要求 evidence_refs 含具体 HTTPS 页面 URL；本任务全部证据均为本机文件路径（ps/log/results JSON/decomposition.md），按协议不得伪造来源，故字段保留 research_required + 空 evidence_refs，advance 被拒（issues: 4 字段缺 HTTPS 来源 + 2 字段仍 researching/deferred）。另注：T17 runner 当前**未退出**（PID 45660 full01 --resume、PID 53388 --evaluate-only --rejudge conv2,3 在跑），最终聚合本就需等 runner 退出。裁决选项：
+   - 4.1 豁免：纯本地工程任务接受本机文件路径作为 evidence_refs（需改 protocol.py 或 per-stage 配置，属框架行为变更）；
+   - 4.2 放宽：允许 research_required + 完整 rationale 本机证据收尾阶段 02（需改 success_condition 校验逻辑）；
+   - 4.3 维持现状：loop 停在 02 等成璐人工放行，期间 runner 继续跑，退出后由人工指令跳过门禁直接执行聚合/对比表/decomp 更新。
+   - 人类回复：
 
 - 2026-10-31 r3 轮：条目 1-4（hooks-codex 安装面复核 / subagent 拆分规范入 skill / X6 caveat 双注记 / O3 claim 清单审定）由成璐授权 AI 自主裁决并执行，存档 `个人/history/APPROVALS-20261031-r3.md`。
 

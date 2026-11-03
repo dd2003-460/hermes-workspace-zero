@@ -1,0 +1,200 @@
+{
+  "active_tasks": {},
+  "allowed_actions": [
+    "advance",
+    "rollback",
+    "blocked_human",
+    "skip_blocked",
+    "candidate",
+    "explore",
+    "dispatch",
+    "join",
+    "clarify",
+    "repair_prompt"
+  ],
+  "clarification_history": [],
+  "current_artifact": "loop-artifacts/stages/02/r1/state.json",
+  "exploration_history": [],
+  "field_tasks": [
+    {
+      "agent_id": "aeabb7b3af4090dcb",
+      "agent_ids": [
+        "aeabb7b3af4090dcb"
+      ],
+      "apply_count": 1,
+      "apply_count_at_dispatch": 0,
+      "attribute": "runner 未退出（观察于 2026-11-03T09:25:20Z）：PID 45660（full01 --resume）存活，正 ingest conversation 4；原 PID 53388 已退出（被 PID 57621 evaluate-only --rejudge conv 2,3 取代），results/locomo/ 尚无新最终聚合产物",
+      "concept": "研究未知因素：T17 runner 当前是否已退出",
+      "dispatch_name": "Fresh T17 runner exit check",
+      "disposition": "research_required",
+      "field_read_count": 1,
+      "flow_only": false,
+      "id": "02-r1-field-T17-runner-194b873314",
+      "input_refs": [
+        "loop-artifacts/stages/02/r1/fields.json"
+      ],
+      "instruction": "只处理字段 `研究未知因素：T17 runner 当前是否已退出`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/02/r1/tasks/02-r1-field-T17-runner-194b873314.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+      "last_applied_at": "2026-11-03T09:27:15.728375+00:00",
+      "last_error": "",
+      "output_schema": {
+        "attribute": "string",
+        "concept": "研究未知因素：T17 runner 当前是否已退出",
+        "confidence": "number 0..1",
+        "disposition": "confirmed|inferred|assumed_default|research_required",
+        "evidence_refs": "array[string]",
+        "rationale": "string",
+        "role": "string"
+      },
+      "path": "loop-artifacts/stages/02/r1/tasks/02-r1-field-T17-runner-194b873314.json",
+      "revision": "r1",
+      "role": "research_findings",
+      "schema_version": 1,
+      "stage_id": "02",
+      "status": "deferred",
+      "type": "field_task",
+      "updated_at": "2026-11-03T09:27:30.955605+00:00",
+      "web_attempts": 0,
+      "web_failures": 0
+    },
+    {
+      "agent_id": "a90e4a7cb19e23d49",
+      "agent_ids": [
+        "ab7f7b54b19eca878",
+        "a90e4a7cb19e23d49"
+      ],
+      "apply_count": 2,
+      "apply_count_at_dispatch": 0,
+      "attribute": "对比表采用 markdown 表格（沿用既有对照表惯例），落盘到 tools/memory-benchmarks/results/locomo/ 下的诊断/报告 md 文件，并在 decomposition.md T17 条目同步结果",
+      "concept": "研究未知因素：对比表的呈现格式与落盘位置",
+      "dispatch_name": "Research comparison table format",
+      "disposition": "research_required",
+      "field_read_count": 1,
+      "flow_only": false,
+      "id": "02-r1-field-field-ff753c9bf4",
+      "input_refs": [
+        "loop-artifacts/stages/02/r1/fields.json"
+      ],
+      "instruction": "只处理字段 `研究未知因素：对比表的呈现格式与落盘位置`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/02/r1/tasks/02-r1-field-field-ff753c9bf4.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+      "last_applied_at": "2026-11-03T09:13:40.633364+00:00",
+      "last_error": "",
+      "output_schema": {
+        "attribute": "string",
+        "concept": "研究未知因素：对比表的呈现格式与落盘位置",
+        "confidence": "number 0..1",
+        "disposition": "confirmed|inferred|assumed_default|research_required",
+        "evidence_refs": "array[string]",
+        "rationale": "string",
+        "role": "string"
+      },
+      "path": "loop-artifacts/stages/02/r1/tasks/02-r1-field-field-ff753c9bf4.json",
+      "revision": "r1",
+      "role": "research_findings",
+      "schema_version": 1,
+      "stage_id": "02",
+      "status": "deferred",
+      "type": "field_task",
+      "updated_at": "2026-11-03T09:14:15.879266+00:00",
+      "web_attempts": 0,
+      "web_failures": 0
+    },
+    {
+      "agent_id": "abbbe26db0483401b",
+      "agent_ids": [
+        "a8eeb9d57bce78c27",
+        "abbbe26db0483401b"
+      ],
+      "apply_count": 2,
+      "apply_count_at_dispatch": 0,
+      "attribute": "验证并记录：decomposition.md 中 T17 条目的现状。",
+      "concept": "研究未知因素：decomposition.md 中 T17 条目的现状。",
+      "dispatch_name": "Research T17 decomp entry state",
+      "disposition": "research_required",
+      "field_read_count": 1,
+      "flow_only": false,
+      "id": "02-r1-field-decomposition.md-T17-7636cb7e15",
+      "input_refs": [
+        "loop-artifacts/stages/02/r1/fields.json"
+      ],
+      "instruction": "只处理字段 `研究未知因素：decomposition.md 中 T17 条目的现状。`，不要读取完整 loop-events.md。先在这个任务文件的 `field` 对象中增量填写；不要修改 loop-state.json。读取后立即提交，不要规划总报告；网页工具最多尝试两次，若没有有效结果就保存待补状态。字段可以多轮修改，已填内容必须保留。填写后优先运行 `ralph field-apply . loop-artifacts/stages/02/r1/tasks/02-r1-field-decomposition.md-T17-7636cb7e15.json`，由 runtime 校验并原子合并；如果命令不可用，再把同一个单字段 JSON 返回给主 Agent。research_required 暂无证据时可以先保存为 research_required + 空 evidence_refs，但必须在 rationale 标注待补证据，不得伪造来源。不需要 SendMessage、TaskGet 或其他协调工具；写完任务文件并运行 field-apply 后直接结束。",
+      "last_applied_at": "2026-11-03T09:14:58.586731+00:00",
+      "last_error": "",
+      "output_schema": {
+        "attribute": "string",
+        "concept": "研究未知因素：decomposition.md 中 T17 条目的现状。",
+        "confidence": "number 0..1",
+        "disposition": "confirmed|inferred|assumed_default|research_required",
+        "evidence_refs": "array[string]",
+        "rationale": "string",
+        "role": "string"
+      },
+      "path": "loop-artifacts/stages/02/r1/tasks/02-r1-field-decomposition.md-T17-7636cb7e15.json",
+      "revision": "r1",
+      "role": "research_findings",
+      "schema_version": 1,
+      "stage_id": "02",
+      "status": "deferred",
+      "type": "field_task",
+      "updated_at": "2026-11-03T09:15:20.806849+00:00",
+      "web_attempts": 0,
+      "web_failures": 0
+    }
+  ],
+  "graph_tasks": [],
+  "history": [
+    {
+      "action": "advance",
+      "internal_state": "stage_02",
+      "revision": "r1",
+      "stage_id": "01"
+    }
+  ],
+  "last_action": "advance",
+  "last_event_id": "fb2d559f-11be-4e50-9c8f-dfc01c0ac636",
+  "last_exploration": null,
+  "last_result": {
+    "action": "advance",
+    "artifact_refs": [],
+    "evidence": [],
+    "message": "",
+    "next_stage": "02",
+    "revision": "r1",
+    "rollback_to": null,
+    "stage_id": "01",
+    "status": "success"
+  },
+  "plan": {
+    "joins": [],
+    "nodes": [],
+    "parallel_groups": [],
+    "revision": "r1"
+  },
+  "project_id": "workspace",
+  "queue": {
+    "blocked_human": [],
+    "candidates": [],
+    "ready": []
+  },
+  "run_history": [],
+  "schema_version": 4,
+  "stage": {
+    "failure_condition": "存在未调研或证据不足的 research_required 字段",
+    "id": "02",
+    "input_description": "目标 + 已知背景 = 已知与目标的差额；针对该差额派窄调研 subagent 直接搜索（关键词不加年份，获取最新结果）",
+    "name": "未知信息调研",
+    "on_failure": "02",
+    "on_human_block": "exploration",
+    "on_success": "02.5",
+    "required_outputs": [
+      "research_findings"
+    ],
+    "revision": "r1",
+    "success_condition": "所有 research_required 字段已调研带回 evidence_refs，无未带证据的调研字段"
+  },
+  "status": "running",
+  "task": {
+    "description": "T17 benchmark 跑完出分：等 runner 退出后聚合各 cutoff 分数，生成对比表，更新 decomp loop-state",
+    "source": "ralph run"
+  },
+  "task_intake": null,
+  "task_intake_history": []
+}

@@ -1,0 +1,110 @@
+{
+  "authoritative_inputs": [
+    "loop-artifacts/stages/01/r1/state.json",
+    {
+      "characters": 1951,
+      "kind": "human_input",
+      "sha256": "b11befcc965506f8",
+      "source": "UserPromptSubmit",
+      "text": "<task-notification>\n<task-id>aeabb7b3af4090dcb</task-id>\n<tool-use-id>call_f2a3d2b6c41b8246</tool-use-id>\n<output-file>/private/tmp/claude-501/-Users-a1-6-Desktop-workspace/29142379-f236-48ba-b130-51bd81061a03/tasks/aeabb7b3af4090dcb.output</output-file>\n<status>completed</status>\n<summary>Agent \"Fresh T17 runner exit check\" finished</summary>\n<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>\n<result>observed_at: 2026-11-03T09:25:20Z\nPID 45660 (full01 --resume): ALIVE, etime 01:24:49, ingesting conversation 4\nPID 53388 (prior evaluate-only rejudge): DEAD — not in ps output; superseded by new PID 57621 (`--evaluate-only --rejudge --conversations 2,3`, started 16:52 local)\nLast 3 log lines (logs/locomo_20261103_160033.log, PID 45660):\n- `2026-11-03 16:00:33,419 - locomo - INFO - Conversation 3 already ingested (user_id=locomo_3_full01, 629 chunks)`\n- `2026-11-03 16:55:11,171 - locomo - INFO - Resuming conversation 4 from 93 completed chunks`\n- `2026-11-03 16:55:11,176 - locomo - INFO - Ingesting conversation 4: Tim &amp; John, 29 sessions, 680 chunks`\n(Newest log file logs/locomo_20261103_165224.log is 0 bytes — PID 57621 just started.)\nNewest results file mtime: tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/ dir Nov 3 16:55; newest *_results_*.json remains locomo_results_20261024_160459.json (Oct 24 16:04) — no new final aggregation artifact with metrics_by_cutoff.\nVerdict: RUNNING (main runner PID 45660 has not exited; per-conversation ingest ongoing at conv 4/9)\nfield-apply result: ok=true, added=1, last_applied_at=2026-11-03T09:27:15Z, no errors (remaining researching items belong to other field tasks).</result>\n<usage><subagent_tokens>18565</subagent_tokens><tool_uses>12</tool_uses><duration_ms>147081</duration_ms></usage>\n</task-notification>"
+    }
+  ],
+  "context_mode": "bounded_artifacts",
+  "current_stage_cards": [],
+  "purpose": "供独立阶段门禁审计；不包含 Commander 主对话或隐藏推理。",
+  "stage": {
+    "failure_condition": "存在未调研或证据不足的 research_required 字段",
+    "id": "02",
+    "input_description": "目标 + 已知背景 = 已知与目标的差额；针对该差额派窄调研 subagent 直接搜索（关键词不加年份，获取最新结果）",
+    "name": "未知信息调研",
+    "on_failure": "02",
+    "on_success": "02.5",
+    "required_outputs": [
+      "research_findings"
+    ],
+    "revision": "r1",
+    "success_condition": "所有 research_required 字段已调研带回 evidence_refs，无未带证据的调研字段"
+  },
+  "structured_inputs": {
+    "decision": {},
+    "handoff": {},
+    "last_exploration": null,
+    "plan": {
+      "joins": [],
+      "nodes": [],
+      "parallel_groups": [],
+      "revision": "r1"
+    },
+    "queue": {
+      "blocked_human": [],
+      "candidates": [],
+      "ready": []
+    },
+    "task_intake": null,
+    "task_spec": {
+      "attribute_matrix": [
+        {
+          "attribute": "runner 未退出（观察于 2026-11-03T09:25:20Z）：PID 45660（full01 --resume）存活，正 ingest conversation 4；原 PID 53388 已退出（被 PID 57621 evaluate-only --rejudge conv 2,3 取代），results/locomo/ 尚无新最终聚合产物",
+          "concept": "研究未知因素：T17 runner 当前是否已退出",
+          "confidence": 0.9,
+          "disposition": "research_required",
+          "evidence_refs": [],
+          "observed_at": "2026-11-03T09:25:20Z",
+          "rationale": "本机证据，无外部来源。observed_at=2026-11-03T09:25:20Z (UTC)。ps -p 45660,53388 -o pid,ppid,etime,command 输出：'PID  PPID  ELAPSED COMMAND / 45660 45656 01:24:49 /opt/homebrew/Cellar/python@3.14/3.14.4_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -m benchmarks.locomo.run --project-name locomo-vllm --run-id full01 --answerer-model qwen3.8-27b --judge-model qwen3.8-27b --provider openai --backend oss --mem0-host http://127.0.0.1:8888 --max-workers 1 --resume'——仅 45660 存在，53388 不在输出中（已退出）。ps aux | grep -i locomo 另见一行：'a1-6 57621 ... S 4:52PM 0:03.08 ... Python -m benchmarks.locomo.run --project-name locomo-vllm --run-id full01 ... --max-workers 1 --rpm 40 --conversations 2,3 --max-questions 152 --dataset-path datasets/locomo/locomo10.json --evaluate-only --rejudge'（16:52 启动的 rejudge 进程，取代了 53388）。日志 logs/locomo_20261103_160033.log（对应 PID 45660）末尾相关行：'2026-11-03 16:00:33,068 - locomo - INFO - Dataset already exists: datasets/locomo/locomo10.json' / '2026-11-03 16:00:33,406 - locomo - INFO - Conversation 0 already ingested (user_id=locomo_0_smoke01, 419 chunks)' / '...Conversation 1 already ingested (user_id=locomo_1_full01, 369 chunks)' / '...Conversation 2 already ingested (user_id=locomo_2_full01, 663 chunks)' / '...Conversation 3 already ingested (user_id=locomo_3_full01, 629 chunks)' / '2026-11-03 16:55:11,171 - locomo - INFO - Resuming conversation 4 from 93 completed chunks' / '2026-11-03 16:55:11,176 - locomo - INFO - Ingesting conversation 4: Tim & John, 29 sessions, 680 chunks'——无运行结束/最终 summary 标记，仍在逐会话推进。最新 log 文件 logs/locomo_20261103_165224.log 大小为 0 字节（PID 57621 刚启动尚未写日志）。results/locomo/ 最新条目 mtime：predicted_locomo-vllm/ 目录 Nov 3 16:55、locomo-full01-diagnosis.md Nov 3 16:08、locomo_results_20261024_160459.json Oct 24 16:04——未见新的带 metrics_by_cutoff 的最终聚合 *_results_*.json。结论：主 runner（PID 45660）未退出，「等 runner 退出后聚合各 cutoff 分数」的前置条件仍不满足；待补证据为 runner 退出后的最终聚合产物路径。",
+          "role": "research_findings"
+        },
+        {
+          "attribute": "验证并记录：各 cutoff 的实际分数值",
+          "concept": "研究未知因素：各 cutoff 的实际分数值",
+          "confidence": 0.85,
+          "disposition": "research_required",
+          "evidence_refs": [
+            "本机文件 tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/conv*_q*.json（full01 run，583 题文件 conv0:152/conv1:81/conv2:152/conv3:198，每题含 cutoff_results{top_10,top_20,top_50,top_200}.{judgment,score}；observed_at 2026-11-03T16:45+08:00）— 本地重算：overall top_10 283/583=0.485 / top_20 285/583=0.489 / top_50 288/583=0.494 / top_200 286/583=0.491；按 conv(top_10)：conv0 0/152=0.000、conv1 21/81=0.259、conv2 118/152=0.776、conv3 144/198=0.727；有效样本 conv2+3 top_10 = 262/350=0.749；conv2+3 分 cutoff：top_10 temporal 51/67=0.761 / top_20 0.716 / top_50 0.716 / top_200 0.731",
+            "tools/memory-benchmarks/results/locomo/locomo-full01-diagnosis.md — r280 中途诊断：full01 表面 top_10 overall 0.488(580题) 被 conv0/conv1 污染拉低，有效样本(conv2+3)真实水平 0.755、temporal 0.835；根因 conv0 检索全空(152/152 题 0 条记忆，smoke01 残留 checkpoint 被 --resume 误判 complete)、conv1 记忆残缺(仅 10 条 vs 应有 ~369)；待 runner 退出后收口动作尚未完成",
+            "tools/memory-benchmarks/results/locomo/locomo-smoke-report.md + locomo_results_20261021_044003.json — smoke01(10/21, 5题)：top_10/20/50/200 均 60.0%，temporal 0/2=0%（修复前基线）",
+            "tools/memory-benchmarks/results/locomo/locomo-temporal-fix-verified.md + locomo_results_20261024_160459.json — smoke-temporal-quick(10/24, 5题 temporal)：top_10 5/5=100%、top_20/50/200 各 4/5=80%（q6 在更高 cutoff 因 LLM 生成超时返回空答案，非检索错误）",
+            "本地检查方式说明：本字段为本地工程状态调研（任务指令明确禁止 WebSearch/WebFetch），证据为本机 tools/memory-benchmarks/results/locomo/ 下逐题预测 JSON 与诊断/报告 md；runtime 外部事实门禁要求 HTTPS 来源，本地文件证据无法以 URL 形式满足该格式，故按 sibling 任务同款处理降为 research_required"
+          ],
+          "observed_at": "2026-11-03T16:45:00+08:00",
+          "rationale": "T17 即 tools/memory-benchmarks 子模块的 LoCoMo benchmark（stage 01 known 所称 memory-benchmarks 子模块在本机实际路径为 tools/memory-benchmarks，工作区根下无同名目录）。cutoff 维度 = top-k 检索深度 {top_10, top_20, top_50, top_200}。已确认三组历史分数（见 evidence_refs）。当前 full01 全量 run 尚无聚合结果文件落盘（results/locomo/ 下最新 results JSON 停留在 10/24 smoke；predicted_locomo-vllm/ 有 583 个逐题预测文件覆盖 conv0-3，说明 runner 仍在跑 conv4-9，未产出最终 metrics_by_cutoff）。本字段数值由逐题 cutoff_results 本地重算得出，与 diagnosis 报告的 0.488/0.755 交叉一致（差异源于 conv3 新增 q196-q197 两题及 13-15% 空答案噪声），本机证据链完整可复核；但 (a) runtime 外部事实门禁要求 HTTPS 来源，本地文件无法以 URL 形式满足，按 sibling 任务同款处理降为 research_required；(b) 这是 runner 未退出时的中途快照（predicted_locomo-vllm/ 仅覆盖 conv0-3，conv4-9 未跑完，无最终 metrics_by_cutoff 聚合文件），最终全量分数（含 conv4-9 及排除 conv0/1 的正式口径）需等 runner 退出后以官方聚合脚本复核。待补证据：runner 退出后的官方聚合结果文件（results/locomo/ 新 results JSON）。",
+          "role": "research_findings"
+        },
+        {
+          "attribute": "对比表采用 markdown 表格（沿用既有对照表惯例），落盘到 tools/memory-benchmarks/results/locomo/ 下的诊断/报告 md 文件，并在 decomposition.md T17 条目同步结果",
+          "concept": "研究未知因素：对比表的呈现格式与落盘位置",
+          "confidence": 0.8,
+          "disposition": "research_required",
+          "evidence_refs": [],
+          "rationale": "本地工程惯例调研已完成，结论如下（待主 Agent 以本机文件复核后转 confirmed/inferred）：(1) 格式——沿用 markdown 表格，模板见 tools/memory-benchmarks/results/locomo/locomo-full01-diagnosis.md L15-21『对照表（temporal 修复验证）』：列 run|样本|temporal top_10|备注，含 smoke01/smoke-temporal-quick/full01 conv2+3 三行；(2) 落盘——tools/memory-benchmarks/results/locomo/ 目录（既有惯例：带时间戳 *_results_*.json + 诊断 md 如 locomo-full01-diagnosis.md、locomo-smoke-report.md、temporal-analysis.md），新对比表建议新建 locomo-cutoff-scores.md 或追加进 diagnosis md 对照表节；(3) 同步——projects/AI-计算科学/D1-persona-align/tasks/decomposition.md L83 T17 条目状态列 + loop-state（阶段 01 goal 要求）。disposition 暂记 research_required 的原因：runtime field-apply 对 role=research_findings 且 disposition∈{confirmed,inferred,assumed_default} 的字段硬性要求 evidence_refs 含具体 HTTPS 页面 URL（protocol.py _is_specific_source_url），不接受本机文件路径作为可复核来源；本字段为纯本地工程惯例调研、无外部事实成分，按协议不伪造 URL，故保留 research_required + 空 evidence_refs，上述本机证据路径与行号摘要在此 rationale 内供主 Agent 直接复核。",
+          "role": "research_findings"
+        },
+        {
+          "attribute": "验证并记录：decomposition.md 中 T17 条目的现状。",
+          "concept": "研究未知因素：decomposition.md 中 T17 条目的现状。",
+          "confidence": 0.9,
+          "disposition": "research_required",
+          "evidence_refs": [],
+          "rationale": "外部事实校验器要求 HTTPS 来源，本任务明确为本地文件调研且禁止 WebSearch/WebFetch，故不伪造外部引用，按协议存为 research_required + 空 evidence_refs。本地调研结论（可人工复核）：projects/AI-计算科学/D1-persona-align/tasks/decomposition.md 第83行 T17 条目为『公理层3决策生成(subagent 521f8207)』，类型实验、不可并行、上游依赖 T16，状态列标注 done(3034字, 3决策, 4公理全应用)，即已执行完成且结果摘要落盘；下游 T18（第84行，依赖 T17）同样 done，链路已收口，无未勾选标记。关于『跑完出分/聚合 cutoff 分数/对比表』的既有计划文字：decomposition.md 全文 grep cutoff|聚合|对比表|出分 零命中，该文件不含此类计划描述；若存在应位于 memory/ 或 loop 阶段文档等其他位置，不在本条目内。待补证据：如需通过 field-apply 的 HTTPS 校验，需将上述本地发现另行发布到可访问 URL 或由主 Agent 豁免外部来源要求。",
+          "role": "research_findings"
+        }
+      ],
+      "authoritative_inputs": [
+        "loop-artifacts/stages/01/r1/state.json",
+        {
+          "characters": 1951,
+          "kind": "human_input",
+          "sha256": "b11befcc965506f8",
+          "source": "UserPromptSubmit",
+          "text": "<task-notification>\n<task-id>aeabb7b3af4090dcb</task-id>\n<tool-use-id>call_f2a3d2b6c41b8246</tool-use-id>\n<output-file>/private/tmp/claude-501/-Users-a1-6-Desktop-workspace/29142379-f236-48ba-b130-51bd81061a03/tasks/aeabb7b3af4090dcb.output</output-file>\n<status>completed</status>\n<summary>Agent \"Fresh T17 runner exit check\" finished</summary>\n<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>\n<result>observed_at: 2026-11-03T09:25:20Z\nPID 45660 (full01 --resume): ALIVE, etime 01:24:49, ingesting conversation 4\nPID 53388 (prior evaluate-only rejudge): DEAD — not in ps output; superseded by new PID 57621 (`--evaluate-only --rejudge --conversations 2,3`, started 16:52 local)\nLast 3 log lines (logs/locomo_20261103_160033.log, PID 45660):\n- `2026-11-03 16:00:33,419 - locomo - INFO - Conversation 3 already ingested (user_id=locomo_3_full01, 629 chunks)`\n- `2026-11-03 16:55:11,171 - locomo - INFO - Resuming conversation 4 from 93 completed chunks`\n- `2026-11-03 16:55:11,176 - locomo - INFO - Ingesting conversation 4: Tim &amp; John, 29 sessions, 680 chunks`\n(Newest log file logs/locomo_20261103_165224.log is 0 bytes — PID 57621 just started.)\nNewest results file mtime: tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/ dir Nov 3 16:55; newest *_results_*.json remains locomo_results_20261024_160459.json (Oct 24 16:04) — no new final aggregation artifact with metrics_by_cutoff.\nVerdict: RUNNING (main runner PID 45660 has not exited; per-conversation ingest ongoing at conv 4/9)\nfield-apply result: ok=true, added=1, last_applied_at=2026-11-03T09:27:15Z, no errors (remaining researching items belong to other field tasks).</result>\n<usage><subagent_tokens>18565</subagent_tokens><tool_uses>12</tool_uses><duration_ms>147081</duration_ms></usage>\n</task-notification>"
+        }
+      ],
+      "status": "research_pending"
+    },
+    "verification": {}
+  },
+  "submission_template_ref": "loop-artifacts/contracts/02-r1-submission-template.json",
+  "task": {
+    "description": "T17 benchmark 跑完出分：等 runner 退出后聚合各 cutoff 分数，生成对比表，更新 decomp loop-state",
+    "source": "ralph run"
+  }
+}

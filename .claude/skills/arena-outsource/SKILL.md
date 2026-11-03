@@ -13,7 +13,13 @@
 
 ## 通道：ego-browser（唯一，AGENTS.md 硬规则）
 
-**故障处置**（2026-10-29 r32 补丁，成璐指令）：登录态几个月不失效，遇到"疑似掉线/401/重定向到登录页"**先检查工具和网络，别放弃、别直接找用户**：① `curl -I https://arena.ai` 确认网络通 ② ego-browser 重新 goto 目标页看是否只是会话页面过期 ③ 查 ego-lite 进程是否活着（`ps aux | grep -i ego`）④ 仍失败才记录具体报错找用户。把"要用户重新扫码"当第一反应是错的。
+**故障处置**（2026-10-29 r32 补丁，成璐指令 + 2026-11-03 链路区分修订）：登录态几个月不失效，遇到"疑似掉线/401/重定向到登录页"**先检查工具和网络，别放弃、别直接找用户**：① `curl -I https://arena.ai` 确认网络通 ② ego-browser 重新 goto 目标页看是否只是会话页面过期 ③ 查 ego-lite 进程是否活着（`ps aux | grep -i ego`）④ 仍失败才记录具体报错找用户。把"要用户重新扫码"当第一反应是错的。
+
+**链路区分（防故障记忆泛化，2026-11-03 成璐指令）**：本机有两条独立浏览器链路，故障不得互相归因：
+- **ego-lite 持久会话**（ego-browser skill 用的，profile 目录持久化）：deepseek/chatgpt/arena 均已登录，登录态几个月不失效。这是 arena 外包的唯一合法通道。
+- **ralph 自带 Playwright profile**（ralph loop runner 内部起的无头实例，全新 profile 无登录态）：它登录失败 ≠ ego-lite 有问题。D1-gpu 那次卡的就是这条，与 ego-browser 无关。
+
+归因规则：记录故障时必须写清是哪条链路 + 具体报错（403? 沙箱拦截? tiptap 操作失败? 网络超时?），禁止写成"arena 通道不可用""web-llm 登录失败"这类不带链路标识的笼统结论。发现 memory/skill 里有笼统故障记录 → 立即按本规则拆分修订。
 
 ```bash
 ego-browser nodejs <<'EOF'

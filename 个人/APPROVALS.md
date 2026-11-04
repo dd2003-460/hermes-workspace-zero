@@ -35,6 +35,21 @@
 
 - 2026-10-31 r3 轮：条目 1-4（hooks-codex 安装面复核 / subagent 拆分规范入 skill / X6 caveat 双注记 / O3 claim 清单审定）由成璐授权 AI 自主裁决并执行，存档 `个人/history/APPROVALS-20261031-r3.md`。
 
+## [2026-11-05 r289] T8 rubric v3.1 sign-off（不可逆：冻结评分标准）
+- 背景：rubric v3.1 经 r271→r278 八轮迭代收口。证据链完整：
+  - 本地同源复放一致性 κ=+0.938, G2 35/36（rubric 可复现）
+  - arena 异源 vs 本地 κ=+0.307, G2 29/36（r270 旧 rubric 时 ~0，实质修复）
+  - arena 内部双判官一致 κ=+0.696（两独立判官对规则解读一致）
+  - S01 分解类特例 154/155=99.4%；code-fence 边界 bug 已修（r278）
+- 终版指纹：J1 sha256_16=`7518ce5c66f92f8a`，J2 sha256_16=`b229dcc9a14b2081`（pfb main @ 17f725c）
+- 影响面：sign-off 后 v3.1 冻结为 T8 正式评分标准，历史 baseline（r269/r270, v3 rubric）全部标注「旧 rubric 参考值」，不再作为质量声明依据。
+- 残留已知项（非 rubric 缺陷，不影响冻结）：① code-fence 2 cell 需下轮 arena 复跑消除（inputs 副本已同步 r278）② 条目提取正则跨模型差异 ③ S02 长工件判断型分歧（靠多裁判约束）。
+- 裁决选项：
+  - A. 确认冻结 v3.1 → 我更新 task brief 状态 + DRAFT 标 FINAL + 历史 baseline 加 caveat
+  - B. 先看某组具体数据再定（指哪组）
+  - C. 方向不对，说哪里
+- 人类回复：
+
 ## 待处理（建议项，不阻塞）
 
 - **wx-push.py 连续失败已自愈**（r268c/r269/r270 三轮 invalid request → r274 起 success:true，bot API token 侧问题自行恢复）。销账：无需换渠道，保留 hermes 原生 weixin 投递 + wx-push 双通道现状。若再连续 ≥3 轮失败则重新登记建议项。

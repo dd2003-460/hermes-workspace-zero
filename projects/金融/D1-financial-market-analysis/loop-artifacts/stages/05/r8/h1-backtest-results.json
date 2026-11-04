@@ -1,0 +1,943 @@
+{
+  "metadata": {
+    "run_id": "h1-backtest-v1",
+    "timestamp": "20261104_183943",
+    "design": "f10-r5-h1-preregistration-draft.md",
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT"
+    ],
+    "oos_windows": [
+      "2020",
+      "2025"
+    ]
+  },
+  "per_symbol": {
+    "BTCUSDT": {
+      "events_found": 4,
+      "trades_executed": 3,
+      "g_up": [
+        {
+          "net_return": -0.005129364726714834,
+          "gross_return": -0.0035293647267148343,
+          "entry_price": 97042.96,
+          "exit_price": 96700.46,
+          "entry_ts": 1746147600000,
+          "exit_ts": 1746234000000,
+          "symbol": "BTCUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-05-02",
+            "ts": 1746144000000,
+            "funding_rate": -0.00012232,
+            "p95_threshold": 9.521e-05,
+            "direction": 1,
+            "group": "G_up",
+            "ret_prev_day": 0.024613579407891883,
+            "entry_ts": 1746147600000,
+            "oi_available": true,
+            "oi_condition_met": false,
+            "oi_change_3d": 0.033511931511055394
+          },
+          "date": "2025-05-02"
+        }
+      ],
+      "g_down": [
+        {
+          "net_return": 0.012114173143330121,
+          "gross_return": 0.013714173143330122,
+          "entry_price": 5279.21,
+          "exit_price": 5351.61,
+          "entry_ts": 1584090000000,
+          "exit_ts": 1584176400000,
+          "symbol": "BTCUSDT",
+          "window": "2020",
+          "event": {
+            "symbol_date": "2020-03-13",
+            "ts": 1584086400000,
+            "funding_rate": -0.003,
+            "p95_threshold": 0.00097918,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.3997964322740506,
+            "entry_ts": 1584090000000,
+            "oi_available": false,
+            "oi_condition_met": true,
+            "oi_change_3d": null
+          },
+          "date": "2020-03-13"
+        },
+        {
+          "net_return": 0.0036590814272195364,
+          "gross_return": 0.005259081427219536,
+          "entry_price": 114069.35,
+          "exit_price": 114669.25,
+          "entry_ts": 1760288400000,
+          "exit_ts": 1760374800000,
+          "symbol": "BTCUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-10-12",
+            "ts": 1760284800000,
+            "funding_rate": -0.00010915,
+            "p95_threshold": 0.0001,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.01888813517240162,
+            "entry_ts": 1760288400000,
+            "oi_available": true,
+            "oi_condition_met": true,
+            "oi_change_3d": -0.3327163727274124
+          },
+          "date": "2025-10-12"
+        }
+      ],
+      "windows": {
+        "2020": {
+          "n_events": 1,
+          "n_trades": 1,
+          "g_up_n": 0,
+          "g_down_n": 1,
+          "g_up_mean_ret": null,
+          "g_down_mean_ret": 0.012114173143330121
+        },
+        "2025": {
+          "n_events": 3,
+          "n_trades": 2,
+          "g_up_n": 1,
+          "g_down_n": 1,
+          "g_up_mean_ret": -0.005129364726714834,
+          "g_down_mean_ret": 0.0036590814272195364
+        }
+      },
+      "g_up_mean": -0.005129364726714834,
+      "g_down_mean": 0.007886627285274828
+    },
+    "ETHUSDT": {
+      "events_found": 5,
+      "trades_executed": 4,
+      "g_up": [
+        {
+          "net_return": -0.04106503458350195,
+          "gross_return": -0.039265034583501945,
+          "entry_price": 2840.95,
+          "exit_price": 2729.4,
+          "entry_ts": 1738630800000,
+          "exit_ts": 1738717200000,
+          "symbol": "ETHUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-02-04",
+            "ts": 1738627200000,
+            "funding_rate": -0.00010653,
+            "p95_threshold": 0.0001,
+            "direction": 1,
+            "group": "G_up",
+            "ret_prev_day": 0.003561372696607279,
+            "entry_ts": 1738630800000,
+            "oi_available": true,
+            "oi_condition_met": true,
+            "oi_change_3d": -0.14591558697677126
+          },
+          "date": "2025-02-04"
+        }
+      ],
+      "g_down": [
+        {
+          "net_return": 0.021819533992978115,
+          "gross_return": 0.023619533992978115,
+          "entry_price": 125.32,
+          "exit_price": 128.28,
+          "entry_ts": 1584090000000,
+          "exit_ts": 1584176400000,
+          "symbol": "ETHUSDT",
+          "window": "2020",
+          "event": {
+            "symbol_date": "2020-03-13",
+            "ts": 1584086400000,
+            "funding_rate": -0.00281778,
+            "p95_threshold": 0.00133922,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.44596886079852016,
+            "entry_ts": 1584090000000,
+            "oi_available": false,
+            "oi_condition_met": true,
+            "oi_change_3d": null
+          },
+          "date": "2020-03-13"
+        },
+        {
+          "net_return": 0.04697935020464008,
+          "gross_return": 0.04877935020464008,
+          "entry_price": 2572.81,
+          "exit_price": 2698.31,
+          "entry_ts": 1738573200000,
+          "exit_ts": 1738659600000,
+          "symbol": "ETHUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-02-03",
+            "ts": 1738569600000,
+            "funding_rate": -0.00016657,
+            "p95_threshold": 0.0001,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.07950499432244662,
+            "entry_ts": 1738573200000,
+            "oi_available": true,
+            "oi_condition_met": false,
+            "oi_change_3d": -0.037750217644628235
+          },
+          "date": "2025-02-03"
+        },
+        {
+          "net_return": 0.02932344438203918,
+          "gross_return": 0.031123444382039178,
+          "entry_price": 2706.32,
+          "exit_price": 2790.55,
+          "entry_ts": 1738602000000,
+          "exit_ts": 1738688400000,
+          "symbol": "ETHUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-02-03",
+            "ts": 1738598400000,
+            "funding_rate": -0.00025121,
+            "p95_threshold": 0.0001,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.07950499432244662,
+            "entry_ts": 1738602000000,
+            "oi_available": true,
+            "oi_condition_met": false,
+            "oi_change_3d": -0.037750217644628235
+          },
+          "date": "2025-02-03"
+        }
+      ],
+      "windows": {
+        "2020": {
+          "n_events": 1,
+          "n_trades": 1,
+          "g_up_n": 0,
+          "g_down_n": 1,
+          "g_up_mean_ret": null,
+          "g_down_mean_ret": 0.021819533992978115
+        },
+        "2025": {
+          "n_events": 4,
+          "n_trades": 3,
+          "g_up_n": 1,
+          "g_down_n": 2,
+          "g_up_mean_ret": -0.04106503458350195,
+          "g_down_mean_ret": 0.03815139729333963
+        }
+      },
+      "g_up_mean": -0.04106503458350195,
+      "g_down_mean": 0.03270744285988579
+    },
+    "SOLUSDT": {
+      "events_found": 71,
+      "trades_executed": 26,
+      "g_up": [
+        {
+          "net_return": -0.0417442638179286,
+          "gross_return": -0.039944263817928594,
+          "entry_price": 215.3,
+          "exit_price": 206.7,
+          "entry_ts": 1738630800000,
+          "exit_ts": 1738717200000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-02-04",
+            "ts": 1738627200000,
+            "funding_rate": -0.00055791,
+            "p95_threshold": 0.0001,
+            "direction": 1,
+            "group": "G_up",
+            "ret_prev_day": 0.06274875927472867,
+            "entry_ts": 1738630800000,
+            "oi_available": true,
+            "oi_condition_met": true,
+            "oi_change_3d": -0.11792164406713694
+          },
+          "date": "2025-02-04"
+        },
+        {
+          "net_return": 0.004140594059405946,
+          "gross_return": 0.005940594059405946,
+          "entry_price": 202.0,
+          "exit_price": 203.2,
+          "entry_ts": 1739120400000,
+          "exit_ts": 1739206800000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-02-09",
+            "ts": 1739116800000,
+            "funding_rate": -0.00021227,
+            "p95_threshold": 0.00012014,
+            "direction": 1,
+            "group": "G_up",
+            "ret_prev_day": 0.038179071826657474,
+            "entry_ts": 1739120400000,
+            "oi_available": true,
+            "oi_condition_met": false,
+            "oi_change_3d": -0.02988275442842492
+          },
+          "date": "2025-02-09"
+        },
+        {
+          "net_return": -0.0127809304377666,
+          "gross_return": -0.0109809304377666,
+          "entry_price": 203.99,
+          "exit_price": 201.75,
+          "entry_ts": 1739149200000,
+          "exit_ts": 1739235600000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-02-10",
+            "ts": 1739145600000,
+            "funding_rate": -0.00016119,
+            "p95_threshold": 0.00012368,
+            "direction": 1,
+            "group": "G_up",
+            "ret_prev_day": 0.00576961669676912,
+            "entry_ts": 1739149200000,
+            "oi_available": true,
+            "oi_condition_met": false,
+            "oi_change_3d": 0.002284227116305453
+          },
+          "date": "2025-02-10"
+        },
+        {
+          "net_return": 0.003691842997900287,
+          "gross_return": 0.005491842997900287,
+          "entry_price": 123.82,
+          "exit_price": 124.5,
+          "entry_ts": 1743382800000,
+          "exit_ts": 1743469200000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-03-31",
+            "ts": 1743379200000,
+            "funding_rate": -0.0002337,
+            "p95_threshold": 0.00016029,
+            "direction": 1,
+            "group": "G_up",
+            "ret_prev_day": 0.0019264729491088595,
+            "entry_ts": 1743382800000,
+            "oi_available": true,
+            "oi_condition_met": false,
+            "oi_change_3d": 0.037186113999039906
+          },
+          "date": "2025-03-31"
+        },
+        {
+          "net_return": 0.0363554980347043,
+          "gross_return": 0.038155498034704305,
+          "entry_price": 104.31,
+          "exit_price": 108.29,
+          "entry_ts": 1744131600000,
+          "exit_ts": 1744218000000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-04-08",
+            "ts": 1744128000000,
+            "funding_rate": -0.00023327,
+            "p95_threshold": 0.00016876,
+            "direction": 1,
+            "group": "G_up",
+            "ret_prev_day": 0.010197337361911085,
+            "entry_ts": 1744131600000,
+            "oi_available": true,
+            "oi_condition_met": true,
+            "oi_change_3d": -0.09307580457269517
+          },
+          "date": "2025-04-08"
+        },
+        {
+          "net_return": 0.00912817600115037,
+          "gross_return": 0.01092817600115037,
+          "entry_price": 139.09,
+          "exit_price": 140.61,
+          "entry_ts": 1745139600000,
+          "exit_ts": 1745226000000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-04-20",
+            "ts": 1745136000000,
+            "funding_rate": -0.00016975,
+            "p95_threshold": 0.00016876,
+            "direction": 1,
+            "group": "G_up",
+            "ret_prev_day": 0.04349447925992256,
+            "entry_ts": 1745139600000,
+            "oi_available": true,
+            "oi_condition_met": false,
+            "oi_change_3d": 0.06493186451341106
+          },
+          "date": "2025-04-20"
+        },
+        {
+          "net_return": -0.06219909727996196,
+          "gross_return": -0.060399097279961955,
+          "entry_price": 168.38,
+          "exit_price": 158.21,
+          "entry_ts": 1762189200000,
+          "exit_ts": 1762275600000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-11-03",
+            "ts": 1762185600000,
+            "funding_rate": -0.00015146,
+            "p95_threshold": 0.0001386,
+            "direction": 1,
+            "group": "G_up",
+            "ret_prev_day": 0.007298094982559844,
+            "entry_ts": 1762189200000,
+            "oi_available": true,
+            "oi_condition_met": true,
+            "oi_change_3d": -0.09662387036229518
+          },
+          "date": "2025-11-03"
+        },
+        {
+          "net_return": -0.03844410706664223,
+          "gross_return": -0.03664410706664223,
+          "entry_price": 164.01,
+          "exit_price": 158.0,
+          "entry_ts": 1762851600000,
+          "exit_ts": 1762938000000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-11-11",
+            "ts": 1762848000000,
+            "funding_rate": -0.00020845,
+            "p95_threshold": 0.00015146,
+            "direction": 1,
+            "group": "G_up",
+            "ret_prev_day": 0.016896614599161364,
+            "entry_ts": 1762851600000,
+            "oi_available": true,
+            "oi_condition_met": false,
+            "oi_change_3d": -0.005413381877051528
+          },
+          "date": "2025-11-11"
+        }
+      ],
+      "g_down": [
+        {
+          "net_return": -0.004977158349572106,
+          "gross_return": -0.0031771583495721067,
+          "entry_price": 236.06,
+          "exit_price": 235.31,
+          "entry_ts": 1737334800000,
+          "exit_ts": 1737421200000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-01-20",
+            "ts": 1737331200000,
+            "funding_rate": -0.0007115,
+            "p95_threshold": 0.0001,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.03645455586517554,
+            "entry_ts": 1737334800000,
+            "oi_available": true,
+            "oi_condition_met": true,
+            "oi_change_3d": -0.07308816923829801
+          },
+          "date": "2025-01-20"
+        },
+        {
+          "net_return": 0.07214500871191201,
+          "gross_return": 0.07394500871191201,
+          "entry_price": 235.31,
+          "exit_price": 252.71,
+          "entry_ts": 1737421200000,
+          "exit_ts": 1737507600000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-01-21",
+            "ts": 1737417600000,
+            "funding_rate": -0.00027508,
+            "p95_threshold": 0.0001,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.04052769194200134,
+            "entry_ts": 1737421200000,
+            "oi_available": true,
+            "oi_condition_met": true,
+            "oi_change_3d": -0.1696871132902881
+          },
+          "date": "2025-01-21"
+        },
+        {
+          "net_return": 0.022051127031277342,
+          "gross_return": 0.02385112703127734,
+          "entry_price": 228.92,
+          "exit_price": 234.38,
+          "entry_ts": 1737997200000,
+          "exit_ts": 1738083600000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-01-27",
+            "ts": 1737993600000,
+            "funding_rate": -0.00018696,
+            "p95_threshold": 0.0001,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.06204906204906213,
+            "entry_ts": 1737997200000,
+            "oi_available": true,
+            "oi_condition_met": false,
+            "oi_change_3d": 0.04585485420345472
+          },
+          "date": "2025-01-27"
+        },
+        {
+          "net_return": 0.03915301395776873,
+          "gross_return": 0.040953013957768736,
+          "entry_price": 195.59,
+          "exit_price": 203.6,
+          "entry_ts": 1738573200000,
+          "exit_ts": 1738659600000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-02-03",
+            "ts": 1738569600000,
+            "funding_rate": -0.00012368,
+            "p95_threshold": 0.0001,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.04468854151997381,
+            "entry_ts": 1738573200000,
+            "oi_available": true,
+            "oi_condition_met": false,
+            "oi_change_3d": 0.02530571881252224
+          },
+          "date": "2025-02-03"
+        },
+        {
+          "net_return": -0.014473567280989783,
+          "gross_return": -0.012673567280989784,
+          "entry_price": 198.05,
+          "exit_price": 195.54,
+          "entry_ts": 1739322000000,
+          "exit_ts": 1739408400000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-02-12",
+            "ts": 1739318400000,
+            "funding_rate": -0.00022332,
+            "p95_threshold": 0.00018095,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.012520576644884485,
+            "entry_ts": 1739322000000,
+            "oi_available": true,
+            "oi_condition_met": false,
+            "oi_change_3d": 0.03205412153183271
+          },
+          "date": "2025-02-12"
+        },
+        {
+          "net_return": -0.008936556811803362,
+          "gross_return": -0.007136556811803363,
+          "entry_price": 124.71,
+          "exit_price": 123.82,
+          "entry_ts": 1743296400000,
+          "exit_ts": 1743382800000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-03-30",
+            "ts": 1743292800000,
+            "funding_rate": -0.00025778,
+            "p95_threshold": 0.00013711,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.03791798594486073,
+            "entry_ts": 1743296400000,
+            "oi_available": true,
+            "oi_condition_met": false,
+            "oi_change_3d": 0.05742467951300656
+          },
+          "date": "2025-03-30"
+        },
+        {
+          "net_return": -0.007824573919936604,
+          "gross_return": -0.006024573919936604,
+          "entry_price": 126.15,
+          "exit_price": 125.39,
+          "entry_ts": 1743325200000,
+          "exit_ts": 1743411600000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-03-30",
+            "ts": 1743321600000,
+            "funding_rate": -0.00040116,
+            "p95_threshold": 0.00014911,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.03791798594486073,
+            "entry_ts": 1743325200000,
+            "oi_available": true,
+            "oi_condition_met": false,
+            "oi_change_3d": 0.05742467951300656
+          },
+          "date": "2025-03-30"
+        },
+        {
+          "net_return": 0.016631689571544175,
+          "gross_return": 0.018431689571544174,
+          "entry_price": 123.7,
+          "exit_price": 125.98,
+          "entry_ts": 1743354000000,
+          "exit_ts": 1743440400000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-03-30",
+            "ts": 1743350400000,
+            "funding_rate": -0.00018023,
+            "p95_threshold": 0.00015544,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.03791798594486073,
+            "entry_ts": 1743354000000,
+            "oi_available": true,
+            "oi_condition_met": false,
+            "oi_change_3d": 0.05742467951300656
+          },
+          "date": "2025-03-30"
+        },
+        {
+          "net_return": 0.05199310344827592,
+          "gross_return": 0.053793103448275925,
+          "entry_price": 116.0,
+          "exit_price": 122.24,
+          "entry_ts": 1743728400000,
+          "exit_ts": 1743814800000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-04-04",
+            "ts": 1743724800000,
+            "funding_rate": -0.00033632,
+            "p95_threshold": 0.00016119,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.0021291091807187357,
+            "entry_ts": 1743728400000,
+            "oi_available": true,
+            "oi_condition_met": false,
+            "oi_change_3d": 0.0037668835386303976
+          },
+          "date": "2025-04-04"
+        },
+        {
+          "net_return": -0.029847312132587376,
+          "gross_return": -0.028047312132587376,
+          "entry_price": 141.19,
+          "exit_price": 137.23,
+          "entry_ts": 1745197200000,
+          "exit_ts": 1745283600000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-04-21",
+            "ts": 1745193600000,
+            "funding_rate": -0.00019655,
+            "p95_threshold": 0.00016975,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.014370486880674882,
+            "entry_ts": 1745197200000,
+            "oi_available": true,
+            "oi_condition_met": false,
+            "oi_change_3d": -0.018046005951038377
+          },
+          "date": "2025-04-21"
+        },
+        {
+          "net_return": 0.028825665434959704,
+          "gross_return": 0.030625665434959704,
+          "entry_price": 159.67,
+          "exit_price": 164.56,
+          "entry_ts": 1754182800000,
+          "exit_ts": 1754269200000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-08-03",
+            "ts": 1754179200000,
+            "funding_rate": -0.00010062,
+            "p95_threshold": 0.0001,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.025997172884272723,
+            "entry_ts": 1754182800000,
+            "oi_available": true,
+            "oi_condition_met": true,
+            "oi_change_3d": -0.06778801343999163
+          },
+          "date": "2025-08-03"
+        },
+        {
+          "net_return": 0.001431532474625487,
+          "gross_return": 0.003231532474625487,
+          "entry_price": 219.71,
+          "exit_price": 220.42,
+          "entry_ts": 1758560400000,
+          "exit_ts": 1758646800000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-09-22",
+            "ts": 1758556800000,
+            "funding_rate": -0.00010344,
+            "p95_threshold": 0.0001,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.013863370636378769,
+            "entry_ts": 1758560400000,
+            "oi_available": true,
+            "oi_condition_met": false,
+            "oi_change_3d": 0.0581792630299591
+          },
+          "date": "2025-09-22"
+        },
+        {
+          "net_return": -0.07303196659073649,
+          "gross_return": -0.0712319665907365,
+          "entry_price": 210.72,
+          "exit_price": 195.71,
+          "entry_ts": 1758762000000,
+          "exit_ts": 1758848400000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-09-25",
+            "ts": 1758758400000,
+            "funding_rate": -0.0001284,
+            "p95_threshold": 0.0001,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.007969995311767564,
+            "entry_ts": 1758762000000,
+            "oi_available": true,
+            "oi_condition_met": false,
+            "oi_change_3d": 0.01968622631121995
+          },
+          "date": "2025-09-25"
+        },
+        {
+          "net_return": -0.08023658601435787,
+          "gross_return": -0.07843658601435788,
+          "entry_price": 188.05,
+          "exit_price": 173.3,
+          "entry_ts": 1760144400000,
+          "exit_ts": 1760230800000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-10-11",
+            "ts": 1760140800000,
+            "funding_rate": -0.00302761,
+            "p95_threshold": 0.0001,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.1471054180057032,
+            "entry_ts": 1760144400000,
+            "oi_available": true,
+            "oi_condition_met": true,
+            "oi_change_3d": -0.2370748604750589
+          },
+          "date": "2025-10-11"
+        },
+        {
+          "net_return": 0.059300465370927945,
+          "gross_return": 0.06110046537092795,
+          "entry_price": 182.65,
+          "exit_price": 193.81,
+          "entry_ts": 1760202000000,
+          "exit_ts": 1760288400000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-10-11",
+            "ts": 1760198400000,
+            "funding_rate": -0.00158704,
+            "p95_threshold": 0.0001,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.1471054180057032,
+            "entry_ts": 1760202000000,
+            "oi_available": true,
+            "oi_condition_met": true,
+            "oi_change_3d": -0.2370748604750589
+          },
+          "date": "2025-10-11"
+        },
+        {
+          "net_return": 0.030344884164903687,
+          "gross_return": 0.032144884164903686,
+          "entry_price": 193.81,
+          "exit_price": 200.04,
+          "entry_ts": 1760288400000,
+          "exit_ts": 1760374800000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-10-12",
+            "ts": 1760284800000,
+            "funding_rate": -0.00057183,
+            "p95_threshold": 0.0001,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.05736878416388047,
+            "entry_ts": 1760288400000,
+            "oi_available": true,
+            "oi_condition_met": true,
+            "oi_change_3d": -0.2211942466741819
+          },
+          "date": "2025-10-12"
+        },
+        {
+          "net_return": 0.007151199784308584,
+          "gross_return": 0.008951199784308583,
+          "entry_price": 185.45,
+          "exit_price": 187.11,
+          "entry_ts": 1761872400000,
+          "exit_ts": 1761958800000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-10-31",
+            "ts": 1761868800000,
+            "funding_rate": -0.00022069,
+            "p95_threshold": 0.0001284,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.04740045388900349,
+            "entry_ts": 1761872400000,
+            "oi_available": true,
+            "oi_condition_met": false,
+            "oi_change_3d": 0.13200283126433685
+          },
+          "date": "2025-10-31"
+        },
+        {
+          "net_return": -0.017288732296099927,
+          "gross_return": -0.015488732296099927,
+          "entry_price": 143.33,
+          "exit_price": 141.11,
+          "entry_ts": 1763082000000,
+          "exit_ts": 1763168400000,
+          "symbol": "SOLUSDT",
+          "window": "2025",
+          "event": {
+            "symbol_date": "2025-11-14",
+            "ts": 1763078400000,
+            "funding_rate": -0.00019091,
+            "p95_threshold": 0.00015825,
+            "direction": -1,
+            "group": "G_down",
+            "ret_prev_day": -0.056641898057619544,
+            "entry_ts": 1763082000000,
+            "oi_available": true,
+            "oi_condition_met": false,
+            "oi_change_3d": 0.09353835868293495
+          },
+          "date": "2025-11-14"
+        }
+      ],
+      "windows": {
+        "2020": {
+          "n_events": 28,
+          "n_trades": 0,
+          "g_up_n": 0,
+          "g_down_n": 0,
+          "g_up_mean_ret": null,
+          "g_down_mean_ret": null
+        },
+        "2025": {
+          "n_events": 43,
+          "n_trades": 26,
+          "g_up_n": 8,
+          "g_down_n": 18,
+          "g_up_mean_ret": -0.012731535938642312,
+          "g_down_mean_ret": 0.005133957586356674
+        }
+      },
+      "g_up_mean": -0.012731535938642312,
+      "g_down_mean": 0.005133957586356674
+    }
+  },
+  "pooled_oos": {
+    "delta_gap": -0.02377453040822366,
+    "ci_95": [
+      -0.04920120268497499,
+      0.010347799945600538
+    ],
+    "condition_1": false,
+    "gates": {
+      "t_ge_2.0": {
+        "pass": false,
+        "detail": "t=-1.55"
+      },
+      "n_ge_30": {
+        "pass": false,
+        "detail": "n=10"
+      },
+      "net_positive": {
+        "pass": false,
+        "detail": "net=-14.805%"
+      },
+      "cross_window_3of4": {
+        "pass": false,
+        "detail": "0/3 windows positive"
+      },
+      "permutation_p_lt_0.001": {
+        "pass": false,
+        "detail": "p=0.8881"
+      },
+      "psr_gt_0.95": {
+        "pass": false,
+        "detail": "PSR=0.000"
+      },
+      "bh_fdr": {
+        "pass": false,
+        "detail": "rejected=False"
+      },
+      "dsr_gt_0": {
+        "pass": false,
+        "detail": "DSR=0.000"
+      }
+    },
+    "condition_2": false
+  },
+  "verdict": {
+    "overall": "FAIL",
+    "condition_1": false,
+    "condition_2": false,
+    "note": "If FAIL \u2192 F10 closes as negative result report"
+  }
+}

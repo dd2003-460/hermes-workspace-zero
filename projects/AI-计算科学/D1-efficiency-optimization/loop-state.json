@@ -8,8 +8,8 @@
   "created": "2026-10-22",
   "rationale": "用户 2026-10-22 指示：效率提高（prompt 改善性能和速度 + 识别瓶颈）优先级放最高",
   "updated_at": "2026-11-03T08:00:00+08:00",
-  "last_updated": "2026-11-04T18:30:00+08:00",
-  "current_focus": "T17 full01: conv0 89.2% (83/152 running) + conv1 rerun ingesting; partial overall 81.3% top_20 vs smoke01 60.0% (+21.3pp); KB.1 pending recalc after full run; GOALS no actionable goal",
+  "last_updated": "2026-11-04T18:45:00+08:00",
+  "current_focus": "T17 conv0 89.3% (84/152 running) + conv1 rerun relaunched (resuming from 253/369 chunks); partial overall 81.3% top_20 vs smoke01 60.0%; GOALS no actionable goal",
   "recent_actions": [
     "R5.2 complete: P0 evidence packet template + P1 M1/M2/M5/M6 fixes",
     "Validation: kappa 0.064 -> 0.644, mean|delta| 19.9 -> 2.9 (-85%)",

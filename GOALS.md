@@ -21,13 +21,12 @@
 - **诚实边界**：n=2/域、同族判官（自偏好风险）、绝对分受天花板限制。异源 judge 是下一步。
 - **状态**：done（2026-11-04 确认 runner 已结束，报告已落盘）
 
-### G4: F10-R5 → H1 回测执行 — prereg 草案就绪，等冻结确认
-- **背景**：F10-R5 宏观调研完成（@ main 6304ab54），H_macro 文献层面不成立。但 S5 (Shek 2026) 发现 funding 极值按当日方向分组 +3.62pp gap，是 R2 漏掉的维度。
-- **当前状态**：H1 预注册草案已写好（bb65e8ba, r8/f10-r5-h1-preregistration-draft.md）。数据本地已有（Binance funding/OI/kline）。APPROVALS r291 已登记等成璐冻结确认。
-- **触发条件**：成璐回复 APPROVALS r291 选项 A（确认冻结）。
-- **动作**：标记 prereg FROZEN → 执行回测脚本（复用 R2 基础设施 + 新增方向分组）→ 报告结果 → 更新 TASKS.md + candidates。
-- **预计耗时**：1-2h（数据已在盘，主要是跑 walk-forward + bootstrap）。
-- **状态**：waiting（等 r291 sign-off）
+### G4: F10-R5 → H1 回测执行 — ✅ 完成（负面结果）
+- **背景**：F10-R5 宏观调研完成（@ main 6304ab54），H_macro 文献层面不成立。S5 (Shek 2026) 发现 funding 极值按当日方向分组 +3.62pp gap，是 R2 漏掉的维度。
+- **执行结果（2026-11-05）**：H1 OOS 回测 **FAIL**。Δgap = −2.38%（CI [−4.92%, +1.03%]），G_up 反而跑输 G_down。8 gates 全挂（0/8）。主因：样本量崩塌（G_up 仅 10 trades < 30 gate）+ SOL 主导 89% 事件扭曲 pooled 估计。
+- **结论**：S5 的方向分组效应在 OOS 不复现。F10 按 prereg 协议收口为负面结果报告。
+- **产出**：`r8/h1-backtest-report.md` + `r8/h1-backtest-results.json` + `r8/h1_backtest.py`
+- **状态**：✅ completed（2026-11-05）
 
 ### G3: 金融·正交信号源（F8）— 已收口 + 采集器启动
 - **结论（负面结果）**：免费+PIT+2020-2026日线约束下，crypto 日频信号高度冗余，无可验证正交源。TVL ρ=0.43 冗余；期权IV/OI/多空比/链上流全没免费历史。详见 `tasks/decomposition.md`。

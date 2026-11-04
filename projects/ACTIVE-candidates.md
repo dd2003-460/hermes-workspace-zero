@@ -4,7 +4,7 @@
 
 | # | 方向 | 锚点仓库（近期有活动） | 现状一句话 | 可立即做的动作 | 状态 |
 |---|------|----------------------|-----------|--------------|------|
-| 1 | 金融·正交信号源 | hermes-workspace-zero (D1-financial-market-analysis) | F6-F10-R4 四条负结果线闭环。**F10-R5 宏观调研已完成**（@ main 6304ab54, r8/ 共 7 文件 984 行）：13 条文献（≥10 独立来源）、6 数据源实测、3 个交互假设 H1-H3。**核心判决：H_macro 文献层面不成立**——日频方向被堵死（宏观 OOS 胜率 5.6% 最低档），宏观只在"波动/事件风险"有信号且不可套利。但 S5 (Shek 2026) 发现 funding 极值按**当日方向**分组有 +3.62pp gap（CI [2.60,4.67]），是 R2 漏掉的维度。**agent 建议：先做 H1（方向分组复现，不需要宏观数据），若也 FAIL 则 F10 收束为负结果报告** | r8 落盘 @ 6304ab54。**H1 预注册草案已写好**（bb65e8ba）：funding 极值×当日方向分组，复用 R2 事件定义，OOS 防重叠（2020+2025），双条件判定（Δgap CI + 8 gate）。数据本地已有。APPROVALS r291 已登记等冻结确认 | **prereg-draft · awaiting-freeze** |
+| 1 | 金融·正交信号源 | hermes-workspace-zero (D1-financial-market-analysis) | F6-F10 全闭环。**F10-R5 宏观调研**（@ main 6304ab54）：H_macro 文献层面不成立。**H1 OOS 回测 FAIL**（2026-11-05, r8/）：Δgap=−2.38% CI[−4.92,+1.03]，G_up 跑输 G_down，8 gates 全挂。S5 方向分组效应 OOS 不复现。**F10 收口为负面结果报告** | r8/h1-backtest-report.md + results.json + h1_backtest.py @ 待提交 | **done · negative result** |
 | 2 | 写作·动机社会 | from-motivation-to-society | Part I-V 全写完，等 P2 实验第一个数（30人30天≥40%信念迁移），solo 0美元方案已写好 | 起草 P2 实验招募文案 + 渠道对比（待你拍板渠道） | open·半阻塞(渠道) |
 | 3 | 健康·MR L1 完成 | longevity-orthogonal-contribution | **阶段2 全部本地工作完成** (b7a9a83)：Step1✅ Step2✅ Step4 L1✅ (10 pair, Egger 为主) + verify_integrity C1-C24 PASS + 执行报告 + LDL→AD 管线伪影诊断(方向一致性69%)。BMI→CHD Egger OR=1.17, LDL→CHD OR=1.40, BMI→CKD OR=1.28 | blocked: 1000G v3 EUR ref (clumping, 所有源已死) + OpenGWAS token (Step3 condition-F)。本地 open-data 已穷尽 | blocked-on-credentials |
 | 4 | 物理·ORF 收尾 | -orf | Stage 4 组件全完成，LaTeX 86→0（2026-11-02），arXiv tarball 已打好（2026-11-02） | arXiv 手动上传（需登录 arxiv.org/submission，不可自动绕过） | blocked-on-human |

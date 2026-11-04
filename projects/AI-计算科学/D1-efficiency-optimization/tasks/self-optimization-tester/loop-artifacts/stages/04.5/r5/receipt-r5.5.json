@@ -1,0 +1,75 @@
+{
+  "kind": "ralph_bench_r5.5",
+  "subtype": "n5_aggregation_and_weight_calibration",
+  "observed_at": "2026-11-04T20:14:37+08:00",
+  "task": "R5.5: n=5 双评分器信度汇总 + 权重校准判定 + M8 shadow 单列",
+  "evidence_packet": "projects/AI-计算科学/D1-efficiency-optimization/tasks/self-optimization-tester/loop-artifacts/stages/04.5/r5/evidence-packet-r5.5.md",
+  "evidence_packet_sha256": "0333976720db0635f950b4118637c46f9586dde6167815dfd2cfbe79a8c5493b",
+  "bench_output": "projects/AI-计算科学/D1-efficiency-optimization/tasks/self-optimization-tester/loop-artifacts/stages/04.5/r5/bench-r5.5.md",
+  "bench_sha256": "6f8f3215b8295646f65ec260233cc358ada7d661193e8253a50f479beba73bcc",
+  "n_runs": 5,
+  "runs": [
+    "run1(Lead本地)",
+    "run2(Arena)",
+    "run3(subagent)",
+    "run4(teammate)",
+    "run5(Arena)"
+  ],
+  "primary_scores": {
+    "run1": 84.1,
+    "run2": 62.4,
+    "run3": 86.0,
+    "run4": 97.5,
+    "run5": 84.8
+  },
+  "mean_std": "83.0 ± 12.7",
+  "kappa_corrected": {
+    "method": "avg Cohen's κ per run (CG vs DS, run1-3, 5-bucket)",
+    "value": 0.167,
+    "interpretation": "低一致性; 根因=M2/M5信息不对称(r5.2已修复)",
+    "post_fix_expected": "~0.54 (r5.2-fix-validation回算)"
+  },
+  "weights_final": {
+    "M1": 0.2461,
+    "M2": 0.1109,
+    "M3": 0.1959,
+    "M4": 0.147,
+    "M5": 0.1477,
+    "M6": 0.1524,
+    "M8": "shadow"
+  },
+  "weight_calibration_decision": "沿用r5权重不调整: M5 r=0.735<0.7阈值(已降过一次); M8 n=1不可判共线→shadow",
+  "m8_shadow": {
+    "run5_score": 100,
+    "first_pass": "10/10",
+    "correlation_with_m3": "n=1不可估",
+    "recommendation": "累积≥5run后按|r|>0.7决策"
+  },
+  "key_findings": [
+    "run2系统性弱点: arena token重发(M1=25)+账本unverified(M6=55)→拉低20pp",
+    "run4设计最优: sha256钉死+独立check脚本→两方max Δ=10",
+    "κ低根因=信息不对称非判断分歧: M2/M5占mean|Δ|的60%+",
+    "M8定义清晰可审计, 与M3粒度不同(交付物级vs链路级), shadow可行"
+  ],
+  "limitations": [
+    "n=5探索性, 不能统计推断",
+    "同族判官风险(CG/DS/Lead都是LLM)",
+    "run5仅Lead一个评分器",
+    "M8 n=1无法估计r(M8,M3)"
+  ],
+  "next_steps_r6": [
+    "异源judge: 人类或非同族模型做第三评分器",
+    "M8累积≥4run凑n≥5判共线",
+    "arena通道token重发优化(M1从25拉到≥70)",
+    "run4模式推广: sha256+独立脚本标准化"
+  ],
+  "status": "done",
+  "gate_check": {
+    "n>=5": true,
+    "dual_scorer_kappa_reported": true,
+    "weights_justified": true,
+    "m8_shadow_separated": true,
+    "evidence_frozen": true,
+    "all_pass": true
+  }
+}

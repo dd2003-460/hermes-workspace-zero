@@ -4,7 +4,7 @@
   "loop_phase": "01-goal-decomposition",
   "status": "active",
   "priority": "HIGHEST",
-  "current_task": "R5.1 完成: ChatGPT 独立打分 run1-run4 (24分) + Fleiss κ=0.258 (根因=证据包版本不对称, M2/M5 信息差) + n=5 首次有效权重校准 (M1 r=0.85/M3 r=0.735; M5降权0.1477→0.1192) + bench.md r5.1 落盘 (n=5 mean 78.91±13.15, run4 97.63 领跑, run2 垫底差距在 M1 重发放大). 工件: r5/bench-r5.1.json + independent-scoring-chatgpt-r5.1.json. 下一步: r6 补 run5 盲打 + 新权重复算稳定性 + push pfb.",
+  "current_task": "R5.5 完成: n=5 双评分器信度汇总 (mean=83.0±12.7, κ_corrected=0.167) + 权重校准(沿用r5) + M8 shadow(100/100, n=1)",
   "created": "2026-10-22",
   "rationale": "用户 2026-10-22 指示：效率提高（prompt 改善性能和速度 + 识别瓶颈）优先级放最高",
   "updated_at": "2026-11-03T08:00:00+08:00",
@@ -15,5 +15,7 @@
     "Validation: kappa 0.064 -> 0.644, mean|delta| 19.9 -> 2.9 (-85%)",
     "bench.md updated with next-round execution flow changes",
     "All committed and pushed (27fc0a92)"
-  ]
+  ],
+  "last_update": "2026-11-04T21:30+08:00",
+  "next_action": "R6 候选: 异源judge / M8累积≥4run / arena token重发优化 / run4模式推广。或转 T17 open-domain 修复实验。"
 }

@@ -8,8 +8,8 @@
   "created": "2026-10-22",
   "rationale": "用户 2026-10-22 指示：效率提高（prompt 改善性能和速度 + 识别瓶颈）优先级放最高",
   "updated_at": "2026-11-03T08:00:00+08:00",
-  "last_updated": "2026-11-04T17:45:00+08:00",
-  "current_focus": "T17 conv0 88.6% (79/152 running) + conv1 rerun ingesting 54%; memory-benchmarks fork 建好+push 成功 (35a4426, 8 commits); GOALS 无可执行 (G1 waiting pfb, G3 monitoring)",
+  "last_updated": "2026-11-04T18:00:00+08:00",
+  "current_focus": "T17 conv0 88.8% (80/152 running) + conv1 rerun ingesting 59%; partial overall 81.2% top_20 (excl stale conv1); KB.1 pending: recalc after full run; GOALS no actionable goal",
   "recent_actions": [
     "R5.2 complete: P0 evidence packet template + P1 M1/M2/M5/M6 fixes",
     "Validation: kappa 0.064 -> 0.644, mean|delta| 19.9 -> 2.9 (-85%)",

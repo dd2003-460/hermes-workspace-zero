@@ -23,7 +23,7 @@
 | 编号 | 日期 | 链路/组件 | 具体报错 | 根因 | 处置 | status |
 |---|---|---|---|---|---|---|
 | F1 | 2026-09-10 | ralph Playwright profile（非 ego-lite） | web-llm-check 3/3 provider 登录失败 | ralph 自带 Playwright 是无头新实例，无登录态；被误记为"web-llm 门禁不可用"并沉淀进 MEMORY.md，导致 2026-11-03 错误推断 arena 整体不可用 | 走 ego-browser（ego-lite）通道提交，有 11-01 金融项目 F6 成功先例；MEMORY.md 条目已修订；SKILL.md 加链路区分节；stop_hook 加笼统故障扫描 | 已修复（教训固化） |
-| F2 | 2026-05-17 起 | Hermes cron | `NameError: tree_reduce is not defined` | Hermes 侧运行时问题，非工作区文件问题 | 待修（cron 全 paused 期间未阻塞主流程） | 未修复 |
+| F2 | 2026-05-17 起 | Hermes cron（13 个旧 job） | `NameError: tree_reduce is not defined` | 2026-05 时 13 个旧 cron job 全部 paused（F3），tree_reduce 错误发生在 paused 恢复尝试时；2026-11-03 恢复活跃后仅保留 2 个有效 job（stop-gate + IV collector），其余 13 个仍 enabled=False 不再触发 | 无需修复：报错源头（旧 job）已永久停用，当前活跃 job 无此错误。若未来重新启用旧 job 需先升级 hermes-agent 版本 | 已销账（2026-11-05） |
 | F3 | 2026-08-25 起 | 工作区整体 | 无产出（休眠） | 13 个 cron 全部 paused，无后台自主执行 | 2026-11-03 恢复活跃；PAUSE 机制已落地可手动控制 | 已修复 |
 
 ## 关联

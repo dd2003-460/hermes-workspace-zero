@@ -19,7 +19,7 @@
 \newtheorem{corollary}{Corollary}[section]
 \newtheorem{remark}{Remark}[section]
 
-\title{\textbf{An Extended Functorial QFT Framework for Gravitational-Wave Source Discrimination in Pulsar Timing Arrays}}
+\title{\textbf{A Functorial Algebraic QFT Framework for Gravitational-Wave Source Discrimination in Pulsar Timing Arrays}}
 
 \author{Cheng Lu\\
 \textit{Independent Researcher}\\
@@ -33,7 +33,7 @@
 \maketitle
 
 \begin{abstract}
-We present a formalism for gravitational-wave (GW) source discrimination in pulsar timing arrays (PTAs) using the framework of extended algebraic quantum field theory. Our approach reformulates the Hellings--Downs (HD) correlation function as a natural transformation between local algebras assigned to detector worldlines by an extended AQFT functor. We show that distinct GW source classes---supermassive black hole binaries (SMBHBs) versus cosmological backgrounds---produce anisotropies of vastly different amplitudes and origins: SMBHB sources generate $\mathcal{O}(1\text{--}10\%)$ anisotropy that directly traces the local galaxy distribution (Poisson shot noise of discrete sources), while cosmological backgrounds exhibit $\mathcal{O}(10^{-5})$ anisotropy set by the primordial density field. We identify a source-discrimination invariant based on the total variation distance between the algebraic states associated with each source class and provide precise predictions for the discrimination power as a function of pulsar count and source population. We demonstrate the applicability of our framework to NANOGrav 15-year data and future IPTA/SKAO observations.
+We present a formalism for gravitational-wave (GW) source discrimination in pulsar timing arrays (PTAs) using the functorial framework of local covariant algebraic quantum field theory (AQFT). Our approach reformulates the Hellings--Downs (HD) correlation function as a natural transformation between local algebras assigned to detector worldlines by an AQFT functor. We show that distinct GW source classes---supermassive black hole binaries (SMBHBs) versus cosmological backgrounds---produce anisotropies of vastly different amplitudes and origins: SMBHB sources generate $\mathcal{O}(1\text{--}10\%)$ anisotropy that directly traces the local galaxy distribution (Poisson shot noise of discrete sources), while cosmological backgrounds exhibit $\mathcal{O}(10^{-5})$ anisotropy set by the primordial density field. We identify a source-discrimination invariant based on the total variation distance between the algebraic states associated with each source class and provide precise predictions for the discrimination power as a function of pulsar count and source population. We demonstrate the applicability of our framework to NANOGrav 15-year data and future IPTA/SKAO observations.
 
 
 
@@ -48,7 +48,7 @@ The 2023 discovery of a nanohertz gravitational-wave background (GWB) by the NAN
 
 The Hellings--Downs (HD) correlation function \cite{Hellings:1983} provides the primary discrimination tool: the angular correlation of timing residuals between pulsar pairs encodes information about the angular distribution of GW sources. However, the standard derivation assumes an isotropic stochastic background and uses perturbative methods. It does not provide a fundamental understanding of why the HD curve has its specific form, nor does it offer a systematic framework for source discrimination beyond the isotropic assumption. The characteristic shape of the HD correlation is shown in Figure~\ref{fig:hd-curve}.
 
-In this work, we reformulate GW detection in PTAs using \textbf{extended algebraic QFT} (AQFT) in the sense of Brunetti, Fredenhagen, and Verch \cite{Brunetti:2003}, combined with the cobordism-based formulation of extended TQFT \cite{Baez:1995,Lurie:2009}. We clarify the following points:
+In this work, we reformulate GW detection in PTAs using the functorial framework of \textbf{local covariant algebraic QFT} (AQFT) in the sense of Brunetti, Fredenhagen, and Verch \cite{Brunetti:2003}, with the detector network described by worldline-restricted subalgebras of the global observable algebra. We clarify the following points:
 
 \begin{enumerate}
 \item We rederive the Hellings--Downs correlation function within the functorial assignment of local observables, providing a geometric interpretation of its $SO(3)$ rotational symmetry in terms of the cobordism structure connecting detector worldlines.
@@ -57,18 +57,18 @@ In this work, we reformulate GW detection in PTAs using \textbf{extended algebra
 \end{enumerate}
 
 
-\section{Extended Functorial QFT for Gravitational-Wave Detection}\label{sec:framework}
+\section{Functorial AQFT for Gravitational-Wave Detection}\label{sec:framework}
 
 \subsection{AQFT Background}\label{sec:aqft}
 
 Algebraic QFT assigns to each open region $O \subseteq M$ of a spacetime manifold $M$ a $C^*$-algebra $\mathcal{A}(O)$ of observables localized in $O$, satisfying the Einstein causality axiom: if $O_1$ and $O_2$ are spacelike separated, then $\mathcal{A}(O_1)$ and $\mathcal{A}(O_2)$ commute. The assignment $O \mapsto \mathcal{A}(O)$ is a functor from the category $\mathbf{Loc}_M$ (Lorentzian manifolds with causal embeddings) to the category $\mathbf{C^*Alg}$ of $C^*$-algebras \cite{Brunetti:2003,Moretti:2017}.
 
-\begin{definition}[Extended AQFT]
-We call an AQFT framework \textbf{extended} when the functorial assignment of local algebras is defined not only on open regions of spacetime but also on submanifolds of lower dimension (in the sense of the cobordism-based formulation of extended TQFT \cite{Baez:1995,Lurie:2009}). Concretely, the extended AQFT functor is
+\begin{definition}[Worldline-restricted AQFT]
+We call an AQFT framework \textbf{worldline-extended} when the functorial assignment of local algebras is defined not only on open regions of spacetime but also on submanifolds of lower dimension, in particular timelike worldlines of point detectors. Concretely, the extended AQFT functor is
 \begin{equation}
 F: \mathbf{Loc}_{M}^{\mathrm{ext}} \to \mathbf{C^*Alg}
 \end{equation}
-where $\mathbf{Loc}_{M}^{\mathrm{ext}}$ is a category whose objects include causal regions (open submanifolds) as well as submanifolds of various codimensions, with morphisms given by causal embeddings and cobordisms of appropriate dimension. The target $\mathbf{C^*Alg}$ is the category of $C^*$-algebras; the ``extended'' structure is encoded in the source category, not the target. The functor satisfies the isotony axiom ($O_1 \subseteq O_2 \Rightarrow \mathcal{A}(O_1) \subseteq \mathcal{A}(O_2)$), Einstein causality (commutativity for spacelike-separated regions), and local covariance (naturality under isometric embeddings) \cite{Brunetti:2003,Moretti:2017}.
+where $\mathbf{Loc}_{M}^{\mathrm{ext}}$ is a category whose objects include causal regions (open submanifolds) as well as timelike curves and their tubular neighborhoods, with morphisms given by causal embeddings. The target $\mathbf{C^*Alg}$ is the category of $C^*$-algebras; the ``extended'' structure is encoded in the source category, not the target. The functor satisfies the isotony axiom ($O_1 \subseteq O_2 \Rightarrow \mathcal{A}(O_1) \subseteq \mathcal{A}(O_2)$), Einstein causality (commutativity for spacelike-separated regions), and local covariance (naturality under isometric embeddings) \cite{Brunetti:2003,Moretti:2017}. For a timelike worldline $w$, the restricted algebra $\mathcal{A}(w)$ is generated by smeared field operators $\rho_w(f) := F(f|_w)$ with test functions $f \in C_0^\infty(w)$, as discussed in Remark~\ref{rem:smearing} below.
 \end{definition}
 
 \subsection{Detector Worldlines as Subobjects}\label{sec:detectors}
@@ -92,7 +92,7 @@ The HD correlation arises from the functorial composition:
 \end{equation}
 where $\rho_w(f) := F(f|_w)$ is the smeared field operator on worldline $w$ with test function $f$, and the expectation is taken in the state $\omega$.
 
-\begin{remark}[Worldline smearing]
+\begin{remark}[Worldline smearing]\label{rem:smearing}
 Point-valued field operators are singular at coincident points, so a detector response must be defined by smearing along the worldline with a smooth compactly supported test function $f_i \in C_0^\infty(w_i)$ (the photon transfer function of pulsar timing). The algebra generated by $\{\rho_{w_i}(f_i)\}$ is a Weyl subalgebra of $\mathcal{A}(M)$ associated to tubular neighborhoods of the worldlines. We write $F(w_i)$ below as shorthand for this smeared subalgebra.
 \end{remark}
 
@@ -133,7 +133,7 @@ The key technical advantage of the functorial framework is that it \textbf{separ
 \end{proof}
 
 \begin{corollary}
-The discrimination between source classes in our framework is equivalent to the question of whether $\omega_{\text{SMBHB}}$ and $\omega_{\text{cosmo}}$ can be distinguished by observations of the form $\omega(F(W_{12}))$ for the specific $W_{12}$ determined by the PTA geometry. This is fundamentally a question about the distinguishability of states on subalgebras, which is controlled by the Tomita-Takesaki modular theory.
+The discrimination between source classes in our framework is equivalent to the question of whether $\omega_{\text{SMBHB}}$ and $\omega_{\text{cosmo}}$ can be distinguished by observations of the form $\omega(F(W_{12}))$ for the specific $W_{12}$ determined by the PTA geometry. This is a question about the distinguishability of states on subalgebras: for type-III von Neumann algebras (the generic case in AQFT), state inequivalence is detected by the total variation distance on the algebra, which we compute explicitly in Section~\ref{sec:discrimination}.
 \end{corollary}
 
 \subsection{Local Covariance and Natural Transformations}\label{sec:natural}
@@ -354,7 +354,7 @@ Standard PTA analysis treats the GWB as a classical stochastic process character
 \item Anisotropy detection (multipoles) \cite{Grimm:2025,Ellis:2024}
 \end{enumerate}
 
-Our functorial QFT framework provides:
+Our functorial AQFT framework provides:
 \begin{enumerate}
 \item A geometric reinterpretation of the HD function within algebraic QFT
 \item A model-independent discrimination criterion based on algebraic inequivalence of vacuum states
@@ -371,12 +371,12 @@ The key advantage is that our framework does not assume a specific source model 
 \item \textbf{State dependence:} The discrimination invariant depends on the choice of vacuum state. We have focused on the Bunch--Davies vacuum for cosmological sources and the Minkowski vacuum for SMBHBs, but a full treatment requires analyzing the space of all Hadamard states \cite{Hollands:2003,Moretti:2017}.
 \item \textbf{Detector effects:} Our framework treats PTA pulsars as ideal point detectors. Real PTA data includes noise, timing systematics, and incomplete sky coverage that must be incorporated into the functorial framework.
 \item \textbf{Source-class degeneracy:} Our dichotomy (SMBHB versus cosmological) does not exclude the possibility that other source classes---notably primordial black hole (PBH) GWBs and cosmic string networks---could produce anisotropy signatures with comparable amplitudes and spatial correlations. A PBH GWB would trace dark matter distribution (similar to SMBHB tracing galaxy distribution) with potentially comparable anisotropy amplitudes $\mathcal{O}(1\text{--}10\%)$ \cite{Raidal:2017}. Distinguishing between these requires additional discriminants beyond anisotropy amplitude alone, such as spectral index ($\gamma = 2/3$ for SMBHBs, potentially different for PBHs) and multi-messenger cross-correlation. We leave a systematic treatment of source-class degeneracy for future work.
-\item \textbf{Methodological positioning:} The formal framework of Section~\ref{sec:framework} (extended AQFT functorial assignment) provides the structural language for state distinguishability, while the quantitative predictions in Sections~\ref{sec:discrimination}--\ref{sec:phenomenology} are computed via classical plane-wave integrals and Poisson statistics. We view this as a two-layer structure: the algebraic layer identifies \emph{what} is being distinguished (inequivalent states on subalgebras) and the classical layer computes \emph{how well} (total variation distance, SNR scaling). A fully functorial computation of the discrimination threshold---bypassing the plane-wave approximation---is an open problem that would require a Lorentzian extension of the cobordism category beyond the current state of mathematical physics.
+\item \textbf{Methodological positioning:} The formal framework of Section~\ref{sec:framework} (functorial AQFT with worldline-restricted subalgebras) provides the structural language for state distinguishability, while the quantitative predictions in Sections~\ref{sec:discrimination}--\ref{sec:phenomenology} are computed via classical plane-wave integrals and Poisson statistics. We view this as a two-layer structure: the algebraic layer identifies \emph{what} is being distinguished (inequivalent states on subalgebras) and the classical layer computes \emph{how well} (total variation distance, SNR scaling). A fully functorial computation of the discrimination threshold---bypassing the plane-wave approximation---is an open problem that would require a Lorentzian extension of the cobordism category beyond the current state of mathematical physics.
 \end{itemize}
 
 \section{Conclusion}\label{sec:conclusion}
 
-We have rederived the Hellings--Downs correlation function within an extended algebraic QFT framework and identified source-discrimination predictions for pulsar timing arrays. Our main results are:
+We have rederived the Hellings--Downs correlation function within a functorial algebraic QFT framework and identified source-discrimination predictions for pulsar timing arrays. Our main results are:
 
 \begin{itemize}
 \item The Hellings--Downs correlation function admits a geometric interpretation as a natural transformation in the functorial assignment of local observables (Proposition \ref{prop:hd-natural}).
@@ -419,16 +419,6 @@ R.~Brunetti, K.~Fredenhagen, and R.~Verch,
 V.~Moretti,
 ``Algebraic QFT in curved spacetime and quasifree Hadamard states,''
 \textit{Math.\ Phys.\ Stud.} (2018) 191--251, DOI: 10.1007/978-3-319-21353-8\_5.
-
-\bibitem{Baez:1995}
-J.~C.~Baez and J.~Dolan,
-``From finite sets to Feynman diagrams: Categories and cobordisms,''
-\textit{arXiv:math/9503012} (1995).
-
-\bibitem{Lurie:2009}
-J.~Lurie,
-``On the classification of topological field theories,''
-\textit{arXiv:math/0905.0465} (2009).
 
 \bibitem{Fujimoto:2026}
 R.~Fujimoto and K.~Takahashi,

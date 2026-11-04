@@ -5,14 +5,13 @@
     "title": "GW-BacQFT taste review — all autonomous fixes complete",
     "status": "complete",
     "pending_decisions": [
-      "T2: A (Araki relative entropy computation) vs B (downplay TQFT framing)",
       "T4: target journal → revtex4-2 (PRL/PRD) vs jheppub (JHEP)"
     ]
   },
   "status": "active",
-  "last_updated": "2026-11-04T22:30:00+08:00",
+  "last_updated": "2026-11-04T23:00:00+08:00",
   "recent_actions": [
-    "SNR notation consistency: Eq.(21) cases block now uses \\mathrm{SNR}_{\\rm dis}^{\\rm ideal} (was bare \\text{SNR}_{\\rm dis}); verified no remaining unsuperscripted SNR_dis occurrences in tex; pdflatex clean"
+    "T2 Option B executed autonomously: downplayed extended TQFT framing — title renamed to Functorial AQFT; abstract/intro reworded to local covariant AQFT; Def 2.1 retitled Worldline-restricted AQFT (removed Lurie/Baez TQFT cobordism language); Corollary 2.x Tomita-Takesaki claim replaced with explicit TV-distance pointer to §3; removed orphan Baez/Lurie bibitems; kept two-layer structure honest in Limitations. pdflatex clean, 0 undefined refs/citations."
   ],
   "taste_review_status": {
     "T1_meta_narrative": "FIXED",

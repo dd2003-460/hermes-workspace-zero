@@ -268,7 +268,7 @@ The key discriminant is the \textbf{structure} of the anisotropy: SMBHB anisotro
 \begin{proof}
 For a cosmological GWB, the sources are distributed at high redshift ($z \gtrsim 10$ for inflation, $z \sim 1-10$ for phase transitions). The angular distribution on the sky is determined by the projection of the source distribution at these redshifts onto the celestial sphere. By the cosmological principle, the source distribution is homogeneous and isotropic to $\mathcal{O}(10^{-5})$.
 
-The anisotropy in the HD correlation arises from two effects for cosmological GWBs: (1) the primordial density fluctuations that generated the GW, and (2) gravitational redshift and Shapiro delay along the line of sight. For inflationary GWBs, the angular power spectrum $C_\ell$ is dominated by the Sachs-Wolfe effect at $\ell \lesssim 100$, with amplitude $C_\ell \sim 10^{-10}$ \cite{Grimm:2025}. The variance of the HD correlation due to large-scale galaxy clustering has been independently studied in \cite{Grimm:2025}, confirming the $\mathcal{O}(10^{-5})$ amplitude for PTA-relevant angular scales. This corresponds to fractional anisotropy of $\mathcal{O}(10^{-5})$.
+The anisotropy in the HD correlation arises from two effects for cosmological GWBs: (1) the primordial density fluctuations that generated the GW, and (2) gravitational redshift and Shapiro delay along the line of sight. For inflationary GWBs, the angular power spectrum $C_\ell$ is dominated by the Sachs-Wolfe effect at $\ell \lesssim 100$, with amplitude $C_\ell \sim 10^{-10}$. The variance of the HD correlation due to large-scale galaxy clustering has been independently studied in \cite{Grimm:2025}: LSS clustering of astrophysical sources contributes to the HD \emph{variance}, not to a shift of the HD mean curve. This corresponds to fractional anisotropy of $\mathcal{O}(10^{-5})$ set by the primordial density field.
 
 For SMBHBs, the sources are galaxies in the local universe ($z \lesssim 1$), with $N_{\rm src} \sim 10^4-10^6$ in the PTA volume. The galaxy distribution traces the cosmic web with significant anisotropy: the local supercluster structure produces $\mathcal{O}(1\text{--}10\%)$ fluctuations on PTA-relevant angular scales, depending on the mass function and redshift range \cite{Grimm:2025}.
 
@@ -313,6 +313,12 @@ Given that the SMBHB anisotropy amplitude scales as $A_{\rm aniso} \propto N_{\r
 \begin{equation}
 \mathrm{SNR}_{\rm dis}^{\rm ideal} = \frac{A_{\rm aniso}}{\delta A_{\rm aniso}} \sim P^{1/2} N_{\rm src}^{-1/2} \quad \text{(SMBHB)}
 \end{equation}
+
+The error budget for a single angular multipole mode has three contributions \cite{Allen:2023variance,Domcke:2025}:
+\begin{equation}
+\sigma_{\rm total}^2(\ell) = \underbrace{\frac{\sigma_{\rm noise}^2}{P}}_{\text{statistical (averaging over } P \text{ pairs)}} + \underbrace{\frac{\sigma_{\rm pulsar}^2}{P}}_{\text{pulsar timing systematics}} + \underbrace{\frac{\sigma_{\rm cosmic}^2(\ell)}{N_f}}_{\text{irreducible cosmic variance}},
+\end{equation}
+where $N_f$ is the number of frequency modes and $\sigma_{\rm cosmic}^2(\ell)$ is the irreducible cosmic-variance floor set by the finite number of independent sky directions in a single universe \cite{Allen:2023variance,AllenRomano:2024}. The first two terms vanish as $P \to \infty$, but the third does not: it sets a fundamental limit on HD-curve reconstruction accuracy even with infinite pulsar numbers. For SKAO-era sensitivity this floor is $\sim 10^{-3}$--$10^{-2}$ per multipole \cite{Domcke:2025}, which is well below the SMBHB anisotropy signal ($\mathcal{O}(1\%$--$10\%)$) but comparable to or above the cosmological anisotropy ($\mathcal{O}(10^{-5})$). This reinforces the conclusion of §\ref{sec:anisotropic}: cosmological anisotropy is unobservable in practice, while SMBHB anisotropy remains detectable even after accounting for all three error terms.
 
 For the SKAO era ($N \sim 200$ pulsars, $P \sim 20000$):
 \begin{equation}
@@ -473,6 +479,21 @@ M.~Raidal, V.~Vaskonen, and H.~Veerm\"ae,
 C.~M.~F.~Mingarelli, T.~Sidery, I.~Mandel, and A.~Vecchio,
 ``Characterising gravitational wave stochastic background anisotropy with pulsar timing arrays,''
 \textit{arXiv:1306.5394} (2013).
+
+\bibitem{Allen:2023variance}
+B.~Allen,
+``Variance of the Hellings--Downs correlation,''
+\textit{Phys.\ Rev.\ D} \textbf{107} (2023) 043018, arXiv:2205.05637.
+
+\bibitem{AllenRomano:2024}
+B.~Allen and J.~D.~Romano,
+``Optimal reconstruction of the Hellings and Downs correlation,''
+\textit{Phys.\ Rev.\ Lett.} \textbf{134} (2025) 031401, arXiv:2407.10968.
+
+\bibitem{Domcke:2025}
+V.~Domcke, G.~Franciolini, and M.~Pieroni,
+``Cosmic variance in anisotropy searches at pulsar timing arrays,''
+\textit{arXiv:2508.21131} (2025).
 
 \end{thebibliography}
 

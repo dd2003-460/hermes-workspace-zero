@@ -4,7 +4,7 @@
   "loop_phase": "01-goal-decomposition",
   "status": "in_progress",
   "priority": "HIGHEST",
-  "current_task": "R5.5 完成: n=5 双评分器信度汇总 (mean=83.0±12.7, κ_corrected=0.167) + 权重校准(沿用r5) + M8 shadow(100/100, n=1)",
+  "current_task": "R6 完成 (2026-11-04): 阶段门控加载 M1=78.1≥70 PASS (Model A), 规则负载 12086→3913 (-67.6%). Model B 实际口径 61.9 FAIL (examples 4211tok + 单会话不卸载). 三口径并列记录于 pfb/bench/self-opt-tester/runs/r6/. 下一步: R7 候选或 P2 实验数据回来后排期",
   "created": "2026-10-22",
   "rationale": "用户 2026-10-22 指示：效率提高（prompt 改善性能和速度 + 识别瓶颈）优先级放最高",
   "updated_at": "2026-11-03T08:00:00+08:00",

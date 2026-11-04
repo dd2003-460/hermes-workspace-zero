@@ -9,7 +9,7 @@
   "loop_phase": "build",
   "iteration": 11,
   "status": "active",
-  "current_task": "L1-L6 全15章第一稿完成. v3 定稿前全书通读完成. 2026-11-05: FULL-BOOK.html/md 合订本落盘(e47eb801)供成璐通读; P2 招募文案+问卷v1 落盘(09c4f76b)待发群; r292 渠道选择已登记 APPROVALS. v3 正式定稿仍待 P2 第一个数(成璐拍板渠道→发招募→30天实验).",
+  "current_task": "L1-L6 全15章完成. v3 定稿前通读完成. 2026-11-05: FULL-BOOK.html/md 合订本(e47eb801); P2 招募文案+问卷v1 落盘(09c4f76b)待发群; r292 渠道选择已登记 APPROVALS. T17 LoCoMo 数字已追加进 decomp T17-REPORT.md(d38f3cc). v3 正式定稿仍待 P2 第一个数.",
   "blocker": "v3 正式定稿待 P2 实验第一个数（渠道待成璐拍板 r292; 招募文案+问卷已就绪）",
   "change_log": [
     {

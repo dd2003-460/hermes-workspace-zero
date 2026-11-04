@@ -37,6 +37,6 @@ R3 前沿映射 (done)  — P0/P1/P5 × 10 AIME 2025 → P1 = prompt 级前沿
 | ID | 条目 | 状态 | 备注 |
 |----|------|------|------|
 | T1 | round3-findings.md 终稿 | done | 155行, P6+P0 A27+前沿表+两层建议, memory/round3-findings.md |
-| T2 | loop-state it7 | in_progress | 依赖 T1(done) |
+| T2 | loop-state it7 | done | loop-state.json 已更新至 iteration 10 |
 | T3 | 副脑质询 subagent | pending | 后台派发, 不阻塞 T4 |
 | T4 | 用户答复 + 台账 | pending | 依赖 T1 |

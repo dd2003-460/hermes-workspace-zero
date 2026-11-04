@@ -152,3 +152,17 @@ Random seeds: bootstrap=42, permutation=42
 | 2025-03-30 16:00 | −0.0401% | — | — |
 
 (Only top 10 shown; full event list in `h1-backtest-results.json`)
+---
+
+## Sensitivity Check: SOL Exclusion (2026-11-05)
+
+Question: Does SOL's 89% event dominance distort the pooled Δgap?
+
+| Subset | G_up (n, mean) | G_down (n, mean) | Δgap |
+|--------|----------------|------------------|------|
+| All 3 symbols | 10, −1.48% | 23, +0.90% | **−2.38%** |
+| BTC+ETH only | 2, −2.31% | 5, +2.28% | **−4.59%** |
+
+**Verdict**: Excluding SOL makes the gap *more* negative (−4.59% vs −2.38%), not less. SOL does NOT drive the negative pooled result — the mechanism fails even on BTC/ETH alone. The direction is consistent across all three symbols individually (BTC −1.30pp, ETH −7.38pp, SOL −1.79pp).
+
+⚠️ n is tiny for BTC+ETH (G_up=2), so this is directional only, not a statistical test. But it removes "SOL artifact" as an alternative explanation for the FAIL verdict.

@@ -9,7 +9,7 @@
   "loop_phase": "build",
   "iteration": 8,
   "status": "active",
-  "current_task": "KB.1 第8篇 agent-goal-loop-mechanisms 收口完毕(drift-check 100/100), 待办: T17-full full01 跑完(预计还需~20h)后重算 top_10 overall vs smoke01 baseline + 按 note C 段预测1 排期全文塞入对照组(~20h)",
+  "current_task": "T17-full 收口(2026-11-04): mem0 75.3% vs full-context 72.9% (+2.4pp). retrieval-vs-long-context.md v2 回填完成(预测1 FALSIFIED, 预测2 BORDERLINE). 待办: 第9篇 note 或 P2 实验数据回来后排期",
   "blocker": null,
   "change_log": [
     {

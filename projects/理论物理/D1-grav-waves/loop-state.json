@@ -6,15 +6,15 @@
     "status": "in_progress"
   },
   "status": "active",
-  "last_updated": "2026-11-04T20:50:00+08:00",
+  "last_updated": "2026-11-04T21:20:00+08:00",
   "recent_actions": [
-    "B3 fixed: P(k) multipole expansion now cites standard anisotropic ORF formalism (Mingarelli 2013 PRD 88 062005 [key Allen:2023]; Ali-Haimoud et al. 2020 PRD 102 083511; Depta et al. arXiv:2407.14460); all journal metadata CrossRef-verified"
+    "T4 partial: merged L186-192 duplicate Kehagias & Riotto sentences into one coherent paragraph; added arXiv:2401.10680 to Kehagias:2024 bibitem (CrossRef confirms JCAP 2024 059); abstract verified single-paragraph ~152 words, no License statement"
   ],
   "taste_review_status": {
     "T1_meta_narrative": "FIXED",
     "T2_framework_mismatch": "PENDING (needs decision: A=Araki relative entropy, B=downplay TQFT)",
     "T3_snr_inconsistency": "FIXED",
-    "T4_template": "PARTIAL (no \tableofcontents/License found; article->revtex4-2 switch pending Lead decision)",
+    "T4_template": "PARTIAL (Kehagias duplicate sentence merged + arXiv ID added; article->revtex4-2/jheppub switch still pending Lead journal decision)",
     "M1_hallucinated_refs": "FIXED",
     "M2_thm31_scaling": "FIXED (Eq.15 direction correct; added explicit scaling paragraph + label)",
     "M3_cosmic_variance": "FIXED",

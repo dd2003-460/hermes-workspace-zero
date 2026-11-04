@@ -9,8 +9,8 @@
   "loop_phase": "build",
   "iteration": 11,
   "status": "active",
-  "current_task": "L1-L6 全15章第一稿完成(第1-15章全100/100, 我全审过). v3 定稿前全书通读完成(6处交叉引用修复+ch12回指补, notes落盘). 提前做文档完成(commit 9c0c00cf: p2-experiment-plan.md + v3-finalization-checklist.md + assetization-path.md v2 + decomposition.md T7). 全书 15 章 drift-check 终检通过(全100/100, round 16). v3 正式定稿仍待 P2 第一个数(成璐 30 人 30 天实验, 渠道待成璐拍板). 审批 m02225 成璐全部批准: Q1=A然后B / Q2=D2✓ / Q3=E3. thinking-budget A/B 由并行 session 接管(round3…",
-  "blocker": "v3 正式定稿待 P2 实验第一个数（30 人 30 天 ≥40% 信念迁移, solo 0 美元设计已在 ch14+p2-experiment-plan.md; 渠道待成璐拍板）",
+  "current_task": "L1-L6 全15章第一稿完成. v3 定稿前全书通读完成. 2026-11-05: FULL-BOOK.html/md 合订本落盘(e47eb801)供成璐通读; P2 招募文案+问卷v1 落盘(09c4f76b)待发群; r292 渠道选择已登记 APPROVALS. v3 正式定稿仍待 P2 第一个数(成璐拍板渠道→发招募→30天实验).",
+  "blocker": "v3 正式定稿待 P2 实验第一个数（渠道待成璐拍板 r292; 招募文案+问卷已就绪）",
   "change_log": [
     {
       "time": "2026-10-20",

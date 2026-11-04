@@ -203,7 +203,7 @@ The structural distinction between SMBHB and cosmological GW sources is quantifi
 Different GW source classes produce different spectral shapes and angular distributions:
 
 \begin{itemize}
-\item \textbf{SMBHBs}: Sources are discrete, located along the galaxy distribution, with $N_{\rm src} \sim 10^4-10^6$ at nanohertz frequencies. The angular distribution traces the large-scale structure, producing Poisson shot noise at order $\mathcal{O}(N_{\rm src}^{-1/2})$ in amplitude ($\mathcal{O}(N_{\rm src}^{-1})$ in variance) \cite{Rogers:2016}.
+\item \textbf{SMBHBs}: Sources are discrete, located along the galaxy distribution, with $N_{\rm src} \sim 10^4-10^6$ at nanohertz frequencies. The angular distribution traces the large-scale structure, producing Poisson shot noise at order $\mathcal{O}(N_{\rm src}^{-1/2})$ in amplitude ($\mathcal{O}(N_{\rm src}^{-1})$ in variance) \cite{Lin:2026}.
 \item \textbf{Cosmological backgrounds}: Effectively continuous in the early universe limit. The angular distribution is isotropic to very high accuracy.
 \item \textbf{Cosmic strings}: Characteristic line-like source distribution with potential anisotropy patterns.
 \end{itemize}
@@ -225,7 +225,7 @@ d_{\mathrm{TV}}(\omega_{\mathrm{SMBHB}}, \omega_{\mathrm{cosmo}}) \gtrsim c \cdo
 \end{equation}
 where $\sigma_N^2$ is the fractional variance of the source count in the PTA sky coverage, and $c = c(S_h, \Delta\gamma, f_1, f_2)$ is a constant that depends on the spectral shape function $S_h$, the spectral index difference $\Delta\gamma = |\gamma_{\rm SMBHB} - \gamma_{\rm cosmo}|$, and the observation frequency band $[f_1, f_2]$. A precise evaluation of $c$ requires a full noise budget analysis and is left to future work.
 
-For SMBHBs, $\sigma_N^2 = \mathcal{O}(N_{\rm src}^{-1})$ due to Poisson discreteness of sources \cite{Rogers:2016}. For cosmological GWBs, the angular anisotropy is determined by the large-scale structure projection, producing corrections of order $\mathcal{O}(N_{\rm mode}^{-1})$ where $N_{\rm mode} \gg N_{\rm src}$ is the effective number of multipoles probed by the PTA \cite{Grimm:2025}. The key distinction is that SMBHB anisotropy traces the local galaxy distribution (with $\mathcal{O}(1\text{--}10\%)$ LSS fluctuations), while cosmological anisotropy is limited by cosmic variance at the $\mathcal{O}(10^{-5})$ level from the primordial density field.
+For SMBHBs, $\sigma_N^2 = \mathcal{O}(N_{\rm src}^{-1})$ due to Poisson discreteness of sources \cite{Lin:2026}. For cosmological GWBs, the angular anisotropy is determined by the large-scale structure projection, producing corrections of order $\mathcal{O}(N_{\rm mode}^{-1})$ where $N_{\rm mode} \gg N_{\rm src}$ is the effective number of multipoles probed by the PTA \cite{Grimm:2025}. The key distinction is that SMBHB anisotropy traces the local galaxy distribution (with $\mathcal{O}(1\text{--}10\%)$ LSS fluctuations), while cosmological anisotropy is limited by cosmic variance at the $\mathcal{O}(10^{-5})$ level from the primordial density field.
 \end{theorem}
 
 \begin{proof}
@@ -238,7 +238,7 @@ For the HD correlation measurement with $P$ pulsar pairs, the statistical uncert
 \delta\zeta \lesssim \left| \zeta_{\mathrm{SMBHB}}(\theta) - \zeta_{\mathrm{cosmo}}(\theta) \right| \sim \left| \sigma_N^2(\mathrm{SMBHB}) - \sigma_N^2(\mathrm{cosmo}) \right|
 \end{equation}
 
-The SMBHB anisotropy is determined by the Poisson shot noise of discrete sources. The variance of the number count in a sky pixel scales as $\mathrm{Var}(N_{\rm pix})/\langle N_{\rm pix} \rangle^2 = \mathcal{O}(N_{\rm pix}^{-1})$ \cite{Rogers:2016}. The total sky-averaged fractional variance is $\sigma_N^2(\mathrm{SMBHB}) \sim N_{\rm src}^{-1}$.
+The SMBHB anisotropy is determined by the Poisson shot noise of discrete sources. The variance of the number count in a sky pixel scales as $\mathrm{Var}(N_{\rm pix})/\langle N_{\rm pix} \rangle^2 = \mathcal{O}(N_{\rm pix}^{-1})$ \cite{Lin:2026}. The total sky-averaged fractional variance is $\sigma_N^2(\mathrm{SMBHB}) \sim N_{\rm src}^{-1}$.
 
 For cosmological GWBs, the anisotropy is dominated by the projection of the primordial density field onto the sky. The angular power spectrum $C_\ell$ of the anisotropy is determined by the Sachs-Wolfe effect and gravitational redshift. For inflationary GWBs, $C_\ell \sim \mathcal{O}(10^{-10})$ for $\ell \lesssim 100$ (the PTA-relevant multipoles). The effective number of independent modes at multipole $\ell$ is $2\ell + 1$, giving a cosmic variance uncertainty $\delta C_\ell / C_\ell = \sqrt{2/(2\ell+1)}$. For the lowest multipoles $\ell \sim 2\text{--}10$, this is $\mathcal{O}(0.3\text{--}0.7)$, but the absolute anisotropy amplitude is set by the primordial density fluctuations $\delta\rho/\rho \sim 10^{-5}$. A complete error budget for PTA anisotropy measurements must account for three additional effects beyond cosmic variance: (i) worldline smearing, which averages the GW signal over the finite observation baseline and suppresses high-frequency anisotropic components \cite{Allen:2023}; (ii) detector noise and timing systematics, which set a floor on the measurable anisotropy amplitude; and (iii) incomplete sky coverage of the pulsar array, which couples multipoles and degrades the effective mode count. We adopt the idealized point-detector, full-sky limit throughout this paper; incorporating these effects will reduce the discrimination SNR by factors that depend on the specific PTA configuration.
 
@@ -294,7 +294,7 @@ A_{\rm aniso} = \begin{cases}
 \mathcal{O}(10^{-5}) & \text{(Cosmological, primordial)}
 \end{cases}
 \end{equation}
-Current data sensitivity to HD anisotropy is $\sim 0.1$ \cite{Isi:2024}, so SMBHB anisotropy may be detectable with current or next-generation data if systematics are controlled.
+Current data sensitivity to HD anisotropy is $\sim 0.1$ \cite{Lemke:2024}, so SMBHB anisotropy may be detectable with current or next-generation data if systematics are controlled.
 
 \item \textbf{Spectral-anisotropy correlation:} Our framework predicts that the spectral index $\gamma$ and the anisotropy amplitude $A_{\rm aniso}$ are correlated for SMBHBs but independent for cosmological backgrounds:
 \begin{equation}
@@ -309,7 +309,7 @@ This provides an orthogonal discriminant to spectral index alone.
 \begin{equation}
 \langle\langle \zeta^3 \rangle\rangle \neq 0 \quad \Rightarrow \quad \text{non-Gaussian correlations from confusion noise or discreteness}
 \end{equation}
-The sign and magnitude of the skewness encode the source clustering properties and the relative importance of Poisson shot noise versus confusion noise. Non-HD correlation patterns (e.g., monopole, dipole) also provide complementary discrimination channels \cite{Ellis:2024,Grimm:2025}. We note that certain exotic source classes---including primordial black hole (PBH) GWBs and cosmic string networks---also produce non-zero skewness through confusion-noise mechanisms, which complicates the source-class identification based on skewness alone.
+The sign and magnitude of the skewness encode the source clustering properties and the relative importance of Poisson shot noise versus confusion noise. Non-HD correlation patterns (e.g., monopole, dipole) also provide complementary discrimination channels \cite{SatoPolito:2023,Grimm:2025}. We note that certain exotic source classes---including primordial black hole (PBH) GWBs and cosmic string networks---also produce non-zero skewness through confusion-noise mechanisms, which complicates the source-class identification based on skewness alone.
 \end{enumerate}
 
 \subsection{Statistical Framework}\label{sec:statistical}
@@ -349,9 +349,9 @@ These values are the \emph{idealized} discrimination SNR $\mathrm{SNR}_{\rm dis}
 
 Standard PTA analysis treats the GWB as a classical stochastic process characterized by a power spectrum $P_h(f)$ and an angular correlation function $\zeta(\theta)$. Source discrimination relies on:
 \begin{enumerate}
-\item Spectral index measurement ($\gamma$) \cite{Tsang:2024}
+\item Spectral index measurement ($\gamma$) \cite{Agazie:2024}
 \item HD correlation fit \cite{Hellings:1983}
-\item Anisotropy detection (multipoles) \cite{Grimm:2025,Ellis:2024}
+\item Anisotropy detection (multipoles) \cite{Grimm:2025,SatoPolito:2023}
 \end{enumerate}
 
 Our functorial AQFT framework provides:
@@ -386,7 +386,7 @@ We have rederived the Hellings--Downs correlation function within a functorial a
 
 Our framework provides a systematic, model-independent approach to GW source discrimination that can be tested with current and future PTA data. The key prediction---that the anisotropy amplitude scales as $N_{\rm src}^{-1/2}$ for SMBHBs (Poisson shot noise of discrete sources) but is fixed by the primordial power spectrum amplitude $\sim 10^{-5}$ for cosmological backgrounds (independent of source count)---is testable with SKAO-era observations.
 
-\textbf{Numerical summary:} For NANOGrav 15-year data ($N = 68$ pulsars, observation time $T = 15$ yr), the predicted SMBHB anisotropy amplitude $\mathcal{O}(1\text{--}10\%)$ is marginally within current detection sensitivity $\sim 0.1$ \cite{Isi:2024}. For the SKAO era ($N \sim 200$, $P \sim 20\,000$ pulsar pairs, $T = 10$ yr), the idealized discrimination SNR $\mathrm{SNR}_{\rm dis}^{\rm ideal}$ for a dominant local SMBHB population ($N_{\rm src} \sim 10^4$) scales as $\sqrt{P}/\sqrt{N_{\rm src}} \sim 140$, but after accounting for realistic systematics---including detector noise, solar-system ephemeris errors, red-noise correlations, and worldline smearing \cite{Allen:2023}---the effective (systematic-reduced) SNR $\mathrm{SNR}_{\rm dis}^{\rm eff}$ is expected to be reduced by one to two orders of magnitude, to $\mathcal{O}(1\text{--}3)$, making anisotropy-based source discrimination a concrete but challenging observable. The cosmological anisotropy ($\mathcal{O}(10^{-5})$) remains below the statistical noise floor ($\sim P^{-1/2} \approx 7 \times 10^{-3}$) even with SKAO sensitivity, confirming that SMBHB-LSS correlation is the only practical anisotropy-based discriminant in the near term.
+\textbf{Numerical summary:} For NANOGrav 15-year data ($N = 68$ pulsars, observation time $T = 15$ yr), the predicted SMBHB anisotropy amplitude $\mathcal{O}(1\text{--}10\%)$ is marginally within current detection sensitivity $\sim 0.1$ \cite{Lemke:2024}. For the SKAO era ($N \sim 200$, $P \sim 20\,000$ pulsar pairs, $T = 10$ yr), the idealized discrimination SNR $\mathrm{SNR}_{\rm dis}^{\rm ideal}$ for a dominant local SMBHB population ($N_{\rm src} \sim 10^4$) scales as $\sqrt{P}/\sqrt{N_{\rm src}} \sim 140$, but after accounting for realistic systematics---including detector noise, solar-system ephemeris errors, red-noise correlations, and worldline smearing \cite{Allen:2023}---the effective (systematic-reduced) SNR $\mathrm{SNR}_{\rm dis}^{\rm eff}$ is expected to be reduced by one to two orders of magnitude, to $\mathcal{O}(1\text{--}3)$, making anisotropy-based source discrimination a concrete but challenging observable. The cosmological anisotropy ($\mathcal{O}(10^{-5})$) remains below the statistical noise floor ($\sim P^{-1/2} \approx 7 \times 10^{-3}$) even with SKAO sensitivity, confirming that SMBHB-LSS correlation is the only practical anisotropy-based discriminant in the near term.
 
 \begin{thebibliography}{99}
 
@@ -430,30 +430,30 @@ N.~Grimm et al.,
 ``The impact of large-scale galaxy clustering on the variance of the Hellings--Downs correlation,''
 \textit{JCAP} \textbf{03} (2025) 011, arXiv:2404.05670.
 
-\bibitem{Rogers:2016}
+\bibitem{Lin:2026}
 M.-X.~Lin, A.~Lidz, and C.-P.~Ma,
 ``Analytical estimates of gravitational wave background anisotropies from shot noise and large-scale structure in pulsar timing arrays,''
-\textit{arXiv:2602.16808} (2026).
+\textit{arXiv:2602.16808} [astro-ph.HE] (2026).
 
-\bibitem{Isi:2024}
+\bibitem{Lemke:2024}
 A.-M.~Lemke, A.~Mitridate, and K.~A.~Gersbach,
 ``Detecting gravitational wave anisotropies from supermassive black hole binaries,''
-\textit{arXiv:2407.08705} (2024).
+\textit{Phys.\ Rev.\ D} \textbf{111}, 063068 (2025), arXiv:2407.08705.
 
 \bibitem{Bunk:2025}
 S.~Bunk, J.~MacManus, and A.~Schenkel,
 ``Lorentzian bordisms in algebraic quantum field theory,''
 \textit{Lett.\ Math.\ Phys.} \textbf{115} (2025), arXiv:2308.01026, DOI: 10.1007/s11005-025-01906-3.
 
-\bibitem{Tsang:2024}
+\bibitem{Agazie:2024}
 G.~Agazie et al. [NANOGrav Collaboration],
 ``The NANOGrav 15 yr Data Set: Running of the Spectral Index,''
 \textit{arXiv:2408.10166} (2024).
 
-\bibitem{Ellis:2024}
+\bibitem{SatoPolito:2023}
 G.~Sato-Polito and M.~Kamionkowski,
 ``Exploring the spectrum of stochastic gravitational-wave anisotropies with pulsar timing arrays,''
-\textit{arXiv:2305.05690} (2023).
+\textit{Phys.\ Rev.\ D} \textbf{109}, 123544 (2024), arXiv:2305.05690.
 
 \bibitem{Hollands:2003}
 S.~Hollands and R.~Wald,

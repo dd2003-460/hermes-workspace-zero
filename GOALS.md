@@ -38,6 +38,18 @@
 - **待成璐决策**：是否接受「免费数据下 crypto 日频信号高度冗余」作为 F8 正式结论（负面结果本身有价值），还是等 IV 采集器积累后再做组合实验。
 - **状态**：done（调研+采集器）→ monitoring（等 IV 数据积累）
 
+## G5 研究 Prompt 消融实验（research-prompt）✅ 完成
+
+- **目标**：7 变体 × 3 run 消融，找出 qwen3.8-27b 下最优研究 prompt
+- **结果**：**R0.3 定版 18.00/20 (σ=0)**。三个有效改动：语言锁定 + 占位符 FAIL + 逐卡对比表。
+- **关键发现**：
+  - SELF-CHECK 契约（R0.4/R0.5/R0.6）方向正确（S3 +1）但崩塌率 33%，搁置等更强模型
+  - C2/C4 是系统性短板（需知识注入或更强执行模型）
+  - 研究 prompt vs bare prompt：+9.00 分（高度显著）
+  - 研究 prompt vs decomp C0：−1.67 分（任务难度差异，预期内）
+- **文件**：`projects/research-prompt/bench/runs/ablation-L1/SUMMARY.md`
+- **状态**：done（2026-11-05）
+
 ## 维护性兜底
 无可执行目标时：扫 workspace git status / 各项目 loop-state.json / memory 蒸馏，保持台账准确。
 

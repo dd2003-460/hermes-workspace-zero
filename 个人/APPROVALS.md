@@ -41,6 +41,7 @@
   - arena 异源 vs 本地 κ=+0.307, G2 29/36（r270 旧 rubric 时 ~0，实质修复）
   - arena 内部双判官一致 κ=+0.696（两独立判官对规则解读一致）
   - S01 分解类特例 154/155=99.4%；code-fence 边界 bug 已修（r278）
+  - r271 全量重放（36 工件 × J1/J2，本地 vLLM）：S01_J1 = 155/155 = 1.0（v3 时 ~0%，效度修复确认生效）；S02/S03 与 r269 对照 ±10pp 内无回归；κ mean = 0.6533；G2 = 8/12 PASS（4 FAIL 均为 spread=0 零区分度 cell，非方向错误）。回执：`experiments/T8-matrix/runs/c3-v3/runs-fullloop/receipt-r271-rubric-v31-summary.md`
 - 终版指纹：J1 sha256_16=`7518ce5c66f92f8a`，J2 sha256_16=`b229dcc9a14b2081`（pfb main @ 17f725c）
 - 影响面：sign-off 后 v3.1 冻结为 T8 正式评分标准，历史 baseline（r269/r270, v3 rubric）全部标注「旧 rubric 参考值」，不再作为质量声明依据。
 - 残留已知项（非 rubric 缺陷，不影响冻结）：① code-fence 2 cell 需下轮 arena 复跑消除（inputs 副本已同步 r278）② 条目提取正则跨模型差异 ③ S02 长工件判断型分歧（靠多裁判约束）。

@@ -9,7 +9,7 @@
     ]
   },
   "status": "active",
-  "last_updated": "2026-11-04T23:00:00+08:00",
+  "last_updated": "2026-11-05T22:40:00+08:00",
   "recent_actions": [
     "T2 Option B executed autonomously: downplayed extended TQFT framing — title renamed to Functorial AQFT; abstract/intro reworded to local covariant AQFT; Def 2.1 retitled Worldline-restricted AQFT (removed Lurie/Baez TQFT cobordism language); Corollary 2.x Tomita-Takesaki claim replaced with explicit TV-distance pointer to §3; removed orphan Baez/Lurie bibitems; kept two-layer structure honest in Limitations. pdflatex clean, 0 undefined refs/citations."
   ],
@@ -24,5 +24,5 @@
     "M4_worldline_smearing": "FIXED",
     "B1-B5_background_gaps": "FIXED (B1/B2 via M3; B3 anisotropic ORF refs added; B4 Bunk:2025 via M4; B5 deferred — Hollands-Wald worldline-algebra refs not yet cited in body)"
   },
-  "current_focus": "taste review 全部完成 (M1 收尾: bib key 对齐 + arXiv 规范化, cc7d3b6b)"
+  "current_focus": "taste review 全部完成 (M1 收尾: bib key 对齐 + arXiv 规范化, cc7d3b6b); T2 Option B 已自主执行 (2d06e5d1); T4 模板切换待定期刊; 论文编译通过 0 errors"
 }

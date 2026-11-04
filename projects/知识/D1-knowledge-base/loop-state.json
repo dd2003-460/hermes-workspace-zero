@@ -9,7 +9,7 @@
   "loop_phase": "build",
   "iteration": 8,
   "status": "active",
-  "current_task": "T17-full 收口(2026-11-04): mem0 75.3% vs full-context 72.9% (+2.4pp). retrieval-vs-long-context.md v2 回填完成(预测1 FALSIFIED, 预测2 BORDERLINE). 待办: 第9篇 note 或 P2 实验数据回来后排期",
+  "current_task": "KB 13 notes 全收口 (2026-11-05): 第9篇 pseudo-thinking-vs-real-reasoning 已收口(2026-11-04); INDEX.md 补了 2 个缺失条目(pseudo-thinking + 27b-hardware), 13/13 全覆盖. C 区 #8 伪thinking 闭合. 下一步: 等 P2 实验数据回来后排期新 note 方向",
   "blocker": null,
   "change_log": [
     {
@@ -57,5 +57,6 @@
       "action": "note-8",
       "summary": "KB.1 第8篇教材 note notes/agent-goal-loop-mechanisms.md (C区 #10 agent goal/loop 机制·控制层): 8概念块(turn-level vs goal-level 信号/hook三型/loop wrapper/stage-gate状态机/keepalive双层保障/完成检测四策略天花板/漂移重锚/七件套完整拼图)x是什么/为什么/边界+conf, 素材=DGI.1 researches/03-agent-stop-mechanism-synthesis.md + memory/goal-mechanism-technical-analysis.md + 本系统 stop_hook.py/stage-gate/keepalive 工件. B成璐视角(判断: 停不停=外部控制问题非智能问题; 自我质询: 七件套是否过度设计→短任务走快车道不建goal; idea conf0.5: keepalive自适应间隔实验类1h/写作类5min; 砍3条). C可证伪预测2条带判死(固定30min无新进展唤醒占比>60%; 去stage-gate后5 goal至少1个阶段回退). drift-check v1=75(句长61.6+空话词最后1处)→拆长句+换词→v2=100/100硬门槛全过. notes/INDEX.md加行+排队区#6更新."
     }
-  ]
+  ],
+  "last_updated": "2026-11-05T03:34:54.243677+08:00"
 }

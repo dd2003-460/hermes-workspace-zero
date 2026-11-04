@@ -4,7 +4,7 @@
 
 | # | 方向 | 锚点仓库（近期有活动） | 现状一句话 | 可立即做的动作 | 状态 |
 |---|------|----------------------|-----------|--------------|------|
-| 1 | 金融·正交信号源 | hermes-workspace-zero (D1-financial-market-analysis) | F6/F7/F8/F10-R4 四条负结果线全闭环（funding/basis/DVOL/温度→带宽均 FAIL）。**F10-R5 宏观 regime 调研已派发 arena**（2026-11-05，session 01a19661，任务书 @ main 35aef2b5）：Q1 文献≥5源 + Q2 数据可得性矩阵 + Q3 ≤3交互假设。纯调研不含回测，回测决策等成璐看完调研拍板 | arena 执行中（r8 产出预计 loop-artifacts/stages/05/r8/） | **in-progress · arena** |
+| 1 | 金融·正交信号源 | hermes-workspace-zero (D1-financial-market-analysis) | F6-F10-R4 四条负结果线闭环。**F10-R5 宏观调研已完成**（@ main 6304ab54, r8/ 共 7 文件 984 行）：13 条文献（≥10 独立来源）、6 数据源实测、3 个交互假设 H1-H3。**核心判决：H_macro 文献层面不成立**——日频方向被堵死（宏观 OOS 胜率 5.6% 最低档），宏观只在"波动/事件风险"有信号且不可套利。但 S5 (Shek 2026) 发现 funding 极值按**当日方向**分组有 +3.62pp gap（CI [2.60,4.67]），是 R2 漏掉的维度。**agent 建议：先做 H1（方向分组复现，不需要宏观数据），若也 FAIL 则 F10 收束为负结果报告** | r8 落盘 @ 6304ab54，待成璐拍板是否进 H1 回测 | **research-done · awaiting-decision** |
 | 2 | 写作·动机社会 | from-motivation-to-society | Part I-V 全写完，等 P2 实验第一个数（30人30天≥40%信念迁移），solo 0美元方案已写好 | 起草 P2 实验招募文案 + 渠道对比（待你拍板渠道） | open·半阻塞(渠道) |
 | 3 | 健康·MR L1 完成 | longevity-orthogonal-contribution | **阶段2 全部本地工作完成** (b7a9a83)：Step1✅ Step2✅ Step4 L1✅ (10 pair, Egger 为主) + verify_integrity C1-C24 PASS + 执行报告 + LDL→AD 管线伪影诊断(方向一致性69%)。BMI→CHD Egger OR=1.17, LDL→CHD OR=1.40, BMI→CKD OR=1.28 | blocked: 1000G v3 EUR ref (clumping, 所有源已死) + OpenGWAS token (Step3 condition-F)。本地 open-data 已穷尽 | blocked-on-credentials |
 | 4 | 物理·ORF 收尾 | -orf | Stage 4 组件全完成，LaTeX 86→0（2026-11-02），arXiv tarball 已打好（2026-11-02） | arXiv 手动上传（需登录 arxiv.org/submission，不可自动绕过） | blocked-on-human |

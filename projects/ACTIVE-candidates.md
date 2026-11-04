@@ -11,7 +11,7 @@
 | 5 | 视频复刻·batch-12 | d1-video-recreation | batch-12 E29-E32 全部完成（4/4 ✅，eccff00），已推 main | 无待办 — 等下一批规划 | done |
 | 6 | 杂乱 idea 池 | conversation-raw-materials / D1-academic-AI raw ideas | 历史对话素材 + AI 研究猜想未消化 | 低优先级：定期蒸馏进对应领域项目，不单独立项 | backlog |
 
-| 7 | 物理·BH 质量谱 + 实验框架 T8 | bh-mass-spectrum / decomp / pfb | BH 任务C 完成（e2d419b）；T21-RR 调研完成 @ 2482280；**T8 Part C 探索性收口完成**（decomp @ 1cd3e74）；rubric v2→v3.1 迭代完成，AC1✅ AC2✅ AC3✅ AC4❌(design limitation)。**r269 本地降级已废弃（成璐指令：去掉本地降级路径）**——异源 judge 必须走 arena，等 ego-browser 登录恢复后直接派发 T8-C3v3-hetero-judge-task-brief.md。pfb @ cd68c66+ | blocked-on-human（arena 登录）；登录后即可派异源 judge 任务书 | partial-awaiting-decision |
+| 7 | 物理·BH 质量谱 + 实验框架 T8 | bh-mass-spectrum / decomp / pfb | **T8 C3v3 异源验证完成**（r278, pfb @ e923f88）：rubric v3.1 终版 J1 sha 7518ce5c，本地复放 κ=0.94 G2 35/36，arena 异源 κ=+0.31 G2 29/36（vs r270 ~0），arena 内部双判官 κ=0.70。残留：code-fence 2 cell（下轮 arena 消除）+ 条目提取差异 + S02 判断型分歧。待成璐 sign-off 冻结 rubric | **awaiting-signoff** |
 
 ## #8 decomp · T17 泛化 bench（方法论跨域验证）
 

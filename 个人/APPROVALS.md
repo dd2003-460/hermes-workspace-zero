@@ -42,6 +42,7 @@
   - arena 内部双判官一致 κ=+0.696（两独立判官对规则解读一致）
   - S01 分解类特例 154/155=99.4%；code-fence 边界 bug 已修（r278）
   - r271 全量重放（36 工件 × J1/J2，本地 vLLM）：S01_J1 = 155/155 = 1.0（v3 时 ~0%，效度修复确认生效）；S02/S03 与 r269 对照 ±10pp 内无回归；κ mean = 0.6533；G2 = 8/12 PASS（4 FAIL 均为 spread=0 零区分度 cell，非方向错误）。回执：`experiments/T8-matrix/runs/c3-v3/runs-fullloop/receipt-r271-rubric-v31-summary.md`
+  - **r272 收紧版补充证据（2026-11-05）**：rubric v3.1-tight 全量重放 36 行完成。关键格 A-full/D1/s02 J1 从 r271 的 0/45 → r272 36/45（0.80），与 r269 (v3) 37/45 对齐，证实 S02 长工件判断型分歧是 rubric 措辞问题而非模型缺陷。κ mean = 0.4960（低于 r271 的 0.6533，J2 在 B-nofreeze/D2/s02 出现 2/18 vs 0/18 分歧拉低）。G2 = 9/12 PASS（比 r271 多 1 项：D1/s02_J2 spread 0→0.8966）。残留 FAIL 仍为 spread=0 零区分度 cell（D1/s01 J1+J2, D2/s03_J2）。结论：**r271 初版已足够冻结**，r272 收紧版可作为后续迭代参考但不改变 sign-off 决策。回执：`receipt-r272-rubric-v31-summary.md`
 - 终版指纹：J1 sha256_16=`7518ce5c66f92f8a`，J2 sha256_16=`b229dcc9a14b2081`（pfb main @ 17f725c）
 - 影响面：sign-off 后 v3.1 冻结为 T8 正式评分标准，历史 baseline（r269/r270, v3 rubric）全部标注「旧 rubric 参考值」，不再作为质量声明依据。
 - 残留已知项（非 rubric 缺陷，不影响冻结）：① code-fence 2 cell 需下轮 arena 复跑消除（inputs 副本已同步 r278）② 条目提取正则跨模型差异 ③ S02 长工件判断型分歧（靠多裁判约束）。

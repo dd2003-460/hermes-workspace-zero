@@ -97,3 +97,9 @@
 | `memory/archive/dashboards/` | 旧仪表板归档（dashboards-all.jsonl 26 条 + 5 个 2026-05 单文件已移入，r274b） | ✅ 归档 |
 | `memory/archive/` | 统一归档区（r275 归一：DASHBOARD-2026-05-stale + 2026-05-subbrain 报告×19 + ONBOARDING 陈旧件；原 notes/archive/ 已并入） | ✅ 归档 |
 | `memory/notes/cron-adaptive-poll-r185.md` | cron 自适应轮询实现记录（jobs.py 两补丁 + adaptive_poll 标记，r185） | ✅ 完成 |
+
+## 研究 Prompt 消融（2026-11-05）
+
+- **结论**：R0.3 定版 18.00/20 (σ=0)，qwen3.8-27b 下最优。SELF-CHECK 契约方向正确但崩塌率 33%，搁置。
+- **天花板**：C2（逐卡 prefill/decode）和 C4（保值谱系）是系统性短板，需知识注入或更强模型。
+- **文件**：`projects/research-prompt/bench/runs/ablation-L1/SUMMARY.md`

@@ -4,7 +4,7 @@
 
 | # | 方向 | 锚点仓库（近期有活动） | 现状一句话 | 可立即做的动作 | 状态 |
 |---|------|----------------------|-----------|--------------|------|
-| 1 | 金融·正交信号源 | hermes-workspace-zero (D1-financial-market-analysis) | F7 三市场组合 FAIL（信息冗余），F10 agent-game-model 在探索阶段 | 外包 arena 调研链上资金流/期权 skew 数据可得性 → 定 F8 实验设计 | open |
+| 1 | 金融·正交信号源 | hermes-workspace-zero (D1-financial-market-analysis) | F6/F7/F8/F10-R4 四条负结果线全闭环（funding/basis/DVOL/温度→带宽均 FAIL）。**F10-R5 宏观 regime 调研已派发 arena**（2026-11-05，session 01a19661，任务书 @ main 35aef2b5）：Q1 文献≥5源 + Q2 数据可得性矩阵 + Q3 ≤3交互假设。纯调研不含回测，回测决策等成璐看完调研拍板 | arena 执行中（r8 产出预计 loop-artifacts/stages/05/r8/） | **in-progress · arena** |
 | 2 | 写作·动机社会 | from-motivation-to-society | Part I-V 全写完，等 P2 实验第一个数（30人30天≥40%信念迁移），solo 0美元方案已写好 | 起草 P2 实验招募文案 + 渠道对比（待你拍板渠道） | open·半阻塞(渠道) |
 | 3 | 健康·MR L1 完成 | longevity-orthogonal-contribution | **阶段2 全部本地工作完成** (b7a9a83)：Step1✅ Step2✅ Step4 L1✅ (10 pair, Egger 为主) + verify_integrity C1-C24 PASS + 执行报告 + LDL→AD 管线伪影诊断(方向一致性69%)。BMI→CHD Egger OR=1.17, LDL→CHD OR=1.40, BMI→CKD OR=1.28 | blocked: 1000G v3 EUR ref (clumping, 所有源已死) + OpenGWAS token (Step3 condition-F)。本地 open-data 已穷尽 | blocked-on-credentials |
 | 4 | 物理·ORF 收尾 | -orf | Stage 4 组件全完成，LaTeX 86→0（2026-11-02），arXiv tarball 已打好（2026-11-02） | arXiv 手动上传（需登录 arxiv.org/submission，不可自动绕过） | blocked-on-human |

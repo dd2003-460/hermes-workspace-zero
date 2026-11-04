@@ -16,9 +16,9 @@
     "bench.md updated with next-round execution flow changes",
     "All committed and pushed (27fc0a92)"
   ],
-  "last_update": "2026-11-04T21:15:00+08:00",
+  "last_update": "2026-11-04T22:00:00+08:00",
   "next_action": "R6 候选: 异源judge / M8累积≥4run / arena token重发优化 / run4模式推广。或转 T17 open-domain 修复实验。",
-  "current_round": "R7-complete",
+  "current_round": "R8-complete",
   "rounds": [
     {
       "id": "R6",
@@ -38,6 +38,14 @@
       "result": "PASS (Model B M1=70.4, margin +0.4; S is the bottleneck not rule volume)",
       "commit_pfb": "afa242e",
       "completed_at": "2026-11-04T21:15:00+08:00"
+    },
+    {
+      "id": "R8",
+      "name": "examples-on-demand",
+      "status": "complete",
+      "result": "PASS (Model B M1=75.6, margin +5.6; examples removed from route table, truly tier-3)",
+      "commit_pfb": "534b41e",
+      "completed_at": "2026-11-04T22:00:00+08:00"
     }
   ]
 }

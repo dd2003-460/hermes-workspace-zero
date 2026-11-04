@@ -1,9 +1,28 @@
 {
-  "iteration": 0,
-  "loop_phase": "DEPRECATED",
+  "iteration": 1,
+  "loop_phase": "taste-review-pending-fixes",
   "current_task": {
-    "title": "DEPRECATED — 用户指示 2026-10-22: 理论物理只保留 ORF + bh-spectrum",
-    "status": "deprecated"
+    "title": "GW-BacQFT taste review fixes (T3/M1/M2/T4 pending)",
+    "status": "in_progress"
   },
-  "status": "deprecated"
+  "status": "active",
+  "last_updated": "2026-11-04T17:45:00+08:00",
+  "recent_actions": [
+    "Taste review completed (gw-taste-review.md): T1 fixed, T3/M1/M2/T4 pending",
+    "M1 hallucinated refs identified: Isi:2024, Mingolla:2023, Gong:2021, Phinney:2001, Ellis:2024, Tsang:2024",
+    "T3 SNR inconsistency: L324/L376 O(1--3) vs ~140 needs reconciliation",
+    "T4 template: still article, needs revtex4-2 or jheppub",
+    "Blocked by: need arXiv verification for M1 refs + formula re-derivation for M2"
+  ],
+  "taste_review_status": {
+    "T1_meta_narrative": "FIXED",
+    "T2_framework_mismatch": "PENDING (needs decision: A=Araki relative entropy, B=downplay TQFT)",
+    "T3_snr_inconsistency": "PENDING",
+    "T4_template": "PENDING",
+    "M1_hallucinated_refs": "PENDING (6 refs to verify/replace)",
+    "M2_thm31_scaling": "PENDING (verify P^{1/2} vs P^{-1/2})",
+    "M3_cosmic_variance": "PENDING",
+    "M4_worldline_smearing": "PENDING",
+    "B1-B5_background_gaps": "PENDING"
+  }
 }

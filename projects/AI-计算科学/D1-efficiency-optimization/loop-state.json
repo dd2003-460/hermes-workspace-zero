@@ -4,11 +4,11 @@
   "loop_phase": "01-goal-decomposition",
   "status": "in_progress",
   "priority": "HIGHEST",
-  "current_task": "R6 完成 (2026-11-04): 阶段门控加载 M1=78.1≥70 PASS (Model A), 规则负载 12086→3913 (-67.6%). Model B 实际口径 61.9 FAIL (examples 4211tok + 单会话不卸载). 三口径并列记录于 pfb/bench/self-opt-tester/runs/r6/. 下一步: R7 候选或 P2 实验数据回来后排期",
+  "current_task": "R6+R7 完成 (2026-11-05): R6 阶段门控加载 M1=78.1≥70 PASS (规则负载 -67.6%); R7 SOP 压缩 6826→2698 tok (-60.5%), 54/54 hard constraints PASS. 下一步: R8 候选或 P2 实验数据回来后排期",
   "created": "2026-10-22",
   "rationale": "用户 2026-10-22 指示：效率提高（prompt 改善性能和速度 + 识别瓶颈）优先级放最高",
   "updated_at": "2026-11-03T08:00:00+08:00",
-  "last_updated": "2026-11-05T23:55:00+08:00",
+  "last_updated": "2026-11-05T03:35:04.980595+08:00",
   "current_focus": "T17 conv0 85.8% (141/152 running, ~50min left) + conv1 rerun ingesting; partial overall ~81% top_20 vs smoke01 60%; GOALS no actionable goal, waiting for runs to complete",
   "recent_actions": [
     "R5.2 complete: P0 evidence packet template + P1 M1/M2/M5/M6 fixes",

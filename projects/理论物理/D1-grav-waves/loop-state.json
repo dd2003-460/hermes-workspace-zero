@@ -6,9 +6,9 @@
     "status": "in_progress"
   },
   "status": "active",
-  "last_updated": "2026-11-04T21:20:00+08:00",
+  "last_updated": "2026-11-04T21:55:00+08:00",
   "recent_actions": [
-    "T4 partial: merged L186-192 duplicate Kehagias & Riotto sentences into one coherent paragraph; added arXiv:2401.10680 to Kehagias:2024 bibitem (CrossRef confirms JCAP 2024 059); abstract verified single-paragraph ~152 words, no License statement"
+    "Light maintenance: removed orphan Schreiber:2023 bibitem (uncited after M4 fix); corrected 3 bibitems with wrong metadata via CrossRef — Vilenkin:1984 (Phys.Rept.121(1985)263, DOI added), Hellings:1983 (title corrected to pulsar timing, DOI 10.1086/183954 added), Moretti:2017 (corrected to Math.Phys.Stud. book chapter, DOI added); verified all 24 remaining bibitems have arXiv or DOI; pdflatex clean"
   ],
   "taste_review_status": {
     "T1_meta_narrative": "FIXED",

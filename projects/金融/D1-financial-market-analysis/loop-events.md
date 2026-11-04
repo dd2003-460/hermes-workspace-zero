@@ -3448,3 +3448,27 @@ Agent 产出 A/B/C/D.md (77/80/77/50 行) + receipts.json @ 8479fb50 (agent 工�
 receipts 自报降级 level 4 (沙箱无 web-llm 登录会话, 改用 ≥2 不同域名+≥2 作者团队直核, successful_provider_ids 记录的是主机类型非 LLM 站点 ID)。
 **待办**: 用户人工登录 web-llm (Perplexity/ChatGPT) 后补跑 check → re-apply advance。
 已 merge 进 arena/f10-gas-dynamics-research @ 11f78192 并 push。
+
+## 2026-11-05 ~17:5x +0800 — F10-R5 宏观/跨资产 regime 调研完成 (worker 侧)
+
+候选 C 调研轮, 非回测。按 prompt-first 01→02→02.5→03 四阶段执行, 全部落盘
+`loop-artifacts/stages/05/r8/`: 01-goal-decomposition.md (14 空缺 G1-G14, 14 项候选变量冻结) /
+02-information-research.md / 02.5-cross-check.md (7 项对抗核验降级) / 03-action-decomposition.md (8 步, A3 为 user 同步阻塞点) /
+f10-r5-macro-survey.md + macro-data-availability.json。
+
+三阶段结论:
+1. 宏观对 crypto 的**日频方向**预测力弱且已被独立证据否定两次 (141 变量 OOS 中宏观类仅 5.6% 跑赢基准; 510 次周频 OOS 中宏观块无增量甚至拖累)。Nakagawa-Sakemoto 显示宏观公共因子**只在季度**显著 → horizon mismatch, 不是"宏观无信息"。
+2. 宏观真正有效的是**波动/事件风险**而非方向: FOMC 声明后一小时 BTC 平均 |r| 0.66%→1.25% (p<0.001), 成交量 2.54x (FRL 2026, 41 次会议, Bitfinex 复现)。但同一批证据显示不可套利: Kalshi Fed 渠道 OOS MSFE=1.009 (变差), 仅衰退风险 0.979。
+3. **最接近"条件有效"的一条, 条件不是宏观**: Shek 2026 (SSRN 7520320) 274 次负 funding 极值事件, 上涨日反转 +1.88% vs 下跌日延续 -1.74%, gap 3.62pp (CI 2.60-4.67), 7/7 外生冲击同号。F10-R2 恰好缺这个"按当日方向分组"的维度。
+
+数据层实测 (2026-11-05): DGS10 / DFII10 / VIXCLS / DTWEXBGS / SP500 满足"日频+2020-01起+免费";
+WALCL 周频、M2SL 月频需 forward-fill 并标发布滞后; TEDRATE 已于 2022-01-21 停更;
+BTC dominance 与 global M2 免费不可得 (CoinGecko 365 天限制 / Coinpaprika 2025-11 起), 保留在冻结集中用于产出否定证据;
+稳定币供应可用但需自建聚合; FOMC 日历 2021-2027 免费可抓。
+
+**事实冲突 (需 Lead 注意)**: `r7/f10-r4-report.md` 记载 "DVOL API 已失效", 本轮三次独立探测该端点**均返回数据** (2021-03-24→2026-11-04, 最新 38.18)。只能确证"当前可用", 无法回溯 r7 当时状态 → 按边界**不改 r7 原文件**, 只在 r8 报告记录, 并标注 F10-R4 的 "DVOL 缺席" 归因需重跑才能定论。
+DVOL 起点 2021-03-24 仍不满足 2020-01 硬约束。
+
+降级: 本 runtime 无 ralph/ego-browser/LLM 登录态 → 02 阶段"网页 LLM 交叉询问"未执行 (通道不存在, 非跳过), 按 02 §2 快速失败条款记录并继续; 证据强度全局降一级。沙箱 curl 直连全断 (SSL_ERROR_SYSCALL), 全部实测经 fetch_page 完成。大陆可达性**未测**, 为部署前阻塞项。
+
+下一步 (交 Lead/成璐): A3 —— 是否进回测。建议优先级 H1 (S5 方向分组, 不需要宏观数据) > H2 (稳定币/WALCL 作 veto) > H3 (DFII10 折现率通道)。

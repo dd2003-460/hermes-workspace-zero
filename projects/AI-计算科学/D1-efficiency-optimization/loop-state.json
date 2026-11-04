@@ -8,8 +8,8 @@
   "created": "2026-10-22",
   "rationale": "用户 2026-10-22 指示：效率提高（prompt 改善性能和速度 + 识别瓶颈）优先级放最高",
   "updated_at": "2026-11-03T08:00:00+08:00",
-  "last_updated": "2026-11-04T16:55:00+08:00",
-  "current_focus": "T17 conv0 fix 完成 (87.5% top_20, was 0%) + conv1 诊断完成 (retrieval gap: mem0 extraction 质量差, top-1 score 0.38 vs conv0 0.95); conv1 rerun 被 background env bug 阻塞",
+  "last_updated": "2026-11-04T17:10:00+08:00",
+  "current_focus": "T17 conv0 87.7% (73/152 in progress) + conv1 rerun launched (re-ingesting with P0 time-anchor fix, old results were pre-fix stale data)",
   "recent_actions": [
     "R5.2 complete: P0 evidence packet template + P1 M1/M2/M5/M6 fixes",
     "Validation: kappa 0.064 -> 0.644, mean|delta| 19.9 -> 2.9 (-85%)",

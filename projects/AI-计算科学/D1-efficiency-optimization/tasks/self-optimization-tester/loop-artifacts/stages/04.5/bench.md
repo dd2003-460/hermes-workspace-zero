@@ -138,3 +138,27 @@ Pearson r（n=9 pairs，x=各指标分，y=旧权重加权总分）：
 3. Pearson n=9 置信区间仍宽，新权重为方向性校准，r6 复算确认稳定性
 
 工件：`r5/bench-r5.1.json`（机读全量）+ `r5/independent-scoring-chatgpt-r5.1.json`（ChatGPT 回执，chat URL 锚点）
+
+## R5.2 双评分器一致性修复（2026-11-04）
+
+**问题**: r5.1 报告 κ=0.258，独立重算发现方法论有误（混合不同评分器对），真实 CG vs DS κ=0.064。根因：证据包不对称 + M1 定义模糊 + M2/M5 缺客观数据。
+
+**修复方案**（全部落盘，详见 `r5/` 目录）:
+
+| # | 文件 | 内容 |
+|---|------|------|
+| P0 | `evidence-packet-template.md` | 统一证据包 A-G 7组字段 + sha256 冻结 + unmeasurable 规则 |
+| P1a | `m1-quantification-proposal.md` | M1 = S(切分)×0.4 + R(重发)×0.35 + G(膨胀)×0.25 |
+| P1b | `m2-m5-objectivization.md` | M2=wc -l 线性衰减, M5=轮数+返工→确定性分数 |
+| P1c | `m6-adjudication-rule.md` | unverified+原因清晰=80分, 消除"是否扣分"歧义 |
+| 验证 | `r5.2-fix-validation.md` | 回算 run1-run3: κ 0.064→0.644, mean\|Δ\| 19.9→2.9 (-85%) |
+
+**下一轮 bench 执行流程变更**:
+1. Lead 从执行日志/git 提取 A-G 字段 → 生成 `evidence-packet-{round}.json` + sha256
+2. M2/M5 由 Lead 客观计算（不发给评分器）
+3. M1 用量化公式计算（S/R/G 从证据包提取）
+4. M6 按 adjudication 规则预打分（评分器只做 ±10 微调确认）
+5. 评分器只打 M3/M4（需要判断力的指标）
+6. κ 只在 M3/M4 上计算（消除客观指标的假一致）
+
+**状态**: 修复方案已落盘并验证。待下一轮 bench 实测确认 κ 提升。

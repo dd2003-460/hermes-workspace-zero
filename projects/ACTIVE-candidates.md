@@ -11,7 +11,7 @@
 | 5 | 视频复刻·batch-12 | d1-video-recreation | batch-12 E29-E32 全部完成（4/4 ✅，eccff00），已推 main | 无待办 — 等下一批规划 | done |
 | 6 | 杂乱 idea 池 | conversation-raw-materials / D1-academic-AI raw ideas | 历史对话素材 + AI 研究猜想未消化 | 低优先级：定期蒸馏进对应领域项目，不单独立项 | backlog |
 
-| 7 | 物理·BH 质量谱 + 实验框架 T8 | bh-mass-spectrum / decomp / pfb | **r269 本地降级双判官完成**（arena 无登录态降级，qwen3.8-27b J1/J2 独立上下文 temp=0）：κ=0.4777（短工件 1.0/长工件 0~0.44），G2=10/12 PASS，J2-lenient 长工件系统性崩塌复现 r268。pfb @ cd68c66。**Arena 通道根因确认 = ego-browser profile 无 arena.ai 登录态**（非会话丢失），解锁唯一路径 = 成璐在 ego-browser 过一次 Google/email 登录 → 重建会话绑 pfb 仓库 | blocked-on-human（arena 登录）；登录后即可派异源 judge 任务书（T8-C3v3-hetero-judge-task-brief.md 已就绪） | partial-awaiting-decision |
+| 7 | 物理·BH 质量谱 + 实验框架 T8 | bh-mass-spectrum / decomp / pfb | BH 任务C 完成（e2d419b）；T21-RR 调研完成 @ 2482280；**T8 Part C 探索性收口完成**（decomp @ 1cd3e74）；rubric v2→v3.1 迭代完成，AC1✅ AC2✅ AC3✅ AC4❌(design limitation)。**r269 本地降级已废弃（成璐指令：去掉本地降级路径）**——异源 judge 必须走 arena，等 ego-browser 登录恢复后直接派发 T8-C3v3-hetero-judge-task-brief.md。pfb @ cd68c66+ | blocked-on-human（arena 登录）；登录后即可派异源 judge 任务书 | partial-awaiting-decision |
 
 ## #8 decomp · T17 泛化 bench（方法论跨域验证）
 

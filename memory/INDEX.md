@@ -56,7 +56,7 @@
 - Family-upgrade / kappa-recalibrate: blocked-on-external
 
 ### 8. Decomp Bench (T7/T8)
-- **状态**: T7 全收口 (T7.3 v2 point=60219, interval_80=[60129,61227]); T8 Part B 文献调研完成 (arena, 7 sources); **T8 Part C 探索性收口**（两轮对抗核验 FAIL×2+partial×4 → freeze 段三域负效应方向稳健，确认性实验等四条件）; **T21 收口完成 (r256: flagship-eval S3 按 T21-RR 实测锚定重算 + 主报告 §9.2 发现5 并入)** — GPU 选型主线 T19→T20→T21 闭环; **T17 rubric v2 修正完成 (r261: C4 判据放宽 + scores.json 全量补齐 + T17-REPORT 重新生成)** — 泛化 bench 四域结论稳定; **T17-full LoCoMo 补跑在途 (r29x, 11-04: conv0 跑完 top_10 79.0% temporal 89.2%, conv1 答题中; checkpoint run_id 校验缺陷已修 13f8be5 — smoke01 残留污染根因闭环; fork main @ 423ec17)**
+- **状态**: T7 全收口 (T7.3 v2 point=60219, interval_80=[60129,61227]); T8 Part B 文献调研完成 (arena, 7 sources); **T8 Part C 探索性收口**（两轮对抗核验 FAIL×2+partial×4 → freeze 段三域负效应方向稳健，确认性实验等四条件）; **T21 收口完成 (r256: flagship-eval S3 按 T21-RR 实测锚定重算 + 主报告 §9.2 发现5 并入)** — GPU 选型主线 T19→T20→T21 闭环; **T17 rubric v2 修正完成 (r261: C4 判据放宽 + scores.json 全量补齐 + T17-REPORT 重新生成)** — 泛化 bench 四域结论稳定; **T17-full LoCoMo 补跑在途 (r29x, 11-04: conv0 跑完 top_10 79.0% temporal 89.2%, conv1 答题中; 两个污染根因代码缺陷全修 (13f8be5+2245b9c); fork main @ 2245b9c)**
 - **核心**: prompt-first 消融研究 — L1 组件级 + pipeline 阶段级
 - **T7.3 v2**: M4 EWMA+weekday 主模型, holdout MAPE 0.511%, 嵌套覆盖率 miss 如实记录 (regime 切换导致区间偏窄)
 - **T8 Part B 关键发现**: Q1 阶段效应不均但非纯 prompt 效应; Q2 critic 有效条件=可定位可执行反馈; Q3 边际递减有例证非通用规律; Q4 L1→pipeline=待测方向不可直接迁移

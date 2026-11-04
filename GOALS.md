@@ -23,7 +23,7 @@
 
 ### G4: F10-R5 → H1 回测执行 — ✅ 完成（负面结果）
 - **背景**：F10-R5 宏观调研完成（@ main 6304ab54），H_macro 文献层面不成立。S5 (Shek 2026) 发现 funding 极值按当日方向分组 +3.62pp gap，是 R2 漏掉的维度。
-- **执行结果（2026-11-05）**：H1 OOS 回测 **FAIL**。Δgap = −2.38%（CI [−4.92%, +1.03%]），G_up 反而跑输 G_down。8 gates 全挂（0/8）。主因：样本量崩塌（G_up 仅 10 trades < 30 gate）+ SOL 主导 89% 事件扭曲 pooled 估计。
+- **执行结果（2026-11-05）**：H1 OOS 回测 **FAIL**。Δgap = −2.38%（CI [−4.92%, +1.03%]），G_up 反而跑输 G_down。8 gates 全挂（0/8）。主因：样本量崩塌（G_up 仅 10 trades < 30 gate）。SOL 排除敏感性检验确认机制本身不成立（BTC+ETH only Δgap = −4.59%，方向不变）。
 - **结论**：S5 的方向分组效应在 OOS 不复现。F10 按 prereg 协议收口为负面结果报告。
 - **产出**：`r8/h1-backtest-report.md` + `r8/h1-backtest-results.json` + `r8/h1_backtest.py`
 - **状态**：✅ completed（2026-11-05）

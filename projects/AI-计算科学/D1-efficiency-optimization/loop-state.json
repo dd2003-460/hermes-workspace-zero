@@ -7,5 +7,15 @@
   "current_task": "R5.1 完成: ChatGPT 独立打分 run1-run4 (24分) + Fleiss κ=0.258 (根因=证据包版本不对称, M2/M5 信息差) + n=5 首次有效权重校准 (M1 r=0.85/M3 r=0.735; M5降权0.1477→0.1192) + bench.md r5.1 落盘 (n=5 mean 78.91±13.15, run4 97.63 领跑, run2 垫底差距在 M1 重发放大). 工件: r5/bench-r5.1.json + independent-scoring-chatgpt-r5.1.json. 下一步: r6 补 run5 盲打 + 新权重复算稳定性 + push pfb.",
   "created": "2026-10-22",
   "rationale": "用户 2026-10-22 指示：效率提高（prompt 改善性能和速度 + 识别瓶颈）优先级放最高",
-  "updated_at": "2026-11-03T08:00:00+08:00"
+  "updated_at": "2026-11-03T08:00:00+08:00",
+  "last_updated": "2026-11-04T16:30:00+08:00",
+  "current_focus": "R5.2 双评分器一致性分析完成 — κ修正(0.258→0.064), 根因=证据包不对称, 修复方向已落盘",
+  "recent_actions": [
+    "R5.2 consistency analysis: independent recomputation of Fleiss κ",
+    "Found: report κ=0.258 reproducible but methodologically flawed (mixed scorer pairs)",
+    "Corrected: CG vs DS only κ=0.064 (n=18, 5-bucket)",
+    "Root cause: evidence packet asymmetry (DS missing task brief line counts / iteration counts)",
+    "Fix priorities: P0=unified evidence packet, P1=M1 quantification + M2/M5 objectivization",
+    "Committed f2b620d7, pushed to origin main"
+  ]
 }

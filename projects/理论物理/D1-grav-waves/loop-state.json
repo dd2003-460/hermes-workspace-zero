@@ -23,5 +23,6 @@
     "M3_cosmic_variance": "FIXED",
     "M4_worldline_smearing": "FIXED",
     "B1-B5_background_gaps": "FIXED (B1/B2 via M3; B3 anisotropic ORF refs added; B4 Bunk:2025 via M4; B5 deferred — Hollands-Wald worldline-algebra refs not yet cited in body)"
-  }
+  },
+  "current_focus": "taste review 全部完成 (M1 收尾: bib key 对齐 + arXiv 规范化, cc7d3b6b)"
 }

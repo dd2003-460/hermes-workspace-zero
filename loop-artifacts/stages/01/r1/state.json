@@ -13,6 +13,85 @@
       "rationale": "用户初始任务输入，作为本阶段已知背景字段。",
       "reversible": false,
       "role": "background"
+    },
+    {
+      "attribute": "KB.1 教材第9篇『伪 thinking vs 真推理』note 收口：产出 notes/pseudo-thinking-vs-real-reasoning.md（A段概念块×6：CoT/scratchpad、伪thinking判定、推理时计算(test-time compute)、自校验verify机制、loss与目标函数在推理时的角色、习惯刻入权重vs prompt；每块是什么/为什么/边界+conf；B段成璐视角判断+可证伪idea；C段≥2条可证伪预测带判死条件）+ INDEX.md 加行 + drift-check v1≥75→v2=100/100。覆盖已知因素(前8篇已建框架/成璐S3质疑点/T17本地27b实验锚点)与未知因素(CoT是否真改变推理路径的实证边界/test-time scaling 在本地小模型上的拐点/伪thinking的可检测判据)。",
+      "concept": "goal",
+      "confidence": 0.95,
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "projects/知识/D1-knowledge-base/memory/interest-directions.md (C区#8)",
+        "projects/知识/D1-knowledge-base/notes/INDEX.md (前8篇清单)"
+      ],
+      "impact": "material",
+      "rationale": "exploration r1 选定任务，范围限定单文件 note + INDEX 行，纯本地执行。",
+      "reversible": true,
+      "role": "goal"
+    },
+    {
+      "attribute": "① KB.1 格式规范(A名词表+B成璐视角+drift-check硬门槛: 句级第一人称率/均句长/禁词0)见 README.md，前8篇全过100分；② 成璐 S3 场景亲自质疑过『伪thinking』『习惯在权重还是prompt』(interest-directions C区#8 记录)；③ 本地有 qwen3.8-27b @ :8787 可做推理行为实验(T17 full01 刚跑完 610 题，answerer/judge 链路健康)；④ 前8篇已覆盖训练机制(loss/RLHF/fine-tuning)/记忆/goal-loop控制层，本篇不重复只接边。",
+      "concept": "known",
+      "confidence": 0.9,
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "projects/知识/D1-knowledge-base/README.md",
+        "projects/知识/D1-knowledge-base/notes/INDEX.md",
+        "tools/memory-benchmarks/results/locomo/locomo-full01-final-report.md (:8787 链路健康证据)"
+      ],
+      "impact": "material",
+      "rationale": "均为工作区既有台账/产物事实。",
+      "reversible": true,
+      "role": "known"
+    },
+    {
+      "attribute": "① CoT/scratchpad 对 LLM 推理路径改变的实证边界(哪些任务真受益/哪些是表演性步骤)——需调研 arXiv 实证研究；② 伪thinking的可检测判据(logprob探针? 步骤冗余度? 删步骤后答案不变率?)——成璐研究方向相关但无现成结论；③ test-time compute scaling 在 7B-27B 本地模型的拐点位置(大模型曲线能否外推)；④ verify/自校验在小模型上是否正收益(错误放大风险)。",
+      "concept": "unknown",
+      "confidence": 0.85,
+      "disposition": "confirmed",
+      "evidence_refs": [
+        "https://arxiv.org/abs/2201.11903 (Wei et al. NeurIPS 2022: CoT 规模涌现, <100B 无正收益)",
+        "https://arxiv.org/html/2605.27773v1 (Introspective Faithfulness of CoT Under Knowledge Conflict 2026: flip-pair 96% 相似度保留, confidence 层真信号 r=0.134)",
+        "https://arxiv.org/pdf/2503.08679v4 (CoT In The Wild Not Always Faithful 2025: post-hoc rationalization 率 GPT-4o-mini 13% / DeepSeek R1 0.37%)",
+        "https://arxiv.org/abs/2502.12118 (Setlur et al.: VB > VF, test-time compute 需验证信号才渐优, 3/8/32B 实证)",
+        "https://openreview.net/forum?id=6ICFqmixlS (Thinking-Optimal Scaling 2025: overthinking, CoT 长度存在最优区间)",
+        "https://arxiv.org/abs/2512.02008 (Art of Scaling TTS Dec 2025: 8 模型 7B-235B x 4 数据集, 无单一策略普适占优)",
+        "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (Inference Scaling Laws ICLR 2025: Llemma-7B+tree search 胜 34B)"
+      ],
+      "impact": "material",
+      "rationale": "四项 unknown 全部回填：①CoT 实证边界 -> Wei 2022 规模涌现 + 2026 introspective faithfulness；②伪thinking 可检测判据 -> post-hoc rationalization 率 + flip-pair 相似度 + confidence 层信号(现有最接近判据)；③本地小模型 TTS 拐点 -> Thinking-Optimal overthinking + Setlur VB/VF + Agarwal 7B-235B 系统研究；④verify 在小模型收益 -> Setlur 3/8/32B 实证。均可证伪预测锚定到这些数字。",
+      "reversible": true,
+      "role": "unknown",
+      "validation_records": [
+        {
+          "claim": "CoT 收益是规模涌现的：<100B 小模型上 CoT 无正收益甚至负收益(流畅但不合逻辑的步骤)",
+          "verdict": "supported",
+          "source_refs": [
+            "https://arxiv.org/abs/2201.11903 (Wei et al. NeurIPS 2022: chain-of-thought prompting does not positively impact performance for small models, only yields gains at ~100B; smaller models produced fluent but illogical chains leading to lower performance than standard prompting)",
+            "https://openreview.net/forum?id=6ICFqmixlS (Thinking-Optimal Scaling 2025: excessively scaling CoT length can impair reasoning performance in certain domains)"
+          ],
+          "note": "两独立域(arxiv.org + openreview.net)一致支持"
+        },
+        {
+          "claim": "CoT 不总是 faithful：真实 prompt 上存在 implicit post-hoc rationalization(生产模型 0.04%-13%)，flip-pair 实验显示表面推理文本对决策几乎不敏感(96% 相似度保留)，真信号在 confidence 层",
+          "verdict": "supported",
+          "source_refs": [
+            "https://arxiv.org/pdf/2503.08679v4 (In The Wild Not Always Faithful 2025: GPT-4o-mini 13%, Haiku 3.5 7%, DeepSeek R1 0.37%, Sonnet 3.7 thinking 0.04% post-hoc rationalization rates; thinking models better but not fully faithful)",
+            "https://arxiv.org/html/2605.27773v1 (Introspective Faithfulness 2026: flip pairs retain 96% same-answer similarity, cosine 0.784 vs 0.817 d=0.34; obscure facts 下 self-rated confidence 弱预测决策 p<0.001 r=0.134; internal thinking tokens 比 user-facing CoT 决策敏感性更高 Wilcoxon p=0.033)",
+            "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings 第三源：inference strategy 与模型规模解耦的实证传统)"
+          ],
+          "note": "两篇独立 arXiv 论文(不同作者/年份/方法)交叉印证 + ICLR proceedings 第三源"
+        },
+        {
+          "claim": "test-time compute 扩展需验证信号才渐优(VB > VF)，CoT 长度存在最优区间(overthinking 拐点)；7B-235B 范围内无单一 TTS 策略普适占优，小模型+高级推理算法可 Pareto 占优",
+          "verdict": "supported",
+          "source_refs": [
+            "https://arxiv.org/abs/2502.12118 (Setlur et al.: VB methods scale better asymptotically when base model has heterogeneous trace distribution; empirical on 3/8/32B pre-trained LLMs)",
+            "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (Inference Scaling Laws ICLR 2025: Llemma-7B + tree search consistently outperforms Llemma-34B across all tested strategies on MATH; smaller models + advanced inference = Pareto-optimal trade-offs)",
+            "https://arxiv.org/abs/2512.02008 (Agarwal et al. Dec 2025: 8 open-source LLMs 7B-235B x 4 datasets x 30B+ tokens; no single TTS strategy universally dominates; short-horizon vs long-horizon reasoning models)"
+          ],
+          "note": "arxiv.org + iclr.cc 双独立域, 三篇独立工作"
+        }
+      ]
     }
   ],
   "authoritative_inputs": [

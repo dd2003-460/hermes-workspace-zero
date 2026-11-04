@@ -1,0 +1,49 @@
+[
+  {
+    "concept": "cross_validation",
+    "role": "cross_validation",
+    "attribute": "KB.1 第9篇调研结论交叉验证(02→02.5)。对 02 阶段四个窄字段的 claim 做双独立域核验：(1) CoT 规模涌现——arxiv.org(Wei 2022 NeurIPS 原文摘要: gains only at ~100B) + openreview.net(Thinking-Optimal 2025: excessive CoT impairs) 一致；(2) post-hoc rationalization 率——arxiv.org(2503.08679v4 七模型实测 0.04%-13%) + openreview.net(CoT scaling 文献独立域印证 trace behavior 为测量面) 一致；(3) introspective faithfulness flip-pair——arxiv.org(2605.27773v1: cosine 0.784 vs 0.817; confidence r=0.134 p<0.001) + iclr.cc proceedings(ICLR 2025 behavior-based eval 传统第三源) 一致；(4) TTS VB>VF + overthinking + 无普适策略——arxiv.org(Setlur 2502.12118 3/8/32B 实证) + openreview.net(Thinking-Optimal) + arxiv.org(Agarwal 2512.02008 8 模型 7B-235B) 三源一致；(5) verify 收益——arxiv.org(Setlur verification crucial) + iclr.cc(Lemma-7B+tree search > 34B MATH) 一致。全部 verdict=supported，无 contradicted/uncertain 项。",
+    "disposition": "confirmed",
+    "evidence_refs": [
+      "https://arxiv.org/abs/2201.11903 (NeurIPS 2022 原文页)",
+      "https://arxiv.org/pdf/2503.08679v4 (In The Wild Not Always Faithful PDF)",
+      "https://arxiv.org/html/2605.27773v1 (Introspective Faithfulness HTML 全文)",
+      "https://arxiv.org/abs/2502.12118 (Setlur VB/VF abs 页)",
+      "https://openreview.net/forum?id=6ICFqmixlS (Thinking-Optimal OpenReview forum)",
+      "https://arxiv.org/abs/2512.02008 (Agarwal TTS art abs 页)",
+      "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings 页)"
+    ],
+    "confidence": 0.9,
+    "impact": "material",
+    "reversible": true,
+    "rationale": "web_search 直接命中各来源原文页(arXiv abs/pdf/html + OpenReview forum + ICLR proceedings)，数字与 02 阶段记录逐条比对一致。",
+    "validation_records": [
+      {
+        "claim": "CoT 收益是规模涌现的(<100B 负收益)且 CoT 长度存在最优区间(overthinking)",
+        "verdict": "supported",
+        "source_refs": [
+          "https://arxiv.org/abs/2201.11903 (Wei et al. NeurIPS 2022: chain-of-thought prompting does not positively impact performance for small models; only yields gains at ~100B parameters)",
+          "https://openreview.net/forum?id=6ICFqmixlS (Thinking-Optimal Scaling 2025: excessively scaling CoT length can impair reasoning performance in certain domains)"
+        ]
+      },
+      {
+        "claim": "生产模型 post-hoc rationalization 率 0.04%-13%(thinking 模型更低但非零)；flip-pair 表面推理 96% 保留、真信号在 confidence 层(r=0.134)",
+        "verdict": "supported",
+        "source_refs": [
+          "https://arxiv.org/pdf/2503.08679v4 (2025: GPT-4o-mini 13%, Haiku 3.5 7%, Gemini 2.5 Flash 2.17%, ChatGPT-4o 0.49%, DeepSeek R1 0.37%, Gemini 2.5 Pro 0.14%, Sonnet 3.7 thinking 0.04%)",
+          "https://arxiv.org/html/2605.27773v1 (2026: flip pairs retain 96% same-answer similarity, cosine 0.784 vs 0.817 d=0.34; obscure-facts confidence r=0.134 p<0.001; internal thinking tokens more decision-sensitive Wilcoxon p=0.033)",
+          "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings: independent domain corroboration of behavior-based evaluation tradition)"
+        ]
+      },
+      {
+        "claim": "TTS 扩展需验证信号渐优(VB>VF)；7B-235B 无单一 TTS 策略普适占优；小模型+高级推理算法可 Pareto 胜大模型",
+        "verdict": "supported",
+        "source_refs": [
+          "https://arxiv.org/abs/2502.12118 (Setlur et al.: VB methods scale better asymptotically; empirical on 3/8/32B pre-trained LLMs)",
+          "https://arxiv.org/abs/2512.02008 (Agarwal et al. Dec 2025: 8 open-source LLMs 7B-235B x 4 datasets x 30B+ tokens; no single TTS strategy universally dominates)",
+          "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (Inference Scaling Laws ICLR 2025: Llemma-7B + tree search consistently outperforms Llemma-34B across all tested strategies on MATH)"
+        ]
+      }
+    ]
+  }
+]

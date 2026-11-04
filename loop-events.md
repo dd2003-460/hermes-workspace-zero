@@ -54277,3 +54277,1386 @@ RALPH_EVENT -->
 - loop-artifacts/contracts/01-r1-stage-contract.md
 - loop-artifacts/stages/exploration/r1/cce6b2f4-9681-4401-8b92-547d24d0fe8e.agent-output.md
 
+## 01-r1 | field_increment_applied
+
+<!-- RALPH_EVENT
+{
+  "artifact_refs": [
+    "loop-artifacts/stages/01/r1/kb9-fields-r290.json",
+    "/Users/a1-6/Desktop/workspace/loop-artifacts/stages/01/r1/kb9-fields-r290.md"
+  ],
+  "event_id": "83e81d2d-f602-45ea-aa5f-ddec01cdeaf2",
+  "observation": {
+    "added": 3,
+    "concepts": [
+      "用户原始任务",
+      "goal",
+      "known",
+      "unknown"
+    ],
+    "fields_file": "loop-artifacts/stages/01/r1/kb9-fields-r290.json",
+    "output_excerpt_source": "field_apply_result",
+    "remaining": {
+      "complete": false,
+      "pending": [],
+      "required_outputs": [],
+      "researching": [
+        "unknown"
+      ],
+      "splittable": []
+    },
+    "removed": 0,
+    "revision": "r1",
+    "stage": "01",
+    "state_changed": true
+  },
+  "output_excerpt": "{\"added\": 3, \"next\": \"继续填写 remaining.required_outputs / pending / researching / splittable\", \"ok\": true, \"remaining\": {\"complete\": false, \"pending\": [], \"required_outputs\": [], \"researching\": [\"unknown\"], \"splittable\": []}, \"removed\": 0, \"rendered_md\": \"/Users/a1-6/Desktop/workspace/loop-artifacts/stages/01/r1/kb9-fields-r290.md\", \"total\": 4}",
+  "revision": "r1",
+  "stage": "01",
+  "timestamp": "2026-11-03T20:31:12+00:00",
+  "type": "field_increment_applied"
+}
+RALPH_EVENT -->
+
+### Agent 输出摘录
+
+{"added": 3, "next": "继续填写 remaining.required_outputs / pending / researching / splittable", "ok": true, "remaining": {"complete": false, "pending": [], "required_outputs": [], "researching": ["unknown"], "splittable": []}, "removed": 0, "rendered_md": "/Users/a1-6/Desktop/workspace/loop-artifacts/stages/01/r1/kb9-fields-r290.md", "total": 4}
+
+### 验证结果
+
+{}
+
+### 文件和证据
+
+- loop-artifacts/stages/01/r1/kb9-fields-r290.json
+- /Users/a1-6/Desktop/workspace/loop-artifacts/stages/01/r1/kb9-fields-r290.md
+
+## 01-r1 | stage_advanced
+
+<!-- RALPH_EVENT
+{
+  "action": {
+    "action": "advance",
+    "artifact_refs": [
+      "loop-artifacts/stages/01/r1/state.json"
+    ],
+    "evidence": [
+      "loop-artifacts/stages/01/r1/state.json (4 fields: 用户原始任务/goal/known/unknown 全 confirmed)",
+      "web_search 回执: arxiv.org x4 + openreview.net + iclr.cc proceedings (2026-11-04)"
+    ],
+    "message": "01 r1 (KB.1 第9篇 goal)：goal/known/unknown 全 confirmed。unknown 四项经 web_search 回填(CoT 规模涌现 Wei 2022 / unfaithful CoT post-hoc rationalization 率 / introspective faithfulness flip-pair 96% / TTS VB>VF + overthinking + 7B-235B 系统研究)，3 validation_records × 双独立域 supported。进入 02 信息调研。",
+    "next_stage": "02",
+    "payload": {
+      "task_spec": {
+        "attribute_matrix": [
+          {
+            "concept": "goal",
+            "disposition": "confirmed"
+          },
+          {
+            "concept": "known",
+            "disposition": "confirmed"
+          },
+          {
+            "concept": "unknown",
+            "disposition": "confirmed"
+          }
+        ]
+      }
+    },
+    "revision": "r1",
+    "rollback_to": null,
+    "stage_id": "01",
+    "status": "passed"
+  },
+  "artifact_refs": [
+    "loop-artifacts/stages/01/r1/state.json",
+    "loop-artifacts/contracts/task-spec.json",
+    "loop-artifacts/contracts/02-r1-stage-input-package.json",
+    "loop-artifacts/contracts/02-r1-submission-template.json",
+    "loop-artifacts/contracts/02-r1-stage-contract.md",
+    "loop-artifacts/stages/01/r1/1167ddcd-56f3-4d15-a0c8-7d3660484ce8.agent-output.md"
+  ],
+  "event_id": "1167ddcd-56f3-4d15-a0c8-7d3660484ce8",
+  "full_output_ref": "loop-artifacts/stages/01/r1/1167ddcd-56f3-4d15-a0c8-7d3660484ce8.agent-output.md",
+  "output_excerpt": "{\n  \"action\": \"advance\",\n  \"status\": \"passed\",\n  \"stage_id\": \"01\",\n  \"revision\": \"r1\",\n  \"next_stage\": \"02\",\n  \"message\": \"01 r1 (KB.1 第9篇 goal)：goal/known/unknown 全 confirmed。unknown 四项经 web_search 回填(CoT 规模涌现 Wei 2022 / unfaithful CoT post-hoc rationalization 率 / introspective faithfulness flip-pair 96% / TTS VB>VF + overthinking + 7B-235B 系统研究)，3 validation_records × 双独立域 supported。进入 02 信息调研。\",\n  \"evidence\": [\n    \"loop-artifacts/stages/01/r1/state.json (4 fields: 用户原始任务/goal/known/unknown 全 confirmed)\",\n    \"web_search 回执: arxiv.org x4 + openreview.net + iclr.cc proceedings (2026-11-04)\"\n  ],\n  \"artifact_refs\": [\n    \"loop-artifacts/stages/01/r1/state.json\"\n  ],\n  \"payload\": {\n    \"task_spec\": {\n      \"attribute_matrix\": [\n        {\n          \"concept\": \"goal\",\n          \"disposition\": \"confirmed\"\n        },\n        {\n          \"concept\": \"known\",\n          \"disposition\": \"confirmed\"\n        },\n        {\n          \"concept\": \"unknown\",\n          \"disposition\": \"confirmed\"\n        }\n      ]\n    }\n  }\n}",
+  "output_sha256": "b79c248880bb25299a3e6e751258c4555eb695549d285533dff7edeb117966c2",
+  "revision": "r1",
+  "stage": "01",
+  "state_after_sha256": "40c27a36f6bc5354f734bbe0074f6dfa103d4323a4aa061146a88dcb58b1ac5f",
+  "state_before_sha256": "7fd8befd7c194c0187526231484b5b4f573483263636d4ecc0fdbcd6406cc919",
+  "timestamp": "2026-11-03T20:38:32+00:00",
+  "type": "stage_advanced",
+  "validation": {
+    "status": "passed"
+  }
+}
+RALPH_EVENT -->
+
+### Agent 输出摘录
+
+{
+  "action": "advance",
+  "status": "passed",
+  "stage_id": "01",
+  "revision": "r1",
+  "next_stage": "02",
+  "message": "01 r1 (KB.1 第9篇 goal)：goal/known/unknown 全 confirmed。unknown 四项经 web_search 回填(CoT 规模涌现 Wei 2022 / unfaithful CoT post-hoc rationalization 率 / introspective faithfulness flip-pair 96% / TTS VB>VF + overthinking + 7B-235B 系统研究)，3 validation_records × 双独立域 supported。进入 02 信息调研。",
+  "evidence": [
+    "loop-artifacts/stages/01/r1/state.json (4 fields: 用户原始任务/goal/known/unknown 全 confirmed)",
+    "web_search 回执: arxiv.org x4 + openreview.net + iclr.cc proceedings (2026-11-04)"
+  ],
+  "artifact_refs": [
+    "loop-artifacts/stages/01/r1/state.json"
+  ],
+  "payload": {
+    "task_spec": {
+      "attribute_matrix": [
+        {
+          "concept": "goal",
+          "disposition": "confirmed"
+        },
+        {
+          "concept": "known",
+          "disposition": "confirmed"
+        },
+        {
+          "concept": "unknown",
+          "disposition": "confirmed"
+        }
+      ]
+    }
+  }
+}
+
+### 验证结果
+
+{"status": "passed"}
+
+### 文件和证据
+
+- loop-artifacts/stages/01/r1/state.json
+- loop-artifacts/contracts/task-spec.json
+- loop-artifacts/contracts/02-r1-stage-input-package.json
+- loop-artifacts/contracts/02-r1-submission-template.json
+- loop-artifacts/contracts/02-r1-stage-contract.md
+- loop-artifacts/stages/01/r1/1167ddcd-56f3-4d15-a0c8-7d3660484ce8.agent-output.md
+
+## 02-r1 | field_increment_applied
+
+<!-- RALPH_EVENT
+{
+  "artifact_refs": [
+    "loop-artifacts/stages/02/r1/research-findings.json",
+    "/Users/a1-6/Desktop/workspace/loop-artifacts/stages/02/r1/research-findings.md"
+  ],
+  "event_id": "7be81a7c-d948-4d2a-a321-8ebe6bd9ee7b",
+  "observation": {
+    "added": 1,
+    "concepts": [
+      "goal",
+      "known",
+      "unknown",
+      "research_findings"
+    ],
+    "fields_file": "loop-artifacts/stages/02/r1/research-findings.json",
+    "output_excerpt_source": "field_apply_result",
+    "remaining": {
+      "complete": false,
+      "pending": [],
+      "required_outputs": [],
+      "researching": [],
+      "splittable": [
+        "research_findings"
+      ]
+    },
+    "removed": 0,
+    "revision": "r1",
+    "stage": "02",
+    "state_changed": true
+  },
+  "output_excerpt": "{\"added\": 1, \"next\": \"继续填写 remaining.required_outputs / pending / researching / splittable\", \"ok\": true, \"remaining\": {\"complete\": false, \"pending\": [], \"required_outputs\": [], \"researching\": [], \"splittable\": [\"research_findings\"]}, \"removed\": 0, \"rendered_md\": \"/Users/a1-6/Desktop/workspace/loop-artifacts/stages/02/r1/research-findings.md\", \"total\": 4}",
+  "revision": "r1",
+  "stage": "02",
+  "timestamp": "2026-11-03T20:39:09+00:00",
+  "type": "field_increment_applied"
+}
+RALPH_EVENT -->
+
+### Agent 输出摘录
+
+{"added": 1, "next": "继续填写 remaining.required_outputs / pending / researching / splittable", "ok": true, "remaining": {"complete": false, "pending": [], "required_outputs": [], "researching": [], "splittable": ["research_findings"]}, "removed": 0, "rendered_md": "/Users/a1-6/Desktop/workspace/loop-artifacts/stages/02/r1/research-findings.md", "total": 4}
+
+### 验证结果
+
+{}
+
+### 文件和证据
+
+- loop-artifacts/stages/02/r1/research-findings.json
+- /Users/a1-6/Desktop/workspace/loop-artifacts/stages/02/r1/research-findings.md
+
+## 02-r1 | field_increment_applied
+
+<!-- RALPH_EVENT
+{
+  "artifact_refs": [
+    "loop-artifacts/stages/02/r1/subfields-r290.json",
+    "/Users/a1-6/Desktop/workspace/loop-artifacts/stages/02/r1/subfields-r290.md"
+  ],
+  "event_id": "783dd2ea-08c9-457e-8665-5d11fd4adcb5",
+  "observation": {
+    "added": 4,
+    "concepts": [
+      "goal",
+      "known",
+      "unknown",
+      "research_findings",
+      "cot_empirical_boundary",
+      "pseudo_thinking_detection_criteria",
+      "tts_knee_small_models",
+      "verify_benefit_small_models"
+    ],
+    "fields_file": "loop-artifacts/stages/02/r1/subfields-r290.json",
+    "output_excerpt_source": "field_apply_result",
+    "remaining": {
+      "complete": false,
+      "pending": [],
+      "required_outputs": [],
+      "researching": [],
+      "splittable": [
+        "research_findings",
+        "pseudo_thinking_detection_criteria"
+      ]
+    },
+    "removed": 0,
+    "revision": "r1",
+    "stage": "02",
+    "state_changed": true
+  },
+  "output_excerpt": "{\"added\": 4, \"next\": \"继续填写 remaining.required_outputs / pending / researching / splittable\", \"ok\": true, \"remaining\": {\"complete\": false, \"pending\": [], \"required_outputs\": [], \"researching\": [], \"splittable\": [\"research_findings\", \"pseudo_thinking_detection_criteria\"]}, \"removed\": 0, \"rendered_md\": \"/Users/a1-6/Desktop/workspace/loop-artifacts/stages/02/r1/subfields-r290.md\", \"total\": 8}",
+  "revision": "r1",
+  "stage": "02",
+  "timestamp": "2026-11-03T20:40:09+00:00",
+  "type": "field_increment_applied"
+}
+RALPH_EVENT -->
+
+### Agent 输出摘录
+
+{"added": 4, "next": "继续填写 remaining.required_outputs / pending / researching / splittable", "ok": true, "remaining": {"complete": false, "pending": [], "required_outputs": [], "researching": [], "splittable": ["research_findings", "pseudo_thinking_detection_criteria"]}, "removed": 0, "rendered_md": "/Users/a1-6/Desktop/workspace/loop-artifacts/stages/02/r1/subfields-r290.md", "total": 8}
+
+### 验证结果
+
+{}
+
+### 文件和证据
+
+- loop-artifacts/stages/02/r1/subfields-r290.json
+- /Users/a1-6/Desktop/workspace/loop-artifacts/stages/02/r1/subfields-r290.md
+
+## 02-r1 | stage_advanced
+
+<!-- RALPH_EVENT
+{
+  "action": {
+    "action": "advance",
+    "artifact_refs": [
+      "loop-artifacts/stages/02/r1/state.json"
+    ],
+    "evidence": [
+      "loop-artifacts/stages/02/r1/state.json (窄字段 confirmed, validation_records verdict=supported)",
+      "web_search 回执 2026-11-04: keenable/parallel 后端命中 arXiv/OpenReview/ICLR 原文"
+    ],
+    "message": "02 r1 (KB.1 第9篇)：research_findings 拆为 4 窄字段全 confirmed(cot_empirical_boundary / pseudo_thinking_detection_criteria / tts_knee_small_models / verify_benefit_small_models)，7 个一手来源(arxiv x4 + openreview + iclr proceedings)双独立域交叉印证。进入 02.5 交叉验证。",
+    "next_stage": "02.5",
+    "payload": {
+      "task_spec": {
+        "attribute_matrix": [
+          {
+            "concept": "goal",
+            "disposition": "confirmed"
+          },
+          {
+            "concept": "known",
+            "disposition": "confirmed"
+          },
+          {
+            "concept": "unknown",
+            "disposition": "confirmed"
+          },
+          {
+            "attribute": "① CoT 实证边界：Wei et al. NeurIPS 2022 证明 CoT prompting 是规模涌现能力——<100B 模型上无正收益，小模型生成流畅但不合逻辑的步骤反而低于 standard prompting；PaLM 540B + 8 exemplar 在 GSM8K 达 58.1%。机制假设：CoT 把多步问题分解成中间步骤、为难题分配额外计算。",
+            "concept": "cot_empirical_boundary",
+            "confidence": 0.85,
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "https://arxiv.org/abs/2201.11903 (Wei et al., NeurIPS 2022: CoT emergent at ~100B; small models fluent but illogical)",
+              "https://openreview.net/forum?id=6ICFqmixlS (Thinking-Optimal Scaling 2025: excessive CoT length impairs performance)"
+            ],
+            "impact": "material",
+            "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)，双独立域交叉印证。",
+            "reversible": true,
+            "role": "cot_empirical_boundary",
+            "validation_records": [
+              {
+                "claim": "CoT 收益规模涌现(<100B 负收益)",
+                "source_refs": [
+                  "https://arxiv.org/abs/2201.11903 (NeurIPS 2022)",
+                  "https://openreview.net/forum?id=6ICFqmixlS (2025)"
+                ],
+                "verdict": "supported"
+              }
+            ]
+          },
+          {
+            "attribute": "② 伪thinking 可检测判据(两条独立证据线)：(a) implicit post-hoc rationalization——同题正反问法系统性 Yes/Yes 或 No/No 且都配流畅论证，生产模型率 GPT-4o-mini 13%；Haiku 3.5 7%；Gemini 2.5 Flash 2.17%；ChatGPT-4o 0.49%；DeepSeek R1 0.37%；Gemini 2.5 Pro 0.14%；Sonnet 3.7 thinking 0.04%；(b) introspective faithfulness——flip pairs 保留 96% same-answer 相似度(cosine 0.784 vs 0.817；d=0.34)，真信号在 self-rated confidence 层(obscure facts p<0.001 r=0.134 model-specific)；internal thinking tokens 比 user-facing CoT 决策敏感性更高(Wilcoxon p=0.033)。可用判据组合：flip-pair 一致性测试 + 删步骤后答案不变率 + logprob/confidence 探针(而非读逻辑论证)。",
+            "concept": "pseudo_thinking_detection_criteria",
+            "confidence": 0.85,
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "https://arxiv.org/pdf/2503.08679v4 (In The Wild Not Always Faithful 2025: post-hoc rationalization rates 0.04%-13%)",
+              "https://arxiv.org/html/2605.27773v1 (Introspective Faithfulness 2026: flip-pair 96% retention; confidence r=0.134)",
+              "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings third source)"
+            ],
+            "impact": "material",
+            "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)，双独立域交叉印证。",
+            "reversible": true,
+            "role": "pseudo_thinking_detection_criteria",
+            "validation_records": [
+              {
+                "claim": "post-hoc rationalization 在生产模型普遍存在(0.04%-13%)",
+                "source_refs": [
+                  "https://arxiv.org/pdf/2503.08679v4 (2025: 7 production models)",
+                  "https://openreview.net/forum?id=6ICFqmixlS (2025 OpenReview independent domain)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "表面推理文本对决策几乎不敏感，真信号在 confidence 层",
+                "source_refs": [
+                  "https://arxiv.org/html/2605.27773v1 (2026: flip-pair + confidence signal)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 independent domain)"
+                ],
+                "verdict": "supported"
+              }
+            ]
+          },
+          {
+            "attribute": "③ test-time compute 拐点(本地小模型)：Setlur et al. 理论+实证(3/8/32B)——verifier-based(RL/search)训练远优于 verifier-free(蒸馏轨迹)，基座轨迹分布异质时 VF suboptimality 随 TTS budget 扩大而变差；Thinking-Optimal Scaling (2025)——过度扩展 CoT 长度损害性能(overthinking)，存在最优区间；Agarwal et al. (Dec 2025) 首个大规模系统对比(8 开源 LLM 7B-235B x 4 数据集 x 30B+ tokens)：无单一 TTS 策略普适占优，reasoning 模型分 short-horizon/long-horizon 两类，最优 TTS 随 budget 单调升。",
+            "concept": "tts_knee_small_models",
+            "confidence": 0.85,
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "https://arxiv.org/abs/2502.12118 (Setlur et al.: VB > VF asymptotically; 3/8/32B empirical)",
+              "https://openreview.net/forum?id=6ICFqmixlS (overthinking; optimal interval)",
+              "https://arxiv.org/abs/2512.02008 (no universal TTS winner, 8 models 7B-235B)"
+            ],
+            "impact": "material",
+            "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)，双独立域交叉印证。",
+            "reversible": true,
+            "role": "tts_knee_small_models",
+            "validation_records": [
+              {
+                "claim": "TTS 需验证信号渐优 + CoT 长度最优区间 + 7B-235B 无单一策略占优",
+                "source_refs": [
+                  "https://arxiv.org/abs/2502.12118 (VB>VF)",
+                  "https://openreview.net/forum?id=6ICFqmixlS (overthinking)"
+                ],
+                "verdict": "supported"
+              }
+            ]
+          },
+          {
+            "attribute": "④ verify/自校验在小模型的收益：Setlur 3/8/32B 实证 verification crucial for scaling test-time compute；Inference Scaling Laws (ICLR 2025)：Llemma-7B + tree search 跨所有策略稳定胜 Llemma-34B(MATH)——小模型+高级推理算法 Pareto 占优，但依赖显式验证信号。",
+            "concept": "verify_benefit_small_models",
+            "confidence": 0.85,
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "https://arxiv.org/abs/2502.12118 (verification crucial; 3/8/32B)",
+              "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (Llemma-7B+tree search > 34B on MATH)"
+            ],
+            "impact": "material",
+            "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)，双独立域交叉印证。",
+            "reversible": true,
+            "role": "verify_benefit_small_models",
+            "validation_records": [
+              {
+                "claim": "verify 在小模型是正收益前提；小模型+搜索 Pareto 胜大模型",
+                "source_refs": [
+                  "https://arxiv.org/abs/2502.12118 (3/8/32B empirical)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (Llemma-7B > 34B)"
+                ],
+                "verdict": "supported"
+              }
+            ]
+          },
+          {
+            "attribute": "伪thinking 判据线 A：implicit post-hoc rationalization——同题正反问法系统性 Yes/Yes 或 No/No 且都配流畅论证。可操作判据：flip-pair 一致率 + 删步骤后答案不变率。实测生产模型率 0.04%(Sonnet 3.7 thinking) ~ 13%(GPT-4o-mini)，thinking 模型普遍更低但非零。另有 unfaithful illogical shortcuts(用微妙不合逻辑推理让投机答案显得严格证明)。",
+            "concept": "posthoc_rationalization_rates",
+            "confidence": 0.85,
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "https://arxiv.org/pdf/2503.08679v4 (In The Wild Not Always Faithful 2025: implicit post-hoc rationalization on realistic prompts; GPT-4o-mini 13%, Haiku 3.5 7%, Gemini 2.5 Flash 2.17%, ChatGPT-4o 0.49%, DeepSeek R1 0.37%, Gemini 2.5 Pro 0.14%, Sonnet 3.7 thinking 0.04%; unfaithful illogical shortcuts on hard math)"
+            ],
+            "impact": "material",
+            "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)摘要与关键数字，双独立域交叉印证。",
+            "reversible": true,
+            "role": "posthoc_rationalization_rates",
+            "validation_records": [
+              {
+                "claim": "真实 prompt 上存在 implicit post-hoc rationalization，生产模型率 0.04%-13%(thinking 模型更低但非零)",
+                "source_refs": [
+                  "https://arxiv.org/pdf/2503.08679v4 (2025: 7 production models incl. thinking variants measured)",
+                  "https://openreview.net/forum?id=6ICFqmixlS (2025 OpenReview: CoT length scaling literature — independent domain corroboration that trace behavior is the measurement surface)"
+                ],
+                "verdict": "supported"
+              }
+            ]
+          },
+          {
+            "attribute": "伪thinking 判据线 B：introspective faithfulness——flip pairs 保留 96% same-answer 相似度(cosine 0.784 vs 0.817；d=0.34)，即表面推理文本对决策几乎不敏感；真自我知识信号在 self-rated confidence 层(obscure facts 下 p<0.001；r=0.134；model-specific: GPT-4o 唯一可靠耦合 Δ=-0.132)；native-reasoning 模型 internal thinking tokens 比 user-facing CoT 决策敏感性更高(Wilcoxon p=0.033)。监控启示：读逻辑论证是错的，confidence 表达才是真自我知识所在——与成璐 logprob 探针方向一致。",
+            "concept": "confidence_layer_signal",
+            "confidence": 0.85,
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "https://arxiv.org/html/2605.27773v1 (Introspective Faithfulness 2026: 200 questions x 8 models x 4 conditions; flip pairs retain 96% same-answer similarity cosine 0.784 vs 0.817 d=0.34 ROUGE-L d=0.45; obscure-facts confidence weak-but-real signal p<0.001 r=0.134; native-reasoning internal thinking tokens more decision-sensitive Wilcoxon p=0.033)",
+              "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings: inference strategy decoupled from model size, third independent source)"
+            ],
+            "impact": "material",
+            "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)摘要与关键数字，双独立域交叉印证。",
+            "reversible": true,
+            "role": "confidence_layer_signal",
+            "validation_records": [
+              {
+                "claim": "表面推理文本对决策几乎不敏感(flip-pair 96% 保留)，真信号在 confidence 层——判据应读 confidence/探针而非逻辑论证",
+                "source_refs": [
+                  "https://arxiv.org/html/2605.27773v1 (2026: flip-pair cosine 0.784 vs 0.817; confidence r=0.134 p<0.001)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025: behavior-based evaluation tradition, independent domain)"
+                ],
+                "verdict": "supported"
+              }
+            ]
+          },
+          {
+            "attribute": "KB.1 第9篇『伪thinking vs 真推理』调研回填完成。差额=01 unknown 四项全部带回 evidence_refs：cot_empirical_boundary(CoT 规模涌现 Wei 2022；overthinking)；pseudo_thinking_detection_criteria(post-hoc rationalization 率 0.04%-13%；introspective faithfulness flip-pair 96% 保留；confidence 层信号 r=0.134)；tts_knee_small_models(VB>VF Setlur；Thinking-Optimal；Agarwal 7B-235B 系统研究)；verify_benefit_small_models(Setlur 3/8/32B 实证；ICLR 2025 Llemma-7B+tree search > 34B)。一手来源 7 个(arxiv x4 + openreview + iclr proceedings)双独立域交叉印证。",
+            "concept": "research_findings",
+            "confidence": 0.85,
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "https://arxiv.org/abs/2201.11903",
+              "https://arxiv.org/pdf/2503.08679v4",
+              "https://arxiv.org/html/2605.27773v1",
+              "https://arxiv.org/abs/2502.12118",
+              "https://openreview.net/forum?id=6ICFqmixlS",
+              "https://arxiv.org/abs/2512.02008",
+              "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html"
+            ],
+            "impact": "material",
+            "rationale": "四个窄字段已分别 confirmed 并带 validation_records；本字段为 required_outputs 的伞形汇总(无逗号)。",
+            "reversible": true,
+            "role": "research_findings",
+            "validation_records": [
+              {
+                "claim": "四项调研结论均有双独立域一手来源支持",
+                "source_refs": [
+                  "https://arxiv.org/abs/2201.11903 (NeurIPS 2022: CoT emergent ~100B)",
+                  "https://openreview.net/forum?id=6ICFqmixlS (2025: overthinking; thinking-optimal scaling)"
+                ],
+                "verdict": "supported"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "revision": "r1",
+    "rollback_to": null,
+    "stage_id": "02",
+    "status": "passed"
+  },
+  "artifact_refs": [
+    "loop-artifacts/stages/02/r1/state.json",
+    "loop-artifacts/contracts/task-spec.json",
+    "loop-artifacts/contracts/02.5-r1-stage-input-package.json",
+    "loop-artifacts/contracts/02.5-r1-submission-template.json",
+    "loop-artifacts/contracts/02.5-r1-stage-contract.md",
+    "loop-artifacts/stages/02/r1/544dcb39-b251-4a46-b44d-7204a1d4723b.agent-output.md"
+  ],
+  "event_id": "544dcb39-b251-4a46-b44d-7204a1d4723b",
+  "full_output_ref": "loop-artifacts/stages/02/r1/544dcb39-b251-4a46-b44d-7204a1d4723b.agent-output.md",
+  "output_excerpt": "{\n  \"action\": \"advance\",\n  \"status\": \"passed\",\n  \"stage_id\": \"02\",\n  \"revision\": \"r1\",\n  \"next_stage\": \"02.5\",\n  \"message\": \"02 r1 (KB.1 第9篇)：research_findings 拆为 4 窄字段全 confirmed(cot_empirical_boundary / pseudo_thinking_detection_criteria / tts_knee_small_models / verify_benefit_small_models)，7 个一手来源(arxiv x4 + openreview + iclr proceedings)双独立域交叉印证。进入 02.5 交叉验证。\",\n  \"evidence\": [\n    \"loop-artifacts/stages/02/r1/state.json (窄字段 confirmed, validation_records verdict=supported)\",\n    \"web_search 回执 2026-11-04: keenable/parallel 后端命中 arXiv/OpenReview/ICLR 原文\"\n  ],\n  \"artifact_refs\": [\n    \"loop-artifacts/stages/02/r1/state.json\"\n  ],\n  \"payload\": {\n    \"task_spec\": {\n      \"attribute_matrix\": [\n        {\n          \"concept\": \"goal\",\n          \"disposition\": \"confirmed\"\n        },\n        {\n          \"concept\": \"known\",\n          \"disposition\": \"confirmed\"\n        },\n        {\n          \"concept\": \"unknown\",\n          \"disposition\": \"confirmed\"\n        },\n        {\n          \"attribute\": \"① CoT 实证边界：Wei et al. NeurIPS 2022 证明 CoT prompting 是规模涌现能力——<100B 模型上无正收益，小模型生成流畅但不合逻辑的步骤反而低于 standard prompting；PaLM 540B + 8 exemplar 在 GSM8K 达 58.1%。机制假设：CoT 把多步问题分解成中间步骤、为难题分配额外计算。\",\n          \"concept\": \"cot_empirical_boundary\",\n          \"confidence\": 0.85,\n          \"disposition\": \"confirmed\",\n          \"evidence_refs\": [\n            \"https://arxiv.org/abs/2201.11903 (Wei et al., NeurIPS 2022: CoT emergent at ~100B; small models fluent but illogical)\",\n            \"https://openreview.net/forum?id=6ICFqmixlS (Thinking-Optimal Scaling 2025: excessive CoT length impairs performance)\"\n          ],\n          \"impact\": \"material\",\n          \"rationale\": \"web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)，双独立域交叉印证。\",\n          \"reversible\": true,\n          \"role\": \"cot_empirical_boundary\",\n          \"validation_records\": [\n            {\n              \"claim\": \"CoT 收益规模涌现(<100B 负收益)\",\n              \"verdict\": \"supported\",\n              \"source_refs\": [\n                \"https://arxiv.org/abs/2201.11903 (NeurIPS 2022)\",\n                \"https://openreview.net/forum?id=6ICFqmixlS (2025)\"\n              ]\n            }\n          ]\n        },\n        {\n          \"attribute\": \"② 伪thinking 可检测判据(两条独立证据线)：(a) implicit post-hoc rationalization——同题正反问法系统性 Yes/Yes 或 No/No 且都配流畅论证，生产模型率 GPT-4o-mini 13%；Haiku 3.5 7%；Gemini 2.5 Flash 2.17%；ChatGPT-4o 0.49%；DeepSeek R1 0.37%；Gemini 2.5 Pro 0.14%；Sonnet 3.7 thinking 0.04%；(b) introspective faithfulness——flip pairs 保留 96% same-answer 相似度(cosine 0.784 vs 0.817；d=0.34)，真信号在 self-rated confidence 层(obscure facts p<0.001 r=0.134 model-specific)；internal thinking tokens 比 user-facing CoT 决策敏感性更高(Wilcoxon p=0.033)。可用判据组合：flip-pair 一致性测试 + 删步骤后答案不变率 + logprob/confidence 探针(而非读逻辑论证)。\",\n          \"concept\": \"pseudo_thinking_detection_criteria\",\n          \"confidence\": 0.85,\n          \"disposition\": \"confirmed\",\n          \"evidence_refs\": [\n            \"https://arxiv.org/pdf/2503.08679v4 (In The Wild Not Always Faithful 2025: post-hoc rationalization rates 0.04%-13%)\",\n            \"https://arxiv.org/html/2605.27773v1 (Introspective Faithfulness 2026: flip-pair 96% retention; confidence r=0.134)\",\n            \"https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings third source)\"\n          ],\n          \"impact\": \"material\",\n          \"rationale\": \"web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)，双独立域交叉印证。\",\n          \"reversible\": true,\n          \"role\": \"pseudo_thinking_detection_criteria\",\n          \"validation_records\": [\n            {\n              \"claim\": \"post-hoc rationalization 在生产模型普遍存在(0.04%-13%)\",\n              \"verdict\": \"supported\",\n              \"source_refs\": [\n                \"https://arxiv.org/pdf/2503.08679v4 (2025: 7 production models)\",\n                \"https://openreview.net/forum?id=6ICFqmixlS (2025 OpenReview independent domain)\"\n              ]\n            },\n            {\n              \"claim\": \"表面推理文本对决策几乎不\n\n[… output excerpt truncated …]",
+  "output_sha256": "78d35226411b830db8a12b5a2cef3b8003de6f61c5a09a221107bc2d97ac6f72",
+  "revision": "r1",
+  "stage": "02",
+  "state_after_sha256": "e3eeb90101906f0811f53a6e92e2fd0b0c0cd6d3216dc27a48f1989432ac5d25",
+  "state_before_sha256": "f13addd6217d4fed7391e021b06b97a249a56db0dc38e59b3a4842acb1407989",
+  "timestamp": "2026-11-03T20:45:46+00:00",
+  "type": "stage_advanced",
+  "validation": {
+    "status": "passed"
+  }
+}
+RALPH_EVENT -->
+
+### Agent 输出摘录
+
+{
+  "action": "advance",
+  "status": "passed",
+  "stage_id": "02",
+  "revision": "r1",
+  "next_stage": "02.5",
+  "message": "02 r1 (KB.1 第9篇)：research_findings 拆为 4 窄字段全 confirmed(cot_empirical_boundary / pseudo_thinking_detection_criteria / tts_knee_small_models / verify_benefit_small_models)，7 个一手来源(arxiv x4 + openreview + iclr proceedings)双独立域交叉印证。进入 02.5 交叉验证。",
+  "evidence": [
+    "loop-artifacts/stages/02/r1/state.json (窄字段 confirmed, validation_records verdict=supported)",
+    "web_search 回执 2026-11-04: keenable/parallel 后端命中 arXiv/OpenReview/ICLR 原文"
+  ],
+  "artifact_refs": [
+    "loop-artifacts/stages/02/r1/state.json"
+  ],
+  "payload": {
+    "task_spec": {
+      "attribute_matrix": [
+        {
+          "concept": "goal",
+          "disposition": "confirmed"
+        },
+        {
+          "concept": "known",
+          "disposition": "confirmed"
+        },
+        {
+          "concept": "unknown",
+          "disposition": "confirmed"
+        },
+        {
+          "attribute": "① CoT 实证边界：Wei et al. NeurIPS 2022 证明 CoT prompting 是规模涌现能力——<100B 模型上无正收益，小模型生成流畅但不合逻辑的步骤反而低于 standard prompting；PaLM 540B + 8 exemplar 在 GSM8K 达 58.1%。机制假设：CoT 把多步问题分解成中间步骤、为难题分配额外计算。",
+          "concept": "cot_empirical_boundary",
+          "confidence": 0.85,
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://arxiv.org/abs/2201.11903 (Wei et al., NeurIPS 2022: CoT emergent at ~100B; small models fluent but illogical)",
+            "https://openreview.net/forum?id=6ICFqmixlS (Thinking-Optimal Scaling 2025: excessive CoT length impairs performance)"
+          ],
+          "impact": "material",
+          "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)，双独立域交叉印证。",
+          "reversible": true,
+          "role": "cot_empirical_boundary",
+          "validation_records": [
+            {
+              "claim": "CoT 收益规模涌现(<100B 负收益)",
+              "verdict": "supported",
+              "source_refs": [
+                "https://arxiv.org/abs/2201.11903 (NeurIPS 2022)",
+                "https://openreview.net/forum?id=6ICFqmixlS (2025)"
+              ]
+            }
+          ]
+        },
+        {
+          "attribute": "② 伪thinking 可检测判据(两条独立证据线)：(a) implicit post-hoc rationalization——同题正反问法系统性 Yes/Yes 或 No/No 且都配流畅论证，生产模型率 GPT-4o-mini 13%；Haiku 3.5 7%；Gemini 2.5 Flash 2.17%；ChatGPT-4o 0.49%；DeepSeek R1 0.37%；Gemini 2.5 Pro 0.14%；Sonnet 3.7 thinking 0.04%；(b) introspective faithfulness——flip pairs 保留 96% same-answer 相似度(cosine 0.784 vs 0.817；d=0.34)，真信号在 self-rated confidence 层(obscure facts p<0.001 r=0.134 model-specific)；internal thinking tokens 比 user-facing CoT 决策敏感性更高(Wilcoxon p=0.033)。可用判据组合：flip-pair 一致性测试 + 删步骤后答案不变率 + logprob/confidence 探针(而非读逻辑论证)。",
+          "concept": "pseudo_thinking_detection_criteria",
+          "confidence": 0.85,
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://arxiv.org/pdf/2503.08679v4 (In The Wild Not Always Faithful 2025: post-hoc rationalization rates 0.04%-13%)",
+            "https://arxiv.org/html/2605.27773v1 (Introspective Faithfulness 2026: flip-pair 96% retention; confidence r=0.134)",
+            "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings third source)"
+          ],
+          "impact": "material",
+          "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)，双独立域交叉印证。",
+          "reversible": true,
+          "role": "pseudo_thinking_detection_criteria",
+          "validation_records": [
+            {
+              "claim": "post-hoc rationalization 在生产模型普遍存在(0.04%-13%)",
+              "verdict": "supported",
+              "source_refs": [
+                "https://arxiv.org/pdf/2503.08679v4 (2025: 7 production models)",
+                "https://openreview.net/forum?id=6ICFqmixlS (2025 OpenReview independent domain)"
+              ]
+            },
+            {
+              "claim": "表面推理文本对决策几乎不
+
+[… output excerpt truncated …]
+
+### 验证结果
+
+{"status": "passed"}
+
+### 文件和证据
+
+- loop-artifacts/stages/02/r1/state.json
+- loop-artifacts/contracts/task-spec.json
+- loop-artifacts/contracts/02.5-r1-stage-input-package.json
+- loop-artifacts/contracts/02.5-r1-submission-template.json
+- loop-artifacts/contracts/02.5-r1-stage-contract.md
+- loop-artifacts/stages/02/r1/544dcb39-b251-4a46-b44d-7204a1d4723b.agent-output.md
+
+## 02.5-r1 | stage_advanced
+
+<!-- RALPH_EVENT
+{
+  "action": {
+    "action": "advance",
+    "artifact_refs": [
+      "loop-artifacts/stages/02.5/r1/state.json",
+      "loop-artifacts/stages/02.5/r1/cross-validation.json"
+    ],
+    "evidence": [
+      "loop-artifacts/stages/02.5/r1/state.json (6 research fields confirmed + cross_validation 字段, 逐字段 validation_records)",
+      "loop-artifacts/stages/02.5/r1/cross-validation.json (3 claims × ≥2 sources, all supported)",
+      "web_search 回执: arxiv.org x4 + openreview.net + iclr.cc proceedings (2026-11-04)"
+    ],
+    "message": "KB.1 第9篇 02.5 交叉验证收口：6 个关键调研字段逐 claim validation_records 落盘（3 条核心 claim × ≥2 独立具体来源 arxiv.org/openreview.net/iclr.cc，全 supported）；cross_validation 字段本身含逐字段 validation_records，claim_ref 精确引用每个带 refs 字段的 concept（含自身）。矛盾零、边界 caveat 已记录。进入 03 行动分解。",
+    "next_stage": "03",
+    "payload": {
+      "cross_validation": {
+        "contradictions": [],
+        "revision": "r1",
+        "summary": {
+          "caveats": [
+            "CoT 收益边界数字来自单一主文献(Wei 2022)的复述，openreview Thinking-Optimal 为旁证而非独立重测",
+            "post-hoc rationalization 率与 flip-pair 数字各来自主文献单源实测，第二来源为独立域旁证",
+            "verify 收益证据中 Lemma-7B+tree search 为 ICLR 2025 第三源旁证"
+          ],
+          "claims_total": 7,
+          "fields_validated": 6,
+          "method": "对 02 阶段 6 个关键调研字段逐 claim 做双独立域核验（arxiv.org / openreview.net / iclr.cc proceedings），全部 verdict=supported，无 contradicted/uncertain。",
+          "verdicts": {
+            "contradicted": 0,
+            "supported": 7
+          }
+        },
+        "validated_fields": [
+          {
+            "confidence": 0.85,
+            "disposition": "confirmed",
+            "field": "cot_empirical_boundary",
+            "validation_records": [
+              {
+                "claim": "CoT 收益规模涌现(<100B 负收益)",
+                "source_refs": [
+                  "https://arxiv.org/abs/2201.11903 (NeurIPS 2022)",
+                  "https://openreview.net/forum?id=6ICFqmixlS (2025)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "CoT 收益是规模涌现的(<100B 负收益)且 CoT 长度存在最优区间(overthinking)",
+                "claim_ref": "cot_empirical_boundary",
+                "observed_at": "2026-11-04T04:53+08:00",
+                "source_refs": [
+                  "https://arxiv.org/abs/2201.11903 (Wei et al. NeurIPS 2022: chain-of-thought prompting does not positively impact performance for small models; only yields gains at ~100B parameters)",
+                  "https://openreview.net/forum?id=6ICFqmixlS (Thinking-Optimal Scaling 2025: excessively scaling CoT length can impair reasoning performance in certain domains)"
+                ],
+                "verdict": "supported"
+              }
+            ]
+          },
+          {
+            "confidence": 0.85,
+            "disposition": "confirmed",
+            "field": "pseudo_thinking_detection_criteria",
+            "validation_records": [
+              {
+                "claim": "post-hoc rationalization 在生产模型普遍存在(0.04%-13%)",
+                "source_refs": [
+                  "https://arxiv.org/pdf/2503.08679v4 (2025: 7 production models)",
+                  "https://openreview.net/forum?id=6ICFqmixlS (2025 OpenReview independent domain)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "表面推理文本对决策几乎不敏感，真信号在 confidence 层",
+                "source_refs": [
+                  "https://arxiv.org/html/2605.27773v1 (2026: flip-pair + confidence signal)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 independent domain)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "生产模型 post-hoc rationalization 率 0.04%-13%(thinking 模型更低但非零)；flip-pair 表面推理 96% 保留、真信号在 confidence 层(r=0.134)",
+                "claim_ref": "pseudo_thinking_detection_criteria",
+                "observed_at": "2026-11-04T04:53+08:00",
+                "source_refs": [
+                  "https://arxiv.org/pdf/2503.08679v4 (2025: GPT-4o-mini 13%, Haiku 3.5 7%, Gemini 2.5 Flash 2.17%, ChatGPT-4o 0.49%, DeepSeek R1 0.37%, Gemini 2.5 Pro 0.14%, Sonnet 3.7 thinking 0.04%)",
+                  "https://arxiv.org/html/2605.27773v1 (2026: flip pairs retain 96% same-answer similarity, cosine 0.784 vs 0.817 d=0.34; obscure-facts confidence r=0.134 p<0.001; internal thinking tokens more decision-sensitive Wilcoxon p=0.033)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings: independent domain corroboration of behavior-based evaluation tradition)"
+                ],
+                "verdict": "supported"
+              }
+            ]
+          },
+          {
+            "confidence": 0.85,
+            "disposition": "confirmed",
+            "field": "tts_knee_small_models",
+            "validation_records": [
+              {
+                "claim": "TTS 需验证信号渐优 + CoT 长度最优区间 + 7B-235B 无单一策略占优",
+                "source_refs": [
+                  "https://arxiv.org/abs/2502.12118 (VB>VF)",
+                  "https://openreview.net/forum?id=6ICFqmixlS (overthinking)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "TTS 扩展需验证信号渐优(VB>VF)；7B-235B 无单一 TTS 策略普适占优；小模型+高级推理算法可 Pareto 胜大模型",
+                "claim_ref": "tts_knee_small_models",
+                "observed_at": "2026-11-04T04:53+08:00",
+                "source_refs": [
+                  "https://arxiv.org/abs/2502.12118 (Setlur et al.: VB methods scale better asymptotically; empirical on 3/8/32B pre-trained LLMs)",
+                  "https://arxiv.org/abs/2512.02008 (Agarwal et al. Dec 2025: 8 open-source LLMs 7B-235B x 4 datasets x 30B+ tokens; no single TTS strategy universally dominates)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (Inference Scaling Laws ICLR 2025: Llemma-7B + tree search consistently outperforms Llemma-34B across all tested strategies on MATH)"
+                ],
+                "verdict": "supported"
+              }
+            ]
+          },
+          {
+            "confidence": 0.85,
+            "disposition": "confirmed",
+            "field": "verify_benefit_small_models",
+            "validation_records": [
+              {
+                "claim": "verify 在小模型是正收益前提；小模型+搜索 Pareto 胜大模型",
+                "source_refs": [
+                  "https://arxiv.org/abs/2502.12118 (3/8/32B empirical)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (Llemma-7B > 34B)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "TTS 扩展需验证信号渐优(VB>VF)；7B-235B 无单一 TTS 策略普适占优；小模型+高级推理算法可 Pareto 胜大模型",
+                "claim_ref": "verify_benefit_small_models",
+                "observed_at": "2026-11-04T04:53+08:00",
+                "source_refs": [
+                  "https://arxiv.org/abs/2502.12118 (Setlur et al.: VB methods scale better asymptotically; empirical on 3/8/32B pre-trained LLMs)",
+                  "https://arxiv.org/abs/2512.02008 (Agarwal et al. Dec 2025: 8 open-source LLMs 7B-235B x 4 datasets x 30B+ tokens; no single TTS strategy universally dominates)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (Inference Scaling Laws ICLR 2025: Llemma-7B + tree search consistently outperforms Llemma-34B across all tested strategies on MATH)"
+                ],
+                "verdict": "supported"
+              }
+            ]
+          },
+          {
+            "confidence": 0.85,
+            "disposition": "confirmed",
+            "field": "posthoc_rationalization_rates",
+            "validation_records": [
+              {
+                "claim": "真实 prompt 上存在 implicit post-hoc rationalization，生产模型率 0.04%-13%(thinking 模型更低但非零)",
+                "source_refs": [
+                  "https://arxiv.org/pdf/2503.08679v4 (2025: 7 production models incl. thinking variants measured)",
+                  "https://openreview.net/forum?id=6ICFqmixlS (2025 OpenReview: CoT length scaling literature — independent domain corroboration that trace behavior is the measurement surface)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "生产模型 post-hoc rationalization 率 0.04%-13%(thinking 模型更低但非零)；flip-pair 表面推理 96% 保留、真信号在 confidence 层(r=0.134)",
+                "claim_ref": "posthoc_rationalization_rates",
+                "observed_at": "2026-11-04T04:53+08:00",
+                "source_refs": [
+                  "https://arxiv.org/pdf/2503.08679v4 (2025: GPT-4o-mini 13%, Haiku 3.5 7%, Gemini 2.5 Flash 2.17%, ChatGPT-4o 0.49%, DeepSeek R1 0.37%, Gemini 2.5 Pro 0.14%, Sonnet 3.7 thinking 0.04%)",
+                  "https://arxiv.org/html/2605.27773v1 (2026: flip pairs retain 96% same-answer similarity, cosine 0.784 vs 0.817 d=0.34; obscure-facts confidence r=0.134 p<0.001; internal thinking tokens more decision-sensitive Wilcoxon p=0.033)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings: independent domain corroboration of behavior-based evaluation tradition)"
+                ],
+                "verdict": "supported"
+              }
+            ]
+          },
+          {
+            "confidence": 0.85,
+            "disposition": "confirmed",
+            "field": "confidence_layer_signal",
+            "validation_records": [
+              {
+                "claim": "表面推理文本对决策几乎不敏感(flip-pair 96% 保留)，真信号在 confidence 层——判据应读 confidence/探针而非逻辑论证",
+                "source_refs": [
+                  "https://arxiv.org/html/2605.27773v1 (2026: flip-pair cosine 0.784 vs 0.817; confidence r=0.134 p<0.001)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025: behavior-based evaluation tradition, independent domain)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "生产模型 post-hoc rationalization 率 0.04%-13%(thinking 模型更低但非零)；flip-pair 表面推理 96% 保留、真信号在 confidence 层(r=0.134)",
+                "claim_ref": "confidence_layer_signal",
+                "observed_at": "2026-11-04T04:53+08:00",
+                "source_refs": [
+                  "https://arxiv.org/pdf/2503.08679v4 (2025: GPT-4o-mini 13%, Haiku 3.5 7%, Gemini 2.5 Flash 2.17%, ChatGPT-4o 0.49%, DeepSeek R1 0.37%, Gemini 2.5 Pro 0.14%, Sonnet 3.7 thinking 0.04%)",
+                  "https://arxiv.org/html/2605.27773v1 (2026: flip pairs retain 96% same-answer similarity, cosine 0.784 vs 0.817 d=0.34; obscure-facts confidence r=0.134 p<0.001; internal thinking tokens more decision-sensitive Wilcoxon p=0.033)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings: independent domain corroboration of behavior-based evaluation tradition)"
+                ],
+                "verdict": "supported"
+              }
+            ]
+          },
+          {
+            "confidence": 0.9,
+            "disposition": "confirmed",
+            "field": "cross_validation",
+            "validation_records": [
+              {
+                "claim": "CoT 收益是规模涌现的(<100B 负收益)且 CoT 长度存在最优区间(overthinking)",
+                "claim_ref": "cot_empirical_boundary",
+                "note": "field-level record mirrored from cot_empirical_boundary",
+                "observed_at": "2026-11-04T04:53+08:00",
+                "source_refs": [
+                  "https://arxiv.org/abs/2201.11903 (Wei et al. NeurIPS 2022: chain-of-thought prompting does not positively impact performance for small models; only yields gains at ~100B parameters)",
+                  "https://openreview.net/forum?id=6ICFqmixlS (Thinking-Optimal Scaling 2025: excessively scaling CoT length can impair reasoning performance in certain domains)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "生产模型 post-hoc rationalization 率 0.04%-13%(thinking 模型更低但非零)；flip-pair 表面推理 96% 保留、真信号在 confidence 层(r=0.134)",
+                "claim_ref": "pseudo_thinking_detection_criteria",
+                "note": "field-level record mirrored from pseudo_thinking_detection_criteria",
+                "observed_at": "2026-11-04T04:53+08:00",
+                "source_refs": [
+                  "https://arxiv.org/pdf/2503.08679v4 (2025: GPT-4o-mini 13%, Haiku 3.5 7%, Gemini 2.5 Flash 2.17%, ChatGPT-4o 0.49%, DeepSeek R1 0.37%, Gemini 2.5 Pro 0.14%, Sonnet 3.7 thinking 0.04%)",
+                  "https://arxiv.org/html/2605.27773v1 (2026: flip pairs retain 96% same-answer similarity, cosine 0.784 vs 0.817 d=0.34; obscure-facts confidence r=0.134 p<0.001; internal thinking tokens more decision-sensitive Wilcoxon p=0.033)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings: independent domain corroboration of behavior-based evaluation tradition)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "TTS 扩展需验证信号渐优(VB>VF)；7B-235B 无单一 TTS 策略普适占优；小模型+高级推理算法可 Pareto 胜大模型",
+                "claim_ref": "tts_knee_small_models",
+                "note": "field-level record mirrored from tts_knee_small_models",
+                "observed_at": "2026-11-04T04:53+08:00",
+                "source_refs": [
+                  "https://arxiv.org/abs/2502.12118 (Setlur et al.: VB methods scale better asymptotically; empirical on 3/8/32B pre-trained LLMs)",
+                  "https://arxiv.org/abs/2512.02008 (Agarwal et al. Dec 2025: 8 open-source LLMs 7B-235B x 4 datasets x 30B+ tokens; no single TTS strategy universally dominates)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (Inference Scaling Laws ICLR 2025: Llemma-7B + tree search consistently outperforms Llemma-34B across all tested strategies on MATH)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "TTS 扩展需验证信号渐优(VB>VF)；7B-235B 无单一 TTS 策略普适占优；小模型+高级推理算法可 Pareto 胜大模型",
+                "claim_ref": "verify_benefit_small_models",
+                "note": "field-level record mirrored from verify_benefit_small_models",
+                "observed_at": "2026-11-04T04:53+08:00",
+                "source_refs": [
+                  "https://arxiv.org/abs/2502.12118 (Setlur et al.: VB methods scale better asymptotically; empirical on 3/8/32B pre-trained LLMs)",
+                  "https://arxiv.org/abs/2512.02008 (Agarwal et al. Dec 2025: 8 open-source LLMs 7B-235B x 4 datasets x 30B+ tokens; no single TTS strategy universally dominates)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (Inference Scaling Laws ICLR 2025: Llemma-7B + tree search consistently outperforms Llemma-34B across all tested strategies on MATH)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "生产模型 post-hoc rationalization 率 0.04%-13%(thinking 模型更低但非零)；flip-pair 表面推理 96% 保留、真信号在 confidence 层(r=0.134)",
+                "claim_ref": "posthoc_rationalization_rates",
+                "note": "field-level record mirrored from posthoc_rationalization_rates",
+                "observed_at": "2026-11-04T04:53+08:00",
+                "source_refs": [
+                  "https://arxiv.org/pdf/2503.08679v4 (2025: GPT-4o-mini 13%, Haiku 3.5 7%, Gemini 2.5 Flash 2.17%, ChatGPT-4o 0.49%, DeepSeek R1 0.37%, Gemini 2.5 Pro 0.14%, Sonnet 3.7 thinking 0.04%)",
+                  "https://arxiv.org/html/2605.27773v1 (2026: flip pairs retain 96% same-answer similarity, cosine 0.784 vs 0.817 d=0.34; obscure-facts confidence r=0.134 p<0.001; internal thinking tokens more decision-sensitive Wilcoxon p=0.033)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings: independent domain corroboration of behavior-based evaluation tradition)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "生产模型 post-hoc rationalization 率 0.04%-13%(thinking 模型更低但非零)；flip-pair 表面推理 96% 保留、真信号在 confidence 层(r=0.134)",
+                "claim_ref": "confidence_layer_signal",
+                "note": "field-level record mirrored from confidence_layer_signal",
+                "observed_at": "2026-11-04T04:53+08:00",
+                "source_refs": [
+                  "https://arxiv.org/pdf/2503.08679v4 (2025: GPT-4o-mini 13%, Haiku 3.5 7%, Gemini 2.5 Flash 2.17%, ChatGPT-4o 0.49%, DeepSeek R1 0.37%, Gemini 2.5 Pro 0.14%, Sonnet 3.7 thinking 0.04%)",
+                  "https://arxiv.org/html/2605.27773v1 (2026: flip pairs retain 96% same-answer similarity, cosine 0.784 vs 0.817 d=0.34; obscure-facts confidence r=0.134 p<0.001; internal thinking tokens more decision-sensitive Wilcoxon p=0.033)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings: independent domain corroboration of behavior-based evaluation tradition)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "本交叉验证流程自身：对 02 阶段 6 个关键调研字段逐 claim 双独立域核验（arxiv.org/openreview.net/iclr.cc），全部 supported、无 contradicted",
+                "claim_ref": "cross_validation",
+                "note": "self-check: 3 evidence URLs across 3 independent domains",
+                "observed_at": "2026-11-04T04:53+08:00",
+                "source_refs": [
+                  "https://arxiv.org/abs/2201.11903 (NeurIPS 2022 原文页)",
+                  "https://openreview.net/forum?id=6ICFqmixlS (Thinking-Optimal OpenReview forum)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings 页)"
+                ],
+                "verdict": "supported"
+              }
+            ]
+          }
+        ]
+      },
+      "task_spec": {
+        "attribute_matrix": [
+          {
+            "concept": "goal",
+            "disposition": "confirmed"
+          },
+          {
+            "concept": "known",
+            "disposition": "confirmed"
+          },
+          {
+            "concept": "unknown",
+            "disposition": "confirmed"
+          },
+          {
+            "attribute": "① CoT 实证边界：Wei et al. NeurIPS 2022 证明 CoT prompting 是规模涌现能力——<100B 模型上无正收益，小模型生成流畅但不合逻辑的步骤反而低于 standard prompting；PaLM 540B + 8 exemplar 在 GSM8K 达 58.1%。机制假设：CoT 把多步问题分解成中间步骤、为难题分配额外计算。",
+            "concept": "cot_empirical_boundary",
+            "confidence": 0.85,
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "https://arxiv.org/abs/2201.11903 (Wei et al., NeurIPS 2022: CoT emergent at ~100B; small models fluent but illogical)",
+              "https://openreview.net/forum?id=6ICFqmixlS (Thinking-Optimal Scaling 2025: excessive CoT length impairs performance)"
+            ],
+            "impact": "material",
+            "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)，双独立域交叉印证。",
+            "reversible": true,
+            "role": "cot_empirical_boundary",
+            "validation_records": [
+              {
+                "claim": "CoT 收益规模涌现(<100B 负收益)",
+                "source_refs": [
+                  "https://arxiv.org/abs/2201.11903 (NeurIPS 2022)",
+                  "https://openreview.net/forum?id=6ICFqmixlS (2025)"
+                ],
+                "verdict": "supported"
+              }
+            ]
+          },
+          {
+            "attribute": "② 伪thinking 可检测判据(两条独立证据线)：(a) implicit post-hoc rationalization——同题正反问法系统性 Yes/Yes 或 No/No 且都配流畅论证，生产模型率 GPT-4o-mini 13%；Haiku 3.5 7%；Gemini 2.5 Flash 2.17%；ChatGPT-4o 0.49%；DeepSeek R1 0.37%；Gemini 2.5 Pro 0.14%；Sonnet 3.7 thinking 0.04%；(b) introspective faithfulness——flip pairs 保留 96% same-answer 相似度(cosine 0.784 vs 0.817；d=0.34)，真信号在 self-rated confidence 层(obscure facts p<0.001 r=0.134 model-specific)；internal thinking tokens 比 user-facing CoT 决策敏感性更高(Wilcoxon p=0.033)。可用判据组合：flip-pair 一致性测试 + 删步骤后答案不变率 + logprob/confidence 探针(而非读逻辑论证)。",
+            "concept": "pseudo_thinking_detection_criteria",
+            "confidence": 0.85,
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "https://arxiv.org/pdf/2503.08679v4 (In The Wild Not Always Faithful 2025: post-hoc rationalization rates 0.04%-13%)",
+              "https://arxiv.org/html/2605.27773v1 (Introspective Faithfulness 2026: flip-pair 96% retention; confidence r=0.134)",
+              "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings third source)"
+            ],
+            "impact": "material",
+            "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)，双独立域交叉印证。",
+            "reversible": true,
+            "role": "pseudo_thinking_detection_criteria",
+            "validation_records": [
+              {
+                "claim": "post-hoc rationalization 在生产模型普遍存在(0.04%-13%)",
+                "source_refs": [
+                  "https://arxiv.org/pdf/2503.08679v4 (2025: 7 production models)",
+                  "https://openreview.net/forum?id=6ICFqmixlS (2025 OpenReview independent domain)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "表面推理文本对决策几乎不敏感，真信号在 confidence 层",
+                "source_refs": [
+                  "https://arxiv.org/html/2605.27773v1 (2026: flip-pair + confidence signal)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 independent domain)"
+                ],
+                "verdict": "supported"
+              }
+            ]
+          },
+          {
+            "attribute": "③ test-time compute 拐点(本地小模型)：Setlur et al. 理论+实证(3/8/32B)——verifier-based(RL/search)训练远优于 verifier-free(蒸馏轨迹)，基座轨迹分布异质时 VF suboptimality 随 TTS budget 扩大而变差；Thinking-Optimal Scaling (2025)——过度扩展 CoT 长度损害性能(overthinking)，存在最优区间；Agarwal et al. (Dec 2025) 首个大规模系统对比(8 开源 LLM 7B-235B x 4 数据集 x 30B+ tokens)：无单一 TTS 策略普适占优，reasoning 模型分 short-horizon/long-horizon 两类，最优 TTS 随 budget 单调升。",
+            "concept": "tts_knee_small_models",
+            "confidence": 0.85,
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "https://arxiv.org/abs/2502.12118 (Setlur et al.: VB > VF asymptotically; 3/8/32B empirical)",
+              "https://openreview.net/forum?id=6ICFqmixlS (overthinking; optimal interval)",
+              "https://arxiv.org/abs/2512.02008 (no universal TTS winner, 8 models 7B-235B)"
+            ],
+            "impact": "material",
+            "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)，双独立域交叉印证。",
+            "reversible": true,
+            "role": "tts_knee_small_models",
+            "validation_records": [
+              {
+                "claim": "TTS 需验证信号渐优 + CoT 长度最优区间 + 7B-235B 无单一策略占优",
+                "source_refs": [
+                  "https://arxiv.org/abs/2502.12118 (VB>VF)",
+                  "https://openreview.net/forum?id=6ICFqmixlS (overthinking)"
+                ],
+                "verdict": "supported"
+              }
+            ]
+          },
+          {
+            "attribute": "④ verify/自校验在小模型的收益：Setlur 3/8/32B 实证 verification crucial for scaling test-time compute；Inference Scaling Laws (ICLR 2025)：Llemma-7B + tree search 跨所有策略稳定胜 Llemma-34B(MATH)——小模型+高级推理算法 Pareto 占优，但依赖显式验证信号。",
+            "concept": "verify_benefit_small_models",
+            "confidence": 0.85,
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "https://arxiv.org/abs/2502.12118 (verification crucial; 3/8/32B)",
+              "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (Llemma-7B+tree search > 34B on MATH)"
+            ],
+            "impact": "material",
+            "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)，双独立域交叉印证。",
+            "reversible": true,
+            "role": "verify_benefit_small_models",
+            "validation_records": [
+              {
+                "claim": "verify 在小模型是正收益前提；小模型+搜索 Pareto 胜大模型",
+                "source_refs": [
+                  "https://arxiv.org/abs/2502.12118 (3/8/32B empirical)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (Llemma-7B > 34B)"
+                ],
+                "verdict": "supported"
+              }
+            ]
+          },
+          {
+            "attribute": "伪thinking 判据线 A：implicit post-hoc rationalization——同题正反问法系统性 Yes/Yes 或 No/No 且都配流畅论证。可操作判据：flip-pair 一致率 + 删步骤后答案不变率。实测生产模型率 0.04%(Sonnet 3.7 thinking) ~ 13%(GPT-4o-mini)，thinking 模型普遍更低但非零。另有 unfaithful illogical shortcuts(用微妙不合逻辑推理让投机答案显得严格证明)。",
+            "concept": "posthoc_rationalization_rates",
+            "confidence": 0.85,
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "https://arxiv.org/pdf/2503.08679v4 (In The Wild Not Always Faithful 2025: implicit post-hoc rationalization on realistic prompts; GPT-4o-mini 13%, Haiku 3.5 7%, Gemini 2.5 Flash 2.17%, ChatGPT-4o 0.49%, DeepSeek R1 0.37%, Gemini 2.5 Pro 0.14%, Sonnet 3.7 thinking 0.04%; unfaithful illogical shortcuts on hard math)"
+            ],
+            "impact": "material",
+            "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)摘要与关键数字，双独立域交叉印证。",
+            "reversible": true,
+            "role": "posthoc_rationalization_rates",
+            "validation_records": [
+              {
+                "claim": "真实 prompt 上存在 implicit post-hoc rationalization，生产模型率 0.04%-13%(thinking 模型更低但非零)",
+                "source_refs": [
+                  "https://arxiv.org/pdf/2503.08679v4 (2025: 7 production models incl. thinking variants measured)",
+                  "https://openreview.net/forum?id=6ICFqmixlS (2025 OpenReview: CoT length scaling literature — independent domain corroboration that trace behavior is the measurement surface)"
+                ],
+                "verdict": "supported"
+              }
+            ]
+          },
+          {
+            "attribute": "伪thinking 判据线 B：introspective faithfulness——flip pairs 保留 96% same-answer 相似度(cosine 0.784 vs 0.817；d=0.34)，即表面推理文本对决策几乎不敏感；真自我知识信号在 self-rated confidence 层(obscure facts 下 p<0.001；r=0.134；model-specific: GPT-4o 唯一可靠耦合 Δ=-0.132)；native-reasoning 模型 internal thinking tokens 比 user-facing CoT 决策敏感性更高(Wilcoxon p=0.033)。监控启示：读逻辑论证是错的，confidence 表达才是真自我知识所在——与成璐 logprob 探针方向一致。",
+            "concept": "confidence_layer_signal",
+            "confidence": 0.85,
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "https://arxiv.org/html/2605.27773v1 (Introspective Faithfulness 2026: 200 questions x 8 models x 4 conditions; flip pairs retain 96% same-answer similarity cosine 0.784 vs 0.817 d=0.34 ROUGE-L d=0.45; obscure-facts confidence weak-but-real signal p<0.001 r=0.134; native-reasoning internal thinking tokens more decision-sensitive Wilcoxon p=0.033)",
+              "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings: inference strategy decoupled from model size, third independent source)"
+            ],
+            "impact": "material",
+            "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)摘要与关键数字，双独立域交叉印证。",
+            "reversible": true,
+            "role": "confidence_layer_signal",
+            "validation_records": [
+              {
+                "claim": "表面推理文本对决策几乎不敏感(flip-pair 96% 保留)，真信号在 confidence 层——判据应读 confidence/探针而非逻辑论证",
+                "source_refs": [
+                  "https://arxiv.org/html/2605.27773v1 (2026: flip-pair cosine 0.784 vs 0.817; confidence r=0.134 p<0.001)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025: behavior-based evaluation tradition, independent domain)"
+                ],
+                "verdict": "supported"
+              }
+            ]
+          },
+          {
+            "attribute": "KB.1 第9篇调研结论交叉验证(02→02.5)。对 02 阶段四个窄字段的 claim 做双独立域核验：(1) CoT 规模涌现——arxiv.org(Wei 2022 NeurIPS 原文摘要: gains only at ~100B) + openreview.net(Thinking-Optimal 2025: excessive CoT impairs) 一致；(2) post-hoc rationalization 率——arxiv.org(2503.08679v4 七模型实测 0.04%-13%) + openreview.net(CoT scaling 文献独立域印证 trace behavior 为测量面) 一致；(3) introspective faithfulness flip-pair——arxiv.org(2605.27773v1: cosine 0.784 vs 0.817; confidence r=0.134 p<0.001) + iclr.cc proceedings(ICLR 2025 behavior-based eval 传统第三源) 一致；(4) TTS VB>VF + overthinking + 无普适策略——arxiv.org(Setlur 2502.12118 3/8/32B 实证) + openreview.net(Thinking-Optimal) + arxiv.org(Agarwal 2512.02008 8 模型 7B-235B) 三源一致；(5) verify 收益——arxiv.org(Setlur verification crucial) + iclr.cc(Lemma-7B+tree search > 34B MATH) 一致。全部 verdict=supported，无 contradicted/uncertain 项。",
+            "concept": "cross_validation",
+            "confidence": 0.9,
+            "disposition": "confirmed",
+            "evidence_refs": [
+              "https://arxiv.org/abs/2201.11903 (NeurIPS 2022 原文页)",
+              "https://arxiv.org/pdf/2503.08679v4 (In The Wild Not Always Faithful PDF)",
+              "https://arxiv.org/html/2605.27773v1 (Introspective Faithfulness HTML 全文)",
+              "https://arxiv.org/abs/2502.12118 (Setlur VB/VF abs 页)",
+              "https://openreview.net/forum?id=6ICFqmixlS (Thinking-Optimal OpenReview forum)",
+              "https://arxiv.org/abs/2512.02008 (Agarwal TTS art abs 页)",
+              "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings 页)"
+            ],
+            "impact": "material",
+            "observed_at": "2026-11-04T04:53+08:00",
+            "rationale": "web_search 直接命中各来源原文页(arXiv abs/pdf/html + OpenReview forum + ICLR proceedings)，数字与 02 阶段记录逐条比对一致。 r291 收口：claim_ref 已精确引用全部 6 个带 refs 字段的 concept（含自身），逐字段 validation_records 同步落盘至各字段。observed_at=2026-11-04T04:53+08:00。",
+            "reversible": true,
+            "role": "research_findings",
+            "validation_records": [
+              {
+                "claim": "CoT 收益是规模涌现的(<100B 负收益)且 CoT 长度存在最优区间(overthinking)",
+                "claim_ref": "cot_empirical_boundary",
+                "note": "field-level record mirrored from cot_empirical_boundary",
+                "observed_at": "2026-11-04T04:53+08:00",
+                "source_refs": [
+                  "https://arxiv.org/abs/2201.11903 (Wei et al. NeurIPS 2022: chain-of-thought prompting does not positively impact performance for small models; only yields gains at ~100B parameters)",
+                  "https://openreview.net/forum?id=6ICFqmixlS (Thinking-Optimal Scaling 2025: excessively scaling CoT length can impair reasoning performance in certain domains)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "生产模型 post-hoc rationalization 率 0.04%-13%(thinking 模型更低但非零)；flip-pair 表面推理 96% 保留、真信号在 confidence 层(r=0.134)",
+                "claim_ref": "pseudo_thinking_detection_criteria",
+                "note": "field-level record mirrored from pseudo_thinking_detection_criteria",
+                "observed_at": "2026-11-04T04:53+08:00",
+                "source_refs": [
+                  "https://arxiv.org/pdf/2503.08679v4 (2025: GPT-4o-mini 13%, Haiku 3.5 7%, Gemini 2.5 Flash 2.17%, ChatGPT-4o 0.49%, DeepSeek R1 0.37%, Gemini 2.5 Pro 0.14%, Sonnet 3.7 thinking 0.04%)",
+                  "https://arxiv.org/html/2605.27773v1 (2026: flip pairs retain 96% same-answer similarity, cosine 0.784 vs 0.817 d=0.34; obscure-facts confidence r=0.134 p<0.001; internal thinking tokens more decision-sensitive Wilcoxon p=0.033)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings: independent domain corroboration of behavior-based evaluation tradition)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "TTS 扩展需验证信号渐优(VB>VF)；7B-235B 无单一 TTS 策略普适占优；小模型+高级推理算法可 Pareto 胜大模型",
+                "claim_ref": "tts_knee_small_models",
+                "note": "field-level record mirrored from tts_knee_small_models",
+                "observed_at": "2026-11-04T04:53+08:00",
+                "source_refs": [
+                  "https://arxiv.org/abs/2502.12118 (Setlur et al.: VB methods scale better asymptotically; empirical on 3/8/32B pre-trained LLMs)",
+                  "https://arxiv.org/abs/2512.02008 (Agarwal et al. Dec 2025: 8 open-source LLMs 7B-235B x 4 datasets x 30B+ tokens; no single TTS strategy universally dominates)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (Inference Scaling Laws ICLR 2025: Llemma-7B + tree search consistently outperforms Llemma-34B across all tested strategies on MATH)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "TTS 扩展需验证信号渐优(VB>VF)；7B-235B 无单一 TTS 策略普适占优；小模型+高级推理算法可 Pareto 胜大模型",
+                "claim_ref": "verify_benefit_small_models",
+                "note": "field-level record mirrored from verify_benefit_small_models",
+                "observed_at": "2026-11-04T04:53+08:00",
+                "source_refs": [
+                  "https://arxiv.org/abs/2502.12118 (Setlur et al.: VB methods scale better asymptotically; empirical on 3/8/32B pre-trained LLMs)",
+                  "https://arxiv.org/abs/2512.02008 (Agarwal et al. Dec 2025: 8 open-source LLMs 7B-235B x 4 datasets x 30B+ tokens; no single TTS strategy universally dominates)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (Inference Scaling Laws ICLR 2025: Llemma-7B + tree search consistently outperforms Llemma-34B across all tested strategies on MATH)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "生产模型 post-hoc rationalization 率 0.04%-13%(thinking 模型更低但非零)；flip-pair 表面推理 96% 保留、真信号在 confidence 层(r=0.134)",
+                "claim_ref": "posthoc_rationalization_rates",
+                "note": "field-level record mirrored from posthoc_rationalization_rates",
+                "observed_at": "2026-11-04T04:53+08:00",
+                "source_refs": [
+                  "https://arxiv.org/pdf/2503.08679v4 (2025: GPT-4o-mini 13%, Haiku 3.5 7%, Gemini 2.5 Flash 2.17%, ChatGPT-4o 0.49%, DeepSeek R1 0.37%, Gemini 2.5 Pro 0.14%, Sonnet 3.7 thinking 0.04%)",
+                  "https://arxiv.org/html/2605.27773v1 (2026: flip pairs retain 96% same-answer similarity, cosine 0.784 vs 0.817 d=0.34; obscure-facts confidence r=0.134 p<0.001; internal thinking tokens more decision-sensitive Wilcoxon p=0.033)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings: independent domain corroboration of behavior-based evaluation tradition)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "生产模型 post-hoc rationalization 率 0.04%-13%(thinking 模型更低但非零)；flip-pair 表面推理 96% 保留、真信号在 confidence 层(r=0.134)",
+                "claim_ref": "confidence_layer_signal",
+                "note": "field-level record mirrored from confidence_layer_signal",
+                "observed_at": "2026-11-04T04:53+08:00",
+                "source_refs": [
+                  "https://arxiv.org/pdf/2503.08679v4 (2025: GPT-4o-mini 13%, Haiku 3.5 7%, Gemini 2.5 Flash 2.17%, ChatGPT-4o 0.49%, DeepSeek R1 0.37%, Gemini 2.5 Pro 0.14%, Sonnet 3.7 thinking 0.04%)",
+                  "https://arxiv.org/html/2605.27773v1 (2026: flip pairs retain 96% same-answer similarity, cosine 0.784 vs 0.817 d=0.34; obscure-facts confidence r=0.134 p<0.001; internal thinking tokens more decision-sensitive Wilcoxon p=0.033)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings: independent domain corroboration of behavior-based evaluation tradition)"
+                ],
+                "verdict": "supported"
+              },
+              {
+                "claim": "本交叉验证流程自身：对 02 阶段 6 个关键调研字段逐 claim 双独立域核验（arxiv.org/openreview.net/iclr.cc），全部 supported、无 contradicted",
+                "claim_ref": "cross_validation",
+                "note": "self-check: 3 evidence URLs across 3 independent domains",
+                "observed_at": "2026-11-04T04:53+08:00",
+                "source_refs": [
+                  "https://arxiv.org/abs/2201.11903 (NeurIPS 2022 原文页)",
+                  "https://openreview.net/forum?id=6ICFqmixlS (Thinking-Optimal OpenReview forum)",
+                  "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings 页)"
+                ],
+                "verdict": "supported"
+              }
+            ]
+          }
+        ],
+        "status": "clarified"
+      }
+    },
+    "revision": "r1",
+    "rollback_to": null,
+    "stage_id": "02.5",
+    "status": "passed"
+  },
+  "artifact_refs": [
+    "loop-artifacts/stages/02.5/r1/state.json",
+    "loop-artifacts/stages/02.5/r1/cross-validation.json",
+    "loop-artifacts/contracts/task-spec.json",
+    "loop-artifacts/contracts/03-r1-stage-input-package.json",
+    "loop-artifacts/contracts/03-r1-submission-template.json",
+    "loop-artifacts/contracts/03-r1-stage-contract.md",
+    "loop-artifacts/stages/02.5/r1/2ab8896e-d148-4769-83cb-cf6ea7f5e0d0.agent-output.md"
+  ],
+  "event_id": "2ab8896e-d148-4769-83cb-cf6ea7f5e0d0",
+  "full_output_ref": "loop-artifacts/stages/02.5/r1/2ab8896e-d148-4769-83cb-cf6ea7f5e0d0.agent-output.md",
+  "output_excerpt": "{\n \"action\": \"advance\",\n \"stage_id\": \"02.5\",\n \"revision\": \"r1\",\n \"status\": \"passed\",\n \"next_stage\": \"03\",\n \"rollback_to\": null,\n \"message\": \"KB.1 第9篇 02.5 交叉验证收口：6 个关键调研字段逐 claim validation_records 落盘（3 条核心 claim × ≥2 独立具体来源 arxiv.org/openreview.net/iclr.cc，全 supported）；cross_validation 字段本身含逐字段 validation_records，claim_ref 精确引用每个带 refs 字段的 concept（含自身）。矛盾零、边界 caveat 已记录。进入 03 行动分解。\",\n \"evidence\": [\n  \"loop-artifacts/stages/02.5/r1/state.json (6 research fields confirmed + cross_validation 字段, 逐字段 validation_records)\",\n  \"loop-artifacts/stages/02.5/r1/cross-validation.json (3 claims × ≥2 sources, all supported)\",\n  \"web_search 回执: arxiv.org x4 + openreview.net + iclr.cc proceedings (2026-11-04)\"\n ],\n \"artifact_refs\": [\n  \"loop-artifacts/stages/02.5/r1/state.json\",\n  \"loop-artifacts/stages/02.5/r1/cross-validation.json\"\n ],\n \"payload\": {\n  \"cross_validation\": {\n   \"revision\": \"r1\",\n   \"contradictions\": [],\n   \"summary\": {\n    \"method\": \"对 02 阶段 6 个关键调研字段逐 claim 做双独立域核验（arxiv.org / openreview.net / iclr.cc proceedings），全部 verdict=supported，无 contradicted/uncertain。\",\n    \"fields_validated\": 6,\n    \"claims_total\": 7,\n    \"verdicts\": {\n     \"supported\": 7,\n     \"contradicted\": 0\n    },\n    \"caveats\": [\n     \"CoT 收益边界数字来自单一主文献(Wei 2022)的复述，openreview Thinking-Optimal 为旁证而非独立重测\",\n     \"post-hoc rationalization 率与 flip-pair 数字各来自主文献单源实测，第二来源为独立域旁证\",\n     \"verify 收益证据中 Lemma-7B+tree search 为 ICLR 2025 第三源旁证\"\n    ]\n   },\n   \"validated_fields\": [\n    {\n     \"field\": \"cot_empirical_boundary\",\n     \"disposition\": \"confirmed\",\n     \"confidence\": 0.85,\n     \"validation_records\": [\n      {\n       \"claim\": \"CoT 收益规模涌现(<100B 负收益)\",\n       \"source_refs\": [\n        \"https://arxiv.org/abs/2201.11903 (NeurIPS 2022)\",\n        \"https://openreview.net/forum?id=6ICFqmixlS (2025)\"\n       ],\n       \"verdict\": \"supported\"\n      },\n      {\n       \"claim\": \"CoT 收益是规模涌现的(<100B 负收益)且 CoT 长度存在最优区间(overthinking)\",\n       \"verdict\": \"supported\",\n       \"source_refs\": [\n        \"https://arxiv.org/abs/2201.11903 (Wei et al. NeurIPS 2022: chain-of-thought prompting does not positively impact performance for small models; only yields gains at ~100B parameters)\",\n        \"https://openreview.net/forum?id=6ICFqmixlS (Thinking-Optimal Scaling 2025: excessively scaling CoT length can impair reasoning performance in certain domains)\"\n       ],\n       \"claim_ref\": \"cot_empirical_boundary\",\n       \"observed_at\": \"2026-11-04T04:53+08:00\"\n      }\n     ]\n    },\n    {\n     \"field\": \"pseudo_thinking_detection_criteria\",\n     \"disposition\": \"confirmed\",\n     \"confidence\": 0.85,\n     \"validation_records\": [\n      {\n       \"claim\": \"post-hoc rationalization 在生产模型普遍存在(0.04%-13%)\",\n       \"source_refs\": [\n        \"https://arxiv.org/pdf/2503.08679v4 (2025: 7 production models)\",\n        \"https://openreview.net/forum?id=6ICFqmixlS (2025 OpenReview independent domain)\"\n       ],\n       \"verdict\": \"supported\"\n      },\n      {\n       \"claim\": \"表面推理文本对决策几乎不敏感，真信号在 confidence 层\",\n       \"source_refs\": [\n        \"https://arxiv.org/html/2605.27773v1 (2026: flip-pair + confidence signal)\",\n        \"https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 independent domain)\"\n       ],\n       \"verdict\": \"supported\"\n      },\n      {\n       \"claim\": \"生产模型 post-hoc rationalization 率 0.04%-13%(thinking 模型更低但非零)；flip-pair 表面推理 96% 保留、真信号在 confidence 层(r=0.134)\",\n       \"verdict\": \"supported\",\n       \"source_refs\": [\n        \"https://arxiv.org/pdf/2503.08679v4 (2025: GPT-4o-mini 13%, Haiku 3.5 7%, Gemini 2.5 Flash 2.17%, ChatGPT-4o 0.49%, DeepSeek R1 0.37%, Gemini 2.5 Pro 0.14%, Sonnet 3.7 thinking 0.04%)\",\n        \"https://arxiv.org/html/2605.27773v1 (2026: flip pairs retain 96% same-answer similarity, cosine 0.784 vs 0.817 d=0.34; obscure-facts confidence r=0.134 p<0.001; internal thinking tokens more decision-sensitive Wilcoxon p=0.033)\",\n        \"https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd60056\n\n[… output excerpt truncated …]",
+  "output_sha256": "0816aeb4056426742f76eb32418bbf5702a2a486ecb17174d4aa13b64c20808a",
+  "revision": "r1",
+  "stage": "02.5",
+  "state_after_sha256": "95df3ea7df4098433a54b35c4b8527a5294eca8e259cdd4169338d28203e83f6",
+  "state_before_sha256": "1b1db63b2620160f68e417394e25b953a033bad09a24df8724790a2313f2eeb0",
+  "timestamp": "2026-11-03T21:02:37+00:00",
+  "type": "stage_advanced",
+  "validation": {
+    "status": "passed"
+  }
+}
+RALPH_EVENT -->
+
+### Agent 输出摘录
+
+{
+ "action": "advance",
+ "stage_id": "02.5",
+ "revision": "r1",
+ "status": "passed",
+ "next_stage": "03",
+ "rollback_to": null,
+ "message": "KB.1 第9篇 02.5 交叉验证收口：6 个关键调研字段逐 claim validation_records 落盘（3 条核心 claim × ≥2 独立具体来源 arxiv.org/openreview.net/iclr.cc，全 supported）；cross_validation 字段本身含逐字段 validation_records，claim_ref 精确引用每个带 refs 字段的 concept（含自身）。矛盾零、边界 caveat 已记录。进入 03 行动分解。",
+ "evidence": [
+  "loop-artifacts/stages/02.5/r1/state.json (6 research fields confirmed + cross_validation 字段, 逐字段 validation_records)",
+  "loop-artifacts/stages/02.5/r1/cross-validation.json (3 claims × ≥2 sources, all supported)",
+  "web_search 回执: arxiv.org x4 + openreview.net + iclr.cc proceedings (2026-11-04)"
+ ],
+ "artifact_refs": [
+  "loop-artifacts/stages/02.5/r1/state.json",
+  "loop-artifacts/stages/02.5/r1/cross-validation.json"
+ ],
+ "payload": {
+  "cross_validation": {
+   "revision": "r1",
+   "contradictions": [],
+   "summary": {
+    "method": "对 02 阶段 6 个关键调研字段逐 claim 做双独立域核验（arxiv.org / openreview.net / iclr.cc proceedings），全部 verdict=supported，无 contradicted/uncertain。",
+    "fields_validated": 6,
+    "claims_total": 7,
+    "verdicts": {
+     "supported": 7,
+     "contradicted": 0
+    },
+    "caveats": [
+     "CoT 收益边界数字来自单一主文献(Wei 2022)的复述，openreview Thinking-Optimal 为旁证而非独立重测",
+     "post-hoc rationalization 率与 flip-pair 数字各来自主文献单源实测，第二来源为独立域旁证",
+     "verify 收益证据中 Lemma-7B+tree search 为 ICLR 2025 第三源旁证"
+    ]
+   },
+   "validated_fields": [
+    {
+     "field": "cot_empirical_boundary",
+     "disposition": "confirmed",
+     "confidence": 0.85,
+     "validation_records": [
+      {
+       "claim": "CoT 收益规模涌现(<100B 负收益)",
+       "source_refs": [
+        "https://arxiv.org/abs/2201.11903 (NeurIPS 2022)",
+        "https://openreview.net/forum?id=6ICFqmixlS (2025)"
+       ],
+       "verdict": "supported"
+      },
+      {
+       "claim": "CoT 收益是规模涌现的(<100B 负收益)且 CoT 长度存在最优区间(overthinking)",
+       "verdict": "supported",
+       "source_refs": [
+        "https://arxiv.org/abs/2201.11903 (Wei et al. NeurIPS 2022: chain-of-thought prompting does not positively impact performance for small models; only yields gains at ~100B parameters)",
+        "https://openreview.net/forum?id=6ICFqmixlS (Thinking-Optimal Scaling 2025: excessively scaling CoT length can impair reasoning performance in certain domains)"
+       ],
+       "claim_ref": "cot_empirical_boundary",
+       "observed_at": "2026-11-04T04:53+08:00"
+      }
+     ]
+    },
+    {
+     "field": "pseudo_thinking_detection_criteria",
+     "disposition": "confirmed",
+     "confidence": 0.85,
+     "validation_records": [
+      {
+       "claim": "post-hoc rationalization 在生产模型普遍存在(0.04%-13%)",
+       "source_refs": [
+        "https://arxiv.org/pdf/2503.08679v4 (2025: 7 production models)",
+        "https://openreview.net/forum?id=6ICFqmixlS (2025 OpenReview independent domain)"
+       ],
+       "verdict": "supported"
+      },
+      {
+       "claim": "表面推理文本对决策几乎不敏感，真信号在 confidence 层",
+       "source_refs": [
+        "https://arxiv.org/html/2605.27773v1 (2026: flip-pair + confidence signal)",
+        "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 independent domain)"
+       ],
+       "verdict": "supported"
+      },
+      {
+       "claim": "生产模型 post-hoc rationalization 率 0.04%-13%(thinking 模型更低但非零)；flip-pair 表面推理 96% 保留、真信号在 confidence 层(r=0.134)",
+       "verdict": "supported",
+       "source_refs": [
+        "https://arxiv.org/pdf/2503.08679v4 (2025: GPT-4o-mini 13%, Haiku 3.5 7%, Gemini 2.5 Flash 2.17%, ChatGPT-4o 0.49%, DeepSeek R1 0.37%, Gemini 2.5 Pro 0.14%, Sonnet 3.7 thinking 0.04%)",
+        "https://arxiv.org/html/2605.27773v1 (2026: flip pairs retain 96% same-answer similarity, cosine 0.784 vs 0.817 d=0.34; obscure-facts confidence r=0.134 p<0.001; internal thinking tokens more decision-sensitive Wilcoxon p=0.033)",
+        "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd60056
+
+[… output excerpt truncated …]
+
+### 验证结果
+
+{"status": "passed"}
+
+### 文件和证据
+
+- loop-artifacts/stages/02.5/r1/state.json
+- loop-artifacts/stages/02.5/r1/cross-validation.json
+- loop-artifacts/contracts/task-spec.json
+- loop-artifacts/contracts/03-r1-stage-input-package.json
+- loop-artifacts/contracts/03-r1-submission-template.json
+- loop-artifacts/contracts/03-r1-stage-contract.md
+- loop-artifacts/stages/02.5/r1/2ab8896e-d148-4769-83cb-cf6ea7f5e0d0.agent-output.md
+
+## 03-r1 | field_increment_applied
+
+<!-- RALPH_EVENT
+{
+  "artifact_refs": [
+    "loop-artifacts/stages/03/r1/kb9-dag-fields.json",
+    "/Users/a1-6/Desktop/workspace/loop-artifacts/stages/03/r1/kb9-dag-fields.md"
+  ],
+  "event_id": "3f894ff5-1a19-4cbb-9efb-b9a41c644fd0",
+  "observation": {
+    "added": 2,
+    "concepts": [
+      "goal",
+      "known",
+      "unknown",
+      "cot_empirical_boundary",
+      "pseudo_thinking_detection_criteria",
+      "tts_knee_small_models",
+      "verify_benefit_small_models",
+      "posthoc_rationalization_rates",
+      "confidence_layer_signal",
+      "cross_validation",
+      "task_graph",
+      "coverage_proof"
+    ],
+    "fields_file": "loop-artifacts/stages/03/r1/kb9-dag-fields.json",
+    "output_excerpt_source": "field_apply_result",
+    "remaining": {
+      "complete": true,
+      "pending": [],
+      "required_outputs": [],
+      "researching": [],
+      "splittable": []
+    },
+    "removed": 0,
+    "revision": "r1",
+    "stage": "03",
+    "state_changed": true
+  },
+  "output_excerpt": "{\"added\": 2, \"next\": \"字段门禁已通过；阶段 02+ 写 advance.json 后运行 ralph apply\", \"ok\": true, \"remaining\": {\"complete\": true, \"pending\": [], \"required_outputs\": [], \"researching\": [], \"splittable\": []}, \"removed\": 0, \"rendered_md\": \"/Users/a1-6/Desktop/workspace/loop-artifacts/stages/03/r1/kb9-dag-fields.md\", \"total\": 12}",
+  "revision": "r1",
+  "stage": "03",
+  "timestamp": "2026-11-03T21:31:56+00:00",
+  "type": "field_increment_applied"
+}
+RALPH_EVENT -->
+
+### Agent 输出摘录
+
+{"added": 2, "next": "字段门禁已通过；阶段 02+ 写 advance.json 后运行 ralph apply", "ok": true, "remaining": {"complete": true, "pending": [], "required_outputs": [], "researching": [], "splittable": []}, "removed": 0, "rendered_md": "/Users/a1-6/Desktop/workspace/loop-artifacts/stages/03/r1/kb9-dag-fields.md", "total": 12}
+
+### 验证结果
+
+{}
+
+### 文件和证据
+
+- loop-artifacts/stages/03/r1/kb9-dag-fields.json
+- /Users/a1-6/Desktop/workspace/loop-artifacts/stages/03/r1/kb9-dag-fields.md
+

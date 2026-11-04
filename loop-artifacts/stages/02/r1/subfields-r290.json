@@ -1,0 +1,101 @@
+[
+  {
+    "concept": "cot_empirical_boundary",
+    "role": "cot_empirical_boundary",
+    "attribute": "① CoT 实证边界(哪些任务真受益/表演性步骤)：Wei et al. NeurIPS 2022 证明 CoT prompting 是规模涌现能力——<100B 模型上无正收益，小模型生成流畅但不合逻辑的步骤反而低于 standard prompting；PaLM 540B + 8 exemplar 在 GSM8K 达 58.1%。机制假设：CoT 把多步问题分解成中间步骤、为难题分配额外计算。",
+    "disposition": "confirmed",
+    "evidence_refs": [
+      "https://arxiv.org/abs/2201.11903 (Wei et al., NeurIPS 2022: CoT prompting emergent at ~100B scale; small models fluent but illogical chains -> lower than standard prompting; PaLM 540B GSM8K 58.1%)",
+      "https://openreview.net/forum?id=6ICFqmixlS (Thinking-Optimal Scaling 2025: excessively scaling CoT length can impair reasoning performance in certain domains)"
+    ],
+    "confidence": 0.85,
+    "impact": "material",
+    "reversible": true,
+    "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)摘要与关键数字，双独立域交叉印证。",
+    "validation_records": [
+      {
+        "claim": "CoT 收益是规模涌现的：<100B 小模型上无正收益甚至负收益",
+        "verdict": "supported",
+        "source_refs": [
+          "https://arxiv.org/abs/2201.11903 (NeurIPS 2022: gains only at ~100B; smaller models produced fluent but illogical chains leading to lower performance)",
+          "https://openreview.net/forum?id=6ICFqmixlS (2025: excessive CoT length impairs reasoning in certain domains)"
+        ]
+      }
+    ]
+  },
+  {
+    "concept": "pseudo_thinking_detection_criteria",
+    "role": "pseudo_thinking_detection_criteria",
+    "attribute": "② 伪thinking 可检测判据：两条独立证据线。(a) In The Wild Not Always Faithful (2025)：真实 prompt 上 implicit post-hoc rationalization——同题正反问法系统性 Yes/Yes 或 No/No 且都配流畅论证；生产模型率 GPT-4o-mini 13%, Haiku 3.5 7%, Gemini 2.5 Flash 2.17%, ChatGPT-4o 0.49%, DeepSeek R1 0.37%, Gemini 2.5 Pro 0.14%, Sonnet 3.7 thinking 0.04%。(b) Introspective Faithfulness (2026)：flip pairs 保留 96% same-answer 相似度(cosine 0.784 vs 0.817, d=0.34)——表面推理文本对决策几乎不敏感；真信号在 self-rated confidence 层(obscure facts 下 p<0.001, r=0.134, model-specific)；native-reasoning 模型 internal thinking tokens 比 user-facing CoT 决策敏感性更高(Wilcoxon p=0.033)。最接近的可用判据组合：flip-pair 一致性测试 + 删步骤后答案不变率 + logprob/confidence 探针(而非读逻辑论证)。",
+    "disposition": "confirmed",
+    "evidence_refs": [
+      "https://arxiv.org/pdf/2503.08679v4 (In The Wild Not Always Faithful 2025: implicit post-hoc rationalization on realistic prompts; GPT-4o-mini 13%, Haiku 3.5 7%, Gemini 2.5 Flash 2.17%, ChatGPT-4o 0.49%, DeepSeek R1 0.37%, Gemini 2.5 Pro 0.14%, Sonnet 3.7 thinking 0.04%)",
+      "https://arxiv.org/html/2605.27773v1 (Introspective Faithfulness 2026: flip pairs retain 96% same-answer similarity, cosine 0.784 vs 0.817 d=0.34; confidence layer weak-but-real signal r=0.134 p<0.001; internal thinking tokens more decision-sensitive than user-facing CoT Wilcoxon p=0.033)",
+      "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings: inference strategy decoupled from model size empirical tradition, third independent source)"
+    ],
+    "confidence": 0.85,
+    "impact": "material",
+    "reversible": true,
+    "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)摘要与关键数字，双独立域交叉印证。",
+    "validation_records": [
+      {
+        "claim": "伪thinking 有可检测判据：flip-pair 一致性 + post-hoc rationalization 率 + confidence 探针(而非读逻辑论证)",
+        "verdict": "supported",
+        "source_refs": [
+          "https://arxiv.org/pdf/2503.08679v4 (2025: production model rationalization rates 0.04%-13%)",
+          "https://arxiv.org/html/2605.27773v1 (2026: flip-pair 96% similarity retention; confidence carries real signal r=0.134)"
+        ]
+      }
+    ]
+  },
+  {
+    "concept": "tts_knee_small_models",
+    "role": "tts_knee_small_models",
+    "attribute": "③ test-time compute 拐点(本地小模型)：Setlur et al. 理论+实证(3/8/32B)——verifier-based(RL/search)训练远优于 verifier-free(蒸馏轨迹)，基座轨迹分布异质时 VF suboptimality 随 TTS budget 扩大而变差；Thinking-Optimal Scaling (2025)——过度扩展 CoT 长度损害性能(overthinking)，存在最优区间；Agarwal et al. (Dec 2025) 首个大规模系统对比(8 开源 LLM 7B-235B x 4 数据集 x 30B+ tokens)：无单一 TTS 策略普适占优，reasoning 模型分 short-horizon/long-horizon 两类，最优 TTS 随 budget 单调升。",
+    "disposition": "confirmed",
+    "evidence_refs": [
+      "https://arxiv.org/abs/2502.12118 (Setlur et al. ICLR 2025: VB methods asymptotically superior to VF when base trace distribution heterogeneous; empirical on 3/8/32B pre-trained LLMs)",
+      "https://openreview.net/forum?id=6ICFqmixlS (Thinking-Optimal Scaling 2025: overthinking — excessive CoT length harms accuracy on math tasks; optimal interval exists)",
+      "https://arxiv.org/abs/2512.02008 (Agarwal et al. Dec 2025: first large-scale TTS comparison, 8 open-source LLMs 7B-235B x 4 datasets x 30B+ tokens; no single strategy universally dominates; short-horizon vs long-horizon reasoning models)"
+    ],
+    "confidence": 0.85,
+    "impact": "material",
+    "reversible": true,
+    "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)摘要与关键数字，双独立域交叉印证。",
+    "validation_records": [
+      {
+        "claim": "CoT 长度存在最优区间(overthinking)，TTS 扩展需验证信号才渐优，7B-235B 无单一策略占优",
+        "verdict": "supported",
+        "source_refs": [
+          "https://arxiv.org/abs/2502.12118 (VB > VF asymptotically; 3/8/32B empirical)",
+          "https://openreview.net/forum?id=6ICFqmixlS (overthinking; thinking-optimal scaling)",
+          "https://arxiv.org/abs/2512.02008 (no universal TTS winner across 8 models 7B-235B)"
+        ]
+      }
+    ]
+  },
+  {
+    "concept": "verify_benefit_small_models",
+    "role": "verify_benefit_small_models",
+    "attribute": "④ verify/自校验在小模型的收益：Setlur 3/8/32B 实证 verification crucial for scaling test-time compute；Inference Scaling Laws (ICLR 2025)：Llemma-7B + tree search 跨所有策略稳定胜 Llemma-34B(MATH)——小模型+高级推理算法 Pareto 占优，但依赖显式验证信号。",
+    "disposition": "confirmed",
+    "evidence_refs": [
+      "https://arxiv.org/abs/2502.12118 (Setlur et al.: verification crucial for scaling test-time compute; 3/8/32B empirical corroboration)",
+      "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (Inference Scaling Laws ICLR 2025: Llemma-7B + tree search consistently outperforms Llemma-34B across all tested strategies on MATH; smaller models + advanced inference = Pareto-optimal trade-offs)"
+    ],
+    "confidence": 0.85,
+    "impact": "material",
+    "reversible": true,
+    "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)摘要与关键数字，双独立域交叉印证。",
+    "validation_records": [
+      {
+        "claim": "verify/自校验在小模型上是正收益前提(需显式验证信号)，小模型+高级推理算法可 Pareto 胜大模型",
+        "verdict": "supported",
+        "source_refs": [
+          "https://arxiv.org/abs/2502.12118 (verification crucial; 3/8/32B)",
+          "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (Llemma-7B+tree search > 34B on MATH)"
+        ]
+      }
+    ]
+  }
+]

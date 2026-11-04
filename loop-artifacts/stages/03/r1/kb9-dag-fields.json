@@ -1,0 +1,159 @@
+{
+ "fields": [
+  {
+   "concept": "task_graph",
+   "role": "task_graph",
+   "attribute": "KB.1 第9篇执行 DAG：N1 起草 A段概念块×6（note 主文件）→ N2 B段成璐视角+可证伪idea / N3 C段≥2可证伪预测带判死条件（并行，各自独立产物文件）→ N4 drift-check v1≥75→v2=100 + INDEX 加行（合并 B/C 入 note）。全本地无外部依赖；输入全部来自 02/02.5 已 confirmed 字段。",
+   "disposition": "confirmed",
+   "confidence": 0.95,
+   "impact": "material",
+   "reversible": true,
+   "rationale": "goal 范围限定单文件 note + INDEX 行（exploration r1 selected_task.scope），最小执行单元即四段写作+质检；N2/N3 并行写独立产物文件，N4 合并入 note 并做 drift-check。",
+   "evidence_refs": [
+    "loop-artifacts/stages/03/r1/actions.md",
+    "loop-artifacts/stages/03/r1/task-graph.md",
+    "loop-artifacts/stages/02.5/r1/state.json"
+   ],
+   "observed_at": "2026-11-04T05:10+08:00",
+   "task_graph": {
+    "nodes": [
+     {
+      "id": "kb9-n1-draft-note",
+      "title": "起草 KB.1 第9篇 note 主体（A段概念块×6）",
+      "owner": "agent",
+      "depends_on": [],
+      "execution_mode": "serial",
+      "input_refs": [
+       "loop-artifacts/stages/02.5/r1/state.json",
+       "projects/知识/D1-knowledge-base/notes/README.md"
+      ],
+      "writes": [
+       "projects/知识/D1-knowledge-base/notes/pseudo-thinking-vs-real-reasoning.md"
+      ],
+      "output_schema": {
+       "properties": {
+        "note_md": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      },
+      "preconditions": [
+       "02.5 六个调研字段已 confirmed（CoT 边界/伪thinking判据/TTS拐点/verify收益/posthoc率/confidence层信号）"
+      ],
+      "postconditions": [
+       "A段含 6 个概念块，每块是什么/为什么/边界+conf；数字与 02.5 evidence_refs 一致"
+      ]
+     },
+     {
+      "id": "kb9-n2-perspective",
+      "title": "B段成璐视角判断 + 可证伪 idea",
+      "owner": "agent",
+      "depends_on": [
+       "kb9-n1-draft-note"
+      ],
+      "execution_mode": "serial",
+      "input_refs": [
+       "loop-artifacts/stages/02.5/r1/state.json",
+       "projects/知识/D1-knowledge-base/memory/interest-directions.md"
+      ],
+      "writes": [
+       "loop-artifacts/stages/04/r1/kb9-section-b.md"
+      ],
+      "output_schema": {
+       "properties": {
+        "section_b_md": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      },
+      "preconditions": [
+       "A段已落盘"
+      ],
+      "postconditions": [
+       "B段含判断（读 confidence 不读论证的监控启示）+ ≥1 条带 conf 的可证伪 idea"
+      ]
+     },
+     {
+      "id": "kb9-n3-predictions",
+      "title": "C段可证伪预测 ≥2 条带判死条件",
+      "owner": "agent",
+      "depends_on": [
+       "kb9-n1-draft-note"
+      ],
+      "execution_mode": "serial",
+      "input_refs": [
+       "loop-artifacts/stages/02.5/r1/state.json",
+       "projects/知识/D1-knowledge-base/memory/interest-directions.md"
+      ],
+      "writes": [
+       "loop-artifacts/stages/04/r1/kb9-section-c.md"
+      ],
+      "output_schema": {
+       "properties": {
+        "predictions": {
+         "type": "array"
+        }
+       },
+       "type": "object"
+      },
+      "preconditions": [
+       "A段已落盘"
+      ],
+      "postconditions": [
+       "≥2 条可证伪预测，每条带明确判死条件"
+      ]
+     },
+     {
+      "id": "kb9-n4-drift-index",
+      "title": "drift-check v1→v2 收口 + INDEX.md 加行",
+      "owner": "agent",
+      "depends_on": [
+       "kb9-n1-draft-note",
+       "kb9-n2-perspective",
+       "kb9-n3-predictions"
+      ],
+      "execution_mode": "serial",
+      "input_refs": [
+       "projects/知识/D1-knowledge-base/notes/pseudo-thinking-vs-real-reasoning.md",
+       "projects/知识/D1-knowledge-base/notes/INDEX.md"
+      ],
+      "writes": [
+       "projects/知识/D1-knowledge-base/notes/INDEX.md"
+      ],
+      "output_schema": {
+       "properties": {
+        "score_v2": {
+         "type": "number"
+        }
+       },
+       "type": "object"
+      },
+      "preconditions": [
+       "A/B/C 三段齐备"
+      ],
+      "postconditions": [
+       "drift-check v1≥75 且 v2=100/100（句级第一人称率/均句长/禁词0）；INDEX.md 新增第9篇行"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "concept": "coverage_proof",
+   "role": "coverage_proof",
+   "attribute": "覆盖证明：goal 验收三要素——①A段6概念块(是什么/为什么/边界+conf)→N1；②B段成璐视角判断+可证伪idea→N2；③C段≥2可证伪预测带判死条件→N3；drift-check v1≥75→v2=100 + INDEX 加行→N4。02.5 六调研字段全部被 N1 的 input_refs 承接（逐字段引用其 evidence_refs 数字）。无遗漏目标要素、无未核验前提（全部输入来自 02/02.5 confirmed 字段）、拓扑无环（N1→N2→N3→N4 线性）。",
+   "disposition": "confirmed",
+   "confidence": 0.95,
+   "impact": "material",
+   "reversible": true,
+   "rationale": "对照 goal 字段（kb9-fields-r290.md）与 02.5 cross_validation action_items 逐项映射，见 loop-artifacts/stages/03/r1/coverage-proof.md。",
+   "evidence_refs": [
+    "loop-artifacts/stages/03/r1/coverage-proof.md",
+    "loop-artifacts/stages/01/r1/kb9-fields-r290.md"
+   ],
+   "observed_at": "2026-11-04T05:10+08:00"
+  }
+ ]
+}

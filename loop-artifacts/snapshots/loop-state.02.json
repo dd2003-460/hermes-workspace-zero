@@ -14,10 +14,49 @@
   ],
   "clarification_history": [],
   "current_artifact": "loop-artifacts/stages/02/r1/state.json",
-  "exploration_history": [],
+  "exploration_history": [
+    {
+      "candidate_tasks": [
+        {
+          "human_approved": true,
+          "priority": "P1",
+          "reason": "C区#8 中成璐亲自质疑过且前 8 篇未闭合的子题；纯本地；与 persona 工作直接相关",
+          "research_summary": "扫描 GOALS.md 链式目标(G1 waiting pfb web-llm回执/G2 T17 done/G3 monitoring) + ACTIVE-candidates.md 8条候选(#2渠道待拍板 #3卡credentials #4卡arXiv手动上传 #5done #6backlog #7需异源judge)：外部线全 blocked。唯一纯本地 open 线=KB.1 教材 C区剩余方向；前8篇已覆盖训练机制/记忆/传播三篇/persona/GPU/向量库/检索vs长上下文/goal-loop控制层，C区#8 中『伪thinking/推理时计算』是成璐 S3 场景主动质疑点且未闭合。",
+          "scope": "notes/pseudo-thinking-vs-real-reasoning.md 单文件教材 note：A段概念块(是什么/为什么/边界+conf)×CoT/scratchpad/伪thinking判定/推理时计算/test-time compute scaling/自校验verify，B段成璐视角判断+可证伪idea，C段可证伪预测带判死条件；drift-check v1≥75 v2=100 收口。产出限 projects/知识/D1-knowledge-base/notes/ 内，INDEX.md 加行。",
+          "status": "candidate",
+          "title": "KB.1 第9篇教材 note：伪 thinking vs 真推理（推理时计算/CoT 机制）"
+        }
+      ],
+      "preference_brief": "自主推进、对标顶刊、一次一个 goal、产投比优先；外部候选全 blocked，选纯本地 KB.1 线",
+      "scanned_sources": [
+        "GOALS.md",
+        "projects/ACTIVE-candidates.md",
+        "projects/知识/D1-knowledge-base/notes/INDEX.md"
+      ],
+      "selected_at_stage": "exploration",
+      "selected_task": {
+        "human_approved": true,
+        "priority": "P1",
+        "reason": "唯一纯本地 open 线且直接回应成璐 S3 场景质疑",
+        "selected_from": "exploration",
+        "source": "candidate",
+        "source_path": "projects/知识/D1-knowledge-base/memory/interest-directions.md",
+        "status": "selected",
+        "task_id": "kb-note-9-pseudo-thinking-r290",
+        "title": "KB.1 第9篇教材 note：伪 thinking vs 真推理（推理时计算/CoT 机制）"
+      },
+      "selection_mode": "candidate"
+    }
+  ],
   "field_tasks": [],
   "graph_tasks": [],
   "history": [
+    {
+      "action": "advance",
+      "internal_state": "stage_01",
+      "revision": "r1",
+      "stage_id": "exploration"
+    },
     {
       "action": "advance",
       "internal_state": "stage_02",
@@ -26,18 +65,72 @@
     }
   ],
   "last_action": "advance",
-  "last_event_id": "fb2d559f-11be-4e50-9c8f-dfc01c0ac636",
-  "last_exploration": null,
+  "last_event_id": "1167ddcd-56f3-4d15-a0c8-7d3660484ce8",
+  "last_exploration": {
+    "candidate_tasks": [
+      {
+        "human_approved": true,
+        "priority": "P1",
+        "reason": "C区#8 中成璐亲自质疑过且前 8 篇未闭合的子题；纯本地；与 persona 工作直接相关",
+        "research_summary": "扫描 GOALS.md 链式目标(G1 waiting pfb web-llm回执/G2 T17 done/G3 monitoring) + ACTIVE-candidates.md 8条候选(#2渠道待拍板 #3卡credentials #4卡arXiv手动上传 #5done #6backlog #7需异源judge)：外部线全 blocked。唯一纯本地 open 线=KB.1 教材 C区剩余方向；前8篇已覆盖训练机制/记忆/传播三篇/persona/GPU/向量库/检索vs长上下文/goal-loop控制层，C区#8 中『伪thinking/推理时计算』是成璐 S3 场景主动质疑点且未闭合。",
+        "scope": "notes/pseudo-thinking-vs-real-reasoning.md 单文件教材 note：A段概念块(是什么/为什么/边界+conf)×CoT/scratchpad/伪thinking判定/推理时计算/test-time compute scaling/自校验verify，B段成璐视角判断+可证伪idea，C段可证伪预测带判死条件；drift-check v1≥75 v2=100 收口。产出限 projects/知识/D1-knowledge-base/notes/ 内，INDEX.md 加行。",
+        "status": "candidate",
+        "title": "KB.1 第9篇教材 note：伪 thinking vs 真推理（推理时计算/CoT 机制）"
+      }
+    ],
+    "preference_brief": "自主推进、对标顶刊、一次一个 goal、产投比优先；外部候选全 blocked，选纯本地 KB.1 线",
+    "scanned_sources": [
+      "GOALS.md",
+      "projects/ACTIVE-candidates.md",
+      "projects/知识/D1-knowledge-base/notes/INDEX.md"
+    ],
+    "selected_at_stage": "exploration",
+    "selected_task": {
+      "human_approved": true,
+      "priority": "P1",
+      "reason": "唯一纯本地 open 线且直接回应成璐 S3 场景质疑",
+      "selected_from": "exploration",
+      "source": "candidate",
+      "source_path": "projects/知识/D1-knowledge-base/memory/interest-directions.md",
+      "status": "selected",
+      "task_id": "kb-note-9-pseudo-thinking-r290",
+      "title": "KB.1 第9篇教材 note：伪 thinking vs 真推理（推理时计算/CoT 机制）"
+    },
+    "selection_mode": "candidate"
+  },
   "last_result": {
     "action": "advance",
-    "artifact_refs": [],
-    "evidence": [],
-    "message": "",
+    "artifact_refs": [
+      "loop-artifacts/stages/01/r1/state.json"
+    ],
+    "evidence": [
+      "loop-artifacts/stages/01/r1/state.json (4 fields: 用户原始任务/goal/known/unknown 全 confirmed)",
+      "web_search 回执: arxiv.org x4 + openreview.net + iclr.cc proceedings (2026-11-04)"
+    ],
+    "message": "01 r1 (KB.1 第9篇 goal)：goal/known/unknown 全 confirmed。unknown 四项经 web_search 回填(CoT 规模涌现 Wei 2022 / unfaithful CoT post-hoc rationalization 率 / introspective faithfulness flip-pair 96% / TTS VB>VF + overthinking + 7B-235B 系统研究)，3 validation_records × 双独立域 supported。进入 02 信息调研。",
     "next_stage": "02",
+    "payload": {
+      "task_spec": {
+        "attribute_matrix": [
+          {
+            "concept": "goal",
+            "disposition": "confirmed"
+          },
+          {
+            "concept": "known",
+            "disposition": "confirmed"
+          },
+          {
+            "concept": "unknown",
+            "disposition": "confirmed"
+          }
+        ]
+      }
+    },
     "revision": "r1",
     "rollback_to": null,
     "stage_id": "01",
-    "status": "success"
+    "status": "passed"
   },
   "plan": {
     "joins": [],
@@ -48,10 +141,45 @@
   "project_id": "workspace",
   "queue": {
     "blocked_human": [],
-    "candidates": [],
+    "candidates": [
+      {
+        "human_approved": true,
+        "priority": "P1",
+        "reason": "C区#8 中成璐亲自质疑过且前 8 篇未闭合的子题；纯本地；与 persona 工作直接相关",
+        "research_summary": "扫描 GOALS.md 链式目标(G1 waiting pfb web-llm回执/G2 T17 done/G3 monitoring) + ACTIVE-candidates.md 8条候选(#2渠道待拍板 #3卡credentials #4卡arXiv手动上传 #5done #6backlog #7需异源judge)：外部线全 blocked。唯一纯本地 open 线=KB.1 教材 C区剩余方向；前8篇已覆盖训练机制/记忆/传播三篇/persona/GPU/向量库/检索vs长上下文/goal-loop控制层，C区#8 中『伪thinking/推理时计算』是成璐 S3 场景主动质疑点且未闭合。",
+        "scope": "notes/pseudo-thinking-vs-real-reasoning.md 单文件教材 note：A段概念块(是什么/为什么/边界+conf)×CoT/scratchpad/伪thinking判定/推理时计算/test-time compute scaling/自校验verify，B段成璐视角判断+可证伪idea，C段可证伪预测带判死条件；drift-check v1≥75 v2=100 收口。产出限 projects/知识/D1-knowledge-base/notes/ 内，INDEX.md 加行。",
+        "stage_id": "exploration",
+        "status": "candidate",
+        "title": "KB.1 第9篇教材 note：伪 thinking vs 真推理（推理时计算/CoT 机制）"
+      }
+    ],
     "ready": []
   },
-  "run_history": [],
+  "run_history": [
+    {
+      "iteration": null,
+      "stage": {
+        "failure_condition": "探索输入不足",
+        "id": "exploration",
+        "input_description": "全局偏好、项目 tasks/ 和当前队列",
+        "name": "探索与任务接续",
+        "on_failure": "exploration",
+        "on_human_block": "exploration",
+        "on_success": "01",
+        "required_outputs": [
+          "preference_brief",
+          "candidate_tasks"
+        ],
+        "revision": "r1",
+        "success_condition": "已扫描任务板并选定可执行任务，或已输出带 candidate 标记的新目标"
+      },
+      "status": "exploration",
+      "task": {
+        "description": "T17 benchmark 跑完出分：等 runner 退出后聚合各 cutoff 分数，生成对比表，更新 decomp loop-state",
+        "source": "ralph run"
+      }
+    }
+  ],
   "schema_version": 4,
   "stage": {
     "failure_condition": "存在未调研或证据不足的 research_required 字段",
@@ -69,9 +197,33 @@
   },
   "status": "running",
   "task": {
-    "description": "T17 benchmark 跑完出分：等 runner 退出后聚合各 cutoff 分数，生成对比表，更新 decomp loop-state",
-    "source": "ralph run"
+    "board_ref": "projects/知识/D1-knowledge-base/memory/interest-directions.md",
+    "board_task_id": "kb-note-9-pseudo-thinking-r290",
+    "description": "KB.1 第9篇教材 note：伪 thinking vs 真推理（推理时计算/CoT 机制）",
+    "source": "tasks:projects/知识/D1-knowledge-base/memory/interest-directions.md"
   },
-  "task_intake": null,
-  "task_intake_history": []
+  "task_intake": {
+    "human_approved": true,
+    "priority": "P1",
+    "reason": "唯一纯本地 open 线且直接回应成璐 S3 场景质疑",
+    "selected_from": "exploration",
+    "source": "candidate",
+    "source_path": "projects/知识/D1-knowledge-base/memory/interest-directions.md",
+    "status": "selected",
+    "task_id": "kb-note-9-pseudo-thinking-r290",
+    "title": "KB.1 第9篇教材 note：伪 thinking vs 真推理（推理时计算/CoT 机制）"
+  },
+  "task_intake_history": [
+    {
+      "human_approved": true,
+      "priority": "P1",
+      "reason": "唯一纯本地 open 线且直接回应成璐 S3 场景质疑",
+      "selected_from": "exploration",
+      "source": "candidate",
+      "source_path": "projects/知识/D1-knowledge-base/memory/interest-directions.md",
+      "status": "selected",
+      "task_id": "kb-note-9-pseudo-thinking-r290",
+      "title": "KB.1 第9篇教材 note：伪 thinking vs 真推理（推理时计算/CoT 机制）"
+    }
+  ]
 }

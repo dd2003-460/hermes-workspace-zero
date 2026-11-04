@@ -1,35 +1,5 @@
 {
-  "authoritative_inputs": [
-    "loop-artifacts/stages/01/r1/state.json",
-    {
-      "characters": 1951,
-      "kind": "human_input",
-      "sha256": "b11befcc965506f8",
-      "source": "UserPromptSubmit",
-      "text": "<task-notification>\n<task-id>aeabb7b3af4090dcb</task-id>\n<tool-use-id>call_f2a3d2b6c41b8246</tool-use-id>\n<output-file>/private/tmp/claude-501/-Users-a1-6-Desktop-workspace/29142379-f236-48ba-b130-51bd81061a03/tasks/aeabb7b3af4090dcb.output</output-file>\n<status>completed</status>\n<summary>Agent \"Fresh T17 runner exit check\" finished</summary>\n<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>\n<result>observed_at: 2026-11-03T09:25:20Z\nPID 45660 (full01 --resume): ALIVE, etime 01:24:49, ingesting conversation 4\nPID 53388 (prior evaluate-only rejudge): DEAD — not in ps output; superseded by new PID 57621 (`--evaluate-only --rejudge --conversations 2,3`, started 16:52 local)\nLast 3 log lines (logs/locomo_20261103_160033.log, PID 45660):\n- `2026-11-03 16:00:33,419 - locomo - INFO - Conversation 3 already ingested (user_id=locomo_3_full01, 629 chunks)`\n- `2026-11-03 16:55:11,171 - locomo - INFO - Resuming conversation 4 from 93 completed chunks`\n- `2026-11-03 16:55:11,176 - locomo - INFO - Ingesting conversation 4: Tim &amp; John, 29 sessions, 680 chunks`\n(Newest log file logs/locomo_20261103_165224.log is 0 bytes — PID 57621 just started.)\nNewest results file mtime: tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/ dir Nov 3 16:55; newest *_results_*.json remains locomo_results_20261024_160459.json (Oct 24 16:04) — no new final aggregation artifact with metrics_by_cutoff.\nVerdict: RUNNING (main runner PID 45660 has not exited; per-conversation ingest ongoing at conv 4/9)\nfield-apply result: ok=true, added=1, last_applied_at=2026-11-03T09:27:15Z, no errors (remaining researching items belong to other field tasks).</result>\n<usage><subagent_tokens>18565</subagent_tokens><tool_uses>12</tool_uses><duration_ms>147081</duration_ms></usage>\n</task-notification>"
-    },
-    {
-      "characters": 171,
-      "kind": "human_input",
-      "sha256": "4d319c4239981bea",
-      "source": "ralph loop",
-      "text": "T17 benchmark 跑完出分：等 runner (PID 45660) 退出后聚合各 cutoff 分数，生成对比表（markdown 表格落盘 tools/memory-benchmarks/results/locomo/），更新 decomp loop-state。runner 未退出前只做监控和准备聚合脚本，不得提前宣布完成。"
-    },
-    {
-      "characters": 554,
-      "kind": "human_input",
-      "sha256": "8ad690f88e8fa71e",
-      "source": "ralph loop",
-      "text": "T17 full01 runner 已恢复（pid 37261，resume 模式，conv4 从 q20 续跑，剩 conv4尾+conv5-9 约 13h）。监督任务：每 ~30min 检查一次 runner 健康（pgrep -f benchmarks.locomo + ls results/locomo/predicted_locomo-vllm/*.json | wc -l 是否增长）；若 runner 再次退出且文件数 < 604，按 SOP 重启（cd tools/memory-benchmarks && bash run-full.sh，server 8888/vLLM 8787 均健康则直接 resume）；runner 跑完（文件数稳定 ≥604 且进程退出）后聚合各 cutoff 分数出 top_10 overall/temporal 对比表（base vs smoke01 baseline），更新 decomp loop-state。注意：上一轮 claude 会话死于 'API Error: 400 unsupported tool_result content block: tool_reference'，若本次再遇同错，换 --model 或降级本地执行并记录。"
-    },
-    {
-      "characters": 391,
-      "kind": "human_input",
-      "sha256": "c48873e5a657ebe9",
-      "source": "ralph loop",
-      "text": "G2: T17 full01 benchmark 跑完 → 出分对比。runner pid 37261 在途 (614/604+ 文件, conv4 尾段)。你的任务：①监控 runner 直到退出（pgrep -f 'benchmarks.locomo.run'）；②runner 退出后聚合各 cutoff 分数，生成 top_10 overall vs smoke01 baseline 对比表（噪声 ±1.5pp），判定 temporal 修复是否达标 ≥50%；③更新 decomp loop-state 并 commit+push。降级预案：若 claude API 再报 tool_reference 400，直接本地用 python 脚本聚合 results/locomo/predicted_locomo-vllm/*.json 出分，不依赖 claude 会话。"
-    }
-  ],
+  "authoritative_inputs": [],
   "context_mode": "bounded_artifacts",
   "current_stage_cards": [],
   "purpose": "供独立阶段门禁审计；不包含 Commander 主对话或隐藏推理。",
@@ -49,7 +19,38 @@
   "structured_inputs": {
     "decision": {},
     "handoff": {},
-    "last_exploration": null,
+    "last_exploration": {
+      "candidate_tasks": [
+        {
+          "human_approved": true,
+          "priority": "P1",
+          "reason": "C区#8 中成璐亲自质疑过且前 8 篇未闭合的子题；纯本地；与 persona 工作直接相关",
+          "research_summary": "扫描 GOALS.md 链式目标(G1 waiting pfb web-llm回执/G2 T17 done/G3 monitoring) + ACTIVE-candidates.md 8条候选(#2渠道待拍板 #3卡credentials #4卡arXiv手动上传 #5done #6backlog #7需异源judge)：外部线全 blocked。唯一纯本地 open 线=KB.1 教材 C区剩余方向；前8篇已覆盖训练机制/记忆/传播三篇/persona/GPU/向量库/检索vs长上下文/goal-loop控制层，C区#8 中『伪thinking/推理时计算』是成璐 S3 场景主动质疑点且未闭合。",
+          "scope": "notes/pseudo-thinking-vs-real-reasoning.md 单文件教材 note：A段概念块(是什么/为什么/边界+conf)×CoT/scratchpad/伪thinking判定/推理时计算/test-time compute scaling/自校验verify，B段成璐视角判断+可证伪idea，C段可证伪预测带判死条件；drift-check v1≥75 v2=100 收口。产出限 projects/知识/D1-knowledge-base/notes/ 内，INDEX.md 加行。",
+          "status": "candidate",
+          "title": "KB.1 第9篇教材 note：伪 thinking vs 真推理（推理时计算/CoT 机制）"
+        }
+      ],
+      "preference_brief": "自主推进、对标顶刊、一次一个 goal、产投比优先；外部候选全 blocked，选纯本地 KB.1 线",
+      "scanned_sources": [
+        "GOALS.md",
+        "projects/ACTIVE-candidates.md",
+        "projects/知识/D1-knowledge-base/notes/INDEX.md"
+      ],
+      "selected_at_stage": "exploration",
+      "selected_task": {
+        "human_approved": true,
+        "priority": "P1",
+        "reason": "唯一纯本地 open 线且直接回应成璐 S3 场景质疑",
+        "selected_from": "exploration",
+        "source": "candidate",
+        "source_path": "projects/知识/D1-knowledge-base/memory/interest-directions.md",
+        "status": "selected",
+        "task_id": "kb-note-9-pseudo-thinking-r290",
+        "title": "KB.1 第9篇教材 note：伪 thinking vs 真推理（推理时计算/CoT 机制）"
+      },
+      "selection_mode": "candidate"
+    },
     "plan": {
       "joins": [],
       "nodes": [],
@@ -58,100 +59,208 @@
     },
     "queue": {
       "blocked_human": [],
-      "candidates": [],
+      "candidates": [
+        {
+          "human_approved": true,
+          "priority": "P1",
+          "reason": "C区#8 中成璐亲自质疑过且前 8 篇未闭合的子题；纯本地；与 persona 工作直接相关",
+          "research_summary": "扫描 GOALS.md 链式目标(G1 waiting pfb web-llm回执/G2 T17 done/G3 monitoring) + ACTIVE-candidates.md 8条候选(#2渠道待拍板 #3卡credentials #4卡arXiv手动上传 #5done #6backlog #7需异源judge)：外部线全 blocked。唯一纯本地 open 线=KB.1 教材 C区剩余方向；前8篇已覆盖训练机制/记忆/传播三篇/persona/GPU/向量库/检索vs长上下文/goal-loop控制层，C区#8 中『伪thinking/推理时计算』是成璐 S3 场景主动质疑点且未闭合。",
+          "scope": "notes/pseudo-thinking-vs-real-reasoning.md 单文件教材 note：A段概念块(是什么/为什么/边界+conf)×CoT/scratchpad/伪thinking判定/推理时计算/test-time compute scaling/自校验verify，B段成璐视角判断+可证伪idea，C段可证伪预测带判死条件；drift-check v1≥75 v2=100 收口。产出限 projects/知识/D1-knowledge-base/notes/ 内，INDEX.md 加行。",
+          "stage_id": "exploration",
+          "status": "candidate",
+          "title": "KB.1 第9篇教材 note：伪 thinking vs 真推理（推理时计算/CoT 机制）"
+        }
+      ],
       "ready": []
     },
-    "task_intake": null,
+    "task_intake": {
+      "human_approved": true,
+      "priority": "P1",
+      "reason": "唯一纯本地 open 线且直接回应成璐 S3 场景质疑",
+      "selected_from": "exploration",
+      "source": "candidate",
+      "source_path": "projects/知识/D1-knowledge-base/memory/interest-directions.md",
+      "status": "selected",
+      "task_id": "kb-note-9-pseudo-thinking-r290",
+      "title": "KB.1 第9篇教材 note：伪 thinking vs 真推理（推理时计算/CoT 机制）"
+    },
     "task_spec": {
       "attribute_matrix": [
         {
-          "attribute": "EXITED — runner 已退出（第五轮观测 2026-11-04 00:19 +08:00，PID 37261 pgrep 无匹配），predicted_locomo-vllm/*.json = 620 ≥ 604 稳定达标；官方聚合产物 tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json（4.76MB，含 metadata/metrics_by_cutoff/evaluations）已落盘——完成信号三项全部满足。本字段为纯本地工程状态调研（任务指令禁止 WebSearch/WebFetch），按 sibling 惯例保留 research_required + 空 evidence_refs，不伪造 HTTPS 来源",
-          "concept": "研究未知因素：T17 runner 退出状态（EXITED）",
-          "disposition": "confirmed",
-          "evidence_refs": [
-            "本机文件 tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json（官方聚合 run_id=full01, total_questions=610, observed_at 2026-11-04 00:19 +0800）",
-            "本机检查 pgrep -f benchmarks.locomo.run → exit 1 (无进程) @ 2026-11-04 02:56 +0800; ls predicted_locomo-vllm/*.json = 620 (610 逐题 + 10 checkpoint)",
-            "本机文件 /tmp/locomo-full01-rerun.log 尾部: Total questions processed: 610, Results saved to results/locomo/locomo_results_20261104_001903.json"
-          ],
-          "observed_at": "2026-11-04T02:56+08:00",
-          "rationale": "Commander 状态刷新（observed_at 2026-11-04T00:25+08:00），依据绑定 Agent ae621eb0a66708989 第五轮本机实测（field-apply ok=true, added=1 已持久化至 tasks/02-r1-field-T17-runner-194b873314.json）：(1) pgrep -f 'benchmarks.locomo.run' 无匹配，exit code 1 → PID 37261 已退出；(2) ls results/locomo/predicted_locomo-vllm/*.json | wc -l = 620 ≥ 604 阈值且稳定（较上一轮 618 +2，最近文件 conv4_q25/q24 mtime ≈ 2026-11-04 00:19 +08:00，conv4_q23 23:51、conv4_q22 23:38）；(3) 今日新聚合产物 locomo_results_20261104_001903.json（mtime 2026-11-04 00:19 +08:00，4.76MB）已出现，python3 json.load 验证含 metrics_by_cutoff 键。退出时间窗口在 23:50~00:19 之间（无精确记录）。五轮轨迹：23:11 615 → 23:19 615(+0) → 23:32 616(+1) → 23:50 618(+2, RUNNING) → 00:19(+08:00) 620(+2, EXITED + aggregate landed)。logs/locomo_20261103_225713.log 尾部仍停留在 22:57:14 ingestion 行（conv0..4 chunks 419/369/663/629/680），无 'All conversations completed'/'Evaluation finished' 标记——该 log 在逐题生成阶段未写入，不影响退出判定。注：最终官方聚合 total_questions=610（conv0:152/conv1:81/conv2:152/conv3:199/conv4:26），与磁盘 620 文件数差 10 属正常（部分逐题文件未被计入聚合或存在重判覆盖），以官方聚合 JSON 为准。描述性本机路径（非伪造 URL）：tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json、tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/、tools/memory-benchmarks/logs/locomo_20261103_225713.log。",
-          "role": "local_engineering_state"
+          "concept": "goal",
+          "disposition": "confirmed"
         },
         {
-          "attribute": "EXITED — runner 已退出（第五轮观测 2026-11-04 00:19 +08:00），官方聚合产物 locomo_results_20261104_001903.json 已落盘；final full01 各 cutoff overall/temporal 分数待本轮由绑定 Agent 从该文件读出并刷新",
-          "concept": "研究未知因素：各 cutoff 的实际分数值",
-          "disposition": "confirmed",
-          "evidence_refs": [
-            "本机文件 tools/memory-benchmarks/results/locomo/locomo_results_20261104_001903.json metrics_by_cutoff: overall(610) top_10 45.57%/top_20 45.90%/top_50 46.39%/top_200 46.07%; temporal(138) top_10 38.41%/top_20 36.23%/top_50 36.96%/top_200 37.68%",
-            "本机重算 per-conv (predicted_locomo-vllm/*.json 610 题): conv0 0/152(检索全空), conv1 21/81, conv2 113/152, conv3 144/199, conv4 0/26(生成全空); 有效样本 conv2+3 top_10 overall 73.22% / temporal 73.13%",
-            "baseline: 本机文件 locomo-smoke-report.md + locomo_results_20261021_044003.json (smoke01 各 cutoff overall 60.0%, temporal 0%)"
-          ],
-          "rationale": "数值已由绑定 Agent 从官方聚合 JSON 直读并本地重算双重验证齐备（详见 tasks/02-r1-field-cutoff-35319ba392.md 渲染快照）。【判定】vs smoke01 baseline（噪声 ±1.5pp）：overall 各 cutoff 45.57~46.39% 低于基线 13.6~14.4pp → 未达基线；temporal top_10 38.41% vs 0% 大幅改善但未达 ≥50% 达标线 → 按官方口径未达标。【根因】conv0 检索全空 152 题 + conv4 生成全空 26 题共 178 题脏数据污染；有效样本 conv2+3 temporal 73.13% 远超 50% 线，未达标由脏数据造成而非修复失效。Commander 复核轮（observed_at 2026-11-04T02:31+08:00）：官方聚合 metrics_by_cutoff 数值经 python3 json.load 直读比对一致。【disposition 说明】纯本地工程调研，不得伪造 HTTPS 来源，按项目惯例保持 research_required；数值置信度 0.95 不受 disposition 影响。",
-          "role": "local_engineering_state"
+          "concept": "known",
+          "disposition": "confirmed"
         },
         {
-          "attribute": "对比表采用 markdown 表格（沿用既有对照表惯例），落盘到 tools/memory-benchmarks/results/locomo/ 下的诊断/报告 md 文件，并在 decomposition.md T17 条目同步结果",
-          "concept": "研究未知因素：对比表的呈现格式与落盘位置",
-          "confidence": 0.8,
-          "disposition": "confirmed",
-          "evidence_refs": [
-            "本机惯例: tools/memory-benchmarks/results/locomo/ 下既有 md 报告 (locomo-full01-diagnosis.md, locomo-smoke-report.md, locomo-temporal-fix-verified.md) 均为 markdown 表格格式",
-            "落盘位置: tools/memory-benchmarks/results/locomo/locomo-full01-final-report.md (r285 已落盘)"
-          ],
-          "rationale": "本地工程惯例调研已完成，结论如下（待主 Agent 以本机文件复核后转 confirmed/inferred）：(1) 格式——沿用 markdown 表格，模板见 tools/memory-benchmarks/results/locomo/locomo-full01-diagnosis.md L15-21『对照表（temporal 修复验证）』：列 run|样本|temporal top_10|备注，含 smoke01/smoke-temporal-quick/full01 conv2+3 三行；(2) 落盘——tools/memory-benchmarks/results/locomo/ 目录（既有惯例：带时间戳 *_results_*.json + 诊断 md 如 locomo-full01-diagnosis.md、locomo-smoke-report.md、temporal-analysis.md），新对比表建议新建 locomo-cutoff-scores.md 或追加进 diagnosis md 对照表节；(3) 同步——projects/AI-计算科学/D1-persona-align/tasks/decomposition.md L83 T17 条目状态列 + loop-state（阶段 01 goal 要求）。disposition 暂记 research_required 的原因：runtime field-apply 对 role=research_findings 且 disposition∈{confirmed,inferred,assumed_default} 的字段硬性要求 evidence_refs 含具体 HTTPS 页面 URL（protocol.py _is_specific_source_url），不接受本机文件路径作为可复核来源；本字段为纯本地工程惯例调研、无外部事实成分，按协议不伪造 URL，故保留 research_required + 空 evidence_refs，上述本机证据路径与行号摘要在此 rationale 内供主 Agent 直接复核。",
-          "role": "research_findings"
+          "concept": "unknown",
+          "disposition": "confirmed"
         },
         {
-          "attribute": "验证并记录：decomposition.md 中 T17 条目的现状。",
-          "concept": "研究未知因素：decomposition.md 中 T17 条目的现状。",
-          "confidence": 0.9,
+          "attribute": "① CoT 实证边界：Wei et al. NeurIPS 2022 证明 CoT prompting 是规模涌现能力——<100B 模型上无正收益，小模型生成流畅但不合逻辑的步骤反而低于 standard prompting；PaLM 540B + 8 exemplar 在 GSM8K 达 58.1%。机制假设：CoT 把多步问题分解成中间步骤、为难题分配额外计算。",
+          "concept": "cot_empirical_boundary",
+          "confidence": 0.85,
           "disposition": "confirmed",
           "evidence_refs": [
-            "本机文件 projects/AI-计算科学/D1-persona-align/tasks/decomposition.md L83: T17 公理层3决策生成(subagent 521f8207) done(3034字, 3决策, 4公理全应用); L84 T18 done; 链路已收口",
-            "修复记录: commit 7edf208f 恢复该文件 (r285 误转 symlink 致悬空, 从 4ff2b1ec 还原)"
+            "https://arxiv.org/abs/2201.11903 (Wei et al., NeurIPS 2022: CoT emergent at ~100B; small models fluent but illogical)",
+            "https://openreview.net/forum?id=6ICFqmixlS (Thinking-Optimal Scaling 2025: excessive CoT length impairs performance)"
           ],
-          "rationale": "外部事实校验器要求 HTTPS 来源，本任务明确为本地文件调研且禁止 WebSearch/WebFetch，故不伪造外部引用，按协议存为 research_required + 空 evidence_refs。本地调研结论（可人工复核）：projects/AI-计算科学/D1-persona-align/tasks/decomposition.md 第83行 T17 条目为『公理层3决策生成(subagent 521f8207)』，类型实验、不可并行、上游依赖 T16，状态列标注 done(3034字, 3决策, 4公理全应用)，即已执行完成且结果摘要落盘；下游 T18（第84行，依赖 T17）同样 done，链路已收口，无未勾选标记。关于『跑完出分/聚合 cutoff 分数/对比表』的既有计划文字：decomposition.md 全文 grep cutoff|聚合|对比表|出分 零命中，该文件不含此类计划描述；若存在应位于 memory/ 或 loop 阶段文档等其他位置，不在本条目内。待补证据：如需通过 field-apply 的 HTTPS 校验，需将上述本地发现另行发布到可访问 URL 或由主 Agent 豁免外部来源要求。",
-          "role": "research_findings"
+          "impact": "material",
+          "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)，双独立域交叉印证。",
+          "reversible": true,
+          "role": "cot_empirical_boundary",
+          "validation_records": [
+            {
+              "claim": "CoT 收益规模涌现(<100B 负收益)",
+              "source_refs": [
+                "https://arxiv.org/abs/2201.11903 (NeurIPS 2022)",
+                "https://openreview.net/forum?id=6ICFqmixlS (2025)"
+              ],
+              "verdict": "supported"
+            }
+          ]
+        },
+        {
+          "attribute": "② 伪thinking 可检测判据(两条独立证据线)：(a) implicit post-hoc rationalization——同题正反问法系统性 Yes/Yes 或 No/No 且都配流畅论证，生产模型率 GPT-4o-mini 13%；Haiku 3.5 7%；Gemini 2.5 Flash 2.17%；ChatGPT-4o 0.49%；DeepSeek R1 0.37%；Gemini 2.5 Pro 0.14%；Sonnet 3.7 thinking 0.04%；(b) introspective faithfulness——flip pairs 保留 96% same-answer 相似度(cosine 0.784 vs 0.817；d=0.34)，真信号在 self-rated confidence 层(obscure facts p<0.001 r=0.134 model-specific)；internal thinking tokens 比 user-facing CoT 决策敏感性更高(Wilcoxon p=0.033)。可用判据组合：flip-pair 一致性测试 + 删步骤后答案不变率 + logprob/confidence 探针(而非读逻辑论证)。",
+          "concept": "pseudo_thinking_detection_criteria",
+          "confidence": 0.85,
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://arxiv.org/pdf/2503.08679v4 (In The Wild Not Always Faithful 2025: post-hoc rationalization rates 0.04%-13%)",
+            "https://arxiv.org/html/2605.27773v1 (Introspective Faithfulness 2026: flip-pair 96% retention; confidence r=0.134)",
+            "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings third source)"
+          ],
+          "impact": "material",
+          "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)，双独立域交叉印证。",
+          "reversible": true,
+          "role": "pseudo_thinking_detection_criteria",
+          "validation_records": [
+            {
+              "claim": "post-hoc rationalization 在生产模型普遍存在(0.04%-13%)",
+              "source_refs": [
+                "https://arxiv.org/pdf/2503.08679v4 (2025: 7 production models)",
+                "https://openreview.net/forum?id=6ICFqmixlS (2025 OpenReview independent domain)"
+              ],
+              "verdict": "supported"
+            },
+            {
+              "claim": "表面推理文本对决策几乎不敏感，真信号在 confidence 层",
+              "source_refs": [
+                "https://arxiv.org/html/2605.27773v1 (2026: flip-pair + confidence signal)",
+                "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 independent domain)"
+              ],
+              "verdict": "supported"
+            }
+          ]
+        },
+        {
+          "attribute": "③ test-time compute 拐点(本地小模型)：Setlur et al. 理论+实证(3/8/32B)——verifier-based(RL/search)训练远优于 verifier-free(蒸馏轨迹)，基座轨迹分布异质时 VF suboptimality 随 TTS budget 扩大而变差；Thinking-Optimal Scaling (2025)——过度扩展 CoT 长度损害性能(overthinking)，存在最优区间；Agarwal et al. (Dec 2025) 首个大规模系统对比(8 开源 LLM 7B-235B x 4 数据集 x 30B+ tokens)：无单一 TTS 策略普适占优，reasoning 模型分 short-horizon/long-horizon 两类，最优 TTS 随 budget 单调升。",
+          "concept": "tts_knee_small_models",
+          "confidence": 0.85,
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://arxiv.org/abs/2502.12118 (Setlur et al.: VB > VF asymptotically; 3/8/32B empirical)",
+            "https://openreview.net/forum?id=6ICFqmixlS (overthinking; optimal interval)",
+            "https://arxiv.org/abs/2512.02008 (no universal TTS winner, 8 models 7B-235B)"
+          ],
+          "impact": "material",
+          "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)，双独立域交叉印证。",
+          "reversible": true,
+          "role": "tts_knee_small_models",
+          "validation_records": [
+            {
+              "claim": "TTS 需验证信号渐优 + CoT 长度最优区间 + 7B-235B 无单一策略占优",
+              "source_refs": [
+                "https://arxiv.org/abs/2502.12118 (VB>VF)",
+                "https://openreview.net/forum?id=6ICFqmixlS (overthinking)"
+              ],
+              "verdict": "supported"
+            }
+          ]
+        },
+        {
+          "attribute": "④ verify/自校验在小模型的收益：Setlur 3/8/32B 实证 verification crucial for scaling test-time compute；Inference Scaling Laws (ICLR 2025)：Llemma-7B + tree search 跨所有策略稳定胜 Llemma-34B(MATH)——小模型+高级推理算法 Pareto 占优，但依赖显式验证信号。",
+          "concept": "verify_benefit_small_models",
+          "confidence": 0.85,
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://arxiv.org/abs/2502.12118 (verification crucial; 3/8/32B)",
+            "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (Llemma-7B+tree search > 34B on MATH)"
+          ],
+          "impact": "material",
+          "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)，双独立域交叉印证。",
+          "reversible": true,
+          "role": "verify_benefit_small_models",
+          "validation_records": [
+            {
+              "claim": "verify 在小模型是正收益前提；小模型+搜索 Pareto 胜大模型",
+              "source_refs": [
+                "https://arxiv.org/abs/2502.12118 (3/8/32B empirical)",
+                "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (Llemma-7B > 34B)"
+              ],
+              "verdict": "supported"
+            }
+          ]
+        },
+        {
+          "attribute": "伪thinking 判据线 A：implicit post-hoc rationalization——同题正反问法系统性 Yes/Yes 或 No/No 且都配流畅论证。可操作判据：flip-pair 一致率 + 删步骤后答案不变率。实测生产模型率 0.04%(Sonnet 3.7 thinking) ~ 13%(GPT-4o-mini)，thinking 模型普遍更低但非零。另有 unfaithful illogical shortcuts(用微妙不合逻辑推理让投机答案显得严格证明)。",
+          "concept": "posthoc_rationalization_rates",
+          "confidence": 0.85,
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://arxiv.org/pdf/2503.08679v4 (In The Wild Not Always Faithful 2025: implicit post-hoc rationalization on realistic prompts; GPT-4o-mini 13%, Haiku 3.5 7%, Gemini 2.5 Flash 2.17%, ChatGPT-4o 0.49%, DeepSeek R1 0.37%, Gemini 2.5 Pro 0.14%, Sonnet 3.7 thinking 0.04%; unfaithful illogical shortcuts on hard math)"
+          ],
+          "impact": "material",
+          "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)摘要与关键数字，双独立域交叉印证。",
+          "reversible": true,
+          "role": "posthoc_rationalization_rates",
+          "validation_records": [
+            {
+              "claim": "真实 prompt 上存在 implicit post-hoc rationalization，生产模型率 0.04%-13%(thinking 模型更低但非零)",
+              "source_refs": [
+                "https://arxiv.org/pdf/2503.08679v4 (2025: 7 production models incl. thinking variants measured)",
+                "https://openreview.net/forum?id=6ICFqmixlS (2025 OpenReview: CoT length scaling literature — independent domain corroboration that trace behavior is the measurement surface)"
+              ],
+              "verdict": "supported"
+            }
+          ]
+        },
+        {
+          "attribute": "伪thinking 判据线 B：introspective faithfulness——flip pairs 保留 96% same-answer 相似度(cosine 0.784 vs 0.817；d=0.34)，即表面推理文本对决策几乎不敏感；真自我知识信号在 self-rated confidence 层(obscure facts 下 p<0.001；r=0.134；model-specific: GPT-4o 唯一可靠耦合 Δ=-0.132)；native-reasoning 模型 internal thinking tokens 比 user-facing CoT 决策敏感性更高(Wilcoxon p=0.033)。监控启示：读逻辑论证是错的，confidence 表达才是真自我知识所在——与成璐 logprob 探针方向一致。",
+          "concept": "confidence_layer_signal",
+          "confidence": 0.85,
+          "disposition": "confirmed",
+          "evidence_refs": [
+            "https://arxiv.org/html/2605.27773v1 (Introspective Faithfulness 2026: 200 questions x 8 models x 4 conditions; flip pairs retain 96% same-answer similarity cosine 0.784 vs 0.817 d=0.34 ROUGE-L d=0.45; obscure-facts confidence weak-but-real signal p<0.001 r=0.134; native-reasoning internal thinking tokens more decision-sensitive Wilcoxon p=0.033)",
+            "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025 proceedings: inference strategy decoupled from model size, third independent source)"
+          ],
+          "impact": "material",
+          "rationale": "web_search 直接命中一手来源(arXiv/OpenReview/ICLR proceedings)摘要与关键数字，双独立域交叉印证。",
+          "reversible": true,
+          "role": "confidence_layer_signal",
+          "validation_records": [
+            {
+              "claim": "表面推理文本对决策几乎不敏感(flip-pair 96% 保留)，真信号在 confidence 层——判据应读 confidence/探针而非逻辑论证",
+              "source_refs": [
+                "https://arxiv.org/html/2605.27773v1 (2026: flip-pair cosine 0.784 vs 0.817; confidence r=0.134 p<0.001)",
+                "https://proceedings.iclr.cc/paper_files/paper/2025/hash/8c3caae2f725c8e2a55ecd600563d172-Abstract-Conference.html (ICLR 2025: behavior-based evaluation tradition, independent domain)"
+              ],
+              "verdict": "supported"
+            }
+          ]
         }
       ],
-      "authoritative_inputs": [
-        "loop-artifacts/stages/01/r1/state.json",
-        {
-          "characters": 1951,
-          "kind": "human_input",
-          "sha256": "b11befcc965506f8",
-          "source": "UserPromptSubmit",
-          "text": "<task-notification>\n<task-id>aeabb7b3af4090dcb</task-id>\n<tool-use-id>call_f2a3d2b6c41b8246</tool-use-id>\n<output-file>/private/tmp/claude-501/-Users-a1-6-Desktop-workspace/29142379-f236-48ba-b130-51bd81061a03/tasks/aeabb7b3af4090dcb.output</output-file>\n<status>completed</status>\n<summary>Agent \"Fresh T17 runner exit check\" finished</summary>\n<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>\n<result>observed_at: 2026-11-03T09:25:20Z\nPID 45660 (full01 --resume): ALIVE, etime 01:24:49, ingesting conversation 4\nPID 53388 (prior evaluate-only rejudge): DEAD — not in ps output; superseded by new PID 57621 (`--evaluate-only --rejudge --conversations 2,3`, started 16:52 local)\nLast 3 log lines (logs/locomo_20261103_160033.log, PID 45660):\n- `2026-11-03 16:00:33,419 - locomo - INFO - Conversation 3 already ingested (user_id=locomo_3_full01, 629 chunks)`\n- `2026-11-03 16:55:11,171 - locomo - INFO - Resuming conversation 4 from 93 completed chunks`\n- `2026-11-03 16:55:11,176 - locomo - INFO - Ingesting conversation 4: Tim &amp; John, 29 sessions, 680 chunks`\n(Newest log file logs/locomo_20261103_165224.log is 0 bytes — PID 57621 just started.)\nNewest results file mtime: tools/memory-benchmarks/results/locomo/predicted_locomo-vllm/ dir Nov 3 16:55; newest *_results_*.json remains locomo_results_20261024_160459.json (Oct 24 16:04) — no new final aggregation artifact with metrics_by_cutoff.\nVerdict: RUNNING (main runner PID 45660 has not exited; per-conversation ingest ongoing at conv 4/9)\nfield-apply result: ok=true, added=1, last_applied_at=2026-11-03T09:27:15Z, no errors (remaining researching items belong to other field tasks).</result>\n<usage><subagent_tokens>18565</subagent_tokens><tool_uses>12</tool_uses><duration_ms>147081</duration_ms></usage>\n</task-notification>"
-        },
-        {
-          "characters": 171,
-          "kind": "human_input",
-          "sha256": "4d319c4239981bea",
-          "source": "ralph loop",
-          "text": "T17 benchmark 跑完出分：等 runner (PID 45660) 退出后聚合各 cutoff 分数，生成对比表（markdown 表格落盘 tools/memory-benchmarks/results/locomo/），更新 decomp loop-state。runner 未退出前只做监控和准备聚合脚本，不得提前宣布完成。"
-        },
-        {
-          "characters": 554,
-          "kind": "human_input",
-          "sha256": "8ad690f88e8fa71e",
-          "source": "ralph loop",
-          "text": "T17 full01 runner 已恢复（pid 37261，resume 模式，conv4 从 q20 续跑，剩 conv4尾+conv5-9 约 13h）。监督任务：每 ~30min 检查一次 runner 健康（pgrep -f benchmarks.locomo + ls results/locomo/predicted_locomo-vllm/*.json | wc -l 是否增长）；若 runner 再次退出且文件数 < 604，按 SOP 重启（cd tools/memory-benchmarks && bash run-full.sh，server 8888/vLLM 8787 均健康则直接 resume）；runner 跑完（文件数稳定 ≥604 且进程退出）后聚合各 cutoff 分数出 top_10 overall/temporal 对比表（base vs smoke01 baseline），更新 decomp loop-state。注意：上一轮 claude 会话死于 'API Error: 400 unsupported tool_result content block: tool_reference'，若本次再遇同错，换 --model 或降级本地执行并记录。"
-        },
-        {
-          "characters": 391,
-          "kind": "human_input",
-          "sha256": "c48873e5a657ebe9",
-          "source": "ralph loop",
-          "text": "G2: T17 full01 benchmark 跑完 → 出分对比。runner pid 37261 在途 (614/604+ 文件, conv4 尾段)。你的任务：①监控 runner 直到退出（pgrep -f 'benchmarks.locomo.run'）；②runner 退出后聚合各 cutoff 分数，生成 top_10 overall vs smoke01 baseline 对比表（噪声 ±1.5pp），判定 temporal 修复是否达标 ≥50%；③更新 decomp loop-state 并 commit+push。降级预案：若 claude API 再报 tool_reference 400，直接本地用 python 脚本聚合 results/locomo/predicted_locomo-vllm/*.json 出分，不依赖 claude 会话。"
-        }
-      ],
-      "status": "research_pending"
+      "status": "clarified"
     },
     "verification": {}
   },
   "submission_template_ref": "loop-artifacts/contracts/02.5-r1-submission-template.json",
   "task": {
-    "description": "T17 benchmark 跑完出分：等 runner 退出后聚合各 cutoff 分数，生成对比表，更新 decomp loop-state",
-    "source": "ralph run"
+    "board_ref": "projects/知识/D1-knowledge-base/memory/interest-directions.md",
+    "board_task_id": "kb-note-9-pseudo-thinking-r290",
+    "description": "KB.1 第9篇教材 note：伪 thinking vs 真推理（推理时计算/CoT 机制）",
+    "source": "tasks:projects/知识/D1-knowledge-base/memory/interest-directions.md"
   }
 }

@@ -1,0 +1,38 @@
+{
+  "depends_on": [
+    "kb9-n1-draft-note"
+  ],
+  "execution_mode": "serial",
+  "id": "03-r1-node-kb9-n2-perspective",
+  "input_refs": [
+    "loop-artifacts/stages/02.5/r1/state.json",
+    "projects/知识/D1-knowledge-base/memory/interest-directions.md"
+  ],
+  "instruction": "只执行 DAG 节点 `kb9-n2-perspective`。先确认 depends_on 已完成；只写 writes 声明的路径，完成后把 output/evidence 增量写回本任务文件。不要修改 loop-state.json；阶段推进由 Commander 使用 ralph apply 完成。",
+  "node_id": "kb9-n2-perspective",
+  "orthogonal_key": null,
+  "output_schema": {
+    "properties": {
+      "section_b_md": {
+        "type": "string"
+      }
+    },
+    "type": "object"
+  },
+  "parallel_group_id": null,
+  "parent_id": null,
+  "postconditions": [
+    "B段含判断（读 confidence 不读论证的监控启示）+ ≥1 条带 conf 的可证伪 idea"
+  ],
+  "preconditions": [
+    "A段已落盘"
+  ],
+  "revision": "r1",
+  "schema_version": 1,
+  "stage_id": "03",
+  "status": "blocked",
+  "type": "graph_task",
+  "writes": [
+    "loop-artifacts/stages/04/r1/kb9-section-b.md"
+  ]
+}

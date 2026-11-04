@@ -2,7 +2,7 @@
   "project_id": "D1-efficiency-optimization",
   "iteration": 1,
   "loop_phase": "01-goal-decomposition",
-  "status": "active",
+  "status": "in_progress",
   "priority": "HIGHEST",
   "current_task": "R5.5 完成: n=5 双评分器信度汇总 (mean=83.0±12.7, κ_corrected=0.167) + 权重校准(沿用r5) + M8 shadow(100/100, n=1)",
   "created": "2026-10-22",
@@ -16,6 +16,25 @@
     "bench.md updated with next-round execution flow changes",
     "All committed and pushed (27fc0a92)"
   ],
-  "last_update": "2026-11-04T21:30+08:00",
-  "next_action": "R6 候选: 异源judge / M8累积≥4run / arena token重发优化 / run4模式推广。或转 T17 open-domain 修复实验。"
+  "last_update": "2026-11-04T21:00:00+08:00",
+  "next_action": "R6 候选: 异源judge / M8累积≥4run / arena token重发优化 / run4模式推广。或转 T17 open-domain 修复实验。",
+  "current_round": "R6-complete, R7-dispatched",
+  "rounds": [
+    {
+      "id": "R6",
+      "name": "arena-token-optimization",
+      "status": "complete",
+      "result": "CONDITIONAL-PASS (Model A M1=78.2, Model B M1=62.0)",
+      "commit_pfb": "1a79bc2",
+      "completed_at": "2026-11-04T20:45:00+08:00"
+    },
+    {
+      "id": "R7",
+      "name": "rule-compression",
+      "status": "dispatched_to_arena",
+      "target": "Model B M1 >= 70 (from 62.0)",
+      "commit_pfb_brief": "dfd5378",
+      "dispatched_at": "2026-11-04T21:00:00+08:00"
+    }
+  ]
 }

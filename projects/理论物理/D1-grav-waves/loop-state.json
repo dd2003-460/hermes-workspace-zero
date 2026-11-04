@@ -6,9 +6,9 @@
     "status": "in_progress"
   },
   "status": "active",
-  "last_updated": "2026-11-04T20:15:00+08:00",
+  "last_updated": "2026-11-04T20:50:00+08:00",
   "recent_actions": [
-    "M4 worldline smearing fixed: Eq(2) rewritten with smeared operators rho_w(f); Remark added (C_0^infty test functions, Weyl subalgebra); Detector Cobordism definition clarified (causal diamond intersection, not strict Lorentzian cobordism); Bunk-MacManus-Schenkel arXiv:2308.01026 Lett.Math.Phys.115 cited; Schreiber:2023 removed from limitations"
+    "B3 fixed: P(k) multipole expansion now cites standard anisotropic ORF formalism (Mingarelli 2013 PRD 88 062005 [key Allen:2023]; Ali-Haimoud et al. 2020 PRD 102 083511; Depta et al. arXiv:2407.14460); all journal metadata CrossRef-verified"
   ],
   "taste_review_status": {
     "T1_meta_narrative": "FIXED",
@@ -19,6 +19,6 @@
     "M2_thm31_scaling": "FIXED (Eq.15 direction correct; added explicit scaling paragraph + label)",
     "M3_cosmic_variance": "FIXED",
     "M4_worldline_smearing": "FIXED",
-    "B1-B5_background_gaps": "B1+B2 addressed via M3 fix; B3/B4/B5 PENDING"
+    "B1-B5_background_gaps": "FIXED (B1/B2 via M3; B3 anisotropic ORF refs added; B4 Bunk:2025 via M4; B5 deferred — Hollands-Wald worldline-algebra refs not yet cited in body)"
   }
 }

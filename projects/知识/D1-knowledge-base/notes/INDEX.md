@@ -25,4 +25,4 @@
 4. ~~LLM persona 对齐~~ → 已完成(第四篇, 关联 DPA.1, 公理层)
 5. ~~传播学 / 网络拓扑 / 传播效率~~ → 已完成(m01255, 2026-10-18, 第三四五篇, 供 D2 书底座)
 6. ~~AI/ML 训练机制 — 伪 thinking 子题~~ → 已完成(第九篇 pseudo-thinking-vs-real-reasoning, 2026-11-04)
-7. (待补: C 区剩余兴趣方向, 见 memory/interest-directions.md) — 第7篇 retrieval-vs-long-context 已收口(2026-11-03, r278); 第8篇 agent-goal-loop-mechanisms 已收口(2026-11-03, r279), C 区 #10 控制层闭合; 第9篇 pseudo-thinking 已收口(2026-11-04)
+7. ~~C 区剩余兴趣方向~~ → 已全部覆盖(#8 AI/ML训练机制+伪thinking子题 / #9 GPU推理硬件 / #10 agent记忆+goal-loop控制层 / #11 LLM persona对齐)，C 区闭合(2026-11-05)

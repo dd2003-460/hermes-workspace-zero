@@ -166,3 +166,31 @@ Question: Does SOL's 89% event dominance distort the pooled Δgap?
 **Verdict**: Excluding SOL makes the gap *more* negative (−4.59% vs −2.38%), not less. SOL does NOT drive the negative pooled result — the mechanism fails even on BTC/ETH alone. The direction is consistent across all three symbols individually (BTC −1.30pp, ETH −7.38pp, SOL −1.79pp).
 
 ⚠️ n is tiny for BTC+ETH (G_up=2), so this is directional only, not a statistical test. But it removes "SOL artifact" as an alternative explanation for the FAIL verdict.
+
+---
+
+## Sensitivity Check: BTC+ETH Only (SOL Excluded)
+
+**Motivation**: SOL contributes 89% of all events (71/80), potentially distorting the pooled estimate. If the mechanism works on BTC/ETH but is masked by SOL's different funding dynamics, excluding SOL should flip or improve the gap.
+
+**Method**: Recomputed Δgap using only BTCUSDT + ETHUSDT trades from the same backtest run.
+
+| Subset | G_up (n, mean) | G_down (n, mean) | Δgap |
+|--------|----------------|------------------|------|
+| Pooled (BTC+ETH+SOL) | 10, −1.48% | 21, +0.90% | −2.38% |
+| **BTC+ETH only** | **2, −2.31%** | **5, +2.28%** | **−4.59%** |
+
+**Per-window detail (BTC+ETH)**:
+
+| Symbol | Window | G_up (n, mean) | G_down (n, mean) |
+|--------|--------|----------------|------------------|
+| BTC | 2020 | 0, N/A | 1, +1.21% |
+| BTC | 2025 | 1, −0.51% | 1, +0.37% |
+| ETH | 2020 | 0, N/A | 1, +2.18% |
+| ETH | 2025 | 1, −4.11% | 2, +3.82% |
+
+**Verdict**: Direction **unchanged** (still negative). Excluding SOL makes the gap *more* negative (−4.59% vs −2.38%), not less. The FAIL verdict is **robust to SOL exclusion** — the mechanism fails even on the two largest-cap symbols alone.
+
+**Caveat**: Sample size collapses further (G_up n=2, G_down n=5), so this subset analysis is illustrative rather than statistically meaningful. The per-trade returns are small in magnitude relative to costs, and with n=2 for G_up, a single bad trade dominates the mean.
+
+**Implication**: The S5 (Shek 2026) direction-grouping finding does not replicate out-of-sample on any reasonable symbol subset. F10 closes as a negative result regardless of which coins are included.

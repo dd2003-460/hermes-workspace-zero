@@ -54,7 +54,7 @@
 - 人类回复：
 
 ## [2026-11-05 r290] LoCoMo conv4 rerun#2 报告定稿确认（不可逆：锁定最终数字）
-- 背景：T17 LoCoMo benchmark 全部实验完成。conv4 rerun#2（entity guard active）最终数字已落盘 `tools/memory-benchmarks/results/locomo/ENTITY-GUARD-STATUS.md` + `locomo_results_20261104_225711.json`（@ 55f7a77 fork）。
+- 背景：T17 LoCoMo benchmark 全部实验完成。conv4 rerun#2（entity guard active）最终数字已落盘 `tools/memory-benchmarks/results/locomo/ENTITY-GUARD-STATUS.md` + `locomo_results_20261104_225711.json`（@ d4063ef fork）。
 - 核心数字（top_50 cutoff）：overall **82.0%** (146/178)，vs 无 entity guard baseline 71.3% (rerun#1) → **+10.7pp**。分类：multi-hop 90.3% / single-hop 83.2% / temporal 88.5% / OD 42.9%。
 - OD 诊断闭环：OD 42.9% 已达实际可达上限（理论 ceiling ~43-50%），5/8 失败题为数据集标注问题（答案实体不在源文本中），非系统缺陷。cutoff top_10→top_200 OD 波动 ±1 题，检索量不是瓶颈。
 - 影响面：确认后 LoCoMo 报告定稿，后续不再修改数字。若需追加实验（query rewriting / multi-memory synthesis）另开新 run，不改本报告。

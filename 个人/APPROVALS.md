@@ -99,6 +99,20 @@
   - E. A+B 组合（AI 建议）
 - 人类回复：
 
+## [2026-11-05 r293] T23 stage-ablation 异源 judge — 通道阻塞（需成璐决策）
+- 背景：T23 任务书已写好（`pfb/tasks/T23-stage-ablation-hetero-judge-task.md`），18 工件 × 6 维盲判。目标：用异族模型复判同源 27b judge 的 S0→S5 曲线，验证 H1-H4。
+- 阻塞原因：
+  - Arena agent mode：登录成功（xyifeng81）但 agent 无 shell/git/文件写入能力，且 72KB 消息触发 reCAPTCHA → 当前不可用
+  - 本地 GLM-4.7-Flash（智谱，真正异族）：推理模型，简单事实核查就死循环烧完 2000 token → 不可用
+  - 本地 Qwen2.5-7B：能输出但同族（Qwen），异源性不足
+  - 外部 API（OpenAI/Anthropic/Gemini）：无 key
+- 裁决选项：
+  - A. 提供任一外部 API key（OpenAI/Anthropic/Gemini/DeepSeek），我用它做异源 judge（~30min 完成）
+  - B. 等 arena reCAPTCHA 冷却（~1h+）后分小批（每批 ≤15KB）慢慢喂，预计 3-4h
+  - C. 降级：用 Qwen2.5-7B 做"半异源"judge（不同代际/规模但同族），conf 上限降到 0.5，标注局限
+  - D. 暂缓 T23，先推其他事（r289/r290 那批 pending decisions 更紧急）
+- 人类回复：
+
 ## 待处理（建议项，不阻塞）
 
 - **wx-push.py 连续失败已自愈**（r268c/r269/r270 三轮 invalid request → r274 起 success:true，bot API token 侧问题自行恢复）。销账：无需换渠道，保留 hermes 原生 weixin 投递 + wx-push 双通道现状。若再连续 ≥3 轮失败则重新登记建议项。

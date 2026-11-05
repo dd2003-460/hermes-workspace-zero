@@ -5,7 +5,7 @@
 | # | 方向 | 锚点仓库（近期有活动） | 现状一句话 | 可立即做的动作 | 状态 |
 |---|------|----------------------|-----------|--------------|------|
 | 1 | 金融·正交信号源 | hermes-workspace-zero (D1-financial-market-analysis) | F6-F10 全闭环。**F10-R5 宏观调研**（@ main 6304ab54）：H_macro 文献层面不成立。**H1 OOS 回测 FAIL**（2026-11-05, r8/）：Δgap=−2.38% CI[−4.92,+1.03]，G_up 跑输 G_down，8 gates 全挂。S5 方向分组效应 OOS 不复现。**F10 收口为负面结果报告** | r8/h1-backtest-report.md (含 SOL 排除敏感性检验) + results.json + h1_backtest.py @ a2859d18 | **done · negative result** | · BTC+ETH 敏感性检验确认 FAIL 稳健
-| 2 | 写作·动机社会 | from-motivation-to-society | Part I-V 全写完，等 P2 实验第一个数（30人30天≥40%信念迁移），solo 0美元方案已写好 | 起草 P2 实验招募文案 + 渠道对比（待你拍板渠道） | open·半阻塞(渠道) |
+| 2 | 写作·动机社会 | D2-efficient-propagation-book | Part I-V 全写完。P2 实验材料就绪（招募文案+前后测问卷+数据表）。**r292 自批渠道 E**（微信私域 A + 即刻/小红书 B）。等成璐发群即启动 30 人前测 | 成璐发群 → 收满 30 人 → 发前测链接+ch1 → 30 天后后测 | open·等成璐发群 |
 | 3 | 健康·MR L1 完成 | longevity-orthogonal-contribution | **阶段2 全部本地工作完成** (b7a9a83)：Step1✅ Step2✅ Step4 L1✅ (10 pair, Egger 为主) + verify_integrity C1-C24 PASS + 执行报告 + LDL→AD 管线伪影诊断(方向一致性69%)。BMI→CHD Egger OR=1.17, LDL→CHD OR=1.40, BMI→CKD OR=1.28 | blocked: 1000G v3 EUR ref (clumping, 所有源已死) + OpenGWAS token (Step3 condition-F)。本地 open-data 已穷尽 | blocked-on-credentials |
 | 4 | 物理·ORF 收尾 | -orf | Stage 4 组件全完成，LaTeX 86→0（2026-11-02），arXiv tarball 已打好（2026-11-02） | arXiv 手动上传（需登录 arxiv.org/submission，不可自动绕过） | blocked-on-human |
 | 5 | 视频复刻·batch-12 | d1-video-recreation | batch-12 E29-E32 全部完成（4/4 ✅，eccff00），已推 main | 无待办 — 等下一批规划 | done |

@@ -14,5 +14,11 @@
     "agent/pre-step 是 waterfall 每步 LLM 请求前锚点 → 用例B 适合 Cordis 原生插件（ctx.on，~40行），hook 桥反而更绕",
     "hook 桥仅复用 Claude Code/Codex 现成配置有价值；本场景无现成配置 → 跳过桥",
     "静态规则进 persona（cache 友好但永久占 token）；动态注入进 pre-step（每步重发成本，文案须短）"
+  ],
+  "status": "active",
+  "current_task": "方案① no-new-facts hook 已实现 (fingerprint_repeat predicate + rule, workspace@8b23e1f9). 下一步: 桥安装面解决后集成验证 (dsh-hooks-codex install_bundle L2)",
+  "last_update": "2026-11-06T15:30:00+08:00",
+  "completed_tasks": [
+    "no-new-facts-guard: fingerprint_repeat predicate implemented + tested (2026-11-06)"
   ]
 }

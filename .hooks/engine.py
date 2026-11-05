@@ -205,13 +205,22 @@ def anchor_vectors(anchors):
 
 # ---------- 谓词 ----------
 
+def _tool_input_compat(payload):
+    """兼容两种 payload 形状：DSH/codex 桥（tool_input）与 Hermes 原生 shell hooks（args）。"""
+    ti = payload.get("tool_input")
+    if ti is None:
+        ti = payload.get("args")
+    return ti or {}
+
+
 def match_text(seam, payload):
     """按缝取触发文本。Stop/SessionStart 无可靠文本 → 只能 metric/always。"""
     if seam == "UserPromptSubmit":
-        return str(payload.get("prompt") or "")
+        # Hermes 原生 pre_llm_call 用 user_message；DSH 桥用 prompt
+        return str(payload.get("prompt") or payload.get("user_message") or "")
     if seam in ("PreToolUse", "PostToolUse"):
         parts = [str(payload.get("tool_name") or "")]
-        ti = payload.get("tool_input") or {}
+        ti = _tool_input_compat(payload)
         if isinstance(ti, dict):
             for k in ("command", "file_path", "path"):
                 if ti.get(k):
@@ -219,7 +228,11 @@ def match_text(seam, payload):
         else:
             parts.append(str(ti))
         if seam == "PostToolUse":
-            parts.append(str(payload.get("tool_response") or "")[:4000])
+            # Hermes 原生 post_tool_call 把结果放 result（JSON 字符串）
+            resp = payload.get("tool_response")
+            if resp is None:
+                resp = payload.get("result")
+            parts.append(str(resp or "")[:4000])
         return "\n".join(p for p in parts if p)
     return ""
 
@@ -289,9 +302,10 @@ def pred_fingerprint_repeat(spec, ctx):
                 recent = recent[-(window * 20):]
         except Exception:
             pass
-    # 当前指纹
+    # 当前指纹（兼容 tool_input/args、tool_response/result 两种 payload 形状）
     payload = ctx.get("payload", {})
-    cur_fp = _fingerprint(payload.get("tool_name"), payload.get("tool_input"), payload.get("tool_response"))
+    cur_fp = _fingerprint(payload.get("tool_name"), _tool_input_compat(payload),
+                          payload.get("tool_response") or payload.get("result"))
     # 统计连续相同
     consecutive = 1
     for rec in reversed(recent):
@@ -438,9 +452,10 @@ def main():
     if seam == "PreToolUse":
         ledger_append(session_id, {"event": "PreToolUse", "turn": turn_id,
                                    "tool": payload.get("tool_name"), "ts": time.time()})
-    # 记录 PostToolUse 指纹（供 fingerprint_repeat 谓词跨事件累积）
+    # 记录 PostToolUse 指纹（供 fingerprint_repeat 谓词跨事件累积；兼容 args/result 形状）
     if seam == "PostToolUse":
-        fp = _fingerprint(payload.get("tool_name"), payload.get("tool_input"), payload.get("tool_response"))
+        fp = _fingerprint(payload.get("tool_name"), _tool_input_compat(payload),
+                          payload.get("tool_response") or payload.get("result"))
         try:
             os.makedirs(STATE_DIR, exist_ok=True)
             fp_path = os.path.join(STATE_DIR, f"fp-{session_id}.jsonl")

@@ -87,7 +87,20 @@
 | token 过期 | `git ls-remote` 测权限 | 重新 OAuth 授权 / 用 `gh auth token` 生成新 token |
 | arena 沙箱拦截 git | `curl https://api.github.com` 通但 `git clone` 不通 | 用 GitHub REST API（不走 git） |
 
-**降级原则**：arena 通道不可用 → 不阻塞，降级到 Lead 本地自答（conf-0.2，loop 工件照常落盘），故障记 `knowledge/efficiency-bottlenecks.md`。
+**降级原则（2026-11-06 成璐修订）**：
+
+1. **默认不降级**。arena 是首选通道，故障时必须先穷尽修复手段再考虑本地执行。
+2. **修复清单**（按顺序尝试，全部失败才允许降级）：
+   - ① `curl -I https://arena.ai` 确认网络通
+   - ② ego-browser 重新 goto arena.ai/agent（会话页面可能过期）
+   - ③ 查 ego-lite 进程是否活着（`ps aux | grep -i ego`），死了就重启
+   - ④ 换 taskSpace 名开新会话（旧 space 可能僵尸）
+   - ⑤ 检查 GitHub App token 权限（`git ls-remote` 测写权限）
+   - ⑥ 若沙箱拦截 git → 用 GitHub REST API（Contents API）替代
+   - ⑦ 仍失败 → 记录具体报错（哪条链路 + 什么错误码），等下一个 keepalive 周期重试
+3. **降级条件**：以上 7 步全部失败 + 连续 2 个 keepalive 周期重试无效 → 才允许 Lead 本地自答（conf-0.2，loop 工件照常落盘）。
+4. **降级后必须修复**：降级不是终点。每次降级后立即在 `knowledge/efficiency-bottlenecks.md` 记录故障根因 + 修复计划，下一个可用周期优先尝试恢复 arena 通道。
+5. **禁止静默降级**：不得因为"本地也能跑"就直接跳过 arena。只有确认所有方法都试过且不可修复时，才允许本地跑。
 
 ## 4. loop 阶段速览（自 loop-executor.md 并入 · 逐段定义见仓库内 loop/prompt-first/）
 

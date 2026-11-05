@@ -253,6 +253,56 @@ def pred_metric(spec, ctx):
     return {"<": v < n, "<=": v <= n, ">": v > n, ">=": v >= n, "==": v == n, "!=": v != n}.get(op, False)
 
 
+def _fingerprint(tool_name, tool_input, tool_response):
+    """确定性指纹：hash(tool_name + 排序后的 input keys/values + response 前 500 字符)。"""
+    parts = [str(tool_name or "")]
+    ti = tool_input if isinstance(tool_input, dict) else {}
+    for k in sorted(ti.keys()):
+        v = str(ti[k])[:200]
+        parts.append(f"{k}={v}")
+    parts.append(str(tool_response or "")[:500])
+    raw = "\x00".join(parts)
+    return hashlib.md5(raw.encode("utf-8")).hexdigest()[:16]
+
+
+def pred_fingerprint_repeat(spec, ctx):
+    """PostToolUse 专用：同一 (session, turn) 内连续 N 次相同 fingerprint → 触发。
+    spec: {type:"fingerprint_repeat", min_repeats:3, window_turns:1}
+    利用 ledger 中已记录的 PostToolUse 事件（engine main 在评估后追加）。
+    为获取历史指纹，从 state/ 的 fingerprint 缓存文件读取。"""
+    min_repeats = int(spec.get("min_repeats", 3))
+    session_id = ctx.get("_session_id", "unknown")
+    fp_path = os.path.join(STATE_DIR, f"fp-{session_id}.jsonl")
+    recent = []
+    if os.path.exists(fp_path):
+        try:
+            with open(fp_path, encoding="utf-8") as f:
+                for line in f:
+                    try:
+                        r = json.loads(line)
+                        recent.append(r)
+                    except Exception:
+                        continue
+            # 只保留最近 window_turns 个 turn 的记录
+            window = int(spec.get("window_turns", 1))
+            if len(recent) > window * 20:
+                recent = recent[-(window * 20):]
+        except Exception:
+            pass
+    # 当前指纹
+    payload = ctx.get("payload", {})
+    cur_fp = _fingerprint(payload.get("tool_name"), payload.get("tool_input"), payload.get("tool_response"))
+    # 统计连续相同
+    consecutive = 1
+    for rec in reversed(recent):
+        if rec.get("fp") == cur_fp and rec.get("turn") == ctx.get("_turn_id"):
+            consecutive += 1
+        else:
+            break
+    log_err(f"  [fp_repeat] cur={cur_fp} consecutive={consecutive}/{min_repeats}")
+    return consecutive >= min_repeats
+
+
 def pred_vector(spec, ctx):
     th = float(spec.get("threshold", 0.18))
     av = ctx["anchor_vecs"]
@@ -314,6 +364,7 @@ PREDICATES = {
     "always": pred_always,
     "keyword": pred_keyword,
     "metric": pred_metric,
+    "fingerprint_repeat": pred_fingerprint_repeat,
     "vector": pred_vector,
     "lexicon": pred_lexicon,
     "judge": pred_judge,
@@ -359,7 +410,8 @@ def main():
 
     text = match_text(seam, payload)
     ctx = {"text": text, "payload": payload, "seam": seam, "metrics": metrics,
-           "anchor_vecs": anchor_vecs, "dims": dims, "ngram": ngram}
+           "anchor_vecs": anchor_vecs, "dims": dims, "ngram": ngram,
+           "_session_id": session_id, "_turn_id": turn_id}
 
     injects, denies = [], []
     for rule in rules_doc.get("rules", []):
@@ -386,6 +438,23 @@ def main():
     if seam == "PreToolUse":
         ledger_append(session_id, {"event": "PreToolUse", "turn": turn_id,
                                    "tool": payload.get("tool_name"), "ts": time.time()})
+    # 记录 PostToolUse 指纹（供 fingerprint_repeat 谓词跨事件累积）
+    if seam == "PostToolUse":
+        fp = _fingerprint(payload.get("tool_name"), payload.get("tool_input"), payload.get("tool_response"))
+        try:
+            os.makedirs(STATE_DIR, exist_ok=True)
+            fp_path = os.path.join(STATE_DIR, f"fp-{session_id}.jsonl")
+            with open(fp_path, "a", encoding="utf-8") as f:
+                f.write(json.dumps({"fp": fp, "turn": turn_id, "ts": time.time()}) + "\n")
+            # 清理：只保留最近 100 条
+            if os.path.exists(fp_path):
+                with open(fp_path, encoding="utf-8") as f:
+                    lines = f.readlines()
+                if len(lines) > 100:
+                    with open(fp_path, "w", encoding="utf-8") as f:
+                        f.writelines(lines[-100:])
+        except Exception:
+            pass
 
     out = {}
     if denies:

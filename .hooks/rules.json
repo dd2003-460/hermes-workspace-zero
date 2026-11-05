@@ -134,6 +134,22 @@
         "inject": "🎯 本会话思考预算 {thinking_budget_tokens} tokens（深度∝不可逆性，不∝复杂度）。若思考已接近/超过预算仍未收敛：停，回看自适应思考原则（AGENTS.md「思考预算」节 / projects/AI-计算科学/D1-persona-align/thinking-budget.md）——L0/L1 可逆任务直接给结论不展开，L2 才推演一次。若当前问题本来就简单，直接答，忽略本提醒。"
       },
       "cooldown_turns": 8
+    },
+    {
+      "id": "no-new-facts-guard",
+      "seam": "PostToolUse",
+      "enabled": true,
+      "trigger": [
+        {
+          "type": "fingerprint_repeat",
+          "min_repeats": 3,
+          "window_turns": 1
+        }
+      ],
+      "action": {
+        "inject": "⚠️ 连续 3 次工具调用返回等价结果（无新信息）。按 AGENTS.md 终止指令：同一问题想 2 轮无新事实→停。直接基于已有结果给结论，或换一条完全不同的路径（不同工具/不同参数/不同假设），不要重试相同操作。"
+      },
+      "cooldown_turns": 2
     }
   ]
 }

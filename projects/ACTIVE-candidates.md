@@ -31,8 +31,8 @@
 
 ## 研究 Prompt 消融实验（research-prompt）
 
-- **状态**：✅ 完成（2026-11-05）
-- **结果**：7 变体 × 3 run，R0.3 定版 **18.00/20 (σ=0)**
-- **关键发现**：SELF-CHECK 契约方向正确但不稳定（崩塌率 33%）；C2/C4 是系统性短板
-- **下一步**：换更强执行模型验证天花板 / 对标真正开源最强模型（需 API）
-- **文件**：`projects/research-prompt/bench/runs/ablation-L1/SUMMARY.md`
+- **状态**：✅ CLOSED（2026-11-06, @ 2450b6d）
+- **最终结果**：8 变体 × n=9 对称样本。R0.3 定版（简洁性原则）。统一判官协议下 R0.3 mean=14.00 σ=2.24 stall=22%，R0.7 mean=13.29 σ=3.45 stall=22%（Δ=-0.71 within noise，不可区分）。
+- **关键修正**：原"18/20 σ=0"是宽松判官+n=3 运气产物；真实分布含 22% 硬停 + 成功 run 内部 11-16 分波动。
+- **结论**：prompt 层无已证实改进路径。突破需更强执行模型（70B+/API 级）。
+- **文件**：`projects/research-prompt/bench/runs/ablation-L1/SUMMARY.md` + `prompt-result/R0.7/N9-FINAL-COMPARISON.md`

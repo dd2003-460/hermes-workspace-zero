@@ -103,6 +103,7 @@
 - 背景：T23 任务书已写好（`pfb/tasks/T23-stage-ablation-hetero-judge-task.md`），18 工件 × 6 维盲判。目标：用异族模型复判同源 27b judge 的 S0→S5 曲线，验证 H1-H4。
 - **C 选项已自主执行 (2026-11-05)**：Qwen2.5-7B 半异源 judge 完成（108 dim-scores, 0 errors）。结果：H1 CONFIRMED（方向一致），H2/H3 REFUTED（judge 区分度不足，所有 arm 挤在 0.85-0.92 窄带）。结论：7B judge 能力不够，不是工件质量真的如它所判。详见 `pfb/experiments/stage-ablation/T23-semihetero-analysis.md`。
 - 真异源仍需：A（外部 API key）或 B（arena reCAPTCHA 冷却）。
+- **B 通道已恢复 (2026-11-05)**：reCAPTCHA 解除。pfb 仓库已设为 public。新 arena 会话已发出 T23 任务（指向公开仓库 clone，非贴数据）。Agent 正在执行中。历史会话已全部归档（~20 个 via 侧栏 Archive 菜单）。
 - 人类回复：
 
 ## 待处理（建议项，不阻塞）

@@ -13,6 +13,8 @@
 
 | 7 | 物理·BH 质量谱 + 实验框架 T8 | bh-mass-spectrum / decomp / pfb | **T8 C3v3 异源验证完成**（pfb @ 17f725c）：rubric v3.1 终版 J1 sha 7518ce5c，本地复放 κ=0.94 G2 35/36，arena 异源 κ=+0.31 G2 29/36（vs r270 ~0），arena 内部双判官 κ=0.70。arena-input rubric 副本已同步 r278（下轮复跑消除 code-fence 2 cell）。待成璐 sign-off 冻结 rubric | **awaiting-signoff** |
 
+| 8 | pfb · stage-ablation 收口 | prompt-first-bench | **T17 最终报告落盘** @ 2c51b36：gate-fixed 全量 90-run 重评分 + cross-judge 对比。核心发现：judge-dependence 是论文核心证据（同族 H1 CONFIRMED +0.129，异族 REFUTED -0.187）。Per-question H1 全正（Q1-Q5）。下一步：Arena 授权拉 per-dim JSONL + 扩展异族评委到 Q2-Q5 | T17-stage-ablation-final-report.md @ 2c51b36 | **done · awaiting-arena-auth** |
+
 ## #8 decomp · T17 泛化 bench（方法论跨域验证）
 
 - **状态**：**首轮完成 + LoCoMo OD 诊断闭环**。3 域 × 2 run 全出分：总分均 15.5-16.5/18。四域全覆盖完成（r245F, decomp @ aeb12b1）。**LoCoMo conv4 rerun#2 完成**（entity guard：overall 82.0%@top_50，+10.7pp vs baseline 71.3% (rerun#1)；OD 42.9% 达 ceiling）；**OD 诊断最终版**：5/8 失败题答案实体不在 LoCoMo 源文本中（数据集标注问题），OD 理论上限 ~43-50%，当前 42.9% 已接近实际可达上限。Prompt 改进 smoke test 无效。memory-benchmarks @ 55f7a77。**T17 bench 收口**。

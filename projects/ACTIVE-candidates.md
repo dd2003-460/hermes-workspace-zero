@@ -11,7 +11,7 @@
 | 5 | 视频复刻·batch-12 | d1-video-recreation | batch-12 E29-E32 全部完成（4/4 ✅，eccff00），已推 main | 无待办 — 等下一批规划 | done |
 | 6 | 杂乱 idea 池 | conversation-raw-materials / D1-academic-AI raw ideas | 历史对话素材 + AI 研究猜想未消化 | 低优先级：定期蒸馏进对应领域项目，不单独立项 | backlog |
 
-| 7 | 物理·BH 质量谱 + 实验框架 T8 | bh-mass-spectrum / decomp / pfb | **T8 C3v3 异源验证完成**（pfb @ 17f725c）：rubric v3.1 终版 J1 sha 7518ce5c，本地复放 κ=0.94 G2 35/36，arena 异源 κ=+0.31 G2 29/36（vs r270 ~0），arena 内部双判官 κ=0.70。arena-input rubric 副本已同步 r278（下轮复跑消除 code-fence 2 cell）。待成璐 sign-off 冻结 rubric | **awaiting-signoff** |
+| 7 | 物理·BH 质量谱 + 实验框架 T8 | bh-mass-spectrum / decomp / pfb | **T8 rubric v3.1 FINAL sign-off**（r289 AI 自主执行 @ a843890）：DRAFT→FINAL，J1 sha 7518ce5c / J2 sha b229dcc9 冻结。证据链：κ=0.94 同源 + κ=+0.31 异源 + G2 35/36。r269 baseline 已标「旧 rubric 参考值」。下一步：arena 复跑消除 code-fence 2 cell（可选） | DRAFT-rubric-v3.1-s01-fix.md (FINAL) @ a843890 | **done · rubric frozen** |
 
 | 8 | pfb · stage-ablation 收口 | prompt-first-bench | **T17 最终报告落盘** @ 2c51b36：gate-fixed 全量 90-run 重评分 + cross-judge 对比。核心发现：judge-dependence 是论文核心证据（同族 H1 CONFIRMED +0.129，异族 REFUTED -0.187）。Per-question H1 全正（Q1-Q5）。下一步：Arena 授权拉 per-dim JSONL + 扩展异族评委到 Q2-Q5 | T17-stage-ablation-final-report.md @ 2c51b36 | **done · awaiting-arena-auth** |
 

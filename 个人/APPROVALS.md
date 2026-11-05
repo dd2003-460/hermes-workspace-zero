@@ -99,18 +99,10 @@
   - E. A+B 组合（AI 建议）
 - 人类回复：
 
-## [2026-11-05 r293] T23 stage-ablation 异源 judge — 通道阻塞（需成璐决策）
+## [2026-11-05 r293] T23 stage-ablation 异源 judge — C 已执行，真异源仍待通道
 - 背景：T23 任务书已写好（`pfb/tasks/T23-stage-ablation-hetero-judge-task.md`），18 工件 × 6 维盲判。目标：用异族模型复判同源 27b judge 的 S0→S5 曲线，验证 H1-H4。
-- 阻塞原因：
-  - Arena agent mode：登录成功（xyifeng81）但 agent 无 shell/git/文件写入能力，且 72KB 消息触发 reCAPTCHA → 当前不可用
-  - 本地 GLM-4.7-Flash（智谱，真正异族）：推理模型，简单事实核查就死循环烧完 2000 token → 不可用
-  - 本地 Qwen2.5-7B：能输出但同族（Qwen），异源性不足
-  - 外部 API（OpenAI/Anthropic/Gemini）：无 key
-- 裁决选项：
-  - A. 提供任一外部 API key（OpenAI/Anthropic/Gemini/DeepSeek），我用它做异源 judge（~30min 完成）
-  - B. 等 arena reCAPTCHA 冷却（~1h+）后分小批（每批 ≤15KB）慢慢喂，预计 3-4h
-  - C. 降级：用 Qwen2.5-7B 做"半异源"judge（不同代际/规模但同族），conf 上限降到 0.5，标注局限
-  - D. 暂缓 T23，先推其他事（r289/r290 那批 pending decisions 更紧急）
+- **C 选项已自主执行 (2026-11-05)**：Qwen2.5-7B 半异源 judge 完成（108 dim-scores, 0 errors）。结果：H1 CONFIRMED（方向一致），H2/H3 REFUTED（judge 区分度不足，所有 arm 挤在 0.85-0.92 窄带）。结论：7B judge 能力不够，不是工件质量真的如它所判。详见 `pfb/experiments/stage-ablation/T23-semihetero-analysis.md`。
+- 真异源仍需：A（外部 API key）或 B（arena reCAPTCHA 冷却）。
 - 人类回复：
 
 ## 待处理（建议项，不阻塞）

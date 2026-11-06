@@ -1,10 +1,10 @@
 {
   "project": "D1-prompt-first-bench",
-  "last_update": "2026-11-06T22:50+08:00",
+  "last_update": "2026-11-06T23:45+08:00",
   "current_stage": "PAPER SUBMISSION-READY (pending arXiv upload)",
   "status": "active",
-  "iteration": 10,
-  "notes": "Paper complete: 7199w, §2 updated with 17 new 2026 H2 citations + 6-group contradiction analysis. Gold replication 5/5 M1=1.0. Rubric v3.3. All arena work done. Next: arXiv upload (BLOCKED: needs 成璐 login).",
+  "iteration": 11,
+  "notes": "Paper final: 7197w, 42 refs (all T44 citations complete), submission-ready. Fixed missing references bug (10 in-text cites had no ref entries).",
   "key_results": {
     "r293_local_27b_v2judge": {
       "S0": 0.517,

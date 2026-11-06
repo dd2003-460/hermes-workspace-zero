@@ -47,23 +47,6 @@
       "cooldown_turns": 0
     },
     {
-      "id": "overthink-backstop",
-      "seam": "Stop",
-      "enabled": true,
-      "trigger": [
-        {
-          "type": "metric",
-          "field": "tool_calls_this_turn",
-          "op": ">=",
-          "value": 8
-        }
-      ],
-      "action": {
-        "deny": "⚠️ 本 turn 已调用 8+ 次工具（过度发散信号）。收敛检查：任务真的需要这么多步吗？能否用已有结果直接给结论？若确实复杂，说明理由后继续。"
-      },
-      "cooldown_turns": 2
-    },
-    {
       "id": "irreversible-op-guard",
       "seam": "PreToolUse",
       "enabled": true,

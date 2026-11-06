@@ -11,9 +11,9 @@
 | 5 | 视频复刻·batch-12 | d1-video-recreation | batch-12 E29-E32 全部完成（4/4 ✅，eccff00），已推 main | 无待办 — 等下一批规划 | done |
 | 6 | 杂乱 idea 池 | conversation-raw-materials / D1-academic-AI raw ideas | 历史对话素材 + AI 研究猜想未消化 | 低优先级：定期蒸馏进对应领域项目，不单独立项 | backlog |
 
-| 7 | 物理·BH 质量谱 + 实验框架 T8 | bh-mass-spectrum / decomp / pfb | **T8 rubric v3.1 FINAL sign-off**（r289 AI 自主执行 @ a843890）：DRAFT→FINAL，J1 sha 7518ce5c / J2 sha b229dcc9 冻结。证据链：κ=0.94 同源 + κ=+0.31 异源 + G2 35/36。r269 baseline 已标「旧 rubric 参考值」。下一步：arena 复跑消除 code-fence 2 cell（可选） | DRAFT-rubric-v3.1-s01-fix.md (FINAL) @ a843890 | **done · rubric frozen** |
+| 7 | 物理·BH 质量谱 + 实验框架 T8 | bh-mass-spectrum / decomp / pfb | **T38 fullloop hetero-judge + rubric v3.2 replay 全部闭环**（2026-11-06, pfb @ 8037303）：v3.2 fence-skip 修复确认有效（§6-A 两围栏 cell J1 0→1.0），κ 0.606→0.559，J1 pass 0.654→0.886；窄结论成立（围栏 bug 修好），"整体质量提升"不可归因于 rubric（同模型双角色 leniency drift）。T36 Q2-Q5 扩展完成（H2 CONFIRMED, H1 INCONCLUSIVE）。论文已更新含 cross-question 证据。WorkBuddy MR 触发源待停否 | DRAFT-rubric-v3.2.md (FINAL) @ 8037303 | **done · all arena rounds closed** |
 
-| 8 | pfb · stage-ablation 收口 | prompt-first-bench | **T17 最终报告落盘** @ 2c51b36：gate-fixed 全量 90-run 重评分 + cross-judge 对比。核心发现：judge-dependence 是论文核心证据（同族 H1 CONFIRMED +0.129，异族 REFUTED -0.187）。Per-question H1 全正（Q1-Q5）。下一步：Arena 授权拉 per-dim JSONL + 扩展异族评委到 Q2-Q5 | T17-stage-ablation-final-report.md @ 2c51b36 | **done · awaiting-arena-auth** |
+| 8 | pfb · stage-ablation 收口 | prompt-first-bench | **T17 最终报告落盘** @ 2c51b36 + **T36 异族评委 Q2-Q5 扩展完成**（e4c6842）：H2 CONFIRMED（S1→S2 最大增益跨题稳健），H1 INCONCLUSIVE（Q1 -0.187 未系统性复现），H3 CONFIRMED（S2→S3 ≤0）。Cross-question curve: S0=0.445→S2=0.500 peak。核心发现不变：judge-dependence 是论文核心证据 | T17-stage-ablation-final-report.md + runs/hetero-judge-q2q5-summary.json | **done · T36 integrated** |
 
 ## #8 decomp · T17 泛化 bench（方法论跨域验证）
 

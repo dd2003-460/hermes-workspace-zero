@@ -177,6 +177,29 @@
         "inject": "🗣️ 用户消息含问题——先直接回答（1-3句），再做事。不要先跑工具把问题埋了。"
       },
       "cooldown_turns": 0
+    },
+    {
+      "id": "orchestrator-mode",
+      "seam": "UserPromptSubmit",
+      "enabled": true,
+      "trigger": [
+        {
+          "type": "keyword",
+          "any": [
+            "subagent",
+            "loop",
+            "派发",
+            "外包",
+            "跑起来",
+            "后台"
+          ],
+          "max_len": 300
+        }
+      ],
+      "action": {
+        "inject": "🏭 Orchestrator 模式：用户提到 loop/subagent/派发。本 turn 只做：① 定目标（读 GOALS.md/ACTIVE-candidates）② 写任务书 ③ delegate_task 派发 ④ 一句话播报。不要在主会话里执行 loop 本身。"
+      },
+      "cooldown_turns": 0
     }
   ]
 }

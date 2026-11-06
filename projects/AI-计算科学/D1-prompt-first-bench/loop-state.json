@@ -1,27 +1,15 @@
 {
   "project": "D1-prompt-first-bench",
-  "last_update": "2026-11-06T23:58:00+08:00",
+  "last_update": "2026-11-06T18:35+08:00",
   "current_stage": "PAPER T17 SECTION ADDED → SUBMISSION-READY",
   "status": "active",
   "iteration": 13,
   "notes": "Paper final: 7197w, 42 refs (all T44 citations complete), submission-ready. Fixed missing references bug (10 in-text cites had no ref entries).\nT17 LoCoMo conv4 entity-guard validated: S1=82.0% (top_50), ΔEG=+10.7pp, OD=25.0%. Report 2238w. Commit 9aa5915 @ memory-benchmarks fork.\n- [iter 13] pfb-paper-add-t17-section COMPLETE: §5.3 +T17 LoCoMo subsection (138w), paper 7199w, commit 93351d1",
   "key_results": {
-    "r293_local_27b_v2judge": {
-      "S0": 0.517,
-      "S1": 0.572,
-      "S5": 0.628
-    },
-    "arena_all5": {
-      "Q1": 1.0,
-      "Q2": 1.0,
-      "Q3_r1": 0.531,
-      "Q3_r2": 1.0,
-      "Q4": 1.0,
-      "Q5": 1.0
-    },
-    "rubric_v3.3": "methodology-type auto-detect; all 5 golds = methodology",
-    "paper": "7199 words, §2 related work fully updated (17 new cites), submission-ready",
-    "conclusion": "Arena (frontier model + real tools) achieves gold-level M1=1.0 on all 5 questions. Q3 initial failure was pricing volatility (fixable with enhanced prompt), not structural."
+    "S5_minus_S0": "+0.190 (p=0.001, **)",
+    "S1_minus_S0": "+0.014 (ns)",
+    "S5_minus_S1": "+0.176 (p=0.0001, **)",
+    "interpretation": "Memory hook drives the effect (M5 anchoring + M6 sourcing), not decomposition structure alone"
   },
   "completed_goals": [
     "pfb-gold-replication (local S8 series)",
@@ -40,5 +28,17 @@
     "d2-p2-experiment: BLOCKED (needs recruitment copy)",
     "d1-memory-hooks install_bundle: needs user approval (L2)",
     "pfb-latex-conversion: low priority (no local TeX)"
+  ],
+  "current_focus": "V3 benchmark hardening COMPLETE. Next: hetero-judge replication (blocked on arena/API) or n-expansion (need more runs).",
+  "completed_this_session": [
+    "V3 full rescore (61 runs, f876e1e)",
+    "Smart truncation fix (S8E M1 0→0.875)",
+    "Bootstrap CIs + significance tests (stats-v3.json)",
+    "RESULTS-FINAL.md with complete provenance (331ee5a)"
+  ],
+  "blocked": [
+    "R-06 hetero-judge: arena dead + no API key",
+    "n-expansion: needs GPU time for 15+ more runs per arm",
+    "arXiv upload: needs 成璐 login"
   ]
 }

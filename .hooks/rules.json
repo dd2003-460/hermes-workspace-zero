@@ -6,20 +6,6 @@
   "_doc": "模型可写数据。seam ∈ SessionStart|UserPromptSubmit|PreToolUse|PostToolUse|Stop。trigger 是谓词数组（OR 级联，便宜的放前）。action.inject → 模型可见提醒; action.deny → 阻塞理由（仅用于不可逆操作保护; 提醒类一律用 inject）。cooldown_turns = 最近 N 个不同 turn 内最多触发一次。改完即生效（每次事件实时读取，无需重启）。顶层 config = 全局数字配置，inject/deny 文本可用 {key} 引用（缺键原样保留）。",
   "rules": [
     {
-      "id": "session-orientation",
-      "seam": "SessionStart",
-      "enabled": true,
-      "trigger": [
-        {
-          "type": "always"
-        }
-      ],
-      "action": {
-        "inject": "本 workspace 装有 memory-hooks（.hooks/）：固定引擎在 5 个拦截缝实时读 rules.json 并注入提醒——L0 简单问题防过度思考、单 turn 工具调用过多防发散、不可逆命令保护、领域锚点（记忆优先）。发现新的'遗忘/过度思考'模式时，直接编辑 .hooks/rules.json 加一条规则即可（改数据不重启；格式见 .hooks/README.md）。"
-      },
-      "cooldown_turns": 2
-    },
-    {
       "id": "overthink-guard-l0",
       "seam": "UserPromptSubmit",
       "enabled": true,

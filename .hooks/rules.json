@@ -173,18 +173,11 @@
     {
       "id": "bidirectional-channel",
       "seam": "UserPromptSubmit",
-      "trigger": "keyword",
-      "keywords": [
-        "双向",
-        "商量",
-        "讨论",
-        "探索性",
-        "一起想"
-      ],
+      "trigger": "always",
       "enabled": true,
       "action": "inject_reminder",
-      "message": "[bidirectional] 用户要求 main↔sub 双向交流。协议：① 建 mailbox: /tmp/hermes-mailbox/<goal-id>/ ② to-sub.md = main 写给 sub 的指令/反馈 ③ to-main.md = sub 写给 main 的问题/发现 ④ main 每轮开始读 to-main.md，有新内容就回应到 to-sub.md ⑤ sub 在 prompt 里被告知：遇到不确定/有更好想法时，写 to-main.md 然后继续当前步骤（不阻塞）⑥ 不是机械问答——sub 可以提\"我觉得换个方向更好因为X\"，main 可以接受或拒绝并解释原因"
+      "message": "[bidirectional-capability] main↔sub 双向交流可用。需要时建 mailbox: /tmp/hermes-mailbox/<goal-id>/to-main.md + to-sub.md。Sub prompt 里加：\"遇到不确定或有更好想法时，写 /tmp/hermes-mailbox/<goal-id>/to-main.md（一行问题+你的建议），然后继续当前步骤不阻塞。Main 会读并回应到 to-sub.md。\" Main 每轮开始检查 to-main.md，有内容就回应。这不是机械问答——sub 可以提方向性建议，main 可以接受/拒绝/改方向。"
     }
   ],
-  "updated": "2026-11-06T15:40+08:00"
+  "updated": "2026-11-06T15:42+08:00"
 }

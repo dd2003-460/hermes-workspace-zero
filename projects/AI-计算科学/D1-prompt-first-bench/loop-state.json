@@ -1,18 +1,19 @@
 {
   "project": "D1-prompt-first-bench",
-  "last_update": "2026-11-06T18:30+08:00",
-  "current_stage": "gold-replication-arena-complete",
+  "last_update": "2026-11-06T19:30+08:00",
+  "current_stage": "gold-replication-complete-rubric-v3.3-paper-updated",
   "status": "active",
-  "iteration": 6,
-  "notes": "Gold 复现在 arena 通道下达成 (CONDITIONAL PASS)。Q2 M1=1.0, Q1 M1=1.0, Q3 M1=0.53(定价易变)。核心结论: 瓶颈是模型能力+工具通道，不是 prompt。下一步: rubric v3.3 + paper 更新 + Q4/Q5 补测。",
+  "iteration": 7,
+  "notes": "Rubric v3.3 implemented (score.py auto-detects gold type). Paper updated with §5.3 Arena Channel (7014 words). Gold replication via arena channel proven (Q2 M1=1.0, Q1 M1=1.0, Q3 M1=0.53 pricing-volatile). Next: Q4/Q5 completion + pricing-enhanced prompt.",
   "key_results": {
-    "r293_local_27b": {"S0": 0.493, "S1": 0.607, "S5": 0.714},
+    "r293_local_27b_v2judge": {"S0": 0.517, "S1": 0.572, "S5": 0.628},
     "arena": {"Q2": 0.895, "Q1": 0.674, "Q3": 0.564},
-    "bottleneck_conclusion": "model_capability + tool_channel, NOT prompt_design"
+    "rubric_v3.3": "methodology-type gold → public-fact verification; S1-Q2 regression M1=0.857",
+    "paper": "7014 words, §5.3 added, submission-ready"
   },
   "next_goals": [
-    "rubric-v3.3: M1 scoring fix for methodology-type gold + implementation in score.py",
-    "paper-update: add arena results + rubric v3.3 note to paper-draft.md",
-    "generalization-completion: Q4/Q5 arena runs + pricing-enhanced prompt for Q3"
+    "pfb-generalization-completion: Q4/Q5 arena runs + pricing-enhanced prompt for Q3 re-test",
+    "pfb-arxiv-upload: needs 成璐 login (BLOCKED)",
+    "d2-p2-experiment: needs recruitment copy (BLOCKED)"
   ]
 }

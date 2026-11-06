@@ -1,17 +1,18 @@
 {
   "project": "D1-prompt-first-bench",
-  "last_update": "2026-11-06T17:30+08:00",
-  "current_stage": "gold-replication-experiment",
+  "last_update": "2026-11-06T18:30+08:00",
+  "current_stage": "gold-replication-arena-complete",
   "status": "active",
-  "iteration": 5,
-  "notes": "S8A-F 实验完成。瓶颈定位: 27B执行一致性+无工具通道(vLLM function calling不工作)。S8D prompt落盘(结构化分解+定量强制+数据注入)。下一步: arena外包S8D prompt执行(路径A)或更强模型(路径B)。Paper submission-ready (6872 words). M1 judge v2 deployed.",
+  "iteration": 6,
+  "notes": "Gold 复现在 arena 通道下达成 (CONDITIONAL PASS)。Q2 M1=1.0, Q1 M1=1.0, Q3 M1=0.53(定价易变)。核心结论: 瓶颈是模型能力+工具通道，不是 prompt。下一步: rubric v3.3 + paper 更新 + Q4/Q5 补测。",
   "key_results": {
-    "r293_final": {"S0": 0.493, "S1": 0.607, "S5": 0.714},
-    "S8D_best": {"Q1_M1": 0.80, "Q3_M1": 0.917, "Q2_best_total": 0.640},
-    "bottleneck": "model_execution_consistency + tool_channel"
+    "r293_local_27b": {"S0": 0.493, "S1": 0.607, "S5": 0.714},
+    "arena": {"Q2": 0.895, "Q1": 0.674, "Q3": 0.564},
+    "bottleneck_conclusion": "model_capability + tool_channel, NOT prompt_design"
   },
-  "blocked": [
-    "arena channel needed for true tool-use",
-    "70B+/API model for higher ceiling"
+  "next_goals": [
+    "rubric-v3.3: M1 scoring fix for methodology-type gold + implementation in score.py",
+    "paper-update: add arena results + rubric v3.3 note to paper-draft.md",
+    "generalization-completion: Q4/Q5 arena runs + pricing-enhanced prompt for Q3"
   ]
 }

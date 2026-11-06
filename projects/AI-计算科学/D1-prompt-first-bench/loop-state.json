@@ -1,10 +1,10 @@
 {
   "project": "D1-prompt-first-bench",
   "last_update": "2026-11-06T23:58:00+08:00",
-  "current_stage": "T17 LOCOMO BENCHMARK COMPLETE → PAPER SUBMISSION-READY",
+  "current_stage": "PAPER T17 SECTION ADDED → SUBMISSION-READY",
   "status": "active",
-  "iteration": 12,
-  "notes": "Paper final: 7197w, 42 refs (all T44 citations complete), submission-ready. Fixed missing references bug (10 in-text cites had no ref entries).\nT17 LoCoMo conv4 entity-guard validated: S1=82.0% (top_50), ΔEG=+10.7pp, OD=25.0%. Report 2238w. Commit 9aa5915 @ memory-benchmarks fork.",
+  "iteration": 13,
+  "notes": "Paper final: 7197w, 42 refs (all T44 citations complete), submission-ready. Fixed missing references bug (10 in-text cites had no ref entries).\nT17 LoCoMo conv4 entity-guard validated: S1=82.0% (top_50), ΔEG=+10.7pp, OD=25.0%. Report 2238w. Commit 9aa5915 @ memory-benchmarks fork.\n- [iter 13] pfb-paper-add-t17-section COMPLETE: §5.3 +T17 LoCoMo subsection (138w), paper 7199w, commit 93351d1",
   "key_results": {
     "r293_local_27b_v2judge": {
       "S0": 0.517,
@@ -32,7 +32,8 @@
     "pfb-gold-replication (CLOSED: full chain complete)",
     "pfb-rubric-v33-paper-update (CLOSED: 4/4 criteria met)",
     "pfb-related-work-update (5/5 pass, T44 arena)",
-    "t17-locomo-memory-bench"
+    "t17-locomo-memory-bench",
+    "pfb-paper-add-t17-section"
   ],
   "next_goals": [
     "arxiv-upload: BLOCKED (needs 成璐 login)",

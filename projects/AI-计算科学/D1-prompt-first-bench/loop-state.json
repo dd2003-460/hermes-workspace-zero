@@ -1,0 +1,17 @@
+{
+  "project": "D1-prompt-first-bench",
+  "last_update": "2026-11-06T17:30+08:00",
+  "current_stage": "gold-replication-experiment",
+  "status": "active",
+  "iteration": 5,
+  "notes": "S8A-F 实验完成。瓶颈定位: 27B执行一致性+无工具通道(vLLM function calling不工作)。S8D prompt落盘(结构化分解+定量强制+数据注入)。下一步: arena外包S8D prompt执行(路径A)或更强模型(路径B)。Paper submission-ready (6872 words). M1 judge v2 deployed.",
+  "key_results": {
+    "r293_final": {"S0": 0.493, "S1": 0.607, "S5": 0.714},
+    "S8D_best": {"Q1_M1": 0.80, "Q3_M1": 0.917, "Q2_best_total": 0.640},
+    "bottleneck": "model_execution_consistency + tool_channel"
+  },
+  "blocked": [
+    "arena channel needed for true tool-use",
+    "70B+/API model for higher ceiling"
+  ]
+}

@@ -7,7 +7,7 @@
     "revision": "r1"
   },
   "loop_phase": "build",
-  "iteration": 11,
+  "iteration": 12,
   "status": "active",
   "current_task": "L1-L6 全15章完成. v3 定稿前通读完成. 2026-11-05: FULL-BOOK.html/md 合订本(e47eb801); P2 招募文案+问卷v1 落盘(09c4f76b)待发群; r292 渠道选择已登记 APPROVALS. T17 LoCoMo 数字已追加进 decomp T17-REPORT.md(d38f3cc). v3 正式定稿仍待 P2 第一个数.",
   "blocker": "v3 正式定稿待 P2 实验第一个数（渠道待成璐拍板 r292; 招募文案+问卷已就绪）",
@@ -74,5 +74,7 @@
   "current_phase": "P2-experiment-ready",
   "next_action": "成璐发群招募（微信私域 A 为主 + 即刻/小红书 B 为辅）。文案+问卷已就绪。收满 30 人后启动前测。",
   "last_update": "2026-11-05",
-  "r292_decision": "E (A+B combo), AI self-approved"
+  "r292_decision": "E (A+B combo), AI self-approved",
+  "current_stage": "QUALITY GATE PASS → 等成璐发群启动 P2",
+  "notes": "[iter 12] quality gate pass"
 }

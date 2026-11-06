@@ -169,25 +169,7 @@
         "inject": "🏭 Orchestrator 模式：用户提到 loop/subagent/派发。本 turn 只做：① 定目标（读 GOALS.md/ACTIVE-candidates）② 写任务书 ③ delegate_task 派发 ④ 一句话播报。不要在主会话里执行 loop 本身。"
       },
       "cooldown_turns": 0
-    },
-    {
-      "id": "bidirectional-channel",
-      "seam": "UserPromptSubmit",
-      "trigger": {
-        "type": "keyword",
-        "any": [
-          "双向",
-          "商量",
-          "一起想",
-          "讨论",
-          "探索性优化"
-        ],
-        "max_len": 300
-      },
-      "enabled": true,
-      "action": "inject_reminder",
-      "message": "[bidirectional] 用户要求 main↔sub 双向交流。建 mailbox: /tmp/hermes-mailbox/<goal-id>/。Sub prompt 加：\"遇到不确定或有更好想法时，写 to-main.md（问题+建议），继续当前步骤不阻塞。Main 会回应到 to-sub.md。\" Main 每轮开始读 to-main.md。不是机械问答——sub 可以提方向性建议，main 接受/拒绝/改方向。"
     }
   ],
-  "updated": "2026-11-06T15:49+08:00"
+  "updated": "2026-11-06T15:50+08:00"
 }

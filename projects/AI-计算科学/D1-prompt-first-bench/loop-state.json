@@ -1,10 +1,10 @@
 {
   "project": "D1-prompt-first-bench",
-  "last_update": "2026-11-06T22:15+08:00",
-  "current_stage": "related-work-update (T44 in arena)",
+  "last_update": "2026-11-06T22:50+08:00",
+  "current_stage": "PAPER SUBMISSION-READY (pending arXiv upload)",
   "status": "active",
-  "iteration": 9,
-  "notes": "Gold replication FULLY COMPLETE (5/5 M1=1.0). Now updating §2 Related Work with 2026 H2 literature (T44 dispatched to arena p3).",
+  "iteration": 10,
+  "notes": "Paper complete: 7199w, §2 updated with 17 new 2026 H2 citations + 6-group contradiction analysis. Gold replication 5/5 M1=1.0. Rubric v3.3. All arena work done. Next: arXiv upload (BLOCKED: needs 成璐 login).",
   "key_results": {
     "r293_local_27b_v2judge": {
       "S0": 0.517,
@@ -20,7 +20,7 @@
       "Q5": 1.0
     },
     "rubric_v3.3": "methodology-type auto-detect; all 5 golds = methodology",
-    "paper": "7092 words, §5.3 complete with 5-question table, submission-ready",
+    "paper": "7199 words, §2 related work fully updated (17 new cites), submission-ready",
     "conclusion": "Arena (frontier model + real tools) achieves gold-level M1=1.0 on all 5 questions. Q3 initial failure was pricing volatility (fixable with enhanced prompt), not structural."
   },
   "completed_goals": [
@@ -30,12 +30,13 @@
     "pfb-generalization-completion (Q4/Q5 + Q3-r2, 5/5 PASS)",
     "pfb-gold-replication-arena (CLOSED: superseded by generalization-completion)",
     "pfb-gold-replication (CLOSED: full chain complete)",
-    "pfb-rubric-v33-paper-update (CLOSED: 4/4 criteria met)"
+    "pfb-rubric-v33-paper-update (CLOSED: 4/4 criteria met)",
+    "pfb-related-work-update (5/5 pass, T44 arena)"
   ],
   "next_goals": [
     "arxiv-upload: BLOCKED (needs 成璐 login)",
     "d2-p2-experiment: BLOCKED (needs recruitment copy)",
     "d1-memory-hooks install_bundle: needs user approval (L2)",
-    "NEW: pfb-latex-conversion (if TeX available) or pfb-related-work-update"
+    "pfb-latex-conversion: low priority (no local TeX)"
   ]
 }

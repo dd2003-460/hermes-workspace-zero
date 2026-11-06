@@ -1,19 +1,27 @@
 {
   "project": "D1-prompt-first-bench",
-  "last_update": "2026-11-06T19:30+08:00",
-  "current_stage": "gold-replication-complete-rubric-v3.3-paper-updated",
+  "last_update": "2026-11-06T21:45+08:00",
+  "current_stage": "gold-replication-FULLY-COMPLETED",
   "status": "active",
-  "iteration": 7,
-  "notes": "Rubric v3.3 implemented (score.py auto-detects gold type). Paper updated with §5.3 Arena Channel (7014 words). Gold replication via arena channel proven (Q2 M1=1.0, Q1 M1=1.0, Q3 M1=0.53 pricing-volatile). Next: Q4/Q5 completion + pricing-enhanced prompt.",
+  "iteration": 8,
+  "notes": "Gold replication via arena channel: 5/5 questions M1=1.0 (v3.3 judge). Paper updated (7092w, §5.3 full table). Rubric v3.3 implemented. Generalization PASS. Next: arXiv upload (needs 成璐) or new research direction.",
   "key_results": {
     "r293_local_27b_v2judge": {"S0": 0.517, "S1": 0.572, "S5": 0.628},
-    "arena": {"Q2": 0.895, "Q1": 0.674, "Q3": 0.564},
-    "rubric_v3.3": "methodology-type gold → public-fact verification; S1-Q2 regression M1=0.857",
-    "paper": "7014 words, §5.3 added, submission-ready"
+    "arena_all5": {"Q1": 1.0, "Q2": 1.0, "Q3_r1": 0.531, "Q3_r2": 1.0, "Q4": 1.0, "Q5": 1.0},
+    "rubric_v3.3": "methodology-type auto-detect; all 5 golds = methodology",
+    "paper": "7092 words, §5.3 complete with 5-question table, submission-ready",
+    "conclusion": "Arena (frontier model + real tools) achieves gold-level M1=1.0 on all 5 questions. Q3 initial failure was pricing volatility (fixable with enhanced prompt), not structural."
   },
+  "completed_goals": [
+    "pfb-gold-replication (local S8 series)",
+    "pfb-gold-replication-arena (Q2/Q1/Q3 initial)",
+    "pfb-rubric-v33-paper-update (score.py + paper §5.3)",
+    "pfb-generalization-completion (Q4/Q5 + Q3-r2, 5/5 PASS)"
+  ],
   "next_goals": [
-    "pfb-generalization-completion: Q4/Q5 arena runs + pricing-enhanced prompt for Q3 re-test",
-    "pfb-arxiv-upload: needs 成璐 login (BLOCKED)",
-    "d2-p2-experiment: needs recruitment copy (BLOCKED)"
+    "arxiv-upload: BLOCKED (needs 成璐 login)",
+    "d2-p2-experiment: BLOCKED (needs recruitment copy)",
+    "d1-memory-hooks install_bundle: needs user approval (L2)",
+    "NEW: pfb-latex-conversion (if TeX available) or pfb-related-work-update"
   ]
 }

@@ -122,20 +122,6 @@
       "cooldown_turns": 2
     },
     {
-      "id": "thinking-budget-frame",
-      "seam": "UserPromptSubmit",
-      "enabled": true,
-      "trigger": [
-        {
-          "type": "always"
-        }
-      ],
-      "action": {
-        "inject": "🎯 本会话思考预算 {thinking_budget_tokens} tokens（深度∝不可逆性，不∝复杂度）。若思考已接近/超过预算仍未收敛：停，回看自适应思考原则（AGENTS.md「思考预算」节 / projects/AI-计算科学/D1-persona-align/thinking-budget.md）——L0/L1 可逆任务直接给结论不展开，L2 才推演一次。若当前问题本来就简单，直接答，忽略本提醒。"
-      },
-      "cooldown_turns": 8
-    },
-    {
       "id": "no-new-facts-guard",
       "seam": "PostToolUse",
       "enabled": true,

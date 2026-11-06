@@ -160,25 +160,11 @@
           "type": "metric",
           "field": "tool_calls_this_turn",
           "op": ">=",
-          "value": 8
+          "value": 5
         }
       ],
       "action": {
         "inject": "⚡ 本 turn 已 5+ 次工具调用。若剩余工作 >2 步，派 subagent(background) 执行，本 turn 收束给一句话播报。用户消息响应优先级最高——长 turn 阻塞你的回复。"
-      },
-      "cooldown_turns": 0
-    },
-    {
-      "id": "dispatch-protocol-reminder",
-      "seam": "UserPromptSubmit",
-      "enabled": true,
-      "trigger": [
-        {
-          "type": "always"
-        }
-      ],
-      "action": {
-        "inject": "📋 工作模式：你是 orchestrator。重活（>3步）派 subagent，本 turn 只做决策+派发+播报。用户消息响应优先级最高——不要在一个 turn 里做完所有事。当前活跃 goal 状态见 ~/.hermes/.stage-gate/CONTINUE_MSG"
       },
       "cooldown_turns": 0
     }

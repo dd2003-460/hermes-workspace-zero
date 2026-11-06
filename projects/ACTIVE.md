@@ -1,6 +1,6 @@
 # ACTIVE — 活跃项目面板
 
-**自动生成**: 2026-11-06 19:16 — 由 scripts/aggregate-active.sh 聚合
+**自动生成**: 2026-11-06 19:27 — 由 scripts/aggregate-active.sh 聚合
 
 ## 焦点项目
 

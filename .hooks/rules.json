@@ -167,6 +167,32 @@
         "inject": "⚡ 本 turn 已 5+ 次工具调用。若剩余工作 >2 步，派 subagent(background) 执行，本 turn 收束给一句话播报。用户消息响应优先级最高——长 turn 阻塞你的回复。"
       },
       "cooldown_turns": 0
+    },
+    {
+      "id": "answer-first-guard",
+      "seam": "UserPromptSubmit",
+      "enabled": true,
+      "trigger": [
+        {
+          "type": "keyword",
+          "any": [
+            "能实现",
+            "怎么办",
+            "为什么",
+            "怎么",
+            "什么",
+            "是不是",
+            "吗",
+            "？",
+            "?"
+          ],
+          "max_len": 200
+        }
+      ],
+      "action": {
+        "inject": "🗣️ 用户消息含问题——先直接回答（1-3句），再做事。不要先跑工具把问题埋了。"
+      },
+      "cooldown_turns": 0
     }
   ]
 }

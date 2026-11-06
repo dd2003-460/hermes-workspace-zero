@@ -26,6 +26,8 @@
 | F2 | 2026-05-17 起 | Hermes cron（13 个旧 job） | `NameError: tree_reduce is not defined` | 2026-05 时 13 个旧 cron job 全部 paused（F3），tree_reduce 错误发生在 paused 恢复尝试时；2026-11-03 恢复活跃后仅保留 2 个有效 job（stop-gate + IV collector），其余 13 个仍 enabled=False 不再触发 | 无需修复：报错源头（旧 job）已永久停用，当前活跃 job 无此错误。若未来重新启用旧 job 需先升级 hermes-agent 版本 | 已销账（2026-11-05） |
 | F3 | 2026-08-25 起 | 工作区整体 | 无产出（休眠） | 13 个 cron 全部 paused，无后台自主执行 | 2026-11-03 恢复活跃；PAUSE 机制已落地可手动控制 | 已修复 |
 
+| F4 | 2026-11-05 | WorkBuddy App（ego-lite 维护方） | 触发 pfb 仓库 MR（来源不明，疑似 WorkBuddy 后台自动同步/CI hook） | 未确认：WorkBuddy 地址配置已验证正确（models.json → 127.0.0.1:8787 通），MR 触发源待成璐停否 | 登记观察；若再触发则查 WorkBuddy connector 日志 `~/.workbuddy/connectors/` | open · awaiting-user |
+
 ## 关联
 
 - SOP 全文: `.claude/skills/arena-outsource/SKILL.md`「链路区分」节

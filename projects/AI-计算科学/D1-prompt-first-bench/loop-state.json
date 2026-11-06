@@ -1,13 +1,24 @@
 {
   "project": "D1-prompt-first-bench",
-  "last_update": "2026-11-06T21:45+08:00",
-  "current_stage": "gold-replication-FULLY-COMPLETED",
+  "last_update": "2026-11-06T22:15+08:00",
+  "current_stage": "related-work-update (T44 in arena)",
   "status": "active",
-  "iteration": 8,
-  "notes": "Gold replication via arena channel: 5/5 questions M1=1.0 (v3.3 judge). Paper updated (7092w, §5.3 full table). Rubric v3.3 implemented. Generalization PASS. Next: arXiv upload (needs 成璐) or new research direction.",
+  "iteration": 9,
+  "notes": "Gold replication FULLY COMPLETE (5/5 M1=1.0). Now updating §2 Related Work with 2026 H2 literature (T44 dispatched to arena p3).",
   "key_results": {
-    "r293_local_27b_v2judge": {"S0": 0.517, "S1": 0.572, "S5": 0.628},
-    "arena_all5": {"Q1": 1.0, "Q2": 1.0, "Q3_r1": 0.531, "Q3_r2": 1.0, "Q4": 1.0, "Q5": 1.0},
+    "r293_local_27b_v2judge": {
+      "S0": 0.517,
+      "S1": 0.572,
+      "S5": 0.628
+    },
+    "arena_all5": {
+      "Q1": 1.0,
+      "Q2": 1.0,
+      "Q3_r1": 0.531,
+      "Q3_r2": 1.0,
+      "Q4": 1.0,
+      "Q5": 1.0
+    },
     "rubric_v3.3": "methodology-type auto-detect; all 5 golds = methodology",
     "paper": "7092 words, §5.3 complete with 5-question table, submission-ready",
     "conclusion": "Arena (frontier model + real tools) achieves gold-level M1=1.0 on all 5 questions. Q3 initial failure was pricing volatility (fixable with enhanced prompt), not structural."
@@ -16,7 +27,10 @@
     "pfb-gold-replication (local S8 series)",
     "pfb-gold-replication-arena (Q2/Q1/Q3 initial)",
     "pfb-rubric-v33-paper-update (score.py + paper §5.3)",
-    "pfb-generalization-completion (Q4/Q5 + Q3-r2, 5/5 PASS)"
+    "pfb-generalization-completion (Q4/Q5 + Q3-r2, 5/5 PASS)",
+    "pfb-gold-replication-arena (CLOSED: superseded by generalization-completion)",
+    "pfb-gold-replication (CLOSED: full chain complete)",
+    "pfb-rubric-v33-paper-update (CLOSED: 4/4 criteria met)"
   ],
   "next_goals": [
     "arxiv-upload: BLOCKED (needs 成璐 login)",

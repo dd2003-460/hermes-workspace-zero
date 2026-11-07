@@ -22,19 +22,22 @@
 
 如果 Idea A 的答案是"存在不可分解的长步骤"，那 Idea B 的等价性就有天花板——正交小 agent 组合不出那个不可分解步骤对应的计算。反过来，如果 Idea B 证明了 L0-L1 层等价成立，那 Idea A 的"原子步骤"就有了操作化定义：等价性开始失效的那个粒度就是原子性的边界。
 
-## Idea A 的结构化（四子问题 → T-PR-07）
+## Idea A 的结构化（四子问题 → T-PR-07）✅ 已完成
 
-| 子问题 | 核心问句 | 最相关的形式工具 |
-|--------|---------|----------------|
-| Q1 可分解性 | 前沿推理能原子化吗？有没有分解后性能崩塌的反例？ | 电路复杂度、程序合成 |
-| Q2 ctx 下界 | 依赖链最小长度 k？硬截断还是概率衰减？ | 信息论（Fano 不等式）、attention 理论 |
-| Q3 不可分解性 | 全局一致性、非单调回溯、并行剪枝 | pebbling games、communication complexity |
-| Q4 dense vs 显式搜索 | 权重空间隐式搜索 vs CoT/树搜索，同预算 head-to-head | 优化理论（local minima landscape）、test-time compute scaling |
+T-PR-07 产出：`research/long-insight-decomposability-survey.md`（394行，19外部来源其中10读原文，commit 79f3cc7）。
 
-**凭记忆的初步判断（conf 低，待 arena 原文校准）**：
-- Q2 大概率不是硬窗口截断而是概率衰减——attention 的 softmax 对远距离 token 的权重指数衰减，但不会归零。真正的问题是"有效 ctx"远小于标称 ctx（LongBench 等基准已反复验证）。
-- Q3 的"不可分解"在计算复杂性意义下几乎肯定存在（NP-hard 问题的某些实例需要指数级搜索），但在 LLM 实际遇到的任务分布上是否真的碰到这个下界，是经验问题不是理论问题。
-- Q4 最有趣：dense net 的"搜索"发生在训练时（梯度下降遍历参数空间），inference 时的"搜索"是 CoT/test-time compute。这两者的关系没人严格比较过——训练时学到的 implicit search 能力 vs inference 时 explicit search 能力，哪个上限高？
+**核心结论（已核验，conf 来自 arena 报告）**：
+
+1. **分解单位是依赖图上的 k 跳链，k 跳要 k 步，不多不少。** BAPO 模型（2602.02909, ICML '26）证明了 token 下界：全局聚合类 Ω(n) 步不可压缩；指针追踪类 Θ(链长)。→ "洞察要多少步"取决于它是链式还是全局约束式，不取决于"跳得多远"。
+2. **"执行可分解"已证，"发现可分解"没有正面证据且有反面证据。** 蒸馏线（2210.11416：770M T5 打赢 few-shot 540B PaLM）证明给定步骤后小模型能走；AInstein（2510.05432）显示严格复现已发表解法 <19%，失败模式 = 跨域类比迁移。
+3. **瓶颈不在"切不切得开"，在"切开后谁来验每一步"。** SCORE（2407.13692：refiner 可迁移、verifier 不可迁移）+ PlanningBench（2605.20873：Avg-pass 90% 但 All-pass 58%）+ LLM Monkeys（2407.21787：覆盖率 >95% 但 selector plateau）三条独立证据链收敛到同一处。
+4. **ctx 不是主因。** 串行 CoT 自己造中间状态，窗口大小不影响可达性；并行 attend 路线才受窗口限制。且没有任何文献给出 W→D 的定量关系（负结果 N2）。
+5. **dense net 搜索优势有条件：** 需要回溯的图搜索上是的（ProsQA +19.5pp / 1/3 token），串行算术上不是（GSM8K −8.8pp）。"跳不出局部最优"的主因是选择器而非搜索器。
+
+**对成璐三个担忧的直接回应**（arena §10）：
+- "超出 ctx？" → 不是主要原因，真正卡住的是"用不用得上自己刚写下的东西"
+- "有下界？" → 有，两层：结构层（问题结构决定，硬的）+ 模型层（模型能力决定，软的）
+- "dense 更高效？" → 条件性成立，且瓶颈在选择器
 
 ## Idea B 的结构化（五层等价性 → T-PR-08）
 
@@ -68,7 +71,7 @@ compression-unified-view 建立了"训练=压缩，推理=选择性解压，CoT=
 
 ## 待办
 
-- [ ] T-PR-07 arena 产出 → `research/long-insight-decomposability-survey.md`（执行中）
-- [ ] T-PR-08 arena 产出 → `research/moe-agent-equivalence-survey.md`（已派发）
-- [ ] 两份 survey 回来后，更新本 note 的"凭记忆"表格为"已核验"版本
+- [x] T-PR-07 arena 产出 → `research/long-insight-decomposability-survey.md`（✅ commit 79f3cc7，已 merge main @ 3ac50cf）
+- [ ] T-PR-08 arena 产出 → `research/moe-agent-equivalence-survey.md`（执行中，git 轮询收）
+- [ ] T-PR-08 回来后，更新本 note Idea B 表格为"已核验"版本
 - [ ] 如果两篇 survey 结论指向"存在不可约简纠缠"，考虑写进 compression-unified-view 作为修正条款

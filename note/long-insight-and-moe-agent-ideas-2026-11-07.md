@@ -91,4 +91,5 @@ compression-unified-view 建立了"训练=压缩，推理=选择性解压，CoT=
 - [x] T-PR-09 arena 产出 → `research/icl-information-theory-framework.md`（✅ commit 239b9b8，merge main @ 822e0bd；判决：Bayesian/信息论支撑到"部分证明"级 conf 0.7——1/√(nT) 统计界 + 条件化 Bayes 最优性定理存在，但都没写成最简描述；互信息控制 ICL 泛化的直接结果穷尽检索未找到）
 - [x] T-PR-10 arena 产出 → `research/model-capability-step-count-mechanisms.md`（✅ commit d94a73e；三机制排序 M3 校准 > M1 激活 > M2 联系，只有 M3 同时可计算+可干预+能翻译成步数）
 - [x] T-PR-11 arena 产出 → `research/search-verify-contribution-function.md`（✅ commit f05753a+3a9bf1c；滚雪球核验完成：乘积型搜×校验贡献函数不存在——伪合成 2 + 单侧 4，且搜集质量连可计算定义都没有；§4.4 可直接引用的 pfb 定位段落已产出）
+- [x] T-PR-12 arena 产出 → （✅ commit ee6585f，merge main @ 8e7c02a；判决：受控对照 0 篇全合格（D1-D4）、部分 3、伪对照 4；C1 固化→「无需在场即可生效」（many-shot 能覆写）；C2 熟练→K 的函数；C3 低成本降质→不成立（成本从训练期搬到推理期，f*=C_train/(K·L·c)）；性能前沿散点存在函数不存在（K/D 不可通约+loss 非质量轴+方差吞信号）；容量前沿主变量=表示干涉度（UUID 1M≈零遗忘）；有效跨度推论 conf 0.6 间接支持，给出可证伪预言：27B 扫 K 应远低于 256K 处饱和）
 - [ ] 如果三篇 survey 结论指向"存在不可约简纠缠 + ICL 效率有信息论上界"，写进 compression-unified-view 作为修正条款

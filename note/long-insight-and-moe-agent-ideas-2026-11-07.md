@@ -88,5 +88,7 @@ compression-unified-view 建立了"训练=压缩，推理=选择性解压，CoT=
 
 - [x] T-PR-07 arena 产出 → `research/long-insight-decomposability-survey.md`（✅ commit 79f3cc7，已 merge main @ 3ac50cf）
 - [x] T-PR-08 arena 产出 → `research/moe-agent-equivalence-survey.md`（✅ commit 129420b，已 merge main @ e843b68）
-- [ ] T-PR-09 arena 产出 → `research/icl-information-theory-framework.md`（dispatched，git 轮询收）
+- [x] T-PR-09 arena 产出 → `research/icl-information-theory-framework.md`（✅ commit 239b9b8，merge main @ 822e0bd；判决：Bayesian/信息论支撑到"部分证明"级 conf 0.7——1/√(nT) 统计界 + 条件化 Bayes 最优性定理存在，但都没写成最简描述；互信息控制 ICL 泛化的直接结果穷尽检索未找到）
+- [x] T-PR-10 arena 产出 → `research/model-capability-step-count-mechanisms.md`（✅ commit d94a73e；三机制排序 M3 校准 > M1 激活 > M2 联系，只有 M3 同时可计算+可干预+能翻译成步数）
+- [x] T-PR-11 arena 产出 → `research/search-verify-contribution-function.md`（✅ commit f05753a+3a9bf1c；滚雪球核验完成：乘积型搜×校验贡献函数不存在——伪合成 2 + 单侧 4，且搜集质量连可计算定义都没有；§4.4 可直接引用的 pfb 定位段落已产出）
 - [ ] 如果三篇 survey 结论指向"存在不可约简纠缠 + ICL 效率有信息论上界"，写进 compression-unified-view 作为修正条款

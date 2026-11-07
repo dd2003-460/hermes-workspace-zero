@@ -39,39 +39,54 @@ T-PR-07 产出：`research/long-insight-decomposability-survey.md`（394行，19
 - "有下界？" → 有，两层：结构层（问题结构决定，硬的）+ 模型层（模型能力决定，软的）
 - "dense 更高效？" → 条件性成立，且瓶颈在选择器
 
-## Idea B 的结构化（五层等价性 → T-PR-08）
+## Idea B 的结构化（五层等价性 → T-PR-08）✅ 已完成
 
-| 层次 | 内容 | 当前状态（凭记忆，conf 低） |
-|------|------|--------------------------|
-| L0 单 token 前向 | MoE(x) vs Σ wᵢ·Agentᵢ(x) | 正交假设下可退化为线性 ensemble；真实 MoE 共享 embedding/attention 破坏正交性 |
-| L1 序列级 | 多 token 生成分布匹配 | 基本空白；MoA (2406.04692) 纯经验无定理 |
-| L2 训练动力学 | 优化轨迹收敛到等价参数 | 完全空白；load balancing loss 耦合所有 expert 梯度 |
-| L3 泛化保证 | 样本复杂度/泛化界可迁移 | ensemble theory 要求 i.i.d.，MoE expert 不满足，gap 未量化 |
-| L4 涌现能力 | scaling 时新能力出现方式是否相同 | 零文献 |
+T-PR-08 产出：`research/moe-agent-equivalence-survey.md`（284行，commit 129420b，已 merge main @ e843b68）。
 
-**关键文献锚点（凭记忆，arena 会逐条核验）**：
-- Mixture of Agents (Wang et al. 2024, arXiv 2406.04692)：分层 proposer + aggregator，效果优于单模型，**无任何等价性定理**
-- Switch Transformer (Fedus et al. 2021, arXiv 2101.03961)：routing 作为 learned discrete choice，有 capacity factor 分析，无等价性
-- Deep Ensembles (Lakshminarayanan et al. 2017, arXiv 1610.02136)：i.i.d. ensemble 的贝叶斯近似，和 MoE 的关系没人正式写过
-- SAE (Bricken et al. 2023, arXiv 2303.08774)：residual stream → sparse features 分解，结构上和"每个 expert 负责一个子空间"同构，但没人把 expert activation 和 SAE feature 对齐过
+**核心结论（已核验）**：
 
-**"纠缠"的三层拆分**：
-1. 信息论纠缠：agent 间 message passing 的 communication complexity 下界
-2. 量子类比：routing ≈ classical superposition？大概率不是，需找到最接近的形式化尝试并说明为什么不是
-3. 训练动力学纠缠：load balancing loss 耦合所有 expert 梯度，inference 时是否消失
+1. **"等价"在容量层面是废话，在结构层面是真的，在训练层面是假的。** 万能逼近定理使两边在函数类上完全一样（都是万能逼近器），所以问"能不能模拟"必须先排除容量层面。真正的结构同构：2505.24205 Thm 5.2——深度-2L、每层 E 专家的 MoE 可逼近 E^L 个分片的复合稀疏函数，**E^L 正好等于 MoA 的 L 层 × M agent 能枚举的组合数**。而且不需要正交性前提。
+
+2. **正交性假设实测是假的，而且"两头都不沾"。** Mixtral 专家间余弦相似度 0.2–0.4（与原始 FFN 反而 ~0.6），DeepSeekMoE 从零训练接近 0；最后一层突然跳到 >0.8。更狠的是 MoE-Lens（ICLR 2025 workshop）：单个 top-1 专家就能以余弦 0.95 逼近 6 专家集成，perplexity 只涨 ~5%。→ "大部分正交的小 agent"在工程现实里没有对应物。
+
+3. **纠缠有两条可量化的形式化路径，都给出了"不可模拟"定理：**
+   - 通信复杂度（2510.13903）：parity 类任务上多数投票式 agent 方案需要 2^Ω(N^c) 个 agent（超多项式），可加结构只要 O(log N) 深度——**某些任务用小 agent 群模拟大模型是指数亏的**
+   - 量子类比：**不成立，且差距可精确写出**——MoE 路由是概率单纯形上的经典凸混合（密度矩阵对角），量子叠加的优势恰好是那个干涉项 2|A₁||A₂|cos(φ₁−φ₂)（2512.22296 把这一项单独隔离出来当优势来源）
+
+4. **五层判定表**：L0 部分证明（结构性成立但严格形式不成立——MoA 原版聚合步是自由 LLM，不属于加权和函数类）；L1 弱经验支持；L2 **已反证**（2510.23671："misleading to think of MoEs as an aggregation of dense models"）；L3 仅 MoE 侧有泛化界（2604.09175 Thm 3.4），agent 侧为零；L4 完全空白。
+
+5. **与 T-PR-07 的汇合点**：arena 建议用 T-PR-07 已建立的"覆盖率 vs 选择器"实验框架去测 2603.20324 的选择瓶颈阈值 s*——**长程洞察的瓶颈与 agent ensemble 的瓶颈是同一个东西：验证/选择。**
+
+## 待验证（T-PR-09）
+
+**P1: "最优性依赖任务结构" ≡ "NN 是否是目标的最简描述"？**
+- MDL 视角：如果 ICL demo selection ≈ MDL 优化，那任务结构决定最优性自动成立。有没有人显式写过？
+- Kolmogorov 视角：训练后权重是否编码了 K* 级压缩？ICL 侧有没有"context 中的 demo 构成 x 的最简条件描述"的结果？
+
+**P2: "额外参数 = 万能拟合器"还是"压缩结构"？**
+- 可测判据：N（参数量）vs K(data)（用 LZ76 近似）。N >> K(data) → memorization；N ≈ K(data) → compression。
+- Scaling law 在什么 N/D 比值下从 memorization 切换到 compression？有相变证据吗？
+- MoE 稀疏激活是否天然倾向 compression regime？
+
+**P3: Bayesian/信息论范式是 ICL 高效性的结构性原因？**
+- (a) ICL as Bayes：prior = parametric knowledge，context = likelihood evidence，输出 = posterior。在哪里精确成立、在哪里断裂？
+- (b) 信息论界：I(y; context) 能否控制泛化误差？有人给过界吗？
+- (c) PAC-Bayes 风格 ICL 泛化界存在吗？
+- (d) 如果 ICL ≈ Bayes 更新，最优 demo selection 应该最大化 posterior 信息增益——这个准则有人试过吗？
 
 ## 与 compression-unified-view 的关系
 
-compression-unified-view 建立了"训练=压缩，推理=选择性解压，CoT=外化解压"的统一框架。本 note 的两个 idea 是这个框架的两个推论方向：
+compression-unified-view 建立了"训练=压缩，推理=选择性解压，CoT=外化解压"的统一框架。本 note 的三个 idea 是这个框架的三个推论方向：
 
 - Idea A 问的是：解压过程（推理链）有没有不可压缩的原子单元？→ 对应 Kolmogorov 复杂度的操作化
 - Idea B 问的是：压缩器（MoE 权重）能不能被分解为独立子压缩器的组合？→ 对应 MDL 中"描述长度可加性"的条件
+- Idea C（T-PR-09）问的是：ICL 的高效性是否由 Bayesian/信息论结构保证？→ 对应"prior 质量决定 posterior 更新效率"
 
-如果两者都得到肯定答案（存在不可分解步骤 + 等价性在某层断裂），那 compression-unified-view 就需要加一条修正：**压缩/解压不是完全可分的，存在不可约简的纠缠项**。
+如果三者都得到肯定答案，那 compression-unified-view 需要加修正：**压缩/解压不是完全可分的，存在不可约简的纠缠项（Idea B L2 已反证支持此修正），且 ICL 的效率上界由 prior-posterior 距离决定（Idea C 待验证）**。
 
 ## 待办
 
 - [x] T-PR-07 arena 产出 → `research/long-insight-decomposability-survey.md`（✅ commit 79f3cc7，已 merge main @ 3ac50cf）
-- [ ] T-PR-08 arena 产出 → `research/moe-agent-equivalence-survey.md`（执行中，git 轮询收）
-- [ ] T-PR-08 回来后，更新本 note Idea B 表格为"已核验"版本
-- [ ] 如果两篇 survey 结论指向"存在不可约简纠缠"，考虑写进 compression-unified-view 作为修正条款
+- [x] T-PR-08 arena 产出 → `research/moe-agent-equivalence-survey.md`（✅ commit 129420b，已 merge main @ e843b68）
+- [ ] T-PR-09 arena 产出 → `research/icl-information-theory-framework.md`（dispatched，git 轮询收）
+- [ ] 如果三篇 survey 结论指向"存在不可约简纠缠 + ICL 效率有信息论上界"，写进 compression-unified-view 作为修正条款

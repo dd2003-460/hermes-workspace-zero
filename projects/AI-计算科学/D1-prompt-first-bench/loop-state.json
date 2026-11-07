@@ -1,10 +1,10 @@
 {
  "project": "D1-prompt-first-bench",
- "last_update": "2026-11-08T02:15:35+08:00",
- "current_stage": "GOAL: pfb-production-hardening (G2 PASS, G1/G3 running)",
+ "last_update": "2026-11-08T09:45:00+08:00",
+ "current_stage": "GOAL: pfb-production-hardening (ALL GATES PASS — G1 180/180 done, G2 PASS, G3 DONE, G4 DRAFTS, G5 DONE)",
  "status": "active",
- "iteration": 13,
- "notes": "Paper final: 7197w, 42 refs (all T44 citations complete), submission-ready. Fixed missing references bug (10 in-text cites had no ref entries).\nT17 LoCoMo conv4 entity-guard validated: S1=82.0% (top_50), ΔEG=+10.7pp, OD=25.0%. Report 2238w. Commit 9aa5915 @ memory-benchmarks fork.\n- [iter 13] pfb-paper-add-t17-section COMPLETE: §5.3 +T17 LoCoMo subsection (138w), paper 7199w, commit 93351d1\n2026-11-08 goal-pfb-production-hardening: G2 collision snowball PASSED (research/collision-snowball.md, no direct collision; nearest precedent 2606.21553 Dissecting Agentic RAG). G1 prod_run n=30/arm running (pid 93103). G3 GPT Researcher baseline done (runs-baseline/gptr-{nat,soc}.md) after DNS fix. Next: G4 expert emails, G5 final report.",
+ "iteration": 14,
+ "notes": "Paper final: 7197w, 42 refs (all T44 citations complete), submission-ready. Fixed missing references bug (10 in-text cites had no ref entries).\nT17 LoCoMo conv4 entity-guard validated: S1=82.0% (top_50), ΔEG=+10.7pp, OD=25.0%. Report 2238w. Commit 9aa5915 @ memory-benchmarks fork.\n- [iter 13] pfb-paper-add-t17-section COMPLETE: §5.3 +T17 LoCoMo subsection (138w), paper 7199w, commit 93351d1\n- [iter 14] goal-pfb-production-hardening ALL GATES PASS:\n  G1: 180/180 runs (95min). S0-nat 0.600±0.205, S0-soc 0.957±0.075. A3-nat 0.589 (p=0.84 ns, zero effect), A3-soc 0.957 (p=1.000 ns). A4-nat 0.622 (p=1.000 ns, weak positive pt3↑5 pt4↑3), A4-soc 0.981 (p=0.388 ns). Core finding: output-end check rules (A3) ineffective; process demonstration (A4) weak positive but d≈0.10 too small for n=30; knowledge-type breakpoints (pt5) unfixable by either lever. Reports: G1-large-sample-report.md + production-final-report.md. Commits e0a55ce6 + this.\n  G2: PASS (research/collision-snowball.md, no direct collision, nearest 2606.21553).\n  G3: DONE (runs-baseline/gptr-{nat,soc}.md, DNS fix applied).\n  G4: DRAFTS DONE (social/email-drafts.md, 4 emails, NOT SENT — needs 成璐 to find addresses and send personally).\n  G5: DONE (loop-state updated, goal checkboxes ✅, production-final-report.md written).",
  "key_results": {
   "S5_minus_S0": "+0.190 (p=0.001, **)",
   "S1_minus_S0": "+0.014 (ns)",
@@ -12,16 +12,17 @@
   "interpretation": "Memory hook drives the effect (M5 anchoring + M6 sourcing), not decomposition structure alone"
  },
  "completed_goals": [
-  "pfb-gold-replication (local S8 series)",
-  "pfb-gold-replication-arena (Q2/Q1/Q3 initial)",
-  "pfb-rubric-v33-paper-update (score.py + paper §5.3)",
-  "pfb-generalization-completion (Q4/Q5 + Q3-r2, 5/5 PASS)",
-  "pfb-gold-replication-arena (CLOSED: superseded by generalization-completion)",
-  "pfb-gold-replication (CLOSED: full chain complete)",
-  "pfb-rubric-v33-paper-update (CLOSED: 4/4 criteria met)",
-  "pfb-related-work-update (5/5 pass, T44 arena)",
-  "t17-locomo-memory-bench",
-  "pfb-paper-add-t17-section"
+   "pfb-gold-replication (local S8 series)",
+   "pfb-gold-replication-arena (Q2/Q1/Q3 initial)",
+   "pfb-rubric-v33-paper-update (score.py + paper §5.3)",
+   "pfb-generalization-completion (Q4/Q5 + Q3-r2, 5/5 PASS)",
+   "pfb-gold-replication-arena (CLOSED: superseded by generalization-completion)",
+   "pfb-gold-replication (CLOSED: full chain complete)",
+   "pfb-rubric-v33-paper-update (CLOSED: 4/4 criteria met)",
+   "pfb-related-work-update (5/5 pass, T44 arena)",
+   "t17-locomo-memory-bench",
+   "pfb-paper-add-t17-section",
+   "pfb-production-hardening (G1-G5 ALL PASS, 2026-11-08)"
  ],
  "next_goals": [
   "arxiv-upload: BLOCKED (needs 成璐 login)",
@@ -29,12 +30,15 @@
   "d1-memory-hooks install_bundle: needs user approval (L2)",
   "pfb-latex-conversion: low priority (no local TeX)"
  ],
- "current_focus": "V3 benchmark hardening COMPLETE. Next: hetero-judge replication (blocked on arena/API) or n-expansion (need more runs).",
+ "current_focus": "pfb-production-hardening COMPLETE. Next: (a) 成璐 sends G4 expert emails; (b) arXiv/Zenodo upload (needs user 2FA); (c) n-expansion to confirm A4 weak positive (need n≈500/arm, exceeds local budget).",
  "completed_this_session": [
-  "V3 full rescore (61 runs, f876e1e)",
-  "Smart truncation fix (S8E M1 0→0.875)",
-  "Bootstrap CIs + significance tests (stats-v3.json)",
-  "RESULTS-FINAL.md with complete provenance (331ee5a)"
+   "G1 production experiment: 180/180 runs complete (95min), six-arm stats + per-point decomposition",
+   "G1-large-sample-report.md: three-arm comparison with sign tests + mechanism interpretation",
+   "production-final-report.md: full G5 summary (three-sentence plain-language opening + evidence sections + paper positioning)",
+   "G2 collision snowball: PASS (no direct collision, nearest 2606.21553)",
+   "G3 GPT Researcher baseline: DONE (DNS fix, nat 26K/soc 64K chars)",
+   "G4 expert email drafts: DONE (4 emails, not sent)",
+   "goal file + loop-state.json updated, all checkboxes ✅"
  ],
  "blocked": [
   "R-06 hetero-judge: arena dead + no API key",

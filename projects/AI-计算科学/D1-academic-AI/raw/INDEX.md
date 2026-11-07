@@ -8,6 +8,7 @@
 | AI/信息论 | [ai/ai_information_theory_optimization.md](./ai/ai_information_theory_optimization.md) | 9 | 中-高 |
 | 数学社科交叉 | [social/math_social_cross.md](./social/math_social_cross.md) | 18 | 中-高 |
 | 人类原始记录 | [raw-human/raw.md](./raw-human/raw.md) | 50+ | 原始素材 |
+| 历史对话挖掘（2026-03） | [ideas-2026-03-migration-notes.md](./ideas-2026-03-migration-notes.md) | 808 条 | 见 notes |
 
 ## 新猜想（已扩展）
 

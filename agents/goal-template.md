@@ -35,7 +35,8 @@
 - 一次一个 goal，干完再找下一个。
 - 每步产出可验证（指标/文件/分数），未达标不 complete。
 - goal 完成后必须 commit + push 留痕。
-- 无 goal = 停摆：complete/clear 后同一回合内 create 下一个或明确 blocked。
+- 无 goal = **不凭空立项**：不得在同一回合静默 create 新 goal。新 goal 只从「讨论结论」或「用户明确下达的任务」里发现，走 §5 候选清单（≥3 条 + 产投比排序）并与用户对齐后才 create；研究型工作一律派 subagent 跑，main 只负责派发、验收与阶段性汇报。**禁止把「找下一个目标」变成每轮续推**。
+- **「不自动立项」≠「停下来问用户」**：本回合已识别的可执行待办（补 run、修 gold、出对比表、验收）由 main 按优先级自己做完。汇报完直接写陈述句「接下来我先做 X」并执行，**禁止把 1./2./3. 选项抛回用户挑**（见 `~/.hermes/rules/autonomy.md`「收尾禁令」）。
 - create_goal 后必须 get_goal 验证落库值（runtime 会静默钳制 max_goal_rounds）。
 - 同一问题想 2 轮无新事实 → 换工具（ego-browser/subagent），不空转。
 - acp_rule 加载：建 goal 后读 `agents/acp-rules.json`，对 rules 数组并行调用 `acp_rule` 录入（一轮完成）；工具不存在则跳过。
@@ -64,11 +65,12 @@
 ## §5 Goal 生命周期
 
 ```
-创建 → 执行（按 §2 阶段流程）→ 验收（§4）→ complete → 同一回合 create 新 goal
+创建 → 执行（按 §2 阶段流程）→ 验收（§4）→ complete → 继续本回合已列待办 / 派 subagent；新 goal 走「讨论发现」通道，不静默 create
 ```
 
 - 新 goal 的 objective 必须包含完整链路规则（本模板 §1-§5），不得只写"继续优化"。
 - 新目标探索准则落盘 `projects/<项目>/tasks/new-goal-criteria-<日期>.md`（候选 ≥3 + 产投比排序）。
+- **发现通道（2026-11-06 成璐指令）**：讨论方向 / 复盘 / 用户提新想法时，把「值得单独立项、多步、可量化验收」的工作记成候选，按上一条落盘，给用户一句 top-1 推荐（带理由和代价），对齐后才 `create_goal`。规则全文 `~/.hermes/rules/goal-discovery.md`，由讨论类消息条件注入，不是常驻。没有结论就照常做完已列待办、用陈述句收尾，不追问「要不要立项」，也不主动开启下一轮。
 
 ## §6 SOP 指针索引（按需读，不默认全量进上下文）
 

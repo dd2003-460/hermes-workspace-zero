@@ -77,6 +77,7 @@
 | SOP | 路径 | 何时读 |
 |-----|------|--------|
 | Arena Loop 链路（★首选） | `sop/arena-loop-pipeline.md` | 外包 arena 时 |
+| **机制修改三问** | `pfb/sop/pfb-domain/modification-rationale.md` | **任何规则/机制改动前必读**：为什么加 + 正交性检查 + 外部依据 + 退出条件 |
 | 结构化输出派发 | `sop/structured-dispatch.md` | 派发决策型子任务时 |
 | acp-rules 硬规则 | `sop/acp-rules.json` | 建 goal 后第一动作录入 |
 | SOP 总索引 | `sop/SOP-INDEX.md` | 找其他 SOP 时 |

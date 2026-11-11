@@ -59,6 +59,8 @@
 | 人类确认机制 | `个人/APPROVALS.md` | 不可逆 × 偏好不明 → 写审批不阻塞 |
 | 问题台账 | `projects/AI-计算科学/D1-persona-align/memory/qanda-ledger.md` | 成璐问过的每个问题 |
 
+| **机制修改三问（★ 规则改动前必读）** | `pfb/sop/pfb-domain/modification-rationale.md` | 为什么加 + 正交性检查 + 外部依据 + 退出条件 + 当前生效机制清单 M1-M10（2026-11-12，D 指令"单加规则没有全局视角"） |
+
 ## 6. 维护
 
 - 新增 SOP → 更新本索引

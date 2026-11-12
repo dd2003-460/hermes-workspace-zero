@@ -99,6 +99,7 @@
 
 1. **默认不降级**。arena 是首选通道，故障时必须先穷尽修复手段再考虑本地执行。
 2. **修复清单**（按顺序尝试，全部失败才允许降级）：
+   - ⓪ **登录态探针**（必跑第一步）：ego-browser 打开目标会话页，跑 arena-outsource skill「登录态判定门禁」的标准探针脚本。`inSession && (composerVisible || repoPanel)` 不满足 = 未登录/会话不存在 → 停止派发，报告"arena 无有效登录态，需人工登录"，禁止把营销页/登录墙当可用状态
    - ① `curl -I https://arena.ai` 确认网络通
    - ② ego-browser 重新 goto arena.ai/agent（会话页面可能过期）
    - ③ 查 ego-lite 进程是否活着（`ps aux | grep -i ego`），死了就重启

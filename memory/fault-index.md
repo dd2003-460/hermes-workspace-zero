@@ -33,3 +33,4 @@
 - SOP 全文: `.claude/skills/arena-outsource/SKILL.md`「链路区分」节
 - 自动拦截: `tools/stage-gate/stage_gate/adapters/stop_hook.py` VAGUE_FAILURE_PATTERNS（命中笼统措辞 → INBOX 注入归因提醒）
 - 召回触发: `~/.hermes/agent-hooks/inject-rules.sh` memory-recall 路由（消息含"故障/报错/卡在哪"等词 → 强制先读本文件）
+| F5 | 2026-11-12 | ego-lite 持久会话（arena.ai） | agent 页显示 "Sign in to open this chat"，Profile 1 Cookies 文件 11-12 16:07 仍活跃写入但登录态已失效；Log In 按钮点击无 modal/新 tab/路由变化（SPA 内嵌 OAuth，ego API 捕获不到） | 未确认：arena 侧 session 过期（cookie 文件活跃 ≠ 登录态有效）。处置：需成璐在 ego lite 窗口手动点 Log In 完成一次登录（OAuth 跳转无法脚本化代做），之后 arena 派发通道恢复 | open · awaiting-user |

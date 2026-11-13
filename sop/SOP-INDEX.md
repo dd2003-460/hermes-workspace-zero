@@ -60,6 +60,7 @@
 | 问题台账 | `projects/AI-计算科学/D1-persona-align/memory/qanda-ledger.md` | 成璐问过的每个问题 |
 
 | **机制修改三问（★ 规则改动前必读）** | `pfb/sop/pfb-domain/modification-rationale.md` | 为什么加 + 正交性检查 + 外部依据 + 退出条件 + 当前生效机制清单 M1-M10（2026-11-12，D 指令"单加规则没有全局视角"） |
+| **Taste SOP（★ prompt/机制改动前必走五检查）** | `pfb/sop/taste-sop.md` | 删句测试(MI) / 残差定位(预测误差) / 杠杆测试(Goodhart防御) / 压缩律比对(MDL) / Goodhart自查 + 三锚点案例 + 元规则(判据+数字+conf)（2026-11-13，从 T53-taste-sop-decomp S1-S4 导出） |
 
 ## 6. 维护
 

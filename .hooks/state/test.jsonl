@@ -1,1 +1,2 @@
 {"event": "hook_fire", "rule": "session-orientation", "turn": null, "via": "always", "ts": 1792426218.408585}
+{"event": "PreToolUse", "turn": "t1", "tool": "terminal", "ts": 1794742734.3208802}

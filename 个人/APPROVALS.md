@@ -35,3 +35,9 @@
 ## 已批
 
 （已执行完的条目记在这里；历史轮次见 `个人/history/`）
+
+## 2026-11-12 04:xx — 停掉 vllm-monitoring 监控栈（释放内存）
+- 操作: kill grafana server(6224) + 全部 gpx_* 插件进程 + prometheus(58541) + supervise-metrics.sh(91701) + netconsole-listener(547)
+- 理由: 本地无 vLLM 引擎（推理走 8787 proxy→服务器 ninfer qwen3.8-27b），该监控栈监控对象不存在；~20 常驻进程占用内存，挤压 drb-1 运行空间
+- 影响: Grafana/Prometheus 仪表盘不可用（本来也没数据可看）；supervise 脚本若被 launchd 拉起会自动复活（已检查无 plist 则不会）
+- 回滚: 重新启动即可: ~/vllm-monitoring/grafana/grafana-13.2.4/bin/grafana server --config=... ; prometheus --config.file=...

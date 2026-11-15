@@ -148,6 +148,43 @@
       "cooldown_turns": 0
     },
     {
+      "id": "info-update-checkpoint",
+      "seam": "UserPromptSubmit",
+      "enabled": true,
+      "trigger": [
+        {
+          "type": "keyword",
+          "any": [
+            "听说",
+            "据说",
+            "有人做了",
+            "好像",
+            "记得",
+            "之前说"
+          ],
+          "max_len": 300
+        }
+      ],
+      "action": {
+        "inject": "📥 信息入口检查（info-update-checkpoint）：用户消息含未验证来源标记。按 ~/.hermes/rules/info-update-checkpoint.md 处理——对话/转述来源默认②类 conf≤0.6，具体数字/DOI/人名当轮升级或标[待核验]不展开，禁止直接写入 goal 前提。"
+      },
+      "cooldown_turns": 1
+    },
+    {
+      "id": "idea-discovery-check",
+      "seam": "Stop",
+      "enabled": true,
+      "trigger": [
+        {
+          "type": "always"
+        }
+      ],
+      "action": {
+        "inject": "💡 idea 自检（每轮一次）：这轮对话/工作有没有产生一个'当前证据够不到、但答案会改变后续判断'的问题？有→过 Q1-Q3（穷尽/杠杆/可推进，见 ~/.hermes/rules/idea-discovery.md）→全过则落盘 D1-persona-align/memory/idea-pool.md。没有→跳过，不强行造问题。"
+      },
+      "cooldown_turns": 3
+    },
+    {
       "id": "orchestrator-mode",
       "seam": "UserPromptSubmit",
       "enabled": true,
@@ -171,5 +208,5 @@
       "cooldown_turns": 0
     }
   ],
-  "updated": "2026-11-06T15:57+08:00"
+  "updated": "2026-11-15T14:30+08:00"
 }

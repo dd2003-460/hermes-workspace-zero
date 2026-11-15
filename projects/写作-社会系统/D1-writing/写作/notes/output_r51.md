@@ -13,7 +13,7 @@ R50 执行 sub 完成了三 deliverable 的最后打磨，但 LW 提交因登录
 
 ### 我的动机是什么？
 
-成璐的写作域权重是 0.2（影响力扩展），最终指向学术平台构建。当前的三个 deliverable 是 IC_K 论文的「传播层」：
+D的写作域权重是 0.2（影响力扩展），最终指向学术平台构建。当前的三个 deliverable 是 IC_K 论文的「传播层」：
 - **A2** (LW post) — 面向 ML/TCS 交叉社区的科普文
 - **Twitter thread** — 论文的 teaser/distribution
 - **A3** — 信息复杂度核⼼结果的短篇阐释

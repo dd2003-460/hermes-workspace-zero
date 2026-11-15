@@ -54,7 +54,7 @@
 
 | 要素 (concept) | 属性 | 状态 | 置信度 | 影响 | 可逆 |
 |---|---|---|---|---|---|
-| confidence_layer_signal | 伪thinking 判据线 B：introspective faithfulness——flip pairs 保留 96% same-answer 相似度(cosine 0.784 vs 0.817；d=0.34)，即表面推理文本对决策几乎不敏感；真自我知识信号在 self-rated confidence 层(obscure facts 下 p<0.001；r=0.134；model-specific: GPT-4o 唯一可靠耦合 Δ=-0.132)；native-reasoning 模型 internal thinking tokens 比 user-facing CoT 决策敏感性更高(Wilcoxon p=0.033)。监控启示：读逻辑论证是错的，confidence 表达才是真自我知识所在——与成璐 logprob 探针方向一致。 | confirmed | 0.85 | material | 是 |
+| confidence_layer_signal | 伪thinking 判据线 B：introspective faithfulness——flip pairs 保留 96% same-answer 相似度(cosine 0.784 vs 0.817；d=0.34)，即表面推理文本对决策几乎不敏感；真自我知识信号在 self-rated confidence 层(obscure facts 下 p<0.001；r=0.134；model-specific: GPT-4o 唯一可靠耦合 Δ=-0.132)；native-reasoning 模型 internal thinking tokens 比 user-facing CoT 决策敏感性更高(Wilcoxon p=0.033)。监控启示：读逻辑论证是错的，confidence 表达才是真自我知识所在——与D logprob 探针方向一致。 | confirmed | 0.85 | material | 是 |
 
 ### research_findings
 
@@ -66,13 +66,13 @@
 
 | 要素 (concept) | 属性 | 状态 | 置信度 | 影响 | 可逆 |
 |---|---|---|---|---|---|
-| task_graph | KB.1 第9篇执行 DAG：N1 起草 A段概念块×6（note 主文件）→ N2 B段成璐视角+可证伪idea / N3 C段≥2可证伪预测带判死条件（并行，各自独立产物文件）→ N4 drift-check v1≥75→v2=100 + INDEX 加行（合并 B/C 入 note）。全本地无外部依赖；输入全部来自 02/02.5 已 confirmed 字段。 | confirmed | 0.95 | material | 是 |
+| task_graph | KB.1 第9篇执行 DAG：N1 起草 A段概念块×6（note 主文件）→ N2 B段D视角+可证伪idea / N3 C段≥2可证伪预测带判死条件（并行，各自独立产物文件）→ N4 drift-check v1≥75→v2=100 + INDEX 加行（合并 B/C 入 note）。全本地无外部依赖；输入全部来自 02/02.5 已 confirmed 字段。 | confirmed | 0.95 | material | 是 |
 
 ### coverage_proof
 
 | 要素 (concept) | 属性 | 状态 | 置信度 | 影响 | 可逆 |
 |---|---|---|---|---|---|
-| coverage_proof | 覆盖证明：goal 验收三要素——①A段6概念块(是什么/为什么/边界+conf)→N1；②B段成璐视角判断+可证伪idea→N2；③C段≥2可证伪预测带判死条件→N3；drift-check v1≥75→v2=100 + INDEX 加行→N4。02.5 六调研字段全部被 N1 的 input_refs 承接（逐字段引用其 evidence_refs 数字）。无遗漏目标要素、无未核验前提（全部输入来自 02/02.5 confirmed 字段）、拓扑无环（N1→N2→N3→N4 线性）。 | confirmed | 0.95 | material | 是 |
+| coverage_proof | 覆盖证明：goal 验收三要素——①A段6概念块(是什么/为什么/边界+conf)→N1；②B段D视角判断+可证伪idea→N2；③C段≥2可证伪预测带判死条件→N3；drift-check v1≥75→v2=100 + INDEX 加行→N4。02.5 六调研字段全部被 N1 的 input_refs 承接（逐字段引用其 evidence_refs 数字）。无遗漏目标要素、无未核验前提（全部输入来自 02/02.5 confirmed 字段）、拓扑无环（N1→N2→N3→N4 线性）。 | confirmed | 0.95 | material | 是 |
 
 ## 证据与备注
 

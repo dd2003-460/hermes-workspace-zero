@@ -1,4 +1,4 @@
-# origin: ai（意图锚: KB 队列第9篇，兴趣方向 C 区 #8『伪 thinking / 推理时计算』——成璐 S3 场景亲自质疑点。素材 = 02.5 六调研字段已核验证据：Wei 2022 CoT 规模涌现 / In-The-Wild post-hoc rationalization 率 / Introspective Faithfulness flip-pair / Setlur TTS VB>VF / Agarwal 7B-235B TTS 系统研究。）
+# origin: ai（意图锚: KB 队列第9篇，兴趣方向 C 区 #8『伪 thinking / 推理时计算』——D S3 场景亲自质疑点。素材 = 02.5 六调研字段已核验证据：Wei 2022 CoT 规模涌现 / In-The-Wild post-hoc rationalization 率 / Introspective Faithfulness flip-pair / Setlur TTS VB>VF / Agarwal 7B-235B TTS 系统研究。）
 # status: v1 — 第九篇教材 note(伪 thinking vs 真推理)
 # 给懒惰兴趣驱动的人: 每概念 是什么/为什么/边界, 带 conf, 结尾收可证伪预测
 
@@ -34,11 +34,11 @@
 - **边界**: 目前缺"同一小模型开/关 self-verify 的 matched 对照"公开数据。现有证据都是跨模型或跨方法比较，因果链不完整。本地 27b 可以做这个对照实验。conf 0.7
 
 ### 6. 习惯刻入权重 vs prompt：推理行为的来源分层
-- **是什么**: 成璐 S3 质疑的第二半：模型的"推理习惯"（比如爱写冗长论证、爱用特定解题模板）是权重里的还是 prompt 诱导的？现有证据支持分层。CoT 的行为模式（写不写步骤）主要由 prompt 触发——Wei 2022 的 standard vs CoT prompting 对照就是纯 prompt 效应。但步骤的质量（合不合逻辑）由权重决定，小模型写得出流畅但错误的步骤，这就是权重天花板。thinking 模型的 internal reasoning 则是第三种来源——训练目标直接优化了推理过程（R1 系），prompt 只能开关不能改风格。
+- **是什么**: D S3 质疑的第二半：模型的"推理习惯"（比如爱写冗长论证、爱用特定解题模板）是权重里的还是 prompt 诱导的？现有证据支持分层。CoT 的行为模式（写不写步骤）主要由 prompt 触发——Wei 2022 的 standard vs CoT prompting 对照就是纯 prompt 效应。但步骤的质量（合不合逻辑）由权重决定，小模型写得出流畅但错误的步骤，这就是权重天花板。thinking 模型的 internal reasoning 则是第三种来源——训练目标直接优化了推理过程（R1 系），prompt 只能开关不能改风格。
 - **为什么这个分层重要**: 它决定了干预手段的选择空间。想改变"写不写步骤"→改 prompt 就行；想改变"步骤质量"→只能换模型或 fine-tune；想改变"internal thinking 风格"→当前无法外部干预，只能选模型。我设计 autoresearch 系统时就是按这个分层下注的："防御性语言=调研入口"赌的是第一层（prompt 可达），logprob 探针赌的是第二层（权重可读）。如果分层错了，整个系统的读取面就选错了。conf 0.8
 - **边界**: 三层分界不干净——长上下文里的 few-shot 示例能部分覆盖第二层（in-context learning 改变步骤质量），RLHF 后的模型 prompt 敏感度也变了。分界是经验性的不是原理性的。conf 0.65
 
-## B. 成璐视角
+## B. D视角
 
 **判断**: "伪 thinking"不是一个 bug，是一个测量面。模型输出的推理文本天然对决策低敏感（flip-pair 96% 保留）。所以"读论证判断它是否在真思考"这条路从根上就走不通——就像第 8 篇说的 turn-level 信号判不了 goal-level 完成，这里的论证文本是 turn-level 信号，决策贡献是 goal-level 量。正确的测量面是 confidence 层和行为一致性（flip-pair 一致率、删步骤不变率），不是文本内容。我的 logprob 探针定位（只排序不触发）正好落在这个测量面上，我觉得这个设计现在有了文献支撑。
 

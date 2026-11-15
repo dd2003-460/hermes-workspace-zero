@@ -3,7 +3,7 @@
 > **项目**: D1-area-quantized-black-hole-QNM
 > **状态**: ✅ I-1 ~ I-6 全部完成 + 短 paper 已撰写
 > **论文**: `papers/01-qbh-reflection-qnm-negative-result.tex` (7p, arXiv-ready)
-> **作者**: 成璐 (理论研究指导) + AI (数值计算执行)
+> **作者**: D (理论研究指导) + AI (数值计算执行)
 
 ---
 

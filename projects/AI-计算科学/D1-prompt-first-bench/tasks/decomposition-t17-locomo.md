@@ -45,7 +45,7 @@ T17 是 pfb prompt-first 方法论在 memory benchmark 域的泛化验证。此�
 | # | 子项 | 缺什么 | 来源 |
 |---|------|--------|------|
 | G1 | B5 | cross-conversation 必要性判断 | 需读 LoCoMo 数据集结构 + 时间预算评估 |
-| G2 | C5 | 目标 venue | 等成璐确认 or 默认 arXiv preprint |
+| G2 | C5 | 目标 venue | 等D确认 or 默认 arXiv preprint |
 | G3 | A1 | 现有 runner 代码位置 + 接口 | 需 grep tools/memory-benchmarks/ |
 | G4 | B1 | 当前 runs 目录结构 + 已有 scores | 需 ls runs/ + read scores.json |
 | G5 | D3 | T17 独立 vs. appendix 决策 | 产投比: 独立成文工作量大但影响力高 |

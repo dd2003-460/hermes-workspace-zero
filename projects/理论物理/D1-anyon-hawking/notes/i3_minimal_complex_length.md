@@ -150,7 +150,7 @@ $$L(\text{anyon}) \approx S(\rho_{\text{anyon}}) = -\text{Tr}(\rho_{\text{anyon}
 ---
 
 *文献支撑: Vitanyi 2000, Susskind 2014+, Brudno 1978, MDL 原理 (Rissanen 1978)*
-*对齐证据: 与成璐原始思维中的"形式化优先"和"信息论统一语言"一致*
+*对齐证据: 与D原始思维中的"形式化优先"和"信息论统一语言"一致*
 
 ---
 
@@ -365,4 +365,4 @@ $$\frac{L(\text{I-1})}{L(\text{CS}_{\text{explicit}})} \approx \frac{600N}{0.694
 ---
 
 *本节补充于 2026-06-11 iteration 511*
-*与成璐思维中的"形式化优先"一致：I-3 不仅评价理论，还推导理论适用范围*
+*与D思维中的"形式化优先"一致：I-3 不仅评价理论，还推导理论适用范围*

@@ -4,7 +4,7 @@
 
 | # | 动作 | 结果 | 证据 |
 |---|------|------|------|
-| A1 | note 落盘 | ✅ | notes/vector-database-cosine-similarity.md（10 概念×4 字段 + B 成璐视角 + C 可证伪预测×2 带判死条件） |
+| A1 | note 落盘 | ✅ | notes/vector-database-cosine-similarity.md（10 概念×4 字段 + B D视角 + C 可证伪预测×2 带判死条件） |
 | A2 | drift-check 首跑 | 75/100（空话"最后"1 处 + 第一人称 0.185<0.2） | 见下轮 |
 | A3 | 修订重跑（2 轮） | ✅ 100/100 | 去掉"最后"、织入 4 处第一人称锚（LoCoMo 检验/T17 gold tree/KB 库口径/讲序声明）；终值：109 句/均句 54.0/第一人称达标/空话 0 |
 | A4 | INDEX.md 登记 | ✅ | 新行：vector-database-cosine-similarity.md / 向量检索与 agent 记忆基础设施 / v1 完成(100/100) |

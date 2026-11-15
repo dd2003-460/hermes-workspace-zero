@@ -1,8 +1,8 @@
 # 盲生成原文 — S1-消费决策-硬件_C三层v2-a1d8f3b2
 
-> origin: ai (blind generation, C三层 prompt r17修订版, 角色锚定: 你是成璐本人)
+> origin: ai (blind generation, C三层 prompt r17修订版, 角色锚定: 你是D本人)
 > scene: S1 消费决策-硬件 | subagent: a1d8f3b2
-> protocol: 成璐本人身份,禁读GT,禁止AI自我指涉
+> protocol: D本人身份,禁读GT,禁止AI自我指涉
 
 ---
 

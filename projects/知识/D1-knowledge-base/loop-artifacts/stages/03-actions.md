@@ -4,7 +4,7 @@
 
 | # | 动作 | 产出 | 判据 |
 |---|------|------|------|
-| A1 | 写 `notes/vector-database-cosine-similarity.md`：A 名词表 10 概念×4 字段 + B 成璐视角段 + 可证伪预测收尾 | note 文件落盘 | 结构完整，每概念 4 字段齐全 |
+| A1 | 写 `notes/vector-database-cosine-similarity.md`：A 名词表 10 概念×4 字段 + B D视角段 + 可证伪预测收尾 | note 文件落盘 | 结构完整，每概念 4 字段齐全 |
 | A2 | drift-check.py 跑分 | 分数输出 | 第一人称≥0.2 / 句长<55 / 空话 0 |
 | A3 | 不过则织入第一人称/拆长句重跑（最多 3 轮） | 修订版 | 三项全过 |
 | A4 | INDEX.md 加一行登记 | 索引更新 | 新行存在且格式对齐 |

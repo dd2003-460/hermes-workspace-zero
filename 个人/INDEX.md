@@ -13,7 +13,7 @@
 | 文件/目录 | 说明 |
 |-----------|------|
 | `identity/` | 数字分身身份（digital-twin-motivation.md + soul-defaults.md，AGENTS.md m00172 驱逐落点） |
-| `persona-claude-longterm.md` | 成璐的 Claude 长期聊天画像（origin: human，AI 禁改，DPA.1 数据源） |
+| `persona-claude-longterm.md` | D的 Claude 长期聊天画像（origin: human，AI 禁改，DPA.1 数据源） |
 | `APPROVALS.md` | 不可逆×偏好不明 的集中审批队列（AGENTS.md m01140 机制落点） |
 | `APPROVALS-TEMPLATE.md` | 审批队列模板（存档后从模板重建） |
 | `ASYNC.md` | 异步事项队列 |

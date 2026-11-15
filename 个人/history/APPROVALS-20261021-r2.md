@@ -1,6 +1,6 @@
 # APPROVALS — 集中审批队列（m01140 机制）
 
-## 模板规则（成璐 2026-10-18 m02225 指令 · AI 必须遵守）
+## 模板规则（D 2026-10-18 m02225 指令 · AI 必须遵守）
 
 1. **准入**：只有**不可逆 且 偏好不明**的操作进这里（m01140）。可逆的事直接做，不问。
 2. **编号**：条目编号 `1 / 2 / 3 / 4`，子选项 `1.1 / 1.2 / 1.3`。人类只回编号。
@@ -9,7 +9,7 @@
    - ① 整个文件存档到 `个人/history/APPROVALS-<YYYYMMDD>-r<轮次>.md`（轮次 = n+1，保留人类回复原文 + AI 补执行结果）
    - ② 复制本模板重建 `个人/APPROVALS.md`（「待批」从空开始）
    - ③ 执行已批项，把执行证据（file:line / 命令输出）写进 history 文件
-5. **模板不可修改**：`个人/APPROVALS-TEMPLATE.md` 只复制、不修改。改规则需先经成璐批准，旧模板存档到 history。
+5. **模板不可修改**：`个人/APPROVALS-TEMPLATE.md` 只复制、不修改。改规则需先经D批准，旧模板存档到 history。
 6. **不阻塞**：等审批期间循环继续，跳过等待项，不停转。
 
 ## 待批
@@ -29,7 +29,7 @@
    - **2.1** RALPH 团队操作细节（~L169-211 共 4 小节 45 行）移 `loop/archived-20261016/ralph-team-setup.md`，留 1 行指针
    - **2.2** m01140 人类确认机制节：留原则 4 行，模板/轮转细节移 `个人/APPROVALS-TEMPLATE.md` 头部注释
    - **2.3** 网页 LLM 交叉验证节（~55 行）：留核心 6 行，ego-browser 代码示例 + 7 站点表 + 先例路径移新 skill `.claude/skills/ego-verify/SKILL.md`
-   - **2.4** 「与成璐的关系 + 驱动力」18 行散文压缩为 4 行，全文移 `个人/identity/digital-twin-motivation.md`
+   - **2.4** 「与D的关系 + 驱动力」18 行散文压缩为 4 行，全文移 `个人/identity/digital-twin-motivation.md`
    - **2.5** 在「研究优先」节加 2 行：联网调研/分解/交叉复核优先外包 LMArena agent mode，SOP 见 skill `arena-outsource`（`.claude/skills/arena-outsource/SKILL.md`，**已建**）
    - soul（默认决策画像）按指示**保留**，未列入。
 

@@ -1,4 +1,4 @@
-# origin: ai (2026-11-03 成璐指令"要不弄个故障索引")
+# origin: ai (2026-11-03 D指令"要不弄个故障索引")
 
 # 故障索引 — 所有通道/工具/环境故障的单一登记处
 
@@ -26,11 +26,11 @@
 | F2 | 2026-05-17 起 | Hermes cron（13 个旧 job） | `NameError: tree_reduce is not defined` | 2026-05 时 13 个旧 cron job 全部 paused（F3），tree_reduce 错误发生在 paused 恢复尝试时；2026-11-03 恢复活跃后仅保留 2 个有效 job（stop-gate + IV collector），其余 13 个仍 enabled=False 不再触发 | 无需修复：报错源头（旧 job）已永久停用，当前活跃 job 无此错误。若未来重新启用旧 job 需先升级 hermes-agent 版本 | 已销账（2026-11-05） |
 | F3 | 2026-08-25 起 | 工作区整体 | 无产出（休眠） | 13 个 cron 全部 paused，无后台自主执行 | 2026-11-03 恢复活跃；PAUSE 机制已落地可手动控制 | 已修复 |
 
-| F4 | 2026-11-05 | WorkBuddy App（ego-lite 维护方） | 触发 pfb 仓库 MR（来源不明，疑似 WorkBuddy 后台自动同步/CI hook） | 未确认：WorkBuddy 地址配置已验证正确（models.json → 127.0.0.1:8787 通），MR 触发源待成璐停否 | 登记观察；若再触发则查 WorkBuddy connector 日志 `~/.workbuddy/connectors/` | open · awaiting-user |
+| F4 | 2026-11-05 | WorkBuddy App（ego-lite 维护方） | 触发 pfb 仓库 MR（来源不明，疑似 WorkBuddy 后台自动同步/CI hook） | 未确认：WorkBuddy 地址配置已验证正确（models.json → 127.0.0.1:8787 通），MR 触发源待D停否 | 登记观察；若再触发则查 WorkBuddy connector 日志 `~/.workbuddy/connectors/` | open · awaiting-user |
 
 ## 关联
 
 - SOP 全文: `.claude/skills/arena-outsource/SKILL.md`「链路区分」节
 - 自动拦截: `tools/stage-gate/stage_gate/adapters/stop_hook.py` VAGUE_FAILURE_PATTERNS（命中笼统措辞 → INBOX 注入归因提醒）
 - 召回触发: `~/.hermes/agent-hooks/inject-rules.sh` memory-recall 路由（消息含"故障/报错/卡在哪"等词 → 强制先读本文件）
-| F5 | 2026-11-12 | ego-lite 持久会话（arena.ai） | agent 页显示 "Sign in to open this chat"，Profile 1 Cookies 文件 11-12 16:07 仍活跃写入但登录态已失效；Log In 按钮点击无 modal/新 tab/路由变化（SPA 内嵌 OAuth，ego API 捕获不到） | 未确认：arena 侧 session 过期（cookie 文件活跃 ≠ 登录态有效）。处置：需成璐在 ego lite 窗口手动点 Log In 完成一次登录（OAuth 跳转无法脚本化代做），之后 arena 派发通道恢复 | open · awaiting-user |
+| F5 | 2026-11-12 | ego-lite 持久会话（arena.ai） | agent 页显示 "Sign in to open this chat"，Profile 1 Cookies 文件 11-12 16:07 仍活跃写入但登录态已失效；Log In 按钮点击无 modal/新 tab/路由变化（SPA 内嵌 OAuth，ego API 捕获不到） | 未确认：arena 侧 session 过期（cookie 文件活跃 ≠ 登录态有效）。处置：需D在 ego lite 窗口手动点 Log In 完成一次登录（OAuth 跳转无法脚本化代做），之后 arena 派发通道恢复 | open · awaiting-user |

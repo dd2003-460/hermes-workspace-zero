@@ -9,9 +9,9 @@
 - `projects/写作-社会系统/author-voice-mining/outputs/user_corpus.jsonl`（271 条原始语料）
 
 ## 本项目的量化工具
-`projects/AI-计算科学/D1-persona-align/scripts/drift-check.py` — 把 voice_features.md 的目标数字变成可跑的 0-100 成璐度得分（persona L7 漂移重锚用）。
+`projects/AI-计算科学/D1-persona-align/scripts/drift-check.py` — 把 voice_features.md 的目标数字变成可跑的 0-100 D度得分（persona L7 漂移重锚用）。
 
 ## 用法定位
-- 要"写得像成璐" → 读 author-voice SKILL
-- 要"验证写得像不像成璐" → 跑 drift-check.py
+- 要"写得像D" → 读 author-voice SKILL
+- 要"验证写得像不像D" → 跑 drift-check.py
 - 本文件只负责让人/AI 知道去上面两个地方

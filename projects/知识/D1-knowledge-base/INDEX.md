@@ -6,8 +6,8 @@
 
 | 路径 | 描述 |
 |------|------|
-| `README.md` | 项目目的 + 教材式笔记格式(名词表: 定义/动机/来源/疑问 + 成璐视角) |
-| `memory/interest-directions.md` | 成璐兴趣方向盘点(从语料/projects 落定) |
+| `README.md` | 项目目的 + 教材式笔记格式(名词表: 定义/动机/来源/疑问 + D视角) |
+| `memory/interest-directions.md` | D兴趣方向盘点(从语料/projects 落定) |
 | `notes/` | 各领域教材式 note(每域一篇) |
 | `notes/INDEX.md` | note 纯索引 |
 | `tasks/state.md` | 当前任务状态 |

@@ -58,7 +58,7 @@ A 是感知（输入），B 是内容（文本），C 是渲染（代码），D 
 ## 决策记录
 - D1: 时长选 4 分钟左右（3.7min 对标《压缩》），不贪 6min —— 渲染时间+迭代预算考虑（D2 代价律）
 - D2: 技术栈 Remotion（个人免费）；若渲染超时降级 540p/24fps 或抽帧稀疏
-- D3: 不复刻"笨笨"剧情（意图校验：产出需回溯用户意图=做"类似风格"，非抄袭；原创叙事更对齐"成璐的数字分身"身份）
+- D3: 不复刻"笨笨"剧情（意图校验：产出需回溯用户意图=做"类似风格"，非抄袭；原创叙事更对齐"D的数字分身"身份）
 - D4: 小红书视频降级处理（画面不可得，只用文字主题做风格参考），不写 APPROVALS（登录不是审批项，是能力边界，记录即可）
 - D5: 旁白用 edge-tts Yunxi（免费、中文自然度够、调研已验证≈5.5字/秒）→ 实际 edge-tts 被 403（WSServerHandshakeError，服务风控/墙），改用 macOS `say -v Tingting -r 120` 本地 TTS（免费零依赖，自然度低一档，标 conf 0.6）
 - D6（2026-10-19）: **放弃 Remotion 渲染管线，改 ffmpeg 帧序列方案**。理由：本机 CHS（Chromium 157 headless shell）spawn 后 --dump-dom 挂起 >20s 不返回（只有 --version 正常），Remotion CLI 与 Node API（bundle+renderMedia，显式 browserExecutable+隔离参数）全部 delayRender timeout；bundle 编译正常但 waitForRoot 回调不触发（疑 remotion 双实例或 headless 环境异常）。已烧 2h+ 调试预算无新事实（思考预算终止指令③：2 轮无新事实→换工具）。新方案：Node+canvas 渲染 720p 帧序列（PNG 5400 帧≈3540 帧@30fps）→ ffmpeg 合成+混音。Remotion 代码（Root.tsx/Video.tsx）保留作帧渲染器的场景/布局参考（逻辑等价迁移到 canvas 绘制）。

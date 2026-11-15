@@ -11,7 +11,7 @@
 2. **A persona 硬数字密度偏高**（S1 hardnum_k=11.2 vs GT=0）：persona prompt 倾向生成更多具体数字
 3. **B generic 类比密度偏高**（S3 analogy_k=11.5 vs GT=0）：generic 倾向用类比解释
 4. **加粗密度全为 0**：三个场景的 GT 和生成文本都没用加粗，该维度无区分度
-5. **drift 成璐度**：A=90 | AX=90 | B=83（A 和 AX 持平，B 略低）
+5. **drift D度**：A=90 | AX=90 | B=83（A 和 AX 持平，B 略低）
 
 ## 原始输出
 
@@ -38,7 +38,7 @@ analogy_k                4.6         0.0         0.0         0.0
 bold_k                   0.0         0.0         0.0         0.0
 hardnum_k                0.0        11.2         0.0         8.8
 余弦 vs GT                           0.486       0.748       0.323
-drift 成璐度                             85          95          85  (GT参照 85)
+drift D度                             85          95          85  (GT参照 85)
 
 ===== S2-量化估算-元评估 =====
 指标                        GT   A persona       AX 公理   B generic
@@ -62,7 +62,7 @@ analogy_k                0.0         0.0         0.0         0.0
 bold_k                   0.0         0.0         0.0         0.0
 hardnum_k                0.0         1.5         1.7         4.2
 余弦 vs GT                            0.74       0.899        0.49
-drift 成璐度                             85          95          80  (GT参照 60)
+drift D度                             85          95          80  (GT参照 60)
 
 ===== S3-ML训练机制-CoT =====
 指标                        GT   A persona       AX 公理   B generic
@@ -86,9 +86,9 @@ analogy_k                0.0         2.1         0.0        11.5
 bold_k                   0.0         0.0         0.0         0.0
 hardnum_k                0.0         4.1         0.0         0.0
 余弦 vs GT                           0.541       0.795       0.545
-drift 成璐度                            100          80          85  (GT参照 70)
+drift D度                            100          80          85  (GT参照 70)
 
 ===== 汇总(3场景均值) =====
 余弦近似度: A persona = 0.589 | AX 公理 = 0.814 | B generic = 0.453
   Δ: A-B = +0.136 | AX-B = +0.361 | A-AX = -0.225
-drift 成璐度: A = 90 | AX = 90 | B = 83  (Δ: A-B = +7, AX-B = +7)
+drift D度: A = 90 | AX = 90 | B = 83  (Δ: A-B = +7, AX-B = +7)

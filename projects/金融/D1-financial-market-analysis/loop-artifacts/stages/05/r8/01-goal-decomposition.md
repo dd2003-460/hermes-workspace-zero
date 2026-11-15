@@ -1,6 +1,6 @@
 # F10-R5 / 阶段 01 — 目标分解、已知与空缺条件
 
-# origin: ai (成璐 2026-11-05 r290 派发)
+# origin: ai (D 2026-11-05 r290 派发)
 # 任务书: `projects/金融/D1-financial-market-analysis/tasks/F10-r5-macro-regime-task.md`
 # 阶段: 01-goal-decomposition（`loop/prompt-first/01-goal-decomposition.md`）
 # 执行: arena agent mode | 观测日: 2026-11-05 | 分支: arena/f10-gas-dynamics-research @ 99c8a77

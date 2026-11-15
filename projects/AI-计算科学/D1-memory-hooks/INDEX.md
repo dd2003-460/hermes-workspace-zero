@@ -13,4 +13,4 @@ AI 思考过长主动提醒插件方案调研。
 
 - 调研完成: plugin-approach-research.md（PostToolUse no-new-facts hook ~40 行, conf 0.8）
 - 先决条件: dsh-hooks-codex 桥未安装（已列 APPROVALS 待批）
-- 去留待成璐拍板（m00379-4）
+- 去留待D拍板（m00379-4）

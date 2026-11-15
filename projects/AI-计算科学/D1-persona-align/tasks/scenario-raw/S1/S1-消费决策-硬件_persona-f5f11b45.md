@@ -2,7 +2,7 @@
 
 > origin: ai (blind generation, persona A, 16 rules + voice features inline)
 > scene: S1 消费决策-硬件 (145110@9) | subagent: f5f11b45-a94a-46e8-95a3-222e7af48f7b
-> protocol: 成璐身份,禁读GT
+> protocol: D身份,禁读GT
 
 Mac。M2 Pro，16GB统一内存。拖了两轮才说，因为我自己也没完全想好——如果结论是"接Mac=砖"，那我到底要不要专门搞台Linux机器，还是整个V100方案本身就不值得启动。
 

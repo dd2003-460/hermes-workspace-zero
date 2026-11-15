@@ -24,7 +24,7 @@ Previous rounds identified a multi-protagonist problem: the current draft runs 4
 - **Old Sec 8's generic ending**: replace with distribution-free specific closing
 
 ## Tone Guidance
-成璐's style: direct, evidence-first, no theatrics. The draft hook "kills an entire approach" is too dramatic. Adjust to be punchy but grounded. Think: Tao's math exposition — clear, inevitable, not breathless.
+D's style: direct, evidence-first, no theatrics. The draft hook "kills an entire approach" is too dramatic. Adjust to be punchy but grounded. Think: Tao's math exposition — clear, inevitable, not breathless.
 
 ## Composition Theorem Status — IMPORTANT
 The Direct Sum / composition results in the A2 draft reference **proven theorems** in the companion IC_K paper, not conjectures. Annotate clearly:

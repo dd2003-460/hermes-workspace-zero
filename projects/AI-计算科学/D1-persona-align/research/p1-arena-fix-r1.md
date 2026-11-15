@@ -1,6 +1,6 @@
 # P1 arena 通道修复记录（r1 · 2026-10-22）
 
-> origin: ai · 成璐指令"收益最大=decomp，先修 P1"
+> origin: ai · D指令"收益最大=decomp，先修 P1"
 
 ## 现状
 

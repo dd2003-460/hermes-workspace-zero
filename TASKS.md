@@ -2,7 +2,7 @@
 
 ---
 
-## 🆕 2026-10-25 workspace 整理 + 仓库替换（成璐直接指令）
+## 🆕 2026-10-25 workspace 整理 + 仓库替换（D直接指令）
 
 ### 任务卡
 | 路 | 任务 | 模型 | 状态 | 结果 |
@@ -36,7 +36,7 @@
 - loop/1loop.md + loop/2loop.md — 精简版规划/执行循环（替代旧 6 阶段结构）
 - loop/1-loop-prompts/ + loop/2-loop-prompts/ — 步骤化 AI prompt（4+1 prompt）
 - ralph-loop.global.md — 已更新引用精简版路径
-- CLAUDE.md — 全局 AGENTS.md（含成璐数字分身原则）
+- CLAUDE.md — 全局 AGENTS.md（含D数字分身原则）
 - CLAUDE.md — 项目级 grav-waves CLAUDE.md
 
 #

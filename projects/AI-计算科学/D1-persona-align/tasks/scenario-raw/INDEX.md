@@ -1,12 +1,12 @@
 # scenario-raw/ 索引
 
-场景盲测输出目录。GT = Ground Truth（成璐原话），S1/S2/S3 = 三个测试场景。
+场景盲测输出目录。GT = Ground Truth（D原话），S1/S2/S3 = 三个测试场景。
 
 ## 目录结构
 
 ```
 scenario-raw/
-├── GT/          # 成璐原话采样（10组，5类场景×2）
+├── GT/          # D原话采样（10组，5类场景×2）
 │   ├── GT-01~02  技术讨论
 │   ├── GT-03~04  情感自我暴露
 │   ├── GT-05~06  决策性价比
@@ -16,14 +16,14 @@ scenario-raw/
 │   └── GT-scenarios-blind.md  # 10 场景描述提取（v2 盲测输入，不含 GT 原文）
 ├── S1/          # 消费决策：Mac vs 显卡坞
 │   ├── *_context.md       场景背景
-│   ├── *_gt.txt           成璐原话
+│   ├── *_gt.txt           D原话
 │   ├── *_persona-*.md     Persona 方案输出
 │   ├── *_C三层*.md        C三层方案输出
 │   ├── *_axiom-*.md       公理方案输出
 │   └── *_generic-*.md     通用 AI 对照
 ├── S2/          # 量化估算：元评估
 │   ├── *_context.md       场景背景
-│   ├── *_gt.txt           成璐原话
+│   ├── *_gt.txt           D原话
 │   ├── *_persona-*.md     Persona 方案输出
 │   ├── *_C三层*.md        C三层方案输出
 │   ├── *_OPRO-*.md        OPRO 迭代输出
@@ -31,7 +31,7 @@ scenario-raw/
 │   └── *_generic-*.md     通用 AI 对照
 ├── S3/          # ML训练机制：CoT幻觉+交叉检验
 │   ├── *_context.md       场景背景
-│   ├── *_gt.txt           成璐原话
+│   ├── *_gt.txt           D原话
 │   ├── *_persona-*.md     Persona 方案输出
 │   ├── *_C三层*.md        C三层方案输出
 │   ├── *_axiom-*.md       公理方案输出
@@ -56,7 +56,7 @@ scenario-raw/
 
 | 方案 | 来源 | 核心方法 |
 |------|------|----------|
-| GT | 成璐原话 | Ground Truth |
+| GT | D原话 | Ground Truth |
 | Persona | C三层 prompt | 描述50%+量化30%+样例20% |
 | C三层 | 消融实验产物 | 三层结构 prompt |
 | OPRO | 迭代优化 | 多 session 迭代 |

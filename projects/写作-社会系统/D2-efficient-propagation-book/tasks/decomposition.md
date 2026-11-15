@@ -30,7 +30,7 @@
 
 ## 空缺清单（未验证事实，不得当行动前提）
 
-1. **P2 实验渠道未定** — 30 人 30 天实验在哪跑（哪个平台/社群）需成璐拍板；AI 侧只能备好实验方案文档，不能代执行。→ 不阻塞 ch14/15 写作（章内标 conf，实验执行单列）。
+1. **P2 实验渠道未定** — 30 人 30 天实验在哪跑（哪个平台/社群）需D拍板；AI 侧只能备好实验方案文档，不能代执行。→ 不阻塞 ch14/15 写作（章内标 conf，实验执行单列）。
 2. **ch14/ch15 素材 = assetization-path.md v1（drift 90）** — v1 未定稿（gate 前不定稿是设计），ch14/15 引用其 gate 定义是"引用设计"不是"引用结论"，章内须标。
 3. **v3 定稿时间 = P2 第一个数到达时间** — 未知；v3 前通读可先做，定稿动作等数。
 
@@ -45,7 +45,7 @@
 | T5 | bookkeeping + git | state.md / loop-state.json / aggregate-active.sh | T3,T4 | Lead | 同前 + commit + push（必须 `-c http.version=HTTP/1.1`） | 远端 main = 本地 HEAD | push 失败重试（HTTP/1.1） | **✅ 完成** 2026-10-20（commit 34231b49, push 成功 5e04a154..34231b49） |
 
 **T6（不派，单列）**：P2 实验执行 — 阻塞于空缺 1（渠道拍板）。可执行部分=实验方案文档，待 T1 交付后从 ch14 抽出即可，不单派。
-**T7（✅ 已完成，T6 前置文档）**：P2 实验方案文档 + v3 定稿 checklist — 从 ch14 抽出实验设计（p2-experiment-plan.md）+ 定稿动作单（v3-finalization-checklist.md），成璐拍板渠道后直接执行 T6。
+**T7（✅ 已完成，T6 前置文档）**：P2 实验方案文档 + v3 定稿 checklist — 从 ch14 抽出实验设计（p2-experiment-plan.md）+ 定稿动作单（v3-finalization-checklist.md），D拍板渠道后直接执行 T6。
 
 ## 执行顺序
 

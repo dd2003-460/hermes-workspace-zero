@@ -2,7 +2,7 @@
 # GT分层采样汇总
 
 ## 采样策略
-从成璐271条语料（`/Users/a1-6/Desktop/workspace/projects/写作-社会系统/author-voice-mining/outputs/user_corpus.jsonl`，272行含首行meta）中，按5个话题类型分层采样，每桶2条，共10条GT场景，用于persona盲测。
+从D271条语料（`/Users/a1-6/Desktop/workspace/projects/写作-社会系统/author-voice-mining/outputs/user_corpus.jsonl`，272行含首行meta）中，按5个话题类型分层采样，每桶2条，共10条GT场景，用于persona盲测。
 
 ## 5桶选择表
 

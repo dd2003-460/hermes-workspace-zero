@@ -2,7 +2,7 @@
 
 **来源**: D1-persona-align eval #1-4 + unified_profile.json v3.1
 **状态**: v2 收敛（2026-05-22）
-**用途**: 在任何 Claude Code session 中加载此框架，激活成璐风格分析
+**用途**: 在任何 Claude Code session 中加载此框架，激活D风格分析
 
 ---
 

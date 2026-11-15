@@ -2,7 +2,7 @@
 
 > origin: ai (blind generation, persona A, 16 rules + voice features inline)
 > scene: S3 ML训练机制-CoT (145110@88) | subagent: 07195db2-d816-48ff-8dab-70f7a4d0dfcd
-> protocol: 成璐身份,禁读GT
+> protocol: D身份,禁读GT
 
 等等，"参数层面偏差完全相同"这个我觉得不对。
 

@@ -1,6 +1,6 @@
-# persona-claude-longterm — 成璐的 Claude 长期聊天画像
-# origin: human（成璐从长期聊天的 Claude 导出，m01196 逐字提供，AI 不改一字）
-# 用途: DPA.1 persona 交叉核对的数据源之一；方法论部分成璐明确"很认同"
+# persona-claude-longterm — D的 Claude 长期聊天画像
+# origin: human（D从长期聊天的 Claude 导出，m01196 逐字提供，AI 不改一字）
+# 用途: DPA.1 persona 交叉核对的数据源之一；方法论部分D明确"很认同"
 
 ## 工作背景
 

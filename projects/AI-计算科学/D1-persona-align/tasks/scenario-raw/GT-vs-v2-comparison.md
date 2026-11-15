@@ -1,5 +1,5 @@
 # origin: ai
-# clonar-v2 盲测对比：GT（成璐真实消息）vs v2（clonar system_prompt + 去腔调10条，盲生成）
+# clonar-v2 盲测对比：GT（D真实消息）vs v2（clonar system_prompt + 去腔调10条，盲生成）
 # 盲条件: subagent 只读 GT-scenarios-blind.md 场景描述，禁读 GT 文本
 # 生成批次: A(2c2d22f6)/B(6eed811e) 2026-10-21 01:4x-02:1x; 63e9a44f 重写 GT-01/02/03/S2 (02:46-02:59)
 # ⚠️ GT-01 盲测污染: S2 context 文件第41行含 GT-01 的 GT 消息逐字（同一对话 c92c712f），

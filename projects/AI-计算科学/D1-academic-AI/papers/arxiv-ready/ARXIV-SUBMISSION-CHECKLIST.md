@@ -1,7 +1,7 @@
 # arXiv Submission Checklist — D1-academic-AI Papers
 
 ## Prerequisites
-- [ ] Login to https://submitt.arxiv.org with your arXiv account (成璐)
+- [ ] Login to https://submitt.arxiv.org with your arXiv account (D)
 - [ ] If no account: create one at https://arxiv.org/signup (takes ~5 min)
 
 ## Submission Order (critical: DistCat FIRST)

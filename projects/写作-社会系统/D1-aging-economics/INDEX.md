@@ -1,6 +1,6 @@
 # D1-aging-economics — 人口老龄化对区域经济的影响
 
-> **起源**: 2026-05-23 · 成璐
+> **起源**: 2026-05-23 · D
 > **领域**: 经济学实证研究
 > **状态**: Phase 0-7 全部完成 (合成数据完整分析流程验证通过: baseline + DID + mechanism + robustness + 英文论文初稿 v1 10页/227KB, 含 prediction section)
 > **方法**: 面板数据 + DID + 因果推断

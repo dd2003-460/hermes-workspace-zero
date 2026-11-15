@@ -1,14 +1,14 @@
 # 决策备忘：persona 建完，下一步干什么
 
-> origin: ai（以成璐身份运行 persona.md 的演示产物）· Plan 五步 + 自我质询
-> 用途：证明「加载 persona 后能按成璐的思维/语言/工作习惯做真实决策」。文末跑 drift-check 验证语言层。
+> origin: ai（以D身份运行 persona.md 的演示产物）· Plan 五步 + 自我质询
+> 用途：证明「加载 persona 后能按D的思维/语言/工作习惯做真实决策」。文末跑 drift-check 验证语言层。
 
 ## Step 0 现状盘点（在哪）
 我觉得现在的情况是：persona 包建好了——identity 三层 + work-habits + 可加载的 persona.md + drift-check 工具。
 但还没接进实际工作流。现在 cron/ralph 跑的还是裸 AGENTS.md，没注入 persona。
 
 ## Step 1 目标 × 约束（去哪 × 路上有什么）
-我的目标：让 AI 以后**默认**按成璐风格干活，不是"要用的时候手动加载"。
+我的目标：让 AI 以后**默认**按D风格干活，不是"要用的时候手动加载"。
 约束：AGENTS.md 红线禁改；性价比优先（免费/现有工具）；长期可维护。
 
 ## Step 2 工具搜集（缺什么找什么）

@@ -1,6 +1,6 @@
 # F10-R3 / D — 信息不对称下的被迫流动预测
 
-# origin: ai (成璐 F10-R3 调研任务书 2026-11-01) | 执行: arena agent mode | 观测日: 2026-11-01
+# origin: ai (D F10-R3 调研任务书 2026-11-01) | 执行: arena agent mode | 观测日: 2026-11-01
 # 子问题: 哪些"被迫交易"(margin call / ETF 调仓 / options gamma / 爆仓)可提前预测? 精度到什么程度?
 # 交叉验证: 每结论 ≥2 独立团队, 明细见 receipts.json
 

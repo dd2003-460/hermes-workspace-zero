@@ -63,7 +63,7 @@
 
 - **Glassnode**: `api.glassnode.com` 返回 401 without key。Free tier 存在但需注册，且有速率限制 + 历史深度限制（community plan 通常只给 90 天）
 - **CryptoQuant**: 同样 401 without token
-- **如果成璐愿意注册**: Glassnode community plan 可能够（exchange_netflow, exchange_balance 等），但历史深度是瓶颈
+- **如果D愿意注册**: Glassnode community plan 可能够（exchange_netflow, exchange_balance 等），但历史深度是瓶颈
 - **conf**: 0.3（理论上最正交的信号，但实操门槛高）
 
 ### 6. DefiLlama Stablecoins — 稳定币供应（⚠️ 部分可用）
@@ -91,7 +91,7 @@
 - **短期替代**: 搜索 arXiv 上用了 Deribit 历史 IV 的论文，看他们是否共享数据集
 - **正交性**: 高（IV 是 forward-looking，funding 是 backward-looking）
 
-### 方案 C：注册 Glassnode free tier（如果成璐愿意花 5 分钟注册）
+### 方案 C：注册 Glassnode free tier（如果D愿意花 5 分钟注册）
 
 - **能获得**: exchange_netflow, exchange_balance, active_addresses（90 天历史）
 - **局限**: 90 天太短，不够做 2020-2026 回测

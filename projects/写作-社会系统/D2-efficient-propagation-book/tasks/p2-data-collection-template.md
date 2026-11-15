@@ -2,7 +2,7 @@
 
 # origin: ai
 
-> 成璐选渠道后直接用这个模板收集数据。Google 表格 / 本地 CSV 都行。
+> D选渠道后直接用这个模板收集数据。Google 表格 / 本地 CSV 都行。
 
 ## 数据结构
 
@@ -90,7 +90,7 @@ if retention is not None:
 
 ## 使用流程
 
-1. 成璐选渠道 → 发招募文案
+1. D选渠道 → 发招募文案
 2. 读者报名 → 填 reader_id + channel + signup_date + pre_score
 3. 30 天后 → 填 chapters_read + post_score_30d
 4. 90 天后 → 填 post_score_90d

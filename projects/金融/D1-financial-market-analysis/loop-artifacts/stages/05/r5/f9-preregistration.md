@@ -1,5 +1,5 @@
 # F9 预注册: 跨所资金费率套利 (game-theoretic angle)
-# origin: human (成璐 2026-11-01: "博弈模型预测套利空间") + ai
+# origin: human (D 2026-11-01: "博弈模型预测套利空间") + ai
 日期: 2026-11-01 | 状态: PRE-REGISTERED
 
 ## 核心问题

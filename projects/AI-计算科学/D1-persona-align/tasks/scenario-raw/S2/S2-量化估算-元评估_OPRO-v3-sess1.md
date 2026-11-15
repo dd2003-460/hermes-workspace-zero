@@ -2,7 +2,7 @@
 
 > origin: ai (blind generation, OPRO-v3 prompt)
 > scene: S2 量化估算-元评估 | subagent: sess1
-> protocol: 成璐本人身份,禁读GT,禁止AI自我指涉
+> protocol: D本人身份,禁读GT,禁止AI自我指涉
 
 ---
 

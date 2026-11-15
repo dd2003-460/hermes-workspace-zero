@@ -47,7 +47,7 @@
 
 | 要素 (concept) | 属性 | 状态 | 置信度 | 影响 | 可逆 |
 |---|---|---|---|---|---|
-| 阶段 03 产出：coverage_proof | 覆盖性证明：G2 验收项逐条映射——聚合各 cutoff 分数→t17-n1-aggregate；生成对比表→t17-n3-compare；更新 decomp loop-state→t17-n4-writeback；脏数据口径透明→t17-n2-dirty-mark。02.5 attribute_matrix 全部 7 字段 confirmed 且 cross_validation 双 provider 门禁通过(commit fbcbec64)。无遗漏节点：T17 后续(对照组实验/异源 judge)属新立项范畴(GOALS.md 待成璐决策)不在本 goal 范围。 | confirmed |  |  |  |
+| 阶段 03 产出：coverage_proof | 覆盖性证明：G2 验收项逐条映射——聚合各 cutoff 分数→t17-n1-aggregate；生成对比表→t17-n3-compare；更新 decomp loop-state→t17-n4-writeback；脏数据口径透明→t17-n2-dirty-mark。02.5 attribute_matrix 全部 7 字段 confirmed 且 cross_validation 双 provider 门禁通过(commit fbcbec64)。无遗漏节点：T17 后续(对照组实验/异源 judge)属新立项范畴(GOALS.md 待D决策)不在本 goal 范围。 | confirmed |  |  |  |
 
 ### verification_report
 
@@ -59,13 +59,13 @@
 
 | 要素 (concept) | 属性 | 状态 | 置信度 | 影响 | 可逆 |
 |---|---|---|---|---|---|
-| preference_brief | 成璐偏好（GOALS.md 行为准则 + USER.md）：①没事主动找新活+发掘 idea 调研，不发巡检废话；②可逆决策自主做，不频繁问是否继续；③对标顶刊/高 star 先复刻再创新；④整洁规范、过程可见、文件链稳定；⑤调研/核验类走 arena 固定会话，本地自答降级 conf-0.2；⑥一次一个 goal，干完再找下一个。当前无活跃 goal（T17 已收口），按产投比选下一方向。 | confirmed | 0.95 | material | 是 |
+| preference_brief | D偏好（GOALS.md 行为准则 + USER.md）：①没事主动找新活+发掘 idea 调研，不发巡检废话；②可逆决策自主做，不频繁问是否继续；③对标顶刊/高 star 先复刻再创新；④整洁规范、过程可见、文件链稳定；⑤调研/核验类走 arena 固定会话，本地自答降级 conf-0.2；⑥一次一个 goal，干完再找下一个。当前无活跃 goal（T17 已收口），按产投比选下一方向。 | confirmed | 0.95 | material | 是 |
 
 ### candidate_tasks
 
 | 要素 (concept) | 属性 | 状态 | 置信度 | 影响 | 可逆 |
 |---|---|---|---|---|---|
-| candidate_tasks | 扫描 GOALS.md 链式目标 + projects/ACTIVE-candidates.md 8 条候选：G1 blocked_human(pfb 等 web-llm ≥2 成功回执)；#2 写作半阻塞(渠道待拍板)；#3 MR 卡 credentials(1000G ref+OpenGWAS token)；#4 ORF 卡 arXiv 手动上传；#5 done；#6 backlog；#7 T8 剩余项全需异源 judge(外部依赖)。纯本地可执行且产投比最高：KB.1 教材第9篇——C 区 #8 AI/ML 训练机制的『伪 thinking vs 真推理』深挖（成璐 S3 场景主动质疑点，前 8 篇未覆盖推理时计算/CoT 机制）。 | confirmed | 0.90 | material | 是 |
+| candidate_tasks | 扫描 GOALS.md 链式目标 + projects/ACTIVE-candidates.md 8 条候选：G1 blocked_human(pfb 等 web-llm ≥2 成功回执)；#2 写作半阻塞(渠道待拍板)；#3 MR 卡 credentials(1000G ref+OpenGWAS token)；#4 ORF 卡 arXiv 手动上传；#5 done；#6 backlog；#7 T8 剩余项全需异源 judge(外部依赖)。纯本地可执行且产投比最高：KB.1 教材第9篇——C 区 #8 AI/ML 训练机制的『伪 thinking vs 真推理』深挖（D S3 场景主动质疑点，前 8 篇未覆盖推理时计算/CoT 机制）。 | confirmed | 0.90 | material | 是 |
 
 ## 证据与备注
 
@@ -210,7 +210,7 @@ required_outputs 第二项；证明 task_graph 四节点覆盖 G2 验收标准�
 
 ### candidate_tasks
 
-逐条核对候选池状态列：外部候选全部 blocked-on-human/credentials/arena；唯一纯本地 open 线是 KB.1 C 区剩余方向。第9篇选题取 interest-directions.md C 区 #8 中成璐亲自质疑过且前 8 篇未闭合的子题（伪thinking/推理时计算），与 persona 工作直接相关。
+逐条核对候选池状态列：外部候选全部 blocked-on-human/credentials/arena；唯一纯本地 open 线是 KB.1 C 区剩余方向。第9篇选题取 interest-directions.md C 区 #8 中D亲自质疑过且前 8 篇未闭合的子题（伪thinking/推理时计算），与 persona 工作直接相关。
 
 证据：
 - GOALS.md (G1-G3 状态)

@@ -2,7 +2,7 @@
 
 # origin: ai
 日期: 2026-11-05
-状态: DRAFT v1 (待成璐确认后冻结; 参数不可改, 回测后只可报告结果)
+状态: DRAFT v1 (待D确认后冻结; 参数不可改, 回测后只可报告结果)
 依据: f10-r5-macro-survey.md §3 H1 (S5 Shek 2026 SSRN 7520320) + f10-r2-preregistration.md (事件定义复用)
 
 ## 假设

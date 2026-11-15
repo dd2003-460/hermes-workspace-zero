@@ -13,9 +13,9 @@
 
 ## 通道：ego-browser（唯一，AGENTS.md 硬规则）
 
-**故障处置**（2026-10-29 r32 补丁，成璐指令 + 2026-11-03 链路区分修订）：登录态几个月不失效，遇到"疑似掉线/401/重定向到登录页"**先检查工具和网络，别放弃、别直接找用户**：① `curl -I https://arena.ai` 确认网络通 ② ego-browser 重新 goto 目标页看是否只是会话页面过期 ③ 查 ego-lite 进程是否活着（`ps aux | grep -i ego`）④ 仍失败才记录具体报错找用户。把"要用户重新扫码"当第一反应是错的。
+**故障处置**（2026-10-29 r32 补丁，D指令 + 2026-11-03 链路区分修订）：登录态几个月不失效，遇到"疑似掉线/401/重定向到登录页"**先检查工具和网络，别放弃、别直接找用户**：① `curl -I https://arena.ai` 确认网络通 ② ego-browser 重新 goto 目标页看是否只是会话页面过期 ③ 查 ego-lite 进程是否活着（`ps aux | grep -i ego`）④ 仍失败才记录具体报错找用户。把"要用户重新扫码"当第一反应是错的。
 
-**链路区分（防故障记忆泛化，2026-11-03 成璐指令）**：本机有两条独立浏览器链路，故障不得互相归因：
+**链路区分（防故障记忆泛化，2026-11-03 D指令）**：本机有两条独立浏览器链路，故障不得互相归因：
 - **ego-lite 持久会话**（ego-browser skill 用的，profile 目录持久化）：deepseek/chatgpt/arena 均已登录，登录态几个月不失效。这是 arena 外包的唯一合法通道。
 - **ralph 自带 Playwright profile**（ralph loop runner 内部起的无头实例，全新 profile 无登录态）：它登录失败 ≠ ego-lite 有问题。D1-gpu 那次卡的就是这条，与 ego-browser 无关。
 
@@ -32,7 +32,7 @@ await task.finish({ keep: [] })        // 结束必须 finish，否则僵尸进�
 EOF'
 ```
 
-## 拆分优先（大调研题 · 2026-10-22 成璐 m00656 指令）
+## 拆分优先（大调研题 · 2026-10-22 D m00656 指令）
 
 大题目 ≠ 一个 subagent 全包。标准流程：
 1. **Lead 拆正交子领域**（3–7 个；每个子领域能独立成一句话问题）
@@ -46,7 +46,7 @@ EOF'
 
 ## SOP（5 步）
 
-0. **任务书 push 仓库**（2026-10-28 r26 补丁，成璐指令）：arena 会话绑定 GitHub 仓库时，任务书先 commit+push 到该仓 `tasks/<T-id>.md`，派发 prompt 只写「读 tasks/<T-id>.md 按其中步骤执行」——不贴 clone 命令、不在聊天里复制任务内容。prompt-first 类任务额外加一句「严格按仓库内 loop/prompt-first/ 的阶段 prompt 执行」（防 agent 用默认流程绕过修订规则）。仓库未绑定时才退回自包含任务卡。
+0. **任务书 push 仓库**（2026-10-28 r26 补丁，D指令）：arena 会话绑定 GitHub 仓库时，任务书先 commit+push 到该仓 `tasks/<T-id>.md`，派发 prompt 只写「读 tasks/<T-id>.md 按其中步骤执行」——不贴 clone 命令、不在聊天里复制任务内容。prompt-first 类任务额外加一句「严格按仓库内 loop/prompt-first/ 的阶段 prompt 执行」（防 agent 用默认流程绕过修订规则）。仓库未绑定时才退回自包含任务卡。
 1. **写任务卡**（给 arena 的 prompt，必须自包含；仅用于无仓库绑定的场景）：
    - 目标（一句话）+ 约束（语言/格式/长度）
    - 明确交付物格式（如「3 条来源+conf 的 JSON」「分解树 markdown」）
@@ -80,7 +80,7 @@ EOF'
 
 ## 失败处理与降级（2026-10-22 实测补丁 · 2026-11-06 修订：默认不降级）
 
-**核心原则（成璐 2026-11-06）**：arena 是首选通道，故障时必须先穷尽修复手段再考虑本地执行。只有确认所有方法都试过且不可修复时，才允许本地跑。降级之后也要想办法修复。
+**核心原则（D 2026-11-06）**：arena 是首选通道，故障时必须先穷尽修复手段再考虑本地执行。只有确认所有方法都试过且不可修复时，才允许本地跑。降级之后也要想办法修复。
 
 **修复清单**（按顺序尝试，全部失败才允许降级）：
 ① `curl -I https://arena.ai` 确认网络通 → ② ego-browser 重新 goto arena.ai/agent → ③ 查 ego-lite 进程是否活着（死了就重启）→ ④ 换 taskSpace 名开新会话 → ⑤ 检查 GitHub App token 权限 → ⑥ 沙箱拦截 git 则用 REST API → ⑦ 仍失败则记录报错等下一周期重试。
@@ -99,7 +99,7 @@ EOF'
 8. **串行提交**（理论推演，待实测）：同一 taskSpace 内多任务串行提交，不并发；等回复落页再提交下一个。
 9. **落盘硬约束**（高优，本会话实证 #4）：任务卡加"文件不存在=任务未完成，Lead 不验收"；Lead 收到完成通知后先 `ls` 确认文件存在+行数>0（实测：memory-hooks researcher 结束未写文件）。
 
-10. **细粒度拆分规范（2026-10-31 成璐 m00656 指令 · APPROVALS r3 条目 2 批准 2.1）**：调研类大任务优先拆子领域，**1 subagent 领 1 子领域走 arena**；短任务多并行优于单长任务。
+10. **细粒度拆分规范（2026-10-31 D m00656 指令 · APPROVALS r3 条目 2 批准 2.1）**：调研类大任务优先拆子领域，**1 subagent 领 1 子领域走 arena**；短任务多并行优于单长任务。
     - 收益定位（诚实标注）：`acp_cache` 实测 provider 不回报 cache tokens（245 req / 11.72M input unmeasured）→ fork 上下文是否命中缓存本侧无法验证。当前已验证的收益 = **鲁棒性 + 并行度**，不是已验证的缓存省钱。若未来 provider 开始回报 cache tokens，重新评估本节动机。
     - 拆分判据：子领域能独立成一句话问题 + 输入输出正交（重叠 <30%）+ 单个 ≤30min（超了再拆）。
     - 失败隔离：每个子领域交付物独立落盘，挂一个不影响其余；Lead 汇总时缺失子领域标「未落盘」不阻塞其他结论。
@@ -123,7 +123,7 @@ await p1.click('loc=css:button[aria-label="Send message"]')
 
 其他三条硬约束：① 单批任务 ≤15 cell/条目（防输出截断，75 cell 拆 8 批全过）；② 任务书必须先 push 到 arena 会话 checkout 的分支再提交（本地 commit 它读不到）；③ 每轮回答完必弹 review panel，下条消息前必须关。
 
-## 会话纪律（成璐 2026-11-01 硬约束）
+## 会话纪律（D 2026-11-01 硬约束）
 
 外包允许用各种 AI（arena agent mode、Battle 双裁判、网页 LLM 交叉验证），但**固定会话，不能乱开**：
 - 派发前先查 `sop/arena-loop-pipeline.md` §3.1 台账，复用该仓库的既有 arena 会话。
@@ -133,12 +133,12 @@ await p1.click('loc=css:button[aria-label="Send message"]')
 
 ## 边界
 - arena 是**执行层**外包，决策仍在本会话（conf 低/矛盾 → 自己用 ego-browser 补查）
-- **链路硬规则（2026-10-22 成璐 m00201 批准）**：① arena 外包 = 必须首选通道（默认走 arena，不自己 AI 琢磨）；② loop 6 阶段（01→04.5）无论 arena 执行还是回退本地自答都全程必需——回退降级的是执行通道，不是流程。本 skill 的 5 步是**提交机制**；调研/核验/执行类任务的链路总控见 `sop/arena-loop-pipeline.md`（唯一 SOP 入口，含仓库映射/降级/断点门禁）。
+- **链路硬规则（2026-10-22 D m00201 批准）**：① arena 外包 = 必须首选通道（默认走 arena，不自己 AI 琢磨）；② loop 6 阶段（01→04.5）无论 arena 执行还是回退本地自答都全程必需——回退降级的是执行通道，不是流程。本 skill 的 5 步是**提交机制**；调研/核验/执行类任务的链路总控见 `sop/arena-loop-pipeline.md`（唯一 SOP 入口，含仓库映射/降级/断点门禁）。
 - subagent 无网络（AGENTS.md 硬规则）：需要在线信息时由 Lead（本会话）走本 skill 代查并写文件，subagent 读文件
 - 匿名 Battle 评测（非 agent mode）有专门工具：`projects/decomp/arena_capture/`（Edge+CDP 驱动，先读其 SKILL.md）——与本 skill 正交：那里是「评测模型」，这里是「外包任务」
 - web_search 仍禁用（付费）；纯 JS 聊天页 WebFetch 仍禁用
 
-## 仓库绑定门禁（2026-10-29 r79 补丁 · 成璐指令）
+## 仓库绑定门禁（2026-10-29 r79 补丁 · D指令）
 
 **教训**：r64-r69 复用旧 arena 会话派发 rubric-v3/deepresearch 任务，该会话历史里混着 market-alpha 的 T3 任务消息，用户误判"所有工作都在 market 下面"。实际产出全在 prompt-first-bench（已逐条核验 remote/分支），但**派发前没有验证绑定**，是流程缺口不是结果错误。
 
@@ -147,7 +147,7 @@ await p1.click('loc=css:button[aria-label="Send message"]')
 2. **长会话历史污染**：一个 agent 会话跑过多项目任务后，对话历史会串（旧项目的仓库名/路径出现在上下文里），模型可能按旧上下文行动。跨项目任务必须开新会话，或派发时显式声明「本任务只涉及 <repo> 仓库，忽略历史中其他仓库的消息」。
 3. **回执带仓库指纹**：arena 执行类任务的回执 JSON 必须含 `repo`（remote URL）+ `branch` + `commit_sha`，Lead 落盘前用 `git ls-remote` 核对 sha 存在——回执没指纹 = 未验证，不通过门禁。
 
-## 会话复用纪律（2026-10-29 r80 补丁 · 成璐指令）
+## 会话复用纪律（2026-10-29 r80 补丁 · D指令）
 
 **原则：一个仓库 = 一个 arena 会话，长期复用，不乱开新窗口。**
 
@@ -156,7 +156,7 @@ await p1.click('loc=css:button[aria-label="Send message"]')
 3. **历史污染靠显式声明解决，不靠换会话**：同一仓库的长会话历史串了旧上下文 → 派发 prompt 开头加一句「本任务只涉及 <repo>/<branch>，忽略历史中其他仓库的消息」，不换会话。
 4. **会话台账**：`sop/arena-loop-pipeline.md` §3.1 映射表旁维护「仓库 → 当前会话 ID/URL」对照，每次开新会话后更新；派发前先查台账。
 
-## 会话固定仓库（2026-10-29 r81 补丁 · 成璐指令）
+## 会话固定仓库（2026-10-29 r81 补丁 · D指令）
 
 **每个 arena 会话从创建起就固定绑定一个仓库，永不混用。**
 
@@ -165,7 +165,7 @@ await p1.click('loc=css:button[aria-label="Send message"]')
 3. **禁止跨仓库复用同一会话**：一个会话只服务一个仓库。旧会话历史里混过其他仓库消息的（如 pfb 会话里的 market-alpha T3），视为"脏会话"——继续用可以，但每次派发 prompt 必须开头声明「本任务只涉及 <repo>/<branch>，忽略历史中其他仓库的消息」。
 4. **为什么之前会连错**：r64-r69 复用了 deepresearch 调研建的会话，那个会话早期跑过 market-alpha 的 T3 任务，agent 上下文被旧仓库消息污染，我派发时没验绑定、没加声明，属于流程执行缺失，不是 arena 机制问题。现在门禁补上了：查台账 → 验绑定 → 显式声明，三步缺一不可。
 
-## 行动 hook（2026-10-29 r83 · 成璐指令）
+## 行动 hook（2026-10-29 r83 · D指令）
 
 **派发 arena 任务前，Lead 必须在当轮先执行以下动作（不是靠自觉读文档）：**
 
@@ -193,7 +193,7 @@ git ls-remote https://github.com/dd2003-460/<repo>.git 'refs/heads/<branch>'
 **为什么是清单不是文档**：r64-r69 连错仓库的根因是"知道规矩但派发时没执行"。清单把规矩变成逐条打勾的动作，跳过任何一条都算违规。
 
 
-## 分支切换门禁（2026-10-29 r84 · 成璐指令）
+## 分支切换门禁（2026-10-29 r84 · D指令）
 
 **教训**：r79-r83 反复让 arena "checkout exp/rubric-v3-ablation"，它每次都拒绝——因为 arena 会话绑定的是自己的工作分支（如 arena/78602cd5-prompt-first-bench），agent 认为"分支不符就不执行"。根因：**任务书 push 到了 exp 分支，但 arena 会话 checkout 的是 arena 分支，两边对不上。**
 
@@ -202,7 +202,7 @@ git ls-remote https://github.com/dd2003-460/<repo>.git 'refs/heads/<branch>'
 2. **如果任务书在别的分支**：要么把任务书 merge/cherry-pick 到 arena 分支再派，要么让 arena 先 `git fetch && git checkout <task-branch>` 并明确告知"这是本任务要求的分支切换，不是违规"。
 3. **回执指纹**：arena 完成后 push 到的分支 = 它当时 checkout 的分支。Lead 核验时用 `git ls-remote origin <那个分支>` 找新 commit，不是去 exp 分支找。
 
-## 会话清理（2026-10-29 r85 · 成璐指令）
+## 会话清理（2026-10-29 r85 · D指令）
 
 **原则：已完成任务的 arena 会话定期清理，只保留当前活跃的。**
 
@@ -211,7 +211,7 @@ git ls-remote https://github.com/dd2003-460/<repo>.git 'refs/heads/<branch>'
 3. **保留规则**：台账里登记的"当前活跃会话"不删；同一仓库只留最新的一个。
 4. **台账同步**：删完会话后更新 `sop/arena-loop-pipeline.md` §3.1 会话台账，把已删的标记为"已清理 <日期>"或移除。
 
-## 分支切换门禁（2026-10-29 r84 · 成璐指令）
+## 分支切换门禁（2026-10-29 r84 · D指令）
 
 **教训**：r79-r83 反复让 arena "checkout exp/rubric-v3-ablation"，它每次都拒绝——因为 arena 会话绑定的是自己的工作分支（如 arena/78602cd5-prompt-first-bench），agent 认为"分支不符就不执行"。根因：**任务书 push 到了 exp 分支，但 arena 会话 checkout 的是 arena 分支，两边对不上。**
 
@@ -220,7 +220,7 @@ git ls-remote https://github.com/dd2003-460/<repo>.git 'refs/heads/<branch>'
 2. **如果任务书在别的分支**：要么把任务书 merge/cherry-pick 到 arena 分支再派，要么让 arena 先 `git fetch && git checkout <task-branch>` 并明确告知"这是本任务要求的分支切换，不是违规"。
 3. **回执指纹**：arena 完成后 push 到的分支 = 它当时 checkout 的分支。Lead 核验时用 `git ls-remote origin <那个分支>` 找新 commit，不是去 exp 分支找。
 
-## 会话清理（2026-10-29 r85 · 成璐指令）
+## 会话清理（2026-10-29 r85 · D指令）
 
 **原则：已完成任务的 arena 会话定期清理，只保留当前活跃的。**
 
@@ -229,7 +229,7 @@ git ls-remote https://github.com/dd2003-460/<repo>.git 'refs/heads/<branch>'
 3. **保留规则**：台账里登记的"当前活跃会话"不删；同一仓库只留最新的一个。
 4. **台账同步**：删完会话后更新 `sop/arena-loop-pipeline.md` §3.1 会话台账，把已删的标记为"已清理 <日期>"或移除。
 
-## 永动保障（2026-10-29 r87 · 成璐指令：必须永远不停止）
+## 永动保障（2026-10-29 r87 · D指令：必须永远不停止）
 
 **架构事实（r89 更新 · 对齐 Claude ralph-loop）**：stop_hook（pre_verify）= ralph-loop 的 Stop hook，语义一一对应：
 
@@ -240,9 +240,9 @@ git ls-remote https://github.com/dd2003-460/<repo>.git 'refs/heads/<branch>'
 | `<promise>` 真为真才放行 | goal completed 才放行（stage_advance 走完 06-find-next-goal 后 status=completed） |
 | max_iterations 到点放行 | 无（max_verify_nudges=999999，不限轮数） |
 | HALT/用户喊停放行 | HALT 文件 / user_said_stop 放行（**仅有的两条真停路径**） |
-| 无 active loop → 直接放行（靠外部 /cancel） | **无活 → 也 continue「扫 projects 找新目标立项」**（成璐 r90：找新目标本身就是工作，不许空转停下） |
+| 无 active loop → 直接放行（靠外部 /cancel） | **无活 → 也 continue「扫 projects 找新目标立项」**（D r90：找新目标本身就是工作，不许空转停下） |
 
-ralph-loop 的"同一条 prompt 反复喂回"在这里对应"CONTINUE_MSG + 阶段简报"——不重复喂固定 prompt（那是单任务循环），而是按当前状态动态生成下一步指令（多目标、跨项目）。两个有意差异：① ralph 是单任务自指循环，我们是多目标调度器，停止门只管"有没有活"，不管"干哪个"；② ralph 无 active loop 时放行等外部 /cancel，我们无活也 continue 找新目标（r90，成璐指令：这是必须的）——比 ralph 更严，真停只有 HALT/用户喊停。
+ralph-loop 的"同一条 prompt 反复喂回"在这里对应"CONTINUE_MSG + 阶段简报"——不重复喂固定 prompt（那是单任务循环），而是按当前状态动态生成下一步指令（多目标、跨项目）。两个有意差异：① ralph 是单任务自指循环，我们是多目标调度器，停止门只管"有没有活"，不管"干哪个"；② ralph 无 active loop 时放行等外部 /cancel，我们无活也 continue 找新目标（r90，D指令：这是必须的）——比 ralph 更严，真停只有 HALT/用户喊停。
 
 cron keepalive（loop-keepalive-30m）是第二道防线（跨会话唤醒+失败自愈，r87）。两道都活着才算"永动"。
 

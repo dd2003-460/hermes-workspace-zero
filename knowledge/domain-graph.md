@@ -1,6 +1,6 @@
 # 领域全景图（Domain Graph）
 
-> origin: ai · 2026-10-22 · 成璐指令"帮我进行各种可能用得上的调研"
+> origin: ai · 2026-10-22 · D指令"帮我进行各种可能用得上的调研"
 > 用途：AI 自主创建 goal 时，按优先级选方向
 
 ## 1. 现有项目（projects/）
@@ -11,9 +11,9 @@
 | persona T45 | `projects/AI-计算科学/D1-persona-align/` | BLOCKED（experiment-design-t45.md MISSING） | P2 | 需先写实验设计文档 |
 | gpu-inference-hardware | `projects/AI-计算科学/D1-gpu-inference-hardware/` | RALPH 阻塞 | P3 | 需 RALPH loop 推进 |
 | 媒体 Step E | `projects/d1-media-pipeline/` | 无阻塞 | P3 | 可直接推进 |
-| area-quantized | `projects/AI-计算科学/D1-area-quantized/` | deprecated | - | 已废弃（2026-10-22 成璐指令） |
+| area-quantized | `projects/AI-计算科学/D1-area-quantized/` | deprecated | - | 已废弃（2026-10-22 D指令） |
 
-## 2. 新方向（成璐 2026-10-22 提出）
+## 2. 新方向（D 2026-10-22 提出）
 
 ### P0：Prompt 优化 + 记忆结构召回设计（验证最快，优先级最高）
 - **目标**：推理引擎 prompt 测试/验证/优化 + 记忆结构召回设计（小测试，快速迭代）

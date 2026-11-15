@@ -1,5 +1,5 @@
 # F9 结果: 跨所/跨币资金费率套利 — 条件性成立但容量有限
-# origin: human (成璐 2026-11-01) + ai
+# origin: human (D 2026-11-01) + ai
 日期: 2026-11-01 | 状态: CLOSED (conditional positive)
 
 ## 一句话结论

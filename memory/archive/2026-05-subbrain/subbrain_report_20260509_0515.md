@@ -116,7 +116,7 @@
 ### bayesian-frame → D1-grav-waves 的方法论迁移
 bayesian-frame 的 PhiShift 排斥偏差机制（从第一性原理产生）与 D1-grav-waves 的 Extended Functorial QFT 有方法论共鸣：
 - 两者都尝试从结构/公理推导而非拟合现象
-- 这验证了成璐的方法论统一性——用形式化框架替代经验参数化
+- 这验证了D的方法论统一性——用形式化框架替代经验参数化
 
 ---
 

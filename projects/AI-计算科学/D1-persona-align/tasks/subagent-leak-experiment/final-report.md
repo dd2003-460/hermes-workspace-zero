@@ -5,7 +5,7 @@
 
 ## 执行摘要
 
-**核心发现**：DSH subagent 的泄漏面 = 系统提示层（~24K，含 AGENTS.md 成璐 persona 全文）+ git status 快照 + 文件系统旁路。父对话历史前缀实验未确认（与文档描述矛盾，待请求体 dump 确认）。
+**核心发现**：DSH subagent 的泄漏面 = 系统提示层（~24K，含 AGENTS.md D persona 全文）+ git status 快照 + 文件系统旁路。父对话历史前缀实验未确认（与文档描述矛盾，待请求体 dump 确认）。
 
 **解决方案**：4 方案矩阵（S1 fresh 模式 / S2 最小化系统提示 / S4 arena 隔离 / S5 本地 CLI），按场景选择。已整合进 `sop/goal-template.md` §2.4。
 
@@ -42,7 +42,7 @@
 - 需要直接 dump fork 子 agent 的请求体来最终确认
 
 ### 3. 泄漏面（实验确认）
-- **系统提示层**（~24K）：AGENTS.md 成璐 persona 全文 + 工具定义 + git status 快照
+- **系统提示层**（~24K）：AGENTS.md D persona 全文 + 工具定义 + git status 快照
 - **工作区指令注入**：AGENTS.md 通过 system-reminder 注入到所有 DSH 子 agent
 - **文件系统旁路**：共享 cwd，子 agent 可读取 workspace 文件
 

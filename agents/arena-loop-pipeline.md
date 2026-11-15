@@ -1,10 +1,10 @@
 # Arena Loop 外包链路（SOP · 唯一入口）
 
-> origin: ai · 2026-10-22 · 成璐指令"链路核查 + arena 首选 + loop 双场景必需 + 精简 SOP + 新 SOP 复制到仓库给 arena 读"
+> origin: ai · 2026-10-22 · D指令"链路核查 + arena 首选 + loop 双场景必需 + 精简 SOP + 新 SOP 复制到仓库给 arena 读"
 > 本文件是外包 arena 任务的**唯一 SOP 入口**（goal 只索引这一个）。仓库/降级/loop 阶段细节已并入本文件，旧 `agents/arena-outsource.md` 与 `agents/loop-executor.md` 仅作存档指针，不再单独注入 goal。
 > **部署**：创建目标仓库后，本文件必须复制进仓库 `sop/arena-loop-pipeline.md` 并 commit+push（与 loop/ 同次 push），arena agent 读仓库内的这份。
 
-## 0. 优先级（硬规则 · 成璐指令）
+## 0. 优先级（硬规则 · D指令）
 
 1. **Arena 外包 = 必须首选通道**：调研/核验/执行类任务，默认走 arena（LMArena agent mode）。不自己 AI 琢磨。
 2. **Loop 全程必需 · 双场景**：无论 arena agent 在仓库里执行，**还是** arena 通道失败回退本地 Lead 自答，**loop 6 阶段（01→04.5）一个不少**。

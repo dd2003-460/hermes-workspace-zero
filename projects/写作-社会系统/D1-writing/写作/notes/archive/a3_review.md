@@ -97,7 +97,7 @@ Sec 5 的小标题 "When This Bites You in Practice" 承诺了 scenarios，但�
 
 当前状态：v2 已审阅，意见已写入 `projects/写作/notes/a3_review.md`。
 
-- **若成璐认可审阅意见** → 派执行 sub 根据 #1-#6 list 修改 v2 → v3
+- **若D认可审阅意见** → 派执行 sub 根据 #1-#6 list 修改 v2 → v3
 - **若需要技术验证** → 先查 IC_K composition theorem 原始文献，验证 #3 的公式准确性
 - **无论哪种情况** → 继续派下一轮副脑跟踪 v3 产出状态
 

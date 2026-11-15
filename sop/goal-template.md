@@ -40,7 +40,7 @@
 - 同一问题想 2 轮无新事实 → 换工具（ego-browser/subagent），不空转。
 - acp_rule 加载：建 goal 后读 `sop/acp-rules.json`，对 rules 数组并行调用 `acp_rule` 录入（一轮完成）；工具不存在则跳过。
 
-## §3.5 Subagent 协议（成璐 2026-11-06 指令 · 2026-11-15 角色化修订）
+## §3.5 Subagent 协议（D 2026-11-06 指令 · 2026-11-15 角色化修订）
 
 **派发前必做**：把本模板 §1-§5 全文写入 subagent 的 context 字段（不是摘要，是全文）。subagent 不知道自己的上下文里有这套规则 = 等于没注入。
 

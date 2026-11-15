@@ -1,6 +1,6 @@
 # 效率瓶颈清单（按优先级排序）
 
-> origin: ai · goal-32d9335d round 2 · 成璐当前最痛的 3-5 个瓶颈
+> origin: ai · goal-32d9335d round 2 · D当前最痛的 3-5 个瓶颈
 
 ## P1: arena 通道系统性失败
 - **现象**：4 次 arena subagent 全部失败（decomp organizer 空等 20min+ / memory-hooks 10min 未落盘 / C0 run2/3 page.fill 故障 / 评分 subagent 无 closing）
@@ -12,13 +12,13 @@
 ## P2: goal 结束太快
 - **现象**：m01051 "goal就这样结束了？其余可以做的仓库的调研呢？"
 - **根因**：goal 只做了 S1-S5（5 步），没做"仓库所有可推进的调研/实验"
-- **影响**：成璐要"独立推进"，我按"完成当前任务"做了
+- **影响**：D要"独立推进"，我按"完成当前任务"做了
 - **修复**：goal 目标要包含"全仓库"范围，不是"当前任务"
 - **状态**：已修（goal-0b22f789 包含全仓库范围）
 
 ## P3: 项目优先级不对
 - **现象**：m01404 "qnm算了，老项目而且目前没兴趣" + "效率提高优先级放最高"
-- **根因**：我按"项目优先级"做（decomp → persona → gpu-inference → 媒体 → area-quantized），成璐要"效率优先"
+- **根因**：我按"项目优先级"做（decomp → persona → gpu-inference → 媒体 → area-quantized），D要"效率优先"
 - **影响**：area-quantized 花了 r13 检查（1 轮），应该标记 deprecated 跳过
 - **修复**：先修工具链（arena 通道），再做项目
 - **状态**：已修（area-quantized 标记 deprecated）

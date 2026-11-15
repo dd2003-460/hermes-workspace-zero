@@ -2,12 +2,12 @@
 
 ## 任务目标（五字段）
 
-【目标】为成璐写第 6 篇教材式 note：向量数据库与余弦相似度。讲清 embedding、余弦相似度、HNSW/ANN、本地方案选型——agent 记忆系统里"检索"这一环到底在算什么、为什么这么算。
+【目标】为D写第 6 篇教材式 note：向量数据库与余弦相似度。讲清 embedding、余弦相似度、HNSW/ANN、本地方案选型——agent 记忆系统里"检索"这一环到底在算什么、为什么这么算。
 
 【阶段】KB.1（projects/知识/D1-knowledge-base），队列第 6 篇，前 5+ 篇已完成且全过 drift-check。本 goal 走本地直写通道（KB 项目历史先例：Lead 直写，非 arena 外包——单文件写作任务，arena 链路开销不划算）。
 
 【SOP 索引】
-- KB README 格式规范：`projects/知识/D1-knowledge-base/README.md`（A 名词表 4 字段 + B 成璐视角段 + L1/L2/L3 分层）
+- KB README 格式规范：`projects/知识/D1-knowledge-base/README.md`（A 名词表 4 字段 + B D视角段 + L1/L2/L3 分层）
 - voice 门禁：`projects/AI-计算科学/D1-persona-align/scripts/drift-check.py`（硬门槛：第一人称≥0.2、句长<55、空话 0）
 - 素材锚：decomp T17 rag-vs-longctx gold tree + runs（RAG 域拆解）、memory-benchmarks LoCoMo 实验（agent 记忆检索实测）
 

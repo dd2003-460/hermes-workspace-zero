@@ -1,7 +1,7 @@
 # origin: ai — Cron 自适应轮询 (r185)
 
 ## 动机
-成璐要求：cron 间隔缩短到 500s 以内随机数 + 排队检测（在跑就跳过）+ 不断缩短间隔轮询。
+D要求：cron 间隔缩短到 500s 以内随机数 + 排队检测（在跑就跳过）+ 不断缩短间隔轮询。
 
 ## 实现
 **修改文件**: `~/.hermes/hermes-agent/cron/jobs.py` (备份 `/tmp/jobs.py.bak-20261102`)
@@ -36,7 +36,7 @@ if job.get("adaptive_poll") and kind in {"cron", "interval"} and job["next_run_a
 
 ## 状态（2026-11-04 更新）
 - **代码已落地**，gateway 需重启后生效
-- **⚠️ 已禁用（r29x, 2026-11-04）**：成璐反馈 ~15min 一轮重复播报同内容。已从 `jobs.json` 移除 job `8d0311e989fc` 的 `adaptive_poll` 字段（备份 `jobs.json.bak-adaptive-poll-fix`），该 job enabled=false。随机 60-500s 轮询对"监督者"型 cron 太激进——每轮都重读 stop-hook 快照 + goal 模板再播报，内容高度重复。**教训：adaptive_poll 只适合真正高频事件驱动的场景；长周期监控用固定 interval + [SILENT] 抑制即可。**
+- **⚠️ 已禁用（r29x, 2026-11-04）**：D反馈 ~15min 一轮重复播报同内容。已从 `jobs.json` 移除 job `8d0311e989fc` 的 `adaptive_poll` 字段（备份 `jobs.json.bak-adaptive-poll-fix`），该 job enabled=false。随机 60-500s 轮询对"监督者"型 cron 太激进——每轮都重读 stop-hook 快照 + goal 模板再播报，内容高度重复。**教训：adaptive_poll 只适合真正高频事件驱动的场景；长周期监控用固定 interval + [SILENT] 抑制即可。**
 - **过渡方案**: interval 已从 30m → 5m (cronjob_manage update)，即使自适应没生效也快了 6 倍
 
 ## 相关文件

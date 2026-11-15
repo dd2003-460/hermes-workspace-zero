@@ -29,4 +29,4 @@
 | ID | 阻塞项 | 类型 | 说明 |
 |---|---|---|---|
 | B1 | 05 S2 美股数据源全断（已在 F6 r2 按候选①降级为 ETH/SOL，本阻塞对 F6 关闭） | 技术 | Yahoo 403(大陆限制) / Stooq 403 / ifzq 美股历史日线空数组(仅实时报价). 候选: ①S2 换 Crypto (ETH/SOL, Binance API 已验证) ②等网络环境变化 ③换付费源 |
-| B2 | 05 预注册需人工确认参数 | 人依赖 | 跨市场参数 (ETH/SOL 的 threshold/window) 需成璐拍板 |
+| B2 | 05 预注册需人工确认参数 | 人依赖 | 跨市场参数 (ETH/SOL 的 threshold/window) 需D拍板 |

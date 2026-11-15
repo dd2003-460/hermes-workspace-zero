@@ -1,10 +1,10 @@
 # Note: 压缩统一观——推理、CoT、泛化、数据、架构是同一条链
 
-> origin: human（成璐 2026-11-07 的串联，AI 补证据与文献）
+> origin: human（D 2026-11-07 的串联，AI 补证据与文献）
 > 日期: 2026-11-07 · 状态: 核心框架 note，非调研
 > 关联: paradigm-routing/research/{cot-necessity-survey, icl-generalization-survey, hierarchy-noquery-survey}.md
 
-## 成璐的原话链条（原始意图锚点）
+## D的原话链条（原始意图锚点）
 
 1. 今天把 推理 / CoT / 泛化 / 数据 / 模型架构 完整串起来了，事实校准过，ctx 完整。
 2. **即使是我以为和数据/频率不一样的 Kolmogorov 复杂度，也是从压缩数据中得到的规则**——归纳是演绎的基础。

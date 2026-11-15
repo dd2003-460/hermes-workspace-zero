@@ -1,6 +1,6 @@
 # F10-R5 / 阶段 02 — 资料搜集与网页 AI 交叉询问
 
-# origin: ai (成璐 2026-11-05 r290 派发)
+# origin: ai (D 2026-11-05 r290 派发)
 # 阶段: 02-information-research（`loop/prompt-first/02-information-research.md`）
 # 观测日: 2026-11-05（UTC 17:45-17:58）| 分支: arena/f10-gas-dynamics-research
 

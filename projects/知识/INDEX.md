@@ -1,6 +1,6 @@
 # 知识
 
-**领域索引**：高兴趣未深学领域的教材式笔记（补成璐"没学好"的知识缺口）。
+**领域索引**：高兴趣未深学领域的教材式笔记（补D"没学好"的知识缺口）。
 
 ---
 
@@ -8,7 +8,7 @@
 
 | 项目 | 描述 |
 |------|------|
-| `D1-knowledge-base/` | 教材式笔记库（名词表+成璐视角；格式见其 README；兴趣方向见 memory/interest-directions.md） |
+| `D1-knowledge-base/` | 教材式笔记库（名词表+D视角；格式见其 README；兴趣方向见 memory/interest-directions.md） |
 
 ---
 

@@ -24,7 +24,7 @@
 |---|---|---|---|---|---|---|
 | **A1** | `agent` | 交付调研三件套 | 01/02/02.5 工件 + 本轮实测数据 | `f10-r5-macro-survey.md`（Q1/Q2/Q3）+ `macro-data-availability.json` + 本文件 | ①Q1 ≥5 个独立来源且每条含 URL+结论+关系+conf ②Q2 每个变量有频率/覆盖/端点/key/可达性 ③Q3 ≤3 假设且各引 Q1 编号 | 若某源 URL 无法直取 → 标"搜索摘要"并把 conf 降级，**不删除该条** |
 | **A2** | `agent` | 提交 + push + PR | A1 全部文件 | commit on `arena/9872a196-hermes-workspace-zero`；PR → `arena/f10-gas-dynamics-research` | `gh pr view` 显示 MERGEABLE / CLEAN | push 被拒 → 只 `--force-with-lease` 到本会话分支，绝不推 base |
-| **A3** | `user` | **阅读并裁决**：是否进入回测轮（F10-R6） | 调研报告 Q3 三假设 | 明确答复："进 / 不进 / 改假设后再看" | 有书面答复 | 无答复 → 项目停在调研态，**不得自行开回测**（任务书：回测决策等成璐拍板） |
+| **A3** | `user` | **阅读并裁决**：是否进入回测轮（F10-R6） | 调研报告 Q3 三假设 | 明确答复："进 / 不进 / 改假设后再看" | 有书面答复 | 无答复 → 项目停在调研态，**不得自行开回测**（任务书：回测决策等D拍板） |
 | **A4** | `agent` | 若 A3=进：写预注册 | Q3 三假设 + F7 的 8 gate 原文 | `f10-r6-preregistration.md`（冻结假设/阈值/窗口/成本/BH 族大小） | **human + ai 双签**（预注册头部须有两人署名与日期） | 若只有 ai 签 → 视为未预注册，不得执行 A6 |
 | **A5** | `agent` | 数据补齐与对齐 | `macro-data-availability.json` + 仓库既有 r6 行情缓存 | 日频 PIT 面板（2020-01→2025-12），列：DGS10/DFII10/VIXCLS/DTWEXBGS/SP500/WALCL/M2SL/稳定币供应/FOMC 事件标记 | ①无前视：所有宏观量在 t 决策时只用到 ≤ t−1d 22:00 UTC 可得值 ②缺失率 <5% ③每列有 source + vintage 说明 | WALCL/M2SL 发布滞后 → forward-fill 并打 `release_lag_days` 标记；稳定币缺日 → 线性插值 ≤3 天，超过则该日剔除 |
 | **A6** | `agent` | 回测执行 | A5 面板 + 既有 funding/basis/DVOL 序列 | `f10-r6-results.json`（3 市场 × 3 假设 × 4 窗口 = 36 组主检验；含 60 检验 BH 族） | 每个检验输出 t / n_trades / net / 跨窗一致数 / perm p / PSR / DSR | 数据断点 → 该假设标 `data_blocked`，**不得用相似变量静默顶替**；顶替须标 `proxy=true` |

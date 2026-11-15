@@ -1,11 +1,11 @@
 # Note: 长程洞察可分解性 + MoE/Agent 等价性——两个 idea 的关系与开放问题
 
-> origin: human（成璐 2026-11-07 的两个 idea，AI 补结构与文献锚点）
+> origin: human（D 2026-11-07 的两个 idea，AI 补结构与文献锚点）
 > 日期: 2026-11-07 · 状态: idea 收录 note，调研进行中（T-PR-07 / T-PR-08）
 > 关联: paradigm-routing/tasks/T-PR-07-long-insight-decomposability.md, T-PR-08-moe-agent-equivalence.md
 >        note/compression-unified-view-2026-11-07.md（压缩统一观，本 note 的上游框架）
 
-## 成璐的原话（意图锚点）
+## D的原话（意图锚点）
 
 **Idea A（长程洞察可分解性）**：
 > "我看到顶级模型的出色洞察和表现，但是也许可以理解为一个长步长的迁移或者联系。但是这种肯定（有可能?）也可以被分解成更原子的步骤和联想。那么这会超过模型注意力的 ctx 范围吗，有下界要求吗，有什么不可分解的长步骤吗？或者至少某种 dense 的 net 在搜索上效率更高（更有概率跳出局部?）"
@@ -34,7 +34,7 @@ T-PR-07 产出：`research/long-insight-decomposability-survey.md`（394行，19
 4. **ctx 不是主因。** 串行 CoT 自己造中间状态，窗口大小不影响可达性；并行 attend 路线才受窗口限制。且没有任何文献给出 W→D 的定量关系（负结果 N2）。
 5. **dense net 搜索优势有条件：** 需要回溯的图搜索上是的（ProsQA +19.5pp / 1/3 token），串行算术上不是（GSM8K −8.8pp）。"跳不出局部最优"的主因是选择器而非搜索器。
 
-**对成璐三个担忧的直接回应**（arena §10）：
+**对D三个担忧的直接回应**（arena §10）：
 - "超出 ctx？" → 不是主要原因，真正卡住的是"用不用得上自己刚写下的东西"
 - "有下界？" → 有，两层：结构层（问题结构决定，硬的）+ 模型层（模型能力决定，软的）
 - "dense 更高效？" → 条件性成立，且瓶颈在选择器

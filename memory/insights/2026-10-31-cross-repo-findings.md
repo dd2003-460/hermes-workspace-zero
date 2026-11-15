@@ -1,6 +1,6 @@
 # 跨仓库精彩结论盘点（pfb + decomp）
 
-> origin: ai · 2026-10-31 · 成璐要求：整理两仓实验轮次/产出/中间结论，识别精彩结论（调研得到 vs 没调研到），评估复用/SOP 化路径。晚点人工审。
+> origin: ai · 2026-10-31 · D要求：整理两仓实验轮次/产出/中间结论，识别精彩结论（调研得到 vs 没调研到），评估复用/SOP 化路径。晚点人工审。
 > 数据源：pfb git log (273 commits) + bench/rubric-v3/{AUDIT-report,ablation} + projects/decomp git log (170 commits) + memory/ + reports/
 
 ## A. pfb（prompt-first-bench）— 评分协议审计线
@@ -91,7 +91,7 @@
 3. **工程教训（三连环故障链）**：vLLM :8000 对 >1k token prompt 502（短请求正常）→ 切 ninfer :8787；runner LLMClient 不读 OPENAI_BASE_URL env → 被 ClashX 系统代理劫持打 api.openai.com → NO_PROXY + env fallback 双层修；本地模型不支持 response_format=json_object → JSON-mode probe + fence 剥离兜底。**可复用规则：本地 LLM 通道切换必须单测 structured output 兼容性，不能只测文本生成。**
 
 ### pfb T8-C3-v3 决策点（blocked-on-human）
-1. **pilot 6/6 消融信号 < 测量噪声**：不投 54-cell 全量是正确止损。两条解锁路径待成璐选：异源 judge 端点（非 Qwen）或升级生成模型。
+1. **pilot 6/6 消融信号 < 测量噪声**：不投 54-cell 全量是正确止损。两条解锁路径待D选：异源 judge 端点（非 Qwen）或升级生成模型。
 2. **r245R 核心发现已入 A 区**：同族 judge leniency 可通过 prompt 工程修复（B-2a 3步流程 AC3 0.417→0.000），不需要异源 judge 解决 AC3——但 Fleiss κ + Part C confirmatory 仍需异源。
 
 ## D. 存放位置说明

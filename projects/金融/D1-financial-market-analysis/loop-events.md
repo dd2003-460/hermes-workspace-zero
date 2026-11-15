@@ -3419,7 +3419,7 @@ F10 CLOSED (negative + mechanism finding): R1/R2 按预注册参数全部 FAIL (
 
 ## 2026-11-01 ~21:xx +0800 — F10-R3 调研任务书落盘 (arena/f10-gas-dynamics-research)
 
-F10 R1/R2 FAIL 后转向"预测新套利空间涌现"正面问题。成璐气体动理论设想 → 拆 4 个正交子领域
+F10 R1/R2 FAIL 后转向"预测新套利空间涌现"正面问题。D气体动理论设想 → 拆 4 个正交子领域
 (A 异质主体微观结构 / B 套利收敛速度 / C 策略拥挤自我瓦解 / D 被迫流动预测)，
 各派 1 subagent，交叉验证门禁 ≥2 独立来源。
 产出目标: stages/05/r6/research/{A,B,C,D}.md + receipts.json。
@@ -3471,4 +3471,4 @@ DVOL 起点 2021-03-24 仍不满足 2020-01 硬约束。
 
 降级: 本 runtime 无 ralph/ego-browser/LLM 登录态 → 02 阶段"网页 LLM 交叉询问"未执行 (通道不存在, 非跳过), 按 02 §2 快速失败条款记录并继续; 证据强度全局降一级。沙箱 curl 直连全断 (SSL_ERROR_SYSCALL), 全部实测经 fetch_page 完成。大陆可达性**未测**, 为部署前阻塞项。
 
-下一步 (交 Lead/成璐): A3 —— 是否进回测。建议优先级 H1 (S5 方向分组, 不需要宏观数据) > H2 (稳定币/WALCL 作 veto) > H3 (DFII10 折现率通道)。
+下一步 (交 Lead/D): A3 —— 是否进回测。建议优先级 H1 (S5 方向分组, 不需要宏观数据) > H2 (稳定币/WALCL 作 veto) > H3 (DFII10 折现率通道)。

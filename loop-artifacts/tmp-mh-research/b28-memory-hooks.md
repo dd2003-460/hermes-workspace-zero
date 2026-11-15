@@ -130,7 +130,7 @@ profile `cordis.patch.yml` L55-60（备份 `/tmp/cordis.patch.yml.bak-20261019_1
 6. **plugin_manager list_plugins（219 条）翻遍 offset 0–125：无 hooks-codex 条目**（全是 include:* 核心 dsh-* 组件）→ 插件 fiber 根本没创建，apply() 从未被调用。
 7. **根因**：`~/Library/Application Support/dsh-desktop/harness/profiles/web/package.json` 只有 13 个 deps（**无 @deepseek-ai/dsh-hooks-codex**），`dsh.profile.bundles` 18 项也无它。desktop 的 profile 一致性检查（`profile inconsistency ... not installed`）按 **profile 安装面**判定；插件包既不在 profile 依赖也不在 bundles 列表 → 该 entry 被判定"未安装"，**loader 跳过它**（不 import），静默失败。包虽然在 asar 可解析，但 loader 的 enabled 判定走安装面，不走裸 import。
 
-## 修复方案（L2 级，涉及 app 安装面，待成璐拍板）
+## 修复方案（L2 级，涉及 app 安装面，待D拍板）
 
 **方案 A（推荐，app 级）**：`plugin_manager install_bundle "@deepseek-ai/dsh-hooks-codex"` —— 把包装进当前 profile 安装面（node_modules + package.json deps），一致性检查即过，entry 生效。需确认 install 目标 profile 是 web，且重启后验证。
 
@@ -142,7 +142,7 @@ profile `cordis.patch.yml` L55-60（备份 `/tmp/cordis.patch.yml.bak-20261019_1
 
 ## 待办
 
-- [ ] 成璐选 A/B/C（写入 个人/APPROVALS.md 或直接回话）
+- [ ] D选 A/B/C（写入 个人/APPROVALS.md 或直接回话）
 - [ ] 修复后重启验证判据
 - [ ] 若 A：确认 install 后 `plugin_manager list_plugins` 出现 hooks-codex 且 fiberPhase=active
 

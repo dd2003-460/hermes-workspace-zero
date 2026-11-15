@@ -1,5 +1,5 @@
 # F7 多信号组合预注册
-# origin: human (成璐 2026-10-31) + ai
+# origin: human (D 2026-10-31) + ai
 日期: 2026-10-31 | 状态: PRE-REGISTERED → EXECUTED (2026-11-01, f7_results.json + f7_report.md; verdict FAIL/负结果)
 
 ## 核心问题

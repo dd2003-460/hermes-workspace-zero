@@ -1,4 +1,4 @@
-# RALPH Loop 使用手册（面向成璐）
+# RALPH Loop 使用手册（面向D）
 
 > 这份文档只讲"怎么用"，不重复内部实现。
 > 现行主流程 = `prompt-first/` 六阶段 Markdown 流程（01 → 04.5）。

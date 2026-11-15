@@ -1,6 +1,6 @@
 # 记忆插件调研：Hermes 规则提醒机制选型
 
-> origin: ai · 2026-10-27 · 成璐要求调研"记忆插件 + hook 提醒"，格式=每个候选怎么样→最后决定用啥
+> origin: ai · 2026-10-27 · D要求调研"记忆插件 + hook 提醒"，格式=每个候选怎么样→最后决定用啥
 > 痛点：规则写在 MEMORY.md/SOUL.md，session 开头注入，聊久了上下文一长就稀释；goal 只覆盖 goal 活跃期，覆盖不了全部；不可能每轮让 agent 重读整个 SOUL。
 
 ---
@@ -19,7 +19,7 @@
 
 ---
 
-## 二、hook 能提醒的"缝"（成璐问：要输出的时候能不能提醒）
+## 二、hook 能提醒的"缝"（D问：要输出的时候能不能提醒）
 
 Hermes hooks 支持的与"提醒/输出"相关的缝：
 
@@ -37,7 +37,7 @@ Hermes hooks 支持的与"提醒/输出"相关的缝：
 - 注入位置是 user message 不是 system prompt → 系统提示缓存不受影响，成本只是每轮多几十~几百 token。
 - shell hook 就能做，不用写 Python plugin：stdout 输出 `{"context": "规则卡内容"}` 即可。
 
-**回答成璐的问题**：能。"要输出的时候提醒"= `pre_llm_call`（每轮思考前把规则塞给我，我输出时自然记得）；"输出后检查"= `transform_llm_output`/`pre_send`（兜底拦 AI 腔调）。两个都能配，前者为主。
+**回答D的问题**：能。"要输出的时候提醒"= `pre_llm_call`（每轮思考前把规则塞给我，我输出时自然记得）；"输出后检查"= `transform_llm_output`/`pre_send`（兜底拦 AI 腔调）。两个都能配，前者为主。
 
 ---
 
@@ -99,7 +99,7 @@ Hermes hooks 支持的与"提醒/输出"相关的缝：
    [[ -n "$card" ]] && jq --null-input --arg c "$card" '{context: ("[规则卡]\n" + $c)}' || printf '{}\n'
    ```
 
-3. **SOUL.md 改软人格体**（配合 persona 结论）：把 SOUL 从"规则清单"改写成"人格描述"（你是成璐的数字分身，你说话像真人，你思考先分类再执行…），软+human 语言引导内化，而不是硬规则堆砌激活执行模式。
+3. **SOUL.md 改软人格体**（配合 persona 结论）：把 SOUL 从"规则清单"改写成"人格描述"（你是D的数字分身，你说话像真人，你思考先分类再执行…），软+human 语言引导内化，而不是硬规则堆砌激活执行模式。
 
 4. **MEMORY.md 保持精简**：只放跨 session 事实（工作区路径、项目状态指针），不放行为规则（规则归 SOUL 软人格 + rule-card 硬卡）。
 
@@ -109,7 +109,7 @@ Hermes hooks 支持的与"提醒/输出"相关的缝：
 
 ---
 
-## 五、SOUL 软提示 + persona 结论（成璐问的关联性）
+## 五、SOUL 软提示 + persona 结论（D问的关联性）
 
 - SOUL.md 本质就是**软提示**（系统提示里的人格描述），不是硬规则引擎。
 - persona 研究结论支持：**人格描述体（软+human 语言）比规则清单体（硬）更能让 agent 自然内化**。规则清单激活"执行规则"模式→机械；人格描述激活"成为这个人"模式→自然。
@@ -118,9 +118,9 @@ Hermes hooks 支持的与"提醒/输出"相关的缝：
 
 ---
 
-## 六、待办（等成璐确认方向后执行）
+## 六、待办（等D确认方向后执行）
 
-- [ ] 写 `~/.hermes/rule-card.md`（初版规则卡，等成璐过目）
+- [ ] 写 `~/.hermes/rule-card.md`（初版规则卡，等D过目）
 - [ ] 写 `~/.hermes/agent-hooks/inject-rule-card.sh` + 配 config.yaml hooks
 - [ ] SOUL.md 软人格化改写（基于 D1-persona-align 的 persona.md 8 层成果）
 - [ ] 重启 gateway 验证 hook 生效（`hermes hooks test` 或实际聊几轮看是否注入）

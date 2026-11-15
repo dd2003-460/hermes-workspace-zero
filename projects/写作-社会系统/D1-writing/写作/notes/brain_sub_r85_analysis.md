@@ -185,7 +185,7 @@ grep -A2 "author:" projects/写作/outputs/a3_blog_v3_release_candidate.md  # "a
 - 产出：Checklist + 如有问题给出具体 fix
 
 **Task D: A3 RC author 占位替换 (2 min)**
-- 目标：修改 `outputs/a3_blog_v3_release_candidate.md` 的 YAML `author:` 为实际署名（如 "成璐" 或合作者名）
+- 目标：修改 `outputs/a3_blog_v3_release_candidate.md` 的 YAML `author:` 为实际署名（如 "D" 或合作者名）
 - 产出：一行 diff
 
 ---

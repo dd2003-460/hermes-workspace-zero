@@ -5,7 +5,7 @@
 ## Active Projects
 
 ### 1. GW-BacQFT (D1-grav-waves)
-- **状态**: ✅ 完成 — arXiv pack v16 ready，待成璐手动上传
+- **状态**: ✅ 完成 — arXiv pack v16 ready，待D手动上传
 - **核心**: Source Discrimination in PTA via Extended Functorial QFT
 - **目录**: `projects/理论物理/D1-grav-waves/papers/2026-GW-BacQFT/`
 - **阻塞**: 需登录 arxiv.org/submission 上传
@@ -29,7 +29,7 @@
 - **状态**: ✅ 全部完成 (Part I-V, 14 chapters, main2.pdf 93pp, 0 errors)
 - **目录**: `projects/写作-社会系统/D1-writing/motivation_society/`
 - **分支**: test @ f894e44 (main2.pdf rebuilt 2026-11-02)
-- **下一步**: 成璐审阅后决定是否合并到 main
+- **下一步**: D审阅后决定是否合并到 main
 
 ### 5. D2 Efficient Propagation Book
 - **状态**: 交叉引用闭环，P2 实验计划就绪 (需 30 天实际执行)
@@ -69,7 +69,7 @@
 - **v2 修复**: 种子 BH 排除 (m_bh>=1e-7) + 占据率分母改全晕群体 + LOGM_H_EDGES 单位修正
 - **验证**: f_occ(z=0, >1e6) @ logM_h>=1.5 = [0.972, 0.999, 1.0] → PASS
 - **GWTC-4.0**: 观测数字表已落盘 (literature/notes/gwtc4-bhmf-numbers.md)
-- **卡人项**: 任务 C 取消与否待成璐确认 (projects/理论物理/bh-mass-spectrum/memory/task-c-status-correction.md)
+- **卡人项**: 任务 C 取消与否待D确认 (projects/理论物理/bh-mass-spectrum/memory/task-c-status-correction.md)
 - **目录**: `projects/理论物理/bh-mass-spectrum/bh-mass-spectrum/`
 
 ### 10. Persona Prompt Lab (persona-prompt-lab)
@@ -88,7 +88,7 @@
 
 | 文件 | 说明 | 状态 |
 |------|------|------|
-| `memory/arxiv_submission_status.md` | arXiv 提交台账：GW-BacQFT v16 + GW-ORF + DistCat v5 + BayesFrame v2.0 共 4 篇 tarball 就绪，全部待成璐手动上传 | ⏳ blocked-on-human |
+| `memory/arxiv_submission_status.md` | arXiv 提交台账：GW-BacQFT v16 + GW-ORF + DistCat v5 + BayesFrame v2.0 共 4 篇 tarball 就绪，全部待D手动上传 | ⏳ blocked-on-human |
 | `memory/arena-audit-report-2026-10-20.md` | hermes-workspace-zero 仓库结构审计（10-20）：研究内容质量高、状态治理失效的完整证据链 | ✅ 历史存档 |
 | `memory/fault-index.md` | 故障索引：所有通道/工具/环境故障登记表（链路+具体报错+根因+status），故障结论写入前必查；两条浏览器链路区分规则在此 | 🔄 持续追加 |
 | `memory/insights/2026-10-31-cross-repo-findings.md` | 跨仓精彩结论盘点（pfb + decomp）：调研得到 vs 负面结果 + SOP 化去向 + r259/r274 增量 | 🔄 持续追加 |

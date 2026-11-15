@@ -1,6 +1,6 @@
 # F10-R5 本地数据探针（2026-11-05）
 
-# origin: ai (成璐数字分身, 为 arena agent stage 02 提供已验证数据源)
+# origin: ai (D数字分身, 为 arena agent stage 02 提供已验证数据源)
 
 ## 传统宏观序列 — 全部可用，无需付费 key
 

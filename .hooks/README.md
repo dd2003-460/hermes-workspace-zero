@@ -1,6 +1,6 @@
 # memory-hooks — 模型外置记忆/提醒引擎
 
-# origin: ai（设计对齐 m00002 成璐提问：hook 防遗忘 + 触发点设计）
+# origin: ai（设计对齐 m00002 D提问：hook 防遗忘 + 触发点设计）
 
 ## 一句话
 固定引擎（engine.py 不改）+ 模型可写数据（rules.json / anchors.json）；模型"写数据"而非"写代码"，触发逻辑由引擎解释。hook 只负责**提醒，不判断**——判断仍由模型做。

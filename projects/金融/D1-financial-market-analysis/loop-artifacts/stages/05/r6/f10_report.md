@@ -1,6 +1,6 @@
 # F10 结果: 主体博弈模型 — R1/R2 预注册规则回测 (负结果 + 机制修正)
 
-# origin: ai (成璐指令 2026-11-01)
+# origin: ai (D指令 2026-11-01)
 日期: 2026-11-01 | 状态: CLOSED (negative, with mechanism finding)
 
 ## 一句话结论

@@ -1,6 +1,6 @@
 # F10-R3 / B — 套利资本流动与均衡收敛速度
 
-# origin: ai (成璐 F10-R3 调研任务书 2026-11-01) | 执行: arena agent mode | 观测日: 2026-11-01
+# origin: ai (D F10-R3 调研任务书 2026-11-01) | 执行: arena agent mode | 观测日: 2026-11-01
 # 子问题: 有人测量过套利空间从出现到消失的时间吗? 收敛速度由什么驱动(资本流入率/竞争者数量/交易成本)? 有无 capital inflow vs profit pool 的定量式?
 # 交叉验证: 每结论 ≥2 独立团队, 明细见 receipts.json
 

@@ -2,8 +2,8 @@
 
 # origin: ai
 
-> 建 2026-10-18（成璐 m02217：「这个异步可以保留历史吗（把已经回答到问题按事件和时间线放起来？）」）
-> 纪律：成璐问的每个问题，回答当轮在此记一行——compress 不丢。
+> 建 2026-10-18（D m02217：「这个异步可以保留历史吗（把已经回答到问题按事件和时间线放起来？）」）
+> 纪律：D问的每个问题，回答当轮在此记一行——compress 不丢。
 > 配套规则（问题优先）：用户消息含问题，当轮先答再干别的（见 AGENTS.md「问题与网络规则」）。
 
 ## 时间线
@@ -20,25 +20,25 @@
 | 2026-10-18 | m00002 | 模型容易忘事→全设置 hook 外化记忆：①触发点怎么设 ②怎么让模型自己写 hook 和触发条件 ③硬指标触发好做、领域/语义触发怎么判断 | 直接结论：hook=外化记忆不是外化判断（只提醒不判断，判断仍归模型）。①DSH 5 缝（SessionStart/UserPromptSubmit/PreToolUse/PostToolUse/Stop），各缝可见字段不同；「思考>1k」测不到 thinking token（桥接 transcript 不可读、无 usage）→正确实现=UserPromptSubmit 主动 L0 分类（省在思考前）+Stop 用 tool_calls_this_turn≥8 代理指标兜底（steer，最贵）。②模型只写 JSON 数据（rules.json）不写代码：固定引擎 engine.py 每次事件实时读 rules.json，改数据不重启；trigger 是声明式谓词数组（keyword/metric/lexicon/vector/judge），action 是 inject（soft 提醒）或 deny（硬阻塞，仅不可逆保护）。③D4 实测：256 维特征哈希余弦对短中文不可分（噪声 0.22>信号 0.14）→领域触发降级为 lexicon（distinct 锚词命中≥min_hits=2，校准信号≥4 噪声 0）；vector 槽位留给将来真实 embedder。v0 已落地 `.hooks/`（engine.py+rules.json 5 规则+anchors.json 3 域+.codex/hooks.json 接线）+T1–T9 全绿。教训：硬阻塞 hook 与弱模型会死锁（loop/ralph_runtime/DECOMPOSITION-REDESIGN.md:6）→提醒类一律 soft | 已答（闭环，v0 落地+测试绿） |
 
 | 2026-10-19 | m01187 | ①细腻语言让弱模型也拟人，qwen3.827b能用prompt+温和上下文引发人味吗 ②跟方法论(搜索/第一性原理/建模/压缩)冲突吗 ③怎么最少地让人味一直保持 ④写作也是描述场景而非机械prompt | ①可以：场景式prompt>规则列表。"你被85-92%惹到了"比"禁止精度外壳"有效10倍。OPRO-v6已验证方向，v7改为纯场景式(去掉"你说话的样子"规则段，只保留场景+种子+格式) ②不冲突：方法论=想清楚(压缩)，人味=压出来的结果。正交。想越清楚→压越短→越像聊天 ③每轮更新"你此刻的状态"1-2行就够了。prompt结构=你是谁(1行)+此刻状态(1-2行)+脑子里滚的东西(5条种子)+格式(1行)。不写"你说话的样子"——种子本身含风格(因为是你写的) ④写作="你在跟完全不懂的人解释，他随时可以打断问为什么"→真对话感。vs"用苏格拉底式提问"→假苏格拉底。建模给地图，类比翻译成对方能走的路，压缩只铺一条 | 已答（闭环） |
-| 2026-10-19 | m01079 | 去网上调研蒸馏人说话风格的仓库和skill，测试在成璐上下文上的效果，GT数据量要大 | 进行中：已有调研(clearmode/Voice DNA/Humanizer-zh-academic/anti-ai-writing-style-skill)，正在扩大GT数据(271条语料263K字→多场景覆盖) | 进行中 |
+| 2026-10-19 | m01079 | 去网上调研蒸馏人说话风格的仓库和skill，测试在D上下文上的效果，GT数据量要大 | 进行中：已有调研(clearmode/Voice DNA/Humanizer-zh-academic/anti-ai-writing-style-skill)，正在扩大GT数据(271条语料263K字→多场景覆盖) | 进行中 |
 
-- m01076(b)：KB「感兴趣-没学好/学好」分类，等成璐完整说
-- P2 第一个数：30人30天≥40% 迁移实验，需要真实发布渠道（成璐的账号），v3 正式定稿的前置
+- m01076(b)：KB「感兴趣-没学好/学好」分类，等D完整说
+- P2 第一个数：30人30天≥40% 迁移实验，需要真实发布渠道（D的账号），v3 正式定稿的前置
 | 2026-10-22 | m00265 | 为什么arena不可用？怎么可能？去修复。然后继续。 | arena 修复尝试：①probe.py 根因=cdp.py import websocket 失败（Windows 路径 sys.path + pip 权限问题）→ 修复 cdp.py（去掉 Windows 路径 + websocket 懒加载）；②CDP 端口 54447 无响应（ego-lite browser 未开 CDP，常见端口 9222/9229/8080 也无）→ 需用户手动启动 ego-lite browser 开 CDP；③降级执行：自答交叉评分（conf-0.2）→ arena-scores.md 落盘（7.0 σ0.0，与独立评分 Δ=0）→ summary.md 更新（conf 0.8→0.6）。Δ(C0−AutoGen)=8.2 不变，交叉评分确认 7.0 稳定 | 已答（arena 修不了 CDP 端口，需用户启动 ego-lite；交叉评分降级完成，Δ 不变） |
 | 2026-10-22 | m00252 | 还要更新，看到这个就必须立马创建，是动作+规范 | goal-template.md 更新：触发规则升级为动作+规范 — 看到 @sop/goal-template.md 引用 = 第一动作立即 create_goal（不是参考上下文后决定）。执行顺序：① read 本文件 → ② create_goal（按 §3 格式） → ③ 才处理用户消息里的具体任务。文件头硬规则区 + §4 维护记录同步更新 | 已答（goal-template.md 已更新） |
 | 2026-10-22 | m00201 | @sop/goal-template.md 用法里面改为必须按照这些方法创建goal防止ai遗忘 | goal-template.md §3 加硬规则：create_goal 必须用 5 字段结构（目标/质量原则/SOP 索引/验收标准/失败降级），不得自由发挥；每次 create_goal 前必须 read 本文件确认格式 | 已答（goal-template.md 已更新） |
 | 2026-10-22 | m00042 | 没懂再解释：让AI分解 vs 直接说要求没区别吗？对比模型大小模型都有吗？最重要是考虑周全分数。+ 指令：让arena调研，工作在decomp仓库 | ①大白话重述：「给AI完整说明书(C0) vs 只说一句要求(C9-plain)」= 分数一样(15.2 vs 15.3)，但完整说明书每次答得稳(波动小3.4倍)，白话版有时答得好有时烂。模型维度：大小模型都有测——白话版下最强模型18分/中等16/弱12.5，说明书本身15.2(在中等偏上)，契约不是让弱模型变强，是让任何模型别翻车。②arena调研已执行：T-P4.0 三子领域(A开源模型候选/B开源框架prompt/C交叉验证+复跑可行性)落盘 p4-open-source-survey.md + p4-cross-check.json。结论：无开源框架在"分解正交性/完备性"上有公开可比分数(lit-survey+§B双确认)；开源最强模型(Qwen3-235B级)在arena C9-plain场预计14-16/18，与C0 15.2差值±1.5内(不显著)；最经济实跑方案=LangGraph planner prompt + ReWOO prompt 各3run同rubric | 已答+调研落盘（①conf0.7 ②conf0.5待实跑验证） |wen3-235B级)在arena C9-plain场预计14-16/18，与C0 15.2差值±1.5内(不显著)；最经济实跑方案=LangGraph planner prompt + ReWOO prompt 各3run同rubric | 已答+调研落盘（①conf0.7 ②conf0.5待实跑验证） |
 | 2026-10-22 | m00001(b) | decomp 的 prompt 对比「只有要求的 prompt」提升多少？对比目前搜索到的开源最强的能提升多少？ | ①vs 白话对照 C9-plain：C0 Mean 15.2 σ0.45(5run,4自答) vs C9-plain 15.3 σ1.53(3run arena)，Δ=0.1 无显著差异→契约价值=方差降低非提分；9 零件 C1-small 10.0 显著低 5.2（下限）；C2-expos 16.0 +0.8 不显著。caveat：C0 4/5 自答 conf0.2；C9-plain 非裸任务。②vs 开源最强：无可比数字——lit-survey 结论=现有 bench 无一测正交/完备/变量归类，指标不可比；自家 arena 最强 inkling 18/opus 16 > C0 15.2，方向=契约非分数杠杆；C4 保值是公共缺口。P4（开源模型同 rubric 实跑）未做 | 已答（①conf0.6 有实测；②conf0.3 待 P4 实测） |
-| 2026-10-22 | m00001 | ①persona 目前有主要使用的方案吗（不同领域的回复/书写 SOP）②能否按三条线整理（1.模仿思考用 clonar 2.为我解答按知识库现状：熟悉域用我的术语/陌生域调研业内做法+不同粗细解释 3.和真人聊天待定）③之前验证过不好的（机械 prompt/不像的/AI 味/用力过猛的）全部归档 | ①有但散在项目里：总入口 persona.md（8 层）+ 公理层 persona-axioms.md（4-way 盲测=均值成璐）+ 语言层 author-voice SKILL（271 语料）+ OPRO-v8.1（盲测最像成璐 Y=34）+ 知识线 KB 教材格式（7 篇 note）②可以，已落 persona-sop.md 四条线（线 1 公理+clonar 补形式 / 线 2 KB 路由+L1 概括/L2 通俗/L3 术语子 note 粗细分层 / 线 3 待定等聊天语料 / 线 4 语言层横切）③已归档 tasks/archive/（8 个失败 prompt+失败原因表：排除词表≈无效/主动跳跃描述无效/逐句命令超调/角色未锚定/AI 自称） | 已答（已执行，persona-sop.md+archive/ 落盘） |
+| 2026-10-22 | m00001 | ①persona 目前有主要使用的方案吗（不同领域的回复/书写 SOP）②能否按三条线整理（1.模仿思考用 clonar 2.为我解答按知识库现状：熟悉域用我的术语/陌生域调研业内做法+不同粗细解释 3.和真人聊天待定）③之前验证过不好的（机械 prompt/不像的/AI 味/用力过猛的）全部归档 | ①有但散在项目里：总入口 persona.md（8 层）+ 公理层 persona-axioms.md（4-way 盲测=均值D）+ 语言层 author-voice SKILL（271 语料）+ OPRO-v8.1（盲测最像D Y=34）+ 知识线 KB 教材格式（7 篇 note）②可以，已落 persona-sop.md 四条线（线 1 公理+clonar 补形式 / 线 2 KB 路由+L1 概括/L2 通俗/L3 术语子 note 粗细分层 / 线 3 待定等聊天语料 / 线 4 语言层横切）③已归档 tasks/archive/（8 个失败 prompt+失败原因表：排除词表≈无效/主动跳跃描述无效/逐句命令超调/角色未锚定/AI 自称） | 已答（已执行，persona-sop.md+archive/ 落盘） |
 | 2026-10-19 | m00002(续) | 400 "At most 1 image(s) may be provided in one prompt" 怎么解决 | 根因：DSH 把连续 read_image 结果合入同一条 user 消息→一条 prompt 带 N 张 data:image 图→上游 8787 桥只允许 1 张→400。修复：~/.claude-vllm-proxy/proxy.mjs 注入 applyImageBudget（全局只留最早 1 张，其余换 text 占位）+ const→let 修 bug。launchd 监督，kill 即重启加载。验证：单元 6 case 全过 + 真实流量 IMG_BUDGET dropped=1/2 多次无回归。回滚点 fix-20261019/proxy.mjs.bak-20261019-165457。详见 projects/媒体/D1-ai-video-recreation/memory/fix-image-limit.md | 已答（修复落地+验证） |
 
 ## 讨论捕获区（无提问但有产出的高价值对话 · origin: ai）
 
-> 建 2026-11-03（成璐：「能不能识别我们有价值的讨论然后抓到对话数据里面」）。
+> 建 2026-11-03（D：「能不能识别我们有价值的讨论然后抓到对话数据里面」）。
 > 与上方 Q&A 时间线的区别：这里收的不是"你问我答"，而是"你抛想法→一起推出新结论"的讨论。
 > 判据（机械可检，避免主观漂）：①产出型=轮内生成 artifact（文件/代码/实验结果）②决策型=出现不可逆判断（定为/否决/改用）③洞察型=产生此前没有、且能指导后续工作的因果结论。命中任一即抓；纯闲聊/纯确认不抓。
 
 | 日期 | 主题 | 触发 | 捕获的结论 | 落盘位置 |
 |---|---|---|---|---|
-| 2026-11-03 | autoresearch r1 复盘 + "知道自己不知道"机制 | 成璐指出 logprob 触发器循环论证（他不知道时探针读到的还是自信） | 破法=三道外部闸，不依赖模型自觉：①数字必溯源（正则抓所有数字断言，无来源=待核验，纯文本规则骗不过）②矛盾必对质（新断言 vs 记忆库交叉比对，冲突冻结+独立 subagent 拿原始证据仲裁）③top-k/logprob 熵只做优先级排序不做触发（避循环论证）。核心转变："让他知道他不知道"不是靠模型自觉，是环境规定产出必须满足"带来源+无矛盾"的格式 | projects/decomp/experiments/autoresearch-r1/run/defensive-language-note.md + 本行 |
-| 2026-11-03 | GPT-6 Astra 防御性语言 = 不确定性信号？ | 成璐记忆 astra 防御性措辞留出空白=调研入口 | 论文 arXiv:2610.11355 证实 astra 防御八版最强，但归因=anticipated reviewer（防审稿人）非真不确定，撤回主张 <1/10 真夸大 → 纯抓措辞混大量冗余噪音。工程化=给每个防御标记分级：具体事实型缺口(高价值,触发调研) vs 空泛语气词(忽略)，分级需探针内部信号。组合=astra式"敢标"×探针"分级" | 同上 defensive-language-note.md |
+| 2026-11-03 | autoresearch r1 复盘 + "知道自己不知道"机制 | D指出 logprob 触发器循环论证（他不知道时探针读到的还是自信） | 破法=三道外部闸，不依赖模型自觉：①数字必溯源（正则抓所有数字断言，无来源=待核验，纯文本规则骗不过）②矛盾必对质（新断言 vs 记忆库交叉比对，冲突冻结+独立 subagent 拿原始证据仲裁）③top-k/logprob 熵只做优先级排序不做触发（避循环论证）。核心转变："让他知道他不知道"不是靠模型自觉，是环境规定产出必须满足"带来源+无矛盾"的格式 | projects/decomp/experiments/autoresearch-r1/run/defensive-language-note.md + 本行 |
+| 2026-11-03 | GPT-6 Astra 防御性语言 = 不确定性信号？ | D记忆 astra 防御性措辞留出空白=调研入口 | 论文 arXiv:2610.11355 证实 astra 防御八版最强，但归因=anticipated reviewer（防审稿人）非真不确定，撤回主张 <1/10 真夸大 → 纯抓措辞混大量冗余噪音。工程化=给每个防御标记分级：具体事实型缺口(高价值,触发调研) vs 空泛语气词(忽略)，分级需探针内部信号。组合=astra式"敢标"×探针"分级" | 同上 defensive-language-note.md |

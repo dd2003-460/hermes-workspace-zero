@@ -1,7 +1,7 @@
 # 子代理上下文隔离解决方案
 
 > origin: ai · 2026-10-23 · goal-c6da5c90 阶段 04 解决方案设计
-> 前提：实验确认的泄漏面 = 系统提示层（~24K，含 AGENTS.md 成璐 persona 全文）+ git status 快照；
+> 前提：实验确认的泄漏面 = 系统提示层（~24K，含 AGENTS.md D persona 全文）+ git status 快照；
 > 父对话历史前缀未确认泄漏（实验与文档矛盾，待请求体 dump 确认）。
 
 ## 方案矩阵（隔离度 × 成本 × 能力）
@@ -20,7 +20,7 @@
 ### 场景 A：一次性子任务（翻译/提取/格式化/简单分析）
 **推荐**：S1（强制 fresh 模式）+ 自包含 prompt
 - 机制：`subagent_fork(context:"fresh", prompt="...")`，prompt 包含目标 + 输出格式 + 边界
-- 泄漏面：只有系统提示层（AGENTS.md 成璐 persona），无对话历史
+- 泄漏面：只有系统提示层（AGENTS.md D persona），无对话历史
 - 成本：低（只需写自包含 prompt）
 - 验证：隔离组任务探针准确率 100%（学术翻译正确输出）
 

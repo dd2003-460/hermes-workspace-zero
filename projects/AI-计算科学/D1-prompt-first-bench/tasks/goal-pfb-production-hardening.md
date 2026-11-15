@@ -1,6 +1,6 @@
 # Goal: pfb-production-hardening（搜索/校验优化到生产 + 学术级验证）
 
-> origin: human-directive (2026-11-08 成璐指令) · status: ACTIVE
+> origin: human-directive (2026-11-08 D指令) · status: ACTIVE
 > 执行方式：ralphloop 单并发（arena 不可外包，用户在场可对话）
 > SOP: sop/arena-loop-pipeline.md §3.3（本地降级条款）+ loop/prompt-first/01-04.5
 
@@ -36,8 +36,8 @@
 
 ### G4 — 专家 social 邮件草稿
 - 对象：pfb 直接相关的 3-5 位作者（DREAM 评测 / DeepResearch Bench / Prometheus 系 judge 校准 / 至少 1 位 LLM caching 理论方向）
-- 格式（成璐定式）：一个可复现结果（带 commit hash + 数据路径）+ 一个问题
-- 英文，≤200 词/封，落盘 social/email-drafts.md，**不发送**（发送需成璐本人操作）
+- 格式（D定式）：一个可复现结果（带 commit hash + 数据路径）+ 一个问题
+- 英文，≤200 词/封，落盘 social/email-drafts.md，**不发送**（发送需D本人操作）
 - 每封附：为什么找这个人（一句）、引用我们哪个具体数字、问的问题指向什么空白
 
 ### G5 — 过程完整性
@@ -50,7 +50,7 @@
 - [x] G2 先跑（撞车风险最高，发现高 overlap 要改后面所有东西）— 本地 ego-browser + arXiv API，~1h → **PASS**（research/collision-snowball.md，无直接撞车；最近先例 2606.21553 已列为 related work；落文窗口判断 1-2 季度）
 - [x] G1 开跑（最耗时，后台挂着）— **DONE**：180/180 runs 完成（95min），S0-nat 0.600±0.205, S0-soc 0.957±0.075, A3-nat 0.589 (p=0.84 ns), A3-soc 0.957 (p=1.000 ns), A4-nat 0.622 (p=1.000 ns, 弱正向 pt3↑5 pt4↑3), A4-soc 0.981 (p=0.388 ns)。报告 G1-large-sample-report.md + production-final-report.md。
 - [x] G3（趁 G1 跑着，~2-3h，含 clone/装环境）→ **DONE**：runs-baseline/gptr-{nat,soc}.md（DNS 修复后 nat 83s/26K chars, soc 24s/64K chars；方向性结论可写，正式对比表归 G5）
-- [x] G4（写邮件，~30min）→ **DRAFTS DONE**：social/email-drafts.md，4 封（Shaikh/Huang/Lumer/Dorfman），未发送，等成璐查邮箱地址后本人发出
+- [x] G4（写邮件，~30min）→ **DRAFTS DONE**：social/email-drafts.md，4 封（Shaikh/Huang/Lumer/Dorfman），未发送，等D查邮箱地址后本人发出
 5. [x] G1 收数 + 统计 + 报告 → **DONE**：production-final-report.md（三句大白话 + 六臂总览 + 逐点分解 + 方法学 + Bootstrap CI + 撞车/基线/邮件汇总 + 论文定位 + 局限）
 6. [x] G5 汇总收口 → **DONE**：loop-state.json 更新 + goal 文件打 ✅ + commit
 
@@ -63,5 +63,5 @@
 ## 停止条件
 
 - 全部 G1-G5 ✅ → goal 关闭，loop-state completed_goals 追加
-- G2 发现高撞车 → 暂停，报成璐决策
+- G2 发现高撞车 → 暂停，报D决策
 - 通道故障（8787 挂）→ 等恢复，不降级换模型（换模型破坏可比性）

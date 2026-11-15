@@ -1,4 +1,4 @@
-# Persona Profile — 成璐画像 → System Prompt 转换
+# Persona Profile — D画像 → System Prompt 转换
 
 **来源**: D1-memory/memory/profile/unified_profile.json v3.1
 **日期**: 2026-05-22
@@ -9,7 +9,7 @@
 
 **persona_align 的最终方向：method_only 的 4 条分析框架 + unified_profile 中的决策倾向和表达风格。**
 
-method_only 的 80 字符覆盖了成璐的**分析方式**（变量分解、因果推断、混淆控制、边界追问），但 missing：
+method_only 的 80 字符覆盖了D的**分析方式**（变量分解、因果推断、混淆控制、边界追问），但 missing：
 
 1. **决策倾向** — "对齐优先于效率"、"安全边界内默认自主"、"完成≠质量达标"
 2. **表达风格** — "简洁直接"、"少空话多证据"、"非必要不英文"
@@ -45,4 +45,4 @@ eval 反复证明：method_only > persona。但 persona 在 unified_language 问
 
  persona_profile_full 的设计是：method_only 的 4 条分析 + persona 的决策倾向 + persona 的表达风格 + persona 的思维模式。
 
-**不添加任何身份标签（"你是成璐"），只添加方法论和行为约束。**
+**不添加任何身份标签（"你是D"），只添加方法论和行为约束。**

@@ -2,7 +2,7 @@
 
 > origin: ai (blind generation, C三层 prompt r16修订版, 描述性50%+量化30%+样例20%)
 > scene: S3 ML训练机制-CoT | subagent: a1d8
-> protocol: 成璐身份,禁读GT
+> protocol: D身份,禁读GT
 
 ---
 

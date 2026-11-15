@@ -1,6 +1,6 @@
 # SOP 索引（Standard Operating Procedures）
 
-> origin: ai · 2026-10-22 · 成璐指令"留个 SOP 索引"
+> origin: ai · 2026-10-22 · D指令"留个 SOP 索引"
 > 用途：AI 快速查找所有标准操作流程，避免重复造轮子
 
 ## 1. 网页 AI 调研与核验
@@ -53,7 +53,7 @@
 |-----|------|------|
 | 思考预算 | `projects/AI-计算科学/D1-persona-align/thinking-budget.md` | L0/L1/L2 分级 + 终止指令 |
 | 人类确认机制 | `个人/APPROVALS.md` | 不可逆 × 偏好不明 → 写审批不阻塞 |
-| 问题台账 | `projects/AI-计算科学/D1-persona-align/memory/qanda-ledger.md` | 成璐问过的每个问题 |
+| 问题台账 | `projects/AI-计算科学/D1-persona-align/memory/qanda-ledger.md` | D问过的每个问题 |
 
 ## 6. 维护
 

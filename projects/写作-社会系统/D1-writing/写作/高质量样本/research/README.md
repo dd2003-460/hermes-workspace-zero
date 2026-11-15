@@ -5,7 +5,7 @@
 本目录初建时收了一条研究型对话，随后定位到工作区已有 canonical 目录，正文已迁出：
 
 - **canonical 位置**：`projects/AI-计算科学/D1-academic/学术/高质量对话/`
-  - `2026-11-03-autoresearch机制×三道外部闸×记忆系统分层.md`（成璐 × Hermes 微信讨论实录）
+  - `2026-11-03-autoresearch机制×三道外部闸×记忆系统分层.md`（D × Hermes 微信讨论实录）
   - 该目录 INDEX.md 的"置信度与自主判断"分类下已登记
 
 ## 为什么放 academic 不放写作

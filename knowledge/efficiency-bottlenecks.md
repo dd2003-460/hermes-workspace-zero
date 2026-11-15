@@ -10,6 +10,6 @@
 
 **Workaround applied**: Extract key data from arena conversation transcripts → commit locally → push to our own fork (`dd2003-460/prompt-first-bench`). Lossy but sufficient for paper-draft purposes.
 
-**Fix path**: 成璐 needs to re-authorize the GitHub App installation for the `prompt-first-bench` repo in arena settings, OR provide a PAT with `repo` scope that arena can use for push.
+**Fix path**: D needs to re-authorize the GitHub App installation for the `prompt-first-bench` repo in arena settings, OR provide a PAT with `repo` scope that arena can use for push.
 
 **Status**: Open. Blocks full artifact retrieval from arena sessions.

@@ -58,7 +58,7 @@
 - **为什么这样站队**: 上一篇的判断是"结构化存储下向量检索边际价值小"。这篇给了它决策规则层面的支撑。不是玄学偏好，是 doc_scale × Q × 更新频率三个业务参数落到了长上下文那一格。真正需要向量检索的场景在我系统里只有一个：conversation-raw-materials 那种几万条非结构化对话的语义查找。
 - **边界**: LoCoMo full01 已收口（五 conv 762 题，2026-11-04）。最终数字：mem0 管线 top_10 overall **75.3%** vs full-context baseline **72.9%** → mem0 净赢 **+2.4pp**。smoke 阶段"四档 cutoff 零差异"的信号被全量推翻：top_10→top_50 提升 +3.7pp（75.3%→79.0%），top_50 是 overall 最优点。temporal 修复后从 0% 拉到 81.4%（+25.9pp vs mem0 官方 55.5%）。open-domain 是明确短板（54.3%），根因经逐题检索回放验证（2026-11-05 OD 诊断 v3）：8 个 conv4 OD 失败中 **0 个可通过 answerer prompt 修复**——瓶颈全在 ingestion 层实体泛化（mem0 ADDITIVE_EXTRACTION 把 "Under Armour" 摘要为 "a renowned outdoor gear company"）或多跳推理缺口（GT 需 4 跳连接）。Entity guard（regex NER → second-pass 注入）已榨取最大价值（75 条实体记忆），但 mem0 原始泛化记忆在语义相关性上压过 guard 注入的精确实体记忆。进一步提升需 ingestion pipeline 重设计（双通道 NER 回填），边际收益 overall +0.3-0.4pp，超出当前 scope。我的判断修正："27B 级别 in-context 定位足以替代大部分检索需求"不成立——mem0 管线赢了 full-context，说明结构化抽取+检索在 27B 上仍有正价值（+2.4pp），但优势薄（<5pp），且集中在 temporal/multi-hop 类别。open-domain 的 -18.6pp（vs mem0 官方 gpt-4o-mini）暴露的是 answerer 能力差距而非管线设计缺陷。conf 升到 0.85。
 
-## B. 成璐视角
+## B. D视角
 
 **判断**: "要不要 RAG"这个问题的第一变量不是技术（哪个模型强、哪个索引快），是 doc_scale × 问答量 × 更新频率这三个业务参数的组合。文档装得下且问答少 → 长上下文。装不下或问答多 → RAG/混合。在测清 B1/B2 之前，"RAG 比长上下文先进"这句话没有决策意义。两个方案各自的致命黑盒都没量化，比较的是想象不是测量。
 

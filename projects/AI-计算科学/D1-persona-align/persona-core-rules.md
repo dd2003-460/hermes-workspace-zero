@@ -1,4 +1,4 @@
-# persona-core-rules — 成璐「简单规则」一页
+# persona-core-rules — D「简单规则」一页
 # origin: ai
 # status: v3（跨域已验证）。v2 物理纯净 + v3 金融跨域纯净（都禁读答案）验证：persona 可转移 edge = LENS(性价比/solo/可验证)+METHOD(正交门/管道常量/怀疑基准)+VOICE，非 domain 知识。5 条规则跨域已验证（#5/#14/#5.5/管道常量/正交门）。详见 memory/replication-test-result-v2.md + -v3.md。
 # 原则：简单规则 > 复杂规则。这里只放最高杠杆的 ~15 条，每条一行，能直接背下来。细节见对应 skill 文件。
@@ -33,7 +33,7 @@
 ---
 
 ## 怎么用
-- 快速加载：`system += read("persona-core-rules.md")`（16 行，够"像成璐"）
+- 快速加载：`system += read("persona-core-rules.md")`（16 行，够"像D"）
 - 需要细节：按编号 read 对应 skill（identity/how-i-think、author-voice、work-habits、learning-habits、persona.md）
 - **检验**：本文件每条规则是否"驱动了行为"，由复刻检验 A/B 结果判定（保留驱动行为的，删掉没用的，补缺的）
 
@@ -46,7 +46,7 @@
 - **drift-check 边界**：抓明显空话AI腔强（v1 对照=0），分两个干净技术写作者弱（A2 90 vs B2 80）→ 语言层不能单独证明 persona 有效，靠动机/决策习惯维度。
 
 ## v3 跨域复刻检验（A3 persona vs B3 通用AI，金融·13F 数据源核验，禁读答案）
-- **跨域转移成功**：A3 在与物理 QNM 完全不同的金融域仍复现成璐的 lens + method + voice。4 维（话说 4.5/3.5 Δ+1.0，提问 4.5/4.0 Δ+0.5，动机 5/2.5 **Δ+2.5**，idea 4.5/3.5 Δ+1.0）→ 通过。
+- **跨域转移成功**：A3 在与物理 QNM 完全不同的金融域仍复现D的 lens + method + voice。4 维（话说 4.5/3.5 Δ+1.0，提问 4.5/4.0 Δ+0.5，动机 5/2.5 **Δ+2.5**，idea 4.5/3.5 Δ+1.0）→ 通过。
 - **5 条跨域已验证规则**（A3 有、B3 无/弱，换域仍成立）：
   - **#5 性价比 / solo lens**（动机"最优成本收益+最抗质疑"、"先出货 top-N 不卡全量"；B3 用 golden/scarce lens）← Δ+2.5 最强
   - **#14 数据对账逐位 + golden 回归锚**（sum=78,051,184,236 逐位 + golden filing 比值 1.000 模式）

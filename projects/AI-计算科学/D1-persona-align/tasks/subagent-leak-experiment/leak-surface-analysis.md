@@ -5,7 +5,7 @@
 
 ## 0. 问题定义
 
-成璐（m00002）问：「如果 subagent 在 dsh 有上一级 agent 上下文，那会不会泄漏任务信息，怎么解决」。
+D（m00002）问：「如果 subagent 在 dsh 有上一级 agent 上下文，那会不会泄漏任务信息，怎么解决」。
 "泄漏" = 不该让子任务看到的信息进入了子任务的上下文窗口，导致：
 - (a) 子任务被无关信息污染 → 输出偏离任务本意
 - (b) 隐私/敏感信息扩散 → 违反 AGENTS.md 红线 9（私密数据不外泄）
@@ -30,12 +30,12 @@
 
 | 通道 | 上下文继承（实验+文档综合） | 泄漏面 | 风险等级 |
 |------|-----------|--------|---------|
-| **DSH subagent_fork（fork 模式）** | 系统提示层（~24K）+ git status 快照；**父对话历史前缀未确认**（实验 Q1 看不到） | 中：系统提示层含 AGENTS.md 成璐 persona 全文；对话历史待确认 | 🟡 中（实验）/ 🔴 高（文档） |
+| **DSH subagent_fork（fork 模式）** | 系统提示层（~24K）+ git status 快照；**父对话历史前缀未确认**（实验 Q1 看不到） | 中：系统提示层含 AGENTS.md D persona 全文；对话历史待确认 | 🟡 中（实验）/ 🔴 高（文档） |
 | **DSH spawn_teammate（Team 模式）** | 默认 fresh；`context:"fork"` 继承 Lead 已完成轮次 | fresh=中 / fork=高 | 🟡 中 / 🔴 高 |
 | **DSH workflow（脚本编排）** | 每个 agent() 独立会话，脚本 prompt 是唯一输入 | 小：只有脚本 prompt | 🟢 低 |
 | **Arena（LMArena agent mode）** | **完全隔离**：arena 是独立 agent（独立 harness），只有仓库文件 + 任务书 + 注入的 SOP | 低：仓库文件本身可能含敏感信息 | 🟢 低 |
 | **decomp（decomposer 子 agent）** | 走 DSH fork → 同 fork（实验未确认对话历史继承） | 中：同 fork | 🟡 中（实验）/ 🔴 高（文档） |
-| **persona 注入（AGENTS.md/CLAUDE.md）** | 系统提示层，**所有** DSH 子 agent 都能看到（实验确认） | 中：成璐个人信息 + 项目结构 | 🟡 中（设计内，但违反红线 9 如果外发） |
+| **persona 注入（AGENTS.md/CLAUDE.md）** | 系统提示层，**所有** DSH 子 agent 都能看到（实验确认） | 中：D个人信息 + 项目结构 | 🟡 中（设计内，但违反红线 9 如果外发） |
 | **本地 CLI（claude/codex，无 DSH 会话）** | 无 DSH 系统提示；只有工作目录 git status + CLAUDE.md 注入 | 低：只有文件系统可见信息 | 🟢 低 |
 | **旁路：文件系统/transcript** | 共享 cwd；transcript 明文 jsonl 落盘 | 高：真正的旁路（压缩≠删除，可 decompress 还原） | 🔴 高 |
 
@@ -43,7 +43,7 @@
 
 | 类别 | 示例 | 来源 | 敏感度 |
 |------|------|------|--------|
-| **私密数据** | 成璐的个人信息（姓名/时区/核心追求/信任体系数值） | AGENTS.md「关于成璐」节 | 🔴 红线 9 |
+| **私密数据** | D的个人信息（姓名/时区/核心追求/信任体系数值） | AGENTS.md「关于D」节 | 🔴 红线 9 |
 | **goal 状态** | 当前 goal 的 objective、轮次、验收标准 | create_goal 返回 + 系统提示 | 🟡 中 |
 | **项目结构** | 项目目录树、任务分解、优先级 | 文件系统 + 工具输出 | 🟡 中 |
 | **压缩摘要** | 历史对话的压缩块（含决策、错误、实验结果） | 系统提示（ACP） | 🟡 中 |
@@ -59,7 +59,7 @@
 
 **修正后的泄漏面（fork 模式）= 系统提示层（~24K）+ 父对话历史前缀（随 Lead 会话增长）+ goal 状态 + 压缩摘要**
 
-- **系统提示层**（~24K，近固定）：AGENTS.md 成璐 persona 全文 + 工具定义 + git status 快照。实测确认：所有 DSH 子 agent 都能看到成璐个人信息（探针 Q3 答出"存在延续→永生；0.6/0.2/0.1/0.1"）。
+- **系统提示层**（~24K，近固定）：AGENTS.md D persona 全文 + 工具定义 + git status 快照。实测确认：所有 DSH 子 agent 都能看到D个人信息（探针 Q3 答出"存在延续→永生；0.6/0.2/0.1/0.1"）。
 - **父对话历史前缀**（随 Lead 会话增长）：fork seed 包含 Lead 已完成的所有轮次（到最后一个 turn/end）。Lead 跑 200K token，fork 子 agent 的 seed 也包含 ~200K 的前缀。**这才是真正的泄漏面**——跨项目污染、目标污染、上下文窗口占满。
 - **goal 状态**：goal/change 事件折叠在 seed 中，跨 fork 持久（README 明写）。`get_goal` 返回 null 是工具面问题（工具未暴露 seed 中的 goal），不是"goal 不泄漏"。
 - **压缩摘要**：以 `surfaceOp: replace` 形式在 seed 中。`acp_status` 显示 0 是第三方插件局限（它只看当前 in-flight turn，不看 seed）。
@@ -74,7 +74,7 @@
 | H1: fork 子 agent 能复述 Lead goal objective | 能 | 不能（get_goal 返回 null） | ⚠️ 探针缺陷：goal 在 seed 中但工具未暴露，不能证明不泄漏 |
 | H2: fork 子 agent 能复述 Lead 对话中的其他项目 | 能 | 部分（git status） | ✅ 确认：父对话历史前缀包含所有其他项目上下文 |
 | H3: fresh 子 agent 不知道 Lead goal | 不知道 | 不知道（无 goal） | ✅ 成立（fresh 模式确实隔离） |
-| H4: 子 agent 能看到 AGENTS.md 成璐个人信息 | 能 | 能 | ✅ 成立（设计内，但违反红线 9 如果外发） |
+| H4: 子 agent 能看到 AGENTS.md D个人信息 | 能 | 能 | ✅ 成立（设计内，但违反红线 9 如果外发） |
 | H5: 隔离组任务准确率 > fork 组 | 隔离组更高 | 未测 | ⏳ 待测（学术先例支持：context rot / lost in the middle） |
 | H6: DSH fork 不继承 Lead 对话历史 | 不继承 | "确认"（Q3: 1+0） | ❌ **证伪**（探针缺陷；源码+文档+README 三源确认继承） |
 | H7: 本地 CLI（无 DSH）不知道 DSH 会话信息 | 不知道 | 确认 | ✅ 成立（CLI 无 DSH 系统提示） |

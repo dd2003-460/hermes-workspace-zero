@@ -1,4 +1,4 @@
-# MAP 分析 — 成璐中文聊天语料（6 chunks）
+# MAP 分析 — D中文聊天语料（6 chunks）
 
 **方法来源**: clonar-escrita/prompts/map_analysis.md（葡语方法中文化执行）
 **语料**: corpus_input.txt, 86条MSG, 其中56条用户消息（30条AI回复已排除），43–85与2–42为重复，唯一内容29组。

@@ -13,7 +13,7 @@
    - 对照表：smoke01(0%) vs smoke-temporal-quick(100%@5题) vs full01 conv2+3(0.835@130题)
    - 结论落盘 `tools/memory-benchmarks/results/locomo/locomo-full01-analysis.md` + decomp loop-state 更新 + commit
    - 判定：temporal 目标线 ≥50% 是否达标（按当前趋势大概率达标，以全量为准）
-2. **conv0/conv1 补跑决策**：~10h 新 ingestion + ~3h 答题。建议成璐拍板要不要为完整 10-conv 数字补跑；不补的话报告里明确标注"有效样本 conv2-9"。
+2. **conv0/conv1 补跑决策**：~10h 新 ingestion + ~3h 答题。建议D拍板要不要为完整 10-conv 数字补跑；不补的话报告里明确标注"有效样本 conv2-9"。
 3. F8-4 等 IV ≥90 天；G1 等 pfb；候选池 #2 起草可顺手做。
 
 ## 授权边界（不变）

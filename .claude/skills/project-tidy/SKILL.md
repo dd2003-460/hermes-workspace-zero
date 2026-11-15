@@ -30,6 +30,6 @@ python3 scripts/tidy_audit.py projects/decomp   # 单项目
 
 报告落 `loop-artifacts/tidy/<YYYYMMDD>/audit.md`。审计只读，不改文件。
 
-## 定时巡检（可选，需成璐批准后建 schedule）
+## 定时巡检（可选，需D批准后建 schedule）
 
 频率建议：每周一次；流程 = 跑 tidy_audit → 只对"新增超界/缺结构"项目执行本 SOP → commit+push → 在对应项目 loop-state.json 记一行。

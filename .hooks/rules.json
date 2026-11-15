@@ -176,11 +176,21 @@
       "enabled": true,
       "trigger": [
         {
-          "type": "always"
+          "type": "keyword",
+          "any": [
+            "不对",
+            "确定吗",
+            "真的？",
+            "真的吗",
+            "质疑",
+            "矛盾",
+            "有问题",
+            "为什么"
+          ]
         }
       ],
       "action": {
-        "inject": "💡 idea 自检（每轮一次）：这轮对话/工作有没有产生一个'当前证据够不到、但答案会改变后续判断'的问题？有→过 Q1-Q3（穷尽/杠杆/可推进，见 ~/.hermes/rules/idea-discovery.md）→全过则落盘 D1-persona-align/memory/idea-pool.md。没有→跳过，不强行造问题。"
+        "inject": "💡 idea/质询触发（事件型）：命中用户质疑词→立即回看该结论的来源判级和推理路径。未命中的轮次靠自觉执行 ~/.hermes/rules/idea-discovery.md 的三个事件条件（断言密度≥3个数字且含②③类来源 / 跨回合依赖 / 用户质疑）。含≥3个具体数字的对比性汇报落盘后→派只读 subagent 用成璐式追问模板质询，逐条回应。同一话题 3 轮冷却。"
       },
       "cooldown_turns": 3
     },

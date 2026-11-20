@@ -1,0 +1,1 @@
+{"run_id": "exp-2026-11-19-r07", "node": "L1/4", "timestamp": "2026-11-19T22:19:41+08:00", "claim": "nat 臂 r7 出现独立不确定性维度（r7 惊奇时刻）", "evidence": {"l1_uncertainty": true, "scope": "横切作用于其他维度"}, "judge": "qwen3.8-27b", "raw_trace": ["q1: nat r7 L1 节点 claim 以'不确定性'开头", "q2: scope 提到横切"]}

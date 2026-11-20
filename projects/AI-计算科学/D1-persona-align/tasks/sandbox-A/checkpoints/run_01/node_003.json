@@ -1,0 +1,1 @@
+{"run_id": "exp-2026-11-19-r07", "node": "L2/1", "timestamp": "2026-11-19T22:24:17+08:00", "claim": "soc 臂 formula 目标形式 verified 率低于 text 臂", "evidence": {"formula_verified": 0.319, "text_verified": 0.556}, "judge": "qwen3.8-27b", "raw_trace": ["q1: soc formula 31.9%", "q2: soc text 55.6%", "q3: 差 23.7pp"]}

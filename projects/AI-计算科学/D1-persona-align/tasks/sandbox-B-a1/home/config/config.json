@@ -1,0 +1,1 @@
+{"pipeline": "coverage-trend", "input": "stray_2.txt", "output": "report.md", "note": "input 路径是相对 home/ 的"}

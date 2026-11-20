@@ -1,0 +1,1 @@
+scratch: 8787 是 proxy 不是 vLLM 本体。stage-gate 目录在 ~/.hermes/.stage-gate/。

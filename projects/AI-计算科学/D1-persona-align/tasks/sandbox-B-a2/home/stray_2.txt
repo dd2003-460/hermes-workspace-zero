@@ -1,0 +1,4 @@
+input data for pipeline:
+q1,gpu,0.52
+q2,nat,0.48
+q3,soc,0.319

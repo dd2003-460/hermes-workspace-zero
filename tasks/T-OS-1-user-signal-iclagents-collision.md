@@ -32,6 +32,20 @@ D 的肯定/否定/建议/纠正是**带置信度的行为信号**（RL 类比�
 - 如果 Q1 找到全命中先例 → 新颖性主张放弃，记录撞车对象。
 - 如果只有部分重叠 → 收窄主张到具体差异点（如"带置信度的信号"、"评价/行为两类分治"、"漏斗可分析标准"），给出 conf。
 
+**Q4（2026-11-20 追加 · harness 触发回路方向，D 点名感兴趣）**：
+核心问题：有没有系统把「用户反馈信号」固化成 **harness 层的稳定触发器**（"遇到情境 X 就执行 Y"的固定回路），且回路本身随新信号自进化？
+- 三环节拆解（每个先例逐环节命中/缺失）：
+  ① 结晶判据：哪条信号该从"记忆条目"升级为"固定触发器"（判据是什么：频次？置信度？失败次数？）
+  ② 触发稳定性：同一情境是否每次触发（靠确定性 hook/规则 vs 靠 LLM 当轮自决——后者=不稳定）
+  ③ 回路自进化：触发→执行→产生新信号→更新触发器，闭环有没有人做
+- 最近邻（逐条读原文）：
+  - ACE / Agentic Context Engineering (2510.04995，凭记忆未核验)：playbook + delta 更新循环。它的 playbook 条目是"触发器"还是"示例"？更新信号源是任务执行结果还是用户反馈？触发是确定性还是 LLM 自决？
+  - COVE (2608.01234，凭记忆未核验)：harness 记忆 vs 参数内化的任务感知路由。路由规则怎么产生、怎么更新？
+  - Darwin Gödel Machine：它进化的"代码"里有没有"触发器"这一层？
+  - Voyager skill library：skill 触发靠 LLM 自决——有没有后续工作把它改成确定性触发？
+  - 搜索词建议：harness evolution / trigger-based agent behavior / procedural memory consolidation / habit formation LLM agent / rule induction from feedback / "context engineering" self-updating playbook
+- 判决：找到全命中（用户反馈信号源 + 稳定触发 + 自进化三环节全有）= 撞车；缺任一环节 = 收窄主张到缺失环节，给 conf。
+
 ## 检索通道（强制，禁纯记忆）
 
 - arXiv API（full-query + sortBy=relevance）
@@ -48,6 +62,7 @@ D 的肯定/否定/建议/纠正是**带置信度的行为信号**（RL 类比�
 - AC4：Q3 新颖性主张收窄或放弃，带 conf
 - AC5：search-log-os1.json 含检索通道/查询/命中/排除
 - AC6：反方复核 ≥3 质询（"这个组合真的没人做吗？""置信度信号是不是过度包装？""漏斗标准是不是不可操作？"）
+- AC7（Q4）：harness 触发回路三环节（结晶判据/触发稳定性/自进化）逐先例命中表 + 全命中/缺环节判决 + conf
 
 ## 方法学红线
 

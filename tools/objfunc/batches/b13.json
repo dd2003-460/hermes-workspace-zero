@@ -1,0 +1,322 @@
+[
+{
+"ts": 1778911955.010271,
+"source": "weixin",
+"session_id": "20260516_135756_186cda",
+"msg_id": 21697,
+"kind": "real",
+"content": "你的goal是干嘛的，goal不能让你自主推进吗\n\n1.基础搜索肯定要，但是后续能不能用浏览器控制去访问我已经登录的网页端大模型\n2.去github找有没有免费的搜索api项目\n3.不了，自动化我本来想用goal实现的\n\n然后看看能不能在工作区建立项目以及可以从入口索引到你的项目，index吗，还是TASKS"
+},
+{
+"ts": 1778912016.352737,
+"source": "qqbot",
+"session_id": "20260516_134918_b5bea6e2",
+"msg_id": 21721,
+"kind": "real",
+"content": "这些研究先暂停，因为不是我的原始喜好，目前更重要是确认你究竟是运行在什么agent框架上，因为我用claude的重要原因是可以用ralph loop"
+},
+{
+"ts": 1778912352.701361,
+"source": "qqbot",
+"session_id": "20260516_134918_b5bea6e2",
+"msg_id": 21723,
+"kind": "real",
+"content": "你的记忆是在哪的\n\n为什么一会跑在clawx的管理界面下\n\n然后还是hermes进程，这几个agent框架都不一样\n\n你可以找到cc connect的github项目以及本地情况，重新看看怎么连接到claude code吗"
+},
+{
+"ts": 1778912862.967319,
+"source": "qqbot",
+"session_id": "20260516_134918_b5bea6e2",
+"msg_id": 21726,
+"kind": "real",
+"content": "等等，你哪里看到路由层是clawx，你别模拟，直接开始找\n\n你现在可以启动claude code的ralph loop插件吗，用你工作区的ralph global启动"
+},
+{
+"ts": 1778913295.691543,
+"source": "qqbot",
+"session_id": "20260516_134918_b5bea6e2",
+"msg_id": 21728,
+"kind": "real",
+"content": "等一下，你跟我说没权限？我给你的是bypass权限啊，你明明可以找到rlaph loop的启动脚本setup.sh然后用global文档作为prompt启动啊，你不是可以用命令吗"
+},
+{
+"ts": 1778913387.898366,
+"source": "qqbot",
+"session_id": "20260516_134918_b5bea6e2",
+"msg_id": 21730,
+"kind": "real",
+"content": "你不能使用工具吗，你刚刚都是用工具了啊"
+},
+{
+"ts": 1778914249.2971818,
+"source": "qqbot",
+"session_id": "20260516_134918_b5bea6e2",
+"msg_id": 21806,
+"kind": "real",
+"content": "为什么去写latex了"
+},
+{
+"ts": 1778917639.1739688,
+"source": "weixin",
+"session_id": "20260516_153853_8da22d",
+"msg_id": 21933,
+"kind": "real",
+"content": "不对，额，配置里面没问题，但是qq机器人我问起来他坚持认为自己是herems底座，clawx路由的，怎么办，而且看他的风格，也很像hermes，有提醒，有reasoning，我不知道哪里出了问题（他说他的记忆啊什么的在./hermes）"
+},
+{
+"ts": 1778982099.741054,
+"source": "weixin",
+"session_id": "20260517_075437_714ffc36",
+"msg_id": 22078,
+"kind": "real",
+"content": "你看了什么文档，你觉得你漏掉了什么？你觉得我希望你做什么你没做？把这些加入原则或任务（他们怎么分类）"
+},
+{
+"ts": 1778989751.669299,
+"source": "weixin",
+"session_id": "20260517_075437_714ffc36",
+"msg_id": 22081,
+"kind": "real",
+"content": "不对，我对你真正的期望在ralph global，希望你像真正的人一样思考和工作，其余的只是为了这个目标具体的说明"
+},
+{
+"ts": 1779011640.824982,
+"source": "weixin",
+"session_id": "20260517_141111_4f4ec2",
+"msg_id": 22161,
+"kind": "real",
+"content": "你的cron有用吗，，为什么不用/goal命令\n你有读ralph global和agents吗"
+},
+{
+"ts": 1779076367.464878,
+"source": "weixin",
+"session_id": "20260518_014347_647ca6",
+"msg_id": 22368,
+"kind": "real",
+"content": "啊，那github能找项目吗"
+},
+{
+"ts": 1779079155.685738,
+"source": "weixin",
+"session_id": "20260518_123915_9b470e",
+"msg_id": 22375,
+"kind": "real",
+"content": "你读过agents或者ralphglobal吗，里面有我的意图，你必须看看你怎么对齐我的喜好和意图，声明，论文部分大部分都是AI做的，不是我的喜好，只有raw部分的idea表述可以看出来"
+},
+{
+"ts": 1779079472.978268,
+"source": "weixin",
+"session_id": "20260518_123915_9b470e",
+"msg_id": 22392,
+"kind": "real",
+"content": "可以，然后这些需要放agents吗，或者怎么样避免ai一意孤行，或者有可能曲解我的意思？"
+},
+{
+"ts": 1779081323.092556,
+"source": "weixin",
+"session_id": "20260518_123915_9b470e",
+"msg_id": 22397,
+"kind": "real",
+"content": "OK，你直接做，那，我写在agents文件里面的其他要点，也可以让ai理解我的意图吗，比如跳过无法解决的（必须我介入的）阻碍\n\n以及自主啦，自己判定，真实反映客观等等\n\n这些，如果换一个没有记忆的ai来，他可以理解并且应用这些思路吗\n\n还是说我应该先反复对齐ai的理解，确保有一套可以准确激发ai的思路（和我对齐，高概率命中和我对齐的情况），然后再用这一套让ai工作\n\nprompt的激发是稳定的吗，或者我应该微调到对任何prompt都能激发类似思路的程度？"
+},
+{
+"ts": 1779082769.739488,
+"source": "weixin",
+"session_id": "20260518_123915_9b470e",
+"msg_id": 22399,
+"kind": "real",
+"content": "先把对齐的意图加入吧，也就是agents里面的条目的完整原因和目标，然后再让ai思考怎么对齐这些目标的情况下工作"
+},
+{
+"ts": 1779083451.990189,
+"source": "weixin",
+"session_id": "20260518_123915_9b470e",
+"msg_id": 22405,
+"kind": "real",
+"content": "那需要创rawtask吗，这个作为人写入的？"
+},
+{
+"ts": 1779084430.899704,
+"source": "weixin",
+"session_id": "20260518_123915_9b470e",
+"msg_id": 22407,
+"kind": "real",
+"content": "1.之前做的对agents上下文补充你做了吗\n2.怎么把agents写入systemprompt，\n\n3.rawtask格式可以，但是恐怕还得避免ai自己乱写入？\n4.怎么让ai从各方面对齐人的语言，思维，行为风格，这方面似乎有一个项目？"
+},
+{
+"ts": 1779096033.915673,
+"source": "weixin",
+"session_id": "20260518_170554_e8b5e4",
+"msg_id": 22507,
+"kind": "real",
+"content": "claude code的system呢\n\n2.那个不是，那个是持续工作的，你弄一个新项目吧，记得规范，任务要求写好，然后加入根目录的index和TASKS"
+},
+{
+"ts": 1779133333.076975,
+"source": "weixin",
+"session_id": "20260519_022247_7d02c7",
+"msg_id": 22630,
+"kind": "real",
+"content": "我的qq连接的claudecode会话找不到，你看看hermes里面是否有，他好像一直在修discat的论文，但是我完全看不到，缓存复用好像也几乎失效了，帮我看看为什么并且修复"
+},
+{
+"ts": 1779172374.4998531,
+"source": "weixin",
+"session_id": "20260519_134326_f84cacab",
+"msg_id": 22770,
+"kind": "real",
+"content": "UT-Dallas, UW, UCLA新作—Do Joint Audio-Video Generation Models Understand Physics?\n\n联合音频视频生成模型真的理解物理吗？\n\nZijun Cui，Xiulong Liu，Hao Fang等人新发布的AV-Phys Bench 是首个系统评估Joint Audio Video生成模型物理常识的benchmark，旨在测试模型是否能在场景演化过程中保持物理常识，以及是否能遵循 Anti-AV-Physics 这类故意违反物理规律的提示词。\n\n评估了 7 个 SOTA 生成模型包括: Seedance 2.0，Kling 3.0 Omni，Veo 3.1等，并开源了一个与人工评估高度一致、结合DSP工具使用的 Agentic evaluator。\n\n如果你觉得这个项目对你有帮助，欢迎大家在 GitHub 上star一个repo⭐️，也欢迎大家在 Hugging Face 上upvote🤗\n\nGitHub: https://github.com/ZijunCui02/AV-Phys\nHF Paper: https://huggingface.co/papers/2605.07061\n\n去看看这个仓库，告诉我完整情况"
+},
+{
+"ts": 1779174634.203389,
+"source": "weixin",
+"session_id": "20260519_134326_f84cacab",
+"msg_id": 22786,
+"kind": "real",
+"content": "1.你如何获取他们的具体情况\n2.物理一致性很重要吗，也许指令遵循也很重要？还是说指令遵循不能超过逻辑，数学等硬限制更重要？"
+},
+{
+"ts": 1779177379.296036,
+"source": "weixin",
+"session_id": "20260519_134326_f84cacab",
+"msg_id": 22788,
+"kind": "real",
+"content": "但是如你所说，覆盖太窄，物理的约束覆盖也很广，即使场景看起来像，也只是看起来，不是由规律生成驱动，那这种只是让ai更像普通人眼里的世界，没有实质性进展"
+},
+{
+"ts": 1779241100.0838861,
+"source": "weixin",
+"session_id": "20260520_093206_4f0b1627",
+"msg_id": 22920,
+"kind": "real",
+"content": "帮我看看工作区变化，包括tasks或者其他有没有新增乱的东西"
+},
+{
+"ts": 1779251058.6404831,
+"source": "weixin",
+"session_id": "20260520_093206_4f0b1627",
+"msg_id": 22983,
+"kind": "real",
+"content": "mattpocock/skills\n\nxichan96/dinotty\n\n这两个github仓库也帮我看看，能怎么用起来"
+},
+{
+"ts": 1779251146.763031,
+"source": "weixin",
+"session_id": "20260520_093206_4f0b1627",
+"msg_id": 22996,
+"kind": "real",
+"content": "可以，但是2loop的规范不就是代码规范吗"
+},
+{
+"ts": 1779251283.882179,
+"source": "weixin",
+"session_id": "20260520_093206_4f0b1627",
+"msg_id": 22997,
+"kind": "real",
+"content": "dinotty我可能也需要，现在ccconnect不稳定，而且session我找不到"
+},
+{
+"ts": 1779251396.0778291,
+"source": "weixin",
+"session_id": "20260520_093206_4f0b1627",
+"msg_id": 23006,
+"kind": "real",
+"content": "额先别急，你先看看skill仓库有什么其他功能的先部署"
+},
+{
+"ts": 1779253862.83763,
+"source": "weixin",
+"session_id": "20260520_124846_69a636",
+"msg_id": 23012,
+"kind": "real",
+"content": "然后还有那个远程推送会话的也试试？"
+},
+{
+"ts": 1779260234.266979,
+"source": "weixin",
+"session_id": "20260520_124846_69a636",
+"msg_id": 23058,
+"kind": "real",
+"content": "质询帮我指向ralph global"
+},
+{
+"ts": 1779267697.410439,
+"source": "cli",
+"session_id": "20260520_165836_337cbd",
+"msg_id": 23090,
+"kind": "real",
+"content": "我发现我 无法用命令唤醒hermes，以及web ui 只能用脚本，然后各种渠道完全失去连接，帮我排查和解决"
+},
+{
+"ts": 1779268298.7833412,
+"source": "cli",
+"session_id": "20260520_170229_9425a1",
+"msg_id": 23130,
+"kind": "real",
+"content": "t login: Wed May 20 16:58:34 on ttys001\na1-6@1-6deMacBook-Pro ~ % claude update\nCurrent version: 2.1.123\nChecking for updates to latest version...\nFailed to check for updates\nUnable to fetch latest version from npm registry\n\nPossible causes:\n  • Network connectivity issues\n  • npm registry is unreachable\n  • Corporate proxy/firewall blocking npm\n\nTry:\n  • Check your internet connection\n  • Run with --debug flag for more details\n  • Manually check: npm view @anthropic-ai/claude-code version\n  • Check if you need to login: npm whoami\na1-6@1-6deMacBook-Pro ~ %  npm view @anthropic-ai/claude-code version\nnpm error code ENOTFOUND\nnpm error syscall getaddrinfo\nnpm error errno ENOTFOUND\nnpm error network request to https://registry.npmjs.org/@anthropic-ai%2fclaude-code failed, reason: getaddrinfo ENOTFOUND registry.npmjs.org\nnpm error network This is a problem related to network connectivity.\nnpm error network In most cases you are behind a proxy or have bad network settings.\nnpm error network\nnpm error network If you are behind a proxy, please make sure that the 'proxy' config is set properly.  See: 'npm help config'\nnpm error A complete log of this run can be found in: /Users/a1-6/.npm/_logs/2026-05-20T09_01_32_531Z-debug-0.log\na1-6@1-6deMacBook-Pro ~ % 还有这个，claude code 升级失败，怎么办"
+},
+{
+"ts": 1779344479.725375,
+"source": "weixin",
+"session_id": "20260521_131823_d32093d3",
+"msg_id": 23339,
+"kind": "real",
+"content": "什么是仪表盘"
+},
+{
+"ts": 1779347048.910711,
+"source": "weixin",
+"session_id": "20260521_131823_d32093d3",
+"msg_id": 23370,
+"kind": "real",
+"content": "persona训练之前，有尝试用prompt复现我的我的研究问题，喜好吗"
+},
+{
+"ts": 1779361364.63808,
+"source": "weixin",
+"session_id": "20260521_131823_d32093d3",
+"msg_id": 23412,
+"kind": "real",
+"content": "你可以试试，但是moe微调是不是比较不稳定和困难，要不要试试小的模型微调，以及之前的消融实验呢，调节模型已经有的向量强度？"
+},
+{
+"ts": 1779361411.9625978,
+"source": "weixin",
+"session_id": "20260521_131823_d32093d3",
+"msg_id": 23417,
+"kind": "real",
+"content": "喔我知道了，相当于lora外加了一点点脑子，但是是否会相当于向量加入的效果，以及对之前的知识有影响吗"
+},
+{
+"ts": 1779361798.884608,
+"source": "weixin",
+"session_id": "20260521_190958_5167d4",
+"msg_id": 23436,
+"kind": "real",
+"content": "先试试1和2？，但是如果扰动温和，改变同样可能不明显，怎么办，后续还是说直接prompt评估"
+},
+{
+"ts": 1779362469.995832,
+"source": "weixin",
+"session_id": "20260521_190958_5167d4",
+"msg_id": 23446,
+"kind": "real",
+"content": "wait，我现在用的是omlx不是lmstudio"
+},
+{
+"ts": 1779362876.104293,
+"source": "weixin",
+"session_id": "20260521_190958_5167d4",
+"msg_id": 23549,
+"kind": "real",
+"content": "等等，prompt和预期回答是什么，我的预期回答就是她会判断这是什么问题，\n\n完整考虑变量，把所有变量纳入优化考虑，然后拆解任务逐步行动\n\n以及像我一样，反复追问自己直到到达问题的边界，例如粒子物理问题确定到实验能标不够，或者某个数学定理没有证明，这样\n\n\n\n那么现在预设的是什么"
+},
+{
+"ts": 1779362911.395882,
+"source": "weixin",
+"session_id": "20260521_190958_5167d4",
+"msg_id": 23554,
+"kind": "real",
+"content": "这些问题太trivial了，我不期望在这些问题上会有不同，关键是一些经典的复杂问题，例如男女数学天赋是不是男强？\n\n或者，完整考虑用agent当助手需要考虑什么"
+}
+]

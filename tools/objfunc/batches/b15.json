@@ -1,0 +1,322 @@
+[
+{
+"ts": 1779434775.289091,
+"source": "weixin",
+"session_id": "20260522_151918_fb4ca3",
+"msg_id": 24205,
+"kind": "real",
+"content": "3"
+},
+{
+"ts": 1779445578.4405508,
+"source": "weixin",
+"session_id": "20260522_161839_5fe994",
+"msg_id": 24255,
+"kind": "real",
+"content": "现在呢，"
+},
+{
+"ts": 1779498282.804941,
+"source": "weixin",
+"session_id": "20260523_085438_a93cdc86",
+"msg_id": 24498,
+"kind": "real",
+"content": "这些怎么感觉是ai输出的，我一般是会问为什么，然后目前在我的理解下，我不会太多专业的东西，\n\n这样吧，你试试这两个skill先，"
+},
+{
+"ts": 1779505585.4180748,
+"source": "weixin",
+"session_id": "20260523_105906_8fb09f",
+"msg_id": 24613,
+"kind": "real",
+"content": "最好是Python的，因为平台通用"
+},
+{
+"ts": 1779506378.239392,
+"source": "weixin",
+"session_id": "20260523_105906_8fb09f",
+"msg_id": 24623,
+"kind": "real",
+"content": "要不换几个关键词搜索，那个multy search的skill可以用吗"
+},
+{
+"ts": 1779506680.34591,
+"source": "weixin",
+"session_id": "20260523_112439_de1a2d",
+"msg_id": 24639,
+"kind": "real",
+"content": "把那个竞品分析删掉吧，其他用不上的skill也删掉\n\n数据源我不清楚，你找一下你感兴趣的数据和项目开做？数据源搜集和分析有一套完整的项目skill吗，如果没有，把数据搜集的skill也找到然后加入"
+},
+{
+"ts": 1779507093.660896,
+"source": "weixin",
+"session_id": "20260523_112439_de1a2d",
+"msg_id": 24642,
+"kind": "real",
+"content": "另外，status分析这个skill完整功能相当于什么，能比得上spss吗，经济学和社科目前比较前沿的分析有什么，skill里面都有吗，双层差分did属于什么位置，关于这个skill能否给我建立一个项目完整研究和"
+},
+{
+"ts": 1779508223.4707232,
+"source": "weixin",
+"session_id": "20260523_112439_de1a2d",
+"msg_id": 24653,
+"kind": "real",
+"content": "还有这些，能对skill功能分类，记入索引文件吗，就index?"
+},
+{
+"ts": 1779508237.18701,
+"source": "weixin",
+"session_id": "20260523_112439_de1a2d",
+"msg_id": 24668,
+"kind": "real",
+"content": "wait"
+},
+{
+"ts": 1779508263.899885,
+"source": "weixin",
+"session_id": "20260523_112439_de1a2d",
+"msg_id": 24672,
+"kind": "real",
+"content": "他们可以分析经济学里面某些链路吗"
+},
+{
+"ts": 1779510306.4969878,
+"source": "weixin",
+"session_id": "20260523_112439_de1a2d",
+"msg_id": 24684,
+"kind": "real",
+"content": "因果推断完整工具包有吗，这个重要吗\n\n如果没有尝试再找相关skill，我看有经济学相关skill\n\n然后你直接建立项目，写入任务，包括数据搜集到结果出来，\n\n然后直接开始定个目标做，把你认为可以的目标文本发我，我用goal命令设定？"
+},
+{
+"ts": 1779518778.410777,
+"source": "weixin",
+"session_id": "20260523_135558_708eb2",
+"msg_id": 24695,
+"kind": "real",
+"content": "可以"
+},
+{
+"ts": 1779544334.9047198,
+"source": "weixin",
+"session_id": "20260523_215134_02db4c",
+"msg_id": 24952,
+"kind": "real",
+"content": "平均只有平均的结果，如果要更精细的结论，就必须要更精细的数据，尝试统计到阶级，地区，市，甚至小区"
+},
+{
+"ts": 1779599159.7264268,
+"source": "weixin",
+"session_id": "20260524_114217_b98127e9",
+"msg_id": 25053,
+"kind": "real",
+"content": "根据我们讨论的工作，给出一个goal的prompt，包括工作区任务投递，项目过往状态记录，项目当前状态查看这些地址，都要写入"
+},
+{
+"ts": 1779633890.8224661,
+"source": "weixin",
+"session_id": "20260524_205016_d6a572",
+"msg_id": 25226,
+"kind": "real",
+"content": "顺便帮我看看claide在工作区干了什么，我看迭代很多次，但是似乎没有产生什么可见成果，尤其persona这个，似乎没有定量实验测量多大程度对齐我"
+},
+{
+"ts": 1779686830.876894,
+"source": "weixin",
+"session_id": "20260525_102407_3c445605",
+"msg_id": 25284,
+"kind": "real",
+"content": "继续看看，应该不止这些，主要是tool，以及更多迭代记录看做了什么"
+},
+{
+"ts": 1779890390.6003149,
+"source": "weixin",
+"session_id": "20260527_155402_4377a8d4",
+"msg_id": 25349,
+"kind": "real",
+"content": "mattpocock/skills\n\n可以部署和使用这个仓库的skill吗"
+},
+{
+"ts": 1779932703.326703,
+"source": "weixin",
+"session_id": "20260527_155402_4377a8d4",
+"msg_id": 25362,
+"kind": "real",
+"content": "全部，，然后在tasks里面写下，让claude看见也部署"
+},
+{
+"ts": 1780241756.5356102,
+"source": "weixin",
+"session_id": "20260531_232802_f704be5b",
+"msg_id": 25401,
+"kind": "real",
+"content": "我需要你完整调研prompt，上下文长度，对ai指令跟随的影响，以及prompt激发ai特定行为的研究，例如复现我的提问（不断提问直到聚焦到某个未解决问题）\n\n以及综合考虑和解决问题\n\n把这个写入任务"
+},
+{
+"ts": 1780244529.1587908,
+"source": "weixin",
+"session_id": "20260601_001708_a02567",
+"msg_id": 25404,
+"kind": "real",
+"content": "调研\"Prompt结构与AI指令跟随能力\"的学术论文和实证研究。\n\n需要覆盖的内容：\n1. **关键论文搜索**：在 arXiv 搜索 prompt engineering, instruction following, instruction tuning 相关论文\n2. **Prompt结构对指令跟随的影响**：例如：\n   - System prompt vs user prompt vs assistant prompt 的角色差异\n   - 结构化prompt（XML标签、Markdown格式）的影响\n   - Few-shot vs zero-shot vs chain-of-thought 对指令跟随的差异\n   - 负面约束（\"不要做什么\"）vs 正面约束（\"要做什么\"）的遵循度差异\n   - 具体指令 vs 抽象指令的跟随率\n3. **核心发现整理**：每篇论文找到：作者、标题、年份、核心结论、对prompt设计的启示\n\n输出要求：\n- 使用 crossref 或 arxiv skill 搜索论文\n- 用 web 搜索补充\n- 整理成结构化的调研笔记，标注关键发现和可操作建议\n- 重点关注 arXiv 论文和实证研究，而非纯经验文章"
+},
+{
+"ts": 1780245049.063715,
+"source": "weixin",
+"session_id": "20260601_002548_03783c",
+"msg_id": 25411,
+"kind": "real",
+"content": "搜索并总结关于\"chain-of-thought prompting\"和\"reasoning quality\"的关键学术论文。关注：CoT、ToT、GoT、self-consistency等方法。\n\n重点论文：\n- Wei et al. Chain-of-Thought Prompting Elicits Reasoning in LLMs (2022)\n- Wang et al. Self-Consistency Improves Chain of Thought (2022)\n- Kojima et al. Large Language Models are Zero-Shot Reasoners (2022)\n- Kuhn et al. Think outside the seed (2023)\n- Yao et al. Tree of Thoughts (2023)\n- Best et al. Best-of-N (2023)\n\n对每篇论文，提取：核心方法、关键结果、对prompt设计的启示。"
+},
+{
+"ts": 1780245350.241248,
+"source": "weixin",
+"session_id": "20260601_003049_50cc5b",
+"msg_id": 25412,
+"kind": "real",
+"content": "搜索并总结关于\"instruction following\"、\"instruction tuning\"、\"prompt compliance\"的学术论文。\n\n重点方向：\n- 指令遵循能力的评估方法（如IFEval、FollowBench等benchmark）\n- InstructGPT/RLHF对指令跟随的影响\n- 指令表述的清晰度对遵循率的影响\n- 指令冲突时模型的决策行为\n- 多指令场景下的注意力分配\n\n搜索关键词：instruction following LLM, instruction tuning, IFEval, FollowBench, model alignment, instruction robustness"
+},
+{
+"ts": 1780245651.8135839,
+"source": "weixin",
+"session_id": "20260601_003551_998f3b",
+"msg_id": 25417,
+"kind": "real",
+"content": "搜索并总结关于\"context length effects\"、\"needle in a haystack\"、\"retrieval behavior\"、\"lost in the middle\"的学术论文。\n\n重点论文：\n- Liu et al. Lost in the Middle (2023) - 注意力在上下文中的位置效应\n- 其他关于上下文长度、注意力衰减、信息遗忘的研究\n- Context window scaling 对推理能力的影响\n- Long context models (Longformer, Transformer-XL, RoPE等) 的技术差异\n\n对每篇论文，提取：核心发现、关键数据、对prompt设计的启示。"
+},
+{
+"ts": 1780252262.4065979,
+"source": "weixin",
+"session_id": "20260531_232802_f704be5b",
+"msg_id": 25421,
+"kind": "real",
+"content": "你先写入任务"
+},
+{
+"ts": 1780288091.428312,
+"source": "weixin",
+"session_id": "20260601_120239_218ba27a",
+"msg_id": 25524,
+"kind": "real",
+"content": "假设是什么，然后已有论文能和你调查结果对得上吗\n\n另外，ai不按照loop步骤怎么办，这个指令跟随怎么解决"
+},
+{
+"ts": 1780288360.1754189,
+"source": "weixin",
+"session_id": "20260601_120239_218ba27a",
+"msg_id": 25526,
+"kind": "real",
+"content": "有什么其他方法可以这样逐步强制他遵循步骤，弄个步骤状态让他自己更新和查看？"
+},
+{
+"ts": 1780297360.950328,
+"source": "weixin",
+"session_id": "20260601_120239_218ba27a",
+"msg_id": 25528,
+"kind": "real",
+"content": "dynamic workflow，帮我看看怎么部署给claude code，另外看看cc的团队功能，能不能固定角色处理对应任务"
+},
+{
+"ts": 1780301838.081845,
+"source": "weixin",
+"session_id": "20260601_120239_218ba27a",
+"msg_id": 25529,
+"kind": "real",
+"content": "这 个写入任务最上面"
+},
+{
+"ts": 1780416882.185421,
+"source": "weixin",
+"session_id": "20260603_001349_1dff5fbd",
+"msg_id": 25570,
+"kind": "real",
+"content": "有一个问题，我发现cc老做相同的task怎么办，是不是tasks没有更新，"
+},
+{
+"ts": 1780416913.328507,
+"source": "weixin",
+"session_id": "20260603_001349_1dff5fbd",
+"msg_id": 25574,
+"kind": "real",
+"content": "然后帮我写入这些问题到task以及原始的idea，但是我忘了具体是什么位置，似乎是在某个文件夹的raw里面存放我的原始idea，并且我不确定有没有index标记他们的完成程度，以及分类存放怎么样也不确定"
+},
+{
+"ts": 1780416967.554404,
+"source": "weixin",
+"session_id": "20260603_001349_1dff5fbd",
+"msg_id": 25579,
+"kind": "real",
+"content": "计算理论的压缩，展开，最小复杂长度，展开规则和生成单元初值的总和最小？\n\n物理理论能否用拟合理论研究和修正\n\n\n泡利不相容，-全同性要求不能重合，类似硬球势？重叠后有其他高能反应"
+},
+{
+"ts": 1780417614.518195,
+"source": "weixin",
+"session_id": "20260603_001349_1dff5fbd",
+"msg_id": 25586,
+"kind": "real",
+"content": "如果找到raw的完整idea记录，就直接放在project下面吧，"
+},
+{
+"ts": 1780419382.9429429,
+"source": "weixin",
+"session_id": "20260603_001349_1dff5fbd",
+"msg_id": 25589,
+"kind": "real",
+"content": "解决方案里面，去掉2，其余全部执行"
+},
+{
+"ts": 1780423926.780331,
+"source": "weixin",
+"session_id": "20260603_001349_1dff5fbd",
+"msg_id": 25593,
+"kind": "real",
+"content": "原始idea有新增吗，新增有放入task吗"
+},
+{
+"ts": 1780457379.021109,
+"source": "weixin",
+"session_id": "20260603_084548_fb0880aa",
+"msg_id": 25613,
+"kind": "real",
+"content": "raw里面原始idea也写入，以及加入task"
+},
+{
+"ts": 1780687625.460958,
+"source": "weixin",
+"session_id": "20260606_032502_1e3853",
+"msg_id": 25628,
+"kind": "real",
+"content": "我需要你更改goal：根据这个文件夹：（/Users/a1-6/Desktop/workspace/projects/2026春复习/宇宙学/raw）下面的原始说明，jso \n  n是每次课程大概内容，复习讲述是老师大概说的，根据这些，还有现代宇宙学主流内容，模型，帮我整理我应该复习的部分和资料， \n  如果你完成了，去同样的，2026复习根目录下，找到规范场论，根据里面的作业题目，讲义，以及复习里面Gemini对我情况的说明，  \n  也帮我整理复习资料并且预测一些类似题目，给我讲解，让我练手，                                                          \n\n  Read 2 files, listed 3 directories (ctrl+o to expand)\n\n❯ 你更改目标了吗，或者把这个写入最新的tasks文档？ \n\n⏺ 好，让我先读完规范场论的资料，然后创建两份完整的复习资料。\n\n  Read 4 files (ctrl+o to expand)\n\n❯ 我的意思是，你重新设置/goal命令内容，或者写入TASKS这个文档？ \n\n❯ 你应该先做宇宙学 \n\n把这个任务写入tasks并且设置为最高优先级：/Users/a1-6/Desktop/workspace/TASKS.md"
+},
+{
+"ts": 1780966032.685602,
+"source": "weixin",
+"session_id": "20260606_032502_1e3853",
+"msg_id": 25652,
+"kind": "real",
+"content": "先写到tasks的最上面"
+},
+{
+"ts": 1780976820.5853949,
+"source": "weixin",
+"session_id": "20260609_114200_8a15d2",
+"msg_id": 25676,
+"kind": "real",
+"content": "Search for the latest research (2023-2026) on three physics ideas and return detailed summaries:\n\n## Idea 1: Fermionization / Pauli exclusion as emergent from hard-sphere-like interaction\nKey concepts: Tonks-Girardeau gas (1D Bose-Fermi duality), 3D extensions, anyons in 2D, whether statistics can be emergent rather than fundamental. Search for:\n- \"Tonks-Girardeau\" + \"fermionization\" + recent developments\n- 3D Bose-Fermi duality / generalized Tonks-Girardeau\n- \"Pauli exclusion principle emergent\" or \"statistics interaction\"\n- Anyons and statistical phase from scattering\n- Quantum Monte Carlo studies of strongly correlated systems\n\n## Idea 2: Physical theories as curve fitting / dark matter/dark energy as residuals\nSearch for:\n- MOND (Modified Newtonian Dynamics) recent results 2023-2026\n- TeVeS, emergent gravity (Verlinde 2016+), entropic gravity\n- \"dark matter as residual\" or \"dark energy approximation\"\n- Whether cosmological observations can be explained without dark components\n\n## Idea 3: Physical theory as minimum description length / Kolmogorov complexity\nSearch for:\n- Minimum Description Length (MDL) and physics\n- Kolmogorov complexity applied to physical laws\n- \"Occam's razor\" and information theory in physics\n- Algorithmic information theory applied to physics (Li & Vitanyi work)\n- Maximum Entropy approaches to fundamental physics\n\nUse Google Scholar, arXiv, and general web search. Return: (1) key papers/authors, (2) current consensus, (3) open questions, (4) any direct connections to the user's intuition."
+},
+{
+"ts": 1781079058.7148721,
+"source": "weixin",
+"session_id": "20260610_155207_13ddcc64",
+"msg_id": 25733,
+"kind": "real",
+"content": "帮我再看看怎么样稳定激发某一类行动这个项目"
+},
+{
+"ts": 1781080612.339788,
+"source": "weixin",
+"session_id": "20260610_155207_13ddcc64",
+"msg_id": 25761,
+"kind": "real",
+"content": "等等，chimera实验到底是啥，其实我完全不明白\n\n然后，我的目标其实只是，用prompt让他产生我想要的行为，然后固定下来prompt切入，并且让他在各种背景下稳定\n\n例如诚实报告情况，或者是追问问题的原理到边界\n\n接下来请你解说你刚刚列出情况意味着什么\n\n然后prompt不止要部署到hermes，还要尝试加入工作区，让各种ai都可以读到和具备相关表现"
+}
+]

@@ -1,0 +1,322 @@
+[
+{
+"ts": 1778411330.3799691,
+"source": "weixin",
+"session_id": "20260510_180448_2e1a55",
+"msg_id": 15471,
+"kind": "real",
+"content": "pre llm相当于system prompt"
+},
+{
+"ts": 1778423147.295003,
+"source": "weixin",
+"session_id": "20260510_212211_3f88ff",
+"msg_id": 15700,
+"kind": "real",
+"content": "我要让hermes也可以实现，什么叫跨turn注入，就是不同轮次不连接吗"
+},
+{
+"ts": 1778423362.981479,
+"source": "weixin",
+"session_id": "20260510_212211_3f88ff",
+"msg_id": 15719,
+"kind": "real",
+"content": "你好好看看syop hook机制"
+},
+{
+"ts": 1778423367.984094,
+"source": "weixin",
+"session_id": "20260510_212211_3f88ff",
+"msg_id": 15720,
+"kind": "real",
+"content": "你好好看看stop hook机制"
+},
+{
+"ts": 1778425994.294265,
+"source": "weixin",
+"session_id": "20260510_212211_3f88ff",
+"msg_id": 15722,
+"kind": "real",
+"content": "记录好"
+},
+{
+"ts": 1778577848.650228,
+"source": "weixin",
+"session_id": "20260512_171314_86451d8b",
+"msg_id": 17935,
+"kind": "real",
+"content": "https://zhuanlan.zhihu.com/p/2036443846322680848?share_code=3PbVNIrVpwhm&utm_psn=2037580471404581096\n\n可以阅读这个然后告诉我他大概做什么，踩坑是什么方面吗\n\n我看他说自己写推理引擎是类似vllm，然后针对这个模型继续优化？但是推理的优化不是一般是kvcache或者推测解码吗，这还能优化什么"
+},
+{
+"ts": 1778581356.926545,
+"source": "weixin",
+"session_id": "20260512_182047_8ee3c2",
+"msg_id": 18070,
+"kind": "real",
+"content": "你研究claude code的stop hook移植到hermes怎么样了"
+},
+{
+"ts": 1778581873.878718,
+"source": "weixin",
+"session_id": "20260512_182047_8ee3c2",
+"msg_id": 18132,
+"kind": "real",
+"content": "算了，跳过那个知乎文章"
+},
+{
+"ts": 1778582007.236516,
+"source": "weixin",
+"session_id": "20260512_182047_8ee3c2",
+"msg_id": 18135,
+"kind": "real",
+"content": "我们讨论过，但是记录似乎丢了，所以你要不要直接在projects的ai下持续研究"
+},
+{
+"ts": 1778582020.774076,
+"source": "weixin",
+"session_id": "20260512_182047_8ee3c2",
+"msg_id": 18148,
+"kind": "real",
+"content": "我们之前讨论，stophook核心是，收到agent停止（完全停止，没有工具或者子agent\n或者命令在跑），之后，注入同一个session预设的prompt，保证不间断的工作，"
+},
+{
+"ts": 1778582108.975743,
+"source": "weixin",
+"session_id": "20260512_182047_8ee3c2",
+"msg_id": 18149,
+"kind": "real",
+"content": "你要不要记入项目目标"
+},
+{
+"ts": 1778583076.7967901,
+"source": "weixin",
+"session_id": "20260512_184819_d814ae",
+"msg_id": 18163,
+"kind": "real",
+"content": "他的cc的hook怎么实现的，hermes完全没有类似机制实现吗，例如收到停止信号？"
+},
+{
+"ts": 1778583977.939821,
+"source": "weixin",
+"session_id": "20260512_184819_d814ae",
+"msg_id": 18189,
+"kind": "real",
+"content": "那为什么不能模仿cc的stop用这个endhook去完成cc的ralph功能"
+},
+{
+"ts": 1778585060.6190772,
+"source": "weixin",
+"session_id": "20260512_191705_f73d7f",
+"msg_id": 18213,
+"kind": "real",
+"content": "那你试试？另外，cc的stop hook只是机械的，没有你想的说可以检查查什么，所以，\n\n我只需要你完成，遇到停止，注入prompt这个功能，保持稳定不断"
+},
+{
+"ts": 1778585554.8681788,
+"source": "weixin",
+"session_id": "20260512_192609_720089",
+"msg_id": 18275,
+"kind": "real",
+"content": "啊？那这个可以做成skill让你自己用起来试试吗"
+},
+{
+"ts": 1778598721.135872,
+"source": "cli",
+"session_id": "20260512_230947_d9f631",
+"msg_id": 18320,
+"kind": "real",
+"content": "你好》"
+},
+{
+"ts": 1778599309.139009,
+"source": "weixin",
+"session_id": "20260512_192609_720089",
+"msg_id": 18333,
+"kind": "real",
+"content": "别重启"
+},
+{
+"ts": 1778599378.75298,
+"source": "weixin",
+"session_id": "20260512_192609_720089",
+"msg_id": 18335,
+"kind": "real",
+"content": "这些应该不用重启吧，你看看ralph loop那个插件或者skill，agent执行就开始工作了，"
+},
+{
+"ts": 1778599438.612705,
+"source": "weixin",
+"session_id": "20260512_192609_720089",
+"msg_id": 18338,
+"kind": "real",
+"content": "而且你为什么搞得这么复杂，收到停止信号然后重新注入prompt就可以了吧"
+},
+{
+"ts": 1778599620.276513,
+"source": "cli",
+"session_id": "20260512_230947_d9f631",
+"msg_id": 18345,
+"kind": "real",
+"content": "我的微信渠道以及webui连接不上了，怎么办"
+},
+{
+"ts": 1778599656.8222752,
+"source": "weixin",
+"session_id": "20260512_192609_720089",
+"msg_id": 18397,
+"kind": "real",
+"content": "那注入prompt能不能变成模仿用户去发一条这样的消息"
+},
+{
+"ts": 1778600701.4712179,
+"source": "weixin",
+"session_id": "20260512_233247_7a2269",
+"msg_id": 18404,
+"kind": "real",
+"content": "然后把提醒内容改成ralph-global这个内容"
+},
+{
+"ts": 1778600946.383611,
+"source": "weixin",
+"session_id": "20260512_233247_7a2269",
+"msg_id": 18462,
+"kind": "real",
+"content": "为啥一定要重启，你开始那个脚本，就像cc一样，不就禁言了吗"
+},
+{
+"ts": 1778600959.950816,
+"source": "weixin",
+"session_id": "20260512_233247_7a2269",
+"msg_id": 18463,
+"kind": "real",
+"content": "而且检测的不应该是循环，而是停止的信号"
+},
+{
+"ts": 1778601255.946631,
+"source": "weixin",
+"session_id": "20260512_235415_8bf601",
+"msg_id": 18468,
+"kind": "real",
+"content": "就是那个hermes里面agent：end的hook"
+},
+{
+"ts": 1778601809.498163,
+"source": "weixin",
+"session_id": "20260512_235415_8bf601",
+"msg_id": 18475,
+"kind": "real",
+"content": "不对吧，应该是agent消息发送完的信号吧"
+},
+{
+"ts": 1778601928.735466,
+"source": "weixin",
+"session_id": "20260512_235415_8bf601",
+"msg_id": 18501,
+"kind": "real",
+"content": "如果没有那就记录，方便下次找"
+},
+{
+"ts": 1778602177.8218062,
+"source": "weixin",
+"session_id": "20260512_235415_8bf601",
+"msg_id": 18504,
+"kind": "real",
+"content": "知道具体记录在哪个项目吗，以及总的工作区索引能不能找到你的记录"
+},
+{
+"ts": 1778636668.803421,
+"source": "weixin",
+"session_id": "20260513_093236_7f61aae5",
+"msg_id": 19192,
+"kind": "real",
+"content": "对了，一句题外话，别人说Hermes可以自我进化，是怎么进化的"
+},
+{
+"ts": 1778637569.109846,
+"source": "weixin",
+"session_id": "20260513_095500_927cc4",
+"msg_id": 19262,
+"kind": "real",
+"content": "还有，那个stophook到底怎么样了，可以收到停止然后触发注入（模仿用户发信息）吗"
+},
+{
+"ts": 1778637769.365803,
+"source": "weixin",
+"session_id": "20260513_095500_927cc4",
+"msg_id": 19291,
+"kind": "real",
+"content": "有写入TASKS吗"
+},
+{
+"ts": 1778637843.572299,
+"source": "weixin",
+"session_id": "20260513_095500_927cc4",
+"msg_id": 19310,
+"kind": "real",
+"content": "你有看自己上下文吗，为什么感觉老重复"
+},
+{
+"ts": 1778638382.918211,
+"source": "weixin",
+"session_id": "20260513_100949_e7ed3e",
+"msg_id": 19323,
+"kind": "real",
+"content": "datalist，我只是记得似乎是这个名字，然后，他不在本地，你得去github搜索\n\n我说的因子评估等等是，用统计学手段，通过最近的期刊信息，判断你写的文章有多大概率能符合标准，而不是模糊判断\n\n拓展的，这个统计学分析手段可以扩展到更多的预测手段，包括经济，社会，人口，财政，模因漂移等等\n\n你说的bash外循环究竟是什么机制，我只想问能否满足stophook最基础的功能，监听ai的结束输出事件，模仿用户发消息提醒"
+},
+{
+"ts": 1778638921.547648,
+"source": "weixin",
+"session_id": "20260513_100949_e7ed3e",
+"msg_id": 19337,
+"kind": "real",
+"content": "1.最好可以复用现成的数据分析skill，不是这个名字你也可以去github找类似的\n\n我需要的是通用的数据分析skill，遇到任何项目可以根据数据集快速构建，你单独构建，不方便，不能复用\n\n2.但是你说hermes有类似cc的结束事件hook，而且你做了比较久，你先看看continue那个项目进展，先把这个做完\n\n3."
+},
+{
+"ts": 1778638940.447523,
+"source": "weixin",
+"session_id": "20260513_100949_e7ed3e",
+"msg_id": 19368,
+"kind": "real",
+"content": "不是，那cc的stophook是怎么让agent重新工作的"
+},
+{
+"ts": 1778639833.760851,
+"source": "weixin",
+"session_id": "20260513_102513_d5a9d1",
+"msg_id": 19384,
+"kind": "real",
+"content": "你不是看到了类似的吗，就是那个agent：end事件"
+},
+{
+"ts": 1778640011.407184,
+"source": "weixin",
+"session_id": "20260513_102513_d5a9d1",
+"msg_id": 19432,
+"kind": "real",
+"content": "可以，\n\n你先记录你的发现到continue的project\n\n然后尽可能做的简洁，遵照2loop规范，模块，接口"
+},
+{
+"ts": 1778640415.2255082,
+"source": "weixin",
+"session_id": "20260513_104542_3af214",
+"msg_id": 19476,
+"kind": "real",
+"content": "所以cc为什么能在准备退出的时候触发，脚本模仿用户再发消息有什么困难"
+},
+{
+"ts": 1778640472.755117,
+"source": "weixin",
+"session_id": "20260513_104542_3af214",
+"msg_id": 19490,
+"kind": "real",
+"content": "啥，那为啥不能模仿用户在cli去发消息"
+},
+{
+"ts": 1778640655.2421691,
+"source": "weixin",
+"session_id": "20260513_104542_3af214",
+"msg_id": 19495,
+"kind": "real",
+"content": "或者模仿cc的stophook？我感觉很奇怪，阻止退出，怎么可能卡那么准，感觉也是退出但是通过同一个渠道投递了消息？"
+}
+]

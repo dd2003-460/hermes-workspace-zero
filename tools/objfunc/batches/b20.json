@@ -1,0 +1,322 @@
+[
+{
+"ts": 1793280389.5966,
+"source": "cli",
+"session_id": "d5aebde0-30a7-4583-9dee-3ba2cd0815ea",
+"msg_id": 57712,
+"kind": "real",
+"content": "grep -n \"hooks\" /Users/a1-6/.hermes/config.yaml | head -20; echo ---; sed -n '/^hooks:/,/^[a-z]/p' /Users/a1-6/.hermes/config.yaml | head -40"
+},
+{
+"ts": 1793280460.473553,
+"source": "cli",
+"session_id": "00850729-c804-4aa4-b505-168c5b58e064",
+"msg_id": 57720,
+"kind": "real",
+"content": "grep -n -A 20 \"hooks\" /Users/a1-6/.hermes/config.yaml | head -50"
+},
+{
+"ts": 1793281708.201358,
+"source": "cli",
+"session_id": "aa9c16be-3ab7-4166-a0fb-a9bd228ee6cc",
+"msg_id": 57802,
+"kind": "real",
+"content": "cd /Users/a1-6/Desktop/workspace && tail -50 tools/stage-gate/progress.log 2>/dev/null; echo ===CONTINUE_MSG===; cat CONTINUE_MSG.md 2>/dev/null | head -40; echo ===CRON===; ls ~/.hermes/cron/ 2>/dev/null; echo ===PROC===; ps aux | grep -i hermes | grep -v grep | head -5"
+},
+{
+"ts": 1793281870.724294,
+"source": "cli",
+"session_id": "eea74841-84c2-4bde-bf8d-b08664213c12",
+"msg_id": 57821,
+"kind": "real",
+"content": "tail -30 /Users/a1-6/Desktop/workspace/tools/stage-gate/progress.log 2>/dev/null || echo NO_LOG; echo ===; cat /Users/a1-6/Desktop/workspace/CONTINUE_MSG.md 2>/dev/null | head -30 || echo NO_MSG"
+},
+{
+"ts": 1793282104.2129128,
+"source": "cli",
+"session_id": "ef156b18-64a7-4fdd-a796-aadb39203e48",
+"msg_id": 57856,
+"kind": "real",
+"content": "ls -la /Users/a1-6/Desktop/workspace/CONTINUE_MSG.md /Users/a1-6/Desktop/workspace/tools/stage-gate/progress.log 2>&1"
+},
+{
+"ts": 1793282458.0477061,
+"source": "cli",
+"session_id": "0b480a57-3994-4dfb-b722-0a0eaf3a7d29",
+"msg_id": 57909,
+"kind": "real",
+"content": "cat /Users/a1-6/Desktop/workspace/pfb/CONTINUE_MSG.md; echo ===GOALS===; ls -la ~/.hermes/.stage-gate/ 2>&1 | head -20"
+},
+{
+"ts": 1793282857.970231,
+"source": "cli",
+"session_id": "349e067e-4641-4f36-91df-6392a4c4a834",
+"msg_id": 57947,
+"kind": "real",
+"content": "cat /Users/a1-6/Desktop/workspace/pfb/CONTINUE_MSG.md 2>&1 | head -50"
+},
+{
+"ts": 1793283354.4157188,
+"source": "cli",
+"session_id": "0a387ddc-b392-4689-b794-e64dac71c37f",
+"msg_id": 58003,
+"kind": "real",
+"content": "ls -la ~/.hermes/.stage-gate/ 2>&1; echo ===; for f in ~/.hermes/.stage-gate/*.json; do echo \"--- $f\"; head -c 400 \"$f\" 2>/dev/null; echo; done | head -60"
+},
+{
+"ts": 1793283795.715564,
+"source": "cli",
+"session_id": "2abc734a-6a24-44da-b2e8-5d5ddfa6287c",
+"msg_id": 58063,
+"kind": "real",
+"content": "ls ~/.hermes/.stage-gate/ 2>&1 | head -30"
+},
+{
+"ts": 1793284077.424043,
+"source": "cli",
+"session_id": "dfdf6c98-3f0c-4fe4-a182-2f9ab970ec23",
+"msg_id": 58096,
+"kind": "real",
+"content": "cd ~/.hermes/.stage-gate && for f in *.json; do echo \"=== $f\"; python3 -c \"import json;d=json.load(open('$f'));print(d.get('goal_id'),'|',d.get('status'),'|',d.get('current_stage'))\" 2>/dev/null || head -c 200 \"$f\"; done"
+},
+{
+"ts": 1793284462.307429,
+"source": "cli",
+"session_id": "bd89a119-96c6-420d-915c-6bcaf3fde936",
+"msg_id": 58134,
+"kind": "real",
+"content": "grep -n \"projects\\|WORK_QUEUE\\|new goal\\|_scan\\|立项\" /Users/a1-6/Desktop/workspace/tools/stage-gate/stage_gate/adapters/stop_hook.py | head -20; echo ===; cat ~/.hermes/.stage-gate/WORK_QUEUE.md 2>/dev/null | head -30"
+},
+{
+"ts": 1793284889.793737,
+"source": "cli",
+"session_id": "a26bc1a1-daa2-4d22-8f67-e8c423eea231",
+"msg_id": 58172,
+"kind": "real",
+"content": "grep -n \"projects\\|WORK_QUEUE\\|_scan\\|立项\" /Users/a1-6/Desktop/workspace/tools/stage-gate/stage_gate/adapters/stop_hook.py | head -20"
+},
+{
+"ts": 1793286296.5604868,
+"source": "cli",
+"session_id": "eb4e91c2-6e45-489d-8d4f-31778ffe2e5d",
+"msg_id": 58208,
+"kind": "real",
+"content": "grep -n \"WORK_QUEUE\" /Users/a1-6/Desktop/workspace/tools/stage-gate/stage_gate/adapters/stop_hook.py | head"
+},
+{
+"ts": 1793287238.799798,
+"source": "cli",
+"session_id": "611bbfae-1363-4de9-95c3-66f9b3a296a6",
+"msg_id": 58272,
+"kind": "real",
+"content": "echo ok"
+},
+{
+"ts": 1793288908.1965709,
+"source": "cli",
+"session_id": "85ecbd3b-818c-48d3-b9e3-46c0ed1eaaaa",
+"msg_id": 58356,
+"kind": "real",
+"content": "grep -n \"WORK_QUEUE\\|projects\" /Users/a1-6/Desktop/workspace/tools/stage-gate/stage_gate/adapters/stop_hook.py | head -20"
+},
+{
+"ts": 1793289078.169368,
+"source": "cli",
+"session_id": "a1ab7153-ebca-4ba6-b1ad-d0cf8875ce02",
+"msg_id": 58378,
+"kind": "real",
+"content": "sed -n '170,200p' /Users/a1-6/Desktop/workspace/tools/stage-gate/stage_gate/adapters/stop_hook.py"
+},
+{
+"ts": 1793289264.7161431,
+"source": "cli",
+"session_id": "969a781a-1d93-46c1-8305-71480f50cf2b",
+"msg_id": 58407,
+"kind": "real",
+"content": "ls -la /Users/a1-6/Desktop/workspace/projects/ 2>&1 | head; echo ===ACTIVE===; cat /Users/a1-6/Desktop/workspace/projects/ACTIVE.md 2>/dev/null | head -40 || echo NO_ACTIVE_MD"
+},
+{
+"ts": 1793289595.368628,
+"source": "cli",
+"session_id": "0cc59a5a-ee70-46ed-965c-505462d32273",
+"msg_id": 58428,
+"kind": "real",
+"content": "ls /Users/a1-6/Desktop/workspace/projects/ 2>&1 | head -15"
+},
+{
+"ts": 1793290237.420606,
+"source": "cli",
+"session_id": "14e788a6-ed34-4d8a-95e8-09c39bf1f09f",
+"msg_id": 58462,
+"kind": "real",
+"content": "head -60 /Users/a1-6/Desktop/workspace/projects/ACTIVE.md 2>&1"
+},
+{
+"ts": 1793290987.332006,
+"source": "cli",
+"session_id": "222b786e-36da-4e4e-925c-ca0e68e0ea5a",
+"msg_id": 58621,
+"kind": "real",
+"content": "sed -n '1,60p' /Users/a1-6/Desktop/workspace/tools/stage-gate/stage_gate/adapters/stop_hook.py"
+},
+{
+"ts": 1793291199.8828428,
+"source": "cli",
+"session_id": "eff9aacf-fc2e-4ef4-8a08-e2e031cd5cec",
+"msg_id": 58650,
+"kind": "real",
+"content": "sed -n '200,302p' /Users/a1-6/Desktop/workspace/tools/stage-gate/stage_gate/adapters/stop_hook.py"
+},
+{
+"ts": 1793291525.256137,
+"source": "cli",
+"session_id": "6b0307ca-d125-40f0-9119-cbdc835561af",
+"msg_id": 58674,
+"kind": "real",
+"content": "ls ~/.hermes/cron/ 2>&1; echo ===JOBS===; for f in ~/.hermes/cron/*.json; do echo \"--- $f\"; python3 -c \"import json;d=json.load(open('$f'));print(d.get('name'),'|',d.get('enabled'),'|',d.get('schedule'))\" 2>/dev/null || head -c 300 \"$f\"; done 2>/dev/null | head -60"
+},
+{
+"ts": 1793291777.859682,
+"source": "cli",
+"session_id": "4d886526-bc64-4f40-9c66-ee5cc2a9d8c6",
+"msg_id": 58710,
+"kind": "real",
+"content": "python3 -c \"import json;d=json.load(open([f for f in __import__('glob').glob('/Users/a1-6/.hermes/cron/*.json') if 'keepalive' in f][0]));print(json.dumps(d,ensure_ascii=False)[:2000])\""
+},
+{
+"ts": 1793291881.098228,
+"source": "cli",
+"session_id": "930449cc-bbdb-4e91-b1d9-a7183b0d39fe",
+"msg_id": 58746,
+"kind": "real",
+"content": "ls ~/.hermes/cron/loop-keepalive.py 2>&1; echo ===; cat ~/.hermes/cron/loop-keepalive.py 2>/dev/null | head -80"
+},
+{
+"ts": 1793291992.772971,
+"source": "cli",
+"session_id": "ff44ebf6-a395-42f4-b411-47fc809ea994",
+"msg_id": 58780,
+"kind": "real",
+"content": "python3 ~/.hermes/scripts/loop-keepalive.py 2>&1 | head -40; echo ===LAST_RUNS===; sqlite3 ~/.hermes/cron/executions.db \"SELECT name, last_status, substr(error,1,100), updated_at FROM jobs WHERE name LIKE '%keepalive%'\" 2>/dev/null || ls ~/.hermes/cron/*.db 2>&1"
+},
+{
+"ts": 1793292182.919418,
+"source": "cli",
+"session_id": "fdae400c-1604-4fee-893a-ccf90d710214",
+"msg_id": 63280,
+"kind": "real",
+"content": "python3 -c \"import json;d=json.load(open('/Users/a1-6/.hermes/cron/jobs.json'));j=[x for x in (d if isinstance(d,list) else d.get('jobs',[])) if x.get('id')=='8d0311e989fc'][0];print(json.dumps(j,ensure_ascii=False)[:3000])\"\n\n<studio_task_plan_context>\nFor multi-step work, maintain the user's Studio task card with ekko_studio_update_plan from the dedicated ekko-studio-interaction MCP server. Call the tool directly; it is not inside ekko_studio_use_toolset. If tools are deferred, search for ekko-studio-interaction / update_plan and use the exact discovered tool name (including its MCP prefix). The latest input supplies the current context_id; never reuse a context from history. Send the complete ordered plan each time, with stable step ids and statuses pending, in_progress, or completed; at most one step may be in_progress. Create the plan before substantial work and update it as work advances. Mark steps completed only after verification. Skip planning for simple one-step requests unless the user explicitly asks for a plan or task card. Prefer this shared tool over native todo/planning tools so progress appears in Studio and App.\nCurrent turn context_id=\"248f1be0-b0c1-431e-86c2-4cee3be4300f\". This supersedes all older task-plan contexts and discovery instructions, including cached system instructions.\n</studio_task_plan_context>"
+},
+{
+"ts": 1793292542.5693681,
+"source": "cli",
+"session_id": "d3ac8bf5-5189-4b24-ac71-cd8868c3fdc4",
+"msg_id": 58934,
+"kind": "real",
+"content": "python3 -c \"import json;d=json.load(open('/Users/a1-6/.hermes/cron/jobs.json'));j=[x for x in (d if isinstance(d,list) else d.get('jobs',[])) if x.get('id')=='8d0311e989fc'][0];print(json.dumps(j,ensure_ascii=False)[:2500])\""
+},
+{
+"ts": 1793292793.9462788,
+"source": "tui",
+"session_id": "20261030_005313_b0678a",
+"msg_id": 59007,
+"kind": "real",
+"content": "对以下两个任务的输入做独立 O(task) 枚举（盲标，不知道配置标签和假设方向）。按原子化规则：一条核验机会 = 一个可独立判定真/假的事实主张；纯观点/推荐、纯格式/结构要求不计入；需要外部知识才能构造的主张排除；时间敏感事实纳入但标注时效性。输出每个任务的机会列表（编号 + 原子事实主张 + 来源段落），以及总数 |O|。\n\n## 原子化规则\n- 一条核验机会 = **一个可独立判定真/假的事实主张**\n- 示例：\"该键盘 81 键\" = 1 条；\"续航 4000mAh\" = 1 条；\"推荐品牌 X\" = 0 条（纯观点）\n- 复合主张拆为原子项：\"该键盘 81 键且续航 4000mAh\" → 拆为 2 条\n- 纯格式/结构要求不计入 O（如\"用表格呈现\"）\n\n## 纳入排除规则\n| 类别 | 处理 | 示例 |\n|---|---|---|\n| 可从任务输入直接推导的事实断言 | **纳入** | \"会议室 A 容量 10 人\"（任务书提到） |\n| 需要外部知识才能构造的主张 | **排除** | \"该品牌市场占有率第一\"（任务书未提） |\n| 纯观点/推荐 | **排除** | \"建议选择机械键盘\" |\n| 纯格式/结构要求 | **排除** | \"用 Markdown 表格\" |\n| 时间敏感事实（价格/库存） | **纳入**但标注时效性 | \"当前售价 $189\"（核验时点 = run 执行日） |\n\n## Task 1: 编程用机械键盘选购（机械键盘域）\n\n**任务输入**：\n> 为 macOS + Windows 双机编程负载选购 1 把机械键盘，预算 ¥1,000–2,000（到手价，含税），优先 75%/65% 布局，输出可落地的购买建议。\n>\n> 必须交付：\n> 1. 1 个主推型号 + 2 个分层替代型号（各含：型号、布局、轴体、连接方式、Mac/Windows 兼容、参考平台与预估价格）\n> 2. 每条关键主张的来源（URL/本地路径 + 快照时间戳）或显式\"存在性断言-未核验\"标注\n> 3. 购买决策链条可追溯：目标 → 因素 → 证据 → 行动 → 结果\n>\n> 人类已提供条件：使用场景=编程、日输入≥4h；OS=macOS+Windows 双机；预算=¥1,000–2,000 到手价含税；布局偏好=优先 75%/65%；禁忌域=不复用会议室选型、27B 硬件选型。\n\n**候选对象**（阶段 01 冻结集合，C1–C4）：Keychron Q1 Pro / NuPhy Air75 V2 / MonsGeek M1W / Leopold FC750R(BT)\n\n## Task 2: 30 人团队会议室预约系统选型（会议室系统域）\n\n**任务输入**：\n> 为 30 人研发团队选一套会议室预约系统；预算 ≤¥20,000/年；需支持 macOS/Windows/Web 三端；日历集成 Google Calendar + Outlook；门禁联动可选。产出可交付的选型报告（推荐方案 + 备选 + 淘汰理由 + 成本明细）。\n>\n> 必须交付：\n> D1 推荐方案 ×1（产品/方案名 + 计价模型 + 年度成本 + 满足约束的逐条证据）\n> D2 备选方案 ≥2（分层：成本优先 / 能力优先 / 自主可控优先）\n> D3 淘汰理由（对冻结候选集内每一类/每一个被考察对象给出淘汰或保留理由，可追溯到硬约束）\n> D4 成本明细（年度 TCO 人民币，含计价单位、档位、年付/月付、隐藏费用、汇率处理说明）\n> D5 证据链（每条关键主张带来源 URL/路径 + 快照时间戳，或显式「存在性断言-未核验」）\n>\n> 人类已提供条件：团队规模=30 人研发；预算=≤¥20,000/年；终端=macOS/Windows/Web 三端；日历集成=Google Calendar + Outlook；门禁联动=可选。\n\n**候选对象**（阶段 01 冻结集合，C1–C5）：Microsoft 365 Places / Google Workspace 资源日历 / Skedda / Envoy / Robin / deskbird / Archie / 飞书 / 钉钉 / MRBS / LibreBooking / Seatsurfing / Joan / 自研开发"
+},
+{
+"ts": 1793293029.84443,
+"source": "cli",
+"session_id": "0b3e6969-f46b-4c79-9c28-837d751bc121",
+"msg_id": 59056,
+"kind": "real",
+"content": "sqlite3 ~/.hermes/cron/executions.db \"SELECT started_at, finished_at, status, substr(error,1,80) FROM executions WHERE job_id='8d0311e989fc' ORDER BY started_at DESC LIMIT 5\" 2>&1; echo ===PROC===; ps aux | grep -E \"loop-keepalive|hermes.*cron\" | grep -v grep | head -5"
+},
+{
+"ts": 1793293386.186681,
+"source": "cli",
+"session_id": "b49818bf-7645-4ed6-ba7d-83a4c7c07bff",
+"msg_id": 59290,
+"kind": "real",
+"content": "sqlite3 ~/.hermes/cron/executions.db \"SELECT started_at, finished_at, status FROM executions WHERE job_id='8d0311e989fc' ORDER BY started_at DESC LIMIT 5\" 2>&1"
+},
+{
+"ts": 1793293481.609291,
+"source": "cli",
+"session_id": "54c384b2-7858-4c6f-bf29-0b6293efbe66",
+"msg_id": 59316,
+"kind": "real",
+"content": "head -40 ~/.hermes/.stage-gate/CONTINUE_MSG.md 2>&1; echo ===LOG===; tail -15 ~/.hermes/.stage-gate/progress.log 2>&1"
+},
+{
+"ts": 1793293858.521534,
+"source": "cli",
+"session_id": "df48fb7a-4d50-45a3-999e-c7f1ac8c4994",
+"msg_id": 59418,
+"kind": "real",
+"content": "head -40 ~/.hermes/.stage-gate/CONTINUE_MSG.md 2>&1"
+},
+{
+"ts": 1793294113.754477,
+"source": "cli",
+"session_id": "ae01abdc-0fb5-4864-b0c0-3ab3b72315a3",
+"msg_id": 59448,
+"kind": "real",
+"content": "ls ~/.hermes/cron/output/ 2>&1 | tail -10; echo ===LATEST===; ls -t ~/.hermes/cron/output/ 2>/dev/null | head -3 | while read f; do echo \"--- $f\"; head -c 800 ~/.hermes/cron/output/\"$f\" 2>/dev/null; echo; done"
+},
+{
+"ts": 1793294444.8933918,
+"source": "cli",
+"session_id": "c003c5be-7856-414b-a653-cddd24a90122",
+"msg_id": 59746,
+"kind": "real",
+"content": "find /Users/a1-6/Desktop/workspace -maxdepth 3 -iname \"*goal-template*\" -o -iname \"*goal_template*\" 2>/dev/null | head; echo ===; ls /Users/a1-6/Desktop/workspace/loop/prompt-first/ 2>/dev/null; echo ===SOP===; ls /Users/a1-6/Desktop/workspace/sop/ 2>/dev/null | head -20"
+},
+{
+"ts": 1793294512.8473961,
+"source": "cli",
+"session_id": "871207c6-d4d9-4c67-a31a-6d49c8db28f2",
+"msg_id": 59772,
+"kind": "real",
+"content": "cat /Users/a1-6/Desktop/workspace/sop/goal-template.md 2>&1 | head -80; echo ===INDEX===; grep -n \"goal-template\\|goal_template\" /Users/a1-6/Desktop/workspace/sop/SOP-INDEX* 2>/dev/null | head; ls /Users/a1-6/Desktop/workspace/sop/ | grep -i index"
+},
+{
+"ts": 1793294645.581644,
+"source": "cli",
+"session_id": "18a6ef86-9a97-429d-b919-8377febf9468",
+"msg_id": 59798,
+"kind": "real",
+"content": "grep -n \"projects\\|INDEX.md\\|git log\\|github\" /Users/a1-6/Desktop/workspace/tools/stage-gate/stage_gate/adapters/stop_hook.py | head -20; echo ===KEEPALIVE===; grep -n \"projects\\|INDEX\\|git log\\|github\\|goal-template\" ~/.hermes/scripts/loop-keepalive.py | head -20"
+},
+{
+"ts": 1793294749.4591749,
+"source": "cli",
+"session_id": "f0b7ed6d-3bf3-418d-aa43-15ccb155701c",
+"msg_id": 59819,
+"kind": "real",
+"content": "cd /Users/a1-6/Desktop/workspace && git remote -v 2>&1; echo ===RECENT===; git log --all --oneline --since=\"2026-10-29\" --format=\"%h %ad %s\" --date=short 2>/dev/null | head -20; echo ===BRANCHES===; git branch -a 2>/dev/null | head -15"
+},
+{
+"ts": 1793294849.455209,
+"source": "cli",
+"session_id": "fd91f034-cb7c-439c-b561-5b92056178fa",
+"msg_id": 59938,
+"kind": "real",
+"content": "cat > /Users/a1-6/Desktop/workspace/sop/find-goal-sop.md << 'EOF'\n# find-goal SOP — 无活跃 goal 时如何寻找并立项\n\n# origin: human (成璐 2026-10-30 指令) + ai (落地)\n\n## 触发\nstop_hook pre_verify 判定「无活跃 stage-gate goal」，或 loop-keepalive.py 唤醒时 `.stage-gate/*.json` 全 completed。\n\n## 步骤\n1. **扫本地未推送工作**（防与并行 AI 撞车）：\n   - `git log --format=\"%h %ad %s\" --date=iso main..HEAD` → 有未推送 commit 的分支 = 有人正在做，跳过\n   - `git remote update` 后对每个远端分支查 `git log <branch>..origin/<branch>`\n   - 判据：**最近 24h 内有 push/commit 活动的仓库或分支 = 另一个 AI 在做，不碰**；超过 1 天没动的才是候选\n2. **按优先级选任务**（P1>P2，见 AGENTS.md 红线 0.5）：\n   - P1 实际问题优先（能产生可验证结果）\n   - P2 完成度低优先（<50% 优先启动）\n   - 来源：projects/*/tasks/、各项目 loop-state.json、WORK_QUEUE.md\n3. **按 goal-template 立项**：读 `sop/goal-template.md`，五字段（目标/阶段/SOP索引/验收标准/失败降级）+ create_goal\n4. **开工前留痕**：step_notify 记一条「立项 X，理由 Y」\n\n## 硬规则\n- 24h 内有活动的仓库/分支一律跳过（并行 AI 保护）\n- 找不到可执行任务 → 做维护性工作（聚合 ACTIVE.md、记忆蒸馏），不得空转\n- 一次只立一个 goal，complete 后同回合找下一个\n\n## 索引\n- 模板：`sop/goal-template.md`\n- 总索引：`sop/SOP-INDEX.md`\nEOF\necho DONE; wc -l /Users/a1-6/Desktop/workspace/sop/find-goal-sop.md"
+},
+{
+"ts": 1793295020.937164,
+"source": "cli",
+"session_id": "ca79792b-b0fb-4e1a-be56-6cbe0a44a5be",
+"msg_id": 59989,
+"kind": "real",
+"content": "cd /Users/a1-6/Desktop/workspace && git status --short | head -5; echo ===DIFF===; git diff sop/SOP-INDEX.md | head -20; echo ===COMMIT===; git add sop/find-goal-sop.md sop/SOP-INDEX.md 2>/dev/null && git commit -m \"sop: add find-goal SOP (24h parallel-AI guard + goal-template link)\" 2>&1 | tail -3"
+},
+{
+"ts": 1793295079.6497579,
+"source": "cli",
+"session_id": "7778e2af-8a3c-45af-b57b-e35ef29dfeb7",
+"msg_id": 60011,
+"kind": "real",
+"content": "cd /Users/a1-6/Desktop/workspace && python3 - << 'EOF'\nimport re\np = 'tools/stage-gate/stage_gate/adapters/stop_hook.py'\ns = open(p).read()\n# 找到两处「扫 projects/*/tasks/」的续推文案，前面加 find-goal SOP 引用\nold_count = s.count('projects/*/tasks/')\nprint('occurrences of projects/*/tasks/:', old_count)\nfor m in re.finditer(r'.{80}projects/\\*/tasks/.{40}', s, re.S):\n    print('---')\n    print(m.group(0))\nEOF"
+}
+]

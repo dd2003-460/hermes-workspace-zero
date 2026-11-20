@@ -1,6 +1,6 @@
 # K^t 压缩-泛化框架 v1
 # origin: ai（D 驱动推导 S27-S33，2026-11-21）
-# 状态：v1 canonical 版。操作规则见 ~/.hermes/rules/hierarchy-analysis.md 推论 5（本文是推导源，规则是操作导出）。
+# 状态：v1.1 canonical 版（v1.1 = 补条件集 C schema，T8）。操作规则见 ~/.hermes/rules/hierarchy-analysis.md 推论 5（本文是推导源，规则是操作导出）。
 # 实证锚：T53b gpu 域 5run 全量 L3/L4=1584 实测（11 模式 / 144x / 信息密度 0.7%）。
 
 ## 准则（一条，其余全是它的导出）
@@ -43,16 +43,42 @@
 13. **正交维度机判判据**：覆盖（K^t 模式覆盖 vs gold 树）、可靠（验证通过率）、新鲜（条件域漂移检测）、适用条件域（C 集标注完备性）。每轴独立判，不合成单一分数（合成 = 丢正交性 = 9 的退化）。
 14. **新鲜度 = 条件域漂移检测**：mtp 发布 → C 变 → 缓存 f(H) 自动失效。
 
+## 条件集 C schema（T8，v1.1 补）
+
+```json
+{
+  "func_id": "throughput_eff",
+  "func_form": "f(H) = base_eff × bw_util × compute_util",
+  "conditions": [
+    {"name": "mtp",        "value": "off",      "type": "config",   "source": "explicit_param", "sensitivity": "concept",   "drift_sensitive": true},
+    {"name": "precision",  "value": "bf16",     "type": "config",   "source": "explicit_param", "sensitivity": "covariate", "drift_sensitive": false},
+    {"name": "topology",   "value": "single_gpu", "type": "hardware", "source": "derived",      "sensitivity": "concept",   "drift_sensitive": true},
+    {"name": "model_type", "value": "dense",    "type": "workload", "source": "explicit_param", "sensitivity": "covariate", "drift_sensitive": false}
+  ],
+  "derived_from": "T53b gpu r01-r05",
+  "observed_at": "2026-11-21T03:00+08:00"
+}
+```
+
+字段判据：
+- **type**：config（软件配置）/ hardware（硬件形态）/ workload（负载类型）。
+- **source**：explicit_param（推导时显式给定）/ derived（从其他条件推出）/ assumed（隐含假设，未显式声明——**unknown unknowns 的主要来源**，推导后必须回填）。
+- **sensitivity**：该条件变化时函数怎么变——`concept`（函数结构变，concept drift → 重推）/ `covariate`（只改参数，骨架复用）/ `inert`（不影响）。这是 C' vs C 三分类的机判依据：C' 里某条件值 ≠ C 里对应值 → 查 sensitivity：concept → 重推；covariate → 修正参数；inert → 忽略。C' 有 C 没有的条件 → 新维度，默认按 concept 处理（保守，防错误外推），标 [待标定]。
+- **drift_sensitive**：该条件是否随时间漂移（mtp 发布/新硬件上市 → true）。新鲜度检测 = 只扫 drift_sensitive=true 的条件（IV.14 的操作化）。
+
+最小完备性检验：一个 f(H) 的 C 集缺条件 = 该条件被隐含假设了但没声明 = unknown unknown。检验方法：换一个该条件的值重推，若函数结构变而 C 集没标 → C 集不完备，补条件。
+
 ## 已知缺口（诚实标注）
 
 - **因果验证**：judge 给相关性判断，transportability 检验需要因果结构（do 操作 vs 观察变量），需要因果图基础设施 [待展开]
 - **微架构效率缺口**：系统模型有 Roofline（带宽×算力），无 SM 级效率 [待调研]
 - **K 下界 14 原子是 5-run 实测**，62-run 全量复测待做 [T53b D1]
-- **条件集 C 的 schema** 未定（字段列表/值域/来源）[待设计]
+- ~~**条件集 C 的 schema** 未定~~ **已定（v1.1，T8）**：见上节。待验证：62-run 数据上回填 C 集，检验最小完备性
 
 ## 版本记录
 
 - **v1（2026-11-21）**：S27（K^t 量化）→ S28（直积+推理/计算分离）→ S29（目标函数=K 下界定义）→ S30（条件集 C）→ S31（压缩域 vs 泛化域）→ S32（目标函数=完整性约束、正交防退化）→ S33（版本化+拆分是阶段性目标）。
+- **v1.1（2026-11-21）**：补条件集 C schema（T8）：字段判据（type/source/sensitivity/drift_sensitive）+ C' vs C 三分类机判规则 + 最小完备性检验。待 62-run 数据回填验证。
 - 推导过程（D 原话 + 我的错误 + 修正）：`objfunc-signal-log.md` S27-S33。
 - 操作规则导出：`~/.hermes/rules/hierarchy-analysis.md` 推论 4-5。
 - 实证数据：`pfb/tasks/T53-bus/anomaly-watchlist.md`（K^t 指标节）。

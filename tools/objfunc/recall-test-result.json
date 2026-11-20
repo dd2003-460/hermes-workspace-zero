@@ -1,0 +1,52 @@
+{
+  "generated_at": "2026-11-20T18:30:00+08:00",
+  "questions": [
+    {
+      "question": "Q1: pfb 的 stage-ablation 实验结果应该 push 到哪个 git remote？它和 workspace 主仓库是什么关系？",
+      "answer": "push 到 pfb 自己的独立 remote `https://github.com/dd2003-460/prompt-first-bench.git`（pfb 仓库的 origin，当前分支 tmp-lit-snowball）。关系：pfb 是 workspace 主仓库（remote `https://github.com/dd2003-460/hermes-workspace-zero.git`）里的一个 git 子模块（gitlink）——workspace 根目录 `git ls-files --stage pfb` 返回 `160000 c688ffe2...`（mode 160000 = gitlink），即 pfb 嵌套在主仓库内但拥有自己独立的 git 历史与 remote。主仓库只记录 pfb 的 commit 指针（gitlink），不直接跟踪 pfb 内部文件。因此 stage-ablation 结果在 pfb 仓库内 commit 并 push 到 prompt-first-bench；workspace 主仓库只需更新该 submodule 指针。",
+      "source_type": "b",
+      "source_file": "terminal: git remote -v (pfb 与 workspace 根) + git ls-files --stage pfb (gitlink 160000) + git log (pfb 分支/提交)"
+    },
+    {
+      "question": "Q2: 本机 8787 端口的服务如果挂了，在手动重启它之前应该先检查什么机制？为什么？",
+      "answer": "8787 端口是 launchd 服务 `com.a1-6.claude-vllm-proxy`（node /Users/a1-6/.claude-vllm-proxy/proxy.mjs，vLLM 代理，PID 5418）。手动重启前应先检查它的自动重启机制：①该 plist 配了 KeepAlive=true + RunAtLoad=true + ThrottleInterval=10，进程崩溃后 launchd 会自动拉起；②另有一个 watchdog `com.a1-6.claude-vllm-proxy-watchdog`，StartInterval=120s 每 2 分钟巡检一次，注释写明'半死僵尸最迟 ~4 分钟被复活'。为什么：如果只是进程崩了，KeepAlive/watchdog 会自动恢复，手动重启可能多余甚至和 supervisor 打架；应先区分是'真挂了（launchd 也没拉起）'还是'半死状态（watchdog 还没巡检到）'，并读 /Users/a1-6/.claude-vllm-proxy/proxy.log 里的真实报错再决定是否手动干预。",
+      "source_type": "b",
+      "source_file": "terminal: lsof -iTCP:8787 + ps -p 5418 + launchctl list + ~/Library/LaunchAgents/com.a1-6.claude-vllm-proxy.plist 与 com.a1-6.claude-vllm-proxy-watchdog.plist"
+    },
+    {
+      "question": "Q3: D1-persona-align 项目当前活跃的 goal 和它停在哪一个阶段？",
+      "answer": "活跃 goal = `goal-fb61fede`（loop-state.json 中引用最多，current_task 即其 r11）。停在阶段 stage=`m01255-persona-voice-alignment`，loop_phase=`execution`，iteration 36，status=active，goal 完成度 ~95%（S1-S5 全覆盖，剩余 = APPROVALS 等批 + git 安全全局 SOP）。",
+      "source_type": "b",
+      "source_file": "/Users/a1-6/Desktop/workspace/projects/AI-计算科学/D1-persona-align/loop-state.json (字段 stage/loop_phase/iteration/status/current_task + change_log 中 goal-fb61fede)"
+    },
+    {
+      "question": "Q4: 之前有一次 .hooks/engine.py 挂死导致所有工具调用报错的事故，当时的恢复方法是什么？",
+      "answer": "2026-11-20 的 engine.py pre_tool_call 挂死事故：现象是所有工具调用报 'pre_tool_call plugin callback timed out'，terminal/read/execute_code 全阻塞。恢复方法 = `pkill -f \".hooks/engine.py\"`（hook 每事件会重新拉起，杀掉挂死进程即可恢复）。根因当时标记为[待查]，疑似写 HERMES-MECHANISM.md 期间触发 engine.py 某分支死等；另记录缺口：框架有 30s 超时+skip，但同窗口后续工具调用硬报错而非 skip，且 18:07:35 连带 QQBot WebSocket 断开。",
+      "source_type": "b",
+      "source_file": "/Users/a1-6/Desktop/workspace/memory/fault-index.md (节 '2026-11-20 engine.py pre_tool_call 挂死')"
+    },
+    {
+      "question": "Q5: 写一个 Python 函数，计算斐波那契数列第 n 项（n 从 0 开始，F(0)=0, F(1)=1），要求迭代实现。",
+      "answer": "def fib(n: int) -> int:\n    if n < 0:\n        raise ValueError(\"n must be >= 0\")\n    a, b = 0, 1\n    for _ in range(n):\n        a, b = b, a + b\n    return a\n\n验证：fib(0)=0, fib(1)=1, fib(2)=1, fib(3)=2, fib(5)=5, fib(10)=55。时间 O(n)，空间 O(1)。",
+      "source_type": "c",
+      "source_file": null
+    }
+  ],
+  "meta": {
+    "rule_injection_block_present": true,
+    "note": "第一条任务消息尾部出现了规则注入块（方括号形式 [规则注入 · 常驻 + 本轮命中: ...]，与题目所述【规则注入·常驻 + 本轮命中...】为同一注入机制）。",
+    "hit_rules": [
+      "执行纪律(索引·按需自取)",
+      "自问(常驻)",
+      "自主决策(简短)",
+      "来源三分法(简短)",
+      "安全边界(简短)",
+      "人话解释(简短)",
+      "灵活执行与韧性达成(简短)",
+      "对齐自问(常驻)",
+      "occam"
+    ],
+    "source_type": "a",
+    "source_file": "第一条任务消息（系统/任务上下文）尾部的规则注入块"
+  }
+}

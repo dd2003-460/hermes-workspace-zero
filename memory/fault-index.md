@@ -39,4 +39,4 @@
 - 现象: 所有工具调用报 "pre_tool_call plugin callback timed out", terminal/read/execute_code 全阻塞
 - 恢复: pkill -f ".hooks/engine.py" (hook 每事件重新拉起, 杀进程即可)
 - 根因: [待查] 写 HERMES-MECHANISM.md 期间触发, 疑似 engine.py 某分支死等
-- 缺口: hook 无 watchdog 熔断, 挂死=agent 瘫痪
+- 缺口(修正 11-20): 框架有 30s 超时+skip (agent.log 实锤), 但同窗口后续工具调用硬报错而非 skip; 且 18:07:35 连带 QQBot WebSocket 断开 (用户侧显示"无法连接")

@@ -6,7 +6,7 @@
 | 仓库 | 会话 | taskSpace | 当前任务 | 状态 |
 |------|------|-----------|---------|------|
 | prompt-first-bench | `01a1ca66-5358-7039-bcfa-b2fbf65a5a27` | tpr15-dispatch | T-PR-15 Goodhart 调研 | 🔄 active (11-16) |
-| hermes-workspace-zero | `01a1f80e-4bfe-7566-9e03-52d0423a71ef` | arena-os1-dispatch-20261120 | T-OS-1 碰撞调研 | 🔄 active (11-20) |
+| hermes-workspace-zero | `01a1f80e-4bfe-7566-9e03-52d0423a71ef` | arena-os1-dispatch-20261120 | T-OS-1 完成(Q1-Q4, 撞车ICAL conf0.97); T-OS-2 K复杂度=结构稳定区域内拟合 滚雪球碰撞调研 11-20 19:05 派发 (任务书@9f89ee85, sha256 d2eb9064) | 🔄 active (11-20) |
 
 ## 派发前检查（3 步，防连错仓库最小检查集）
 

@@ -63,10 +63,11 @@
 
 | SOP | 路径 | 说明 |
 |-----|------|------|
-| **验证与结论引用（★ 实验/评分产出必读）** | `sop/verification-sop.md` | 7 条规则：实跑证据验收 / 异族 judge / 功效分析 / 口径限定语 / 负结果登记 / 机判边界 / 混淆变量检查（2026-10-31，从 pfb AUDIT + decomp arena 复核提炼） |
+| **验证与结论引用（★ 实验/评分产出必读）** | `sop/verification-sop.md` | 8 条规则：实跑证据验收 / 异族 judge / 功效分析 / 口径限定语 / 负结果登记 / 机判边界 / 混淆变量检查 / done 对账数据工件（2026-11-20，T53b 记账污染提炼） |
 | **对抗核验任务书模板** | `sop/adversarial-check-template.md` | 六质询结构（循环论证/独立性/功效/噪声/同源偏差/降级行为）+ JSON 回执 schema + Lead 裁定规则（2026-11-02，从 pfb TASK-adversarial-check + decomp T8-C3 两份实战任务书合并提炼） |
 | **交叉复核打分（★ bench 大类）** | `sop/cross-review-scoring-sop.md` | 统一标准分列 / 理由可追问到数学边界 / 一致性度量按分数特性选（κ→连续化回归）/ 正交化先完整后去重 / 离群值先复算再剔除（2026-10-31，D指令 + rubric-v3 实战） |
 | **find-goal（无活跃 goal 时立项）** | `sop/find-goal-sop.md` | 扫未推送工作防撞车 → P1/P2 选任务 → goal-template 立项 → step_notify 留痕（2026-10-30） |
+| **LLM 链路错误排查（★ 渠道报障必读）** | `sop/llm-chain-troubleshooting.md` | 8787 唯一出口原则 + 4 层排查流程（渠道→proxy→上游→客户端）+ 根因动作表；配套 `projects/系统运维/1_LLM链路错误排查/`（症状映射/手册/事件台账）（2026-11-18，四渠道同抖事件提炼） |
 | 思考预算 | `projects/AI-计算科学/D1-persona-align/thinking-budget.md` | L0/L1/L2 分级 + 终止指令 |
 | 人类确认机制 | `个人/APPROVALS.md` | 不可逆 × 偏好不明 → 写审批不阻塞 |
 | 问题台账 | `projects/AI-计算科学/D1-persona-align/memory/qanda-ledger.md` | D问过的每个问题 |

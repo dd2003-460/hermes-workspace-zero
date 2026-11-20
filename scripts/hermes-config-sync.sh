@@ -24,12 +24,13 @@ if [ ! -d "$REPO/.git" ]; then
   }
 fi
 
-# rsync 快照 (不删远端仓库已有文件, 只增量同步)
-for asset in rules agent-hooks .stage-gate; do
-  rsync -a --delete "${EXCLUDES[@]}" "$SRC/$asset/" "$REPO/$asset/" 2>/dev/null || \
+# rsync 快照 (灵魂层: 规则/触发/状态机/记忆/技能/定时任务)
+for asset in rules agent-hooks .stage-gate memories skills cron; do
   rsync -a "${EXCLUDES[@]}" "$SRC/$asset/" "$REPO/$asset/"
 done
 cp "$SRC/config.yaml" "$REPO/config.yaml"
+# cron 只要声明(jobs.json), 不要执行历史(executions.db 会膨胀)
+rm -f "$REPO"/cron/*.db* 2>/dev/null
 
 # 生成资产清单 (人可读的迁移说明)
 {

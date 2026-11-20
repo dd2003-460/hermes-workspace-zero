@@ -18,7 +18,7 @@ D 自己的判断：这像**次生推论**（聪明人大概率做过），核�
 
 ## 检索方法（强制：滚雪球，不是一次性搜索）
 
-**雪球协议**：种子 query → 找最近邻论文 → 读其 related work / references → 顺藤摸到下一层 → 重复 ≥3 层。每层记录：query / 命中论文 / 为什么选它 / 下一层往哪走。雪球轨迹写进回执 search-log-os2.json 的 `snowball_trace[]`。
+**雪球协议**：种子 query → 找最近邻论文 → 读其 related work / references → 顺藤摸到下一层 → 重复。**最多 10 层**（2026-11-20 补充指令扩大，原 ≥3 层），停止条件：连续 2 层无新信息（无新论文/无新 claim）就停，不硬凑层数。每层只追 1 条主线，分叉记录到 snowball_trace 的 `branches[]` 但不追（防指数爆炸）。每层记录：query / 命中论文 / 为什么选它 / 下一层往哪走。雪球轨迹写进回执 search-log-os2.json 的 `snowball_trace[]`。
 
 ## 核心问题（3 个正交子问）
 
@@ -29,6 +29,11 @@ D 自己的判断：这像**次生推论**（聪明人大概率做过），核�
 **Q2（K复杂度/压缩率在混沌与临界点附近的行为）**：有没有人研究过"描述长度/压缩率在 bifurcation 点或混沌边缘的行为"？
 - 种子 query 建议：algorithmic complexity near bifurcation / compressibility phase transition / "computational irreducibility" chaos / Kolmogorov complexity chaotic systems / "edge of chaos" complexity / algorithmic information dynamics
 - 要回答：① 有没有实测/理论结果支持"混沌化时描述长度突变"（如：临界点附近的序列压缩率变化、critical phenomena + algorithmic information）② 最近邻工作的精确 claim（逐条读原文 abstract + 主定理）③ 有没有人把"K 复杂度失效域"和动力系统相变联系起来
+
+**Q2b（2026-11-20 补充 · 有效性域角度）**：有没有文献把"压缩率/描述长度的有效性域"和"动力系统临界点"正式联系起来？
+- ① KAM 定理的边界条件（微扰大小/解析性/非共振）及其失效后行为
+- ② "现在远离临界点→未来也远离临界点"有没有定理保证（预期答案：没有，参数漂移是外生的——请确认或反驳，给文献）
+- ③ 临界现象 + 算法信息论的交叉文献（critical phenomena + algorithmic information）
 
 **Q3（撞车判决：核心 claim 有没有先例）**：
 - 核心 claim A："K 复杂度的有效性是物理的（依赖结构稳定性），不是数学的"——有没有人说过等价的话？
@@ -45,7 +50,7 @@ D 自己的判断：这像**次生推论**（聪明人大概率做过），核�
 
 ## 验收标准
 
-- AC1：雪球 ≥3 层（snowball_trace 长度 ≥3），每层有 query + 命中 + 走向理由
+- AC1：雪球轨迹有停止记录（snowball_trace 含停止原因：达 10 层上限 或 连续 2 层无新信息），每层有 query + 命中 + 走向理由
 - AC2：≥12 个来源，其中 ≥6 读原文（不止 abstract）
 - AC3：Q1/Q2/Q3 各有明确判决（撞车/部分重叠/无先例），撞车的给文献指针，部分重叠的给收窄后的 claim + conf
 - AC4：最终一段"撞车地图"：D 的 5 步推导链，每步标"已知(出处)/部分重叠(出处+差异)/未见先例"

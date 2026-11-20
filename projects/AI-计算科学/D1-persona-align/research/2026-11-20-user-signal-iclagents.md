@@ -1,8 +1,9 @@
 # Idea: 用户信号驱动的 ICL+RAG agent 进化框架（无权重更新）
 
 > origin: human (D 2026-11-20 提出) + ai (整理/分解)
-> 状态：❓待碰撞调研（大批交叉调研已获 D 认可）
+> 状态：❌ 信号源层撞车（Q1 判决，arena T-OS-1 11-20，撞车对象 ICAL 2024，agent conf 0.97 待核验）→ 转向 Q4 harness 触发回路方向（派发中，11-20 17:00）
 > 素材：tools/objfunc/d-messages.json (1171 条 D 直聊消息) + memory/objfunc-signal-log.md (S1-S20)
+> 进度快照：research/2026-11-20-tos1-progress.md
 
 ## 一句话
 

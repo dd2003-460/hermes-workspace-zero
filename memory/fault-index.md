@@ -38,5 +38,5 @@
 ## 2026-11-20 engine.py pre_tool_call 挂死
 - 现象: 所有工具调用报 "pre_tool_call plugin callback timed out", terminal/read/execute_code 全阻塞
 - 恢复: pkill -f ".hooks/engine.py" (hook 每事件重新拉起, 杀进程即可)
-- 根因: [待查] 写 HERMES-MECHANISM.md 期间触发, 疑似 engine.py 某分支死等
+- 根因(11-20 定位+修复 @18873013): engine.py main() 的 sys.stdin.read() 无超时, 框架写 payload 异常时(同窗口 stream 中断)永久阻塞; 修复=select 10s 超时 fail-open, 实测故障模式从永久挂死降到 10.1s 退出
 - 缺口(修正 11-20): 框架有 30s 超时+skip (agent.log 实锤), 但同窗口后续工具调用硬报错而非 skip; 且 18:07:35 连带 QQBot WebSocket 断开 (用户侧显示"无法连接")

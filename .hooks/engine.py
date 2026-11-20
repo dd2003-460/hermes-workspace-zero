@@ -405,7 +405,16 @@ def eval_trigger(trigger, ctx):
 
 def main():
     seam = sys.argv[1] if len(sys.argv) > 1 else ""
-    raw = sys.stdin.read()
+    # 2026-11-20 修复: stdin.read() 无超时, 框架写 payload 异常时会永久阻塞
+    # (18:07 挂死根因: 同窗口 stream 中断, read 死等 91s 被框架 30s 超时杀掉)
+    # 加 10s 超时, 超时则空 payload fail-open (hook 变 no-op, 不阻塞 agent)
+    raw = ""
+    try:
+        import select
+        if select.select([sys.stdin], [], [], 10.0)[0]:
+            raw = sys.stdin.read()
+    except Exception:
+        raw = ""
     try:
         payload = json.loads(raw) if raw.strip() else {}
     except Exception:

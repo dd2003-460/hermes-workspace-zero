@@ -1,0 +1,73 @@
+# 发表策略：从当前资产到顶会可见成果（2026-11-22）
+# origin: ai · 触发：D 指令"查证后放仓库 + 具体计划（哪怕微小但可见的发表成果）"
+# 查证来源：①本轮 web_extract 官方页面（NeurIPS/ICLR/ICML/PLOS），见 §1 逐条引用
+
+## §1 已查证事实（全部 ① 来源，本轮工具输出）
+
+| 事实 | 来源 | 备注 |
+|---|---|---|
+| NeurIPS 2026 双盲："All submissions must be anonymized…Papers violating this policy will be desk rejected" | neurips.cc/Conferences/2026/MainTrackHandbook（本轮抓取，缓存 neurips.cc-ff0837dd06.md L189） | 背书/挂名对投稿无效 |
+| NeurIPS 2026 无版面费：CFP 全文无 page/publication fee；仅"至少一位作者须注册主会"（学生注册即可，Virtual Only 不够） | 同上（L342） | 会议=0 版面费，注册费仅中稿后 |
+| NeurIPS 2026 截止：abstract 2026-05-04 / full 2026-05-06（已过） | neurips.cc/Conferences/2026/CallForPapers | 下届 NeurIPS 2027 约 2027-05 |
+| **ICLR 2027 截止：abstract 2026-09-18 / paper 2026-09-25 AoE**；会期 2027-04-26~28；workshops 2027-04-29~30 | iclr.cc/Conferences/2027/Dates（本轮抓取） | **最近的主会窗口，距今约 12 周** |
+| ICML 2027 截止：abstract 2027-01-14 / paper 2027-01-22 AoE；会期 2027-08-02~04 | icml.cc/Conferences/2027/Dates（本轮抓取） | 次选窗口 |
+| 版面费（APC）只存在于期刊：PLOS 系 $1,088–$3,165/篇（plos.org/fees 本轮抓取）；Nat Comm 等 OA 期刊同量级 | plos.org/fees | 目标=会议→0 版面费 |
+| TRUST(2611.10787) 已投 ICLR 2027 在审，同方向另有 3 篇 RSI 在审（含 "Why Is RSI Hard to Verify?"） | pfb git log 0faf8fa31（OpenReview 查询记录） | 赛道正在拥挤——客观验证器角度是差异化 |
+
+**结论（对 D 三个猜测的裁定）**：
+- 背书：顶会双盲，投稿不需要；需要的是 related work 定位 + 发表后传播
+- 版面费：会议 0；只有走期刊才有 $1-5k
+- social：不是发表门槛，是影响力放大器
+
+## §2 我们的可发表资产（现状）
+
+1. **formula_judge.py**（decomp/experiments/autoresearch-r1/run/）：机械公式验证器，SymPy 精确值+容差，verify/judge 双接口，reward-only 反馈串。H100 真实 run 5/5 判对（rel_err ≤0.00011）。
+2. **2 题 × n=3 数据**：FP8 题 27b 3/3 全对；14x 误读题；consistency n=3 已做（可靠性行为 3/3 一致，内容 27% 方差）。
+3. **judge 失败模式谱系**（jin-line-bench-judge-survey S4/S6）：self-preference / phantom / surface-compliance，及对策（outcome-blind / warrant-aware / 校准集）。
+4. **理论钩子**：瞎猜概率→0（2000 次模拟 0 命中）；reward-only 自修复增量（A vs B）是可测新维度。
+
+**核心 claim（一句话）**：LLM-as-judge 在 agent 可靠性评估上有三类系统性失败（self-preference/phantom/surface-compliance），**机械公式验证器**（预置检查点+符号精确值+reward-only 反馈）在同等题集上消除这三类失败，且使评估可复现、可统计检验。
+
+**为什么这是顶会级而非工程报告**：① 对照实验（LLM-judge vs 机械 judge 的可靠性差异，同题同模型）② 量化指标（判分翻转率/一致率/显著性）③ 理论（瞎猜概率界 + reward-only 自修复测量）④ 可复现（spec 与题面分离，gold 预置，任何人可重跑）。
+
+## §3 两轨计划
+
+### 轨 A（主）：ICLR 2027 主会，2026-09-25 截止（12 周）
+
+| 周 | 任务 | 产出 | 依赖 |
+|---|---|---|---|
+| W1-2 | 题集扩到 n≥10：每题 3-5 机械检查点（calc/fact/bool），含 2-3 道"秩亏"题（缺关键事实，测正确报缺口 vs 幻觉） | spec-*.json ×10 + 题面 | 无（可外包 arena 出题+Lead 核 gold） |
+| W3 | baseline 对比实验：LLM-judge（27b 判 27b 输出）vs 公式 judge，同题同输出 | 判分翻转率/一致率表 | W1-2 |
+| W4 | consistency + 显著性：每题 n≥3，跨 run 一致率；judge 结论的 bootstrap CI | 统计报告 | W3 |
+| W5 | 校准腿：秩亏题上测"正确报缺口率"（满秩类比，见 metacognition-rsi-survey §C） | 校准维度数据 | W1-2 |
+| W6 | reward-only 自修复：A（one-shot）vs B（二元反馈 ≤5 轮），rounds_to_pass 分布 | 自修复增量数据 | W1-2 |
+| W7 | 交叉核验：关键数字 ≥2 独立 LLM（ego-browser）+ arena 对抗核验 | 核验回执 | W3-W6 |
+| W8-10 | 成文（9 页 + 附录）：intro（judge 可靠性问题）→ 方法（三层架构）→ 实验 → 理论 → related work（TRUST/RuHarness/Phantom/Agent-as-a-Judge） | 初稿 | W7 |
+| W11 | 内审：按 NeurIPS checklist 自查 + 双盲合规（匿名化代码/链接） | 修订稿 | W10 |
+| W12 | 9/18 abstract → 9/25 提交 | OpenReview 提交 | W11 |
+
+**风险**：12 周偏紧。缓解：W1-6 的每个实验块独立可交付——任何一块完成即有 arXiv 预印本素材（预印本不违反双盲，Handbook L252 明确允许）。
+
+### 轨 B（保底，微小但可见）：workshop / 预印本，4-6 周
+
+- **最小可见成果 = 4 页 workshop 短文**："Mechanical Verifiers as Objective Judges for Agent Reliability"：10 题 × 2 judge 的翻转率对比 + 瞎猜概率界 + 1 个 reward-only 自修复案例。
+- 目标：ICLR 2027 workshop（2027-04-29~30；workshop 论文截止通常 2027-02~03，具体随各 workshop CFP）+ arXiv 预印本先行。
+- 成本：W1-3 做完即可投，不需要等 W4-6 全量。
+- 可见性：arXiv + workshop 报告 + 与 Jin 线/SAGA 线的 outreach（cold-email-design 已有 SOP）形成引用链。
+
+### 不做
+- 不投期刊（APC $1-5k + 周期长，性价比低）
+- 不上 12 指标全套可靠性 profile（n 不够，先做 judge 对比这一条主线）
+- 不做"AGI 定义"position paper（无可证伪内容，评审不买账）
+
+## §4 立即可执行（本周）
+
+1. [ ] 题集扩 10 题：外包 arena 出题（任务卡见 tasks/decomp-publish-20261122.md），Lead 核 gold
+2. [ ] LLM-judge vs 公式 judge 对比脚本（复用 formula_judge.py + 27b judge prompt）
+3. [ ] 秩亏题设计 2-3 道（校准腿最小集）
+4. [ ] arXiv 预印本占位：W1-3 完成后即投（date-stamp）
+
+## §5 待核验
+- [ ] ICLR 2027 workshop 论文截止日期（各 workshop CFP 预计 2027-01 发布）
+- [ ] "Why Is RSI Hard to Verify?" 全文（与 judge 客观性直接相关，需精读定位 delta）
+- [ ] NeurIPS 2027 CFP 是否延续双盲（预计延续，2026-09 后确认）

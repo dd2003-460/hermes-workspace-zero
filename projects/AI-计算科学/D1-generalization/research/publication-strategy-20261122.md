@@ -79,15 +79,19 @@
 | 找谁 | "best for you to find an endorser who **you know personally** and is knowledgeable in the subject area" | 优先熟人；其次每篇 arXiv 摘要页底部有 "Which authors of this paper are endorsers?" 链接，可找领域内活跃作者（官方明确：不要群发、不要重复骚扰同一人） |
 | 加速通道 | 机构邮箱 + 认领自己参与过的论文 → 可能直接获背书 | 有机构邮箱的话流程更快 |
 
-**操作路径（按性价比排序）**：
-1. **pfb 那篇待上传论文**（T37 完成，blocked-on-human: D 登录 arXiv）——它本身就是 cs 类论文，**D 登录提交它时顺手就把 cs 类背书流程走完了**（提交时系统发 endorsement request 邮件，含 6 位码链接）。这篇上传 = 新论文背书的免费前置
-2. 背书人选：Jin 线/SAGA 线的作者（cold-email-design 已有 outreach SOP 和邮件模板，tasks/emails/ 有现成素材）——他们正是 cs.AI 活跃 arXiv 作者，且我们本来就要套磁他们问 bitter lesson 问题，**一封邮件两个目的**：套磁 + 请求背书（官方允许附上论文副本）
-3. 理论物理背景不是障碍：背书看的是"提交者属于该领域社区"，跨领域研究者（物理→ML）在 arXiv 极常见
+**操作路径（按性价比排序，2026-11-22 修正：D 确认无 cs 类背书人，arXiv 当前发不了）**：
+1. **关键修正：arXiv 不在关键路径上**。ICLR 2027 投稿走 OpenReview，不要求预印本。"微小但可见成果"= ICLR workshop 4 页短文（4-6 周可投），arXiv 只是加分项
+2. **背书触发机制**：endorsement request 邮件（含 6 位码）在**开始一次提交时**才由系统生成。序列：D 登录 arXiv → 开始 pfb 论文提交（cs.CL）→ 收到背书请求邮件 → 6 位码附给 Jin/Gomes → 解锁 cs 类 → 提交
+3. **一次背书覆盖两篇**：pfb 论文（cs.CL/cs.AI/cs.LG）+ 新 formula-judge 论文（cs.AI）同属 cs 类，解锁一次全通
+4. **背书人选 = 已有套磁邮件复用**：Jin（Northeastern）/ Gomes（Cornell）草稿已就绪（tasks/emails/，待 D 确认发送），各加 2 行背书请求附块（arXiv 政策允许附论文副本；背书人只需填 6 位码，30 秒动作）
+5. **背景**：D 有 4 篇物理/数学论文待上传（gr-qc×2/math.CT/q-bio.NC，见 memory/arxiv_submission_status.md）→ arXiv 账号已存在，物理类背书已有（[待核验]），但 cs 类是新 category 需新背书
+6. 理论物理背景不是障碍：背书看"提交者属于该领域社区"，跨领域（物理→ML）在 arXiv 极常见
 
-**结论**：背书不是门槛，是一个 5 分钟的流程动作，且与既有 outreach 计划完全复用。真正的门槛仍是 §3 的实验规模（n≥10 + baseline + 显著性）。
+**结论**：背书不是学术门槛（官方明确非 peer review、不验证正确性），是一个流程动作，且与既有 outreach 计划完全复用。当前真实状态：无 cs 类背书人 → arXiv 暂不可发，但 ICLR 投稿不依赖 arXiv，研究排期不受影响。真正的门槛仍是 §3 的实验规模（n≥10 + baseline + 显著性）。
 
 ## §6 待核验
 - [ ] ICLR 2027 workshop 论文截止日期（各 workshop CFP 预计 2027-01 发布）
 - [ ] "Why Is RSI Hard to Verify?" 全文（与 judge 客观性直接相关，需精读定位 delta）
 - [ ] NeurIPS 2027 CFP 是否延续双盲（预计延续，2026-09 后确认）
-- [ ] pfb 待上传论文的 arXiv category 选择（决定 cs.AI 还是 stat.ML 背书域）
+- [x] pfb 待上传论文的 arXiv category：cs.CL (primary) / cs.AI / cs.LG（pfb/experiments/stage-ablation/arxiv-submission.md）→ 与 formula-judge 论文（cs.AI）同背书域
+- [ ] D 的 arXiv 账号物理类背书状态（gr-qc 等 4 篇待上传 → 账号存在，物理类背书大概率已有，未登录核验）

@@ -67,7 +67,27 @@
 3. [ ] 秩亏题设计 2-3 道（校准腿最小集）
 4. [ ] arXiv 预印本占位：W1-3 完成后即投（date-stamp）
 
-## §5 待核验
+## §5 arXiv 背书政策（2026-11-22 查证，① ego-browser 实抓 info.arxiv.org/help/endorsement.html）
+
+**D 的担心（"arXiv 要领域专家背书，我只是理论物理硕士"）不成立，政策原文裁定如下**：
+
+| 政策点 | 原文/含义 | 对我们的影响 |
+|---|---|---|
+| 触发条件 | "endorsed before submitting their first paper **or a new category**" | 背书是**按 category** 的，不是按领域身份。cs.AI 背书一次后该 category 内所有后续论文免背书 |
+| 背书人门槛 | "authored a certain number of papers within the endorsement domain…any active scientist who has been working in their field for a few years should be able to endorse" | 背书人只需是**该 category 的活跃 arXiv 作者**（近 3 月-5 年间的论文计数），不需要是大牛 |
+| 背书性质 | "**The endorsement process is not peer review.** You do not expect you to read the paper in detail, or verify that the work is correct, but you should check that the paper is appropriate for the subject area" | 背书 = 确认"这人属于该领域科学社区"，**不是质量背书**。官方明确不要求背书人验证正确性 |
+| 找谁 | "best for you to find an endorser who **you know personally** and is knowledgeable in the subject area" | 优先熟人；其次每篇 arXiv 摘要页底部有 "Which authors of this paper are endorsers?" 链接，可找领域内活跃作者（官方明确：不要群发、不要重复骚扰同一人） |
+| 加速通道 | 机构邮箱 + 认领自己参与过的论文 → 可能直接获背书 | 有机构邮箱的话流程更快 |
+
+**操作路径（按性价比排序）**：
+1. **pfb 那篇待上传论文**（T37 完成，blocked-on-human: D 登录 arXiv）——它本身就是 cs 类论文，**D 登录提交它时顺手就把 cs 类背书流程走完了**（提交时系统发 endorsement request 邮件，含 6 位码链接）。这篇上传 = 新论文背书的免费前置
+2. 背书人选：Jin 线/SAGA 线的作者（cold-email-design 已有 outreach SOP 和邮件模板，tasks/emails/ 有现成素材）——他们正是 cs.AI 活跃 arXiv 作者，且我们本来就要套磁他们问 bitter lesson 问题，**一封邮件两个目的**：套磁 + 请求背书（官方允许附上论文副本）
+3. 理论物理背景不是障碍：背书看的是"提交者属于该领域社区"，跨领域研究者（物理→ML）在 arXiv 极常见
+
+**结论**：背书不是门槛，是一个 5 分钟的流程动作，且与既有 outreach 计划完全复用。真正的门槛仍是 §3 的实验规模（n≥10 + baseline + 显著性）。
+
+## §6 待核验
 - [ ] ICLR 2027 workshop 论文截止日期（各 workshop CFP 预计 2027-01 发布）
 - [ ] "Why Is RSI Hard to Verify?" 全文（与 judge 客观性直接相关，需精读定位 delta）
 - [ ] NeurIPS 2027 CFP 是否延续双盲（预计延续，2026-09 后确认）
+- [ ] pfb 待上传论文的 arXiv category 选择（决定 cs.AI 还是 stat.ML 背书域）

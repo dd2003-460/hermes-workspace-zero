@@ -216,15 +216,15 @@
      "id": "c5",
      "kind": "calc",
      "desc": "largest integer batch at 16384 ctx = floor(KV_pool / (16384*kv_per_token))",
-     "gold": "floor((80 - 405e9/8/1e9 - 5.5)*1e9/(16384*(126*8*128*2)))",
+     "gold": "floor((80 - 405e9/8/1e9 - 5.5)*1e9/(16384*(2*126*(8/8)*128)))",
      "unit": "sequences",
      "tolerance": 0.0,
-     "source": "kv_per_token = 2*126*8*128*1B = 258048"
+     "source": "kv_per_token_per_GPU = 2*126*(8/8)*128*1B = 32256 (KV heads sharded by TP=8, 题面明说 Weights and KV are sharded evenly)"
     }
    ],
    "checks": {
-    "batch8_at_16384_fits": 0,
-    "batch8_bytes": "8*16384*(126*8*128*2)"
+    "batch8_at_16384_fits": 1,
+    "batch8_bytes": "8*16384*(2*126*(8/8)*128)"
    },
    "reward_only_feedback": "c1=ok|miss; c2=ok|miss; c3=ok|miss; c4=ok|miss; c5=ok|miss"
   },

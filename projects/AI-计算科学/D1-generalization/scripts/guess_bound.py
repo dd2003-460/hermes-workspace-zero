@@ -31,7 +31,10 @@ def hit_prob(cp):
 def guess_value(cp):
     kind, tol = cp.get('kind'), cp.get('tolerance', 0.02)
     gv = fj.eval_gold(cp['gold']) or 1.0
-    if kind == 'calc' and tol == 0:
+    if kind in ('calc', 'fact') and tol == 0:
+        # 整数精确匹配型检查点（calc 整数 / fact tol=0）：瞎猜 U[gold-50, gold+50] 整数，
+        # 命中概率 1/101（与 hit_prob 一致）。修前 fact tol=0 误走连续 uniform，
+        # 模拟判定又落到 `<0` 恒 False → 零命中是程序构造的，非真实验证。
         return int(gv) + random.randint(-50, 50)
     if kind in ('calc', 'fact'):
         return random.uniform(0.5*gv, 2*gv)
@@ -64,7 +67,7 @@ for qid, spec in sorted(SPECS.items()):
             elif gv is None:
                 # 文字 gold（fact 非数值）：瞎猜的数值不可能命中文字事实
                 ok = False
-            elif tol == 0 and cp.get('kind') == 'calc':
+            elif tol == 0 and cp.get('kind') in ('calc', 'fact'):
                 ok = (float(g) == gv)
             else:
                 ok = abs(float(g) - gv)/abs(gv) < tol

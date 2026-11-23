@@ -77,7 +77,7 @@ To rule out that high scores are achievable by guessing, we define an explicit r
 
 Guess model: continuous calc checkpoints (tol 2%) — guess U[0.5g, 2g], hit probability 2·tol/1.5; integer-exact checkpoints (tol 0) — guess U[g±50], hit probability 1/101; textual gold — hit probability 1/100 (conservative). The probability of guessing all checkpoints correct is the product over checkpoints (independent-guess assumption).
 
-Analytic bound: full-rank tasks P(all-correct by guess) ≈ 1.2e-10 to 1.9e-7; rank-deficient tasks ≈ 3.6e-6 to 3.3e-5 (highest, fewer checkpoints + textual gold). Simulation (N=2000, seed=42): 0/2000 all-correct, consistent with the bound.
+Analytic bound: full-rank tasks P(all-correct by guess) ≈ 1.2e-10 to 1.9e-7; rank-deficient tasks ≈ 3.6e-6 to 3.3e-5 (highest, fewer checkpoints + boolean checkpoints). Simulation (N=2000, seed=42): 0/2000 all-correct — consistent with the bound, though at the most-guessable task (P=3.3e-5) 2000 trials yield an expected 0.07 successes, so the simulation is underpowered to verify the bound; the analytic product is the claim, the simulation is a consistency check.
 
 Rank-deficient tasks are guessable ~3 orders of magnitude more easily than full-rank — a quantitative basis for "rank-deficient tasks need more checkpoints to resist guessing." The bound is model-agnostic (it depends only on the guess model and checkpoint structure, not on the judge).
 

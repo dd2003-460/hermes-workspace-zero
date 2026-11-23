@@ -15,7 +15,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-LLM judges are default in automated evaluation, yet their reliability on the formalizable core — where the correct answer is a numeric value or spec-constrained quantity — has not been measured against an exact reference. We measure it. On 67 real model outputs across 10 tasks, a 27b LLM judge under three prompt variants emits unparseable output on 52–84\% of checkpoints (Wilson 95\% CI excluding 0), and on the checkpoints it does parse its verdicts disagree with a mechanical judge at ≈50\% — indistinguishable from a coin flip (exact binomial p = 0.79–0.90). A mechanical judge (symbolic comparison or spec-driven regex) fails on 0/67 by construction. We isolate the mechanism: complexity lengthens the judge's reasoning chain, exhausting max\_tokens and truncating the verdict — not attention dilution; prompt phrasing spans 31.4pp across variants, V3 best at 52.2\%. We certify the task set against guessing via a model-agnostic bound (P(all-correct by guess) ≤ 3.3×10⁻⁵) and show prompt optimization trades one checkpoint dimension for another. The contribution is the *reference*: on the formalizable core a mechanical judge is exact on calc checkpoints, free, and reproducible, and is the appropriate default there, with LLM judgment reserved for the non-formalizable residual.
+LLM judges are default in automated evaluation, yet their reliability on the formalizable core — where the correct answer is a numeric value or spec-constrained quantity — has not been measured against an exact reference. We measure it. On 67 real model outputs across 10 tasks, a 27b LLM judge under three prompt variants emits unparseable output on 52–84\% of checkpoints (Wilson 95\% CI excluding 0), and on the checkpoints it does parse its verdicts disagree with a mechanical judge at ≈50\% — statistically indistinguishable from 50\% (exact binomial p = 0.79–0.90; non-rejection of p=0.5, not proof of equivalence). A mechanical judge (symbolic comparison or spec-driven regex) fails on 0/67 by construction. We isolate the mechanism: complexity lengthens the judge's reasoning chain, exhausting max\_tokens and truncating the verdict — not attention dilution; prompt phrasing spans 31.4pp across variants, V3 best at 52.2\%. We certify the task set against guessing via a model-agnostic bound (P(all-correct by guess) ≤ 3.3×10⁻⁵) and show prompt optimization trades one checkpoint dimension for another. The contribution is the *reference*: on the formalizable core a mechanical judge is exact on calc checkpoints, free, and reproducible, and is the appropriate default there, with LLM judgment reserved for the non-formalizable residual.
 \end{abstract}
 
 \section{Introduction}
@@ -40,7 +40,7 @@ Our contribution. Against a mechanical judge as the exact reference, we measure 
 3. Verdict accuracy flips at chance (F3). Even on the parseable subset, the LLM judge disagrees with the mechanical judge on 48–52\% of checkpoints — indistinguishable from a coin flip.
 
 
-4. The task set resists guessing (F4). F1–F3 ask whether the judge can be trusted; F4 asks whether the *test* can be trusted. Under an explicit random-guess model, the probability of guessing all checkpoints correct is bounded analytically (1.2e-10 to 3.3e-5) and confirmed by simulation (0/2000) — a high score on this set cannot be explained by luck. The bound is model-agnostic.
+4. The task set resists guessing (F4). F1–F3 ask whether the judge can be trusted; F4 asks whether the *test* can be trusted. Under an explicit random-guess model, the probability of guessing all checkpoints correct is bounded analytically (1.2e-10 to 3.3e-5); 2000 seeded simulations produced 0 full-guess successes (consistent with, but underpowered to verify, the bound). The bound is model-agnostic.
 
 
 5. Prompt optimization is not free (F5). A three-arm behavioral experiment shows that fixing one checkpoint dimension (c1: 33\%→100\%) induces a side effect on another (c3: 100\%→77\%, via induced conditional-enumeration / hedging behavior).
@@ -137,7 +137,7 @@ Default max\_tokens=500 (the deployment default; the truncation mechanism in F2 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig3-guess-bound.png}
-\caption{Analytic upper bound on the probability of guessing all checkpoints correct, per task. Full-rank tasks (blue) sit at 1e-10 to 1e-7; rank-deficient tasks (red) at 1e-6 to 3.3e-5. All are far below the 1e-4 threshold, and 2000 seeded simulations produced 0 full-guess successes.}
+\caption{Analytic upper bound on the probability of guessing all checkpoints correct, per task. Full-rank tasks (blue) sit at 1e-10 to 1e-7; rank-deficient tasks (red) at 1e-6 to 3.3e-5. All are far below the 1e-4 threshold. 2000 seeded simulations produced 0 full-guess successes — consistent with the bound, but underpowered to verify it at the most-guessable task (expected 0.07 successes).}
 \end{figure}
 
 \begin{table}[h]
@@ -243,7 +243,7 @@ To rule out that high scores are achievable by guessing, we define an explicit r
 Guess model: continuous calc checkpoints (tol 2\%) — guess U[0.5g, 2g], hit probability 2·tol/1.5; integer-exact checkpoints (tol 0) — guess U[g±50], hit probability 1/101; textual gold — hit probability 1/100 (conservative). The probability of guessing all checkpoints correct is the product over checkpoints (independent-guess assumption).
 
 
-Analytic bound: full-rank tasks P(all-correct by guess) ≈ 1.2e-10 to 1.9e-7; rank-deficient tasks ≈ 3.6e-6 to 3.3e-5 (highest, fewer checkpoints + textual gold). Simulation (N=2000, seed=42): 0/2000 all-correct, consistent with the bound.
+Analytic bound: full-rank tasks P(all-correct by guess) ≈ 1.2e-10 to 1.9e-7; rank-deficient tasks ≈ 3.6e-6 to 3.3e-5 (highest, fewer checkpoints + boolean checkpoints). Simulation (N=2000, seed=42): 0/2000 all-correct — consistent with the bound, though at the most-guessable task (P=3.3e-5) 2000 trials yield an expected 0.07 successes, so the simulation is underpowered to verify the bound; the analytic product is the claim, the simulation is a consistency check.
 
 
 Rank-deficient tasks are guessable ~3 orders of magnitude more easily than full-rank — a quantitative basis for "rank-deficient tasks need more checkpoints to resist guessing." The bound is model-agnostic (it depends only on the guess model and checkpoint structure, not on the judge).
@@ -642,10 +642,10 @@ Guessing model (explicit, conservative). A "guesser" that knows the answer *clas
 \end{itemize}
 
 
-Analytic bound. P(all checkpoints guessed correctly) = product over checkpoints. Full-rank tasks: ≈1.2e-10 to 1.9e-7. Rank-deficient tasks: ≈3.6e-6 to 3.3e-5 (highest — driven by the text gold). Monte Carlo N=2000 (seed=42): 0/2000 full-correct, consistent with the bound.
+Analytic bound. P(all checkpoints guessed correctly) = product over checkpoints. Full-rank tasks: ≈1.2e-10 to 1.9e-7. Rank-deficient tasks: ≈3.6e-6 to 3.3e-5 (highest — driven by the boolean checkpoints). Monte Carlo N=2000 (seed=42): 0/2000 full-correct, consistent with the bound (underpowered at the most-guessable task, as noted in §F4).
 
 
-Key consequence. Rank-deficient tasks are ~3 orders of magnitude easier to guess than full-rank tasks (3.6e-6–3.3e-5 vs 1.2e-10–1.9e-7), for two reasons: (i) fewer checkpoints (4 vs 5, fewer product terms); (ii) a text gold ("report the gap"), whose guess-hit probability (1/100) is ~3.7× higher than a continuous calc checkpoint (2·tol/1.5 ≈ 0.0267). The text-gold term is the dominant driver. Quantified implication (analytic, from Corollary 2): a rank-deficient task's average per-checkpoint hit probability is $p_{\text{avg}} = P_t^{1/4} \in [0.043, 0.076]$; reaching the full-rank scale ($1.2\times10^{-10}$) requires $k = \lceil \log(1.2\times10^{-10})/\log p_{\text{avg}} \rceil \in [8, 9]$ checkpoints — i.e., 4–5 more than the current 4. This is the analytic basis for "rank-deficient tasks need more checkpoints to resist guessing." The bound is model-agnostic (it constrains any judge/model that does not know the gold value), so the anti-hack claim does not depend on the single-model measurements.
+Key consequence. Rank-deficient tasks are ~3 orders of magnitude easier to guess than full-rank tasks (3.6e-6–3.3e-5 vs 1.2e-10–1.9e-7), for two reasons: (i) fewer checkpoints (4 vs 5, fewer product terms); (ii) boolean checkpoints ("fits / does not fit", "names the gap"), each with hit probability 0.5 — the dominant driver (two booleans contribute a factor 0.25 to the product, vs 0.0099–0.0267 per term in full-rank tasks). The textual-gold term (1/100) is, if anything, *harder* to guess than a continuous calc term (0.0267): replacing Q08's text gold with a calc term raises P from 3.3e-5 to 8.9e-5. Quantified implication (analytic, from Corollary 2): a rank-deficient task's average per-checkpoint hit probability is $p_{\text{avg}} = P_t^{1/4} \in [0.043, 0.076]$; reaching the full-rank scale ($1.2\times10^{-10}$) requires $k = \lceil \log(1.2\times10^{-10})/\log p_{\text{avg}} \rceil \in [8, 9]$ checkpoints — i.e., 4–5 more than the current 4. This is the analytic basis for "rank-deficient tasks need more checkpoints to resist guessing." The bound is model-agnostic (it constrains any judge/model that does not know the gold value), so the anti-hack claim does not depend on the single-model measurements.
 
 
 Reproducible: scripts/guess\_bound.py (analytic bound + Monte Carlo, seed=42).

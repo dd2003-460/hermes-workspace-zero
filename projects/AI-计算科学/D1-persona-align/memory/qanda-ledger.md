@@ -68,5 +68,5 @@
 - **探针 v2 实证**（scripts/mt_truncation_probe2.py, /tmp/mt_probe2.json）：6 个 V1 失败 case 全部 finish_reason=length，尾部全是推理文本（JSON 没开始写）；mt2000 恢复的 case 推理正确只是链长。**机制不是注意力退化（那会让 verdict 更错），是推理链吃光 token 预算 → JSON 截断**。
 - **F2 修正**：三因素框架（截断83% × 输入复杂度偏相关0.436 × 指令遵循17%）→ 单一因果链（输入复杂度→推理链→撞max_tokens→截断）+ 两子机制：截断可恢复（Q01/02/06）vs 收敛失败（Q03/04/05，模型打转，加 token 也不恢复）。旧数字标记 superseded。
 - **F1 修正**：604-char 阈值 = 任务类型混杂假象（full-rank 7/7 全挂含最短 385 字符；rank-deficient 短输出多通过）。机制是内容驱动非长度驱动。
-- **新发现（未决）**：v1/v2 探针同 case 同 prompt temp=0 结果定性不同（Q04）→ judge 非确定性。确定性探针（同输入×5rep）在跑，结果决定 F1 失败率是否要带 run-to-run 方差区间。
-- 状态：F1/F2 已修正落盘 commit；确定性探针 pending。
+- **新发现（已决）**：v1/v2 探针同 case 同 prompt temp=0 结果定性不同（Q04）→ 确定性探针（同输入×5rep, /tmp/judge_determinism.json）确认：**judge 在 temp=0 下难 case 非确定**——Q01 5/5 全过（确定性恢复）、Q03 0/5 全挂（确定性收敛失败）、Q04 3/5 翻转（74字符纯JSON vs 2600+字符打转链）。翻转的是"是否遵守'禁止解释'指令"→ 根因=**指令遵循非确定性**，输入复杂度只决定写了链之后的严重度。F2 改三行为类（可恢复/收敛失败/borderline翻转），F1 失败率需带 run-to-run 方差（borderline 是分布不是点值）。
+- 状态：F1/F2 修正 + 确定性探针结果已落盘 commit。

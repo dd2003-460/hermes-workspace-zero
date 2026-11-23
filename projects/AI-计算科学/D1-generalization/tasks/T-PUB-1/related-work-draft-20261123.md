@@ -7,7 +7,7 @@
 
 ### 3.1 LLM-as-a-judge reliability
 
-LLM-as-a-judge has become the default scalable evaluation mechanism (Zheng et al. 2023), and a rapidly growing literature — 600+ papers in 2026 alone — has documented its unreliability. The established failure modes are *verdict-accuracy* biases: position bias, verbosity bias, self-preference, and instruction sensitivity. The closest prior work to ours operates on the reliability axis rather than the bias axis:
+LLM-as-a-judge has become the default scalable evaluation mechanism (Zheng et al. 2023), and a rapidly growing literature has documented its unreliability (an arXiv search for "LLM judge" returns over 1,000 papers submitted in 2026 alone). The established failure modes are *verdict-accuracy* biases: position bias, verbosity bias, self-preference, and instruction sensitivity. The closest prior work to ours operates on the reliability axis rather than the bias axis:
 
 - **Judge Reliability Harness (Dev et al. 2026, arXiv:2603.05399).** Measures a judge's robustness to *input* perturbations — formatting changes, paraphrasing, verbosity, label flips — via a perturbation test battery. The "format" in JRH is the judge's *input*; we measure the judge's *output* format reliability — the rate at which it fails to emit a parseable verdict at all. The two "formats" point in opposite directions: JRH perturbs the input and asks whether the verdict stays stable; we hold the input fixed and ask whether a verdict is emitted at all. JRH does not instrument the output-format failure mode.
 

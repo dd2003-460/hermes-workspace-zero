@@ -31,6 +31,21 @@
 3. **claim 强度降档**：原"LLM judge 不可靠"是已知结论（620 篇都在说），我们的贡献不是"发现不可靠"而是"可形式化核上机械 judge 是免费替代 + 机制可归因 + 防 hack 可证明"——§1 contribution 列表按此重写。
 4. **NeurIPS 2026 JUDGe workshop（"Can We Trust the Judge?"）是天然的 venue 备选**：若 ICML 2027 主会撑不住，投该 workshop 系列（2027 届）比 ICLR workshop 更对口。
 
+## 差异化三支柱核验（基于 6 篇撞车摘要，2026-11-23 本轮 web_extract 直读）
+
+| 撞车篇 | ground truth | 测的维度 | 机制归因 | 防hack理论 |
+|---|---|---|---|---|
+| 2603.05399 Harness | 扰动测试 | verdict accuracy（binary+ordinal） | ✗ | ✗ |
+| 2610.30512 Arena-Hard | 重复运行 | verdict 漂移（instruction 依赖） | ✗（只报相关性） | ✗ |
+| 2609.13824 Consistency | 9 人类标注 | consistency vs human | ✗ | ✗ |
+| 2510.09738 Judge's Verdict | 人类 ground truth | Cohen's Kappa 一致性 | ✗ | ✗ |
+| 2606.15029 Metric Match | 有限人类标注 | reliability metric 估计方法 | ✗ | ✗ |
+| 2610.05452 VERA | hidden activations | verdict 可靠性估计 | ✗ | ✗ |
+
+**核验结论（conf 0.85，基于摘要非全文）**：6 篇全测 verdict accuracy（judge 出了分后准不准），**没有一篇测 format reliability（judge 根本没法出可解析判定这个前置失败）**；没有一篇做机制归因到截断/输入复杂度/指令遵循；没有一篇有防 hack 理论保证。**三支柱 (a)(b)(c) 全部未被覆盖，差异化定位站得住**。
+
+**残留风险（W2 消）**：摘要可能漏掉全文里的 format failure 分析（如 2603.05399 的 harness 是否含 parse failure 指标）→ W2 拉 2603.05399 + 2610.30512 全文 PDF 精读确认。若发现某篇已测 format reliability，支柱 (a) 降级为"我们做了机制归因 + 防 hack"双支柱，claim 仍可站但需重述。
+
 ## 待办（W2-W3）
 
 - [ ] 撞车 6 篇拉 PDF 精读（至少 2603.05399 + 2610.30512），确认 (a)(b)(c) 差异化没被覆盖 → ego-browser 下 PDF

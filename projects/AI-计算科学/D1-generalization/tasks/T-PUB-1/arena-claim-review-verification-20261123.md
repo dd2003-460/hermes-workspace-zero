@@ -39,12 +39,18 @@
   3. 统计：0/2000 的 95% 上限 ≈1.5e-3，不能验证 3.3e-5；原稿误称 0.01 > 0.0267
 - 最小强化动作（≤3）：① 删普适因果/硬币/防hack/必然trade-off 措辞 + 补撞车文献 ② 修判分+盲审参考+留 raw 重算 ③ 扩 ≥30 独立题 + 2 异家族 judge 配对
 
-## 待执行（按性价比）— 1-4 已完成 @ 7b593678
+## 待执行（按性价比）— 1-4 已完成 @ 7b593678；F3 完整修正 @ 7193af79 + cc82fd27
 1. ✅ **修 Q04 gold**（c5 公式改分片版 32256，checks.batch8 改 1）— 完成
 2. ✅ **修 guess_bound.py** tol=0 分支（`<0` → `<=tol` 或对称容差）— 完成
 3. ✅ **措辞降级**（F3/F4/F5 按建议改 intro+findings）— 完成（3 处：F4 因果归因、模拟措辞、F3 硬币措辞）
 4. ✅ **统计修正**（0/2000 降级为 underpowered；0.01/0.0267 笔误清除）— 完成
 5. ⏸ 扩题+异家族 judge（大工程，workshop 投后可做）
+6. ✅ **F3 完整修正（超出原 4/5 范围，2026-11-23 20:40+ @ 7193af79 + cc82fd27）**：arena 指出的"c2 文字 gold 恒判 False 污染分歧率"已根治——
+   - `scripts/formula_judge.py` c2 分支改为关键词匹配（v0.2），不再恒 False
+   - 修后 flip **不是 ≈50% coin flip**，而是按参考质量分层：exact-reference core（calc+数值 gold，pooled n=73）LLM 与机械 judge **94.5% 一致**（4/73 flip）；heuristic 层（bool+文字 gold，pooled n=159）**80.5% 分歧**（128/159）。pooled：V1 39/60、V2 25/44、V3 68/128
+   - 结论从"LLM judge 在可形式化核心无信息（coin flip）"改为"LLM 在 exact core 上冗余（确认已有精确参考，还搭上 52–84% 格式失败成本）、在 heuristic 残差上更强"——反而更支持机械 judge 作为可形式化核心默认的主张
+   - 主会 tex 12 处 + appendix 逐题表 + workshop 草稿 + fig1 panel B 全部同步；xelatex 编译干净 14 页
+   - 注：arena 报告里"剔除后 V1 27/45、V2 17/33、V3 45/96 仍 ≈50%"的口径是**只剔除文字 gold c2**；本次修 bug 后全量重算，heuristic 层（含 bool）分歧 80.5%，两个口径都对但本次以分层口径为准（bool 也是 heuristic 参考）
 
 ## 补充核验（Lead 独立，2026-11-23 20:20）
 - **arXiv 文献计数**：intro/related-work 写"600+ papers in 2026 alone"。arXiv API 实测 `all:"LLM judge" AND submittedDate:[2026]` = **1,139 篇**（all-time 1,393）。"600+" 技术上正确（1139>600）但偏低 ~2×，且 arena 未 flag。

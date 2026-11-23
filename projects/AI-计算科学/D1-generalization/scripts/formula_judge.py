@@ -81,13 +81,22 @@ def judge_bool(cp, text):
     return True
 
 
+def _clean_latex_sci(text):
+    """LaTeX 科学计数法 → e 形式，让 NUM_RE 能抓到。
+    '1.551 \\times 10^{-5}' → '1.551e-5'；'50.625 \\times 10^9' → '50.625e9'。
+    只动 \\times 10^{±n} 结构，普通数字不受影响。"""
+    return re.sub(r"(\d[\d,]*\.?\d*)\s*\\times\s*10\^?\{?(-?\d+)\}?",
+                  lambda m: f"{m.group(1).replace(',', '')}e{m.group(2)}", text)
+
 def _find_gold_in_text(text, gv, tol):
     """在 markdown 文本里找 gold 值。tol=0 整数精确匹配；tol>0 相对误差 < tol。
     优先在 'Answer:' 行找，找不到再全文找。
-    支持科学计数法（1.551e-5）和 SI 单位换算（模型答 57.77 GB 而 gold 是 bytes：
-    对每个候选值同时试 ×1e9/×1e12 等常用前缀，tolerance 足够紧不会误判）。"""
+    支持科学计数法（1.551e-5 及 LaTeX 的 1.551\\times 10^{-5}）和 SI 单位换算
+    （模型答 57.77 GB 而 gold 是 bytes：对每个候选值同时试 ×1e9/×1e12 等常用前缀，
+    tolerance 足够紧不会误判）。"""
     if gv is None or not text:
         return False
+    text = _clean_latex_sci(text)
     # 科学计数法 + 普通数字（含千分位逗号）
     NUM_RE = r"-?\d[\d,]*\.?\d*(?:[eE][-+]?\d+)?"
     SCALES = [1.0, 1e3, 1e6, 1e9, 1e12]  # 无换算 / k / M / G / T
@@ -156,6 +165,7 @@ def judge_mechanical(spec, text):
                 results[cid] = False
             else:
                 found = False
+                text = _clean_latex_sci(text)
                 NUM_RE = r"-?\d[\d,]*\.?\d*(?:[eE][-+]?\d+)?"
                 SCALES = [1.0, 1e3, 1e6, 1e9, 1e12]  # 同 _find_gold_in_text：单位换算
                 for m in re.finditer(NUM_RE, text):

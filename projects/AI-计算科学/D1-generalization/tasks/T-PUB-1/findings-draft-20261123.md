@@ -37,7 +37,7 @@ We attribute format failures with a controlled re-judging probe (max_tokens 500�
 
 **Superseded claim.** An earlier version of this finding (based on a v1 probe that recovered 5/6) reported "input complexity as an independent factor, partial r=0.436." The v2 probe supersedes this: the partial correlation captured the convergence-failure sub-mechanism, not an independent attention effect. (An earlier F1 claim of a "604-char threshold" was likewise superseded — see F1: it is a task-type confound, not a length boundary.)
 
-**Open verification (run-to-run determinism) — resolved.** A determinism probe (same input × 5 reps, same run, same mt, temperature 0; /tmp/judge_determinism.json) shows the judge is **deterministic on easy cases but non-deterministic on hard ones**:
+**Open verification (run-to-run determinism) — resolved.** A determinism probe (same input × 5 reps, same run, same mt, temperature 0; `data/judge_determinism_probe-20261123.json`) shows the judge is **deterministic on easy cases but non-deterministic on hard ones**:
 - Q01 (easy) at mt2000: 5/5 parseable (deterministic recovery); at mt500: 0/5 (deterministic truncation).
 - Q03 (hard) at mt2000: 0/5 parseable, all `finish_reason=length` at ~3160 chars (deterministic convergence failure — the model cycles and never emits JSON even with full budget).
 - **Q04 (borderline) at mt2000: 3/5 parseable — a run-to-run flip at temperature 0.** The 3 passing runs emit a 74-char pure JSON (no reasoning chain); the 2 failing runs emit 2600+ char cycling reasoning chains. Same input, same mt, same run.

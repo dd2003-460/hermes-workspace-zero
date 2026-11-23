@@ -74,3 +74,22 @@
 - **D 质疑**：F4 瞎猜概率界（guessing bound）在论文里服务什么？为什么需要它？
 - **回答**：F1–F3 回答"裁判（judge）可不可信"，F4 回答"考卷（task set）可不可信"。如果高分能靠蒙达到，那 F1–F3 在"正确"之上做的所有可靠性测量都建在沙上——被比较的"正确"本身不可靠。类比：F1–F3 测秤准不准，F4 测砝码是不是假砝码。reviewer 必问"高分怎么知道不是蒙的"，尤其 rank-deficient 题少检查点+textual gold 更易蒙；给出 1.2e-10~3.3e-5 的解析上界一次性堵死。
 - **落地**：intro F4 贡献声明 + findings F4 开头各加一句动机（"F1–F3 问 judge 可不可信，F4 问 test 可不可信"），已 commit。
+## 2026-11-23 · Q9-agi 题面 v1 确认请求（发 D，⑤子项阻塞点）
+- **请求**：Q9 题面 v1 草稿（pfb/experiments/stage-ablation/tasks/q9-agi-question-v0.md）3 项确认：①预算定值 150 节点 OK? ②5 项因子清单（模型能力/预算/检索/记忆/自我认识闭环）增删? ③排序键"单位预算闭环成功率"（post_acc 口径）OK? 确认即冻结 v1 → 解锁 D2 gold 骨架
+- **附带核对项**：题面硬件段写"4× V100 TP=4"（来源: D 此前提供, 本机无法核验——本机 M1 Max, 推理走 8787 proxy 到服务器）→ 请 D 一并核对是否当前真实配置
+- 状态: 已发微信 (21:35), 等 D 回复
+
+## 2026-11-24 · 方法论根基三问（D：judge 客观性 / general 合法性 / 成本+信息获取）
+- **D 问题 1**：机械 judge 是域特定（特殊化）的，怎么保证客观？给其他不同的 AI 也跑一遍吗？
+- **回答 1**：拆两层。judge 的**机制**（embedding 匹配 + 确定性 temp=0 + 无 self-bias）是 general 的；域特定的是 **gold**（36/46/52 units 人工构建）。"客观"的正确定义 = 给定 gold，分数确定性、可复现、无 LLM self-bias——这恰恰是它**不需要** LLM 交叉验证的原因（交叉验证是 LLM judge 的补救，机械 judge 没有 self-bias 可纠）。"给其他 AI 跑一遍"若指让另一个 LLM 当 judge 交叉打分 = 把机械 judge 降级回 LLM judge，丢掉确定性+免费两大优势，方向反了。真正需要验证的是 **gold 质量**（人工构建可能漏 unit / 划分不合理），可用"独立 gold 构建对照"（让另一个 AI 独立建 gold，看重合度）防——那是 gold 验证，不是 judge 验证。当前 gold 走 markdown→units 转换器 + D 确认，但**独立 gold 对照没做**，是真 gap。
+- **D 问题 2**：这种不 general 的 bench 能有什么 general 发现吗？怎么证明？
+- **回答 2**：general 发现 = **跨域复现的形状**，不是单域绝对值。单域：GPU ~400 realized 节点饱和；general：饱和点存在 + 域依赖（GPU 饱和 vs Q6 ≤379 仍升）。合法性来自"同一套机械 judge 机制（换 gold）跑多域，比形状不比绝对 cov"（跨域绝对 cov 不可比，gold 不同）。证明 = 跨域复现（Q7 第三域落地后出三域对比）。**但 D 的潜台词成立**：general 是用人工 gold 构建劳动换来的，不是方法本身 general——每加一个域要重建 gold。辩护：gold 走转换器非纯手工 + general claim 只需 2-3 域（GPU+Q6+Q7）即可立，不需穷举。真正的 general 是"双轴框架 + 机械 judge 机制"，不是"每域具体饱和点"。
+- **D 问题 3**：别的 workshop 都要跑不同 bench，DRB 那里 judge 还要付费 API，深度推理和信息获取问题似乎也没解决？
+- **回答 3**：成本——机械 judge 边际成本≈0（本地 sentence-transformers embedding，零 LLM/API 调用，judge_v1.py 只有 model.encode 无 LLM call），这是相对 DRB 付费 LLM judge 的核心优势不是劣势；但 gold 构建成本随域数线性增长（每域一次人工+转换器），总成本 = Σ域 gold 构建。信息获取——**真 gap，没解决**：judge 测量"输出树的结构/覆盖"，不测量"模型怎么得到这些内容的"（检索质量/推理深度是黑箱）；retrieval_rate 在 channel-outage 时盲（r7: 97 tags 但检索返回空，模型标了 search 节点没拿到真实信息）。draft 已标 "retrieval_rate is blind to channel outages"，但"模型实际检索到的信息质量"这个维度 judge 完全测不到，是 harness 测量盲区。
+- **状态**：已回答。三问暴露的真 gap：①独立 gold 构建对照没做（gold 质量验证缺）②信息获取/推理深度是 judge 测量盲区（harness 局限）。两者都进 draft limitation + 后续 roadmap。
+- **[11-24 05:55 实证补强（Q1 落地）]**：judge 扰动测试 + 阈值形状 robustness 两组实验完成（脚本 judge_objectivity_perturbation.py / threshold_shape_robustness.py，数据 data/threshold-shape-robustness-20261124.json）：
+  - **gold 构建扰动**（删 10% units × 5 seeds, thr=0.70）：max|Δcov|=0.022 ≈ 1/4 噪声底 → 分数对 gold 构建细节不敏感。
+  - **阈值悬崖**（真正的设计自由度）：cov 在 0.65/0.70/0.75/0.80 = 0.496/0.319/0.098/0.015（30× 摆动）；cor(cov,n_nodes) 同步塌 0.802/0.601/0.388/0.132。
+  - **形状分层结论**：低预算"上升"段 4 个阈值全单调 → 阈值 robust；高预算"平台"段 4 个阈值全非单调（n=2/2）→ 阈值 fragile。draft §6 已按此精确化 claim。
+  - **0.70 provenance**：人工标定（calibrate_cos 只出分布供人选；0.80 覆盖塌 0.015 → 人工降 0.70），单语料实证，非自动/跨语料验证。
+  - **教训**：首版扰动脚本误用 thr=0.75 基线（0.0981 vs 官方 0.3185，差 3.2 倍）→ 敏感性测试基线必须用生产口径；cov 在阈值上是悬崖不是斜坡。

@@ -76,7 +76,7 @@ by_oid = {}
 for rec in mp:
     by_oid.setdefault(rec['oid'], {})[rec['mt']] = rec
 
-fig, ax = plt.subplots(figsize=(7, 3.6))
+fig, ax = plt.subplots(figsize=(7, 3.4))
 oids = sorted(by_oid.keys())
 y = np.arange(len(oids))
 for mt, color, label in [(500, '#d62728', 'mt=500'), (2000, '#2ca02c', 'mt=2000')]:
@@ -94,8 +94,8 @@ for mt, color, label in [(500, '#d62728', 'mt=500'), (2000, '#2ca02c', 'mt=2000'
 ax.set_yticks(y); ax.set_yticklabels([o.replace('T-PUB-1-', '') for o in oids], fontsize=9)
 ax.invert_yaxis()
 ax.set_xlabel('Raw output length (chars)')
+ax.legend(fontsize=8, loc='lower right')
 ax.set_title('Mechanism probe: token budget vs output length and parseability', fontsize=11)
-ax.legend(fontsize=9)
 ax.grid(axis='x', alpha=0.3)
 fig.tight_layout()
 fig.savefig(os.path.join(OUT, 'fig2-mechanism.png'), dpi=200)

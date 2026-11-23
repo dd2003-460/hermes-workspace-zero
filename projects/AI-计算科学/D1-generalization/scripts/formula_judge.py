@@ -27,7 +27,7 @@ from sympy import sympify, N
 
 URL = "http://127.0.0.1:8787/v1/chat/completions"
 MODEL = "qwen3.8-27b-mtp"
-JUDGE_PROMPT_VERSION = "v1-20261123"   # P5 口径: judge 族标注
+JUDGE_PROMPT_VERSION = "v2-20261123"   # P5 口径: judge 族标注。v1→v2: 整数检查点(tol=0)必须精确匹配, 差1=错 (v1 把 max_batch=240 判对, 边界case测试暴露)
 
 # ---------- 机械 judge ----------
 def eval_gold(gold):
@@ -61,10 +61,14 @@ def judge_mechanical(spec, text):
             gv = eval_gold(gold)
             mv = data.get(cid) if data else None
             if isinstance(mv, (int, float)):
-                results[cid] = gv is not None and abs(float(mv) - gv) / abs(gv) < tol
+                if tol == 0:
+                    results[cid] = float(mv) == gv  # 整数检查点：精确匹配（差1=错）
+                else:
+                    results[cid] = gv is not None and abs(float(mv) - gv) / abs(gv) < tol
             elif isinstance(mv, str):
                 try:
-                    results[cid] = gv is not None and abs(float(mv.strip().rstrip(",")) - gv) / abs(gv) < tol
+                    v = float(mv.strip().rstrip(","))
+                    results[cid] = (v == gv) if tol == 0 else (gv is not None and abs(v - gv) / abs(gv) < tol)
                 except Exception:
                     results[cid] = False
             else:
@@ -101,12 +105,12 @@ def reward_only(spec, mech_res):
     return ", ".join(f"{cid}={'对' if v else '错'}" for cid, v in mech_res.items())
 
 # ---------- LLM judge ----------
-JUDGE_PROMPT = """你是一个严格的数值判分员。给定题目检查点和模型输出，逐检查点判"对/错"。
-只输出 JSON：{{"c1": true/false, "c2": true/false, ...}}
-禁止解释。"""
+JUDGE_PROMPT = """你是严格的数值判分员。逐检查点判"对/错"。
+规则：tolerance=0.02 的检查点，数值在 gold 的 2% 容差内算对；tolerance=0 的检查点（整数），必须与 gold 完全相等才算对，差 1 也算错。
+只输出 JSON：{"检查点id": true/false}。禁止解释。"""
 
 def judge_llm(spec, text, max_tokens=500):
-    cps = "\n".join(f"{cp['id']}: {cp['kind']} gold={cp['gold']}" for cp in spec["checkpoints"])
+    cps = "\n".join(f"{cp['id']}: gold={cp['gold']} tolerance={cp.get('tolerance', 0.02)}" for cp in spec["checkpoints"])
     body = json.dumps({"model": MODEL,
         "messages": [{"role": "user", "content": f"检查点:\n{cps}\n\n模型输出:\n{text[:3000]}\n\n{JUDGE_PROMPT}"}],
         "temperature": 0, "max_tokens": max_tokens}).encode()

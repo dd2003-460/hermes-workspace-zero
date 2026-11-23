@@ -133,16 +133,22 @@ def judge_mechanical(spec, text):
                 results[cid] = _find_gold_in_text(text, gv, tol)
         elif kind == "fact":
             gv = eval_gold(gold)
-            # fact: 模型输出里出现该数值（±tol）
+            # fact: 模型输出里出现该数值（±tol）。tol=0 精确匹配（0<0 恒 False，需单独分支）。
             if gv is None or not text:
                 results[cid] = False
             else:
                 found = False
                 for m in re.finditer(r"-?\d+\.?\d*", text):
                     try:
-                        if abs(float(m.group()) - gv) / abs(gv) < tol:
-                            found = True
-                            break
+                        v = float(m.group())
+                        if tol == 0:
+                            if v == gv:
+                                found = True
+                                break
+                        else:
+                            if abs(v - gv) / abs(gv) < tol:
+                                found = True
+                                break
                     except Exception:
                         pass
                 results[cid] = found

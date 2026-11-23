@@ -42,9 +42,11 @@
 | 2606.15029 Metric Match | 有限人类标注 | reliability metric 估计方法 | ✗ | ✗ |
 | 2610.05452 VERA | hidden activations | verdict 可靠性估计 | ✗ | ✗ |
 
-**核验结论（conf 0.85，基于摘要非全文）**：6 篇全测 verdict accuracy（judge 出了分后准不准），**没有一篇测 format reliability（judge 根本没法出可解析判定这个前置失败）**；没有一篇做机制归因到截断/输入复杂度/指令遵循；没有一篇有防 hack 理论保证。**三支柱 (a)(b)(c) 全部未被覆盖，差异化定位站得住**。
-
-**残留风险（W2 消）**：摘要可能漏掉全文里的 format failure 分析（如 2603.05399 的 harness 是否含 parse failure 指标）→ W2 拉 2603.05399 + 2610.30512 全文 PDF 精读确认。若发现某篇已测 format reliability，支柱 (a) 降级为"我们做了机制归因 + 防 hack"双支柱，claim 仍可站但需重述。
+**核验结论（conf 0.9，基于 2603.05399 + 2610.30512 全文 PDF 精读，2026-11-23 本轮 web_extract 直读）**：
+- **2603.05399 (JRH)**：测的是 judge 对**输入扰动**（formatting changes / paraphrasing / verbosity / label flip）的鲁棒性——"judge 在输入被改写后能否保持判定一致"。**不是**测 judge 自身**输出**的格式可靠性（judge 能否吐出可解析判定）。两个"format"方向相反：JRH 扰动输入看输出稳不稳，我们固定输入看输出可解析率。**必须用一句话区分**，否则 reviewer 判撞车。
+- **2610.30512 (Arena-Hard)**：测 verdict 在 instruction 组合变化下的漂移（21.2% prompt 翻转），ground truth = 重复运行一致性，**无** format reliability 指标、**无**机制归因、**无**防 hack 理论。
+- **三支柱核验**：(a) format reliability（judge 输出可解析率）→ **6 篇均未测，JRH 的"format"是输入扰动不是输出可靠性，方向相反**；(b) 机制归因（截断/输入复杂度/指令遵循分离）→ 6 篇均未做；(c) 防 hack 理论 → 6 篇均未做。**三支柱站得住（conf 0.9）**。
+- **§3 必须写的一句话**（防 reviewer 误判撞车）："JRH (Dev et al. 2026) measures a judge's robustness to *input* perturbations (formatting/paraphrasing/verbosity); we measure a judge's *output* format reliability — the rate at which it fails to emit a parseable verdict at all — a failure mode JRH does not instrument."
 
 ## 待办（W2-W3）
 

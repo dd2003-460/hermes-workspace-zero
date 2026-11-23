@@ -60,3 +60,8 @@
 - **重算**（prompt_variant_formal.json）：V1 与 V2 各 67 输出、**重叠 67**（不是 44）；parseability 分歧 **6/67=9.0%**，双失败 **51/67=76.1%**。"44" 分母来源不明（疑为早期子集统计残留）。
 - **处置**：appendix A.5 已改为 9.0% (6/67) / 76.1% (51/67)。主会稿正文（abstract/intro/findings）未引用 11.4%/73% 旧值（grep 确认），不受影响。paper-data-table 是数据日志（data log）不改，但论文引用以本核验为准。
 - **匿名化检查（W6 ③ 预检）**：全部 7 个论文文件 grep `127.0.0.1/8787/a1-6/qwen3.8` — 附录 A.6 已改 `Qwen3-27B, served locally via vLLM`（去 URL 和本地部署名）；workshop 稿已改 `Qwen3-27B`；其余文件干净 ✓。
+
+### 澄清：模型名 "Qwen3-27B" 是有意匿名化，勿改回（2026-11-23 晚）
+- **背景**：数据生成脚本 `scripts/formula_judge.py` 实际 `MODEL="qwen3.8-27b-mtp"`（root `/models/Qwen3.8-27B-NVFP4`，后端 vLLM，8787 本地 proxy）。论文统一写 `Qwen3-27B` 是**匿名化选择**（去具体版本/量化/部署名，只留公开模型族），不是笔误。
+- **核验**：`vLLM` 部署描述正确（owned_by: vllm，upstream 127.0.0.1:8000）；模型族 Qwen3-27B 正确。
+- **W6 警示**：终审时不要把 `Qwen3-27B` "修正"成 `qwen3.8-27b-mtp`——那会泄露具体部署，违反匿名化。匿名化 vs 可复现性的取舍：匿名化优先（ICML 双盲），可复现性靠附录 A 的 gold 推导 + 数据落盘保证，不靠模型全名。

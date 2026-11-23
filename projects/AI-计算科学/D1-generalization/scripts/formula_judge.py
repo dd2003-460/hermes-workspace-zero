@@ -50,6 +50,37 @@ def extract_json(text):
             pass
     return None
 
+def judge_bool(cp, text):
+    """bool 检查点判分（spec 驱动，Lead 核 gold 时补字段）。
+    字段（可组合）：
+    - keywords: [str] — 任一出现（小写）→ pass
+    - forbidden_numbers: [num] — 任一以容量/数值语境出现 → fail
+    - forbidden_patterns: [regex] — 任一命中 → fail
+    优先级：forbidden 先判（命中即 fail），再 keywords（命中即 pass），都不中 → fail。
+    无判分字段时回退旧行为（gold=1 搜泛词）。
+    """
+    low = text.lower()
+    has_fields = any(k in cp for k in ("keywords", "forbidden_numbers", "forbidden_patterns"))
+    if not has_fields:
+        g = int(cp.get("gold", 1))
+        if g == 1:
+            return bool(re.search(r"\b(yes|true|1|是|识别|不足|缺少|missing|insufficient)\b", text, re.I))
+        return True
+    for n in cp.get("forbidden_numbers", []):
+        pat = rf"(?<!\d){n}(?:\.\d+)?\s*(?:gb|gib|gigabyte|gigabytes|capacity|memory)"
+        if re.search(pat, low):
+            return False
+    for pat in cp.get("forbidden_patterns", []):
+        if re.search(pat, low):
+            return False
+    kws = cp.get("keywords", [])
+    if kws:
+        # 正向检查点：出现任一关键词即 pass
+        return any(kw.lower() in low for kw in kws)
+    # 无 keywords = 纯"通过即缺席"检查点（gold=1, pass=没出现禁值）：禁值未命中即 pass
+    return True
+
+
 def judge_mechanical(spec, text):
     """返回 {checkpoint_id: bool}"""
     data = extract_json(text)
@@ -89,13 +120,7 @@ def judge_mechanical(spec, text):
                         pass
                 results[cid] = found
         elif kind == "bool":
-            g = int(gold)
-            if g == 1:
-                # 模型应表达"是/识别到"
-                results[cid] = bool(re.search(r"\b(yes|true|1|是|识别|不足|缺少|missing|insufficient)\b", text, re.I))
-            else:
-                # gold=0: 模型不应幻觉出值（出现具体数字=幻觉=错）
-                results[cid] = not bool(re.search(r"幻觉值占位", text))  # 具体逻辑按题 spec 扩展
+            results[cid] = judge_bool(cp, text)
         else:
             results[cid] = False
     return results

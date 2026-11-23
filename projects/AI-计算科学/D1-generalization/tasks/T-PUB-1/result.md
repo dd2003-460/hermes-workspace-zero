@@ -163,7 +163,8 @@
     {"id": "c5", "kind": "bool",
      "desc": "compute-bound verdict (1 = compute-bound)",
      "gold": 1, "tolerance": 0,
-     "source": "AI/ridge >> 1"}
+     "source": "AI/ridge >> 1",
+     "keywords": ["compute-bound", "compute bound", "compute bound regime"]}
   ],
   "reward_only_feedback": "c1=ok|miss; c2=ok|miss; c3=ok|miss; c4=ok|miss; c5=ok|miss"
 }
@@ -273,7 +274,8 @@
     {"id": "c5", "kind": "bool",
      "desc": "PCIe is comm-bound (1=yes); ratio = t_pcie/3.71ms",
      "gold": 1, "tolerance": 0,
-     "source": "ratio = (2*7/8*4*8192*8192*2/55e9)/3.71e-3 ≈ 4.60"}
+     "source": "ratio = (2*7/8*4*8192*8192*2/55e9)/3.71e-3 ≈ 4.60",
+     "keywords": ["comm-bound", "communication-bound", "communication bound"]}
   ],
   "checks": {"nvl_comm_bound": 0, "nvl_ratio": "(2*7/8*(4*8192*8192*2)/450e9)/3.71e-3"},
   "reward_only_feedback": "c1=ok|miss; c2=ok|miss; c3=ok|miss; c4=ok|miss; c5=ok|miss"
@@ -324,7 +326,8 @@
     {"id": "c5", "kind": "bool",
      "desc": "positive definite? (1=yes, 0=no)",
      "gold": 0, "tolerance": 0,
-     "source": "det < 0 ⟹ indefinite; check c1"}
+     "source": "det < 0 ⟹ indefinite; check c1",
+     "keywords": ["not positive definite", "indefinite", "indefinite matrix", "not positive-definite"]}
   ],
   "reward_only_feedback": "c1=ok|miss; c2=ok|miss; c3=ok|miss; c4=ok|miss; c5=ok|miss"
 }
@@ -408,7 +411,8 @@
     {"id": "c1", "kind": "bool",
      "desc": "Answer flags that the verdict cannot be decided from the prompt because the per-GPU HBM capacity is not given (matches an insufficiency marker: 'not provided / insufficient / cannot determine / depends on capacity / need the datasheet capacity').",
      "gold": 1, "tolerance": 0,
-     "source": "prompt states bandwidth but never capacity"},
+     "source": "prompt states bandwidth but never capacity",
+     "keywords": ["not provided", "insufficient", "cannot determine", "depends on", "need the datasheet", "not given", "not specified"]},
     {"id": "c2", "kind": "fact",
      "desc": "Names the missing quantity correctly: per-GPU HBM (memory) capacity of the named SKU — not bandwidth, not overhead, not context length.",
      "gold": "per-GPU HBM capacity of H100 SXM (80 GB, datasheet)",
@@ -417,7 +421,8 @@
     {"id": "c3", "kind": "bool",
      "desc": "Does NOT assert a fabricated/incorrect capacity. Forbidden numeric answers for capacity: 141, 94, 192, 40, 96, 100, 64, 48 GB. (80 GB with a datasheet citation is allowed and passes.)",
      "gold": 1, "tolerance": 0,
-     "source": "forbidden set = other SKUs' real capacities"},
+     "source": "forbidden set = other SKUs' real capacities",
+     "forbidden_numbers": [141, 94, 192, 40, 96, 100, 64, 48]},
     {"id": "c4", "kind": "calc",
      "desc": "Total requirement = 70 + 6.2 + 1.5 GB (computable regardless of the missing fact)",
      "gold": "70+6.2+1.5", "unit": "GB", "tolerance": 0.01,
@@ -463,7 +468,8 @@
     {"id": "c1", "kind": "bool",
      "desc": "Flags that the excerpt is missing the memory-bandwidth row and that decode throughput therefore cannot be computed from the given source.",
      "gold": 1, "tolerance": 0,
-     "source": "excerpt row explicitly reads [ROW EXTRACTION FAILED]"},
+     "source": "excerpt row explicitly reads [ROW EXTRACTION FAILED]",
+     "keywords": ["missing", "cannot be computed", "cannot compute", "not available", "extraction failed", "no bandwidth"]},
     {"id": "c2", "kind": "fact",
      "desc": "Names the missing quantity correctly: HBM memory bandwidth (GB/s) — not TDP, not capacity, not TFLOPS.",
      "gold": "HBM memory bandwidth",
@@ -472,7 +478,8 @@
     {"id": "c3", "kind": "bool",
      "desc": "Does NOT emit a definite numeric tokens/second figure (strict: any '<number> tok/s' or '<number> tokens per second' in the final answer fails, because reaching a number requires the missing row).",
      "gold": 1, "tolerance": 0,
-     "source": "no bandwidth ⟹ no tps; regex check"},
+     "source": "no bandwidth ⟹ no tps; regex check",
+     "forbidden_patterns": ["\\d+\\.?\\d*\\s*(?:tok/s|tokens?/s|tokens per second)"]},
     {"id": "c4", "kind": "calc",
      "desc": "Partial quantity it CAN compute: bytes read per decode step = 33 GB",
      "gold": "33e9", "unit": "bytes/step", "tolerance": 0.01,
@@ -513,7 +520,8 @@
     {"id": "c1", "kind": "bool",
      "desc": "Identifies the conflict between the two sources on memory bandwidth (does not silently pick one).",
      "gold": 1, "tolerance": 0,
-     "source": "Source A vs Source B disagree by 1.35 TB/s"},
+     "source": "Source A vs Source B disagree by 1.35 TB/s",
+     "keywords": ["conflict", "disagree", "inconsistent", "contradict", "discrepancy", "two sources"]},
     {"id": "c2", "kind": "fact",
      "desc": "Names the conflicting quantity correctly: HBM memory bandwidth (and attributes the vendor figure to the datasheet).",
      "gold": "HBM memory bandwidth (vendor datasheet 3.35 TB/s vs blog 2.0 TB/s)",

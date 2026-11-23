@@ -29,3 +29,6 @@
 ## 未核验项（诚实标注）
 - vLLM 部署配置（tensor parallel/dtype/context length）：实验脚本未记录，推理引擎未为本研究重配，模型 standing 部署设置适用。附录 A.6 已标注。
 - 604 字符阈值：已被 F2 机制归因修正为 task-type confound（非硬长度边界），正文已按 v2 表述，不再作为 claim。
+
+## 数字张力（W6 arena 评审重点，W7 定稿前必须解决）
+- **abstract "prompt phrasing explains only ~11% of failures"**：出处 paper-data-table-20261123.md 行 122（"73% 输出驱动 + 11% prompt 措辞"），但 ① 73+11=84，剩余 16% 无交代；② 三变体失败率 52.2%-83.6%（极差 31.4pp）直接证明 prompt 措辞效应不小，"only ~11%" 与自身数据张力大；③ 机制探针的 83%/17% 是"截断 vs 指令遵循"归因，与"prompt 措辞 11%"是两套口径，不能混用。建议 W7 改为可核验表述（如"variant spread 31.4pp, V3 best 52.2% still ≫ 0%"），删掉无完整分解支撑的 11%。

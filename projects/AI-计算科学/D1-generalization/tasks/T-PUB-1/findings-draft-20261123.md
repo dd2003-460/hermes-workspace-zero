@@ -73,7 +73,7 @@ On the parseable subset, we measure the flip rate: the fraction of checkpoints w
 
 ## F4. Guessing bound: the task set is not guessable
 
-To rule out that high scores are achievable by guessing, we define an explicit random-guess model and derive an analytic upper bound on the probability of guessing all checkpoints correct.
+To rule out that high scores are achievable by guessing, we define an explicit random-guess model and derive an analytic upper bound on the probability of guessing all checkpoints correct. This answers the paper's second validity question: F1–F3 ask whether the *judge* can be trusted; F4 asks whether the *test* can be trusted. If a high score were achievable by chance, the reliability measurements above it would rest on a rotten foundation — the "correct" being compared against would itself be unreliable.
 
 Guess model: continuous calc checkpoints (tol 2%) — guess U[0.5g, 2g], hit probability 2·tol/1.5; integer-exact checkpoints (tol 0) — guess U[g±50], hit probability 1/101; textual gold — hit probability 1/100 (conservative). The probability of guessing all checkpoints correct is the product over checkpoints (independent-guess assumption).
 

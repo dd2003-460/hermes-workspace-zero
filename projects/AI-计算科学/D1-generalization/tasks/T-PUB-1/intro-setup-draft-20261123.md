@@ -19,7 +19,7 @@ We study this question on the **formalizable core** — the part of an evaluatio
 
 3. **Verdict accuracy flips at chance (F3).** Even on the parseable subset, the LLM judge disagrees with the mechanical judge on 48–52% of checkpoints — indistinguishable from a coin flip.
 
-4. **The task set resists guessing (F4).** Under an explicit random-guess model, the probability of guessing all checkpoints correct is bounded analytically (1.2e-10 to 3.3e-5) and confirmed by simulation (0/2000). The bound is model-agnostic.
+4. **The task set resists guessing (F4).** F1–F3 ask whether the judge can be trusted; F4 asks whether the *test* can be trusted. Under an explicit random-guess model, the probability of guessing all checkpoints correct is bounded analytically (1.2e-10 to 3.3e-5) and confirmed by simulation (0/2000) — a high score on this set cannot be explained by luck. The bound is model-agnostic.
 
 5. **Prompt optimization is not free (F5).** A three-arm behavioral experiment shows that fixing one checkpoint dimension (c1: 33%→100%) induces a side effect on another (c3: 100%→77%, via induced conditional-enumeration / hedging behavior).
 

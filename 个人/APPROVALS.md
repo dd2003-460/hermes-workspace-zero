@@ -14,7 +14,13 @@
 
 ## 待批
 
-（无条目）
+1. T53b webllm 降级数据处置（2026-11-20 14:52 · 不阻塞，run 继续跑）
+   - 现状：Perplexity/ChatGPT 未登录 → 25/30 已跑 run 的 webllm 交叉验证全跳过（WEBLLM-BROKEN）；登录窗口已超时，剩余 ~50 run 也会降级。webllm 效应从现有数据不可识别（OK 组 n=2）。
+   - **登录状态未定（14:55）**：Cookies 14:31 更新、perplexity 阶段已返回（现跑 chatgpt 阶段）→ 可能已登录成功但未验证。3 个在跑 run 已带 "skipping future webllm" 标志，永久降级；**下一个新 run 的 webllm 状态是判据**——若恢复则剩余 run 正常，数据变成"前降级后正常"混合，(a)/(b) 需重估。
+   - 1.1 (a) 接受降级：62 跑完出"webllm 缺席"口径消融结论，5 个 OK run 标离群；webllm 效应另立 goal 登录后小规模配对实验补（推荐——臂间结论不受影响，代价 0）
+   - 1.2 (b) 登录后重跑：现有 12/62 作废，重跑 4-5h（需 D 重新发起 Perplexity 登录）
+   - 详情：pfb/tasks/T53-bus/anomaly-watchlist.md
+   - 人类回复：
 
 ## AI 自主裁决记录（2026-11-09 · D指令"别审批了，卡死了"）
 

@@ -1,0 +1,40 @@
+{
+ "tag": "sceneD_offbyone_flat16_r02",
+ "scene": "D",
+ "bug": "offbyone",
+ "arm": "flat16",
+ "round": 2,
+ "ts": "2026-11-20T21:28:56.739309",
+ "elapsed_s": 3.1,
+ "temperature": 0.3,
+ "model": "qwen3.8-27b",
+ "real_bug_line": "total += i",
+ "output": {
+  "bug_line": "        total += i",
+  "explanation": "range(n) 生成 0 到 n-1 的序列，导致累加的是 0+1+...+(n-1)，而非 1+2+...+n。当 n=1 时，range(1) 仅包含 0，结果为 0 而非 1。",
+  "fixed_code": "def sum_first_n(n):\n    \"\"\"返回 1+2+...+n。n<=0 返回 0。\"\"\"\n    if n <= 0:\n        return 0\n    return n * (n + 1) // 2",
+  "confidence": "高置信度。逻辑推导与测试用例完全吻合：原代码 sum_first_n(1) 返回 0（期望 1），sum_first_n(3) 返回 3（期望 6）。修复方案使用数学公式，既正确又高效。"
+ },
+ "test_results": [
+  {
+   "call": "sum_first_n(0)",
+   "expected": "0",
+   "got": "0",
+   "pass": true
+  },
+  {
+   "call": "sum_first_n(1)",
+   "expected": "1",
+   "got": "1",
+   "pass": true
+  },
+  {
+   "call": "sum_first_n(3)",
+   "expected": "6",
+   "got": "6",
+   "pass": true
+  }
+ ],
+ "tests_passed": 3,
+ "tests_total": 3
+}

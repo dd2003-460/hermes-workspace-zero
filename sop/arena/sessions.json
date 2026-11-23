@@ -2,15 +2,87 @@
   "generated": "2026-11-20",
   "note": "机器可读会话台账。派发前查此文件（或跑 scripts/arena/dispatch-check.sh <repo>）。一仓一会话硬约束：同 repo 出现两个 active = 违规。历史详情见 sop/arena/session-history.md。",
   "sessions": [
-    {"repo": "prompt-first-bench", "uuid": "01a1ca66-5358-7039-bcfa-b2fbf65a5a27", "taskSpace": "tpr15-dispatch", "status": "active", "task": "T-PR-15 文字目标函数 Goodhart 滚雪球调研", "last_date": "2026-11-16", "branch": "arena/f65a5a27-prompt-first-bench"},
-    {"repo": "hermes-workspace-zero", "uuid": "01a1f80e-4bfe-7566-9e03-52d0423a71ef", "taskSpace": "arena-os1-dispatch-20261120", "status": "blocked-limit", "task": "T-OS-1 完成(Q1-Q4); T-OS-2 疑似跑完未push(页面diff有Unknown file); T-OS-3 任务书@42334c3a 排队; arena daily limit 明天16:26重置", "last_date": "2026-11-20", "branch": "main"},
-    {"repo": "prompt-first-bench", "uuid": "01a1aee6-f717-7e8f-a8bf-6b512858680a", "taskSpace": "t38-rubric-v32-replay", "status": "done", "task": "T38 rubric v3.2 replay（11-06 收口：围栏修复 PASS，整体提升不可下；遗留 a/b 低优先级待办）", "last_date": "2026-11-06", "branch": "arena/2858680a-prompt-first-bench"},
-    {"repo": "prompt-first-bench", "uuid": "01a185f5-522b-72b2-a713-200878602cd5", "taskSpace": "arena-deepresearch-bench-20261029", "status": "idle", "task": "rubric-v3/deepresearch 系列（历史混有 market-alpha T3 消息，派发时显式声明只涉及 pfb）", "last_date": "2026-10-29", "branch": null},
-    {"repo": "hermes-workspace-zero", "uuid": "01a19661-a064-7684-b5ef-6bc8bbea6ca3", "taskSpace": null, "status": "done", "task": "F10-R5 宏观 regime 调研（待D拍板 H1 回测）", "last_date": "2026-11-05", "branch": "arena/9872a196"},
-    {"repo": "research-prompt", "uuid": "01a1acde-7ca1-715c-a996-f1289d23b2ae", "taskSpace": "t33-hetero-judge-research-prompt", "status": "done", "task": "T33 hetero-judge", "last_date": "2026-11-06", "branch": null},
-    {"repo": "paradigm-routing", "uuid": null, "taskSpace": "arena-check", "status": "done", "task": "T-PR-06/07/08/09/10/11 系列调研", "last_date": "2026-11-08", "branch": "arena/62fe3fd4-paradigm-routing"},
-    {"repo": "from-motivation-to-society", "uuid": "01a197a6-b7bb-7c8c-8565-139a0b215928", "taskSpace": "motivation-society-ch10-contradiction", "status": "done", "task": "Part IV+V 写作", "last_date": "2026-11-02", "branch": "test"},
-    {"repo": "decomp-bench", "uuid": null, "taskSpace": "decomp-t8-partb-arena-dispatch", "status": "done", "task": "T8 Part B/C 文献调研+对抗核验", "last_date": "2026-11-02", "branch": "arena/e31379c5-decomp-bench"}
+    {
+      "repo": "prompt-first-bench",
+      "uuid": "01a1ca66-5358-7039-bcfa-b2fbf65a5a27",
+      "taskSpace": "tpr15-dispatch",
+      "status": "active",
+      "task": "T-PR-16 对抗核验 novelty+时间尺度TCO (11-22 派发, 任务书 ecd99a856 @ arena/f65a5a27, 交付 tasks/T-PR-16-result.md)",
+      "last_date": "2026-11-22",
+      "branch": "arena/f65a5a27-prompt-first-bench"
+    },
+    {
+      "repo": "hermes-workspace-zero",
+      "uuid": "01a1f80e-4bfe-7566-9e03-52d0423a71ef",
+      "taskSpace": "arena-os1-dispatch-20261120",
+      "status": "blocked-limit",
+      "task": "T-OS-1 完成(Q1-Q4); T-OS-2 疑似跑完未push(页面diff有Unknown file); T-OS-3 任务书@42334c3a 排队; arena daily limit 明天16:26重置",
+      "last_date": "2026-11-20",
+      "branch": "main"
+    },
+    {
+      "repo": "prompt-first-bench",
+      "uuid": "01a1aee6-f717-7e8f-a8bf-6b512858680a",
+      "taskSpace": "t38-rubric-v32-replay",
+      "status": "done",
+      "task": "T38 rubric v3.2 replay（11-06 收口：围栏修复 PASS，整体提升不可下；遗留 a/b 低优先级待办）",
+      "last_date": "2026-11-06",
+      "branch": "arena/2858680a-prompt-first-bench"
+    },
+    {
+      "repo": "prompt-first-bench",
+      "uuid": "01a185f5-522b-72b2-a713-200878602cd5",
+      "taskSpace": "arena-deepresearch-bench-20261029",
+      "status": "idle",
+      "task": "rubric-v3/deepresearch 系列（历史混有 market-alpha T3 消息，派发时显式声明只涉及 pfb）",
+      "last_date": "2026-10-29",
+      "branch": null
+    },
+    {
+      "repo": "hermes-workspace-zero",
+      "uuid": "01a19661-a064-7684-b5ef-6bc8bbea6ca3",
+      "taskSpace": null,
+      "status": "done",
+      "task": "F10-R5 宏观 regime 调研（待D拍板 H1 回测）",
+      "last_date": "2026-11-05",
+      "branch": "arena/9872a196"
+    },
+    {
+      "repo": "research-prompt",
+      "uuid": "01a1acde-7ca1-715c-a996-f1289d23b2ae",
+      "taskSpace": "t33-hetero-judge-research-prompt",
+      "status": "done",
+      "task": "T33 hetero-judge",
+      "last_date": "2026-11-06",
+      "branch": null
+    },
+    {
+      "repo": "paradigm-routing",
+      "uuid": null,
+      "taskSpace": "arena-check",
+      "status": "done",
+      "task": "T-PR-06/07/08/09/10/11 系列调研",
+      "last_date": "2026-11-08",
+      "branch": "arena/62fe3fd4-paradigm-routing"
+    },
+    {
+      "repo": "from-motivation-to-society",
+      "uuid": "01a197a6-b7bb-7c8c-8565-139a0b215928",
+      "taskSpace": "motivation-society-ch10-contradiction",
+      "status": "done",
+      "task": "Part IV+V 写作",
+      "last_date": "2026-11-02",
+      "branch": "test"
+    },
+    {
+      "repo": "decomp-bench",
+      "uuid": null,
+      "taskSpace": "decomp-t8-partb-arena-dispatch",
+      "status": "done",
+      "task": "T8 Part B/C 文献调研+对抗核验",
+      "last_date": "2026-11-02",
+      "branch": "arena/e31379c5-decomp-bench"
+    }
   ],
   "known_issues": [
     "pfb 同仓 2 个 active（01a1ca66 + 01a1aee6）= 违规状态，待核验 01a1aee6 是否已完成可归档",

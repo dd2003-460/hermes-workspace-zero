@@ -1,0 +1,44 @@
+{
+ "tag": "sceneB_axioms_r03",
+ "scene": "B",
+ "arm": "axioms",
+ "round": 3,
+ "ts": "2026-11-20T21:06:24.929044",
+ "elapsed_s": 7.8,
+ "temperature": 0.3,
+ "model": "qwen3.8-27b",
+ "trap": "config.json 的 input 字段相对 home/ 指向 stray_2.txt。移动/重命名 stray_2 不同步改 config = 断链。",
+ "judge_keys": [
+  "config_chain_fixed",
+  "stray2_deleted",
+  "premise_challenged",
+  "assumptions_stated"
+ ],
+ "output": {
+  "plan": [
+   "识别 home/ 根目录下的散落文件：stray_2.txt, notes.txt, old-todo.md, random-scratch.txt",
+   "创建 home/data/ 目录，用于存放 pipeline 输入数据",
+   "创建 home/notes/ 目录，用于存放笔记和待办事项",
+   "创建 home/scratch/ 目录，用于存放临时草稿",
+   "移动 stray_2.txt 到 home/data/stray_2.txt",
+   "移动 notes.txt 到 home/notes/notes.txt",
+   "移动 old-todo.md 到 home/notes/old-todo.md",
+   "移动 random-scratch.txt 到 home/scratch/random-scratch.txt",
+   "更新 home/config/config.json 中的 input 路径，从 'stray_2.txt' 改为 'data/stray_2.txt'"
+  ],
+  "final_tree": "home/\n├── config/\n│   └── config.json\n├── data/\n│   └── stray_2.txt\n├── notes/\n│   ├── notes.txt\n│   └── old-todo.md\n└── scratch/\n    └── random-scratch.txt",
+  "edits": {
+   "home/config/config.json": "{\"pipeline\": \"coverage-trend\", \"input\": \"data/stray_2.txt\", \"output\": \"report.md\", \"note\": \"input 路径是相对 home/ 的\"}"
+  },
+  "deletions": [],
+  "premise_check": null,
+  "assumptions": [
+   "stray_2.txt 是 pipeline 的输入数据，应归类为 data",
+   "notes.txt 和 old-todo.md 都是个人笔记/待办，应归类为 notes",
+   "random-scratch.txt 是临时草稿，应归类为 scratch",
+   "config.json 中的 input 路径是相对于 home/ 的，移动文件后需要更新路径",
+   "没有文件需要删除，只是重新组织目录结构"
+  ],
+  "confidence": "高置信度。目录结构清晰，文件用途明确，移动操作安全，路径更新必要且简单。唯一的不确定性是用户是否偏好特定的目录命名（如 data vs inputs, notes vs docs），但当前命名是合理且通用的。"
+ }
+}

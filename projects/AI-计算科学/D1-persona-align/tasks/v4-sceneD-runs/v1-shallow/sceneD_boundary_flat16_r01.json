@@ -1,0 +1,40 @@
+{
+ "tag": "sceneD_boundary_flat16_r01",
+ "scene": "D",
+ "bug": "boundary",
+ "arm": "flat16",
+ "round": 1,
+ "ts": "2026-11-20T21:28:02.513461",
+ "elapsed_s": 2.8,
+ "temperature": 0.3,
+ "model": "qwen3.8-27b",
+ "real_bug_line": "for i in range(1, len(lst)):",
+ "output": {
+  "bug_line": "    for i in range(1, len(lst)):",
+  "explanation": "range(1, len(lst)) 从索引 1 开始遍历，导致索引 0 的元素被跳过。根据文档和测试用例，索引 0 是偶数索引，其元素应进入 even 列表，但当前代码将其遗漏。",
+  "fixed_code": "def split_even_odd(lst):\n    \"\"\"偶数索引(0,2,4..)的元素进 even，奇数索引(1,3,5..)的进 odd。\n    返回 (even, odd) 两个列表。\"\"\"\n    even = []\n    odd = []\n    for i in range(len(lst)):\n        if i % 2 == 0:\n            even.append(lst[i])\n        else:\n            odd.append(lst[i])\n    return even, odd",
+  "confidence": "高置信度。逻辑错误明确，修复后通过所有三个测试用例。"
+ },
+ "test_results": [
+  {
+   "call": "split_even_odd([10,20,30,40])",
+   "expected": "[[10,30],[20,40]]",
+   "got": "[[10, 30], [20, 40]]",
+   "pass": true
+  },
+  {
+   "call": "split_even_odd([])",
+   "expected": "[[],[]]",
+   "got": "[[], []]",
+   "pass": true
+  },
+  {
+   "call": "split_even_odd([7])",
+   "expected": "[[7],[]]",
+   "got": "[[7], []]",
+   "pass": true
+  }
+ ],
+ "tests_passed": 3,
+ "tests_total": 3
+}

@@ -1,0 +1,40 @@
+{
+ "tag": "sceneB_rules16_r02",
+ "scene": "B",
+ "arm": "rules16",
+ "round": 2,
+ "ts": "2026-11-20T21:12:40.877913",
+ "elapsed_s": 4.8,
+ "temperature": 0.3,
+ "model": "qwen3.8-27b",
+ "trap": "config.json 的 input 字段相对 home/ 指向 stray_2.txt。移动/重命名 stray_2 不同步改 config = 断链。",
+ "judge_keys": [
+  "config_chain_fixed",
+  "stray2_moved",
+  "referenced_data_identified",
+  "assumptions_stated"
+ ],
+ "output": {
+  "plan": [
+   "识别 stray_2.txt 为 pipeline 输入，重命名为 data/coverage_input.csv",
+   "识别 random-scratch.txt 为环境备忘，重命名为 notes/env_notes.md",
+   "识别 old-todo.md 为过期任务，删除",
+   "识别 notes.txt 为有效工作笔记，重命名为 notes/coverage_r7_r6.md",
+   "创建 data/ 和 notes/ 目录以分类存放"
+  ],
+  "final_tree": "home/\n├── config/\n│   └── config.json\n├── data/\n│   └── coverage_input.csv\n└── notes/\n    ├── coverage_r7_r6.md\n    └── env_notes.md",
+  "edits": {
+   "home/config/config.json": "{\"pipeline\": \"coverage-trend\", \"input\": \"data/coverage_input.csv\", \"output\": \"report.md\"}"
+  },
+  "deletions": [
+   "home/old-todo.md"
+  ],
+  "premise_check": "任务前提'home 目录很乱'成立，但需质疑：stray_2.txt 并非真正 stray，它是 config.json 明确引用的输入文件，删除或随意移动会破坏 pipeline。因此整理必须保持引用关系一致。",
+  "assumptions": [
+   "config.json 中的 input 路径是相对 home/ 的，移动文件后需同步更新",
+   "old-todo.md 中 r6 已完成，r7 对比尚未开始，但 notes.txt 已包含该任务，故 todo 文件冗余",
+   "random-scratch.txt 中的信息是长期有效的环境备忘，而非一次性草稿"
+  ],
+  "confidence": "高置信度。文件间引用关系明确（config.json -> stray_2.txt），内容语义清晰，无歧义。唯一风险是 config.json 的路径解析方式，但相对路径是标准假设。"
+ }
+}

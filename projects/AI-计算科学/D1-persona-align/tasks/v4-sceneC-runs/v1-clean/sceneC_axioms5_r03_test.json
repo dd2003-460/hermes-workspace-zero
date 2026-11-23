@@ -1,0 +1,53 @@
+{
+ "tag": "sceneC_axioms5_r03_test",
+ "scene": "C",
+ "arm": "axioms5",
+ "round": 3,
+ "ts": "2026-11-20T21:22:27.871385",
+ "elapsed_s": 3.6,
+ "rule": "若文件内容可通过现有工具、脚本或源数据在合理成本内无损重建，则删除；否则保留。",
+ "output": {
+  "predictions": [
+   {
+    "path": "/home/user/project/data/raw_20261115.csv",
+    "decision": "keep",
+    "reason": "原始采集数据通常无法通过现有工具无损重建。"
+   },
+   {
+    "path": "/home/user/.cache/npm/",
+    "decision": "delete",
+    "reason": "npm 缓存可通过重新安装依赖无损重建。"
+   },
+   {
+    "path": "/home/user/project/experiments/ablation-r3/results.json",
+    "decision": "keep",
+    "reason": "实验结果通常包含不可复现的随机性或环境状态，重建成本极高。"
+   },
+   {
+    "path": "/tmp/swapfile",
+    "decision": "delete",
+    "reason": "系统临时交换文件，重启或系统操作即可无损重建。"
+   },
+   {
+    "path": "/home/user/project/scripts/etl_pipeline.py",
+    "decision": "keep",
+    "reason": "源代码包含人工编写的逻辑与注释，无法通过工具无损重建。"
+   },
+   {
+    "path": "/home/user/project/data/derived_v2.csv",
+    "decision": "delete",
+    "reason": "派生数据可通过保留的源数据和脚本在合理成本内无损重建。"
+   },
+   {
+    "path": "/home/user/.config/myapp/settings.json",
+    "decision": "keep",
+    "reason": "包含手动调整且无默认值可恢复的参数，无法无损重建。"
+   },
+   {
+    "path": "/home/user/project/data/raw_20261101_backup.tar.gz",
+    "decision": "delete",
+    "reason": "原始 csv 文件仍在原处，备份数据可通过现有源数据无损重建。"
+   }
+  ]
+ }
+}

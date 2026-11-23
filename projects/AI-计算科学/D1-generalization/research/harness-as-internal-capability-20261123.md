@@ -63,6 +63,27 @@ qqbot 补充 29 的数据已经给了有效结论：
 - 若 B 没提升 → 提醒词无效（措辞问题），需迭代提醒词或换更强提醒
 - **无论哪种结果都是有效结论**（对齐 D 第 1 问：能下结论）
 
+## 实验结果（2026-11-23 跑完，judge 修中文 keywords 后）
+
+| 题 | A 裸 c1/c3 | B 提醒 c1/c3 | 变化 |
+|----|-----------|-------------|------|
+| Q08 | False/True | True/True | 报缺口 +1 |
+| Q09 | True/False | True/True | 不编造 +1（关键翻转）|
+| Q10 | False/True | True/True | 报缺口 +1 |
+
+报缺口率 1/3→3/3，不编造率 2/3→3/3（命中"预期"第一条：A 低 B 高）。
+
+**Q09 关键翻转**：A 裸 prompt 下模型用记忆 3.35 TB/s 补全缺失的 H100 带宽行，
+算出 "~100 tokens/s"，附免责声明"如果严格禁止外部知识则无法确定"——
+不报缺口、直接编数 + 事后找补。B 提醒后不编（c3=True）。
+模型有能力识别"参数缺失"（免责声明证明它知道），但裸 prompt 下滑向"用先验补全继续算"。
+状态机提醒把内在能力从"潜在"拉成"显式"。
+
+**结论**：D 假设成立——"知道参数缺失"是模型内在能力（Q09 免责声明证明），
+"主动停下来报缺口"是 harness 可注入的控制（A/B 翻转证明）。
+harness ≈ 模型内部能力的"显式化/触发器"，不是装它没有的能力。
+n=3 定性不定量（Wilson CI 44%-100%）；定量需 ≥10 题 + 多提醒词变体。
+
 ## 与论文的关系
 
 这个实验是论文的核心 claim 之一：
@@ -73,8 +94,8 @@ qqbot 补充 29 的数据已经给了有效结论：
 
 ## 数据落点
 
-- 实验脚本：/tmp/rd_state_machine_ab.py（临时，正式移入 scripts/）
-- 结果：/tmp/rd_state_machine_ab.json → 落盘 tasks/T-PUB-1/rd-ab-results.json
+- 实验脚本：scripts/rd_state_machine_ab.py
+- 结果：tasks/T-PUB-1/rd-ab-results.json
 - 本 note：research/harness-as-internal-capability-20261123.md
 
 ## 方法学教训（2026-11-23 第一轮 A/B 踩的坑）

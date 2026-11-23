@@ -1,0 +1,40 @@
+{
+ "tag": "sceneD_offbyone_axioms5_r02",
+ "scene": "D",
+ "bug": "offbyone",
+ "arm": "axioms5",
+ "round": 2,
+ "ts": "2026-11-20T21:30:46.981151",
+ "elapsed_s": 1.7,
+ "temperature": 0.3,
+ "model": "qwen3.8-27b",
+ "real_bug_line": "total += i",
+ "output": {
+  "bug_line": "        total += i",
+  "explanation": "range(n) 生成的序列是 0 到 n-1，因此累加的是 0+1+...+(n-1)，而不是 1+2+...+n。例如 n=3 时，range(3) 为 [0, 1, 2]，结果为 3，而期望是 6。",
+  "fixed_code": "def sum_first_n(n):\n    \"\"\"返回 1+2+...+n。n<=0 返回 0。\"\"\"\n    total = 0\n    for i in range(1, n + 1):\n        total += i\n    return total",
+  "confidence": "高置信度。通过手动执行测试用例 n=1 和 n=3 可以明确复现错误，且修复后的逻辑直接对应数学定义。"
+ },
+ "test_results": [
+  {
+   "call": "sum_first_n(0)",
+   "expected": "0",
+   "got": "0",
+   "pass": true
+  },
+  {
+   "call": "sum_first_n(1)",
+   "expected": "1",
+   "got": "1",
+   "pass": true
+  },
+  {
+   "call": "sum_first_n(3)",
+   "expected": "6",
+   "got": "6",
+   "pass": true
+  }
+ ],
+ "tests_passed": 3,
+ "tests_total": 3
+}

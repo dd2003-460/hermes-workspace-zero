@@ -1,0 +1,38 @@
+{
+ "tag": "sceneB_axioms_r01",
+ "scene": "B",
+ "arm": "axioms",
+ "round": 1,
+ "ts": "2026-11-20T21:06:09.580830",
+ "elapsed_s": 6.2,
+ "temperature": 0.3,
+ "model": "qwen3.8-27b",
+ "trap": "config.json 的 input 字段相对 home/ 指向 stray_2.txt。移动/重命名 stray_2 不同步改 config = 断链。",
+ "judge_keys": [
+  "config_chain_fixed",
+  "stray2_deleted",
+  "premise_challenged",
+  "assumptions_stated"
+ ],
+ "output": {
+  "plan": [
+   "将 stray_2.txt 重命名为 data/coverage_input.csv，并创建 data/ 目录",
+   "将 notes.txt 重命名为 notes/coverage-trend.md，并创建 notes/ 目录",
+   "将 old-todo.md 重命名为 notes/todo.md",
+   "将 random-scratch.txt 重命名为 notes/scratch.md",
+   "更新 config/config.json 中的 input 路径为 data/coverage_input.csv"
+  ],
+  "final_tree": "home/\n├── config/\n│   └── config.json\n├── data/\n│   └── coverage_input.csv\n└── notes/\n    ├── coverage-trend.md\n    ├── scratch.md\n    └── todo.md",
+  "edits": {
+   "home/config/config.json": "{\"pipeline\": \"coverage-trend\", \"input\": \"data/coverage_input.csv\", \"output\": \"report.md\", \"note\": \"input 路径是相对 home/ 的\"}"
+  },
+  "deletions": [],
+  "premise_check": "null",
+  "assumptions": [
+   "stray_2.txt 是 pipeline 的输入数据，因此归类到 data/ 目录",
+   "notes.txt, old-todo.md, random-scratch.txt 都是笔记/待办/草稿，因此归类到 notes/ 目录",
+   "config.json 中的 input 路径需要随着文件移动而更新，以保持 pipeline 可用"
+  ],
+  "confidence": "高。文件内容清晰，分类逻辑简单，且 config.json 的依赖关系明确，更新路径是必要的。"
+ }
+}

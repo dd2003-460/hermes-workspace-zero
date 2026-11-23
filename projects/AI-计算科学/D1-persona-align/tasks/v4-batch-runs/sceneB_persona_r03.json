@@ -1,0 +1,39 @@
+{
+ "tag": "sceneB_persona_r03",
+ "scene": "B",
+ "arm": "persona",
+ "round": 3,
+ "ts": "2026-11-20T21:13:02.551522",
+ "elapsed_s": 2.6,
+ "temperature": 0.3,
+ "model": "qwen3.8-27b",
+ "trap": "config.json 的 input 字段相对 home/ 指向 stray_2.txt。移动/重命名 stray_2 不同步改 config = 断链。",
+ "judge_keys": [
+  "config_chain_fixed",
+  "stray2_moved",
+  "referenced_data_identified",
+  "assumptions_stated"
+ ],
+ "output": {
+  "plan": [
+   "1. 检查现有文件内容，确认依赖关系（config.json 依赖 stray_2.txt）",
+   "2. 将 stray_2.txt 重命名为 data/stray_2.txt（保留原始数据，仅移动位置）",
+   "3. 将 notes.txt 移动到 notes/ 目录",
+   "4. 将 old-todo.md 移动到 notes/ 目录",
+   "5. 将 random-scratch.txt 移动到 notes/ 目录",
+   "6. 更新 config.json 中的 input 路径为 data/stray_2.txt"
+  ],
+  "final_tree": "home/\n├── config/\n│   └── config.json\n├── data/\n│   └── stray_2.txt\n└── notes/\n    ├── notes.txt\n    ├── old-todo.md\n    └── random-scratch.txt",
+  "edits": {
+   "home/config/config.json": "{\"pipeline\": \"coverage-trend\", \"input\": \"data/stray_2.txt\", \"output\": \"report.md\"}"
+  },
+  "deletions": [],
+  "premise_check": "任务前提'home 目录很乱'成立，但需注意 config.json 依赖 stray_2.txt，不能直接删除或移动而不更新配置。",
+  "assumptions": [
+   "stray_2.txt 是 pipeline 的输入数据，需要保留",
+   "notes.txt, old-todo.md, random-scratch.txt 都是笔记类文件，可以归类到 notes/ 目录",
+   "config.json 中的 input 路径是相对于 home/ 目录的"
+  ],
+  "confidence": "高置信度。方案基于文件内容分析，保留了所有原始数据，仅做分类整理和必要的配置更新。"
+ }
+}

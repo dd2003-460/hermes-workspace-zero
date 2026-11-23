@@ -1,0 +1,842 @@
+[
+ {
+  "tag": "sceneC_axioms5_r01_test",
+  "arm": "axioms5",
+  "round": 1,
+  "score": 10,
+  "max": 10,
+  "correct": [
+   {
+    "path": "/home/user/project/data/20261115_batch.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.cache/npm/",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/experiments/ablation-r3/results.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/tmp/swapfile",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/scripts/etl_pipeline.py",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/features_v2.csv",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.config/myapp/settings.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/20261101_batch.tar.gz",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/derived_final.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/logs/failed_run_20261114.log",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   }
+  ],
+  "rule": "删除当且仅当该文件的信息内容可通过现有可访问资源（命令、源、备份或替代文件）无损重建。"
+ },
+ {
+  "tag": "sceneC_axioms5_r02_test",
+  "arm": "axioms5",
+  "round": 2,
+  "score": 10,
+  "max": 10,
+  "correct": [
+   {
+    "path": "/home/user/project/data/20261115_batch.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.cache/npm/",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/experiments/ablation-r3/results.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/tmp/swapfile",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/scripts/etl_pipeline.py",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/features_v2.csv",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.config/myapp/settings.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/20261101_batch.tar.gz",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/derived_final.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/logs/failed_run_20261114.log",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   }
+  ],
+  "rule": "删除当且仅当该文件的信息内容在当前系统或外部可访问源中拥有可验证的、非孤立的完整副本或可无损重建路径。"
+ },
+ {
+  "tag": "sceneC_axioms5_r03_test",
+  "arm": "axioms5",
+  "round": 3,
+  "score": 10,
+  "max": 10,
+  "correct": [
+   {
+    "path": "/home/user/project/data/20261115_batch.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.cache/npm/",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/experiments/ablation-r3/results.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/tmp/swapfile",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/scripts/etl_pipeline.py",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/features_v2.csv",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.config/myapp/settings.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/20261101_batch.tar.gz",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/derived_final.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/logs/failed_run_20261114.log",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   }
+  ],
+  "rule": "删除当且仅当该文件的内容可被低成本、确定性地从现存源或标准流程中完全复现，且不存在任何不可逆的信息损失风险。"
+ },
+ {
+  "tag": "sceneC_flat16_r01_test",
+  "arm": "flat16",
+  "round": 1,
+  "score": 10,
+  "max": 10,
+  "correct": [
+   {
+    "path": "/home/user/project/data/20261115_batch.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.cache/npm/",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/experiments/ablation-r3/results.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/tmp/swapfile",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/scripts/etl_pipeline.py",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/features_v2.csv",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.config/myapp/settings.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/20261101_batch.tar.gz",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/derived_final.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/logs/failed_run_20261114.log",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   }
+  ],
+  "rule": "若文件内容可被当前环境中的工具、脚本或现存源文件无损且低成本地重建，则删除；否则保留。"
+ },
+ {
+  "tag": "sceneC_flat16_r02_test",
+  "arm": "flat16",
+  "round": 2,
+  "score": 10,
+  "max": 10,
+  "correct": [
+   {
+    "path": "/home/user/project/data/20261115_batch.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.cache/npm/",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/experiments/ablation-r3/results.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/tmp/swapfile",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/scripts/etl_pipeline.py",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/features_v2.csv",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.config/myapp/settings.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/20261101_batch.tar.gz",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/derived_final.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/logs/failed_run_20261114.log",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   }
+  ],
+  "rule": "若该文件可通过现有工具、脚本或在线源在合理时间内无损重建，则删除；否则保留。"
+ },
+ {
+  "tag": "sceneC_flat16_r03_test",
+  "arm": "flat16",
+  "round": 3,
+  "score": 10,
+  "max": 10,
+  "correct": [
+   {
+    "path": "/home/user/project/data/20261115_batch.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.cache/npm/",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/experiments/ablation-r3/results.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/tmp/swapfile",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/scripts/etl_pipeline.py",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/features_v2.csv",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.config/myapp/settings.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/20261101_batch.tar.gz",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/derived_final.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/logs/failed_run_20261114.log",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   }
+  ],
+  "rule": "删除当且仅当该文件是“可再生”的（即存在确定的、低成本的、不依赖已丢失信息或已失效源头的重建路径），否则保留。"
+ },
+ {
+  "tag": "sceneC_prose_r01_test",
+  "arm": "prose",
+  "round": 1,
+  "score": 9,
+  "max": 10,
+  "correct": [
+   {
+    "path": "/home/user/project/data/20261115_batch.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.cache/npm/",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/experiments/ablation-r3/results.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/tmp/swapfile",
+    "expected": "delete",
+    "got": "keep",
+    "correct": false
+   },
+   {
+    "path": "/home/user/project/scripts/etl_pipeline.py",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/features_v2.csv",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.config/myapp/settings.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/20261101_batch.tar.gz",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/derived_final.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/logs/failed_run_20261114.log",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   }
+  ],
+  "rule": "删除当且仅当该文件可被无损重建（源存在且过程可逆）或已被严格更新的版本完全取代；否则保留。"
+ },
+ {
+  "tag": "sceneC_prose_r02_test",
+  "arm": "prose",
+  "round": 2,
+  "score": 10,
+  "max": 10,
+  "correct": [
+   {
+    "path": "/home/user/project/data/20261115_batch.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.cache/npm/",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/experiments/ablation-r3/results.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/tmp/swapfile",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/scripts/etl_pipeline.py",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/features_v2.csv",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.config/myapp/settings.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/20261101_batch.tar.gz",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/derived_final.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/logs/failed_run_20261114.log",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   }
+  ],
+  "rule": "删除当且仅当该文件可被无损重建（存在确定性来源或等价替代）且无不可逆信息损失。"
+ },
+ {
+  "tag": "sceneC_prose_r03_test",
+  "arm": "prose",
+  "round": 3,
+  "score": 10,
+  "max": 10,
+  "correct": [
+   {
+    "path": "/home/user/project/data/20261115_batch.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.cache/npm/",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/experiments/ablation-r3/results.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/tmp/swapfile",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/scripts/etl_pipeline.py",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/features_v2.csv",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.config/myapp/settings.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/20261101_batch.tar.gz",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/derived_final.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/logs/failed_run_20261114.log",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   }
+  ],
+  "rule": "删除当且仅当该文件是“可再生”的（存在已知且可用的重建路径）且“冗余”的（存在功能等价的新版或原件）；若不可再生、无重建路径、或为唯一副本/含不可逆信息，则保留。"
+ },
+ {
+  "tag": "sceneC_structured_r01_test",
+  "arm": "structured",
+  "round": 1,
+  "score": 10,
+  "max": 10,
+  "correct": [
+   {
+    "path": "/home/user/project/data/20261115_batch.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.cache/npm/",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/experiments/ablation-r3/results.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/tmp/swapfile",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/scripts/etl_pipeline.py",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/features_v2.csv",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.config/myapp/settings.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/20261101_batch.tar.gz",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/derived_final.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/logs/failed_run_20261114.log",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   }
+  ],
+  "rule": "若文件内容可通过现有工具、脚本或源数据在合理时间内无损重建，则删除；否则保留。"
+ },
+ {
+  "tag": "sceneC_structured_r02_test",
+  "arm": "structured",
+  "round": 2,
+  "score": 10,
+  "max": 10,
+  "correct": [
+   {
+    "path": "/home/user/project/data/20261115_batch.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.cache/npm/",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/experiments/ablation-r3/results.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/tmp/swapfile",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/scripts/etl_pipeline.py",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/features_v2.csv",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.config/myapp/settings.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/20261101_batch.tar.gz",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/derived_final.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/logs/failed_run_20261114.log",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   }
+  ],
+  "rule": "删除当且仅当该文件是“可再生”的（即存在确定性的重建路径或已被更新版本完全替代），否则保留。"
+ },
+ {
+  "tag": "sceneC_structured_r03_test",
+  "arm": "structured",
+  "round": 3,
+  "score": 10,
+  "max": 10,
+  "correct": [
+   {
+    "path": "/home/user/project/data/20261115_batch.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.cache/npm/",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/experiments/ablation-r3/results.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/tmp/swapfile",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/scripts/etl_pipeline.py",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/features_v2.csv",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/.config/myapp/settings.json",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/20261101_batch.tar.gz",
+    "expected": "delete",
+    "got": "delete",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/data/derived_final.csv",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   },
+   {
+    "path": "/home/user/project/logs/failed_run_20261114.log",
+    "expected": "keep",
+    "got": "keep",
+    "correct": true
+   }
+  ],
+  "rule": "若文件内容可通过现有工具、脚本或源数据在合理时间内无损重建，则删除；否则保留。"
+ }
+]

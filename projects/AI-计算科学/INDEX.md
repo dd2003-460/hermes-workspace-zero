@@ -13,6 +13,7 @@
 | `D1-continuous-agent/` | Agent 持续循环机制 |
 | `D1-goal-investigation/` | 目标发现与探索 |
 | `D1-memory/` | 记忆系统理论 |
+| `D1-generalization/` | LLM 泛化能力实证（CodeARC 调试策略 + 跨域自发探针 + 能力/触发区分实验，2026-11-21 从 persona-align 迁出） |
 | `D1-persona-align/` | Persona 对齐机制（8 原则 + 6 维度 + 3 行为约束） |
 | `D1-hintfree-decomposition/` | 无提示词目标分解（hint-free goal decomposition）实验 |
 | `D1-efficiency-optimization/` | 效率优化（任务分解成本、benchmark） |

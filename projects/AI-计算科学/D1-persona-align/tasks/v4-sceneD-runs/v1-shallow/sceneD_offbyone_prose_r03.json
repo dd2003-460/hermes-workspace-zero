@@ -1,0 +1,40 @@
+{
+ "tag": "sceneD_offbyone_prose_r03",
+ "scene": "D",
+ "bug": "offbyone",
+ "arm": "prose",
+ "round": 3,
+ "ts": "2026-11-20T21:29:31.735237",
+ "elapsed_s": 2.0,
+ "temperature": 0.3,
+ "model": "qwen3.8-27b",
+ "real_bug_line": "total += i",
+ "output": {
+  "bug_line": "        total += i",
+  "explanation": "range(n) 生成 0 到 n-1，导致累加的是 0+1+...+(n-1)，漏掉了 n。例如 n=3 时实际计算 0+1+2=3，而非 1+2+3=6。",
+  "fixed_code": "def sum_first_n(n):\n    \"\"\"返回 1+2+...+n。n<=0 返回 0。\"\"\"\n    if n <= 0:\n        return 0\n    return n * (n + 1) // 2",
+  "confidence": "高。三个测试中 sum_first_n(1) 和 sum_first_n(3) 必然失败，根因明确是 range 起点为 0 且未包含 n。"
+ },
+ "test_results": [
+  {
+   "call": "sum_first_n(0)",
+   "expected": "0",
+   "got": "0",
+   "pass": true
+  },
+  {
+   "call": "sum_first_n(1)",
+   "expected": "1",
+   "got": "1",
+   "pass": true
+  },
+  {
+   "call": "sum_first_n(3)",
+   "expected": "6",
+   "got": "6",
+   "pass": true
+  }
+ ],
+ "tests_passed": 3,
+ "tests_total": 3
+}

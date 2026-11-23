@@ -1,0 +1,7 @@
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795026754.9572978}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795026760.7134988}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795026769.64786}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795026780.4037912}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795026861.9685}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1795026866.947659}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795026866.947953}

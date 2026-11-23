@@ -1,0 +1,53 @@
+{
+ "tag": "sceneC_flat16_r03_test",
+ "scene": "C",
+ "arm": "flat16",
+ "round": 3,
+ "ts": "2026-11-20T21:22:12.246220",
+ "elapsed_s": 5.9,
+ "rule": "若文件内容可通过现有工具、脚本或源数据在合理成本内无损重建，则删除；否则保留。",
+ "output": {
+  "predictions": [
+   {
+    "path": "/home/user/project/data/raw_20261115.csv",
+    "decision": "keep",
+    "reason": "原始数据不可无损重建，采集成本高且具唯一性。"
+   },
+   {
+    "path": "/home/user/.cache/npm/",
+    "decision": "delete",
+    "reason": "缓存可通过 npm 命令低成本无损重建。"
+   },
+   {
+    "path": "/home/user/project/experiments/ablation-r3/results.json",
+    "decision": "keep",
+    "reason": "实验结果依赖特定环境与时间，重跑成本高且可能无法完全复现。"
+   },
+   {
+    "path": "/tmp/swapfile",
+    "decision": "delete",
+    "reason": "临时交换文件，系统重启或清理后自动重建，无持久价值。"
+   },
+   {
+    "path": "/home/user/project/scripts/etl_pipeline.py",
+    "decision": "keep",
+    "reason": "脚本含逻辑注释，是核心资产，无法通过其他工具无损重建。"
+   },
+   {
+    "path": "/home/user/project/data/derived_v2.csv",
+    "decision": "delete",
+    "reason": "派生数据，源数据和脚本均在，可低成本无损重建。"
+   },
+   {
+    "path": "/home/user/.config/myapp/settings.json",
+    "decision": "keep",
+    "reason": "含手动调整参数且无默认值可恢复，丢失后无法无损重建。"
+   },
+   {
+    "path": "/home/user/project/data/raw_20261101_backup.tar.gz",
+    "decision": "delete",
+    "reason": "原始 CSV 仍在，备份冗余，可通过现有源数据无损重建。"
+   }
+  ]
+ }
+}

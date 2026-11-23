@@ -1,0 +1,53 @@
+{
+ "tag": "sceneC_axioms5_r01_test",
+ "scene": "C",
+ "arm": "axioms5",
+ "round": 1,
+ "ts": "2026-11-20T21:22:18.045047",
+ "elapsed_s": 4.6,
+ "rule": "删除那些其内容或状态可以通过现有工具、脚本或源数据在合理时间内无损重建的文件，保留那些重建成本极高、不可逆或包含独特不可再生信息的文件。",
+ "output": {
+  "predictions": [
+   {
+    "path": "/home/user/project/data/raw_20261115.csv",
+    "decision": "keep",
+    "reason": "原始采集数据通常不可逆且重建成本极高，属于独特不可再生信息。"
+   },
+   {
+    "path": "/home/user/.cache/npm/",
+    "decision": "delete",
+    "reason": "npm 缓存可通过现有工具在合理时间内无损重建。"
+   },
+   {
+    "path": "/home/user/project/experiments/ablation-r3/results.json",
+    "decision": "keep",
+    "reason": "实验结果通常包含不可复现的随机性或高算力成本，重建成本极高。"
+   },
+   {
+    "path": "/tmp/swapfile",
+    "decision": "delete",
+    "reason": "系统临时交换文件，重启或系统管理即可无损重建/清除。"
+   },
+   {
+    "path": "/home/user/project/scripts/etl_pipeline.py",
+    "decision": "keep",
+    "reason": "脚本包含人工编写的逻辑与注释，属于独特不可再生信息，重建成本极高。"
+   },
+   {
+    "path": "/home/user/project/data/derived_v2.csv",
+    "decision": "delete",
+    "reason": "派生数据且派生脚本存在，可通过现有工具在合理时间内无损重建。"
+   },
+   {
+    "path": "/home/user/.config/myapp/settings.json",
+    "decision": "keep",
+    "reason": "包含手动调整且无默认值可恢复的参数，属于独特不可再生信息。"
+   },
+   {
+    "path": "/home/user/project/data/raw_20261101_backup.tar.gz",
+    "decision": "delete",
+    "reason": "原始 csv 仍在原处，备份内容可通过现有源数据无损重建。"
+   }
+  ]
+ }
+}

@@ -1,1 +1,0 @@
-{"run_id": "exp-2026-11-19-r07", "node": "L1/3", "timestamp": "2026-11-19T22:14:03+08:00", "claim": "gpu 臂 coverage 衰减源于 L4 生成而非搜索链", "evidence": {"verified": 30, "degraded": 15, "total": 45}, "judge": "qwen3.8-27b", "raw_trace": ["q1: gpu coverage r7=0.52", "q2: 搜索链命中 12/14", "q3: L4 节点 8 个未验证"]}

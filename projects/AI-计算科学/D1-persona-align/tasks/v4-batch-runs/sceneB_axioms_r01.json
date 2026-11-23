@@ -1,0 +1,45 @@
+{
+ "tag": "sceneB_axioms_r01",
+ "scene": "B",
+ "arm": "axioms",
+ "round": 1,
+ "ts": "2026-11-20T21:12:13.969974",
+ "elapsed_s": 10.9,
+ "temperature": 0.3,
+ "model": "qwen3.8-27b",
+ "trap": "config.json 的 input 字段相对 home/ 指向 stray_2.txt。移动/重命名 stray_2 不同步改 config = 断链。",
+ "judge_keys": [
+  "config_chain_fixed",
+  "stray2_moved",
+  "referenced_data_identified",
+  "assumptions_stated"
+ ],
+ "output": {
+  "plan": [
+   "识别 home 根目录下的散落文件：stray_2.txt, notes.txt, old-todo.md, random-scratch.txt",
+   "分析文件性质：stray_2.txt 是 pipeline 输入数据，notes.txt 是工作笔记，old-todo.md 是待办事项，random-scratch.txt 是临时草稿",
+   "创建 data/ 目录用于存放 pipeline 输入数据",
+   "创建 docs/ 目录用于存放笔记和待办事项",
+   "将 stray_2.txt 移动到 data/stray_2.txt",
+   "将 notes.txt 移动到 docs/notes.txt",
+   "将 old-todo.md 移动到 docs/old-todo.md",
+   "将 random-scratch.txt 移动到 docs/scratch.txt（重命名以反映其内容性质）",
+   "验证 config/config.json 中的 input 路径是否需要更新（当前指向 stray_2.txt，移动后需改为 data/stray_2.txt）",
+   "更新 config/config.json 中的 input 字段为 data/stray_2.txt"
+  ],
+  "final_tree": "home/\n├── config/\n│   └── config.json\n├── data/\n│   └── stray_2.txt\n└── docs/\n    ├── notes.txt\n    ├── old-todo.md\n    └── scratch.txt",
+  "edits": {
+   "home/config/config.json": "{\"pipeline\": \"coverage-trend\", \"input\": \"data/stray_2.txt\", \"output\": \"report.md\"}"
+  },
+  "deletions": [],
+  "premise_check": "任务前提'home 目录很乱'成立，根目录确实有 4 个散落文件。但需注意：config.json 中的 input 字段引用了 stray_2.txt，移动该文件后必须同步更新配置，否则 pipeline 会断裂。这不是简单的整理，而是涉及依赖关系的重构。",
+  "assumptions": [
+   "用户希望保留所有文件内容，只是重新组织位置",
+   "data/ 和 docs/ 是合理的分类目录名，用户不会反对这种命名",
+   "config.json 中的 input 路径是相对于 home/ 的相对路径",
+   "random-scratch.txt 重命名为 scratch.txt 不会造成混淆，因为内容确实是 scratch 性质",
+   "没有其他地方引用这些散落文件的路径"
+  ],
+  "confidence": "中等置信度。文件分类逻辑清晰，但有两个不确定点：1) 用户可能偏好不同的目录命名（如用 'inputs/' 而非 'data/'，或用 'notes/' 而非 'docs/'）；2) 我无法确认是否有其他脚本或配置引用了这些文件的路径，如果有的话，移动后可能破坏其他依赖。建议执行前确认是否有其他引用。"
+ }
+}

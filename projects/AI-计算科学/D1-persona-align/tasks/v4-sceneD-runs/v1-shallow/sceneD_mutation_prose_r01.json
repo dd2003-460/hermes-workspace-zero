@@ -1,0 +1,40 @@
+{
+ "tag": "sceneD_mutation_prose_r01",
+ "scene": "D",
+ "bug": "mutation",
+ "arm": "prose",
+ "round": 1,
+ "ts": "2026-11-20T21:30:25.868085",
+ "elapsed_s": 4.8,
+ "temperature": 0.3,
+ "model": "qwen3.8-27b",
+ "real_bug_line": "return items",
+ "output": {
+  "bug_line": "    return items",
+  "explanation": "函数构建了去重后的 result 列表，但最后返回了原始输入 items，导致重复元素未被移除。应返回 result 以提供去重结果。",
+  "fixed_code": "def dedupe(items):\n    \"\"\"去掉重复元素，保持首次出现的顺序。返回新列表。\"\"\"\n    seen = set()\n    result = []\n    for x in items:\n        if x not in seen:\n            seen.add(x)\n            result.append(x)\n    return result",
+  "confidence": "高置信度：逻辑清晰，三个测试中两个会失败（[1,2,2,3] 和 [5,5,5]），仅空列表测试通过，修复后全部通过。"
+ },
+ "test_results": [
+  {
+   "call": "dedupe([1,2,2,3])",
+   "expected": "[1,2,3]",
+   "got": "[1, 2, 3]",
+   "pass": true
+  },
+  {
+   "call": "dedupe([])",
+   "expected": "[]",
+   "got": "[]",
+   "pass": true
+  },
+  {
+   "call": "dedupe([5,5,5])",
+   "expected": "[5]",
+   "got": "[5]",
+   "pass": true
+  }
+ ],
+ "tests_passed": 3,
+ "tests_total": 3
+}

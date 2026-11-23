@@ -1,0 +1,48 @@
+{
+ "tag": "sceneD_stateful_axioms5_r02",
+ "scene": "D",
+ "bug": "stateful",
+ "arm": "axioms5",
+ "round": 2,
+ "ts": "2026-11-20T21:39:42.171579",
+ "elapsed_s": 3.2,
+ "temperature": 0.3,
+ "model": "qwen3.8-27b",
+ "real_bug_line": "return None",
+ "guess_keywords": [
+  "_count",
+  "归零",
+  "清零",
+  "reset",
+  "全局变量",
+  "计数器"
+ ],
+ "output": {
+  "bug_line": "    # 注意：这里应该把 _count 归零",
+  "explanation": "reset() 函数中缺少将全局变量 _count 重置为 0 的语句。因此，调用 reset() 后 _count 保持原值，下一次 next_id() 不会从 1 开始，而是继续递增，导致第三个测试失败。",
+  "fixed_code": "_count = 0\n\ndef next_id():\n    \"\"\"返回自增 id，从 1 开始。每次调用加 1。\n    调用 reset() 后应重新从 1 开始。\"\"\"\n    global _count\n    _count += 1\n    return _count\n\ndef reset():\n    \"\"\"把计数器归零，使下一次 next_id() 返回 1。\"\"\"\n    global _count\n    _count = 0\n    return None",
+  "confidence": "高置信度。bug 非常明显，reset 函数没有执行重置操作，直接导致测试 3 失败。"
+ },
+ "test_results": [
+  {
+   "call": "next_id()",
+   "expected": "1",
+   "got": "1",
+   "pass": true
+  },
+  {
+   "call": "next_id()",
+   "expected": "2",
+   "got": "2",
+   "pass": true
+  },
+  {
+   "call": "(lambda: (reset(), next_id())[1])()",
+   "expected": "1",
+   "got": "1",
+   "pass": true
+  }
+ ],
+ "tests_passed": 3,
+ "tests_total": 3
+}

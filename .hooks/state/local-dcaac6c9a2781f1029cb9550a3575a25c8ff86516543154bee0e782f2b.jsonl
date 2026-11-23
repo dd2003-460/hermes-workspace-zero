@@ -1,0 +1,25 @@
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794985172.914819}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794985176.348654}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794985183.050383}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794985185.476751}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794985191.826592}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1794985195.768213}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794985195.768391}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1794985201.014743}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794985201.0331242}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1794985204.053321}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794985204.0535622}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1794985420.069383}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794985420.069569}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1794985425.363106}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794985425.363306}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1794985427.198098}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794985427.198336}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1794985430.14558}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794985430.145816}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1794985436.455033}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794985436.4606452}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1794985444.49439}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794985444.494571}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1794985446.684931}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794985446.685118}

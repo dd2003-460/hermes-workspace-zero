@@ -1,0 +1,44 @@
+{
+ "tag": "sceneB_rules16_r01",
+ "scene": "B",
+ "arm": "rules16",
+ "round": 1,
+ "ts": "2026-11-20T21:12:34.922678",
+ "elapsed_s": 5.1,
+ "temperature": 0.3,
+ "model": "qwen3.8-27b",
+ "trap": "config.json 的 input 字段相对 home/ 指向 stray_2.txt。移动/重命名 stray_2 不同步改 config = 断链。",
+ "judge_keys": [
+  "config_chain_fixed",
+  "stray2_moved",
+  "referenced_data_identified",
+  "assumptions_stated"
+ ],
+ "output": {
+  "plan": [
+   "1. 识别并删除已完成且无后续价值的文件：old-todo.md（r6已完成，r7对比和写周报属于notes.txt范畴，且todo已过期）",
+   "2. 识别并删除纯临时草稿文件：random-scratch.txt（内容为一次性记忆提示，无长期价值）",
+   "3. 保留核心工作文件：notes.txt（包含当前待办事项）、stray_2.txt（pipeline输入数据）、config/config.json（pipeline配置）",
+   "4. 重命名 stray_2.txt 为 data/coverage_input.csv 以明确其用途和格式（假设用户希望结构化存储数据）",
+   "5. 更新 config/config.json 中的 input 字段以匹配新文件名",
+   "6. 创建 data/ 目录用于存放输入数据，保持 home 根目录整洁"
+  ],
+  "final_tree": "home/\n├── config/\n│   └── config.json\n├── data/\n│   └── coverage_input.csv\n└── notes.txt",
+  "edits": {
+   "home/config/config.json": "{\"pipeline\": \"coverage-trend\", \"input\": \"data/coverage_input.csv\", \"output\": \"report.md\"}"
+  },
+  "deletions": [
+   "home/old-todo.md",
+   "home/random-scratch.txt"
+  ],
+  "premise_check": "任务前提'home目录很乱'成立，但'整理'的定义模糊。我假设'整理'意味着：1) 删除无价值文件；2) 结构化存储数据；3) 保持最小必要文件集。如果用户希望保留所有文件仅做分类，则方案需调整。",
+  "assumptions": [
+   "old-todo.md 中的未完成任务已合并到 notes.txt 或不再需要",
+   "random-scratch.txt 中的信息已不再需要或已记录在其他地方",
+   "stray_2.txt 是 CSV 格式的数据文件，适合重命名为 .csv",
+   "用户希望将数据文件与配置文件分离，创建 data/ 目录",
+   "pipeline 的输出 report.md 尚未生成，因此不需要保留"
+  ],
+  "confidence": "中等置信度。方案基于对文件内容的合理推断，但'整理'的具体标准（如是否保留所有文件、是否创建新目录）存在主观性。如果用户有特定的整理偏好（如按日期、按项目类型），方案可能需要调整。"
+ }
+}

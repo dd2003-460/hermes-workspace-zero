@@ -11,10 +11,10 @@
 ## 链式目标
 
 ### G1: pfb/decomp 研究完成 → 研究"激发煮东西"
-- **前置**：pfb blocked_human（02.5 交叉验证，等 web-llm 登录 ≥2 成功回执）；decomp active（T7 收口 4/4 PASS）。
+- **前置**：pfb blocked_human（02.5 交叉验证，等 ralph web-llm 登录 ≥2 成功回执）；decomp active（T7 收口 4/4 PASS）。
 - **触发条件**：pfb status → done/closed，且 decomp 无新卡点。
 - **动作**：stage_init 立项"激发煮东西"——1-loop 信息调研（GitHub/arXiv/网页 LLM 交叉验证）→ 行动分解。范围待D补充定义。
-- **状态**：waiting（等 pfb 解锁）
+- **状态**：blocked_human（2026-11-20 更新）——02.5 实质核验已完成（本地双通道 + ego-browser 2 个独立 web-LLM 一致），但 ralph field-apply 硬门禁只认 `ralph web-llm-check` 用自己独立 browser-profile 跑的回执（隐私设计，不复用 D 登录态），该 profile 未登录 → 死锁。唯一人工步骤：`cd pfb && ralph web-llm-authorize . --providers perplexity chatgpt`（D 手动登录一次，profile 持久化复用）。D 登录后我自动跑 web-llm-check → field-apply → apply 推进到 03。详见 `pfb/loop-artifacts/stages/02.5/r1/blocked-analysis.md`。
 
 ### G2: T17 泛化 bench → done
 - **结论**（T17-REPORT.md, 10 runs 全出分）：四域 ms 16.5 / infra 16.5 / rag 16.0 / methodology 18.0。概念迁移成功（C1-C3 跨域稳）；形式纪律需显式注入（S2/S3 不自发）；单 run 噪声 ≥ 域间差 → 域排序不可信；rubric v2 修 C4 判据完成。

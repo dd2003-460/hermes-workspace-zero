@@ -1,0 +1,21 @@
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795095643.5736}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795095675.8938088}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795095679.47936}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795095685.112187}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795095688.361755}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1795095706.0900428}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795095706.090328}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1795095714.049655}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795095714.049956}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1795095730.911815}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795095730.912677}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1795095798.906795}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795095798.9070668}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1795095811.075519}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795095811.075715}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1795095811.486321}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795095811.4866502}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1795095825.912954}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795095825.913216}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1795095826.3478122}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795095826.348094}

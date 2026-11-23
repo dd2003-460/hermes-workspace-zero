@@ -1,0 +1,40 @@
+{
+ "tag": "sceneD_offbyone_structured_r02",
+ "scene": "D",
+ "bug": "offbyone",
+ "arm": "structured",
+ "round": 2,
+ "ts": "2026-11-20T21:29:16.985280",
+ "elapsed_s": 1.8,
+ "temperature": 0.3,
+ "model": "qwen3.8-27b",
+ "real_bug_line": "total += i",
+ "output": {
+  "bug_line": "        total += i",
+  "explanation": "range(n) 生成 0 到 n-1 的序列，导致累加时漏掉了 n 本身，且从 0 开始累加虽然不影响结果但逻辑上应累加 1 到 n。例如 n=3 时实际计算 0+1+2=3，而非 1+2+3=6。",
+  "fixed_code": "def sum_first_n(n):\n    \"\"\"返回 1+2+...+n。n<=0 返回 0。\"\"\"\n    if n <= 0:\n        return 0\n    return n * (n + 1) // 2",
+  "confidence": "高置信度。通过手动执行测试用例 sum_first_n(1) 和 sum_first_n(3) 可明确复现错误，且数学公式法是最优修复方案。"
+ },
+ "test_results": [
+  {
+   "call": "sum_first_n(0)",
+   "expected": "0",
+   "got": "0",
+   "pass": true
+  },
+  {
+   "call": "sum_first_n(1)",
+   "expected": "1",
+   "got": "1",
+   "pass": true
+  },
+  {
+   "call": "sum_first_n(3)",
+   "expected": "6",
+   "got": "6",
+   "pass": true
+  }
+ ],
+ "tests_passed": 3,
+ "tests_total": 3
+}

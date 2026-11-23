@@ -1,0 +1,40 @@
+{
+ "tag": "sceneD_boundary_prose_r02",
+ "scene": "D",
+ "bug": "boundary",
+ "arm": "prose",
+ "round": 2,
+ "ts": "2026-11-20T21:28:44.872960",
+ "elapsed_s": 1.4,
+ "temperature": 0.3,
+ "model": "qwen3.8-27b",
+ "real_bug_line": "for i in range(1, len(lst)):",
+ "output": {
+  "bug_line": "    for i in range(1, len(lst)):",
+  "explanation": "range(1, len(lst)) 跳过了索引 0，导致第一个元素永远不被处理。测试 1 期望 [10,30] 但实际得到 [30]；测试 3 期望 [7] 但实际得到 []。",
+  "fixed_code": "def split_even_odd(lst):\n    \"\"\"偶数索引(0,2,4..)的元素进 even，奇数索引(1,3,5..)的进 odd。\n    返回 (even, odd) 两个列表。\"\"\"\n    even = []\n    odd = []\n    for i in range(len(lst)):\n        if i % 2 == 0:\n            even.append(lst[i])\n        else:\n            odd.append(lst[i])\n    return even, odd",
+  "confidence": "高。三个测试中两个失败，根因唯一且明确：起始索引应为 0 而非 1。"
+ },
+ "test_results": [
+  {
+   "call": "split_even_odd([10,20,30,40])",
+   "expected": "[[10,30],[20,40]]",
+   "got": "[[10, 30], [20, 40]]",
+   "pass": true
+  },
+  {
+   "call": "split_even_odd([])",
+   "expected": "[[],[]]",
+   "got": "[[], []]",
+   "pass": true
+  },
+  {
+   "call": "split_even_odd([7])",
+   "expected": "[[7],[]]",
+   "got": "[[7], []]",
+   "pass": true
+  }
+ ],
+ "tests_passed": 3,
+ "tests_total": 3
+}

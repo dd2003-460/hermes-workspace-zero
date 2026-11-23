@@ -1,0 +1,40 @@
+{
+ "tag": "sceneD_offbyone_prose_r02",
+ "scene": "D",
+ "bug": "offbyone",
+ "arm": "prose",
+ "round": 2,
+ "ts": "2026-11-20T21:29:28.636138",
+ "elapsed_s": 2.9,
+ "temperature": 0.3,
+ "model": "qwen3.8-27b",
+ "real_bug_line": "total += i",
+ "output": {
+  "bug_line": "        total += i",
+  "explanation": "range(n) 生成 0 到 n-1，导致累加的是 0+1+...+(n-1)，而非 1+2+...+n。当 n=1 时循环体执行一次但 i=0，结果为 0 而非 1；n=3 时结果为 3 而非 6。",
+  "fixed_code": "def sum_first_n(n):\n    \"\"\"返回 1+2+...+n。n<=0 返回 0。\"\"\"\n    total = 0\n    for i in range(1, n + 1):\n        total += i\n    return total",
+  "confidence": "高。三个测试中 n=0 通过（空循环），n=1 和 n=3 失败，失败模式与 range 起点偏移完全吻合，无其他可疑行。"
+ },
+ "test_results": [
+  {
+   "call": "sum_first_n(0)",
+   "expected": "0",
+   "got": "0",
+   "pass": true
+  },
+  {
+   "call": "sum_first_n(1)",
+   "expected": "1",
+   "got": "1",
+   "pass": true
+  },
+  {
+   "call": "sum_first_n(3)",
+   "expected": "6",
+   "got": "6",
+   "pass": true
+  }
+ ],
+ "tests_passed": 3,
+ "tests_total": 3
+}

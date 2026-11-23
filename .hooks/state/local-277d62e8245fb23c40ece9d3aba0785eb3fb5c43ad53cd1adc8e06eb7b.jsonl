@@ -1,0 +1,9 @@
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795046133.865598}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795046137.697845}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795046153.318858}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795046304.937633}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795046313.040171}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1795046319.197403}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795046319.1976068}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1795046322.662179}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795046322.662858}

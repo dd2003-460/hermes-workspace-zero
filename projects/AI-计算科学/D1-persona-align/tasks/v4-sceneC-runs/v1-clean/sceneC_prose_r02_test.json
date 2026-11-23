@@ -1,0 +1,53 @@
+{
+ "tag": "sceneC_prose_r02_test",
+ "scene": "C",
+ "arm": "prose",
+ "round": 2,
+ "ts": "2026-11-20T21:22:58.277314",
+ "elapsed_s": 2.9,
+ "rule": "若文件内容可通过现有工具、脚本或源数据在合理时间内无损重建，则删除；否则保留。",
+ "output": {
+  "predictions": [
+   {
+    "path": "/home/user/project/data/raw_20261115.csv",
+    "decision": "keep",
+    "reason": "原始采集数据不可无损重建"
+   },
+   {
+    "path": "/home/user/.cache/npm/",
+    "decision": "delete",
+    "reason": "npm 缓存可通过 npm install 无损重建"
+   },
+   {
+    "path": "/home/user/project/experiments/ablation-r3/results.json",
+    "decision": "keep",
+    "reason": "实验结果依赖不可复现的随机种子或环境状态，重建成本高且可能不一致"
+   },
+   {
+    "path": "/tmp/swapfile",
+    "decision": "delete",
+    "reason": "系统临时文件，重启或清理后自动重建，无持久价值"
+   },
+   {
+    "path": "/home/user/project/scripts/etl_pipeline.py",
+    "decision": "keep",
+    "reason": "脚本本身是源数据，含逻辑注释，不可由其他文件无损重建"
+   },
+   {
+    "path": "/home/user/project/data/derived_v2.csv",
+    "decision": "delete",
+    "reason": "派生脚本存在，可从 raw 数据无损重建"
+   },
+   {
+    "path": "/home/user/.config/myapp/settings.json",
+    "decision": "keep",
+    "reason": "手动调参无默认值可恢复，不可无损重建"
+   },
+   {
+    "path": "/home/user/project/data/raw_20261101_backup.tar.gz",
+    "decision": "delete",
+    "reason": "原始 csv 仍在，备份冗余，可从原始文件无损重建"
+   }
+  ]
+ }
+}

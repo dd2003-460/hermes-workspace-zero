@@ -1,0 +1,23 @@
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794969950.0336509}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794969951.18048}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794969952.310485}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794969953.380831}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794969954.654474}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1794969956.6462379}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794969956.646841}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1794969958.1373298}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794969958.137592}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1794969959.741463}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794969959.7417338}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1794969960.95029}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794969960.9506218}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1794969962.2537029}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794969962.253983}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1794969963.734072}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794969963.734375}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1794969964.9899719}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794969964.990277}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1794969968.398722}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794969968.399075}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1794969969.464315}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1794969969.464575}

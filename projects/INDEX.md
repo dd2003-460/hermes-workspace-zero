@@ -26,6 +26,7 @@
 
 | 项目 | 号 | 标签 |
 |------|----|------|
+| `AI-计算科学/D1-generalization/` | DGEN.1 | LLM 泛化实证（CodeARC/跨域探针） |
 | `AI-计算科学/D1-persona-align/` | DPA.1 | Persona 对齐 |
 | `AI-计算科学/D1-academic-AI/` | DAI.1 | DistCat 统一框架 |
 | `AI-计算科学/D1-academic/` | DA.1 | 学术辅助研究 |
@@ -36,6 +37,7 @@
 | `AI-计算科学/D1-memory-hooks/` | DMH.1 | 记忆钩子系统 |
 | `AI-计算科学/D1-think-token-budget/` | DTB.1 | 思考 token 预算 |
 | `AI-计算科学/archive/gpu-to-decomp/` | DGPU.1 | GPU 调研归档 |
+| `../../pfb/`（workspace 根目录） | PFB.1 | prompt-first-bench（独立 git 仓库，物理位置在根目录；有 loop-state.json 无 INDEX.md，2026-11-20 补索引行） |
 | `persona-prompt-lab/` | PPL.1 | persona 提示词实验 |
 | `research-prompt/` | RP.1 | 研究 prompt 实验 |
 | `decomp/` | DC.1 | 任务分解（已并入 pfb，存档+指针） |

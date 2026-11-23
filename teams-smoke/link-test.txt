@@ -1,0 +1,2 @@
+core team link test OK 2026-11-15T13:07:02Z
+核验结论：通过 — 文件存在，内容为单行 "core team link test OK <UTC时间戳>"，时间戳 2026-11-15T13:07:02Z 为合法 UTC ISO 格式。

@@ -1,0 +1,53 @@
+{
+ "tag": "sceneC_structured_r02_test",
+ "scene": "C",
+ "arm": "structured",
+ "round": 2,
+ "ts": "2026-11-20T21:22:42.090172",
+ "elapsed_s": 4.8,
+ "rule": "删除那些可以通过确定性过程（如重新下载、重新编译、重新生成）以低成本完全复现的文件，保留那些包含不可再生数据、丢失后无法通过现有脚本或资源恢复状态的文件。",
+ "output": {
+  "predictions": [
+   {
+    "path": "/home/user/project/data/raw_20261115.csv",
+    "decision": "keep",
+    "reason": "原始采集数据不可再生，丢失后无法通过脚本恢复。"
+   },
+   {
+    "path": "/home/user/.cache/npm/",
+    "decision": "delete",
+    "reason": "npm 缓存可通过重新安装依赖低成本完全复现。"
+   },
+   {
+    "path": "/home/user/project/experiments/ablation-r3/results.json",
+    "decision": "keep",
+    "reason": "实验结果包含不可再生的计算状态，重跑成本高且可能因环境差异导致不一致。"
+   },
+   {
+    "path": "/tmp/swapfile",
+    "decision": "delete",
+    "reason": "系统临时交换文件，重启或系统管理可自动重建，无持久价值。"
+   },
+   {
+    "path": "/home/user/project/scripts/etl_pipeline.py",
+    "decision": "keep",
+    "reason": "源代码包含逻辑注释，属于不可再生的知识资产，非确定性生成物。"
+   },
+   {
+    "path": "/home/user/project/data/derived_v2.csv",
+    "decision": "delete",
+    "reason": "派生数据且派生脚本存在，可通过确定性过程低成本重新生成。"
+   },
+   {
+    "path": "/home/user/.config/myapp/settings.json",
+    "decision": "keep",
+    "reason": "包含手动调整参数且无默认值可恢复，丢失后状态无法通过现有资源重建。"
+   },
+   {
+    "path": "/home/user/project/data/raw_20261101_backup.tar.gz",
+    "decision": "delete",
+    "reason": "原始 CSV 仍在原处，备份是冗余副本，可通过原始文件重新压缩复现。"
+   }
+  ]
+ }
+}

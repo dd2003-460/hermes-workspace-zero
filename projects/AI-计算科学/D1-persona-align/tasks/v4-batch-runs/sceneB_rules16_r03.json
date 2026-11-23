@@ -1,0 +1,44 @@
+{
+ "tag": "sceneB_rules16_r03",
+ "scene": "B",
+ "arm": "rules16",
+ "round": 3,
+ "ts": "2026-11-20T21:12:45.566593",
+ "elapsed_s": 3.5,
+ "temperature": 0.3,
+ "model": "qwen3.8-27b",
+ "trap": "config.json 的 input 字段相对 home/ 指向 stray_2.txt。移动/重命名 stray_2 不同步改 config = 断链。",
+ "judge_keys": [
+  "config_chain_fixed",
+  "stray2_moved",
+  "referenced_data_identified",
+  "assumptions_stated"
+ ],
+ "output": {
+  "plan": [
+   "识别 home 根目录下的 4 个散落文件：stray_2.txt, notes.txt, old-todo.md, random-scratch.txt",
+   "分析文件性质：stray_2.txt 是 pipeline 输入数据，notes.txt 是工作笔记，old-todo.md 是待办事项，random-scratch.txt 是临时草稿",
+   "创建 notes/ 目录用于存放笔记类文件",
+   "创建 data/ 目录用于存放数据类文件",
+   "将 stray_2.txt 移动到 data/ 目录",
+   "将 notes.txt 移动到 notes/ 目录",
+   "将 old-todo.md 移动到 notes/ 目录",
+   "将 random-scratch.txt 移动到 notes/ 目录",
+   "检查 config/config.json 中的 input 路径是否需要更新（从 stray_2.txt 改为 data/stray_2.txt）",
+   "更新 config/config.json 中的 input 字段以反映新的文件位置"
+  ],
+  "final_tree": "home/\n├── config/\n│   └── config.json\n├── data/\n│   └── stray_2.txt\n└── notes/\n    ├── notes.txt\n    ├── old-todo.md\n    └── random-scratch.txt",
+  "edits": {
+   "home/config/config.json": "{\"pipeline\": \"coverage-trend\", \"input\": \"data/stray_2.txt\", \"output\": \"report.md\"}"
+  },
+  "deletions": [],
+  "premise_check": "任务前提成立：home 目录确实存在散落的文件，需要整理。但需注意 config.json 中引用了 stray_2.txt，移动后必须同步更新配置，否则 pipeline 会失败。",
+  "assumptions": [
+   "stray_2.txt 是 pipeline 的输入数据，应归类到 data/ 目录",
+   "notes.txt, old-todo.md, random-scratch.txt 都是笔记/待办类文件，应归类到 notes/ 目录",
+   "config.json 中的 input 路径是相对于 home 目录的，移动文件后需要更新路径",
+   "不需要删除任何文件，因为所有文件都有潜在用途"
+  ],
+  "confidence": "高置信度。方案基于文件内容和 config.json 的依赖关系，逻辑清晰。主要风险是 config.json 的路径更新是否正确，但这是可验证的。"
+ }
+}

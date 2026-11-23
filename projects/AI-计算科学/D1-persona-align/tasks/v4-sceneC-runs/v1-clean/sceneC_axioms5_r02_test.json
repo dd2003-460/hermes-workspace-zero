@@ -1,0 +1,53 @@
+{
+ "tag": "sceneC_axioms5_r02_test",
+ "scene": "C",
+ "arm": "axioms5",
+ "round": 2,
+ "ts": "2026-11-20T21:22:23.250167",
+ "elapsed_s": 4.1,
+ "rule": "删除那些其信息内容或功能状态可以通过现有工具、源文件或标准流程低成本且无损地重建或恢复的文件。",
+ "output": {
+  "predictions": [
+   {
+    "path": "/home/user/project/data/raw_20261115.csv",
+    "decision": "keep",
+    "reason": "原始数据通常无法通过现有工具或源文件低成本无损重建。"
+   },
+   {
+    "path": "/home/user/.cache/npm/",
+    "decision": "delete",
+    "reason": "npm 缓存可通过标准流程（重新安装依赖）低成本且无损地重建。"
+   },
+   {
+    "path": "/home/user/project/experiments/ablation-r3/results.json",
+    "decision": "keep",
+    "reason": "实验结果通常包含不可复现的随机性或特定环境状态，无法低成本无损重建。"
+   },
+   {
+    "path": "/tmp/swapfile",
+    "decision": "delete",
+    "reason": "系统临时交换文件，其状态可通过系统标准流程（重启或重新分配）无损恢复。"
+   },
+   {
+    "path": "/home/user/project/scripts/etl_pipeline.py",
+    "decision": "keep",
+    "reason": "源文件本身是信息载体，无法通过其他文件无损重建其代码和注释。"
+   },
+   {
+    "path": "/home/user/project/data/derived_v2.csv",
+    "decision": "delete",
+    "reason": "派生数据可通过保留的派生脚本和原始数据低成本且无损地重新生成。"
+   },
+   {
+    "path": "/home/user/.config/myapp/settings.json",
+    "decision": "keep",
+    "reason": "手动调过的参数没有默认值可恢复，无法通过标准流程无损重建。"
+   },
+   {
+    "path": "/home/user/project/data/raw_20261101_backup.tar.gz",
+    "decision": "delete",
+    "reason": "备份文件的信息内容可通过原处的原始 csv 文件无损恢复。"
+   }
+  ]
+ }
+}

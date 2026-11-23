@@ -1,0 +1,63 @@
+{
+ "tag": "sceneC_flat16_r01_test",
+ "scene": "C",
+ "arm": "flat16",
+ "round": 1,
+ "ts": "2026-11-20T21:25:01.826089",
+ "elapsed_s": 4.2,
+ "rule": "若文件内容可被当前环境中的工具、脚本或现存源文件无损且低成本地重建，则删除；否则保留。",
+ "output": {
+  "predictions": [
+   {
+    "path": "/home/user/project/data/20261115_batch.csv",
+    "decision": "keep",
+    "reason": "原始数据无生成脚本，不可重建"
+   },
+   {
+    "path": "/home/user/.cache/npm/",
+    "decision": "delete",
+    "reason": "缓存可低成本无损重建"
+   },
+   {
+    "path": "/home/user/project/experiments/ablation-r3/results.json",
+    "decision": "keep",
+    "reason": "实验结果含完整记录，重跑成本高且不可无损重建"
+   },
+   {
+    "path": "/tmp/swapfile",
+    "decision": "delete",
+    "reason": "系统临时文件，可重建且无业务价值"
+   },
+   {
+    "path": "/home/user/project/scripts/etl_pipeline.py",
+    "decision": "keep",
+    "reason": "源文件本身，不可被其他工具无损替代"
+   },
+   {
+    "path": "/home/user/project/data/features_v2.csv",
+    "decision": "delete",
+    "reason": "由现存脚本从原始数据生成，可低成本无损重建"
+   },
+   {
+    "path": "/home/user/.config/myapp/settings.json",
+    "decision": "keep",
+    "reason": "含手动参数，无默认值可恢复，不可无损重建"
+   },
+   {
+    "path": "/home/user/project/data/20261101_batch.tar.gz",
+    "decision": "delete",
+    "reason": "原始csv还在，备份冗余且可无损重建"
+   },
+   {
+    "path": "/home/user/project/data/derived_final.csv",
+    "decision": "keep",
+    "reason": "生成脚本已删，无法无损重建"
+   },
+   {
+    "path": "/home/user/project/logs/failed_run_20261114.log",
+    "decision": "keep",
+    "reason": "失败日志含唯一参数和报错，实验未重跑，不可重建"
+   }
+  ]
+ }
+}

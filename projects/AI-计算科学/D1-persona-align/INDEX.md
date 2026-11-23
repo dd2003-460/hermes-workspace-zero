@@ -17,7 +17,7 @@
 | `skills/` | persona 技能树：SKILL.md 根 + 01-thinking / 02-engineering / 03-writing + voice / work-habits / learning-habits |
 | `research/` | 语料与蒸馏：corpus / distill-style-reports / distill-style-repos / human-vs-ai-input |
 | `tasks/` | 当前临时状态：decomposition.md（行动分解 r16）+ experiments/（现役 prompt：opro-v8.1 等）+ archive/（已验证不好的 prompt 归档，带失败原因表）+ scenario-raw/（情景引导 GT/S1-S3） |
-| `memory/` | 探索记录（完整，不可删除）：复刻检验 v1-v3、delivery-report r25/r29/r30、qanda-ledger、**objfunc-signal-log（目标函数信号台账：D 反问/建议→修正闭环+反问率监测）**、persona-crosscheck-claude、**codearc-smoke-27b-debugging-20261120 + collision-llm-debugging-info-theoretic-20261120（CodeARC 27b 调试实证 + 信息论最优撞车调研）**、**kt-framework-v1-20261121（K^t 压缩-泛化框架 v1 canonical：准则 1 条 + 正交树四分支 14 条，S27-S33 推导源）** |
+| `memory/` | 探索记录（完整，不可删除）：复刻检验 v1-v3、delivery-report r25/r29/r30、qanda-ledger、**objfunc-signal-log（目标函数信号台账：D 反问/建议→修正闭环+反问率监测）**、persona-crosscheck-claude、**kt-framework-v1-20261121（K^t 压缩-泛化框架 v1 canonical：准则 1 条 + 正交树四分支 14 条，S27-S33 推导源）**。（CodeARC/跨域/撞车 7 篇 + raw-outputs 于 2026-11-21 迁至 `../D1-generalization/memory/`，D 指令：泛化测试归主题项目） |
 | `loop-artifacts/` | 1-loop 阶段产物：stages/ + retro-test/ + open-questions.md |
 | `scripts/` | drift-check.py / scenario-score.py / interruption_injector.py |
 | `loop-state.json` | loop 进度指针（r31，T45 待最终交付） |

@@ -1,0 +1,63 @@
+{
+ "tag": "sceneC_structured_r01_test",
+ "scene": "C",
+ "arm": "structured",
+ "round": 1,
+ "ts": "2026-11-20T21:25:30.434206",
+ "elapsed_s": 3.7,
+ "rule": "若文件内容可通过现有工具、脚本或源数据在合理时间内无损重建，则删除；否则保留。",
+ "output": {
+  "predictions": [
+   {
+    "path": "/home/user/project/data/20261115_batch.csv",
+    "decision": "keep",
+    "reason": "原始数据且无生成脚本，无法无损重建。"
+   },
+   {
+    "path": "/home/user/.cache/npm/",
+    "decision": "delete",
+    "reason": "缓存可通过 npm 命令无损重建。"
+   },
+   {
+    "path": "/home/user/project/experiments/ablation-r3/results.json",
+    "decision": "keep",
+    "reason": "实验结果含完整记录，重跑成本高且可能因随机性无法完全复现。"
+   },
+   {
+    "path": "/tmp/swapfile",
+    "decision": "delete",
+    "reason": "系统临时文件，重启或系统管理可自动重建/清理。"
+   },
+   {
+    "path": "/home/user/project/scripts/etl_pipeline.py",
+    "decision": "keep",
+    "reason": "源代码含逻辑注释，无法通过工具无损重建。"
+   },
+   {
+    "path": "/home/user/project/data/features_v2.csv",
+    "decision": "delete",
+    "reason": "由现存脚本从原始数据生成，可无损重建。"
+   },
+   {
+    "path": "/home/user/.config/myapp/settings.json",
+    "decision": "keep",
+    "reason": "含手动调整参数且无默认值恢复机制，无法无损重建。"
+   },
+   {
+    "path": "/home/user/project/data/20261101_batch.tar.gz",
+    "decision": "delete",
+    "reason": "原始 CSV 仍在，压缩包内容可无损重建。"
+   },
+   {
+    "path": "/home/user/project/data/derived_final.csv",
+    "decision": "keep",
+    "reason": "生成脚本已删除，无法通过现有工具无损重建。"
+   },
+   {
+    "path": "/home/user/project/logs/failed_run_20261114.log",
+    "decision": "keep",
+    "reason": "失败实验日志含特定参数和报错，无法通过重跑无损重建。"
+   }
+  ]
+ }
+}

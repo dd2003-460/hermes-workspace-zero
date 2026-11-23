@@ -1,0 +1,7 @@
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795288664.604488}
+{"event": "PreToolUse", "turn": null, "tool": "search_files", "ts": 1795288805.381525}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795288813.0940642}
+{"event": "PreToolUse", "turn": null, "tool": "read_file", "ts": 1795288831.1051059}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795288977.4034739}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1795289028.079696}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795289028.0799081}

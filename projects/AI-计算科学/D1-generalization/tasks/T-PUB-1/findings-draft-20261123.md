@@ -44,6 +44,19 @@ The flip is in **whether the model obeys the "output JSON only, no explanation" 
 
 **Implication for F1 rates.** The 52–84% failure rates are single-run point estimates. On borderline cases the parseable rate has run-to-run variance (Q04: 3/5 = 60% ± a wide CI at n=5), so the true failure rate on such cases is a distribution, not a number. This *strengthens* the paper's claim: the LLM judge's format reliability is not merely low, it is **unstable** — the same input at the same temperature flips between parseable and unparseable. A mechanical judge has no such variance by construction.
 
+**Table 2. Mechanism probe (v2): 6 V1 failure cases re-judged at max_tokens 500 vs 2000.**
+
+| Case | mt500: finish / chars / parse | mt2000: finish / chars / parse | Behavior class |
+|---|---|---|---|
+| Q01 | length / 650 / ✗ | stop / 74 / ✓ | recoverable |
+| Q02 | length / 619 / ✗ | stop / 74 / ✓ | recoverable |
+| Q03 | length / 654 / ✗ | length / 3167 / ✗ | convergence failure |
+| Q04 | length / 681 / ✗ | length / 2602 / ✗ | borderline (flip) |
+| Q05 | length / 698 / ✗ | length / 3212 / ✗ | convergence failure |
+| Q06 | length / 673 / ✗ | stop / 63 / ✓ | recoverable |
+
+All six mt500 cases hit `finish_reason=length` (token budget exhausted before the JSON verdict begins). The three mt2000 recoveries (Q01/Q02/Q06) emit short pure-JSON (63–74 chars); the three non-recoveries (Q03/Q04/Q05) emit 2600–3200-char reasoning chains. Recovery is determined by whether the reasoning chain converges, not by max_tokens itself.
+
 ## F3. Even when parseable, LLM judge verdicts flip at chance rate
 
 On the parseable subset, we measure the flip rate: the fraction of checkpoints where the LLM judge's verdict disagrees with the mechanical judge. V1: 31/60 (51.7%, Wilson 95% CI [0.393, 0.638]), V2: 21/44 (47.7%, CI [0.338, 0.621]), V3: 66/128 (51.6%, CI [0.430, 0.600]). All three variants flip at ≈50% — indistinguishable from a coin flip: exact two-sided binomial test against p=0.5 gives p=0.90 (V1), p=0.79 (V3); every CI contains 0.5. The parseable subset is small (15/11/32 calls) because format failure (F1) dominates; the flip rate is measured on what survives.

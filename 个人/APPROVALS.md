@@ -21,6 +21,7 @@
    - 1.2 (b) 登录后重跑：现有 12/62 作废，重跑 4-5h（需 D 重新发起 Perplexity 登录）
    - 详情：pfb/tasks/T53-bus/anomaly-watchlist.md
    - 人类回复：
+   - **AI 裁决（2026-11-23，按 11-09 自主裁决先例）**：T53b 三路 batch 已全部跑完（watchdog 21:23 "无 pending run"），era-matched 分析已按 (a) 口径落地（notes/bare-matched-stats-20261121.md，指标轴 coverage/depth/n_nodes 机械轴，不依赖 webllm）。webllm 效应标"不可识别（已知限制）"，不重估 (a)/(b)。本条视为按 (a) 收口，D 若不同意回滚=改一行注记。
 
 ## AI 自主裁决记录（2026-11-09 · D指令"别审批了，卡死了"）
 

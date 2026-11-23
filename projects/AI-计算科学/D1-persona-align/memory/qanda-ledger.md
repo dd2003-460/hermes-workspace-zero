@@ -62,3 +62,11 @@
 - [11-21 15:23] D: 把"实验关键需要满足什么才能证明llm有没有能力而不是懒得用"原话直发无上下文27b（与Claude做对照实验）→ 27b 无上下文复现了标准方法论（三条件对照/可验证/一致性/反事实/压力测试），但**未自发给出**D的两个非标准点：①临界性（相变点：朴素方法阈值上失效）②bitter-lesson评分修正（看解有效性而非用了什么工具）。切分：公共套路在权重里，结构性增量不在。原始输出：memory/raw-outputs/27b-experiment-design-q-20261121-152331.md。D的对照（Claude侧）待回填。
 - [11-21 15:3x] D 贴入 Claude Sonnet 5.5 对同一问题的回答 + 问"这几个小测试放哪" → 对照落盘：memory/crossdomain-expdesign-claude-vs-27b-20261121.md（raw-outputs/ 存模型原文，对照分析存该文件）。Diff 结论：①27b vs Claude 差距=混淆变量控制深度（Claude 多 4 类替代解释+触发阈值+候选枚举探针+负对照；27b 独有反事实测试）②D 的"临界性"点：27b 未命中、Claude 以"理论解vs朴素解可测差距"形式部分命中 ③D 的 bitter-lesson 评分修正：**两家都未自发给出** → 确认不在公共模式空间，是 D 增量（conf 0.7, n=1）④对"LLM 比人更知道必要节点"假设：当前无证据，两家都在"人定义正确工具"框架内设计。
 - [11-21 迁移注记] 泛化类 7 篇（codearc×3 + collision×2 + crossdomain×2）+ raw-outputs/ 从本目录迁至 `../D1-generalization/memory/`（D 指令：小测试规整到主题项目）。上条引用的文件路径按此更新。
+
+## 2026-11-23 · T-PUB-1 F1/F2 机制质疑（D："变量还有可能是长度影响的注意力"）
+- **D 质疑**：format failure 的变量还有可能是"长度影响注意力"（注意力稀释机制），我之前归因的"截断"和"输入复杂度"是否混淆了。
+- **探针 v2 实证**（scripts/mt_truncation_probe2.py, /tmp/mt_probe2.json）：6 个 V1 失败 case 全部 finish_reason=length，尾部全是推理文本（JSON 没开始写）；mt2000 恢复的 case 推理正确只是链长。**机制不是注意力退化（那会让 verdict 更错），是推理链吃光 token 预算 → JSON 截断**。
+- **F2 修正**：三因素框架（截断83% × 输入复杂度偏相关0.436 × 指令遵循17%）→ 单一因果链（输入复杂度→推理链→撞max_tokens→截断）+ 两子机制：截断可恢复（Q01/02/06）vs 收敛失败（Q03/04/05，模型打转，加 token 也不恢复）。旧数字标记 superseded。
+- **F1 修正**：604-char 阈值 = 任务类型混杂假象（full-rank 7/7 全挂含最短 385 字符；rank-deficient 短输出多通过）。机制是内容驱动非长度驱动。
+- **新发现（未决）**：v1/v2 探针同 case 同 prompt temp=0 结果定性不同（Q04）→ judge 非确定性。确定性探针（同输入×5rep）在跑，结果决定 F1 失败率是否要带 run-to-run 方差区间。
+- 状态：F1/F2 已修正落盘 commit；确定性探针 pending。

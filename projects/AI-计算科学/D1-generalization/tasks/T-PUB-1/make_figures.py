@@ -41,7 +41,7 @@ axes[0].set_title('(a) Format reliability', fontsize=11)
 axes[0].legend(fontsize=8, loc='upper right')
 axes[0].grid(axis='y', alpha=0.3)
 
-# Panel B: flip rate (parseable outputs, both verdicted)
+# Panel B: flip rate (parseable outputs, both verdicted) — stratified by reference quality
 flips = []
 for v in variants:
     agree = disagree = 0
@@ -58,11 +58,13 @@ for v in variants:
 bars3 = axes[1].bar(x, flips, 0.5, color='#1f77b4', alpha=0.85)
 for i, f in enumerate(flips):
     axes[1].text(i, f + 1.5, f'{f:.1f}%', ha='center', fontsize=9)
-axes[1].axhline(50, color='k', ls='--', lw=1, alpha=0.6)
-axes[1].text(2.4, 51, 'coin flip (50%)', fontsize=8, ha='right')
+axes[1].axhline(5.5, color='#2ca02c', ls='--', lw=1, alpha=0.7)
+axes[1].text(2.4, 7, 'exact-ref core: 5.5% (4/73)', fontsize=8, ha='right', color='#2ca02c')
+axes[1].axhline(80.5, color='#d62728', ls='--', lw=1, alpha=0.7)
+axes[1].text(2.4, 82.5, 'heuristic-ref: 80.5% (128/159)', fontsize=8, ha='right', color='#d62728')
 axes[1].set_xticks(x); axes[1].set_xticklabels(labels, fontsize=10)
-axes[1].set_ylim(0, 75); axes[1].set_ylabel('Verdict disagreement rate (%)')
-axes[1].set_title('(b) Flip rate (parseable subset)', fontsize=11)
+axes[1].set_ylim(0, 100); axes[1].set_ylabel('Verdict disagreement rate (%)')
+axes[1].set_title('(b) Flip rate, stratified by reference quality', fontsize=11)
 axes[1].grid(axis='y', alpha=0.3)
 
 fig.tight_layout()

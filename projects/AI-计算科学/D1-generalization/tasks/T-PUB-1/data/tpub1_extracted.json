@@ -435,7 +435,14 @@
      "desc": "Names the missing quantity correctly: per-GPU HBM (memory) capacity of the named SKU — not bandwidth, not overhead, not context length.",
      "gold": "per-GPU HBM capacity of H100 SXM (80 GB, datasheet)",
      "tolerance": 0,
-     "source": "https://www.nvidia.com/en-us/data-center/h100/#specifications"
+     "source": "https://www.nvidia.com/en-us/data-center/h100/#specifications",
+     "keywords": [
+      "hbm",
+      "memory capacity",
+      "hbm capacity",
+      "hbm3",
+      "hbm memory"
+     ]
     },
     {
      "id": "c3",
@@ -500,7 +507,12 @@
      "desc": "Names the missing quantity correctly: HBM memory bandwidth (GB/s) — not TDP, not capacity, not TFLOPS.",
      "gold": "HBM memory bandwidth",
      "tolerance": 0,
-     "source": "https://www.nvidia.com/en-us/data-center/h100/#specifications (3.35 TB/s row)"
+     "source": "https://www.nvidia.com/en-us/data-center/h100/#specifications (3.35 TB/s row)",
+     "keywords": [
+      "memory bandwidth",
+      "hbm bandwidth",
+      "bandwidth"
+     ]
     },
     {
      "id": "c3",
@@ -558,7 +570,12 @@
      "desc": "Names the conflicting quantity correctly: HBM memory bandwidth (and attributes the vendor figure to the datasheet).",
      "gold": "HBM memory bandwidth (vendor datasheet 3.35 TB/s vs blog 2.0 TB/s)",
      "tolerance": 0,
-     "source": "https://www.nvidia.com/en-us/data-center/h100/#specifications"
+     "source": "https://www.nvidia.com/en-us/data-center/h100/#specifications",
+     "keywords": [
+      "memory bandwidth",
+      "hbm bandwidth",
+      "bandwidth"
+     ]
     },
     {
      "id": "c3",

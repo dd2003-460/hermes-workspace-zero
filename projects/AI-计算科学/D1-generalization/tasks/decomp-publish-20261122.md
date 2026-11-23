@@ -19,9 +19,9 @@
 ## 任务表（派发只执行表内条目）
 | # | 任务 | 执行者 | 状态 |
 |---|---|---|---|
-| P1 | 题集 10 题出题（arena 任务卡）+ Lead 核 gold | arena + Lead | 待启动 |
+| P1 | 题集 10 题出题（arena 任务卡）+ Lead 核 gold | arena + Lead | **已派发 11-23 14:0x**（会话 01a1ca66，任务书 @main 0b889b578 正文sha256 20af62bf，交付 tasks/T-PUB-1-result.md，核验走 git） |
 | P2 | 对比脚本（formula_judge + 27b judge prompt 版本化） | Lead/subagent | 待启动 |
-| P3 | 秩亏题 2-3 道设计（2026-11-23 修正：给不完整检索结果测"批判准确性"，不测"主动检索"——qqbot 补充 29 证模型不自主触发检索） | Lead | 待启动 |
+| P3 | 秩亏题 2-3 道设计（2026-11-23 修正：给不完整检索结果测"批判准确性"，不测"主动检索"——qqbot 补充 29 证模型不自主触发检索） | Lead | **已并入 P1 任务书**（T-PUB-1 含 3 道秩亏题，设计修正已写入；Lead 核 gold 时一并验） |
 | P4 | "Why Is RSI Hard to Verify?" 精读 note | subagent | 待启动 |
 | P5 | 统计口径定义（CI/翻转率/一致率） | Lead | 待启动 |
 

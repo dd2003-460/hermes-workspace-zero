@@ -22,6 +22,8 @@ The failure is not a smooth function of output length; it is **confounded with t
 
 **Claim.** No prompt phrasing brings a 27b LLM judge to usable format reliability on the formalizable core: even the best variant (V3) fails 52% of the time, versus 0% for the mechanical judge.
 
+**Pipeline impact.** In an automated evaluation harness, a 52–84% format failure rate is not a noisy score — it is a *missing* score on half to four-fifths of the data. Every aggregate reliability metric computed over the parseable subset is conditioned on a selection that the metric itself does not report, and the selection is correlated with item difficulty (the harder the checkpoint, the more likely the judge's reasoning chain overruns its budget). The pipeline is not producing a biased estimate; it is producing no estimate on the hardest items, which is exactly where the estimate is most needed.
+
 ## F2. Mechanism attribution: a single causal chain — input complexity → reasoning chain → token exhaustion → JSON truncation
 
 We attribute format failures with a controlled re-judging probe (max_tokens 500→2000) plus engine `finish_reason` and output-tail inspection. The probe (v2, 6 V1 failure cases) shows the mechanism is **not** attention degradation (which would make verdicts more *wrong*) but **token-budget exhaustion by the reasoning chain**.
@@ -57,6 +59,8 @@ The flip is in **whether the model obeys the "output JSON only, no explanation" 
 
 All six mt500 cases hit `finish_reason=length` (token budget exhausted before the JSON verdict begins). The three mt2000 recoveries (Q01/Q02/Q06) emit short pure-JSON (63–74 chars); the three non-recoveries (Q03/Q04/Q05) emit 2600–3200-char reasoning chains. Recovery is determined by whether the reasoning chain converges, not by max_tokens itself.
 
+**Actionable diagnostic.** The three behavior classes are distinguishable from a single re-judge at a larger budget, which gives a practitioner a concrete triage: (i) if the output tail at the default budget is reasoning text and `finish_reason=length`, the case is truncation-recoverable — raise the budget and re-judge; (ii) if the tail shows *cycling* (the same quantity re-derived repeatedly) even at a large budget, the case is a convergence failure — more tokens will not help, and the checkpoint should be routed to a mechanical judge or a human; (iii) if the same input flips between a short JSON and a long chain across identical runs, the case is instruction-following non-determinism — the verdict is not merely unreliable, it is not reproducible, which disqualifies it from any use where a stable score is required. This triage is what makes the mechanism attribution actionable rather than merely descriptive: it tells a pipeline *which* failures to retry, *which* to escalate, and *which* to treat as unmeasurable.
+
 ## F3. Even when parseable, LLM judge verdicts flip at chance rate
 
 On the parseable subset, we measure the flip rate: the fraction of checkpoints where the LLM judge's verdict disagrees with the mechanical judge. V1: 31/60 (51.7%, Wilson 95% CI [0.393, 0.638]), V2: 21/44 (47.7%, CI [0.338, 0.621]), V3: 66/128 (51.6%, CI [0.430, 0.600]). All three variants flip at ≈50% — indistinguishable from a coin flip: exact two-sided binomial test against p=0.5 gives p=0.90 (V1), p=0.79 (V3); every CI contains 0.5. The parseable subset is small (15/11/32 calls) because format failure (F1) dominates; the flip rate is measured on what survives.
@@ -64,6 +68,8 @@ On the parseable subset, we measure the flip rate: the fraction of checkpoints w
 **Scope of the reference.** The mechanical reference is exact on calc checkpoints (SymPy symbolic comparison) but is a spec-driven regex heuristic on the textual-gold checkpoints of the rank-deficient tasks (c2: "names the missing quantity correctly"), where it scores 0/60. On those checkpoints the flip direction skews toward LLM-correct / mechanical-false-negative, so we report them separately: excluding the rank-deficient c2 textual-gold checkpoints, the flip rate is V1 27/45 (60.0%), V2 17/33 (51.5%), V3 45/96 (46.9%) — still ≈50% on every variant. The coin-flip claim therefore rests on the calc-gold checkpoints, where the reference is exact.
 
 **Claim.** Format reliability and verdict accuracy are distinct failure modes, and both fail: the LLM judge is unreliable both in *emitting* a verdict (F1) and in the *content* of the verdict it does emit (F3). The mechanical judge is exact on calc checkpoints by construction (0/67 format failures, symbolic gold); on textual-gold checkpoints it is a heuristic reference and is reported as such.
+
+**Why a coin flip is worse than a bias.** A *biased* judge is still a usable instrument: its systematic error can be estimated (by calibration against a reference) and subtracted, and it at least ranks items consistently. A *coin-flip* judge is not: its error is independent of the item, so no calibration can recover a signal that is not there, and its verdicts carry no information about which items are actually correct. The 51.7%/47.7%/51.6% flip rates — each statistically indistinguishable from 50% — place the LLM judge in the second category on the parseable subset. This is the sense in which the LLM judge is not merely "noisy" but *uninformative* on the formalizable core: even the verdicts it manages to emit carry no reliable signal about correctness.
 
 ## F4. Guessing bound: the task set is not guessable
 
@@ -76,6 +82,8 @@ Analytic bound: full-rank tasks P(all-correct by guess) ≈ 1.2e-10 to 1.9e-7; r
 Rank-deficient tasks are guessable ~3 orders of magnitude more easily than full-rank — a quantitative basis for "rank-deficient tasks need more checkpoints to resist guessing." The bound is model-agnostic (it depends only on the guess model and checkpoint structure, not on the judge).
 
 **Claim.** The task set resists guessing: even the most guessable task (rank-deficient) has P(all-correct by guess) ≤ 3.3e-5, so observed scores cannot be attributed to chance.
+
+**How to use the bound.** The bound is a design tool, not just a post-hoc check: before publishing a checkpoint set, compute the product bound under the guess model; if the most guessable task exceeds a chosen threshold (we use 1e-4), add checkpoints or tighten tolerances until it does not. Because the bound depends only on the guess model and checkpoint structure — not on the judge or the model being evaluated — it can be computed at task-construction time at zero cost, and it transfers to any judge or model that later scores the same task set.
 
 ## F5. Prompt modification trades one dimension for another
 

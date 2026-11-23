@@ -39,9 +39,14 @@
   3. 统计：0/2000 的 95% 上限 ≈1.5e-3，不能验证 3.3e-5；原稿误称 0.01 > 0.0267
 - 最小强化动作（≤3）：① 删普适因果/硬币/防hack/必然trade-off 措辞 + 补撞车文献 ② 修判分+盲审参考+留 raw 重算 ③ 扩 ≥30 独立题 + 2 异家族 judge 配对
 
-## 待执行（按性价比）
-1. **修 Q04 gold**（c5 公式改分片版 32256，checks.batch8 改 1）— 10 分钟，阻塞项
-2. **修 guess_bound.py** tol=0 分支（`<0` → `<=tol` 或对称容差）— 30 分钟，F4 生死线
-3. **措辞降级**（F3/F4/F5 按建议改 intro+findings）— 1-2 小时
-4. 统计修正（3.3e-5 → 1.5e-3 上限表述；0.01/0.0267 笔误）
-5. 扩题+异家族 judge（大工程，workshop 投后可做）
+## 待执行（按性价比）— 1-4 已完成 @ 7b593678
+1. ✅ **修 Q04 gold**（c5 公式改分片版 32256，checks.batch8 改 1）— 完成
+2. ✅ **修 guess_bound.py** tol=0 分支（`<0` → `<=tol` 或对称容差）— 完成
+3. ✅ **措辞降级**（F3/F4/F5 按建议改 intro+findings）— 完成（3 处：F4 因果归因、模拟措辞、F3 硬币措辞）
+4. ✅ **统计修正**（0/2000 降级为 underpowered；0.01/0.0267 笔误清除）— 完成
+5. ⏸ 扩题+异家族 judge（大工程，workshop 投后可做）
+
+## 补充核验（Lead 独立，2026-11-23 20:20）
+- **arXiv 文献计数**：intro/related-work 写"600+ papers in 2026 alone"。arXiv API 实测 `all:"LLM judge" AND submittedDate:[2026]` = **1,139 篇**（all-time 1,393）。"600+" 技术上正确（1139>600）但偏低 ~2×，且 arena 未 flag。
+  - 处置：不阻塞（非事实错误，是保守表述）；若审稿人挑战可改为"1,000+ papers in 2026"或引用 arXiv 检索式。[待 D 决定是否改]
+- **fig3 重跑**：Q04 gold 修正后 guess_bound 界值变化（Q04 从 text-gold 驱动改为 boolean 驱动），fig3-guess-bound.png 已用新 spec 重生成。

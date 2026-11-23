@@ -134,6 +134,12 @@ Default max\_tokens=500 (the deployment default; the truncation mechanism in F2 
 \caption{Mechanism probe: the six V1 failure cases re-judged at max\_tokens 500 vs 2000. Recovery is determined by whether the reasoning chain converges, not by max\_tokens itself.}
 \end{figure}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig3-guess-bound.png}
+\caption{Analytic upper bound on the probability of guessing all checkpoints correct, per task. Full-rank tasks (blue) sit at 1e-10 to 1e-7; rank-deficient tasks (red) at 1e-6 to 3.3e-5. All are far below the 1e-4 threshold, and 2000 seeded simulations produced 0 full-guess successes.}
+\end{figure}
+
 \begin{table}[h]
 \centering
 \begin{tabular}{llll}

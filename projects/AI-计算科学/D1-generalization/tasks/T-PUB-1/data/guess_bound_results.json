@@ -1,0 +1,42 @@
+{
+ "T-PUB-1-Q01": {
+  "type": "full",
+  "P_all_correct_by_guess": 5.006722894511667e-09
+ },
+ "T-PUB-1-Q02": {
+  "type": "full",
+  "P_all_correct_by_guess": 2.503361447255838e-09
+ },
+ "T-PUB-1-Q03": {
+  "type": "full",
+  "P_all_correct_by_guess": 1.8962962962962978e-07
+ },
+ "T-PUB-1-Q04": {
+  "type": "full",
+  "P_all_correct_by_guess": 9.294658838821199e-10
+ },
+ "T-PUB-1-Q05": {
+  "type": "full",
+  "P_all_correct_by_guess": 9.387605427209405e-08
+ },
+ "T-PUB-1-Q06": {
+  "type": "full",
+  "P_all_correct_by_guess": 1.1734506784011747e-10
+ },
+ "T-PUB-1-Q07": {
+  "type": "full",
+  "P_all_correct_by_guess": 3.3711934156378723e-09
+ },
+ "T-PUB-1-Q08": {
+  "type": "rank-deficient",
+  "P_all_correct_by_guess": 3.333333333333338e-05
+ },
+ "T-PUB-1-Q09": {
+  "type": "rank-deficient",
+  "P_all_correct_by_guess": 3.333333333333338e-05
+ },
+ "T-PUB-1-Q10": {
+  "type": "rank-deficient",
+  "P_all_correct_by_guess": 3.5555555555555568e-06
+ }
+}

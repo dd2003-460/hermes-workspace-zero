@@ -123,6 +123,8 @@ def main():
         fig_tex += '\\begin{figure}[t]\n\\centering\n\\includegraphics[width=\\columnwidth]{figures/fig1-format-reliability.png}\n\\caption{Format failure rate (bars) and verdict flip rate (line) across the three prompt variants. The mechanical judge (dashed) fails on 0\\% of calls.}\n\\end{figure}\n\n'
     if 'fig2-mechanism.png' in figs:
         fig_tex += '\\begin{figure}[t]\n\\centering\n\\includegraphics[width=\\columnwidth]{figures/fig2-mechanism.png}\n\\caption{Mechanism probe: the six V1 failure cases re-judged at max\\_tokens 500 vs 2000. Recovery is determined by whether the reasoning chain converges, not by max\\_tokens itself.}\n\\end{figure}\n\n'
+    if 'fig3-guess-bound.png' in figs:
+        fig_tex += '\\begin{figure}[t]\n\\centering\n\\includegraphics[width=\\columnwidth]{figures/fig3-guess-bound.png}\n\\caption{Analytic upper bound on the probability of guessing all checkpoints correct, per task. Full-rank tasks (blue) sit at 1e-10 to 1e-7; rank-deficient tasks (red) at 1e-6 to 3.3e-5. All are far below the 1e-4 threshold, and 2000 seeded simulations produced 0 full-guess successes.}\n\\end{figure}\n\n'
 
     preamble = r'''\documentclass[10pt,twocolumn]{article}
 \usepackage[margin=0.9in,columnsep=0.33in]{geometry}

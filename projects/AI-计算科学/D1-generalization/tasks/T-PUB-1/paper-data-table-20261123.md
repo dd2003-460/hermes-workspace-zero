@@ -83,6 +83,8 @@ pilot（judge-boundary-findings §4）只有 n=24，CI 太宽。正式跑：67 �
 - 5/44 混合（同输出 V1 挂 V2 过或反之）= 11.4% → 纯 prompt 效应
 - **结论：prompt 措辞只解释 1/9 失败，输出长度解释 8/9**
 
+**理论节：瞎猜概率界（可复现，scripts/guess_bound.py）**：瞎猜模型定义明确——calc 连续值 U[0.5g,2g] 命中概率 2tol/1.5、整数精确 U[g±50] 命中 1/101、文字 gold 命中 1/100（保守）。解析界：full 题 P(全瞎猜全对)≈1.2e-10~1.9e-7，rank-deficient 题 P≈3.6e-6~3.3e-5（最高，检查点少且含文字 gold）。模拟 N=2000 seed=42：0/2000 全对，与界一致。**比原"2000 次模拟 0 次"硬：有解析界 + 可复现脚本 + 瞎猜模型显式定义**。rank-deficient 题瞎猜概率比 full 高 3 个量级——这是"rank-deficient 题需要更多检查点防蒙对"的量化依据。
+
 **机制判别（截断 vs 指令遵循，探针 6/6 完成）**：对 V1 失败 case 用 max_tokens 500→2000 重判（scripts/mt_truncation_probe.py）。
 - Q01(2280)/Q02(1492)/Q04(2646)/Q05(7210)/Q06(1328)：mt500=False → mt2000=**True**，raw_len=74/74/62/78/63（纯 JSON 无推理链）→ **截断驱动**（mt500 把推理路径截断，给够空间模型就只输出 JSON）
 - Q03(1720)：mt500=False → mt2000=**False**，raw_len=3190（给够 2000 token 仍输出长推理链不肯只给 JSON）→ **指令遵循例外**

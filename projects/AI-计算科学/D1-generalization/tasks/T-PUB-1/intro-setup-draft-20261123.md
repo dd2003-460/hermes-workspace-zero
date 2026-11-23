@@ -11,9 +11,9 @@ We study this question on the **formalizable core** — the part of an evaluatio
 
 **Our contribution.** Against a mechanical judge as the exact reference, we measure a 27b LLM judge on 67 real model outputs across 10 tasks (7 full-rank, 3 rank-deficient) under three prompt variants (201 judge calls total). We find:
 
-1. **Format reliability fails (F1).** The LLM judge emits unparseable output on 52–84% of calls depending on prompt variant; the mechanical judge fails on 0% by construction. The failure exhibits a threshold at ~604 output characters, not a gradient.
+1. **Format reliability fails (F1).** The LLM judge emits unparseable output on 52–84% of calls depending on prompt variant; the mechanical judge fails on 0% by construction. The failure is content-driven (task type / gold complexity), not a length threshold: full-rank tasks fail 7/7 across the entire length range.
 
-2. **The mechanism is attributable (F2).** Controlled re-judging and partial correlation separate three candidate mechanisms: output truncation (dominant, 83% recovery when max_tokens is raised; engine-reported `finish_reason=length`), input complexity (independent partial correlation 0.436, driven by gold complexity not checkpoint count), and instruction-following (minority, 17%).
+2. **The mechanism is attributable (F2).** Controlled re-judging and output-tail inspection show the mechanism is a single causal chain — input complexity → longer reasoning chain → collision with max_tokens → JSON truncation — not attention degradation. Within it, two sub-mechanisms: truncation-recoverable (3/6, recovered by raising max_tokens) and convergence failure (3/6, the model cycles and cannot emit a verdict even with more tokens).
 
 3. **Verdict accuracy flips at chance (F3).** Even on the parseable subset, the LLM judge disagrees with the mechanical judge on 48–52% of checkpoints — indistinguishable from a coin flip.
 

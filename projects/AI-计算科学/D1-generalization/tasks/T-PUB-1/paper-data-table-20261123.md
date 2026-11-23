@@ -5,10 +5,10 @@
 
 - 检查点通过率：33/35 = 94.3%（修复前 29/35 = 83%，3 个单点 FAIL 全是判分器 bug 非模型错）
 - 全对题：6/7（仅 Q04 首轮收口失败）
-- Q04 归因（11-23 晚重跑）：同 prompt 重跑 5/5（23.3s）→ **单样本随机波动，非系统性缺陷**；full7 分数是单样本点估计，带 run-to-run 噪声（Q04 两次 2/5↔5/5）
-- 方法学含义：27b 难题单样本可靠性波动显著 = "为什么需要验证器/多次采样"的实证动机
-- 判分器修复（scripts/formula_judge.py，6 测试全过含回归）：Q01 c3（57.77 GB vs bytes）、Q03 c1（989.5 TFLOPS vs FLOP/s）单位换算 + Q07 c1（1.551e-5）科学计数法
-- 出处：tasks/T-PUB-1/full7-rerun.json + q04-close-rerun.json + rd-ab-v2-summary-20261123.md §2
+- Q04 归因（11-23 trunc_mitigate 修正）：mt4000 时 7334 字符中文思维链被 4000 token 截断→2/5；mt12000 时 2583 字符收口→5/5。**主因=max_tokens=4000 对中文思维链不够用（截断），次因=采样波动**（同 mt4000 重跑能 5/5）。full7 分数带截断伪影 + run-to-run 噪声，评测协议应 max_tokens≥12000
+- 方法学含义：27b 难题单样本可靠性波动显著 + 固定 max_tokens 系统性低估难题得分 = "为什么需要验证器/多次采样/足够 max_tokens"的实证动机
+- 判分器修复（scripts/formula_judge.py，6 测试全过含回归）：Q01 c3（57.77 GB vs bytes）、Q03 c1（989.5 TFLOPS vs FLOP/s）单位换算 + Q07 c1（1.551e-5）科学计数法 + LaTeX 科学计数法（`1.551 \times 10^{-5}`，trunc_mitigate 暴露，`_clean_latex_sci` 预处理）
+- 出处：tasks/T-PUB-1/full7-rerun.json + q04-close-rerun.json + trunc-mitigate.json + rd-ab-v2-summary-20261123.md §2
 
 ## A/B 状态机提醒实验（3 秩亏题）
 
@@ -36,9 +36,9 @@
 | T-PUB-1-Q10 | rank-deficient A | c1=False/c3=True | 15.2s | 1005 |
 | T-PUB-1-Q10 | rank-deficient B | c1=True/c3=True | 17.6s | 1080 |
 
-\* Q04 首轮 3/5（思考链未收口），同 prompt 重跑 5/5——单样本波动（q04-close-rerun.json）。
+\* Q04 首轮 3/5（mt4000 截断中文思维链，7334 字符没收口），mt12000 重跑 5/5（2583 字符收口）——主因截断、次因采样波动（trunc-mitigate.json）。
 
 ## 待补
 
-- [x] Q04 截断缓解（11-23 晚完成）：同 prompt 重跑 5/5 → 非截断/非系统性，是单样本波动
+- [x] Q04 截断缓解（11-23 trunc_mitigate 完成）：mt4000→2/5（截断）vs mt12000→5/5 → **主因=max_tokens 截断，次因=采样波动**；评测协议应 max_tokens≥12000
 - [ ] 秩亏题 n=3→n≥10 出 Wilson CI（stats-protocol 已定义口径）

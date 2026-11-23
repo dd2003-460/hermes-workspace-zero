@@ -48,11 +48,11 @@
      "source": "depends on c2"},
     {"id": "c4", "kind": "calc",
      "desc": "aggregate decode tokens/s = 0.85 * 3.35e12 / bytes_per_step",
-     "gold": "0.85*3.35e12/(32e9 + 16*12288*(64*8*128*2))", "unit": "tok/s", "tolerance": 0.02,
+     "gold": "16*0.85*3.35e12/(32e9 + 16*12288*(64*8*128*2))", "unit": "tok/s", "tolerance": 0.02,
      "source": "depends on c3"},
     {"id": "c5", "kind": "calc",
      "desc": "Joules per generated token = TDP / aggregate tok/s",
-     "gold": "(700)/(0.85*3.35e12/(32e9 + 16*12288*(64*8*128*2)))", "unit": "J/token", "tolerance": 0.02,
+     "gold": "(700)/(16*0.85*3.35e12/(32e9 + 16*12288*(64*8*128*2)))", "unit": "J/token", "tolerance": 0.02,
      "source": "depends on c1 + c4"}
   ],
   "checks": {"fits_in_80gb": 1, "headroom_gb": "80 - (32 + 16*12288*(64*8*128*2)/1e9 + 4)"},

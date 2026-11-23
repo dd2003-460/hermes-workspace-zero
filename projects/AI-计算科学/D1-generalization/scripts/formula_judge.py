@@ -81,6 +81,31 @@ def judge_bool(cp, text):
     return True
 
 
+def _find_gold_in_text(text, gv, tol):
+    """在 markdown 文本里找 gold 值。tol=0 整数精确匹配；tol>0 相对误差 < tol。
+    优先在 'Answer:' 行找，找不到再全文找。"""
+    if gv is None or not text:
+        return False
+    def _match(s):
+        for m in re.finditer(r"-?\d[\d,]*\.?\d*", s):
+            try:
+                v = float(m.group().replace(",", ""))
+                if tol == 0:
+                    if v == gv and float(gv).is_integer():
+                        return True
+                else:
+                    if abs(v - gv) / abs(gv) < tol:
+                        return True
+            except Exception:
+                pass
+        return False
+    # 优先 Answer 行
+    ans_lines = [ln for ln in text.split("\n") if re.search(r"answer", ln, re.I)]
+    if ans_lines and _match(" ".join(ans_lines)):
+        return True
+    return _match(text)
+
+
 def judge_mechanical(spec, text):
     """返回 {checkpoint_id: bool}"""
     data = extract_json(text)
@@ -103,7 +128,9 @@ def judge_mechanical(spec, text):
                 except Exception:
                     results[cid] = False
             else:
-                results[cid] = False
+                # markdown 回退：真实模型输出常是 markdown 不是 JSON。
+                # 优先在 "Answer:" 行找 gold±tol，找不到再全文找（与 fact 分支同逻辑）。
+                results[cid] = _find_gold_in_text(text, gv, tol)
         elif kind == "fact":
             gv = eval_gold(gold)
             # fact: 模型输出里出现该数值（±tol）

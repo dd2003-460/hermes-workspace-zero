@@ -3,6 +3,17 @@
 # 数据源: tasks/T-PUB-1/paper-data-table-20261123.md（全部数字可回溯）
 # 状态: 初稿，逻辑 + 数字就位，待 W2 扩写论证 + W5 补 CI
 
+## Table 1. Main results (formalizable core, n=67 outputs × 3 judge variants)
+
+| Judge | Format failure (Wilson 95% CI) | Verdict flip vs mechanical (CI) | Parseable n |
+|---|---|---|---|
+| V1 strict | 77.6% (52/67, [66,86]) | 51.7% (31/60, [39,64]) | 15 |
+| V2 loose | 83.6% (56/67, [73,91]) | 47.7% (21/44, [34,62]) | 11 |
+| V3 engineer | 52.2% (35/67, [40,64]) | 51.6% (66/128, [43,60]) | 32 |
+| Mechanical | 0% (0/67) | 0% (by construction) | 67 |
+
+Flip denominator = parseable checkpoints where both judges rendered a verdict.
+
 ## F1. LLM judges fail format reliability on the formalizable core
 
 We measure format reliability as the rate at which an LLM judge emits unparseable output on inputs where a mechanical judge succeeds by construction. On 67 real 27b outputs across 10 tasks (7 full-rank, 3 rank-deficient), three prompt variants (V1_strict, V2_loose, V3_engineer) yield format failure rates of 77.6% (52/67, Wilson 95% CI [0.663, 0.859]), 83.6% (56/67, CI [0.729, 0.906]), and 52.2% (35/67, CI [0.405, 0.637]) respectively. The mechanical judge, which evaluates each checkpoint by SymPy symbolic comparison or spec-driven regex, fails on 0/67 (0%) by construction.

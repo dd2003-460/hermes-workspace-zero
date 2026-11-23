@@ -44,7 +44,7 @@
 |----|------|------|------|
 | W1 | 11/23-11/29 | ①related work 调研 ✅ ②§4 Findings 初稿 ✅ ③图 1-2 ✅（figures/fig1+fig2, 已 vision 核验） | 无 |
 | W2 | 11/30-12/06 | ①§1 Intro 初稿 ✅ ②§2 Setup 初稿 ✅ ③理论节初稿 ✅（瞎猜界正式证明）④§4 补 F5 ✅ | W1 |
-| W3 | 12/07-12/13 | ①§3 Related work 初稿 ✅（防撞车区分句+三支柱定位表+机械judge定位）②跨模型验证子集（可选，缺口 2）③图 3 + 表 1 | W2 |
+| W3 | 12/07-12/13 | ①§3 Related work 初稿 ✅ ②跨模型验证子集（可选，缺口 2）⬜ ③图 3 ✅ + 表 1 ✅（findings Table 1 + figures/fig3） | W2 |
 | W4 | 12/14-12/20 | ①§5 Implications ②§6 Limitations ③表 2 ④附录初稿 | W3 |
 | W5 | 12/21-12/27 | ①统计严谨性（CI + bootstrap）②附录完整化 ③全文通读 + 字数控制 | W4 |
 | W6 | 12/28-01/03 | ①内部 review（arena 交叉验证 claim 强度）②修订 ③匿名化 checklist | W5 |

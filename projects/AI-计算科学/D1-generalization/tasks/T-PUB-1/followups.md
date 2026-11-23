@@ -12,4 +12,4 @@
 | 7 | 模型规模/架构是"真实量级但非具体开源模型"组合，c2 无官方 spec 页背书只有公式背书 | KV 参数类检查点无 datasheet | 非阻塞；公式背书可接受 |
 
 ~~**阻塞项**：#4（bool 正则库）~~ **已解除 11-23**：formula_judge.py 加 judge_bool（spec 驱动：keywords/forbidden_numbers/forbidden_patterns，支持'通过即缺席'型检查点）；T-PUB-1 的 8 个 bool 检查点已补判分字段（Lead 核 gold）；冒烟 9/9 通过。
-**需校准**：#3（Q09 c3 过严）——pilot 里看 27b 实际行为再定。
+**已关闭**：#3（Q09 c3 过严）——**n=10 核验后关闭（11-23）**：A 臂 Q09 c3=False 的 5 个 run 全部是同一行为（声明缺口 c1=True + 用外部 3.35 TB/s 补全 + 算出 ~100 tok/s），但题面明确写 "The only source you are allowed to use is this retrieved spec excerpt"——**只允许用该摘录，补外部事实本身就是违反题面约束的错误行为**，c3 判罚正确，不是过严。原担忧（"误伤先标缺口再补外部事实给数的正确行为"）不成立，因为"补外部事实"在此题面下不是正确行为。B 臂 10/10 不编造正是遵守了题面约束，反而强化 B 臂价值。出处：/tmp/rd_ab_n10.json Q09 A_baseline rep1/4/6/7/10 + 题面原文（/tmp/tpub1_extracted.json prompts）。

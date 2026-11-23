@@ -315,11 +315,11 @@ Scoring semantics identical; wording differs. (Source: `scripts/prompt_variant_f
 - **V2_loose** (Chinese): 请判断模型输出中每个检查点是否正确。容差 2% 内的数值算对，整数检查点需精确匹配。以 JSON 形式返回每个检查点 id 对应的布尔值。
 - **V3_engineer** (English): You are a strict numeric grader. For each checkpoint, decide true/false. Tolerance 0.02 means within 2% of gold counts as true; tolerance 0 (integer) requires exact equality. Output ONLY a JSON object mapping checkpoint id to boolean. No explanation.
 
-The 11.4% "pure prompt effect" (5/44 overlapping outputs where V1 and V2 disagree on parseability) is the upper bound on what wording alone explains; the remaining 73% (32/44, both variants fail) is output/length-driven.
+The 9.0% "pure prompt effect" (6/67 outputs where V1 and V2 disagree on parseability) is the upper bound on what wording alone explains; the remaining 76.1% (51/67, both variants fail) is output/length-driven.
 
 ## A.6 27b deployment details
 
-- Model: `qwen3.8-27b-mtp`, served locally via vLLM at `http://127.0.0.1:8787/v1/chat/completions` (OpenAI-compatible API).
+- Model: Qwen3-27B, served locally via vLLM (OpenAI-compatible API).
 - All judge and probe calls: `temperature=0`, `max_tokens=500` (default; the mechanism probe re-runs at `max_tokens=2000`).
 - Mechanical judge: SymPy symbolic comparison for calc checkpoints; spec-driven regex for text/fact checkpoints. Version-controlled (`formula_judge.JUDGE_PROMPT_VERSION`).
 - Determinism probe: same input × 5 reps, same run, same `max_tokens`, temperature 0 (`scripts/judge_determinism_probe.py`).

@@ -5,7 +5,7 @@
   "priority": "HIGH",
   "iteration": 1,
   "updated_at": "2026-11-23T19:10:00+08:00",
-  "current_task": "T-PUB-1 论文冲刺 (W1-3 数据齐, 主会稿 9 页 + workshop 稿 4 页双轨). 11-23: 匿名化预检(去 127.0.0.1:8787/本地部署名→Qwen3-27B) + 修附录 A.5 分母错误(11.4%/5/44→9.0%/6/67, 重算确认 V1V2 重叠 67 非 44) + workshop 稿扩写 1011→1871 词(4页达标, +Why this matters/Related work 6篇/F2/F5修正) + figures(fig1 format+flip, fig2 mechanism, make_figures.py 直读 data/ 可复现) + LaTeX 初稿编译通过(5页, 压缩中). prompt_variant_formal.py 201 调用后台跑完, SUMMARY 与论文数字一致(52/67,56/67,35/67; 31/60,21/44,66/128).",
+  "current_task": "T-PUB-1 论文冲刺 (W1-3 数据齐, 主会稿 9 页 + workshop 稿 4 页双轨). 11-23: 匿名化预检(去 127.0.0.1:8787/本地部署名→Qwen3-27B) + 修附录 A.5 分母错误(11.4%/5/44→9.0%/6/67, 重算确认 V1V2 重叠 67 非 44) + workshop 稿扩写 1011→1871 词(4页达标, +Why this matters/Related work 6篇/F2/F5修正) + figures(fig1 format+flip, fig2 mechanism, make_figures.py 直读 data/ 可复现) + LaTeX 初稿编译通过(5页, 压缩中). prompt_variant_formal.py 201 调用后台跑完, SUMMARY 与论文数字一致(52/67,56/67,35/67; 31/60,21/44,66/128). 11-23晚: 主会稿 W5 扩写达标 — intro 750→~950词(+why-it-matters段/working-hypothesis/paper-structure自洽), setup 600→~1150词(+Q01五检查点依赖链实例[对回spec核验:32B FP8单卡H100,题面参数全部对回tpub1_extracted.json]+秩亏校准探针设计动机+gold验证流程+max_tokens=500选择理由), findings 1961→2510词(+F1 pipeline-impact/F2 actionable-triage/F3 coin-flip-vs-bias/F4 bound用法), 跨章12个关键数字一致性核验通过; Q08/Q09/Q10题面描述全部对回核验。arena claim-review 仍在跑(未交付)。",
   "blocker": "W6 arena claim-review (session 01a1f80e) 还在跑 — 主会稿 intro/findings 扩写等其 claim 判断(若降级 workshop 不扩主会)",
   "next": "① workshop PDF 压到 4 页 ② arena 交付后核验 claim 评审 → 决定主会/workshop 权重 ③ 主会稿 intro(1297/2100+) findings(1887/2500+) 扩写 ④ W6 匿名化终检 + 双盲合规",
   "change_log": [

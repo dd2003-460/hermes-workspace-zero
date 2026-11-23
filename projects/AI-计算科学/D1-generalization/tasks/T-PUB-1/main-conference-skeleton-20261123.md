@@ -9,9 +9,13 @@
 #   ⑤ c3 双口径重判 (scripts/c3_lenient_rejudge.py)
 # 目标: 9 页 ICML 格式 ≈ 7000-8000 词正文 + 附录
 
-## 核心 claim（一句话）
+## 核心 claim（一句话，2026-11-23 related work 调研后修正）
 
-**LLM judge 在可形式化核上不可靠（格式可靠性 52-84% 失败 + 判分翻转率 ≈50%），机械 judge 必要且免费**——可靠性失败主驱动是输出长度 × max_tokens 截断交互（非 prompt 措辞），prompt 修改存在维度间 trade-off（修 c1 引入 c3 副作用）。
+**现有 LLM judge reliability 工作（620 篇，2026 活跃方向）依赖人类标注/扰动测试当 ground truth；我们在可形式化核上用机械 judge 当 exact reference（免费 + 100% 精确 + 可复现），测出 LLM judge 双维度失败（格式可靠性 52-84% + 判分翻转 ≈50%），做机制归因（截断/输入复杂度/指令遵循三因素分离），并给防 hack 理论保证（瞎猜概率界）。**
+
+差异化三支柱（§3 逐篇对比用）：(a) format reliability 维度——现有工作全假设 judge 出了分，没测"judge 根本没法出分"的前置失败；(b) 机制归因——现有只报相关性，我们归因到可操作机制（偏相关 + finish_reason 直接证据）；(c) 防 hack 理论——现有无"高分非蒙的"保证，我们有模型无关的瞎猜概率界。
+
+撞车 6 篇（必须 cite + 区分，详见 research/related-work-survey-20261123.md）：2603.05399 Judge Reliability Harness / 2610.30512 Arena-Hard judge / 2609.13824 Consistency≠Reliability / 2510.09738 Judge's Verdict / 2606.15029 Metric Match / 2610.05452 VERA。
 
 ## 字数预算（9 页 ≈ 7500 词正文）
 

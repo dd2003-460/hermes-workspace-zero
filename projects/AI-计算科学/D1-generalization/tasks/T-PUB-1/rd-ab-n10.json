@@ -1,0 +1,662 @@
+{
+ "T-PUB-1-Q08/A_baseline/rep1": {
+  "r": {
+   "c1": false,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 5.8,
+  "out_len": 931,
+  "out": "\n\n**Total memory requirement:**  \n70 GB (model weights) + 6.2 GB (KV cache) + 1.5 GB (runtime overhead) = **77.7 GB**\n\n**Verdict:**  \n✅ **Yes, this deployment fits on a single NVIDIA H100 SXM GPU.**\n\n**Justification:**  \n- The NVIDIA H100 SXM accelerator is equipped with **80 GB of HBM3 memory** (a standard specification for the SXM variant).  \n- The total memory requirement of **77.7 GB** is **less than 80 GB**, leaving **2.3 GB of headroom** for additional runtime allocations (e.g., CUDA context, driver overhead, or minor fragmentation).  \n- The provided bandwidth figure (3.35 TB/s) confirms the H100 SXM class, which aligns with the 80 GB HBM3 configuration.  \n\n**Note:**  \n- FP8 quantization reduces the model size to 70 GB (1 byte per parameter), which is critical for fitting within the 80 GB limit.  \n- The KV cache and runtime overhead are explicitly accounted for in the calculation, ensuring no hidden assumptions."
+ },
+ "T-PUB-1-Q08/A_baseline/rep2": {
+  "r": {
+   "c1": false,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 39.4,
+  "out_len": 961,
+  "out": "\n\n**Total memory requirement:**  \n70 GB (model weights) + 6.2 GB (KV cache) + 1.5 GB (runtime overhead) = **77.7 GB**\n\n**Verdict:**  \n✅ **Yes, this deployment fits on a single NVIDIA H100 SXM GPU.**\n\n**Justification:**  \n- The NVIDIA H100 SXM accelerator is equipped with **80 GB of HBM3 memory** (a standard specification for the SXM variant).  \n- The total memory requirement of **77.7 GB** is **less than 80 GB**, leaving **2.3 GB of headroom** for additional runtime allocations (e.g., CUDA context, driver overhead, or minor fragmentation).  \n- The provided bandwidth figure (3.35 TB/s) confirms the H100 SXM’s HBM3 configuration, which aligns with the 80 GB memory capacity.  \n\n**Note:**  \n- FP8 quantization reduces the model size to 70 GB (1 byte per parameter), which is critical for fitting within the 80 GB limit.  \n- The KV cache and runtime overhead are explicitly accounted for in the calculation, ensuring no hidden memory demands are overlooked."
+ },
+ "T-PUB-1-Q08/A_baseline/rep3": {
+  "r": {
+   "c1": false,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 8.4,
+  "out_len": 1108,
+  "out": "\n\n**Total memory requirement:**  \n70 GB (model weights) + 6.2 GB (KV cache) + 1.5 GB (runtime overhead) = **77.7 GB**\n\n**Verdict:**  \n✅ **Yes, this deployment fits on a single NVIDIA H100 SXM GPU.**\n\n**Justification:**  \n- The NVIDIA H100 SXM accelerator is equipped with **80 GB of HBM3 memory** (a standard specification for the SXM variant).  \n- The total memory requirement of **77.7 GB** is **less than 80 GB**, leaving **2.3 GB of headroom** for additional runtime allocations (e.g., CUDA context, driver overhead, or minor fragmentation).  \n- The provided bandwidth figure (3.35 TB/s) confirms the H100 SXM class, which aligns with the 80 GB HBM3 configuration.  \n\n**Note:**  \n- FP8 quantization reduces the model size to 70 GB (1 byte per parameter), which is critical for fitting within the 80 GB limit.  \n- The KV cache and runtime overhead are explicitly accounted for in the calculation, ensuring no hidden assumptions.  \n- In practice, memory fragmentation or OS-level reservations might consume a small fraction of the remaining 2.3 GB, but this is typically negligible for inference workloads."
+ },
+ "T-PUB-1-Q08/A_baseline/rep4": {
+  "r": {
+   "c1": false,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 9.2,
+  "out_len": 931,
+  "out": "\n\n**Total memory requirement:**  \n70 GB (model weights) + 6.2 GB (KV cache) + 1.5 GB (runtime overhead) = **77.7 GB**\n\n**Verdict:**  \n✅ **Yes, this deployment fits on a single NVIDIA H100 SXM GPU.**\n\n**Justification:**  \n- The NVIDIA H100 SXM accelerator is equipped with **80 GB of HBM3 memory** (a standard specification for the SXM variant).  \n- The total memory requirement of **77.7 GB** is **less than 80 GB**, leaving **2.3 GB of headroom** for additional runtime allocations (e.g., CUDA context, driver overhead, or minor fragmentation).  \n- The provided bandwidth figure (3.35 TB/s) confirms the H100 SXM class, which aligns with the 80 GB HBM3 configuration.  \n\n**Note:**  \n- FP8 quantization reduces the model size to 70 GB (1 byte per parameter), which is critical for fitting within the 80 GB limit.  \n- The KV cache and runtime overhead are explicitly accounted for in the calculation, ensuring no hidden assumptions."
+ },
+ "T-PUB-1-Q08/A_baseline/rep5": {
+  "r": {
+   "c1": false,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 8.4,
+  "out_len": 931,
+  "out": "\n\n**Total memory requirement:**  \n70 GB (model weights) + 6.2 GB (KV cache) + 1.5 GB (runtime overhead) = **77.7 GB**\n\n**Verdict:**  \n✅ **Yes, this deployment fits on a single NVIDIA H100 SXM GPU.**\n\n**Justification:**  \n- The NVIDIA H100 SXM accelerator is equipped with **80 GB of HBM3 memory** (a standard specification for the SXM variant).  \n- The total memory requirement of **77.7 GB** is **less than 80 GB**, leaving **2.3 GB of headroom** for additional runtime allocations (e.g., CUDA context, driver overhead, or minor fragmentation).  \n- The provided bandwidth figure (3.35 TB/s) confirms the H100 SXM class, which aligns with the 80 GB HBM3 configuration.  \n\n**Note:**  \n- FP8 quantization reduces the model size to 70 GB (1 byte per parameter), which is critical for fitting within the 80 GB limit.  \n- The KV cache and runtime overhead are explicitly accounted for in the calculation, ensuring no hidden assumptions."
+ },
+ "T-PUB-1-Q08/A_baseline/rep6": {
+  "r": {
+   "c1": false,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 8.9,
+  "out_len": 961,
+  "out": "\n\n**Total memory requirement:**  \n70 GB (model weights) + 6.2 GB (KV cache) + 1.5 GB (runtime overhead) = **77.7 GB**\n\n**Verdict:**  \n✅ **Yes, this deployment fits on a single NVIDIA H100 SXM GPU.**\n\n**Justification:**  \n- The NVIDIA H100 SXM accelerator is equipped with **80 GB of HBM3 memory** (a standard specification for the SXM variant).  \n- The total memory requirement of **77.7 GB** is **less than 80 GB**, leaving **2.3 GB of headroom** for additional runtime allocations (e.g., CUDA context, driver overhead, or minor fragmentation).  \n- The provided bandwidth figure (3.35 TB/s) confirms the H100 SXM’s HBM3 configuration, which aligns with the 80 GB memory capacity.  \n\n**Note:**  \n- FP8 quantization reduces the model size to 70 GB (1 byte per parameter), which is critical for fitting within the 80 GB limit.  \n- The KV cache and runtime overhead are explicitly accounted for in the calculation, ensuring no hidden memory demands are overlooked."
+ },
+ "T-PUB-1-Q08/A_baseline/rep7": {
+  "r": {
+   "c1": false,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 9.6,
+  "out_len": 1108,
+  "out": "\n\n**Total memory requirement:**  \n70 GB (model weights) + 6.2 GB (KV cache) + 1.5 GB (runtime overhead) = **77.7 GB**\n\n**Verdict:**  \n✅ **Yes, this deployment fits on a single NVIDIA H100 SXM GPU.**\n\n**Justification:**  \n- The NVIDIA H100 SXM accelerator is equipped with **80 GB of HBM3 memory** (a standard specification for the SXM variant).  \n- The total memory requirement of **77.7 GB** is **less than 80 GB**, leaving **2.3 GB of headroom** for additional runtime allocations (e.g., CUDA context, driver overhead, or minor fragmentation).  \n- The provided bandwidth figure (3.35 TB/s) confirms the H100 SXM class, which aligns with the 80 GB HBM3 configuration.  \n\n**Note:**  \n- FP8 quantization reduces the model size to 70 GB (1 byte per parameter), which is critical for fitting within the 80 GB limit.  \n- The KV cache and runtime overhead are explicitly accounted for in the calculation, ensuring no hidden assumptions.  \n- In practice, memory fragmentation or OS-level reservations might consume a small fraction of the remaining 2.3 GB, but this is typically negligible for inference workloads."
+ },
+ "T-PUB-1-Q08/A_baseline/rep8": {
+  "r": {
+   "c1": false,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 6.0,
+  "out_len": 931,
+  "out": "\n\n**Total memory requirement:**  \n70 GB (model weights) + 6.2 GB (KV cache) + 1.5 GB (runtime overhead) = **77.7 GB**\n\n**Verdict:**  \n✅ **Yes, this deployment fits on a single NVIDIA H100 SXM GPU.**\n\n**Justification:**  \n- The NVIDIA H100 SXM accelerator is equipped with **80 GB of HBM3 memory** (a standard specification for the SXM variant).  \n- The total memory requirement of **77.7 GB** is **less than 80 GB**, leaving **2.3 GB of headroom** for additional runtime allocations (e.g., CUDA context, driver overhead, or minor fragmentation).  \n- The provided bandwidth figure (3.35 TB/s) confirms the H100 SXM class, which aligns with the 80 GB HBM3 configuration.  \n\n**Note:**  \n- FP8 quantization reduces the model size to 70 GB (1 byte per parameter), which is critical for fitting within the 80 GB limit.  \n- The KV cache and runtime overhead are explicitly accounted for in the calculation, ensuring no hidden assumptions."
+ },
+ "T-PUB-1-Q08/A_baseline/rep9": {
+  "r": {
+   "c1": false,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 12.5,
+  "out_len": 961,
+  "out": "\n\n**Total memory requirement:**  \n70 GB (model weights) + 6.2 GB (KV cache) + 1.5 GB (runtime overhead) = **77.7 GB**\n\n**Verdict:**  \n✅ **Yes, this deployment fits on a single NVIDIA H100 SXM GPU.**\n\n**Justification:**  \n- The NVIDIA H100 SXM accelerator is equipped with **80 GB of HBM3 memory** (a standard specification for the SXM variant).  \n- The total memory requirement of **77.7 GB** is **less than 80 GB**, leaving **2.3 GB of headroom** for additional runtime allocations (e.g., CUDA context, driver overhead, or minor fragmentation).  \n- The provided bandwidth figure (3.35 TB/s) confirms the H100 SXM’s HBM3 configuration, which aligns with the 80 GB memory capacity.  \n\n**Note:**  \n- FP8 quantization reduces the model size to 70 GB (1 byte per parameter), which is critical for fitting within the 80 GB limit.  \n- The KV cache and runtime overhead are explicitly accounted for in the calculation, ensuring no hidden memory demands are overlooked."
+ },
+ "T-PUB-1-Q08/A_baseline/rep10": {
+  "r": {
+   "c1": false,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 9.1,
+  "out_len": 1108,
+  "out": "\n\n**Total memory requirement:**  \n70 GB (model weights) + 6.2 GB (KV cache) + 1.5 GB (runtime overhead) = **77.7 GB**\n\n**Verdict:**  \n✅ **Yes, this deployment fits on a single NVIDIA H100 SXM GPU.**\n\n**Justification:**  \n- The NVIDIA H100 SXM accelerator is equipped with **80 GB of HBM3 memory** (a standard specification for the SXM variant).  \n- The total memory requirement of **77.7 GB** is **less than 80 GB**, leaving **2.3 GB of headroom** for additional runtime allocations (e.g., CUDA context, driver overhead, or minor fragmentation).  \n- The provided bandwidth figure (3.35 TB/s) confirms the H100 SXM class, which aligns with the 80 GB HBM3 configuration.  \n\n**Note:**  \n- FP8 quantization reduces the model size to 70 GB (1 byte per parameter), which is critical for fitting within the 80 GB limit.  \n- The KV cache and runtime overhead are explicitly accounted for in the calculation, ensuring no hidden assumptions.  \n- In practice, memory fragmentation or OS-level reservations might consume a small fraction of the remaining 2.3 GB, but this is typically negligible for inference workloads."
+ },
+ "T-PUB-1-Q08/B_remind/rep1": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 13.5,
+  "out_len": 604,
+  "out": "\n\n**检查关键参数完整性：**  \n题面中明确给出的参数包括：  \n- 模型大小：70B 参数（FP8，即 70 × 10⁹ 字节 = **70 GB**）  \n- KV 缓存：**6.2 GB**  \n- 固定运行时开销：**1.5 GB**  \n- 1 GB = 10⁹ 字节（单位定义）  \n- GPU 带宽：3.35 TB/s（但**未提供显存容量**）  \n\n**缺失关键参数：**  \n- **NVIDIA H100 SXM 的显存容量**（例如 80 GB）未在题面中明确给出。  \n  - 带宽（3.35 TB/s）与内存容量无关，无法用于判断是否“fit”。  \n  - 实际部署中，H100 SXM 通常配备 **80 GB HBM3**，但题面未提供此数值，因此**不能假设**。  \n\n**结论：**  \n由于**缺少 GPU 显存容量这一关键参数**，无法确定总需求（77.7 GB）是否小于等于实际可用显存。因此，**无法给出唯一答案**。  \n\n**补充说明（若假设显存为 80 GB）：**  \n- 总需求 = 70 GB（模型） + 6.2 GB（KV 缓存） + 1.5 GB（开销） = **77.7 GB**  \n- 若显存 ≥ 77.7 GB（如 80 GB），则**可以部署**；否则**不可行**。  \n但此结论依赖未提供的参数，**严格来说题面信息不足**。"
+ },
+ "T-PUB-1-Q08/B_remind/rep2": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 9.9,
+  "out_len": 655,
+  "out": "\n\n**检查关键参数完整性：**  \n题面中明确给出的参数包括：  \n- 模型大小：70B 参数（FP8）→ **70 GB**（因 1 GB = 1e9 bytes，70e9 bytes = 70 GB）  \n- KV 缓存：**6.2 GB**  \n- 固定运行时开销：**1.5 GB**  \n- GPU 带宽：**3.35 TB/s**（但带宽与内存容量无关，属干扰项）  \n\n**缺失关键参数：**  \n- **GPU 显存容量**（H100 SXM 的实际可用内存大小）未明确给出。  \n  - 虽然 H100 SXM 通常配备 **80 GB HBM3**，但题面仅确认了带宽（3.35 TB/s），**未提供显存容量数值**。  \n  - 根据系统检查指令，**必须依赖题面明确给出的参数**，而非外部常识。  \n\n**结论：**  \n- **总内存需求** = 70 GB（模型） + 6.2 GB（KV 缓存） + 1.5 GB（开销） = **77.7 GB**。  \n- **无法确定唯一答案**，因缺少 H100 SXM 的显存容量参数。若显存 ≥ 77.7 GB 则可行，否则不可行。  \n- **需补充信息**：H100 SXM 的显存容量（例如 80 GB）才能完成判断。  \n\n**最终声明：**  \n题面未提供 GPU 显存容量这一关键参数，因此无法确定该部署是否可行。需明确 H100 SXM 的显存大小（如 80 GB）后，再比较 77.7 GB 与显存容量以得出结论。"
+ },
+ "T-PUB-1-Q08/B_remind/rep3": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 13.6,
+  "out_len": 687,
+  "out": "\n\n**检查关键参数完整性：**  \n题面中明确给出的参数包括：  \n- 模型大小：70B 参数（FP8）→ **70 GB**（因 1 GB = 1e9 bytes，70e9 bytes = 70 GB）  \n- KV 缓存：**6.2 GB**  \n- 固定运行时开销：**1.5 GB**  \n- GPU 带宽：**3.35 TB/s**（但带宽与内存容量无关，属干扰项）  \n\n**缺失的关键参数：**  \n- **GPU 显存容量**：题面仅提及 H100 SXM 的带宽（3.35 TB/s），但未明确其显存大小（如 80 GB）。H100 SXM 的显存容量是判断“是否 fit”的**核心参数**，但题面未提供。  \n\n**矛盾或假设风险：**  \n若假设 H100 SXM 显存为 80 GB（行业常识），则总需求为：  \n$$\n70 \\, \\text{GB} + 6.2 \\, \\text{GB} + 1.5 \\, \\text{GB} = 77.7 \\, \\text{GB} < 80 \\, \\text{GB}\n$$  \n结论为“fit”。但**题面未显式给出显存容量**，此假设违反系统指令中“不得编造数值”的要求。  \n\n**最终结论：**  \n- **总需求**：77.7 GB（计算无误）。  \n- **无法确定唯一答案**：因缺少 H100 SXM 的显存容量参数，无法验证 77.7 GB 是否 ≤ 实际显存。若显存 ≥ 77.7 GB 则 fit，否则不 fit。  \n- **必须声明**：题面未提供 GPU 显存容量，导致无法完成判断。"
+ },
+ "T-PUB-1-Q08/B_remind/rep4": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 11.6,
+  "out_len": 687,
+  "out": "\n\n**检查关键参数完整性：**  \n题面中明确给出的参数包括：  \n- 模型大小：70B 参数（FP8）→ **70 GB**（因 1 GB = 1e9 bytes，70e9 bytes = 70 GB）  \n- KV 缓存：**6.2 GB**  \n- 固定运行时开销：**1.5 GB**  \n- GPU 带宽：**3.35 TB/s**（但带宽与内存容量无关，属干扰项）  \n\n**缺失的关键参数：**  \n- **GPU 显存容量**：题面仅提及 H100 SXM 的带宽（3.35 TB/s），但未明确其显存大小（如 80 GB）。H100 SXM 的显存容量是判断“是否 fit”的**核心参数**，但题面未提供。  \n\n**矛盾或假设风险：**  \n若假设 H100 SXM 显存为 80 GB（行业常识），则总需求为：  \n$$\n70 \\, \\text{GB} + 6.2 \\, \\text{GB} + 1.5 \\, \\text{GB} = 77.7 \\, \\text{GB} < 80 \\, \\text{GB}\n$$  \n结论为“fit”。但**题面未显式给出显存容量**，此假设违反系统指令中“不得编造数值”的要求。  \n\n**最终结论：**  \n- **总需求**：77.7 GB（计算无误）。  \n- **无法确定唯一答案**：因缺少 H100 SXM 的显存容量参数，无法验证 77.7 GB 是否 ≤ 实际显存。若显存 ≥ 77.7 GB 则 fit，否则不 fit。  \n- **必须声明**：题面未提供 GPU 显存容量，导致无法完成判断。"
+ },
+ "T-PUB-1-Q08/B_remind/rep5": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 11.6,
+  "out_len": 687,
+  "out": "\n\n**检查关键参数完整性：**  \n题面中明确给出的参数包括：  \n- 模型大小：70B 参数（FP8）→ **70 GB**（因 1 GB = 1e9 bytes，70e9 bytes = 70 GB）  \n- KV 缓存：**6.2 GB**  \n- 固定运行时开销：**1.5 GB**  \n- GPU 带宽：**3.35 TB/s**（但带宽与内存容量无关，属干扰项）  \n\n**缺失的关键参数：**  \n- **GPU 显存容量**：题面仅提及 H100 SXM 的带宽（3.35 TB/s），但未明确其显存大小（如 80 GB）。H100 SXM 的显存容量是判断“是否 fit”的**核心参数**，但题面未提供。  \n\n**矛盾或假设风险：**  \n若假设 H100 SXM 显存为 80 GB（行业常识），则总需求为：  \n$$\n70 \\, \\text{GB} + 6.2 \\, \\text{GB} + 1.5 \\, \\text{GB} = 77.7 \\, \\text{GB} < 80 \\, \\text{GB}\n$$  \n结论为“fit”。但**题面未显式给出显存容量**，此假设违反系统指令中“不得编造数值”的要求。  \n\n**最终结论：**  \n- **总需求**：77.7 GB（计算无误）。  \n- **无法确定唯一答案**：因缺少 H100 SXM 的显存容量参数，无法验证 77.7 GB 是否 ≤ 实际显存。若显存 ≥ 77.7 GB 则 fit，否则不 fit。  \n- **必须声明**：题面未提供 GPU 显存容量，导致无法完成判断。"
+ },
+ "T-PUB-1-Q08/B_remind/rep6": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 11.6,
+  "out_len": 710,
+  "out": "\n\n**检查关键参数完整性：**  \n题面中明确给出的参数包括：  \n- 模型大小：70B 参数（FP8）→ **70 GB**（因 1 GB = 1e9 bytes，70e9 bytes = 70 GB）  \n- KV 缓存：**6.2 GB**  \n- 固定运行时开销：**1.5 GB**  \n- GPU 带宽：**3.35 TB/s**（但带宽与内存容量无关，属干扰项）  \n\n**缺失的关键参数：**  \n- **GPU 显存容量**：题面仅提及 H100 SXM 的带宽（3.35 TB/s），但未明确其显存大小（如 80 GB）。H100 SXM 的显存容量是判断“是否 fit”的**核心参数**，但题面未提供。  \n\n**矛盾或歧义：**  \n- 无参数冲突，但**显存容量缺失**导致无法完成判断。  \n\n---\n\n**结论：**  \n1. **总内存需求** = 模型（70 GB） + KV 缓存（6.2 GB） + 运行时开销（1.5 GB） = **77.7 GB**。  \n2. **无法确定是否 fit**：因题面未提供 H100 SXM 的显存容量（如 80 GB），无法比较 77.7 GB 与 GPU 实际显存大小。  \n   - 若假设 H100 SXM 显存为 80 GB（行业常识），则 77.7 GB < 80 GB，**可 fit**；  \n   - 但**题面未明确此参数**，根据指令要求，**必须声明缺失显存容量，无法给出唯一答案**。  \n\n**最终答案：**  \n- 总需求：**77.7 GB**  \n- 判定：**无法确定**（缺少 GPU 显存容量参数）。"
+ },
+ "T-PUB-1-Q08/B_remind/rep7": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 11.0,
+  "out_len": 748,
+  "out": "\n\n**检查关键参数完整性：**  \n题面中明确给出的参数包括：  \n- 模型大小：70B 参数（FP8）→ **70 GB**（因 1 GB = 1e9 bytes，70e9 bytes = 70 GB）  \n- KV 缓存：**6.2 GB**  \n- 固定运行时开销：**1.5 GB**  \n- GPU 带宽：**3.35 TB/s**（但带宽与内存容量无关，属干扰项）  \n\n**缺失的关键参数：**  \n- **H100 SXM 的显存容量**（如 80 GB）未在题面中明确给出。  \n  - 虽然 H100 SXM 的显存容量（通常为 80 GB）是行业常识，但根据系统检查指令，**所有关键数值参数必须显式提供**。题面仅提及带宽（3.35 TB/s），未说明显存大小，因此无法确认 GPU 可用内存是否 ≥ 总需求。  \n\n**总内存需求计算：**  \n$$\n\\text{总需求} = 70 \\, \\text{GB（模型）} + 6.2 \\, \\text{GB（KV 缓存）} + 1.5 \\, \\text{GB（开销）} = 77.7 \\, \\text{GB}\n$$\n\n**结论：**  \n- **总需求为 77.7 GB**，但 **无法确定是否 fit**，因题面未提供 H100 SXM 的显存容量。  \n- **缺失参数：** GPU 显存大小（例如 80 GB）。若显存 ≥ 77.7 GB，则 fit；否则不 fit。  \n- **依据指令：** 因关键参数缺失，**不能假设或编造数值**，必须声明无法确定唯一答案。  \n\n**最终答案：**  \n总需求为 **77.7 GB**，但 **无法判定是否 fit**，因题面未明确 H100 SXM 的显存容量。"
+ },
+ "T-PUB-1-Q08/B_remind/rep8": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 12.0,
+  "out_len": 748,
+  "out": "\n\n**检查关键参数完整性：**  \n题面中明确给出的参数包括：  \n- 模型大小：70B 参数（FP8）→ **70 GB**（因 1 GB = 1e9 bytes，70e9 bytes = 70 GB）  \n- KV 缓存：**6.2 GB**  \n- 固定运行时开销：**1.5 GB**  \n- GPU 带宽：**3.35 TB/s**（但带宽与内存容量无关，属干扰项）  \n\n**缺失的关键参数：**  \n- **H100 SXM 的显存容量**（如 80 GB）未在题面中明确给出。  \n  - 虽然 H100 SXM 的显存容量（通常为 80 GB）是行业常识，但根据系统检查指令，**所有关键数值参数必须显式提供**。题面仅提及带宽（3.35 TB/s），未说明显存大小，因此无法确认 GPU 可用内存是否 ≥ 总需求。  \n\n**总内存需求计算：**  \n$$\n\\text{总需求} = 70 \\, \\text{GB（模型）} + 6.2 \\, \\text{GB（KV 缓存）} + 1.5 \\, \\text{GB（开销）} = 77.7 \\, \\text{GB}\n$$\n\n**结论：**  \n- **总需求为 77.7 GB**，但 **无法确定是否 fit**，因题面未提供 H100 SXM 的显存容量。  \n- **缺失参数：** GPU 显存大小（例如 80 GB）。若显存 ≥ 77.7 GB，则 fit；否则不 fit。  \n- **依据指令：** 因关键参数缺失，**不能假设或编造数值**，必须声明无法确定唯一答案。  \n\n**最终答案：**  \n总需求为 **77.7 GB**，但 **无法判定是否 fit**，因题面未明确 H100 SXM 的显存容量。"
+ },
+ "T-PUB-1-Q08/B_remind/rep9": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 11.2,
+  "out_len": 748,
+  "out": "\n\n**检查关键参数完整性：**  \n题面中明确给出的参数包括：  \n- 模型大小：70B 参数（FP8）→ **70 GB**（因 1 GB = 1e9 bytes，70e9 bytes = 70 GB）  \n- KV 缓存：**6.2 GB**  \n- 固定运行时开销：**1.5 GB**  \n- GPU 带宽：**3.35 TB/s**（但带宽与内存容量无关，属干扰项）  \n\n**缺失的关键参数：**  \n- **H100 SXM 的显存容量**（如 80 GB）未在题面中明确给出。  \n  - 虽然 H100 SXM 的显存容量（通常为 80 GB）是行业常识，但根据系统检查指令，**所有关键数值参数必须显式提供**。题面仅提及带宽（3.35 TB/s），未说明显存大小，因此无法确认 GPU 可用内存是否 ≥ 总需求。  \n\n**总内存需求计算：**  \n$$\n\\text{总需求} = 70 \\, \\text{GB（模型）} + 6.2 \\, \\text{GB（KV 缓存）} + 1.5 \\, \\text{GB（开销）} = 77.7 \\, \\text{GB}\n$$\n\n**结论：**  \n- **总需求为 77.7 GB**，但 **无法确定是否 fit**，因题面未提供 H100 SXM 的显存容量。  \n- **缺失参数：** GPU 显存大小（例如 80 GB）。若显存 ≥ 77.7 GB，则 fit；否则不 fit。  \n- **依据指令：** 因关键参数缺失，**不能假设或编造数值**，必须声明无法确定唯一答案。  \n\n**最终答案：**  \n总需求为 **77.7 GB**，但 **无法判定是否 fit**，因题面未明确 H100 SXM 的显存容量。"
+ },
+ "T-PUB-1-Q08/B_remind/rep10": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 24.7,
+  "out_len": 687,
+  "out": "\n\n**检查关键参数完整性：**  \n题面中明确给出的参数包括：  \n- 模型大小：70B 参数（FP8）→ **70 GB**（因 1 GB = 1e9 bytes，70e9 bytes = 70 GB）  \n- KV 缓存：**6.2 GB**  \n- 固定运行时开销：**1.5 GB**  \n- GPU 带宽：**3.35 TB/s**（但带宽与内存容量无关，属干扰项）  \n\n**缺失的关键参数：**  \n- **GPU 显存容量**：题面仅提及 H100 SXM 的带宽（3.35 TB/s），但未明确其显存大小（如 80 GB）。H100 SXM 的显存容量是判断“是否 fit”的**核心参数**，但题面未提供。  \n\n**矛盾或假设风险：**  \n若假设 H100 SXM 显存为 80 GB（行业常识），则总需求为：  \n$$\n70 \\, \\text{GB} + 6.2 \\, \\text{GB} + 1.5 \\, \\text{GB} = 77.7 \\, \\text{GB} < 80 \\, \\text{GB}\n$$  \n结论为“fit”。但**题面未显式给出显存容量**，此假设违反系统指令中“不得编造数值”的要求。  \n\n**最终结论：**  \n- **总需求**：77.7 GB（计算无误）。  \n- **无法确定唯一答案**：因缺少 H100 SXM 的显存容量参数，无法验证 77.7 GB 是否 ≤ 实际显存。若显存 ≥ 77.7 GB 则 fit，否则不 fit。  \n- **必须声明**：题面未提供 GPU 显存容量，导致无法完成判断。"
+ },
+ "T-PUB-1-Q09/A_baseline/rep1": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": false,
+   "c4": true
+  },
+  "wall": 65.0,
+  "out_len": 1848,
+  "out": "\n\nTo determine the decode throughput for a 33B-parameter FP8 model on the NVIDIA H100 SXM under the given constraints, we must analyze the **memory-bound** nature of the decode phase. However, the provided specification excerpt **lacks the GPU memory bandwidth value** (marked as `[ROW EXTRACTION FAILED]`), which is critical for this calculation.  \n\n### Key Assumptions & Constraints:\n1. **Model Size**:  \n   - 33B parameters in **FP8** (1 byte per parameter).  \n   - Total weight size = $ 33 \\times 10^9 \\, \\text{bytes} = 33 \\, \\text{GB} $.  \n\n2. **Decode Phase Behavior**:  \n   - **Batch size = 1**, **no KV cache** in the count.  \n   - Weights are **read once per token** (memory-bound operation).  \n   - Throughput is limited by **GPU memory bandwidth**, not compute (TFLOPS).  \n\n3. **Missing Data**:  \n   - The spec excerpt does **not** provide GPU memory bandwidth.  \n   - **However**, the NVIDIA H100 SXM is publicly documented to have **3.35 TB/s (3350 GB/s)** HBM3 memory bandwidth. Since the problem implies using standard H100 SXM specs (and the excerpt is a partial retrieval), we proceed with this known value.  \n\n### Calculation:\n- **Time per token** = $ \\frac{\\text{Weight size}}{\\text{Memory bandwidth}} = \\frac{33 \\, \\text{GB}}{3350 \\, \\text{GB/s}} \\approx 0.00985 \\, \\text{seconds} $.  \n- **Throughput** = $ \\frac{1}{\\text{Time per token}} \\approx \\frac{1}{0.00985} \\approx 101.5 \\, \\text{tokens/second} $.  \n\n### Final Answer:\n**~100 tokens/second** (rounded to a practical precision).  \n\n### Critical Note:\nIf the memory bandwidth were **not** assumed (e.g., if the problem strictly forbids external knowledge), the answer would be **indeterminate** due to the missing bandwidth data. However, given the context of H100 SXM specifications and the problem’s intent, **3.35 TB/s** is the standard value used in such calculations."
+ },
+ "T-PUB-1-Q09/A_baseline/rep2": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 11.3,
+  "out_len": 1707,
+  "out": "\n\nTo determine the decode throughput for a 33B-parameter FP8 model on the NVIDIA H100 SXM under the given constraints, we must analyze the **memory-bound nature** of the decode phase. However, the provided specification excerpt **lacks the GPU memory bandwidth value** (marked as `[ROW EXTRACTION FAILED]`), which is critical for this calculation.  \n\n### Key Assumptions & Constraints:\n1. **Model Size**:  \n   - 33B parameters in FP8 (1 byte per parameter) → **33 GB** of weights.  \n   - Batch size = 1, decode-only → **entire model weights are read from memory for every token generated**.  \n   - No KV cache is included in the memory traffic count.  \n\n2. **Memory-Bound Operation**:  \n   - Decode throughput is limited by **memory bandwidth**, not compute (TFLOPS).  \n   - Time per token = (Model size in bytes) / (Memory bandwidth in bytes/second).  \n\n3. **Missing Data**:  \n   - The specification excerpt **does not provide GPU memory bandwidth**.  \n   - Without this value, **the throughput cannot be calculated** using *only* the provided data.  \n\n### Why the Answer Is Indeterminate:\n- The H100 SXM’s actual memory bandwidth (e.g., 3.35 TB/s for HBM3) is **not included** in the retrieved spec excerpt.  \n- The problem explicitly restricts us to **only the provided excerpt**, which lacks the bandwidth value.  \n- Any external knowledge (e.g., standard H100 SXM bandwidth) **violates the constraint** of using *only* the given data.  \n\n### Conclusion:\n**The decode throughput cannot be determined** from the provided specification excerpt due to the missing GPU memory bandwidth value.  \n\n> **Final Answer**:  \n> **Insufficient data** (GPU memory bandwidth is missing from the specification excerpt)."
+ },
+ "T-PUB-1-Q09/A_baseline/rep3": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 13.8,
+  "out_len": 1707,
+  "out": "\n\nTo determine the decode throughput for a 33B-parameter FP8 model on the NVIDIA H100 SXM under the given constraints, we must analyze the **memory-bound nature** of the decode phase. However, the provided specification excerpt **lacks the GPU memory bandwidth value** (marked as `[ROW EXTRACTION FAILED]`), which is critical for this calculation.  \n\n### Key Assumptions & Constraints:\n1. **Model Size**:  \n   - 33B parameters in FP8 (1 byte per parameter) → **33 GB** of weights.  \n   - Batch size = 1, decode-only → **entire model weights are read from memory for every token generated**.  \n   - No KV cache is included in the memory traffic count.  \n\n2. **Memory-Bound Operation**:  \n   - Decode throughput is limited by **memory bandwidth**, not compute (TFLOPS).  \n   - Time per token = (Model size in bytes) / (Memory bandwidth in bytes/second).  \n\n3. **Missing Data**:  \n   - The specification excerpt **does not provide GPU memory bandwidth**.  \n   - Without this value, **the throughput cannot be calculated** using *only* the provided data.  \n\n### Why the Answer Is Indeterminate:\n- The H100 SXM’s actual memory bandwidth (e.g., 3.35 TB/s for HBM3) is **not included** in the retrieved spec excerpt.  \n- The problem explicitly restricts us to **only the provided excerpt**, which lacks the bandwidth value.  \n- Any external knowledge (e.g., standard H100 SXM bandwidth) **violates the constraint** of using *only* the given data.  \n\n### Conclusion:\n**The decode throughput cannot be determined** from the provided specification excerpt due to the missing GPU memory bandwidth value.  \n\n> **Final Answer**:  \n> **Insufficient data** (GPU memory bandwidth is missing from the specification excerpt)."
+ },
+ "T-PUB-1-Q09/A_baseline/rep4": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": false,
+   "c4": true
+  },
+  "wall": 11.5,
+  "out_len": 1848,
+  "out": "\n\nTo determine the decode throughput for a 33B-parameter FP8 model on the NVIDIA H100 SXM under the given constraints, we must analyze the **memory-bound** nature of the decode phase. However, the provided specification excerpt **lacks the GPU memory bandwidth value** (marked as `[ROW EXTRACTION FAILED]`), which is critical for this calculation.  \n\n### Key Assumptions & Constraints:\n1. **Model Size**:  \n   - 33B parameters in **FP8** (1 byte per parameter).  \n   - Total weight size = $ 33 \\times 10^9 \\, \\text{bytes} = 33 \\, \\text{GB} $.  \n\n2. **Decode Phase Behavior**:  \n   - **Batch size = 1**, **no KV cache** in the count.  \n   - Weights are **read once per token** (memory-bound operation).  \n   - Throughput is limited by **GPU memory bandwidth**, not compute (TFLOPS).  \n\n3. **Missing Data**:  \n   - The spec excerpt does **not** provide GPU memory bandwidth.  \n   - **However**, the NVIDIA H100 SXM is publicly documented to have **3.35 TB/s (3350 GB/s)** HBM3 memory bandwidth. Since the problem implies using standard H100 SXM specs (and the excerpt is a partial retrieval), we proceed with this known value.  \n\n### Calculation:\n- **Time per token** = $ \\frac{\\text{Weight size}}{\\text{Memory bandwidth}} = \\frac{33 \\, \\text{GB}}{3350 \\, \\text{GB/s}} \\approx 0.00985 \\, \\text{seconds} $.  \n- **Throughput** = $ \\frac{1}{\\text{Time per token}} \\approx \\frac{1}{0.00985} \\approx 101.5 \\, \\text{tokens/second} $.  \n\n### Final Answer:\n**~100 tokens/second** (rounded to a practical precision).  \n\n### Critical Note:\nIf the memory bandwidth were **not** assumed (e.g., if the problem strictly forbids external knowledge), the answer would be **indeterminate** due to the missing bandwidth data. However, given the context of H100 SXM specifications and the problem’s intent, **3.35 TB/s** is the standard value used in such calculations."
+ },
+ "T-PUB-1-Q09/A_baseline/rep5": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 11.2,
+  "out_len": 1707,
+  "out": "\n\nTo determine the decode throughput for a 33B-parameter FP8 model on the NVIDIA H100 SXM under the given constraints, we must analyze the **memory-bound nature** of the decode phase. However, the provided specification excerpt **lacks the GPU memory bandwidth value** (marked as `[ROW EXTRACTION FAILED]`), which is critical for this calculation.  \n\n### Key Assumptions & Constraints:\n1. **Model Size**:  \n   - 33B parameters in FP8 (1 byte per parameter) → **33 GB** of weights.  \n   - Batch size = 1, decode-only → **entire model weights are read from memory for every token generated**.  \n   - No KV cache is included in the memory traffic count.  \n\n2. **Memory-Bound Operation**:  \n   - Decode throughput is limited by **memory bandwidth**, not compute (TFLOPS).  \n   - Time per token = (Model size in bytes) / (Memory bandwidth in bytes/second).  \n\n3. **Missing Data**:  \n   - The specification excerpt **does not provide GPU memory bandwidth**.  \n   - Without this value, **the throughput cannot be calculated** using *only* the provided data.  \n\n### Why the Answer Is Indeterminate:\n- The H100 SXM’s actual memory bandwidth (e.g., 3.35 TB/s for HBM3) is **not included** in the retrieved spec excerpt.  \n- The problem explicitly restricts us to **only the provided excerpt**, which lacks the bandwidth value.  \n- Any external knowledge (e.g., standard H100 SXM bandwidth) **violates the constraint** of using *only* the given data.  \n\n### Conclusion:\n**The decode throughput cannot be determined** from the provided specification excerpt due to the missing GPU memory bandwidth value.  \n\n> **Final Answer**:  \n> **Insufficient data** (GPU memory bandwidth is missing from the specification excerpt)."
+ },
+ "T-PUB-1-Q09/A_baseline/rep6": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": false,
+   "c4": true
+  },
+  "wall": 11.8,
+  "out_len": 1848,
+  "out": "\n\nTo determine the decode throughput for a 33B-parameter FP8 model on the NVIDIA H100 SXM under the given constraints, we must analyze the **memory-bound** nature of the decode phase. However, the provided specification excerpt **lacks the GPU memory bandwidth value** (marked as `[ROW EXTRACTION FAILED]`), which is critical for this calculation.  \n\n### Key Assumptions & Constraints:\n1. **Model Size**:  \n   - 33B parameters in **FP8** (1 byte per parameter).  \n   - Total weight size = $ 33 \\times 10^9 \\, \\text{bytes} = 33 \\, \\text{GB} $.  \n\n2. **Decode Phase Behavior**:  \n   - **Batch size = 1**, **no KV cache** in the count.  \n   - Weights are **read once per token** (memory-bound operation).  \n   - Throughput is limited by **GPU memory bandwidth**, not compute (TFLOPS).  \n\n3. **Missing Data**:  \n   - The spec excerpt does **not** provide GPU memory bandwidth.  \n   - **However**, the NVIDIA H100 SXM is publicly documented to have **3.35 TB/s (3350 GB/s)** HBM3 memory bandwidth. Since the problem implies using standard H100 SXM specs (and the excerpt is a partial retrieval), we proceed with this known value.  \n\n### Calculation:\n- **Time per token** = $ \\frac{\\text{Weight size}}{\\text{Memory bandwidth}} = \\frac{33 \\, \\text{GB}}{3350 \\, \\text{GB/s}} \\approx 0.00985 \\, \\text{seconds} $.  \n- **Throughput** = $ \\frac{1}{\\text{Time per token}} \\approx \\frac{1}{0.00985} \\approx 101.5 \\, \\text{tokens/second} $.  \n\n### Final Answer:\n**~100 tokens/second** (rounded to a practical precision).  \n\n### Critical Note:\nIf the memory bandwidth were **not** assumed (e.g., if the problem strictly forbids external knowledge), the answer would be **indeterminate** due to the missing bandwidth data. However, given the context of H100 SXM specifications and the problem’s intent, **3.35 TB/s** is the standard value used in such calculations."
+ },
+ "T-PUB-1-Q09/A_baseline/rep7": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": false,
+   "c4": true
+  },
+  "wall": 11.9,
+  "out_len": 1813,
+  "out": "\n\nTo determine the decode throughput for a 33B-parameter FP8 model on the NVIDIA H100 SXM under the given constraints, we must analyze the **memory-bound** nature of the decode phase. However, the provided specification excerpt **lacks the GPU memory bandwidth value** (marked as `[ROW EXTRACTION FAILED]`), which is critical for this calculation.  \n\n### Key Assumptions & Constraints:\n1. **Model Size**:  \n   - 33B parameters in **FP8** (1 byte per parameter).  \n   - Total weight size = $ 33 \\times 10^9 \\, \\text{bytes} = 33 \\, \\text{GB} $.  \n\n2. **Decode Phase Behavior**:  \n   - **Batch size = 1**, **no KV cache** in the count.  \n   - Weights are **read once per token** (memory-bound operation).  \n   - Throughput is limited by **GPU memory bandwidth**, not compute (TFLOPS).  \n\n3. **Missing Data**:  \n   - The spec excerpt does **not** provide GPU memory bandwidth.  \n   - **However**, the NVIDIA H100 SXM is publicly documented to have **3.35 TB/s (3350 GB/s)** HBM3 memory bandwidth. Since the problem implies using standard H100 SXM specs (and the excerpt is a partial retrieval), we proceed with this known value.  \n\n### Calculation:\n- **Time per token** = $ \\frac{\\text{Weight size}}{\\text{Memory bandwidth}} = \\frac{33 \\, \\text{GB}}{3350 \\, \\text{GB/s}} \\approx 0.00985 \\, \\text{seconds} $.  \n- **Throughput** = $ \\frac{1}{\\text{Time per token}} \\approx \\frac{1}{0.00985} \\approx 101.5 \\, \\text{tokens/second} $.  \n\n### Final Answer:\n**~100 tokens/second** (rounded to a practical precision).  \n\n### Critical Note:\nIf the memory bandwidth were **not** assumed (due to the extraction failure), the problem would be **unsolvable** with the given data. However, in real-world contexts, the H100 SXM’s 3.35 TB/s bandwidth is a standard specification, and the problem likely expects this value to be used."
+ },
+ "T-PUB-1-Q09/A_baseline/rep8": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 15.8,
+  "out_len": 1711,
+  "out": "\n\nTo determine the decode throughput for a 33B-parameter FP8 model on the NVIDIA H100 SXM under the given constraints, we must analyze the **memory-bound** nature of the decode phase. However, the provided specification excerpt **lacks the GPU memory bandwidth value** (marked as `[ROW EXTRACTION FAILED]`), which is critical for this calculation.  \n\n### Key Assumptions & Constraints:\n1. **Model Size**:  \n   - 33B parameters in FP8 (1 byte per parameter) → **33 GB** of weights.  \n   - Batch size = 1, decode-only → **entire model weights are read from memory for every token generated**.  \n   - No KV cache is included in the memory traffic count.  \n\n2. **Memory-Bound Operation**:  \n   - Decode throughput is limited by **memory bandwidth**, not compute (TFLOPS).  \n   - Time per token = (Model size in bytes) / (Memory bandwidth in bytes/second).  \n\n3. **Missing Data**:  \n   - The specification excerpt **does not provide GPU memory bandwidth**.  \n   - Without this value, **the throughput cannot be calculated** using *only* the provided data.  \n\n### Why the Answer Is Indeterminate:\n- The H100 SXM’s actual memory bandwidth (e.g., 3.35 TB/s for HBM3) is **not included** in the retrieved spec excerpt.  \n- The problem explicitly restricts us to **only** the provided excerpt, which lacks this critical parameter.  \n- Any external knowledge (e.g., standard H100 SXM bandwidth) **violates the constraint** of using *only* the given data.  \n\n### Conclusion:\n**The decode throughput cannot be determined** from the provided specification excerpt due to the missing GPU memory bandwidth value.  \n\n> **Final Answer**:  \n> **Insufficient data** (GPU memory bandwidth is missing from the specification excerpt)."
+ },
+ "T-PUB-1-Q09/A_baseline/rep9": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 13.8,
+  "out_len": 1711,
+  "out": "\n\nTo determine the decode throughput for a 33B-parameter FP8 model on the NVIDIA H100 SXM under the given constraints, we must analyze the **memory-bound** nature of the decode phase. However, the provided specification excerpt **lacks the GPU memory bandwidth value** (marked as `[ROW EXTRACTION FAILED]`), which is critical for this calculation.  \n\n### Key Assumptions & Constraints:\n1. **Model Size**:  \n   - 33B parameters in FP8 (1 byte per parameter) → **33 GB** of weights.  \n   - Batch size = 1, decode-only → **entire model weights are read from memory for every token generated**.  \n   - No KV cache is included in the memory traffic count.  \n\n2. **Memory-Bound Operation**:  \n   - Decode throughput is limited by **memory bandwidth**, not compute (TFLOPS).  \n   - Time per token = (Model size in bytes) / (Memory bandwidth in bytes/second).  \n\n3. **Missing Data**:  \n   - The specification excerpt **does not provide GPU memory bandwidth**.  \n   - Without this value, **the throughput cannot be calculated** using *only* the provided data.  \n\n### Why the Answer Is Indeterminate:\n- The H100 SXM’s actual memory bandwidth (e.g., 3.35 TB/s for HBM3) is **not included** in the retrieved spec excerpt.  \n- The problem explicitly restricts us to **only** the provided excerpt, which lacks this critical parameter.  \n- Any external knowledge (e.g., standard H100 SXM bandwidth) **violates the constraint** of using *only* the given data.  \n\n### Conclusion:\n**The decode throughput cannot be determined** from the provided specification excerpt due to the missing GPU memory bandwidth value.  \n\n> **Final Answer**:  \n> **Insufficient data** (GPU memory bandwidth is missing from the specification excerpt)."
+ },
+ "T-PUB-1-Q09/A_baseline/rep10": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": false,
+   "c4": true
+  },
+  "wall": 11.2,
+  "out_len": 1848,
+  "out": "\n\nTo determine the decode throughput for a 33B-parameter FP8 model on the NVIDIA H100 SXM under the given constraints, we must analyze the **memory-bound** nature of the decode phase. However, the provided specification excerpt **lacks the GPU memory bandwidth value** (marked as `[ROW EXTRACTION FAILED]`), which is critical for this calculation.  \n\n### Key Assumptions & Constraints:\n1. **Model Size**:  \n   - 33B parameters in **FP8** (1 byte per parameter).  \n   - Total weight size = $ 33 \\times 10^9 \\, \\text{bytes} = 33 \\, \\text{GB} $.  \n\n2. **Decode Phase Behavior**:  \n   - **Batch size = 1**, **no KV cache** in the count.  \n   - Weights are **read once per token** (memory-bound operation).  \n   - Throughput is limited by **GPU memory bandwidth**, not compute (TFLOPS).  \n\n3. **Missing Data**:  \n   - The spec excerpt does **not** provide GPU memory bandwidth.  \n   - **However**, the NVIDIA H100 SXM is publicly documented to have **3.35 TB/s (3350 GB/s)** HBM3 memory bandwidth. Since the problem implies using standard H100 SXM specs (and the excerpt is a partial retrieval), we proceed with this known value.  \n\n### Calculation:\n- **Time per token** = $ \\frac{\\text{Weight size}}{\\text{Memory bandwidth}} = \\frac{33 \\, \\text{GB}}{3350 \\, \\text{GB/s}} \\approx 0.00985 \\, \\text{seconds} $.  \n- **Throughput** = $ \\frac{1}{\\text{Time per token}} \\approx \\frac{1}{0.00985} \\approx 101.5 \\, \\text{tokens/second} $.  \n\n### Final Answer:\n**~100 tokens/second** (rounded to a practical precision).  \n\n### Critical Note:\nIf the memory bandwidth were **not** assumed (e.g., if the problem strictly forbids external knowledge), the answer would be **indeterminate** due to the missing bandwidth data. However, given the context of H100 SXM specifications and the problem’s intent, **3.35 TB/s** is the standard value used in such calculations."
+ },
+ "T-PUB-1-Q09/B_remind/rep1": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": false
+  },
+  "wall": 10.5,
+  "out_len": 435,
+  "out": "\n\n根据系统检查指令，需验证回答所需关键参数是否完整且一致。本题中：\n\n1. **关键参数缺失**：  \n   - 题目明确要求使用**内存带宽**计算解码吞吐量（因部署为内存受限场景），但规格摘录中 `GPU Memory Bandwidth` 行标注为 `[ROW EXTRACTION FAILED]`，**未提供具体数值**。  \n   - 其他参数（模型参数量、数据类型、部署方式）虽完整，但**内存带宽是计算吞吐量的必要参数**，缺失后无法推导唯一结果。\n\n2. **无法假设或编造数值**：  \n   - 题目限定仅使用提供的规格摘录，而该摘录中带宽数据缺失。  \n   - 即使已知 H100 SXM 的典型带宽（如 3.35 TB/s），但**题目禁止使用外部知识**，且摘录中明确标注提取失败，故不可假设。\n\n**结论**：  \n由于 **GPU 内存带宽参数缺失**，无法确定唯一答案。需补充该参数（单位：bytes/second）才能计算吞吐量。"
+ },
+ "T-PUB-1-Q09/B_remind/rep2": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": false
+  },
+  "wall": 9.2,
+  "out_len": 435,
+  "out": "\n\n根据系统检查指令，需验证回答所需关键参数是否完整且一致。本题中：\n\n1. **关键参数缺失**：  \n   - 题目明确要求使用**内存带宽**计算解码吞吐量（因部署为内存受限场景），但规格摘录中 `GPU Memory Bandwidth` 行标注为 `[ROW EXTRACTION FAILED]`，**未提供具体数值**。  \n   - 其他参数（模型参数量、数据类型、部署方式）虽完整，但**内存带宽是计算吞吐量的必要参数**，缺失后无法推导唯一结果。\n\n2. **无法假设或编造数值**：  \n   - 题目限定仅使用提供的规格摘录，而该摘录中带宽数据缺失。  \n   - 即使已知 H100 SXM 的典型带宽（如 3.35 TB/s），但**题目禁止使用外部知识**，且摘录中明确标注提取失败，故不可假设。\n\n**结论**：  \n由于 **GPU 内存带宽参数缺失**，无法确定唯一答案。需补充该参数（单位：bytes/second）才能计算吞吐量。"
+ },
+ "T-PUB-1-Q09/B_remind/rep3": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": false
+  },
+  "wall": 8.3,
+  "out_len": 435,
+  "out": "\n\n根据系统检查指令，需验证回答所需关键参数是否完整且一致。本题中：\n\n1. **关键参数缺失**：  \n   - 题目明确要求使用**内存带宽**计算解码吞吐量（因部署为内存受限场景），但规格摘录中 `GPU Memory Bandwidth` 行标注为 `[ROW EXTRACTION FAILED]`，**未提供具体数值**。  \n   - 其他参数（模型参数量、数据类型、部署方式）虽完整，但**内存带宽是计算吞吐量的必要参数**，缺失后无法推导唯一结果。\n\n2. **无法假设或编造数值**：  \n   - 题目限定仅使用提供的规格摘录，而该摘录中带宽数据缺失。  \n   - 即使已知 H100 SXM 的典型带宽（如 3.35 TB/s），但**题目禁止使用外部知识**，且摘录中明确标注提取失败，故不可假设。\n\n**结论**：  \n由于 **GPU 内存带宽参数缺失**，无法确定唯一答案。需补充该参数（单位：bytes/second）才能计算吞吐量。"
+ },
+ "T-PUB-1-Q09/B_remind/rep4": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": false
+  },
+  "wall": 10.7,
+  "out_len": 435,
+  "out": "\n\n根据系统检查指令，需验证回答所需关键参数是否完整且一致。本题中：\n\n1. **关键参数缺失**：  \n   - 题目明确要求使用**内存带宽**计算解码吞吐量（因部署为内存受限场景），但规格摘录中 `GPU Memory Bandwidth` 行标注为 `[ROW EXTRACTION FAILED]`，**未提供具体数值**。  \n   - 其他参数（模型参数量、数据类型、部署方式）虽完整，但**内存带宽是计算吞吐量的必要参数**，缺失后无法推导唯一结果。\n\n2. **无法假设或编造数值**：  \n   - 题目限定仅使用提供的规格摘录，而该摘录中带宽数据缺失。  \n   - 即使已知 H100 SXM 的典型带宽（如 3.35 TB/s），但**题目禁止使用外部知识**，且摘录中明确标注提取失败，故不可假设。\n\n**结论**：  \n由于 **GPU 内存带宽参数缺失**，无法确定唯一答案。需补充该参数（单位：bytes/second）才能计算吞吐量。"
+ },
+ "T-PUB-1-Q09/B_remind/rep5": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": false
+  },
+  "wall": 8.8,
+  "out_len": 435,
+  "out": "\n\n根据系统检查指令，需验证回答所需关键参数是否完整且一致。本题中：\n\n1. **关键参数缺失**：  \n   - 题目明确要求使用**内存带宽**计算解码吞吐量（因部署为内存受限场景），但规格摘录中 `GPU Memory Bandwidth` 行标注为 `[ROW EXTRACTION FAILED]`，**未提供具体数值**。  \n   - 其他参数（模型参数量、数据类型、部署方式）虽完整，但**内存带宽是计算吞吐量的必要参数**，缺失后无法推导唯一结果。\n\n2. **无法假设或编造数值**：  \n   - 题目限定仅使用提供的规格摘录，而该摘录中带宽数据缺失。  \n   - 即使已知 H100 SXM 的典型带宽（如 3.35 TB/s），但**题目禁止使用外部知识**，且摘录中明确标注提取失败，故不可假设。\n\n**结论**：  \n由于 **GPU 内存带宽参数缺失**，无法确定唯一答案。需补充该参数（单位：bytes/second）才能计算吞吐量。"
+ },
+ "T-PUB-1-Q09/B_remind/rep6": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": false
+  },
+  "wall": 8.4,
+  "out_len": 435,
+  "out": "\n\n根据系统检查指令，需验证回答所需关键参数是否完整且一致。本题中：\n\n1. **关键参数缺失**：  \n   - 题目明确要求使用**内存带宽**计算解码吞吐量（因部署为内存受限场景），但规格摘录中 `GPU Memory Bandwidth` 行标注为 `[ROW EXTRACTION FAILED]`，**未提供具体数值**。  \n   - 其他参数（模型参数量、数据类型、部署方式）虽完整，但**内存带宽是计算吞吐量的必要参数**，缺失后无法推导唯一结果。\n\n2. **无法假设或编造数值**：  \n   - 题目限定仅使用提供的规格摘录，而该摘录中带宽数据缺失。  \n   - 即使已知 H100 SXM 的典型带宽（如 3.35 TB/s），但**题目禁止使用外部知识**，且摘录中明确标注提取失败，故不可假设。\n\n**结论**：  \n由于 **GPU 内存带宽参数缺失**，无法确定唯一答案。需补充该参数（单位：bytes/second）才能计算吞吐量。"
+ },
+ "T-PUB-1-Q09/B_remind/rep7": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 11.8,
+  "out_len": 1135,
+  "out": "\n\n**声明：无法确定唯一答案。**  \n**原因：关键参数缺失。**  \n\n### 具体分析：\n1. **问题核心依赖内存带宽**  \n   题目明确说明部署场景为 **memory-bound**（内存受限），且 **weights read once per step**（每步读取一次权重）。此时解码吞吐量（tokens/second）的计算公式为：  \n   $$\n   \\text{Throughput} = \\frac{\\text{GPU Memory Bandwidth (bytes/s)}}{\\text{Weight Size per Token (bytes/token)}}\n   $$  \n   其中：  \n   - **Weight Size per Token** 可计算：  \n     - 模型参数量 = 33B = $33 \\times 10^9$ 参数  \n     - FP8 精度下，每参数占 **1 字节**（题目指定 1 GB = $10^9$ bytes）  \n     - 因此，每 token 需读取的权重数据量 = $33 \\times 10^9$ **bytes/token**。  \n\n   - **GPU Memory Bandwidth** 是公式中唯一缺失的关键参数。  \n\n2. **规格中明确缺失带宽数据**  \n   提供的规格摘录中：  \n   ```\n   GPU Memory Bandwidth ........ [ROW EXTRACTION FAILED]\n   ```  \n   **该参数未给出任何数值**，且题目严格限定 **仅允许使用此规格摘录**（禁止引用外部知识或假设）。  \n\n3. **其他参数无法替代带宽**  \n   - **GPU Memory (80 GB)**：仅说明显存容量，与带宽无关。  \n   - **BFLOAT16 Tensor Core (1,979 TFLOPS)**：题目已声明场景为 **memory-bound**，计算能力非瓶颈，此参数无关。  \n   - **Max TDP (700 W)**：功耗限制未提及影响吞吐量，且无功耗-性能关联公式，无法推导带宽。  \n\n### 结论：\n- **缺失关键参数**：GPU Memory Bandwidth（单位：bytes/s 或 GB/s）。  \n- **无法计算唯一答案**：因带宽值未知，吞吐量公式无法求解。  \n- **系统检查指令要求**：必须明确声明缺失项，而非假设或编造数值。  \n\n**最终答案：无法确定唯一答案，因 GPU Memory Bandwidth 参数缺失。**"
+ },
+ "T-PUB-1-Q09/B_remind/rep8": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": false
+  },
+  "wall": 9.8,
+  "out_len": 435,
+  "out": "\n\n根据系统检查指令，需验证回答所需关键参数是否完整且一致。本题中：\n\n1. **关键参数缺失**：  \n   - 题目明确要求使用**内存带宽**计算解码吞吐量（因部署为内存受限场景），但规格摘录中 `GPU Memory Bandwidth` 行标注为 `[ROW EXTRACTION FAILED]`，**未提供具体数值**。  \n   - 其他参数（模型参数量、数据类型、部署方式）虽完整，但**内存带宽是计算吞吐量的必要参数**，缺失后无法推导唯一结果。\n\n2. **无法假设或编造数值**：  \n   - 题目限定仅使用提供的规格摘录，而该摘录中带宽数据缺失。  \n   - 即使已知 H100 SXM 的典型带宽（如 3.35 TB/s），但**题目禁止使用外部知识**，且摘录中明确标注提取失败，故不可假设。\n\n**结论**：  \n由于 **GPU 内存带宽参数缺失**，无法确定唯一答案。需补充该参数（单位：bytes/second）才能计算吞吐量。"
+ },
+ "T-PUB-1-Q09/B_remind/rep9": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": false
+  },
+  "wall": 8.3,
+  "out_len": 435,
+  "out": "\n\n根据系统检查指令，需验证回答所需关键参数是否完整且一致。本题中：\n\n1. **关键参数缺失**：  \n   - 题目明确要求使用**内存带宽**计算解码吞吐量（因部署为内存受限场景），但规格摘录中 `GPU Memory Bandwidth` 行标注为 `[ROW EXTRACTION FAILED]`，**未提供具体数值**。  \n   - 其他参数（模型参数量、数据类型、部署方式）虽完整，但**内存带宽是计算吞吐量的必要参数**，缺失后无法推导唯一结果。\n\n2. **无法假设或编造数值**：  \n   - 题目限定仅使用提供的规格摘录，而该摘录中带宽数据缺失。  \n   - 即使已知 H100 SXM 的典型带宽（如 3.35 TB/s），但**题目禁止使用外部知识**，且摘录中明确标注提取失败，故不可假设。\n\n**结论**：  \n由于 **GPU 内存带宽参数缺失**，无法确定唯一答案。需补充该参数（单位：bytes/second）才能计算吞吐量。"
+ },
+ "T-PUB-1-Q09/B_remind/rep10": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": false
+  },
+  "wall": 9.3,
+  "out_len": 435,
+  "out": "\n\n根据系统检查指令，需验证回答所需关键参数是否完整且一致。本题中：\n\n1. **关键参数缺失**：  \n   - 题目明确要求使用**内存带宽**计算解码吞吐量（因部署为内存受限场景），但规格摘录中 `GPU Memory Bandwidth` 行标注为 `[ROW EXTRACTION FAILED]`，**未提供具体数值**。  \n   - 其他参数（模型参数量、数据类型、部署方式）虽完整，但**内存带宽是计算吞吐量的必要参数**，缺失后无法推导唯一结果。\n\n2. **无法假设或编造数值**：  \n   - 题目限定仅使用提供的规格摘录，而该摘录中带宽数据缺失。  \n   - 即使已知 H100 SXM 的典型带宽（如 3.35 TB/s），但**题目禁止使用外部知识**，且摘录中明确标注提取失败，故不可假设。\n\n**结论**：  \n由于 **GPU 内存带宽参数缺失**，无法确定唯一答案。需补充该参数（单位：bytes/second）才能计算吞吐量。"
+ },
+ "T-PUB-1-Q10/A_baseline/rep1": {
+  "r": {
+   "c1": false,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 15.9,
+  "out_len": 1366,
+  "out": "\n\nTo determine the decode throughput for a 33B-parameter model in FP8 on an NVIDIA H100 SXM, we analyze the memory-bound decode phase where **each token generation requires reading the entire model weights once**. The key factors are:\n\n- **Model size**: 33B parameters × 1 byte/parameter (FP8) = **33 GB** (since 1 GB = 1e9 bytes).\n- **Memory bandwidth**:  \n  - Source A (vendor spec): **3.35 TB/s** (theoretical peak).  \n  - Source B (measured): **2.0 TB/s** (realistic benchmark).\n\n### Arithmetic\nThroughput (tokens/s) = **Memory bandwidth (bytes/s) / Model size (bytes)**.\n\n#### Using Source A (3.35 TB/s):\n$$\n\\frac{3.35 \\times 10^{12} \\text{ bytes/s}}{33 \\times 10^9 \\text{ bytes}} \\approx 101.5 \\text{ tokens/s}\n$$\n\n#### Using Source B (2.0 TB/s):\n$$\n\\frac{2.0 \\times 10^{12} \\text{ bytes/s}}{33 \\times 10^9 \\text{ bytes}} \\approx 60.6 \\text{ tokens/s}\n$$\n\n### Recommendation\n- **Plan for ~60 tokens/s** using the **measured bandwidth (Source B)**, as real-world performance is constrained by practical limitations (e.g., memory controller overhead, non-ideal access patterns).  \n- The vendor’s theoretical peak (Source A) is optimistic and not achievable in practice.\n\n### Final Answer\n**~60 tokens/s** (based on measured bandwidth of 2.0 TB/s).  \n*(If using vendor specs, ~100 tokens/s is the theoretical upper bound, but this is not realistic for planning.)*"
+ },
+ "T-PUB-1-Q10/A_baseline/rep2": {
+  "r": {
+   "c1": false,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 14.4,
+  "out_len": 935,
+  "out": "\n\n### 解码吞吐量计算\n\n**关键假设与参数：**\n- 模型参数量：33B（33 × 10⁹ 参数）\n- 精度：FP8（每参数 1 字节）\n- 权重总大小：33 × 10⁹ 字节 = **33 GB**（因 1 GB = 10⁹ 字节）\n- 解码阶段：每个 token 生成需完整读取一次权重（batch size = 1，无 KV cache 开销）\n- 吞吐量公式：  \n  $$\n  \\text{吞吐量 (tokens/s)} = \\frac{\\text{内存带宽 (bytes/s)}}{\\text{权重大小 (bytes/token)}}\n  $$\n\n---\n\n### **基于 Source A（厂商规格：3.35 TB/s）**\n- 带宽：3.35 TB/s = 3.35 × 10¹² bytes/s  \n- 计算：  \n  $$\n  \\frac{3.35 \\times 10^{12}}{33 \\times 10^9} = \\frac{3.35}{33} \\times 10^3 \\approx 101.5 \\text{ tokens/s}\n  $$\n\n---\n\n### **基于 Source B（实测带宽：2.0 TB/s）**\n- 带宽：2.0 TB/s = 2.0 × 10¹² bytes/s  \n- 计算：  \n  $$\n  \\frac{2.0 \\times 10^{12}}{33 \\times 10^9} = \\frac{2.0}{33} \\times 10^3 \\approx 60.6 \\text{ tokens/s}\n  $$\n\n---\n\n### **结论与建议**\n- **理论峰值（Source A）**：**~102 tokens/s**  \n- **保守规划（Source B 实测）**：**~61 tokens/s**  \n\n**实际部署建议：**  \n- 厂商规格（3.35 TB/s）为理论峰值，实际受硬件调度、内存访问模式等影响，**实测带宽（2.0 TB/s）更可靠**。  \n- **应规划为 ~60 tokens/s**（取整），以匹配真实硬件表现。若需高置信度，可进一步测试目标工作负载的带宽利用率。"
+ },
+ "T-PUB-1-Q10/A_baseline/rep3": {
+  "r": {
+   "c1": false,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 9.8,
+  "out_len": 2061,
+  "out": "\n\n**Answer:**  \nPlan for **~60 tokens/s** (using measured bandwidth) or **~100 tokens/s** (using vendor spec). Here's the arithmetic:\n\n---\n\n### **Step 1: Model Weight Size**\n- **Parameters:** 33B = \\(33 \\times 10^9\\)  \n- **Precision:** FP8 → **1 byte/parameter**  \n- **Total weight size:**  \n  \\[\n  33 \\times 10^9 \\text{ bytes} = 33 \\text{ GB} \\quad (\\text{since } 1 \\text{ GB} = 10^9 \\text{ bytes})\n  \\]\n\n---\n\n### **Step 2: Decode Throughput Formula**\nIn **memory-bound decode** (batch=1, no KV cache), each token requires reading **all model weights** once. Throughput is limited by memory bandwidth:  \n\\[\n\\text{Throughput (tokens/s)} = \\frac{\\text{Memory Bandwidth (bytes/s)}}{\\text{Weight Size (bytes)}}\n\\]\n\n---\n\n### **Step 3: Calculate Using Both Bandwidth Sources**\n#### **Case 1: Vendor Spec (Source A: 3.35 TB/s)**\n- Bandwidth: \\(3.35 \\text{ TB/s} = 3.35 \\times 10^{12} \\text{ bytes/s}\\)  \n- Throughput:  \n  \\[\n  \\frac{3.35 \\times 10^{12}}{33 \\times 10^9} = \\frac{3.35}{33} \\times 10^3 \\approx 101.5 \\text{ tokens/s}\n  \\]\n\n#### **Case 2: Measured Benchmark (Source B: 2.0 TB/s)**\n- Bandwidth: \\(2.0 \\text{ TB/s} = 2.0 \\times 10^{12} \\text{ bytes/s}\\)  \n- Throughput:  \n  \\[\n  \\frac{2.0 \\times 10^{12}}{33 \\times 10^9} = \\frac{2.0}{33} \\times 10^3 \\approx 60.6 \\text{ tokens/s}\n  \\]\n\n---\n\n### **Recommendation**\n- **Use the measured bandwidth (2.0 TB/s)** for planning, as it reflects real-world performance (vendor specs often cite theoretical peaks).  \n- **Plan for ~60 tokens/s** to account for practical constraints (e.g., memory access inefficiencies, system overhead).  \n- If optimizing for best-case scenarios (e.g., idealized workloads), **~100 tokens/s** is the upper bound.\n\n---\n\n### **Key Assumptions**\n1. **Memory-bound regime:** Compute is not the bottleneck (valid for batch=1 decode).  \n2. **No KV cache overhead:** Excluded per problem statement.  \n3. **Full weight read per token:** Each decode step reads all 33 GB of weights.  \n4. **Bandwidth utilization:** Measured bandwidth (2.0 TB/s) is more realistic than vendor spec (3.35 TB/s)."
+ },
+ "T-PUB-1-Q10/A_baseline/rep4": {
+  "r": {
+   "c1": false,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 13.1,
+  "out_len": 1635,
+  "out": "\n\n**Answer:**  \nPlan for **~60 tokens/s** (using measured bandwidth) or **~100 tokens/s** (using vendor spec). Here's the arithmetic:\n\n---\n\n### **Step 1: Model Weight Size**\n- **Parameters:** 33B = \\(33 \\times 10^9\\)  \n- **Precision:** FP8 → **1 byte/parameter**  \n- **Total weight size:**  \n  \\[\n  33 \\times 10^9 \\text{ bytes} = 33 \\text{ GB} \\quad (\\text{since } 1 \\text{ GB} = 10^9 \\text{ bytes})\n  \\]\n\n---\n\n### **Step 2: Decode Throughput Formula**\nIn **memory-bound decode** (batch=1, no KV cache), each token requires reading **all model weights once**. Throughput is limited by memory bandwidth:  \n\\[\n\\text{Throughput (tokens/s)} = \\frac{\\text{Memory Bandwidth (bytes/s)}}{\\text{Weight Size (bytes)}}\n\\]\n\n---\n\n### **Step 3: Calculate Using Both Bandwidth Sources**\n#### **Case 1: Vendor Spec (Source A: 3.35 TB/s)**  \n- Bandwidth: \\(3.35 \\times 10^{12} \\text{ bytes/s}\\)  \n- Throughput:  \n  \\[\n  \\frac{3.35 \\times 10^{12}}{33 \\times 10^9} = \\frac{3.35}{33} \\times 10^3 \\approx 101.5 \\text{ tokens/s}\n  \\]\n\n#### **Case 2: Measured Benchmark (Source B: 2.0 TB/s)**  \n- Bandwidth: \\(2.0 \\times 10^{12} \\text{ bytes/s}\\)  \n- Throughput:  \n  \\[\n  \\frac{2.0 \\times 10^{12}}{33 \\times 10^9} = \\frac{2.0}{33} \\times 10^3 \\approx 60.6 \\text{ tokens/s}\n  \\]\n\n---\n\n### **Recommendation**  \n- **Use 60 tokens/s** for planning (conservative, based on real-world measurements).  \n- Vendor specs (100 tokens/s) represent **theoretical peak** and are rarely achieved in practice due to memory access inefficiencies, contention, or other overheads.  \n\n**Final Answer:**  \n\\[\n\\boxed{60 \\text{ tokens/s}} \\quad (\\text{using measured bandwidth})\n\\]"
+ },
+ "T-PUB-1-Q10/A_baseline/rep5": {
+  "r": {
+   "c1": false,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 9.3,
+  "out_len": 1366,
+  "out": "\n\nTo determine the decode throughput for a 33B-parameter model in FP8 on an NVIDIA H100 SXM, we analyze the memory-bound decode phase where **each token generation requires reading the entire model weights once**. The key factors are:\n\n- **Model size**: 33B parameters × 1 byte/parameter (FP8) = **33 GB** (since 1 GB = 1e9 bytes).\n- **Memory bandwidth**:  \n  - Source A (vendor spec): **3.35 TB/s** (theoretical peak).  \n  - Source B (measured): **2.0 TB/s** (realistic benchmark).\n\n### Arithmetic\nThroughput (tokens/s) = **Memory bandwidth (bytes/s) / Model size (bytes)**.\n\n#### Using Source A (3.35 TB/s):\n$$\n\\frac{3.35 \\times 10^{12} \\text{ bytes/s}}{33 \\times 10^9 \\text{ bytes}} \\approx 101.5 \\text{ tokens/s}\n$$\n\n#### Using Source B (2.0 TB/s):\n$$\n\\frac{2.0 \\times 10^{12} \\text{ bytes/s}}{33 \\times 10^9 \\text{ bytes}} \\approx 60.6 \\text{ tokens/s}\n$$\n\n### Recommendation\n- **Plan for ~60 tokens/s** using the **measured bandwidth (Source B)**, as real-world performance is constrained by practical limitations (e.g., memory controller overhead, non-ideal access patterns).  \n- The vendor’s theoretical peak (Source A) is optimistic and not achievable in practice.\n\n### Final Answer\n**~60 tokens/s** (based on measured bandwidth of 2.0 TB/s).  \n*(If using vendor specs, ~100 tokens/s is the theoretical upper bound, but this is not realistic for planning.)*"
+ },
+ "T-PUB-1-Q10/A_baseline/rep6": {
+  "r": {
+   "c1": false,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 11.1,
+  "out_len": 1366,
+  "out": "\n\nTo determine the decode throughput for a 33B-parameter model in FP8 on an NVIDIA H100 SXM, we analyze the memory-bound decode phase where **each token generation requires reading the entire model weights once**. The key factors are:\n\n- **Model size**: 33B parameters × 1 byte/parameter (FP8) = **33 GB** (since 1 GB = 1e9 bytes).\n- **Memory bandwidth**:  \n  - Source A (vendor spec): **3.35 TB/s** (theoretical peak).  \n  - Source B (measured): **2.0 TB/s** (realistic benchmark).\n\n### Arithmetic\nThroughput (tokens/s) = **Memory bandwidth (bytes/s) / Model size (bytes)**.\n\n#### Using Source A (3.35 TB/s):\n$$\n\\frac{3.35 \\times 10^{12} \\text{ bytes/s}}{33 \\times 10^9 \\text{ bytes}} \\approx 101.5 \\text{ tokens/s}\n$$\n\n#### Using Source B (2.0 TB/s):\n$$\n\\frac{2.0 \\times 10^{12} \\text{ bytes/s}}{33 \\times 10^9 \\text{ bytes}} \\approx 60.6 \\text{ tokens/s}\n$$\n\n### Recommendation\n- **Plan for ~60 tokens/s** using the **measured bandwidth (Source B)**, as real-world performance is constrained by practical limitations (e.g., memory controller overhead, non-ideal access patterns).  \n- The vendor’s theoretical peak (Source A) is optimistic and not achievable in practice.\n\n### Final Answer\n**~60 tokens/s** (based on measured bandwidth of 2.0 TB/s).  \n*(If using vendor specs, ~100 tokens/s is the theoretical upper bound, but this is not realistic for planning.)*"
+ },
+ "T-PUB-1-Q10/A_baseline/rep7": {
+  "r": {
+   "c1": false,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 23.5,
+  "out_len": 1668,
+  "out": "\n\n**Answer:**  \nPlan for **~60 tokens/s** (using measured bandwidth) or **~100 tokens/s** (using vendor spec). Here's the arithmetic:\n\n---\n\n### **Step 1: Model Weight Size**\n- **Parameters:** 33B = \\(33 \\times 10^9\\)  \n- **Precision:** FP8 → **1 byte/parameter**  \n- **Total weight size:**  \n  \\[\n  33 \\times 10^9 \\text{ bytes} = 33 \\text{ GB} \\quad (\\text{since } 1 \\text{ GB} = 10^9 \\text{ bytes})\n  \\]\n\n---\n\n### **Step 2: Decode Throughput Formula**\nIn **memory-bound decode** (batch=1, no KV cache), each token requires reading **all model weights once**. Throughput is limited by memory bandwidth:  \n\\[\n\\text{Throughput (tokens/s)} = \\frac{\\text{Memory Bandwidth (bytes/s)}}{\\text{Weight Size (bytes)}}\n\\]\n\n---\n\n### **Step 3: Calculate Using Both Bandwidth Sources**\n#### **Case 1: Vendor Spec (Source A: 3.35 TB/s)**\n- Bandwidth: \\(3.35 \\text{ TB/s} = 3.35 \\times 10^{12} \\text{ bytes/s}\\)  \n- Throughput:  \n  \\[\n  \\frac{3.35 \\times 10^{12}}{33 \\times 10^9} = \\frac{3.35}{33} \\times 10^3 \\approx 101.5 \\text{ tokens/s}\n  \\]\n\n#### **Case 2: Measured Benchmark (Source B: 2.0 TB/s)**\n- Bandwidth: \\(2.0 \\text{ TB/s} = 2.0 \\times 10^{12} \\text{ bytes/s}\\)  \n- Throughput:  \n  \\[\n  \\frac{2.0 \\times 10^{12}}{33 \\times 10^9} = \\frac{2.0}{33} \\times 10^3 \\approx 60.6 \\text{ tokens/s}\n  \\]\n\n---\n\n### **Recommendation**\n- **Use 60 tokens/s** for planning (conservative, based on real-world measurements).  \n- Vendor specs (100 tokens/s) represent **theoretical peak** and are rarely achieved in practice due to memory access inefficiencies, contention, or other overheads.  \n\n**Final Answer:**  \n\\[\n\\boxed{60 \\text{ tokens/s}} \\quad (\\text{using measured bandwidth})\n\\]"
+ },
+ "T-PUB-1-Q10/A_baseline/rep8": {
+  "r": {
+   "c1": false,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 14.9,
+  "out_len": 1366,
+  "out": "\n\nTo determine the decode throughput for a 33B-parameter model in FP8 on an NVIDIA H100 SXM, we analyze the memory-bound decode phase where **each token generation requires reading the entire model weights once**. The key factors are:\n\n- **Model size**: 33B parameters × 1 byte/parameter (FP8) = **33 GB** (since 1 GB = 1e9 bytes).\n- **Memory bandwidth**:  \n  - Source A (vendor spec): **3.35 TB/s** (theoretical peak).  \n  - Source B (measured): **2.0 TB/s** (realistic benchmark).\n\n### Arithmetic\nThroughput (tokens/s) = **Memory bandwidth (bytes/s) / Model size (bytes)**.\n\n#### Using Source A (3.35 TB/s):\n$$\n\\frac{3.35 \\times 10^{12} \\text{ bytes/s}}{33 \\times 10^9 \\text{ bytes}} \\approx 101.5 \\text{ tokens/s}\n$$\n\n#### Using Source B (2.0 TB/s):\n$$\n\\frac{2.0 \\times 10^{12} \\text{ bytes/s}}{33 \\times 10^9 \\text{ bytes}} \\approx 60.6 \\text{ tokens/s}\n$$\n\n### Recommendation\n- **Plan for ~60 tokens/s** using the **measured bandwidth (Source B)**, as real-world performance is constrained by practical limitations (e.g., memory controller overhead, non-ideal access patterns).  \n- The vendor’s theoretical peak (Source A) is optimistic and not achievable in practice.\n\n### Final Answer\n**~60 tokens/s** (based on measured bandwidth of 2.0 TB/s).  \n*(If using vendor specs, ~100 tokens/s is the theoretical upper bound, but this is not realistic for planning.)*"
+ },
+ "T-PUB-1-Q10/A_baseline/rep9": {
+  "r": {
+   "c1": false,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 17.1,
+  "out_len": 1366,
+  "out": "\n\nTo determine the decode throughput for a 33B-parameter model in FP8 on an NVIDIA H100 SXM, we analyze the memory-bound decode phase where **each token generation requires reading the entire model weights once**. The key factors are:\n\n- **Model size**: 33B parameters × 1 byte/parameter (FP8) = **33 GB** (since 1 GB = 1e9 bytes).\n- **Memory bandwidth**:  \n  - Source A (vendor spec): **3.35 TB/s** (theoretical peak).  \n  - Source B (measured): **2.0 TB/s** (realistic benchmark).\n\n### Arithmetic\nThroughput (tokens/s) = **Memory bandwidth (bytes/s) / Model size (bytes)**.\n\n#### Using Source A (3.35 TB/s):\n$$\n\\frac{3.35 \\times 10^{12} \\text{ bytes/s}}{33 \\times 10^9 \\text{ bytes}} \\approx 101.5 \\text{ tokens/s}\n$$\n\n#### Using Source B (2.0 TB/s):\n$$\n\\frac{2.0 \\times 10^{12} \\text{ bytes/s}}{33 \\times 10^9 \\text{ bytes}} \\approx 60.6 \\text{ tokens/s}\n$$\n\n### Recommendation\n- **Plan for ~60 tokens/s** using the **measured bandwidth (Source B)**, as real-world performance is constrained by practical limitations (e.g., memory controller overhead, non-ideal access patterns).  \n- The vendor’s theoretical peak (Source A) is optimistic and not achievable in practice.\n\n### Final Answer\n**~60 tokens/s** (based on measured bandwidth of 2.0 TB/s).  \n*(If using vendor specs, ~100 tokens/s is the theoretical upper bound, but this is not realistic for planning.)*"
+ },
+ "T-PUB-1-Q10/A_baseline/rep10": {
+  "r": {
+   "c1": false,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 19.1,
+  "out_len": 1366,
+  "out": "\n\nTo determine the decode throughput for a 33B-parameter model in FP8 on an NVIDIA H100 SXM, we analyze the memory-bound decode phase where **each token generation requires reading the entire model weights once**. The key factors are:\n\n- **Model size**: 33B parameters × 1 byte/parameter (FP8) = **33 GB** (since 1 GB = 1e9 bytes).\n- **Memory bandwidth**:  \n  - Source A (vendor spec): **3.35 TB/s** (theoretical peak).  \n  - Source B (measured): **2.0 TB/s** (realistic benchmark).\n\n### Arithmetic\nThroughput (tokens/s) = **Memory bandwidth (bytes/s) / Model size (bytes)**.\n\n#### Using Source A (3.35 TB/s):\n$$\n\\frac{3.35 \\times 10^{12} \\text{ bytes/s}}{33 \\times 10^9 \\text{ bytes}} \\approx 101.5 \\text{ tokens/s}\n$$\n\n#### Using Source B (2.0 TB/s):\n$$\n\\frac{2.0 \\times 10^{12} \\text{ bytes/s}}{33 \\times 10^9 \\text{ bytes}} \\approx 60.6 \\text{ tokens/s}\n$$\n\n### Recommendation\n- **Plan for ~60 tokens/s** using the **measured bandwidth (Source B)**, as real-world performance is constrained by practical limitations (e.g., memory controller overhead, non-ideal access patterns).  \n- The vendor’s theoretical peak (Source A) is optimistic and not achievable in practice.\n\n### Final Answer\n**~60 tokens/s** (based on measured bandwidth of 2.0 TB/s).  \n*(If using vendor specs, ~100 tokens/s is the theoretical upper bound, but this is not realistic for planning.)*"
+ },
+ "T-PUB-1-Q10/B_remind/rep1": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 24.9,
+  "out_len": 1100,
+  "out": "\n\n**关键参数冲突声明：**  \n题面中 **GPU 内存带宽** 存在明确矛盾：  \n- **Source A（厂商规格）** 给出 **3.35 TB/s**（理论峰值）；  \n- **Source B（第三方实测）** 给出 **2.0 TB/s**（实际测量值）。  \n由于解码吞吐量直接依赖内存带宽，且两者数值不一致，**无法确定唯一答案**。以下分别基于两种带宽值计算，供参考。\n\n---\n\n### **计算逻辑**  \n1. **模型权重大小**：  \n   - 参数量 = 33B = $33 \\times 10^9$ 参数；  \n   - FP8 格式 → 每参数占 **1 字节**；  \n   - 总权重大小 = $33 \\times 10^9$ **bytes**。  \n\n2. **解码吞吐量公式**（memory-bound，batch=1）：  \n   $$\n   \\text{吞吐量 (tokens/s)} = \\frac{\\text{内存带宽 (bytes/s)}}{\\text{每 token 读取的权重大小 (bytes)}}\n   $$\n\n---\n\n### **结果计算**  \n#### **情况 1：使用 Source A 带宽（3.35 TB/s）**  \n- 带宽 = $3.35 \\times 10^{12}$ bytes/s；  \n- 吞吐量 = $\\frac{3.35 \\times 10^{12}}{33 \\times 10^9} = \\frac{3.35}{33} \\times 10^3 \\approx 101.5$ **tokens/s**。  \n\n#### **情况 2：使用 Source B 带宽（2.0 TB/s）**  \n- 带宽 = $2.0 \\times 10^{12}$ bytes/s；  \n- 吞吐量 = $\\frac{2.0 \\times 10^{12}}{33 \\times 10^9} = \\frac{2.0}{33} \\times 10^3 \\approx 60.6$ **tokens/s**。  \n\n---\n\n### **结论**  \n- **若采用厂商理论峰值（3.35 TB/s）**：计划吞吐量 ≈ **101.5 tokens/s**；  \n- **若采用实测值（2.0 TB/s）**：计划吞吐量 ≈ **60.6 tokens/s**。  \n**实际部署中应优先参考实测数据（Source B）**，因理论峰值通常无法完全达成。但题面未明确指定使用哪一数据源，故 **无法给出唯一确定值**。"
+ },
+ "T-PUB-1-Q10/B_remind/rep2": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 16.6,
+  "out_len": 1103,
+  "out": "\n\n**关键参数冲突声明：**  \n题面中 **GPU 内存带宽** 存在明确矛盾：  \n- **Source A（厂商规格）** 给出 **3.35 TB/s**（理论峰值）；  \n- **Source B（第三方实测）** 给出 **2.0 TB/s**（实际测量值）。  \n由于解码吞吐量直接依赖内存带宽，且两者数值不一致，**无法确定唯一答案**。以下分别基于两种带宽值计算，供参考。\n\n---\n\n### **计算逻辑**  \n1. **模型权重大小**：  \n   - 33B 参数 × FP8（1 字节/参数） = **33 × 10⁹ 字节**。  \n2. **每 token 读取量**：  \n   - Batch size = 1，解码阶段每步读取全部权重 → **33 × 10⁹ 字节/token**。  \n3. **吞吐量公式**：  \n   $$\n   \\text{吞吐量 (tokens/s)} = \\frac{\\text{内存带宽 (bytes/s)}}{\\text{每 token 读取量 (bytes)}}\n   $$\n\n---\n\n### **结果计算**  \n#### **情况 1：使用 Source A 带宽（3.35 TB/s）**  \n- 带宽 = $ 3.35 \\times 10^{12} $ bytes/s  \n- 吞吐量 = $ \\frac{3.35 \\times 10^{12}}{33 \\times 10^9} = \\frac{3.35}{33} \\times 10^3 \\approx 101.5 $ **tokens/s**  \n\n#### **情况 2：使用 Source B 带宽（2.0 TB/s）**  \n- 带宽 = $ 2.0 \\times 10^{12} $ bytes/s  \n- 吞吐量 = $ \\frac{2.0 \\times 10^{12}}{33 \\times 10^9} = \\frac{2.0}{33} \\times 10^3 \\approx 60.6 $ **tokens/s**  \n\n---\n\n### **结论**  \n- **若采用厂商理论峰值（3.35 TB/s）**：计划吞吐量 ≈ **101.5 tokens/s**。  \n- **若采用实测值（2.0 TB/s）**：计划吞吐量 ≈ **60.6 tokens/s**。  \n- **关键矛盾**：带宽数据冲突导致无法确定唯一答案。**实际部署应优先采用实测值（2.0 TB/s）**，因理论峰值通常受硬件限制无法完全达成，但需明确标注数据来源差异。"
+ },
+ "T-PUB-1-Q10/B_remind/rep3": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 15.9,
+  "out_len": 1251,
+  "out": "\n\n**关键参数一致性检查：**  \n题面中 **GPU 内存带宽** 存在明确矛盾：  \n- **Source A（厂商规格）**：3.35 TB/s  \n- **Source B（第三方实测）**：2.0 TB/s  \n其他参数（模型参数量 33B、FP8 格式、batch=1、decode-only、无 KV cache 计数）均明确且无冲突。  \n**结论**：因带宽参数矛盾，**无法确定唯一答案**。需分别基于两种带宽值计算，并说明矛盾来源。\n\n---\n\n### **计算逻辑**  \n解码阶段为 **memory-bound**，每生成 1 token 需读取全部模型权重（batch=1，无 KV cache 开销）。  \n- **模型权重大小**：  \n  $ 33 \\times 10^9 \\text{ 参数} \\times 1 \\text{ 字节/参数 (FP8)} = 33 \\times 10^9 \\text{ 字节} $  \n- **吞吐量公式**：  \n  $$\n  \\text{tokens/s} = \\frac{\\text{内存带宽 (bytes/s)}}{\\text{每 token 权重大小 (bytes)}}\n  $$\n\n---\n\n### **分情况计算**  \n#### **情况 1：采用 Source A 带宽（3.35 TB/s）**  \n- 带宽换算：$ 3.35 \\, \\text{TB/s} = 3.35 \\times 10^{12} \\, \\text{bytes/s} $  \n- 吞吐量：  \n  $$\n  \\frac{3.35 \\times 10^{12}}{33 \\times 10^9} = \\frac{3.35}{33} \\times 10^3 \\approx 101.5 \\, \\text{tokens/s}\n  $$\n\n#### **情况 2：采用 Source B 带宽（2.0 TB/s）**  \n- 带宽换算：$ 2.0 \\, \\text{TB/s} = 2.0 \\times 10^{12} \\, \\text{bytes/s} $  \n- 吞吐量：  \n  $$\n  \\frac{2.0 \\times 10^{12}}{33 \\times 10^9} = \\frac{2.0}{33} \\times 10^3 \\approx 60.6 \\, \\text{tokens/s}\n  $$\n\n---\n\n### **最终结论**  \n- **若按厂商理论峰值（Source A）**：计划 **≈101.5 tokens/s**  \n- **若按实测值（Source B）**：计划 **≈60.6 tokens/s**  \n- **关键矛盾**：带宽参数不一致（3.35 vs. 2.0 TB/s），**无法确定唯一答案**。实际部署中应优先采用 **实测值（Source B）** 作为保守规划依据，但需明确说明数据来源差异。"
+ },
+ "T-PUB-1-Q10/B_remind/rep4": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 15.2,
+  "out_len": 1271,
+  "out": "\n\n**关键参数冲突声明：**  \n题面中 **GPU 内存带宽** 存在明确矛盾：  \n- **Source A（厂商规格）** 给出 **3.35 TB/s**  \n- **Source B（第三方实测）** 给出 **2.0 TB/s**  \n该参数是计算解码吞吐量的核心依据，且无其他信息可仲裁其优先级（如“理论峰值 vs 实际有效带宽”的明确说明）。因此 **无法确定唯一答案**，需分别基于两种带宽值计算。\n\n---\n\n### 计算逻辑（通用公式）\n1. **模型权重大小**：  \n   - 33B 参数 × FP8（1 字节/参数） = **33 × 10⁹ 字节**  \n2. **每 token 内存读取量**：  \n   - 解码阶段（batch=1，无 KV cache 计数）需 **每 token 读取全部权重** → **33 × 10⁹ 字节/token**  \n3. **吞吐量公式**：  \n   $$\n   \\text{吞吐量 (tokens/s)} = \\frac{\\text{内存带宽 (bytes/s)}}{\\text{每 token 读取量 (bytes/token)}}\n   $$  \n   其中 **1 TB/s = 10¹² bytes/s**，故：  \n   $$\n   \\text{吞吐量} = \\frac{B \\times 10^{12}}{33 \\times 10^9} = \\frac{B}{33} \\times 100 \\approx 3.0303 \\times B \\quad (B \\text{ 单位: TB/s})\n   $$\n\n---\n\n### 分情况计算\n#### **情况 1：采用 Source A 带宽（3.35 TB/s）**  \n$$\n\\text{吞吐量} = \\frac{3.35 \\times 10^{12}}{33 \\times 10^9} = \\frac{3.35}{33} \\times 100 \\approx 101.52 \\text{ tokens/s}\n$$\n\n#### **情况 2：采用 Source B 带宽（2.0 TB/s）**  \n$$\n\\text{吞吐量} = \\frac{2.0 \\times 10^{12}}{33 \\times 10^9} = \\frac{2.0}{33} \\times 100 \\approx 60.61 \\text{ tokens/s}\n$$\n\n---\n\n### 结论\n- **若以厂商理论峰值（3.35 TB/s）规划**：预期吞吐量 **≈ 101.5 tokens/s**  \n- **若以实测有效带宽（2.0 TB/s）规划**：预期吞吐量 **≈ 60.6 tokens/s**  \n- **关键限制**：因带宽数据冲突，**无法给出唯一确定值**。实际部署中应优先采用 **实测值（2.0 TB/s）** 作为保守规划依据（理论峰值通常受硬件/软件限制无法完全达成），但需明确标注此假设。"
+ },
+ "T-PUB-1-Q10/B_remind/rep5": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 13.9,
+  "out_len": 1125,
+  "out": "\n\n**关键参数冲突声明：**  \n题面中 **GPU 内存带宽** 存在明确矛盾：  \n- **Source A（厂商规格）** 给出 **3.35 TB/s**  \n- **Source B（第三方实测）** 给出 **2.0 TB/s**  \n该参数是计算解码吞吐量的核心依据，且无其他信息可仲裁其优先级（如“理论峰值 vs 实际有效带宽”的明确说明）。因此 **无法确定唯一答案**，需分别基于两种带宽值计算。\n\n---\n\n### 计算逻辑（通用公式）\n1. **模型权重大小**：  \n   - 33B 参数 × FP8（1 字节/参数） = **33 × 10⁹ 字节**  \n2. **每 token 内存读取量**：  \n   - 解码阶段（batch=1，无 KV cache 计数）需 **每 token 读取全部权重** → **33 × 10⁹ 字节/token**  \n3. **吞吐量公式**：  \n   $$\n   \\text{吞吐量 (tokens/s)} = \\frac{\\text{内存带宽 (bytes/s)}}{\\text{每 token 读取量 (bytes)}}\n   $$\n\n---\n\n### 分情况计算\n#### **情况 1：采用 Source A 带宽（3.35 TB/s）**  \n- 带宽 = 3.35 × 10¹² 字节/秒  \n- 吞吐量 = $ \\frac{3.35 \\times 10^{12}}{33 \\times 10^9} = \\frac{3.35}{33} \\times 10^3 \\approx 101.5 \\, \\text{tokens/s} $  \n\n#### **情况 2：采用 Source B 带宽（2.0 TB/s）**  \n- 带宽 = 2.0 × 10¹² 字节/秒  \n- 吞吐量 = $ \\frac{2.0 \\times 10^{12}}{33 \\times 10^9} = \\frac{2.0}{33} \\times 10^3 \\approx 60.6 \\, \\text{tokens/s} $  \n\n---\n\n### 结论\n- **若以厂商理论峰值（3.35 TB/s）规划**：吞吐量 ≈ **101.5 tokens/s**  \n- **若以实测有效带宽（2.0 TB/s）规划**：吞吐量 ≈ **60.6 tokens/s**  \n- **关键限制**：因带宽数据冲突，**无法给出唯一确定值**。实际部署中应优先采用 **实测带宽（2.0 TB/s）** 作为保守规划依据（厂商规格常为理论峰值，实际受硬件/驱动/负载影响），但需明确此假设。"
+ },
+ "T-PUB-1-Q10/B_remind/rep6": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 15.4,
+  "out_len": 1134,
+  "out": "\n\n**关键参数冲突声明：**  \n题面中 **GPU 内存带宽** 存在明确矛盾：  \n- **Source A（厂商规格）** 给出 **3.35 TB/s**（理论峰值）；  \n- **Source B（第三方实测）** 给出 **2.0 TB/s**（实际测量值）。  \n**二者数值不一致，且未说明应采用哪一数据作为规划依据**。因此，**无法确定唯一答案**，需分别基于两种带宽计算结果。\n\n---\n\n### **计算逻辑**  \n解码阶段（decode only）为 **memory-bound**，每生成 1 个 token 需读取 **全部模型权重**（batch=1，无 KV cache 计入）。  \n- **模型参数量**：33B = $33 \\times 10^9$ 参数；  \n- **FP8 格式**：每参数占 **1 字节**（8 位）；  \n- **每 token 读取数据量**：$33 \\times 10^9$ 字节；  \n- **吞吐量公式**：  \n  $$\n  \\text{tokens/s} = \\frac{\\text{内存带宽 (bytes/s)}}{\\text{每 token 读取字节数}}\n  $$\n\n---\n\n### **分情况计算**  \n#### **情况 1：采用 Source A 带宽（3.35 TB/s）**  \n- 带宽 = $3.35 \\times 10^{12}$ bytes/s；  \n- 吞吐量 = $\\frac{3.35 \\times 10^{12}}{33 \\times 10^9} = \\frac{3.35}{33} \\times 10^3 \\approx 101.5$ **tokens/s**。  \n\n#### **情况 2：采用 Source B 带宽（2.0 TB/s）**  \n- 带宽 = $2.0 \\times 10^{12}$ bytes/s；  \n- 吞吐量 = $\\frac{2.0 \\times 10^{12}}{33 \\times 10^9} = \\frac{2.0}{33} \\times 10^3 \\approx 60.6$ **tokens/s**。  \n\n---\n\n### **结论**  \n- **若按厂商理论峰值（3.35 TB/s）规划**：吞吐量 ≈ **101.5 tokens/s**；  \n- **若按实测值（2.0 TB/s）规划**：吞吐量 ≈ **60.6 tokens/s**。  \n**因带宽数据冲突，无法给出唯一答案**。实际部署中应优先采用 **实测值（2.0 TB/s）** 作为保守规划依据，但需明确标注数据来源差异。"
+ },
+ "T-PUB-1-Q10/B_remind/rep7": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 14.5,
+  "out_len": 1134,
+  "out": "\n\n**关键参数冲突声明：**  \n题面中 **GPU 内存带宽** 存在明确矛盾：  \n- **Source A（厂商规格）** 给出 **3.35 TB/s**（理论峰值）；  \n- **Source B（第三方实测）** 给出 **2.0 TB/s**（实际测量值）。  \n**二者数值不一致，且未说明应采用哪一数据作为规划依据**。因此，**无法确定唯一答案**，需分别基于两种带宽计算结果。\n\n---\n\n### **计算逻辑**  \n解码阶段（decode only）为 **memory-bound**，每生成 1 个 token 需读取 **全部模型权重**（batch=1，无 KV cache 计入）。  \n- **模型参数量**：33B = $33 \\times 10^9$ 参数；  \n- **FP8 格式**：每参数占 **1 字节**（8 位）；  \n- **每 token 读取数据量**：$33 \\times 10^9$ 字节；  \n- **吞吐量公式**：  \n  $$\n  \\text{tokens/s} = \\frac{\\text{内存带宽 (bytes/s)}}{\\text{每 token 读取字节数}}\n  $$\n\n---\n\n### **分情况计算**  \n#### **情况 1：采用 Source A 带宽（3.35 TB/s）**  \n- 带宽 = $3.35 \\times 10^{12}$ bytes/s；  \n- 吞吐量 = $\\frac{3.35 \\times 10^{12}}{33 \\times 10^9} = \\frac{3.35}{33} \\times 10^3 \\approx 101.5$ **tokens/s**。  \n\n#### **情况 2：采用 Source B 带宽（2.0 TB/s）**  \n- 带宽 = $2.0 \\times 10^{12}$ bytes/s；  \n- 吞吐量 = $\\frac{2.0 \\times 10^{12}}{33 \\times 10^9} = \\frac{2.0}{33} \\times 10^3 \\approx 60.6$ **tokens/s**。  \n\n---\n\n### **结论**  \n- **若按厂商理论峰值（3.35 TB/s）规划**：吞吐量 ≈ **101.5 tokens/s**；  \n- **若按实测值（2.0 TB/s）规划**：吞吐量 ≈ **60.6 tokens/s**。  \n**因带宽数据冲突，无法给出唯一答案**。实际部署中应优先采用 **实测值（2.0 TB/s）** 作为保守规划依据，但需明确标注数据来源差异。"
+ },
+ "T-PUB-1-Q10/B_remind/rep8": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 15.1,
+  "out_len": 1252,
+  "out": "\n\n**关键参数一致性检查：**  \n题面中 **GPU 内存带宽** 存在明确矛盾：  \n- **Source A（厂商规格）**：3.35 TB/s  \n- **Source B（第三方实测）**：2.0 TB/s  \n其他参数（模型参数量 33B、FP8 格式、batch=1、decode-only、无 KV cache 计数）均明确且无冲突。  \n**结论**：因带宽参数矛盾，**无法确定唯一答案**。需分别基于两种带宽值计算，并说明矛盾来源。\n\n---\n\n### **计算逻辑**  \n解码阶段为 **memory-bound**，每生成 1 token 需读取全部模型权重（batch=1，无 KV cache 开销）。  \n- **模型权重大小**：  \n  $ 33 \\times 10^9 \\text{ 参数} \\times 1 \\text{ 字节/参数 (FP8)} = 33 \\times 10^9 \\text{ 字节} $  \n- **吞吐量公式**：  \n  $$\n  \\text{tokens/s} = \\frac{\\text{内存带宽 (bytes/s)}}{\\text{每 token 权重大小 (bytes)}}\n  $$\n\n---\n\n### **分情况计算**  \n#### **情况 1：采用 Source A 带宽（3.35 TB/s）**  \n- 带宽换算：$ 3.35 \\, \\text{TB/s} = 3.35 \\times 10^{12} \\, \\text{bytes/s} $  \n- 吞吐量：  \n  $$\n  \\frac{3.35 \\times 10^{12}}{33 \\times 10^9} = \\frac{3.35}{33} \\times 10^3 \\approx 101.5 \\, \\text{tokens/s}\n  $$\n\n#### **情况 2：采用 Source B 带宽（2.0 TB/s）**  \n- 带宽换算：$ 2.0 \\, \\text{TB/s} = 2.0 \\times 10^{12} \\, \\text{bytes/s} $  \n- 吞吐量：  \n  $$\n  \\frac{2.0 \\times 10^{12}}{33 \\times 10^9} = \\frac{2.0}{33} \\times 10^3 \\approx 60.6 \\, \\text{tokens/s}\n  $$\n\n---\n\n### **最终结论**  \n- **若按厂商理论峰值（Source A）**：计划 **≈101.5 tokens/s**  \n- **若按实测带宽（Source B）**：计划 **≈60.6 tokens/s**  \n- **关键矛盾**：带宽参数不一致（3.35 vs. 2.0 TB/s），**无法确定唯一答案**。实际部署中应优先采用 **实测值（Source B）** 作为保守规划依据，但需明确说明数据来源差异。"
+ },
+ "T-PUB-1-Q10/B_remind/rep9": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 15.7,
+  "out_len": 1125,
+  "out": "\n\n**关键参数冲突声明：**  \n题面中 **GPU 内存带宽** 存在明确矛盾：  \n- **Source A（厂商规格）** 给出 **3.35 TB/s**  \n- **Source B（第三方实测）** 给出 **2.0 TB/s**  \n该参数是计算解码吞吐量的核心依据，且无其他信息可仲裁其优先级（如“理论峰值 vs 实际有效带宽”的明确说明）。因此 **无法确定唯一答案**，需分别基于两种带宽值计算。\n\n---\n\n### 计算逻辑（通用公式）\n1. **模型权重大小**：  \n   - 33B 参数 × FP8（1 字节/参数） = **33 × 10⁹ 字节**  \n2. **每 token 内存读取量**：  \n   - 解码阶段（batch=1，无 KV cache 计数）需 **每 token 读取全部权重** → **33 × 10⁹ 字节/token**  \n3. **吞吐量公式**：  \n   $$\n   \\text{吞吐量 (tokens/s)} = \\frac{\\text{内存带宽 (bytes/s)}}{\\text{每 token 读取量 (bytes)}}\n   $$\n\n---\n\n### 分情况计算\n#### **情况 1：采用 Source A 带宽（3.35 TB/s）**  \n- 带宽 = 3.35 × 10¹² 字节/秒  \n- 吞吐量 = $ \\frac{3.35 \\times 10^{12}}{33 \\times 10^9} = \\frac{3.35}{33} \\times 10^3 \\approx 101.5 \\, \\text{tokens/s} $  \n\n#### **情况 2：采用 Source B 带宽（2.0 TB/s）**  \n- 带宽 = 2.0 × 10¹² 字节/秒  \n- 吞吐量 = $ \\frac{2.0 \\times 10^{12}}{33 \\times 10^9} = \\frac{2.0}{33} \\times 10^3 \\approx 60.6 \\, \\text{tokens/s} $  \n\n---\n\n### 结论\n- **若以厂商理论峰值（3.35 TB/s）规划**：吞吐量 ≈ **101.5 tokens/s**  \n- **若以实测有效带宽（2.0 TB/s）规划**：吞吐量 ≈ **60.6 tokens/s**  \n- **关键限制**：因带宽数据冲突，**无法给出唯一确定值**。实际部署中应优先采用 **实测带宽（2.0 TB/s）** 作为保守规划依据（厂商规格常为理论峰值，实际受硬件/驱动/负载影响），但需明确此假设。"
+ },
+ "T-PUB-1-Q10/B_remind/rep10": {
+  "r": {
+   "c1": true,
+   "c2": false,
+   "c3": true,
+   "c4": true
+  },
+  "wall": 31.1,
+  "out_len": 1134,
+  "out": "\n\n**关键参数冲突声明：**  \n题面中 **GPU 内存带宽** 存在明确矛盾：  \n- **Source A（厂商规格）** 给出 **3.35 TB/s**（理论峰值）；  \n- **Source B（第三方实测）** 给出 **2.0 TB/s**（实际测量值）。  \n**二者数值不一致，且未说明应采用哪一数据作为规划依据**。因此，**无法确定唯一答案**，需分别基于两种带宽计算结果。\n\n---\n\n### **计算逻辑**  \n解码阶段（decode only）为 **memory-bound**，每生成 1 个 token 需读取 **全部模型权重**（batch=1，无 KV cache 计入）。  \n- **模型参数量**：33B = $33 \\times 10^9$ 参数；  \n- **FP8 格式**：每参数占 **1 字节**（8 位）；  \n- **每 token 读取数据量**：$33 \\times 10^9$ 字节；  \n- **吞吐量公式**：  \n  $$\n  \\text{tokens/s} = \\frac{\\text{内存带宽 (bytes/s)}}{\\text{每 token 读取字节数}}\n  $$\n\n---\n\n### **分情况计算**  \n#### **情况 1：采用 Source A 带宽（3.35 TB/s）**  \n- 带宽 = $3.35 \\times 10^{12}$ bytes/s；  \n- 吞吐量 = $\\frac{3.35 \\times 10^{12}}{33 \\times 10^9} = \\frac{3.35}{33} \\times 10^3 \\approx 101.5$ **tokens/s**。  \n\n#### **情况 2：采用 Source B 带宽（2.0 TB/s）**  \n- 带宽 = $2.0 \\times 10^{12}$ bytes/s；  \n- 吞吐量 = $\\frac{2.0 \\times 10^{12}}{33 \\times 10^9} = \\frac{2.0}{33} \\times 10^3 \\approx 60.6$ **tokens/s**。  \n\n---\n\n### **结论**  \n- **若按厂商理论峰值（3.35 TB/s）规划**：吞吐量 ≈ **101.5 tokens/s**；  \n- **若按实测值（2.0 TB/s）规划**：吞吐量 ≈ **60.6 tokens/s**。  \n**因带宽数据冲突，无法给出唯一答案**。实际部署中应优先采用 **实测值（2.0 TB/s）** 作为保守规划依据，但需明确标注数据来源差异。"
+ }
+}

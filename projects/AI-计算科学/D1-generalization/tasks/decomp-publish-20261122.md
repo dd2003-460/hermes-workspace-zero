@@ -19,11 +19,12 @@
 ## 任务表（派发只执行表内条目）
 | # | 任务 | 执行者 | 状态 |
 |---|---|---|---|
-| P1 | 题集 10 题出题（arena 任务卡）+ Lead 核 gold | arena + Lead | **已派发 11-23 14:0x**（会话 01a1ca66，任务书 @main 0b889b578 正文sha256 20af62bf，交付 tasks/T-PUB-1-result.md，核验走 git） |
+| P1 | 题集 10 题出题（arena 任务卡）+ Lead 核 gold | arena + Lead | **已交付+核验 11-23**（b148b12ed, 指纹一致, 10题47检查点 SymPy自检PASS, 落盘 tasks/T-PUB-1/; 7条方法学缺口登记, 阻塞项=#4 bool正则库） |
 | P2 | 对比脚本（formula_judge + 27b judge prompt 版本化） | Lead/subagent | **完成 11-23**（scripts/formula_judge.py：机械 judge calc/fact/bool + reward_only + LLM judge prompt v1 + Wilson CI；冒烟通过：全对=5/5，错5%=正确判错。待 P1 题集落地后接真实输出跑） |
-| P3 | 秩亏题 2-3 道设计（2026-11-23 修正：给不完整检索结果测"批判准确性"，不测"主动检索"——qqbot 补充 29 证模型不自主触发检索） | Lead | **已并入 P1 任务书**（T-PUB-1 含 3 道秩亏题，设计修正已写入；Lead 核 gold 时一并验） |
+| P3 | 秩亏题 2-3 道设计（2026-11-23 D 纠正：模型"有发现缺口意识(84%)、缺补缺口行动意识(1.6%)"是有效结论非 harness 问题；harness 问题仅当未提供检索工具时成立。秩亏题测"信息不足时正确报缺口/不编造"） | Lead | **已并入 P1 任务书**（T-PUB-1 含 3 道秩亏题 Q08/Q09/Q10，bool 判分字段已补 Lead 核 gold） |
 | P4 | "Why Is RSI Hard to Verify?" 精读 note | subagent | **完成 11-23（勘误：真实论文=Frontis-MA1/OpenRSI arXiv 2607.28568，非 2607.13110；note 落盘 research/openrsi-frontis-ma1-note-20261123.md，含 5 条 limitation 碰撞分析）** |
 | P5 | 统计口径定义（CI/翻转率/一致率） | Lead | **完成 11-23**（research/stats-protocol-20261123.md：Wilson CI + 按题聚类 + judge 族标注 + 秩亏三指标分开报） |
+| P6 | 状态机提醒 A/B 实验（D 2026-11-23 第 2 问落地：裸 vs 元认知提醒词，测 harness 外部提醒补上的 control 量 Δ；3 道秩亏题 pilot） | Lead | **进行中 11-23**（设计 research/harness-as-internal-capability-20261123.md；脚本 /tmp/rd_state_machine_ab.py 后台跑 6 次调用；判分 c1 报缺口率 + c3 不编造率，A/B 配对比较） |
 
 ## 留空（不编）
 - ICLR 2027 workshop 论文截止：[待核验，预计 2027-01 发布]

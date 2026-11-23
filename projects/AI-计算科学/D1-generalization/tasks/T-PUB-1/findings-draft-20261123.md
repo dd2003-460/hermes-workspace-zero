@@ -61,7 +61,9 @@ All six mt500 cases hit `finish_reason=length` (token budget exhausted before th
 
 On the parseable subset, we measure the flip rate: the fraction of checkpoints where the LLM judge's verdict disagrees with the mechanical judge. V1: 31/60 (51.7%, Wilson 95% CI [0.393, 0.638]), V2: 21/44 (47.7%, CI [0.338, 0.621]), V3: 66/128 (51.6%, CI [0.430, 0.600]). All three variants flip at ≈50% — indistinguishable from a coin flip: exact two-sided binomial test against p=0.5 gives p=0.90 (V1), p=0.79 (V3); every CI contains 0.5. The parseable subset is small (15/11/32 calls) because format failure (F1) dominates; the flip rate is measured on what survives.
 
-**Claim.** Format reliability and verdict accuracy are distinct failure modes, and both fail: the LLM judge is unreliable both in *emitting* a verdict (F1) and in the *content* of the verdict it does emit (F3). The mechanical judge is exact on both by construction.
+**Scope of the reference.** The mechanical reference is exact on calc checkpoints (SymPy symbolic comparison) but is a spec-driven regex heuristic on the textual-gold checkpoints of the rank-deficient tasks (c2: "names the missing quantity correctly"), where it scores 0/60. On those checkpoints the flip direction skews toward LLM-correct / mechanical-false-negative, so we report them separately: excluding the rank-deficient c2 textual-gold checkpoints, the flip rate is V1 27/45 (60.0%), V2 17/33 (51.5%), V3 45/96 (46.9%) — still ≈50% on every variant. The coin-flip claim therefore rests on the calc-gold checkpoints, where the reference is exact.
+
+**Claim.** Format reliability and verdict accuracy are distinct failure modes, and both fail: the LLM judge is unreliable both in *emitting* a verdict (F1) and in the *content* of the verdict it does emit (F3). The mechanical judge is exact on calc checkpoints by construction (0/67 format failures, symbolic gold); on textual-gold checkpoints it is a heuristic reference and is reported as such.
 
 ## F4. Guessing bound: the task set is not guessable
 

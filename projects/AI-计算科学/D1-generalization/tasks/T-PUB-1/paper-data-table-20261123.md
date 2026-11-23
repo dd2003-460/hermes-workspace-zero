@@ -67,6 +67,28 @@
 
 \* Q04 mt4000 首轮 3/5（截断）；mt12000 n=5 重跑 3/5 全对（r3/r5 确定性退化循环，同 md5）——主因 repetition degeneration（full7-mt12000.json）。
 
+## 核心实验正式跑：prompt 变体敏感性（n≥100，2026-11-23 进行中）
+
+pilot（judge-boundary-findings §4）只有 n=24，CI 太宽。正式跑：67 真实输出 × 3 prompt 变体（V1_strict/V2_loose/V3_engineer）= 201 次 LLM judge 调用（scripts/prompt_variant_formal.py）。
+
+**【D 2026-11-23 指出长度混淆 → 已量化确认】** 汇总格式失败率是 67 个长度 385–7210 字符输出的堆叠，若长输出更易让 judge 吐不可解析 JSON，则失败率含"长度驱动"成分，直接报"prompt 驱动格式不可靠"会过度归因。分离方法：同输出跨 3 变体比较（长度固定=纯 prompt 效应）vs 跨输出长度分桶（长度效应）。
+
+**V1_strict 全 67 次（已完成）长度混淆信号**：
+- 失败率随长度单调升：Q1（385–687 字符）30.8% → Q2（687–961）92.3% → Q3–Q5 稳定 85–92%
+- 失败 case 平均长度 1368 vs 通过 case 782
+- **700 字符处是台阶非渐变**（30.8% 直跳 92.3%）→ 不像"注意力稀释"平滑效应，更像推理链撞 max_tokens=500 截断的阈值效应
+
+**V1 vs V2 重叠 44 输出（长度固定，纯 prompt 效应）**：
+- 32/44 全挂（两变体都不可解析）= 73% → 输出/长度驱动
+- 5/44 混合（同输出 V1 挂 V2 过或反之）= 11.4% → 纯 prompt 效应
+- **结论：prompt 措辞只解释 1/9 失败，输出长度解释 8/9**
+
+**机制判别（截断 vs 指令遵循，探针跑中）**：对 V1 失败 case 用 max_tokens 500→2000 重判（scripts/mt_truncation_probe.py）。恢复率高→截断驱动（长度→推理链→撞 max_tokens）；恢复率低→指令遵循问题（模型不肯只输出 JSON）。
+
+**对论文 claim 的影响**：格式可靠性失败主驱动 = 输出长度 × max_tokens 截断交互（73% 输出驱动），prompt 措辞次要（11%）。比"prompt 驱动格式不可靠"更准且更可操作——缓解 = 提 max_tokens + 强制 JSON-only 解码，比"换机械 judge"更具体。机械 judge 优势细化为"格式 100% vs 受 max_tokens 截断约束的 ~30–90%（随输出长度）"。
+
+出处：scripts/prompt_variant_formal.py + /tmp/prompt_variant_formal.log（201 调用进行中）+ scripts/prompt_variant_analyze.py（5 维分析含长度混淆控制）+ scripts/mt_truncation_probe.py（截断探针）。
+
 ## 待补
 
 - [x] Q04 截断缓解（11-23 trunc_mitigate + full7_mt12000 n=5 完成）：mt4000→2/5（截断）；mt12000→3/5 全对（r3/r5 确定性退化循环）→ **主因 = repetition degeneration，非截断非随机波动**

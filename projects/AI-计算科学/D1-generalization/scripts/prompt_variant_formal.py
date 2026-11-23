@@ -35,7 +35,7 @@ def judge_llm_variant(spec, text, prompt, max_tokens=500):
         out = d["choices"][0]["message"]["content"]
         data = fj.extract_json(out)
         if data is None:
-            return False, {cp["id"]: None for cp in spec["checkpoints"]}
+            return False, {cp["id"]: None for cp in spec["checkpoints"]}, out
         # 格式合规检查: 必须包含所有 checkpoint id, 值必须是 bool (不能单布尔广播)
         result = {}
         for cp in spec["checkpoints"]:
@@ -44,10 +44,10 @@ def judge_llm_variant(spec, text, prompt, max_tokens=500):
                 result[cp["id"]] = v
             else:
                 # 键缺失或非 bool → 格式失败
-                return False, {c["id"]: None for c in spec["checkpoints"]}
-        return True, result
+                return False, {c["id"]: None for c in spec["checkpoints"]}, out
+        return True, result, out
     except Exception:
-        return False, {cp["id"]: None for cp in spec["checkpoints"]}
+        return False, {cp["id"]: None for cp in spec["checkpoints"]}, ""
 
 def main():
     t0 = time.time()
@@ -59,11 +59,10 @@ def main():
         for o in OUTS:
             spec = SPECS[o["spec_id"]]
             mech = fj.judge_mechanical(spec, o["text"])
-            parseable, llm = judge_llm_variant(spec, o["text"], vprompt)
-            results[vname][o["output_id"]] = {"parseable": parseable, "llm": llm, "mech": mech}
+            parseable, llm, raw = judge_llm_variant(spec, o["text"], vprompt)
+            results[vname][o["output_id"]] = {"parseable": parseable, "llm": llm, "mech": mech, "raw": raw}
             done += 1
-            if done % 10 == 0:
-                print(f"[{done}/{total_calls}] {vname} {o['output_id']} parseable={parseable}", flush=True)
+            print(f"[{done}/{total_calls}] {vname} {o['output_id']} parseable={parseable}", flush=True)
     # 统计
     summary = {}
     for vname, vres in results.items():

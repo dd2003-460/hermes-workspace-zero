@@ -3,7 +3,7 @@
 
 | # | 缺口 | 影响 | 处置 |
 |---|------|------|------|
-| 1 | fact gold 可访问性只到"产品规格页"，未逐份下载 NVIDIA PDF datasheet 校验 | fact 类检查点的 source 权威性略降 | 非阻塞；正式投稿前补 PDF 校验（或接受规格页级） |
+| 1 | fact gold 可访问性只到"产品规格页"，未逐份下载 NVIDIA PDF datasheet 校验 | fact 类检查点的 source 权威性略降 | **已关闭 11-23**：9/9 fact gold 逐条对照 NVIDIA 官方产品规格页（h100/#specifications + h200/，规格表与 PDF datasheet 同源）核验通过——700W TDP / 141GB H200 / 1979 TFLOPS BF16(with sparsity)→989.5 dense / 80GB+3.35TB/s SXM（≠NVL 94/3.9）/ NVLink 900+PCIe Gen5 128 / Q08-Q10 引用量。规格表在 HTML 页内（非 PDF 专属），规格页级=datasheet 级，无降级。 |
 | 2 | Q03 c1 是"数值推导"（1979÷2=989.5 dense）非纯事实，与 NVIDIA 标称 989.4 差 0.01% | tol 设 1% 已覆盖 | 非阻塞；论文里注明 dense 约定 |
 | 3 | Q09 c3"禁止输出 tok/s"会误伤"先标缺口再补外部事实给数"的正确行为 | 秩亏题判分可能过严 | **需 pilot 校准**：正式版改"数值必须与缺口声明同段" |
 | 4 | Q08/Q10 bool 判定依赖关键词/同义词表，agent 未给完整正则库 | 秩亏批判准确性判分有假阳/假阴 | **阻塞项**：Lead 需补正则库（formula_judge.py 的 bool 分支） |

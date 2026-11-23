@@ -40,7 +40,7 @@ Our contribution. Against a mechanical judge as the exact reference, we measure 
 3. Verdict accuracy flips at chance (F3). Even on the parseable subset, the LLM judge disagrees with the mechanical judge on 48–52\% of checkpoints — indistinguishable from a coin flip.
 
 
-4. The task set resists guessing (F4). Under an explicit random-guess model, the probability of guessing all checkpoints correct is bounded analytically (1.2e-10 to 3.3e-5) and confirmed by simulation (0/2000). The bound is model-agnostic.
+4. The task set resists guessing (F4). F1–F3 ask whether the judge can be trusted; F4 asks whether the *test* can be trusted. Under an explicit random-guess model, the probability of guessing all checkpoints correct is bounded analytically (1.2e-10 to 3.3e-5) and confirmed by simulation (0/2000) — a high score on this set cannot be explained by luck. The bound is model-agnostic.
 
 
 5. Prompt optimization is not free (F5). A three-arm behavioral experiment shows that fixing one checkpoint dimension (c1: 33\%→100\%) induces a side effect on another (c3: 100\%→77\%, via induced conditional-enumeration / hedging behavior).
@@ -231,7 +231,7 @@ Claim. Format reliability and verdict accuracy are distinct failure modes, and b
 Why a coin flip is worse than a bias. A *biased* judge is still a usable instrument: its systematic error can be estimated (by calibration against a reference) and subtracted, and it at least ranks items consistently. A *coin-flip* judge is not: its error is independent of the item, so no calibration can recover a signal that is not there, and its verdicts carry no information about which items are actually correct. The 51.7\%/47.7\%/51.6\% flip rates — each statistically indistinguishable from 50\% — place the LLM judge in the second category on the parseable subset. This is the sense in which the LLM judge is not merely "noisy" but *uninformative* on the formalizable core: even the verdicts it manages to emit carry no reliable signal about correctness.
 
 
-To rule out that high scores are achievable by guessing, we define an explicit random-guess model and derive an analytic upper bound on the probability of guessing all checkpoints correct.
+To rule out that high scores are achievable by guessing, we define an explicit random-guess model and derive an analytic upper bound on the probability of guessing all checkpoints correct. This answers the paper's second validity question: F1–F3 ask whether the *judge* can be trusted; F4 asks whether the *test* can be trusted. If a high score were achievable by chance, the reliability measurements above it would rest on a rotten foundation — the "correct" being compared against would itself be unreliable.
 
 
 Guess model: continuous calc checkpoints (tol 2\%) — guess U[0.5g, 2g], hit probability 2·tol/1.5; integer-exact checkpoints (tol 0) — guess U[g±50], hit probability 1/101; textual gold — hit probability 1/100 (conservative). The probability of guessing all checkpoints correct is the product over checkpoints (independent-guess assumption).
@@ -362,8 +362,6 @@ Single-run point estimates. The F1/F3 rates are single-run estimates. F2 shows t
 \bibitem{metric2026} Metric Match: A Subset Selection Approach to Evaluating LLM Judge Reliability. arXiv:2606.15029.
 \bibitem{vera2026} VERA: Verdict-Conditioned Reliability for Adaptive LLM Judges. arXiv:2610.05452.
 \end{thebibliography}
-
-
 \appendix
 Per-question × per-variant parseability and flip count (aggregated over all outputs per question; full 201-row dump in data/prompt\_variant\_formal.json). ✓/✗ = parseable on that output; (flip f/j) = LLM≠mech on judged checkpoints. Q01–Q07: 1 output each; Q08–Q10: 10 outputs each (A/B arms).
 

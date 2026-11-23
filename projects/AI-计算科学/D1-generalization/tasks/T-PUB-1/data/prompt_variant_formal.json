@@ -11,7 +11,28 @@
    "format_fail_rate": 0.7761194029850746,
    "n_checkpoints_parsed": 60,
    "flip": 31,
-   "flip_rate": 0.5166666666666667
+   "flip_rate": 0.5166666666666667,
+   "flip_all_fixed": 39,
+   "flip_all_fixed_rate": 0.65,
+   "flip_all_fixed_ci": [
+    0.524,
+    0.758
+   ],
+   "flip_all_fixed_den": 60,
+   "flip_exact_core": 2,
+   "flip_exact_core_den": 16,
+   "flip_exact_core_rate": 0.125,
+   "flip_exact_core_ci": [
+    0.035,
+    0.36
+   ],
+   "flip_heuristic": 37,
+   "flip_heuristic_den": 44,
+   "flip_heuristic_rate": 0.8409,
+   "flip_heuristic_ci": [
+    0.706,
+    0.921
+   ]
   },
   "V2_loose": {
    "n_calls": 67,
@@ -19,7 +40,28 @@
    "format_fail_rate": 0.835820895522388,
    "n_checkpoints_parsed": 44,
    "flip": 21,
-   "flip_rate": 0.4772727272727273
+   "flip_rate": 0.4772727272727273,
+   "flip_all_fixed": 25,
+   "flip_all_fixed_rate": 0.5682,
+   "flip_all_fixed_ci": [
+    0.422,
+    0.703
+   ],
+   "flip_all_fixed_den": 44,
+   "flip_exact_core": 0,
+   "flip_exact_core_den": 12,
+   "flip_exact_core_rate": 0.0,
+   "flip_exact_core_ci": [
+    0,
+    0.243
+   ],
+   "flip_heuristic": 25,
+   "flip_heuristic_den": 32,
+   "flip_heuristic_rate": 0.7812,
+   "flip_heuristic_ci": [
+    0.612,
+    0.89
+   ]
   },
   "V3_engineer": {
    "n_calls": 67,
@@ -27,7 +69,28 @@
    "format_fail_rate": 0.5223880597014925,
    "n_checkpoints_parsed": 128,
    "flip": 66,
-   "flip_rate": 0.515625
+   "flip_rate": 0.515625,
+   "flip_all_fixed": 68,
+   "flip_all_fixed_rate": 0.5312,
+   "flip_all_fixed_ci": [
+    0.445,
+    0.616
+   ],
+   "flip_all_fixed_den": 128,
+   "flip_exact_core": 2,
+   "flip_exact_core_den": 45,
+   "flip_exact_core_rate": 0.0444,
+   "flip_exact_core_ci": [
+    0.012,
+    0.148
+   ],
+   "flip_heuristic": 66,
+   "flip_heuristic_den": 83,
+   "flip_heuristic_rate": 0.7952,
+   "flip_heuristic_ci": [
+    0.696,
+    0.868
+   ]
   }
  },
  "results": {
@@ -47,7 +110,8 @@
      "c3": true,
      "c4": true,
      "c5": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q02-r1": {
     "parseable": false,
@@ -64,7 +128,8 @@
      "c3": true,
      "c4": true,
      "c5": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q03-r1": {
     "parseable": false,
@@ -81,7 +146,8 @@
      "c3": true,
      "c4": true,
      "c5": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q04-r1": {
     "parseable": false,
@@ -98,7 +164,8 @@
      "c3": true,
      "c4": true,
      "c5": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q05-r1": {
     "parseable": false,
@@ -115,7 +182,8 @@
      "c3": false,
      "c4": false,
      "c5": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q06-r1": {
     "parseable": false,
@@ -132,7 +200,8 @@
      "c3": false,
      "c4": true,
      "c5": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q07-r1": {
     "parseable": false,
@@ -149,7 +218,8 @@
      "c3": false,
      "c4": false,
      "c5": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep1": {
     "parseable": false,
@@ -161,10 +231,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep2": {
     "parseable": false,
@@ -176,10 +247,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep3": {
     "parseable": false,
@@ -191,10 +263,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep4": {
     "parseable": false,
@@ -206,10 +279,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep5": {
     "parseable": false,
@@ -221,10 +295,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep6": {
     "parseable": false,
@@ -236,10 +311,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep7": {
     "parseable": true,
@@ -251,10 +327,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep8": {
     "parseable": true,
@@ -266,10 +343,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep9": {
     "parseable": false,
@@ -281,10 +359,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep10": {
     "parseable": true,
@@ -296,10 +375,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep1": {
     "parseable": false,
@@ -311,10 +391,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep2": {
     "parseable": false,
@@ -326,10 +407,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep3": {
     "parseable": false,
@@ -344,7 +426,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep4": {
     "parseable": false,
@@ -359,7 +442,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep5": {
     "parseable": false,
@@ -374,7 +458,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep6": {
     "parseable": false,
@@ -389,7 +474,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep7": {
     "parseable": false,
@@ -404,7 +490,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep8": {
     "parseable": false,
@@ -419,7 +506,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep9": {
     "parseable": false,
@@ -434,7 +522,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep10": {
     "parseable": false,
@@ -449,7 +538,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep1": {
     "parseable": false,
@@ -461,10 +551,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": false,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep2": {
     "parseable": false,
@@ -476,10 +567,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep3": {
     "parseable": false,
@@ -491,10 +583,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep4": {
     "parseable": false,
@@ -506,10 +599,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": false,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep5": {
     "parseable": false,
@@ -521,10 +615,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep6": {
     "parseable": false,
@@ -536,10 +631,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": false,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep7": {
     "parseable": false,
@@ -551,10 +647,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": false,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep8": {
     "parseable": true,
@@ -566,10 +663,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep9": {
     "parseable": true,
@@ -581,10 +679,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep10": {
     "parseable": false,
@@ -596,10 +695,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": false,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep1": {
     "parseable": true,
@@ -611,10 +711,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep2": {
     "parseable": true,
@@ -626,10 +727,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep3": {
     "parseable": true,
@@ -641,10 +743,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep4": {
     "parseable": true,
@@ -656,10 +759,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep5": {
     "parseable": true,
@@ -671,10 +775,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep6": {
     "parseable": true,
@@ -686,10 +791,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep7": {
     "parseable": false,
@@ -701,10 +807,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep8": {
     "parseable": true,
@@ -716,10 +823,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep9": {
     "parseable": true,
@@ -731,10 +839,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep10": {
     "parseable": true,
@@ -746,10 +855,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep1": {
     "parseable": false,
@@ -761,10 +871,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep2": {
     "parseable": false,
@@ -779,7 +890,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep3": {
     "parseable": false,
@@ -791,10 +903,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep4": {
     "parseable": false,
@@ -806,10 +919,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep5": {
     "parseable": false,
@@ -821,10 +935,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep6": {
     "parseable": false,
@@ -836,10 +951,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep7": {
     "parseable": false,
@@ -851,10 +967,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep8": {
     "parseable": false,
@@ -866,10 +983,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep9": {
     "parseable": false,
@@ -881,10 +999,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep10": {
     "parseable": false,
@@ -896,10 +1015,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep1": {
     "parseable": false,
@@ -914,7 +1034,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep2": {
     "parseable": false,
@@ -929,7 +1050,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep3": {
     "parseable": true,
@@ -944,7 +1066,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep4": {
     "parseable": false,
@@ -959,7 +1082,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep5": {
     "parseable": false,
@@ -974,7 +1098,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep6": {
     "parseable": false,
@@ -989,7 +1114,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep7": {
     "parseable": false,
@@ -1004,7 +1130,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep8": {
     "parseable": false,
@@ -1019,7 +1146,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep9": {
     "parseable": false,
@@ -1034,7 +1162,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep10": {
     "parseable": false,
@@ -1049,7 +1178,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    }
   },
   "V2_loose": {
@@ -1068,7 +1198,8 @@
      "c3": true,
      "c4": true,
      "c5": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q02-r1": {
     "parseable": false,
@@ -1085,7 +1216,8 @@
      "c3": true,
      "c4": true,
      "c5": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q03-r1": {
     "parseable": false,
@@ -1102,7 +1234,8 @@
      "c3": true,
      "c4": true,
      "c5": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q04-r1": {
     "parseable": false,
@@ -1119,7 +1252,8 @@
      "c3": true,
      "c4": true,
      "c5": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q05-r1": {
     "parseable": false,
@@ -1136,7 +1270,8 @@
      "c3": false,
      "c4": false,
      "c5": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q06-r1": {
     "parseable": false,
@@ -1153,7 +1288,8 @@
      "c3": false,
      "c4": true,
      "c5": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q07-r1": {
     "parseable": false,
@@ -1170,7 +1306,8 @@
      "c3": false,
      "c4": false,
      "c5": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep1": {
     "parseable": false,
@@ -1182,10 +1319,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep2": {
     "parseable": false,
@@ -1197,10 +1335,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep3": {
     "parseable": true,
@@ -1212,10 +1351,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep4": {
     "parseable": false,
@@ -1227,10 +1367,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep5": {
     "parseable": false,
@@ -1242,10 +1383,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep6": {
     "parseable": false,
@@ -1257,10 +1399,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep7": {
     "parseable": true,
@@ -1272,10 +1415,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep8": {
     "parseable": false,
@@ -1287,10 +1431,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep9": {
     "parseable": false,
@@ -1302,10 +1447,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep10": {
     "parseable": true,
@@ -1317,10 +1463,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep1": {
     "parseable": false,
@@ -1332,10 +1479,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep2": {
     "parseable": false,
@@ -1347,10 +1495,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep3": {
     "parseable": false,
@@ -1365,7 +1514,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep4": {
     "parseable": false,
@@ -1380,7 +1530,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep5": {
     "parseable": false,
@@ -1395,7 +1546,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep6": {
     "parseable": false,
@@ -1410,7 +1562,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep7": {
     "parseable": false,
@@ -1425,7 +1578,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep8": {
     "parseable": false,
@@ -1440,7 +1594,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep9": {
     "parseable": false,
@@ -1455,7 +1610,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep10": {
     "parseable": false,
@@ -1470,7 +1626,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep1": {
     "parseable": false,
@@ -1482,10 +1639,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": false,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep2": {
     "parseable": false,
@@ -1497,10 +1655,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep3": {
     "parseable": false,
@@ -1512,10 +1671,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep4": {
     "parseable": false,
@@ -1527,10 +1687,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": false,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep5": {
     "parseable": false,
@@ -1542,10 +1703,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep6": {
     "parseable": false,
@@ -1557,10 +1719,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": false,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep7": {
     "parseable": false,
@@ -1572,10 +1735,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": false,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep8": {
     "parseable": false,
@@ -1587,10 +1751,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep9": {
     "parseable": false,
@@ -1602,10 +1767,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep10": {
     "parseable": false,
@@ -1617,10 +1783,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": false,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep1": {
     "parseable": true,
@@ -1632,10 +1799,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep2": {
     "parseable": true,
@@ -1647,10 +1815,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep3": {
     "parseable": true,
@@ -1662,10 +1831,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep4": {
     "parseable": true,
@@ -1677,10 +1847,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep5": {
     "parseable": true,
@@ -1692,10 +1863,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep6": {
     "parseable": false,
@@ -1707,10 +1879,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep7": {
     "parseable": false,
@@ -1722,10 +1895,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep8": {
     "parseable": false,
@@ -1737,10 +1911,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep9": {
     "parseable": true,
@@ -1752,10 +1927,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep10": {
     "parseable": true,
@@ -1767,10 +1943,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep1": {
     "parseable": false,
@@ -1782,10 +1959,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep2": {
     "parseable": false,
@@ -1800,7 +1978,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep3": {
     "parseable": false,
@@ -1812,10 +1991,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep4": {
     "parseable": false,
@@ -1827,10 +2007,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep5": {
     "parseable": false,
@@ -1842,10 +2023,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep6": {
     "parseable": false,
@@ -1857,10 +2039,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep7": {
     "parseable": false,
@@ -1872,10 +2055,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep8": {
     "parseable": false,
@@ -1887,10 +2071,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep9": {
     "parseable": false,
@@ -1902,10 +2087,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep10": {
     "parseable": false,
@@ -1917,10 +2103,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep1": {
     "parseable": false,
@@ -1935,7 +2122,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep2": {
     "parseable": false,
@@ -1950,7 +2138,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep3": {
     "parseable": true,
@@ -1965,7 +2154,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep4": {
     "parseable": false,
@@ -1980,7 +2170,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep5": {
     "parseable": false,
@@ -1995,7 +2186,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep6": {
     "parseable": false,
@@ -2010,7 +2202,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep7": {
     "parseable": false,
@@ -2025,7 +2218,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep8": {
     "parseable": false,
@@ -2040,7 +2234,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep9": {
     "parseable": false,
@@ -2055,7 +2250,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep10": {
     "parseable": false,
@@ -2070,7 +2266,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    }
   },
   "V3_engineer": {
@@ -2089,7 +2286,8 @@
      "c3": true,
      "c4": true,
      "c5": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q02-r1": {
     "parseable": false,
@@ -2106,7 +2304,8 @@
      "c3": true,
      "c4": true,
      "c5": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q03-r1": {
     "parseable": false,
@@ -2123,7 +2322,8 @@
      "c3": true,
      "c4": true,
      "c5": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q04-r1": {
     "parseable": false,
@@ -2140,7 +2340,8 @@
      "c3": true,
      "c4": true,
      "c5": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q05-r1": {
     "parseable": false,
@@ -2157,7 +2358,8 @@
      "c3": false,
      "c4": false,
      "c5": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q06-r1": {
     "parseable": false,
@@ -2174,7 +2376,8 @@
      "c3": false,
      "c4": true,
      "c5": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q07-r1": {
     "parseable": false,
@@ -2191,7 +2394,8 @@
      "c3": false,
      "c4": false,
      "c5": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep1": {
     "parseable": false,
@@ -2203,10 +2407,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep2": {
     "parseable": false,
@@ -2218,10 +2423,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep3": {
     "parseable": false,
@@ -2233,10 +2439,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep4": {
     "parseable": false,
@@ -2248,10 +2455,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep5": {
     "parseable": false,
@@ -2263,10 +2471,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep6": {
     "parseable": true,
@@ -2278,10 +2487,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep7": {
     "parseable": false,
@@ -2293,10 +2503,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep8": {
     "parseable": false,
@@ -2308,10 +2519,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep9": {
     "parseable": true,
@@ -2323,10 +2535,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/A_baseline/rep10": {
     "parseable": false,
@@ -2338,10 +2551,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep1": {
     "parseable": false,
@@ -2353,10 +2567,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep2": {
     "parseable": false,
@@ -2368,10 +2583,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep3": {
     "parseable": true,
@@ -2386,7 +2602,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep4": {
     "parseable": true,
@@ -2401,7 +2618,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep5": {
     "parseable": true,
@@ -2416,7 +2634,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep6": {
     "parseable": false,
@@ -2431,7 +2650,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep7": {
     "parseable": false,
@@ -2446,7 +2666,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep8": {
     "parseable": false,
@@ -2461,7 +2682,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep9": {
     "parseable": false,
@@ -2476,7 +2698,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q08/B_remind/rep10": {
     "parseable": true,
@@ -2491,7 +2714,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep1": {
     "parseable": false,
@@ -2503,10 +2727,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": false,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep2": {
     "parseable": false,
@@ -2518,10 +2743,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep3": {
     "parseable": false,
@@ -2533,10 +2759,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep4": {
     "parseable": false,
@@ -2548,10 +2775,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": false,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep5": {
     "parseable": false,
@@ -2563,10 +2791,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep6": {
     "parseable": true,
@@ -2578,10 +2807,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": false,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep7": {
     "parseable": true,
@@ -2593,10 +2823,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": false,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep8": {
     "parseable": true,
@@ -2608,10 +2839,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep9": {
     "parseable": true,
@@ -2623,10 +2855,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/A_baseline/rep10": {
     "parseable": false,
@@ -2638,10 +2871,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": false,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep1": {
     "parseable": true,
@@ -2653,10 +2887,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep2": {
     "parseable": true,
@@ -2668,10 +2903,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep3": {
     "parseable": true,
@@ -2683,10 +2919,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep4": {
     "parseable": true,
@@ -2698,10 +2935,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep5": {
     "parseable": true,
@@ -2713,10 +2951,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep6": {
     "parseable": true,
@@ -2728,10 +2967,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep7": {
     "parseable": false,
@@ -2743,10 +2983,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep8": {
     "parseable": true,
@@ -2758,10 +2999,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep9": {
     "parseable": true,
@@ -2773,10 +3015,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q09/B_remind/rep10": {
     "parseable": true,
@@ -2788,10 +3031,11 @@
     },
     "mech": {
      "c1": true,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": false
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep1": {
     "parseable": true,
@@ -2803,10 +3047,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep2": {
     "parseable": false,
@@ -2821,7 +3066,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep3": {
     "parseable": true,
@@ -2833,10 +3079,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep4": {
     "parseable": false,
@@ -2848,10 +3095,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep5": {
     "parseable": true,
@@ -2863,10 +3111,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep6": {
     "parseable": false,
@@ -2878,10 +3127,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep7": {
     "parseable": false,
@@ -2893,10 +3143,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep8": {
     "parseable": false,
@@ -2908,10 +3159,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep9": {
     "parseable": true,
@@ -2923,10 +3175,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/A_baseline/rep10": {
     "parseable": true,
@@ -2938,10 +3191,11 @@
     },
     "mech": {
      "c1": false,
-     "c2": false,
+     "c2": true,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep1": {
     "parseable": false,
@@ -2956,7 +3210,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep2": {
     "parseable": true,
@@ -2971,7 +3226,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep3": {
     "parseable": false,
@@ -2986,7 +3242,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep4": {
     "parseable": true,
@@ -3001,7 +3258,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep5": {
     "parseable": true,
@@ -3016,7 +3274,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep6": {
     "parseable": true,
@@ -3031,7 +3290,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep7": {
     "parseable": true,
@@ -3046,7 +3306,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep8": {
     "parseable": true,
@@ -3061,7 +3322,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep9": {
     "parseable": true,
@@ -3076,7 +3338,8 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    },
    "T-PUB-1-Q10/B_remind/rep10": {
     "parseable": true,
@@ -3091,8 +3354,10 @@
      "c2": false,
      "c3": true,
      "c4": true
-    }
+    },
+    "judge_version": "formula_judge v0.2 (c2 keyword fix)"
    }
   }
- }
+ },
+ "judge_note": "formula_judge v0.2: c2 textual-gold now keyword-matched (was always False in v0.1). Flip stratified by reference quality: exact (calc+numeric-fact) vs heuristic (bool+textual-gold-fact)."
 }

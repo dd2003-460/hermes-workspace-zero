@@ -161,6 +161,17 @@ def judge_mechanical(spec, text):
         elif kind == "fact":
             gv = eval_gold(gold)
             # fact: 模型输出里出现该数值（±tol）。tol=0 精确匹配（0<0 恒 False，需单独分支）。
+            # 文字 gold（字符串，eval_gold→None）: 走 keywords 判分（与 bool 同套路，
+            # spec 驱动）。无 keywords 字段 → False（不静默，显式失败）。
+            # [arena W6 conf 0.99: 旧版文字 gold 恒判 False, Q08-Q10 c2 180/180 恒错]
+            if isinstance(gold, str) and gv is None:
+                kws = cp.get("keywords", [])
+                if not kws:
+                    results[cid] = False
+                else:
+                    low = text.lower() if text else ""
+                    results[cid] = any(kw.lower() in low for kw in kws)
+                continue
             if gv is None or not text:
                 results[cid] = False
             else:

@@ -4098,3 +4098,5 @@
 {"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795418713.669245}
 {"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1795418720.784837}
 {"event": "PreToolUse", "turn": null, "tool": "patch", "ts": 1795418720.785253}
+{"event": "hook_fire", "rule": "delegate-heavy-work", "turn": null, "via": "metric", "ts": 1795418730.4567602}
+{"event": "PreToolUse", "turn": null, "tool": "terminal", "ts": 1795418730.457207}

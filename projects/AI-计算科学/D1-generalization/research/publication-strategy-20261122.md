@@ -32,7 +32,7 @@
 
 ## §3 两轨计划
 
-### 轨 A（主）：ICLR 2027 主会，2026-09-25 截止（12 周）
+### 轨 A（主）：~~ICLR 2027 主会~~ → **ICML 2027 主会（2027-01-22 截止，2026-11-23 修正：ICLR 2027 截止 2026-09-25 已过，最近主会窗口 = ICML 2027）**
 
 | 周 | 任务 | 产出 | 依赖 |
 |---|---|---|---|
@@ -51,7 +51,7 @@
 ### 轨 B（保底，微小但可见）：workshop / 预印本，4-6 周
 
 - **最小可见成果 = 4 页 workshop 短文**："Mechanical Verifiers as Objective Judges for Agent Reliability"：10 题 × 2 judge 的翻转率对比 + 瞎猜概率界 + 1 个 reward-only 自修复案例。
-- 目标：ICLR 2027 workshop（2027-04-29~30；workshop 论文截止通常 2027-02~03，具体随各 workshop CFP）+ arXiv 预印本先行。
+- 目标：ICLR 2027 workshop（2027-04-29~30；**论文提交 suggested deadline 2027-02-01**（2026-11-23 ego-browser 实查 iclr.cc/Conferences/2027/CallForWorkshops），录用通知须 2027-02-26 前；workshop 组织者录用名单 2026-11-29 公布 → 届时确认目标 workshop + 各自 CFP 页数限制）+ arXiv 预印本先行。
 - 成本：W1-3 做完即可投，不需要等 W4-6 全量。
 - 可见性：arXiv + workshop 报告 + 与 Jin 线/SAGA 线的 outreach（cold-email-design 已有 SOP）形成引用链。
 

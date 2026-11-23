@@ -1,0 +1,597 @@
+{
+ "specs": {
+  "T-PUB-1-Q01": {
+   "id": "T-PUB-1-Q01",
+   "domain": "gpu",
+   "type": "full",
+   "checkpoints": [
+    {
+     "id": "c1",
+     "kind": "fact",
+     "desc": "H100 SXM datasheet max TDP = 700 W (configurable)",
+     "gold": 700,
+     "unit": "W",
+     "tolerance": 0.0,
+     "source": "https://www.nvidia.com/en-us/data-center/h100/#specifications"
+    },
+    {
+     "id": "c2",
+     "kind": "calc",
+     "desc": "KV bytes per token = layers * kv_heads * head_dim * 2(K,V) * 1B",
+     "gold": "64*8*128*2",
+     "unit": "bytes",
+     "tolerance": 0.02,
+     "source": "kv = 2 * n_layers * n_kv_heads * d_head * dtype_bytes"
+    },
+    {
+     "id": "c3",
+     "kind": "calc",
+     "desc": "bytes moved per decode step = weights + batch*ctx*kv_per_token",
+     "gold": "32e9 + 16*12288*(64*8*128*2)",
+     "unit": "bytes",
+     "tolerance": 0.02,
+     "source": "depends on c2"
+    },
+    {
+     "id": "c4",
+     "kind": "calc",
+     "desc": "aggregate decode tokens/s = 0.85 * 3.35e12 / bytes_per_step",
+     "gold": "16*0.85*3.35e12/(32e9 + 16*12288*(64*8*128*2))",
+     "unit": "tok/s",
+     "tolerance": 0.02,
+     "source": "depends on c3"
+    },
+    {
+     "id": "c5",
+     "kind": "calc",
+     "desc": "Joules per generated token = TDP / aggregate tok/s",
+     "gold": "(700)/(16*0.85*3.35e12/(32e9 + 16*12288*(64*8*128*2)))",
+     "unit": "J/token",
+     "tolerance": 0.02,
+     "source": "depends on c1 + c4"
+    }
+   ],
+   "checks": {
+    "fits_in_80gb": 1,
+    "headroom_gb": "80 - (32 + 16*12288*(64*8*128*2)/1e9 + 4)"
+   },
+   "reward_only_feedback": "c1=ok|miss; c2=ok|miss; c3=ok|miss; c4=ok|miss; c5=ok|miss"
+  },
+  "T-PUB-1-Q02": {
+   "id": "T-PUB-1-Q02",
+   "domain": "gpu",
+   "type": "full",
+   "checkpoints": [
+    {
+     "id": "c1",
+     "kind": "fact",
+     "desc": "H200 SXM datasheet HBM capacity = 141 GB",
+     "gold": 141,
+     "unit": "GB",
+     "tolerance": 0.01,
+     "source": "https://www.nvidia.com/en-us/data-center/h200/"
+    },
+    {
+     "id": "c2",
+     "kind": "calc",
+     "desc": "KV bytes per token",
+     "gold": "80*8*128*2",
+     "unit": "bytes",
+     "tolerance": 0.02,
+     "source": "kv = 2 * layers * kv_heads * d_head * 1B"
+    },
+    {
+     "id": "c3",
+     "kind": "calc",
+     "desc": "KV pool bytes = (141 - 70 - 6.5) * 1e9",
+     "gold": "(141-70-6.5)*1e9",
+     "unit": "bytes",
+     "tolerance": 0.02,
+     "source": "depends on c1"
+    },
+    {
+     "id": "c4",
+     "kind": "calc",
+     "desc": "max KV tokens = pool_bytes / kv_bytes_per_token",
+     "gold": "(141-70-6.5)*1e9/(80*8*128*2)",
+     "unit": "tokens",
+     "tolerance": 0.02,
+     "source": "depends on c2 + c3"
+    },
+    {
+     "id": "c5",
+     "kind": "calc",
+     "desc": "largest integer batch at 8192 ctx = floor(max_tokens / 8192)",
+     "gold": "floor((141-70-6.5)*1e9/(80*8*128*2)/8192)",
+     "unit": "sequences",
+     "tolerance": 0.0,
+     "source": "depends on c4"
+    }
+   ],
+   "checks": {
+    "batch64_at_8192_fits": 0,
+    "batch64_bytes": "64*8192*(80*8*128*2)"
+   },
+   "reward_only_feedback": "c1=ok|miss; c2=ok|miss; c3=ok|miss; c4=ok|miss; c5=ok|miss"
+  },
+  "T-PUB-1-Q03": {
+   "id": "T-PUB-1-Q03",
+   "domain": "gpu",
+   "type": "full",
+   "checkpoints": [
+    {
+     "id": "c1",
+     "kind": "fact",
+     "desc": "dense BF16 = 1,979 TFLOPS (with sparsity) / 2 = 989.5 TFLOPS",
+     "gold": "1979e12/2",
+     "unit": "FLOP/s",
+     "tolerance": 0.01,
+     "source": "https://www.nvidia.com/en-us/data-center/h100/#specifications (footnote: with sparsity)"
+    },
+    {
+     "id": "c2",
+     "kind": "calc",
+     "desc": "ridge point = dense BF16 / HBM BW",
+     "gold": "(1979e12/2)/3.35e12",
+     "unit": "FLOP/byte",
+     "tolerance": 0.02,
+     "source": "depends on c1"
+    },
+    {
+     "id": "c3",
+     "kind": "calc",
+     "desc": "arithmetic intensity = 2*params*tokens / (weights + kv bytes)",
+     "gold": "2*32e9*8192/(32e9 + 8192*(64*8*128*2))",
+     "unit": "FLOP/byte",
+     "tolerance": 0.02,
+     "source": "kv = 2*64*8*128*1B"
+    },
+    {
+     "id": "c4",
+     "kind": "calc",
+     "desc": "AI / ridge",
+     "gold": "(2*32e9*8192/(32e9 + 8192*(64*8*128*2)))/((1979e12/2)/3.35e12)",
+     "unit": "dimensionless",
+     "tolerance": 0.03,
+     "source": "depends on c2 + c3"
+    },
+    {
+     "id": "c5",
+     "kind": "bool",
+     "desc": "compute-bound verdict (1 = compute-bound)",
+     "gold": 1,
+     "tolerance": 0,
+     "source": "AI/ridge >> 1",
+     "keywords": [
+      "compute-bound",
+      "compute bound",
+      "compute bound regime"
+     ]
+    }
+   ],
+   "reward_only_feedback": "c1=ok|miss; c2=ok|miss; c3=ok|miss; c4=ok|miss; c5=ok|miss"
+  },
+  "T-PUB-1-Q04": {
+   "id": "T-PUB-1-Q04",
+   "domain": "gpu",
+   "type": "full",
+   "checkpoints": [
+    {
+     "id": "c1",
+     "kind": "fact",
+     "desc": "H100 SXM (SXM5) HBM capacity = 80 GB — NOT NVL's 94 GB",
+     "gold": 80,
+     "unit": "GB",
+     "tolerance": 0.0,
+     "source": "https://www.nvidia.com/en-us/data-center/h100/#specifications"
+    },
+    {
+     "id": "c2",
+     "kind": "fact",
+     "desc": "H100 SXM HBM bandwidth = 3.35 TB/s — NOT NVL's 3.9 TB/s",
+     "gold": 3.35,
+     "unit": "TB/s",
+     "tolerance": 0.01,
+     "source": "https://www.nvidia.com/en-us/data-center/h100/#specifications"
+    },
+    {
+     "id": "c3",
+     "kind": "calc",
+     "desc": "weights per GPU = 405e9/8",
+     "gold": "405e9/8",
+     "unit": "bytes",
+     "tolerance": 0.02,
+     "source": "TP=8 shards weights evenly"
+    },
+    {
+     "id": "c4",
+     "kind": "calc",
+     "desc": "KV pool per GPU = (80 - weights_GB - 5.5) * 1e9",
+     "gold": "(80 - 405e9/8/1e9 - 5.5)*1e9",
+     "unit": "bytes",
+     "tolerance": 0.02,
+     "source": "depends on c1 + c3"
+    },
+    {
+     "id": "c5",
+     "kind": "calc",
+     "desc": "largest integer batch at 16384 ctx = floor(KV_pool / (16384*kv_per_token))",
+     "gold": "floor((80 - 405e9/8/1e9 - 5.5)*1e9/(16384*(126*8*128*2)))",
+     "unit": "sequences",
+     "tolerance": 0.0,
+     "source": "kv_per_token = 2*126*8*128*1B = 258048"
+    }
+   ],
+   "checks": {
+    "batch8_at_16384_fits": 0,
+    "batch8_bytes": "8*16384*(126*8*128*2)"
+   },
+   "reward_only_feedback": "c1=ok|miss; c2=ok|miss; c3=ok|miss; c4=ok|miss; c5=ok|miss"
+  },
+  "T-PUB-1-Q05": {
+   "id": "T-PUB-1-Q05",
+   "domain": "gpu",
+   "type": "full",
+   "checkpoints": [
+    {
+     "id": "c1",
+     "kind": "fact",
+     "desc": "H100 SXM NVLink 4 = 900 GB/s; PCIe Gen5 = 128 GB/s (both directional/aggregate as published)",
+     "gold": 900,
+     "unit": "GB/s",
+     "tolerance": 0.0,
+     "source": "https://www.nvidia.com/en-us/data-center/h100/#specifications"
+    },
+    {
+     "id": "c2",
+     "kind": "calc",
+     "desc": "ring volume per GPU = 2*(N-1)/N * S, S = 4*8192*8192*2 bytes",
+     "gold": "2*(8-1)/8*(4*8192*8192*2)",
+     "unit": "bytes",
+     "tolerance": 0.02,
+     "source": "ring all-reduce volume 2(N-1)/N*S"
+    },
+    {
+     "id": "c3",
+     "kind": "calc",
+     "desc": "NVLink comm time per layer = volume / 450e9 s -> ms",
+     "gold": "2*(8-1)/8*(4*8192*8192*2)/450e9*1000",
+     "unit": "ms",
+     "tolerance": 0.02,
+     "source": "depends on c2"
+    },
+    {
+     "id": "c4",
+     "kind": "calc",
+     "desc": "PCIe comm time per layer = volume / 55e9 s -> ms",
+     "gold": "2*(8-1)/8*(4*8192*8192*2)/55e9*1000",
+     "unit": "ms",
+     "tolerance": 0.02,
+     "source": "depends on c2"
+    },
+    {
+     "id": "c5",
+     "kind": "bool",
+     "desc": "PCIe is comm-bound (1=yes); ratio = t_pcie/3.71ms",
+     "gold": 1,
+     "tolerance": 0,
+     "source": "ratio = (2*7/8*4*8192*8192*2/55e9)/3.71e-3 ≈ 4.60",
+     "keywords": [
+      "comm-bound",
+      "communication-bound",
+      "communication bound"
+     ]
+    }
+   ],
+   "checks": {
+    "nvl_comm_bound": 0,
+    "nvl_ratio": "(2*7/8*(4*8192*8192*2)/450e9)/3.71e-3"
+   },
+   "reward_only_feedback": "c1=ok|miss; c2=ok|miss; c3=ok|miss; c4=ok|miss; c5=ok|miss"
+  },
+  "T-PUB-1-Q06": {
+   "id": "T-PUB-1-Q06",
+   "domain": "math",
+   "type": "full",
+   "checkpoints": [
+    {
+     "id": "c1",
+     "kind": "calc",
+     "desc": "det(A) = 11*3 - (2*sqrt(13))^2",
+     "gold": "11*3-(2*sqrt(13))**2",
+     "unit": "scalar",
+     "tolerance": 0.0,
+     "source": "det = ac - b^2 for symmetric 2x2"
+    },
+    {
+     "id": "c2",
+     "kind": "calc",
+     "desc": "lambda_max = 7 + 2*sqrt(17)",
+     "gold": "7+2*sqrt(17)",
+     "unit": "scalar",
+     "tolerance": 0.001,
+     "source": "lambda = tr/2 ± sqrt((tr/2)^2 - det), tr=14"
+    },
+    {
+     "id": "c3",
+     "kind": "calc",
+     "desc": "lambda_min = 7 - 2*sqrt(17)  (negative!)",
+     "gold": "7-2*sqrt(17)",
+     "unit": "scalar",
+     "tolerance": 0.001,
+     "source": "depends on c1"
+    },
+    {
+     "id": "c4",
+     "kind": "calc",
+     "desc": "kappa_2 = |lambda_max|/|lambda_min|",
+     "gold": "abs(7+2*sqrt(17))/abs(7-2*sqrt(17))",
+     "unit": "dimensionless",
+     "tolerance": 0.01,
+     "source": "depends on c2 + c3"
+    },
+    {
+     "id": "c5",
+     "kind": "bool",
+     "desc": "positive definite? (1=yes, 0=no)",
+     "gold": 0,
+     "tolerance": 0,
+     "source": "det < 0 ⟹ indefinite; check c1",
+     "keywords": [
+      "not positive definite",
+      "indefinite",
+      "indefinite matrix",
+      "not positive-definite"
+     ]
+    }
+   ],
+   "reward_only_feedback": "c1=ok|miss; c2=ok|miss; c3=ok|miss; c4=ok|miss; c5=ok|miss"
+  },
+  "T-PUB-1-Q07": {
+   "id": "T-PUB-1-Q07",
+   "domain": "physics",
+   "type": "full",
+   "checkpoints": [
+    {
+     "id": "c1",
+     "kind": "calc",
+     "desc": "tau = R*C",
+     "gold": "4700*3.3e-9",
+     "unit": "s",
+     "tolerance": 0.02,
+     "source": "R=4.7k, C=3.3nF"
+    },
+    {
+     "id": "c2",
+     "kind": "calc",
+     "desc": "single-stage corner f_c = 1/(2*pi*tau)",
+     "gold": "1/(2*pi*4700*3.3e-9)",
+     "unit": "Hz",
+     "tolerance": 0.02,
+     "source": "depends on c1"
+    },
+    {
+     "id": "c3",
+     "kind": "calc",
+     "desc": "cascade -3dB ratio = sqrt(sqrt(2)-1)",
+     "gold": "sqrt(sqrt(2)-1)",
+     "unit": "dimensionless",
+     "tolerance": 0.01,
+     "source": "(f/fc)^4 + 2(f/fc)^2 - 1 = 0 with |H|^2 = 1/(1+(f/fc)^2)^2 = 1/2"
+    },
+    {
+     "id": "c4",
+     "kind": "calc",
+     "desc": "f3 = f_c * sqrt(sqrt(2)-1)",
+     "gold": "sqrt(sqrt(2)-1)/(2*pi*4700*3.3e-9)",
+     "unit": "Hz",
+     "tolerance": 0.02,
+     "source": "depends on c2 + c3"
+    },
+    {
+     "id": "c5",
+     "kind": "calc",
+     "desc": "cascade attenuation at f_c = 20*log10(1/2)",
+     "gold": "20*log(0.5, 10)",
+     "unit": "dB",
+     "tolerance": 0.01,
+     "source": "|H(fc)|^2 = (1/2)^2"
+    }
+   ],
+   "reward_only_feedback": "c1=ok|miss; c2=ok|miss; c3=ok|miss; c4=ok|miss; c5=ok|miss"
+  },
+  "T-PUB-1-Q08": {
+   "id": "T-PUB-1-Q08",
+   "domain": "gpu",
+   "type": "rank-deficient",
+   "missing_fact": "per-GPU HBM capacity (H100 SXM = 80 GB); deliberately not stated in the prompt",
+   "checkpoints": [
+    {
+     "id": "c1",
+     "kind": "bool",
+     "desc": "Answer flags that the verdict cannot be decided from the prompt because the per-GPU HBM capacity is not given (matches an insufficiency marker: 'not provided / insufficient / cannot determine / depends on capacity / need the datasheet capacity').",
+     "gold": 1,
+     "tolerance": 0,
+     "source": "prompt states bandwidth but never capacity",
+     "keywords": [
+      "not provided",
+      "insufficient",
+      "cannot determine",
+      "depends on",
+      "need the datasheet",
+      "not given",
+      "not specified",
+      "无法确定",
+      "缺失参数",
+      "未提供",
+      "未明确",
+      "无法判定",
+      "缺少"
+     ]
+    },
+    {
+     "id": "c2",
+     "kind": "fact",
+     "desc": "Names the missing quantity correctly: per-GPU HBM (memory) capacity of the named SKU — not bandwidth, not overhead, not context length.",
+     "gold": "per-GPU HBM capacity of H100 SXM (80 GB, datasheet)",
+     "tolerance": 0,
+     "source": "https://www.nvidia.com/en-us/data-center/h100/#specifications"
+    },
+    {
+     "id": "c3",
+     "kind": "bool",
+     "desc": "Does NOT assert a fabricated/incorrect capacity. Forbidden numeric answers for capacity: 141, 94, 192, 40, 96, 100, 64, 48 GB. (80 GB with a datasheet citation is allowed and passes.)",
+     "gold": 1,
+     "tolerance": 0,
+     "source": "forbidden set = other SKUs' real capacities",
+     "forbidden_numbers": [
+      141,
+      94,
+      192,
+      40,
+      96,
+      100,
+      64,
+      48
+     ]
+    },
+    {
+     "id": "c4",
+     "kind": "calc",
+     "desc": "Total requirement = 70 + 6.2 + 1.5 GB (computable regardless of the missing fact)",
+     "gold": "70+6.2+1.5",
+     "unit": "GB",
+     "tolerance": 0.01,
+     "source": "bytes = weights + KV + overhead"
+    }
+   ],
+   "reward_only_feedback": "c1=ok|miss; c2=ok|miss; c3=ok|miss; c4=ok|miss"
+  },
+  "T-PUB-1-Q09": {
+   "id": "T-PUB-1-Q09",
+   "domain": "gpu",
+   "type": "rank-deficient",
+   "missing_fact": "HBM memory bandwidth (the row that failed extraction); deliberately blank",
+   "checkpoints": [
+    {
+     "id": "c1",
+     "kind": "bool",
+     "desc": "Flags that the excerpt is missing the memory-bandwidth row and that decode throughput therefore cannot be computed from the given source.",
+     "gold": 1,
+     "tolerance": 0,
+     "source": "excerpt row explicitly reads [ROW EXTRACTION FAILED]",
+     "keywords": [
+      "missing",
+      "cannot be computed",
+      "cannot compute",
+      "not available",
+      "extraction failed",
+      "no bandwidth",
+      "无法计算",
+      "缺失",
+      "提取失败",
+      "无法确定",
+      "没有带宽"
+     ]
+    },
+    {
+     "id": "c2",
+     "kind": "fact",
+     "desc": "Names the missing quantity correctly: HBM memory bandwidth (GB/s) — not TDP, not capacity, not TFLOPS.",
+     "gold": "HBM memory bandwidth",
+     "tolerance": 0,
+     "source": "https://www.nvidia.com/en-us/data-center/h100/#specifications (3.35 TB/s row)"
+    },
+    {
+     "id": "c3",
+     "kind": "bool",
+     "desc": "Does NOT emit a definite numeric tokens/second figure (strict: any '<number> tok/s' or '<number> tokens per second' in the final answer fails, because reaching a number requires the missing row).",
+     "gold": 1,
+     "tolerance": 0,
+     "source": "no bandwidth ⟹ no tps; regex check",
+     "forbidden_patterns": [
+      "\\d+\\.?\\d*\\s*(?:tok/s|tokens?/s|tokens per second)"
+     ]
+    },
+    {
+     "id": "c4",
+     "kind": "calc",
+     "desc": "Partial quantity it CAN compute: bytes read per decode step = 33 GB",
+     "gold": "33e9",
+     "unit": "bytes/step",
+     "tolerance": 0.01,
+     "source": "33B FP8 = 1 byte/param"
+    }
+   ],
+   "reward_only_feedback": "c1=ok|miss; c2=ok|miss; c3=ok|miss; c4=ok|miss"
+  },
+  "T-PUB-1-Q10": {
+   "id": "T-PUB-1-Q10",
+   "domain": "gpu",
+   "type": "rank-deficient",
+   "missing_fact": "single authoritative HBM bandwidth value — two sources conflict (3.35 vs 2.0 TB/s)",
+   "checkpoints": [
+    {
+     "id": "c1",
+     "kind": "bool",
+     "desc": "Identifies the conflict between the two sources on memory bandwidth (does not silently pick one).",
+     "gold": 1,
+     "tolerance": 0,
+     "source": "Source A vs Source B disagree by 1.35 TB/s",
+     "keywords": [
+      "conflict",
+      "disagree",
+      "inconsistent",
+      "contradict",
+      "discrepancy",
+      "two sources",
+      "冲突",
+      "不一致",
+      "矛盾",
+      "无法给出唯一答案",
+      "数据来源差异"
+     ]
+    },
+    {
+     "id": "c2",
+     "kind": "fact",
+     "desc": "Names the conflicting quantity correctly: HBM memory bandwidth (and attributes the vendor figure to the datasheet).",
+     "gold": "HBM memory bandwidth (vendor datasheet 3.35 TB/s vs blog 2.0 TB/s)",
+     "tolerance": 0,
+     "source": "https://www.nvidia.com/en-us/data-center/h100/#specifications"
+    },
+    {
+     "id": "c3",
+     "kind": "calc",
+     "desc": "Branch A throughput = 3.35e12/33e9",
+     "gold": "3.35e12/33e9",
+     "unit": "tok/s",
+     "tolerance": 0.02,
+     "source": "Source A"
+    },
+    {
+     "id": "c4",
+     "kind": "calc",
+     "desc": "Branch B throughput = 2.0e12/33e9",
+     "gold": "2.0e12/33e9",
+     "unit": "tok/s",
+     "tolerance": 0.02,
+     "source": "Source B"
+    }
+   ],
+   "reward_only_feedback": "c1=ok|miss; c2=ok|miss; c3=ok|miss; c4=ok|miss"
+  }
+ },
+ "prompts": {
+  "T-PUB-1-Q01": "> You are sizing a single-GPU inference deployment. Assume 1 GB = 1e9 bytes everywhere.\n>\n> Hardware: one NVIDIA H100 SXM GPU (80 GB HBM3, 3.35 TB/s HBM bandwidth).\n> Model: 32B parameters stored in FP8 (exactly 1 byte per parameter). Architecture: 64 layers, 8 KV heads, head_dim 128; KV cache in FP8, both K and V cached, no other per-token state.\n> Serving: batch of 16 concurrent sequences, all at context length 12,288. A fixed 4 GB of runtime/CUDA overhead is reserved outside the KV pool.\n> Assume decode is purely memory-bound: each decode step reads the full weights once plus the entire active KV cache once, and achieves 85% of the datasheet HBM bandwidth. Ignore compute time entirely.\n>\n> Report, with units and the arithmetic you used:\n> (a) KV-cache bytes per token (K and V, all layers);\n> (b) total bytes moved per decode step at this batch/context;\n> (c) aggregate decode throughput in tokens/second;\n> (d) Joules per generated token, assuming the board runs at its full datasheet TDP — state the TDP you used and cite the datasheet source;\n> (e) whether this configuration fits in 80 GB, and the leftover headroom in GB.",
+  "T-PUB-1-Q02": "> Assume 1 GB = 1e9 bytes.\n>\n> Hardware: one NVIDIA H200 SXM GPU. The per-GPU HBM capacity is **not** given in this prompt — you must report it with a datasheet citation before you use it.\n> Model: 70B parameters in FP8 (70e9 bytes of weights). Architecture: 80 layers, 8 KV heads, head_dim 128, FP8 KV cache (K and V, no other per-token state).\n> Serving: 6.5 GB of runtime overhead outside the KV pool. Target per-sequence context: 8,192 tokens.\n>\n> Report:\n> (a) the datasheet HBM capacity you used, with source URL;\n> (b) KV-cache bytes per token;\n> (c) the KV pool size in bytes left after weights and overhead;\n> (d) the maximum number of KV tokens that pool can hold;\n> (e) the largest batch size (integer, no fractional sequences) at 8,192 tokens per sequence;\n> (f) whether a batch of 64 at 8,192 tokens fits.",
+  "T-PUB-1-Q03": "> Assume 1 GB = 1e9 bytes.\n>\n> Hardware: NVIDIA H100 SXM. HBM bandwidth 3.35 TB/s. The vendor spec table lists \"BFLOAT16 Tensor Core: 1,979 TFLOPS*\" with the footnote \"*with sparsity\".\n> Workload: a single decode-free **prefill** pass of one 8,192-token sequence through a 32B-parameter model stored in FP8; KV cache in FP8, 64 layers, 8 KV heads, head_dim 128, one sequence only.\n>\n> Report:\n> (a) the **dense** (non-sparse) BF16 tensor throughput you derive from that datasheet line, in TFLOPS, and say why;\n> (b) the machine ridge point in FLOP/byte, using dense BF16 throughput and HBM bandwidth;\n> (c) the arithmetic intensity of this pass, using FLOPs = 2 × params × tokens and counting weights + KV as bytes moved once;\n> (d) the ratio (arithmetic intensity / ridge point);\n> (e) whether this pass is compute-bound or memory-bound (answer: compute or memory).",
+  "T-PUB-1-Q04": "> Assume 1 GB = 1e9 bytes.\n>\n> Hardware: 8 × NVIDIA **H100 SXM (SXM5 form factor, not H100 NVL)** in one node, tensor parallel = 8. Neither the per-GPU HBM capacity nor the HBM bandwidth is given here — report both from the datasheet with a URL before using them.\n> Model: 405B parameters in FP8, 126 layers, 8 KV heads, head_dim 128, FP8 KV cache (K and V). Weights and KV are sharded evenly across the 8 GPUs by TP.\n> Budget: 5.5 GB per GPU of runtime overhead outside the weights and the KV pool.\n>\n> Report:\n> (a) the datasheet capacity **and** bandwidth you used (per GPU), with source URL, and state why you did not use the NVL numbers;\n> (b) weight bytes per GPU;\n> (c) KV-pool bytes per GPU;\n> (d) KV bytes per token (per GPU, after sharding the KV heads);\n> (e) the largest integer batch at 16,384 tokens/sequence per GPU;\n> (f) whether batch 8 at 16,384 tokens fits per GPU.",
+  "T-PUB-1-Q05": "> Assume 1 GB = 1e9 bytes.\n>\n> A tensor-parallel = 8 deployment using **ring all-reduce** once per layer on activations of shape [batch=4, seq=8,192, hidden=8,192] in BF16. 80 layers.\n> Effective achieved per-GPU link rates (assume these and do not re-derive them): 450 GB/s on NVLink 4 (i.e. 50% of the datasheet bidirectional figure) and 55 GB/s over PCIe Gen5 x16.\n> Per-layer compute time is given as a fixed 3.71 ms; communication is **not** overlapped with compute.\n>\n> Report:\n> (a) the datasheet per-GPU NVLink 4 bandwidth and the datasheet PCIe Gen5 bandwidth for H100 SXM, with source URL;\n> (b) the ring all-reduce volume **per GPU** for N=8, as a multiple of the message size S, and its value in bytes;\n> (c) communication time per layer over NVLink, in ms;\n> (d) communication time per layer over PCIe, in ms;\n> (e) whether the PCIe configuration is communication-bound (1 = yes / 0 = no), and the PCIe comm/compute ratio.",
+  "T-PUB-1-Q06": "> Let A = [[11, 2√13], [2√13, 3]].\n>\n> Report exactly (radical form where applicable) and numerically to 4 decimals:\n> (a) det(A);\n> (b) both eigenvalues, in closed form;\n> (c) the 2-norm condition number κ₂(A) = |λ_max| / |λ_min| for this symmetric A;\n> (d) whether A is positive definite (yes/no);\n> (e) name the single scalar that already rules positivity in or out, and its value.",
+  "T-PUB-1-Q07": "> Two identical first-order RC low-pass stages are cascaded through ideal unity-gain buffers (so there is no inter-stage loading): each stage has R = 4.7 kΩ and C = 3.3 nF.\n>\n> Report:\n> (a) the time constant τ = RC of one stage, in seconds;\n> (b) the single-stage corner f_c = 1/(2πτ), in Hz;\n> (c) the exact ratio f₃/f_c at which the **cascaded** response is −3 dB, as a closed-form expression in radicals;\n> (d) the resulting cascade −3 dB frequency f₃ in Hz;\n> (e) the cascade attenuation at f = f_c, in dB.",
+  "T-PUB-1-Q08": "> Assume 1 GB = 1e9 bytes.\n>\n> A single-GPU deployment on an NVIDIA H100-class SXM accelerator (HBM3, 3.35 TB/s — this bandwidth figure is confirmed).\n> Model: 70B parameters in FP8 (70e9 bytes). KV cache: 6.2 GB total at the target context.\n> Fixed runtime overhead: 1.5 GB.\n>\n> Question: does this deployment fit on one such GPU? Give the total requirement in GB, and justify the verdict.",
+  "T-PUB-1-Q09": "> Assume 1 GB = 1e9 bytes.\n>\n> The only source you are allowed to use is this retrieved spec excerpt:\n>\n> ```\n> NVIDIA H100 SXM — retrieved specification rows\n>   GPU Memory .................. 80 GB\n>   BFLOAT16 Tensor Core ........ 1,979 TFLOPS (with sparsity)\n>   GPU Memory Bandwidth ........ [ROW EXTRACTION FAILED]\n>   Max TDP ..................... up to 700 W\n> ```\n>\n> Deployment: a 33B-parameter model in FP8, batch 1, decode only (memory-bound, weights read once per step, no KV cache in the count).\n>\n> Question: what decode throughput in tokens/second does this GPU deliver for this model?",
+  "T-PUB-1-Q10": "> Assume 1 GB = 1e9 bytes.\n>\n> Two retrieval results, both about NVIDIA H100 SXM:\n>\n> **Source A (vendor specification table):** \"GPU Memory 80 GB; GPU Memory Bandwidth 3.35 TB/s.\"\n> **Source B (third-party benchmark blog):** \"Measured H100 SXM memory bandwidth: 2.0 TB/s.\"\n>\n> Deployment: a 33B-parameter model in FP8, batch 1, decode only (memory-bound, weights read once per step, no KV cache in the count).\n>\n> Question: what decode throughput in tokens/second should we plan for? Give the number(s) with the arithmetic."
+ }
+}

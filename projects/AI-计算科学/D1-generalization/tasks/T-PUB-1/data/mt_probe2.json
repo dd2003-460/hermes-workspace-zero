@@ -1,0 +1,98 @@
+[
+ {
+  "oid": "T-PUB-1-Q01-r1",
+  "mt": 500,
+  "finish_reason": "length",
+  "parseable": false,
+  "raw_len": 650,
+  "tail": "7,769,803,776，模型写的是57.77e9，即57,770,000,000。差值是57,770,000,000 - 57,769,803,776 = 196,224。相对误差是196224 / 57,769,803,776 ≈ 0"
+ },
+ {
+  "oid": "T-PUB-1-Q01-r1",
+  "mt": 2000,
+  "finish_reason": "stop",
+  "parseable": true,
+  "raw_len": 74,
+  "tail": "\\n\\n{\\n  \"c1\": true,\\n  \"c2\": true,\\n  \"c3\": true,\\n  \"c4\": true,\\n  \"c5\": true\\n}"
+ },
+ {
+  "oid": "T-PUB-1-Q02-r1",
+  "mt": 500,
+  "finish_reason": "length",
+  "parseable": false,
+  "raw_len": 619,
+  "tail": "84e5，所以64.5e9 / 1.6384e5 = (64.5 / 1.6384) * 1e4。64.5 ÷ 1.6384 ≈ 39.3664，所以39.3664 * 1e4 = 393,664。模型输出是393,664.0625，然后取"
+ },
+ {
+  "oid": "T-PUB-1-Q02-r1",
+  "mt": 2000,
+  "finish_reason": "stop",
+  "parseable": true,
+  "raw_len": 74,
+  "tail": "\\n\\n{\\n  \"c1\": true,\\n  \"c2\": true,\\n  \"c3\": true,\\n  \"c4\": true,\\n  \"c5\": true\\n}"
+ },
+ {
+  "oid": "T-PUB-1-Q03-r1",
+  "mt": 500,
+  "finish_reason": "length",
+  "parseable": false,
+  "raw_len": 654,
+  "tail": "e9*8192 = 64e9 *8192 = 5.24288e14。分母部分：32e9 + 8192*(64*8*128*2)。先算括号里的：64*8=512，512*128=65536，65536*2=131072。然后8192*1310"
+ },
+ {
+  "oid": "T-PUB-1-Q03-r1",
+  "mt": 2000,
+  "finish_reason": "length",
+  "parseable": false,
+  "raw_len": 3167,
+  "tail": "=0，必须完全相等。所以如果模型输出的是\"Compute\"，而检查点需要数值1，那么这里可能不匹配，导致c5为false？\\n\\n但可能这里的c5对应的是问题(e)的答案是否为1，而模型可能应该输出1？但根据模型的回答，它写的是\"Compute"
+ },
+ {
+  "oid": "T-PUB-1-Q04-r1",
+  "mt": 500,
+  "finish_reason": "length",
+  "parseable": false,
+  "raw_len": 681,
+  "tail": "ld一致，所以c4正确。\\n\\nc5：gold=floor((80 - 405e9/8/1e9 -5.5)*1e9/(16384*(126*8*128*2)))，tolerance=0.0。先算分母：16384 * (126*8*128*2)。"
+ },
+ {
+  "oid": "T-PUB-1-Q04-r1",
+  "mt": 2000,
+  "finish_reason": "length",
+  "parseable": false,
+  "raw_len": 2602,
+  "tail": "或者用计算器：258,048 * 16,384。258,048 * 16,000 = 4,128,768,000；258,048 * 384 = 99,090,432。总和是4,128,768,000 + 99,090,432 = 4,22"
+ },
+ {
+  "oid": "T-PUB-1-Q05-r1",
+  "mt": 500,
+  "finish_reason": "length",
+  "parseable": false,
+  "raw_len": 698,
+  "tail": "型在这里理解错了，gold的S应该是整个激活的大小，而不是每个GPU上的分片。所以模型的计算结果117,440,512和gold的939,524,096相差很大，所以c2应该是false。\\n\\nc3的gold是c2的值除以450e9再乘以10"
+ },
+ {
+  "oid": "T-PUB-1-Q05-r1",
+  "mt": 2000,
+  "finish_reason": "length",
+  "parseable": false,
+  "raw_len": 3212,
+  "tail": "某个地方提到1？比如可能c5是判断是否使用正确的带宽，但模型可能没有明确回答。不过根据给出的模型输出，最后部分在计算PCIe时中断了，可能没有给出c5的答案。但检查点c5的gold=1，tolerance=0，必须完全相等。如果模型没有输出"
+ },
+ {
+  "oid": "T-PUB-1-Q06-r1",
+  "mt": 500,
+  "finish_reason": "length",
+  "parseable": false,
+  "raw_len": 673,
+  "tail": "计算的值是否一致？让我再算一遍：\\n\\nsqrt(17)≈4.123105625617661\\n2*sqrt(17)=8.246211251235322\\n7+2√17=15.246211251235322\\n7-2√17=7-8.246211251"
+ },
+ {
+  "oid": "T-PUB-1-Q06-r1",
+  "mt": 2000,
+  "finish_reason": "stop",
+  "parseable": true,
+  "raw_len": 63,
+  "tail": "\\n\\n{\"c1\": true, \"c2\": true, \"c3\": true, \"c4\": true, \"c5\": false}"
+ }
+]

@@ -11,5 +11,5 @@
 | 6 | Q06/Q07 纯数学/物理无外部来源，抗 memorization 靠"数值不凑整"非"来源新" | 这两题的防 hack 弱一档 | 非阻塞；已知 |
 | 7 | 模型规模/架构是"真实量级但非具体开源模型"组合，c2 无官方 spec 页背书只有公式背书 | KV 参数类检查点无 datasheet | 非阻塞；公式背书可接受 |
 
-**阻塞项**：#4（bool 正则库）——不补就跑不了秩亏题的批判准确性判分。
+~~**阻塞项**：#4（bool 正则库）~~ **已解除 11-23**：formula_judge.py 加 judge_bool（spec 驱动：keywords/forbidden_numbers/forbidden_patterns，支持'通过即缺席'型检查点）；T-PUB-1 的 8 个 bool 检查点已补判分字段（Lead 核 gold）；冒烟 9/9 通过。
 **需校准**：#3（Q09 c3 过严）——pilot 里看 27b 实际行为再定。

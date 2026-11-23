@@ -1,7 +1,7 @@
 # Appendix 初稿（T-PUB-1, ICML 2027）
 # origin: ai · 2026-11-23 · W4 交付
 # 数据源: paper-data-table-20261123.md（原始数据日志）+ findings-draft（修正版解读）+ theory-guessing-bound + scripts/
-# 状态: W5 完整化 — A.2 十题全文+47检查点gold+推导链 已填实 / A.4 灰区7case hedging句 已填实 / A.6 部署细节 已填实(未核验项已标注) / A.1 逐检查点201行表 仍待(W5)
+# 状态: W5 完整化完成 — A.1 逐题×逐变体 parseable/flip 矩阵(紧凑版,逐行指向data/) / A.2 十题题干verbatim+47检查点gold/推导链/source / A.4 灰区7case hedging句+strict/lenient判定 / A.6 部署细节 全部填实; 未核验项已诚实标注(vLLM配置)
 # 重要: 解读对齐 findings-draft（修正版），paper-data-table 的旧解读（三因素交互/604阈值/偏相关0.436）已被 v2 探针取代，附录 A.7 记录该修正。
 
 ## A.1 Full statistics: per-checkpoint × per-variant

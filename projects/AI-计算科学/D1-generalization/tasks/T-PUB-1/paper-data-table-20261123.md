@@ -5,8 +5,8 @@
 
 - 检查点通过率：33/35 = 94.3%（修复前 29/35 = 83%，3 个单点 FAIL 全是判分器 bug 非模型错）
 - 全对题：6/7（仅 Q04 首轮收口失败）
-- Q04 归因（11-23 trunc_mitigate 修正）：mt4000 时 7334 字符中文思维链被 4000 token 截断→2/5；mt12000 时 2583 字符收口→5/5。**主因=max_tokens=4000 对中文思维链不够用（截断），次因=采样波动**（同 mt4000 重跑能 5/5）。full7 分数带截断伪影 + run-to-run 噪声，评测协议应 max_tokens≥12000
-- 方法学含义：27b 难题单样本可靠性波动显著 + 固定 max_tokens 系统性低估难题得分 = "为什么需要验证器/多次采样/足够 max_tokens"的实证动机
+- Q04 归因（11-23 full7_mt12000 n=5 修正，**推翻"截断+随机波动"旧归因**）：mt4000 时截断→2/5；**mt12000 n=5 得分 [5,5,3,5,3]，全对率 3/5=60%（Wilson95 [0.23,0.88]）**。r3/r5 逐字节相同（同 md5）= temperature=0 下的**确定性重复退化循环路径**（"可能用户的问题"×90、390 字符块循环、全程无答案块、c4/c5 数值 0 处）。**主因 = repetition degeneration（~40% run 落入），不是截断也不是随机波动**；mt12000 消除硬截断后退化循环仍独立发生。full7 分数带退化循环伪影，33/35 应报为"单样本点估计，Q04 有确定性退化路径（3/5）"
+- 方法学含义：27b 在多子问题 GPU 内存题（子问题结构有歧义时）有可复现的 repetition degeneration 失败模式 = "为什么需要验证器/多次采样/退化检测"的实证动机（退化循环可机械检测：重复块 + 无答案块）
 - 判分器修复（scripts/formula_judge.py，6 测试全过含回归）：Q01 c3（57.77 GB vs bytes）、Q03 c1（989.5 TFLOPS vs FLOP/s）单位换算 + Q07 c1（1.551e-5）科学计数法 + LaTeX 科学计数法（`1.551 \times 10^{-5}`，trunc_mitigate 暴露，`_clean_latex_sci` 预处理）
 - 出处：tasks/T-PUB-1/full7-rerun.json + q04-close-rerun.json + trunc-mitigate.json + rd-ab-v2-summary-20261123.md §2
 
@@ -36,9 +36,9 @@
 | T-PUB-1-Q10 | rank-deficient A | c1=False/c3=True | 15.2s | 1005 |
 | T-PUB-1-Q10 | rank-deficient B | c1=True/c3=True | 17.6s | 1080 |
 
-\* Q04 首轮 3/5（mt4000 截断中文思维链，7334 字符没收口），mt12000 重跑 5/5（2583 字符收口）——主因截断、次因采样波动（trunc-mitigate.json）。
+\* Q04 mt4000 首轮 3/5（截断）；mt12000 n=5 重跑 3/5 全对（r3/r5 确定性退化循环，同 md5）——主因 repetition degeneration（full7-mt12000.json）。
 
 ## 待补
 
-- [x] Q04 截断缓解（11-23 trunc_mitigate 完成）：mt4000→2/5（截断）vs mt12000→5/5 → **主因=max_tokens 截断，次因=采样波动**；评测协议应 max_tokens≥12000
+- [x] Q04 截断缓解（11-23 trunc_mitigate + full7_mt12000 n=5 完成）：mt4000→2/5（截断）；mt12000→3/5 全对（r3/r5 确定性退化循环）→ **主因 = repetition degeneration，非截断非随机波动**
 - [ ] 秩亏题 n=3→n≥10 出 Wilson CI（stats-protocol 已定义口径）

@@ -83,21 +83,28 @@ def judge_bool(cp, text):
 
 def _find_gold_in_text(text, gv, tol):
     """在 markdown 文本里找 gold 值。tol=0 整数精确匹配；tol>0 相对误差 < tol。
-    优先在 'Answer:' 行找，找不到再全文找。"""
+    优先在 'Answer:' 行找，找不到再全文找。
+    支持科学计数法（1.551e-5）和 SI 单位换算（模型答 57.77 GB 而 gold 是 bytes：
+    对每个候选值同时试 ×1e9/×1e12 等常用前缀，tolerance 足够紧不会误判）。"""
     if gv is None or not text:
         return False
+    # 科学计数法 + 普通数字（含千分位逗号）
+    NUM_RE = r"-?\d[\d,]*\.?\d*(?:[eE][-+]?\d+)?"
+    SCALES = [1.0, 1e3, 1e6, 1e9, 1e12]  # 无换算 / k / M / G / T
     def _match(s):
-        for m in re.finditer(r"-?\d[\d,]*\.?\d*", s):
+        for m in re.finditer(NUM_RE, s):
             try:
                 v = float(m.group().replace(",", ""))
+            except Exception:
+                continue
+            for sc in SCALES:
+                vv = v * sc
                 if tol == 0:
-                    if v == gv and float(gv).is_integer():
+                    if vv == gv and float(gv).is_integer():
                         return True
                 else:
-                    if abs(v - gv) / abs(gv) < tol:
+                    if gv != 0 and abs(vv - gv) / abs(gv) < tol:
                         return True
-            except Exception:
-                pass
         return False
     # 优先 Answer 行
     ans_lines = [ln for ln in text.split("\n") if re.search(r"answer", ln, re.I)]
@@ -123,8 +130,19 @@ def judge_mechanical(spec, text):
                     results[cid] = gv is not None and abs(float(mv) - gv) / abs(gv) < tol
             elif isinstance(mv, str):
                 try:
-                    v = float(mv.strip().rstrip(","))
-                    results[cid] = (v == gv) if tol == 0 else (gv is not None and abs(v - gv) / abs(gv) < tol)
+                    v = float(mv.strip().rstrip(",").replace(",", ""))
+                    # 单位换算：模型答 "57.77 GB" 而 gold 是 bytes → 试 SI 前缀
+                    matched = (v == gv) if tol == 0 else (gv is not None and abs(v - gv) / abs(gv) < tol)
+                    if not matched:
+                        for sc in (1e3, 1e6, 1e9, 1e12):
+                            vv = v * sc
+                            if tol == 0:
+                                matched = (vv == gv)
+                            else:
+                                matched = gv is not None and abs(vv - gv) / abs(gv) < tol
+                            if matched:
+                                break
+                    results[cid] = matched
                 except Exception:
                     results[cid] = False
             else:
@@ -138,19 +156,25 @@ def judge_mechanical(spec, text):
                 results[cid] = False
             else:
                 found = False
-                for m in re.finditer(r"-?\d+\.?\d*", text):
+                NUM_RE = r"-?\d[\d,]*\.?\d*(?:[eE][-+]?\d+)?"
+                SCALES = [1.0, 1e3, 1e6, 1e9, 1e12]  # 同 _find_gold_in_text：单位换算
+                for m in re.finditer(NUM_RE, text):
                     try:
-                        v = float(m.group())
+                        v = float(m.group().replace(",", ""))
+                    except Exception:
+                        continue
+                    for sc in SCALES:
+                        vv = v * sc
                         if tol == 0:
-                            if v == gv:
+                            if vv == gv:
                                 found = True
                                 break
                         else:
-                            if abs(v - gv) / abs(gv) < tol:
+                            if gv != 0 and abs(vv - gv) / abs(gv) < tol:
                                 found = True
                                 break
-                    except Exception:
-                        pass
+                    if found:
+                        break
                 results[cid] = found
         elif kind == "bool":
             results[cid] = judge_bool(cp, text)

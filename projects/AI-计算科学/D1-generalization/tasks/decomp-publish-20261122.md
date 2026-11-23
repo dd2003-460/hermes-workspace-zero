@@ -23,7 +23,7 @@
 | P2 | 对比脚本（formula_judge + 27b judge prompt 版本化） | Lead/subagent | 待启动 |
 | P3 | 秩亏题 2-3 道设计（2026-11-23 修正：给不完整检索结果测"批判准确性"，不测"主动检索"——qqbot 补充 29 证模型不自主触发检索） | Lead | **已并入 P1 任务书**（T-PUB-1 含 3 道秩亏题，设计修正已写入；Lead 核 gold 时一并验） |
 | P4 | "Why Is RSI Hard to Verify?" 精读 note | subagent | **完成 11-23（勘误：真实论文=Frontis-MA1/OpenRSI arXiv 2607.28568，非 2607.13110；note 落盘 research/openrsi-frontis-ma1-note-20261123.md，含 5 条 limitation 碰撞分析）** |
-| P5 | 统计口径定义（CI/翻转率/一致率） | Lead | 待启动 |
+| P5 | 统计口径定义（CI/翻转率/一致率） | Lead | **完成 11-23**（research/stats-protocol-20261123.md：Wilson CI + 按题聚类 + judge 族标注 + 秩亏三指标分开报） |
 
 ## 留空（不编）
 - ICLR 2027 workshop 论文截止：[待核验，预计 2027-01 发布]

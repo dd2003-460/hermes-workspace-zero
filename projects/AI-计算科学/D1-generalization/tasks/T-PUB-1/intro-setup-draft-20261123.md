@@ -27,7 +27,7 @@ We study this question on the **formalizable core** — the part of an evaluatio
 
 **Implication.** On the formalizable core, the mechanical judge should be the default: it is exact, free, reproducible, and its failure mode (none) is known. LLM judges remain appropriate for the non-formalizable residual — explanation quality, style, argument structure — where no mechanical reference exists.
 
-**Paper structure.** §2 describes the task set, the two judges, and the measurement protocol. §3 reports the five findings (F1–F5). §4 isolates the mechanism with the token-budget probe and the self-repair case. §5 derives the anti-guessing bound. §6 positions against prior work. §7 discusses implications and limitations.
+**Paper structure.** §2 describes the task set, the two judges, and the measurement protocol. The findings section reports five findings (F1–F5): format reliability (F1), mechanism attribution (F2), verdict accuracy (F3), the anti-guessing bound (F4), and prompt side effects (F5). A related-work section positions the contribution against the LLM-judge-reliability literature. An implications-and-limitations section closes the paper. Task construction and gold-derivation traces are in the appendix.
 
 ## §2 Setup & Method（目标 1200-1500 词，v2 ~1150 词，2026-11-23 晚 W5 扩）
 

@@ -1,23 +1,26 @@
 # Appendix 初稿（T-PUB-1, ICML 2027）
 # origin: ai · 2026-11-23 · W4 交付
 # 数据源: paper-data-table-20261123.md（原始数据日志）+ findings-draft（修正版解读）+ theory-guessing-bound + scripts/
-# 状态: W5 完整化完成 — A.1 逐题×逐变体 parseable/flip 矩阵(紧凑版,逐行指向data/) / A.2 十题题干verbatim+47检查点gold/推导链/source / A.4 灰区7case hedging句+strict/lenient判定 / A.6 部署细节 全部填实; 未核验项已诚实标注(vLLM配置)
+# 状态: W5 完整化完成 — A.1 逐题×逐变体 parseable/flip 矩阵(紧凑版,逐行指向data/; 变体合计与Table1精确一致) / A.2 十题题干verbatim+47检查点gold/推导链/source / A.4 灰区7case hedging句+strict/lenient判定 / A.6 部署细节 全部填实; 未核验项已诚实标注(vLLM配置)
 # 重要: 解读对齐 findings-draft（修正版），paper-data-table 的旧解读（三因素交互/604阈值/偏相关0.436）已被 v2 探针取代，附录 A.7 记录该修正。
 
-## A.1 Full statistics: per-checkpoint × per-variant
+Per-question × per-variant parseability and flip count (aggregated over all outputs per question; full 201-row dump in `data/prompt_variant_formal.json`). ✓/✗ = parseable on that output; (flip f/j) = LLM≠mech on judged checkpoints. Q01–Q07: 1 output each; Q08–Q10: 10 outputs each (A/B arms).
 
-Complete table: for each of the 67 outputs, for each of the 3 prompt variants (V1_strict/V2_loose/V3_engineer), the parseable flag and the per-checkpoint LLM verdict vs the mechanical verdict. (n=201 judge calls.)
-
-Summary (from Table 1, main text):
-
-| Variant | Parseable | Checkpoints judged | LLM≠mech (flip) | Flip rate |
+| Question | #outs | V1_strict | V2_loose | V3_engineer |
 |---|---|---|---|---|
-| V1_strict | 15/67 | 60 | 31 | 51.7% [39,64] |
-| V2_loose | 11/67 | 44 | 21 | 47.7% [34,62] |
-| V3_engineer | 32/67 | 128 | 66 | 51.6% [43,60] |
-| Mechanical | 67/67 | 275 | 0 (by construction) | 0% |
+| Q01 | 1 | 0/1 parse | 0/1 parse | 0/1 parse |
+| Q02 | 1 | 0/1 parse | 0/1 parse | 0/1 parse |
+| Q03 | 1 | 0/1 parse | 0/1 parse | 0/1 parse |
+| Q04 | 1 | 0/1 parse | 0/1 parse | 0/1 parse |
+| Q05 | 1 | 0/1 parse | 0/1 parse | 0/1 parse |
+| Q06 | 1 | 0/1 parse | 0/1 parse | 0/1 parse |
+| Q07 | 1 | 0/1 parse | 0/1 parse | 0/1 parse |
+| Q08 | 20 | 3/20 parse, flip 6/12 | 3/20 parse, flip 6/12 | 6/20 parse, flip 16/24 |
+| Q09 | 20 | 11/20 parse, flip 24/44 | 7/20 parse, flip 14/28 | 13/20 parse, flip 30/52 |
+| Q10 | 20 | 1/20 parse, flip 1/4 | 1/20 parse, flip 1/4 | 13/20 parse, flip 20/52 |
+| **Total** | 67 | 15/67 parse, flip 31/60 | 11/67 parse, flip 21/44 | 32/67 parse, flip 66/128 |
 
-Full per-checkpoint dump: `scripts/prompt_variant_formal.py` output (`/tmp/prompt_variant_formal.json`), 67×3 records, each with `parseable`, `llm` (per-checkpoint verdict), `mech` (per-checkpoint verdict), `raw` (judge output tail). [W5: expand to a 201-row table or a compact checkpoint-level matrix.]
+**Reading.** The 27b model is unreliable at emitting the strict JSON contract: only 15/67 (V1), 11/67 (V2), 32/67 (V3) outputs parse at all — this is itself a core finding, and it is why the mechanical judge is the primary scorer and the LLM judge a sensitivity analysis (it also motivates the mechanism probe, A.7: truncation vs format). "flip f/j" counts checkpoints where LLM and mechanical judges disagree on the same output (both judged); high flip counts on parseable outputs are the LLM-judge disagreement rate, reported as sensitivity, not as a score. The per-variant totals match Table 1 exactly (V1 31/60, V2 21/44, V3 66/128).
 
 ## A.2 The 10 tasks and gold derivations
 

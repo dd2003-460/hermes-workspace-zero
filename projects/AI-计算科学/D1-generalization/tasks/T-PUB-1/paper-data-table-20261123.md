@@ -96,6 +96,17 @@ pilot（judge-boundary-findings §4）只有 n=24，CI 太宽。正式跑：67 �
 - 翻转率三臂都在 48–52% ≈ 抛硬币——**可解析的那部分里，LLM judge 的判分准确性也不稳定**（一半检查点上和机械判分不一致）
 - 两个维度（格式可靠性 + 判分准确性）都不达标 → 论文 claim"LLM judge 在可形式化核上不可靠，机械 judge 必要"双证据支撑
 
+**三臂 A/B/B' 完整对比（n=10/臂，/tmp/rd_ab_bprime_n10.json）+ c3 双口径重判（scripts/c3_lenient_rejudge.py）**：
+
+| 臂 | c1 | c3 (strict) | c3 (lenient) | c4 |
+|---|---|---|---|---|
+| A_baseline | 10/30 (33%) | 25/30 (83%) | — | 30/30 (100%) |
+| B_remind | 30/30 (100%) | 30/30 (100%) | — | 21/30 (70%) |
+| B'_remind | 30/30 (100%) | 23/30 (77%) | 30/30 (100%) | 30/30 (100%) |
+
+- **c3 灰区 7/30（全在 Q08）**：B' 输出是"若为 64 GB 则…若为 80 GB 则…"条件列举——strict 判 miss（未 commit 单一值），lenient（句含 hedging 词豁免）判 pass。**双口径并报：strict 为主口径（benchmark 测 commitment，条件列举=hedging 行为应记 miss），lenient 为敏感性分析**。灰区本身是可测 finding：B' 的 prompt 诱导了条件列举行为（7/10 Q08），这是 prompt 效应的行为级证据。
+- **三臂结论**：B'（remind + 条件列举诱导）c1/c4 全过但 c3 strict 掉到 77%——**prompt 修改可以修好 c1（33%→100%）但引入 c3 副作用（条件列举 hedging）**，prompt 优化不是免费的。B（纯 remind）c3 全过但 c4 掉到 70%——同样有副作用。无臂全维度 100% → **prompt 设计存在维度间 trade-off**，这是论文 claim 的行为级支撑。
+
 **理论节：瞎猜概率界（可复现，scripts/guess_bound.py）**：瞎猜模型定义明确——calc 连续值 U[0.5g,2g] 命中概率 2tol/1.5、整数精确 U[g±50] 命中 1/101、文字 gold 命中 1/100（保守）。解析界：full 题 P(全瞎猜全对)≈1.2e-10~1.9e-7，rank-deficient 题 P≈3.6e-6~3.3e-5（最高，检查点少且含文字 gold）。模拟 N=2000 seed=42：0/2000 全对，与界一致。**比原"2000 次模拟 0 次"硬：有解析界 + 可复现脚本 + 瞎猜模型显式定义**。rank-deficient 题瞎猜概率比 full 高 3 个量级——这是"rank-deficient 题需要更多检查点防蒙对"的量化依据。
 
 **机制判别（截断 vs 指令遵循，探针 6/6 完成）**：对 V1 失败 case 用 max_tokens 500→2000 重判（scripts/mt_truncation_probe.py）。

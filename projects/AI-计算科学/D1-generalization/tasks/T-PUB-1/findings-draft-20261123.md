@@ -5,7 +5,7 @@
 
 ## F1. LLM judges fail format reliability on the formalizable core
 
-We measure format reliability as the rate at which an LLM judge emits unparseable output on inputs where a mechanical judge succeeds by construction. On 67 real 27b outputs across 10 tasks (7 full-rank, 3 rank-deficient), three prompt variants (V1_strict, V2_loose, V3_engineer) yield format failure rates of 77.6% (52/67), 83.6% (56/67), and 52.2% (35/67) respectively. The mechanical judge, which evaluates each checkpoint by SymPy symbolic comparison or spec-driven regex, fails on 0/67 (0%) by construction.
+We measure format reliability as the rate at which an LLM judge emits unparseable output on inputs where a mechanical judge succeeds by construction. On 67 real 27b outputs across 10 tasks (7 full-rank, 3 rank-deficient), three prompt variants (V1_strict, V2_loose, V3_engineer) yield format failure rates of 77.6% (52/67, Wilson 95% CI [0.663, 0.859]), 83.6% (56/67, CI [0.729, 0.906]), and 52.2% (35/67, CI [0.405, 0.637]) respectively. The mechanical judge, which evaluates each checkpoint by SymPy symbolic comparison or spec-driven regex, fails on 0/67 (0%) by construction.
 
 The failure is not a smooth function of output length; it is **confounded with task type**. Full-rank tasks (Q01–Q07, complex symbolic gold) fail 7/7 across the full length range (385–7210 chars) — including the shortest output in the set (Q07, 385 chars). Rank-deficient tasks (Q08–Q10, where the model often emits a short "flag the gap" response) fail 45/60, with a genuine length effect *within* the group: Q09's nine 435-char outputs all parse, while its 1707–1848-char outputs mostly fail. An apparent "604-char threshold" in the pooled data is an artifact of this task-type confound (the two task types happen to occupy different length bands), not a hard length boundary. The mechanism is content-driven, not length-driven: complex gold values force the judge into a long reasoning chain that exhausts the token budget (F2), while short gap-flagging responses let the judge emit a verdict quickly.
 
@@ -35,7 +35,7 @@ The flip is in **whether the model obeys the "output JSON only, no explanation" 
 
 ## F3. Even when parseable, LLM judge verdicts flip at chance rate
 
-On the parseable subset, we measure the flip rate: the fraction of checkpoints where the LLM judge's verdict disagrees with the mechanical judge. V1: 31/60 (51.7%), V2: 21/44 (47.7%), V3: 66/128 (51.6%). All three variants flip at ≈50% — indistinguishable from a coin flip.
+On the parseable subset, we measure the flip rate: the fraction of checkpoints where the LLM judge's verdict disagrees with the mechanical judge. V1: 31/60 (51.7%, Wilson 95% CI [0.393, 0.638]), V2: 21/44 (47.7%, CI [0.338, 0.621]), V3: 66/128 (51.6%, CI [0.430, 0.600]). All three variants flip at ≈50% — indistinguishable from a coin flip: exact two-sided binomial test against p=0.5 gives p=0.90 (V1), p=0.79 (V3); every CI contains 0.5. The parseable subset is small (15/11/32 calls) because format failure (F1) dominates; the flip rate is measured on what survives.
 
 **Claim.** Format reliability and verdict accuracy are distinct failure modes, and both fail: the LLM judge is unreliable both in *emitting* a verdict (F1) and in the *content* of the verdict it does emit (F3). The mechanical judge is exact on both by construction.
 

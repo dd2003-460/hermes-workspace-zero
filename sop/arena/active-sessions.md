@@ -5,7 +5,7 @@
 
 | 仓库 | 会话 | taskSpace | 当前任务 | 状态 |
 |------|------|-----------|---------|------|
-| prompt-first-bench | `01a1ca66-5358-7039-bcfa-b2fbf65a5a27` | tpr15-dispatch | T-PR-15/16/17 已交付(11-22) → **T-PUB-1 公式judge论文10题(7 full+3 rank-deficient) 派发中 (11-23 14:0x, 任务书 @main 0b889b578, 正文sha256 20af62bf, 交付 tasks/T-PUB-1-result.md)**：秩亏题测批判准确性不测主动检索(qqbot发现2方向反转) | 🔄 running (11-23) |
+| prompt-first-bench | `01a1ca66-5358-7039-bcfa-b2fbf65a5a27` | tpr15-dispatch | T-PR-15/16/17 已交付(11-22) → **T-PUB-1 公式judge论文10题 已交付+核验(11-23, b148b12ed, 指纹一致, 47检查点SymPy自检PASS)**：7 full+3 rank-deficient；Lead 核 gold 发现 Q01 gold 漏 ×16 batch 因子(27b答788.5对)，已修；bool判分库已补(阻塞项#4解除) | ✅ done (11-23) |
 | hermes-workspace-zero | `01a1f80e-4bfe-7566-9e03-52d0423a71ef` | arena-os1-dispatch-20261120 | T-OS-1 完成(Q1-Q4, 撞车ICAL conf0.97); T-OS-2 11-20 19:05 派发, 疑似跑完但未 commit+push (页面 diff 有 4 个 Unknown file +190/+1038 行, 远端无交付物); **arena daily limit 撞墙, 明天 16:26 重置**; T-OS-3 公轴-定理agent设计碰撞调研 任务书已 push @42334c3a (sha256 b07c9244) 排队待发 | ⏸️ blocked-limit (11-20) |
 
 ## 派发前检查（3 步，防连错仓库最小检查集）

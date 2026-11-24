@@ -19,6 +19,13 @@
 - **验证**：隔离环境模拟（Path.home→临时目录，不碰真实状态）5 场景全过：①连续 5 轮薄思考→反思指令注入 stdout continue message；②冷却期不重复注入；③厚思考(2000字符/轮)不触发；④触发器集合可插拔（T4 槽位在位）；⑤audit 留痕 `think-trigger HIT t1-thin-thinking stats=[(100,1)×5]`。
 - **回滚**：`git revert 1b30bc6`（在 `tools/stage-gate` 仓执行；改动前 HEAD=`40a071d`）。注：`tools/stage-gate/` 是独立 git 仓（workspace 根仓 gitignore 掉），commit 在该仓内。
 
+## 2026-11-25 01:50 — stop_hook 思考触发 T4 真检测落地 · 框架源码改动留痕
+
+- **做了什么**：`tools/stage-gate/stage_gate/adapters/stop_hook.py`（框架源码，续上次 T1 留痕）把 T4（修脚本打转）从恒 False 槽位改成真检测。`_session_thinking_stats` 每轮新增 `errors`（该轮 tool 结果里的归一化报错签名）+ `paths`（tool_calls 结构化 path，仅 patch/write_file 等编辑类工具；terminal command 不解析，宁可漏检），查询扩到 assistant+tool 双角色（LIMIT 150 行，<1ms）。报错判定=结构性优先（exit_code≠0 / error 字段非空）+ 高精度关键词兜底（traceback/command not found/no such file/assertionerror 等；failed/timeout 太宽不用），归一化签名抹掉时间戳/十六进制/数字使同一报错重试 N 次聚成同一签名，框架护栏/播报文本排除防 harness 噪音。触发条件（任一命中，保守取值宁漏勿误报）：A. 同一报错签名最近 10 轮内 ≥2 次；B. 同一文件最近 6 轮被改 ≥5 次 且 窗口内有报错（无报错的正当迭代不触发）。
+- **影响范围**：只改 stop_hook.py 一个文件（+本留痕）。T1 语义不变（仍只用 reasoning_chars/tool_calls 两字段）；现有机制全部不动；未命中行为与旧版一致；命中后冷却 3 轮；任何异常 fail-open 退回旧版。
+- **验证**：隔离 HOME 沙箱 9 场景全过——T4-A 同一报错×2(行号变化)触发 / T4-B 同文件改5次+1报错触发 / 同文件全成功不触发 / 两个不同报错各1次不触发 / 护栏噪音×3不触发 + T1 回归 5 场景全过（薄思考触发/冷却/厚思考不触发/可插拔/audit 留痕）。真实数据核验：最近 12 个生产 session 扫描 0 误报、0 crash。
+- **回滚**：`git revert 7229159`（在 `tools/stage-gate` 仓执行；改动前 HEAD=`1b30bc6`）。
+
 ## 待批
 
 1. T53b webllm 降级数据处置（2026-11-20 14:52 · 不阻塞，run 继续跑）

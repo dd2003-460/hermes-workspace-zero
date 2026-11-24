@@ -12,6 +12,13 @@
 5. **模板不可修改**：本文件（`个人/APPROVALS-TEMPLATE.md`）只复制、不修改。改规则需先经D批准，旧模板存档到 history。
 6. **不阻塞**：等审批期间循环继续，跳过等待项，不停转。
 
+## 2026-11-25 01:20 — stop_hook 思考触发（think-trigger T1）· 框架源码改动留痕
+
+- **做了什么**：`tools/stage-gate/stage_gate/adapters/stop_hook.py`（框架源码，1108→1250 行）新增"思考触发"分支：pre_verify 续推时检测"连续 5 轮 assistant 消息每轮都有工具调用且 thinking < 430 字符"（基线=223 会话全量扫描 430 字符/调用）→ 续推消息替换为反思指令（"当前进展 vs 原始目标对齐了吗？general 机制是什么？能推出什么可检验预言？"），而非纯"继续干/4 问"。数据源=~/.hermes/state.db messages 表的 per-message `reasoning` 列（首选方案成立：各平台填充率 ~98%，查询 <1ms）。架构=可插拔触发器集合 `_THINK_TRIGGERS`（名字, 检测函数, 反思文案）：T1 已实现；T4（修脚本打转：同一文件连续 N 轮无新验证证据/同一报错≥2次）槽位在位（恒 False 待实现），加新触发器=追加一个三元组，主流程零改动。
+- **影响范围**：只改 stop_hook.py 一个文件（+本留痕）。现有机制（HALT/用户喊停/无 goal 放行/平台门/PAUSE/IDLE_SPIN/flex_nudge/4 问冷却/等待态门控/完成态核验）全部不动；未命中时行为与旧版逐字节一致；命中后冷却 3 轮防反思文案重复注入；任何异常 fail-open 退回旧版。
+- **验证**：隔离环境模拟（Path.home→临时目录，不碰真实状态）5 场景全过：①连续 5 轮薄思考→反思指令注入 stdout continue message；②冷却期不重复注入；③厚思考(2000字符/轮)不触发；④触发器集合可插拔（T4 槽位在位）；⑤audit 留痕 `think-trigger HIT t1-thin-thinking stats=[(100,1)×5]`。
+- **回滚**：`git revert 1b30bc6`（在 `tools/stage-gate` 仓执行；改动前 HEAD=`40a071d`）。注：`tools/stage-gate/` 是独立 git 仓（workspace 根仓 gitignore 掉），commit 在该仓内。
+
 ## 待批
 
 1. T53b webllm 降级数据处置（2026-11-20 14:52 · 不阻塞，run 继续跑）
@@ -22,6 +29,14 @@
    - 详情：pfb/tasks/T53-bus/anomaly-watchlist.md
    - 人类回复：
    - **AI 裁决（2026-11-23，按 11-09 自主裁决先例）**：T53b 三路 batch 已全部跑完（watchdog 21:23 "无 pending run"），era-matched 分析已按 (a) 口径落地（notes/bare-matched-stats-20261121.md，指标轴 coverage/depth/n_nodes 机械轴，不依赖 webllm）。webllm 效应标"不可识别（已知限制）"，不重估 (a)/(b)。本条视为按 (a) 收口，D 若不同意回滚=改一行注记。
+
+2. Q9-AGI 题面 v1 确认（2026-11-24 03:50 · 不阻塞，relay 链继续跑）
+   - 现状：research-agi-budget goal 子项⑤（AGI 题面+gold 骨架）。题面 v1 草稿已就绪（pfb/experiments/stage-ablation/tasks/q9-agi-question-v0.md §题面 v1 草稿），D2 gold 骨架的 arena 任务卡已写好（q9-gold-skeleton-arena-taskcard.md，A 主调研+B 交叉验证双卡），但题面=D 的目标，按硬规则 3 不能 AI 代定，需 D 一句话确认 3 项后冻结 v1 → 解锁 D2 派发。
+   - 2.1 预算定值 150 节点（对齐 Q6 budget scan 的 150 档）
+   - 2.2 贡献因子清单 5 项（模型能力轴/预算轴/检索质量轴/记忆轴/自我认识闭环）增删
+   - 2.3 排序键"单位预算闭环成功率"（gap 标记→补全→post_acc 口径）
+   - 回复方式：回 "2 全过" 或指出要改的项（如 "2.1 改 300"）。确认后 AI 冻结题面 v1 并派 arena D2（不占 vLLM，与 nodepth/Q7 并行）。
+   - 人类回复：
 
 ## AI 自主裁决记录（2026-11-09 · D指令"别审批了，卡死了"）
 

@@ -70,3 +70,8 @@
 - 理由: 本地无 vLLM 引擎（推理走 8787 proxy→服务器 ninfer qwen3.8-27b），该监控栈监控对象不存在；~20 常驻进程占用内存，挤压 drb-1 运行空间
 - 影响: Grafana/Prometheus 仪表盘不可用（本来也没数据可看）；supervise 脚本若被 launchd 拉起会自动复活（已检查无 plist 则不会）
 - 回滚: 重新启动即可: ~/vllm-monitoring/grafana/grafana-13.2.4/bin/grafana server --config=... ; prometheus --config.file=...
+
+## 2026-11-25 T1 文案更新（框架源码改动，留 commit 回滚点）
+- 改动: tools/stage-gate stage_gate/adapters/stop_hook.py _T1_REFLECTION 文案（纯文案，无逻辑改动）
+- 依据: T2 实验域偏移 100%（pfb/tasks/think-trigger/exp-results/scores_v2.md, commit 536ef36f6）
+- 回滚: tools/stage-gate git revert <本次commit>（上一条是 7229159 T4 真检测）

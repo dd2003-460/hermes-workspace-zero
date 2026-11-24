@@ -36,6 +36,11 @@ composer 先点 repo chip 选仓库 → 点 branch chip 选分支 → **再**发
 ### IDEA-review（7 个空白 idea 外部撞车核验+可发表性排序）— ✅ DONE 2026-11-24
 - session `01a20b11-d552-79cc-be74-8222f8477718`，分支 `arena/f8477718-prompt-first-bench` @ `70dca8efa`（5 idea @ e271a44c4 + 追加 #53/#52 @ 70dca8efa）
 - 任务书 `tasks/IDEA-review/TASK.md` @ `799264136`（tmp-lit-snowball），sha256 `c1aaa377…`
+- **追加2（#53 信息论精化框架第三轮核验）@ 81be67cb9 (11-24)**：conf 0.7, workshop/短文级, 独立顶会难；链式域已撞（2601.23163 NeurIPS'26 E&D / 2508.03346 Step Entropy / 2604.06695 depth-wise）；最难一击=信息转发平凡性；最佳定位=并入 #10 主线离线分析章节。与内部节点级 MI 实测（5fa9dfe8b, 浅层主导+深层点增益负）交叉印证 → #53 独立 claim 不成立，收进 #10 当瓶颈定位模块
+- **追加3（#53 枚举vs判断精化第四轮核验）@ 82a67df96 (11-24)**：claim 重释=深层对微架构级判断（具体哪一环）的增量贡献>浅层枚举；conf 0.6 条件可发表，make-or-break=交叉梯度实验（浅层主导 I(L;V_coarse) + 深层主导 I(L;V_fine|V_coarse)，fine-conditional 不升则 claim 死）；撞车三线占位（DDx 三阶段 2602.03340 / 信息增益消歧 2402.03271+2605.05386 / 步类型分类学 2512.14332+2512.00729），未见=树×类型×深度×信息贡献测量+两级判定交叉梯度；最难一击=同义反复+HARKing+概念已占位，守法=判据去深度化+层内类型对照+预注册 held-out+三控制臂；方法学升级 SLIDER 式 PID（2610.00571）。#53 定位不变=#10 离线分析模块，模块内容=交叉梯度测量
+- **追加4（#53 投稿策略第五轮）@ 7dae6431a (11-24)**：5 对标实核（2601.23163 NeurIPS'26 E&D 已录/2508.03346 ICLR'26 正刊已录/SLIDER ICLR'26 workshop/Thought Anchors 在审/UoT NeurIPS'24）；venue 主推双轨=NeurIPS'27 E&D（P 0.30 全守法/0.15 半守法，~2027-05 截稿，分析型免 code）+ ICML'27 workshop（P 0.55/0.35）；ICML'27 main 窗口留给 #10；最快路径 3-4 周到 arXiv 可投稿态；概率=主观估计非事实
+- **新任务（#10 分解树 1-loop 01）派发 11-24 13:50**：任务书 `tasks/10-decomposition/TASK.md` @ 281a1322d（arena 分支）；**✅ 完成 @ b8f7a3691**：分解树 v2 = S1-S7 正交子项 + 量化正交性核对 + 缺口标注 + 任务表（机器可查验收+耗时）+ #53 负结果模块嵌入；待 Lead 核验正交性后进入 02 信息调研
+- **#53 升格独立 goal (11-24 D 指令)**：stage-gate `idea53-cross-gradient`（6 阶段，全平台共享含 qqbot）；goal 三件套 `pfb/tasks/idea53-goal/`（GOAL.md 含 §0 完整逻辑链+§7 arena 看法+§8 qqbot 接手入口 @ 0d0fffd79 / decomposition.md T1-T7 @ 40f5cef09 / 预注册锚点 20c029300）；T1-T3 subagent deleg_53e3a082 running
 - 触发：D「其余 idea 你也问一遍」
 - 7 个 idea：#10 正交完备分解 / #30 prompt-only 消融 / #31 公式vs文字 / #32 压缩即智能MDL / #40 压缩阶梯K复杂度 / #53 树级深节点信息增益 / #52 发现-行动断裂
 - **结论（git show result.md 读到）**：总排序 #10→#32→#53→#52→#30→#31→#40；**#10 top-1**（唯一可量化终点+ADaPT/VeriMAP 头对头+组合窄空白）；#31 直接撞车 UtilityMax(2603.11583) 降级 replication；#40 建议砍（K 不可计算）；#53 强近邻 IGRPO/Thought Anchors/2411.11984，剩空白=深度梯度实证+瓶颈定位应用 conf0.45，建议作主线瓶颈定位模块；#52 直接近邻 Knowing but Not Showing(2605.25284) conf0.6。一个主线论文吃下全部 7 个 idea。

@@ -80,5 +80,10 @@
   "完整项目树存在于分支 thinkmech-review（含 draft/paper.tex 及 _sec/ 分节文件）。",
   "pfb 仓处于未解决 merge 状态（git status 有 DU 冲突条目）——subagent 未触碰。",
   "风险：t5-timestamp-lock.sh prep 会因 MISSING paper.tex/paper.pdf 等失败，直至 Lead 恢复这些文件或解决 merge。pilot 4 文件（runs.json/results.md/audit-rubric.md/scores.json）已由本 subagent 重跑落盘，prep 的 pilot 侧输入齐全。"
- ]
+ ],
+ "durability": {
+  "backup_copy": "/Users/a1-6/Desktop/workspace/t4b-pilot-backup-20261126/ (verified byte-equal to pfb deliverables)",
+  "git_commit": "e73215d7 (outer workspace repo, scoped to backup dir only; pfb repo untouched — mid-merge)",
+  "pfb_repo_status": "deliverables untracked in pfb (mid-merge, commit deferred to Lead)"
+ }
 }

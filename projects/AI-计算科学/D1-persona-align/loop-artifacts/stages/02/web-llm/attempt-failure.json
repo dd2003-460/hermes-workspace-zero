@@ -1,0 +1,19 @@
+{
+  "kind": "ralph_web_llm_cross_check",
+  "stage": "02",
+  "status": "channel_unavailable",
+  "channel": "ego-browser (ego-lite 已登录会话) + ego-verify SOP",
+  "successful_provider_ids": [],
+  "responses": [],
+  "failure_reasons": [
+    "命令 ego-browser 不在 PATH（command -v 无输出；ego-browser --version: command not found）",
+    "全盘 find -iname 'ego-browser*' 仅命中仓库文档与目录（loop-artifacts/ego-browser/ 下为子目录，sop/ego-browser-index.md 为索引），没有可执行文件",
+    "未找到 ~/.hermes/skills/ego-browser/ 安装目录（sop/ego-browser-index.md 所指路径不存在于本沙箱）",
+    "npm -g 无 ego 相关包",
+    "ego-lite 桌面应用及其已登录 profile 在本沙箱不可达；SOP 要求用户已在 ego-lite 中登录，本沙箱无该登录态",
+    "本会话工具集中不存在 ego-browser 或 ego-verify 工具，无法驱动任何网页 LLM"
+  ],
+  "handling": "按 02 规则 2：快速失败后记录完整原因，继续公开网页资料搜集；未等待、未循环重试。本工件不含任何网页 LLM 线索。",
+  "degradation": "通道降级，需要 Lead 确认（见 04.5 反方检查）。",
+  "observed_at": "2026-11-25T18:38:04+00:00"
+}

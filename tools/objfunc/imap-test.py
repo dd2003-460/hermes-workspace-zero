@@ -28,13 +28,13 @@ def test(acc_name, cfg):
         m = imaplib.IMAP4_SSL(cfg['host'], cfg['port'])
         m.login(cfg['user'], cfg['pw'])
         typ, data = m.select('INBOX')
-        if typ != 'OK':
+        if typ != 'OK' or not data or data[0] is None:
             return dict(ok=False, err='select_failed', detail=str(data))
         total = int(data[0])
         # 拉最新 1 封的 subject
-        typ, msg_data = m.fetch(total if total else 1, '(BODY.PEEK[HEADER.FIELDS (SUBJECT DATE)])')
+        typ, msg_data = m.fetch(str(max(total,1)), '(BODY.PEEK[HEADER.FIELDS (SUBJECT DATE)])')
         subj = date = ''
-        if typ == 'OK' and msg_data and msg_data[0] is not None:
+        if typ == 'OK' and msg_data and msg_data[0] is not None and isinstance(msg_data[0], tuple):
             hdr = email.message_from_bytes(msg_data[0][1])
             subj = str(hdr.get('Subject',''))[:120]
             date = str(hdr.get('Date',''))

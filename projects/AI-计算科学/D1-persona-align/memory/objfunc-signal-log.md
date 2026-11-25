@@ -573,3 +573,8 @@ D原话: "我的意思是，为什么不是always的hook，或者至少留个思
 - D 指正："qqbot还不用sub干执行怎么办"（指 qqbot 频道的会话行为，非本会话）。qqbot 与 weixin 同 agent 同模型（无 profile 隔离，profiles/ 为空）。
 - 归因：routing.json 里 自问(always) 的"简单单步(查/改/跑)→直接干" 与 lead-context-budget(always) 的"纯检索→一律派 sub" 同时注入、方向相反。"查个文件"恰是两条都覆盖的交集，模型选省事的 → 自己干。qqbot 侧观察到的"不用sub干执行"是该矛盾的必然结果。
 - 落地：routing.json 自问条款限定为"只管 SOP 路由，不管派不派 sub"，派 sub 裁决权归 lead-context-budget（2026-11-25）。
+
+## 2026-11-25 · S: 大任务分工闭环 = 拆块→派sub→验收（D 提议）
+- D 提议："应该拆分大任务，然后小的分块任务给sub干，验收即可"。
+- 归因：lead-context-budget 原规则只说"执行细节派 sub"，缺大任务的切分标准和 Lead 的验收职责边界——Lead 两头是分解+验收，中间过程不进上下文。
+- 落地：lead-context-budget.md 加"大任务分工闭环"节（2026-11-25）：拆块粒度=一个 sub 一次干完+一行可验收结论；验收=对照任务书核产出（handle 自核），不读全部过程；依赖链长按"能独立验收的最大单元"串行切。

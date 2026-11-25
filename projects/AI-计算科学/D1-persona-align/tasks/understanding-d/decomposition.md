@@ -33,6 +33,7 @@
 | T2 | 11 月信号增量 | sub 粗筛 + Lead delta | signal-classification-v3.json + 台账新条目 | 6 信号已登记(11-26)；v3 json 待聚合 |
 | T3 | 邮件 IMAP 通道 | Lead + D(app password) | IMAP 测试拉取 1 封成功 | blocked-on-D |
 | T4 | 语料思考模式挖掘 | Lead | template v2 + ≥5 条新思考习惯（各带原文证据） | DONE 11-26: 11 条(9新+2强化), 抽检5条原文grep全命中, 8/8文件成功 |
+| T6 | 复活前沿调研 Q1-Q3 | arena（01a213fa 会话） | revival-frontier-research.md（三方向 SOTA 表+推荐组合+横向结论，每条带来源+conf） | 派发 11-26: 任务书 T6-revival-frontier-research.md @ c9afd64a(arena/423a71ef 分支), 指纹 d0fdaf81b4cf24d4; 回执核验走 git(fetch→show→复算指纹) |
 | T5 | 思考对话收录管道 | Lead（持续） | skill hq-dialogue-capture 判据 + corpus/hermes/ 落盘 | 管道建成 11-26: 首条已落盘(质疑猜想验证/死亡永生段); 每次思考对话触发收录 |
 
 ## 缺口清单

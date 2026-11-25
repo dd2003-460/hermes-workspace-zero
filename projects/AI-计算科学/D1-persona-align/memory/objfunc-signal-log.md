@@ -568,3 +568,8 @@ D原话: "我的意思是，为什么不是always的hook，或者至少留个思
 - D 指正："qqbot还不用sub干执行怎么办"。事实：挂 lead-context-budget 注入的同时，Lead 连跑 5 组 terminal（查 gold 基础设施/跑 judge selftest/查 S0 schema/找论文 tex）。
 - 归因：把"查文件回答 D 的问题"当成 Lead 本职，给"为回答问题而查"开了口子；压缩恢复后惯性延续，紧迫感压过预算纪律。
 - 落地：lead-context-budget.md 外包清单加"纯检索/查文件位置"条目（2026-11-25）：查的过程本身不构成判断 → 一律派 sub，Lead 只组织回答；Lead 下场的唯一正当理由 = 查的过程本身就是判断（判 canonical/改规则/定方向）。
+
+## 2026-11-25 · S: 两条 always 规则打架 → "简单单步直接干"吞掉了"纯检索派sub"
+- D 指正："qqbot还不用sub干执行怎么办"（指 qqbot 频道的会话行为，非本会话）。qqbot 与 weixin 同 agent 同模型（无 profile 隔离，profiles/ 为空）。
+- 归因：routing.json 里 自问(always) 的"简单单步(查/改/跑)→直接干" 与 lead-context-budget(always) 的"纯检索→一律派 sub" 同时注入、方向相反。"查个文件"恰是两条都覆盖的交集，模型选省事的 → 自己干。qqbot 侧观察到的"不用sub干执行"是该矛盾的必然结果。
+- 落地：routing.json 自问条款限定为"只管 SOP 路由，不管派不派 sub"，派 sub 裁决权归 lead-context-budget（2026-11-25）。

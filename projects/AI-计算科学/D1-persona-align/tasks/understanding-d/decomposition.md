@@ -33,6 +33,7 @@
 | T2 | 11 月信号增量 | sub 粗筛 + Lead delta | signal-classification-v3.json + 台账新条目 | 6 信号已登记(11-26)；v3 json 待聚合 |
 | T3 | 邮件 IMAP 通道 | Lead + D(app password) | IMAP 测试拉取 1 封成功 | blocked-on-D |
 | T4 | 语料思考模式挖掘 | Lead | template v2 + ≥5 条新思考习惯（各带原文证据） | DONE 11-26: 11 条(9新+2强化), 抽检5条原文grep全命中, 8/8文件成功 |
+| T5 | 思考对话收录管道 | Lead（持续） | skill hq-dialogue-capture 判据 + corpus/hermes/ 落盘 | 管道建成 11-26: 首条已落盘(质疑猜想验证/死亡永生段); 每次思考对话触发收录 |
 
 ## 缺口清单
 - 邮件登录态: 真实 Edge profile 的 Google 会话疑似服务端已失效（证据: 真实 profile 恢复的标签页里含 Google 登录页，早于本轮操作）[待核验: D 在真实 Edge 打开 mail.google.com 一次即可定案]

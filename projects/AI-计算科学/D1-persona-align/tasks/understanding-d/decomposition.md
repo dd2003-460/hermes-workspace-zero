@@ -35,6 +35,7 @@
 | T4 | 语料思考模式挖掘 | Lead | template v2 + ≥5 条新思考习惯（各带原文证据） | DONE 11-26: 11 条(9新+2强化), 抽检5条原文grep全命中, 8/8文件成功 |
 | T6 | 复活前沿调研 Q1-Q3 | arena（01a213fa 会话） | revival-frontier-research.md（三方向 SOTA 表+推荐组合+横向结论，每条带来源+conf） | 派发 11-26: 任务书 T6-revival-frontier-research.md @ c9afd64a(arena/423a71ef 分支), 指纹 d0fdaf81b4cf24d4; 回执核验走 git(fetch→show→复算指纹) |
 | T7 | 回归测试集 v0（验收锚点） | sub→Lead 接管 | regression-test-set-v0.md（≥10 场景，各带场景/ground truth 原话/来源/判别力/关联轴；引用 grep 全命中+盲测自检） | DONE 11-26: 12 场景 6/6 轴, 原话 grep 12/12 命中, 盲测 PASS; sub 两次死于 27b 输出上限→Lead 直接执行（T4a 先例） |
+| T8 | 回归基线跑分 + runner 固化 | Lead | A/B 两条件跑分 + 重复性检验 + tools/regression_runner.py 可复跑 | DONE 11-26: A 25% / B 75% 严格一致率(n=12, Δ+50pp); r2 重跑 0 翻转(同分); runner 固化(2e9e3ddd); 阈值建议 ≥75%+一票否决待 D 确认; 缺口: R05/R07 判别力弱→v1 换场景, R09 暴露 persona map 缺"连续性瓶颈"→已补 |
 | T5 | 思考对话收录管道 | Lead（持续） | skill hq-dialogue-capture 判据 + corpus/hermes/ 落盘 | 管道建成 11-26: 首条已落盘(质疑猜想验证/死亡永生段); 每次思考对话触发收录 |
 
 ## 缺口清单

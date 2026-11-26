@@ -1,0 +1,42 @@
+{
+  "kind": "ralph_web_llm_cross_check",
+  "task": "understanding-d T6 复活前沿调研 — 02.5 异族交叉核验补做（arena 沙箱内 ego-browser 不可达，Lead 侧 ego-lite 补做）",
+  "observed_at": "2026-11-26T14:30:00+08:00",
+  "channel": "ego-browser (ego-lite 已登录会话)",
+  "claims_checked": [
+    "A: 角色设定/persona 提示对客观任务准确率无正向收益，persona 应编码为可执行检查/断言而非角色描述（T6 横向结论#2, conf 0.6）",
+    "B: 同族 LLM judge 有自偏好偏差，不能当外部真值锚点，需异族模型或可执行检查（T6 Q3 推荐#1, conf 0.6）"
+  ],
+  "responses": [
+    {
+      "provider_id": "perplexity",
+      "url": "https://www.perplexity.ai/",
+      "status": "ok",
+      "verdict": "A: broadly supported for objective verifiable tasks but overstated as universal rule; B: supported in direction but too categorical",
+      "key_evidence": [
+        "Zheng et al. 'When A Helpful Assistant Is Not Really Helpful' (EMNLP Findings 2024): 4 LLM families, 2410 factual questions, persona 无显著增益，apparent gains 不稳定",
+        "Luz de Araujo et al. 'Principled Personas' (EMNLP 2025): 专家 persona 正/中性，无关 persona 细节可致 ~30pp 下降",
+        "2026 EMNLP: expert personas 提升 alignment 任务但损害 MMLU/math/coding",
+        "Panickssery et al. (NeurIPS 2024): GPT-3.5/GPT-4/Llama2 偏好自己生成的摘要（人类评分等价时）",
+        "'Who Judges Matters': 9312 judgments 全交叉，同族响应 per-token logprob 显著更高（family-conditioned preference）",
+        "Chen et al. 2025 'Do LLM Evaluators Prefer Themselves for a Reason?': 对照客观真值，强 judge 的偏好更常对齐正确性 → 自偏好非必然毁准确性"
+      ],
+      "bottom_line": "A: accept with qualification（persona 不是客观任务的可靠准确率杠杆；可机械验证处 executable checks 是更强默认；persona 对行为/风格约束仍有用）。B: accept bias premise, reject absolutist conclusion（同族 judge 有偏、不应当中性真值；cross-family/ensemble/校准/可执行真值是缓解而非魔法消除）"
+    },
+    {
+      "provider_id": "chatgpt",
+      "url": "https://chatgpt.com/",
+      "status": "ok",
+      "verdict_table": {
+        "A_personas_no_objective_gain": "Strong for general factual accuracy; conditional exceptions → replace persona-only instructions with measurable requirements",
+        "A_assertions_superior": "Reasonable engineering inference, not directly proven universally → use assertions for verifiable requirements",
+        "B_same_family_bias": "Strong and supported by 2024-2026 research → avoid as sole evaluators",
+        "B_cross_family_is_ground_truth": "Not established → treat as independent-ish evaluators, not ground truth",
+        "B_executable_checks_preferable": "Strong for objectively decidable criteria → make them the primary evaluation authority"
+      }
+    }
+  ],
+  "successful_provider_ids": ["perplexity", "chatgpt"],
+  "conclusion": "T6 两条方向性 claim 均获 ≥2 独立 provider 支持，但需收窄措辞：A 限定为'客观可验证任务'（persona 对行为/风格约束仍有效）；B 限定为'同族 judge 不可作唯一/中性真值'（异族 judge 也非 ground truth，只是 independent-ish；可执行检查才是 primary authority）。T6 原文 conf 0.6 维持，措辞按此收窄。",
+  "caveat": "ego-browser 回执是有效实质证据，但 ralph field-apply 门禁不认此通道（privacy 设计，只认 ralph 独立 profile 跑出的回执）。若未来 T6 相关结论要过 ralph 门禁，需 ralph web-llm-authorize 后重跑。"
+}

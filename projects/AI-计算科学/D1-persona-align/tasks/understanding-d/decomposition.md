@@ -29,8 +29,8 @@
 ## 任务表
 | ID | 任务 | 执行 | 验收 | 状态 |
 |----|------|------|------|------|
-| T1 | idea 盘点 | sub | idea-inventory-v1.md 落盘 + ≥40 条 + 每条带来源路径和原文引用 | DONE 11-26: 主文件 61 条(5 范围全扫)+extra 808 条(ai_chats 任务卡外发现, 待 Lead 验收); 61/61 原文引用 grep 命中源文件 |
-| T2 | 11 月信号增量 | sub 粗筛 + Lead delta | signal-classification-v3.json + 台账新条目 | 6 信号已登记(11-26)；v3 json 待聚合 |
+| T1 | idea 盘点 | sub | idea-inventory-v1.md 落盘 + ≥40 条 + 每条带来源路径和原文引用 | DONE 11-26: 主文件 61 条(5 范围全扫)+extra 808 条(ai_chats, 处置见缺口清单); 61/61 原文引用 grep 命中源文件, 独立抽检 5/5 命中, commit 485be757 |
+| T2 | 11 月信号增量 | sub 粗筛 + Lead delta | signal-classification-v3.json + 台账新条目 | DONE 11-26: 6 信号登记；v3 json 已聚合(118 条, commit 2a021c38) |
 | T3 | 邮件 IMAP 通道 | Lead + D(app password) | IMAP 测试拉取 1 封成功 | blocked-on-D |
 | T4 | 语料思考模式挖掘 | Lead | template v2 + ≥5 条新思考习惯（各带原文证据） | DONE 11-26: 11 条(9新+2强化), 抽检5条原文grep全命中, 8/8文件成功 |
 | T6 | 复活前沿调研 Q1-Q3 | arena（01a213fa 会话） | revival-frontier-research.md（三方向 SOTA 表+推荐组合+横向结论，每条带来源+conf） | 派发 11-26: 任务书 T6-revival-frontier-research.md @ c9afd64a(arena/423a71ef 分支), 指纹 d0fdaf81b4cf24d4; 回执核验走 git(fetch→show→复算指纹) |
@@ -39,6 +39,7 @@
 ## 缺口清单
 - 邮件登录态: 真实 Edge profile 的 Google 会话疑似服务端已失效（证据: 真实 profile 恢复的标签页里含 Google 登录页，早于本轮操作）[待核验: D 在真实 Edge 打开 mail.google.com 一次即可定案]
 - QQ 邮箱: 真实 profile 有 30 个 qq/tencent cookie，登录态 [待核验]
-- "复活"技术定义空白 = 前沿开放问题（4.1），无成熟解，1-loop 调研先行，不预设路径
+- "复活"技术定义: T6 调研已派发 arena（01a213fa, 11-26），Q1-Q3 三方向 SOTA 调研中
+- extra 808 条（ai_chats 历史挖掘）处置决定: 不并入主盘点（主文件=任务卡 5 范围，口径保持）；作为内容层扩展池，做更深聚类/时间轴分析时用
 - 微信/QQ 本机不全（D: 部分记录在别的电脑，还有未同步部分），等 D 导出
 - 语料库 646 会话中"思考类"会话占比 [待核验]（T4 挖掘时统计）
